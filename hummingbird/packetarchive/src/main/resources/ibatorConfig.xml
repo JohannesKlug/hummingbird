@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ibatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Apache iBATIS Ibator Configuration 1.0//EN" "http://ibatis.apache.org/dtd/ibator-config_1_0.dtd" >
+<ibatorConfiguration >
+
+	<classPathEntry location="C:\Documents and Settings\KrygervillemosG.GROUPINFRA\.m2\repository\mysql\mysql-connector-java\5.1.7\mysql-connector-java-5.1.7.jar" />
+
+
+  <ibatorContext id="context1" >
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost/hummingbird" userId="root" password="logica" />
+    <javaModelGenerator targetPackage="com.logica.hummingbird.packetarchive" targetProject="packetarchive/src/main/java" />
+    <sqlMapGenerator targetPackage="com.logica.hummingbird.packetarchive" targetProject="packetarchive/src/main/java" />
+    <daoGenerator targetPackage="com.logica.hummingbird.packetarchive" targetProject="packetarchive/src/main/java" type="GENERIC-CI" />
+    <table schema="hummingbird" tableName="packet"></table>
+  </ibatorContext>
+</ibatorConfiguration>

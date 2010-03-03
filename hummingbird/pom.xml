@@ -1,0 +1,275 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.logica.hummingbird</groupId>
+  <artifactId>project</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0</version>
+
+	<name>Hummingbird Root Project</name>
+	<description>The Hummingbird root project is a container for all Hummingbird components, each created in a separate maven module. By building this project, the complete system can be built.</description>
+  	<url></url>
+  	
+  <modules>
+  	<module>marshaller</module>
+  	<module>xtce</module>
+  	<module>packetarchive</module>
+  	<module>parameterarchive</module>
+  	<module>commons</module>
+  	<module>help</module>
+  </modules>
+  
+  	<licenses>
+		<license>
+			<name>GPL</name>
+			<url>http://www.gnu.org/licenses/gpl.html</url>
+			<distribution>manual</distribution>
+			<comments>(c) Logica 2009. All rights reserved.</comments>
+		</license>
+	</licenses>
+	
+	<distributionManagement>
+		<repository>
+			<id>internal-releases</id>
+			<name>Logica Repository</name>
+			<url>http://10.48.29.168:8888/artifactory/internal-releases</url>
+		</repository>
+	</distributionManagement>
+	
+  	<properties>
+		<log4j.version>1.2.14</log4j.version>
+		<spring.version>2.5.6</spring.version>
+		<junit.version>4.7</junit.version>
+		<castor.version>1.3</castor.version>
+		<camel.version>2.1.0</camel.version>
+		<activemq.version>5.2.0</activemq.version>
+		<mysqlconnector.version>5.1.10</mysqlconnector.version>
+		<jencks.version>2.1</jencks.version>
+		<cameljms.version>1.6.0</cameljms.version>
+				
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+  
+  	<ciManagement>
+		<system>Hudson</system>
+		<url>http:/10.48.29.168:8888/hudson</url>
+	</ciManagement>
+  
+ 	<organization>
+		<name>Logica</name>
+		<url>http://www.logica.com</url>
+	</organization>
+
+	<issueManagement>
+		<system></system>
+		<url></url>
+	</issueManagement>
+  
+  	<developers>
+		<developer>
+			<id>0</id>
+			<organization>Logica</organization>
+			<name>Johannes Klug</name>
+			<email>johannes.klug@logica.com</email>
+			<roles>
+				<role>scrum master</role>
+				<role>project manager</role>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>0</timezone>
+		</developer>
+
+		<developer>
+			<id>1</id>
+			<organization>Logica</organization>
+			<name>Gert Villemos</name>
+			<email>gert.villemos@logica.com</email>
+			<roles>
+				<role>product owner</role>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>0</timezone>
+		</developer>
+
+		<developer>
+			<id>2</id>
+			<organization>Logica</organization>
+			<name>Steven James</name>
+			<email>steven.james@logica.com</email>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>0</timezone>
+		</developer>
+
+	</developers>
+  
+  	<dependencyManagement>
+		<dependencies>
+
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jms</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+			  <groupId>org.apache.activemq</groupId>
+			  <artifactId>activemq-camel</artifactId>
+			  <version>${activemq.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysqlconnector.version}</version>
+			</dependency>
+		
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-ibatis</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test</artifactId>
+			<version>${camel.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+	      <groupId>org.jencks</groupId>
+	      <artifactId>jencks-amqpool</artifactId>
+	      <version>${jencks.version}</version>
+    	</dependency>
+
+	<dependency>
+	  <groupId>org.apache.camel</groupId>
+	  <artifactId>camel-jms</artifactId>
+	  <version>${cameljms.version}</version>
+	</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.castor</groupId>
+			<artifactId>castor-core</artifactId>
+			<version>${castor.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.castor</groupId>
+			<artifactId>castor-xml</artifactId>
+			<version>${castor.version}</version>
+		</dependency>
+
+
+		</dependencies>
+	</dependencyManagement>
+	
+	<build>
+		<pluginManagement>
+			<plugins>
+
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>2.1</version>
+					<configuration>
+						<descriptorRefs>
+							<descriptorRef>jar-with-dependencies</descriptorRef>
+						</descriptorRefs>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+
+			</plugins>
+
+		</pluginManagement>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>				
+			</plugin>
+
+		</plugins>
+	</build>
+    
+</project>

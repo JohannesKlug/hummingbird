@@ -1,0 +1,268 @@
+package com.logica.hummingbird.xtce;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.exolab.castor.xml.MarshalException;
+import org.exolab.castor.xml.Unmarshaller;
+import org.exolab.castor.xml.ValidationException;
+import org.exolab.castor.xml.XMLContext;
+
+import com.logica.hummingbird.marshaller.Container;
+import com.logica.hummingbird.marshaller.FloatParameter;
+import com.logica.hummingbird.marshaller.IContainerFactory;
+import com.logica.hummingbird.marshaller.IntegerParameter;
+import com.logica.hummingbird.marshaller.Parameter;
+import com.logica.hummingbird.marshaller.ParameterType;
+import com.logica.hummingbird.marshaller.Unit;
+import com.logica.hummingbird.xtce.castor.Comparison;
+import com.logica.hummingbird.xtce.castor.ParameterSetTypeItem;
+import com.logica.hummingbird.xtce.castor.ParameterTypeSetTypeItem;
+import com.logica.hummingbird.xtce.castor.SequenceContainer;
+import com.logica.hummingbird.xtce.castor.SpaceSystem;
+
+public class XtceModelFactory implements IContainerFactory {
+
+	protected Map<String, Unit> units = new HashMap<String, Unit>();
+	protected Map<String, ParameterType> types = new HashMap<String, ParameterType>();
+	protected Map<String, Container> containers = new HashMap<String, Container>();
+	protected Map<String, Parameter> parameters = new HashMap<String, Parameter>();
+
+	protected SpaceSystem spaceSystem = null;
+
+	protected String packetBaseReference = "TMPacket";
+	protected String frameBaseReference = "TMFrame";
+
+	protected boolean initialised = false;
+	
+	protected String spacesystemmodelFilename = "src/main/resources/humsat.xml";
+
+	public Parameter getParameter(String name) {
+		if (initialised == false) {
+			initialise();
+		}
+		
+		return parameters.get(name);
+	}
+
+	public Container getContainer(String name) {
+		if (initialised == false) {
+			initialise();
+		}
+		
+		return containers.get(name);
+	}
+
+	public void initialise() {
+
+		spaceSystem = getSpaceSystem();
+
+		/** Create all parameter types. */
+		for (int parameterTypeIndex = 0; parameterTypeIndex < spaceSystem.getTelemetryMetaData().getParameterTypeSet().getParameterTypeSetTypeItemCount(); ++parameterTypeIndex) {
+			ParameterTypeSetTypeItem item = spaceSystem.getTelemetryMetaData().getParameterTypeSet().getParameterTypeSetTypeItem(parameterTypeIndex);
+
+
+			/** INTEGER */
+			if (item.getIntegerParameterType() != null) {
+				Unit unit = null;				
+
+				/** Read in the unit of the parameter type. */
+				if (item.getIntegerParameterType().getUnitSet() != null) {
+					for (int unitTypeIndex = 0; unitTypeIndex < item.getIntegerParameterType().getUnitSet().getUnitCount(); ++unitTypeIndex) {
+						unit = units.get(item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getContent());
+						if (unit == null) {
+							unit = new Unit(
+									item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(),
+									item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getDescription(),
+									item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getDescription(),
+									item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getPower(),
+									item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getFactor());
+
+							units.put(item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(), unit);
+						}
+					}
+				}
+
+				ParameterType type = new ParameterType(					
+						item.getIntegerParameterType().getName(),
+						item.getIntegerParameterType().getShortDescription(),
+						item.getIntegerParameterType().getLongDescription(),
+						ParameterType.eParameterType.INTEGER,
+						item.getIntegerParameterType().getSigned(),
+						item.getIntegerParameterType().getInitialValue(),				
+						item.getIntegerParameterType().getSizeInBits());
+
+				types.put(type.getName(), type);
+			}
+
+			/** INTEGER */
+			else if (item.getFloatParameterType() != null) {
+				Unit unit = null;
+
+				/** Read in the unit of the parameter type. */
+				if (item.getFloatParameterType().getUnitSet() != null) {
+					for (int unitTypeIndex = 0; unitTypeIndex < item.getFloatParameterType().getUnitSet().getUnitCount(); ++unitTypeIndex) {
+						unit = units.get(item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getContent());
+						if (unit == null) {
+							unit = new Unit(
+									item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(),
+									item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getDescription(),
+									item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getDescription(),
+									item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getPower(),
+									item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getFactor());
+
+							units.put(item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(), unit);
+						}
+					}
+				}
+
+				ParameterType type = new ParameterType(					
+						item.getFloatParameterType().getName(),
+						item.getFloatParameterType().getShortDescription(),
+						item.getFloatParameterType().getLongDescription(),
+						ParameterType.eParameterType.FLOAT,
+						false,
+						item.getFloatParameterType().getInitialValue().longValue(),				
+						Long.parseLong(item.getFloatParameterType().getSizeInBits().value()));
+
+				types.put(type.getName(), type);
+			}
+		}
+
+		/** Create all parameters. */
+		for (int parameterIndex = 0; parameterIndex < spaceSystem.getTelemetryMetaData().getParameterSet().getParameterSetTypeItemCount(); ++parameterIndex) {
+			ParameterSetTypeItem item = spaceSystem.getTelemetryMetaData().getParameterSet().getParameterSetTypeItem(parameterIndex);
+
+			Parameter model = null;
+			ParameterType type = types.get(item.getParameter().getParameterTypeRef());
+			if (type != null) {
+
+				if (type.getType() == ParameterType.eParameterType.INTEGER) {
+					model = new IntegerParameter(					
+							item.getParameter().getName(),
+							item.getParameter().getShortDescription(),
+							item.getParameter().getLongDescription(),
+							type,
+							(int) type.getInitialValue());
+				}
+				else if (type.getType() == ParameterType.eParameterType.FLOAT) {
+					model = new FloatParameter(					
+							item.getParameter().getName(),
+							item.getParameter().getShortDescription(),
+							item.getParameter().getLongDescription(),
+							type,
+							(int) type.getInitialValue());	
+				}
+			}
+
+			parameters.put(model.getName(), model);
+			containers.put(model.getName(), model);
+		}
+
+		/** Create all containers. 
+		 * In this iteration we create the container models, but do not create the references between 
+		 * them as the referenced objects do not yet exit. The creation of the references is done in
+		 * the second iteration below. */
+		for (int containerIndex = 0; containerIndex < spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItemCount(); ++containerIndex) {
+			SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex).getSequenceContainer();
+
+			Container container = new Container(xtceContainer.getName(), xtceContainer.getShortDescription(), xtceContainer.getLongDescription());			
+			containers.put(container.getName(), container);			
+		}
+
+		/** Reiterate through the containers and set the references between the objects. 
+		 * Three types of references exist;
+		 * 1. Base. A container may have a base container. 
+		 * 2. Sub containers.
+		 * 3. Restrictions. */
+		for (int containerIndex = 0; containerIndex < spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItemCount(); ++containerIndex) {
+			SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex).getSequenceContainer();
+
+			Container thisContainer = containers.get(xtceContainer.getName());
+
+			/** Register this container with the base container to make sure it gets processed. */
+			if (xtceContainer.getBaseContainer() != null) {				
+				for (Comparison comparison : xtceContainer.getBaseContainer().getRestrictionCriteria().getComparisonList().getComparison()) {
+					thisContainer.addRestriction((Parameter) containers.get(comparison.getParameterRef()), comparison.getValue());
+				}
+
+				containers.get(xtceContainer.getBaseContainer().getContainerRef()).addContainer(thisContainer);
+			}
+
+			/** Register all sub containers. */
+			for (int subContainerIndex = 0; subContainerIndex < xtceContainer.getEntryList().getEntryListTypeItemCount(); ++subContainerIndex) {
+				String name = "";
+				if (xtceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getParameterRefEntry() != null) {
+					name = xtceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getParameterRefEntry().getParameterRef();
+				}
+				else if (xtceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getContainerRefEntry() != null) {
+					name = xtceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getContainerRefEntry().getContainerRef();
+				}
+				
+				thisContainer.addContainer(containers.get(name));
+			}
+		}
+		
+		initialised = true;
+	}
+	
+	public SpaceSystem getSpaceSystem() {
+		if (spaceSystem == null) {
+
+			try {
+				// Load Mapping
+				// Mapping mapping = new Mapping();
+
+				// mapping.loadMapping(mappingFilename);
+				// initialize and configure XMLContext
+
+				XMLContext context = new XMLContext();
+				// context.addMapping(mapping);
+
+				// Create a new Unmarshaller
+				Unmarshaller unmarshaller = context.createUnmarshaller();
+				unmarshaller.setClass(SpaceSystem.class);
+
+				// Unmarshal the space system object
+				spaceSystem = (SpaceSystem) unmarshaller.unmarshal(new FileReader(spacesystemmodelFilename));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (MarshalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ValidationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return spaceSystem;
+	}
+
+	public String getPacketBaseReference() {
+		return packetBaseReference;
+	}
+
+	public void setPacketBaseReference(String packetBaseReference) {
+		this.packetBaseReference = packetBaseReference;
+	}
+
+	public String getFrameBaseReference() {
+		return frameBaseReference;
+	}
+
+	public void setFrameBaseReference(String frameBaseReference) {
+		this.frameBaseReference = frameBaseReference;
+	}
+
+	public String getSpacesystemmodelFilename() {
+		return spacesystemmodelFilename;
+	}
+
+	public void setSpacesystemmodelFilename(String spacesystemmodelFilename) {
+		this.spacesystemmodelFilename = spacesystemmodelFilename;
+	}	
+}
