@@ -26,6 +26,9 @@
  */
 package com.logica.hummingbird.marshaller;
 
+import com.logica.hummingbird.marshaller.producers.FrameProducer;
+import com.logica.hummingbird.marshaller.producers.PacketProducer;
+
 /**
  * The abstract base class for all parameter containers. The class
  * is intended to be subtyped for each simple Java type type. 
@@ -82,4 +85,17 @@ public abstract class Parameter extends Container implements IParameter {
 	public int getLength() {
 		return length + (int) type.sizeInBits;
 	}
+
+
+	public void registerUpdateObserver(PacketProducer packetProducer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void registerUpdateObserver(FrameProducer frameProducer) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

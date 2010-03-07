@@ -28,7 +28,7 @@ package com.logica.hummingbird.marshaller;
 
 import java.util.BitSet;
 
-import com.logica.hummingbird.marshaller.producers.PacketProducer;
+import com.logica.hummingbird.marshaller.producers.IProducer;
 
 /**
  * The standard interface of a marshaller container. The interface supports the
@@ -92,5 +92,7 @@ public interface IContainer {
 	 */
 	public BitSet getRawValue();
 
-	public void registerCompletionObserver(PacketProducer packetProducer);
+	public void registerCompletionObserver(IProducer producer);
+
+	public void registerUpdateObserver(IProducer producer);
 }

@@ -30,8 +30,12 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jms.BytesMessage;
+import javax.jms.Message;
+
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.component.jms.JmsMessage;
 
 import com.logica.hummingbird.commons.CCSDSMessageTypes;
 import com.logica.hummingbird.marshaller.IContainerFactory;
@@ -51,7 +55,7 @@ public class ParameterProducer implements IProducer {
 	/** List of all containers that are parameters to be generated. */
 	protected List<String> parameters = null;
 
-	protected Builder parameterBuilder = CCSDSParameter.newBuilder();
+	protected Camel parameterMessage;
 	
 	protected String parameterpath = "parameter";
 	

@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.logica.hummingbird.marshaller.producers.IProducer;
 import com.logica.hummingbird.marshaller.producers.PacketProducer;
 
 /**
@@ -210,8 +211,15 @@ public class Container extends NamedElement implements IContainer {
 	}
 
 	@Override
-	public void registerCompletionObserver(PacketProducer packetProducer) {
+	public void registerCompletionObserver(IProducer producer) {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+
+	@Override
+	public void registerUpdateObserver(IProducer producer) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
