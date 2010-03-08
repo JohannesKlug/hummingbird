@@ -35,7 +35,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.logica.hummingbird.marshaller.producers.IProducer;
-import com.logica.hummingbird.marshaller.producers.PacketProducer;
 
 /**
  * The container is the basic element in the marshallers POJO hierarchy. A container

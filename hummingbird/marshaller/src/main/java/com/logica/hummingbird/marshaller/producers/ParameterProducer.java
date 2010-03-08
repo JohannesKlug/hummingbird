@@ -28,7 +28,9 @@ package com.logica.hummingbird.marshaller.producers;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jms.BytesMessage;
 import javax.jms.JMSException;
@@ -58,6 +60,8 @@ public class ParameterProducer implements IProducer {
 	
 	protected IContainerFactory containerFactory = null;
 	
+	private Map<String,Object> headerMap = new HashMap<String, Object>();
+	
 	public void initialise() {
 		
 		/** Register with all parameters corresponding to header fields. */
@@ -69,18 +73,16 @@ public class ParameterProducer implements IProducer {
 		}
 	}
 
-	public void updated(String field, String value) throws JMSException {
-		parameterMessage.setStringProperty(field, value);
+	public void updated(String key, String value) {
+		headerMap.put(key, value);
 	}
 
-	public void updated(String field, int value) {
-		parameterBuilder.setName(field);
-		parameterBuilder.setValue(Integer.toString(value));
+	public void updated(String key, int value) {
+		headerMap.put(key, value);
 	}
 
-	public void updated(String field, double value) {
-		parameterBuilder.setName(field);
-		parameterBuilder.setValue(Double.toString(value));
+	public void updated(String key, double value) {
+		headerMap.put(key, value);
 	}
 
 	/* (non-Javadoc)
@@ -89,6 +91,5 @@ public class ParameterProducer implements IProducer {
 	@Override
 	public void completed() {
 		producerTemplate.sendBody(parameterpath, ExchangePattern.InOnly, parameterBuilder.build());
-		parameterBuilder.clear();
 	}
 }
