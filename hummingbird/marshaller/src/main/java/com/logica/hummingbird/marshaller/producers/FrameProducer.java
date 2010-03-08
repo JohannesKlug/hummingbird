@@ -58,7 +58,6 @@ public class FrameProducer implements IProducer {
 	
 	protected IContainerFactory containerFactory = null;
 
-	protected CCSDSMessageTypes.CCSDSFrame.Builder frameBuilder = CCSDSMessageTypes.CCSDSFrame.newBuilder();
 
 	public void initialise() {
 		/** Register with all parameters corresponding to header fields. */
@@ -78,19 +77,15 @@ public class FrameProducer implements IProducer {
 	}
 
 	public void updated(String field, BitSet value) {
-		frameBuilder.getClass().getMethod("set" + field, String.class).invoke(frameBuilder, BitSetUtility.toString(value));
 	}
 	
 	public void updated(String field, String value) {
-		frameBuilder.getClass().getMethod("set" + field, String.class).invoke(frameBuilder, value);
 	}
 
 	public void updated(String field, int value) {
-		frameBuilder.getClass().getMethod("set" + field, int.class).invoke(frameBuilder, value);
 	}
 
 	public void updated(String field, double value) {
-		frameBuilder.getClass().getMethod("set" + field, double.class).invoke(frameBuilder, value);
 	}
 
 	/* (non-Javadoc)
@@ -98,7 +93,6 @@ public class FrameProducer implements IProducer {
 	 */
 	@Override
 	public void completed() {
-		producerTemplate.sendBody(path, ExchangePattern.In, frameBuilder.build());
-		frameBuilder = null;
+		//producerTemplate.sendBody(path, ExchangePattern.In, frameBuilder.build());
 	}
 }

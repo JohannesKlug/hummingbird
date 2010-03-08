@@ -30,17 +30,13 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
 
 import com.logica.hummingbird.marshaller.BitSetUtility;
-import com.logica.hummingbird.commons.CCSDSMessageTypes;
 import com.logica.hummingbird.marshaller.IContainerFactory;
-import com.logica.hummingbird.commons.CCSDSMessageTypes.CCSDSFrame;
-import com.logica.hummingbird.commons.CCSDSMessageTypes.CCSDSPacket;
-import com.logica.hummingbird.commons.CCSDSMessageTypes.CCSDSParameter;
-import com.logica.hummingbird.commons.CCSDSMessageTypes.CCSDSParameter.Builder;
 
 /**
  * TODO write here a description of the class
@@ -62,7 +58,10 @@ public class PacketProducer implements IProducer {
 	
 	protected IContainerFactory containerFactory = null;
 
-	protected CCSDSMessageTypes.CCSDSPacket.Builder packetBuilder = CCSDSMessageTypes.CCSDSPacket.newBuilder();
+	private Object body;
+
+	private Map<String, Object> headers;
+
 		
 	public void initialise() {
 		/** Register with all parameters corresponding to header fields. */
@@ -77,19 +76,15 @@ public class PacketProducer implements IProducer {
 	}
 	
 	public void updated(String field, BitSet value) {
-		packetBuilder.getClass().getMethod("set" + field, String.class).invoke(packetBuilder, BitSetUtility.toString(value));
 	}
 
 	public void updated(String field, String value) {
-		packetBuilder.getClass().getMethod("set" + field, String.class).invoke(packetBuilder, value);
 	}
 
 	public void updated(String field, int value) {
-		packetBuilder.getClass().getMethod("set" + field, int.class).invoke(packetBuilder, value);
 	}
 
 	public void updated(String field, double value) {
-		packetBuilder.getClass().getMethod("set" + field, double.class).invoke(packetBuilder, value);
 	}
 
 	/* (non-Javadoc)
@@ -97,7 +92,7 @@ public class PacketProducer implements IProducer {
 	 */
 	@Override
 	public void completed() {
-		producerTemplate.sendBody(packetpath, ExchangePattern.InOnly, packetBuilder.build());
-		packetBuilder.clear();
+		//producerTemplate.sendBody(packetpath, ExchangePattern.InOnly, packetBuilder.build());
+		producerTemplate.sendBodyAndHeaders(body, headers);
 	}
 }
