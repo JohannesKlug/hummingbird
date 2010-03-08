@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<description>This module contains the Hummingbird help pages, i.e. the documentation of the system.</description>
+	<parent>
+		<artifactId>project</artifactId>
+		<groupId>com.logica.hummingbird</groupId>
+		<version>1.0</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.logica.hummingbird</groupId>
+	<artifactId>help</artifactId>
+	<packaging>zip</packaging>
+	<name>Hummingbird Help</name>
+	<version>1.0</version>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/resources/assembly.xml</descriptor>
+					</descriptors>
+					<finalName>com.logica.hummingbird.help-1.0</finalName>					
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

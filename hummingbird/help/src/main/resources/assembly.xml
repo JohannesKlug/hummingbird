@@ -1,0 +1,14 @@
+<assembly>
+  <id>plugin</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <fileSets>
+    <fileSet>
+      <includes>
+        <include>src/main/html/*.html</include>
+      </includes>
+      <outputDirectory>src/main/target</outputDirectory>
+    </fileSet>
+  </fileSets>
+</assembly>
