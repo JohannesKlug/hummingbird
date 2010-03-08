@@ -1,6 +1,0 @@
-<plugin name="Hummingbird Help" id="com.logica.hummingbird.help"
-   version="1.0.0" provider-name="Logica">
-   <extension point="org.eclipse.help.toc">
-      <toc file="toc.xml" primary="true" />
-   </extension>
-</plugin>
