@@ -60,7 +60,9 @@ public class ParameterProducer implements IProducer {
 	
 	protected IContainerFactory containerFactory = null;
 	
-	private Map<String,Object> headerMap = new HashMap<String, Object>();
+	private Map<String,Object> headers = new HashMap<String, Object>();
+
+	private byte[] body;
 	
 	public void initialise() {
 		
@@ -74,15 +76,15 @@ public class ParameterProducer implements IProducer {
 	}
 
 	public void updated(String key, String value) {
-		headerMap.put(key, value);
+		headers.put(key, value);
 	}
 
 	public void updated(String key, int value) {
-		headerMap.put(key, value);
+		headers.put(key, value);
 	}
 
 	public void updated(String key, double value) {
-		headerMap.put(key, value);
+		headers.put(key, value);
 	}
 
 	/* (non-Javadoc)
@@ -90,6 +92,7 @@ public class ParameterProducer implements IProducer {
 	 */
 	@Override
 	public void completed() {
-		producerTemplate.sendBody(parameterpath, ExchangePattern.InOnly, parameterBuilder.build());
+		//producerTemplate.sendBody(parameterpath, ExchangePattern.InOnly, parameterBuilder.build());
+		producerTemplate.sendBodyAndHeaders(body, headers);
 	}
 }

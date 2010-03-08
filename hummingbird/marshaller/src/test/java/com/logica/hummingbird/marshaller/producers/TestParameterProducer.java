@@ -11,13 +11,15 @@ public class TestParameterProducer {
 
 	@Before
 	public void setUp() throws Exception {
-		parameterProducer = new ParameterProducer();
 	}
 
 	@Test
-	public void testHeaderMap() {
+	public void testHeader() {
+		parameterProducer = new ParameterProducer();
 		parameterProducer.updated("String", "Test");
 		parameterProducer.updated("double", Double.MAX_VALUE);
 		parameterProducer.updated("int", Integer.MAX_VALUE);
+		parameterProducer.completed();
+		
 	}
 }
