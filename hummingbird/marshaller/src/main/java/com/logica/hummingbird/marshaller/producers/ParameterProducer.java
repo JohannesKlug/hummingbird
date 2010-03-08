@@ -31,37 +31,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.jms.BytesMessage;
+import javax.jms.JMSException;
 import javax.jms.Message;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.jms.JmsMessage;
 
-import com.logica.hummingbird.commons.CCSDSMessageTypes;
 import com.logica.hummingbird.marshaller.IContainerFactory;
 import com.logica.hummingbird.marshaller.Parameter;
-import com.logica.hummingbird.commons.CCSDSMessageTypes.CCSDSFrame;
-import com.logica.hummingbird.commons.CCSDSMessageTypes.CCSDSPacket;
-import com.logica.hummingbird.commons.CCSDSMessageTypes.CCSDSParameter;
-import com.logica.hummingbird.commons.CCSDSMessageTypes.CCSDSParameter.Builder;
 
 /**
  * TODO write here a description of the class
  */
 public class ParameterProducer implements IProducer {
 	
-	protected ProducerTemplate producerTemplate = null;
+	protected ProducerTemplate producerTemplate;
 
 	/** List of all containers that are parameters to be generated. */
 	protected List<String> parameters = null;
 
-	protected Camel parameterMessage;
+	protected BytesMessage parameterMessage;
 	
 	protected String parameterpath = "parameter";
 	
 	protected IContainerFactory containerFactory = null;
 	
 	public void initialise() {
+		
 		/** Register with all parameters corresponding to header fields. */
 		for (String field : parameters) {
 			Parameter parameter = containerFactory.getParameter(field);
@@ -71,9 +69,8 @@ public class ParameterProducer implements IProducer {
 		}
 	}
 
-	public void updated(String field, String value) {
-		parameterBuilder.setName(field);
-		parameterBuilder.setValue(value);
+	public void updated(String field, String value) throws JMSException {
+		parameterMessage.setStringProperty(field, value);
 	}
 
 	public void updated(String field, int value) {

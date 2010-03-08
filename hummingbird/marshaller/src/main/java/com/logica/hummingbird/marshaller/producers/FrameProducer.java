@@ -36,8 +36,6 @@ import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
 
 import com.logica.hummingbird.marshaller.BitSetUtility;
-import com.logica.hummingbird.commons.CCSDSMessageTypes;
-import com.logica.hummingbird.commons.CCSDSMessageTypes.*;
 import com.logica.hummingbird.marshaller.IContainerFactory;
 
 /**
