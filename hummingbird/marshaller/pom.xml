@@ -9,7 +9,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.logica.hummingbird</groupId>
 	<artifactId>marshaller</artifactId>
-	<packaging>war</packaging>
 	<name>Marshaller</name>
 	<version>1.0</version>
 
@@ -36,6 +35,10 @@
 			<version>4.8.1</version>
 			<type>jar</type>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test</artifactId>
 		</dependency>
 	</dependencies>
 </project>

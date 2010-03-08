@@ -17,6 +17,7 @@
   	<module>parameterarchive</module>
   	<module>commons</module>
   	<module>help</module>
+  	<module>assembly</module>
   </modules>
   
   	<licenses>

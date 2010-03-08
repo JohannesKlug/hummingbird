@@ -32,6 +32,9 @@ public class PacketArchiveTest extends CamelTestSupport {
     @Test
     public void testInsert() throws Exception {
         MockEndpoint mock = getMockEndpoint("mock:result");
+        
+        
+        
         mock.expectedMessageCount(1);
 
         Packet packet = new Packet();
@@ -53,10 +56,32 @@ public class PacketArchiveTest extends CamelTestSupport {
     @Override
     protected RouteBuilder createRouteBuilder() throws Exception {
         return new RouteBuilder() {
+        	
+        	
+//    		<route>
+//			<from uri="activemq:topic:rawframe" />
+//			<to uri="bean:marshaller" />
+//			<choice>
+//	            <when>
+//	                <xpath>$type = 'frame'</xpath>
+//	                <to uri="activemq:topic:frame?messageConverter=com.logica.hummingbird.marshaller.Converter"/>
+//	            </when>
+//	            <when>
+//	                <xpath>$type = 'packet'</xpath>
+//	                <to uri="activemq:topic:packet?messageConverter=com.logica.hummingbird.marshaller.Converter"/>
+//	            </when>
+//	            <otherwise>
+//	                <xpath>$type = 'parameter'</xpath>
+//	                <to uri="activemq:topic:parameter?messageConverter=com.logica.hummingbird.marshaller.Converter"/>
+//	            </otherwise>
+//	        </choice>
+//		</route>
+        	
+        	
             @Override
             public void configure() throws Exception {
                 from("direct:start")
-                    .to("ibatis:ibatorgenerated_insert?statementType=Insert")
+                    .to("marshaller")
                     .to("mock:result");
             }
         };

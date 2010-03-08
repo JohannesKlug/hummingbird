@@ -2,3 +2,5 @@ target/
 .settings/
 hummingbird/xtce/src/main/java/com/logica/hummingbird/xtce/castor/
 .metadata/
+.project
+.classpath

@@ -40,6 +40,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.jms.JmsMessage;
+import org.apache.camel.impl.DefaultCamelContext;
 
 import com.logica.hummingbird.marshaller.IContainerFactory;
 import com.logica.hummingbird.marshaller.Parameter;
@@ -49,13 +50,13 @@ import com.logica.hummingbird.marshaller.Parameter;
  */
 public class ParameterProducer implements IProducer {
 	
-	protected ProducerTemplate producerTemplate;
+	DefaultCamelContext context = new DefaultCamelContext();
+	
+	protected ProducerTemplate producerTemplate = context.createProducerTemplate();
 
 	/** List of all containers that are parameters to be generated. */
 	protected List<String> parameters = null;
 
-	protected BytesMessage parameterMessage;
-	
 	protected String parameterpath = "parameter";
 	
 	protected IContainerFactory containerFactory = null;
@@ -93,6 +94,7 @@ public class ParameterProducer implements IProducer {
 	@Override
 	public void completed() {
 		//producerTemplate.sendBody(parameterpath, ExchangePattern.InOnly, parameterBuilder.build());
+		//producerTemplate.sendBodyAndHeaders(parameterpath, body, headers);
 		producerTemplate.sendBodyAndHeaders(body, headers);
 	}
 }
