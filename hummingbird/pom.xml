@@ -42,11 +42,11 @@
 		<spring.version>2.5.6</spring.version>
 		<junit.version>4.7</junit.version>
 		<castor.version>1.3</castor.version>
-		<camel.version>2.1.0</camel.version>
-		<activemq.version>5.2.0</activemq.version>
+		<camel.version>2.2.0</camel.version>
+		<activemq.version>5.3.0</activemq.version>
 		<mysqlconnector.version>5.1.10</mysqlconnector.version>
-		<jencks.version>2.1</jencks.version>
-		<cameljms.version>1.6.0</cameljms.version>
+		<jencks.version>2.2</jencks.version>
+		<cameljms.version>2.2.0</cameljms.version>
 				
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
