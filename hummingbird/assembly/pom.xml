@@ -7,7 +7,9 @@
   </parent>
   <groupId>com.logica.hummingbird</groupId>
   <artifactId>assembly</artifactId>
+  <name>Assembly</name>
   <version>1.0</version>
+  <description>Provides system integration tests</description>
   <dependencies>
   	<dependency>
   		<groupId>com.logica.hummingbird</groupId>
