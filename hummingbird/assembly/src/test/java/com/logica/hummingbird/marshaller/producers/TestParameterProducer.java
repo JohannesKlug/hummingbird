@@ -26,7 +26,7 @@ import com.logica.hummingbird.xtce.XtceModelFactory;
 
 public class TestParameterProducer extends CamelTestSupport {
 	
-	protected static XtceModelFactory xtceFactory = null;
+	protected static XtceModelFactory xtceFactory = new XtceModelFactory();
 	
 	private ParameterProducer parameterProducer;
 
@@ -35,10 +35,37 @@ public class TestParameterProducer extends CamelTestSupport {
 
     @Produce(uri = "direct:start")
     protected ProducerTemplate template;
+    
+//    @Before
+//    public void setUp() {
+////    	Logger logger =  Logger.getAnonymousLogger();
+////    	logger.setLevel(Level.WARN);
+//    	
+//    }
+    
+    @Override
+    protected RouteBuilder createRouteBuilder() {
+        return new RouteBuilder() {
+        	
+            public void configure() throws Exception {
+            	
+            	xtceFactory = new XtceModelFactory();
+            	xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
+            	xtceFactory.initialise();
+            	ContainerProcessor processor = new ContainerProcessor(xtceFactory);
+            	
+                from("direct:start")
+                .process(processor)
+                    .to("mock:result");
+        }
+        };
+    }
 
     @Test
     public void testInsert() throws Exception {
 
+    	xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
+    	
     	/** Create FRAME */
 
 		
@@ -98,40 +125,22 @@ public class TestParameterProducer extends CamelTestSupport {
 		
                 
         /** Send to end point. */
+		assertNotNull("template is null.", template);
 		template.sendBody(frame);
         
         /** Check we got the expected output. */        
-    
-		assertMockEndpointsSatisfied();
+		resultEndpoint.expectedMinimumMessageCount(1);
+		resultEndpoint.assertIsSatisfied();
+		
+		System.out.println("Number of received messages: " + resultEndpoint.getReceivedCounter());
 
-        // there should be 3 rows now
 		for (Exchange exchange : resultEndpoint.getReceivedExchanges()) {
 			/** Print each exchange.*/
 			System.out.println("Exchange: " + exchange.toString());
 		}
     }
 
-    @Override
-    protected RouteBuilder createRouteBuilder() {
-        return new RouteBuilder() {
-        	int x = 0;
-        	
-        	
-            public void configure() throws Exception {
-            	
-            	CamelContext context = new DefaultCamelContext();
-            	
-            	xtceFactory = new XtceModelFactory();
-            	xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
-            	xtceFactory.initialise();
-            	ContainerProcessor processor = new ContainerProcessor(xtceFactory);
-            	
-                from("direct:start")
-                .process(processor)
-                    .to("mock:result");
-        }
-        };
-    }
+   
 	
     
  
@@ -147,29 +156,6 @@ public class TestParameterProducer extends CamelTestSupport {
 		
 	}
 
-	public ParameterProducer getParameterProducer() {
-		return parameterProducer;
-	}
-
-	public void setParameterProducer(ParameterProducer parameterProducer) {
-		this.parameterProducer = parameterProducer;
-	}
-
-	public MockEndpoint getResultEndpoint() {
-		return resultEndpoint;
-	}
-
-	public void setResultEndpoint(MockEndpoint resultEndpoint) {
-		this.resultEndpoint = resultEndpoint;
-	}
-
-	public ProducerTemplate getTemplate() {
-		return template;
-	}
-
-	public void setTemplate(ProducerTemplate template) {
-		this.template = template;
-	}
 	
 	
 }
