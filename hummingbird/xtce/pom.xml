@@ -36,11 +36,6 @@
 		</dependency>
 		<dependency>
 			<groupId>com.logica.hummingbird</groupId>
-			<artifactId>commons</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
 			<artifactId>marshaller</artifactId>
 			<version>1.0</version>
 		</dependency>
