@@ -68,7 +68,8 @@ public interface IMarshaller {
 	 * Returns a container reference.
 	 *
 	 * @param container Identifier of the container. 
+	 * @throws Exception 
 	 *
 	 */
-	public IContainer getContainer(String container);
+	public IContainer getContainer(String container) throws Exception;
 }

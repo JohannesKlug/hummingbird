@@ -235,4 +235,10 @@ public class Container extends NamedElement implements IContainer {
 		
 	}
 
+	public List<IContainer> getSubContainers() {
+		return subContainers;
+	}
+
+	
+	
 }

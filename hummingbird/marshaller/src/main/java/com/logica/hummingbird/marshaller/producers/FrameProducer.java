@@ -32,6 +32,7 @@ import java.util.Map;
 
 import org.apache.camel.ProducerTemplate;
 
+import com.logica.hummingbird.marshaller.IContainer;
 import com.logica.hummingbird.marshaller.IContainerFactory;
 
 /**
@@ -59,20 +60,22 @@ public class FrameProducer implements IProducer {
 
 
 	public void initialise() {
-		/** Register with all parameters corresponding to header fields. */
-		for (String field : headerFields) {
-			containerFactory.getParameter(field).registerUpdateObserver(this);
+		
+		try {
+			for (IContainer sub : containerFactory.getContainer("TMFrameHeader").getSubContainers()) {
+				sub.registerUpdateObserver(this);
+			}
+			
+			for (IContainer sub : containerFactory.getContainer("TMFrameTail").getSubContainers()) {
+				sub.registerUpdateObserver(this);
+			}
+			
+			containerFactory.getContainer("TMFrame").registerCompletionObserver(this);
+		
+		} catch (Exception e) {
+			e.printStackTrace(); 
 		}
-
-		/** Register with all containers corresponding to packets. */
-		for (String field : packets) {
-			containerFactory.getContainer(field).registerUpdateObserver(this);
-		}
-
-		/** Register with all containers corresponding to frames. */
-		for (String field : packets) {
-			containerFactory.getContainer(field).registerCompletionObserver(this);
-		}		
+	
 	}
 
 	public void updated(String key, BitSet value) {

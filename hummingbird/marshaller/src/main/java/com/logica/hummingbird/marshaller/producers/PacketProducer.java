@@ -32,23 +32,23 @@ import java.util.Map;
 
 import org.apache.camel.ProducerTemplate;
 
+import com.logica.hummingbird.marshaller.IContainer;
 import com.logica.hummingbird.marshaller.IContainerFactory;
 
 /**
- * TODO write here a description of the class
+ * The packet consists of a sequence of packet header fields, which are parameters, and a 
+ * packet body which is binary data. This producer registers for the parameters in the 
+ * header, and for the packet itself to get the raw data.
  */
 public class PacketProducer implements IProducer {
 	
 	protected ProducerTemplate producerTemplate = null;
 
 	/** List of all containers that are parameters to be generated. */
-	protected List<String> headerFields = null;
+	// protected List<String> packetHeaderParameters = null;
 
-	/** List of all containers that are parameters to be generated. */
-	protected List<String> parameters = null;
-	
 	/** List of all containers that are packets to be generated. */
-	protected List<String> packets = null;
+	// protected List<String> packets = null;
 
 	protected String path = null;
 	
@@ -60,15 +60,21 @@ public class PacketProducer implements IProducer {
 
 		
 	public void initialise() {
-		/** Register with all parameters corresponding to header fields. */
-		for (String field : headerFields) {
-			containerFactory.getParameter(field).registerUpdateObserver(this);
+		
+		/** The packet base container (should have the name TMPacket by convention) contains as sub containers;
+		 *   1. A parameter per header field. For example CCSDS_APID
+		 *   2. A container per layout of a packet. The layout to be used is defined as a constrain, i.e. for example if
+		 *      the header parameter 'CCSDS_APID == 123' is valid, then a specific layout will be used. */
+		try {
+			for (IContainer sub : containerFactory.getContainer("TMPacket").getSubContainers()) {
+				sub.registerUpdateObserver(this);
+			}
+			containerFactory.getContainer("TMPacket").registerCompletionObserver(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		/** Register with all containers corresponding to packets. */
-		for (String field : packets) {
-			containerFactory.getContainer(field).registerCompletionObserver(this);
-		}
 	}
 	
 	public void updated(String key, BitSet value) {

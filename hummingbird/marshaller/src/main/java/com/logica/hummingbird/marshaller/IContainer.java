@@ -27,6 +27,7 @@
 package com.logica.hummingbird.marshaller;
 
 import java.util.BitSet;
+import java.util.List;
 
 import com.logica.hummingbird.marshaller.producers.IProducer;
 
@@ -95,4 +96,6 @@ public interface IContainer {
 	public void registerCompletionObserver(IProducer producer);
 
 	public void registerUpdateObserver(IProducer producer);
+	
+	public List<IContainer> getSubContainers();
 }

@@ -26,6 +26,8 @@
  */
 package com.logica.hummingbird.marshaller;
 
+import java.util.Map;
+
 /**
  * Interface to create monitoring models.
  * 
@@ -53,9 +55,10 @@ public interface IContainerFactory {
 	 *
 	 * @param name The unique name of the container to be returned.
 	 * @return IContainer Returns the container identified through the name, or null. 
+	 * @throws Exception 
 	 *
 	 */
-	public IContainer getContainer(String name);
+	public IContainer getContainer(String name) throws Exception;
 
 	/**
 	 * Retrieves a parameter container. 
@@ -64,5 +67,9 @@ public interface IContainerFactory {
 	 * @return Parameter Returns the parameter container identified through the name, or null. 
 	 *
 	 */
-	public Parameter getParameter(String name);	
+	public Parameter getParameter(String name);
+	
+	// TODO Get all parameters function.
+	
+	public Map<String, Parameter> getAllParameters();
 }

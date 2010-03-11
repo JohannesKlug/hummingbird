@@ -2,7 +2,9 @@ package com.logica.hummingbird.xtce;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.exolab.castor.xml.MarshalException;
@@ -47,12 +49,18 @@ public class XtceModelFactory implements IContainerFactory {
 		return parameters.get(name);
 	}
 
-	public Container getContainer(String name) {
+	public Container getContainer(String name) throws Exception {
 		if (initialised == false) {
 			initialise();
 		}
 		
-		return containers.get(name);
+		Container container = containers.get(name);
+		
+		if (container == null) {
+			throw new RuntimeException("Your container lookup for '" + name + "' didn't return any containers. Check your SpaceSystem configuration.");
+		}
+		
+		return container;
 	}
 
 	public void initialise() {
@@ -264,5 +272,10 @@ public class XtceModelFactory implements IContainerFactory {
 
 	public void setSpacesystemmodelFilename(String spacesystemmodelFilename) {
 		this.spacesystemmodelFilename = spacesystemmodelFilename;
+	}
+
+	@Override
+	public Map<String, Parameter> getAllParameters() {
+		return parameters;
 	}	
 }

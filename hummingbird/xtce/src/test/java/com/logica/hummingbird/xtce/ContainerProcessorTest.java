@@ -51,9 +51,20 @@ public class ContainerProcessorTest extends TestCase {
 		BitSet frame = new BitSet();
 
 		System.out.println("Initial values:");
-		int length = factory.getContainer("TMFrame").getLength();
+		int length = 0;
+		try {
+			length = factory.getContainer("TMFrame").getLength();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertTrue(length == 175);
-		System.out.println("Total length: " + factory.getContainer("TMFrame").getLength() + " bit(s).");
+		try {
+			System.out.println("Total length: " + factory.getContainer("TMFrame").getLength() + " bit(s).");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		/** Flip the bit 175 (one larger than the size based on 0 index) to make sure the
 		 * bit set does not truncate itself. Else it will remove the trailing 0's, i.e. its
@@ -61,7 +72,12 @@ public class ContainerProcessorTest extends TestCase {
 		frame.set(length);
 		
 		/** Test print the content as a string. */
-		System.out.println(factory.getContainer("TMFrame").toString());
+		try {
+			System.out.println(factory.getContainer("TMFrame").toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		/** Marshall it to a BitSet. */
 		ContainerProcessor processor = new ContainerProcessor(factory);
@@ -106,7 +122,12 @@ public class ContainerProcessorTest extends TestCase {
 		System.out.println("Reset values:");
 		
 		/** Test print the content as a string. */
-		System.out.println(factory.getContainer("TMFrame").toString());
+		try {
+			System.out.println(factory.getContainer("TMFrame").toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		/** Visualize the BitSet*/
 		BitSet frame2 = new BitSet();
@@ -121,7 +142,12 @@ public class ContainerProcessorTest extends TestCase {
 		System.out.println("Reinstated values:");
 		
 		/** Test print the content as a string. */
-		System.out.println(factory.getContainer("TMFrame").toString());
+		try {
+			System.out.println(factory.getContainer("TMFrame").toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		/** Visualize the BitSet*/
 		System.out.println(BitSetUtility.binDump(frame));

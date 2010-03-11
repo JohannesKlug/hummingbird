@@ -55,20 +55,35 @@ public class ContainerProcessor implements IMarshaller, Processor {
 	
 	@Override
 	public void unmarshall(String packetname, BitSet packet) {
-		factory.getContainer(packetname).unmarshall(packet);
+		try {
+			factory.getContainer(packetname).unmarshall(packet);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void marshall(String packetname, BitSet packet) {
-		factory.getContainer(packetname).marshall(packet, 0);
+		try {
+			factory.getContainer(packetname).marshall(packet, 0);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
 	public void marshall(String packetname, String packet) {
-		packet = factory.getContainer(packetname).toString();
+		try {
+			packet = factory.getContainer(packetname).toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public IContainer getContainer(String container) {
+	public IContainer getContainer(String container) throws Exception {
 		return factory.getContainer(container);
 	}
 	
