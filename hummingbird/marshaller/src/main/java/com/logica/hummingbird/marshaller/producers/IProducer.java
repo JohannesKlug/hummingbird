@@ -26,11 +26,14 @@
  */
 package com.logica.hummingbird.marshaller.producers;
 
+import java.util.BitSet;
+
 /**
  * TODO write here a description of the class
  */
 public interface IProducer {
 
+	public void updated(String field, BitSet value);
 	public void updated(String field, int value);
 	public void updated(String field, String value);
 	public void updated(String field, double value);

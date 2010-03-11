@@ -26,20 +26,12 @@
  */
 package com.logica.hummingbird.marshaller.producers;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.jms.BytesMessage;
-import javax.jms.JMSException;
-import javax.jms.Message;
-
-import org.apache.camel.CamelContext;
-import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
-import org.apache.camel.component.jms.JmsMessage;
 import org.apache.camel.impl.DefaultCamelContext;
 
 import com.logica.hummingbird.marshaller.IContainerFactory;
@@ -63,7 +55,8 @@ public class ParameterProducer implements IProducer {
 	
 	private Map<String,Object> headers = new HashMap<String, Object>();
 
-	private byte[] body;
+	// body will be empty for parameters
+	private Object body;
 	
 	public void initialise() {
 		
@@ -76,6 +69,12 @@ public class ParameterProducer implements IProducer {
 		}
 	}
 
+	@Override
+	public void updated(String field, BitSet value) {
+		// TODO For parameters, body might make no sense - needs discussion.
+		body = value;		
+	}
+	
 	public void updated(String key, String value) {
 		headers.put(key, value);
 	}
@@ -93,8 +92,12 @@ public class ParameterProducer implements IProducer {
 	 */
 	@Override
 	public void completed() {
+		// TODO remove those lines
 		//producerTemplate.sendBody(parameterpath, ExchangePattern.InOnly, parameterBuilder.build());
 		//producerTemplate.sendBodyAndHeaders(parameterpath, body, headers);
+		
+		// body will be empty for parameters
 		producerTemplate.sendBodyAndHeaders(body, headers);
 	}
+
 }

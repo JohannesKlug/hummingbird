@@ -26,16 +26,12 @@
  */
 package com.logica.hummingbird.marshaller.producers;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
+import java.util.Map;
 
-import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
 
-import com.logica.hummingbird.marshaller.BitSetUtility;
 import com.logica.hummingbird.marshaller.IContainerFactory;
 
 /**
@@ -57,6 +53,9 @@ public class FrameProducer implements IProducer {
 	protected String path = null;
 	
 	protected IContainerFactory containerFactory = null;
+	
+	private Object body;
+	private Map<String, Object> headers;
 
 
 	public void initialise() {
@@ -76,16 +75,20 @@ public class FrameProducer implements IProducer {
 		}		
 	}
 
-	public void updated(String field, BitSet value) {
+	public void updated(String key, BitSet value) {
+		body = value;
 	}
 	
-	public void updated(String field, String value) {
+	public void updated(String key, String value) {
+		headers.put(key, value);
 	}
 
-	public void updated(String field, int value) {
+	public void updated(String key, int value) {
+		headers.put(key, value);
 	}
 
-	public void updated(String field, double value) {
+	public void updated(String key, double value) {
+		headers.put(key, value);
 	}
 
 	/* (non-Javadoc)
@@ -93,6 +96,9 @@ public class FrameProducer implements IProducer {
 	 */
 	@Override
 	public void completed() {
+		// TODO remove the following line
 		//producerTemplate.sendBody(path, ExchangePattern.In, frameBuilder.build());
+		
+		producerTemplate.sendBodyAndHeaders(body, headers);
 	}
 }

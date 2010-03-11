@@ -26,8 +26,7 @@
  */
 package com.logica.hummingbird.marshaller;
 
-import com.logica.hummingbird.marshaller.producers.FrameProducer;
-import com.logica.hummingbird.marshaller.producers.PacketProducer;
+import com.logica.hummingbird.marshaller.producers.IProducer;
 
 /**
  * The abstract base class for all parameter containers. The class
@@ -41,7 +40,7 @@ public abstract class Parameter extends Container implements IParameter {
 	/** The type of the parameter. */
 	protected ParameterType type = null;
 	
-	
+
 	/**
 	 * Constructor of the Parameter class.
 	 *
@@ -87,15 +86,10 @@ public abstract class Parameter extends Container implements IParameter {
 	}
 
 
-	public void registerUpdateObserver(PacketProducer packetProducer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void registerUpdateObserver(FrameProducer frameProducer) {
-		// TODO Auto-generated method stub
-		
-	}
+	/**
+	 * Registers the observer
+	 * 
+	 */
+	abstract public void registerUpdateObserver(IProducer producer);
 
 }

@@ -70,6 +70,9 @@ public class Container extends NamedElement implements IContainer {
 	/** The length of this container in bits. The value will hold a BitSet of length >= length + 1. */
 	protected int length = 0;
 	
+	IProducer updateObserver;
+	IProducer completionObserver;
+	
 	/**
 	 * Constructor of the Container class.
 	 *
@@ -122,6 +125,17 @@ public class Container extends NamedElement implements IContainer {
 			
 			for (IContainer container : subContainers) {
 				packet = container.unmarshall(packet);
+				if (updateObserver != null) {
+					updateObserver.updated("", packet);
+				} else {
+					System.out.println("Error: In Container: updateObserver is null.");
+				}
+			}
+			
+			if (completionObserver != null) {
+				completionObserver.completed();
+			} else {
+				System.out.println("Error: In Container: completionObserver is null");
 			}
 		}
 
@@ -211,13 +225,13 @@ public class Container extends NamedElement implements IContainer {
 
 	@Override
 	public void registerCompletionObserver(IProducer producer) {
-		// TODO Auto-generated method stub
+		this.completionObserver = producer;
 		
 	}
 
 	@Override
 	public void registerUpdateObserver(IProducer producer) {
-		// TODO Auto-generated method stub
+		this.updateObserver = producer;
 		
 	}
 

@@ -26,16 +26,12 @@
  */
 package com.logica.hummingbird.marshaller.producers;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
 
-import com.logica.hummingbird.marshaller.BitSetUtility;
 import com.logica.hummingbird.marshaller.IContainerFactory;
 
 /**
@@ -75,16 +71,20 @@ public class PacketProducer implements IProducer {
 		}
 	}
 	
-	public void updated(String field, BitSet value) {
+	public void updated(String key, BitSet value) {
+		body = value;
 	}
 
-	public void updated(String field, String value) {
+	public void updated(String key, String value) {
+		headers.put(key, value);
 	}
 
-	public void updated(String field, int value) {
+	public void updated(String key, int value) {
+		headers.put(key, value);
 	}
 
-	public void updated(String field, double value) {
+	public void updated(String key, double value) {
+		headers.put(key, value);
 	}
 
 	/* (non-Javadoc)

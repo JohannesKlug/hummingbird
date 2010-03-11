@@ -28,10 +28,15 @@ package com.logica.hummingbird.marshaller;
 
 import java.util.BitSet;
 
+import com.logica.hummingbird.marshaller.producers.IProducer;
+
 public class IntegerParameter extends Parameter {
 
 	/** The value of the integer. */
 	protected int value = 0;
+	
+	/** The producer to call back*/
+	private IProducer producer;
 
 	/**
 	 * Constructor of the IntegerParameter class.
@@ -52,6 +57,9 @@ public class IntegerParameter extends Parameter {
 	public BitSet unmarshall(BitSet packet) {
 		value = BitSetUtility.extractInteger(packet, 0, (int) type.sizeInBits);
 		/** TODO Create POJO and send to observer. */
+		if (producer != null ) {
+			producer.updated(this.getType().toString(), value);
+		}
 		return packet.get((int) type.sizeInBits, packet.length());
 	}
 	
@@ -85,5 +93,11 @@ public class IntegerParameter extends Parameter {
 	@Override
 	public boolean match(String value) {
 		return (this.value == Integer.parseInt(value));
+	}
+
+	@Override
+	public void registerUpdateObserver(IProducer producer) {
+		this.producer = producer;
+		
 	}
 }

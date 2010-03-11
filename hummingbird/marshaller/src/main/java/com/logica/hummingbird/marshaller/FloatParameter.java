@@ -28,6 +28,8 @@ package com.logica.hummingbird.marshaller;
 
 import java.util.BitSet;
 
+import com.logica.hummingbird.marshaller.producers.IProducer;
+
 /**
  * The float container encodes / decodes a float parameter from the
  * data stream. 
@@ -37,11 +39,14 @@ public class FloatParameter extends Parameter {
 	/** The last extracted value of the container. */
 	protected float value = 0;
 
-	/** The minimual possible value. */
+	/** The minimal possible value. */
 	protected final double minimumValue = Double.MIN_VALUE;
 	
 	/** The maximal possible value. */
 	protected final double maximumValue = Double.MAX_VALUE;
+	
+	/** The producer to call back*/
+	private IProducer producer;
 
 	
 	/**
@@ -62,6 +67,9 @@ public class FloatParameter extends Parameter {
 	public BitSet unmarshall(BitSet packet) {
 		value = (float) BitSetUtility.extractDouble(packet, 0, (int) type.sizeInBits, minimumValue, maximumValue);
 		/** TODO Create POJO and send to observer. */
+		if (producer != null) {
+			producer.updated(this.getType().toString(), value);
+		}
 		return packet.get((int) type.sizeInBits, packet.length());
 	}
 
@@ -95,5 +103,11 @@ public class FloatParameter extends Parameter {
 	@Override
 	public boolean match(String value) {		
 		return (this.value == Float.parseFloat(value));
+	}
+
+	@Override
+	public void registerUpdateObserver(IProducer producer) {
+		this.producer = producer;
+		
 	}
 }
