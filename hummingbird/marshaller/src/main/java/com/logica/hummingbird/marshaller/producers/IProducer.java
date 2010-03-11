@@ -28,6 +28,7 @@ package com.logica.hummingbird.marshaller.producers;
 
 import java.util.BitSet;
 
+
 /**
  * TODO write here a description of the class
  */

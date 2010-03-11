@@ -148,7 +148,7 @@ public class TestParameterProducer extends CamelTestSupport {
 
 	@Test
 	public void testHeader() {
-		parameterProducer = new ParameterProducer();
+		parameterProducer = new ParameterProducer(xtceFactory);
 		parameterProducer.updated("String", "Test");
 		parameterProducer.updated("double", Double.MAX_VALUE);
 		parameterProducer.updated("int", Integer.MAX_VALUE);
@@ -157,5 +157,5 @@ public class TestParameterProducer extends CamelTestSupport {
 	}
 
 	
-	
+		
 }

@@ -31,6 +31,11 @@ import java.util.BitSet;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 
+import com.logica.hummingbird.marshaller.producers.FrameProducer;
+import com.logica.hummingbird.marshaller.producers.IProducer;
+import com.logica.hummingbird.marshaller.producers.PacketProducer;
+import com.logica.hummingbird.marshaller.producers.ParameterProducer;
+
 /** 
  * 
  * 
@@ -45,12 +50,20 @@ public class ContainerProcessor implements IMarshaller, Processor {
 	/** The factory used to locate the models. */
 	protected IContainerFactory factory = null;
 	
+	IProducer frameProducer;
+	IProducer packetProducer;
+	IProducer parameterProducer;
+	
 	/** Constructor.
 	 * 
 	 * @param factory The factory to be used to obtain references to the container.
 	 * */
 	public ContainerProcessor(IContainerFactory factory) {
 		this.factory = factory;
+		
+		frameProducer = new FrameProducer(factory);
+		packetProducer = new PacketProducer(factory);
+		parameterProducer = new ParameterProducer(factory);
 	}
 	
 	@Override
@@ -61,6 +74,8 @@ public class ContainerProcessor implements IMarshaller, Processor {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 	}
 
 	@Override

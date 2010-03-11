@@ -26,12 +26,6 @@
  */
 package com.logica.hummingbird.marshaller.producers;
 
-import java.util.BitSet;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.camel.ProducerTemplate;
-
 import com.logica.hummingbird.marshaller.IContainer;
 import com.logica.hummingbird.marshaller.IContainerFactory;
 
@@ -40,26 +34,10 @@ import com.logica.hummingbird.marshaller.IContainerFactory;
  * packet body which is binary data. This producer registers for the parameters in the 
  * header, and for the packet itself to get the raw data.
  */
-public class PacketProducer implements IProducer {
+public class PacketProducer extends Producer {
 	
-	protected ProducerTemplate producerTemplate = null;
-
-	/** List of all containers that are parameters to be generated. */
-	// protected List<String> packetHeaderParameters = null;
-
-	/** List of all containers that are packets to be generated. */
-	// protected List<String> packets = null;
-
-	protected String path = null;
-	
-	protected IContainerFactory containerFactory = null;
-
-	private Object body;
-
-	private Map<String, Object> headers;
-
-		
-	public void initialise() {
+	public PacketProducer(IContainerFactory containerFactory) {
+		super(containerFactory);
 		
 		/** The packet base container (should have the name TMPacket by convention) contains as sub containers;
 		 *   1. A parameter per header field. For example CCSDS_APID
@@ -74,31 +52,10 @@ public class PacketProducer implements IProducer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
 		
-	}
+		
+		
 	
-	public void updated(String key, BitSet value) {
-		body = value;
-	}
-
-	public void updated(String key, String value) {
-		headers.put(key, value);
-	}
-
-	public void updated(String key, int value) {
-		headers.put(key, value);
-	}
-
-	public void updated(String key, double value) {
-		headers.put(key, value);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.logica.hummingbird.marshaller.IMessageProducer#sendFrame()
-	 */
-	@Override
-	public void completed() {
-		//producerTemplate.sendBody(packetpath, ExchangePattern.InOnly, packetBuilder.build());
-		producerTemplate.sendBodyAndHeaders(body, headers);
-	}
 }

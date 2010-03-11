@@ -24,7 +24,7 @@ public class XtceTest {
 			System.out.println("TMFrameHeader: " +xtceFactory.getContainer("TMFrameHeader").getSubContainers());
 			System.out.println("TMFrameTail: " +xtceFactory.getContainer("TMFrameTail").getSubContainers());
 			
-			System.out.println("TMPackets: " +xtceFactory.getContainer("TMPackets").getSubContainers());
+			System.out.println("Parameters: " +xtceFactory.getAllParameters().values());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

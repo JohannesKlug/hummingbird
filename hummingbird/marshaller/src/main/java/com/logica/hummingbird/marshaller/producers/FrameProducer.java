@@ -26,41 +26,17 @@
  */
 package com.logica.hummingbird.marshaller.producers;
 
-import java.util.BitSet;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.camel.ProducerTemplate;
-
 import com.logica.hummingbird.marshaller.IContainer;
 import com.logica.hummingbird.marshaller.IContainerFactory;
 
 /**
  * TODO write here a description of the class
  */
-public class FrameProducer implements IProducer {
+public class FrameProducer extends Producer {
 
-	protected ProducerTemplate producerTemplate = null;
+	public FrameProducer(IContainerFactory containerFactory) {
+		super(containerFactory);
 
-	/** List of all containers that are parameters to be generated. */
-	protected List<String> headerFields = null;
-
-	/** List of all containers that are parameters to be generated. */
-	protected List<String> parameters = null;
-	
-	/** List of all containers that are packets to be generated. */
-	protected List<String> packets = null;
-
-	protected String path = null;
-	
-	protected IContainerFactory containerFactory = null;
-	
-	private Object body;
-	private Map<String, Object> headers;
-
-
-	public void initialise() {
-		
 		try {
 			for (IContainer sub : containerFactory.getContainer("TMFrameHeader").getSubContainers()) {
 				sub.registerUpdateObserver(this);
@@ -75,33 +51,5 @@ public class FrameProducer implements IProducer {
 		} catch (Exception e) {
 			e.printStackTrace(); 
 		}
-	
-	}
-
-	public void updated(String key, BitSet value) {
-		body = value;
-	}
-	
-	public void updated(String key, String value) {
-		headers.put(key, value);
-	}
-
-	public void updated(String key, int value) {
-		headers.put(key, value);
-	}
-
-	public void updated(String key, double value) {
-		headers.put(key, value);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.logica.hummingbird.marshaller.IMessageProducer#sendFrame()
-	 */
-	@Override
-	public void completed() {
-		// TODO remove the following line
-		//producerTemplate.sendBody(path, ExchangePattern.In, frameBuilder.build());
-		
-		producerTemplate.sendBodyAndHeaders(body, headers);
 	}
 }

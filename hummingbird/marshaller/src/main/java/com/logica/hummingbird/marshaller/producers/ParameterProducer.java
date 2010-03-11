@@ -26,78 +26,22 @@
  */
 package com.logica.hummingbird.marshaller.producers;
 
-import java.util.BitSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.camel.ProducerTemplate;
-import org.apache.camel.impl.DefaultCamelContext;
-
 import com.logica.hummingbird.marshaller.IContainerFactory;
 import com.logica.hummingbird.marshaller.Parameter;
 
 /**
  * TODO write here a description of the class
  */
-public class ParameterProducer implements IProducer {
+public class ParameterProducer extends Producer {
 	
-	DefaultCamelContext context = new DefaultCamelContext();
-	
-	protected ProducerTemplate producerTemplate = context.createProducerTemplate();
-
-	/** List of all containers that are parameters to be generated. */
-	protected List<String> parameters = null;
-
-	protected String parameterpath = "parameter";
-	
-	protected IContainerFactory containerFactory = null;
-	
-	private Map<String,Object> headers = new HashMap<String, Object>();
-
-	// body will be empty for parameters
-	private Object body;
-	
-	public void initialise() {
+	public ParameterProducer(IContainerFactory containerFactory) {
+		super(containerFactory);
 		
 		/** Register with all parameters corresponding to header fields. */
-		for (String field : parameters) {
-			Parameter parameter = containerFactory.getParameter(field);
-			
+		for (Parameter parameter : containerFactory.getAllParameters().values()) {
 			parameter.registerUpdateObserver(this);
 			parameter.registerCompletionObserver(this);
 		}
-	}
-
-	@Override
-	public void updated(String field, BitSet value) {
-		// TODO For parameters, body might make no sense - needs discussion.
-		body = value;		
-	}
-	
-	public void updated(String key, String value) {
-		headers.put(key, value);
-	}
-
-	public void updated(String key, int value) {
-		headers.put(key, value);
-	}
-
-	public void updated(String key, double value) {
-		headers.put(key, value);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.logica.hummingbird.marshaller.IMessageProducer#sendFrame()
-	 */
-	@Override
-	public void completed() {
-		// TODO remove those lines
-		//producerTemplate.sendBody(parameterpath, ExchangePattern.InOnly, parameterBuilder.build());
-		//producerTemplate.sendBodyAndHeaders(parameterpath, body, headers);
-		
-		// body will be empty for parameters
-		producerTemplate.sendBodyAndHeaders(body, headers);
 	}
 
 }
