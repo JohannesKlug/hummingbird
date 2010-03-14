@@ -113,6 +113,13 @@
 		    <artifactId>spring-context-support</artifactId>
 		</dependency> 
 
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.2.131</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
