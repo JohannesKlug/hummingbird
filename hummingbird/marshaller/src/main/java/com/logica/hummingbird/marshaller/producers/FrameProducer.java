@@ -39,14 +39,14 @@ public class FrameProducer extends Producer {
 
 		try {
 			for (IContainer sub : containerFactory.getContainer("TMFrameHeader").getSubContainers()) {
-				sub.registerUpdateObserver(this);
+				sub.addUpdateObserver(this);
 			}
 			
 			for (IContainer sub : containerFactory.getContainer("TMFrameTail").getSubContainers()) {
-				sub.registerUpdateObserver(this);
+				sub.addUpdateObserver(this);
 			}
 			
-			containerFactory.getContainer("TMFrame").registerCompletionObserver(this);
+			containerFactory.getContainer("TMFrame").addCompletionObserver(this);
 		
 		} catch (Exception e) {
 			e.printStackTrace(); 

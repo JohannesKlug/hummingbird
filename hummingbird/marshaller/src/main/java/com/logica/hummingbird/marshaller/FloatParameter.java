@@ -45,9 +45,6 @@ public class FloatParameter extends Parameter {
 	/** The maximal possible value. */
 	protected final double maximumValue = Double.MAX_VALUE;
 	
-	/** The producer to call back*/
-	private IProducer producer;
-
 	
 	/**
 	 * Constructor of the FloatParameter class.
@@ -67,9 +64,10 @@ public class FloatParameter extends Parameter {
 	public BitSet unmarshall(BitSet packet) {
 		value = (float) BitSetUtility.extractDouble(packet, 0, (int) type.sizeInBits, minimumValue, maximumValue);
 		/** TODO Create POJO and send to observer. */
-		if (producer != null) {
-			producer.updated(this.getType().toString(), value);
+		for (IProducer producer : updateObservers) {
+			producer.updated(name, value);
 		}
+		
 		return packet.get((int) type.sizeInBits, packet.length());
 	}
 
@@ -79,6 +77,7 @@ public class FloatParameter extends Parameter {
 			packet = BitSetUtility.insertDouble(packet, offset, (int) type.sizeInBits, minimumValue, maximumValue, value);
 		}
 		catch (RuntimeException e) {
+			// TODO log this
 			System.out.println("Error encoding parameter '" + this.name + "'. The value '" + this.value + "' cannot be encoded in " + type.sizeInBits + " bit(s).");	
 		}
 
@@ -105,9 +104,4 @@ public class FloatParameter extends Parameter {
 		return (this.value == Float.parseFloat(value));
 	}
 
-	@Override
-	public void registerUpdateObserver(IProducer producer) {
-		this.producer = producer;
-		
-	}
 }

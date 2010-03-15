@@ -25,5 +25,10 @@
   		<groupId>org.apache.camel</groupId>
   		<artifactId>camel-test</artifactId>
   	</dependency>
+  	<dependency>
+  		<groupId>com.logica.hummingbird</groupId>
+  		<artifactId>packetarchive</artifactId>
+  		<version>1.0</version>
+  	</dependency>
   </dependencies>
 </project>

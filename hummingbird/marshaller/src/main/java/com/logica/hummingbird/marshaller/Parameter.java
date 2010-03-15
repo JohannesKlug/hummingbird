@@ -84,12 +84,4 @@ public abstract class Parameter extends Container implements IParameter {
 	public int getLength() {
 		return length + (int) type.sizeInBits;
 	}
-
-
-	/**
-	 * Registers the observer
-	 * 
-	 */
-	abstract public void registerUpdateObserver(IProducer producer);
-
 }

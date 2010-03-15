@@ -93,9 +93,9 @@ public interface IContainer {
 	 */
 	public BitSet getRawValue();
 
-	public void registerCompletionObserver(IProducer producer);
+	public void addCompletionObserver(IProducer producer);
 
-	public void registerUpdateObserver(IProducer producer);
+	public void addUpdateObserver(IProducer producer);
 	
 	public List<IContainer> getSubContainers();
 }

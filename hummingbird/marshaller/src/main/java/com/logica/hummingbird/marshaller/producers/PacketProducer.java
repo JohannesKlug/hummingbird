@@ -45,9 +45,9 @@ public class PacketProducer extends Producer {
 		 *      the header parameter 'CCSDS_APID == 123' is valid, then a specific layout will be used. */
 		try {
 			for (IContainer sub : containerFactory.getContainer("TMPacket").getSubContainers()) {
-				sub.registerUpdateObserver(this);
+				sub.addUpdateObserver(this);
 			}
-			containerFactory.getContainer("TMPacket").registerCompletionObserver(this);
+			containerFactory.getContainer("TMPacket").addCompletionObserver(this);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

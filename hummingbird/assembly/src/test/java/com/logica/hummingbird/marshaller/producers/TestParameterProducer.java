@@ -1,14 +1,7 @@
 package com.logica.hummingbird.marshaller.producers;
-import static org.junit.Assert.*;
-
 import java.util.BitSet;
-import java.util.Date;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.Endpoint;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
@@ -17,11 +10,14 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.test.junit4.CamelTestSupport;
+import org.apache.camel.util.jndi.JndiContext;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.logica.hummingbird.marshaller.BitSetUtility;
 import com.logica.hummingbird.marshaller.ContainerProcessor;
-import com.logica.hummingbird.marshaller.IContainerFactory;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 
 public class TestParameterProducer extends CamelTestSupport {
@@ -30,18 +26,19 @@ public class TestParameterProducer extends CamelTestSupport {
 	
 	private ParameterProducer parameterProducer;
 
+	protected static ContainerProcessor processor = null; 
+	
     @EndpointInject(uri = "mock:result")
     protected MockEndpoint resultEndpoint;
 
     @Produce(uri = "direct:start")
     protected ProducerTemplate template;
     
-//    @Before
-//    public void setUp() {
-////    	Logger logger =  Logger.getAnonymousLogger();
-////    	logger.setLevel(Level.WARN);
-//    	
-//    }
+    @Before
+    public void prepare() {
+    	Logger logger =  Logger.getRootLogger();
+    	logger.setLevel(Level.WARN);
+    }
     
     @Override
     protected RouteBuilder createRouteBuilder() {
@@ -49,14 +46,20 @@ public class TestParameterProducer extends CamelTestSupport {
         	
             public void configure() throws Exception {
             	
+
+            	
+            	
             	xtceFactory = new XtceModelFactory();
             	xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
             	xtceFactory.initialise();
-            	ContainerProcessor processor = new ContainerProcessor(xtceFactory);
+            	processor = new ContainerProcessor(xtceFactory);
+            	
             	
                 from("direct:start")
-                .process(processor)
-                    .to("mock:result");
+                .split().method(processor, "process")
+                    .to(resultEndpoint);
+                
+                // Add router to multiplex into the different streams.
         }
         };
     }
@@ -117,7 +120,8 @@ public class TestParameterProducer extends CamelTestSupport {
 		System.out.println(xtceFactory.getContainer("TMFrame").toString());
 		
 		/** Marshall it to a BitSet. */
-		ContainerProcessor processor = new ContainerProcessor(xtceFactory);
+		//ContainerProcessor processor = new ContainerProcessor(xtceFactory);
+		assertTrue(processor != null);
 		processor.marshall("TMFrame", frame);
 		
 		/** Visualize the BitSet*/
@@ -137,6 +141,8 @@ public class TestParameterProducer extends CamelTestSupport {
 		for (Exchange exchange : resultEndpoint.getReceivedExchanges()) {
 			/** Print each exchange.*/
 			System.out.println("Exchange: " + exchange.toString());
+			System.out.println(exchange.getIn().getHeaders());
+			System.out.println(exchange.getIn().getBody());
 		}
     }
 
@@ -146,15 +152,15 @@ public class TestParameterProducer extends CamelTestSupport {
  
 	
 
-	@Test
-	public void testHeader() {
-		parameterProducer = new ParameterProducer(xtceFactory);
-		parameterProducer.updated("String", "Test");
-		parameterProducer.updated("double", Double.MAX_VALUE);
-		parameterProducer.updated("int", Integer.MAX_VALUE);
-		//parameterProducer.completed();
-		
-	}
+//	@Test
+//	public void testHeader() {
+//		parameterProducer = new ParameterProducer(xtceFactory);
+//		parameterProducer.updated("String", "Test");
+//		parameterProducer.updated("double", Double.MAX_VALUE);
+//		parameterProducer.updated("int", Integer.MAX_VALUE);
+//		//parameterProducer.completed();
+//		
+//	}
 
 	
 		

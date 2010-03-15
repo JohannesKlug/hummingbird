@@ -70,8 +70,8 @@ public class Container extends NamedElement implements IContainer {
 	/** The length of this container in bits. The value will hold a BitSet of length >= length + 1. */
 	protected int length = 0;
 	
-	IProducer updateObserver;
-	IProducer completionObserver;
+	protected List<IProducer> updateObservers = new ArrayList<IProducer>();
+	protected List<IProducer> completionObservers = new ArrayList<IProducer>();
 	
 	/**
 	 * Constructor of the Container class.
@@ -121,21 +121,16 @@ public class Container extends NamedElement implements IContainer {
 			rawValue = packet.get(0, getLength());
 			rawValue.set(getLength() + 1);
 			
-			/** TODO Create POJO and send to observer. */
-			
 			for (IContainer container : subContainers) {
 				packet = container.unmarshall(packet);
-				if (updateObserver != null) {
-					updateObserver.updated("", packet);
-				} else {
-					System.out.println("Error: In Container: updateObserver is null.");
-				}
 			}
 			
-			if (completionObserver != null) {
+			for (IProducer updateObserver : updateObservers) {
+				updateObserver.updated(name, packet);
+			}
+			
+			for (IProducer completionObserver : completionObservers) {
 				completionObserver.completed();
-			} else {
-				System.out.println("Error: In Container: completionObserver is null");
 			}
 		}
 
@@ -154,8 +149,8 @@ public class Container extends NamedElement implements IContainer {
 		return offset;
 	}
 
-	@Override
-	public String toString() {
+	// @Override
+	public String toxString() {
 		/** If the packet should be processed by this container. */
 		String str = "";
 		if (matchRestrictions() == true) {
@@ -183,6 +178,7 @@ public class Container extends NamedElement implements IContainer {
 			this.subContainers.add(container);	
 		}
 		else {
+			// TODO log this
 			System.out.println("Error; Adding NULL container!");
 		}		
 	}
@@ -224,14 +220,14 @@ public class Container extends NamedElement implements IContainer {
 	}
 
 	@Override
-	public void registerCompletionObserver(IProducer producer) {
-		this.completionObserver = producer;
+	public void addCompletionObserver(IProducer producer) {
+		this.completionObservers.add(producer);
 		
 	}
 
 	@Override
-	public void registerUpdateObserver(IProducer producer) {
-		this.updateObserver = producer;
+	public void addUpdateObserver(IProducer producer) {
+		this.updateObservers.add(producer);
 		
 	}
 

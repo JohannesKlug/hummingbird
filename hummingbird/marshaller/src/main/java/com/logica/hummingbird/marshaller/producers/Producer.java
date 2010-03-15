@@ -1,21 +1,27 @@
 package com.logica.hummingbird.marshaller.producers;
 
+import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.camel.Message;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.camel.impl.DefaultMessage;
 
 import com.logica.hummingbird.marshaller.IContainerFactory;
 
 public abstract class Producer implements IProducer {
 
 DefaultCamelContext context = new DefaultCamelContext();
-	
+
+	protected static List<Message> messages = new ArrayList<Message>();
+
 	protected ProducerTemplate producerTemplate = context.createProducerTemplate();
 
-	private Map<String,Object> headers = new HashMap<String, Object>();
+	protected Map<String,Object> headers = new HashMap<String, Object>();
 	
 	private IContainerFactory containerFactory;
 
@@ -23,7 +29,6 @@ DefaultCamelContext context = new DefaultCamelContext();
 	
 	public Producer(IContainerFactory containerFactory) {
 		this.containerFactory = containerFactory;
-		System.out.println(this.getClass() + " constructor called.");
 	}
 	
 
@@ -53,8 +58,26 @@ DefaultCamelContext context = new DefaultCamelContext();
 	
 	@Override
 	public void completed() {
-		producerTemplate.sendBodyAndHeaders(body, headers);
+
+		Message message = new DefaultMessage();
+		message.setBody(body);
+		message.setHeaders(headers);
 		
+		messages.add(message);
+		
+		/** Clean up body and headers */
+		body = null;
+		headers.clear();
+		
+	}
+
+
+	public static List<Message> getMessages() {		
+		return messages;
+	}
+	
+	public static void clearMessages() {
+		messages.clear();
 	}
 
 }

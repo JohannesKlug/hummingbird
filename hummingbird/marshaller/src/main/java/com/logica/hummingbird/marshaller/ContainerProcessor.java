@@ -27,14 +27,17 @@
 package com.logica.hummingbird.marshaller;
 
 import java.util.BitSet;
+import java.util.List;
 
 import org.apache.camel.Exchange;
+import org.apache.camel.Message;
 import org.apache.camel.Processor;
 
 import com.logica.hummingbird.marshaller.producers.FrameProducer;
 import com.logica.hummingbird.marshaller.producers.IProducer;
 import com.logica.hummingbird.marshaller.producers.PacketProducer;
 import com.logica.hummingbird.marshaller.producers.ParameterProducer;
+import com.logica.hummingbird.marshaller.producers.Producer;
 
 /** 
  * 
@@ -45,7 +48,7 @@ import com.logica.hummingbird.marshaller.producers.ParameterProducer;
  * 2. Notify the observers when the complete container has been unmarshalled.
  * 
  */
-public class ContainerProcessor implements IMarshaller, Processor {
+public class ContainerProcessor implements IMarshaller {
 
 	/** The factory used to locate the models. */
 	protected IContainerFactory factory = null;
@@ -110,12 +113,21 @@ public class ContainerProcessor implements IMarshaller, Processor {
 		this.factory = factory;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.apache.camel.Processor#process(org.apache.camel.Exchange)
-	 */
-	@Override
-	public void process(Exchange arg0) throws Exception {
+	public List<Message> process(Exchange arg0) throws Exception {
 		unmarshall("TMFrame", (BitSet) arg0.getIn().getBody());
+		
+		List<Message> messages = Producer.getMessages();
+
+
+		for (Message message : messages) {
+			System.out.println(message.getHeaders());
+			System.out.println(message.getBody());
+		}
+		Producer.clearMessages();
+		
+		return messages;
+		
+		
 	}
 	
 	

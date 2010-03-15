@@ -39,9 +39,26 @@ public class ParameterProducer extends Producer {
 		
 		/** Register with all parameters corresponding to header fields. */
 		for (Parameter parameter : containerFactory.getAllParameters().values()) {
-			parameter.registerUpdateObserver(this);
-			parameter.registerCompletionObserver(this);
+			parameter.addUpdateObserver(this);
+			parameter.addCompletionObserver(this);
 		}
 	}
 
+	@Override
+	public void updated(String field, int value) {
+		headers.put(field, value);
+		completed();
+	}
+
+	@Override
+	public void updated(String field, String value) {
+		headers.put(field, value);
+		completed();
+	}
+
+	@Override
+	public void updated(String field, double value) {
+		headers.put(field, value);
+		completed();
+	}
 }
