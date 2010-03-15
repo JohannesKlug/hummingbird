@@ -115,6 +115,11 @@
 			<artifactId>junit</artifactId>
 		</dependency> 
 
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.2.131</version>
+		</dependency>
 	</dependencies>
 
 	<build>

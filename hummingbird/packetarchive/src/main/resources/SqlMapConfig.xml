@@ -10,10 +10,10 @@
        and a managed datasource -->
   <transactionManager type="JDBC" commitRequired="false">
     <dataSource type="SIMPLE">
-      <property name="JDBC.Driver" value="com.mysql.jdbc.Driver"/>
-      <property name="JDBC.ConnectionURL" value="jdbc:mysql://localhost/hummingbird"/>
-      <property name="JDBC.Username" value="root"/>
-      <property name="JDBC.Password" value="logica"/>
+      <property name="JDBC.Driver" value="org.h2.Driver"/>
+      <property name="JDBC.ConnectionURL" value="jdbc:h2:~/test"/>
+      <property name="JDBC.Username" value="sa"/>
+      <property name="JDBC.Password" value=""/>
     </dataSource>
   </transactionManager>
 

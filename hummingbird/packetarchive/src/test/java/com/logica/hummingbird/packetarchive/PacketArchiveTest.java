@@ -44,6 +44,8 @@ public class PacketArchiveTest extends CamelTestSupport {
         packet.setPacketId(1000l);
         packet.setPacket(new byte[1000]);
 
+      //  template.sendBody("ibatis:createPacketTable?statementType=Statement","");
+        template.sendBody("ibatis:ibatorgenerated_insert?statementType=Insert", packet);
         template.sendBody("direct:start", packet);
 
         assertMockEndpointsSatisfied();
@@ -80,8 +82,9 @@ public class PacketArchiveTest extends CamelTestSupport {
         	
             @Override
             public void configure() throws Exception {
+            	
                 from("direct:start")
-                    .to("marshaller")
+                //.to("ibatorgenerated_insert")
                     .to("mock:result");
             }
         };
