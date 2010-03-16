@@ -42,7 +42,7 @@ public class PacketArchiveTest extends CamelTestSupport {
 		Class.forName("org.h2.Driver");
 		Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
 		
-		org.h2.tools.RunScript.execute(conn, new InputStreamReader(new FileInputStream("src/test/resources/h2database.sql")));
+		org.h2.tools.RunScript.execute(conn, new InputStreamReader(new FileInputStream("src/main/resources/h2database.sql")));
 
     	
     	
