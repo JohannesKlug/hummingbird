@@ -16,6 +16,13 @@ package com.logica.hummingbird.packetarchive;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.DriverManager;
 import java.util.Date;
 
 import org.apache.camel.builder.RouteBuilder;
@@ -31,11 +38,19 @@ public class PacketArchiveTest extends CamelTestSupport {
 
     @Test
     public void testInsert() throws Exception {
-        MockEndpoint mock = getMockEndpoint("mock:result");
+        
+		Class.forName("org.h2.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+		
+		org.h2.tools.RunScript.execute(conn, new InputStreamReader(new FileInputStream("src/main/resources/h2database.sql")));
+
+    	
+    	
+    	MockEndpoint mock = getMockEndpoint("mock:result");
         
         
         
-        mock.expectedMessageCount(1);
+        mock.expectedMessageCount(3);
 
         Packet packet = new Packet();
         Date date = new Date();
@@ -44,15 +59,40 @@ public class PacketArchiveTest extends CamelTestSupport {
         packet.setPacketId(1000l);
         packet.setPacket(new byte[1000]);
 
-      //  template.sendBody("ibatis:createPacketTable?statementType=Statement","");
-        template.sendBody("ibatis:ibatorgenerated_insert?statementType=Insert", packet);
+        //template.sendBody("ibatis:dropAndCreatePacketTable?statementType=QueryForObject", "");
+        //template.sendBody("ibatis:ibatorgenerated_insert?statementType=Insert", packet);
+
+        
         template.sendBody("direct:start", packet);
+        
+//        Statement select = conn.createStatement();
+//        ResultSet result = select
+//            .executeQuery("SELECT * FROM packet");
+//        
+//        System.out.println(result);
+
+        Thread.sleep(100);
+        packet.setOnboardCreationTime(new Date());
+        packet.setOngroundReceptionTime(new Date());
+        
+       template.sendBody("direct:start", packet);
+
+        Thread.sleep(100);
+        packet.setOnboardCreationTime(new Date());
+        packet.setOngroundReceptionTime(new Date());
+        
+        template.sendBody("direct:start", packet);
+
 
         assertMockEndpointsSatisfied();
 
+        
+        
         // there should be 3 rows now
         Integer rows = template.requestBody("ibatis:ibatorgenerated_countByExample?statementType=QueryForObject", null, Integer.class);
         assertEquals("There should be 3 rows", 3, rows.intValue());
+        
+        conn.close();
     }
 
     @Override
@@ -84,7 +124,7 @@ public class PacketArchiveTest extends CamelTestSupport {
             public void configure() throws Exception {
             	
                 from("direct:start")
-                //.to("ibatorgenerated_insert")
+                .to("ibatis:ibatorgenerated_insert?statementType=Insert")
                     .to("mock:result");
             }
         };
