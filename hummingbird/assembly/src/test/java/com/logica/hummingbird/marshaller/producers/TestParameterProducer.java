@@ -34,11 +34,11 @@ public class TestParameterProducer extends CamelTestSupport {
     @Produce(uri = "direct:start")
     protected ProducerTemplate template;
     
-    @Before
-    public void prepare() {
-    	Logger logger =  Logger.getRootLogger();
-    	logger.setLevel(Level.WARN);
-    }
+//    @Before
+//    public void prepare() {
+//    	Logger logger =  Logger.getRootLogger();
+//    	logger.setLevel(Level.WARN);
+//    }
     
     @Override
     protected RouteBuilder createRouteBuilder() {
@@ -56,8 +56,8 @@ public class TestParameterProducer extends CamelTestSupport {
             	
             	
                 from("direct:start")
-                .split().method(processor, "process")
-                    .to(resultEndpoint);
+                .split().method(processor, "split")
+                    .to("mock:result");
                 
                 // Add router to multiplex into the different streams.
         }
@@ -116,9 +116,6 @@ public class TestParameterProducer extends CamelTestSupport {
 		 * length will become LESS than 175. */
 		frame.set(length);
 		
-		/** Test print the content as a string. */
-		System.out.println(xtceFactory.getContainer("TMFrame").toString());
-		
 		/** Marshall it to a BitSet. */
 		//ContainerProcessor processor = new ContainerProcessor(xtceFactory);
 		assertTrue(processor != null);
@@ -133,7 +130,8 @@ public class TestParameterProducer extends CamelTestSupport {
 		template.sendBody(frame);
         
         /** Check we got the expected output. */        
-		resultEndpoint.expectedMinimumMessageCount(1);
+		//resultEndpoint.expectedMinimumMessageCount(1);
+		resultEndpoint.expectedMessageCount(26);
 		resultEndpoint.assertIsSatisfied();
 		
 		System.out.println("Number of received messages: " + resultEndpoint.getReceivedCounter());

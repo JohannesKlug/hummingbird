@@ -26,6 +26,7 @@
  */
 package com.logica.hummingbird.marshaller;
 
+import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 
@@ -113,16 +114,11 @@ public class ContainerProcessor implements IMarshaller {
 		this.factory = factory;
 	}
 
-	public List<Message> process(Exchange arg0) throws Exception {
+	public List<Message> split(Exchange arg0) throws Exception {
 		unmarshall("TMFrame", (BitSet) arg0.getIn().getBody());
 		
-		List<Message> messages = Producer.getMessages();
-
-
-		for (Message message : messages) {
-			System.out.println(message.getHeaders());
-			System.out.println(message.getBody());
-		}
+		List<Message> messages = new ArrayList<Message>(Producer.getMessages());
+		
 		Producer.clearMessages();
 		
 		return messages;
