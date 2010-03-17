@@ -2,7 +2,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.logica.hummingbird</groupId>
-  <artifactId>project</artifactId>
+  <artifactId>hummingbird</artifactId>
   <packaging>pom</packaging>
   <version>1.0</version>
 
