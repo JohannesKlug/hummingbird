@@ -3,7 +3,7 @@
 	<description>An implementation of the IModelFactory used by the marshaller, based on XTCE. The component at build time uses 'castor' to generate POJO's from the CCSDS XTCE XSD schema. At runtime the component uses 'castor' to parse a specific telemetry and command definition in XTCE format and create the corresponding marshaller object model.</description>
 	
 	<parent>
-	    <artifactId>project</artifactId>
+	    <artifactId>hummingbird</artifactId>
 	    <groupId>com.logica.hummingbird</groupId>
 	    <version>1.0</version>
 	</parent>
