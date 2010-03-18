@@ -94,6 +94,7 @@ public class TestParameterProducer extends CamelTestSupport {
 //	}
 
 
+    // TODO move this method to a more generic place (test infrastructure)
     public static BitSet getFrame() throws Exception {
     	xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
     	
@@ -146,7 +147,9 @@ public class TestParameterProducer extends CamelTestSupport {
 		
 		/** Marshall it to a BitSet. */
 		//ContainerProcessor processor = new ContainerProcessor(xtceFactory);
-		assertTrue(processor != null);
+		if (processor == null) {
+			processor = new ContainerProcessor(xtceFactory);
+		}
 		processor.marshall("TMFrame", frame);
 		
 		return frame;
