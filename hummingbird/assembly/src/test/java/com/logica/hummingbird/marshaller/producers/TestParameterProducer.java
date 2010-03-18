@@ -67,6 +67,43 @@ public class TestParameterProducer extends CamelTestSupport {
     @Test
     public void testInsert() throws Exception {
 
+        /** Send to end point. */
+		assertNotNull("template is null.", template);
+		template.sendBody(getFrame());
+        
+        /** Check we got the expected output. */        
+		//resultEndpoint.expectedMinimumMessageCount(1);
+		resultEndpoint.expectedMessageCount(26);
+		resultEndpoint.assertIsSatisfied();
+		
+		System.out.println("Number of received messages: " + resultEndpoint.getReceivedCounter());
+
+		for (Exchange exchange : resultEndpoint.getReceivedExchanges()) {
+			/** Print each exchange.*/
+			System.out.println("Exchange: " + exchange.toString());
+			System.out.println(exchange.getIn().getHeaders());
+			System.out.println(exchange.getIn().getBody());
+		}
+    }
+
+   
+	
+    
+ 
+	
+
+//	@Test
+//	public void testHeader() {
+//		parameterProducer = new ParameterProducer(xtceFactory);
+//		parameterProducer.updated("String", "Test");
+//		parameterProducer.updated("double", Double.MAX_VALUE);
+//		parameterProducer.updated("int", Integer.MAX_VALUE);
+//		//parameterProducer.completed();
+//		
+//	}
+
+
+    public BitSet getFrame() throws Exception {
     	xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
     	
     	/** Create FRAME */
@@ -121,45 +158,7 @@ public class TestParameterProducer extends CamelTestSupport {
 		assertTrue(processor != null);
 		processor.marshall("TMFrame", frame);
 		
-		/** Visualize the BitSet*/
-		System.out.println(BitSetUtility.binDump(frame));
-		
-                
-        /** Send to end point. */
-		assertNotNull("template is null.", template);
-		template.sendBody(frame);
-        
-        /** Check we got the expected output. */        
-		//resultEndpoint.expectedMinimumMessageCount(1);
-		resultEndpoint.expectedMessageCount(26);
-		resultEndpoint.assertIsSatisfied();
-		
-		System.out.println("Number of received messages: " + resultEndpoint.getReceivedCounter());
-
-		for (Exchange exchange : resultEndpoint.getReceivedExchanges()) {
-			/** Print each exchange.*/
-			System.out.println("Exchange: " + exchange.toString());
-			System.out.println(exchange.getIn().getHeaders());
-			System.out.println(exchange.getIn().getBody());
-		}
+		return frame;
     }
-
-   
-	
-    
- 
-	
-
-//	@Test
-//	public void testHeader() {
-//		parameterProducer = new ParameterProducer(xtceFactory);
-//		parameterProducer.updated("String", "Test");
-//		parameterProducer.updated("double", Double.MAX_VALUE);
-//		parameterProducer.updated("int", Integer.MAX_VALUE);
-//		//parameterProducer.completed();
-//		
-//	}
-
-	
 		
 }
