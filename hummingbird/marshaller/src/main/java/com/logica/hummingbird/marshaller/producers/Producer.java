@@ -20,12 +20,14 @@ DefaultCamelContext context = new DefaultCamelContext();
 	protected static List<Message> messages = new ArrayList<Message>();
 
 	protected ProducerTemplate producerTemplate = context.createProducerTemplate();
-
-	protected Map<String,Object> headers = new HashMap<String, Object>();
-	
 	private IContainerFactory containerFactory;
 
+	protected Map<String,Object> headers = new HashMap<String, Object>();
 	private Object body;
+	
+	// TODO Refactor messageType to enum in commons
+	protected String messageType;
+
 	
 	public Producer(IContainerFactory containerFactory) {
 		this.containerFactory = containerFactory;
@@ -59,6 +61,11 @@ DefaultCamelContext context = new DefaultCamelContext();
 	@Override
 	public void completed() {
 
+		/**
+		 * This sets the correct header type.
+		 * */
+		headers.put("Type", messageType);
+		
 		Message message = new DefaultMessage();
 		message.setBody(body);
 		message.setHeaders(headers);

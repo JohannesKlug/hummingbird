@@ -39,6 +39,8 @@ public class PacketProducer extends Producer {
 	public PacketProducer(IContainerFactory containerFactory) {
 		super(containerFactory);
 		
+		messageType = "TMPacket";
+		
 		/** The packet base container (should have the name TMPacket by convention) contains as sub containers;
 		 *   1. A parameter per header field. For example CCSDS_APID
 		 *   2. A container per layout of a packet. The layout to be used is defined as a constrain, i.e. for example if
