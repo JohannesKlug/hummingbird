@@ -145,7 +145,7 @@ public class TestParameterProducer extends CamelTestSupport {
 
 		System.out.println("Initial values:");
 				int length = xtceFactory.getContainer("TMFrame").getLength();
-		assertTrue(length == 175);
+		assertEquals(175, length);
 		System.out.println("Total length: " + xtceFactory.getContainer("TMFrame").getLength() + " bit(s).");
 		
 		/** Flip the bit 175 (one larger than the size based on 0 index) to make sure the
