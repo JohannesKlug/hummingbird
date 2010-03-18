@@ -1,22 +1,15 @@
 package com.logica.hummingbird.marshaller.producers;
 import java.util.BitSet;
 
-import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.test.junit4.CamelTestSupport;
-import org.apache.camel.util.jndi.JndiContext;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.junit.Before;
 import org.junit.Test;
 
-import com.logica.hummingbird.marshaller.BitSetUtility;
 import com.logica.hummingbird.marshaller.ContainerProcessor;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 
@@ -24,8 +17,6 @@ public class TestParameterProducer extends CamelTestSupport {
 	
 	protected static XtceModelFactory xtceFactory = new XtceModelFactory();
 	
-	private ParameterProducer parameterProducer;
-
 	protected static ContainerProcessor processor = null; 
 	
     @EndpointInject(uri = "mock:result")
@@ -103,7 +94,7 @@ public class TestParameterProducer extends CamelTestSupport {
 //	}
 
 
-    public BitSet getFrame() throws Exception {
+    public static BitSet getFrame() throws Exception {
     	xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
     	
     	/** Create FRAME */
