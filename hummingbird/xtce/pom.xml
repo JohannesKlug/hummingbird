@@ -1,34 +1,66 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<description>An implementation of the IModelFactory used by the marshaller, based on XTCE. The component at build time uses 'castor' to generate POJO's from the CCSDS XTCE XSD schema. At runtime the component uses 'castor' to parse a specific telemetry and command definition in XTCE format and create the corresponding marshaller object model.</description>
-	
+
 	<parent>
-	    <artifactId>hummingbird</artifactId>
-	    <groupId>com.logica.hummingbird</groupId>
-	    <version>1.0</version>
+		<artifactId>hummingbird</artifactId>
+		<groupId>com.logica.hummingbird</groupId>
+		<version>1.0</version>
 	</parent>
-	
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.logica.hummingbird</groupId>
 	<artifactId>xtce</artifactId>
 	<name>XTCE</name>
-	<version>1.0</version>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/castor</directory>
+				<excludes>
+					<!-- Exclude all the castor code generation properties from the runtime -->
+					<exclude>castor/castorbuilder.properties</exclude>
+				</excludes>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>castor-maven-plugin</artifactId>
+				<version>2.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<schemaDirectory>${basedir}/src/main/resources/schemas</schemaDirectory>
+							<packaging>com.logica.hummingbird.generatedcode.xtce</packaging>
+							<properties>${basedir}/src/main/castor/castorbuilder.properties</properties>
+							<verbose>true</verbose>
+							<warnings>true</warnings>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>org.codehaus.castor</groupId>
 			<artifactId>castor-core</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.codehaus.castor</groupId>
 			<artifactId>castor-xml</artifactId>
 		</dependency>
-		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -40,32 +72,5 @@
 			<version>1.0</version>
 		</dependency>
 	</dependencies>
-
-	<build>
-
-		<plugins>
-
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>castor-maven-plugin</artifactId>
-        <version>2.0</version>
-        <executions>
-          <execution>
-          	<goals>
-            	<goal>generate</goal>
-            </goals>
-            <configuration>
-              <packaging>com.logica.hummingbird.xtce.castor</packaging>
-              <dest>src/main/java</dest>
-<!--              <warnings>true</warnings>-->
-              <verbose>true</verbose>
-            </configuration>
-          </execution>
-
-        </executions>
-      </plugin>
-
-		</plugins>
-	</build>
 
 </project>
