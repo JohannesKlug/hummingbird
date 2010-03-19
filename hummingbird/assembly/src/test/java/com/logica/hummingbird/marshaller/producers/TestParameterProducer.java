@@ -1,22 +1,15 @@
 package com.logica.hummingbird.marshaller.producers;
 import java.util.BitSet;
 
-import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.test.junit4.CamelTestSupport;
-import org.apache.camel.util.jndi.JndiContext;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.junit.Before;
 import org.junit.Test;
 
-import com.logica.hummingbird.marshaller.BitSetUtility;
 import com.logica.hummingbird.marshaller.ContainerProcessor;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 
@@ -24,8 +17,6 @@ public class TestParameterProducer extends CamelTestSupport {
 	
 	protected static XtceModelFactory xtceFactory = new XtceModelFactory();
 	
-	private ParameterProducer parameterProducer;
-
 	protected static ContainerProcessor processor = null; 
 	
     @EndpointInject(uri = "mock:result")
@@ -67,6 +58,44 @@ public class TestParameterProducer extends CamelTestSupport {
     @Test
     public void testInsert() throws Exception {
 
+        /** Send to end point. */
+		assertNotNull("template is null.", template);
+		template.sendBody(getFrame());
+        
+        /** Check we got the expected output. */        
+		//resultEndpoint.expectedMinimumMessageCount(1);
+		resultEndpoint.expectedMessageCount(26);
+		resultEndpoint.assertIsSatisfied();
+		
+		System.out.println("Number of received messages: " + resultEndpoint.getReceivedCounter());
+
+		for (Exchange exchange : resultEndpoint.getReceivedExchanges()) {
+			/** Print each exchange.*/
+			System.out.println("Exchange: " + exchange.toString());
+			System.out.println(exchange.getIn().getHeaders());
+			System.out.println(exchange.getIn().getBody());
+		}
+    }
+
+   
+	
+    
+ 
+	
+
+//	@Test
+//	public void testHeader() {
+//		parameterProducer = new ParameterProducer(xtceFactory);
+//		parameterProducer.updated("String", "Test");
+//		parameterProducer.updated("double", Double.MAX_VALUE);
+//		parameterProducer.updated("int", Integer.MAX_VALUE);
+//		//parameterProducer.completed();
+//		
+//	}
+
+
+    // TODO move this method to a more generic place (test infrastructure)
+    public static BitSet getFrame() throws Exception {
     	xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
     	
     	/** Create FRAME */
@@ -108,7 +137,7 @@ public class TestParameterProducer extends CamelTestSupport {
 
 		System.out.println("Initial values:");
 				int length = xtceFactory.getContainer("TMFrame").getLength();
-		assertTrue(length == 175);
+		assertEquals(175, length);
 		System.out.println("Total length: " + xtceFactory.getContainer("TMFrame").getLength() + " bit(s).");
 		
 		/** Flip the bit 175 (one larger than the size based on 0 index) to make sure the
@@ -118,48 +147,12 @@ public class TestParameterProducer extends CamelTestSupport {
 		
 		/** Marshall it to a BitSet. */
 		//ContainerProcessor processor = new ContainerProcessor(xtceFactory);
-		assertTrue(processor != null);
+		if (processor == null) {
+			processor = new ContainerProcessor(xtceFactory);
+		}
 		processor.marshall("TMFrame", frame);
 		
-		/** Visualize the BitSet*/
-		System.out.println(BitSetUtility.binDump(frame));
-		
-                
-        /** Send to end point. */
-		assertNotNull("template is null.", template);
-		template.sendBody(frame);
-        
-        /** Check we got the expected output. */        
-		//resultEndpoint.expectedMinimumMessageCount(1);
-		resultEndpoint.expectedMessageCount(26);
-		resultEndpoint.assertIsSatisfied();
-		
-		System.out.println("Number of received messages: " + resultEndpoint.getReceivedCounter());
-
-		for (Exchange exchange : resultEndpoint.getReceivedExchanges()) {
-			/** Print each exchange.*/
-			System.out.println("Exchange: " + exchange.toString());
-			System.out.println(exchange.getIn().getHeaders());
-			System.out.println(exchange.getIn().getBody());
-		}
+		return frame;
     }
-
-   
-	
-    
- 
-	
-
-//	@Test
-//	public void testHeader() {
-//		parameterProducer = new ParameterProducer(xtceFactory);
-//		parameterProducer.updated("String", "Test");
-//		parameterProducer.updated("double", Double.MAX_VALUE);
-//		parameterProducer.updated("int", Integer.MAX_VALUE);
-//		//parameterProducer.completed();
-//		
-//	}
-
-	
 		
 }

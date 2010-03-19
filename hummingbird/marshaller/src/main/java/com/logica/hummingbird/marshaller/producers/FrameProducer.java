@@ -36,6 +36,8 @@ public class FrameProducer extends Producer {
 
 	public FrameProducer(IContainerFactory containerFactory) {
 		super(containerFactory);
+		
+		messageType = "TMFrame";
 
 		try {
 			for (IContainer sub : containerFactory.getContainer("TMFrameHeader").getSubContainers()) {
@@ -52,4 +54,5 @@ public class FrameProducer extends Producer {
 			e.printStackTrace(); 
 		}
 	}
+
 }

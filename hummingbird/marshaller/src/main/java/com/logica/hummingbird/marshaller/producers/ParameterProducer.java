@@ -37,6 +37,8 @@ public class ParameterProducer extends Producer {
 	public ParameterProducer(IContainerFactory containerFactory) {
 		super(containerFactory);
 		
+		messageType = "TMParameter";
+		
 		/** Register with all parameters corresponding to header fields. */
 		for (Parameter parameter : containerFactory.getAllParameters().values()) {
 			parameter.addUpdateObserver(this);
