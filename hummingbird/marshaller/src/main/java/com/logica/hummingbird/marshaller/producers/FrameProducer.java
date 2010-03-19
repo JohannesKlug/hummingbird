@@ -26,6 +26,7 @@
  */
 package com.logica.hummingbird.marshaller.producers;
 
+import com.logica.hummingbird.MessageType;
 import com.logica.hummingbird.marshaller.IContainer;
 import com.logica.hummingbird.marshaller.IContainerFactory;
 
@@ -37,7 +38,7 @@ public class FrameProducer extends Producer {
 	public FrameProducer(IContainerFactory containerFactory) {
 		super(containerFactory);
 		
-		messageType = "TMFrame";
+		messageType = MessageType.TMFrame.toString();
 
 		try {
 			for (IContainer sub : containerFactory.getContainer("TMFrameHeader").getSubContainers()) {
