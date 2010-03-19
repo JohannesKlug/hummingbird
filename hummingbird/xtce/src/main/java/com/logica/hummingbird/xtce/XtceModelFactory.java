@@ -2,9 +2,7 @@ package com.logica.hummingbird.xtce;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.exolab.castor.xml.MarshalException;
@@ -12,6 +10,11 @@ import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.xml.ValidationException;
 import org.exolab.castor.xml.XMLContext;
 
+import com.logica.hummingbird.generatedcode.xtce.Comparison;
+import com.logica.hummingbird.generatedcode.xtce.ParameterSetTypeItem;
+import com.logica.hummingbird.generatedcode.xtce.ParameterTypeSetTypeItem;
+import com.logica.hummingbird.generatedcode.xtce.SequenceContainer;
+import com.logica.hummingbird.generatedcode.xtce.SpaceSystem;
 import com.logica.hummingbird.marshaller.Container;
 import com.logica.hummingbird.marshaller.FloatParameter;
 import com.logica.hummingbird.marshaller.IContainerFactory;
@@ -19,11 +22,6 @@ import com.logica.hummingbird.marshaller.IntegerParameter;
 import com.logica.hummingbird.marshaller.Parameter;
 import com.logica.hummingbird.marshaller.ParameterType;
 import com.logica.hummingbird.marshaller.Unit;
-import com.logica.hummingbird.xtce.castor.Comparison;
-import com.logica.hummingbird.xtce.castor.ParameterSetTypeItem;
-import com.logica.hummingbird.xtce.castor.ParameterTypeSetTypeItem;
-import com.logica.hummingbird.xtce.castor.SequenceContainer;
-import com.logica.hummingbird.xtce.castor.SpaceSystem;
 
 public class XtceModelFactory implements IContainerFactory {
 
