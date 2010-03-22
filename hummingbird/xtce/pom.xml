@@ -40,7 +40,6 @@
 							<packaging>com.logica.hummingbird.generatedcode.xtce</packaging>
 							<properties>${basedir}/src/main/castor/castorbuilder.properties</properties>
 							<verbose>true</verbose>
-							<warnings>true</warnings>
 						</configuration>
 					</execution>
 				</executions>
