@@ -2,13 +2,13 @@
   <parent>
     <artifactId>hummingbird</artifactId>
     <groupId>com.logica.hummingbird</groupId>
-    <version>1.0</version>
+    <version>0.0.1-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.logica.hummingbird</groupId>
   <artifactId>commons</artifactId>
   <name>commons</name>
-  <version>1.0</version>
+  <version>0.0.1-SNAPSHOT</version>
   <build>
   	<plugins>
   	</plugins>

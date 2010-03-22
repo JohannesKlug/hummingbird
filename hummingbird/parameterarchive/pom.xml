@@ -21,7 +21,7 @@
   <parent>
     <artifactId>hummingbird</artifactId>
     <groupId>com.logica.hummingbird</groupId>
-    <version>1.0</version>
+    <version>0.0.1-SNAPSHOT</version>
   </parent>
 
 
@@ -30,7 +30,7 @@
 	<groupId>com.logica.hummingbird</groupId>
 	<artifactId>parameterarchive</artifactId>
 	<packaging>war</packaging>
-	<version>1.0</version>
+	<version>0.0.1-SNAPSHOT</version>
 
 	<name>Parameter Archive</name>
 	<description>The parameter archive stores parameters extracted from CCSDS packets. </description>
