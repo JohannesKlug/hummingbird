@@ -31,15 +31,16 @@ import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.logica.hummingbird.packetarchive.Packet;
+import com.logica.hummingbird.packetarchive.*;
 /**
  * @version $Revision: 785119 $
  */
 public class PacketArchiveTest extends CamelTestSupport {
 	
 	@BeforeClass
-	public void startSpringContext() {
-		PacketArchiver app = new PacketArchiver();
+	public static void startSpringContext() {
+//		PacketArchiver app = new PacketArchiver();
+		new PacketArchiver();
 	}
 
     @Test
