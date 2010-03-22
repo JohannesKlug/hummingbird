@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<description>The marshaller is a Camel processor capabel of unmarshalling / marshalling bnary data (frames) into packets and parameters.</description>
+	<description>The FrameDispatcher is a Camel processor capable of unmarshalling / marshalling bnary data (frames) into packets and parameters.</description>
 	<parent>
 		<artifactId>hummingbird</artifactId>
 		<groupId>com.logica.hummingbird</groupId>
@@ -8,8 +8,8 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.logica.hummingbird</groupId>
-	<artifactId>marshaller</artifactId>
-	<name>Marshaller</name>
+	<artifactId>FrameDispatcher</artifactId>
+	<name>FrameDispatcher</name>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<dependencies>
