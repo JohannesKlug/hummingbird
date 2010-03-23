@@ -24,7 +24,7 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.marshaller;
+package com.logica.hummingbird.framebroker;
 
 import java.util.BitSet;
 import java.util.List;

@@ -14,7 +14,7 @@ import org.apache.camel.impl.DefaultMessage;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
-import com.logica.hummingbird.marshaller.ContainerProcessor;
+import com.logica.hummingbird.framebroker.ContainerProcessor;
 
 
 

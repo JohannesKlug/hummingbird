@@ -24,18 +24,35 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.marshaller;
+package com.logica.hummingbird.framebroker;
 
 /**
- * The interface to be implemented by an observer of a container.
- */
-public interface IObserver {
-
+ * Interface of a parameter container. */
+public interface IParameter {
 	/**
-	 * Function that will be called when the container updates or completes.
-	 *
-	 * @param IContainer Reference to the container that has updated. 
+	 * Returns the type of the parameter.
+	 * 
+	 * @return ParameterType The type of the parameter.
 	 *
 	 */
-	public void updated(IContainer container);
+	public ParameterType getType();
+	
+	
+	/**
+	 * Returns the value of the parameter.
+	 * 
+	 * @return float The value of the parameter. 
+	 *
+	 */
+	public float getValue();
+	
+	
+	/**
+	 * Converts the parsed value to the type of this parameter and compares the
+	 * value with the current value.
+	 *
+	 * @param value The value to be compared against. 
+	 *
+	 */
+	public boolean match(String value);
 }

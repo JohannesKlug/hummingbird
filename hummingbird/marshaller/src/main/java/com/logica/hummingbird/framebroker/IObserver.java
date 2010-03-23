@@ -21,55 +21,21 @@
  * ----------------------------------------------------------------------------
  * System       : Hummingbird
  * Author       : VillemosG
- * Created on   : 10.01.2010
+ * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.marshaller;
-
-import java.util.BitSet;
+package com.logica.hummingbird.framebroker;
 
 /**
- * The interface of the marshaller. 
+ * The interface to be implemented by an observer of a container.
  */
-public interface IMarshaller {
-	
-	/**
-	 * Unmarshalles the bitset using the container identified through the
-	 * container parameter name. Following the unmarshalling the 'getContainerFactory'
-	 * can be used to get a reference to a subcontainer.
-	 *
-	 * @param container The name of the container as registered within the container factory.
-	 * @param data The data stream from which the data shall be extracted. 
-	 *
-	 */
-	public void unmarshall(String container, BitSet data);
-	
-	/**
-	 * Marshalles the container identified through the container parameter name into
-	 * into the bitset using the container. 
-	 *
-	 * @param container The name of the container as registered within the container factory.
-	 * @param data The data stream from which the data shall be extracted. 
-	 *
-	 */	
-	public void marshall(String container, BitSet data);
+public interface IObserver {
 
 	/**
-	 * Marshalles the container identified through the container parameter name into
-	 * into the String using the container. 
+	 * Function that will be called when the container updates or completes.
 	 *
-	 * @param container The name of the container as registered within the container factory.
-	 * @param String The data stream from which the data shall be extracted. 
-	 *
-	 */	
-	public void marshall(String container, String data);
-		
-	/**
-	 * Returns a container reference.
-	 *
-	 * @param container Identifier of the container. 
-	 * @throws Exception 
+	 * @param IContainer Reference to the container that has updated. 
 	 *
 	 */
-	public IContainer getContainer(String container) throws Exception;
+	public void updated(IContainer container);
 }

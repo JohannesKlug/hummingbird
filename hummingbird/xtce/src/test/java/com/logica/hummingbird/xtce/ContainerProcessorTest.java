@@ -3,9 +3,9 @@ package com.logica.hummingbird.xtce;
 import java.util.BitSet;
 
 
-import com.logica.hummingbird.marshaller.BitSetUtility;
-import com.logica.hummingbird.marshaller.ContainerProcessor;
-import com.logica.hummingbird.marshaller.IContainerFactory;
+import com.logica.hummingbird.framebroker.BitSetUtility;
+import com.logica.hummingbird.framebroker.ContainerProcessor;
+import com.logica.hummingbird.framebroker.IContainerFactory;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 
 import junit.framework.TestCase;

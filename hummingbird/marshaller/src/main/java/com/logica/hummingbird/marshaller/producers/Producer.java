@@ -11,7 +11,7 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.impl.DefaultMessage;
 
-import com.logica.hummingbird.marshaller.IContainerFactory;
+import com.logica.hummingbird.framebroker.IContainerFactory;
 
 public abstract class Producer implements IProducer {
 

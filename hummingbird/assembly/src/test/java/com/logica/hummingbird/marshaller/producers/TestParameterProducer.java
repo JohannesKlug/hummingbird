@@ -10,7 +10,7 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
-import com.logica.hummingbird.marshaller.ContainerProcessor;
+import com.logica.hummingbird.framebroker.ContainerProcessor;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 
 public class TestParameterProducer extends CamelTestSupport {

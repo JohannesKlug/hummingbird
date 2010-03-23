@@ -26,8 +26,8 @@
  */
 package com.logica.hummingbird.marshaller.producers;
 
-import com.logica.hummingbird.marshaller.IContainerFactory;
-import com.logica.hummingbird.marshaller.Parameter;
+import com.logica.hummingbird.framebroker.IContainerFactory;
+import com.logica.hummingbird.framebroker.Parameter;
 
 /**
  * TODO write here a description of the class

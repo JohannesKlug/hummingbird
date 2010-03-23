@@ -21,38 +21,55 @@
  * ----------------------------------------------------------------------------
  * System       : Hummingbird
  * Author       : VillemosG
- * Created on   : 08.01.2010
+ * Created on   : 10.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.marshaller;
+package com.logica.hummingbird.framebroker;
+
+import java.util.BitSet;
 
 /**
- * Interface of a parameter container. */
-public interface IParameter {
-	/**
-	 * Returns the type of the parameter.
-	 * 
-	 * @return ParameterType The type of the parameter.
-	 *
-	 */
-	public ParameterType getType();
-	
+ * The interface of the marshaller. 
+ */
+public interface IMarshaller {
 	
 	/**
-	 * Returns the value of the parameter.
-	 * 
-	 * @return float The value of the parameter. 
+	 * Unmarshalles the bitset using the container identified through the
+	 * container parameter name. Following the unmarshalling the 'getContainerFactory'
+	 * can be used to get a reference to a subcontainer.
+	 *
+	 * @param container The name of the container as registered within the container factory.
+	 * @param data The data stream from which the data shall be extracted. 
 	 *
 	 */
-	public float getValue();
-	
+	public void unmarshall(String container, BitSet data);
 	
 	/**
-	 * Converts the parsed value to the type of this parameter and compares the
-	 * value with the current value.
+	 * Marshalles the container identified through the container parameter name into
+	 * into the bitset using the container. 
 	 *
-	 * @param value The value to be compared against. 
+	 * @param container The name of the container as registered within the container factory.
+	 * @param data The data stream from which the data shall be extracted. 
+	 *
+	 */	
+	public void marshall(String container, BitSet data);
+
+	/**
+	 * Marshalles the container identified through the container parameter name into
+	 * into the String using the container. 
+	 *
+	 * @param container The name of the container as registered within the container factory.
+	 * @param String The data stream from which the data shall be extracted. 
+	 *
+	 */	
+	public void marshall(String container, String data);
+		
+	/**
+	 * Returns a container reference.
+	 *
+	 * @param container Identifier of the container. 
+	 * @throws Exception 
 	 *
 	 */
-	public boolean match(String value);
+	public IContainer getContainer(String container) throws Exception;
 }

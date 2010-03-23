@@ -24,52 +24,64 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.marshaller;
+package com.logica.hummingbird.framebroker;
 
-import java.util.Map;
+import com.logica.hummingbird.marshaller.producers.IProducer;
 
 /**
- * Interface to create monitoring models.
+ * The abstract base class for all parameter containers. The class
+ * is intended to be subtyped for each simple Java type type. 
  * 
- * The monitoring models are created based on an underlying
- * space system model, defining the structure of the space
- * system, including the telemetry and command structures. The
- * space system can be expressed in different ways, such as 
- * through the OMG/CCSDS XTCE or the ESA MIB/PUS model. The
- * model factory implementation will depend on a data structure
- * in a specific format, but hides this implementation to the
- * monitoring component. 
- *
+ * A parameter is the leaf of the container tree. Each parameter
+ * has a type, which defines among others the length in bits.  
  */
-public interface IContainerFactory {
+public abstract class Parameter extends Container implements IParameter {
+
+	/** The type of the parameter. */
+	protected ParameterType type = null;
+	
 
 	/**
-	 * Initialises the container factory. Must be called prior to
-	 * calling any other methods.
+	 * Constructor of the Parameter class.
+	 *
+	 * @param name The name of the container.
+	 * @param shortDescription A one line description of the container, used for tooltip type information.
+	 * @param longDescription A detailed description of the container.
+	 * @param type The parameter type.
+	 *
 	 */
-	public void initialise();
+	public Parameter(String name, String shortDescription, String longDescription, ParameterType type) {
+		super(name, shortDescription, longDescription);
+		this.type = type;
+	}
 	
 	
 	/**
-	 * Retrieves a container. 
+	 * Sets the value of the parameter.
 	 *
-	 * @param name The unique name of the container to be returned.
-	 * @return IContainer Returns the container identified through the name, or null. 
-	 * @throws Exception 
+	 * @param value The value to be set. 
 	 *
 	 */
-	public IContainer getContainer(String name) throws Exception;
-
+	abstract public void setValue(float value);
+	
+	@Override
+	public ParameterType getType() {
+		return type;
+	}
+	
+	
 	/**
-	 * Retrieves a parameter container. 
+	 * Sets the type of the parameter.
 	 *
-	 * @param name The unique name of the parameter container to be returned.
-	 * @return Parameter Returns the parameter container identified through the name, or null. 
+	 * @param type The type to be set. 
 	 *
 	 */
-	public Parameter getParameter(String name);
-	
-	// TODO Get all parameters function.
-	
-	public Map<String, Parameter> getAllParameters();
+	public void setType(ParameterType type) {
+		this.type = type;
+	}
+	 
+	@Override
+	public int getLength() {
+		return length + (int) type.sizeInBits;
+	}
 }

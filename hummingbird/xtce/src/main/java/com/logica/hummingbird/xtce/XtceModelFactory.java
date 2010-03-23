@@ -10,18 +10,18 @@ import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.xml.ValidationException;
 import org.exolab.castor.xml.XMLContext;
 
+import com.logica.hummingbird.framebroker.Container;
+import com.logica.hummingbird.framebroker.FloatParameter;
+import com.logica.hummingbird.framebroker.IContainerFactory;
+import com.logica.hummingbird.framebroker.IntegerParameter;
+import com.logica.hummingbird.framebroker.Parameter;
+import com.logica.hummingbird.framebroker.ParameterType;
+import com.logica.hummingbird.framebroker.Unit;
 import com.logica.hummingbird.generatedcode.xtce.Comparison;
 import com.logica.hummingbird.generatedcode.xtce.ParameterSetTypeItem;
 import com.logica.hummingbird.generatedcode.xtce.ParameterTypeSetTypeItem;
 import com.logica.hummingbird.generatedcode.xtce.SequenceContainer;
 import com.logica.hummingbird.generatedcode.xtce.SpaceSystem;
-import com.logica.hummingbird.marshaller.Container;
-import com.logica.hummingbird.marshaller.FloatParameter;
-import com.logica.hummingbird.marshaller.IContainerFactory;
-import com.logica.hummingbird.marshaller.IntegerParameter;
-import com.logica.hummingbird.marshaller.Parameter;
-import com.logica.hummingbird.marshaller.ParameterType;
-import com.logica.hummingbird.marshaller.Unit;
 
 public class XtceModelFactory implements IContainerFactory {
 

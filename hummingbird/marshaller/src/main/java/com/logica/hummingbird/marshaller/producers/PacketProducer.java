@@ -26,8 +26,8 @@
  */
 package com.logica.hummingbird.marshaller.producers;
 
-import com.logica.hummingbird.marshaller.IContainer;
-import com.logica.hummingbird.marshaller.IContainerFactory;
+import com.logica.hummingbird.framebroker.IContainer;
+import com.logica.hummingbird.framebroker.IContainerFactory;
 
 /**
  * The packet consists of a sequence of packet header fields, which are parameters, and a 
