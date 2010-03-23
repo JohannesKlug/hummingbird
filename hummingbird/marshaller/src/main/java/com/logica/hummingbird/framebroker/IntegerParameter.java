@@ -28,7 +28,7 @@ package com.logica.hummingbird.framebroker;
 
 import java.util.BitSet;
 
-import com.logica.hummingbird.marshaller.producers.IProducer;
+import com.logica.hummingbird.framebroker.producers.IProducer;
 
 public class IntegerParameter extends Parameter {
 

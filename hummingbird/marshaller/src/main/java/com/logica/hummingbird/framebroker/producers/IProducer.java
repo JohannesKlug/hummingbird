@@ -24,36 +24,19 @@
  * Created on   : 13.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.marshaller.producers;
+package com.logica.hummingbird.framebroker.producers;
 
-import com.logica.hummingbird.MessageType;
-import com.logica.hummingbird.framebroker.IContainer;
-import com.logica.hummingbird.framebroker.IContainerFactory;
+import java.util.BitSet;
+
 
 /**
  * TODO write here a description of the class
  */
-public class FrameProducer extends Producer {
+public interface IProducer {
 
-	public FrameProducer(IContainerFactory containerFactory) {
-		super(containerFactory);
-		
-		messageType = MessageType.TMFrame.toString();
-
-		try {
-			for (IContainer sub : containerFactory.getContainer("TMFrameHeader").getSubContainers()) {
-				sub.addUpdateObserver(this);
-			}
-			
-			for (IContainer sub : containerFactory.getContainer("TMFrameTail").getSubContainers()) {
-				sub.addUpdateObserver(this);
-			}
-			
-			containerFactory.getContainer("TMFrame").addCompletionObserver(this);
-		
-		} catch (Exception e) {
-			e.printStackTrace(); 
-		}
-	}
-
+	public void updated(String field, BitSet value);
+	public void updated(String field, int value);
+	public void updated(String field, String value);
+	public void updated(String field, double value);
+	public void completed();
 }

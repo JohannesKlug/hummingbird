@@ -24,7 +24,7 @@
  * Created on   : 13.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.marshaller.producers;
+package com.logica.hummingbird.framebroker.producers;
 
 import com.logica.hummingbird.framebroker.IContainer;
 import com.logica.hummingbird.framebroker.IContainerFactory;

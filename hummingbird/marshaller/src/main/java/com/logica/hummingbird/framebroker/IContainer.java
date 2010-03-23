@@ -29,7 +29,7 @@ package com.logica.hummingbird.framebroker;
 import java.util.BitSet;
 import java.util.List;
 
-import com.logica.hummingbird.marshaller.producers.IProducer;
+import com.logica.hummingbird.framebroker.producers.IProducer;
 
 /**
  * The standard interface of a marshaller container. The interface supports the

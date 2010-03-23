@@ -28,7 +28,7 @@ package com.logica.hummingbird.framebroker;
 
 import java.util.BitSet;
 
-import com.logica.hummingbird.marshaller.producers.IProducer;
+import com.logica.hummingbird.framebroker.producers.IProducer;
 
 /**
  * The float container encodes / decodes a float parameter from the

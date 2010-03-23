@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.logica.hummingbird.marshaller.producers.IProducer;
+import com.logica.hummingbird.framebroker.producers.IProducer;
 
 /**
  * The container is the basic element in the Frame Broker's POJO hierarchy. A container

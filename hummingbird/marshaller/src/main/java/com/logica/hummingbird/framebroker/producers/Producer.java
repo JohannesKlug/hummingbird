@@ -1,4 +1,4 @@
-package com.logica.hummingbird.marshaller.producers;
+package com.logica.hummingbird.framebroker.producers;
 
 import java.util.ArrayList;
 import java.util.BitSet;

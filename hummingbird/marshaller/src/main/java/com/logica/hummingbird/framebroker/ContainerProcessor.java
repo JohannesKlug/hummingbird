@@ -34,11 +34,11 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 
-import com.logica.hummingbird.marshaller.producers.FrameProducer;
-import com.logica.hummingbird.marshaller.producers.IProducer;
-import com.logica.hummingbird.marshaller.producers.PacketProducer;
-import com.logica.hummingbird.marshaller.producers.ParameterProducer;
-import com.logica.hummingbird.marshaller.producers.Producer;
+import com.logica.hummingbird.framebroker.producers.FrameProducer;
+import com.logica.hummingbird.framebroker.producers.IProducer;
+import com.logica.hummingbird.framebroker.producers.PacketProducer;
+import com.logica.hummingbird.framebroker.producers.ParameterProducer;
+import com.logica.hummingbird.framebroker.producers.Producer;
 
 /** 
  * 

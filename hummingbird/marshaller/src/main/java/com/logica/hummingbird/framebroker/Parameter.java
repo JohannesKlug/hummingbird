@@ -26,7 +26,7 @@
  */
 package com.logica.hummingbird.framebroker;
 
-import com.logica.hummingbird.marshaller.producers.IProducer;
+import com.logica.hummingbird.framebroker.producers.IProducer;
 
 /**
  * The abstract base class for all parameter containers. The class
