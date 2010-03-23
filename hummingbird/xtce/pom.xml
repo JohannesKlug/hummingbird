@@ -67,7 +67,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.logica.hummingbird</groupId>
-			<artifactId>marshaller</artifactId>
+			<artifactId>frame-broker</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
