@@ -17,6 +17,9 @@
 	<build>
 		<resources>
 			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
 				<directory>src/main/castor</directory>
 				<excludes>
 					<!-- Exclude all the castor code generation properties from the runtime -->
