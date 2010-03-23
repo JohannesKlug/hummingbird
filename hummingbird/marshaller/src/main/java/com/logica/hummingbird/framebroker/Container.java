@@ -37,21 +37,22 @@ import java.util.Map.Entry;
 import com.logica.hummingbird.marshaller.producers.IProducer;
 
 /**
- * The container is the basic element in the marshallers POJO hierarchy. A container
+ * The container is the basic element in the Frame Broker's POJO hierarchy. A container
  * is an ordered sequence of other containers, of which some or all may be parameter.
  * 
- * The container is responsible for managing the encoding / decoding its portion of the 
- * structured bit set that represent the encoded data. The container has a length, being
- * the sum of the length of its sub containers and may have a value when a structured 
- * bit set has been processed by the marshaller.
+ * The container is responsible for managing the encoding/decoding of it's portion of the 
+ * structured bit-set that represents the encoded data. The container has a length, which
+ * is the sum of the length of its sub-containers.  This length may have a value when a 
+ * structured bit-set has been processed by the Frame Broker.
  * 
- * The container will only process the bitset if all restrictions are meet. This is used
- * as a switch to turn certain containers on / off as part of the marshallers processing
- * hierarchy. FOr example when processing CCSDS space packets, the packet header will define
- * a Application ID (APID) which defines what the structure of the data part of the packet
- * is. A container will exist per possible data structure, i.e. per APID. Which processes 
- * the packet is configured by adding restrictions to each container, defining that the APID
- * parameter must have a specific or be ignored by this container.
+ * The container will only process the bit-set if all restrictions are met. This is used
+ * as a switch to turn certain containers on or off as part of the Frame Broker's processing
+ * hierarchy. For example, when processing CCSDS space packets, the packet header will define
+ * an Application ID (APID) which in turn defines what the structure of the data part of the packet
+ * is. For each data structure a Container will exist, i.e., per APID.  The specific container 
+ * that processes the packet is configured by adding restrictions to each container.  These
+ * restrictions dictate that the APID parameter must have a specific value or be ignored by 
+ * this container.
  */
 public class Container extends NamedElement implements IContainer {
 
