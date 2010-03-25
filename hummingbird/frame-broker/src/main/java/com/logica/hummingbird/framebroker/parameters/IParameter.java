@@ -24,64 +24,35 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.framebroker;
-
-import com.logica.hummingbird.framebroker.producers.IProducer;
+package com.logica.hummingbird.framebroker.parameters;
 
 /**
- * The abstract base class for all parameter containers. The class
- * is intended to be subtyped for each simple Java type type. 
- * 
- * A parameter is the leaf of the container tree. Each parameter
- * has a type, which defines among others the length in bits.  
- */
-public abstract class Parameter extends Container implements IParameter {
-
-	/** The type of the parameter. */
-	protected ParameterType type = null;
-	
-
+ * Interface of a parameter container. */
+public interface IParameter {
 	/**
-	 * Constructor of the Parameter class.
-	 *
-	 * @param name The name of the container.
-	 * @param shortDescription A one line description of the container, used for tooltip type information.
-	 * @param longDescription A detailed description of the container.
-	 * @param type The parameter type.
+	 * Returns the type of the parameter.
+	 * 
+	 * @return ParameterType The type of the parameter.
 	 *
 	 */
-	public Parameter(String name, String shortDescription, String longDescription, ParameterType type) {
-		super(name, shortDescription, longDescription);
-		this.type = type;
-	}
+	public ParameterType getType();
 	
 	
 	/**
-	 * Sets the value of the parameter.
-	 *
-	 * @param value The value to be set. 
+	 * Returns the value of the parameter.
+	 * 
+	 * @return float The value of the parameter. 
 	 *
 	 */
-	abstract public void setValue(float value);
-	
-	@Override
-	public ParameterType getType() {
-		return type;
-	}
+	public float getValue();
 	
 	
 	/**
-	 * Sets the type of the parameter.
+	 * Converts the parsed value to the type of this parameter and compares the
+	 * value with the current value.
 	 *
-	 * @param type The type to be set. 
+	 * @param value The value to be compared against. 
 	 *
 	 */
-	public void setType(ParameterType type) {
-		this.type = type;
-	}
-	 
-	@Override
-	public int getLength() {
-		return length + (int) type.sizeInBits;
-	}
+	public boolean match(String value);
 }

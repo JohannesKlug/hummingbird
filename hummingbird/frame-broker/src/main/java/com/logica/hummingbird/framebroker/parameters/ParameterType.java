@@ -24,9 +24,12 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.framebroker;
+package com.logica.hummingbird.framebroker.parameters;
 
 import java.util.List;
+
+import com.logica.hummingbird.framebroker.NamedElement;
+import com.logica.hummingbird.framebroker.Unit;
 
 /**
  * A parameter type. The parameter type consists of two elements;

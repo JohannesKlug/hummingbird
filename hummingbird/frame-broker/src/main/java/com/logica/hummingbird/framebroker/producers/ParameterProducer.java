@@ -27,7 +27,7 @@
 package com.logica.hummingbird.framebroker.producers;
 
 import com.logica.hummingbird.framebroker.IContainerFactory;
-import com.logica.hummingbird.framebroker.Parameter;
+import com.logica.hummingbird.framebroker.parameters.Parameter;
 
 /**
  * TODO write here a description of the class

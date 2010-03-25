@@ -11,13 +11,13 @@ import org.exolab.castor.xml.ValidationException;
 import org.exolab.castor.xml.XMLContext;
 
 import com.logica.hummingbird.framebroker.Container;
-import com.logica.hummingbird.framebroker.FloatParameter;
 import com.logica.hummingbird.framebroker.IContainerFactory;
-import com.logica.hummingbird.framebroker.IntegerParameter;
-import com.logica.hummingbird.framebroker.Parameter;
-import com.logica.hummingbird.framebroker.ParameterType;
 import com.logica.hummingbird.framebroker.Unit;
 import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.framebroker.parameters.FloatParameter;
+import com.logica.hummingbird.framebroker.parameters.IntegerParameter;
+import com.logica.hummingbird.framebroker.parameters.Parameter;
+import com.logica.hummingbird.framebroker.parameters.ParameterType;
 import com.logica.hummingbird.generatedcode.xtce.Comparison;
 import com.logica.hummingbird.generatedcode.xtce.ParameterSetTypeItem;
 import com.logica.hummingbird.generatedcode.xtce.ParameterTypeSetTypeItem;

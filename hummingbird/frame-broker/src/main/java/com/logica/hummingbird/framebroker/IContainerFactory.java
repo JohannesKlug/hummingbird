@@ -29,6 +29,7 @@ package com.logica.hummingbird.framebroker;
 import java.util.Map;
 
 import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.framebroker.parameters.Parameter;
 
 /**
  * Interface to create monitoring models.

@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.logica.hummingbird.framebroker.parameters.IParameter;
 import com.logica.hummingbird.framebroker.producers.IProducer;
 
 /**

@@ -24,10 +24,11 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.framebroker;
+package com.logica.hummingbird.framebroker.parameters;
 
 import java.util.BitSet;
 
+import com.logica.hummingbird.framebroker.BitSetUtility;
 import com.logica.hummingbird.framebroker.producers.IProducer;
 
 /**

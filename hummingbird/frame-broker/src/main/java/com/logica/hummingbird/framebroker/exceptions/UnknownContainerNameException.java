@@ -14,7 +14,6 @@ import com.logica.hummingbird.framebroker.Container;
  * client to retrieve the available Container names.
  * 
  * @author Mark Doyle
- *
  */
 public class UnknownContainerNameException extends Exception {
 	private static final long serialVersionUID = 3499163979287233832L;
