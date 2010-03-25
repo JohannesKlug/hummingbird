@@ -31,14 +31,14 @@ import java.util.BitSet;
 import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
 
 /**
- * The interface of the marshaller. 
+ * The interface of the Frame Broker. 
  */
-public interface IMarshaller {
+public interface IFrameBroker {
 	
 	/**
-	 * Unmarshalls the bitset using the container identified through the
+	 * Unmarshalls the bit-set using the container identified through the
 	 * container parameter name. Following the unmarshalling the 'getContainerFactory'
-	 * can be used to get a reference to a subcontainer.
+	 * can be used to get a reference to a sub-container.
 	 *
 	 * @param container The name of the container as registered within the container factory.
 	 * @param data The data stream from which the data shall be extracted. 
@@ -48,8 +48,8 @@ public interface IMarshaller {
 	public void unmarshall(String container, BitSet data) throws UnknownContainerNameException;
 	
 	/**
-	 * Marshalles the container identified through the container parameter name into
-	 * into the bitset using the container. 
+	 * Marshalls the container identified through the container parameter name into
+	 * into the bit-set using the container. 
 	 *
 	 * @param container The name of the container as registered within the container factory.
 	 * @param data The data stream from which the data shall be extracted. 
@@ -58,7 +58,7 @@ public interface IMarshaller {
 	public void marshall(String container, BitSet data);
 
 	/**
-	 * Marshalles the container identified through the container parameter name into
+	 * Marshalls the container identified through the container parameter name into
 	 * into the String using the container. 
 	 *
 	 * @param container The name of the container as registered within the container factory.

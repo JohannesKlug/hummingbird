@@ -32,7 +32,6 @@ import java.util.List;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
-import org.apache.camel.Processor;
 
 import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.framebroker.producers.FrameProducer;
@@ -50,7 +49,7 @@ import com.logica.hummingbird.framebroker.producers.Producer;
  * when the complete container has been unmarshalled.
  * 
  */
-public class ContainerProcessor implements IMarshaller {
+public class ContainerProcessor implements IFrameBroker {
 
 	/** The factory used to locate the models. */
 	protected IContainerFactory factory = null;
