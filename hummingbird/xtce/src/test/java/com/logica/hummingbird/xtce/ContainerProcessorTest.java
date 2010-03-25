@@ -6,13 +6,14 @@ import java.util.BitSet;
 import com.logica.hummingbird.framebroker.BitSetUtility;
 import com.logica.hummingbird.framebroker.ContainerProcessor;
 import com.logica.hummingbird.framebroker.IContainerFactory;
+import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 
 import junit.framework.TestCase;
 
 public class ContainerProcessorTest extends TestCase {
 
-	public void testMarshall() {
+	public void testMarshall() throws UnknownContainerNameException {
 		IContainerFactory factory = new XtceModelFactory();
 		factory.initialise();
 		

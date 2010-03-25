@@ -34,78 +34,76 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 
+import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.framebroker.producers.FrameProducer;
 import com.logica.hummingbird.framebroker.producers.IProducer;
 import com.logica.hummingbird.framebroker.producers.PacketProducer;
 import com.logica.hummingbird.framebroker.producers.ParameterProducer;
 import com.logica.hummingbird.framebroker.producers.Producer;
 
-/** 
+/**
  * 
  * 
  * The notification model for observers could have been implemented in two ways;
  * Firstly we could notify the observer when it changes. This is architecturally
- * pleasing as there is a direct coupling between the 
- * 2. Notify the observers when the complete container has been unmarshalled.
+ * pleasing as there is a direct coupling between the 2. Notify the observers
+ * when the complete container has been unmarshalled.
  * 
  */
 public class ContainerProcessor implements IMarshaller {
 
 	/** The factory used to locate the models. */
 	protected IContainerFactory factory = null;
-	
+
 	IProducer frameProducer;
 	IProducer packetProducer;
 	IProducer parameterProducer;
-	
-	/** Constructor.
+
+	/**
+	 * Constructor.
 	 * 
-	 * @param factory The factory to be used to obtain references to the container.
+	 * @param factory
+	 *            The factory to be used to obtain references to the container.
 	 * */
 	public ContainerProcessor(IContainerFactory factory) {
 		this.factory = factory;
-		
+
 		frameProducer = new FrameProducer(factory);
 		packetProducer = new PacketProducer(factory);
 		parameterProducer = new ParameterProducer(factory);
 	}
-	
+
 	@Override
-	public void unmarshall(String packetname, BitSet packet) {
-		try {
-			factory.getContainer(packetname).unmarshall(packet);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+	public void unmarshall(String packetname, BitSet packet) throws UnknownContainerNameException {
+		factory.getContainer(packetname).unmarshall(packet);
 	}
 
 	@Override
 	public void marshall(String packetname, BitSet packet) {
 		try {
 			factory.getContainer(packetname).marshall(packet, 0);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void marshall(String packetname, String packet) {
 		try {
 			packet = factory.getContainer(packetname).toString();
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	public IContainer getContainer(String container) throws Exception {
 		return factory.getContainer(container);
 	}
-	
+
 	public IContainerFactory getFactory() {
 		return factory;
 	}
@@ -116,15 +114,13 @@ public class ContainerProcessor implements IMarshaller {
 
 	public List<Message> split(Exchange arg0) throws Exception {
 		unmarshall("TMFrame", (BitSet) arg0.getIn().getBody());
-		
+
 		List<Message> messages = new ArrayList<Message>(Producer.getMessages());
-		
+
 		Producer.clearMessages();
-		
+
 		return messages;
-		
-		
+
 	}
-	
-	
+
 }

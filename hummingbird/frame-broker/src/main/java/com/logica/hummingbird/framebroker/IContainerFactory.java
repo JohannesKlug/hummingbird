@@ -28,6 +28,8 @@ package com.logica.hummingbird.framebroker;
 
 import java.util.Map;
 
+import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
+
 /**
  * Interface to create monitoring models.
  * 
@@ -58,7 +60,7 @@ public interface IContainerFactory {
 	 * @throws Exception 
 	 *
 	 */
-	public IContainer getContainer(String name) throws Exception;
+	public IContainer getContainer(String name) throws UnknownContainerNameException;
 
 	/**
 	 * Retrieves a parameter container. 
