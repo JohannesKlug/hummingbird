@@ -16,8 +16,8 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.logica.hummingbird.marshaller.BitSetUtility;
-import com.logica.hummingbird.marshaller.ContainerProcessor;
+import com.logica.hummingbird.framebroker.BitSetUtility;
+import com.logica.hummingbird.framebroker.ContainerProcessor;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 
 public class RouterTest extends CamelTestSupport {

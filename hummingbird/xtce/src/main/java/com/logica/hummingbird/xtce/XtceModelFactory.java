@@ -10,18 +10,19 @@ import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.xml.ValidationException;
 import org.exolab.castor.xml.XMLContext;
 
+import com.logica.hummingbird.framebroker.Container;
+import com.logica.hummingbird.framebroker.IContainerFactory;
+import com.logica.hummingbird.framebroker.Unit;
+import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.framebroker.parameters.FloatParameter;
+import com.logica.hummingbird.framebroker.parameters.IntegerParameter;
+import com.logica.hummingbird.framebroker.parameters.Parameter;
+import com.logica.hummingbird.framebroker.parameters.ParameterType;
 import com.logica.hummingbird.generatedcode.xtce.Comparison;
 import com.logica.hummingbird.generatedcode.xtce.ParameterSetTypeItem;
 import com.logica.hummingbird.generatedcode.xtce.ParameterTypeSetTypeItem;
 import com.logica.hummingbird.generatedcode.xtce.SequenceContainer;
 import com.logica.hummingbird.generatedcode.xtce.SpaceSystem;
-import com.logica.hummingbird.marshaller.Container;
-import com.logica.hummingbird.marshaller.FloatParameter;
-import com.logica.hummingbird.marshaller.IContainerFactory;
-import com.logica.hummingbird.marshaller.IntegerParameter;
-import com.logica.hummingbird.marshaller.Parameter;
-import com.logica.hummingbird.marshaller.ParameterType;
-import com.logica.hummingbird.marshaller.Unit;
 
 public class XtceModelFactory implements IContainerFactory {
 
@@ -47,7 +48,7 @@ public class XtceModelFactory implements IContainerFactory {
 		return parameters.get(name);
 	}
 
-	public Container getContainer(String name) throws Exception {
+	public Container getContainer(String name) throws UnknownContainerNameException {
 		if (initialised == false) {
 			initialise();
 		}
@@ -55,7 +56,7 @@ public class XtceModelFactory implements IContainerFactory {
 		Container container = containers.get(name);
 		
 		if (container == null) {
-			throw new RuntimeException("Your container lookup for '" + name + "' didn't return any containers. Check your SpaceSystem configuration.");
+			throw new UnknownContainerNameException(containers, "Your container lookup for '" + name + "' did not return any containers. Check your SpaceSystem configuration.");
 		}
 		
 		return container;

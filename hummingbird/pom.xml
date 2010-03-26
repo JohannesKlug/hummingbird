@@ -11,7 +11,7 @@
   	<url></url>
   	
   <modules>
-  	<module>marshaller</module>
+  	<module>frame-broker</module>
   	<module>xtce</module>
   	<module>packetarchive</module>
   	<module>parameterarchive</module>

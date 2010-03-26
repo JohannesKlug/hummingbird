@@ -70,7 +70,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.logica.hummingbird</groupId>
+<<<<<<< HEAD
+			<artifactId>FrameDispatcher</artifactId>
+=======
 			<artifactId>frame-broker</artifactId>
+>>>>>>> ed472972ee1c909119ea54824671c425a402e3ec
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
