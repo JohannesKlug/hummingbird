@@ -185,10 +185,10 @@ public class Container extends NamedElement implements IContainer {
 		}		
 	}
 
-	
+
 	/**
 	 * Add a restriction to the container. If you know that some restrictions
-	 * are typically always meet (typically evaluate to true), where as others 
+	 * are typically always met (typically evaluate to true), where as others 
 	 * doesn't, then add the later first.  
 	 *
 	 * @param model The parameter container to be added as a restriction.
