@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
@@ -8,7 +9,7 @@
 
 	<name>Hummingbird Root Project</name>
 	<description>The Hummingbird root project is a container for all Hummingbird components, each created in a separate maven module. By building this project, the complete system can be built.</description>
-  	<url></url>
+  	<url/>
   	
   <modules>
   	<module>frame-broker</module>
@@ -18,6 +19,7 @@
   	<module>commons</module>
   	<module>help</module>
   	<module>assembly</module>
+  	<module>example-endpoint</module>
   </modules>
   
   	<licenses>
@@ -63,8 +65,8 @@
 	</organization>
 
 	<issueManagement>
-		<system></system>
-		<url></url>
+		<system/>
+		<url/>
 	</issueManagement>
   
   	<developers>
