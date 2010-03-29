@@ -28,6 +28,7 @@ package com.logica.hummingbird.framebroker;
 
 import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -169,8 +170,8 @@ public class Container extends NamedElement implements IContainer {
 
 	/**
 	 * Adds a subcontainer to this container. It is the responsibility of the 
-	 * caller to ensure that the subcontainers are aded in the right order, i.e.
-	 * this function will simply push the container to teh end of the query.
+	 * caller to ensure that the subcontainers are added in the right order, i.e.
+	 * this function will simply push the container to the end of the query.
 	 *
 	 * @param container The container to be added. 
 	 *
@@ -183,6 +184,19 @@ public class Container extends NamedElement implements IContainer {
 			// TODO log this
 			System.out.println("Error; Adding NULL container!");
 		}		
+	}
+	
+	/**
+	 * Adds a collection of subcontainers to this container. The containers are
+	 * added in the order they are removed from the Collection.
+	 *
+	 * @param container The Collection of IContainers to be added. 
+	 *
+	 */
+	public void addContainer(Collection<IContainer> containers) {
+		for(IContainer container : containers) {
+			this.addContainer(container);
+		}
 	}
 
 
