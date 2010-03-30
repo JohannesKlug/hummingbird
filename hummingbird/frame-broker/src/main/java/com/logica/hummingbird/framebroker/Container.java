@@ -35,6 +35,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.logica.hummingbird.framebroker.parameters.IParameter;
 import com.logica.hummingbird.framebroker.producers.IProducer;
 
@@ -57,6 +60,8 @@ import com.logica.hummingbird.framebroker.producers.IProducer;
  * this container.
  */
 public class Container extends NamedElement implements IContainer {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(Container.class);
 
 	/** The restrictions defining when this container should process. Each restriction
 	 * is a parameter / string pair. The parameter will convert the string based on
@@ -181,8 +186,7 @@ public class Container extends NamedElement implements IContainer {
 			this.subContainers.add(container);	
 		}
 		else {
-			// TODO log this
-			System.out.println("Error; Adding NULL container!");
+			LOG.warn("Argument IContainer passed to me was null");
 		}		
 	}
 	
