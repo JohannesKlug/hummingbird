@@ -59,7 +59,7 @@ public class MockContainerModelFactory implements IContainerFactory {
 		
 		// Create the packet body containing
 		Container tmPacketBody = new Container("TMPacketBody", "Test packet body", "Test TM packet header for unit testing");
-		tmPacketBody.addRestriction(paramApid, "555");
+		tmPacketBody.addRestriction(paramApid, "555"); //TODO restriction on packet body?
 		containers.put("TMPacketBody", tmPacketBody);
 		
 		ParameterType test32bitInt = new ParameterType("test32bitInt", "test param", "32 bit int test param",eParameterType.INTEGER, true, 0, 32);
