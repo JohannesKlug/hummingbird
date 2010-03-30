@@ -197,7 +197,7 @@ public class Container extends NamedElement implements IContainer {
 	 * @param container The Collection of IContainers to be added. 
 	 *
 	 */
-	public void addContainer(Collection<IContainer> containers) {
+	public void addContainer(Collection<? extends IContainer> containers) {
 		for(IContainer container : containers) {
 			this.addContainer(container);
 		}
