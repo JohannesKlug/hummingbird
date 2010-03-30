@@ -39,8 +39,8 @@ public class MockContainerModelFactory implements IContainerFactory {
 	 */
 	@Override
 	public void initialise() {
-		if (LOG.isTraceEnabled()) {
-			LOG.trace("Beginning initialisation of container model mock up");
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Beginning initialisation of container model mock up");
 		}
 
 		/** Build the upper frame skeleton of the Model **/
@@ -48,11 +48,11 @@ public class MockContainerModelFactory implements IContainerFactory {
 		// containers collection
 		Container tmFrame = new Container("TMFrame", "Test frame", "Test TM frame for unit testing");
 		this.addToContainers(tmFrame);
-		Container tmHeader = new Container("TMHeader", "Test header", "Test TM header for unit testing");
+		Container tmHeader = new Container("TMFrameHeader", "Test header", "Test TM header for unit testing");
 		this.addToContainers(tmHeader);
 		Container tmPacket = new Container("TMPacket", "Test packet", "Test TM packet for unit testing");
 		this.addToContainers(tmPacket);
-		Container tmTail = new Container("TMTail", "Test tail", "Test TM tail for unit testing");
+		Container tmTail = new Container("TMFrameTail", "Test tail", "Test TM tail for unit testing");
 		this.addToContainers(tmTail);
 		// Add the header, packet and tail to the frame container.
 		ArrayList<IContainer> containersToAdd = new ArrayList<IContainer>(3);
@@ -112,8 +112,8 @@ public class MockContainerModelFactory implements IContainerFactory {
 		packetInners.add(tmPacketBody);
 		tmPacket.addContainer(packetInners);
 
-		if (LOG.isTraceEnabled()) {
-			LOG.trace("Completed mock container model initialisaion");
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Completed mock container model initialisaion");
 		}
 		this.initialised = true;
 	}
