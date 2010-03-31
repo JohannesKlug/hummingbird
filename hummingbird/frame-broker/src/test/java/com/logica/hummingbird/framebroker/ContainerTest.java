@@ -3,11 +3,10 @@
  */
 package com.logica.hummingbird.framebroker;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.BitSet;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -30,6 +29,11 @@ public class ContainerTest {
 
 	private static IFrameBroker testFrameBroker = null;
 
+	private static final String EXPECTED_BIT_SET_DUMP = "11010100 01011011 11000000 00000000 00000000 00000000 00000000 00000000 "
+			+ System.getProperty("line.separator")
+			+ "00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 "
+			+ System.getProperty("line.separator");
+
 	/**
 	 * Set's up the FrameBroker with a mock container model factory.
 	 */
@@ -48,10 +52,10 @@ public class ContainerTest {
 	 * 
 	 * @throws UnknownContainerNameException
 	 */
-//	@Test
-//	public void testUnmarshall() throws UnknownContainerNameException {
-//		 testFrameBroker.unmarshall("TMFrame", frame);
-//	}
+	// @Test
+	// public void testUnmarshall() throws UnknownContainerNameException {
+	// testFrameBroker.unmarshall("TMFrame", frame);
+	// }
 
 	/**
 	 * Test method for
@@ -73,16 +77,21 @@ public class ContainerTest {
 		Parameter paramA = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.TEST_PARAM_VALUE_A);
 		paramA.setValue(123);
 
+		// Get the frame length, that is, the sum of itself and it's tree of sub containers and set the bitset to this length.
 		int length = MOCK_CONTAINER_MODEL_FACTORY.getContainer("TMFrame").getLength();
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("TMFrame length = " + length);
 		}
-		
 		BitSet frame = new BitSet(length);
 
+		// Marshall the Frame to a bitset
 		testFrameBroker.marshall("TMFrame", frame);
+
+		String binDump = BitSetUtility.binDump(frame);
+		LOG.debug(binDump);
 		
-		LOG.debug(BitSetUtility.binDump(frame));
+		// Assert the bitset is as expected.  // TODO there is probably a better way to do this than a binDump String comparison haha. 
+		assertEquals("Bit dump not equal", EXPECTED_BIT_SET_DUMP, binDump);
 	}
 
 }
