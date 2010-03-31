@@ -60,7 +60,9 @@ import com.logica.hummingbird.framebroker.producers.IProducer;
  * this container.
  */
 public class Container extends NamedElement implements IContainer {
-	
+	/**
+	 * Logger for this class	
+	 */
 	private static final Logger LOG = LoggerFactory.getLogger(Container.class);
 
 	/** The restrictions defining when this container should process. Each restriction
@@ -106,6 +108,9 @@ public class Container extends NamedElement implements IContainer {
 		 * are relevant for the processing. */
 		boolean match = true;
 		Iterator<Entry<IParameter, String>> it = restrictions.entrySet().iterator();
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("There are " + restrictions.size() + " restrictions to check");
+		}
 		while (it.hasNext() == true && match == true) {
 			Entry<IParameter, String> entry = it.next();				
 
@@ -114,6 +119,9 @@ public class Container extends NamedElement implements IContainer {
 			 * example could the packet header have been processed by the base container and
 			 * the APID set to a value. The data is thereafter forwarded to containers who
 			 * only process specific APIDs, based on a restriction on the APID. */
+			if(LOG.isDebugEnabled()) {
+				LOG.debug("Matching "  + entry.getKey() + " against " + entry.getValue());
+			}
 			match = entry.getKey().match(entry.getValue());
 		}	
 
@@ -157,8 +165,8 @@ public class Container extends NamedElement implements IContainer {
 		return offset;
 	}
 
-	// @Override
-	public String toxString() {
+	 @Override
+	public String toString() {
 		/** If the packet should be processed by this container. */
 		String str = "";
 		if (matchRestrictions() == true) {
