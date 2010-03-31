@@ -77,6 +77,7 @@ public class FloatParameter extends Parameter {
 		try{
 			packet = BitSetUtility.insertDouble(packet, offset, (int) type.sizeInBits, minimumValue, maximumValue, value);
 		}
+		// TODO Get rid of RuntimeException - Shouldn't throw these.
 		catch (RuntimeException e) {
 			// TODO log this
 			System.out.println("Error encoding parameter '" + this.name + "'. The value '" + this.value + "' cannot be encoded in " + type.sizeInBits + " bit(s).");	
