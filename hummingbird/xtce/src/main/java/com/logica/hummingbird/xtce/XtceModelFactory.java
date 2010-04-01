@@ -102,6 +102,7 @@ public class XtceModelFactory implements IContainerFactory {
 				
 				if (initialValueAsString != null) {
 					initialValue = Long.decode(initialValueAsString);
+					// FIXME decode() will ONLY work with base10 and hex, NOT with octal (wrong representation) and not with binary.
 				}
 				
 				
