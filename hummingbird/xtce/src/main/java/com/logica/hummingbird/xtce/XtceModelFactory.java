@@ -92,19 +92,33 @@ public class XtceModelFactory implements IContainerFactory {
 					}
 				}
 
+				/** TITLE XTCE Empty (null) Initial Value
+				 * If the XTCE definition doesn't contain a default value, then the parameter gets the initial value of '0'. 
+				 * CATEGORY XTCE FAQ */
+				
+				String initialValueAsString = item.getIntegerParameterType().getInitialValue();
+				
+				long initialValue = 0;
+				
+				if (initialValueAsString != null) {
+					initialValue = Long.decode(initialValueAsString);
+				}
+				
+				
 				ParameterType type = new ParameterType(					
 						item.getIntegerParameterType().getName(),
 						item.getIntegerParameterType().getShortDescription(),
 						item.getIntegerParameterType().getLongDescription(),
 						ParameterType.eParameterType.INTEGER,
 						item.getIntegerParameterType().getSigned(),
-						item.getIntegerParameterType().getInitialValue(),				
+						initialValue,				
 						item.getIntegerParameterType().getSizeInBits());
+				
 
 				types.put(type.getName(), type);
 			}
 
-			/** INTEGER */
+			/** FLOAT */
 			else if (item.getFloatParameterType() != null) {
 				Unit unit = null;
 
@@ -131,7 +145,7 @@ public class XtceModelFactory implements IContainerFactory {
 						item.getFloatParameterType().getLongDescription(),
 						ParameterType.eParameterType.FLOAT,
 						false,
-						item.getFloatParameterType().getInitialValue().longValue(),				
+						(long) item.getFloatParameterType().getInitialValue(),				
 						Long.parseLong(item.getFloatParameterType().getSizeInBits().value()));
 
 				types.put(type.getName(), type);
