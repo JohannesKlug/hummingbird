@@ -28,7 +28,12 @@ package com.logica.hummingbird.framebroker.parameters;
 
 import java.util.BitSet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.logica.hummingbird.framebroker.BitSetUtility;
+import com.logica.hummingbird.framebroker.ContainerTest;
+import com.logica.hummingbird.framebroker.exceptions.BitSetOperationException;
 import com.logica.hummingbird.framebroker.producers.IProducer;
 
 /**
@@ -36,6 +41,10 @@ import com.logica.hummingbird.framebroker.producers.IProducer;
  * data stream. 
  */
 public class FloatParameter extends Parameter {
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger LOG = LoggerFactory.getLogger(FloatParameter.class);
 
 	/** The last extracted value of the container. */
 	protected float value = 0;
@@ -74,13 +83,11 @@ public class FloatParameter extends Parameter {
 
 	@Override
 	public int marshall(BitSet packet, int offset) {
-		try{
+		try {
 			packet = BitSetUtility.insertDouble(packet, offset, (int) type.sizeInBits, minimumValue, maximumValue, value);
 		}
-		// TODO Get rid of RuntimeException - Shouldn't throw these.
-		catch (RuntimeException e) {
-			// TODO log this
-			System.out.println("Error encoding parameter '" + this.name + "'. The value '" + this.value + "' cannot be encoded in " + type.sizeInBits + " bit(s).");	
+		catch (BitSetOperationException e) {
+			LOG.error(e.toString());
 		}
 
 		return offset + (int) type.sizeInBits;
