@@ -80,9 +80,10 @@ public class MockContainerModelFactory implements IContainerFactory {
 
 		// Create the apid (ID) parameter type and add it to the packet header and the parameters collection.
 		ParameterType paramType11bitInt = new ParameterType("11bitInt", "11bit integer type", "Parameter type for 11bit integers", eParameterType.INTEGER, false, 0, 11);
-		IntegerParameter packetTypeId = new IntegerParameter(PACKET_ID_NAME, "Test Apid", "Test Application Id", paramType11bitInt, 0);
-		this.addToParameters(packetTypeId);
-		tmPacketHeader.addContainer(packetTypeId);
+		IntegerParameter packetIdParameter = new IntegerParameter(PACKET_ID_NAME, "Test Apid", "Test Application Id", paramType11bitInt, 0);
+		this.addToParameters(packetIdParameter);
+		this.addToContainers(packetIdParameter);
+		tmPacketHeader.addContainer(packetIdParameter);
 
 		// Create the packet body and add it to the containers collection
 		Container tmPacketBody = new Container("TMPacketBody", "Test packet body", "Test TM packet header for unit testing");
@@ -91,30 +92,32 @@ public class MockContainerModelFactory implements IContainerFactory {
 		// Create a packet type, add it to the packet body, add a restriction to
 		// associate it to an ID, and add it to the containers collection
 		Container packetTypeA = new Container("TMPacketTypeA", "Test packet body", "Test TM packet for unit testing");
-		packetTypeA.addRestriction(packetTypeId, PACKET_TYPE_A_ID);
+		packetTypeA.addRestriction(packetIdParameter, PACKET_TYPE_A_ID);
 		this.addToContainers(packetTypeA);
 		tmPacketBody.addContainer(packetTypeA);
 
 		// Create a parameter for packetTypeA and add it to the packet type and
 		// the container collection
-		ParameterType test32bitInt = new ParameterType("test32bitInt", "test param", "32 bit int test param", eParameterType.INTEGER, false, 0, 32);
+		ParameterType test32bitInt = new ParameterType("test32bitInt", "test param", "32 bit int test param", eParameterType.INTEGER, false, 1, 32);
 		IntegerParameter testParameterA = new IntegerParameter(TEST_PARAM_VALUE_A, "test param", "test param holding an int value", test32bitInt, 0);
 		packetTypeA.addContainer(testParameterA);
 		this.addToParameters(testParameterA);
+		this.addToContainers(testParameterA);
 
 		// Create a packet type, add it to the packet body, add a restriction to
 		// associate it to an ID, and add it to the containers collection
 		Container packetTypeB = new Container("TMPacketTypeB", "Test packet body", "Test TM packet for unit testing");
-		packetTypeB.addRestriction(packetTypeId, PACKET_TYPE_B_ID);
+		packetTypeB.addRestriction(packetIdParameter, PACKET_TYPE_B_ID);
 		this.addToContainers(packetTypeB);
 		tmPacketBody.addContainer(packetTypeB);
 
 		// Create a parameter for packetTypeB and add it to the packet type and
 		// the container collection
-		ParameterType test64bitFloat = new ParameterType("test64bitFloat", "test param", "64 float test param", eParameterType.FLOAT, false, 0, 64);
-		FloatParameter testParameterB = new FloatParameter(TEST_PARAM_VALUE_B, "test param", "test param holding a float value", test64bitFloat, 0);
+		ParameterType test64bitFloat = new ParameterType("test64bitFloat", "test param", "64 float test param", eParameterType.FLOAT, false, 1, 64);
+		FloatParameter testParameterB = new FloatParameter(TEST_PARAM_VALUE_B, "test param", "test param holding a float value", test64bitFloat, 1);
 		packetTypeA.addContainer(testParameterB);
 		this.addToParameters(testParameterB);
+		this.addToContainers(testParameterB);
 
 		// Add the packet inners (header and body) to the packet
 		List<IContainer> packetInners = new ArrayList<IContainer>(2);
