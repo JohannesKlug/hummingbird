@@ -3,8 +3,9 @@ package com.logica.hummingbird.example;
 import java.io.PrintStream;
 
 import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 
-public class ExampleEndpoint {
+public class ExampleEndpoint implements Processor {
 	
 	private PrintStream outStream = System.out;
 	
