@@ -1,7 +1,5 @@
 package com.logica.hummingbird.simulator;
 
-import javax.naming.NamingException;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.builder.RouteBuilder;
@@ -17,7 +15,12 @@ public class SimulatorTest extends CamelTestSupport {
     protected MockEndpoint resultEndpoint;
     
     @Override
-    protected RouteBuilder createRouteBuilder() {
+    protected RouteBuilder createRouteBuilder() throws Exception {
+    	
+    	JndiContext context = new JndiContext();
+    	context.bind("simulator", new Simulator(resultEndpoint));
+    	CamelContext camelContext = new DefaultCamelContext(context);
+    	
         return new RouteBuilder() {
             public void configure() {
                 from("bean:simulator").to("mock:result");
@@ -28,10 +31,7 @@ public class SimulatorTest extends CamelTestSupport {
     @Test
     public void TestSimulator() throws Exception {
     	
-    	JndiContext context = new JndiContext();
-    	context.bind("simulator", new Simulator());
 
-    	CamelContext camelContext = new DefaultCamelContext(context);
 
     	
     	resultEndpoint.setExpectedMessageCount(1);
