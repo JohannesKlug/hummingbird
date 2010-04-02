@@ -264,6 +264,33 @@ public class BitSetUtility
 		return dump;
 	}
 	
+	/**
+	 * Creates a {@link BitSet} from a String.  The String must represent bit states using 
+	 * a '0' or a '1' (ASCII values 48 or 49).  Invalid characters in the String will cause a 
+	 * BitSetOperationException to be thrown.  
+	 * @param str  {@link String} encoding the required BitSet using 1's and 0's
+	 * @return a {@link BitSet} equal to the BitSet encoded by the input String
+	 * @throws BitSetOperationException if the input string contains invald characters, that is, not equal to 1 or 0
+	 */
+	public static BitSet fromString(String str) throws BitSetOperationException {
+		str = str.trim();
+		BitSet result = new BitSet(str.length());
+		int count = 0;
+		for(byte c : str.getBytes()) {
+			// If character '1' flip the bit to "on"
+			if (c == 49) {
+				result.flip(count);
+			}
+			// else the bit must be equal to 48 ('0'); if not we have a problem...
+			else if (c != 48) {
+				throw new BitSetOperationException("invalid bit string, cannot infer 0 or 1 frmo character " + c);
+			}
+			count++;
+		}
+		
+		return result;
+	}
+	
 	public static String toString(BitSet data) {
 		String result = "";
 			
