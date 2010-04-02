@@ -138,11 +138,11 @@ public class Container extends NamedElement implements IContainer {
 			rawValue.set(getLength() + 1);
 			
 			for (IContainer container : subContainers) {
-				packet = container.unmarshall(packet);
+				packet = container.unmarshall(rawValue);
 			}
 			
 			for (IProducer updateObserver : updateObservers) {
-				updateObserver.updated(name, packet);
+				updateObserver.updated(name, rawValue);
 			}
 			
 			for (IProducer completionObserver : completionObservers) {
