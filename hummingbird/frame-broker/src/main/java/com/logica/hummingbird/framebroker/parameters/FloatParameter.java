@@ -99,7 +99,7 @@ public class FloatParameter extends Parameter {
 	}
 
 	@Override
-	public float getValue() {
+	public Number getValue() {
 		return value;
 	}
 
