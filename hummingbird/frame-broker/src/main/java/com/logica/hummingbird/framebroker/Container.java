@@ -120,11 +120,14 @@ public class Container extends NamedElement implements IContainer {
 			 * the APID set to a value. The data is thereafter forwarded to containers who
 			 * only process specific APIDs, based on a restriction on the APID. */
 			if(LOG.isDebugEnabled()) {
-				LOG.debug("Matching "  + entry.getKey() + " against " + entry.getValue());
+				LOG.debug("Checking Container "  + entry.getKey() + " against restriction " + entry.getValue());
 			}
 			match = entry.getKey().match(entry.getValue());
 		}	
 
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Match was " + match);
+		}
 		return match;
 	}
 
@@ -157,6 +160,9 @@ public class Container extends NamedElement implements IContainer {
 	public int marshall(BitSet packet, int offset) {
 		/** If the packet should be processed by this container. */
 		if (matchRestrictions() == true) {
+			if(LOG.isDebugEnabled()) {
+				LOG.debug("Matching was true, marshalling " + name);
+			}
 			for (IContainer container : subContainers) {
 				offset = container.marshall(packet, offset);
 			}
