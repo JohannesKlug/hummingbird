@@ -114,8 +114,8 @@ public class MockContainerModelFactory implements IContainerFactory {
 		// Create a parameter for packetTypeB and add it to the packet type and
 		// the container collection
 		ParameterType test64bitFloat = new ParameterType("test64bitFloat", "test param", "64 float test param", eParameterType.FLOAT, false, 1, 64);
-		FloatParameter testParameterB = new FloatParameter(TEST_PARAM_VALUE_B, "test param", "test param holding a float value", test64bitFloat, 1);
-		packetTypeA.addContainer(testParameterB);
+		FloatParameter testParameterB = new FloatParameter(TEST_PARAM_VALUE_B, "test param", "test param holding a float value", test64bitFloat, 1.0f);
+		packetTypeB.addContainer(testParameterB);
 		this.addToParameters(testParameterB);
 		this.addToContainers(testParameterB);
 
