@@ -12,9 +12,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.Assert;
 
 import com.logica.hummingbird.framebroker.exceptions.BitSetOperationException;
 import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.framebroker.parameters.IntegerParameter;
 import com.logica.hummingbird.framebroker.parameters.Parameter;
 
 /**
@@ -37,6 +39,10 @@ public class ContainerTest {
 			+ System.getProperty("line.separator");
 	
 	private final static String BITSET_AS_STRING = "11010100010110111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+	
+	private static final String PACKET_TYPE_ID_555 = "555";
+	
+	private static final int PARAM_A_TEST_VALUE = 123;
 
 	/**
 	 * Set's up the FrameBroker with a mock container model factory.
@@ -50,7 +56,7 @@ public class ContainerTest {
 	}
 
 	/**
-	 * Test method for
+	 * Test method for checking a valid BitSet can be unmarshalled into a collection of Java objects (the Containers)
 	 * {@link com.logica.hummingbird.framebroker.Container#unmarshall(java.util.BitSet)}
 	 * .
 	 * 
@@ -63,17 +69,34 @@ public class ContainerTest {
 		
 		BitSet frame = BitSetUtility.fromString(BITSET_AS_STRING);
 		testFrameBroker.unmarshall("TMFrame", frame);
+		
+		// Check the unmarshalling was successful...
+		IContainer tmframe = testFrameBroker.getContainer("TMFrame");
+		Assert.isInstanceOf(Container.class, tmframe);
+		
+		// Test the parameter type ID (Apid) was unmarshalled as an IntegerParameter with value 555 (PACKET_TYPE_ID_555)
+		IContainer paramTypeID = testFrameBroker.getContainer(MockContainerModelFactory.PACKET_ID_NAME);
+		Assert.isInstanceOf(IntegerParameter.class, paramTypeID);
+		Number value = ((IntegerParameter)paramTypeID).getValue();
+		assertEquals("Parameter has incorrect value.", Integer.parseInt(PACKET_TYPE_ID_555), value.intValue());
+		
+		// Test that there is a Test Param A (32 bit unsigned int) as expected.
+		IContainer testParamA = testFrameBroker.getContainer(MockContainerModelFactory.TEST_PARAM_VALUE_A);
+		Assert.isInstanceOf(IntegerParameter.class, testParamA);
+		Number testParamValue = ((IntegerParameter)testParamA).getValue();
+		assertEquals("Parameter has incorrect value.", PARAM_A_TEST_VALUE, testParamValue.intValue());
 	}
 
 	/**
-	 * Test method for
+	 * Tests marshalling a <b>valid</b> population of a Mock Container Model.  The Model is
+	 * populated in the test method.
 	 * {@link com.logica.hummingbird.framebroker.Container#marshall(java.util.BitSet, int)}
 	 * .
 	 * 
 	 * @throws UnknownContainerNameException
 	 */
 	@Test
-	public void testMarshall() throws UnknownContainerNameException {
+	public void testMarshallOfValidModel() throws UnknownContainerNameException {
 		LOG.info("Beginning test");
 		
 		LOG.debug(MOCK_CONTAINER_MODEL_FACTORY.getContainer("TMFrame").toString());
@@ -85,7 +108,7 @@ public class ContainerTest {
 
 		// Set parameter A value
 		Parameter paramA = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.TEST_PARAM_VALUE_A);
-		paramA.setValue(123);
+		paramA.setValue(PARAM_A_TEST_VALUE);
 
 		// Get the frame length, that is, the sum of itself and it's tree of sub
 		// containers and set the bitset to this length.
