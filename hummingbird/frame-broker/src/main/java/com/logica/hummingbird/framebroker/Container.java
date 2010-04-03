@@ -108,9 +108,7 @@ public class Container extends NamedElement implements IContainer {
 		 * are relevant for the processing. */
 		boolean match = true;
 		Iterator<Entry<IParameter, String>> it = restrictions.entrySet().iterator();
-		if(LOG.isDebugEnabled()) {
-			LOG.debug("There are " + restrictions.size() + " restrictions to check");
-		}
+
 		while (it.hasNext() == true && match == true) {
 			Entry<IParameter, String> entry = it.next();				
 
@@ -119,15 +117,9 @@ public class Container extends NamedElement implements IContainer {
 			 * example could the packet header have been processed by the base container and
 			 * the APID set to a value. The data is thereafter forwarded to containers who
 			 * only process specific APIDs, based on a restriction on the APID. */
-			if(LOG.isDebugEnabled()) {
-				LOG.debug("Checking Container "  + entry.getKey() + " against restriction " + entry.getValue());
-			}
 			match = entry.getKey().match(entry.getValue());
-		}	
-
-		if(LOG.isDebugEnabled()) {
-			LOG.debug("Match was " + match);
 		}
+		
 		return match;
 	}
 
@@ -268,7 +260,4 @@ public class Container extends NamedElement implements IContainer {
 	public List<IContainer> getSubContainers() {
 		return subContainers;
 	}
-
-	
-	
 }
