@@ -28,6 +28,8 @@ package com.logica.hummingbird.framebroker;
 
 import java.util.BitSet;
 
+import com.logica.hummingbird.framebroker.exceptions.BitSetOperationException;
+
 /**
  * The bitset utilities class helps the encoding / decoding of simple java types
  * such as integer and float to a bitset.
@@ -161,19 +163,21 @@ public class BitSetUtility
 	 * @param maxValue maximal value of <tt>value</tt>
 	 * @param value the value to encode
 	 * @return the manipulated bit set
+	 * @throws BitSetOperationException 
 	 * @throws RuntimeException if the value of <tt>value</tt> does not fit in ]minValue,
 	 *         maxValue[
 	 * @throws RuntimeException if the number of bits (<tt>length</tt>) is bigger than
 	 *         <tt>Long.SIZE</tt>
 	 */
-	public static BitSet insertDouble(BitSet bitSet, int offset, int length, double minValue, double maxValue, double value)
+	public static BitSet insertDouble(BitSet bitSet, int offset, int length, double minValue, double maxValue, double value) throws BitSetOperationException
 	{
-		if (value < minValue || value > maxValue)
-			throw new RuntimeException("Value out of bounds.");
+		if (value < minValue || value > maxValue) {
+			throw new BitSetOperationException("Value " + value + " is out of bounds.  Bounds are from " + minValue + " to " + maxValue);
+		}
 
-		if (length > Long.SIZE)
-			throw new RuntimeException("You can not set a higher length than " + Long.SIZE
-					+ " bits.");
+		if (length > Long.SIZE) {
+			throw new BitSetOperationException("You can not set a value greater than " + Long.SIZE + " bits in length.");
+		}
 
 		// scaling function:
 		// x element of ]minValue, maxValue[
@@ -192,9 +196,11 @@ public class BitSetUtility
 
 		// putting the scaled value to the bitset (without any sign!)
 		long mask = 1;
-		for (int i = 0; i < length; ++i, mask <<= 1)
-			if ((mask & scaledValue) > 0)
+		for (int i = 0; i < length; ++i, mask <<= 1) {
+			if ((mask & scaledValue) > 0) {
 				bitSet.set(offset + i);
+			}
+		}
 		
 		return bitSet;
 	}
@@ -256,6 +262,33 @@ public class BitSetUtility
 		}
 				
 		return dump;
+	}
+	
+	/**
+	 * Creates a {@link BitSet} from a String.  The String must represent bit states using 
+	 * a '0' or a '1' (ASCII values 48 or 49).  Invalid characters in the String will cause a 
+	 * BitSetOperationException to be thrown.  
+	 * @param str  {@link String} encoding the required BitSet using 1's and 0's
+	 * @return a {@link BitSet} equal to the BitSet encoded by the input String
+	 * @throws BitSetOperationException if the input string contains invald characters, that is, not equal to 1 or 0
+	 */
+	public static BitSet fromString(String str) throws BitSetOperationException {
+		str = str.trim();
+		BitSet result = new BitSet(str.length());
+		int count = 0;
+		for(byte c : str.getBytes()) {
+			// If character '1' flip the bit to "on"
+			if (c == 49) {
+				result.flip(count);
+			}
+			// else the bit must be equal to 48 ('0'); if not we have a problem...
+			else if (c != 48) {
+				throw new BitSetOperationException("invalid bit string, cannot infer 0 or 1 frmo character " + c);
+			}
+			count++;
+		}
+		
+		return result;
 	}
 	
 	public static String toString(BitSet data) {

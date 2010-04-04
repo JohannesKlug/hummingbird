@@ -44,7 +44,7 @@ public interface IParameter {
 	 * @return float The value of the parameter. 
 	 *
 	 */
-	public float getValue();
+	public Number getValue();
 	
 	
 	/**

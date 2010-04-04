@@ -71,8 +71,9 @@ public interface IFrameBroker {
 	 * Returns a container reference.
 	 *
 	 * @param container Identifier of the container. 
+	 * @throws UnknownContainerNameException 
 	 * @throws Exception 
 	 *
 	 */
-	public IContainer getContainer(String container) throws Exception;
+	public IContainer getContainer(String container) throws UnknownContainerNameException ;
 }

@@ -99,7 +99,7 @@ public class ContainerProcessor implements IFrameBroker {
 		}
 	}
 
-	public IContainer getContainer(String container) throws Exception {
+	public IContainer getContainer(String container) throws UnknownContainerNameException {
 		return factory.getContainer(container);
 	}
 

@@ -28,10 +28,17 @@ package com.logica.hummingbird.framebroker.parameters;
 
 import java.util.BitSet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.logica.hummingbird.framebroker.BitSetUtility;
 import com.logica.hummingbird.framebroker.producers.IProducer;
 
 public class IntegerParameter extends Parameter {
+	/**
+	 * Logger for this class	
+	 */
+	private static final Logger LOG = LoggerFactory.getLogger(IntegerParameter.class);
 
 	/** The value of the integer. */
 	protected int value = 0;
@@ -53,11 +60,15 @@ public class IntegerParameter extends Parameter {
 		
 	@Override
 	public BitSet unmarshall(BitSet packet) {
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Unmarshalling " + this.name);
+		}
 		value = BitSetUtility.extractInteger(packet, 0, (int) type.sizeInBits);
 		/** TODO Create POJO and send to observer. */
 		for (IProducer producer : updateObservers) {
 			producer.updated(name, value);
 		}
+
 		return packet.get((int) type.sizeInBits, packet.length());
 	}
 	
@@ -80,7 +91,7 @@ public class IntegerParameter extends Parameter {
 	}
 	
 	@Override
-	public float getValue() {
+	public Number getValue() {
 		return value;
 	}
 
