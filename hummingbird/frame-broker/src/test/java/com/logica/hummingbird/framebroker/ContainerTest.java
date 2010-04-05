@@ -20,7 +20,7 @@ import com.logica.hummingbird.framebroker.parameters.IntegerParameter;
 import com.logica.hummingbird.framebroker.parameters.Parameter;
 
 /**
- * @author doylemr
+ * @author Mark Doyle
  * 
  */
 public class ContainerTest {

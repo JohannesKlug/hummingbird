@@ -1,7 +1,6 @@
 package com.logica.hummingbird.framebroker;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.BitSet;
@@ -13,6 +12,11 @@ import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.framebroker.exceptions.BitSetOperationException;
 
+/**
+ * 
+ * @author Mark Doyle
+ *
+ */
 public class BitSetUtilityTest {
 	/**
 	 * Logger for this class.
@@ -43,7 +47,8 @@ public class BitSetUtilityTest {
 	 */
 	@BeforeClass
 	public final static void setUp() {
-		// The test bit set has the following indexex in the set state, that is, set to 1 {0, 1, 3, 5, 9, 11, 12, 14, 15, 16, 17}
+		// Create the test bit set as a BitSet and a String.
+		// The test bit set has the following indexes in the set state, that is, set to 1 {0, 1, 3, 5, 9, 11, 12, 14, 15, 16, 17}
 		TEST_BIT_SET.flip(0);
 		TEST_BIT_SET.flip(1);
 		TEST_BIT_SET.flip(3);
