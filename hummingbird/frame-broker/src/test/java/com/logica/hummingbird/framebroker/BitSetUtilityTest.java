@@ -93,6 +93,7 @@ public class BitSetUtilityTest {
 		
 		if(LOG.isDebugEnabled()) {
 			LOG.debug("BitSet created from a string = " + actual);
+			LOG.debug(BitSetUtility.binDump(actual));
 		}
 		
 		assertEquals("BitSet not equal", TEST_BIT_SET, actual);
