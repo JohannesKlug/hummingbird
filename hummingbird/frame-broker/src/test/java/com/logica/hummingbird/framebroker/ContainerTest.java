@@ -38,10 +38,19 @@ public class ContainerTest {
 			+ "00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 "
 			+ System.getProperty("line.separator");
 	
+	/**
+	 * Based upon the MockContainerFactory this Bit String encodes the Mock Container model with a param type ID of 555 and a param A test value of 123
+	 */
 	private final static String BITSET_AS_STRING = "11010100010110111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
 	
+	/**
+	 * Constant used to reference param type ID 555 in the tests.
+	 */
 	private static final String PACKET_TYPE_ID_555 = "555";
 	
+	/**
+	 * A value used in testing to set param A to a value.
+	 */
 	private static final int PARAM_A_TEST_VALUE = 123;
 
 	/**

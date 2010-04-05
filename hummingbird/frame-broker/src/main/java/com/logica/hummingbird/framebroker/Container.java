@@ -132,9 +132,11 @@ public class Container extends NamedElement implements IContainer {
 		// a truncation reversal bit it tagged on the end the sub-containers cannot be truncated.
 		boolean truncated = false;
 		if(packet.length() < getLength()) {
-			LOG.debug("The " + name + " packet length (" + getLength() + ") is less than expected.  Truncation has occured");
-			LOG.debug("The input packet length = " + packet.length());
-			LOG.debug("The " + name + " packet has been trucated by " + (getLength() - packet.length()));
+			if(LOG.isDebugEnabled()) {
+				LOG.debug("The " + name + " packet length (" + getLength() + ") is less than expected.  Truncation has occured");
+				LOG.debug("The input packet length = " + packet.length());
+				LOG.debug("The " + name + " packet has been trucated by " + (getLength() - packet.length()));
+			}
 			truncated = true;
 		}
 
@@ -170,7 +172,7 @@ public class Container extends NamedElement implements IContainer {
 
 		// As the packet is unmarshalled this BitSet should shrink as the subcontainers chunk off the previous sections
 		if(LOG.isDebugEnabled()) {
-			LOG.debug("The completeBitData is " + completeBitData.length() + "/" + completeBitData.size() + " long");
+			LOG.debug("The completeBitData for " + name + " is " + completeBitData.length() + "/" + completeBitData.size() + " long");
 		}
 		return completeBitData;
 	}
