@@ -127,6 +127,9 @@ public class Container extends NamedElement implements IContainer {
 
 	@Override
 	public BitSet unmarshall(BitSet packet) {
+		// Check if the BitSet has been truncated by testing it against the known length of the container.
+		// This should only be possible on the root container since it's the first thing to be tested.  If
+		// a truncation reversal bit it tagged on the end the sub-containers cannot be truncated.
 		boolean truncated = false;
 		if(packet.length() < getLength()) {
 			LOG.debug("The " + name + " packet length (" + getLength() + ") is less than expected.  Truncation has occured");
@@ -134,12 +137,11 @@ public class Container extends NamedElement implements IContainer {
 			LOG.debug("The " + name + " packet has been trucated by " + (getLength() - packet.length()));
 			truncated = true;
 		}
-		
-		/** Get the portion that corresponds to this container. We need to set a 'stop' bit
-		 * as the BitSet will else automatically shorten itself, i.e. trailing 0's will be lost. */
-		// Should only add the truncation reversion bit on the root node (is necessary)
-		// We must do this regardless of the matchRestrictions because we return completedBitData.  If the container
-		// is not to be processed the completeBitData must be set to the current packet otherwise we'll get a null pointer.
+
+		// If the BitSet has been truncated we need to set a truncation reversal bit after the packet.
+		// We must do this regardless of the matchRestrictions because each unmarshall call returns completedBitData.
+		// If the container is not to be processed the completeBitData must be set to the current packet otherwise 
+		// we'll get a null pointer.
 		if (truncated) {
 			completeBitData = packet.get(0, getLength());
 			completeBitData.set(getLength() + 1);
@@ -148,11 +150,13 @@ public class Container extends NamedElement implements IContainer {
 			completeBitData = packet;
 		}
 		
-		/** If the packet should be processed by this container. */
-		if (matchRestrictions() == true) {	
+		// If the packet should be processed by this container.
+		if (matchRestrictions() == true) {
 			for (IContainer container : subContainers) {
+				// The nested calls unmarshall down through the sub containers
+				// Specific Containers, e.g. Parameters will "chunk" the bitSet (Packet) in order to
+				// remove the section that has already been unmarshalled.
 				completeBitData = container.unmarshall(completeBitData);
-//				packet = container.unmarshall(packet);
 			}
 			
 			for (IProducer updateObserver : updateObservers) {
@@ -164,7 +168,10 @@ public class Container extends NamedElement implements IContainer {
 			}
 		}
 
-//		return packet;
+		// As the packet is unmarshalled this BitSet should shrink as the subcontainers chunk off the previous sections
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("The completeBitData is " + completeBitData.length() + "/" + completeBitData.size() + " long");
+		}
 		return completeBitData;
 	}
 
