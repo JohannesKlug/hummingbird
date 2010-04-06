@@ -22,8 +22,6 @@ import org.apache.camel.AsyncProcessor;
 import org.apache.camel.Exchange;
 import org.apache.camel.impl.DefaultConsumer;
 import org.apache.camel.impl.DefaultProducer;
-import org.apache.camel.impl.converter.AsyncProcessorTypeConverter;
-import org.apache.camel.impl.converter.
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -55,26 +53,14 @@ public class DirectProducer extends DefaultProducer implements AsyncProcessor {
         if (size == 0) {
             LOG.warn("No getConsumers() available on " + this + " for " + exchange);
         }
-        else {
-            if (size > 1) {
-                // Too hard to do multiple async.. do it sync
-                try {
-                    for (DefaultConsumer consumer : endpoint.getConsumers()) {
-                        consumer.getProcessor().process(exchange);
-                    }
-                }
-                catch (Throwable error) {
-                    exchange.setException(error);
-                }
-            }
-            else {
-                for (DefaultConsumer consumer : endpoint.getConsumers()) {
-                    AsyncProcessor processor = AsyncProcessorTypeConverter.convert(consumer.getProcessor());
-                    return processor.process(exchange, callback);
-                }
-            }
+ 
+        for (DefaultConsumer consumer : endpoint.getConsumers()) {
+            try {
+				consumer.getProcessor().process(exchange);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
-        callback.done(true);
-        return true;
     }
 }
