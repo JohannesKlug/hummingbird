@@ -61,7 +61,7 @@ public class IntegerParameter extends Parameter {
 	@Override
 	public BitSet unmarshall(BitSet packet) {
 		if(LOG.isDebugEnabled()) {
-			LOG.debug("Unmarshalling " + this.name);
+			LOG.debug("Unmarshalling " + this.name + " : " + packet);
 		}
 		value = BitSetUtility.extractInteger(packet, 0, (int) type.sizeInBits);
 		/** TODO Create POJO and send to observer. */
@@ -69,7 +69,8 @@ public class IntegerParameter extends Parameter {
 			producer.updated(name, value);
 		}
 
-		return packet.get((int) type.sizeInBits, packet.length());
+		BitSet returnPacket = packet.get((int) type.sizeInBits, packet.length());
+		return returnPacket;
 	}
 	
 	@Override
