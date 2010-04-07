@@ -26,8 +26,13 @@
  */
 package com.logica.hummingbird.framebroker.producers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.logica.hummingbird.MessageType;
 import com.logica.hummingbird.framebroker.IContainer;
 import com.logica.hummingbird.framebroker.IContainerFactory;
+import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
 
 /**
  * The packet consists of a sequence of packet header fields, which are parameters, and a 
@@ -35,11 +40,12 @@ import com.logica.hummingbird.framebroker.IContainerFactory;
  * header, and for the packet itself to get the raw data.
  */
 public class PacketProducer extends Producer {
+	private final static Logger LOG = LoggerFactory.getLogger(PacketProducer.class);
 	
 	public PacketProducer(IContainerFactory containerFactory) {
 		super(containerFactory);
-		
-		messageType = "TMPacket";
+
+		messageType = MessageType.TMPacket;
 		
 		/** The packet base container (should have the name TMPacket by convention) contains as sub containers;
 		 *   1. A parameter per header field. For example CCSDS_APID
@@ -50,14 +56,10 @@ public class PacketProducer extends Producer {
 				sub.addUpdateObserver(this);
 			}
 			containerFactory.getContainer("TMPacket").addCompletionObserver(this);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		}
+		catch (UnknownContainerNameException e) {
+			LOG.error(e.toString());
 			e.printStackTrace();
 		}
 	}
-
-		
-		
-		
-	
 }

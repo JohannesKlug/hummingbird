@@ -26,6 +26,10 @@
  */
 package com.logica.hummingbird.framebroker.producers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.logica.hummingbird.MessageType;
 import com.logica.hummingbird.framebroker.IContainerFactory;
 import com.logica.hummingbird.framebroker.parameters.Parameter;
 
@@ -33,11 +37,12 @@ import com.logica.hummingbird.framebroker.parameters.Parameter;
  * TODO write here a description of the class
  */
 public class ParameterProducer extends Producer {
+	private final static Logger LOG = LoggerFactory.getLogger(ParameterProducer.class);
 	
 	public ParameterProducer(IContainerFactory containerFactory) {
 		super(containerFactory);
 		
-		messageType = "TMParameter";
+		messageType = MessageType.TMParameter;
 		
 		/** Register with all parameters corresponding to header fields. */
 		for (Parameter parameter : containerFactory.getAllParameters().values()) {
