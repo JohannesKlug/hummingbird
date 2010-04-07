@@ -71,5 +71,23 @@ public class SimulatorTest extends CamelTestSupport {
     	}
     	
     }
+    
+    @Test
+    public void TestRunningSimulator() throws Exception {
+    	
+    	resultEndpoint.reset();
+    	
+    	Simulator simulator = new Simulator(resultEndpoint);
+    	
+    	Thread simulatorThread = new Thread(simulator);
+    	simulatorThread.start();
+    	Thread.sleep(2500);
+    	simulator.stopSimulator();
+    	
+    	resultEndpoint.setMinimumExpectedMessageCount(2);
+    	resultEndpoint.assertIsSatisfied();
+    	
+    	
+    }
 
 }
