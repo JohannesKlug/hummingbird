@@ -40,7 +40,7 @@ import com.logica.hummingbird.framebroker.producers.FrameProducer;
 import com.logica.hummingbird.framebroker.producers.IProducer;
 import com.logica.hummingbird.framebroker.producers.PacketProducer;
 import com.logica.hummingbird.framebroker.producers.ParameterProducer;
-import com.logica.hummingbird.framebroker.producers.Producer;
+import com.logica.hummingbird.framebroker.producers.CamelMessageProducer;
 
 /**
  * 
@@ -102,12 +102,23 @@ public class ContainerProcessor implements IFrameBroker {
 		this.factory = factory;
 	}
 
-	public List<Message> split(Exchange arg0) throws Exception {
-		unmarshall("TMFrame", (BitSet) arg0.getIn().getBody());
+	/**
+	 * Split takes a TMFrame and calls unmarshall.  The messages produced buy the various producers listening
+	 * to the unmarshalling are then returned to the caller.  Since this ContainerProcessor contains
+	 * a frameProducer, packetProducer, and parameterProducer which all register themselves are listeners it will
+	 * return a list of messages identified by their headers for each type.  Note, the individual producers
+	 * set the header to the required type for the messages they create.
+	 * @param camelExchange the camel exchange container
+	 * @return a list of camel messages
+	 * @throws UnknownContainerNameException 
+	 * @throws Exception
+	 */
+	public List<Message> split(Exchange camelExchange) throws UnknownContainerNameException {
+		this.unmarshall("TMFrame", (BitSet) camelExchange.getIn().getBody());
 
-		List<Message> messages = new ArrayList<Message>(Producer.getMessages());
+		List<Message> messages = new ArrayList<Message>(CamelMessageProducer.getMessages());
 
-		Producer.clearMessages();
+		CamelMessageProducer.clearMessages();
 
 		return messages;
 	}

@@ -37,7 +37,7 @@ import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameExcepti
 /**
  * TODO write here a description of the class
  */
-public class FrameProducer extends Producer {
+public class FrameProducer extends CamelMessageProducer {
 	private final static Logger LOG = LoggerFactory.getLogger(FrameProducer.class);
 
 	public FrameProducer(IContainerFactory containerFactory) {

@@ -39,7 +39,7 @@ import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameExcepti
  * packet body which is binary data. This producer registers for the parameters in the 
  * header, and for the packet itself to get the raw data.
  */
-public class PacketProducer extends Producer {
+public class PacketProducer extends CamelMessageProducer {
 	private final static Logger LOG = LoggerFactory.getLogger(PacketProducer.class);
 	
 	public PacketProducer(IContainerFactory containerFactory) {

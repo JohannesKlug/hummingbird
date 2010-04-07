@@ -58,6 +58,9 @@ import com.logica.hummingbird.framebroker.producers.IProducer;
  * that processes the packet is configured by adding restrictions to each container.  These
  * restrictions dictate that the APID parameter must have a specific value or be ignored by 
  * this container.
+ * 
+ * @author Gert Villemos
+ * @author Mark Doyle
  */
 public class Container extends NamedElement implements IContainer {
 	/**

@@ -14,68 +14,73 @@ import org.apache.camel.impl.DefaultMessage;
 import com.logica.hummingbird.MessageType;
 import com.logica.hummingbird.framebroker.IContainerFactory;
 
-public abstract class Producer implements IProducer {
+/**
+ * 
+ * @author Gert Villemos
+ *
+ */
+public abstract class CamelMessageProducer implements IProducer {
+	/**
+	 * This identifies the type of message we are dealing with.  The header of the Camel message is set
+	 * to this type.
+	 */
+	protected MessageType messageType;
 
 	private DefaultCamelContext context = new DefaultCamelContext();
 	
+	protected ProducerTemplate producerTemplate = context.createProducerTemplate();
+	
 	private IContainerFactory containerFactory;
 
-	protected static List<Message> messages = new ArrayList<Message>();
-
-	protected ProducerTemplate producerTemplate = context.createProducerTemplate();
+	/**
+	 * A List of Camel messages produced by this producer.
+	 */
+	protected static List<Message> messages = new ArrayList<Message>();	
 	
 	protected Map<String, Object> headers = new HashMap<String, Object>();
 	
 	private Object body;
 
-	protected MessageType messageType;
-
-	public Producer(IContainerFactory containerFactory) {
+	public CamelMessageProducer(IContainerFactory containerFactory) {
 		this.setContainerFactory(containerFactory);
 	}
 
 	@Override
 	public void updated(String field, BitSet value) {
 		body = value;
-
 	}
 
 	@Override
 	public void updated(String field, int value) {
 		headers.put(field, value);
-
 	}
 
 	@Override
 	public void updated(String field, String value) {
 		headers.put(field, value);
-
 	}
 
 	@Override
 	public void updated(String field, double value) {
 		headers.put(field, value);
-
 	}
 
 	@Override
 	public void completed() {
-
-		/**
-		 * This sets the correct header type.
-		 * */
+		// Set the correct header type.
 		headers.put("Type", messageType);
 
+		// Create a new message, set the body and headers
 		Message message = new DefaultMessage();
 		message.setBody(body);
 		message.setHeaders(headers);
 
+		// Add the new message to the list
 		messages.add(message);
 
-		/** Clean up body and headers */
+		// Clean up body and headers
 		body = null;
 		headers.clear();
-
 	}
 
 	public static List<Message> getMessages() {
@@ -93,5 +98,4 @@ public abstract class Producer implements IProducer {
 	public IContainerFactory getContainerFactory() {
 		return containerFactory;
 	}
-
 }

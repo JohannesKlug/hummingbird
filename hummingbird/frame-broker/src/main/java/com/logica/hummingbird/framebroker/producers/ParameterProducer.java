@@ -36,7 +36,7 @@ import com.logica.hummingbird.framebroker.parameters.Parameter;
 /**
  * TODO write here a description of the class
  */
-public class ParameterProducer extends Producer {
+public class ParameterProducer extends CamelMessageProducer {
 	private final static Logger LOG = LoggerFactory.getLogger(ParameterProducer.class);
 	
 	public ParameterProducer(IContainerFactory containerFactory) {
