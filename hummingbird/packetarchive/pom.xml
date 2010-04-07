@@ -40,10 +40,6 @@
 			<artifactId>camel-spring</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>mysql</groupId>
@@ -103,10 +99,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -119,22 +111,12 @@
 		<defaultGoal>install</defaultGoal>
 
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-
-			<!-- allows the route to be ran via 'mvn camel:run' -->
+			<!-- allows the route to be run via 'mvn camel:run' -->
 			<plugin>
 				<groupId>org.apache.camel</groupId>
 				<artifactId>camel-maven-plugin</artifactId>
 				<version>${camel.version}</version>
 			</plugin>
-
 		</plugins>
 	</build>
 </project>

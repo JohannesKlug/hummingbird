@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.logica.hummingbird</groupId>
-  <artifactId>hummingbird</artifactId>
-  <packaging>pom</packaging>
-  <version>0.0.1-SNAPSHOT</version>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.logica.hummingbird</groupId>
+	<artifactId>hummingbird</artifactId>
+	<packaging>pom</packaging>
+	<version>0.0.1-SNAPSHOT</version>
 
 	<name>Hummingbird Root Project</name>
 	<description>The Hummingbird root project is a container for all Hummingbird components, each created in a separate maven module. By building this project, the complete system can be built.</description>
-  	<url/>
-  	
-  <modules>
-  	<module>frame-broker</module>
-  	<module>xtce</module>
-  	<module>packetarchive</module>
-  	<module>parameterarchive</module>
-  	<module>commons</module>
-  	<module>help</module>
-  	<module>assembly</module>
-  	<module>example-endpoint</module>
-  </modules>
-  
-  	<licenses>
+	<url />
+
+	<modules>
+		<module>frame-broker</module>
+		<module>xtce</module>
+		<module>packetarchive</module>
+		<module>parameterarchive</module>
+		<module>commons</module>
+		<module>help</module>
+		<module>assembly</module>
+		<module>example-endpoint</module>
+	</modules>
+
+	<licenses>
 		<license>
 			<name>GPL</name>
 			<url>http://www.gnu.org/licenses/gpl.html</url>
@@ -30,7 +31,7 @@
 			<comments>(c) Logica 2009. All rights reserved.</comments>
 		</license>
 	</licenses>
-	
+
 	<distributionManagement>
 		<repository>
 			<id>internal-releases</id>
@@ -38,8 +39,8 @@
 			<url>http://10.48.29.168:8888/artifactory/internal-releases</url>
 		</repository>
 	</distributionManagement>
-	
-  	<properties>
+
+	<properties>
 		<log4j.version>1.2.14</log4j.version>
 		<spring.version>2.5.6</spring.version>
 		<junit.version>4.8.1</junit.version>
@@ -49,27 +50,27 @@
 		<mysqlconnector.version>5.1.10</mysqlconnector.version>
 		<jencks.version>2.2</jencks.version>
 		<cameljms.version>2.2.0</cameljms.version>
-				
+
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
-  
-  	<ciManagement>
+
+	<ciManagement>
 		<system>Hudson</system>
 		<url>http:/10.48.29.168:8888/hudson</url>
 	</ciManagement>
-  
- 	<organization>
+
+	<organization>
 		<name>Logica</name>
 		<url>http://www.logica.com</url>
 	</organization>
 
 	<issueManagement>
-		<system/>
-		<url/>
+		<system />
+		<url />
 	</issueManagement>
-  
-  	<developers>
+
+	<developers>
 		<developer>
 			<id>0</id>
 			<organization>Logica</organization>
@@ -110,23 +111,39 @@
 		</developer>
 
 	</developers>
-  
-  	<dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.0.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.4.2</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
 		<dependencies>
-
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>${log4j.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>${junit.version}</version>
-				<scope>test</scope>
-			</dependency>
-
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-core</artifactId>
@@ -170,9 +187,9 @@
 			</dependency>
 
 			<dependency>
-			  <groupId>org.apache.activemq</groupId>
-			  <artifactId>activemq-camel</artifactId>
-			  <version>${activemq.version}</version>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-camel</artifactId>
+				<version>${activemq.version}</version>
 			</dependency>
 
 			<dependency>
@@ -180,64 +197,63 @@
 				<artifactId>mysql-connector-java</artifactId>
 				<version>${mysqlconnector.version}</version>
 			</dependency>
-		
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-core</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
 
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-spring</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-core</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
 
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-ibatis</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-spring</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
 
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-test</artifactId>
-			<version>${camel.version}</version>
-			<scope>test</scope>
-		</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-ibatis</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
 
-		<dependency>
-	      <groupId>org.jencks</groupId>
-	      <artifactId>jencks-amqpool</artifactId>
-	      <version>${jencks.version}</version>
-    	</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-test</artifactId>
+				<version>${camel.version}</version>
+				<scope>test</scope>
+			</dependency>
 
-	<dependency>
-	  <groupId>org.apache.camel</groupId>
-	  <artifactId>camel-jms</artifactId>
-	  <version>${cameljms.version}</version>
-	</dependency>
+			<dependency>
+				<groupId>org.jencks</groupId>
+				<artifactId>jencks-amqpool</artifactId>
+				<version>${jencks.version}</version>
+			</dependency>
 
-		<dependency>
-			<groupId>org.codehaus.castor</groupId>
-			<artifactId>castor-core</artifactId>
-			<version>${castor.version}</version>
-		</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-jms</artifactId>
+				<version>${cameljms.version}</version>
+			</dependency>
 
-		<dependency>
-			<groupId>org.codehaus.castor</groupId>
-			<artifactId>castor-xml</artifactId>
-			<version>${castor.version}</version>
-		</dependency>
+			<dependency>
+				<groupId>org.codehaus.castor</groupId>
+				<artifactId>castor-core</artifactId>
+				<version>${castor.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.codehaus.castor</groupId>
+				<artifactId>castor-xml</artifactId>
+				<version>${castor.version}</version>
+			</dependency>
 
 
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<build>
 		<pluginManagement>
 			<plugins>
-
 				<plugin>
 					<artifactId>maven-assembly-plugin</artifactId>
 					<version>2.1</version>
@@ -247,32 +263,20 @@
 						</descriptorRefs>
 					</configuration>
 				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<source>1.6</source>
-						<target>1.6</target>
-					</configuration>
-				</plugin>
-
 			</plugins>
-
 		</pluginManagement>
 
 		<plugins>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-						<source>1.6</source>
-						<target>1.6</target>
-					</configuration>				
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
 			</plugin>
 
 		</plugins>
 	</build>
-    
+
 </project>

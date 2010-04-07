@@ -60,15 +60,6 @@
 			<artifactId>castor-xml</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.logica.hummingbird</groupId>
 			<artifactId>frame-broker</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
