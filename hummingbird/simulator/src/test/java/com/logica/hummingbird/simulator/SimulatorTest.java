@@ -5,6 +5,8 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
+import com.logica.hummingbird.simulator.waveforms.FlatWaveform;
+
 public class SimulatorTest extends CamelTestSupport {
 	
     @EndpointInject(uri = "mock:result")
@@ -20,19 +22,19 @@ public class SimulatorTest extends CamelTestSupport {
     	resultEndpoint.setExpectedMessageCount(0);
     	resultEndpoint.assertIsSatisfied();
     	
-    	simulator.sendMessage();
+    	simulator.sendMessage(0);
     	
     	resultEndpoint.setExpectedMessageCount(1);
     	resultEndpoint.assertIsSatisfied();
     	
-    	simulator.sendMessage();
+    	simulator.sendMessage(0);
     	
     	resultEndpoint.setExpectedMessageCount(2);
     	resultEndpoint.assertIsSatisfied();
     	
-    	simulator.sendMessage();
-    	simulator.sendMessage();
-    	simulator.sendMessage();
+    	simulator.sendMessage(0);
+    	simulator.sendMessage(0);
+    	simulator.sendMessage(0);
     	
     	resultEndpoint.setExpectedMessageCount(5);
     	resultEndpoint.assertIsSatisfied();
@@ -44,6 +46,7 @@ public class SimulatorTest extends CamelTestSupport {
     	resultEndpoint.reset();
     	
     	Simulator simulator = new Simulator(resultEndpoint);
+    	simulator.addWaveform(new FlatWaveform(100, 2));
     	
     	Thread simulatorThread = new Thread(simulator);
     	simulatorThread.start();
@@ -52,7 +55,6 @@ public class SimulatorTest extends CamelTestSupport {
     	
     	resultEndpoint.setMinimumExpectedMessageCount(2);
     	resultEndpoint.assertIsSatisfied();
-    	
     	
     }
 
