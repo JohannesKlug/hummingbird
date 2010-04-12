@@ -6,7 +6,6 @@ import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.direct.DirectEndpoint;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
@@ -20,8 +19,6 @@ public class ExampleAssembly extends CamelTestSupport{
 	
 	ExampleEndpoint exampleEndpoint = new ExampleEndpoint();
 	
-    protected DirectEndpoint mitmEndpoint = new DirectEndpoint("direct:mitm");
-	
 	@Produce(uri = "direct:start")
     protected ProducerTemplate template;
 	
@@ -30,11 +27,7 @@ public class ExampleAssembly extends CamelTestSupport{
 	
     protected CamelContext createCamelContext() throws Exception {
         CamelContext camelContext = super.createCamelContext();
-
-        // START SNIPPET: example
         camelContext.addComponent("activemq", ActiveMQComponent.activeMQComponent("vm://localhost?broker.persistent=false"));
-        // END SNIPPET: example
-
         return camelContext;
     }
 
@@ -46,16 +39,19 @@ public class ExampleAssembly extends CamelTestSupport{
         	
             public void configure() throws Exception {
             	
-//            	from("direct:start").to(mitmEndpoint).to(resultEndpoint);
-            	
-//            	from("direct:start").to("direct:mitm");
-//            	
-//            	from("direct:mitm").to(resultEndpoint);
-            	
+            	// Feeds into the topic
             	from("direct:start").to("activemq:topic:example");
             	
-            	//from("activemq:queue:example").process(exampleEndpoint);
-            	from("activemq:topic:example").to(resultEndpoint).process(exampleEndpoint);
+            	// Three subscribers for that topic:
+            	
+            	// a mock endpoint (data sink)
+            	from("activemq:topic:example").to(resultEndpoint);
+            	
+            	// ExampleEndpoint, as a processor object
+            	from("activemq:topic:example").process(exampleEndpoint);
+            	
+            	// ExampleEndpoint as a bean
+            	from("activemq:topic:example").bean(ExampleEndpoint.class);
 
             	}
             };
