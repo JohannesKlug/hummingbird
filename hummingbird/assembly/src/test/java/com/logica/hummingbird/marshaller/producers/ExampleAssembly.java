@@ -6,6 +6,7 @@ import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.direct.DirectEndpoint;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
@@ -19,6 +20,8 @@ public class ExampleAssembly extends CamelTestSupport{
 	
 	ExampleEndpoint exampleEndpoint = new ExampleEndpoint();
 	
+    protected DirectEndpoint mitmEndpoint = new DirectEndpoint("direct:mitm");
+	
 	@Produce(uri = "direct:start")
     protected ProducerTemplate template;
 	
@@ -29,7 +32,7 @@ public class ExampleAssembly extends CamelTestSupport{
         CamelContext camelContext = super.createCamelContext();
 
         // START SNIPPET: example
-        camelContext.addComponent("activemq", new ActiveMQComponent());
+        camelContext.addComponent("activemq", ActiveMQComponent.activeMQComponent("vm://localhost?broker.persistent=false"));
         // END SNIPPET: example
 
         return camelContext;
@@ -43,12 +46,16 @@ public class ExampleAssembly extends CamelTestSupport{
         	
             public void configure() throws Exception {
             	
-//            	from("direct:start").to(resultEndpoint);
+//            	from("direct:start").to(mitmEndpoint).to(resultEndpoint);
             	
-            	from("direct:start").to("activemq:queue:example");
+//            	from("direct:start").to("direct:mitm");
+//            	
+//            	from("direct:mitm").to(resultEndpoint);
+            	
+            	from("direct:start").to("activemq:topic:example");
             	
             	//from("activemq:queue:example").process(exampleEndpoint);
-            	from("activemq:queue:example").to(resultEndpoint);
+            	from("activemq:topic:example").to(resultEndpoint).process(exampleEndpoint);
 
             	}
             };
@@ -59,9 +66,9 @@ public class ExampleAssembly extends CamelTestSupport{
     @Test
     public void runExampleAssembly() throws Exception {
 
-	//	template.sendBody("Test");
+    	template.sendBody("Test");
 		
-		resultEndpoint.setMinimumExpectedMessageCount(1);
+		resultEndpoint.setExpectedMessageCount(1);
 		resultEndpoint.assertIsSatisfied();
     }
 }
