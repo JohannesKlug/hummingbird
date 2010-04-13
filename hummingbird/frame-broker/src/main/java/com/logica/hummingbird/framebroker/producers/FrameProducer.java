@@ -26,33 +26,39 @@
  */
 package com.logica.hummingbird.framebroker.producers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.logica.hummingbird.MessageType;
 import com.logica.hummingbird.framebroker.IContainer;
 import com.logica.hummingbird.framebroker.IContainerFactory;
+import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
 
 /**
  * TODO write here a description of the class
  */
-public class FrameProducer extends Producer {
+public class FrameProducer extends CamelMessageProducer {
+	private final static Logger LOG = LoggerFactory.getLogger(FrameProducer.class);
 
 	public FrameProducer(IContainerFactory containerFactory) {
 		super(containerFactory);
-		
-		messageType = MessageType.TMFrame.toString();
+
+		messageType = MessageType.TMFrame;
 
 		try {
 			for (IContainer sub : containerFactory.getContainer("TMFrameHeader").getSubContainers()) {
 				sub.addUpdateObserver(this);
 			}
-			
+
 			for (IContainer sub : containerFactory.getContainer("TMFrameTail").getSubContainers()) {
 				sub.addUpdateObserver(this);
 			}
-			
+
 			containerFactory.getContainer("TMFrame").addCompletionObserver(this);
-		
-		} catch (Exception e) {
-			e.printStackTrace(); 
+		}
+		catch (UnknownContainerNameException e) {
+			LOG.error(e.toString());
+			e.printStackTrace();
 		}
 	}
 

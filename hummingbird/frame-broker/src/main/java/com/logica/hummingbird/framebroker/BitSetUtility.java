@@ -35,6 +35,9 @@ import com.logica.hummingbird.framebroker.exceptions.BitSetOperationException;
  * such as integer and float to a bitset.
  * 
  * TODO Make the class set the final bit + 1 in the set automatically.
+ * 
+ * @author Gert Villemos
+ * @author Mark Doyle
  */
 public class BitSetUtility
 {

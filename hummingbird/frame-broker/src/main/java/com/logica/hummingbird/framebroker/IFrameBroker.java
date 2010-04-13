@@ -53,9 +53,10 @@ public interface IFrameBroker {
 	 *
 	 * @param container The name of the container as registered within the container factory.
 	 * @param data The data stream from which the data shall be extracted. 
+	 * @throws UnknownContainerNameException 
 	 *
 	 */	
-	public void marshall(String container, BitSet data);
+	public void marshall(String container, BitSet data) throws UnknownContainerNameException;
 
 	/**
 	 * Marshalls the container identified through the container parameter name into
@@ -63,9 +64,10 @@ public interface IFrameBroker {
 	 *
 	 * @param container The name of the container as registered within the container factory.
 	 * @param String The data stream from which the data shall be extracted. 
+	 * @throws UnknownContainerNameException 
 	 *
 	 */	
-	public void marshall(String container, String data);
+	public void marshall(String container, String data) throws UnknownContainerNameException;
 		
 	/**
 	 * Returns a container reference.

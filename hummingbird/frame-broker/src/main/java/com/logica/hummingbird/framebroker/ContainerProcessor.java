@@ -32,13 +32,15 @@ import java.util.List;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.framebroker.producers.FrameProducer;
 import com.logica.hummingbird.framebroker.producers.IProducer;
 import com.logica.hummingbird.framebroker.producers.PacketProducer;
 import com.logica.hummingbird.framebroker.producers.ParameterProducer;
-import com.logica.hummingbird.framebroker.producers.Producer;
+import com.logica.hummingbird.framebroker.producers.CamelMessageProducer;
 
 /**
  * 
@@ -50,6 +52,7 @@ import com.logica.hummingbird.framebroker.producers.Producer;
  * 
  */
 public class ContainerProcessor implements IFrameBroker {
+	private final static Logger LOG = LoggerFactory.getLogger(ContainerProcessor.class);
 
 	/** The factory used to locate the models. */
 	protected IContainerFactory factory = null;
@@ -78,25 +81,13 @@ public class ContainerProcessor implements IFrameBroker {
 	}
 
 	@Override
-	public void marshall(String packetname, BitSet packet) {
-		try {
-			factory.getContainer(packetname).marshall(packet, 0);
-		}
-		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void marshall(String packetname, BitSet packet) throws UnknownContainerNameException {
+		factory.getContainer(packetname).marshall(packet, 0);
 	}
 
 	@Override
-	public void marshall(String packetname, String packet) {
-		try {
-			packet = factory.getContainer(packetname).toString();
-		}
-		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void marshall(String packetname, String packet) throws UnknownContainerNameException {
+		packet = factory.getContainer(packetname).toString();
 	}
 
 	public IContainer getContainer(String container) throws UnknownContainerNameException {
@@ -111,15 +102,25 @@ public class ContainerProcessor implements IFrameBroker {
 		this.factory = factory;
 	}
 
-	public List<Message> split(Exchange arg0) throws Exception {
-		unmarshall("TMFrame", (BitSet) arg0.getIn().getBody());
+	/**
+	 * Split takes a TMFrame and calls unmarshall.  The messages produced buy the various producers listening
+	 * to the unmarshalling are then returned to the caller.  Since this ContainerProcessor contains
+	 * a frameProducer, packetProducer, and parameterProducer which all register themselves are listeners it will
+	 * return a list of messages identified by their headers for each type.  Note, the individual producers
+	 * set the header to the required type for the messages they create.
+	 * @param camelExchange the camel exchange container
+	 * @return a list of camel messages
+	 * @throws UnknownContainerNameException 
+	 * @throws Exception
+	 */
+	public List<Message> split(Exchange camelExchange) throws UnknownContainerNameException {
+		this.unmarshall("TMFrame", (BitSet) camelExchange.getIn().getBody());
 
-		List<Message> messages = new ArrayList<Message>(Producer.getMessages());
+		List<Message> messages = new ArrayList<Message>(CamelMessageProducer.getMessages());
 
-		Producer.clearMessages();
+		CamelMessageProducer.clearMessages();
 
 		return messages;
-
 	}
 
 }

@@ -58,6 +58,9 @@ import com.logica.hummingbird.framebroker.producers.IProducer;
  * that processes the packet is configured by adding restrictions to each container.  These
  * restrictions dictate that the APID parameter must have a specific value or be ignored by 
  * this container.
+ * 
+ * @author Gert Villemos
+ * @author Mark Doyle
  */
 public class Container extends NamedElement implements IContainer {
 	/**
@@ -75,7 +78,7 @@ public class Container extends NamedElement implements IContainer {
 	protected List<IContainer> subContainers = new ArrayList<IContainer>();
 
 	/** Holds the complete portion of the data corresponding to this container. */
-	protected BitSet rawValue = null;
+	protected BitSet completeBitData = null;
 
 	/** The length of this container in bits. The value will hold a BitSet of length >= length + 1. */
 	protected int length = 0;
@@ -83,6 +86,8 @@ public class Container extends NamedElement implements IContainer {
 	protected List<IProducer> updateObservers = new ArrayList<IProducer>();
 	protected List<IProducer> completionObservers = new ArrayList<IProducer>();
 	
+	protected IContainer parent = null;
+
 	/**
 	 * Constructor of the Container class.
 	 *
@@ -125,19 +130,42 @@ public class Container extends NamedElement implements IContainer {
 
 	@Override
 	public BitSet unmarshall(BitSet packet) {
-		/** If the packet should be processed by this container. */
+		// Check if the BitSet has been truncated by testing it against the known length of the container.
+		// This should only be possible on the root container since it's the first thing to be tested.  If
+		// a truncation reversal bit it tagged on the end the sub-containers cannot be truncated.
+		boolean truncated = false;
+		if(packet.length() < getLength()) {
+			if(LOG.isDebugEnabled()) {
+				LOG.debug("The " + name + " packet length (" + getLength() + ") is less than expected.  Truncation has occured");
+				LOG.debug("The input packet length = " + packet.length());
+				LOG.debug("The " + name + " packet has been trucated by " + (getLength() - packet.length()));
+			}
+			truncated = true;
+		}
+
+		// If the BitSet has been truncated we need to set a truncation reversal bit after the packet.
+		// We must do this regardless of the matchRestrictions because each unmarshall call returns completedBitData.
+		// If the container is not to be processed the completeBitData must be set to the current packet otherwise 
+		// we'll get a null pointer.
+		if (truncated) {
+			completeBitData = packet.get(0, getLength());
+			completeBitData.set(getLength() + 1);
+		}
+		else {
+			completeBitData = packet;
+		}
+		
+		// If the packet should be processed by this container.
 		if (matchRestrictions() == true) {
-			/** Get the portion that corresponds to this container. We need to set a 'stop' bit
-			 * as the BitSet will else automatically shorten itself, i.e. trailing 0's will be lost. */
-			rawValue = packet.get(0, getLength());
-			rawValue.set(getLength() + 1);
-			
 			for (IContainer container : subContainers) {
-				packet = container.unmarshall(rawValue);
+				// The nested calls unmarshall down through the sub containers
+				// Specific Containers, e.g. Parameters will "chunk" the bitSet (Packet) in order to
+				// remove the section that has already been unmarshalled.
+				completeBitData = container.unmarshall(completeBitData);
 			}
 			
 			for (IProducer updateObserver : updateObservers) {
-				updateObserver.updated(name, rawValue);
+				updateObserver.updated(name, completeBitData);
 			}
 			
 			for (IProducer completionObserver : completionObservers) {
@@ -145,7 +173,11 @@ public class Container extends NamedElement implements IContainer {
 			}
 		}
 
-		return packet;
+		// As the packet is unmarshalled this BitSet should shrink as the subcontainers chunk off the previous sections
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("The completeBitData for " + name + " is " + completeBitData.length() + "/" + completeBitData.size() + " long");
+		}
+		return completeBitData;
 	}
 
 	@Override
@@ -189,7 +221,7 @@ public class Container extends NamedElement implements IContainer {
 	 */
 	public void addContainer(IContainer container) {
 		if (container != null) {
-			this.subContainers.add(container);	
+			this.subContainers.add(container);
 		}
 		else {
 			LOG.warn("Argument IContainer passed to me was null");
@@ -242,7 +274,7 @@ public class Container extends NamedElement implements IContainer {
 
 	@Override
 	public BitSet getRawValue() {
-		return rawValue;
+		return completeBitData;
 	}
 
 	@Override
@@ -259,5 +291,5 @@ public class Container extends NamedElement implements IContainer {
 
 	public List<IContainer> getSubContainers() {
 		return subContainers;
-	}
+	}	
 }
