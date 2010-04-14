@@ -1,4 +1,4 @@
-package com.logica.hummingbird.marshaller.producers;
+package com.logica.hummingbird;
 
 import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
