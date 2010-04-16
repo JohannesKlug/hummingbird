@@ -21,6 +21,7 @@
 		<module>help</module>
 		<module>assembly</module>
 		<module>example-endpoint</module>
+    		<module>simulator</module>
 	</modules>
 
 	<licenses>
