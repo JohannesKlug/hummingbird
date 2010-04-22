@@ -1,22 +1,12 @@
 package com.logica.hummingbird.marshaller.producers;
-import java.util.BitSet;
-
-import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
-import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.test.junit4.CamelTestSupport;
-import org.apache.camel.util.jndi.JndiContext;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.junit.Before;
 import org.junit.Test;
 
-import com.logica.hummingbird.framebroker.BitSetUtility;
 import com.logica.hummingbird.framebroker.ContainerProcessor;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 
