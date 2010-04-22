@@ -12,7 +12,8 @@ public class ParamArchiverTest {
 	@Test
 	public void testParameterArchiverConstructor() {
 		IContainerFactory mockCF = new MockContainerModelFactory();
-		System.out.println(mockCF.getAllParameters());
+		mockCF.initialise();
+		ParameterArchiver pa = new ParameterArchiver(mockCF);
 	}
 	
 }
