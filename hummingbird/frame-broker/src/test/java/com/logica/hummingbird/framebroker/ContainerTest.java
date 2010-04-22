@@ -18,6 +18,7 @@ import com.logica.hummingbird.framebroker.exceptions.BitSetOperationException;
 import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.framebroker.parameters.IntegerParameter;
 import com.logica.hummingbird.framebroker.parameters.Parameter;
+import com.logica.hummingbird.testsupport.MockContainerModelFactory;
 
 /**
  * @author Mark Doyle

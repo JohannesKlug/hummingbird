@@ -22,6 +22,7 @@
 		<module>assembly</module>
 		<module>example-endpoint</module>
 		<module>simulator</module>
+		<module>test-support</module>
 	</modules>
 
 	<licenses>
