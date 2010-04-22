@@ -9,12 +9,43 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.logica.hummingbird</groupId>
 	<artifactId>frame-broker</artifactId>
+	<packaging>bundle</packaging>
 	<name>Frame Broker</name>
 
 	<version>0.0.1-SNAPSHOT</version>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<instructions>
+						<Export-Package>
+							com.logica.hummingbird.framebroker,
+							com.logica.hummingbird.framebroker.parameters,
+							com.logica.hummingbird.framebroker.producers,
+							com.logica.hummingbird.framebroker.exceptions							
+						</Export-Package>
+						<Private-Package>
+							com.logica.hummingbird,
+							org.slf4j.*
+						</Private-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-core</artifactId>
@@ -44,6 +75,13 @@
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>2.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.logica.hummingbird</groupId>
+			<artifactId>test-support</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
