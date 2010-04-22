@@ -16,7 +16,6 @@ import com.logica.hummingbird.simulator.waveforms.Waveform;
 
 public class Simulator implements Runnable {
 	
-	private Endpoint endpoint;
 	private DefaultProducerTemplate template;
 	private CamelContext context;
 	private List<Waveform> waveforms;
@@ -26,7 +25,6 @@ public class Simulator implements Runnable {
 	private long messageInterval = 1000;
 	
 	public Simulator(Endpoint endpoint)  {
-		this.endpoint = endpoint;
 		this.context = new DefaultCamelContext();
 		this.template = new DefaultProducerTemplate(context, endpoint);
 		this.waveforms = new ArrayList<Waveform>();
@@ -50,7 +48,7 @@ public class Simulator implements Runnable {
 	
 	public Exchange nextExchange(double value) {
 		Exchange exchange = new DefaultExchange(context);
-		exchange.setOut(nextMessage(value));
+		exchange.setIn(nextMessage(value));
 		return exchange;
 	}
 	
