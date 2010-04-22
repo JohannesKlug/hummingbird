@@ -3,7 +3,7 @@ package com.logica.hummingbird.parameterArchiver;
 import static org.junit.Assert.*;
 
 import com.logica.hummingbird.framebroker.IContainerFactory;
-import com.logica.hummingbird.framebroker.MockContainerModelFactory;
+import com.logica.hummingbird.testsupport.MockContainerModelFactory;
 
 import org.junit.Test;
 
