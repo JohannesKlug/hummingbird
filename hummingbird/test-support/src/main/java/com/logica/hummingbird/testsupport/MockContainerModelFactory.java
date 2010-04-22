@@ -1,4 +1,4 @@
-package com.logica.hummingbird.framebroker;
+package com.logica.hummingbird.testsupport;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +8,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.logica.hummingbird.framebroker.Container;
+import com.logica.hummingbird.framebroker.IContainer;
+import com.logica.hummingbird.framebroker.IContainerFactory;
 import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.framebroker.parameters.FloatParameter;
 import com.logica.hummingbird.framebroker.parameters.IntegerParameter;
@@ -173,7 +176,7 @@ public class MockContainerModelFactory implements IContainerFactory {
 	
 
 	private void addToParameters(Parameter parameter) {
-		this.parameters.put(parameter.name, parameter);
+		this.parameters.put(parameter.getName(), parameter);
 	}
 
 }

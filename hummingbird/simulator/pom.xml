@@ -10,8 +10,7 @@
   <groupId>com.logica.hummingbird</groupId>
   <artifactId>simulator</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>A Camel Component</name>
-  <url>http://www.myorganization.org</url>
+  <name>Simulator</name>
   <dependencies>
     <dependency>
       <groupId>org.apache.camel</groupId>
@@ -25,6 +24,7 @@
     	<scope>test</scope>
     </dependency>
   </dependencies>
+  <description>A Simulator that produces telemetry according to its setup.</description>
   <build>
     <defaultGoal>install</defaultGoal>
     <plugins>

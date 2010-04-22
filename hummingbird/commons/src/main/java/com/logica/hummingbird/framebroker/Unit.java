@@ -67,7 +67,7 @@ public class Unit extends NamedElement {
 	/** SI dimension for distance. */
 	protected int meter = 0;
 	
-	/** SI dimension for lumenosity. */
+	/** SI dimension for luminosity. */
 	protected int candela = 0;
 	
 	/** SI dimension for mass. */
