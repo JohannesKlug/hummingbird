@@ -49,8 +49,10 @@ public interface IContainerFactory {
 	/**
 	 * Initialises the container factory. Must be called prior to
 	 * calling any other methods.
+	 * 
+	 * 2010-04-21: I'm removing this --Johannes
 	 */
-	public void initialise();
+//	public void initialise();
 	
 	
 	/**

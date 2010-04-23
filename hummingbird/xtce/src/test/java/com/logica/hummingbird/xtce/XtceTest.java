@@ -9,14 +9,14 @@ public class XtceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		xtceFactory = new XtceModelFactory();
-		xtceFactory.setSpacesystemmodelFilename("src/main/resources/humsat.xml");
+		xtceFactory = new XtceModelFactory("src/main/resources/humsat.xml");
+//		xtceFactory.setSpacesystemmodelFilename("src/main/resources/humsat.xml");
 	}
 
 	@Test
 	public void TestContainers() throws Exception {
 
-		xtceFactory.initialise();
+//		xtceFactory.initialise();
 		System.out.println(xtceFactory.getAllParameters());
 
 		System.out.println("TMFrameHeader: " + xtceFactory.getContainer("TMFrameHeader").getSubContainers());

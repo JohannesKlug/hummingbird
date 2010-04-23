@@ -1,28 +1,18 @@
 package com.logica.hummingbird.marshaller.producers;
-import java.util.BitSet;
-
-import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
-import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.test.junit4.CamelTestSupport;
-import org.apache.camel.util.jndi.JndiContext;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.junit.Before;
 import org.junit.Test;
 
-import com.logica.hummingbird.framebroker.BitSetUtility;
 import com.logica.hummingbird.framebroker.ContainerProcessor;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 
 public class RouterTest extends CamelTestSupport {
 	
-	protected static XtceModelFactory xtceFactory = new XtceModelFactory();
+	protected static XtceModelFactory xtceFactory;
 	
 	protected static ContainerProcessor processor = null; 
 	
@@ -53,9 +43,9 @@ public class RouterTest extends CamelTestSupport {
 
             	
             	
-            	xtceFactory = new XtceModelFactory();
-            	xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
-            	xtceFactory.initialise();
+            	xtceFactory = new XtceModelFactory("src/test/resources/humsat.xml");
+//            	xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
+//            	xtceFactory.initialise();
             	processor = new ContainerProcessor(xtceFactory);
             	
             	

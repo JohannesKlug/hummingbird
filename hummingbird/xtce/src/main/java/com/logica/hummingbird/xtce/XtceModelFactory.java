@@ -36,23 +36,18 @@ public class XtceModelFactory implements IContainerFactory {
 	protected String packetBaseReference = "TMPacket";
 	protected String frameBaseReference = "TMFrame";
 
-	protected boolean initialised = false;
-	
 	protected String spacesystemmodelFilename = "src/main/resources/humsat.xml";
 
+	public XtceModelFactory(String spacesystemmodelFilename) {
+		this.spacesystemmodelFilename = spacesystemmodelFilename;
+		initialise();
+	}
+
 	public Parameter getParameter(String name) {
-		if (initialised == false) {
-			initialise();
-		}
-		
 		return parameters.get(name);
 	}
 
 	public Container getContainer(String name) throws UnknownContainerNameException {
-		if (initialised == false) {
-			initialise();
-		}
-		
 		Container container = containers.get(name);
 		
 		if (container == null) {
@@ -62,7 +57,7 @@ public class XtceModelFactory implements IContainerFactory {
 		return container;
 	}
 
-	public void initialise() {
+	private void initialise() {
 
 		spaceSystem = getSpaceSystem();
 
@@ -226,8 +221,6 @@ public class XtceModelFactory implements IContainerFactory {
 				thisContainer.addContainer(containers.get(name));
 			}
 		}
-		
-		initialised = true;
 	}
 	
 	public SpaceSystem getSpaceSystem() {

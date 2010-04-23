@@ -15,7 +15,7 @@ import com.logica.hummingbird.xtce.XtceModelFactory;
 
 public class TestParameterProducer extends CamelTestSupport {
 	
-	protected static XtceModelFactory xtceFactory = new XtceModelFactory();
+	protected static XtceModelFactory xtceFactory;
 	
 	protected static ContainerProcessor processor = null; 
 	
@@ -40,9 +40,9 @@ public class TestParameterProducer extends CamelTestSupport {
 
             	
             	
-            	xtceFactory = new XtceModelFactory();
-            	xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
-            	xtceFactory.initialise();
+            	xtceFactory = new XtceModelFactory("src/test/resources/humsat.xml");
+//            	xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
+//            	xtceFactory.initialise();
             	processor = new ContainerProcessor(xtceFactory);
             	
             	
