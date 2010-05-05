@@ -70,15 +70,16 @@ public class Simulator implements Runnable {
 					
 					// TODO Passing the value down to nextMessage() is ugly. Refactor?
 					sendMessage(waveform.nextValue());
+					
+					try {
+						Thread.sleep(messageInterval);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 
-			try {
-				Thread.sleep(messageInterval);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 	}
 
