@@ -2,6 +2,7 @@ package com.logica.hummingbird.testsupport;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.logica.hummingbird.framebroker.IContainerFactory;
@@ -11,10 +12,17 @@ import com.logica.hummingbird.framebroker.parameters.ParameterType;
 
 public class MockContainerModelFactoryTest {
 	
+	private IContainerFactory containerFactory;
+	
+	@Before
+	public void setUp() {
+		containerFactory = new MockContainerModelFactory();
+	}
+	
 	@Test
 	public void testMockContainerFactoryTypes() {
 		
-		IContainerFactory containerFactory = new MockContainerModelFactory();
+		
 		
 		for (Parameter parameter : containerFactory.getAllParameters().values()) {
 			if (parameter.getType().getType() == ParameterType.eParameterType.FLOAT) {
@@ -27,6 +35,24 @@ public class MockContainerModelFactoryTest {
 			
 			
 		}
+	}
+	
+	@Test
+	public void testParameterNames() {
+		for (Parameter parameter : containerFactory.getAllParameters().values()) {
+			System.out.println(parameter.getName());
+			
+			System.out.println("ApId".matches("\\w"));
+			System.out.println("ApId".matches("\\W"));
+			
+			assertTrue(
+					(("ApId".matches("\\w")) 
+				|| ("ApId".matches("\\W"))
+						));
+			
+			assertTrue("Parameter name '" + parameter.getName() + "' contains invalid characters.", parameter.getName().matches("\\p{Alnum}"));
+		}
+		
 	}
 
 }
