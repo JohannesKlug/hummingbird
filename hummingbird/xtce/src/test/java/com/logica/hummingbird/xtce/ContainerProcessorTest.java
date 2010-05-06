@@ -14,8 +14,8 @@ import junit.framework.TestCase;
 public class ContainerProcessorTest extends TestCase {
 
 	public void testMarshall() throws UnknownContainerNameException {
-		IContainerFactory factory = new XtceModelFactory();
-		factory.initialise();
+		IContainerFactory factory = new XtceModelFactory("src/main/resources/humsat.xml");
+//		factory.initialise();
 		
 		/** Build the frame. */
 		factory.getParameter("CCSDS_FVERSION").setValue(1);

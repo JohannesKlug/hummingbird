@@ -45,15 +45,16 @@ public class MockContainerModelFactory implements IContainerFactory {
 	private Map<String, Container> containers = new HashMap<String, Container>();
 	private Map<String, Parameter> parameters = new HashMap<String, Parameter>();
 
-	private boolean initialised = false;
-
+	public MockContainerModelFactory() {
+		initialise();
+	}
+	
 	/**
 	 * Creates an operational mock Container hierarchy which is used by the
 	 * FrameBroker.
 	 * 
 	 */
-	@Override
-	public void initialise() {
+	private void initialise() {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Beginning initialisation of container model mock up");
 		}
@@ -131,14 +132,10 @@ public class MockContainerModelFactory implements IContainerFactory {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Completed mock container model initialisaion");
 		}
-		this.initialised = true;
 	}
 
 	@Override
 	public IContainer getContainer(String name) throws UnknownContainerNameException {
-		if (initialised == false) {
-			initialise();
-		}
 
 		Container container = containers.get(name);
 
@@ -157,9 +154,6 @@ public class MockContainerModelFactory implements IContainerFactory {
 
 	@Override
 	public Parameter getParameter(String name) {
-		if (initialised == false) {
-			initialise();
-		}
 		return parameters.get(name);
 	}
 
