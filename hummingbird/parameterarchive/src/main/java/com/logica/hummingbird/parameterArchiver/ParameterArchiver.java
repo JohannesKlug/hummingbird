@@ -28,7 +28,7 @@ public class ParameterArchiver implements Processor {
 				}
 			} else if (parameter.getType().getType() == ParameterType.eParameterType.INTEGER) {
 				System.out.println(parameter.getName() + " says it's an Integer. Will check." );
-				if (parameter.getValue() instanceof Float) {
+				if (parameter.getValue() instanceof Integer) {
 					System.out.println(parameter.getName() + " is really an Integer." );
 				} else {
 					System.out.println(parameter.getName() + " is NOT an Integer." );

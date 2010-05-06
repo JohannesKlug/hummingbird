@@ -41,7 +41,7 @@ public class IntegerParameter extends Parameter {
 	private static final Logger LOG = LoggerFactory.getLogger(IntegerParameter.class);
 
 	/** The value of the integer. */
-	protected int value = 0;
+	protected Integer value = 0;
 	
 	/**
 	 * Constructor of the IntegerParameter class.
