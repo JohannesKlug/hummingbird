@@ -16,20 +16,22 @@ public class ParameterArchiver {
 	
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    public void setDataSource(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
-
-
-
-	public ParameterArchiver(IContainerFactory containerFactory) {
+	public ParameterArchiver(IContainerFactory containerFactory, DataSource dataSource) {
 		
-		for (Parameter parameter :containerFactory.getAllParameters().values()) {
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		
+		for (Parameter parameter : containerFactory.getAllParameters().values()) {
 			if (parameter.getType().getType() == ParameterType.eParameterType.FLOAT) {
 				// create float table
+				this.jdbcTemplate.execute("create table " + parameter.getName()
+						+ " (onBoardTime BIGINT, filingTime BIGINT, value REAL)");
+				
 			} else if (parameter.getType().getType() == ParameterType.eParameterType.INTEGER) {
 				// create integer table
+				this.jdbcTemplate.execute("create table " + parameter.getName() 
+						+ " (onBoardTime BIGINT, filingTime BIGINT, value INTEGER)");
+			} else {
+				// TODO Make this fail properly with an exception.
 			}
 			
 			
