@@ -2,37 +2,34 @@ package com.logica.hummingbird.parameterArchiver;
 
 import java.util.Map.Entry;
 
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
+import javax.sql.DataSource;
+
+import org.apache.camel.Message;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+
 import com.logica.hummingbird.framebroker.IContainerFactory;
 import com.logica.hummingbird.framebroker.parameters.Parameter;
 import com.logica.hummingbird.framebroker.parameters.ParameterType;
 
+public class ParameterArchiver {
+	
+    private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    public void setDataSource(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
-import java.io.File;
-
-
-public class ParameterArchiver implements Processor {
 
 
 	public ParameterArchiver(IContainerFactory containerFactory) {
 		
 		for (Parameter parameter :containerFactory.getAllParameters().values()) {
 			if (parameter.getType().getType() == ParameterType.eParameterType.FLOAT) {
-				System.out.println(parameter.getName() + " says it's a Float. Will check." );
-				if (parameter.getValue() instanceof Float) {
-					System.out.println(parameter.getName() + " is really a Float." );
-				} else {
-					System.out.println(parameter.getName() + " is NOT a Float." );
-				}
+				// create float table
 			} else if (parameter.getType().getType() == ParameterType.eParameterType.INTEGER) {
-				System.out.println(parameter.getName() + " says it's an Integer. Will check." );
-				if (parameter.getValue() instanceof Integer) {
-					System.out.println(parameter.getName() + " is really an Integer." );
-				} else {
-					System.out.println(parameter.getName() + " is NOT an Integer." );
-				}
+				// create integer table
 			}
 			
 			
@@ -44,12 +41,11 @@ public class ParameterArchiver implements Processor {
 	}
 	
 	
-	@Override
-	public void process(Exchange exchange) {
+	public void store(Message message) {
 		
 		long storageTime = System.currentTimeMillis();
 		
-		for (Entry<String, Object> header : exchange.getIn().getHeaders().entrySet()) {
+		for (Entry<String, Object> header : message.getHeaders().entrySet()) {
 			
 			// Disregard the Type header field 
 			if (header.getKey() == "Type" ) break;
@@ -72,5 +68,16 @@ public class ParameterArchiver implements Processor {
 	
 	}
 	
+	
+	/**
+	 * Stores the passed parameter, adding the filing time in a fourth column.
+	 * 
+	 * @param parameterName The parameter's name 
+	 * @param time The parameter's on-board generation time
+	 * @param value The parameter's value
+	 */
+	public void storeParameter(String parameterName, long time, Number value) {
+		
+	}
 
 }
