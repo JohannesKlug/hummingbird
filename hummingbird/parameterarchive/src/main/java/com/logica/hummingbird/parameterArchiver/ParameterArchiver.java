@@ -23,12 +23,12 @@ public class ParameterArchiver {
 		for (Parameter parameter : containerFactory.getAllParameters().values()) {
 			if (parameter.getType().getType() == ParameterType.eParameterType.FLOAT) {
 				// create float table
-				this.jdbcTemplate.execute("create table " + parameter.getName()
+				this.jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS " + parameter.getName()
 						+ " (onBoardTime BIGINT, filingTime BIGINT, value REAL)");
 				
 			} else if (parameter.getType().getType() == ParameterType.eParameterType.INTEGER) {
 				// create integer table
-				this.jdbcTemplate.execute("create table " + parameter.getName() 
+				this.jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS " + parameter.getName() 
 						+ " (onBoardTime BIGINT, filingTime BIGINT, value INTEGER)");
 			} else {
 				// TODO Make this fail properly with an exception.
@@ -79,6 +79,10 @@ public class ParameterArchiver {
 	 * @param value The parameter's value
 	 */
 	public void storeParameter(String parameterName, long time, Number value) {
+		jdbcTemplate.update(
+		        "insert into " + parameterName + "(onBoardTime, filingTime, value) values (?, ?, ?)",
+		        new Object[] {time, System.currentTimeMillis(), value}
+		        );
 		
 	}
 
