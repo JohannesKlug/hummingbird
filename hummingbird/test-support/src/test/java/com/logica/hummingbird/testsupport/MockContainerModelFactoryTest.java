@@ -40,17 +40,7 @@ public class MockContainerModelFactoryTest {
 	@Test
 	public void testParameterNames() {
 		for (Parameter parameter : containerFactory.getAllParameters().values()) {
-			System.out.println(parameter.getName());
-			
-			System.out.println("ApId".matches("\\w"));
-			System.out.println("ApId".matches("\\W"));
-			
-			assertTrue(
-					(("ApId".matches("\\w")) 
-				|| ("ApId".matches("\\W"))
-						));
-			
-			assertTrue("Parameter name '" + parameter.getName() + "' contains invalid characters.", parameter.getName().matches("\\p{Alnum}"));
+			assertTrue("Parameter name '" + parameter.getName() + "' contains invalid characters.", parameter.getName().matches("\\p{Alnum}*"));
 		}
 		
 	}

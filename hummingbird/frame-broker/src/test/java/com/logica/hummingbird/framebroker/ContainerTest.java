@@ -91,7 +91,7 @@ public class ContainerTest {
 		assertEquals("Parameter has incorrect value.", Integer.parseInt(PACKET_TYPE_ID_555), value.intValue());
 		
 		// Test that there is a Test Param A (32 bit unsigned int) as expected.
-		IContainer testParamA = testFrameBroker.getContainer(MockContainerModelFactory.TEST_PARAM_VALUE_A);
+		IContainer testParamA = testFrameBroker.getContainer(MockContainerModelFactory.TEST_PARAM_A);
 		Assert.isInstanceOf(IntegerParameter.class, testParamA);
 		Number testParamValue = ((IntegerParameter)testParamA).getValue();
 		assertEquals("Parameter has incorrect value.", PARAM_A_TEST_VALUE, testParamValue.intValue());
@@ -117,7 +117,7 @@ public class ContainerTest {
 		apid.setValue(Float.valueOf(MockContainerModelFactory.PACKET_TYPE_A_ID));
 
 		// Set parameter A value
-		Parameter paramA = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.TEST_PARAM_VALUE_A);
+		Parameter paramA = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.TEST_PARAM_A);
 		paramA.setValue(PARAM_A_TEST_VALUE);
 
 		// Get the frame length, that is, the sum of itself and it's tree of sub

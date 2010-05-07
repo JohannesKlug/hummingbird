@@ -32,9 +32,9 @@ public class MockContainerModelFactory implements IContainerFactory {
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(MockContainerModelFactory.class);
 
-	public static final String TEST_PARAM_VALUE_A = "Test param value A";
+	public static final String TEST_PARAM_A = "TestParamA";
 	
-	public static final String TEST_PARAM_VALUE_B = "Test param value B";
+	public static final String TEST_PARAM_B = "TestParamB";
 
 	public static final String PACKET_ID_NAME = "ApId";
 
@@ -103,7 +103,7 @@ public class MockContainerModelFactory implements IContainerFactory {
 		// Create a parameter for packetTypeA and add it to the packet type and
 		// the container collection
 		ParameterType test32bitInt = new ParameterType("test32bitInt", "test param", "32 bit int test param", eParameterType.INTEGER, false, 1, 32);
-		IntegerParameter testParameterA = new IntegerParameter(TEST_PARAM_VALUE_A, "test param", "test param holding an int value", test32bitInt, 0);
+		IntegerParameter testParameterA = new IntegerParameter(TEST_PARAM_A, "test param", "test param holding an int value", test32bitInt, 0);
 		packetTypeA.addContainer(testParameterA);
 		this.addToParameters(testParameterA);
 		this.addToContainers(testParameterA);
@@ -118,7 +118,7 @@ public class MockContainerModelFactory implements IContainerFactory {
 		// Create a parameter for packetTypeB and add it to the packet type and
 		// the container collection
 		ParameterType test64bitFloat = new ParameterType("test64bitFloat", "test param", "64 float test param", eParameterType.FLOAT, false, 1, 64);
-		FloatParameter testParameterB = new FloatParameter(TEST_PARAM_VALUE_B, "test param", "test param holding a float value", test64bitFloat, 1.0f);
+		FloatParameter testParameterB = new FloatParameter(TEST_PARAM_B, "test param", "test param holding a float value", test64bitFloat, 1.0f);
 		packetTypeB.addContainer(testParameterB);
 		this.addToParameters(testParameterB);
 		this.addToContainers(testParameterB);
