@@ -19,11 +19,11 @@
     <context:property-placeholder location="src/test/resources/jdbc.properties"/>
     
     <!-- provides a H2 console to look into the db if necessary --> 
-	<bean id="org.h2.tools.Server-WebServer" class="org.h2.tools.Server" 
+	<!-- <bean id="org.h2.tools.Server-WebServer" class="org.h2.tools.Server" 
     	factory-method="createWebServer" depends-on="dataSource" 
     	init-method="start" lazy-init="false">
     	<constructor-arg value="-web,-webPort,11111" />
-	</bean>
+	</bean> -->
     
     <bean id="parameterArchiver" class="com.logica.hummingbird.parameterArchiver.ParameterArchiver">
     	<constructor-arg>
