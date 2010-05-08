@@ -1,11 +1,8 @@
 package com.logica.hummingbird.parameterArchiver;
 
-import java.util.Map.Entry;
-
 import javax.sql.DataSource;
 
 import org.apache.camel.Message;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.logica.hummingbird.framebroker.IContainerFactory;
@@ -34,40 +31,20 @@ public class ParameterArchiver {
 				// TODO Make this fail properly with an exception.
 			}
 			
-			
 		}
-			
-		
-			
 
 	}
 	
-	
+	/** 
+	 * Takes Camel messages and stores the contained parameter.
+	 * The following are used:
+	 * * Header field "Name" for the parameter name
+	 * * Header dield "Time" for the on-board generation time
+	 * * Body cast to Number for the actual parameter value
+	 * 
+	 * */
 	public void store(Message message) {
-		
-		long storageTime = System.currentTimeMillis();
-		
-		for (Entry<String, Object> header : message.getHeaders().entrySet()) {
-			
-			// Disregard the Type header field 
-			if (header.getKey() == "Type" ) break;
-			
-			try {
-//			    DatabaseEntry theKey = new DatabaseEntry(header.getKey().getBytes("UTF-8"));
-//			    DatabaseEntry theData = new DatabaseEntry(header.getValue().getBytes("UTF-8"));
-//			    myDatabase.put(null, theKey, theData);
-			} catch (Exception e) {
-			    // Exception handling goes here
-			} 
-		}
-		
-		
-		
-		
-		
-		
-		
-	
+		storeParameter((String) message.getHeader("Name"), (Long) message.getHeader("Time"), (Number) message.getBody());
 	}
 	
 	
@@ -80,7 +57,8 @@ public class ParameterArchiver {
 	 */
 	public void storeParameter(String parameterName, long time, Number value) {
 		jdbcTemplate.update(
-		        "insert into " + parameterName + "(onBoardTime, filingTime, value) values (?, ?, ?)",
+		        "insert into " + parameterName + 
+		        "(onBoardTime, filingTime, value) values (?, ?, ?)",
 		        new Object[] {time, System.currentTimeMillis(), value}
 		        );
 		
