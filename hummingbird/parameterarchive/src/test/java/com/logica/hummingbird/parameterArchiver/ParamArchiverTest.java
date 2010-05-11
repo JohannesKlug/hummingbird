@@ -56,6 +56,14 @@ public class ParamArchiverTest {
 		
 		assertEquals(2, countOfStoredParameters);
 		
+		// Store a different parameter
+		parameterArchiver.storeParameter(MockContainerModelFactory.TEST_PARAM_B, System.currentTimeMillis(), 15.9);
+		
+		countOfStoredParameters = reflectedTemplate.queryForInt(
+				"select count(*) from " + MockContainerModelFactory.TEST_PARAM_B);
+		
+		assertEquals(1, countOfStoredParameters);
+		
 	}
 	
 }
