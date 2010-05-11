@@ -57,5 +57,38 @@ public class SimulatorTest extends CamelTestSupport {
     	resultEndpoint.assertIsSatisfied();
     	
     }
+    
+    @Test
+    public void TestRunningSimulatorPerformance() throws Exception {
+    	
+    	resultEndpoint.reset();
+    	
+    	resultEndpoint.setExpectedMessageCount(0);
+    	resultEndpoint.assertIsSatisfied();
+    	
+    	resultEndpoint.reset();
+    	
+    	Simulator simulator = new Simulator(resultEndpoint);
+    	simulator.addWaveform(new FlatWaveform(100, 2));
+    	simulator.setMessageInterval(0);
+    	
+    	Thread simulatorThread = new Thread(simulator);
+    	
+    	long startTime = System.currentTimeMillis();
+    	simulatorThread.start();
+    	for (int i = 0; i< 1; i++) {
+    		Thread.sleep(1000);
+    		long delta = System.currentTimeMillis() - startTime;
+    		int received = resultEndpoint.getReceivedCounter();
+    		System.out.println(received + " messages received in " + delta/1000 + " seconds → " + received * 1000 / delta + " messages/s; " + Math.round(((double)delta / (double)received * 1000)) + " µs/message.");
+    		
+    	}
+    	
+    	simulator.stopSimulator();
+    	
+    	resultEndpoint.setMinimumExpectedMessageCount(2);
+    	resultEndpoint.assertIsSatisfied();
+    	
+    }
 
 }
