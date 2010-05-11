@@ -42,6 +42,8 @@ public class ParameterArchiver {
 	 * * Header dield "Time" for the on-board generation time
 	 * * Body cast to Number for the actual parameter value
 	 * 
+	 * @param message The message from which a parameter will be extracted and stored
+	 * 
 	 * */
 	public void store(Message message) {
 		storeParameter((String) message.getHeader("Name"), (Long) message.getHeader("Time"), (Number) message.getBody());
