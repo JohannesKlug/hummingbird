@@ -9,20 +9,17 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.logica.hummingbird</groupId>
-
 	<artifactId>commons</artifactId>
-
 	<name>commons</name>
-
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>bundle</packaging>
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
-<!--				<version>1.4.0</version>-->
-<!--				<extensions>true</extensions>-->
+				<extensions>true</extensions>
 				<executions>
 					<execution>
 						<id>bundle-manifest</id>
@@ -34,7 +31,13 @@
 				</executions>
 				<configuration>
 					<instructions>
-						<Export-Package>com.logica.hummingbird.*</Export-Package>
+						<Export-Package>
+							com.logica.hummingbird.*,
+							com.logica.hummingbird.framebroker.*,
+							com.logica.hummingbird.framebroker.exceptions,
+							com.logica.hummingbird.framebroker.producers,
+							com.logica.hummingbird.framebroker.exceptions							
+						</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>
