@@ -6,6 +6,8 @@ import java.lang.reflect.Field;
 
 import com.logica.hummingbird.testsupport.MockContainerModelFactory;
 
+import org.apache.camel.Message;
+import org.apache.camel.impl.DefaultMessage;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
@@ -23,9 +25,15 @@ public class ParamArchiverTest {
 	}
 	
 	@Test
+	public void handleEmptyMessage() throws Exception {
+		// Send an empty message - this must be handled gracefully.
+		parameterArchiver.onMessage(new DefaultMessage());
+	}
+	
+	
+	@Test
 	public void testParameterArchiverConstructor() {
 		assertNotNull(parameterArchiver);
-
 	}
 	
 	@Test
@@ -66,4 +74,14 @@ public class ParamArchiverTest {
 		
 	}
 	
+	@Test
+	public void testRetrieval() {
+		Message message = new DefaultMessage();
+		message.setHeader("Type", "RetrievalRequest");
+		message.setHeader("Name", MockContainerModelFactory.PACKET_ID_NAME);
+		message.setHeader("FromDate", Long.MIN_VALUE);
+		message.setHeader("LongDate", Long.MAX_VALUE);
+		message.getHeader("JmsReplyTo", "");
+		
+	}
 }
