@@ -1,0 +1,24 @@
+<html>
+<head>
+<script type="text/javascript" src="amq/prototype.js"></script>
+<script type="text/javascript" src="amq/behaviour.js"></script>
+<script type="text/javascript" src="amq/_amq.js"></script>
+<!--<script type="text/javascript">amq.uri='/amq';</script>-->
+</head>
+<body>
+<h1>Hummingbird Live Stream</h1>
+<script type="text/javascript">
+//document.write("Hello World!");
+var myHandler =
+{
+  rcvMessage: function(message)
+  {
+     document.write("received "+message);
+  }
+};
+var myId = "string";
+amq.addListener(myId,"topic://newtopic",myHandler.rcvMessage);
+
+</script>
+</body>
+</html>
