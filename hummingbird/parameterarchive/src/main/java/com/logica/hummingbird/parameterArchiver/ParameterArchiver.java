@@ -35,11 +35,24 @@ public class ParameterArchiver {
 
 	}
 	
+	public void onMessage(Message message) {
+		if (message.getHeader("Type") == "TMParameter" ) {
+			store(message);
+		} else if (message.getHeader("Type") == "RetrievalRequest" ) {
+			retrieve(message);
+		}
+		
+	}
+	
+	public void retrieve(Message message) {
+		
+	}
+
 	/** 
 	 * Takes Camel messages and stores the contained parameter.
 	 * The following are used:
 	 * * Header field "Name" for the parameter name
-	 * * Header dield "Time" for the on-board generation time
+	 * * Header field "Time" for the on-board generation time
 	 * * Body cast to Number for the actual parameter value
 	 * 
 	 * @param message The message from which a parameter will be extracted and stored
