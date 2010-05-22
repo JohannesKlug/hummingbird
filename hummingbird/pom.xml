@@ -12,11 +12,11 @@
 	<url/>
 
 	<modules>
-		<module>frame-broker</module>
+		<module>commons</module>
 		<module>xtce</module>
+		<module>frame-broker</module>
 		<module>packetarchive</module>
 		<module>parameterarchive</module>
-		<module>commons</module>
 		<module>help</module>
 		<module>assembly</module>
 		<module>example-endpoint</module>
