@@ -22,7 +22,6 @@
 		<module>example-endpoint</module>
 		<module>simulator</module>
 		<module>test-support</module>
-    <module>webgui</module>
   </modules>
 
 	<licenses>
