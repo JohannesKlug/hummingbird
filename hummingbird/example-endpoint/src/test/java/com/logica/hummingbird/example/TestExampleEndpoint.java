@@ -1,8 +1,5 @@
 package com.logica.hummingbird.example;
 
-
-import groovyjarjarantlr.StringUtils;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
