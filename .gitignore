@@ -5,3 +5,5 @@ hummingbird/xtce/src/main/java/com/logica/hummingbird/xtce/castor/
 .project
 .classpath
 .springBeans
+.idea/
+*.iml
