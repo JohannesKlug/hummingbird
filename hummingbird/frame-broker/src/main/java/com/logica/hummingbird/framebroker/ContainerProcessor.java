@@ -111,7 +111,6 @@ public class ContainerProcessor implements IFrameBroker {
 	 * @param camelExchange the camel exchange container
 	 * @return a list of camel messages
 	 * @throws UnknownContainerNameException 
-	 * @throws Exception
 	 */
 	public List<Message> split(Exchange camelExchange) throws UnknownContainerNameException {
 		this.unmarshall("TMFrame", (BitSet) camelExchange.getIn().getBody());
