@@ -59,8 +59,8 @@ public interface IContainerFactory {
 	 * Retrieves a container. 
 	 *
 	 * @param name The unique name of the container to be returned.
-	 * @return IContainer Returns the container identified through the name, or null. 
-	 * @throws Exception 
+	 * @return IContainer Returns the container identified through the name  or throws an UnknownContainerNameException. 
+	 * @throws UnknownContainerNameException 
 	 *
 	 */
 	public IContainer getContainer(String name) throws UnknownContainerNameException;
