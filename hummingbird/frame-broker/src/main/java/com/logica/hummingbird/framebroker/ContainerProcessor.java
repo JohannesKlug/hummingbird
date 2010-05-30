@@ -32,15 +32,19 @@ import java.util.List;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
+import org.apache.camel.impl.DefaultMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.logica.hummingbird.MessageType;
+import com.logica.hummingbird.ccsds.TmPacket;
+import com.logica.hummingbird.ccsds.TmParameter;
 import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.framebroker.producers.CcsdsProducer;
 import com.logica.hummingbird.framebroker.producers.FrameProducer;
 import com.logica.hummingbird.framebroker.producers.IProducer;
 import com.logica.hummingbird.framebroker.producers.PacketProducer;
 import com.logica.hummingbird.framebroker.producers.ParameterProducer;
-import com.logica.hummingbird.framebroker.producers.CamelMessageProducer;
 
 /**
  * 
@@ -69,10 +73,12 @@ public class ContainerProcessor implements IFrameBroker {
 	 * */
 	public ContainerProcessor(IContainerFactory factory) {
 		this.factory = factory;
-
+		
 		frameProducer = new FrameProducer(factory);
-		packetProducer = new PacketProducer(factory);
-		parameterProducer = new ParameterProducer(factory);
+		packetProducer = new PacketProducer(factory, (FrameProducer) frameProducer);
+		parameterProducer = new ParameterProducer(factory, (PacketProducer) packetProducer);
+		
+		LOG.debug("Frame Broker's ContainerProcessor instantiated.");
 	}
 
 	@Override
@@ -115,9 +121,31 @@ public class ContainerProcessor implements IFrameBroker {
 	public List<Message> split(Exchange camelExchange) throws UnknownContainerNameException {
 		this.unmarshall("TMFrame", (BitSet) camelExchange.getIn().getBody());
 
-		List<Message> messages = new ArrayList<Message>(CamelMessageProducer.getMessages());
-
-		CamelMessageProducer.clearMessages();
+//		List<Message> messages = new ArrayList<Message>(CamelMessageProducer.getMessages());
+//		CamelMessageProducer.clearMessages();
+		
+		
+		List<Message> messages = new ArrayList<Message>();
+		
+		// Prepare the frame message - with POJO structure as payload (as opposed to uninterpreted BitSet)
+		Message frameMessage = new DefaultMessage();
+		frameMessage.setHeader("Type", MessageType.TMFrame);
+		frameMessage.setBody(CcsdsProducer.getFrame());
+		messages.add(frameMessage);
+		
+		for (TmPacket packet : CcsdsProducer.getFrame().getPackets()) {
+			Message packetMessage = new DefaultMessage();
+			packetMessage.setHeader("Type", MessageType.TMPacket);
+			packetMessage.setBody(packet);
+			messages.add(packetMessage);
+			
+			for (TmParameter parameter : packet.getParameters()) {
+				Message parameterMessage = new DefaultMessage();
+				parameterMessage.setHeader("Type", MessageType.TMParameter);
+				parameterMessage.setBody(parameter);
+				messages.add(parameterMessage);
+			}
+		}
 
 		return messages;
 	}

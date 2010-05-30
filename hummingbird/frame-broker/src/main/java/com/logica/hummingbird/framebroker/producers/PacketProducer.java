@@ -29,7 +29,7 @@ package com.logica.hummingbird.framebroker.producers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.MessageType;
+import com.logica.hummingbird.ccsds.TmPacket;
 import com.logica.hummingbird.framebroker.IContainer;
 import com.logica.hummingbird.framebroker.IContainerFactory;
 import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
@@ -39,17 +39,24 @@ import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameExcepti
  * packet body which is binary data. This producer registers for the parameters in the 
  * header, and for the packet itself to get the raw data.
  */
-public class PacketProducer extends CamelMessageProducer {
+public class PacketProducer extends CcsdsProducer {
 	private final static Logger LOG = LoggerFactory.getLogger(PacketProducer.class);
 	
-	public PacketProducer(IContainerFactory containerFactory) {
-		super(containerFactory);
+	FrameProducer parent;
+	
+	TmPacket tmPacket = new TmPacket();
+	
+	public TmPacket getTmPacket() {
+		return tmPacket;
+	}
 
-		messageType = MessageType.TMPacket;
-		
+	public PacketProducer(IContainerFactory containerFactory, FrameProducer parent) {
+		super(containerFactory);
+		this.parent = parent;
+
 		/** The packet base container (should have the name TMPacket by convention) contains as sub containers;
 		 *   1. A parameter per header field. For example CCSDS_APID
-		 *   2. A container per layout of a packet. The layout to be used is defined as a constrain, i.e. for example if
+		 *   2. A container per layout of a packet. The layout to be used is defined as a constraint, i.e. for example if
 		 *      the header parameter 'CCSDS_APID == 123' is valid, then a specific layout will be used. */
 		try {
 			for (IContainer sub : containerFactory.getContainer("TMPacket").getSubContainers()) {
@@ -61,5 +68,10 @@ public class PacketProducer extends CamelMessageProducer {
 			LOG.error(e.toString());
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void completed() {
+		parent.getTmFrame().getPackets().add(tmPacket);
 	}
 }

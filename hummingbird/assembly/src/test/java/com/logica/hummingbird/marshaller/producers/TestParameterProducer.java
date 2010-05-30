@@ -58,6 +58,9 @@ public class TestParameterProducer extends CamelTestSupport {
     @Test
     public void testInsert() throws Exception {
 
+    	assertNotNull(xtceFactory);
+    	
+    	
         /** Send to end point. */
 		assertNotNull("template is null.", template);
 		template.sendBody(getFrame());
@@ -96,7 +99,7 @@ public class TestParameterProducer extends CamelTestSupport {
 
     // TODO move this method to a more generic place (test infrastructure)
     public static BitSet getFrame() throws Exception {
-    	xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
+    	//xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
     	
     	/** Create FRAME */
 

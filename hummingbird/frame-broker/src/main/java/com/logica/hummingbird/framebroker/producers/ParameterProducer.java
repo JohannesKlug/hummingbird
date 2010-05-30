@@ -29,20 +29,24 @@ package com.logica.hummingbird.framebroker.producers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.MessageType;
+import com.logica.hummingbird.ccsds.TmParameter;
 import com.logica.hummingbird.framebroker.IContainerFactory;
 import com.logica.hummingbird.framebroker.parameters.Parameter;
 
 /**
  * TODO write here a description of the class
  */
-public class ParameterProducer extends CamelMessageProducer {
+public class ParameterProducer extends CcsdsProducer {
 	private final static Logger LOG = LoggerFactory.getLogger(ParameterProducer.class);
 	
-	public ParameterProducer(IContainerFactory containerFactory) {
+	PacketProducer parent;
+	
+	TmParameter tmParameter = new TmParameter();
+
+	public ParameterProducer(IContainerFactory containerFactory, PacketProducer parent) {
 		super(containerFactory);
 		
-		messageType = MessageType.TMParameter;
+		this.parent = parent;
 		
 		/** Register with all parameters corresponding to header fields. */
 		for (Parameter parameter : containerFactory.getAllParameters().values()) {
@@ -53,19 +57,24 @@ public class ParameterProducer extends CamelMessageProducer {
 
 	@Override
 	public void updated(String field, int value) {
-		headers.put(field, value);
+		tmParameter.getValues().put(field, value);
 		completed();
 	}
 
 	@Override
 	public void updated(String field, String value) {
-		headers.put(field, value);
+		tmParameter.getValues().put(field, value);
 		completed();
 	}
 
 	@Override
 	public void updated(String field, double value) {
-		headers.put(field, value);
+		tmParameter.getValues().put(field, value);
 		completed();
+	}
+	
+	@Override
+	public void completed() {
+		parent.getTmPacket().getParameters().add(tmParameter);
 	}
 }

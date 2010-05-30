@@ -12,6 +12,7 @@ import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.impl.DefaultMessage;
 
 import com.logica.hummingbird.MessageType;
+import com.logica.hummingbird.ccsds.TmFrame;
 import com.logica.hummingbird.framebroker.IContainerFactory;
 
 /**
@@ -19,17 +20,28 @@ import com.logica.hummingbird.framebroker.IContainerFactory;
  * @author Gert Villemos
  *
  */
-public abstract class CamelMessageProducer implements IProducer {
-	/**
-	 * This identifies the type of message we are dealing with.  The header of the Camel message is set
-	 * to this type.
-	 */
-	protected MessageType messageType;
+public abstract class CcsdsProducer implements IProducer {
+//	/**
+//	 * This identifies the type of message we are dealing with.  The header of the Camel message is set
+//	 * to this type.
+//	 */
+//	protected MessageType messageType;
 
-	private DefaultCamelContext context = new DefaultCamelContext();
+//	private DefaultCamelContext context = new DefaultCamelContext();
+//	
+//	protected ProducerTemplate producerTemplate = context.createProducerTemplate();
 	
-	protected ProducerTemplate producerTemplate = context.createProducerTemplate();
+	// FIXME TmFrame being static is not a good design!
+	protected static TmFrame frame;
 	
+	public static TmFrame getFrame() {
+		return frame;
+	}
+
+	public static void setFrame(TmFrame tmFrame) {
+		CcsdsProducer.frame = tmFrame;
+	}
+
 	private IContainerFactory containerFactory;
 
 	/**
@@ -41,7 +53,7 @@ public abstract class CamelMessageProducer implements IProducer {
 	
 	private Object body;
 
-	public CamelMessageProducer(IContainerFactory containerFactory) {
+	public CcsdsProducer(IContainerFactory containerFactory) {
 		this.setContainerFactory(containerFactory);
 	}
 
@@ -68,7 +80,7 @@ public abstract class CamelMessageProducer implements IProducer {
 	@Override
 	public void completed() {
 		// Set the correct header type.
-		headers.put("Type", messageType);
+//		headers.put("Type", messageType);
 
 		// Create a new message, set the body and headers
 		Message message = new DefaultMessage();
@@ -98,4 +110,5 @@ public abstract class CamelMessageProducer implements IProducer {
 	public IContainerFactory getContainerFactory() {
 		return containerFactory;
 	}
+
 }

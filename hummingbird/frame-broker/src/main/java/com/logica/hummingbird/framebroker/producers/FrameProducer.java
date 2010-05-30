@@ -30,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.MessageType;
+import com.logica.hummingbird.ccsds.TmFrame;
 import com.logica.hummingbird.framebroker.IContainer;
 import com.logica.hummingbird.framebroker.IContainerFactory;
 import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
@@ -37,13 +38,18 @@ import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameExcepti
 /**
  * TODO write here a description of the class
  */
-public class FrameProducer extends CamelMessageProducer {
+public class FrameProducer extends CcsdsProducer {
 	private final static Logger LOG = LoggerFactory.getLogger(FrameProducer.class);
+	
+	TmFrame tmFrame = new TmFrame();
+
+	public TmFrame getTmFrame() {
+		return tmFrame;
+	}
 
 	public FrameProducer(IContainerFactory containerFactory) {
 		super(containerFactory);
 
-		messageType = MessageType.TMFrame;
 
 		try {
 			for (IContainer sub : containerFactory.getContainer("TMFrameHeader").getSubContainers()) {
@@ -61,5 +67,12 @@ public class FrameProducer extends CamelMessageProducer {
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public void completed() {
+		CcsdsProducer.setFrame(tmFrame);
+	}
+	
+	
 
 }
