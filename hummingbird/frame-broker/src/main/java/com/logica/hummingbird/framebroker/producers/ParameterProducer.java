@@ -26,6 +26,8 @@
  */
 package com.logica.hummingbird.framebroker.producers;
 
+import java.util.BitSet;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -71,6 +73,11 @@ public class ParameterProducer extends CcsdsProducer {
 	public void updated(String field, double value) {
 		tmParameter.getValues().put(field, value);
 		completed();
+	}
+	
+	@Override
+	public void updated(String field, BitSet value) {
+		LOG.error("ParameterProducer was sent a BitSetValue, this shouldn't happen!");
 	}
 	
 	@Override

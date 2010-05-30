@@ -26,6 +26,8 @@
  */
 package com.logica.hummingbird.framebroker.producers;
 
+import java.util.BitSet;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -73,5 +75,29 @@ public class PacketProducer extends CcsdsProducer {
 	@Override
 	public void completed() {
 		parent.getTmFrame().getPackets().add(tmPacket);
+	}
+
+	@Override
+	public void updated(String field, BitSet value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updated(String field, int value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updated(String field, String value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updated(String field, double value) {
+		// TODO Auto-generated method stub
+		
 	}
 }

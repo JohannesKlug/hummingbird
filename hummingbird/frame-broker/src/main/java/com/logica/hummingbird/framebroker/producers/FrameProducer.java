@@ -26,10 +26,11 @@
  */
 package com.logica.hummingbird.framebroker.producers;
 
+import java.util.BitSet;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.MessageType;
 import com.logica.hummingbird.ccsds.TmFrame;
 import com.logica.hummingbird.framebroker.IContainer;
 import com.logica.hummingbird.framebroker.IContainerFactory;
@@ -71,6 +72,30 @@ public class FrameProducer extends CcsdsProducer {
 	@Override
 	public void completed() {
 		CcsdsProducer.setFrame(tmFrame);
+	}
+
+	@Override
+	public void updated(String field, BitSet value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updated(String field, int value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updated(String field, String value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updated(String field, double value) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
