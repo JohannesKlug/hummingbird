@@ -9,6 +9,9 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
+import com.logica.hummingbird.ccsds.TmFrame;
+import com.logica.hummingbird.ccsds.TmPacket;
+import com.logica.hummingbird.ccsds.TmParameter;
 import com.logica.hummingbird.framebroker.ContainerProcessor;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 
@@ -42,14 +45,8 @@ public class RouterTest extends CamelTestSupport {
         	
             public void configure() throws Exception {
             	
-
-            	
-            	
             	xtceFactory = new XtceModelFactory("src/test/resources/humsat.xml");
-//            	xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
-//            	xtceFactory.initialise();
             	processor = new ContainerProcessor(xtceFactory);
-            	
             	
                 from("direct:start")
                 .split().method(processor, "split")
@@ -58,9 +55,7 @@ public class RouterTest extends CamelTestSupport {
                 .when(header("Type").isEqualTo("TMParameter")).to(parameterEndpoint)
                 .when(header("Type").isEqualTo("TMFrame")).to(frameEndpoint)
                     ;
-                
-                // Add router to multiplex into the different streams.
-        }
+            }
         };
     }
 
@@ -87,13 +82,23 @@ public class RouterTest extends CamelTestSupport {
 
     }
     
-    // TODO move this method to a more generic place (test infrastructure)
+    @Test
+    public void testInstances() throws Exception {
+    	
+        /** Send to end point. */
+		assertNotNull("template is null.", template);
+		template.sendBody(getFrame());
+    	
+    	assertIsInstanceOf(TmParameter.class, parameterEndpoint.getReceivedExchanges().get(0).getIn().getBody());
+    	assertIsInstanceOf(TmPacket.class, packetEndpoint.getReceivedExchanges().get(0).getIn().getBody());
+    	assertIsInstanceOf(TmFrame.class, frameEndpoint.getReceivedExchanges().get(0).getIn().getBody());
+    }
+    
+    // TODO use MockModelFactory from test-support for this!
     public static BitSet getFrame() throws Exception {
-    	//xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
     	
     	/** Create FRAME */
 
-		
 		/** Build the frame. */
 		xtceFactory.getParameter("CCSDS_FVERSION").setValue(1);
 		xtceFactory.getParameter("CCSDS_SC_ID").setValue(3);
