@@ -77,6 +77,7 @@ public class ParameterProducer extends CcsdsProducer {
 	
 	@Override
 	public void updated(String field, BitSet value) {
+		// FIXME how to fail properly here?
 		LOG.error("ParameterProducer was sent a BitSetValue, this shouldn't happen!");
 	}
 	

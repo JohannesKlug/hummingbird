@@ -79,25 +79,21 @@ public class PacketProducer extends CcsdsProducer {
 
 	@Override
 	public void updated(String field, BitSet value) {
-		// TODO Auto-generated method stub
-		
+		tmPacket.getValues().put(field, value);
 	}
 
 	@Override
 	public void updated(String field, int value) {
-		// TODO Auto-generated method stub
-		
+		tmPacket.getValues().put(field, value);	
 	}
 
 	@Override
 	public void updated(String field, String value) {
-		// TODO Auto-generated method stub
-		
+		tmPacket.getValues().put(field, value);
 	}
 
 	@Override
 	public void updated(String field, double value) {
-		// TODO Auto-generated method stub
-		
+		tmPacket.getValues().put(field, value);
 	}
 }
