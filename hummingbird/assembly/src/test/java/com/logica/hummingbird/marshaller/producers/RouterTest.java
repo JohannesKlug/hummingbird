@@ -92,6 +92,12 @@ public class RouterTest extends CamelTestSupport {
     	assertIsInstanceOf(TmParameter.class, parameterEndpoint.getReceivedExchanges().get(0).getIn().getBody());
     	assertIsInstanceOf(TmPacket.class, packetEndpoint.getReceivedExchanges().get(0).getIn().getBody());
     	assertIsInstanceOf(TmFrame.class, frameEndpoint.getReceivedExchanges().get(0).getIn().getBody());
+    	
+    	TmFrame tmFrame = (TmFrame) frameEndpoint.getReceivedExchanges().get(0).getIn().getBody();
+    	
+    	System.out.println("Frame values: " + tmFrame.getValues());
+    	System.out.println("Frame's 1st packet's values: " + tmFrame.getPackets().get(0).getValues());
+    	System.out.println("Frame's 1st packet's 1st parameter's values: " + tmFrame.getPackets().get(0).getParameters().get(0).getValues());
     }
     
     // TODO use MockModelFactory from test-support for this!
