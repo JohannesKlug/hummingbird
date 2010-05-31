@@ -28,7 +28,8 @@ package com.logica.hummingbird.framebroker;
 
 import java.util.BitSet;
 
-import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.spacesystemmodel.Container;
+import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 
 /**
  * The interface of the Frame Broker. 
@@ -77,5 +78,5 @@ public interface IFrameBroker {
 	 * @throws Exception 
 	 *
 	 */
-	public IContainer getContainer(String container) throws UnknownContainerNameException ;
+	public Container getContainer(String container) throws UnknownContainerNameException ;
 }

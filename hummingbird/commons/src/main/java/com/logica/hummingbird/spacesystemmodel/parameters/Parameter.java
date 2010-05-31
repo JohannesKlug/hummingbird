@@ -24,11 +24,11 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.framebroker.parameters;
+package com.logica.hummingbird.spacesystemmodel.parameters;
 
 /**
  * Interface of a parameter container. */
-public interface IParameter {
+public interface Parameter {
 	/**
 	 * Returns the type of the parameter.
 	 * 

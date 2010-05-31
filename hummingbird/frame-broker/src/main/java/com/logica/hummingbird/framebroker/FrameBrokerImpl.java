@@ -39,12 +39,14 @@ import org.slf4j.LoggerFactory;
 import com.logica.hummingbird.MessageType;
 import com.logica.hummingbird.ccsds.TmPacket;
 import com.logica.hummingbird.ccsds.TmParameter;
-import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.framebroker.producers.CcsdsProducer;
 import com.logica.hummingbird.framebroker.producers.FrameProducer;
-import com.logica.hummingbird.framebroker.producers.IProducer;
 import com.logica.hummingbird.framebroker.producers.PacketProducer;
 import com.logica.hummingbird.framebroker.producers.ParameterProducer;
+import com.logica.hummingbird.spacesystemmodel.Container;
+import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.SpaceSystemModelObserver;
+import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 
 /**
  * 
@@ -55,15 +57,15 @@ import com.logica.hummingbird.framebroker.producers.ParameterProducer;
  * when the complete container has been unmarshalled.
  * 
  */
-public class ContainerProcessor implements IFrameBroker {
-	private final static Logger LOG = LoggerFactory.getLogger(ContainerProcessor.class);
+public class FrameBrokerImpl implements IFrameBroker {
+	private final static Logger LOG = LoggerFactory.getLogger(FrameBrokerImpl.class);
 
 	/** The factory used to locate the models. */
-	protected IContainerFactory factory = null;
+	protected ContainerFactory factory = null;
 
-	IProducer frameProducer;
-	IProducer packetProducer;
-	IProducer parameterProducer;
+	SpaceSystemModelObserver frameProducer;
+	SpaceSystemModelObserver packetProducer;
+	SpaceSystemModelObserver parameterProducer;
 
 	/**
 	 * Constructor.
@@ -71,7 +73,7 @@ public class ContainerProcessor implements IFrameBroker {
 	 * @param factory
 	 *            The factory to be used to obtain references to the container.
 	 * */
-	public ContainerProcessor(IContainerFactory factory) {
+	public FrameBrokerImpl(ContainerFactory factory) {
 		this.factory = factory;
 		
 		frameProducer = new FrameProducer(factory);
@@ -96,15 +98,15 @@ public class ContainerProcessor implements IFrameBroker {
 		packet = factory.getContainer(packetname).toString();
 	}
 
-	public IContainer getContainer(String container) throws UnknownContainerNameException {
+	public Container getContainer(String container) throws UnknownContainerNameException {
 		return factory.getContainer(container);
 	}
 
-	public IContainerFactory getFactory() {
+	public ContainerFactory getFactory() {
 		return factory;
 	}
 
-	public void setFactory(IContainerFactory factory) {
+	public void setFactory(ContainerFactory factory) {
 		this.factory = factory;
 	}
 

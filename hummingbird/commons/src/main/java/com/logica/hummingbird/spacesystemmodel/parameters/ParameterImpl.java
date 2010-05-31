@@ -24,10 +24,9 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.framebroker.parameters;
+package com.logica.hummingbird.spacesystemmodel.parameters;
 
-import com.logica.hummingbird.framebroker.Container;
-import com.logica.hummingbird.framebroker.producers.IProducer;
+import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
 
 /**
  * The abstract base class for all parameter containers. The class
@@ -36,7 +35,7 @@ import com.logica.hummingbird.framebroker.producers.IProducer;
  * A parameter is the leaf of the container tree. Each parameter
  * has a type, which defines among others the length in bits.  
  */
-public abstract class Parameter extends Container implements IParameter {
+public abstract class ParameterImpl extends ContainerImpl implements Parameter {
 
 	/** The type of the parameter. */
 	protected ParameterType type = null;
@@ -51,7 +50,7 @@ public abstract class Parameter extends Container implements IParameter {
 	 * @param type The parameter type.
 	 *
 	 */
-	public Parameter(String name, String shortDescription, String longDescription, ParameterType type) {
+	public ParameterImpl(String name, String shortDescription, String longDescription, ParameterType type) {
 		super(name, shortDescription, longDescription);
 		this.type = type;
 	}

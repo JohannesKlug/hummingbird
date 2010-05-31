@@ -24,12 +24,12 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.framebroker.parameters;
+package com.logica.hummingbird.spacesystemmodel.parameters;
 
 import java.util.List;
 
-import com.logica.hummingbird.framebroker.NamedElement;
-import com.logica.hummingbird.framebroker.Unit;
+import com.logica.hummingbird.spacesystemmodel.NamedElement;
+import com.logica.hummingbird.spacesystemmodel.Unit;
 
 /**
  * A parameter type. The parameter type consists of two elements;
