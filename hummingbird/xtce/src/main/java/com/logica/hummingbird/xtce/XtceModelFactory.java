@@ -10,26 +10,26 @@ import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.xml.ValidationException;
 import org.exolab.castor.xml.XMLContext;
 
-import com.logica.hummingbird.framebroker.Container;
-import com.logica.hummingbird.framebroker.IContainerFactory;
-import com.logica.hummingbird.framebroker.Unit;
-import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.framebroker.parameters.FloatParameter;
-import com.logica.hummingbird.framebroker.parameters.IntegerParameter;
-import com.logica.hummingbird.framebroker.parameters.Parameter;
-import com.logica.hummingbird.framebroker.parameters.ParameterType;
 import com.logica.hummingbird.generatedcode.xtce.Comparison;
 import com.logica.hummingbird.generatedcode.xtce.ParameterSetTypeItem;
 import com.logica.hummingbird.generatedcode.xtce.ParameterTypeSetTypeItem;
 import com.logica.hummingbird.generatedcode.xtce.SequenceContainer;
 import com.logica.hummingbird.generatedcode.xtce.SpaceSystem;
+import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
+import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.Unit;
+import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
+import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
 
-public class XtceModelFactory implements IContainerFactory {
+public class XtceModelFactory implements ContainerFactory {
 
 	protected Map<String, Unit> units = new HashMap<String, Unit>();
 	protected Map<String, ParameterType> types = new HashMap<String, ParameterType>();
-	protected Map<String, Container> containers = new HashMap<String, Container>();
-	protected Map<String, Parameter> parameters = new HashMap<String, Parameter>();
+	protected Map<String, ContainerImpl> containers = new HashMap<String, ContainerImpl>();
+	protected Map<String, ParameterImpl> parameters = new HashMap<String, ParameterImpl>();
 
 	protected SpaceSystem spaceSystem = null;
 
@@ -43,12 +43,12 @@ public class XtceModelFactory implements IContainerFactory {
 		initialise();
 	}
 
-	public Parameter getParameter(String name) {
+	public ParameterImpl getParameter(String name) {
 		return parameters.get(name);
 	}
 
-	public Container getContainer(String name) throws UnknownContainerNameException {
-		Container container = containers.get(name);
+	public ContainerImpl getContainer(String name) throws UnknownContainerNameException {
+		ContainerImpl container = containers.get(name);
 		
 		if (container == null) {
 			throw new UnknownContainerNameException(containers, "Your container lookup for '" + name + "' did not return any containers. Check your SpaceSystem configuration.");
@@ -152,7 +152,7 @@ public class XtceModelFactory implements IContainerFactory {
 		for (int parameterIndex = 0; parameterIndex < spaceSystem.getTelemetryMetaData().getParameterSet().getParameterSetTypeItemCount(); ++parameterIndex) {
 			ParameterSetTypeItem item = spaceSystem.getTelemetryMetaData().getParameterSet().getParameterSetTypeItem(parameterIndex);
 
-			Parameter model = null;
+			ParameterImpl model = null;
 			ParameterType type = types.get(item.getParameter().getParameterTypeRef());
 			if (type != null) {
 
@@ -185,7 +185,7 @@ public class XtceModelFactory implements IContainerFactory {
 		for (int containerIndex = 0; containerIndex < spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItemCount(); ++containerIndex) {
 			SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex).getSequenceContainer();
 
-			Container container = new Container(xtceContainer.getName(), xtceContainer.getShortDescription(), xtceContainer.getLongDescription());			
+			ContainerImpl container = new ContainerImpl(xtceContainer.getName(), xtceContainer.getShortDescription(), xtceContainer.getLongDescription());			
 			containers.put(container.getName(), container);			
 		}
 
@@ -197,12 +197,12 @@ public class XtceModelFactory implements IContainerFactory {
 		for (int containerIndex = 0; containerIndex < spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItemCount(); ++containerIndex) {
 			SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex).getSequenceContainer();
 
-			Container thisContainer = containers.get(xtceContainer.getName());
+			ContainerImpl thisContainer = containers.get(xtceContainer.getName());
 
 			/** Register this container with the base container to make sure it gets processed. */
 			if (xtceContainer.getBaseContainer() != null) {				
 				for (Comparison comparison : xtceContainer.getBaseContainer().getRestrictionCriteria().getComparisonList().getComparison()) {
-					thisContainer.addRestriction((Parameter) containers.get(comparison.getParameterRef()), comparison.getValue());
+					thisContainer.addRestriction((ParameterImpl) containers.get(comparison.getParameterRef()), comparison.getValue());
 				}
 
 				containers.get(xtceContainer.getBaseContainer().getContainerRef()).addContainer(thisContainer);
@@ -282,7 +282,7 @@ public class XtceModelFactory implements IContainerFactory {
 	}
 
 	@Override
-	public Map<String, Parameter> getAllParameters() {
+	public Map<String, ParameterImpl> getAllParameters() {
 		return parameters;
 	}	
 }

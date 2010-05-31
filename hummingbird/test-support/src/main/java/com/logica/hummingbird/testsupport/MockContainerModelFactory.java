@@ -8,15 +8,15 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.framebroker.Container;
-import com.logica.hummingbird.framebroker.IContainer;
-import com.logica.hummingbird.framebroker.IContainerFactory;
-import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.framebroker.parameters.FloatParameter;
-import com.logica.hummingbird.framebroker.parameters.IntegerParameter;
-import com.logica.hummingbird.framebroker.parameters.Parameter;
-import com.logica.hummingbird.framebroker.parameters.ParameterType;
-import com.logica.hummingbird.framebroker.parameters.ParameterType.eParameterType;
+import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
+import com.logica.hummingbird.spacesystemmodel.Container;
+import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
+import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType.eParameterType;
 
 /**
  * This class is used for testing the Frame broker.  It creates a simple Container model which can be 
@@ -26,7 +26,7 @@ import com.logica.hummingbird.framebroker.parameters.ParameterType.eParameterTyp
  * @author Mark Doyle <markjohndoyle@googlemail.com>
  * @since Hummingbird 0.0.1
  */
-public class MockContainerModelFactory implements IContainerFactory {
+public class MockContainerModelFactory implements ContainerFactory {
 	/**
 	 * Logger for this class
 	 */
@@ -42,8 +42,8 @@ public class MockContainerModelFactory implements IContainerFactory {
 
 	public static final String PACKET_TYPE_A_ID = "555";
 
-	private Map<String, Container> containers = new HashMap<String, Container>();
-	private Map<String, Parameter> parameters = new HashMap<String, Parameter>();
+	private Map<String, ContainerImpl> containers = new HashMap<String, ContainerImpl>();
+	private Map<String, ParameterImpl> parameters = new HashMap<String, ParameterImpl>();
 
 	public MockContainerModelFactory() {
 		initialise();
@@ -62,16 +62,16 @@ public class MockContainerModelFactory implements IContainerFactory {
 		/** Build the upper frame skeleton of the Model **/
 		// Create the Frame, header, packet and tail and add them to the
 		// containers collection
-		Container tmFrame = new Container("TMFrame", "Test frame", "Test TM frame for unit testing");
+		ContainerImpl tmFrame = new ContainerImpl("TMFrame", "Test frame", "Test TM frame for unit testing");
 		this.addToContainers(tmFrame);
-		Container tmHeader = new Container("TMFrameHeader", "Test header", "Test TM header for unit testing");
+		ContainerImpl tmHeader = new ContainerImpl("TMFrameHeader", "Test header", "Test TM header for unit testing");
 		this.addToContainers(tmHeader);
-		Container tmPacket = new Container("TMPacket", "Test packet", "Test TM packet for unit testing");
+		ContainerImpl tmPacket = new ContainerImpl("TMPacket", "Test packet", "Test TM packet for unit testing");
 		this.addToContainers(tmPacket);
-		Container tmTail = new Container("TMFrameTail", "Test tail", "Test TM tail for unit testing");
+		ContainerImpl tmTail = new ContainerImpl("TMFrameTail", "Test tail", "Test TM tail for unit testing");
 		this.addToContainers(tmTail);
 		// Add the header, packet and tail to the frame container.
-		ArrayList<IContainer> containersToAdd = new ArrayList<IContainer>(3);
+		ArrayList<Container> containersToAdd = new ArrayList<Container>(3);
 		containersToAdd.add(tmHeader);
 		containersToAdd.add(tmPacket);
 		containersToAdd.add(tmTail);
@@ -79,7 +79,7 @@ public class MockContainerModelFactory implements IContainerFactory {
 
 		/** Build the lower packet level of the model **/
 		// Create the packet header and add it to the containers collection.
-		Container tmPacketHeader = new Container("TMPacketHeader", "Test packet header", "Test TM packet header for unit testing");
+		ContainerImpl tmPacketHeader = new ContainerImpl("TMPacketHeader", "Test packet header", "Test TM packet header for unit testing");
 		this.addToContainers(tmPacketHeader);
 
 		// Create the apid (ID) parameter type and add it to the packet header and the parameters collection.
@@ -90,12 +90,12 @@ public class MockContainerModelFactory implements IContainerFactory {
 		tmPacketHeader.addContainer(packetIdParameter);
 
 		// Create the packet body and add it to the containers collection
-		Container tmPacketBody = new Container("TMPacketBody", "Test packet body", "Test TM packet header for unit testing");
+		ContainerImpl tmPacketBody = new ContainerImpl("TMPacketBody", "Test packet body", "Test TM packet header for unit testing");
 		this.addToContainers(tmPacketBody);
 
 		// Create a packet type, add it to the packet body, add a restriction to
 		// associate it to an ID, and add it to the containers collection
-		Container packetTypeA = new Container("TMPacketTypeA", "Test packet body", "Test TM packet for unit testing");
+		ContainerImpl packetTypeA = new ContainerImpl("TMPacketTypeA", "Test packet body", "Test TM packet for unit testing");
 		packetTypeA.addRestriction(packetIdParameter, PACKET_TYPE_A_ID);
 		this.addToContainers(packetTypeA);
 		tmPacketBody.addContainer(packetTypeA);
@@ -110,7 +110,7 @@ public class MockContainerModelFactory implements IContainerFactory {
 
 		// Create a packet type, add it to the packet body, add a restriction to
 		// associate it to an ID, and add it to the containers collection
-		Container packetTypeB = new Container("TMPacketTypeB", "Test packet body", "Test TM packet for unit testing");
+		ContainerImpl packetTypeB = new ContainerImpl("TMPacketTypeB", "Test packet body", "Test TM packet for unit testing");
 		packetTypeB.addRestriction(packetIdParameter, PACKET_TYPE_B_ID);
 		this.addToContainers(packetTypeB);
 		tmPacketBody.addContainer(packetTypeB);
@@ -124,7 +124,7 @@ public class MockContainerModelFactory implements IContainerFactory {
 		this.addToContainers(testParameterB);
 
 		// Add the packet inners (header and body) to the packet
-		List<IContainer> packetInners = new ArrayList<IContainer>(2);
+		List<Container> packetInners = new ArrayList<Container>(2);
 		packetInners.add(tmPacketHeader);
 		packetInners.add(tmPacketBody);
 		tmPacket.addContainer(packetInners);
@@ -135,9 +135,9 @@ public class MockContainerModelFactory implements IContainerFactory {
 	}
 
 	@Override
-	public IContainer getContainer(String name) throws UnknownContainerNameException {
+	public Container getContainer(String name) throws UnknownContainerNameException {
 
-		Container container = containers.get(name);
+		ContainerImpl container = containers.get(name);
 
 		if (container == null) {
 			throw new UnknownContainerNameException(containers, "Your container lookup for '" + name
@@ -148,12 +148,12 @@ public class MockContainerModelFactory implements IContainerFactory {
 	}
 
 	@Override
-	public Map<String, Parameter> getAllParameters() {
+	public Map<String, ParameterImpl> getAllParameters() {
 		return parameters;
 	}
 
 	@Override
-	public Parameter getParameter(String name) {
+	public ParameterImpl getParameter(String name) {
 		return parameters.get(name);
 	}
 
@@ -164,12 +164,12 @@ public class MockContainerModelFactory implements IContainerFactory {
 	 * 
 	 * @param container
 	 */
-	public void addToContainers(Container container) {
+	public void addToContainers(ContainerImpl container) {
 		this.containers.put(container.getName(), container);
 	}
 	
 
-	private void addToParameters(Parameter parameter) {
+	private void addToParameters(ParameterImpl parameter) {
 		this.parameters.put(parameter.getName(), parameter);
 	}
 

@@ -4,15 +4,16 @@ import java.util.BitSet;
 
 import junit.framework.TestCase;
 
-import com.logica.hummingbird.framebroker.BitSetUtility;
-import com.logica.hummingbird.framebroker.ContainerProcessor;
-import com.logica.hummingbird.framebroker.IContainerFactory;
-import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.framebroker.FrameBrokerImpl;
+import com.logica.hummingbird.spacesystemmodel.BitSetUtility;
+import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 
+// FIXME Not a unit test. This tests integration of separate components.  Needs moving.
 public class ContainerProcessorTest extends TestCase {
 
 	public void testMarshall() throws UnknownContainerNameException {
-		IContainerFactory factory = new XtceModelFactory("src/main/resources/humsat.xml");
+		ContainerFactory factory = new XtceModelFactory("src/main/resources/humsat.xml");
 //		factory.initialise();
 		
 		/** Build the frame. */
@@ -79,7 +80,7 @@ public class ContainerProcessorTest extends TestCase {
 		}
 		
 		/** Marshall it to a BitSet. */
-		ContainerProcessor processor = new ContainerProcessor(factory);
+		FrameBrokerImpl processor = new FrameBrokerImpl(factory);
 		processor.marshall("TMFrame", frame);
 		
 		/** Visualize the BitSet*/
