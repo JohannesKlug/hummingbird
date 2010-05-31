@@ -24,7 +24,7 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.framebroker;
+package com.logica.hummingbird.spacesystemmodel;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -24,11 +24,11 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.framebroker;
+package com.logica.hummingbird.spacesystemmodel;
 
 import java.util.BitSet;
 
-import com.logica.hummingbird.framebroker.exceptions.BitSetOperationException;
+import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 
 /**
  * The bitset utilities class helps the encoding / decoding of simple java types

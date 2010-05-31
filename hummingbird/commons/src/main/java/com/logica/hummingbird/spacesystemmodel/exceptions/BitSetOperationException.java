@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.logica.hummingbird.framebroker.exceptions;
+package com.logica.hummingbird.spacesystemmodel.exceptions;
 
 
 /**

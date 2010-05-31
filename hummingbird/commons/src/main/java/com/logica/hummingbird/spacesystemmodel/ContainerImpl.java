@@ -24,7 +24,7 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.framebroker;
+package com.logica.hummingbird.spacesystemmodel;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -38,8 +38,7 @@ import java.util.Map.Entry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.framebroker.parameters.IParameter;
-import com.logica.hummingbird.framebroker.producers.IProducer;
+import com.logica.hummingbird.spacesystemmodel.parameters.Parameter;
 
 /**
  * The container is the basic element in the Frame Broker's POJO hierarchy. A container
@@ -62,20 +61,20 @@ import com.logica.hummingbird.framebroker.producers.IProducer;
  * @author Gert Villemos
  * @author Mark Doyle
  */
-public class Container extends NamedElement implements IContainer {
+public class ContainerImpl extends NamedElement implements Container {
 	/**
 	 * Logger for this class	
 	 */
-	private static final Logger LOG = LoggerFactory.getLogger(Container.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ContainerImpl.class);
 
 	/** The restrictions defining when this container should process. Each restriction
 	 * is a parameter / string pair. The parameter will convert the string based on
 	 * its type and compare itself against the resulting value. If the string is invalid
 	 * then this will always count as a failed match. */
-	protected Map<IParameter, String> restrictions = new HashMap<IParameter, String>();
+	protected Map<Parameter, String> restrictions = new HashMap<Parameter, String>();
 
 	/** The ordered set of sub containers. */
-	protected List<IContainer> subContainers = new ArrayList<IContainer>();
+	protected List<Container> subContainers = new ArrayList<Container>();
 
 	/** Holds the complete portion of the data corresponding to this container. */
 	protected BitSet completeBitData = null;
@@ -83,10 +82,10 @@ public class Container extends NamedElement implements IContainer {
 	/** The length of this container in bits. The value will hold a BitSet of length >= length + 1. */
 	protected int length = 0;
 	
-	protected List<IProducer> updateObservers = new ArrayList<IProducer>();
-	protected List<IProducer> completionObservers = new ArrayList<IProducer>();
+	protected List<SpaceSystemModelObserver> updateObservers = new ArrayList<SpaceSystemModelObserver>();
+	protected List<SpaceSystemModelObserver> completionObservers = new ArrayList<SpaceSystemModelObserver>();
 	
-	protected IContainer parent = null;
+	protected Container parent = null;
 
 	/**
 	 * Constructor of the Container class.
@@ -96,7 +95,7 @@ public class Container extends NamedElement implements IContainer {
 	 * @param longDescription A detailed description of the container.
 	 *
 	 */
-	public Container(String name, String shortDescription, String longDescription) {
+	public ContainerImpl(String name, String shortDescription, String longDescription) {
 		super(name, shortDescription, longDescription);
 	}
 
@@ -112,10 +111,10 @@ public class Container extends NamedElement implements IContainer {
 		 * container as a base. The sub containers themselves must decide whether they
 		 * are relevant for the processing. */
 		boolean match = true;
-		Iterator<Entry<IParameter, String>> it = restrictions.entrySet().iterator();
+		Iterator<Entry<Parameter, String>> it = restrictions.entrySet().iterator();
 
 		while (it.hasNext() == true && match == true) {
-			Entry<IParameter, String> entry = it.next();				
+			Entry<Parameter, String> entry = it.next();				
 
 			/** The restriction is against a parameter value. The value may thus depend on
 			 * a parameter which has already be extracted from the same data container. For 
@@ -157,18 +156,18 @@ public class Container extends NamedElement implements IContainer {
 		
 		// If the packet should be processed by this container.
 		if (matchRestrictions() == true) {
-			for (IContainer container : subContainers) {
+			for (Container container : subContainers) {
 				// The nested calls unmarshall down through the sub containers
 				// Specific Containers, e.g. Parameters will "chunk" the bitSet (Packet) in order to
 				// remove the section that has already been unmarshalled.
 				completeBitData = container.unmarshall(completeBitData);
 			}
 			
-			for (IProducer updateObserver : updateObservers) {
+			for (SpaceSystemModelObserver updateObserver : updateObservers) {
 				updateObserver.updated(name, completeBitData);
 			}
 			
-			for (IProducer completionObserver : completionObservers) {
+			for (SpaceSystemModelObserver completionObserver : completionObservers) {
 				completionObserver.completed();
 			}
 		}
@@ -187,7 +186,7 @@ public class Container extends NamedElement implements IContainer {
 			if(LOG.isDebugEnabled()) {
 				LOG.debug("Matching was true, marshalling " + name);
 			}
-			for (IContainer container : subContainers) {
+			for (Container container : subContainers) {
 				offset = container.marshall(packet, offset);
 			}
 		}		
@@ -201,7 +200,7 @@ public class Container extends NamedElement implements IContainer {
 		String str = "";
 		if (matchRestrictions() == true) {
 			str += "{" + this.name;
-			for (IContainer container : subContainers) {
+			for (Container container : subContainers) {
 				str += container.toString();
 			}
 			str += "}";
@@ -219,7 +218,7 @@ public class Container extends NamedElement implements IContainer {
 	 * @param container The container to be added. 
 	 *
 	 */
-	public void addContainer(IContainer container) {
+	public void addContainer(Container container) {
 		if (container != null) {
 			this.subContainers.add(container);
 		}
@@ -235,8 +234,8 @@ public class Container extends NamedElement implements IContainer {
 	 * @param container The Collection of IContainers to be added. 
 	 *
 	 */
-	public void addContainer(Collection<? extends IContainer> containers) {
-		for(IContainer container : containers) {
+	public void addContainer(Collection<? extends Container> containers) {
+		for(Container container : containers) {
 			this.addContainer(container);
 		}
 	}
@@ -252,7 +251,7 @@ public class Container extends NamedElement implements IContainer {
 	 * restriction to evaluate to true. 
 	 *
 	 */
-	public void addRestriction(IParameter model, String value) {
+	public void addRestriction(Parameter model, String value) {
 		if (model != null) {
 			restrictions.put(model, value);
 		}
@@ -264,7 +263,7 @@ public class Container extends NamedElement implements IContainer {
 		/** Lazy initialize the attribute upon first access. */
 		if (this.length == 0) {
 			/** Iterate through all subcontainers and sum the size.*/
-			for (IContainer container : subContainers) {
+			for (Container container : subContainers) {
 				length += container.getLength();
 			}
 		}
@@ -278,18 +277,18 @@ public class Container extends NamedElement implements IContainer {
 	}
 
 	@Override
-	public void addCompletionObserver(IProducer producer) {
+	public void addCompletionObserver(SpaceSystemModelObserver producer) {
 		this.completionObservers.add(producer);
 		
 	}
 
 	@Override
-	public void addUpdateObserver(IProducer producer) {
+	public void addUpdateObserver(SpaceSystemModelObserver producer) {
 		this.updateObservers.add(producer);
 		
 	}
 
-	public List<IContainer> getSubContainers() {
+	public List<Container> getSubContainers() {
 		return subContainers;
 	}	
 }

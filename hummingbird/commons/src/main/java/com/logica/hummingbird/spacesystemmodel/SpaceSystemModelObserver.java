@@ -24,7 +24,7 @@
  * Created on   : 13.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.framebroker.producers;
+package com.logica.hummingbird.spacesystemmodel;
 
 import java.util.BitSet;
 
@@ -32,7 +32,7 @@ import java.util.BitSet;
 /**
  * TODO write here a description of the class
  */
-public interface IProducer {
+public interface SpaceSystemModelObserver {
 
 	public void updated(String field, BitSet value);
 	public void updated(String field, int value);

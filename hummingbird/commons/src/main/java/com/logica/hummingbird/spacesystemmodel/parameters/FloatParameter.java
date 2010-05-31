@@ -24,22 +24,22 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.framebroker.parameters;
+package com.logica.hummingbird.spacesystemmodel.parameters;
 
 import java.util.BitSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.framebroker.BitSetUtility;
-import com.logica.hummingbird.framebroker.exceptions.BitSetOperationException;
-import com.logica.hummingbird.framebroker.producers.IProducer;
+import com.logica.hummingbird.spacesystemmodel.BitSetUtility;
+import com.logica.hummingbird.spacesystemmodel.SpaceSystemModelObserver;
+import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 
 /**
  * The float container encodes / decodes a float parameter from the
  * data stream. 
  */
-public class FloatParameter extends Parameter {
+public class FloatParameter extends ParameterImpl {
 	/**
 	 * Logger for this class
 	 */
@@ -73,7 +73,7 @@ public class FloatParameter extends Parameter {
 	public BitSet unmarshall(BitSet packet) {
 		value = (float) BitSetUtility.extractDouble(packet, 0, (int) type.sizeInBits, minimumValue, maximumValue);
 		/** TODO Create POJO and send to observer. */
-		for (IProducer producer : updateObservers) {
+		for (SpaceSystemModelObserver producer : updateObservers) {
 			producer.updated(name, value);
 		}
 		

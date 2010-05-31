@@ -24,12 +24,12 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.framebroker;
+package com.logica.hummingbird.spacesystemmodel;
 
 import java.util.Map;
 
-import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.framebroker.parameters.Parameter;
+import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
 
 /**
  * Interface to create monitoring models.
@@ -44,7 +44,7 @@ import com.logica.hummingbird.framebroker.parameters.Parameter;
  * monitoring component. 
  *
  */
-public interface IContainerFactory {
+public interface ContainerFactory {
 
 	/**
 	 * Initialises the container factory. Must be called prior to
@@ -63,7 +63,7 @@ public interface IContainerFactory {
 	 * @throws UnknownContainerNameException 
 	 *
 	 */
-	public IContainer getContainer(String name) throws UnknownContainerNameException;
+	public Container getContainer(String name) throws UnknownContainerNameException;
 
 	/**
 	 * Retrieves a parameter container. 
@@ -72,9 +72,9 @@ public interface IContainerFactory {
 	 * @return Parameter Returns the parameter container identified through the name, or null. 
 	 *
 	 */
-	public Parameter getParameter(String name);
+	public ParameterImpl getParameter(String name);
 	
 	// TODO Get all parameters function.
 	
-	public Map<String, Parameter> getAllParameters();
+	public Map<String, ParameterImpl> getAllParameters();
 }

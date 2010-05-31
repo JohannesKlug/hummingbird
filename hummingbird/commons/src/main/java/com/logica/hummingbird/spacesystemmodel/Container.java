@@ -24,18 +24,17 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.framebroker;
+package com.logica.hummingbird.spacesystemmodel;
 
 import java.util.BitSet;
 import java.util.List;
 
-import com.logica.hummingbird.framebroker.producers.IProducer;
 
 /**
  * The standard interface of a marshaller container. The interface supports the
  * unmarshalling and marshalling of containers.
  */
-public interface IContainer {
+public interface Container {
 
 	/**
 	 *  The method MUST remove the part of the packet that it represents, i.e.
@@ -93,9 +92,9 @@ public interface IContainer {
 	 */
 	public BitSet getRawValue();
 
-	public void addCompletionObserver(IProducer producer);
+	public void addCompletionObserver(SpaceSystemModelObserver producer);
 
-	public void addUpdateObserver(IProducer producer);
+	public void addUpdateObserver(SpaceSystemModelObserver producer);
 	
-	public List<IContainer> getSubContainers();
+	public List<Container> getSubContainers();
 }
