@@ -32,9 +32,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.ccsds.TmFrame;
-import com.logica.hummingbird.framebroker.IContainer;
-import com.logica.hummingbird.framebroker.IContainerFactory;
-import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.spacesystemmodel.Container;
+import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 
 /**
  * TODO write here a description of the class
@@ -48,16 +48,16 @@ public class FrameProducer extends CcsdsProducer {
 		return tmFrame;
 	}
 
-	public FrameProducer(IContainerFactory containerFactory) {
+	public FrameProducer(ContainerFactory containerFactory) {
 		super(containerFactory);
 
 
 		try {
-			for (IContainer sub : containerFactory.getContainer("TMFrameHeader").getSubContainers()) {
+			for (Container sub : containerFactory.getContainer("TMFrameHeader").getSubContainers()) {
 				sub.addUpdateObserver(this);
 			}
 
-			for (IContainer sub : containerFactory.getContainer("TMFrameTail").getSubContainers()) {
+			for (Container sub : containerFactory.getContainer("TMFrameTail").getSubContainers()) {
 				sub.addUpdateObserver(this);
 			}
 

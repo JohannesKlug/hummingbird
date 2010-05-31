@@ -10,7 +10,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.framebroker.exceptions.BitSetOperationException;
+import com.logica.hummingbird.spacesystemmodel.BitSetUtility;
+import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 
 /**
  * 

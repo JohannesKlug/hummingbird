@@ -5,19 +5,19 @@ import javax.sql.DataSource;
 import org.apache.camel.Message;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.logica.hummingbird.framebroker.IContainerFactory;
-import com.logica.hummingbird.framebroker.parameters.Parameter;
-import com.logica.hummingbird.framebroker.parameters.ParameterType;
+import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
 
 public class ParameterArchiver {
 	
     private JdbcTemplate jdbcTemplate;
 
-	public ParameterArchiver(IContainerFactory containerFactory, DataSource dataSource) {
+	public ParameterArchiver(ContainerFactory containerFactory, DataSource dataSource) {
 		
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 		
-		for (Parameter parameter : containerFactory.getAllParameters().values()) {
+		for (ParameterImpl parameter : containerFactory.getAllParameters().values()) {
 			if (parameter.getType().getType() == ParameterType.eParameterType.FLOAT) {
 				// create float table
 				this.jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS " + parameter.getName()

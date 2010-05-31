@@ -32,9 +32,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.ccsds.TmPacket;
-import com.logica.hummingbird.framebroker.IContainer;
-import com.logica.hummingbird.framebroker.IContainerFactory;
-import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.spacesystemmodel.Container;
+import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 
 /**
  * The packet consists of a sequence of packet header fields, which are parameters, and a 
@@ -52,7 +52,7 @@ public class PacketProducer extends CcsdsProducer {
 		return tmPacket;
 	}
 
-	public PacketProducer(IContainerFactory containerFactory, FrameProducer parent) {
+	public PacketProducer(ContainerFactory containerFactory, FrameProducer parent) {
 		super(containerFactory);
 		this.parent = parent;
 
@@ -61,7 +61,7 @@ public class PacketProducer extends CcsdsProducer {
 		 *   2. A container per layout of a packet. The layout to be used is defined as a constraint, i.e. for example if
 		 *      the header parameter 'CCSDS_APID == 123' is valid, then a specific layout will be used. */
 		try {
-			for (IContainer sub : containerFactory.getContainer("TMPacket").getSubContainers()) {
+			for (Container sub : containerFactory.getContainer("TMPacket").getSubContainers()) {
 				sub.addUpdateObserver(this);
 			}
 			containerFactory.getContainer("TMPacket").addCompletionObserver(this);

@@ -32,8 +32,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.ccsds.TmParameter;
-import com.logica.hummingbird.framebroker.IContainerFactory;
-import com.logica.hummingbird.framebroker.parameters.Parameter;
+import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
 
 /**
  * TODO write here a description of the class
@@ -45,13 +45,13 @@ public class ParameterProducer extends CcsdsProducer {
 	
 	TmParameter tmParameter = new TmParameter();
 
-	public ParameterProducer(IContainerFactory containerFactory, PacketProducer parent) {
+	public ParameterProducer(ContainerFactory containerFactory, PacketProducer parent) {
 		super(containerFactory);
 		
 		this.parent = parent;
 		
 		/** Register with all parameters corresponding to header fields. */
-		for (Parameter parameter : containerFactory.getAllParameters().values()) {
+		for (ParameterImpl parameter : containerFactory.getAllParameters().values()) {
 			parameter.addUpdateObserver(this);
 			parameter.addCompletionObserver(this);
 		}

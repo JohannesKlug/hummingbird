@@ -14,10 +14,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
-import com.logica.hummingbird.framebroker.exceptions.BitSetOperationException;
-import com.logica.hummingbird.framebroker.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.framebroker.parameters.IntegerParameter;
-import com.logica.hummingbird.framebroker.parameters.Parameter;
+import com.logica.hummingbird.spacesystemmodel.BitSetUtility;
+import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
+import com.logica.hummingbird.spacesystemmodel.Container;
+import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
+import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
 import com.logica.hummingbird.testsupport.MockContainerModelFactory;
 
 /**
@@ -62,12 +65,12 @@ public class ContainerTest {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Setting up for all tests");
 		}
-		testFrameBroker = new ContainerProcessor(MOCK_CONTAINER_MODEL_FACTORY);
+		testFrameBroker = new FrameBrokerImpl(MOCK_CONTAINER_MODEL_FACTORY);
 	}
 
 	/**
 	 * Test method for checking a valid BitSet can be unmarshalled into a collection of Java objects (the Containers)
-	 * {@link com.logica.hummingbird.framebroker.Container#unmarshall(java.util.BitSet)}
+	 * {@link com.logica.hummingbird.spacesystemmodel.ContainerImpl#unmarshall(java.util.BitSet)}
 	 * .
 	 * 
 	 * @throws UnknownContainerNameException
@@ -81,17 +84,17 @@ public class ContainerTest {
 		testFrameBroker.unmarshall("TMFrame", frame);
 		
 		// Check the unmarshalling was successful...
-		IContainer tmframe = testFrameBroker.getContainer("TMFrame");
-		Assert.isInstanceOf(Container.class, tmframe);
+		Container tmframe = testFrameBroker.getContainer("TMFrame");
+		Assert.isInstanceOf(ContainerImpl.class, tmframe);
 		
 		// Test the parameter type ID (Apid) was unmarshalled as an IntegerParameter with value 555 (PACKET_TYPE_ID_555)
-		IContainer paramTypeID = testFrameBroker.getContainer(MockContainerModelFactory.PACKET_ID_NAME);
+		Container paramTypeID = testFrameBroker.getContainer(MockContainerModelFactory.PACKET_ID_NAME);
 		Assert.isInstanceOf(IntegerParameter.class, paramTypeID);
 		Number value = ((IntegerParameter)paramTypeID).getValue();
 		assertEquals("Parameter has incorrect value.", Integer.parseInt(PACKET_TYPE_ID_555), value.intValue());
 		
 		// Test that there is a Test Param A (32 bit unsigned int) as expected.
-		IContainer testParamA = testFrameBroker.getContainer(MockContainerModelFactory.TEST_PARAM_A);
+		Container testParamA = testFrameBroker.getContainer(MockContainerModelFactory.TEST_PARAM_A);
 		Assert.isInstanceOf(IntegerParameter.class, testParamA);
 		Number testParamValue = ((IntegerParameter)testParamA).getValue();
 		assertEquals("Parameter has incorrect value.", PARAM_A_TEST_VALUE, testParamValue.intValue());
@@ -100,7 +103,7 @@ public class ContainerTest {
 	/**
 	 * Tests marshalling a <b>valid</b> population of a Mock Container Model.  The Model is
 	 * populated in the test method.
-	 * {@link com.logica.hummingbird.framebroker.Container#marshall(java.util.BitSet, int)}
+	 * {@link com.logica.hummingbird.spacesystemmodel.ContainerImpl#marshall(java.util.BitSet, int)}
 	 * .
 	 * 
 	 * @throws UnknownContainerNameException
@@ -113,11 +116,11 @@ public class ContainerTest {
 
 		/** Populate the input mock frame **/
 		// Set the Apid to Packet ID type A
-		Parameter apid = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.PACKET_ID_NAME);
+		ParameterImpl apid = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.PACKET_ID_NAME);
 		apid.setValue(Float.valueOf(MockContainerModelFactory.PACKET_TYPE_A_ID));
 
 		// Set parameter A value
-		Parameter paramA = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.TEST_PARAM_A);
+		ParameterImpl paramA = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.TEST_PARAM_A);
 		paramA.setValue(PARAM_A_TEST_VALUE);
 
 		// Get the frame length, that is, the sum of itself and it's tree of sub
