@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TmParameter {
-		
+
 	Map<String, Object> values = new HashMap<String, Object>();
+
+	Integer apid;
 
 	public Map<String, Object> getValues() {
 		return values;
 	}
-	
+
 }

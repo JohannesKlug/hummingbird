@@ -9,6 +9,8 @@ public class TmPacket {
     List<TmParameter> parameters = new ArrayList<TmParameter>();;
 
     Map<String, Object> values = new HashMap<String, Object>();
+    
+    Integer apid; 
 
     public List<TmParameter> getParameters() {
 		return parameters;
