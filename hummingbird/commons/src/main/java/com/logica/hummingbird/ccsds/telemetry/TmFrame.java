@@ -21,4 +21,20 @@ public class TmFrame {
 	public Map<String, Object> getValues() {
 		return values;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("TmFrame [packets=");
+		builder.append(packets);
+		builder.append(", values=");
+		builder.append(values);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
 }
