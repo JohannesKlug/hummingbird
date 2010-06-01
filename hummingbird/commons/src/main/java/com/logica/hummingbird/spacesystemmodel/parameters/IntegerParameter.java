@@ -38,47 +38,52 @@ import com.logica.hummingbird.spacesystemmodel.SpaceSystemModelObserver;
  * 
  * @author Gert Villemos
  * @author Mark Doyle
- *
+ * 
  */
 public class IntegerParameter extends ParameterImpl {
 	/**
-	 * Logger for this class	
+	 * Logger for this class
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(IntegerParameter.class);
 
 	/** The value of the integer. */
 	protected Integer value = 0;
-	
+
 	/**
 	 * Constructor of the IntegerParameter class.
-	 *
-	 * @param name The name of the container. Used as the unique identifier of the container.
-	 * @param shortDescription A one-line description, tooltip style, of the container.
-	 * @param longDescription A full description of the container, help style. 
-	 * @param ParameterType The type of the container. The type defines the length and behaviour of the parameter.
-	 * @param value The initial value.
+	 * 
+	 * @param name
+	 *            The name of the container. Used as the unique identifier of the container.
+	 * @param shortDescription
+	 *            A one-line description, tooltip style, of the container.
+	 * @param longDescription
+	 *            A full description of the container, help style.
+	 * @param ParameterType
+	 *            The type of the container. The type defines the length and behaviour of the parameter.
+	 * @param value
+	 *            The initial value.
 	 */
-	public IntegerParameter(String name, String shortDescription,
-			String longDescription, ParameterType type, int value) {
+	public IntegerParameter(String name, String shortDescription, String longDescription, ParameterType type, int value) {
 		super(name, shortDescription, longDescription, type);
 		this.value = value;
 	}
-		
+
 	@Override
 	public BitSet unmarshall(BitSet packet) {
-		if(LOG.isDebugEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Unmarshalling " + this.name + " : " + packet);
 		}
 		value = BitSetUtility.extractInteger(packet, 0, (int) type.sizeInBits);
-		/** TODO Create POJO and send to observer. */
-		for (SpaceSystemModelObserver producer : updateObservers) {
-			producer.updated(name, value);
+
+		// TODO Create POJO and send to observer.
+		for (SpaceSystemModelObserver spaceSysModelObserver : updateObservers) {
+			spaceSysModelObserver.updated(name, value);
 		}
 
 		BitSet returnPacket = packet.get((int) type.sizeInBits, packet.length());
 		return returnPacket;
 	}
-	
+
 	@Override
 	public int marshall(BitSet packet, int offset) {
 		try {
@@ -86,17 +91,18 @@ public class IntegerParameter extends ParameterImpl {
 		}
 		catch (RuntimeException e) {
 			// TODO log this
-			System.out.println("Error encoding parameter '" + this.name + "'. The value '" + this.value + "' cannot be encoded in " + type.sizeInBits + " bit(s).");	
+			System.out.println("Error encoding parameter '" + this.name + "'. The value '" + this.value + "' cannot be encoded in " + type.sizeInBits
+					+ " bit(s).");
 		}
-		
+
 		return offset + (int) type.sizeInBits;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "[int (" + this.type.sizeInBits + ") " + this.name + "=" + this.value + "]"; 
+		return "[int (" + this.type.sizeInBits + ") " + this.name + "=" + this.value + "]";
 	}
-	
+
 	@Override
 	public Number getValue() {
 		return value;
