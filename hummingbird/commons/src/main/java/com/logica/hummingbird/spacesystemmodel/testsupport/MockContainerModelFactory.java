@@ -1,4 +1,4 @@
-package com.logica.hummingbird.testsupport;
+package com.logica.hummingbird.spacesystemmodel.testsupport;
 
 import java.util.ArrayList;
 import java.util.HashMap;

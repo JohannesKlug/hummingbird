@@ -1,4 +1,4 @@
-package com.logica.hummingbird.testsupport;
+package com.logica.hummingbird;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,7 @@ import org.junit.Test;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
+import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
 
 
 public class MockContainerModelFactoryTest {

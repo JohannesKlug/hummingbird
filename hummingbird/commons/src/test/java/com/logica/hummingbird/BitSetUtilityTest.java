@@ -1,4 +1,4 @@
-package com.logica.hummingbird.framebroker;
+package com.logica.hummingbird;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
