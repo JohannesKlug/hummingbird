@@ -9,8 +9,8 @@ import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
 
 import com.logica.hummingbird.MessageType;
-import com.logica.hummingbird.ccsds.TmPacket;
-import com.logica.hummingbird.ccsds.TmParameter;
+import com.logica.hummingbird.ccsds.telemetry.TmPacket;
+import com.logica.hummingbird.ccsds.telemetry.TmParameter;
 import com.logica.hummingbird.framebroker.producers.CcsdsProducer;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;

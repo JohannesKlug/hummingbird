@@ -9,9 +9,9 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
-import com.logica.hummingbird.ccsds.TmFrame;
-import com.logica.hummingbird.ccsds.TmPacket;
-import com.logica.hummingbird.ccsds.TmParameter;
+import com.logica.hummingbird.ccsds.telemetry.TmFrame;
+import com.logica.hummingbird.ccsds.telemetry.TmPacket;
+import com.logica.hummingbird.ccsds.telemetry.TmParameter;
 import com.logica.hummingbird.framebroker.FrameBrokerImpl;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 

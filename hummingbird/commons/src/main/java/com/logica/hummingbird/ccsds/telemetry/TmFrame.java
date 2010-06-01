@@ -1,4 +1,4 @@
-package com.logica.hummingbird.ccsds;
+package com.logica.hummingbird.ccsds.telemetry;
 
 import java.util.ArrayList;
 import java.util.HashMap;

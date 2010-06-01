@@ -31,7 +31,7 @@ import java.util.BitSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.ccsds.TmParameter;
+import com.logica.hummingbird.ccsds.telemetry.TmParameter;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
 

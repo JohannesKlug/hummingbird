@@ -1,6 +1,6 @@
 package com.logica.hummingbird.framebroker.producers;
 
-import com.logica.hummingbird.ccsds.TmFrame;
+import com.logica.hummingbird.ccsds.telemetry.TmFrame;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.SpaceSystemModelObserver;
 
