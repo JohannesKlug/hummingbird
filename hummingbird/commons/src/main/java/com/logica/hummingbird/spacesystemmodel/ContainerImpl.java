@@ -131,7 +131,7 @@ public class ContainerImpl extends NamedElement implements Container {
 	public BitSet unmarshall(BitSet packet) {
 		// Check if the BitSet has been truncated by testing it against the known length of the container.
 		// This should only be possible on the root container since it's the first thing to be tested.  If
-		// a truncation reversal bit it tagged on the end the sub-containers cannot be truncated.
+		// a "truncation reversal" bit is tagged on the end the sub-containers cannot be truncated.
 		boolean truncated = false;
 		if(packet.length() < getLength()) {
 			if(LOG.isDebugEnabled()) {
@@ -257,9 +257,22 @@ public class ContainerImpl extends NamedElement implements Container {
 		}
 	}
 
+	/**
+	 * Returns the length of the complete container in bits.  This simply iterates over
+	 * all the sub containers until getting the lengths of each one.  The length of
+	 * a Container is defined as the length of all it's SubContainers parameters.  These
+	 * parameters may be grouped into other containers, e.g., headers, packetbody etc but these are
+	 * conceptual and have no size.
+	 * For example, a FrameHeader Container is an abstract container consisting of n sub containers,
+	 * x of this will be concrete parameter values (where x <= n).  When iterating over it's 
+	 * sub containers it will eventually hit the parameters of which it is made up; these know how 
+	 * large they are and return their length value.  This value is propagated back up to the initial 
+	 * container having been summed with all the other sub-containers via the getLength methods loop. 
+	 * 
+	 * The length is lazily loaded. 
+	 */
 	@Override
 	public int getLength() {
-
 		/** Lazy initialize the attribute upon first access. */
 		if (this.length == 0) {
 			/** Iterate through all subcontainers and sum the size.*/

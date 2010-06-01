@@ -34,6 +34,12 @@ import org.slf4j.LoggerFactory;
 import com.logica.hummingbird.spacesystemmodel.BitSetUtility;
 import com.logica.hummingbird.spacesystemmodel.SpaceSystemModelObserver;
 
+/**
+ * 
+ * @author Gert Villemos
+ * @author Mark Doyle
+ *
+ */
 public class IntegerParameter extends ParameterImpl {
 	/**
 	 * Logger for this class	
