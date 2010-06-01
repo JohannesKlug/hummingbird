@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.logica.hummingbird.framebroker;
+package com.logica.hummingbird;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,13 +15,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
 import com.logica.hummingbird.spacesystemmodel.BitSetUtility;
-import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
 import com.logica.hummingbird.spacesystemmodel.Container;
+import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
-import com.logica.hummingbird.testsupport.MockContainerModelFactory;
+import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
 
 /**
  * @author Mark Doyle
@@ -35,23 +35,21 @@ public class ContainerTest {
 
 	private static final MockContainerModelFactory MOCK_CONTAINER_MODEL_FACTORY = new MockContainerModelFactory();
 
-	private static IFrameBroker testFrameBroker = null;
-
 	private static final String EXPECTED_BIT_SET_DUMP = "11010100 01011011 11000000 00000000 00000000 00000000 00000000 00000000 "
-			+ System.getProperty("line.separator")
-			+ "00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 "
+			+ System.getProperty("line.separator") + "00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 "
 			+ System.getProperty("line.separator");
-	
+
 	/**
-	 * Based upon the MockContainerFactory this Bit String encodes the Mock Container model with a param type ID of 555 and a param A test value of 123
+	 * Based upon the MockContainerFactory this Bit String encodes the Mock Container model with a param type ID of 555
+	 * and a param A test value of 123
 	 */
 	private final static String BITSET_AS_STRING = "11010100010110111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
-	
+
 	/**
 	 * Constant used to reference param type ID 555 in the tests.
 	 */
 	private static final String PACKET_TYPE_ID_555 = "555";
-	
+
 	/**
 	 * A value used in testing to set param A to a value.
 	 */
@@ -65,46 +63,45 @@ public class ContainerTest {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Setting up for all tests");
 		}
-		testFrameBroker = new FrameBrokerImpl(MOCK_CONTAINER_MODEL_FACTORY);
+
+		ContainerFactory mockFactory = MOCK_CONTAINER_MODEL_FACTORY;
 	}
 
 	/**
 	 * Test method for checking a valid BitSet can be unmarshalled into a collection of Java objects (the Containers)
-	 * {@link com.logica.hummingbird.spacesystemmodel.ContainerImpl#unmarshall(java.util.BitSet)}
-	 * .
+	 * {@link com.logica.hummingbird.spacesystemmodel.ContainerImpl#unmarshall(java.util.BitSet)} .
 	 * 
 	 * @throws UnknownContainerNameException
-	 * @throws BitSetOperationException 
+	 * @throws BitSetOperationException
 	 */
 	@Test
 	public void testUnmarshall() throws UnknownContainerNameException, BitSetOperationException {
 		LOG.info("Beginning test");
-		
+
 		BitSet frame = BitSetUtility.fromString(BITSET_AS_STRING);
-		testFrameBroker.unmarshall("TMFrame", frame);
-		
+
+		Container tmframe = MOCK_CONTAINER_MODEL_FACTORY.getContainer("TMFrame");
+		tmframe.unmarshall(frame);
+
 		// Check the unmarshalling was successful...
-		Container tmframe = testFrameBroker.getContainer("TMFrame");
-		Assert.isInstanceOf(ContainerImpl.class, tmframe);
-		
 		// Test the parameter type ID (Apid) was unmarshalled as an IntegerParameter with value 555 (PACKET_TYPE_ID_555)
-		Container paramTypeID = testFrameBroker.getContainer(MockContainerModelFactory.PACKET_ID_NAME);
+		// Container paramTypeID = testFrameBroker.getContainer(MockContainerModelFactory.PACKET_ID_NAME);
+		Container paramTypeID = MOCK_CONTAINER_MODEL_FACTORY.getContainer(MockContainerModelFactory.PACKET_ID_NAME);
 		Assert.isInstanceOf(IntegerParameter.class, paramTypeID);
-		Number value = ((IntegerParameter)paramTypeID).getValue();
+		Number value = ((IntegerParameter) paramTypeID).getValue();
 		assertEquals("Parameter has incorrect value.", Integer.parseInt(PACKET_TYPE_ID_555), value.intValue());
-		
+
 		// Test that there is a Test Param A (32 bit unsigned int) as expected.
-		Container testParamA = testFrameBroker.getContainer(MockContainerModelFactory.TEST_PARAM_A);
+		// Container testParamA = testFrameBroker.getContainer(MockContainerModelFactory.TEST_PARAM_A);
+		Container testParamA = MOCK_CONTAINER_MODEL_FACTORY.getContainer(MockContainerModelFactory.TEST_PARAM_A);
 		Assert.isInstanceOf(IntegerParameter.class, testParamA);
-		Number testParamValue = ((IntegerParameter)testParamA).getValue();
+		Number testParamValue = ((IntegerParameter) testParamA).getValue();
 		assertEquals("Parameter has incorrect value.", PARAM_A_TEST_VALUE, testParamValue.intValue());
 	}
 
 	/**
-	 * Tests marshalling a <b>valid</b> population of a Mock Container Model.  The Model is
-	 * populated in the test method.
-	 * {@link com.logica.hummingbird.spacesystemmodel.ContainerImpl#marshall(java.util.BitSet, int)}
-	 * .
+	 * Tests marshalling a <b>valid</b> population of a Mock Container Model. The Model is populated in the test method.
+	 * {@link com.logica.hummingbird.spacesystemmodel.ContainerImpl#marshall(java.util.BitSet, int)} .
 	 * 
 	 * @throws UnknownContainerNameException
 	 */
@@ -132,7 +129,8 @@ public class ContainerTest {
 		BitSet frame = new BitSet(length);
 
 		// Marshall the Frame to a bitset
-		testFrameBroker.marshall("TMFrame", frame);
+		Container tmframe = MOCK_CONTAINER_MODEL_FACTORY.getContainer("TMFrame");
+		tmframe.marshall(frame, 0);
 
 		LOG.debug("Bitset length = " + frame.size());
 		String binDump = BitSetUtility.binDump(frame);
@@ -144,11 +142,11 @@ public class ContainerTest {
 
 		// Now let's marshall a parameter and run some tests.
 		BitSet apidBitSet = new BitSet(MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.PACKET_ID_NAME).getLength());
-		testFrameBroker.marshall(MockContainerModelFactory.PACKET_ID_NAME, apidBitSet);
+		Container packet = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.PACKET_ID_NAME);
+		packet.marshall(apidBitSet, 0);
 		String apidBinDump = BitSetUtility.binDump(apidBitSet);
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.PACKET_ID_NAME) + " = "
-					+ apidBinDump);
+			LOG.debug(MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.PACKET_ID_NAME) + " = " + apidBinDump);
 		}
 
 		String apidBinValue = Integer.toBinaryString(Integer.valueOf(MockContainerModelFactory.PACKET_TYPE_A_ID));
@@ -165,5 +163,4 @@ public class ContainerTest {
 		apidBinValueWithPadding.append(zeroPadding);
 		assertEquals("Apid does not match", StringUtils.deleteWhitespace(apidBinDump), apidBinValueWithPadding.toString());
 	}
-
 }
