@@ -34,6 +34,7 @@ import org.slf4j.LoggerFactory;
 import com.logica.hummingbird.framebroker.producers.CcsdsFrameProducer;
 import com.logica.hummingbird.framebroker.producers.CcsdsPacketProducer;
 import com.logica.hummingbird.framebroker.producers.CcsdsParameterProducer;
+import com.logica.hummingbird.framebroker.producers.CcsdsProducer;
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.SpaceSystemModelObserver;
@@ -54,9 +55,9 @@ public class FrameBrokerImpl implements IFrameBroker {
 	/** The factory used to locate the models. */
 	protected ContainerFactory factory = null;
 
-	SpaceSystemModelObserver frameProducer;
-	SpaceSystemModelObserver packetProducer;
-	SpaceSystemModelObserver parameterProducer;
+	CcsdsProducer frameProducer;
+	CcsdsProducer packetProducer;
+	CcsdsProducer parameterProducer;
 
 	/**
 	 * Constructor.
