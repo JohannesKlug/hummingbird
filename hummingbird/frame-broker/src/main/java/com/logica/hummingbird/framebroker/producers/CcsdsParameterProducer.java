@@ -50,7 +50,7 @@ public class CcsdsParameterProducer extends CcsdsProducer {
 		
 		this.parent = parent;
 		
-		/** Register with all parameters corresponding to header fields. */
+		// Register with all parameters corresponding to header fields.
 		for (ParameterImpl parameter : containerFactory.getAllParameters().values()) {
 			parameter.addUpdateObserver(this);
 			parameter.addCompletionObserver(this);

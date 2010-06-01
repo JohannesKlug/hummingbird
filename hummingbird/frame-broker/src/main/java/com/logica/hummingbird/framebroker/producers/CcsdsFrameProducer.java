@@ -41,18 +41,18 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameEx
  */
 public class CcsdsFrameProducer extends CcsdsProducer {
 	private final static Logger LOG = LoggerFactory.getLogger(CcsdsFrameProducer.class);
-	
-	TmFrame tmFrame = new TmFrame();
 
-	public TmFrame getTmFrame() {
-		return tmFrame;
-	}
+	TmFrame tmFrame = new TmFrame();
 
 	public CcsdsFrameProducer(ContainerFactory containerFactory) {
 		super(containerFactory);
 
-
 		try {
+			// Add this as a completion observer to receive updates every time a complete frame has
+			// been updated.
+			containerFactory.getContainer("TMFrame").addCompletionObserver(this);
+	
+			// Add this as an update observer to receive updates when any subcontainers are updated
 			for (Container sub : containerFactory.getContainer("TMFrameHeader").getSubContainers()) {
 				sub.addUpdateObserver(this);
 			}
@@ -60,18 +60,21 @@ public class CcsdsFrameProducer extends CcsdsProducer {
 			for (Container sub : containerFactory.getContainer("TMFrameTail").getSubContainers()) {
 				sub.addUpdateObserver(this);
 			}
-
-			containerFactory.getContainer("TMFrame").addCompletionObserver(this);
 		}
 		catch (UnknownContainerNameException e) {
 			LOG.error(e.toString());
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void completed() {
+		// Now the complete frame is complete we can set the ccsds tmframe in the model
 		CcsdsProducer.setFrame(tmFrame);
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("TmFrame completely updated");
+			LOG.debug("TmFrame = " + tmFrame);
+		}
 	}
 
 	@Override
@@ -81,7 +84,7 @@ public class CcsdsFrameProducer extends CcsdsProducer {
 
 	@Override
 	public void updated(String field, int value) {
-		tmFrame.getValues().put(field, value);	
+		tmFrame.getValues().put(field, value);
 	}
 
 	@Override
@@ -93,7 +96,9 @@ public class CcsdsFrameProducer extends CcsdsProducer {
 	public void updated(String field, double value) {
 		tmFrame.getValues().put(field, value);
 	}
-	
-	
+
+	public TmFrame getTmFrame() {
+		return tmFrame;
+	}
 
 }

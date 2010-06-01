@@ -5,17 +5,12 @@ import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.SpaceSystemModelObserver;
 
 public abstract class CcsdsProducer implements SpaceSystemModelObserver {
-	
-	// FIXME TmFrame being static is not a good design!
-	protected static TmFrame frame;
-	
-	public static TmFrame getFrame() {
-		return frame;
-	}
 
-	public static void setFrame(TmFrame tmFrame) {
-		CcsdsProducer.frame = tmFrame;
-	}
+	/**
+	 * This is a CCSDS TmFrame model which is populated each time the spacesystemmodel
+	 * is updated.
+	 */
+	protected static TmFrame frame;
 
 	private ContainerFactory containerFactory;
 
@@ -29,6 +24,14 @@ public abstract class CcsdsProducer implements SpaceSystemModelObserver {
 
 	public ContainerFactory getContainerFactory() {
 		return containerFactory;
+	}
+
+	public static void setFrame(TmFrame tmFrame) {
+		CcsdsProducer.frame = tmFrame;
+	}
+
+	public static TmFrame getFrame() {
+		return frame;
 	}
 
 }
