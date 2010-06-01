@@ -31,9 +31,9 @@ import java.util.BitSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.framebroker.producers.FrameProducer;
-import com.logica.hummingbird.framebroker.producers.PacketProducer;
-import com.logica.hummingbird.framebroker.producers.ParameterProducer;
+import com.logica.hummingbird.framebroker.producers.CcsdsFrameProducer;
+import com.logica.hummingbird.framebroker.producers.CcsdsPacketProducer;
+import com.logica.hummingbird.framebroker.producers.CcsdsParameterProducer;
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.SpaceSystemModelObserver;
@@ -67,9 +67,9 @@ public class FrameBrokerImpl implements IFrameBroker {
 	public FrameBrokerImpl(ContainerFactory factory) {
 		this.factory = factory;
 		
-		frameProducer = new FrameProducer(factory);
-		packetProducer = new PacketProducer(factory, (FrameProducer) frameProducer);
-		parameterProducer = new ParameterProducer(factory, (PacketProducer) packetProducer);
+		frameProducer = new CcsdsFrameProducer(factory);
+		packetProducer = new CcsdsPacketProducer(factory, (CcsdsFrameProducer) frameProducer);
+		parameterProducer = new CcsdsParameterProducer(factory, (CcsdsPacketProducer) packetProducer);
 		
 		LOG.debug("Frame Broker's ContainerProcessor instantiated.");
 	}

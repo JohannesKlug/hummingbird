@@ -39,8 +39,8 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameEx
 /**
  * TODO write here a description of the class
  */
-public class FrameProducer extends CcsdsProducer {
-	private final static Logger LOG = LoggerFactory.getLogger(FrameProducer.class);
+public class CcsdsFrameProducer extends CcsdsProducer {
+	private final static Logger LOG = LoggerFactory.getLogger(CcsdsFrameProducer.class);
 	
 	TmFrame tmFrame = new TmFrame();
 
@@ -48,7 +48,7 @@ public class FrameProducer extends CcsdsProducer {
 		return tmFrame;
 	}
 
-	public FrameProducer(ContainerFactory containerFactory) {
+	public CcsdsFrameProducer(ContainerFactory containerFactory) {
 		super(containerFactory);
 
 

@@ -41,10 +41,10 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameEx
  * packet body which is binary data. This producer registers for the parameters in the 
  * header, and for the packet itself to get the raw data.
  */
-public class PacketProducer extends CcsdsProducer {
-	private final static Logger LOG = LoggerFactory.getLogger(PacketProducer.class);
+public class CcsdsPacketProducer extends CcsdsProducer {
+	private final static Logger LOG = LoggerFactory.getLogger(CcsdsPacketProducer.class);
 	
-	FrameProducer parent;
+	CcsdsFrameProducer parent;
 	
 	TmPacket tmPacket = new TmPacket();
 	
@@ -52,7 +52,7 @@ public class PacketProducer extends CcsdsProducer {
 		return tmPacket;
 	}
 
-	public PacketProducer(ContainerFactory containerFactory, FrameProducer parent) {
+	public CcsdsPacketProducer(ContainerFactory containerFactory, CcsdsFrameProducer parent) {
 		super(containerFactory);
 		this.parent = parent;
 

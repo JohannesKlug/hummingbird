@@ -38,14 +38,14 @@ import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
 /**
  * TODO write here a description of the class
  */
-public class ParameterProducer extends CcsdsProducer {
-	private final static Logger LOG = LoggerFactory.getLogger(ParameterProducer.class);
+public class CcsdsParameterProducer extends CcsdsProducer {
+	private final static Logger LOG = LoggerFactory.getLogger(CcsdsParameterProducer.class);
 	
-	PacketProducer parent;
+	CcsdsPacketProducer parent;
 	
 	TmParameter tmParameter = new TmParameter();
 
-	public ParameterProducer(ContainerFactory containerFactory, PacketProducer parent) {
+	public CcsdsParameterProducer(ContainerFactory containerFactory, CcsdsPacketProducer parent) {
 		super(containerFactory);
 		
 		this.parent = parent;
