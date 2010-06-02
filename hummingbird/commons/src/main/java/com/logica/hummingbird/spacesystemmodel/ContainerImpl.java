@@ -38,7 +38,6 @@ import java.util.Map.Entry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.MessageType;
 import com.logica.hummingbird.spacesystemmodel.parameters.Parameter;
 
 /**
@@ -83,8 +82,9 @@ public class ContainerImpl extends NamedElement implements Container {
 	 */
 	protected int length = 0;
 
-	protected List<SpaceSystemModelObserver> updateObservers = new ArrayList<SpaceSystemModelObserver>();
-	protected List<SpaceSystemModelObserver> completionObservers = new ArrayList<SpaceSystemModelObserver>();
+	protected List<ContainerObserver> updateObservers = new ArrayList<ContainerObserver>();
+	protected List<ContainerObserver> completionObservers = new ArrayList<ContainerObserver>();
+	protected List<ParameterObserver> updatedParameterObservers = new ArrayList<ParameterObserver>();
 
 	protected Container parent = null;
 
@@ -110,6 +110,9 @@ public class ContainerImpl extends NamedElement implements Container {
 	 * 
 	 */
 	protected boolean matchRestrictions() {
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Match restriction called");
+		}
 		// Check for match against the restriction criteria. The base container will forward the data to all containers
 		// which have been defined with the base container as a base. The sub containers themselves must decide whether
 		// they are relevant for the processing.
@@ -126,6 +129,9 @@ public class ContainerImpl extends NamedElement implements Container {
 			match = entry.getKey().match(entry.getValue());
 		}
 
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("returning " + match);
+		}
 		return match;
 	}
 
@@ -167,11 +173,11 @@ public class ContainerImpl extends NamedElement implements Container {
 				completeBitData = container.unmarshall(completeBitData);
 			}
 
-			for (SpaceSystemModelObserver updateObserver : updateObservers) {
+			for (ContainerObserver updateObserver : updateObservers) {
 				updateObserver.updated(name, completeBitData);
 			}
 
-			for (SpaceSystemModelObserver completionObserver : completionObservers) {
+			for (ContainerObserver completionObserver : completionObservers) {
 				completionObserver.completed();
 			}
 		}
@@ -201,8 +207,9 @@ public class ContainerImpl extends NamedElement implements Container {
 
 	@Override
 	public String toString() {
-		/** If the packet should be processed by this container. */
 		String str = "";
+
+		// If the packet should be processed by this container...
 		if (matchRestrictions() == true) {
 			str += "{" + this.name;
 			for (Container container : subContainers) {
@@ -292,18 +299,23 @@ public class ContainerImpl extends NamedElement implements Container {
 	}
 
 	@Override
-	public void addCompletionObserver(SpaceSystemModelObserver producer) {
-		this.completionObservers.add(producer);
+	public void addCompletionObserver(ContainerObserver observer) {
+		this.completionObservers.add(observer);
 
 	}
 
 	@Override
-	public void addUpdateObserver(SpaceSystemModelObserver producer) {
-		this.updateObservers.add(producer);
+	public void addUpdateObserver(ContainerObserver observer) {
+		this.updateObservers.add(observer);
 
 	}
 
+	@Override
+	public void addParameterUpdateObserve(ParameterObserver observer) {
+		this.updatedParameterObservers.add(observer);
+	}
+	
 	public List<Container> getSubContainers() {
 		return subContainers;
-	}
+	}	
 }

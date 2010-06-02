@@ -1,19 +1,26 @@
 package com.logica.hummingbird.telemetry.ccsds;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.BitSet;
 import java.util.List;
-import java.util.Map;
 
+import com.logica.hummingbird.telemetry.FrameHeader;
+import com.logica.hummingbird.telemetry.FrameTail;
 import com.logica.hummingbird.telemetry.TelemetryFrame;
 
 public class CcsdsTmFrame implements TelemetryFrame {
+	
+	FrameHeader frameHeader;
+	
 	/**
 	 * List of Telemetry Packets contained by this frame.
 	 */
 	List<CcsdsTmPacket> packets = new ArrayList<CcsdsTmPacket>();
+	
+	FrameTail frameTail;
 
-	Map<String, Object> values = new HashMap<String, Object>();
+	
+//	Map<String, Object> values = new HashMap<String, Object>();
 
 	/* (non-Javadoc)
 	 * @see com.logica.hummingbird.ccsds.telemetry.TelemetryFrame#getPackets()
@@ -24,29 +31,6 @@ public class CcsdsTmFrame implements TelemetryFrame {
 
 	public void setPackets(List<CcsdsTmPacket> packets) {
 		this.packets = packets;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.logica.hummingbird.ccsds.telemetry.TelemetryFrame#getValues()
-	 */
-	public Map<String, Object> getValues() {
-		return values;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("TmFrame [packets=");
-		builder.append(packets);
-		builder.append(", values=");
-		builder.append(values);
-		builder.append("]");
-		return builder.toString();
 	}
 
 	@Override
@@ -67,6 +51,25 @@ public class CcsdsTmFrame implements TelemetryFrame {
 	    boolean equal = packets.equals(otherFrame.getPackets());
 
 		return equal;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CcsdsTmFrame [framTail=");
+		builder.append(frameTail);
+		builder.append(", frameHeader=");
+		builder.append(frameHeader);
+		builder.append(", packets=");
+		builder.append(packets);
+		builder.append("]");
+		return builder.toString();
+	}
+
+	@Override
+	public void setValue(String field, BitSet value) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

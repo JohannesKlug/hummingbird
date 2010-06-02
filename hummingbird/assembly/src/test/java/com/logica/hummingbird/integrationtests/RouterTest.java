@@ -96,7 +96,7 @@ public class RouterTest extends CamelTestSupport {
     	
     	TelemetryFrame tmFrame = (TelemetryFrame) frameEndpoint.getReceivedExchanges().get(0).getIn().getBody();
     	
-    	System.out.println("Frame values: " + tmFrame.getValues());
+//    	System.out.println("Frame values: " + tmFrame.getValues());
     	System.out.println("Frame's 1st packet's values: " + tmFrame.getPackets().get(0).getValues());
     	System.out.println("Frame's 1st packet's 1st parameter's values: " + tmFrame.getPackets().get(0).getParameters().get(0).getValues());
     }

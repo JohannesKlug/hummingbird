@@ -92,9 +92,11 @@ public interface Container {
 	 */
 	public BitSet getRawValue();
 
-	public void addCompletionObserver(SpaceSystemModelObserver producer);
+	public void addCompletionObserver(ContainerObserver observer);
 
-	public void addUpdateObserver(SpaceSystemModelObserver producer);
+	public void addUpdateObserver(ContainerObserver observer);
+	
+	public void addParameterUpdateObserve(ParameterObserver observer);
 	
 	public List<Container> getSubContainers();
 }

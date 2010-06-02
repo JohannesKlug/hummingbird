@@ -32,11 +32,9 @@ import java.util.BitSet;
 /**
  * TODO write here a description of the class
  */
-public interface SpaceSystemModelObserver {
+public interface ContainerObserver {
 
 	public void updated(String field, BitSet value);
-	public void updated(String field, int value);
-	public void updated(String field, String value);
-	public void updated(String field, double value);
+
 	public void completed();
 }

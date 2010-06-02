@@ -21,7 +21,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationExcepti
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
-import com.logica.hummingbird.spacesystemmodel.testsupport.MockSpaceSystemModelFactory;
+import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
 
 /**
  * @author Mark Doyle
@@ -33,7 +33,7 @@ public class ContainerTest {
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(ContainerTest.class);
 
-	private static final MockSpaceSystemModelFactory MOCK_CONTAINER_MODEL_FACTORY = new MockSpaceSystemModelFactory();
+	private static final MockContainerModelFactory MOCK_CONTAINER_MODEL_FACTORY = new MockContainerModelFactory();
 
 	private static final String EXPECTED_BIT_SET_DUMP = "11010100 01011011 11000000 00000000 00000000 00000000 00000000 00000000 "
 			+ System.getProperty("line.separator") + "00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 "
@@ -86,14 +86,14 @@ public class ContainerTest {
 		// Check the unmarshalling was successful...
 		// Test the parameter type ID (Apid) was unmarshalled as an IntegerParameter with value 555 (PACKET_TYPE_ID_555)
 		// Container paramTypeID = testFrameBroker.getContainer(MockContainerModelFactory.PACKET_ID_NAME);
-		Container paramTypeID = MOCK_CONTAINER_MODEL_FACTORY.getContainer(MockSpaceSystemModelFactory.PACKET_ID_NAME);
+		Container paramTypeID = MOCK_CONTAINER_MODEL_FACTORY.getContainer(MockContainerModelFactory.PACKET_ID_NAME);
 		Assert.isInstanceOf(IntegerParameter.class, paramTypeID);
 		Number value = ((IntegerParameter) paramTypeID).getValue();
 		assertEquals("Parameter has incorrect value.", Integer.parseInt(PACKET_TYPE_ID_555), value.intValue());
 
 		// Test that there is a Test Param A (32 bit unsigned int) as expected.
 		// Container testParamA = testFrameBroker.getContainer(MockContainerModelFactory.TEST_PARAM_A);
-		Container testParamA = MOCK_CONTAINER_MODEL_FACTORY.getContainer(MockSpaceSystemModelFactory.TEST_PARAM_A);
+		Container testParamA = MOCK_CONTAINER_MODEL_FACTORY.getContainer(MockContainerModelFactory.TEST_PARAM_A);
 		Assert.isInstanceOf(IntegerParameter.class, testParamA);
 		Number testParamValue = ((IntegerParameter) testParamA).getValue();
 		assertEquals("Parameter has incorrect value.", PARAM_A_TEST_VALUE, testParamValue.intValue());
@@ -113,11 +113,11 @@ public class ContainerTest {
 
 		/** Populate the input mock frame **/
 		// Set the Apid to Packet ID type A
-		ParameterImpl apid = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockSpaceSystemModelFactory.PACKET_ID_NAME);
-		apid.setValue(Float.valueOf(MockSpaceSystemModelFactory.PACKET_TYPE_A_ID));
+		ParameterImpl apid = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.PACKET_ID_NAME);
+		apid.setValue(Float.valueOf(MockContainerModelFactory.PACKET_TYPE_A_ID));
 
 		// Set parameter A value
-		ParameterImpl paramA = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockSpaceSystemModelFactory.TEST_PARAM_A);
+		ParameterImpl paramA = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.TEST_PARAM_A);
 		paramA.setValue(PARAM_A_TEST_VALUE);
 
 		// Get the frame length, that is, the sum of itself and it's tree of sub
@@ -141,15 +141,15 @@ public class ContainerTest {
 		assertEquals("Bit dump not equal", EXPECTED_BIT_SET_DUMP, binDump);
 
 		// Now let's marshall a parameter and run some tests.
-		BitSet apidBitSet = new BitSet(MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockSpaceSystemModelFactory.PACKET_ID_NAME).getLength());
-		Container packet = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockSpaceSystemModelFactory.PACKET_ID_NAME);
+		BitSet apidBitSet = new BitSet(MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.PACKET_ID_NAME).getLength());
+		Container packet = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.PACKET_ID_NAME);
 		packet.marshall(apidBitSet, 0);
 		String apidBinDump = BitSetUtility.binDump(apidBitSet);
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockSpaceSystemModelFactory.PACKET_ID_NAME) + " = " + apidBinDump);
+			LOG.debug(MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.PACKET_ID_NAME) + " = " + apidBinDump);
 		}
 
-		String apidBinValue = Integer.toBinaryString(Integer.valueOf(MockSpaceSystemModelFactory.PACKET_TYPE_A_ID));
+		String apidBinValue = Integer.toBinaryString(Integer.valueOf(MockContainerModelFactory.PACKET_TYPE_A_ID));
 		// LSB first so we need to reverse the dumped string.
 		apidBinValue = new StringBuffer(apidBinValue).reverse().toString();
 		// BitSets are rounded up to 64 bits so we will have to pad the marshalled APID with extra 0's

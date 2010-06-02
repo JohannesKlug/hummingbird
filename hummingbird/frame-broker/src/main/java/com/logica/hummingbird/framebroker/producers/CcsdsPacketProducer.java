@@ -33,6 +33,7 @@ import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.ContainerObserver;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
 
@@ -41,7 +42,7 @@ import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
  * packet body which is binary data. This producer registers for the parameters in the 
  * header, and for the packet itself to get the raw data.
  */
-public class CcsdsPacketProducer extends CcsdsProducer {
+public class CcsdsPacketProducer extends CcsdsProducer implements ContainerObserver {
 	private final static Logger LOG = LoggerFactory.getLogger(CcsdsPacketProducer.class);
 	
 	CcsdsFrameProducer parent;
@@ -79,21 +80,8 @@ public class CcsdsPacketProducer extends CcsdsProducer {
 
 	@Override
 	public void updated(String field, BitSet value) {
-		tmPacket.getValues().put(field, value);
+		// TODO Auto-generated method stub
+		
 	}
 
-	@Override
-	public void updated(String field, int value) {
-		tmPacket.getValues().put(field, value);	
-	}
-
-	@Override
-	public void updated(String field, String value) {
-		tmPacket.getValues().put(field, value);
-	}
-
-	@Override
-	public void updated(String field, double value) {
-		tmPacket.getValues().put(field, value);
-	}
 }
