@@ -85,7 +85,6 @@ public class CcsdsFrameProducer extends CcsdsProducer implements ContainerObserv
 
 	@Override
 	public void updated(String field, BitSet value) {
-		// TODO Auto-generated method stub
 		
 	}
 

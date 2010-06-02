@@ -1,6 +1,7 @@
 package com.logica.hummingbird.telemetry.ccsds;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.List;
 
 import com.logica.hummingbird.telemetry.FrameHeader;
@@ -63,6 +64,12 @@ public class CcsdsTmFrame implements TelemetryFrame {
 		builder.append(packets);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	@Override
+	public void setValue(String field, BitSet value) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
