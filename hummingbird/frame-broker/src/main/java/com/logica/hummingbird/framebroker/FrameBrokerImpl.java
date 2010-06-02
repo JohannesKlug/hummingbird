@@ -28,6 +28,7 @@ package com.logica.hummingbird.framebroker;
 
 import java.util.BitSet;
 
+import org.omg.CosNaming.IstringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,17 +38,15 @@ import com.logica.hummingbird.framebroker.producers.CcsdsParameterProducer;
 import com.logica.hummingbird.framebroker.producers.CcsdsProducer;
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.spacesystemmodel.SpaceSystemModelObserver;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.telemetry.TelemetryFrame;
 
 /**
- * 
- * 
+ * TODO Improve comment.
  * The notification model for observers could have been implemented in two ways;
  * Firstly we could notify the observer when it changes. This is architecturally
  * pleasing as there is a direct coupling between the 2. Notify the observers
  * when the complete container has been unmarshalled.
- * 
  */
 public class FrameBrokerImpl implements IFrameBroker {
 	private final static Logger LOG = LoggerFactory.getLogger(FrameBrokerImpl.class);
@@ -62,17 +61,16 @@ public class FrameBrokerImpl implements IFrameBroker {
 	/**
 	 * Constructor.
 	 * 
+	 * SEt up the SpaceSystemModelFactory and the necessary message producers.
+	 * 
 	 * @param factory
 	 *            The factory to be used to obtain references to the container.
 	 * */
 	public FrameBrokerImpl(ContainerFactory factory) {
 		this.factory = factory;
-		
-		frameProducer = new CcsdsFrameProducer(factory);
-		packetProducer = new CcsdsPacketProducer(factory, (CcsdsFrameProducer) frameProducer);
-		parameterProducer = new CcsdsParameterProducer(factory, (CcsdsPacketProducer) packetProducer);
-		
-		LOG.debug("Frame Broker's ContainerProcessor instantiated.");
+		this.frameProducer = new CcsdsFrameProducer(factory);
+		this.packetProducer = new CcsdsPacketProducer(factory, (CcsdsFrameProducer) frameProducer);
+		this.parameterProducer = new CcsdsParameterProducer(factory, (CcsdsPacketProducer) packetProducer);
 	}
 
 	@Override
@@ -100,6 +98,11 @@ public class FrameBrokerImpl implements IFrameBroker {
 
 	public void setFactory(ContainerFactory factory) {
 		this.factory = factory;
+	}
+
+	@Override
+	public TelemetryFrame getFrame() {
+		return this.frameProducer.getFrame();
 	}
 
 }

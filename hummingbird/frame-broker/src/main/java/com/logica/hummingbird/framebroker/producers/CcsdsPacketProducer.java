@@ -31,10 +31,10 @@ import java.util.BitSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.ccsds.telemetry.TmPacket;
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
 
 /**
  * The packet consists of a sequence of packet header fields, which are parameters, and a 
@@ -46,9 +46,9 @@ public class CcsdsPacketProducer extends CcsdsProducer {
 	
 	CcsdsFrameProducer parent;
 	
-	TmPacket tmPacket = new TmPacket();
+	CcsdsTmPacket tmPacket = new CcsdsTmPacket();
 	
-	public TmPacket getTmPacket() {
+	public CcsdsTmPacket getTmPacket() {
 		return tmPacket;
 	}
 

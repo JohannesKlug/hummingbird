@@ -1,8 +1,8 @@
 package com.logica.hummingbird.framebroker.producers;
 
-import com.logica.hummingbird.ccsds.telemetry.TmFrame;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.SpaceSystemModelObserver;
+import com.logica.hummingbird.telemetry.TelemetryFrame;
 
 public abstract class CcsdsProducer implements SpaceSystemModelObserver {
 
@@ -10,7 +10,7 @@ public abstract class CcsdsProducer implements SpaceSystemModelObserver {
 	 * This is a CCSDS TmFrame model which is populated each time the spacesystemmodel
 	 * is updated.
 	 */
-	protected static TmFrame frame;
+	protected TelemetryFrame frame;
 
 	private ContainerFactory containerFactory;
 
@@ -26,11 +26,11 @@ public abstract class CcsdsProducer implements SpaceSystemModelObserver {
 		return containerFactory;
 	}
 
-	public static void setFrame(TmFrame tmFrame) {
-		CcsdsProducer.frame = tmFrame;
+	public void setFrame(TelemetryFrame tmFrame) {
+		this.frame = tmFrame;
 	}
 
-	public static TmFrame getFrame() {
+	public TelemetryFrame getFrame() {
 		return frame;
 	}
 

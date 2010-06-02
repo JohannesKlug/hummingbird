@@ -19,21 +19,53 @@ import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType.eParameterType;
 
 /**
- * This class is used for testing the Frame broker.  It creates a simple Container model which can be 
- * populated with values by tests.  The container model follows the Frame Broker rules and 
- * therefore contains a TMFrame, TMFrameHeader, TMPacket, and a TMFrameTail.
+ * This class is used for testing the Container model and anything that uses the SpaceSystemModel. It is a simple
+ * Container model representing a space system which can be populated with values by tests. The container model follows
+ * the CCSDS standards and therefore uses the TMFrame, TMFrameHeader, TMPacket, and a TMFrameTail concepts. They can go
+ * by any name since they are accessed using the constants X_ALIAS defined in the class.
  * 
- * @author Mark Doyle <markjohndoyle@googlemail.com>
+ * @author Mark Doyle <markjohndoyle@googlemail.com>, <mark.doyle@logica.com>
  * @since Hummingbird 0.0.1
  */
-public class MockContainerModelFactory implements ContainerFactory {
+public class MockSpaceSystemModelFactory implements ContainerFactory {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOG = LoggerFactory.getLogger(MockContainerModelFactory.class);
+	public static final Logger LOG = LoggerFactory.getLogger(MockSpaceSystemModelFactory.class);
 
-	public static final String TEST_PARAM_A = "TestParamA";
+	/**
+	 * MockSpaceSystemModel's telemetry frame alias
+	 */
+	public static final String TM_FRAME_ALIAS = "TMFrame";
+
+	/**
+	 * MockSpaceSystemModel's telemetry packet body alias
+	 */
+	public static final String TM_PACKET_BODY_ALIAS = "TMPacketBody";
+
+	/**
+	 * MockSpaceSystemModel's telemetry frame header alias
+	 */
+	public static final String TM_PACKET_HEADER_ALIAS = "TMPacketHeader";
+
+	/**
+	 * MockSpaceSystemModel's telemetry frame tail alias
+	 */
+	public static final String TM_FRAME_TAIL_ALIAS = "TMFrameTail";
+
+	/**
+	 * MockSpaceSystemModel's telemetry packet alias
+	 */
+	public static final String TM_PACKET_ALIAS = "TMPacket";
+
+	/**
+	 * MockSpaceSystemModel's telemetry packet header alias
+	 */
+	public static final String TM_FRAME_HEADER_ALIAS = "TMFrameHeader";
+
 	
+	public static final String TEST_PARAM_A = "TestParamA";
+
 	public static final String TEST_PARAM_B = "TestParamB";
 
 	public static final String PACKET_ID_NAME = "ApId";
@@ -45,13 +77,12 @@ public class MockContainerModelFactory implements ContainerFactory {
 	private Map<String, ContainerImpl> containers = new HashMap<String, ContainerImpl>();
 	private Map<String, ParameterImpl> parameters = new HashMap<String, ParameterImpl>();
 
-	public MockContainerModelFactory() {
+	public MockSpaceSystemModelFactory() {
 		initialise();
 	}
-	
+
 	/**
-	 * Creates an operational mock Container hierarchy which is used by the
-	 * FrameBroker.
+	 * Creates an operational mock Container hierarchy which is used by the FrameBroker.
 	 * 
 	 */
 	private void initialise() {
@@ -62,13 +93,13 @@ public class MockContainerModelFactory implements ContainerFactory {
 		/** Build the upper frame skeleton of the Model **/
 		// Create the Frame, header, packet and tail and add them to the
 		// containers collection
-		ContainerImpl tmFrame = new ContainerImpl("TMFrame", "Test frame", "Test TM frame for unit testing");
+		ContainerImpl tmFrame = new ContainerImpl(TM_FRAME_ALIAS, "Test frame", "Test TM frame for unit testing");
 		this.addToContainers(tmFrame);
-		ContainerImpl tmHeader = new ContainerImpl("TMFrameHeader", "Test header", "Test TM header for unit testing");
+		ContainerImpl tmHeader = new ContainerImpl(TM_FRAME_HEADER_ALIAS, "Test header", "Test TM header for unit testing");
 		this.addToContainers(tmHeader);
-		ContainerImpl tmPacket = new ContainerImpl("TMPacket", "Test packet", "Test TM packet for unit testing");
+		ContainerImpl tmPacket = new ContainerImpl(TM_PACKET_ALIAS, "Test packet", "Test TM packet for unit testing");
 		this.addToContainers(tmPacket);
-		ContainerImpl tmTail = new ContainerImpl("TMFrameTail", "Test tail", "Test TM tail for unit testing");
+		ContainerImpl tmTail = new ContainerImpl(TM_FRAME_TAIL_ALIAS, "Test tail", "Test TM tail for unit testing");
 		this.addToContainers(tmTail);
 		// Add the header, packet and tail to the frame container.
 		ArrayList<Container> containersToAdd = new ArrayList<Container>(3);
@@ -79,18 +110,19 @@ public class MockContainerModelFactory implements ContainerFactory {
 
 		/** Build the lower packet level of the model **/
 		// Create the packet header and add it to the containers collection.
-		ContainerImpl tmPacketHeader = new ContainerImpl("TMPacketHeader", "Test packet header", "Test TM packet header for unit testing");
+		ContainerImpl tmPacketHeader = new ContainerImpl(TM_PACKET_HEADER_ALIAS, "Test packet header", "Test TM packet header for unit testing");
 		this.addToContainers(tmPacketHeader);
 
 		// Create the apid (ID) parameter type and add it to the packet header and the parameters collection.
-		ParameterType paramType11bitInt = new ParameterType("11bitInt", "11bit integer type", "Parameter type for 11bit integers", eParameterType.INTEGER, false, 0, 11);
+		ParameterType paramType11bitInt = new ParameterType("11bitInt", "11bit integer type", "Parameter type for 11bit integers", eParameterType.INTEGER,
+				false, 0, 11);
 		IntegerParameter packetIdParameter = new IntegerParameter(PACKET_ID_NAME, "Test Apid", "Test Application Id", paramType11bitInt, 0);
 		this.addToParameters(packetIdParameter);
 		this.addToContainers(packetIdParameter);
 		tmPacketHeader.addContainer(packetIdParameter);
 
 		// Create the packet body and add it to the containers collection
-		ContainerImpl tmPacketBody = new ContainerImpl("TMPacketBody", "Test packet body", "Test TM packet header for unit testing");
+		ContainerImpl tmPacketBody = new ContainerImpl(TM_PACKET_BODY_ALIAS, "Test packet body", "Test TM packet header for unit testing");
 		this.addToContainers(tmPacketBody);
 
 		// Create a packet type, add it to the packet body, add a restriction to
@@ -140,8 +172,8 @@ public class MockContainerModelFactory implements ContainerFactory {
 		ContainerImpl container = containers.get(name);
 
 		if (container == null) {
-			throw new UnknownContainerNameException(containers, "Your container lookup for '" + name
-					+ "' did not return any containers. Check your SpaceSystem configuration.");
+			throw new UnknownContainerNameException(containers,
+					"Your container lookup for '" + name + "' did not return any containers. Check your SpaceSystem configuration.");
 		}
 
 		return container;
@@ -158,16 +190,14 @@ public class MockContainerModelFactory implements ContainerFactory {
 	}
 
 	/**
-	 * Convenience method to add a container with the key set to the containers
-	 * name. This is less error prone and less work assuming you want the key to
-	 * be the same as the container name.
+	 * Convenience method to add a container with the key set to the containers name. This is less error prone and less
+	 * work assuming you want the key to be the same as the container name.
 	 * 
 	 * @param container
 	 */
 	public void addToContainers(ContainerImpl container) {
 		this.containers.put(container.getName(), container);
 	}
-	
 
 	private void addToParameters(ParameterImpl parameter) {
 		this.parameters.put(parameter.getName(), parameter);

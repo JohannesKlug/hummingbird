@@ -30,6 +30,7 @@ import java.util.BitSet;
 
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.telemetry.TelemetryFrame;
 
 /**
  * The interface of the Frame Broker. 
@@ -79,4 +80,11 @@ public interface IFrameBroker {
 	 *
 	 */
 	public Container getContainer(String container) throws UnknownContainerNameException ;
+
+	
+	/**
+	 * Returns the {@link TelemetryFrame} the framebroker has loaded.
+	 * @return
+	 */
+	public TelemetryFrame getFrame();
 }

@@ -9,10 +9,11 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
-import com.logica.hummingbird.ccsds.telemetry.TmFrame;
-import com.logica.hummingbird.ccsds.telemetry.TmPacket;
-import com.logica.hummingbird.ccsds.telemetry.TmParameter;
 import com.logica.hummingbird.framebroker.FrameBrokerImpl;
+import com.logica.hummingbird.telemetry.TelemetryFrame;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 
 public class RouterTest extends CamelTestSupport {
@@ -89,11 +90,11 @@ public class RouterTest extends CamelTestSupport {
 		assertNotNull("template is null.", template);
 		template.sendBody(getFrame());
     	
-    	assertIsInstanceOf(TmParameter.class, parameterEndpoint.getReceivedExchanges().get(0).getIn().getBody());
-    	assertIsInstanceOf(TmPacket.class, packetEndpoint.getReceivedExchanges().get(0).getIn().getBody());
-    	assertIsInstanceOf(TmFrame.class, frameEndpoint.getReceivedExchanges().get(0).getIn().getBody());
+    	assertIsInstanceOf(CcsdsTmParameter.class, parameterEndpoint.getReceivedExchanges().get(0).getIn().getBody());
+    	assertIsInstanceOf(CcsdsTmPacket.class, packetEndpoint.getReceivedExchanges().get(0).getIn().getBody());
+    	assertIsInstanceOf(CcsdsTmFrame.class, frameEndpoint.getReceivedExchanges().get(0).getIn().getBody());
     	
-    	TmFrame tmFrame = (TmFrame) frameEndpoint.getReceivedExchanges().get(0).getIn().getBody();
+    	TelemetryFrame tmFrame = (TelemetryFrame) frameEndpoint.getReceivedExchanges().get(0).getIn().getBody();
     	
     	System.out.println("Frame values: " + tmFrame.getValues());
     	System.out.println("Frame's 1st packet's values: " + tmFrame.getPackets().get(0).getValues());

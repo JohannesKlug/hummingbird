@@ -31,9 +31,9 @@ import java.util.BitSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.ccsds.telemetry.TmParameter;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
 
 /**
  * TODO write here a description of the class
@@ -43,7 +43,7 @@ public class CcsdsParameterProducer extends CcsdsProducer {
 	
 	CcsdsPacketProducer parent;
 	
-	TmParameter tmParameter = new TmParameter();
+	CcsdsTmParameter tmParameter = new CcsdsTmParameter();
 
 	public CcsdsParameterProducer(ContainerFactory containerFactory, CcsdsPacketProducer parent) {
 		super(containerFactory);

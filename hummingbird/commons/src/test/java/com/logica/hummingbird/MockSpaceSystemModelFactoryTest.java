@@ -8,42 +8,40 @@ import org.junit.Test;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
-import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
+import com.logica.hummingbird.spacesystemmodel.testsupport.MockSpaceSystemModelFactory;
 
+public class MockSpaceSystemModelFactoryTest {
 
-public class MockContainerModelFactoryTest {
-	
 	private ContainerFactory containerFactory;
-	
+
 	@Before
 	public void setUp() {
-		containerFactory = new MockContainerModelFactory();
+		containerFactory = new MockSpaceSystemModelFactory();
 	}
-	
+
 	@Test
 	public void testMockContainerFactoryTypes() {
-		
-		
-		
+
 		for (ParameterImpl parameter : containerFactory.getAllParameters().values()) {
 			if (parameter.getType().getType() == ParameterType.eParameterType.FLOAT) {
 				assertTrue("Parameter data type mismatch", parameter.getValue() instanceof Float);
-			} else if (parameter.getType().getType() == ParameterType.eParameterType.INTEGER) {
+			}
+			else if (parameter.getType().getType() == ParameterType.eParameterType.INTEGER) {
 				assertTrue("Parameter data type mismatch", parameter.getValue() instanceof Integer);
-			} else {
+			}
+			else {
 				fail("Parameter data type unknown: " + parameter.getType().getType() + " for " + parameter.getName());
 			}
-			
-			
+
 		}
 	}
-	
+
 	@Test
 	public void testParameterNames() {
 		for (ParameterImpl parameter : containerFactory.getAllParameters().values()) {
 			assertTrue("Parameter name '" + parameter.getName() + "' contains invalid characters.", parameter.getName().matches("\\p{Alnum}*"));
 		}
-		
+
 	}
 
 }

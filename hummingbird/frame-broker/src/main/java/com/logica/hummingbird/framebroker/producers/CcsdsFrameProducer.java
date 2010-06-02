@@ -31,10 +31,11 @@ import java.util.BitSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.ccsds.telemetry.TmFrame;
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.telemetry.TelemetryFrame;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
 
 /**
  * TODO write here a description of the class
@@ -42,7 +43,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameEx
 public class CcsdsFrameProducer extends CcsdsProducer {
 	private final static Logger LOG = LoggerFactory.getLogger(CcsdsFrameProducer.class);
 
-	TmFrame tmFrame = new TmFrame();
+	TelemetryFrame tmFrame = new CcsdsTmFrame();
 
 	public CcsdsFrameProducer(ContainerFactory containerFactory) {
 		super(containerFactory);
@@ -70,7 +71,7 @@ public class CcsdsFrameProducer extends CcsdsProducer {
 	@Override
 	public void completed() {
 		// Now the complete frame is complete we can set the ccsds tmframe in the model
-		CcsdsProducer.setFrame(tmFrame);
+		this.setFrame(tmFrame);
 		if(LOG.isDebugEnabled()) {
 			LOG.debug("TmFrame completely updated");
 			LOG.debug("TmFrame = " + tmFrame);
@@ -97,7 +98,7 @@ public class CcsdsFrameProducer extends CcsdsProducer {
 		tmFrame.getValues().put(field, value);
 	}
 
-	public TmFrame getTmFrame() {
+	public TelemetryFrame getTmFrame() {
 		return tmFrame;
 	}
 
