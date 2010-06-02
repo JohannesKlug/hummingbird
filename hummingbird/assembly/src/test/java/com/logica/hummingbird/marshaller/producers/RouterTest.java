@@ -12,14 +12,14 @@ import org.junit.Test;
 import com.logica.hummingbird.ccsds.telemetry.TmFrame;
 import com.logica.hummingbird.ccsds.telemetry.TmPacket;
 import com.logica.hummingbird.ccsds.telemetry.TmParameter;
-import com.logica.hummingbird.framebroker.FrameBrokerImpl;
+import com.logica.hummingbird.framebroker.CamelFrameBroker;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 
 public class RouterTest extends CamelTestSupport {
 	
 	protected static XtceModelFactory xtceFactory;
 	
-	protected static FrameBrokerImpl processor = null; 
+	protected static CamelFrameBroker processor = null; 
 	
     @EndpointInject(uri = "mock:frames")
     protected MockEndpoint frameEndpoint;
@@ -46,7 +46,7 @@ public class RouterTest extends CamelTestSupport {
             public void configure() throws Exception {
             	
             	xtceFactory = new XtceModelFactory("src/test/resources/humsat.xml");
-            	processor = new FrameBrokerImpl(xtceFactory);
+            	processor = new CamelFrameBroker(xtceFactory);
             	
                 from("direct:start")
                 .split().method(processor, "split")
@@ -152,7 +152,7 @@ public class RouterTest extends CamelTestSupport {
 		/** Marshall it to a BitSet. */
 		//ContainerProcessor processor = new ContainerProcessor(xtceFactory);
 		if (processor == null) {
-			processor = new FrameBrokerImpl(xtceFactory);
+			processor = new CamelFrameBroker(xtceFactory);
 		}
 		processor.marshall("TMFrame", frame);
 		

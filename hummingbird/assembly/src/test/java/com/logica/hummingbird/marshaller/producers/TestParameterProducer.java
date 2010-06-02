@@ -10,14 +10,14 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
-import com.logica.hummingbird.framebroker.FrameBrokerImpl;
+import com.logica.hummingbird.framebroker.CamelFrameBroker;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 
 public class TestParameterProducer extends CamelTestSupport {
 	
 	protected static XtceModelFactory xtceFactory;
 	
-	protected static FrameBrokerImpl processor = null; 
+	protected static CamelFrameBroker processor = null; 
 	
     @EndpointInject(uri = "mock:result")
     protected MockEndpoint resultEndpoint;
@@ -43,7 +43,7 @@ public class TestParameterProducer extends CamelTestSupport {
             	xtceFactory = new XtceModelFactory("src/test/resources/humsat.xml");
 //            	xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
 //            	xtceFactory.initialise();
-            	processor = new FrameBrokerImpl(xtceFactory);
+            	processor = new CamelFrameBroker(xtceFactory);
             	
             	
                 from("direct:start")
@@ -151,7 +151,7 @@ public class TestParameterProducer extends CamelTestSupport {
 		/** Marshall it to a BitSet. */
 		//ContainerProcessor processor = new ContainerProcessor(xtceFactory);
 		if (processor == null) {
-			processor = new FrameBrokerImpl(xtceFactory);
+			processor = new CamelFrameBroker(xtceFactory);
 		}
 		processor.marshall("TMFrame", frame);
 		
