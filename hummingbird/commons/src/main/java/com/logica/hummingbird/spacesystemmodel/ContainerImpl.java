@@ -110,6 +110,9 @@ public class ContainerImpl extends NamedElement implements Container {
 	 * 
 	 */
 	protected boolean matchRestrictions() {
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Match restriction called");
+		}
 		// Check for match against the restriction criteria. The base container will forward the data to all containers
 		// which have been defined with the base container as a base. The sub containers themselves must decide whether
 		// they are relevant for the processing.
@@ -126,6 +129,9 @@ public class ContainerImpl extends NamedElement implements Container {
 			match = entry.getKey().match(entry.getValue());
 		}
 
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("returning " + match);
+		}
 		return match;
 	}
 
@@ -201,8 +207,9 @@ public class ContainerImpl extends NamedElement implements Container {
 
 	@Override
 	public String toString() {
-		/** If the packet should be processed by this container. */
 		String str = "";
+
+		// If the packet should be processed by this container...
 		if (matchRestrictions() == true) {
 			str += "{" + this.name;
 			for (Container container : subContainers) {

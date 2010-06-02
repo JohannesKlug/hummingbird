@@ -3,30 +3,30 @@
  */
 package com.logica.hummingbird.framebroker;
 
-import java.awt.PageAttributes.OriginType;
 import java.util.BitSet;
-
-import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.BitSetUtility;
-import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.spacesystemmodel.testsupport.MockSpaceSystemModelFactory;
+import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
 import com.logica.hummingbird.telemetry.TelemetryFrame;
-import com.sun.source.tree.AssertTree;
 
 /**
  * @author Mark Doyle
  * 
  */
 public class FrameBrokerImplTest {
-
-	private final static ContainerFactory mockSpaceSystemFactory = new MockSpaceSystemModelFactory();
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger LOG = LoggerFactory.getLogger(FrameBrokerImplTest.class);
 
 	private IFrameBroker frameBroker;
 
@@ -36,12 +36,17 @@ public class FrameBrokerImplTest {
 	 */
 	private final static String BITSET_AS_STRING = "11010100010110111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
 
+	private MockContainerModelFactory mockSpaceSystemFactory;
+
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
+		mockSpaceSystemFactory = new MockContainerModelFactory();
 		frameBroker = new FrameBrokerImpl(mockSpaceSystemFactory);
+
+		LOG.info(mockSpaceSystemFactory.getContainer(MockContainerModelFactory.TM_FRAME_ALIAS).toString());
 	}
 
 	/**
@@ -53,17 +58,17 @@ public class FrameBrokerImplTest {
 	@Test
 	public final void testUnmarshall() throws UnknownContainerNameException, BitSetOperationException {
 		BitSet mockFrame = BitSetUtility.fromString(BITSET_AS_STRING);
-	
+		
 		// Unmarshall each telemetry element in the space system model
-		frameBroker.unmarshall(MockSpaceSystemModelFactory.TM_FRAME_ALIAS, mockFrame);
+		frameBroker.unmarshall(MockContainerModelFactory.TM_FRAME_ALIAS, mockFrame);
 		TelemetryFrame unmarshalledFrame = frameBroker.getFrame();
 		System.out.println("unmarshalled frame = " + unmarshalledFrame);
 		
-		frameBroker.unmarshall(MockSpaceSystemModelFactory.TM_FRAME_HEADER_ALIAS, mockFrame);
-		frameBroker.unmarshall(MockSpaceSystemModelFactory.TM_FRAME_TAIL_ALIAS, mockFrame);
-		frameBroker.unmarshall(MockSpaceSystemModelFactory.TM_PACKET_ALIAS, mockFrame);
-		frameBroker.unmarshall(MockSpaceSystemModelFactory.TM_PACKET_HEADER_ALIAS, mockFrame);
-		frameBroker.unmarshall(MockSpaceSystemModelFactory.TM_PACKET_BODY_ALIAS, mockFrame);
+		frameBroker.unmarshall(MockContainerModelFactory.TM_FRAME_HEADER_ALIAS, mockFrame);
+		frameBroker.unmarshall(MockContainerModelFactory.TM_FRAME_TAIL_ALIAS, mockFrame);
+		frameBroker.unmarshall(MockContainerModelFactory.TM_PACKET_ALIAS, mockFrame);
+		frameBroker.unmarshall(MockContainerModelFactory.TM_PACKET_HEADER_ALIAS, mockFrame);
+		frameBroker.unmarshall(MockContainerModelFactory.TM_PACKET_BODY_ALIAS, mockFrame);
 	}
 
 	/**

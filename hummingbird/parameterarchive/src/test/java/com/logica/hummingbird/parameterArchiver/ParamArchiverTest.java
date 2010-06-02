@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import java.lang.reflect.Field;
 
-import com.logica.hummingbird.spacesystemmodel.testsupport.MockSpaceSystemModelFactory;
+import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
 
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
@@ -49,26 +49,26 @@ public class ParamArchiverTest {
 		
 		
 		// Store the first parameter
-		parameterArchiver.storeParameter(MockSpaceSystemModelFactory.PACKET_ID_NAME, System.currentTimeMillis(), 15);
+		parameterArchiver.storeParameter(MockContainerModelFactory.PACKET_ID_NAME, System.currentTimeMillis(), 15);
 		
 		int countOfStoredParameters = reflectedTemplate.queryForInt(
-				"select count(*) from " + MockSpaceSystemModelFactory.PACKET_ID_NAME);
+				"select count(*) from " + MockContainerModelFactory.PACKET_ID_NAME);
 		
 		assertEquals(1, countOfStoredParameters);
 
 		// Store the second parameter
-		parameterArchiver.storeParameter(MockSpaceSystemModelFactory.PACKET_ID_NAME, System.currentTimeMillis(), 15);
+		parameterArchiver.storeParameter(MockContainerModelFactory.PACKET_ID_NAME, System.currentTimeMillis(), 15);
 		
 		countOfStoredParameters = reflectedTemplate.queryForInt(
-				"select count(*) from " + MockSpaceSystemModelFactory.PACKET_ID_NAME);
+				"select count(*) from " + MockContainerModelFactory.PACKET_ID_NAME);
 		
 		assertEquals(2, countOfStoredParameters);
 		
 		// Store a different parameter
-		parameterArchiver.storeParameter(MockSpaceSystemModelFactory.TEST_PARAM_B, System.currentTimeMillis(), 15.9);
+		parameterArchiver.storeParameter(MockContainerModelFactory.TEST_PARAM_B, System.currentTimeMillis(), 15.9);
 		
 		countOfStoredParameters = reflectedTemplate.queryForInt(
-				"select count(*) from " + MockSpaceSystemModelFactory.TEST_PARAM_B);
+				"select count(*) from " + MockContainerModelFactory.TEST_PARAM_B);
 		
 		assertEquals(1, countOfStoredParameters);
 		
@@ -78,7 +78,7 @@ public class ParamArchiverTest {
 	public void testRetrieval() {
 		Message message = new DefaultMessage();
 		message.setHeader("Type", "RetrievalRequest");
-		message.setHeader("Name", MockSpaceSystemModelFactory.PACKET_ID_NAME);
+		message.setHeader("Name", MockContainerModelFactory.PACKET_ID_NAME);
 		message.setHeader("FromDate", Long.MIN_VALUE);
 		message.setHeader("LongDate", Long.MAX_VALUE);
 		message.getHeader("JmsReplyTo", "");

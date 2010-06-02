@@ -8,15 +8,15 @@ import org.junit.Test;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
-import com.logica.hummingbird.spacesystemmodel.testsupport.MockSpaceSystemModelFactory;
+import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
 
-public class MockSpaceSystemModelFactoryTest {
+public class MockContainerModelFactoryTest {
 
 	private ContainerFactory containerFactory;
 
 	@Before
 	public void setUp() {
-		containerFactory = new MockSpaceSystemModelFactory();
+		containerFactory = new MockContainerModelFactory();
 	}
 
 	@Test

@@ -27,11 +27,11 @@ import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType.eParamet
  * @author Mark Doyle <markjohndoyle@googlemail.com>, <mark.doyle@logica.com>
  * @since Hummingbird 0.0.1
  */
-public class MockSpaceSystemModelFactory implements ContainerFactory {
+public class MockContainerModelFactory implements ContainerFactory {
 	/**
 	 * Logger for this class
 	 */
-	public static final Logger LOG = LoggerFactory.getLogger(MockSpaceSystemModelFactory.class);
+	public static final Logger LOG = LoggerFactory.getLogger(MockContainerModelFactory.class);
 
 	/**
 	 * MockSpaceSystemModel's telemetry frame alias
@@ -63,7 +63,6 @@ public class MockSpaceSystemModelFactory implements ContainerFactory {
 	 */
 	public static final String TM_FRAME_HEADER_ALIAS = "TMFrameHeader";
 
-	
 	public static final String TEST_PARAM_A = "TestParamA";
 
 	public static final String TEST_PARAM_B = "TestParamB";
@@ -77,7 +76,7 @@ public class MockSpaceSystemModelFactory implements ContainerFactory {
 	private Map<String, ContainerImpl> containers = new HashMap<String, ContainerImpl>();
 	private Map<String, ParameterImpl> parameters = new HashMap<String, ParameterImpl>();
 
-	public MockSpaceSystemModelFactory() {
+	public MockContainerModelFactory() {
 		initialise();
 	}
 
