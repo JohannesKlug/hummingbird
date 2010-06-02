@@ -27,7 +27,7 @@
     
     <bean id="parameterArchiver" class="com.logica.hummingbird.parameterArchiver.ParameterArchiver">
     	<constructor-arg>
-    		<bean class="com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory"></bean>
+    		<bean class="com.logica.hummingbird.spacesystemmodel.testsupport.MockSpaceSystemModelFactory"></bean>
     	</constructor-arg>
     	<constructor-arg ref="dataSource"/>
     </bean>
