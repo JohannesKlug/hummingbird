@@ -21,10 +21,12 @@ import org.junit.Test;
  * 
  * Example taken from Camel documentation.
  * 
+ * Not that this does NOT test hummingbird at all - it merely serves as en example.
+ * 
  */
 
 
-public class SplitterTest extends CamelTestSupport {
+public class ExampleSplitterTest extends CamelTestSupport {
 
     @EndpointInject(uri = "mock:result")
     protected MockEndpoint resultEndpoint;
@@ -32,7 +34,7 @@ public class SplitterTest extends CamelTestSupport {
     @Produce(uri = "direct:start")
     protected ProducerTemplate template;
     
-    protected static SplitterTest splitter;
+    protected static ExampleSplitterTest splitter;
 
     @Test
     public void testSendMessageToSplitter() throws Exception {
@@ -54,7 +56,7 @@ public class SplitterTest extends CamelTestSupport {
         return new RouteBuilder() {
             public void configure() {
             	
-            	splitter = new SplitterTest();
+            	splitter = new ExampleSplitterTest();
             	
                 from("direct:start").split().method(splitter, "split").to(resultEndpoint);
             }
