@@ -33,6 +33,7 @@ import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.ContainerObserver;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.telemetry.TelemetryFrame;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
@@ -40,7 +41,7 @@ import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
 /**
  * TODO write here a description of the class
  */
-public class CcsdsFrameProducer extends CcsdsProducer {
+public class CcsdsFrameProducer extends CcsdsProducer implements ContainerObserver {
 	private final static Logger LOG = LoggerFactory.getLogger(CcsdsFrameProducer.class);
 
 	TelemetryFrame tmFrame = new CcsdsTmFrame();
@@ -78,28 +79,14 @@ public class CcsdsFrameProducer extends CcsdsProducer {
 		}
 	}
 
-	@Override
-	public void updated(String field, BitSet value) {
-		tmFrame.getValues().put(field, value);
-	}
-
-	@Override
-	public void updated(String field, int value) {
-		tmFrame.getValues().put(field, value);
-	}
-
-	@Override
-	public void updated(String field, String value) {
-		tmFrame.getValues().put(field, value);
-	}
-
-	@Override
-	public void updated(String field, double value) {
-		tmFrame.getValues().put(field, value);
-	}
-
 	public TelemetryFrame getTmFrame() {
 		return tmFrame;
+	}
+
+	@Override
+	public void updated(String field, BitSet value) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

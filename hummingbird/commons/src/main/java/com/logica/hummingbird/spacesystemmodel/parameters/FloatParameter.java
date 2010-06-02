@@ -32,7 +32,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.BitSetUtility;
-import com.logica.hummingbird.spacesystemmodel.SpaceSystemModelObserver;
+import com.logica.hummingbird.spacesystemmodel.ContainerObserver;
+import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 
 /**
@@ -72,9 +73,9 @@ public class FloatParameter extends ParameterImpl {
 	@Override
 	public BitSet unmarshall(BitSet packet) {
 		value = (float) BitSetUtility.extractDouble(packet, 0, (int) type.sizeInBits, minimumValue, maximumValue);
-		/** TODO Create POJO and send to observer. */
-		for (SpaceSystemModelObserver producer : updateObservers) {
-			producer.updated(name, value);
+
+		for(ParameterObserver paramObserver : updatedParameterObservers) {
+			paramObserver.updated(name, value);
 		}
 		
 		return packet.get((int) type.sizeInBits, packet.length());

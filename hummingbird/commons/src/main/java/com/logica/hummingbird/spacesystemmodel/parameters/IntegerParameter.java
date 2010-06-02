@@ -32,7 +32,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.BitSetUtility;
-import com.logica.hummingbird.spacesystemmodel.SpaceSystemModelObserver;
+import com.logica.hummingbird.spacesystemmodel.ContainerObserver;
+import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
 
 /**
  * 
@@ -75,11 +76,10 @@ public class IntegerParameter extends ParameterImpl {
 		}
 		value = BitSetUtility.extractInteger(packet, 0, (int) type.sizeInBits);
 
-		// TODO Create POJO and send to observer.
-		for (SpaceSystemModelObserver spaceSysModelObserver : updateObservers) {
-			spaceSysModelObserver.updated(name, value);
+		for(ParameterObserver paramObserver : updatedParameterObservers) {
+			paramObserver.updated(name, value);
 		}
-
+		
 		BitSet returnPacket = packet.get((int) type.sizeInBits, packet.length());
 		return returnPacket;
 	}

@@ -32,13 +32,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
 
 /**
  * TODO write here a description of the class
  */
-public class CcsdsParameterProducer extends CcsdsProducer {
+public class CcsdsParameterProducer extends CcsdsProducer implements ParameterObserver {
 	private final static Logger LOG = LoggerFactory.getLogger(CcsdsParameterProducer.class);
 	
 	CcsdsPacketProducer parent;
@@ -52,8 +53,7 @@ public class CcsdsParameterProducer extends CcsdsProducer {
 		
 		// Register with all parameters corresponding to header fields.
 		for (ParameterImpl parameter : containerFactory.getAllParameters().values()) {
-			parameter.addUpdateObserver(this);
-			parameter.addCompletionObserver(this);
+			parameter.addParameterUpdateObserve(this);
 		}
 	}
 
@@ -75,13 +75,6 @@ public class CcsdsParameterProducer extends CcsdsProducer {
 		completed();
 	}
 	
-	@Override
-	public void updated(String field, BitSet value) {
-		// FIXME how to fail properly here?
-		LOG.error("ParameterProducer was sent a BitSetValue, this shouldn't happen!");
-	}
-	
-	@Override
 	public void completed() {
 		parent.getTmPacket().getParameters().add(tmParameter);
 	}
