@@ -9,6 +9,4 @@ public interface TelemetryFrame {
 
 	public abstract List<CcsdsTmPacket> getPackets();
 
-	public abstract Map<String, Object> getValues();
-
 }
