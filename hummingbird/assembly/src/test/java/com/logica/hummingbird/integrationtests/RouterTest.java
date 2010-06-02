@@ -47,32 +47,6 @@ public class RouterTest extends CamelTestSupport {
             public void configure() throws Exception {
             	
             	xtceFactory = new XtceModelFactory("src/test/resources/humsat.xml");
-	
-    @EndpointInject(uri = "mock:frames")
-    protected MockEndpoint frameEndpoint;
-    
-    @EndpointInject(uri = "mock:packets")
-    protected MockEndpoint packetEndpoint;
-    
-    @EndpointInject(uri = "mock:parameters")
-    protected MockEndpoint parameterEndpoint;
-
-    @Produce(uri = "direct:start")
-    protected ProducerTemplate template;
-    
-//    @Before
-//    public void prepare() {
-//    	Logger logger =  Logger.getRootLogger();
-//    	logger.setLevel(Level.WARN);
-//    }
-    
-    @Override
-    protected RouteBuilder createRouteBuilder() {
-        return new RouteBuilder() {
-        	
-            public void configure() throws Exception {
-            	
-            	xtceFactory = new XtceModelFactory("src/test/resources/humsat.xml");
             	processor = new CamelFrameBroker(xtceFactory);
             	
                 from("direct:start")
