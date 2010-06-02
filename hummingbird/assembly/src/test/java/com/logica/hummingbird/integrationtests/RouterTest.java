@@ -1,8 +1,7 @@
-package com.logica.hummingbird.marshaller.producers;
+package com.logica.hummingbird.integrationtests;
 import java.util.BitSet;
 
 import org.apache.camel.EndpointInject;
-import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
@@ -10,17 +9,27 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
-import com.logica.hummingbird.framebroker.FrameBrokerImpl;
+import com.logica.hummingbird.framebroker.CamelFrameBroker;
+import com.logica.hummingbird.telemetry.TelemetryFrame;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 
-public class TestParameterProducer extends CamelTestSupport {
+public class RouterTest extends CamelTestSupport {
 	
 	protected static XtceModelFactory xtceFactory;
 	
-	protected static FrameBrokerImpl processor = null; 
+	protected static CamelFrameBroker processor = null; 
 	
-    @EndpointInject(uri = "mock:result")
-    protected MockEndpoint resultEndpoint;
+    @EndpointInject(uri = "mock:frames")
+    protected MockEndpoint frameEndpoint;
+    
+    @EndpointInject(uri = "mock:packets")
+    protected MockEndpoint packetEndpoint;
+    
+    @EndpointInject(uri = "mock:parameters")
+    protected MockEndpoint parameterEndpoint;
 
     @Produce(uri = "direct:start")
     protected ProducerTemplate template;
@@ -37,73 +46,92 @@ public class TestParameterProducer extends CamelTestSupport {
         	
             public void configure() throws Exception {
             	
+            	xtceFactory = new XtceModelFactory("src/test/resources/humsat.xml");
+	
+    @EndpointInject(uri = "mock:frames")
+    protected MockEndpoint frameEndpoint;
+    
+    @EndpointInject(uri = "mock:packets")
+    protected MockEndpoint packetEndpoint;
+    
+    @EndpointInject(uri = "mock:parameters")
+    protected MockEndpoint parameterEndpoint;
 
-            	
+    @Produce(uri = "direct:start")
+    protected ProducerTemplate template;
+    
+//    @Before
+//    public void prepare() {
+//    	Logger logger =  Logger.getRootLogger();
+//    	logger.setLevel(Level.WARN);
+//    }
+    
+    @Override
+    protected RouteBuilder createRouteBuilder() {
+        return new RouteBuilder() {
+        	
+            public void configure() throws Exception {
             	
             	xtceFactory = new XtceModelFactory("src/test/resources/humsat.xml");
-//            	xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
-//            	xtceFactory.initialise();
-            	processor = new FrameBrokerImpl(xtceFactory);
-            	
+            	processor = new CamelFrameBroker(xtceFactory);
             	
                 from("direct:start")
                 .split().method(processor, "split")
-                    .to("mock:result");
-                
-                // Add router to multiplex into the different streams.
-        }
+                .choice()
+                .when(header("Type").isEqualTo("TMPacket")).to(packetEndpoint)
+                .when(header("Type").isEqualTo("TMParameter")).to(parameterEndpoint)
+                .when(header("Type").isEqualTo("TMFrame")).to(frameEndpoint)
+                    ;
+            }
         };
     }
 
     @Test
-    public void testInsert() throws Exception {
+    public void testRouter() throws Exception {
 
-    	assertNotNull(xtceFactory);
-    	
-    	
         /** Send to end point. */
 		assertNotNull("template is null.", template);
 		template.sendBody(getFrame());
         
         /** Check we got the expected output. */        
-		//resultEndpoint.expectedMinimumMessageCount(1);
-		resultEndpoint.expectedMessageCount(26);
-		resultEndpoint.assertIsSatisfied();
+		parameterEndpoint.expectedMessageCount(24);
+		parameterEndpoint.assertIsSatisfied();
 		
-		System.out.println("Number of received messages: " + resultEndpoint.getReceivedCounter());
+		packetEndpoint.expectedMessageCount(1);
+		packetEndpoint.assertIsSatisfied();
+		
+		frameEndpoint.expectedMessageCount(1);
+		frameEndpoint.assertIsSatisfied();
+		
+		System.out.println("Number of received frames: " + frameEndpoint.getReceivedCounter());
+		System.out.println("Number of received packets: " + packetEndpoint.getReceivedCounter());
+		System.out.println("Number of received parameters: " + parameterEndpoint.getReceivedCounter());
 
-		for (Exchange exchange : resultEndpoint.getReceivedExchanges()) {
-			/** Print each exchange.*/
-			System.out.println("Exchange: " + exchange.toString());
-			System.out.println(exchange.getIn().getHeaders());
-			System.out.println(exchange.getIn().getBody());
-		}
     }
-
-   
-	
     
- 
-	
-
-//	@Test
-//	public void testHeader() {
-//		parameterProducer = new ParameterProducer(xtceFactory);
-//		parameterProducer.updated("String", "Test");
-//		parameterProducer.updated("double", Double.MAX_VALUE);
-//		parameterProducer.updated("int", Integer.MAX_VALUE);
-//		//parameterProducer.completed();
-//		
-//	}
-
-
-    // TODO move this method to a more generic place (test infrastructure)
+    @Test
+    public void testInstances() throws Exception {
+    	
+        /** Send to end point. */
+		assertNotNull("template is null.", template);
+		template.sendBody(getFrame());
+    	
+    	assertIsInstanceOf(CcsdsTmParameter.class, parameterEndpoint.getReceivedExchanges().get(0).getIn().getBody());
+    	assertIsInstanceOf(CcsdsTmPacket.class, packetEndpoint.getReceivedExchanges().get(0).getIn().getBody());
+    	assertIsInstanceOf(CcsdsTmFrame.class, frameEndpoint.getReceivedExchanges().get(0).getIn().getBody());
+    	
+    	TelemetryFrame tmFrame = (TelemetryFrame) frameEndpoint.getReceivedExchanges().get(0).getIn().getBody();
+    	
+    	System.out.println("Frame values: " + tmFrame.getValues());
+    	System.out.println("Frame's 1st packet's values: " + tmFrame.getPackets().get(0).getValues());
+    	System.out.println("Frame's 1st packet's 1st parameter's values: " + tmFrame.getPackets().get(0).getParameters().get(0).getValues());
+    }
+    
+    // TODO use MockModelFactory from test-support for this!
     public static BitSet getFrame() throws Exception {
-    	//xtceFactory.setSpacesystemmodelFilename("src/test/resources/humsat.xml");
     	
     	/** Create FRAME */
 
-		
 		/** Build the frame. */
 		xtceFactory.getParameter("CCSDS_FVERSION").setValue(1);
 		xtceFactory.getParameter("CCSDS_SC_ID").setValue(3);
@@ -151,7 +179,7 @@ public class TestParameterProducer extends CamelTestSupport {
 		/** Marshall it to a BitSet. */
 		//ContainerProcessor processor = new ContainerProcessor(xtceFactory);
 		if (processor == null) {
-			processor = new FrameBrokerImpl(xtceFactory);
+			processor = new CamelFrameBroker(xtceFactory);
 		}
 		processor.marshall("TMFrame", frame);
 		

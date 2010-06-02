@@ -1,4 +1,4 @@
-package com.logica.hummingbird.marshaller.producers;
+package com.logica.hummingbird.integrationtests;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
@@ -15,10 +15,12 @@ import org.junit.Test;
  * 
  * Example taken from Camel documentation.
  * 
+ * Not that this does NOT test hummingbird at all - it merely serves as en example.
+ * 
  */
 
 
-public class FilterTest extends CamelTestSupport {
+public class ExampleFilterTest extends CamelTestSupport {
 
     @EndpointInject(uri = "mock:result")
     protected MockEndpoint resultEndpoint;

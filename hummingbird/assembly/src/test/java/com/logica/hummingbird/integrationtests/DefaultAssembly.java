@@ -1,4 +1,4 @@
-package com.logica.hummingbird;
+package com.logica.hummingbird.integrationtests;
 
 import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
@@ -12,7 +12,7 @@ import org.junit.Test;
 import com.logica.hummingbird.example.ExampleEndpoint;
 import com.logica.hummingbird.simulator.Simulator;
 
-public class ExampleAssembly extends CamelTestSupport{
+public class DefaultAssembly extends CamelTestSupport{
 	
 	Simulator simulator;
 	
