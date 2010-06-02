@@ -1,4 +1,4 @@
-package com.logica.hummingbird.marshaller.producers;
+package com.logica.hummingbird.integrationtests;
 import java.util.BitSet;
 
 import org.apache.camel.EndpointInject;

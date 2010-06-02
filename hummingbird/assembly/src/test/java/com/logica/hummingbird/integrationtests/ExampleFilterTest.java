@@ -1,4 +1,4 @@
-package com.logica.hummingbird.marshaller.producers;
+package com.logica.hummingbird.integrationtests;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
