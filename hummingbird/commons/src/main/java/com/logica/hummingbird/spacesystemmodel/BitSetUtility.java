@@ -293,10 +293,4 @@ public class BitSetUtility
 		
 		return result;
 	}
-	
-	public static String toString(BitSet data) {
-		String result = "";
-			
-		return result;
-	}
 }
