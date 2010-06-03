@@ -2,7 +2,7 @@ package com.logica.hummingbird.telemetry.ccsds;
 
 import java.util.BitSet;
 
-import com.logica.hummingbird.telemetry.FrameHeader;
+import com.logica.hummingbird.telemetry.TelemetryFrameHeader;
 
 
 /**
@@ -11,7 +11,7 @@ import com.logica.hummingbird.telemetry.FrameHeader;
  * @author Johannes Klug
  *
  */
-public class CcsdsFrameHeader implements FrameHeader {
+public class CcsdsFrameHeader implements TelemetryFrameHeader {
 	
 	CcsdsFrameHeader secondaryHeader = null;
 

@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CcsdsTmPacket {
+import com.logica.hummingbird.telemetry.TelemetryPacket;
+
+public class CcsdsTmPacket implements TelemetryPacket {
     List<CcsdsTmParameter> parameters = new ArrayList<CcsdsTmParameter>();;
 
     Map<String, Object> values = new HashMap<String, Object>();

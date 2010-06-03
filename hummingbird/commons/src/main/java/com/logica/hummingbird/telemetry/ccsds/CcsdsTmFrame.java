@@ -1,35 +1,50 @@
 package com.logica.hummingbird.telemetry.ccsds;
 
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.List;
 
-import com.logica.hummingbird.telemetry.FrameHeader;
-import com.logica.hummingbird.telemetry.FrameTail;
 import com.logica.hummingbird.telemetry.TelemetryFrame;
+import com.logica.hummingbird.telemetry.TelemetryFrameHeader;
+import com.logica.hummingbird.telemetry.TelemetryFrameTail;
+import com.logica.hummingbird.telemetry.TelemetryPacket;
 
 public class CcsdsTmFrame implements TelemetryFrame {
 	
-	FrameHeader frameHeader;
+	/**
+	 * This frames telemetry header.
+	 */
+	TelemetryFrameHeader frameHeader;
 	
 	/**
 	 * List of Telemetry Packets contained by this frame.
 	 */
-	List<CcsdsTmPacket> packets = new ArrayList<CcsdsTmPacket>();
+	List<TelemetryPacket> packets;
 	
-	FrameTail frameTail;
+	/**
+	 * This frames tail.
+	 */
+	TelemetryFrameTail frameTail;
+	
+	public CcsdsTmFrame() {
+		super();
+	}
 
-	
-//	Map<String, Object> values = new HashMap<String, Object>();
+	public CcsdsTmFrame(TelemetryFrameHeader frameHeader, List<TelemetryPacket> packets, TelemetryFrameTail frameTail) {
+		super();
+		this.frameHeader = frameHeader;
+		this.packets = packets;
+		this.frameTail = frameTail;
+	}
+
 
 	/* (non-Javadoc)
 	 * @see com.logica.hummingbird.ccsds.telemetry.TelemetryFrame#getPackets()
 	 */
-	public List<CcsdsTmPacket> getPackets() {
+	public List<TelemetryPacket> getPackets() {
 		return packets;
 	}
 
-	public void setPackets(List<CcsdsTmPacket> packets) {
+	public void setPackets(List<TelemetryPacket> packets) {
 		this.packets = packets;
 	}
 
@@ -66,10 +81,31 @@ public class CcsdsTmFrame implements TelemetryFrame {
 		return builder.toString();
 	}
 
+
 	@Override
-	public void setValue(String field, BitSet value) {
-		// TODO Auto-generated method stub
-		
+	public void setHeader(TelemetryFrameHeader header) {
+		this.frameHeader = header;
+	}
+
+	@Override
+	public void addPacket(TelemetryPacket packet) {
+		if(this.packets == null) {
+			this.packets = new ArrayList<TelemetryPacket>(1);
+		}
+		this.packets.add(packet);
+	}
+
+	@Override
+	public void addPackets(List<TelemetryPacket> packets) {
+		if(this.packets == null) {
+			this.packets = new ArrayList<TelemetryPacket>(packets.size());
+		}
+		this.packets.addAll(this.packets);
+	}
+
+	@Override
+	public void setTail(TelemetryFrameTail tail) {
+		this.frameTail = tail;
 	}
 
 }
