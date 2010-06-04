@@ -59,23 +59,21 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 
 	@Override
 	public void updated(String field, int value) {
-		tmParameter.getValues().put(field, value);
-		completed();
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void updated(String field, String value) {
-		tmParameter.getValues().put(field, value);
-		completed();
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void updated(String field, double value) {
-		tmParameter.getValues().put(field, value);
-		completed();
+		// TODO Auto-generated method stub
+		
 	}
-	
-	public void completed() {
-		parent.getTmPacket().getParameters().add(tmParameter);
-	}
+
+
 }

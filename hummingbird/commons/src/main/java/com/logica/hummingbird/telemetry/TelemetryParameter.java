@@ -1,5 +1,5 @@
 package com.logica.hummingbird.telemetry;
 
-public interface TelemetryFrameTail {
+public interface TelemetryParameter {
 
 }

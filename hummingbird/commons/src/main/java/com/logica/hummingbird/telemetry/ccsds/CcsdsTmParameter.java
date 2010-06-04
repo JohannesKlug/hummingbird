@@ -1,31 +1,10 @@
 package com.logica.hummingbird.telemetry.ccsds;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.logica.hummingbird.telemetry.TelemetryParameter;
 
-public class CcsdsTmParameter {
-
-	Map<String, Object> values = new HashMap<String, Object>();
+public class CcsdsTmParameter implements TelemetryParameter {
 
 	Integer apid;
-
-	public Map<String, Object> getValues() {
-		return values;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("TmParameter [apid=");
-		builder.append(apid);
-		builder.append(", values=");
-		builder.append(values);
-		builder.append("]");
-		return builder.toString();
-	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -42,9 +21,21 @@ public class CcsdsTmParameter {
 		
 		CcsdsTmParameter otherParameter = (CcsdsTmParameter)obj;
 	    
-	    boolean equal = values.equals(otherParameter.getValues()) 
-	    				&&
-	    				apid == otherParameter.apid;
+	    boolean equal = apid == otherParameter.apid;
 		return equal;
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CcsdsTmParameter [apid=");
+		builder.append(apid);
+		builder.append("]");
+		return builder.toString();
 	}
 }

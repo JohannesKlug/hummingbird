@@ -24,6 +24,11 @@ import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
 
+/**
+ * 
+ * @author Gert Villemos
+ *
+ */
 public class XtceModelFactory implements ContainerFactory {
 
 	protected Map<String, Unit> units = new HashMap<String, Unit>();

@@ -11,6 +11,7 @@ import org.apache.camel.impl.DefaultMessage;
 import com.logica.hummingbird.MessageType;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.telemetry.TelemetryPacket;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
 
@@ -49,13 +50,13 @@ public class CamelFrameBroker extends FrameBrokerImpl {
 		messages.add(frameMessage);
 
 		// for (CcsdsTmPacket packet : CcsdsProducer.getFrame().getPackets()) {
-		for (CcsdsTmPacket packet : frameProducer.getFrame().getPackets()) {
+		for (TelemetryPacket packet : frameProducer.getFrame().getPackets()) {
 			Message packetMessage = new DefaultMessage();
 			packetMessage.setHeader("Type", MessageType.TMPacket);
 			packetMessage.setBody(packet);
 			messages.add(packetMessage);
 
-			for (CcsdsTmParameter parameter : packet.getParameters()) {
+			for (CcsdsTmParameter parameter : ((CcsdsTmPacket) packet).getParameters()) {
 				Message parameterMessage = new DefaultMessage();
 				parameterMessage.setHeader("Type", MessageType.TMParameter);
 				parameterMessage.setBody(parameter);
