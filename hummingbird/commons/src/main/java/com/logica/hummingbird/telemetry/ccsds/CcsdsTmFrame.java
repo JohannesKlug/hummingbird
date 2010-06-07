@@ -72,7 +72,7 @@ public class CcsdsTmFrame implements TelemetryFrame {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CcsdsTmFrame [framTail=");
+		builder.append("CcsdsTmFrame [frameTail=");
 		builder.append(frameTail);
 		builder.append(", frameHeader=");
 		builder.append(frameHeader);
