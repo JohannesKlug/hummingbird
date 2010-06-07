@@ -45,7 +45,6 @@ public class CamelFrameBroker extends FrameBrokerImpl {
 		// Prepare the frame message - with POJO structure as payload (as opposed to uninterpreted BitSet)
 		Message frameMessage = new DefaultMessage();
 		frameMessage.setHeader("Type", MessageType.TMFrame);
-		// frameMessage.setBody(CcsdsProducer.getFrame());
 		frameMessage.setBody(frameProducer.getFrame());
 		messages.add(frameMessage);
 
