@@ -11,18 +11,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.BitSetUtility;
-import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
 import com.logica.hummingbird.telemetry.TelemetryFrame;
 
-/**
- * @author Mark Doyle
- * 
- */
 public class FrameBrokerImplTest {
+	
 	/**
 	 * Logger for this class
 	 */
