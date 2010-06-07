@@ -17,8 +17,9 @@ public class CcsdsTmFrame implements TelemetryFrame {
 	
 	/**
 	 * List of Telemetry Packets contained by this frame.
+	 * Initialised with an initial capacity of 1
 	 */
-	List<TelemetryPacket> packets;
+	List<TelemetryPacket> packets = new ArrayList<TelemetryPacket>(1);
 	
 	/**
 	 * This frames tail.
@@ -89,17 +90,11 @@ public class CcsdsTmFrame implements TelemetryFrame {
 
 	@Override
 	public void addPacket(TelemetryPacket packet) {
-		if(this.packets == null) {
-			this.packets = new ArrayList<TelemetryPacket>(1);
-		}
 		this.packets.add(packet);
 	}
 
 	@Override
 	public void addPackets(List<TelemetryPacket> packets) {
-		if(this.packets == null) {
-			this.packets = new ArrayList<TelemetryPacket>(packets.size());
-		}
 		this.packets.addAll(this.packets);
 	}
 
