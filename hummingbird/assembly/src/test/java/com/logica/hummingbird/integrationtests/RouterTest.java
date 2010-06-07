@@ -10,7 +10,6 @@ import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
 import com.logica.hummingbird.framebroker.CamelFrameBroker;
-import com.logica.hummingbird.telemetry.TelemetryFrame;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
@@ -94,11 +93,6 @@ public class RouterTest extends CamelTestSupport {
     	assertIsInstanceOf(CcsdsTmPacket.class, packetEndpoint.getReceivedExchanges().get(0).getIn().getBody());
     	assertIsInstanceOf(CcsdsTmFrame.class, frameEndpoint.getReceivedExchanges().get(0).getIn().getBody());
     	
-    	TelemetryFrame tmFrame = (TelemetryFrame) frameEndpoint.getReceivedExchanges().get(0).getIn().getBody();
-    	
-//    	System.out.println("Frame values: " + tmFrame.getValues());
-    	System.out.println("Frame's 1st packet's values: " + tmFrame.getPackets().get(0).getValues());
-    	System.out.println("Frame's 1st packet's 1st parameter's values: " + tmFrame.getPackets().get(0).getParameters().get(0).getValues());
     }
     
     // TODO use MockModelFactory from test-support for this!
