@@ -9,6 +9,7 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
+import com.logica.hummingbird.MessageType;
 import com.logica.hummingbird.framebroker.CamelFrameBroker;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
@@ -51,9 +52,9 @@ public class RouterTest extends CamelTestSupport {
                 from("direct:start")
                 .split().method(processor, "split")
                 .choice()
-                .when(header("Type").isEqualTo("TMPacket")).to(packetEndpoint)
-                .when(header("Type").isEqualTo("TMParameter")).to(parameterEndpoint)
-                .when(header("Type").isEqualTo("TMFrame")).to(frameEndpoint)
+                .when(header("Type").isEqualTo(MessageType.TMPacket)).to(packetEndpoint)
+                .when(header("Type").isEqualTo(MessageType.TMParameter)).to(parameterEndpoint)
+                .when(header("Type").isEqualTo(MessageType.TMFrame)).to(frameEndpoint)
                     ;
             }
         };
