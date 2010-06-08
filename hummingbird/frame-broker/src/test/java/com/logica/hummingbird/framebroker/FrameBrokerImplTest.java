@@ -27,7 +27,6 @@ import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacketPayload;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
-import com.logica.hummingbird.telemetry.types.ParameterIntegerType;
 
 /**
  * @author Mark Doyle
