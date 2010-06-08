@@ -1,29 +1,32 @@
 package com.logica.hummingbird.telemetry.ccsds;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.logica.hummingbird.telemetry.TelemetryPacket;
+import com.logica.hummingbird.telemetry.TelemetryPacketHeader;
+import com.logica.hummingbird.telemetry.TelemetryPacketPayload;
 
-public class CcsdsTmPacket implements TelemetryPacket {
-    List<CcsdsTmParameter> parameters = new ArrayList<CcsdsTmParameter>();;
-
-    Map<String, Object> values = new HashMap<String, Object>();
+public class CcsdsTmPacket implements TelemetryPacket {    
+    TelemetryPacketHeader packetHeader = new CcsdsTmPacketHeader();
     
-    Integer apid; 
+    TelemetryPacketPayload payload = new CcsdsTmPacketPayload();
 
-    public List<CcsdsTmParameter> getParameters() {
-		return parameters;
+	@Override
+	public TelemetryPacketHeader getHeader() {
+		return this.packetHeader;
 	}
 
-	public void setParameters(List<CcsdsTmParameter> parameters) {
-		this.parameters = parameters;
+	@Override
+	public TelemetryPacketPayload getPayload() {
+		return this.payload;
 	}
-	
-	public Map<String, Object> getValues() {
-		return values;
+
+	@Override
+	public void setHeader(TelemetryPacketHeader header) {
+		this.packetHeader = header;
+	}
+
+	@Override
+	public void setPayload(TelemetryPacketPayload payload) {
+		this.payload = payload;		
 	}
 
 	/* (non-Javadoc)
@@ -32,36 +35,13 @@ public class CcsdsTmPacket implements TelemetryPacket {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("TmPacket [apid=");
-		builder.append(apid);
-		builder.append(", parameters=");
-		builder.append(parameters);
-		builder.append(", values=");
-		builder.append(values);
+		builder.append("CcsdsTmPacket [packetHeader=");
+		builder.append(packetHeader);
+		builder.append(", payload=");
+		builder.append(payload);
 		builder.append("]");
 		return builder.toString();
-	}
-	
-	
-	@Override
-	public boolean equals(Object obj) {
-		System.out.println("packet equals");
-		// Check for comparison to self.
-		if (this == obj) {
-			return true;
-		}
+	}	
 
-		// Check we can actually compare this object to ourselves.
-		if (!(obj instanceof CcsdsTmPacket)) {
-			return false;
-		}
-		
-		CcsdsTmPacket otherPacket = (CcsdsTmPacket)obj;
-	    
-	    boolean equal = parameters.equals(otherPacket.getParameters()) 
-	    				&&
-	    				apid == otherPacket.apid;
-		return equal;
-	}
 	
 }

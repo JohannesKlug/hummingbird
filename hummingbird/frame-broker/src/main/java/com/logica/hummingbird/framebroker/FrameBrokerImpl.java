@@ -28,7 +28,6 @@ package com.logica.hummingbird.framebroker;
 
 import java.util.BitSet;
 
-import org.omg.CosNaming.IstringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

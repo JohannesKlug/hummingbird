@@ -26,8 +26,6 @@
  */
 package com.logica.hummingbird.framebroker.producers;
 
-import java.util.BitSet;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,16 +39,14 @@ import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
  */
 public class CcsdsParameterProducer extends CcsdsProducer implements ParameterObserver {
 	private final static Logger LOG = LoggerFactory.getLogger(CcsdsParameterProducer.class);
-	
+
 	CcsdsPacketProducer parent;
-	
-	CcsdsTmParameter tmParameter = new CcsdsTmParameter();
 
 	public CcsdsParameterProducer(ContainerFactory containerFactory, CcsdsPacketProducer parent) {
 		super(containerFactory);
-		
+
 		this.parent = parent;
-		
+
 		// Register with all parameters corresponding to header fields.
 		for (ParameterImpl parameter : containerFactory.getAllParameters().values()) {
 			parameter.addParameterUpdateObserve(this);
@@ -59,21 +55,26 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 
 	@Override
 	public void updated(String field, int value) {
-		// TODO Auto-generated method stub
-		
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Updated Parameter: " + field + " : " + value);
+		}
+		this.parent.getTmPacket().getPayload().addParameter(new CcsdsTmParameter(field, value, Integer.class));
 	}
 
 	@Override
 	public void updated(String field, String value) {
-		// TODO Auto-generated method stub
-		
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Updated Parameter: " + field + " : " + value);
+		}
+		this.parent.getTmPacket().getPayload().addParameter(new CcsdsTmParameter(field, value, String.class));
 	}
 
 	@Override
 	public void updated(String field, double value) {
-		// TODO Auto-generated method stub
-		
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Updated Parameter: " + field + " : " + value);
+		}
+		this.parent.getTmPacket().getPayload().addParameter(new CcsdsTmParameter(field, value, Double.class));
 	}
-
 
 }

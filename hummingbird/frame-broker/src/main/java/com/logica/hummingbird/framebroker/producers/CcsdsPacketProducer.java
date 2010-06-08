@@ -75,7 +75,12 @@ public class CcsdsPacketProducer extends CcsdsProducer implements ContainerObser
 	
 	@Override
 	public void completed() {
-		parent.getTmFrame().getPackets().add(tmPacket);
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("TmPacket completely updated");
+			LOG.debug("TmPacket = " + tmPacket);
+		}
+//		parent.getTmFrame().getPackets().add(tmPacket);
+		parent.getTmFrame().addPacket(tmPacket);
 	}
 
 	@Override

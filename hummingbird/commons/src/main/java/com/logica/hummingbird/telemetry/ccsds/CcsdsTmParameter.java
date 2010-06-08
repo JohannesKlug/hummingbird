@@ -4,7 +4,23 @@ import com.logica.hummingbird.telemetry.TelemetryParameter;
 
 public class CcsdsTmParameter implements TelemetryParameter {
 
-	Integer apid;
+	private String name;
+	
+	private Class valueClazz;
+
+	private Object value;
+	
+	
+	public CcsdsTmParameter(String name, Object value, Class valueClazz) {
+		this.value = value;
+		this.valueClazz = valueClazz;
+		this.name = name;
+	}
+	
+	public Object getValue() {
+		return value;
+	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -21,11 +37,14 @@ public class CcsdsTmParameter implements TelemetryParameter {
 		
 		CcsdsTmParameter otherParameter = (CcsdsTmParameter)obj;
 	    
-	    boolean equal = apid == otherParameter.apid;
+	    boolean equal = value.equals(otherParameter.value);
 		return equal;
 	}
 
-
+	@Override
+	public String getName() {
+		return this.name;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -33,8 +52,12 @@ public class CcsdsTmParameter implements TelemetryParameter {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CcsdsTmParameter [apid=");
-		builder.append(apid);
+		builder.append("CcsdsTmParameter [name=");
+		builder.append(name);
+		builder.append(", value=");
+		builder.append(value);
+		builder.append(", valueClazz=");
+		builder.append(valueClazz);
 		builder.append("]");
 		return builder.toString();
 	}
