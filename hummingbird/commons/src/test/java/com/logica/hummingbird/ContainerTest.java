@@ -14,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
-import com.logica.hummingbird.spacesystemmodel.BitSetUtility;
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
@@ -22,6 +21,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameEx
 import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
+import com.logica.hummingbird.util.BitSetUtility;
 
 /**
  * @author Mark Doyle

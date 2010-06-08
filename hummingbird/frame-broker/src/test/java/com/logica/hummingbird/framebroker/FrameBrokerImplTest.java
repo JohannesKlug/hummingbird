@@ -8,10 +8,11 @@ import java.util.BitSet;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.BitSetUtility;
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
@@ -27,6 +28,7 @@ import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacketPayload;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
+import com.logica.hummingbird.util.BitSetUtility;
 
 /**
  * @author Mark Doyle
@@ -87,7 +89,7 @@ public class FrameBrokerImplTest {
 	 * Create the framebroker.
 	 * We do this before each test as we don't know how a test may effect the state
 	 * of a framebroker.  Just to be sure ;)
-	 * t
+	 * 
 	 * @throws java.lang.Exception
 	 */
 	@Before
@@ -122,10 +124,20 @@ public class FrameBrokerImplTest {
 	/**
 	 * Test method for
 	 * {@link com.logica.hummingbird.framebroker.FrameBrokerImpl#marshall(java.lang.String, java.util.BitSet)}.
+	 * @throws UnknownContainerNameException 
+	 * @throws BitSetOperationException 
 	 */
 	@Test
-	public final void testMarshallStringBitSet() {
-		// TODO
+	public final void testMarshallStringBitSet() throws UnknownContainerNameException, BitSetOperationException {
+		// FIXME test failing.  Could be related to padding.  Unmarshalled bitset is much smaller.
+		BitSet marshalledFrame = new BitSet();
+		frameBroker.marshall(MockContainerModelFactory.TM_FRAME_ALIAS, marshalledFrame);
+		LOG.info("Marshalled Frame: " + BitSetUtility.binDump(marshalledFrame));
+
+		BitSet testBitset = BitSetUtility.fromString(TEST_BITSET_FRAME);
+		
+		LOG.debug("Test target bindump: " + BitSetUtility.binDump(testBitset));
+		assertEquals("Marshalled frame should be the same as the TEST_BITSET_FRAME", marshalledFrame, testBitset);
 	}
 
 	/**

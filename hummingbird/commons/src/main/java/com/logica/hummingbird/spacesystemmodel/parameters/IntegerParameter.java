@@ -31,9 +31,9 @@ import java.util.BitSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.BitSetUtility;
 import com.logica.hummingbird.spacesystemmodel.ContainerObserver;
 import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
+import com.logica.hummingbird.util.BitSetUtility;
 
 /**
  * 

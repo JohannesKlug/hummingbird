@@ -5,9 +5,9 @@ import java.util.BitSet;
 import junit.framework.TestCase;
 
 import com.logica.hummingbird.framebroker.FrameBrokerImpl;
-import com.logica.hummingbird.spacesystemmodel.BitSetUtility;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.util.BitSetUtility;
 
 // FIXME Not a unit test. This tests integration of separate components.  Needs moving.
 public class ContainerProcessorTest extends TestCase {

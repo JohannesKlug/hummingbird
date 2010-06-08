@@ -34,6 +34,7 @@ import com.logica.hummingbird.telemetry.TelemetryFrame;
 
 /**
  * The interface of the Frame Broker. 
+ * @author Gert Villemos
  */
 public interface IFrameBroker {
 	
@@ -50,8 +51,8 @@ public interface IFrameBroker {
 	public void unmarshall(String container, BitSet data) throws UnknownContainerNameException;
 	
 	/**
-	 * Marshalls the container identified through the container parameter name into
-	 * into the bit-set using the container. 
+	 * Marshalls the container identified through the container parameter name 
+	 * into the bit-set. 
 	 *
 	 * @param container The name of the container as registered within the container factory.
 	 * @param data The data stream from which the data shall be extracted. 

@@ -59,7 +59,7 @@
 
 	<ciManagement>
 		<system>Hudson</system>
-		<url>http:/10.48.29.168:8888/hudson</url>
+		<url>http:/open.logicaspace.com:8080/hudson</url>
 	</ciManagement>
 
 	<organization>
@@ -136,17 +136,18 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
 		<!-- For creating OSGi bundles -->
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
 			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 
