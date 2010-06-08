@@ -34,6 +34,7 @@ import com.logica.hummingbird.telemetry.types.ParameterIntegerType;
  * @TODO Test is not complete - awaiting commons telemetry models to be finalised
  */
 public class FrameBrokerImplTest {
+	
 	/**
 	 * Logger for this class
 	 */
