@@ -16,11 +16,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
 import com.logica.hummingbird.spacesystemmodel.Container;
-import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
@@ -205,7 +203,7 @@ public class ContainerTest {
 	public void testMarshallOfValidModel() throws UnknownContainerNameException, BitSetOperationException {
 		LOG.info("Beginning test");
 		
-		LOG.debug(mockContainerFactory.getContainer("TMFrame").toString());
+		LOG.debug("SSModel before setting values: " + mockContainerFactory.getContainer("TMFrame").toString());
 
 		/** Populate the input mock frame parameter values **/	
 		// Set the Frame Header
@@ -224,7 +222,8 @@ public class ContainerTest {
 
 		// Set the Frame Tail
 		mockContainerFactory.getParameter(MockContainerModelFactory.TM_FRAME_TAIL_VALIDITY_FLAG).setValue(1);
-		
+
+		LOG.debug("SSModel after setting values: " + mockContainerFactory.getContainer("TMFrame").toString());
 
 		// Get the frame length, that is, the sum of itself and it's tree of sub
 		// containers and set the target bitset to this length.
