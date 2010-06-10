@@ -66,10 +66,25 @@ public class BitSetUtilityTest {
 		TEST_BIT_SET_STR_INVALID = "11015100010110111150000000900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
 	}
 
-	@Ignore
 	@Test
-	public void testExtractInteger() {
-		fail("Not yet implemented"); // TODO
+	public void testExtractSignedInteger() {
+		
+		BitSet signedIntegerInBitset = new BitSet(4);
+		signedIntegerInBitset.set(0, 4);
+		Integer extractedInteger = BitSetUtility.extractInteger(signedIntegerInBitset, 0, 4, true);
+		
+		assertEquals("1111 as a signed Integer should be read as -7.", new Integer(-7), extractedInteger);
+		
+	}
+	
+	@Test
+	public void testExtractUnsignedInteger() {
+		
+		BitSet unsignedIntegerInBitset = new BitSet(4);
+		unsignedIntegerInBitset.set(0, 4);
+		Integer extractedInteger = BitSetUtility.extractInteger(unsignedIntegerInBitset, 0, 4, false);
+		
+		assertEquals("1111 as an unsigned Integer should be read as 15.", new Integer(15), extractedInteger);
 	}
 
 	@Ignore

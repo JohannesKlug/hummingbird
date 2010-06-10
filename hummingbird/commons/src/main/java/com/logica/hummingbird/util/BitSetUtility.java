@@ -49,23 +49,34 @@ public class BitSetUtility {
 	 *            the offset in the bit set
 	 * @param length
 	 *            the length of the bit string that represents the encoded int
+	 * @param isSigned 
 	 * @return the extracted integer value
 	 * @throws RuntimeException
 	 *             if <tt>length</tt> is greater than the bit-count of int
 	 */
-	public static int extractInteger(BitSet bitSet, int offset, int length) {
+	public static int extractInteger(BitSet bitSet, int offset, int length, boolean isSigned) {
 		// checking the bit length
-		if (length > Integer.SIZE)
+		if (length > Integer.SIZE) {
 			throw new RuntimeException("You can not set a higher length than " + Integer.SIZE + " bits.");
+		}
 
 		int newValue = 0;
 		int mask = 1;
-		for (int i = 0; i < length - 1; ++i, mask <<= 1)
-			if (bitSet.get(offset + i))
-				newValue |= mask;
 
-		if (bitSet.get(offset + length - 1))
+		int end = length;
+		if(isSigned) {
+			end = length -1;
+		}
+		
+		for (int i = 0; i < end; i++, mask <<= 1) {
+			if (bitSet.get(offset + i)) {
+				newValue |= mask;
+			}
+		}
+		
+		if (isSigned && bitSet.get(offset + length - 1)) {
 			newValue *= -1;
+		}
 
 		return newValue;
 	}
