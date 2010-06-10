@@ -25,10 +25,10 @@ public class MockContainerModelFactoryTest {
 
 		for (ParameterImpl parameter : containerFactory.getAllParameters().values()) {
 			if (parameter.getType().getType() == ParameterType.eParameterType.FLOAT) {
-				assertTrue("Parameter data type mismatch", parameter.getValue() instanceof Float);
+				assertTrue("Parameter data type mismatch", parameter.getValue() instanceof Double);
 			}
 			else if (parameter.getType().getType() == ParameterType.eParameterType.INTEGER) {
-				assertTrue("Parameter data type mismatch", parameter.getValue() instanceof Integer);
+				assertTrue("Parameter data type mismatch", parameter.getValue() instanceof Long);
 			}
 			else {
 				fail("Parameter data type unknown: " + parameter.getType().getType() + " for " + parameter.getName());
