@@ -195,32 +195,49 @@ public class BitSetUtilityTest {
 	@Test
 	public void testFloatToBitSet() throws BitSetOperationException {
 		
-		String pi32BitString = "01000000010010010000111111011011";
-		String pi64BitString = "0100000000001001001000011111101101010011110010001101010011110001";
-		
 		String zeroAs32BitString = "00000000000000000000000000000000";
 		String zeroAs64BitString = "0000000000000000000000000000000000000000000000000000000000000000";
 		
-		assertEquals(32, pi32BitString.length());
-		assertEquals(64, pi64BitString.length());
+		String threeAs32BitString = "01000000010000000000000000000000";
+		String threeAs64BitString = "0100000000001000000000000000000000000000000000000000000000000000";
+		
+		String pi32BitString = "01000000010010010000111111011011";
+		String pi64BitString = "0100000000001001001000011111101101010011110010001101010011110001";
 		
 		assertEquals(32, zeroAs32BitString.length());
 		assertEquals(64, zeroAs64BitString.length());
 		
-		float originalFloat = 3.14159265f;
+		assertEquals(32, threeAs32BitString.length());
+		assertEquals(64, threeAs64BitString.length());
+
+		assertEquals(32, pi32BitString.length());
+		assertEquals(64, pi64BitString.length());
+		
+		
 		float zero = 0f;
+		float three = 3.0f;
+		float pi = 3.14159265f;
 		
-		BitSet bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, originalFloat);
-		assertEquals(BitSetUtility.fromString(pi32BitString), bitSet);
-		
-		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, originalFloat);
-		assertEquals(BitSetUtility.fromString(pi64BitString), bitSet);
+		BitSet bitSet = new BitSet();
 		
 		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, zero);
 		assertEquals(BitSetUtility.fromString(zeroAs32BitString), bitSet);
 		
 		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, zero);
 		assertEquals(BitSetUtility.fromString(zeroAs64BitString), bitSet);
+		
+		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, three);
+		assertEquals(BitSetUtility.fromString(threeAs32BitString), bitSet);
+		
+		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, three);
+		assertEquals(BitSetUtility.fromString(threeAs64BitString), bitSet);
+
+		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, pi);
+		assertEquals(BitSetUtility.fromString(pi32BitString), bitSet);
+		
+		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, pi);
+		assertEquals(BitSetUtility.fromString(pi64BitString), bitSet);
+		
 		
 	}
 }
