@@ -110,9 +110,6 @@ public class ContainerImpl extends NamedElement implements Container {
 	 * 
 	 */
 	protected boolean matchRestrictions() {
-		if(LOG.isDebugEnabled()) {
-			LOG.debug("Match restriction called");
-		}
 		// Check for match against the restriction criteria. The base container will forward the data to all containers
 		// which have been defined with the base container as a base. The sub containers themselves must decide whether
 		// they are relevant for the processing.
