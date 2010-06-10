@@ -199,7 +199,11 @@ public class BitSetUtilityTest {
 		BitSet bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, originalFloat);
 		System.out.println(originalFloat + " as a BitSet:" + bitSet);
 		
-		System.out.println(Integer.toBinaryString(Float.floatToRawIntBits(3f)));
+		System.out.println(Integer.toBinaryString(Float.floatToRawIntBits(837483.125345323324f)));
+		System.out.println(Integer.toBinaryString(Float.floatToRawIntBits(-837483.125345323324f)));
+		
+		System.out.println(Long.toBinaryString(Double.doubleToLongBits(837483.125345323324d)));
+		System.out.println(Long.toBinaryString(Double.doubleToLongBits(-837483.125345323324d)));
 		
 	}
 }
