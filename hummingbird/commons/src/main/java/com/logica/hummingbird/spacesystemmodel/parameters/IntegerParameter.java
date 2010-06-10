@@ -1,29 +1,3 @@
-/* ----------------------------------------------------------------------------
- * (c) Copyright Logica 2010
- *
- * All rights reserved. This document is protected by international copyright 
- * law and may not be reprinted, reproduced, copied or utilised in whole or in 
- * part by any means including electronic, mechanical, or other means without 
- * the prior written consent of Logica. 
- * Whilst reasonable care has been taken by Logica to ensure the information 
- * contained herein is reasonably accurate, Logica shall not, under any 
- * circumstances be liable for any loss or damage (direct or consequential) 
- * suffered by any party as a result of the contents of this publication or the 
- * reliance of any party thereon or any inaccuracy or omission therein. The 
- * information in this document is therefore provided on an "as is" basis 
- * without warranty and is subject to change without further notice and cannot 
- * be construed as a commitment by Logica. 
- * The products mentioned in this document are identified by the names, 
- * trademarks, service marks and logos of their respective companies or 
- * organisations and may not be used in any advertising or publicity or in any 
- * other way whatsoever without the prior written consent of those companies 
- * or organisations and Logica.
- * ----------------------------------------------------------------------------
- * System       : Hummingbird
- * Author       : VillemosG
- * Created on   : 08.01.2010
- * ----------------------------------------------------------------------------
- */
 package com.logica.hummingbird.spacesystemmodel.parameters;
 
 import java.util.BitSet;
@@ -34,16 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
 import com.logica.hummingbird.util.BitSetUtility;
 
-/**
- * 
- * @author Gert Villemos
- * @author Mark Doyle
- * 
- */
 public class IntegerParameter extends ParameterImpl {
-	/**
-	 * Logger for this class
-	 */
 	private static final Logger LOG = LoggerFactory.getLogger(IntegerParameter.class);
 
 	/** The value of the integer. 
@@ -92,8 +57,7 @@ public class IntegerParameter extends ParameterImpl {
 			BitSetUtility.insertInteger(packet, offset, (int) type.sizeInBits, value);
 		}
 		catch (RuntimeException e) {
-			// TODO log this
-			System.out.println("Error encoding parameter '" + this.name + "'. The value '" + this.value + "' cannot be encoded in " + type.sizeInBits
+			LOG.error("Error encoding parameter '" + this.name + "'. The value '" + this.value + "' cannot be encoded in " + type.sizeInBits
 					+ " bit(s).");
 		}
 
