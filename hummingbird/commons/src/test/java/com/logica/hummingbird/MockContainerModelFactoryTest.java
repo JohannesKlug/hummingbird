@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
@@ -15,7 +16,7 @@ public class MockContainerModelFactoryTest {
 	private ContainerFactory containerFactory;
 
 	@Before
-	public void setUp() {
+	public void setUp() throws InvalidParameterTypeException {
 		containerFactory = new MockContainerModelFactory();
 	}
 

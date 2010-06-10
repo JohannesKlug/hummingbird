@@ -9,20 +9,24 @@ import org.exolab.castor.xml.MarshalException;
 import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.xml.ValidationException;
 import org.exolab.castor.xml.XMLContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.generatedcode.xtce.Comparison;
 import com.logica.hummingbird.generatedcode.xtce.ParameterSetTypeItem;
 import com.logica.hummingbird.generatedcode.xtce.ParameterTypeSetTypeItem;
 import com.logica.hummingbird.generatedcode.xtce.SequenceContainer;
 import com.logica.hummingbird.generatedcode.xtce.SpaceSystem;
-import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
 import com.logica.hummingbird.spacesystemmodel.Unit;
+import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
+import com.logica.hummingbird.xtce.exceptions.InvalidXtceFileException;
 
 /**
  * 
@@ -30,6 +34,8 @@ import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
  *
  */
 public class XtceModelFactory implements ContainerFactory {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(XtceModelFactory.class);
 
 	protected Map<String, Unit> units = new HashMap<String, Unit>();
 	protected Map<String, ParameterType> types = new HashMap<String, ParameterType>();
@@ -43,9 +49,16 @@ public class XtceModelFactory implements ContainerFactory {
 
 	protected String spacesystemmodelFilename = "src/main/resources/humsat.xml";
 
-	public XtceModelFactory(String spacesystemmodelFilename) {
+	public XtceModelFactory(String spacesystemmodelFilename) throws InvalidXtceFileException {
 		this.spacesystemmodelFilename = spacesystemmodelFilename;
-		initialise();
+		try {
+			initialise();
+		}
+		catch (InvalidParameterTypeException e) {
+			String message = "Error in SpaceSystemModel file: " + spacesystemmodelFilename + "." ;
+			LOG.error(message + " " + e.getMessage());
+			throw new InvalidXtceFileException(message, e);
+		}
 	}
 
 	public ParameterImpl getParameter(String name) {
@@ -62,7 +75,7 @@ public class XtceModelFactory implements ContainerFactory {
 		return container;
 	}
 
-	private void initialise() {
+	private void initialise() throws InvalidParameterTypeException {
 
 		spaceSystem = getSpaceSystem();
 

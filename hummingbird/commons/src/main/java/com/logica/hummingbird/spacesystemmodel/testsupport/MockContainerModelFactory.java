@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
@@ -72,19 +73,24 @@ public class MockContainerModelFactory implements ContainerFactory {
 	public static final String PACKET_TYPE_B_ID = "333";
 
 	public static final String PACKET_TYPE_A_ID = "555";
+	
+	public static final String TM_FRAME_HEADER_HAPPY_FLAG = "Happy Flag";
+	
+	public static final String TM_FRAME_TAIL_VALIDITY_FLAG = "Validity Flag";
 
 	private Map<String, ContainerImpl> containers = new HashMap<String, ContainerImpl>();
 	private Map<String, ParameterImpl> parameters = new HashMap<String, ParameterImpl>();
 
-	public MockContainerModelFactory() {
+	public MockContainerModelFactory() throws InvalidParameterTypeException {
 		initialise();
 	}
 
 	/**
 	 * Creates an operational mock Container hierarchy which is used by the FrameBroker.
+	 * @throws InvalidParameterTypeException 
 	 * 
 	 */
-	private void initialise() {
+	private void initialise() throws InvalidParameterTypeException {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Beginning initialisation of container model mock up");
 		}
@@ -94,17 +100,36 @@ public class MockContainerModelFactory implements ContainerFactory {
 		// containers collection
 		ContainerImpl tmFrame = new ContainerImpl(TM_FRAME_ALIAS, "Test frame", "Test TM frame for unit testing");
 		this.addToContainers(tmFrame);
-		ContainerImpl tmHeader = new ContainerImpl(TM_FRAME_HEADER_ALIAS, "Test header", "Test TM header for unit testing");
-		this.addToContainers(tmHeader);
+		ContainerImpl tmFrameHeader = new ContainerImpl(TM_FRAME_HEADER_ALIAS, "Test header", "Test TM header for unit testing");
+		this.addToContainers(tmFrameHeader);
 		ContainerImpl tmPacket = new ContainerImpl(TM_PACKET_ALIAS, "Test packet", "Test TM packet for unit testing");
 		this.addToContainers(tmPacket);
-		ContainerImpl tmTail = new ContainerImpl(TM_FRAME_TAIL_ALIAS, "Test tail", "Test TM tail for unit testing");
-		this.addToContainers(tmTail);
+		ContainerImpl tmFrameTail = new ContainerImpl(TM_FRAME_TAIL_ALIAS, "Test tail", "Test TM tail for unit testing");
+		this.addToContainers(tmFrameTail);
 		// Add the header, packet and tail to the frame container.
 		ArrayList<Container> containersToAdd = new ArrayList<Container>(3);
-		containersToAdd.add(tmHeader);
+		
+		ParameterType paramType1bitInt = new ParameterType("1bitInt", "1bit integer type", "Parameter type for 1bit integers", eParameterType.INTEGER,
+				false, 0, 1);
+
+		// Add a flag to the Frame Header
+		
+		IntegerParameter happyFlagParameter = new IntegerParameter(TM_FRAME_HEADER_HAPPY_FLAG, "happy?", "Flag of Happiness", paramType1bitInt, 0);
+		tmFrameHeader.addContainer(happyFlagParameter);
+		this.addToContainers(happyFlagParameter);
+		this.addToParameters(happyFlagParameter);
+
+		containersToAdd.add(tmFrameHeader);
+		
 		containersToAdd.add(tmPacket);
-		containersToAdd.add(tmTail);
+
+		// Add a flag to the Frame Tail
+		IntegerParameter validityFlagParameter = new IntegerParameter(TM_FRAME_TAIL_VALIDITY_FLAG, "valid?", "Flag of Validity", paramType1bitInt, 0);
+		tmFrameTail.addContainer(validityFlagParameter);
+		containersToAdd.add(tmFrameTail);
+		this.addToContainers(validityFlagParameter);
+		this.addToParameters(validityFlagParameter);
+		
 		tmFrame.addContainer(containersToAdd);
 
 		/** Build the lower packet level of the model **/
@@ -149,7 +174,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 		// Create a parameter for packetTypeB and add it to the packet type and
 		// the container collection
 		ParameterType test64bitFloat = new ParameterType("test64bitFloat", "test param", "64 float test param", eParameterType.FLOAT, false, 1, 64);
-		FloatParameter testParameterB = new FloatParameter(TEST_PARAM_B, "test param", "test param holding a float value", test64bitFloat, 1.0f);
+		FloatParameter testParameterB = new FloatParameter(TEST_PARAM_B, "test param", "test param holding a float value", test64bitFloat, 0.0f);
 		packetTypeB.addContainer(testParameterB);
 		this.addToParameters(testParameterB);
 		this.addToContainers(testParameterB);

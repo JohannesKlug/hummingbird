@@ -30,6 +30,7 @@ import java.util.List;
 
 import com.logica.hummingbird.spacesystemmodel.NamedElement;
 import com.logica.hummingbird.spacesystemmodel.Unit;
+import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 
 /**
  * A parameter type. The parameter type consists of two elements;
@@ -71,11 +72,20 @@ public class ParameterType extends NamedElement {
 	 * @param signed Flag indicating whether the type is signed or not.
 	 * @param initialValue The default value of all parameters of this type.
 	 * @param sizeInBits The size of the parameters of this type in bits. 
+	 * @throws InvalidParameterTypeException 
 	 *
 	 */
-	public ParameterType(String name, String shortDescription, String longDescription, eParameterType type, boolean signed, long initialValue, long sizeInBits) {
+	public ParameterType(String name, String shortDescription, String longDescription, eParameterType type, boolean signed, long initialValue, long sizeInBits) throws InvalidParameterTypeException {
 		super(name, shortDescription, longDescription);
 
+		if (sizeInBits == 1 && signed) {
+			throw new InvalidParameterTypeException("Exception creating parameter type " + name + ".  A single-bit signed parameter makes no sense - you're doing it wrong!");
+		}
+		
+		if (sizeInBits == 0) {
+			throw new InvalidParameterTypeException("Exception creating parameter type " + name + ".  A size zero parameter makes no sense - you're doing it wrong!");
+		}
+		
 		this.type = type;
 		this.signed = signed;
 		this.initialValue = initialValue;
