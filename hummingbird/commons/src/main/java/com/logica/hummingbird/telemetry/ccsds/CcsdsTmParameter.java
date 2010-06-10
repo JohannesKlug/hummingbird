@@ -46,19 +46,18 @@ public class CcsdsTmParameter implements TelemetryParameter {
 		return this.name;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CcsdsTmParameter [name=");
+		builder.append("CcsdsTmParameter [\n\tname = ");
 		builder.append(name);
-		builder.append(", value=");
+		builder.append("\n\tvalue = ");
 		builder.append(value);
-		builder.append(", valueClazz=");
+		builder.append("\n\tvalueClazz = ");
 		builder.append(valueClazz);
-		builder.append("]");
+		builder.append("\n]");
 		return builder.toString();
 	}
+
+
 }

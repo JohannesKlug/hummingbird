@@ -69,18 +69,7 @@ public class CcsdsTmFrame implements TelemetryFrame {
 		return equal;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("CcsdsTmFrame [frameTail=");
-		builder.append(frameTail);
-		builder.append(", frameHeader=");
-		builder.append(frameHeader);
-		builder.append(", packets=");
-		builder.append(packets);
-		builder.append("]");
-		return builder.toString();
-	}
+
 
 
 	@Override
@@ -101,6 +90,19 @@ public class CcsdsTmFrame implements TelemetryFrame {
 	@Override
 	public void setTail(TelemetryFrameTail tail) {
 		this.frameTail = tail;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CcsdsTmFrame [\n\tframeHeader = ");
+		builder.append(frameHeader);
+		builder.append("\n\tpackets = ");
+		builder.append(packets);
+		builder.append("\n\tframeTail = ");
+		builder.append(frameTail);
+		builder.append("\n]");
+		return builder.toString();
 	}
 
 }

@@ -165,4 +165,45 @@ public class CcsdsFrameHeader implements TelemetryFrameHeader {
 	public void setTransferFrameSecondaryHeaderLength(BitSet transferFrameSecondaryHeaderLength) {
 		this.transferFrameSecondaryHeaderLength = transferFrameSecondaryHeaderLength;
 	}
+
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CcsdsFrameHeader [\n\tfirstHeaderPointer = ");
+		builder.append(firstHeaderPointer);
+		builder.append("\n\tframeVersionNum = ");
+		builder.append(frameVersionNum);
+		builder.append("\n\tmasterChannelFrameCount = ");
+		builder.append(masterChannelFrameCount);
+		builder.append("\n\toperationControlFieldFlag = ");
+		builder.append(operationControlFieldFlag);
+		builder.append("\n\tpacketOrderFlag = ");
+		builder.append(packetOrderFlag);
+		builder.append("\n\tsecondLengthId = ");
+		builder.append(secondLengthId);
+		builder.append("\n\tsecondaryHeader = ");
+		builder.append(secondaryHeader);
+		builder.append("\n\tspaceCraftId = ");
+		builder.append(spaceCraftId);
+		builder.append("\n\tsyncFlag = ");
+		builder.append(syncFlag);
+		builder.append("\n\ttransferFrameSecondaryHeaderFlag = ");
+		builder.append(transferFrameSecondaryHeaderFlag);
+		builder.append("\n\ttransferFrameSecondaryHeaderLength = ");
+		builder.append(transferFrameSecondaryHeaderLength);
+		builder.append("\n\ttransferFrameSecondaryHeaderVersionNum = ");
+		builder.append(transferFrameSecondaryHeaderVersionNum);
+		builder.append("\n\tvirtualChannelFrameCount = ");
+		builder.append(virtualChannelFrameCount);
+		builder.append("\n\tvirtualChannelId = ");
+		builder.append(virtualChannelId);
+		builder.append("\n]");
+		return builder.toString();
+	}
+
+
+
+
+
 }

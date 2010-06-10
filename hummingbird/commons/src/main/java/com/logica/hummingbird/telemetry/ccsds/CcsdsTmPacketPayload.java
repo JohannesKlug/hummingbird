@@ -32,15 +32,14 @@ public class CcsdsTmPacketPayload implements TelemetryPacketPayload {
 		return this.parameters;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CcsdsTmPacketPayload [parameters=");
+		builder.append("CcsdsTmPacketPayload [\n\tparameters = ");
 		builder.append(parameters);
-		builder.append("]");
+		builder.append("\n]");
 		return builder.toString();
 	}
+
+
 }

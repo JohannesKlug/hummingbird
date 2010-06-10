@@ -1,16 +1,16 @@
 package com.logica.hummingbird.telemetry.ccsds;
 
 import com.logica.hummingbird.telemetry.TelemetryPacket;
-import com.logica.hummingbird.telemetry.TelemetryPacketHeader;
+import com.logica.hummingbird.telemetry.CcsdsTelemetryPacketHeader;
 import com.logica.hummingbird.telemetry.TelemetryPacketPayload;
 
 public class CcsdsTmPacket implements TelemetryPacket {    
-    TelemetryPacketHeader packetHeader = new CcsdsTmPacketHeader();
+    CcsdsTelemetryPacketHeader packetHeader = new CcsdsTmPacketHeader();
     
     TelemetryPacketPayload payload = new CcsdsTmPacketPayload();
 
 	@Override
-	public TelemetryPacketHeader getHeader() {
+	public CcsdsTelemetryPacketHeader getHeader() {
 		return this.packetHeader;
 	}
 
@@ -20,7 +20,7 @@ public class CcsdsTmPacket implements TelemetryPacket {
 	}
 
 	@Override
-	public void setHeader(TelemetryPacketHeader header) {
+	public void setHeader(CcsdsTelemetryPacketHeader header) {
 		this.packetHeader = header;
 	}
 
@@ -29,19 +29,18 @@ public class CcsdsTmPacket implements TelemetryPacket {
 		this.payload = payload;		
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CcsdsTmPacket [packetHeader=");
+		builder.append("CcsdsTmPacket [\n\tpacketHeader = ");
 		builder.append(packetHeader);
-		builder.append(", payload=");
+		builder.append("\n\tpayload = ");
 		builder.append(payload);
-		builder.append("]");
+		builder.append("\n]");
 		return builder.toString();
-	}	
+	}
+
+
 
 	
 }
