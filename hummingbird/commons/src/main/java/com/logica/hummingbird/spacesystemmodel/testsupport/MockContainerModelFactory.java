@@ -74,9 +74,9 @@ public class MockContainerModelFactory implements ContainerFactory {
 
 	public static final String PACKET_TYPE_A_ID = "555";
 	
-	public static final String TM_FRAME_HEADER_HAPPY_FLAG = "Happy Flag";
+	public static final String TM_FRAME_HEADER_HAPPY_FLAG = "HappyFlag";
 	
-	public static final String TM_FRAME_TAIL_VALIDITY_FLAG = "Validity Flag";
+	public static final String TM_FRAME_TAIL_VALIDITY_FLAG = "ValidityFlag";
 
 	private Map<String, ContainerImpl> containers = new HashMap<String, ContainerImpl>();
 	private Map<String, ParameterImpl> parameters = new HashMap<String, ParameterImpl>();
