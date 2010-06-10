@@ -31,7 +31,6 @@ import java.util.BitSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.ContainerObserver;
 import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
 import com.logica.hummingbird.util.BitSetUtility;
 
@@ -47,8 +46,10 @@ public class IntegerParameter extends ParameterImpl {
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(IntegerParameter.class);
 
-	/** The value of the integer. */
-	protected Integer value = 0;
+	/** The value of the integer. 
+	 * It must be of type Long, since Hummingbird supports 64bit Integers.
+	 * */
+	protected Long value = 0;
 
 	/**
 	 * Constructor of the IntegerParameter class.
@@ -64,7 +65,7 @@ public class IntegerParameter extends ParameterImpl {
 	 * @param value
 	 *            The initial value.
 	 */
-	public IntegerParameter(String name, String shortDescription, String longDescription, ParameterType type, int value) {
+	public IntegerParameter(String name, String shortDescription, String longDescription, ParameterType type, long value) {
 		super(name, shortDescription, longDescription, type);
 		this.value = value;
 	}
@@ -110,12 +111,12 @@ public class IntegerParameter extends ParameterImpl {
 	}
 
 	@Override
-	public void setValue(float value) {
-		this.value = (int) value;
+	public boolean match(String value) {
+		return (this.value == Integer.parseInt(value));
 	}
 
 	@Override
-	public boolean match(String value) {
-		return (this.value == Integer.parseInt(value));
+	public void setValue(double value) {
+		this.value = (int) value;
 	}
 }
