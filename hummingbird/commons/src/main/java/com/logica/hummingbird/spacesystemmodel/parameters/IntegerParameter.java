@@ -49,7 +49,7 @@ public class IntegerParameter extends ParameterImpl {
 	/** The value of the integer. 
 	 * It must be of type Long, since Hummingbird supports 64bit Integers.
 	 * */
-	protected Long value = 0;
+	protected Long value = 0L;
 
 	/**
 	 * Constructor of the IntegerParameter class.
@@ -117,6 +117,6 @@ public class IntegerParameter extends ParameterImpl {
 
 	@Override
 	public void setValue(double value) {
-		this.value = (int) value;
+		this.value = (long) value;
 	}
 }
