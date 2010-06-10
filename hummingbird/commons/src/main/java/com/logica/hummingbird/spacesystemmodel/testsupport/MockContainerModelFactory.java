@@ -68,15 +68,17 @@ public class MockContainerModelFactory implements ContainerFactory {
 
 	public static final String TEST_PARAM_B = "TestParamB";
 
-	public static final String PACKET_ID_NAME = "ApId";
+	public static final String PACKET_ID_ALIAS = "ApId";
+	
+	public static final String PAYLOAD_LENGTH_PARAM_ALIAS = "PayloadLength";
 
 	public static final String PACKET_TYPE_B_ID = "333";
 
 	public static final String PACKET_TYPE_A_ID = "555";
 	
-	public static final String TM_FRAME_HEADER_HAPPY_FLAG = "HappyFlag";
+	public static final String HAPPY_FLAG_ALIAS = "HappyFlag";
 	
-	public static final String TM_FRAME_TAIL_VALIDITY_FLAG = "ValidityFlag";
+	public static final String VALIDITY_FLAG_ALIAS = "ValidityFlag";
 
 	private Map<String, ContainerImpl> containers = new HashMap<String, ContainerImpl>();
 	private Map<String, ParameterImpl> parameters = new HashMap<String, ParameterImpl>();
@@ -114,7 +116,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 
 		// Add a flag to the Frame Header
 		
-		IntegerParameter happyFlagParameter = new IntegerParameter(TM_FRAME_HEADER_HAPPY_FLAG, "happy?", "Flag of Happiness", paramType1bitInt, 0);
+		IntegerParameter happyFlagParameter = new IntegerParameter(HAPPY_FLAG_ALIAS, "happy?", "Flag of Happiness", paramType1bitInt, 0);
 		tmFrameHeader.addContainer(happyFlagParameter);
 		this.addToContainers(happyFlagParameter);
 		this.addToParameters(happyFlagParameter);
@@ -124,7 +126,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 		containersToAdd.add(tmPacket);
 
 		// Add a flag to the Frame Tail
-		IntegerParameter validityFlagParameter = new IntegerParameter(TM_FRAME_TAIL_VALIDITY_FLAG, "valid?", "Flag of Validity", paramType1bitInt, 0);
+		IntegerParameter validityFlagParameter = new IntegerParameter(VALIDITY_FLAG_ALIAS, "valid?", "Flag of Validity", paramType1bitInt, 0);
 		tmFrameTail.addContainer(validityFlagParameter);
 		containersToAdd.add(tmFrameTail);
 		this.addToContainers(validityFlagParameter);
@@ -140,10 +142,18 @@ public class MockContainerModelFactory implements ContainerFactory {
 		// Create the apid (ID) parameter type and add it to the packet header and the parameters collection.
 		ParameterType paramType11bitInt = new ParameterType("11bitInt", "11bit integer type", "Parameter type for 11bit integers", eParameterType.INTEGER,
 				false, 0, 11);
-		IntegerParameter packetIdParameter = new IntegerParameter(PACKET_ID_NAME, "Test Apid", "Test Application Id", paramType11bitInt, 0);
+		IntegerParameter packetIdParameter = new IntegerParameter(PACKET_ID_ALIAS, "Test Apid", "Test Application Id", paramType11bitInt, 0);
 		this.addToParameters(packetIdParameter);
 		this.addToContainers(packetIdParameter);
 		tmPacketHeader.addContainer(packetIdParameter);
+
+		// Create the payload length parameter type and add it to the packet header and the parameters collection.
+		ParameterType paramType16bitInt = new ParameterType("16bitInt", "16bit integer type", "Parameter type for 16bit integers", eParameterType.INTEGER,
+				false, 0, 16);
+		IntegerParameter payloadLengthParameter = new IntegerParameter(PAYLOAD_LENGTH_PARAM_ALIAS, "Payload length", "Payload lenght parameter", paramType16bitInt, 0);
+		this.addToContainers(payloadLengthParameter);
+		this.addToParameters(payloadLengthParameter);
+		tmPacketHeader.addContainer(payloadLengthParameter);
 
 		// Create the packet body and add it to the containers collection
 		ContainerImpl tmPacketBody = new ContainerImpl(TM_PACKET_BODY_ALIAS, "Test packet body", "Test TM packet header for unit testing");

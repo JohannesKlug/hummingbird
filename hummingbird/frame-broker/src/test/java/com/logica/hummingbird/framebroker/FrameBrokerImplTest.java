@@ -161,16 +161,16 @@ public class FrameBrokerImplTest {
 	public final void testMarshallStringBitSet() throws UnknownContainerNameException, BitSetOperationException {
 		LOG.info("---------- testMarshallStringBitSet -------------");
 		// Set the id parameter (apid) to 555.
-		ParameterImpl apid = mockSpaceSystemFactory.getParameter(MockContainerModelFactory.PACKET_ID_NAME);
+		ParameterImpl apid = mockSpaceSystemFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS);
 		apid.setValue(Float.valueOf(MockContainerModelFactory.PACKET_TYPE_A_ID));
 
 		// Set parameter A value
 		ParameterImpl paramA = mockSpaceSystemFactory.getParameter(MockContainerModelFactory.TEST_PARAM_A);
 		paramA.setValue(PARAM_A_TEST_VALUE);
 		
-		mockSpaceSystemFactory.getParameter(MockContainerModelFactory.TM_FRAME_HEADER_HAPPY_FLAG).setValue(1);
+		mockSpaceSystemFactory.getParameter(MockContainerModelFactory.HAPPY_FLAG_ALIAS).setValue(1);
 		
-		mockSpaceSystemFactory.getParameter(MockContainerModelFactory.TM_FRAME_TAIL_VALIDITY_FLAG).setValue(1);
+		mockSpaceSystemFactory.getParameter(MockContainerModelFactory.VALIDITY_FLAG_ALIAS).setValue(1);
 
 		// Create an empty bitset to marshal the frame into
 		BitSet marshalledFrame = new BitSet(TEST_BITSET_FRAME.length());

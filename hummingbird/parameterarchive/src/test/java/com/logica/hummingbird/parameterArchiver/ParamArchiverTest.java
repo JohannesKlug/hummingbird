@@ -49,18 +49,18 @@ public class ParamArchiverTest {
 		
 		
 		// Store the first parameter
-		parameterArchiver.storeParameter(MockContainerModelFactory.PACKET_ID_NAME, System.currentTimeMillis(), 15);
+		parameterArchiver.storeParameter(MockContainerModelFactory.PACKET_ID_ALIAS, System.currentTimeMillis(), 15);
 		
 		int countOfStoredParameters = reflectedTemplate.queryForInt(
-				"select count(*) from " + MockContainerModelFactory.PACKET_ID_NAME);
+				"select count(*) from " + MockContainerModelFactory.PACKET_ID_ALIAS);
 		
 		assertEquals(1, countOfStoredParameters);
 
 		// Store the second parameter
-		parameterArchiver.storeParameter(MockContainerModelFactory.PACKET_ID_NAME, System.currentTimeMillis(), 15);
+		parameterArchiver.storeParameter(MockContainerModelFactory.PACKET_ID_ALIAS, System.currentTimeMillis(), 15);
 		
 		countOfStoredParameters = reflectedTemplate.queryForInt(
-				"select count(*) from " + MockContainerModelFactory.PACKET_ID_NAME);
+				"select count(*) from " + MockContainerModelFactory.PACKET_ID_ALIAS);
 		
 		assertEquals(2, countOfStoredParameters);
 		
@@ -78,7 +78,7 @@ public class ParamArchiverTest {
 	public void testRetrieval() {
 		Message message = new DefaultMessage();
 		message.setHeader("Type", "RetrievalRequest");
-		message.setHeader("Name", MockContainerModelFactory.PACKET_ID_NAME);
+		message.setHeader("Name", MockContainerModelFactory.PACKET_ID_ALIAS);
 		message.setHeader("FromDate", Long.MIN_VALUE);
 		message.setHeader("LongDate", Long.MAX_VALUE);
 		message.getHeader("JmsReplyTo", "");
