@@ -110,13 +110,13 @@ public class BitSetUtility {
 	 *             if <tt>value</tt> is greater than the value encodeable by the given amount of bits or if value ==
 	 *             Integer.MIN_VALUE (no absolute value available as int)
 	 */
-	public static BitSet insertInteger(BitSet bitSet, int offset, int length, int value) {
+	public static BitSet insertInteger(BitSet bitSet, int offset, int length, long value) {
 		// checking the bit length
 		if (length > Integer.SIZE)
 			throw new RuntimeException("You can not set a higher length than " + Integer.SIZE + " bits.");
 
 		// checking whether the value fits into the bit string of length - 1
-		int absValue = Math.abs(value);
+		int absValue = Math.abs((int) value);
 		if (absValue > Math.pow(2.0, length) - 1 || value == Integer.MIN_VALUE)
 			throw new RuntimeException("The value of " + value + " does not fit into a bit string of " + (length - 1) + " bits.");
 
@@ -185,25 +185,44 @@ public class BitSetUtility {
 		BitSet floatBitSet = floatToBitSet(floatSize, value);
 		
 		for (int i=0; i<floatSize.getSize(); i++) {
+			if (floatBitSet.get(i)) {
+				bitSet.set(i+offset);
+			} else {
+				bitSet.set(i+offset);
+			}
 		}
 		return bitSet;
 	}
 
 	public static BitSet floatToBitSet (FloatSizeInBits floatSize, double value) throws BitSetOperationException {
 		BitSet bitSet = new BitSet(floatSize.getSize());
-		Long longBits = Double.doubleToLongBits(value);
-		String binaryString = Long.toBinaryString(longBits);
 		
-		int bitIndex = 0;
-		for (char c : binaryString.toCharArray()) {
-			if (c == '0') {
-				bitSet.clear(bitIndex);
-			} else if (c == '1') {
-				bitSet.set(bitIndex);
+		String binaryString = new String();
+		if (floatSize == FloatSizeInBits.THIRTY_TWO) {
+			// Parse as IEEE-754 Single Precision (32-bit) (Java Float)
+			int intBits = Float.floatToIntBits((float) value);
+			binaryString = Integer.toBinaryString(intBits);
+			
+		} else if (floatSize == FloatSizeInBits.SIXTY_FOUR) {
+			// Parse as IEEE-754 Double Precision (64-bit) (Java Double)
+			Long longBits = Double.doubleToLongBits(value);
+			binaryString = Long.toBinaryString(longBits);
+		}
+		System.out.println(binaryString);
+		
+		for (int bitIndex = 0; bitIndex < floatSize.getSize(); bitIndex++) {
+			if (bitIndex < binaryString.length()) {
+				if (binaryString.charAt(bitIndex) == '0') {
+					bitSet.clear(bitIndex);
+				} else if (binaryString.charAt(bitIndex) == '1') {
+					bitSet.set(bitIndex);
+				} else {
+					throw new BitSetOperationException("Error converting floating point number '" + value + "' to a BitSet: invalid character '" + binaryString.charAt(bitIndex) + "' encountered.");
+				}
 			} else {
-				throw new BitSetOperationException("Error converting floating point number '" + value + "' to a BitSet: invalid character '" + c + "' encountered.");
+				// When we run out of characters in our binaryString, set the rest to zero.
+				bitSet.clear(bitIndex);
 			}
-			bitIndex++;
 		}
 		
 		return bitSet;
@@ -282,11 +301,11 @@ public class BitSetUtility {
 		int count = 0;
 		for (byte c : str.getBytes()) {
 			// If character '1' flip the bit to "on"
-			if (c == 49) {
+			if (c == '1') {
 				result.flip(count);
 			}
 			// else the bit must be equal to 48 ('0'); if not we have a problem...
-			else if (c != 48) {
+			else if (c != '0') {
 				throw new BitSetOperationException("Invalid bit string, cannot infer 0 or 1 from character " + c);
 			}
 			count++;

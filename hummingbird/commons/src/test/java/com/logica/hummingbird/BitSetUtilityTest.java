@@ -192,4 +192,14 @@ public class BitSetUtilityTest {
 		assertEquals(3, BitSetUtility.toLong(data));
 	}
 
+	@Test
+	public void testFloatToBitSet() throws BitSetOperationException {
+		float originalFloat = 3f;
+		
+		BitSet bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, originalFloat);
+		System.out.println(originalFloat + " as a BitSet:" + bitSet);
+		
+		System.out.println(Integer.toBinaryString(Float.floatToRawIntBits(3f)));
+		
+	}
 }
