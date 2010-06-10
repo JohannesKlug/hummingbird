@@ -12,7 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
+import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
 import com.logica.hummingbird.util.BitSetUtility;
+import com.logica.hummingbird.util.BitSetUtility.FloatSizeInBits;
 
 /**
  * 
@@ -70,32 +72,32 @@ public class BitSetUtilityTest {
 	public void testExtractSignedInteger() {
 		BitSet signedIntegerInBitset = new BitSet(4);
 		signedIntegerInBitset.set(0, 4);
-		Integer extractedInteger = BitSetUtility.extractInteger(signedIntegerInBitset, 0, 4, true);
+		Long extractedInteger = BitSetUtility.extractInteger(signedIntegerInBitset, 0, 4, true);
 		
-		assertEquals("1111 as a signed Integer should be read as -7.", new Integer(-7), extractedInteger);
+		assertEquals("1111 as a signed Integer should be read as -7.", new Long(-7), extractedInteger);
 	}
 	
 	@Test
 	public void testExtractUnsignedInteger() {
 		BitSet unsignedIntegerInBitset = new BitSet(4);
 		unsignedIntegerInBitset.set(0, 4);
-		Integer extractedInteger = BitSetUtility.extractInteger(unsignedIntegerInBitset, 0, 4, false);
+		Long extractedInteger = BitSetUtility.extractInteger(unsignedIntegerInBitset, 0, 4, false);
 		
-		assertEquals("1111 as an unsigned Integer should be read as 15.", new Integer(15), extractedInteger);
+		assertEquals("1111 as an unsigned Integer should be read as 15.", new Long(15), extractedInteger);
 	}
 	
 	@Test
 	public void testExtractUnsigned1BitInteger() {
 		BitSet unsignedIntegerInBitset = new BitSet(1);
 		unsignedIntegerInBitset.set(0);
-		Integer extractedInteger = BitSetUtility.extractInteger(unsignedIntegerInBitset, 0, 1, false);
+		Long extractedInteger = BitSetUtility.extractInteger(unsignedIntegerInBitset, 0, 1, false);
 		
-		assertEquals("1 as an unsigned Integer should be read as 1.", new Integer(1), extractedInteger);
+		assertEquals("1 as an unsigned Integer should be read as 1.", new Long(1), extractedInteger);
 		
 		unsignedIntegerInBitset = new BitSet(1);
 		extractedInteger = BitSetUtility.extractInteger(unsignedIntegerInBitset, 0, 1, false);
 		
-		assertEquals("0 as an unsigned Integer should be read as 0.", new Integer(0), extractedInteger);
+		assertEquals("0 as an unsigned Integer should be read as 0.", new Long(0), extractedInteger);
 	}
 	
 	@Ignore
@@ -106,14 +108,16 @@ public class BitSetUtilityTest {
 
 	@Ignore
 	@Test
-	public void testExtractDouble() {
+	public void testExtractFloat() {
 		fail("Not yet implemented"); // TODO
 	}
 
 	@Ignore
 	@Test
 	public void testInsertDouble() {
-		fail("Not yet implemented"); // TODO
+		BitSet floatBitSet = new BitSet(0);
+//		BitSetUtility.insertFloat(floatBitSet, 0, 64, FloatSizeInBits.SIXTY_FOUR, value);
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -156,6 +160,36 @@ public class BitSetUtilityTest {
 		}
 
 		fail("BitSetOperationException exception was not thrown for " + TEST_BIT_SET_STR_INVALID + ". BitSetUtility.fromString created " + actual);
+	}
+	
+	@Test
+	public void testToBinaryString() {
+		BitSet data = new BitSet();
+		data.set(0);
+		data.set(1);
+		data.set(5);
+		
+		String binaryString = BitSetUtility.toBinaryBigEndianString(data);
+		
+		String expected = "100011";
+		
+		assertEquals(expected, binaryString);
+		
+	}
+	
+	@Test
+	public void testToLong() {
+		BitSet data = new BitSet();
+		data.set(2);
+		data.set(3);
+		
+		assertEquals(12, BitSetUtility.toLong(data));
+		
+		data = new BitSet();
+		data.set(0);
+		data.set(1);
+		
+		assertEquals(3, BitSetUtility.toLong(data));
 	}
 
 }

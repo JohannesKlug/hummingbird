@@ -39,6 +39,22 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationExcepti
  * @author Mark Doyle
  */
 public class BitSetUtility {
+	
+	public enum FloatSizeInBits {
+		THIRTY_TWO (32),
+		SIXTY_FOUR (64);
+		
+		private final int size;
+		
+	    FloatSizeInBits(int size) {
+	        this.size = size;
+	    }
+
+		public int getSize() {
+			return size;
+		}
+	}
+
 	/**
 	 * Extracts an integer value from the given <tt>BitSet</tt> from offset of the given amount of bits (given by
 	 * <tt>lenght</tt>).
@@ -49,31 +65,26 @@ public class BitSetUtility {
 	 *            the offset in the bit set
 	 * @param length
 	 *            the length of the bit string that represents the encoded int
-	 * @param isSigned 
+	 * @param isSigned
 	 * @return the extracted integer value
 	 * @throws RuntimeException
 	 *             if <tt>length</tt> is greater than the bit-count of int
 	 */
-	public static int extractInteger(BitSet bitSet, int offset, int length, boolean isSigned) {
-		// checking the bit length
-		if (length > Integer.SIZE) {
-			throw new RuntimeException("You can not set a higher length than " + Integer.SIZE + " bits.");
-		}
-
-		int newValue = 0;
+	public static long extractInteger(BitSet bitSet, int offset, int length, boolean isSigned) {
+		long newValue = 0;
 		int mask = 1;
-
-		int end = length;
-		if(isSigned) {
-			end = length -1;
-		}
 		
+		int end = length;
+		if (isSigned) {
+			end = length - 1;
+		}
+
 		for (int i = 0; i < end; i++, mask <<= 1) {
 			if (bitSet.get(offset + i)) {
 				newValue |= mask;
 			}
 		}
-		
+
 		if (isSigned && bitSet.get(offset + length - 1)) {
 			newValue *= -1;
 		}
@@ -126,8 +137,8 @@ public class BitSetUtility {
 	}
 
 	/**
-	 * Extracts a double value from <tt>bitSet</tt> from the offset position to the given offset+length-1. It does the
-	 * reverse scaling done by
+	 * Extracts a floating point number from <tt>bitSet</tt> from the offset position to the given offset+length-1. It
+	 * does the reverse scaling done by
 	 * <tt>public static BitSet doubleToBitSet(BitSet bitSet, int offset, int length, double minValue,
 	 double maxValue, double value)</tt>.
 	 * 
@@ -147,81 +158,54 @@ public class BitSetUtility {
 	 * @throws RuntimeException
 	 *             if the number of bits given by <tt>length</tt> is greater than Long.SIZE
 	 */
-	public static double extractDouble(BitSet bitSet, int offset, int length, double minValue, double maxValue) {
-		// checking the bit length
-		if (length > Long.SIZE)
-			throw new RuntimeException("You can not set a higher length than " + Long.SIZE + " bits.");
-
-		// getting the value as natural number from the bitSet
-		long longValue = 0;
-		long mask = 1;
-		for (int i = 0; i < length; ++i, mask <<= 1)
-			if (bitSet.get(offset + i))
-				longValue |= mask;
-
-		// hint: without sign!
-		long max = (int) (Math.pow(2.0, length - 1) * 2 - 1);
-
-		// returning the scaled back double value
-		return (longValue / (max / (maxValue - minValue)) + minValue);
+	public static double extractFloat(BitSet bitSet, int offset, FloatSizeInBits floatSize) {
+//		Float.intBitsToFloat(b1010101);
+//		
+//		int length = floatSize.getSize();
+//
+//		// getting the value as natural number from the bitSet
+//		long longValue = 0;
+//		long mask = 1;
+//		for (int i = 0; i < length; ++i, mask <<= 1) {
+//			if (bitSet.get(offset + i)) {
+//				longValue |= mask;
+//			}
+//		}
+//
+//		// hint: without sign!
+//		long max = (int) (Math.pow(2.0, length - 1) * 2 - 1);
+//
+//		// returning the scaled back double value
+//		return (longValue / (max / (maxValue - minValue)) + minValue);
+		BitSet actualBitSet = bitSet.get(offset, offset + floatSize.size); 
+		return Double.longBitsToDouble(BitSetUtility.toLong(actualBitSet));
+	}
+	
+	public static BitSet insertFloat(BitSet bitSet, int offset, FloatSizeInBits floatSize, double value) throws BitSetOperationException {
+		BitSet floatBitSet = floatToBitSet(floatSize, value);
+		
+		for (int i=0; i<floatSize.getSize(); i++) {
+		}
+		return bitSet;
 	}
 
-	/**
-	 * Encodes a double value in a <tt>BitSet</tt> by scaling the interval (given by minValue and maxValue) to the
-	 * codomain of the natural number representable by n bits (n=length). <tt>minValue</tt> and <tt>maxValue</tt> are
-	 * necessary to calculate a scaling function between the two codomains.
-	 * 
-	 * @param bitSet
-	 *            the <tt>BitSet</tt> to operate on
-	 * @param offset
-	 *            the offset in the given bit set
-	 * @param length
-	 *            the number of bits used to encode <tt>value</tt>
-	 * @param minValue
-	 *            minimal value of <tt>value</tt>
-	 * @param maxValue
-	 *            maximal value of <tt>value</tt>
-	 * @param value
-	 *            the value to encode
-	 * @return the manipulated bit set
-	 * @throws BitSetOperationException
-	 * @throws RuntimeException
-	 *             if the value of <tt>value</tt> does not fit in ]minValue, maxValue[
-	 * @throws RuntimeException
-	 *             if the number of bits (<tt>length</tt>) is bigger than <tt>Long.SIZE</tt>
-	 */
-	public static BitSet insertDouble(BitSet bitSet, int offset, int length, double minValue, double maxValue, double value) throws BitSetOperationException {
-		if (value < minValue || value > maxValue) {
-			throw new BitSetOperationException("Value " + value + " is out of bounds.  Bounds are from " + minValue + " to " + maxValue);
-		}
-
-		if (length > Long.SIZE) {
-			throw new BitSetOperationException("You can not set a value greater than " + Long.SIZE + " bits in length.");
-		}
-
-		// scaling function:
-		// x element of ]minValue, maxValue[
-		// ==> f(x) element of ]0, (2^(length-1)*2 -1)[
-		//
-		// so:
-		// f(x) = (x-minValue) * m
-		// m = max / (maxValue - minValue)
-
-		double intervalLength = maxValue - minValue;
-		// hint: without sign!
-		int max = (int) (Math.pow(2.0, length - 1) * 2 - 1);
-
-		// scaling the input interval to the output interval of 0...2^(length-1)*2 -1
-		long scaledValue = Math.round((value - minValue) * max / intervalLength);
-
-		// putting the scaled value to the bitset (without any sign!)
-		long mask = 1;
-		for (int i = 0; i < length; ++i, mask <<= 1) {
-			if ((mask & scaledValue) > 0) {
-				bitSet.set(offset + i);
+	public static BitSet floatToBitSet (FloatSizeInBits floatSize, double value) throws BitSetOperationException {
+		BitSet bitSet = new BitSet(floatSize.getSize());
+		Long longBits = Double.doubleToLongBits(value);
+		String binaryString = Long.toBinaryString(longBits);
+		
+		int bitIndex = 0;
+		for (char c : binaryString.toCharArray()) {
+			if (c == '0') {
+				bitSet.clear(bitIndex);
+			} else if (c == '1') {
+				bitSet.set(bitIndex);
+			} else {
+				throw new BitSetOperationException("Error converting floating point number '" + value + "' to a BitSet: invalid character '" + c + "' encountered.");
 			}
+			bitIndex++;
 		}
-
+		
 		return bitSet;
 	}
 
@@ -309,5 +293,22 @@ public class BitSetUtility {
 		}
 
 		return result;
+	}
+	
+	public static long toLong(BitSet bitset) {
+		return Long.parseLong(BitSetUtility.toBinaryBigEndianString(bitset),2);
+	}
+
+	public static String toBinaryBigEndianString(BitSet data) {
+		String binaryString = "";
+		
+		for (int i = data.length()-1; i>=0 ; i--) {
+			if (data.get(i)) {
+				binaryString += '1';
+			} else {
+				binaryString += '0';
+			}
+		}
+		return binaryString;
 	}
 }
