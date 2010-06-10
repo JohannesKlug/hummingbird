@@ -31,10 +31,11 @@ import java.util.BitSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.ContainerObserver;
 import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
+import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import com.logica.hummingbird.util.BitSetUtility;
+import com.logica.hummingbird.util.BitSetUtility.FloatSizeInBits;
 
 /**
  * The float container encodes / decodes a float parameter from the
@@ -45,15 +46,17 @@ public class FloatParameter extends ParameterImpl {
 	 * Logger for this class
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(FloatParameter.class);
-
+	
 	/** The last extracted value of the container. */
-	protected float value = 0;
+	protected double value = 0;
 
 	/** The minimal possible value. */
 	protected final double minimumValue = Double.MIN_VALUE;
 	
 	/** The maximal possible value. */
 	protected final double maximumValue = Double.MAX_VALUE;
+	
+	private FloatSizeInBits floatSize;
 	
 	
 	/**
@@ -64,15 +67,30 @@ public class FloatParameter extends ParameterImpl {
 	 * @param longDescription A full description of the container, help style. 
 	 * @param ParameterType The type of the container. The type defines the length and behaviour of the parameter.
 	 * @param value The initial value.
+	 * @throws InvalidParameterTypeException 
 	 */
-	public FloatParameter(String name, String shortDescription, String longDescription, ParameterType type, float value) {
+	public FloatParameter(String name, String shortDescription, String longDescription, ParameterType type, float value) throws InvalidParameterTypeException {
 		super(name, shortDescription, longDescription, type);
-		this.value = value;
+		
+		if(type.signed) {
+			throw new InvalidParameterTypeException("Floats must be signed; sorry");
+		}
+		
+		if(type.getSizeInBits() == 32) {
+			floatSize = FloatSizeInBits.THIRTY_TWO;
+		}
+		else if(type.getSizeInBits() == 64) {
+			floatSize = FloatSizeInBits.SIXTY_FOUR;
+		}
+		else {
+			throw new InvalidParameterTypeException("Floats must be either 32 or 64 bits in size");
+		}
+		
 	}
 
 	@Override
 	public BitSet unmarshall(BitSet packet) {
-		value = (float) BitSetUtility.extractDouble(packet, 0, (int) type.sizeInBits, minimumValue, maximumValue);
+		value = BitSetUtility.extractFloat(packet, 0, this.floatSize);
 
 		for(ParameterObserver paramObserver : updatedParameterObservers) {
 			paramObserver.updated(name, value);
@@ -84,7 +102,7 @@ public class FloatParameter extends ParameterImpl {
 	@Override
 	public int marshall(BitSet packet, int offset) {
 		try {
-			packet = BitSetUtility.insertDouble(packet, offset, (int) type.sizeInBits, minimumValue, maximumValue, value);
+			packet = BitSetUtility.insertFloat(packet, offset, this.floatSize, value);
 		}
 		catch (BitSetOperationException e) {
 			LOG.error(e.toString());
@@ -104,13 +122,13 @@ public class FloatParameter extends ParameterImpl {
 	}
 
 	@Override
-	public void setValue(float value) {
+	public void setValue(double value) {
 		this.value = value;
 	}
 
 	@Override
 	public boolean match(String value) {		
-		return (this.value == Float.parseFloat(value));
+		return (this.value == Double.parseDouble(value));
 	}
 
 }

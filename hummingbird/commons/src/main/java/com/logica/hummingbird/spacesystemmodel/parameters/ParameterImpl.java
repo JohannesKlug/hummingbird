@@ -26,6 +26,8 @@
  */
 package com.logica.hummingbird.spacesystemmodel.parameters;
 
+import java.math.BigDecimal;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,7 +68,7 @@ public abstract class ParameterImpl extends ContainerImpl implements Parameter {
 	 * @param value The value to be set. 
 	 *
 	 */
-	abstract public void setValue(float value);
+	abstract public void setValue(double value);
 	
 	@Override
 	public ParameterType getType() {
