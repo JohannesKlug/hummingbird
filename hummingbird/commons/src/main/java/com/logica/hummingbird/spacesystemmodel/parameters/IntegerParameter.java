@@ -72,9 +72,10 @@ public class IntegerParameter extends ParameterImpl {
 	@Override
 	public BitSet unmarshall(BitSet packet) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("Unmarshalling " + this.name + " : " + packet);
+			LOG.debug("Unmarshalling " + this.name + " from packet : " + packet);
 		}
-		value = BitSetUtility.extractInteger(packet, 0, (int) type.sizeInBits);
+		
+		value = BitSetUtility.extractInteger(packet, 0, (int) type.sizeInBits, type.signed);
 
 		for(ParameterObserver paramObserver : updatedParameterObservers) {
 			paramObserver.updated(name, value);

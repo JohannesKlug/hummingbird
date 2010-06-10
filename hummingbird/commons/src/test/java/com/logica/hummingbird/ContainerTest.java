@@ -8,6 +8,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.BitSet;
 
 import org.apache.commons.lang.StringUtils;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -17,7 +18,9 @@ import org.springframework.util.Assert;
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
+import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
@@ -33,25 +36,57 @@ public class ContainerTest {
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(ContainerTest.class);
 
-	private static final MockContainerModelFactory MOCK_CONTAINER_MODEL_FACTORY = new MockContainerModelFactory();
-
-	private static final String EXPECTED_BIT_SET_DUMP = "11010100 01011011 11000000 00000000 00000000 00000000 00000000 00000000 "
-			+ System.getProperty("line.separator") + "00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 "
-			+ System.getProperty("line.separator");
-
 	/**
-	 * Based upon the MockContainerFactory this Bit String encodes the Mock Container model with a param type ID of 555
-	 * and a param A test value of 123
+	 * Mock Factory used in all the tests.
 	 */
-	private final static String BITSET_AS_STRING = "11010100010110111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
-
+	private static MockContainerModelFactory mockContainerFactory;
+	
 	/**
-	 * Constant used to reference param type ID 555 in the tests.
+	 * The complete mock container model as a string using default values i.e. 0
+	 */
+	private final static String EMPTY_CONTAINER_MODEL_BITSET_STRING = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+	
+	/**
+	 * The total length of the mock factory container model.  This includes all possible parameters.  
+	 */
+	private final static int CONTAINER_MODEL_FRAME_LENGTH = 109;
+	
+	/**
+	 * The total length of the mock factory container model with default values.
+	 * This means the packet type ID is 0 so no packet types match.
+	 */
+	private final static int DEFAULT_MODEL_FRAME_LENGTH = 13;
+	
+	/**
+	 * The total length of the mock factory container model with a packet type A set (555).
+	 */
+	private final static int PKT_TYPE_A_MODEL_FRAME_LENGTH = 45;
+	
+	/**
+	 * The total length of the mock factory container model with a packet type B set (333).
+	 */
+	private final static int PKT_TYPE_B_MODEL_FRAME_LENGTH = 77;
+	
+	/**
+	 * Based upon the MockContainerFactory this Bit String encodes the Mock Container model with values
+	 * represetning a snapshot of telemetry.
+	 * HappyFlag = 1
+	 * Param type ID = 555
+	 * Param A test = 123
+	 * ValidityFlag = 1
+	 * 
+	 * Total length 45/
+	 * NOTE: Param type ID is 555 so the packet type B is not used, i.e. the 64 bit float test param B
+	 */
+	private final static String TEST_BITSET_STRING = "111010100010110111100000000000000000000000001";
+	
+	/**
+	 * The packet ID value based upon the TEST_BITSET_STRING
 	 */
 	private static final String PACKET_TYPE_ID_555 = "555";
 
 	/**
-	 * A value used in testing to set param A to a value.
+	 * The test parameter A value based upon the TEST_BITSET_STRING
 	 */
 	private static final int PARAM_A_TEST_VALUE = 123;
 
@@ -60,43 +95,103 @@ public class ContainerTest {
 	 */
 	@BeforeClass
 	public static void setUpForAllTests() {
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Setting up for all tests");
-		}
-
-		ContainerFactory mockFactory = MOCK_CONTAINER_MODEL_FACTORY;
+	}
+	
+	@Before
+	public void setUpPerTest() throws InvalidParameterTypeException {
+		mockContainerFactory = new MockContainerModelFactory();
+	}
+	
+	@Test
+	public void testGetLength() throws UnknownContainerNameException {
+		Container tmframe = mockContainerFactory.getContainer("TMFrame");
+		
+		int length = tmframe.getLength();
+		// Using default values, i.e. everything 0 including packet type ID we should get the length 
+		// of the model with NO parameters.
+		assertEquals("Comparing length of tmframe", DEFAULT_MODEL_FRAME_LENGTH, length);
+		
+		mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_NAME).setValue(Integer.valueOf(MockContainerModelFactory.PACKET_TYPE_A_ID));
+		length = tmframe.getLength();
+		assertEquals("Comparing length of tmframe", PKT_TYPE_A_MODEL_FRAME_LENGTH, length);
+		
+		mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_NAME).setValue(Integer.valueOf(MockContainerModelFactory.PACKET_TYPE_B_ID));
+		length = tmframe.getLength();
+		
+		assertEquals("Comparing length of tmframe", PKT_TYPE_B_MODEL_FRAME_LENGTH, length);
+	}
+	
+	/**
+	 * Simply tests the container can marshal with the default empty parameters.
+	 * @throws UnknownContainerNameException
+	 * @throws BitSetOperationException
+	 */
+	@Test
+	public void testEmptyMarshall() throws UnknownContainerNameException, BitSetOperationException {
+		Container tmframe = mockContainerFactory.getContainer("TMFrame");
+		
+		BitSet marshalledFrame = new BitSet();
+		tmframe.marshall(marshalledFrame, 0);	
+		
+		assertEquals(BitSetUtility.fromString(EMPTY_CONTAINER_MODEL_BITSET_STRING), marshalledFrame);
 	}
 
 	/**
 	 * Test method for checking a valid BitSet can be unmarshalled into a collection of Java objects (the Containers)
-	 * {@link com.logica.hummingbird.spacesystemmodel.ContainerImpl#unmarshall(java.util.BitSet)} .
+	 * {@link com.logica.hummingbird.spacesystemmodel.ContainerImpl#unmarshall(java.util.BitSet)}.
+	 * 
+	 * NOTE: Test Param B (the 64 bit float) is not checked because the {@link TEST_BITSET_STRING} has the
+	 * packet type id set to 555.  The model restricts this id to packet type a which only contains 
+	 * test param A (a 32 bit int).
 	 * 
 	 * @throws UnknownContainerNameException
 	 * @throws BitSetOperationException
 	 */
 	@Test
-	public void testUnmarshall() throws UnknownContainerNameException, BitSetOperationException {
+	public void testUnmarshallFrameTestParamA() throws UnknownContainerNameException, BitSetOperationException {
 		LOG.info("Beginning test");
 
-		BitSet frame = BitSetUtility.fromString(BITSET_AS_STRING);
+		BitSet frame = BitSetUtility.fromString(TEST_BITSET_STRING);
 
-		Container tmframe = MOCK_CONTAINER_MODEL_FACTORY.getContainer("TMFrame");
+		Container tmframe = mockContainerFactory.getContainer("TMFrame");
 		tmframe.unmarshall(frame);
 
+		LOG.debug("The container frame after unmarshalling: " + tmframe);
 		// Check the unmarshalling was successful...
 		// Test the parameter type ID (Apid) was unmarshalled as an IntegerParameter with value 555 (PACKET_TYPE_ID_555)
 		// Container paramTypeID = testFrameBroker.getContainer(MockContainerModelFactory.PACKET_ID_NAME);
-		Container paramTypeID = MOCK_CONTAINER_MODEL_FACTORY.getContainer(MockContainerModelFactory.PACKET_ID_NAME);
+		Container paramTypeID = mockContainerFactory.getContainer(MockContainerModelFactory.PACKET_ID_NAME);
 		Assert.isInstanceOf(IntegerParameter.class, paramTypeID);
 		Number value = ((IntegerParameter) paramTypeID).getValue();
+		LOG.info("Checking " + MockContainerModelFactory.PACKET_ID_NAME);
 		assertEquals("Parameter has incorrect value.", Integer.parseInt(PACKET_TYPE_ID_555), value.intValue());
+		LOG.debug(MockContainerModelFactory.PACKET_ID_NAME + " parameter (apid) passed with value : " + value.intValue());
 
 		// Test that there is a Test Param A (32 bit unsigned int) as expected.
 		// Container testParamA = testFrameBroker.getContainer(MockContainerModelFactory.TEST_PARAM_A);
-		Container testParamA = MOCK_CONTAINER_MODEL_FACTORY.getContainer(MockContainerModelFactory.TEST_PARAM_A);
+		Container testParamA = mockContainerFactory.getContainer(MockContainerModelFactory.TEST_PARAM_A);
 		Assert.isInstanceOf(IntegerParameter.class, testParamA);
-		Number testParamValue = ((IntegerParameter) testParamA).getValue();
-		assertEquals("Parameter has incorrect value.", PARAM_A_TEST_VALUE, testParamValue.intValue());
+		Number testParamAvalue = ((IntegerParameter) testParamA).getValue();
+		LOG.info("Checking " + MockContainerModelFactory.TEST_PARAM_A);
+		assertEquals("Parameter has incorrect value.", PARAM_A_TEST_VALUE, testParamAvalue.intValue());
+		LOG.debug(MockContainerModelFactory.TEST_PARAM_A + " parameter passed with value : " + testParamAvalue.intValue());
+		
+		// Test the container models happy flag and the validity flag
+		// Both expected to be the default value of 0 since we never set a value.
+		final int expectedValue = 1;
+		Container happyFlag = mockContainerFactory.getContainer(MockContainerModelFactory.TM_FRAME_HEADER_HAPPY_FLAG);
+		Assert.isInstanceOf(IntegerParameter.class, happyFlag);
+		Number happyFlagValue = ((IntegerParameter) happyFlag).getValue();
+		LOG.info("Checking " + MockContainerModelFactory.TM_FRAME_HEADER_HAPPY_FLAG);
+		assertEquals("Parameter has incorrect value.", expectedValue, happyFlagValue.intValue());
+		LOG.debug(MockContainerModelFactory.TM_FRAME_HEADER_HAPPY_FLAG + " parameter passed with value : " + happyFlagValue.intValue());
+		
+		Container validityFlag = mockContainerFactory.getContainer(MockContainerModelFactory.TM_FRAME_TAIL_VALIDITY_FLAG);
+		Assert.isInstanceOf(IntegerParameter.class, validityFlag);
+		Number vFlagValue = ((IntegerParameter) validityFlag).getValue();
+		LOG.info("Checking " + MockContainerModelFactory.TM_FRAME_TAIL_VALIDITY_FLAG);
+		assertEquals("Parameter has incorrect value.", expectedValue, vFlagValue.intValue());
+		LOG.debug(MockContainerModelFactory.TM_FRAME_TAIL_VALIDITY_FLAG + " parameter passed with value : " + vFlagValue.intValue());
 	}
 
 	/**
@@ -104,49 +199,60 @@ public class ContainerTest {
 	 * {@link com.logica.hummingbird.spacesystemmodel.ContainerImpl#marshall(java.util.BitSet, int)} .
 	 * 
 	 * @throws UnknownContainerNameException
+	 * @throws BitSetOperationException 
 	 */
 	@Test
-	public void testMarshallOfValidModel() throws UnknownContainerNameException {
+	public void testMarshallOfValidModel() throws UnknownContainerNameException, BitSetOperationException {
 		LOG.info("Beginning test");
 		
-		LOG.debug(MOCK_CONTAINER_MODEL_FACTORY.getContainer("TMFrame").toString());
+		LOG.debug(mockContainerFactory.getContainer("TMFrame").toString());
 
-		/** Populate the input mock frame **/
+		/** Populate the input mock frame parameter values **/	
+		// Set the Frame Header
+		mockContainerFactory.getParameter(MockContainerModelFactory.TM_FRAME_HEADER_HAPPY_FLAG).setValue(1);
+		
 		// Set the Apid to Packet ID type A
-		ParameterImpl apid = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.PACKET_ID_NAME);
+		ParameterImpl apid = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_NAME);
 		apid.setValue(Float.valueOf(MockContainerModelFactory.PACKET_TYPE_A_ID));
 
 		// Set parameter A value
-		ParameterImpl paramA = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.TEST_PARAM_A);
+		ParameterImpl paramA = mockContainerFactory.getParameter(MockContainerModelFactory.TEST_PARAM_A);
 		paramA.setValue(PARAM_A_TEST_VALUE);
+		
+		// Set parameter B value
+		mockContainerFactory.getParameter(MockContainerModelFactory.TEST_PARAM_B).setValue(0.0f);
+
+		// Set the Frame Tail
+		mockContainerFactory.getParameter(MockContainerModelFactory.TM_FRAME_TAIL_VALIDITY_FLAG).setValue(1);
+		
 
 		// Get the frame length, that is, the sum of itself and it's tree of sub
-		// containers and set the bitset to this length.
-		int length = MOCK_CONTAINER_MODEL_FACTORY.getContainer("TMFrame").getLength();
+		// containers and set the target bitset to this length.
+		int length = mockContainerFactory.getContainer("TMFrame").getLength();
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("TMFrame length = " + length);
+			LOG.debug("TMFrame from space system model is of length = " + length);
 		}
-		BitSet frame = new BitSet(length);
-
+		
 		// Marshall the Frame to a bitset
-		Container tmframe = MOCK_CONTAINER_MODEL_FACTORY.getContainer("TMFrame");
-		tmframe.marshall(frame, 0);
+		BitSet marshalledFrame = new BitSet();
+		Container tmframe = mockContainerFactory.getContainer("TMFrame");
+		tmframe.marshall(marshalledFrame, 0);
 
-		LOG.debug("Bitset length = " + frame.size());
-		String binDump = BitSetUtility.binDump(frame);
+		LOG.debug("Bitset length = " + marshalledFrame.length());
+		String binDump = BitSetUtility.binDump(marshalledFrame);
 		LOG.debug(binDump);
 
-		// Assert the bitset is as expected. // TODO there is probably a better
-		// way to do this than a binDump String comparison haha.
-		assertEquals("Bit dump not equal", EXPECTED_BIT_SET_DUMP, binDump);
+		assertEquals("BitSets not equal", BitSetUtility.fromString(TEST_BITSET_STRING), marshalledFrame);
+		
+		assertEquals("BitSets length not as expected", marshalledFrame.length(), TEST_BITSET_STRING.length());
 
 		// Now let's marshall a parameter and run some tests.
-		BitSet apidBitSet = new BitSet(MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.PACKET_ID_NAME).getLength());
-		Container packet = MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.PACKET_ID_NAME);
+		BitSet apidBitSet = new BitSet(mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_NAME).getLength());
+		Container packet = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_NAME);
 		packet.marshall(apidBitSet, 0);
 		String apidBinDump = BitSetUtility.binDump(apidBitSet);
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(MOCK_CONTAINER_MODEL_FACTORY.getParameter(MockContainerModelFactory.PACKET_ID_NAME) + " = " + apidBinDump);
+			LOG.debug(mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_NAME) + " = " + apidBinDump);
 		}
 
 		String apidBinValue = Integer.toBinaryString(Integer.valueOf(MockContainerModelFactory.PACKET_TYPE_A_ID));

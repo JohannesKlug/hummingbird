@@ -26,6 +26,9 @@
  */
 package com.logica.hummingbird.spacesystemmodel.parameters;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
 
 /**
@@ -36,6 +39,7 @@ import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
  * has a type, which defines among others the length in bits.  
  */
 public abstract class ParameterImpl extends ContainerImpl implements Parameter {
+	private static final Logger LOG = LoggerFactory.getLogger(ParameterImpl.class);
 
 	/** The type of the parameter. */
 	protected ParameterType type = null;
@@ -82,6 +86,9 @@ public abstract class ParameterImpl extends ContainerImpl implements Parameter {
 	 
 	@Override
 	public int getLength() {
+		LOG.debug("returning length " + (length + (int) type.sizeInBits) + " for " + getName());
+		
+		//FIXME Why is the length field here?
 		return length + (int) type.sizeInBits;
 	}
 }
