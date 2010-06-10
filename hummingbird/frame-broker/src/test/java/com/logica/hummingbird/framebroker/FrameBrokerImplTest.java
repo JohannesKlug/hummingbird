@@ -49,7 +49,7 @@ public class FrameBrokerImplTest {
 	 * Based upon the MockContainerFactory this Bit String encodes the Mock Container model with a param type ID of 555
 	 * and a param A test value of 123
 	 */
-	private final static String TEST_BITSET_FRAME = "11010100010110111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+	private final static String TEST_BITSET_FRAME = "111010100010110111100000000000000000000000001";
 	
 	/**
 	 * Based upon the MockContainerFactory this Bit String encodes the Mock Container model with a param type ID of 555
@@ -167,6 +167,10 @@ public class FrameBrokerImplTest {
 		// Set parameter A value
 		ParameterImpl paramA = mockSpaceSystemFactory.getParameter(MockContainerModelFactory.TEST_PARAM_A);
 		paramA.setValue(PARAM_A_TEST_VALUE);
+		
+		mockSpaceSystemFactory.getParameter(MockContainerModelFactory.TM_FRAME_HEADER_HAPPY_FLAG).setValue(1);
+		
+		mockSpaceSystemFactory.getParameter(MockContainerModelFactory.TM_FRAME_TAIL_VALIDITY_FLAG).setValue(1);
 
 		// Create an empty bitset to marshal the frame into
 		BitSet marshalledFrame = new BitSet(TEST_BITSET_FRAME.length());
