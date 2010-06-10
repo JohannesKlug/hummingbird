@@ -126,9 +126,6 @@ public class ContainerImpl extends NamedElement implements Container {
 			match = entry.getKey().match(entry.getValue());
 		}
 
-		if(LOG.isDebugEnabled()) {
-			LOG.debug("returning " + match);
-		}
 		return match;
 	}
 
@@ -165,7 +162,7 @@ public class ContainerImpl extends NamedElement implements Container {
 		if (matchRestrictions() == true) {
 			for (Container container : subContainers) {
 				// The nested calls unmarshall down through the sub containers Specific Containers,
-				// NOTE: Parameter Containers will "chunk" the bitSet (Packet) in order to remove 
+				// NOTE: Parameter Containers will "chunk" the bitSet (Packet) in order to remove
 				// the section that has already been unmarshalled.
 				completeBitData = container.unmarshall(completeBitData);
 			}
@@ -191,9 +188,6 @@ public class ContainerImpl extends NamedElement implements Container {
 	public int marshall(BitSet packet, int offset) {
 		/** If the packet should be processed by this container. */
 		if (matchRestrictions() == true) {
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("Matching was true, marshalling " + name);
-			}
 			for (Container container : subContainers) {
 				offset = container.marshall(packet, offset);
 			}
@@ -279,13 +273,16 @@ public class ContainerImpl extends NamedElement implements Container {
 	 */
 	@Override
 	public int getLength() {
-		/** Lazy initialize the attribute upon first access. */
-		if (this.length == 0) {
-			/** Iterate through all subcontainers and sum the size. */
-			for (Container container : subContainers) {
-				length += container.getLength();
+		length = 0;
+		// Lazy initialise the attribute upon first access.
+//		if (this.length == 0) {
+			if (matchRestrictions() == true) {
+				// Iterate through all sub-containers and sum the size.
+				for (Container container : subContainers) {
+					length += container.getLength();
+				}
 			}
-		}
+//		}
 
 		return length;
 	}
@@ -311,8 +308,8 @@ public class ContainerImpl extends NamedElement implements Container {
 	public void addParameterUpdateObserve(ParameterObserver observer) {
 		this.updatedParameterObservers.add(observer);
 	}
-	
+
 	public List<Container> getSubContainers() {
 		return subContainers;
-	}	
+	}
 }
