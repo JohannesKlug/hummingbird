@@ -261,28 +261,26 @@ public class ContainerImpl extends NamedElement implements Container {
 
 	/**
 	 * Returns the length of the complete container in bits. This simply iterates over all the sub containers until
-	 * getting the lengths of each one. The length of a Container is defined as the length of all it's SubContainers
-	 * parameters. These parameters may be grouped into other containers, e.g., headers, packetbody etc but these are
-	 * conceptual and have no size. For example, a FrameHeader Container is an abstract container consisting of n sub
-	 * containers, x of this will be concrete parameter values (where x <= n). When iterating over it's sub containers
-	 * it will eventually hit the parameters of which it is made up; these know how large they are and return their
-	 * length value. This value is propagated back up to the initial container having been summed with all the other
-	 * sub-containers via the getLength methods loop.
+	 * getting the lengths of each one that matches the restrictions. The length of a Container is defined as the 
+	 * length of all it's SubContainers parameters <b>taking any restrictions into account</b>. These parameters may be 
+	 * grouped into other containers, e.g., headers, packet body etc but these are conceptual and have no size. For  
+	 * example, a FrameHeader Container is an abstract container consisting of n sub containers, x of this will be 
+	 * concrete parameter values (where x <= n). When iterating over its sub containers it will eventually hit the 
+	 * parameters of which it is made up; these know how large they are and return their length value. This value 
+	 * is propagated back up to the initial container having been summed with all the other sub-containers via the 
+	 * getLength methods loop.
 	 * 
-	 * The length is lazily loaded.
+	 * The length is reset before each call.
 	 */
 	@Override
 	public int getLength() {
 		length = 0;
-		// Lazy initialise the attribute upon first access.
-//		if (this.length == 0) {
-			if (matchRestrictions() == true) {
-				// Iterate through all sub-containers and sum the size.
-				for (Container container : subContainers) {
-					length += container.getLength();
-				}
+		if (matchRestrictions() == true) {
+			// Iterate through all sub-containers and sum the size.
+			for (Container container : subContainers) {
+				length += container.getLength();
 			}
-//		}
+		}
 
 		return length;
 	}
