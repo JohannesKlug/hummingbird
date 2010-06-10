@@ -208,7 +208,11 @@ public class BitSetUtility {
 			Long longBits = Double.doubleToLongBits(value);
 			binaryString = Long.toBinaryString(longBits);
 		}
-		System.out.println(binaryString);
+		
+		if (value >= 0) {
+			// We have to add the Sign bit manually for positive Numbers
+			binaryString = '0' + binaryString;
+		}
 		
 		for (int bitIndex = 0; bitIndex < floatSize.getSize(); bitIndex++) {
 			if (bitIndex < binaryString.length()) {

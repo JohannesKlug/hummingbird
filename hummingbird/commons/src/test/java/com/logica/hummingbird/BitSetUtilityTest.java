@@ -194,16 +194,33 @@ public class BitSetUtilityTest {
 
 	@Test
 	public void testFloatToBitSet() throws BitSetOperationException {
-		float originalFloat = 3f;
+		
+		String pi32BitString = "01000000010010010000111111011011";
+		String pi64BitString = "0100000000001001001000011111101101010011110010001101010011110001";
+		
+		String zeroAs32BitString = "00000000000000000000000000000000";
+		String zeroAs64BitString = "0000000000000000000000000000000000000000000000000000000000000000";
+		
+		assertEquals(32, pi32BitString.length());
+		assertEquals(64, pi64BitString.length());
+		
+		assertEquals(32, zeroAs32BitString.length());
+		assertEquals(64, zeroAs64BitString.length());
+		
+		float originalFloat = 3.14159265f;
+		float zero = 0f;
 		
 		BitSet bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, originalFloat);
-		System.out.println(originalFloat + " as a BitSet:" + bitSet);
+		assertEquals(BitSetUtility.fromString(pi32BitString), bitSet);
 		
-		System.out.println(Integer.toBinaryString(Float.floatToRawIntBits(837483.125345323324f)));
-		System.out.println(Integer.toBinaryString(Float.floatToRawIntBits(-837483.125345323324f)));
+		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, originalFloat);
+		assertEquals(BitSetUtility.fromString(pi64BitString), bitSet);
 		
-		System.out.println(Long.toBinaryString(Double.doubleToLongBits(837483.125345323324d)));
-		System.out.println(Long.toBinaryString(Double.doubleToLongBits(-837483.125345323324d)));
+		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, zero);
+		assertEquals(BitSetUtility.fromString(zeroAs32BitString), bitSet);
+		
+		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, zero);
+		assertEquals(BitSetUtility.fromString(zeroAs64BitString), bitSet);
 		
 	}
 }
