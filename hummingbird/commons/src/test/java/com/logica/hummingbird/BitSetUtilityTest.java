@@ -227,7 +227,12 @@ public class BitSetUtilityTest {
 		
 		Long longBits = Double.doubleToLongBits(pi);
 		String binaryString = Long.toBinaryString(longBits);
+		String hexString = Long.toHexString(longBits);
+		System.out.println(binaryString);
+		System.out.println(hexString);
+		assertEquals(pi64BitString, binaryString);
 		Long longBitsRecovered = Long.parseLong(binaryString, 2);
+		assertEquals(longBits, longBitsRecovered);
 		
 		double piRecovered = Double.longBitsToDouble(longBitsRecovered);
 		assertEquals(pi, piRecovered, 0.0);
@@ -255,7 +260,14 @@ public class BitSetUtilityTest {
 		assertEquals(BitSetUtility.fromString(pi32BitString), bitSet);
 		
 		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, pi);
+		System.out.println(BitSetUtility.binDump(bitSet));
 		assertEquals(BitSetUtility.fromString(pi64BitString), bitSet);
+		
+		/*
+		 *  64bit pi result:
+		 *  3.1415927410125732421875
+		 *  → 0x400921FB60000000
+		 */
 		
 	}
 }
