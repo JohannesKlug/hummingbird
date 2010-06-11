@@ -169,7 +169,7 @@ public class BitSetUtilityTest {
 		data.set(1);
 		data.set(5);
 
-		String binaryString = BitSetUtility.toBinaryBigEndianString(data);
+		String binaryString = BitSetUtility.toBinaryBigEndianString(data, false);
 
 		String expected = "100011";
 
@@ -248,6 +248,16 @@ public class BitSetUtilityTest {
 		assertEquals(BitSetUtility.stringToBitSet(pi64BitString), bitSet);
 
 		// 64bit pi result: 3.1415927410125732421875 → 0x400921FB60000000
-
+	}
+	
+	@Test
+	public void testToBinaryBigEndianString() {
+		String expectedPadded = "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111101101000101011";
+		String result = BitSetUtility.toBinaryBigEndianString(TEST_BIT_SET, true);
+		assertEquals("Strings expected to be equal", expectedPadded, result);
+		
+		result = BitSetUtility.toBinaryBigEndianString(TEST_BIT_SET, false);
+		String expectedNotPadded = "111101101000101011";
+		assertEquals("Strings expected to be equal", expectedNotPadded, result);
 	}
 }

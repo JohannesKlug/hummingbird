@@ -40,16 +40,15 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationExcepti
  * @author Johannes Klug
  */
 public class BitSetUtility {
-	
+
 	public enum FloatSizeInBits {
-		THIRTY_TWO (32),
-		SIXTY_FOUR (64);
-		
+		THIRTY_TWO(32), SIXTY_FOUR(64);
+
 		private final int size;
-		
-	    FloatSizeInBits(int size) {
-	        this.size = size;
-	    }
+
+		FloatSizeInBits(int size) {
+			this.size = size;
+		}
 
 		public int getSize() {
 			return size;
@@ -74,7 +73,7 @@ public class BitSetUtility {
 	public static long extractInteger(BitSet bitSet, int offset, int length, boolean isSigned) {
 		long newValue = 0;
 		int mask = 1;
-		
+
 		int end = length;
 		if (isSigned) {
 			end = length - 1;
@@ -160,76 +159,83 @@ public class BitSetUtility {
 	 *             if the number of bits given by <tt>length</tt> is greater than Long.SIZE
 	 */
 	public static double extractFloat(BitSet bitSet, int offset, FloatSizeInBits floatSize) {
-//		Float.intBitsToFloat(b1010101);
-//		
-//		int length = floatSize.getSize();
-//
-//		// getting the value as natural number from the bitSet
-//		long longValue = 0;
-//		long mask = 1;
-//		for (int i = 0; i < length; ++i, mask <<= 1) {
-//			if (bitSet.get(offset + i)) {
-//				longValue |= mask;
-//			}
-//		}
-//
-//		// hint: without sign!
-//		long max = (int) (Math.pow(2.0, length - 1) * 2 - 1);
-//
-//		// returning the scaled back double value
-//		return (longValue / (max / (maxValue - minValue)) + minValue);
-		BitSet actualBitSet = bitSet.get(offset, offset + floatSize.size); 
+		// Float.intBitsToFloat(b1010101);
+		//		
+		// int length = floatSize.getSize();
+		//
+		// // getting the value as natural number from the bitSet
+		// long longValue = 0;
+		// long mask = 1;
+		// for (int i = 0; i < length; ++i, mask <<= 1) {
+		// if (bitSet.get(offset + i)) {
+		// longValue |= mask;
+		// }
+		// }
+		//
+		// // hint: without sign!
+		// long max = (int) (Math.pow(2.0, length - 1) * 2 - 1);
+		//
+		// // returning the scaled back double value
+		// return (longValue / (max / (maxValue - minValue)) + minValue);
+		BitSet actualBitSet = bitSet.get(offset, offset + floatSize.size);
+		
 		return Double.longBitsToDouble(BitSetUtility.toLong(actualBitSet));
 	}
-	
+
 	public static BitSet insertFloat(BitSet bitSet, int offset, FloatSizeInBits floatSize, double value) throws BitSetOperationException {
 		BitSet floatBitSet = floatToBitSet(floatSize, value);
-		
-		for (int i=0; i<floatSize.getSize(); i++) {
+
+		for (int i = 0; i < floatSize.getSize(); i++) {
 			if (floatBitSet.get(i)) {
-				bitSet.set(i+offset);
-			} else {
-				bitSet.set(i+offset);
+				bitSet.set(i + offset);
+			}
+			else {
+				bitSet.set(i + offset);
 			}
 		}
 		return bitSet;
 	}
 
-	public static BitSet floatToBitSet (FloatSizeInBits floatSize, double value) throws BitSetOperationException {
+	public static BitSet floatToBitSet(FloatSizeInBits floatSize, double value) throws BitSetOperationException {
 		BitSet bitSet = new BitSet(floatSize.getSize());
-		
+
 		String binaryString = new String();
 		if (floatSize == FloatSizeInBits.THIRTY_TWO) {
 			// Parse as IEEE-754 Single Precision (32-bit) (Java Float)
 			int intBits = Float.floatToIntBits((float) value);
 			binaryString = Integer.toBinaryString(intBits);
-			
-		} else if (floatSize == FloatSizeInBits.SIXTY_FOUR) {
+
+		}
+		else if (floatSize == FloatSizeInBits.SIXTY_FOUR) {
 			// Parse as IEEE-754 Double Precision (64-bit) (Java Double)
 			Long longBits = Double.doubleToLongBits(value);
 			binaryString = Long.toBinaryString(longBits);
 		}
-		
+
 		if (value >= 0) {
 			// We have to add the Sign bit manually for positive Numbers
 			binaryString = '0' + binaryString;
 		}
-		
+
 		for (int bitIndex = 0; bitIndex < floatSize.getSize(); bitIndex++) {
 			if (bitIndex < binaryString.length()) {
 				if (binaryString.charAt(bitIndex) == '0') {
 					bitSet.clear(bitIndex);
-				} else if (binaryString.charAt(bitIndex) == '1') {
-					bitSet.set(bitIndex);
-				} else {
-					throw new BitSetOperationException("Error converting floating point number '" + value + "' to a BitSet: invalid character '" + binaryString.charAt(bitIndex) + "' encountered at position " + bitIndex + ".");
 				}
-			} else {
+				else if (binaryString.charAt(bitIndex) == '1') {
+					bitSet.set(bitIndex);
+				}
+				else {
+					throw new BitSetOperationException("Error converting floating point number '" + value + "' to a BitSet: invalid character '" + binaryString
+							.charAt(bitIndex) + "' encountered at position " + bitIndex + ".");
+				}
+			}
+			else {
 				// When we run out of characters in our binaryString, set the rest to zero.
 				bitSet.clear(bitIndex);
 			}
 		}
-		
+
 		return bitSet;
 	}
 
@@ -262,7 +268,6 @@ public class BitSetUtility {
 		int bitIndex = 0;
 
 		while (totalIndex < data.size()) {
-
 			if (bitIndex < bits.length && bits[bitIndex].equals("") == false && totalIndex == Integer.parseInt(bits[bitIndex])) {
 				dump += "1";
 				++bitIndex;
@@ -318,18 +323,27 @@ public class BitSetUtility {
 
 		return result;
 	}
-	
+
 	public static long toLong(BitSet bitset) {
-		return Long.parseLong(BitSetUtility.toBinaryBigEndianString(bitset),2);
+		return Long.parseLong(BitSetUtility.toBinaryBigEndianString(bitset, false), 2);
 	}
 
-	public static String toBinaryBigEndianString(BitSet data) {
+	public static String toBinaryBigEndianString(BitSet data, boolean pad) {
 		String binaryString = "";
+
+		int iterateCount;
+		if(pad) {
+			iterateCount = data.size() - 1;
+		}
+		else {
+			iterateCount = data.length() - 1 ;
+		}
 		
-		for (int i = data.length()-1; i>=0 ; i--) {
+		for (int i = iterateCount; i >= 0; i--) {
 			if (data.get(i)) {
 				binaryString += '1';
-			} else {
+			}
+			else {
 				binaryString += '0';
 			}
 		}
