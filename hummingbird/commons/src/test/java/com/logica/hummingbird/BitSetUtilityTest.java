@@ -195,15 +195,15 @@ public class BitSetUtilityTest {
 	@Test
 	public void testFloatToBitSet() throws BitSetOperationException {
 		
-		float zero = 0f;
+		double zero = 0d;
 		String zeroAs32BitString = "00000000000000000000000000000000";
 		String zeroAs64BitString = "0000000000000000000000000000000000000000000000000000000000000000";
 		
-		float three = 3.0f;
+		double three = 3.0d;
 		String threeAs32BitString = "01000000010000000000000000000000";
 		String threeAs64BitString = "0100000000001000000000000000000000000000000000000000000000000000";
 		
-		float pi = 3.14159265f;
+		double pi = 3.14159265d;
 		String pi32BitString = "01000000010010010000111111011011";
 		String pi64BitString = "0100000000001001001000011111101101010011110010001101010011110001";
 		
@@ -256,17 +256,7 @@ public class BitSetUtilityTest {
 		assertEquals(BitSetUtility.fromString(pi32BitString), bitSet);
 		
 		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, pi);
-		// Due to floating point rounding errors, these strings won't match exactly:
-		// assertEquals(BitSetUtility.fromString(pi64BitString), bitSet);
-		
-		// We turn the received BitSet back into a long and compare with the actual pi.
-		assertEquals(pi, Double.longBitsToDouble(Long.parseLong(BitSetUtility.toBinaryBigEndianString(bitSet), 2)), 0.0001);
-		
-		/*
-		 *  64bit pi result:
-		 *  3.1415927410125732421875
-		 *  → 0x400921FB60000000
-		 */
+		 assertEquals(BitSetUtility.fromString(pi64BitString), bitSet);
 		
 	}
 }
