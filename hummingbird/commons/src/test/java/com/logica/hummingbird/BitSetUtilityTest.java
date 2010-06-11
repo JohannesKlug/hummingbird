@@ -116,7 +116,10 @@ public class BitSetUtilityTest {
 	@Ignore
 	@Test
 	public void testInsertInteger() {
-		fail("Not yet implemented"); // TODO
+//		BitSet bitSet = BitSetUtility.stringToBitSet(PI_32BIT_STRING);
+//		Double actual = BitSetUtility.extractFloat(bitSet, 0, FloatSizeInBits.THIRTY_TWO);
+//		System.out.println(actual);
+//		assertEquals(PI, actual,0.01);
 	}
 
 	@Test
@@ -243,7 +246,7 @@ public class BitSetUtilityTest {
 		data.set(1);
 		data.set(5);
 		
-		String binaryString = BitSetUtility.bitSetToBinaryString(data, false);
+		String binaryString = BitSetUtility.bitSetToBinaryString(data);
 		
 		String expected = "110001";
 		
@@ -253,12 +256,13 @@ public class BitSetUtilityTest {
 	
 	@Test
 	public void testBitSetToBinaryString2() {
-		String expectedPadded = "11010100010110111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
-		String result = BitSetUtility.bitSetToBinaryString(TEST_BIT_SET, true);
-		assertEquals("Strings expected to be equal", expectedPadded, result);
+		String result = BitSetUtility.bitSetToBinaryString(TEST_BIT_SET);
+		result = BitSetUtility.padStringFromTheFront(result, 129);
+		String expected = "0" + TEST_BIT_SET_STR_VALID;
+		assertEquals(129, result.length());
+		assertEquals("Strings expected to be equal", expected, result);
 		
-		result = BitSetUtility.bitSetToBinaryString(TEST_BIT_SET, false);
-		String expectedNotPadded = "110101000101101111";
-		assertEquals("Strings expected to be equal", expectedNotPadded, result);
+		result = BitSetUtility.bitSetToBinaryString(TEST_BIT_SET);
+		assertEquals("Strings expected to be equal", TEST_BIT_SET_STR_VALID, result);
 	}
 }

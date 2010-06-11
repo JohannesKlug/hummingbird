@@ -117,7 +117,7 @@ public class ContainerTest {
 	/**
 	 * The test parameter B value based upon the TEST_BITSET_STRING_PKT_TYPE_B
 	 */
-	private static final float PARAM_B_TEST_VALUE = 54.78f;
+	private static final double PARAM_B_TEST_VALUE = 54.78;
 	
 	/**
 	 * The total length of the mock factory container model with a packet type B set (333).
@@ -245,16 +245,16 @@ public class ContainerTest {
 		Container paramTypeID = mockContainerFactory.getContainer(MockContainerModelFactory.PACKET_ID_ALIAS);
 		Assert.isInstanceOf(IntegerParameter.class, paramTypeID);
 		Number value = ((IntegerParameter) paramTypeID).getValue();
-		LOG.info("Checking " + MockContainerModelFactory.PACKET_ID_ALIAS);
+		LOG.info("Asserting " + MockContainerModelFactory.PACKET_ID_ALIAS);
 		assertEquals("Parameter has incorrect value.", Integer.parseInt(PACKET_TYPE_ID_333), value.intValue());
 		LOG.debug(MockContainerModelFactory.PACKET_ID_ALIAS + " parameter (apid) passed with value : " + value.intValue());
 		
-		// Test that there is a Test Param B (64 bit unsigned float) as expected.
+		// Test that there is a Test Param B (64 bit float) as expected.
 		Container testParamB = mockContainerFactory.getContainer(MockContainerModelFactory.TEST_PARAM_B);
 		Assert.isInstanceOf(FloatParameter.class, testParamB);
 		Number testParamBvalue = ((FloatParameter) testParamB).getValue();
-		LOG.info("Checking " + MockContainerModelFactory.TEST_PARAM_B);
-		assertEquals("Parameter has incorrect value.", PARAM_B_TEST_VALUE, testParamBvalue.intValue(), 0);
+		LOG.info("Asserting " + MockContainerModelFactory.TEST_PARAM_B);
+		assertEquals("Parameter has incorrect value.", PARAM_B_TEST_VALUE, testParamBvalue.doubleValue(), 0);
 		LOG.debug(MockContainerModelFactory.TEST_PARAM_A + " parameter passed with value : " + testParamBvalue.intValue());
 	}
 

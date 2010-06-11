@@ -28,6 +28,9 @@ package com.logica.hummingbird.util;
 
 import java.util.BitSet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 
 /**
@@ -40,6 +43,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationExcepti
  * @author Johannes Klug
  */
 public class BitSetUtility {
+	private static final Logger LOG = LoggerFactory.getLogger(BitSetUtility.class);
 
 	public enum FloatSizeInBits {
 		THIRTY_TWO(32), SIXTY_FOUR(64);
@@ -111,32 +115,32 @@ public class BitSetUtility {
 	 *             Integer.MIN_VALUE (no absolute value available as int)
 	 */
 	public static BitSet insertInteger(BitSet bitSet, int offset, int length, long value) {
-		// checking the bit length
-		if (length > Integer.SIZE) {
-			throw new RuntimeException("You can not set a higher length than " + Integer.SIZE + " bits.");
-		}
-
-		// checking whether the value fits into the bit string of length - 1
-		int absValue = Math.abs((int) value);
-		if (absValue > Math.pow(2.0, length) - 1 || value == Integer.MIN_VALUE) {
-			throw new RuntimeException("The value of " + value + " does not fit into a bit string of " + (length - 1) + " bits.");
-		}
-
-		// setting all bits to zero
-		bitSet.clear(offset, offset + length - 1);
-
-		// setting up the number in reverse order
-		int mask = 1;
-		for (int i = 0; i < length; ++i, mask <<= 1) {
-			if ((mask & absValue) > 0) {
-				bitSet.set(offset + i);
-			}
-		}
-
-		// setting up the sign
-		if (value < 0) {
-			bitSet.set(offset + length - 1);
-		}
+//		// checking the bit length
+//		if (length > Integer.SIZE) {
+//			throw new RuntimeException("You can not set a higher length than " + Integer.SIZE + " bits.");
+//		}
+//
+//		// checking whether the value fits into the bit string of length - 1
+//		int absValue = Math.abs((int) value);
+//		if (absValue > Math.pow(2.0, length) - 1 || value == Integer.MIN_VALUE) {
+//			throw new RuntimeException("The value of " + value + " does not fit into a bit string of " + (length - 1) + " bits.");
+//		}
+//
+//		// setting all bits to zero
+//		bitSet.clear(offset, offset + length - 1);
+//
+//		// setting up the number in reverse order
+//		int mask = 1;
+//		for (int i = 0; i < length; ++i, mask <<= 1) {
+//			if ((mask & absValue) > 0) {
+//				bitSet.set(offset + i);
+//			}
+//		}
+//
+//		// setting up the sign
+//		if (value < 0) {
+//			bitSet.set(offset + length - 1);
+//		}
 
 		return bitSet;
 	}
@@ -164,15 +168,40 @@ public class BitSetUtility {
 	 *             if the number of bits given by <tt>length</tt> is greater than Long.SIZE
 	 */
 	public static double extractFloat(BitSet bitSet, int offset, FloatSizeInBits floatSize) {
-		BitSet actualBitSet = bitSet.get(offset, offset + floatSize.size);
-		String actualBitSetString = BitSetUtility.bitSetToBinaryString(actualBitSet, false);
-
-		System.out.println(actualBitSetString.length());
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Float size: " + floatSize.getSize());
+			LOG.debug("BitSet in = " + BitSetUtility.binDump(bitSet));
+		}
+		BitSet actualBitSet = bitSet.get(offset, offset + floatSize.size - 1);
+		
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Float Parameter BitSet taken from bitset in = " + BitSetUtility.binDump(actualBitSet));
+		}
+		
+		
+		int length = actualBitSet.size();
+		if (length != FloatSizeInBits.THIRTY_TWO.getSize() && length != FloatSizeInBits.SIXTY_FOUR.getSize()) {
+			LOG.error("A float BitSet of invalid length was passed. This is an error! Size is: " + length);
+		}
+		
+		String actualBitSetString = BitSetUtility.bitSetToBinaryString(actualBitSet);
+		actualBitSetString = BitSetUtility.padStringFromTheFront(actualBitSetString, floatSize.getSize());
+		
+		
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("BinaryString representation of actual bitset = " + actualBitSetString);
+		}
 		
 		if (floatSize == FloatSizeInBits.THIRTY_TWO) {
+			if(LOG.isDebugEnabled()) {
+				LOG.debug("Extracting value using intBitsToFloat");
+			}
 			return Float.intBitsToFloat(Integer.parseInt(actualBitSetString, 2));
 		}
 		else {
+			if(LOG.isDebugEnabled()) {
+				LOG.debug("Extracting value using longBitsToDouble");
+			}
 			// Treat it like 64 bit floating point number.
 			return Double.longBitsToDouble(Long.parseLong(actualBitSetString, 2));
 		}
@@ -320,27 +349,26 @@ public class BitSetUtility {
 
 		return result;
 	}
+	
+	public static String bitSetToBinaryString(BitSet data) {
+		StringBuilder binaryString = new StringBuilder(data.length());
 
-	public static String bitSetToBinaryString(BitSet data, boolean pad) {
-		String binaryString = "";
-
-		int iterateCount;
-		if (pad) {
-			iterateCount = data.size();
-		}
-		else {
-			iterateCount = data.length();
-		}
-
-//		for (int i = iterateCount; i >= 0; i--) {
-		for (int i = 0; i < iterateCount; i++) {
+		for (int i = 0; i < data.length(); i++) {
 			if (data.get(i)) {
-				binaryString += '1';
+				binaryString.append('1');
 			}
 			else {
-				binaryString += '0';
+				binaryString.append('0');
 			}
 		}
-		return binaryString;
+		return binaryString.toString();
+	}
+	
+	public static String padStringFromTheFront(String string, int finalLength) {
+		int zeroesToAdd = finalLength - string.length(); 
+		for (int i=0; i<zeroesToAdd; i++) {
+			string = '0' + string;
+		}
+		return string;
 	}
 }

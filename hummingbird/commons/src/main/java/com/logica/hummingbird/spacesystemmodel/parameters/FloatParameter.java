@@ -69,10 +69,10 @@ public class FloatParameter extends ParameterImpl {
 	 * @param value The initial value.
 	 * @throws InvalidParameterTypeException 
 	 */
-	public FloatParameter(String name, String shortDescription, String longDescription, ParameterType type, float value) throws InvalidParameterTypeException {
+	public FloatParameter(String name, String shortDescription, String longDescription, ParameterType type, double value) throws InvalidParameterTypeException {
 		super(name, shortDescription, longDescription, type);
 		
-		if(type.signed) {
+		if(!type.signed) {
 			throw new InvalidParameterTypeException("Floats must be signed; sorry");
 		}
 		
@@ -89,7 +89,10 @@ public class FloatParameter extends ParameterImpl {
 	}
 
 	@Override
-	public BitSet unmarshall(BitSet packet) {
+	public BitSet unmarshall(BitSet packet) {	
+		int length = packet.length();
+		
+		
 		value = BitSetUtility.extractFloat(packet, 0, this.floatSize);
 
 		for(ParameterObserver paramObserver : updatedParameterObservers) {
