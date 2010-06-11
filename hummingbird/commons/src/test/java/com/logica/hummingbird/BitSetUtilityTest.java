@@ -195,15 +195,15 @@ public class BitSetUtilityTest {
 	@Test
 	public void testFloatToBitSet() throws BitSetOperationException {
 		// Set up some values for testing with...
-		float zero = 0f;
+		double zero = 0d;
 		String zeroAs32BitString = "00000000000000000000000000000000";
 		String zeroAs64BitString = "0000000000000000000000000000000000000000000000000000000000000000";
 
-		float three = 3.0f;
+		double three = 3.0d;
 		String threeAs32BitString = "01000000010000000000000000000000";
 		String threeAs64BitString = "0100000000001000000000000000000000000000000000000000000000000000";
 
-		float pi = 3.14159265f;
+		double pi = 3.14159265d;
 		String pi32BitString = "01000000010010010000111111011011";
 		String pi64BitString = "0100000000001001001000011111101101010011110010001101010011110001";
 
@@ -220,10 +220,6 @@ public class BitSetUtilityTest {
 		// Testing the Float->Integer->BinaryString->Integer->Float chain
 		Long longBits = Double.doubleToLongBits(pi);
 		String binaryString = Long.toBinaryString(longBits);
-		String hexString = Long.toHexString(longBits);
-		System.out.println(binaryString);
-		System.out.println(hexString);
-		assertEquals(pi64BitString, binaryString);
 		Long longBitsRecovered = Long.parseLong(binaryString, 2);
 		assertEquals(longBits, longBitsRecovered);
 
@@ -249,7 +245,6 @@ public class BitSetUtilityTest {
 		assertEquals(BitSetUtility.stringToBitSet(pi32BitString), bitSet);
 
 		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, pi);
-		System.out.println(BitSetUtility.binDump(bitSet));
 		assertEquals(BitSetUtility.stringToBitSet(pi64BitString), bitSet);
 
 		// 64bit pi result: 3.1415927410125732421875 → 0x400921FB60000000
