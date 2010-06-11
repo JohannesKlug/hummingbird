@@ -37,6 +37,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationExcepti
  * 
  * @author Gert Villemos
  * @author Mark Doyle
+ * @author Johannes Klug
  */
 public class BitSetUtility {
 	
@@ -221,7 +222,7 @@ public class BitSetUtility {
 				} else if (binaryString.charAt(bitIndex) == '1') {
 					bitSet.set(bitIndex);
 				} else {
-					throw new BitSetOperationException("Error converting floating point number '" + value + "' to a BitSet: invalid character '" + binaryString.charAt(bitIndex) + "' encountered.");
+					throw new BitSetOperationException("Error converting floating point number '" + value + "' to a BitSet: invalid character '" + binaryString.charAt(bitIndex) + "' encountered at position " + bitIndex + ".");
 				}
 			} else {
 				// When we run out of characters in our binaryString, set the rest to zero.
@@ -299,7 +300,7 @@ public class BitSetUtility {
 	 * @throws BitSetOperationException
 	 *             if the input string contains invalid characters, that is, not equal to 1 or 0
 	 */
-	public static BitSet fromString(String str) throws BitSetOperationException {
+	public static BitSet stringToBitSet(String str) throws BitSetOperationException {
 		str = str.trim();
 		BitSet result = new BitSet(str.length());
 		int count = 0;

@@ -125,7 +125,7 @@ public class FrameBrokerImplTest {
 	@Test
 	public final void testUnmarshallFrame() throws UnknownContainerNameException, BitSetOperationException {
 		LOG.info("---------- testUnmarshall -------------");
-		BitSet mockFrame = BitSetUtility.fromString(TEST_BITSET_FRAME);
+		BitSet mockFrame = BitSetUtility.stringToBitSet(TEST_BITSET_FRAME);
 
 		// Unmarshall each telemetry element in the space system model
 		frameBroker.unmarshall(MockContainerModelFactory.TM_FRAME_ALIAS, mockFrame);
@@ -138,7 +138,7 @@ public class FrameBrokerImplTest {
 	@Test
 	public final void testUnmarshallFrameHeader() throws BitSetOperationException, UnknownContainerNameException {
 		LOG.info("---------- testUnmarshallFrameHeader -------------");
-		BitSet mockFrame = BitSetUtility.fromString(TEST_BITSET_FRAME);
+		BitSet mockFrame = BitSetUtility.stringToBitSet(TEST_BITSET_FRAME);
 		
 		frameBroker.unmarshall(MockContainerModelFactory.TM_FRAME_HEADER_ALIAS, mockFrame);
 		
@@ -180,7 +180,7 @@ public class FrameBrokerImplTest {
 		
 		LOG.info("Marshalled Frame: " + BitSetUtility.binDump(marshalledFrame));
 
-		BitSet testBitset = BitSetUtility.fromString(TEST_BITSET_FRAME);
+		BitSet testBitset = BitSetUtility.stringToBitSet(TEST_BITSET_FRAME);
 		LOG.debug("Test target bindump: " + BitSetUtility.binDump(testBitset));
 		assertEquals("Marshalled frame should be the same as the TEST_BITSET_FRAME", testBitset, marshalledFrame);
 	}
