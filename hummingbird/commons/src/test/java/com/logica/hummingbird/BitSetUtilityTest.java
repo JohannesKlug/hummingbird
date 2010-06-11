@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
-import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
 import com.logica.hummingbird.util.BitSetUtility;
 import com.logica.hummingbird.util.BitSetUtility.FloatSizeInBits;
 
@@ -43,6 +42,20 @@ public class BitSetUtilityTest {
 	 * tests in the @BeforeClass method.
 	 */
 	private static String TEST_BIT_SET_STR_INVALID = new String();
+	
+	
+	private final static double ZERO = 0d;
+	private final static String ZERO_AS_32BIT_STRING = "00000000000000000000000000000000";
+	private final static String ZERO_AS_64BIT_STRING = "0000000000000000000000000000000000000000000000000000000000000000";
+
+	private final static double THREE = 3.0d;
+	private final static String THREE_AS_32BIT_STRING = "01000000010000000000000000000000";
+	private final static String THREE_AS_64BIT_STRING = "0100000000001000000000000000000000000000000000000000000000000000";
+
+	private final static double PI = 3.14159265d;
+	private final static String PI_32BIT_STRING = "01000000010010010000111111011011";
+	private final static String PI_64BIT_STRING = "0100000000001001001000011111101101010011110010001101010011110001";
+	
 
 	/**
 	 * Sets up the Test BitSet and configures the test bit set string.
@@ -106,18 +119,42 @@ public class BitSetUtilityTest {
 		fail("Not yet implemented"); // TODO
 	}
 
-	@Ignore
 	@Test
-	public void testExtractFloat() {
-		fail("Not yet implemented"); // TODO
+	public void testExtractFloat32() throws BitSetOperationException {
+		BitSet bitSet = BitSetUtility.stringToBitSet(PI_32BIT_STRING);
+		Double actual = BitSetUtility.extractFloat(bitSet, 0, FloatSizeInBits.THIRTY_TWO);
+		System.out.println(actual);
+		assertEquals(PI, actual,0.01);
 	}
 
-	@Ignore
 	@Test
-	public void testInsertDouble() {
+	public void testExtractFloat64() throws BitSetOperationException {
+		BitSet bitSet = BitSetUtility.stringToBitSet(PI_64BIT_STRING);
+		Double actual = BitSetUtility.extractFloat(bitSet, 0, FloatSizeInBits.SIXTY_FOUR);
+		System.out.println(actual);
+		assertEquals(PI, actual,0.01);
+	}
+
+	@Test
+	public void testInsertDouble32() throws BitSetOperationException {
 		BitSet floatBitSet = new BitSet(0);
-		// BitSetUtility.insertFloat(floatBitSet, 0, 64, FloatSizeInBits.SIXTY_FOUR, value);
-		fail("Not yet implemented");
+		BitSet actual = BitSetUtility.insertFloat(floatBitSet, 0, FloatSizeInBits.THIRTY_TWO, PI);
+		
+		BitSet expected = BitSetUtility.stringToBitSet(PI_32BIT_STRING);
+		
+		assertEquals(expected, actual);
+
+	}
+	
+	@Test
+	public void testInsertDouble64() throws BitSetOperationException {
+		BitSet floatBitSet = new BitSet(0);
+		BitSet actual = BitSetUtility.insertFloat(floatBitSet, 0, FloatSizeInBits.SIXTY_FOUR, PI);
+		
+		BitSet expected = BitSetUtility.stringToBitSet(PI_64BIT_STRING);
+		
+		assertEquals(expected, actual);
+
 	}
 
 	/**
@@ -162,102 +199,66 @@ public class BitSetUtilityTest {
 		fail("BitSetOperationException exception was not thrown for " + TEST_BIT_SET_STR_INVALID + ". BitSetUtility.fromString created " + actual);
 	}
 
-	@Test
-	public void testToBinaryString() {
-		BitSet data = new BitSet();
-		data.set(0);
-		data.set(1);
-		data.set(5);
-
-		String binaryString = BitSetUtility.toBinaryBigEndianString(data, false);
-
-		String expected = "100011";
-
-		assertEquals(expected, binaryString);
-
-	}
-
-	@Test
-	public void testToLong() {
-		BitSet data = new BitSet();
-		data.set(2);
-		data.set(3);
-
-		assertEquals(12, BitSetUtility.toLong(data));
-
-		data = new BitSet();
-		data.set(0);
-		data.set(1);
-
-		assertEquals(3, BitSetUtility.toLong(data));
-	}
 
 	@Test
 	public void testFloatToBitSet() throws BitSetOperationException {
-		// Set up some values for testing with...
-		double zero = 0d;
-		String zeroAs32BitString = "00000000000000000000000000000000";
-		String zeroAs64BitString = "0000000000000000000000000000000000000000000000000000000000000000";
-
-		double three = 3.0d;
-		String threeAs32BitString = "01000000010000000000000000000000";
-		String threeAs64BitString = "0100000000001000000000000000000000000000000000000000000000000000";
-
-		double pi = 3.14159265d;
-		String pi32BitString = "01000000010010010000111111011011";
-		String pi64BitString = "0100000000001001001000011111101101010011110010001101010011110001";
-
-		// Making sure our binary strings are of the correct length
-		assertEquals(32, zeroAs32BitString.length());
-		assertEquals(64, zeroAs64BitString.length());
-
-		assertEquals(32, threeAs32BitString.length());
-		assertEquals(64, threeAs64BitString.length());
-
-		assertEquals(32, pi32BitString.length());
-		assertEquals(64, pi64BitString.length());
 
 		// Testing the Float->Integer->BinaryString->Integer->Float chain
-		Long longBits = Double.doubleToLongBits(pi);
+		Long longBits = Double.doubleToLongBits(PI);
 		String binaryString = Long.toBinaryString(longBits);
 		Long longBitsRecovered = Long.parseLong(binaryString, 2);
 		assertEquals(longBits, longBitsRecovered);
 
 		double piRecovered = Double.longBitsToDouble(longBitsRecovered);
-		assertEquals(pi, piRecovered, 0.0);
+		assertEquals(PI, piRecovered, 0.0);
 
 		// Testing the actual BitSet conversion functions
 		BitSet bitSet = new BitSet();
 
-		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, zero);
-		assertEquals(BitSetUtility.stringToBitSet(zeroAs32BitString), bitSet);
+		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, ZERO);
+		assertEquals(BitSetUtility.stringToBitSet(ZERO_AS_32BIT_STRING), bitSet);
 
-		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, zero);
-		assertEquals(BitSetUtility.stringToBitSet(zeroAs64BitString), bitSet);
+		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, ZERO);
+		assertEquals(BitSetUtility.stringToBitSet(ZERO_AS_64BIT_STRING), bitSet);
 
-		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, three);
-		assertEquals(BitSetUtility.stringToBitSet(threeAs32BitString), bitSet);
+		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, THREE);
+		assertEquals(BitSetUtility.stringToBitSet(THREE_AS_32BIT_STRING), bitSet);
 
-		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, three);
-		assertEquals(BitSetUtility.stringToBitSet(threeAs64BitString), bitSet);
+		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, THREE);
+		assertEquals(BitSetUtility.stringToBitSet(THREE_AS_64BIT_STRING), bitSet);
 
-		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, pi);
-		assertEquals(BitSetUtility.stringToBitSet(pi32BitString), bitSet);
+		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, PI);
+		assertEquals(BitSetUtility.stringToBitSet(PI_32BIT_STRING), bitSet);
 
-		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, pi);
-		assertEquals(BitSetUtility.stringToBitSet(pi64BitString), bitSet);
+		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, PI);
+		assertEquals(BitSetUtility.stringToBitSet(PI_64BIT_STRING), bitSet);
 
 		// 64bit pi result: 3.1415927410125732421875 → 0x400921FB60000000
 	}
 	
 	@Test
-	public void testToBinaryBigEndianString() {
-		String expectedPadded = "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111101101000101011";
-		String result = BitSetUtility.toBinaryBigEndianString(TEST_BIT_SET, true);
+	public void testBitSetToBinaryString() {
+		BitSet data = new BitSet();
+		data.set(0);
+		data.set(1);
+		data.set(5);
+		
+		String binaryString = BitSetUtility.bitSetToBinaryString(data, false);
+		
+		String expected = "110001";
+		
+		assertEquals(expected, binaryString);
+		
+	}
+	
+	@Test
+	public void testBitSetToBinaryString2() {
+		String expectedPadded = "11010100010110111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+		String result = BitSetUtility.bitSetToBinaryString(TEST_BIT_SET, true);
 		assertEquals("Strings expected to be equal", expectedPadded, result);
 		
-		result = BitSetUtility.toBinaryBigEndianString(TEST_BIT_SET, false);
-		String expectedNotPadded = "111101101000101011";
+		result = BitSetUtility.bitSetToBinaryString(TEST_BIT_SET, false);
+		String expectedNotPadded = "110101000101101111";
 		assertEquals("Strings expected to be equal", expectedNotPadded, result);
 	}
 }

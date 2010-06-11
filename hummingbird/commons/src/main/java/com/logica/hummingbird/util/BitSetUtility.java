@@ -112,26 +112,31 @@ public class BitSetUtility {
 	 */
 	public static BitSet insertInteger(BitSet bitSet, int offset, int length, long value) {
 		// checking the bit length
-		if (length > Integer.SIZE)
+		if (length > Integer.SIZE) {
 			throw new RuntimeException("You can not set a higher length than " + Integer.SIZE + " bits.");
+		}
 
 		// checking whether the value fits into the bit string of length - 1
 		int absValue = Math.abs((int) value);
-		if (absValue > Math.pow(2.0, length) - 1 || value == Integer.MIN_VALUE)
+		if (absValue > Math.pow(2.0, length) - 1 || value == Integer.MIN_VALUE) {
 			throw new RuntimeException("The value of " + value + " does not fit into a bit string of " + (length - 1) + " bits.");
+		}
 
 		// setting all bits to zero
 		bitSet.clear(offset, offset + length - 1);
 
 		// setting up the number in reverse order
 		int mask = 1;
-		for (int i = 0; i < length; ++i, mask <<= 1)
-			if ((mask & absValue) > 0)
+		for (int i = 0; i < length; ++i, mask <<= 1) {
+			if ((mask & absValue) > 0) {
 				bitSet.set(offset + i);
+			}
+		}
 
 		// setting up the sign
-		if (value < 0)
+		if (value < 0) {
 			bitSet.set(offset + length - 1);
+		}
 
 		return bitSet;
 	}
@@ -159,27 +164,19 @@ public class BitSetUtility {
 	 *             if the number of bits given by <tt>length</tt> is greater than Long.SIZE
 	 */
 	public static double extractFloat(BitSet bitSet, int offset, FloatSizeInBits floatSize) {
-		// Float.intBitsToFloat(b1010101);
-		//		
-		// int length = floatSize.getSize();
-		//
-		// // getting the value as natural number from the bitSet
-		// long longValue = 0;
-		// long mask = 1;
-		// for (int i = 0; i < length; ++i, mask <<= 1) {
-		// if (bitSet.get(offset + i)) {
-		// longValue |= mask;
-		// }
-		// }
-		//
-		// // hint: without sign!
-		// long max = (int) (Math.pow(2.0, length - 1) * 2 - 1);
-		//
-		// // returning the scaled back double value
-		// return (longValue / (max / (maxValue - minValue)) + minValue);
 		BitSet actualBitSet = bitSet.get(offset, offset + floatSize.size);
+		String actualBitSetString = BitSetUtility.bitSetToBinaryString(actualBitSet, false);
+
+		System.out.println(actualBitSetString.length());
 		
-		return Double.longBitsToDouble(BitSetUtility.toLong(actualBitSet));
+		if (floatSize == FloatSizeInBits.THIRTY_TWO) {
+			return Float.intBitsToFloat(Integer.parseInt(actualBitSetString, 2));
+		}
+		else {
+			// Treat it like 64 bit floating point number.
+			return Double.longBitsToDouble(Long.parseLong(actualBitSetString, 2));
+		}
+
 	}
 
 	public static BitSet insertFloat(BitSet bitSet, int offset, FloatSizeInBits floatSize, double value) throws BitSetOperationException {
@@ -190,7 +187,7 @@ public class BitSetUtility {
 				bitSet.set(i + offset);
 			}
 			else {
-				bitSet.set(i + offset);
+				bitSet.clear(i + offset);
 			}
 		}
 		return bitSet;
@@ -324,22 +321,19 @@ public class BitSetUtility {
 		return result;
 	}
 
-	public static long toLong(BitSet bitset) {
-		return Long.parseLong(BitSetUtility.toBinaryBigEndianString(bitset, false), 2);
-	}
-
-	public static String toBinaryBigEndianString(BitSet data, boolean pad) {
+	public static String bitSetToBinaryString(BitSet data, boolean pad) {
 		String binaryString = "";
 
 		int iterateCount;
-		if(pad) {
-			iterateCount = data.size() - 1;
+		if (pad) {
+			iterateCount = data.size();
 		}
 		else {
-			iterateCount = data.length() - 1 ;
+			iterateCount = data.length();
 		}
-		
-		for (int i = iterateCount; i >= 0; i--) {
+
+//		for (int i = iterateCount; i >= 0; i--) {
+		for (int i = 0; i < iterateCount; i++) {
 			if (data.get(i)) {
 				binaryString += '1';
 			}
