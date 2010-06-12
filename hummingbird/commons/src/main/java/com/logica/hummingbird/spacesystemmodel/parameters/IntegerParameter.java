@@ -11,8 +11,8 @@ import com.logica.hummingbird.util.BitSetUtility;
 public class IntegerParameter extends ParameterImpl {
 	private static final Logger LOG = LoggerFactory.getLogger(IntegerParameter.class);
 
-	/** The value of the integer. 
-	 * It must be of type Long, since Hummingbird supports 64bit Integers.
+	/**
+	 * The value of the integer. It must be of type Long, since Hummingbird supports 64bit Integers.
 	 * */
 	protected Long value = 0L;
 
@@ -40,13 +40,13 @@ public class IntegerParameter extends ParameterImpl {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Unmarshalling " + this.name + " from packet : " + packet);
 		}
-		
+
 		value = BitSetUtility.extractInteger(packet, 0, (int) type.sizeInBits, type.signed);
 
-		for(ParameterObserver paramObserver : updatedParameterObservers) {
+		for (ParameterObserver paramObserver : updatedParameterObservers) {
 			paramObserver.updated(name, value);
 		}
-		
+
 		BitSet returnPacket = packet.get((int) type.sizeInBits, packet.length());
 		return returnPacket;
 	}
@@ -57,8 +57,7 @@ public class IntegerParameter extends ParameterImpl {
 			BitSetUtility.insertInteger(packet, offset, (int) type.sizeInBits, value);
 		}
 		catch (RuntimeException e) {
-			LOG.error("Error encoding parameter '" + this.name + "'. The value '" + this.value + "' cannot be encoded in " + type.sizeInBits
-					+ " bit(s).");
+			LOG.error("Error encoding parameter '" + this.name + "'. The value '" + this.value + "' cannot be encoded in " + type.sizeInBits + " bit(s).");
 		}
 
 		return offset + (int) type.sizeInBits;

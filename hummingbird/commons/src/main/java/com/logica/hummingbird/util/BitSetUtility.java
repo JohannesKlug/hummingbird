@@ -184,7 +184,7 @@ public class BitSetUtility {
 			LOG.error("A float BitSet of invalid length was passed. This is an error! Size is: " + length);
 		}
 		
-		String actualBitSetString = BitSetUtility.bitSetToBinaryString(actualBitSet);
+		String actualBitSetString = BitSetUtility.bitSetToBinaryString(actualBitSet, false);
 		actualBitSetString = BitSetUtility.padStringFromTheFront(actualBitSetString, floatSize.getSize());
 		
 		
@@ -350,10 +350,23 @@ public class BitSetUtility {
 		return result;
 	}
 	
-	public static String bitSetToBinaryString(BitSet data) {
-		StringBuilder binaryString = new StringBuilder(data.length());
+	/**
+	 * Uses the complete BitSet i.e. the size and <b><i>not</i></b> the length
+	 * @param data
+	 * @return
+	 */
+	public static String bitSetToBinaryString(BitSet data, boolean logicalSize) {
+		int bitSetSize;
+		if(logicalSize) {
+			bitSetSize = data.length();
+		}
+		else {
+			bitSetSize = data.size();			
+		}
+		
+		StringBuilder binaryString = new StringBuilder(bitSetSize);
 
-		for (int i = 0; i < data.length(); i++) {
+		for (int i = 0; i < bitSetSize; i++) {
 			if (data.get(i)) {
 				binaryString.append('1');
 			}

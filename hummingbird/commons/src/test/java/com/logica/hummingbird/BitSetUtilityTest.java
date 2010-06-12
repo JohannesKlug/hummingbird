@@ -246,23 +246,22 @@ public class BitSetUtilityTest {
 		data.set(1);
 		data.set(5);
 		
-		String binaryString = BitSetUtility.bitSetToBinaryString(data);
+		String binaryString = BitSetUtility.bitSetToBinaryString(data, false);
 		
-		String expected = "110001";
+		String expected = "1100010000000000000000000000000000000000000000000000000000000000";
 		
 		assertEquals(expected, binaryString);
-		
 	}
 	
 	@Test
 	public void testBitSetToBinaryString2() {
-		String result = BitSetUtility.bitSetToBinaryString(TEST_BIT_SET);
+		String result = BitSetUtility.bitSetToBinaryString(TEST_BIT_SET, false);
 		result = BitSetUtility.padStringFromTheFront(result, 129);
 		String expected = "0" + TEST_BIT_SET_STR_VALID;
 		assertEquals(129, result.length());
 		assertEquals("Strings expected to be equal", expected, result);
 		
-		result = BitSetUtility.bitSetToBinaryString(TEST_BIT_SET);
+		result = BitSetUtility.bitSetToBinaryString(TEST_BIT_SET, false);
 		assertEquals("Strings expected to be equal", TEST_BIT_SET_STR_VALID, result);
 	}
 }
