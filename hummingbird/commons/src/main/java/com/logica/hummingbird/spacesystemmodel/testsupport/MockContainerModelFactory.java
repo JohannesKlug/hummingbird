@@ -15,7 +15,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeEx
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType.eParameterType;
 
@@ -81,7 +81,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 	public static final String VALIDITY_FLAG_ALIAS = "ValidityFlag";
 
 	private Map<String, ContainerImpl> containers = new HashMap<String, ContainerImpl>();
-	private Map<String, ParameterImpl> parameters = new HashMap<String, ParameterImpl>();
+	private Map<String, ParameterContainer> parameters = new HashMap<String, ParameterContainer>();
 
 	public MockContainerModelFactory() throws InvalidParameterTypeException {
 		initialise();
@@ -214,12 +214,12 @@ public class MockContainerModelFactory implements ContainerFactory {
 	}
 
 	@Override
-	public Map<String, ParameterImpl> getAllParameters() {
+	public Map<String, ParameterContainer> getAllParameters() {
 		return parameters;
 	}
 
 	@Override
-	public ParameterImpl getParameter(String name) {
+	public ParameterContainer getParameter(String name) {
 		return parameters.get(name);
 	}
 
@@ -233,7 +233,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 		this.containers.put(container.getName(), container);
 	}
 
-	private void addToParameters(ParameterImpl parameter) {
+	private void addToParameters(ParameterContainer parameter) {
 		this.parameters.put(parameter.getName(), parameter);
 	}
 

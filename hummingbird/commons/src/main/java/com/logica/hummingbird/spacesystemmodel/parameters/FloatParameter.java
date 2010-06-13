@@ -41,7 +41,7 @@ import com.logica.hummingbird.util.BitSetUtility.FloatSizeInBits;
  * The float container encodes / decodes a float parameter from the
  * data stream. 
  */
-public class FloatParameter extends ParameterImpl {
+public class FloatParameter extends ParameterContainer {
 	/**
 	 * Logger for this class
 	 */

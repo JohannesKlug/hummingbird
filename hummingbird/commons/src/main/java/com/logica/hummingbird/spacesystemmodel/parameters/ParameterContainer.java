@@ -32,14 +32,18 @@ import org.slf4j.LoggerFactory;
 import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
 
 /**
- * The abstract base class for all parameter containers. The class
+ * The abstract base class for all parameter <b><i>containers</i></b>. The class
  * is intended to be subtyped for each simple Java type type. 
  * 
  * A parameter is the leaf of the container tree. Each parameter
  * has a type, which defines among others the length in bits.  
+ * 
+ * @author Gert Villemos
+ * @author Mark Doyle
+ * @author Johannes Klug
  */
-public abstract class ParameterImpl extends ContainerImpl implements Parameter {
-	private static final Logger LOG = LoggerFactory.getLogger(ParameterImpl.class);
+public abstract class ParameterContainer extends ContainerImpl implements Parameter {
+	private static final Logger LOG = LoggerFactory.getLogger(ParameterContainer.class);
 
 	/** The type of the parameter. */
 	protected ParameterType type = null;
@@ -54,7 +58,7 @@ public abstract class ParameterImpl extends ContainerImpl implements Parameter {
 	 * @param type The parameter type.
 	 *
 	 */
-	public ParameterImpl(String name, String shortDescription, String longDescription, ParameterType type) {
+	public ParameterContainer(String name, String shortDescription, String longDescription, ParameterType type) {
 		super(name, shortDescription, longDescription);
 		this.type = type;
 	}

@@ -21,7 +21,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeEx
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
 import com.logica.hummingbird.util.BitSetUtility;
 
@@ -294,14 +294,14 @@ public class ContainerTest {
 		mockContainerFactory.getParameter(MockContainerModelFactory.HAPPY_FLAG_ALIAS).setValue(1);
 
 		// Set the packet id to 555 (Packet ID type A)
-		ParameterImpl apid = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS);
+		ParameterContainer apid = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS);
 		apid.setValue(Float.valueOf(MockContainerModelFactory.PACKET_TYPE_A_ID));
 
 		// Set the payload length to 32 (the length of test param A)
 		mockContainerFactory.getParameter(MockContainerModelFactory.PAYLOAD_LENGTH_PARAM_ALIAS).setValue(32);
 
 		// Set parameter A value
-		ParameterImpl paramA = mockContainerFactory.getParameter(MockContainerModelFactory.TEST_PARAM_A);
+		ParameterContainer paramA = mockContainerFactory.getParameter(MockContainerModelFactory.TEST_PARAM_A);
 		paramA.setValue(PARAM_A_TEST_VALUE);
 
 		// Set the Frame Tail

@@ -6,7 +6,7 @@ import org.apache.camel.Message;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
 
 public class ParameterArchiver {
@@ -17,7 +17,7 @@ public class ParameterArchiver {
 		
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 		
-		for (ParameterImpl parameter : containerFactory.getAllParameters().values()) {
+		for (ParameterContainer parameter : containerFactory.getAllParameters().values()) {
 			if (parameter.getType().getType() == ParameterType.eParameterType.FLOAT) {
 				// create float table
 				this.jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS " + parameter.getName()

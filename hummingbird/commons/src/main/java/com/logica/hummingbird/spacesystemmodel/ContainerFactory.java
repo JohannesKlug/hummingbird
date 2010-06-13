@@ -29,7 +29,7 @@ package com.logica.hummingbird.spacesystemmodel;
 import java.util.Map;
 
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
 
 /**
  * Interface to create monitoring models.
@@ -72,9 +72,9 @@ public interface ContainerFactory {
 	 * @return Parameter Returns the parameter container identified through the name, or null. 
 	 *
 	 */
-	public ParameterImpl getParameter(String name);
+	public ParameterContainer getParameter(String name);
 	
 	// TODO Get all parameters function.
 	
-	public Map<String, ParameterImpl> getAllParameters();
+	public Map<String, ParameterContainer> getAllParameters();
 }

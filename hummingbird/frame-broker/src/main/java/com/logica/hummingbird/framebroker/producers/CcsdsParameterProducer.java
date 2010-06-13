@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
 
 /**
@@ -48,7 +48,7 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 		this.parent = parent;
 
 		// Register with all parameters corresponding to header fields.
-		for (ParameterImpl parameter : containerFactory.getAllParameters().values()) {
+		for (ParameterContainer parameter : containerFactory.getAllParameters().values()) {
 			parameter.addParameterUpdateObserve(this);
 		}
 	}

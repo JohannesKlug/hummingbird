@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
 import com.logica.hummingbird.util.BitSetUtility;
 
-public class IntegerParameter extends ParameterImpl {
+public class IntegerParameter extends ParameterContainer {
 	private static final Logger LOG = LoggerFactory.getLogger(IntegerParameter.class);
 
 	/**

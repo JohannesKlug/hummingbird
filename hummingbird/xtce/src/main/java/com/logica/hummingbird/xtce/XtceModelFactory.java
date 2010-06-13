@@ -24,7 +24,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeEx
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
 import com.logica.hummingbird.xtce.exceptions.InvalidXtceFileException;
 
@@ -40,7 +40,7 @@ public class XtceModelFactory implements ContainerFactory {
 	protected Map<String, Unit> units = new HashMap<String, Unit>();
 	protected Map<String, ParameterType> types = new HashMap<String, ParameterType>();
 	protected Map<String, ContainerImpl> containers = new HashMap<String, ContainerImpl>();
-	protected Map<String, ParameterImpl> parameters = new HashMap<String, ParameterImpl>();
+	protected Map<String, ParameterContainer> parameters = new HashMap<String, ParameterContainer>();
 
 	protected SpaceSystem spaceSystem = null;
 
@@ -61,7 +61,7 @@ public class XtceModelFactory implements ContainerFactory {
 		}
 	}
 
-	public ParameterImpl getParameter(String name) {
+	public ParameterContainer getParameter(String name) {
 		return parameters.get(name);
 	}
 
@@ -170,7 +170,7 @@ public class XtceModelFactory implements ContainerFactory {
 		for (int parameterIndex = 0; parameterIndex < spaceSystem.getTelemetryMetaData().getParameterSet().getParameterSetTypeItemCount(); ++parameterIndex) {
 			ParameterSetTypeItem item = spaceSystem.getTelemetryMetaData().getParameterSet().getParameterSetTypeItem(parameterIndex);
 
-			ParameterImpl model = null;
+			ParameterContainer model = null;
 			ParameterType type = types.get(item.getParameter().getParameterTypeRef());
 			if (type != null) {
 
@@ -220,7 +220,7 @@ public class XtceModelFactory implements ContainerFactory {
 			/** Register this container with the base container to make sure it gets processed. */
 			if (xtceContainer.getBaseContainer() != null) {				
 				for (Comparison comparison : xtceContainer.getBaseContainer().getRestrictionCriteria().getComparisonList().getComparison()) {
-					thisContainer.addRestriction((ParameterImpl) containers.get(comparison.getParameterRef()), comparison.getValue());
+					thisContainer.addRestriction((ParameterContainer) containers.get(comparison.getParameterRef()), comparison.getValue());
 				}
 
 				containers.get(xtceContainer.getBaseContainer().getContainerRef()).addContainer(thisContainer);
@@ -300,7 +300,7 @@ public class XtceModelFactory implements ContainerFactory {
 	}
 
 	@Override
-	public Map<String, ParameterImpl> getAllParameters() {
+	public Map<String, ParameterContainer> getAllParameters() {
 		return parameters;
 	}	
 }

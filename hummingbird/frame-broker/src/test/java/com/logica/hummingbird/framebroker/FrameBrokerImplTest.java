@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
 import com.logica.hummingbird.telemetry.TelemetryFrame;
 import com.logica.hummingbird.telemetry.TelemetryPacket;
@@ -161,11 +161,11 @@ public class FrameBrokerImplTest {
 	public final void testMarshallStringBitSet() throws UnknownContainerNameException, BitSetOperationException {
 		LOG.info("---------- testMarshallStringBitSet -------------");
 		// Set the id parameter (apid) to 555.
-		ParameterImpl apid = mockSpaceSystemFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS);
+		ParameterContainer apid = mockSpaceSystemFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS);
 		apid.setValue(Float.valueOf(MockContainerModelFactory.PACKET_TYPE_A_ID));
 
 		// Set parameter A value
-		ParameterImpl paramA = mockSpaceSystemFactory.getParameter(MockContainerModelFactory.TEST_PARAM_A);
+		ParameterContainer paramA = mockSpaceSystemFactory.getParameter(MockContainerModelFactory.TEST_PARAM_A);
 		paramA.setValue(PARAM_A_TEST_VALUE);
 		
 		mockSpaceSystemFactory.getParameter(MockContainerModelFactory.HAPPY_FLAG_ALIAS).setValue(1);

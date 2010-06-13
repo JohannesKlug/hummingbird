@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterImpl;
+import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
 
@@ -23,7 +23,7 @@ public class MockContainerModelFactoryTest {
 	@Test
 	public void testMockContainerFactoryTypes() {
 
-		for (ParameterImpl parameter : containerFactory.getAllParameters().values()) {
+		for (ParameterContainer parameter : containerFactory.getAllParameters().values()) {
 			if (parameter.getType().getType() == ParameterType.eParameterType.FLOAT) {
 				assertTrue("Parameter data type mismatch", parameter.getValue() instanceof Double);
 			}
@@ -39,7 +39,7 @@ public class MockContainerModelFactoryTest {
 
 	@Test
 	public void testParameterNames() {
-		for (ParameterImpl parameter : containerFactory.getAllParameters().values()) {
+		for (ParameterContainer parameter : containerFactory.getAllParameters().values()) {
 			assertTrue("Parameter name '" + parameter.getName() + "' contains invalid characters.", parameter.getName().matches("\\p{Alnum}*"));
 		}
 
