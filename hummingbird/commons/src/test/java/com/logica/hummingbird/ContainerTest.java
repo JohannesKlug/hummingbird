@@ -117,8 +117,6 @@ public class ContainerTest {
 	/**
 	 * The test parameter B value based upon the TEST_BITSET_STRING_PKT_TYPE_B
 	 */
-	private static final double PARAM_B_TEST_VALUE = 54.78;
-	
 	private final static double PI = 3.14159265d;
 	
 	/**
