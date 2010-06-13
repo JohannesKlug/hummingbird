@@ -115,32 +115,33 @@ public class BitSetUtility {
 	 *             Integer.MIN_VALUE (no absolute value available as int)
 	 */
 	public static BitSet insertInteger(BitSet bitSet, int offset, int length, long value) {
-//		// checking the bit length
-//		if (length > Integer.SIZE) {
-//			throw new RuntimeException("You can not set a higher length than " + Integer.SIZE + " bits.");
-//		}
-//
-//		// checking whether the value fits into the bit string of length - 1
-//		int absValue = Math.abs((int) value);
-//		if (absValue > Math.pow(2.0, length) - 1 || value == Integer.MIN_VALUE) {
-//			throw new RuntimeException("The value of " + value + " does not fit into a bit string of " + (length - 1) + " bits.");
-//		}
-//
-//		// setting all bits to zero
-//		bitSet.clear(offset, offset + length - 1);
-//
-//		// setting up the number in reverse order
-//		int mask = 1;
-//		for (int i = 0; i < length; ++i, mask <<= 1) {
-//			if ((mask & absValue) > 0) {
-//				bitSet.set(offset + i);
-//			}
-//		}
-//
-//		// setting up the sign
-//		if (value < 0) {
-//			bitSet.set(offset + length - 1);
-//		}
+		// // checking the bit length
+		// if (length > Integer.SIZE) {
+		// throw new RuntimeException("You can not set a higher length than " + Integer.SIZE + " bits.");
+		// }
+		//
+		// // checking whether the value fits into the bit string of length - 1
+		// int absValue = Math.abs((int) value);
+		// if (absValue > Math.pow(2.0, length) - 1 || value == Integer.MIN_VALUE) {
+		// throw new RuntimeException("The value of " + value + " does not fit into a bit string of " + (length - 1) +
+		// " bits.");
+		// }
+		//
+		// // setting all bits to zero
+		// bitSet.clear(offset, offset + length - 1);
+		//
+		// // setting up the number in reverse order
+		// int mask = 1;
+		// for (int i = 0; i < length; ++i, mask <<= 1) {
+		// if ((mask & absValue) > 0) {
+		// bitSet.set(offset + i);
+		// }
+		// }
+		//
+		// // setting up the sign
+		// if (value < 0) {
+		// bitSet.set(offset + length - 1);
+		// }
 
 		return bitSet;
 	}
@@ -168,38 +169,42 @@ public class BitSetUtility {
 	 *             if the number of bits given by <tt>length</tt> is greater than Long.SIZE
 	 */
 	public static double extractFloat(BitSet bitSet, int offset, FloatSizeInBits floatSize) {
-		if(LOG.isDebugEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Float size: " + floatSize.getSize());
 			LOG.debug("BitSet in = " + BitSetUtility.binDump(bitSet));
 		}
-		BitSet actualBitSet = bitSet.get(offset, offset + floatSize.size - 1);
-		
-		if(LOG.isDebugEnabled()) {
+		BitSet actualBitSet = bitSet.get(offset, offset + floatSize.size);
+
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Float Parameter BitSet taken from bitset in = " + BitSetUtility.binDump(actualBitSet));
 		}
-		
-		
+
 		int length = actualBitSet.size();
 		if (length != FloatSizeInBits.THIRTY_TWO.getSize() && length != FloatSizeInBits.SIXTY_FOUR.getSize()) {
 			LOG.error("A float BitSet of invalid length was passed. This is an error! Size is: " + length);
 		}
-		
-		String actualBitSetString = BitSetUtility.bitSetToBinaryString(actualBitSet, false);
-		actualBitSetString = BitSetUtility.padStringFromTheFront(actualBitSetString, floatSize.getSize());
-		
-		
-		if(LOG.isDebugEnabled()) {
+
+		String actualBitSetString = null;
+		if (floatSize == FloatSizeInBits.SIXTY_FOUR) {
+			actualBitSetString = BitSetUtility.bitSetToBinaryString(actualBitSet, false);
+		}
+		else if (floatSize == FloatSizeInBits.THIRTY_TWO) {
+			actualBitSetString = BitSetUtility.bitSetToBinaryString(actualBitSet, true);
+			actualBitSetString = padStringFromTheFront(actualBitSetString, FloatSizeInBits.THIRTY_TWO.getSize());
+		}
+
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("BinaryString representation of actual bitset = " + actualBitSetString);
 		}
-		
+
 		if (floatSize == FloatSizeInBits.THIRTY_TWO) {
-			if(LOG.isDebugEnabled()) {
+			if (LOG.isDebugEnabled()) {
 				LOG.debug("Extracting value using intBitsToFloat");
 			}
 			return Float.intBitsToFloat(Integer.parseInt(actualBitSetString, 2));
 		}
 		else {
-			if(LOG.isDebugEnabled()) {
+			if (LOG.isDebugEnabled()) {
 				LOG.debug("Extracting value using longBitsToDouble");
 			}
 			// Treat it like 64 bit floating point number.
@@ -230,7 +235,6 @@ public class BitSetUtility {
 			// Parse as IEEE-754 Single Precision (32-bit) (Java Float)
 			int intBits = Float.floatToIntBits((float) value);
 			binaryString = Integer.toBinaryString(intBits);
-
 		}
 		else if (floatSize == FloatSizeInBits.SIXTY_FOUR) {
 			// Parse as IEEE-754 Double Precision (64-bit) (Java Double)
@@ -252,8 +256,8 @@ public class BitSetUtility {
 					bitSet.set(bitIndex);
 				}
 				else {
-					throw new BitSetOperationException("Error converting floating point number '" + value + "' to a BitSet: invalid character '" + binaryString
-							.charAt(bitIndex) + "' encountered at position " + bitIndex + ".");
+					throw new BitSetOperationException("Error converting floating point number '" + value + "' to a BitSet: invalid character '"
+							+ binaryString.charAt(bitIndex) + "' encountered at position " + bitIndex + ".");
 				}
 			}
 			else {
@@ -349,21 +353,22 @@ public class BitSetUtility {
 
 		return result;
 	}
-	
+
 	/**
 	 * Uses the complete BitSet i.e. the size and <b><i>not</i></b> the length
+	 * 
 	 * @param data
 	 * @return
 	 */
 	public static String bitSetToBinaryString(BitSet data, boolean logicalSize) {
 		int bitSetSize;
-		if(logicalSize) {
+		if (logicalSize) {
 			bitSetSize = data.length();
 		}
 		else {
-			bitSetSize = data.size();			
+			bitSetSize = data.size();
 		}
-		
+
 		StringBuilder binaryString = new StringBuilder(bitSetSize);
 
 		for (int i = 0; i < bitSetSize; i++) {
@@ -376,12 +381,20 @@ public class BitSetUtility {
 		}
 		return binaryString.toString();
 	}
-	
+
 	public static String padStringFromTheFront(String string, int finalLength) {
-		int zeroesToAdd = finalLength - string.length(); 
-		for (int i=0; i<zeroesToAdd; i++) {
-			string = '0' + string;
+		int zeroesToAdd = finalLength - string.length();
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Padding " + zeroesToAdd + " zero(s) to the front of the binary string");
 		}
-		return string;
+		
+		String newString = "0";
+		for (int i = 1; i < zeroesToAdd; i++) {
+			newString += '0';
+		}
+		
+		newString += string;
+		
+		return newString;
 	}
 }
