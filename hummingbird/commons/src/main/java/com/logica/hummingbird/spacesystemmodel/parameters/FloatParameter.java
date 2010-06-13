@@ -90,9 +90,6 @@ public class FloatParameter extends ParameterImpl {
 
 	@Override
 	public BitSet unmarshall(BitSet packet) {	
-		int length = packet.length();
-		
-		
 		value = BitSetUtility.extractFloat(packet, 0, this.floatSize);
 
 		for(ParameterObserver paramObserver : updatedParameterObservers) {
