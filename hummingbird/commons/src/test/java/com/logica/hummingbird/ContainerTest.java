@@ -259,6 +259,23 @@ public class ContainerTest {
 		LOG.info("Asserting " + MockContainerModelFactory.TEST_PARAM_B);
 		assertEquals("Parameter has incorrect value.", PI, testParamBvalue.doubleValue(), 0);
 		LOG.debug(MockContainerModelFactory.TEST_PARAM_B + " parameter passed with value : " + testParamBvalue.doubleValue());
+		
+		// Test the container models happy flag and the validity flag
+		// Both expected to be the default value of 0 since we never set a value.
+		final int expectedValue = 1;
+		Container happyFlag = mockContainerFactory.getContainer(MockContainerModelFactory.HAPPY_FLAG_ALIAS);
+		Assert.isInstanceOf(IntegerParameter.class, happyFlag);
+		Number happyFlagValue = ((IntegerParameter) happyFlag).getValue();
+		LOG.info("Checking " + MockContainerModelFactory.HAPPY_FLAG_ALIAS);
+		assertEquals("Parameter has incorrect value.", expectedValue, happyFlagValue.intValue());
+		LOG.debug(MockContainerModelFactory.HAPPY_FLAG_ALIAS + " parameter passed with value : " + happyFlagValue.intValue());
+
+		Container validityFlag = mockContainerFactory.getContainer(MockContainerModelFactory.VALIDITY_FLAG_ALIAS);
+		Assert.isInstanceOf(IntegerParameter.class, validityFlag);
+		Number vFlagValue = ((IntegerParameter) validityFlag).getValue();
+		LOG.info("Checking " + MockContainerModelFactory.VALIDITY_FLAG_ALIAS);
+		assertEquals("Parameter has incorrect value.", expectedValue, vFlagValue.intValue());
+		LOG.debug(MockContainerModelFactory.VALIDITY_FLAG_ALIAS + " parameter passed with value : " + vFlagValue.intValue());
 	}
 
 	/**
@@ -274,7 +291,7 @@ public class ContainerTest {
 
 		LOG.debug("SSModel before setting values: " + mockContainerFactory.getContainer("TMFrame").toString());
 
-		/** Populate the input mock frame parameter values **/
+		// Populate the input mock frame parameter values
 		// Set the Frame Header
 		mockContainerFactory.getParameter(MockContainerModelFactory.HAPPY_FLAG_ALIAS).setValue(1);
 
