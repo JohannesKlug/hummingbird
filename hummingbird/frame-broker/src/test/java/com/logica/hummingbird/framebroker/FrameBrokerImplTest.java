@@ -49,7 +49,7 @@ public class FrameBrokerImplTest {
 	 * Based upon the MockContainerFactory this Bit String encodes the Mock Container model with a param type ID of 555
 	 * and a param A test value of 123
 	 */
-	private final static String TEST_BITSET_FRAME = "111010100010110111100000000000000000000000001";
+	private final static String TEST_BITSET_FRAME = "1110101000100000000000000000110111100000000000000000000000001";
 	
 	/**
 	 * Based upon the MockContainerFactory this Bit String encodes the Mock Container model with a param type ID of 555
