@@ -254,8 +254,8 @@ public class ContainerTest {
 		Assert.isInstanceOf(FloatParameter.class, testParamB);
 		Number testParamBvalue = ((FloatParameter) testParamB).getValue();
 		LOG.info("Asserting " + MockContainerModelFactory.TEST_PARAM_B);
-		assertEquals("Parameter has incorrect value.", PARAM_B_TEST_VALUE, testParamBvalue.doubleValue(), 0);
-		LOG.debug(MockContainerModelFactory.TEST_PARAM_A + " parameter passed with value : " + testParamBvalue.intValue());
+		assertEquals("Parameter has incorrect value.", PARAM_B_TEST_VALUE, testParamBvalue.doubleValue(), 0.01);
+		LOG.debug(MockContainerModelFactory.TEST_PARAM_B + " parameter passed with value : " + testParamBvalue.doubleValue());
 	}
 
 	/**
