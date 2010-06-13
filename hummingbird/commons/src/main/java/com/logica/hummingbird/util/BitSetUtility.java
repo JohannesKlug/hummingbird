@@ -115,33 +115,33 @@ public class BitSetUtility {
 	 *             Integer.MIN_VALUE (no absolute value available as int)
 	 */
 	public static BitSet insertInteger(BitSet bitSet, int offset, int length, long value) {
-		// // checking the bit length
-		// if (length > Integer.SIZE) {
-		// throw new RuntimeException("You can not set a higher length than " + Integer.SIZE + " bits.");
-		// }
-		//
-		// // checking whether the value fits into the bit string of length - 1
-		// int absValue = Math.abs((int) value);
-		// if (absValue > Math.pow(2.0, length) - 1 || value == Integer.MIN_VALUE) {
-		// throw new RuntimeException("The value of " + value + " does not fit into a bit string of " + (length - 1) +
-		// " bits.");
-		// }
-		//
-		// // setting all bits to zero
-		// bitSet.clear(offset, offset + length - 1);
-		//
-		// // setting up the number in reverse order
-		// int mask = 1;
-		// for (int i = 0; i < length; ++i, mask <<= 1) {
-		// if ((mask & absValue) > 0) {
-		// bitSet.set(offset + i);
-		// }
-		// }
-		//
-		// // setting up the sign
-		// if (value < 0) {
-		// bitSet.set(offset + length - 1);
-		// }
+		 // checking the bit length
+		 if (length > Integer.SIZE) {
+		 throw new RuntimeException("You can not set a higher length than " + Integer.SIZE + " bits.");
+		 }
+		
+		 // checking whether the value fits into the bit string of length - 1
+		 int absValue = Math.abs((int) value);
+		 if (absValue > Math.pow(2.0, length) - 1 || value == Integer.MIN_VALUE) {
+		 throw new RuntimeException("The value of " + value + " does not fit into a bit string of " + (length - 1) +
+		 " bits.");
+		 }
+		
+		 // setting all bits to zero
+		 bitSet.clear(offset, offset + length - 1);
+		
+		 // setting up the number in reverse order
+		 int mask = 1;
+		 for (int i = 0; i < length; ++i, mask <<= 1) {
+		 if ((mask & absValue) > 0) {
+		 bitSet.set(offset + i);
+		 }
+		 }
+		
+		 // setting up the sign
+		 if (value < 0) {
+		 bitSet.set(offset + length - 1);
+		 }
 
 		return bitSet;
 	}
