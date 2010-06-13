@@ -107,7 +107,7 @@ public class ContainerTest {
 	 * 
 	 * See class javadoc for details
 	 */
-	private final static String TEST_BITSET_STRING_PKT_TYPE_B = "110110010100000000100000000000011101011110001101101001000010000000000000000000000000000000001";
+	private final static String TEST_BITSET_STRING_PKT_TYPE_B = "110110010100000000100000000001000000000010010010000111111011010100111100100011010100111100011";
 	
 	/**
 	 * The packet ID value based upon the TEST_BITSET_STRING_PKT_TYPE_B
@@ -118,6 +118,8 @@ public class ContainerTest {
 	 * The test parameter B value based upon the TEST_BITSET_STRING_PKT_TYPE_B
 	 */
 	private static final double PARAM_B_TEST_VALUE = 54.78;
+	
+	private final static double PI = 3.14159265d;
 	
 	/**
 	 * The total length of the mock factory container model with a packet type B set (333).
@@ -253,9 +255,10 @@ public class ContainerTest {
 		Container testParamB = mockContainerFactory.getContainer(MockContainerModelFactory.TEST_PARAM_B);
 		Assert.isInstanceOf(FloatParameter.class, testParamB);
 		Number testParamBvalue = ((FloatParameter) testParamB).getValue();
+		LOG.info("Extracted value = " + testParamBvalue);
 		LOG.info("Asserting " + MockContainerModelFactory.TEST_PARAM_B);
-		assertEquals("Parameter has incorrect value.", PARAM_B_TEST_VALUE, testParamBvalue.doubleValue(), 0);
-		LOG.debug(MockContainerModelFactory.TEST_PARAM_A + " parameter passed with value : " + testParamBvalue.intValue());
+		assertEquals("Parameter has incorrect value.", PI, testParamBvalue.doubleValue(), 0);
+		LOG.debug(MockContainerModelFactory.TEST_PARAM_B + " parameter passed with value : " + testParamBvalue.doubleValue());
 	}
 
 	/**
