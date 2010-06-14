@@ -42,13 +42,13 @@ import com.logica.hummingbird.util.BitSetUtility;
  * 
  * 
  * TEST_BITSET_STRING_PKT_TYPE_B
- * 110110010100000000100000000000011101011110001101101001000010000000000000000000000000000000001
+ * 110110010100000000100000000001000000000010010010000111111011010100111100100011010100111100011
  * 
  * Breakdown:
  * 1 = Happy flag
  * 10000100000 = Apid 333
  * 0000001000000000 = payloadLength 64
- * 0001110101111000110110100100001000000000000000000000000000000000 = test paramB 54.78
+ * 0100000000001001001000011111101101010011110010001101010011110001 = test paramB 3.14159265d
  * 1  = ValidityFlag
  * }
  * </pre>
@@ -284,7 +284,7 @@ public class ContainerTest {
 	 * @throws BitSetOperationException
 	 */
 	@Test
-	public void testMarshallOfValidModel() throws UnknownContainerNameException, BitSetOperationException {
+	public void testMarshallTmModelType555() throws UnknownContainerNameException, BitSetOperationException {
 		LOG.info("Beginning test");
 
 		LOG.debug("SSModel before setting values: " + mockContainerFactory.getContainer("TMFrame").toString());
@@ -339,6 +339,83 @@ public class ContainerTest {
 		}
 
 		String apidBinValue = Integer.toBinaryString(Integer.valueOf(MockContainerModelFactory.PACKET_TYPE_A_ID));
+		// LSB first so we need to reverse the dumped string.
+		apidBinValue = new StringBuffer(apidBinValue).reverse().toString();
+		// BitSets are rounded up to 64 bits so we will have to pad the marshalled APID with extra 0's
+		// We will calculate the required zeros using the apid's length so we don't spoil the test
+		int requiredPadding = 64 - apidBinValue.length();
+		char[] zeroPadding = new char[requiredPadding];
+		for (int c = 0; c < requiredPadding; c++) {
+			zeroPadding[c] = '0';
+		}
+		StringBuffer apidBinValueWithPadding = new StringBuffer(apidBinValue);
+		apidBinValueWithPadding.append(zeroPadding);
+		assertEquals("Apid does not match", StringUtils.deleteWhitespace(apidBinDump), apidBinValueWithPadding.toString());
+	}
+
+	/**
+	 * Tests marshalling a <b>valid</b> population of a Mock Container Model. The Model is populated in the test method.
+	 * {@link com.logica.hummingbird.spacesystemmodel.ContainerImpl#marshall(java.util.BitSet, int)} .
+	 * 
+	 * @throws UnknownContainerNameException
+	 * @throws BitSetOperationException
+	 */
+	@Test
+	public void testMarshallTmModelType333() throws UnknownContainerNameException, BitSetOperationException {
+		LOG.info("Beginning test");
+	
+		LOG.debug("SSModel before setting values: " + mockContainerFactory.getContainer("TMFrame").toString());
+	
+		// Populate the input mock frame parameter values
+		// Set the Frame Header
+		mockContainerFactory.getParameter(MockContainerModelFactory.HAPPY_FLAG_ALIAS).setValue(1);
+	
+		// Set the packet id to 333 (Packet ID type B)
+		ParameterContainer apid = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS);
+		apid.setValue(Float.valueOf(MockContainerModelFactory.PACKET_TYPE_B_ID));
+	
+		// Set the payload length to 64 (the length of test param B)
+		mockContainerFactory.getParameter(MockContainerModelFactory.PAYLOAD_LENGTH_PARAM_ALIAS).setValue(64);
+	
+		// Set parameter B value to test value pi 
+		ParameterContainer paramB = mockContainerFactory.getParameter(MockContainerModelFactory.TEST_PARAM_B);
+		paramB.setValue(PI);
+	
+		// Set the Frame Tail
+		mockContainerFactory.getParameter(MockContainerModelFactory.VALIDITY_FLAG_ALIAS).setValue(1);
+	
+		LOG.debug("SSModel after setting values: " + mockContainerFactory.getContainer("TMFrame").toString());
+	
+		// Get the frame length, that is, the sum of itself and it's tree of sub
+		// containers and set the target bitset to this length.
+		int length = mockContainerFactory.getContainer("TMFrame").getLength();
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("TMFrame from space system model is of length = " + length);
+		}
+	
+		// Marshall the Frame to a bitset
+		BitSet marshalledFrame = new BitSet();
+		Container tmframe = mockContainerFactory.getContainer("TMFrame");
+		tmframe.marshall(marshalledFrame, 0);
+	
+		LOG.debug("Bitset length = " + marshalledFrame.length());
+		String binDump = BitSetUtility.binDump(marshalledFrame);
+		LOG.debug(binDump);
+	
+		assertEquals("BitSets not equal", BitSetUtility.stringToBitSet(TEST_BITSET_STRING_PKT_TYPE_B), marshalledFrame);
+	
+		assertEquals("BitSets length not as expected", marshalledFrame.length(), TEST_BITSET_STRING_PKT_TYPE_B.length());
+	
+		// Now let's marshall a parameter and run some tests.
+		BitSet apidBitSet = new BitSet(mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS).getLength());
+		Container packet = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS);
+		packet.marshall(apidBitSet, 0);
+		String apidBinDump = BitSetUtility.binDump(apidBitSet);
+		if (LOG.isDebugEnabled()) {
+			LOG.debug(mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS) + " = " + apidBinDump);
+		}
+	
+		String apidBinValue = Integer.toBinaryString(Integer.valueOf(MockContainerModelFactory.PACKET_TYPE_B_ID));
 		// LSB first so we need to reverse the dumped string.
 		apidBinValue = new StringBuffer(apidBinValue).reverse().toString();
 		// BitSets are rounded up to 64 bits so we will have to pad the marshalled APID with extra 0's
