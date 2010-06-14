@@ -15,7 +15,7 @@ public class IntegerParameter extends ParameterContainer {
 	/**
 	 * The value of the integer. It must be of type Long, since Hummingbird supports 64bit Integers.
 	 * */
-	protected Long value = 0L;
+	protected Number value = 0L;
 
 	/**
 	 * Constructor of the IntegerParameter class.
@@ -42,10 +42,11 @@ public class IntegerParameter extends ParameterContainer {
 			LOG.debug("Unmarshalling " + this.name + " from packet : " + packet);
 		}
 
-		value = BitSetUtility.extractInteger(packet, 0, (int) type.getSizeInBits(), type.isSigned());
+		// value = BitSetUtility.extractInteger(packet, 0, (int) type.getSizeInBits(), type.isSigned());
+		value = this.type.getNumberBehaviour().valueFromBitSet(packet);
 
 		for (ParameterObserver paramObserver : updatedParameterObservers) {
-			paramObserver.updated(name, value);
+			paramObserver.updated(name, value.intValue());
 		}
 
 		BitSet returnPacket = packet.get((int) type.getSizeInBits(), packet.length());
@@ -54,12 +55,8 @@ public class IntegerParameter extends ParameterContainer {
 
 	@Override
 	public int marshall(BitSet packet, int offset) {
-		try {
-			BitSetUtility.insertInteger(packet, offset, (int) type.getSizeInBits(), value);
-		}
-		catch (RuntimeException e) {
-			LOG.error("Error encoding parameter '" + this.name + "'. The value '" + this.value + "' cannot be encoded in " + type.getSizeInBits() + " bit(s).");
-		}
+		// BitSetUtility.insertInteger(packet, offset, (int) type.getSizeInBits(), value);
+		this.type.getNumberBehaviour().insertIntoBitSet(packet, offset);
 
 		return offset + (int) type.getSizeInBits();
 	}
@@ -76,7 +73,7 @@ public class IntegerParameter extends ParameterContainer {
 
 	@Override
 	public boolean match(String value) {
-		return (this.value == Integer.parseInt(value));
+		return (this.value.intValue() == Integer.parseInt(value));
 	}
 
 	@Override
