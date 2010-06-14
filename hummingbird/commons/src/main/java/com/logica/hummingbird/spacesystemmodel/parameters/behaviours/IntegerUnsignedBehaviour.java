@@ -2,9 +2,13 @@ package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
 
 import java.util.BitSet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 
 public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
+	private static final Logger LOG = LoggerFactory.getLogger(IntegerUnsignedBehaviour.class);
 	
 	public IntegerUnsignedBehaviour(long sizeInBits) throws InvalidParameterTypeException {
 		super(sizeInBits);
@@ -15,8 +19,18 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 
 	@Override
 	public Integer valueFromBitSet(BitSet packet) {
-		// TODO Auto-generated method stub
-		return null;
+		int parameterValue = 0;
+		int offset = 0;
+		int mask = 1;
+
+		for (int i = 0; i < getSizeIntBits(); i++, mask <<= 1) {
+			if (packet.get(offset + i)) {
+				parameterValue |= mask;
+			}
+		}
+		
+		LOG.debug("Calculated value from bitset was: " + parameterValue);
+		return parameterValue;
 	}
 
 	@Override
