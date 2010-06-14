@@ -26,9 +26,10 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 	}
 
 	@Override
-	public void insertIntoBitSet(BitSet bitSetTarget) {
+	public void insertIntoBitSet(BitSet bitSetTarget, int offset) {
 		// TODO Auto-generated method stub
-
+		
 	}
+
 
 }
