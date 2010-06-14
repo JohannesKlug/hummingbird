@@ -89,7 +89,7 @@ public class FloatParameter extends ParameterContainer {
 
 	@Override
 	public int marshall(BitSet packet, int offset) {
-		packet = this.getType().getNumberBehaviour().insertIntoBitSet(packet, offset);
+		packet = this.getType().getNumberBehaviour().insertIntoBitSet(getValue(), packet, offset);
 
 		return offset + (int) type.getSizeInBits();
 	}
