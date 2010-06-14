@@ -32,5 +32,10 @@ public class Float32Behaviour extends AbstractFloatBehaviour {
 		
 	}
 
+	@Override
+	public String getTypeName() {
+		return "Float (IEEE754 Single precision 32-bit)"; 
+	}
+
 
 }

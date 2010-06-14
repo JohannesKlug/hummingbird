@@ -32,5 +32,10 @@ public class Float64Behaviour extends AbstractFloatBehaviour {
 		
 	}
 
+	@Override
+	public String getTypeName() {
+		return "Double (IEEE754 Double precision 64-bit)";
+	}
+
 
 }

@@ -5,5 +5,7 @@ import java.util.BitSet;
 public interface NumberParameterTypeBehaviour extends ParameterBehaviour {
 	
 	public Number valueFromBitSet(BitSet packet);
+	
+	public String getTypeName();
 
 }

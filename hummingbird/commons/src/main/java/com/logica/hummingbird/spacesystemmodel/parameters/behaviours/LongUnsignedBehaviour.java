@@ -37,4 +37,9 @@ public class LongUnsignedBehaviour extends AbstractIntegerBehaviour {
 		// TODO Auto-generated method stub
 	}
 
+	@Override
+	public String getTypeName() {
+		return "Unsigned long";
+	}
+
 }

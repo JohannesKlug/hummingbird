@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import com.logica.hummingbird.util.BitSetUtility;
 
 public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 	private static final Logger LOG = LoggerFactory.getLogger(IntegerUnsignedBehaviour.class);
@@ -29,7 +30,9 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 			}
 		}
 		
-		LOG.debug("Calculated value from bitset was: " + parameterValue);
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Calculated value from bitset was: " + parameterValue);
+		}
 		return parameterValue;
 	}
 
@@ -66,8 +69,17 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 				bitSetTarget.set(offset + i);
 			}
 		}
+		
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Calculated Bitset from value " + number.intValue() + " was: " + BitSetUtility.binDump(bitSetTarget));
+		}
 
 		return bitSetTarget;	
+	}
+
+	@Override
+	public String getTypeName() {
+		return "Unsigned integer";
 	}
 
 
