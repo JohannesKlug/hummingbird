@@ -40,10 +40,34 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 	}
 
 	@Override
-	public BitSet insertIntoBitSet(BitSet bitSetTarget, int offset) {
-		return bitSetTarget;
-		// TODO Auto-generated method stub
+	public BitSet insertIntoBitSet(Number number, BitSet bitSetTarget, int offset) {
+		int length = (int) getSizeIntBits();
 		
+		long unsignedInt = number.longValue();
+		
+		// checking the bit length against unsigned int
+		if (length > Integer.SIZE + 1) {
+			throw new RuntimeException("You can not set a higher length than " + (Integer.SIZE + 1) + " bits.");
+		}
+
+		// checking whether the value fits into the bit string of length - 1
+		long absValue = Math.abs(unsignedInt);
+		if (absValue > Math.pow(2.0, length) - 1 || unsignedInt == Long.MIN_VALUE) {
+			throw new RuntimeException("The value of " + unsignedInt + " does not fit into a bit string of " + (length - 1) + " bits.");
+		}
+
+		// setting all bits to zero
+		bitSetTarget.clear(offset, offset + length - 1);
+
+		// setting up the number in reverse order
+		int mask = 1;
+		for (int i = 0; i < length; ++i, mask <<= 1) {
+			if ((mask & absValue) > 0) {
+				bitSetTarget.set(offset + i);
+			}
+		}
+
+		return bitSetTarget;	
 	}
 
 
