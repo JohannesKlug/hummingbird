@@ -39,82 +39,64 @@ import com.logica.hummingbird.util.BitSetUtility;
 import com.logica.hummingbird.util.BitSetUtility.FloatSizeInBits;
 
 /**
- * The float container encodes / decodes a float parameter from the
- * data stream. 
+ * The float container encodes / decodes a float parameter from the data stream.
  */
 public class FloatParameter extends ParameterContainer {
-	/**
-	 * Logger for this class
-	 */
+	/** Logger for this class */
 	private static final Logger LOG = LoggerFactory.getLogger(FloatParameter.class);
-	
+
 	/** The last extracted value of the container. */
-	protected double value = 0;
+	protected Number value = 0;
 
 	/** The minimal possible value. */
 	protected final double minimumValue = Double.MIN_VALUE;
-	
+
 	/** The maximal possible value. */
 	protected final double maximumValue = Double.MAX_VALUE;
-	
-	private FloatSizeInBits floatSize;
-	
-	
+
+	// private FloatSizeInBits floatSize;
+
 	/**
 	 * Constructor of the FloatParameter class.
-	 *
-	 * @param name The name of the container. Used as the unique identifier of the container.
-	 * @param shortDescription A one-line description, tooltip style, of the container.
-	 * @param longDescription A full description of the container, help style. 
-	 * @param NumberParameterType The type of the container. The type defines the length and behaviour of the parameter.
-	 * @param value The initial value.
-	 * @throws InvalidParameterTypeException 
+	 * 
+	 * @param name
+	 *            The name of the container. Used as the unique identifier of the container.
+	 * @param shortDescription
+	 *            A one-line description, tooltip style, of the container.
+	 * @param longDescription
+	 *            A full description of the container, help style.
+	 * @param NumberParameterType
+	 *            The type of the container. The type defines the length and behaviour of the parameter.
+	 * @param value
+	 *            The initial value.
+	 * @throws InvalidParameterTypeException
 	 */
-	public FloatParameter(String name, String shortDescription, String longDescription, NumberParameterType type, double value) throws InvalidParameterTypeException {
+	public FloatParameter(String name, String shortDescription, String longDescription, NumberParameterType type, double value)
+			throws InvalidParameterTypeException {
 		super(name, shortDescription, longDescription, type);
-		
-		if(!type.isSigned()) {
-			throw new InvalidParameterTypeException("Floats must be signed; sorry");
-		}
-		
-		if(type.getSizeInBits() == 32) {
-			floatSize = FloatSizeInBits.THIRTY_TWO;
-		}
-		else if(type.getSizeInBits() == 64) {
-			floatSize = FloatSizeInBits.SIXTY_FOUR;
-		}
-		else {
-			throw new InvalidParameterTypeException("Floats must be either 32 or 64 bits in size");
-		}
-		
 	}
 
 	@Override
-	public BitSet unmarshall(BitSet packet) {	
-		value = BitSetUtility.extractFloat(packet, 0, this.floatSize);
+	public BitSet unmarshall(BitSet packet) {
+		value = this.getType().getNumberBehaviour().valueFromBitSet(packet);
 
-		for(ParameterObserver paramObserver : updatedParameterObservers) {
-			paramObserver.updated(name, value);
+		for (ParameterObserver paramObserver : updatedParameterObservers) {
+			paramObserver.updated(name, value.doubleValue());
 		}
-		
+
 		return packet.get((int) type.getSizeInBits(), packet.length());
 	}
 
 	@Override
 	public int marshall(BitSet packet, int offset) {
-		try {
-			packet = BitSetUtility.insertFloat(packet, offset, this.floatSize, value);
-		}
-		catch (BitSetOperationException e) {
-			LOG.error(e.toString());
-		}
+		packet = this.getType().getNumberBehaviour().insertIntoBitSet(packet, offset);
 
 		return offset + (int) type.getSizeInBits();
 	}
 
 	@Override
 	public String toString() {
-		return "[float (" + this.type.getSizeInBits() + ") " + this.name + "=" + this.value + "]"; 
+		return "[float (" + this.type.getSizeInBits() + ") " + this.name + "=" + this.value + "]";
 	}
 
 	@Override
@@ -128,8 +110,8 @@ public class FloatParameter extends ParameterContainer {
 	}
 
 	@Override
-	public boolean match(String value) {		
-		return (this.value == Double.parseDouble(value));
+	public boolean match(String value) {
+		return (this.value.doubleValue() == Double.parseDouble(value));
 	}
 
 }
