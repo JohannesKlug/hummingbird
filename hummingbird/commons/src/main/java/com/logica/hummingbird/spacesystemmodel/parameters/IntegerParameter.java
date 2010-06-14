@@ -41,21 +41,24 @@ public class IntegerParameter extends ParameterContainer {
 			LOG.debug("Unmarshalling " + this.name + " from packet : " + packet);
 		}
 
-		// value = BitSetUtility.extractInteger(packet, 0, (int) type.getSizeInBits(), type.isSigned());
+		// Extract this Integer form the given binary bitset.
 		value = this.type.getNumberBehaviour().valueFromBitSet(packet);
 
+		// Notify all our observers that the value has changed.
 		for (ParameterObserver paramObserver : updatedParameterObservers) {
 			paramObserver.updated(name, value.intValue());
 		}
 
+		// Chop off this integer parameter because it has now been unmarshalled
 		BitSet returnPacket = packet.get((int) type.getSizeInBits(), packet.length());
+		
+		// Return the rest of the binary bitset to the calling container 
 		return returnPacket;
 	}
 
 	@Override
 	public int marshall(BitSet packet, int offset) {
-		// BitSetUtility.insertInteger(packet, offset, (int) type.getSizeInBits(), value);
-		this.type.getNumberBehaviour().insertIntoBitSet(packet, offset);
+		packet = this.type.getNumberBehaviour().insertIntoBitSet(packet, offset);
 
 		return offset + (int) type.getSizeInBits();
 	}
