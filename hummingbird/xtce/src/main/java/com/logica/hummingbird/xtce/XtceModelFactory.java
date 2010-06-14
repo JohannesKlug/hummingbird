@@ -25,16 +25,21 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameEx
 import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
+import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.AbstractFloatBehaviour;
+import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.AbstractIntegerBehaviour;
+import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float32Behaviour;
+import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float64Behaviour;
+import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
 import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
 import com.logica.hummingbird.xtce.exceptions.InvalidXtceFileException;
 
 /**
  * 
  * @author Gert Villemos
- *
+ * 
  */
 public class XtceModelFactory implements ContainerFactory {
-	
+
 	private static final Logger LOG = LoggerFactory.getLogger(XtceModelFactory.class);
 
 	protected Map<String, Unit> units = new HashMap<String, Unit>();
@@ -55,7 +60,7 @@ public class XtceModelFactory implements ContainerFactory {
 			initialise();
 		}
 		catch (InvalidParameterTypeException e) {
-			String message = "Error in SpaceSystemModel file: " + spacesystemmodelFilename + "." ;
+			String message = "Error in SpaceSystemModel file: " + spacesystemmodelFilename + ".";
 			LOG.error(message + " " + e.getMessage());
 			throw new InvalidXtceFileException(message, e);
 		}
@@ -67,15 +72,16 @@ public class XtceModelFactory implements ContainerFactory {
 
 	public ContainerImpl getContainer(String name) throws UnknownContainerNameException {
 		ContainerImpl container = containers.get(name);
-		
+
 		if (container == null) {
-			throw new UnknownContainerNameException(containers, "Your container lookup for '" + name + "' did not return any containers. Check your SpaceSystem configuration.");
+			throw new UnknownContainerNameException(containers,
+					"Your container lookup for '" + name + "' did not return any containers. Check your SpaceSystem configuration.");
 		}
-		
+
 		return container;
 	}
 
-	private void initialise() throws InvalidParameterTypeException {
+	private void initialise() throws InvalidParameterTypeException, InvalidXtceFileException {
 
 		spaceSystem = getSpaceSystem();
 
@@ -83,51 +89,43 @@ public class XtceModelFactory implements ContainerFactory {
 		for (int parameterTypeIndex = 0; parameterTypeIndex < spaceSystem.getTelemetryMetaData().getParameterTypeSet().getParameterTypeSetTypeItemCount(); ++parameterTypeIndex) {
 			ParameterTypeSetTypeItem item = spaceSystem.getTelemetryMetaData().getParameterTypeSet().getParameterTypeSetTypeItem(parameterTypeIndex);
 
-
 			/** INTEGER */
 			if (item.getIntegerParameterType() != null) {
-				Unit unit = null;				
+				Unit unit = null;
 
 				/** Read in the unit of the parameter type. */
 				if (item.getIntegerParameterType().getUnitSet() != null) {
 					for (int unitTypeIndex = 0; unitTypeIndex < item.getIntegerParameterType().getUnitSet().getUnitCount(); ++unitTypeIndex) {
 						unit = units.get(item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getContent());
 						if (unit == null) {
-							unit = new Unit(
-									item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(),
-									item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getDescription(),
-									item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getDescription(),
-									item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getPower(),
-									item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getFactor());
+							unit = new Unit(item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(), item.getIntegerParameterType()
+									.getUnitSet().getUnit(unitTypeIndex).getDescription(), item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex)
+									.getDescription(), item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getPower(), item
+									.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getFactor());
 
 							units.put(item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(), unit);
 						}
 					}
 				}
 
-				/** TITLE XTCE Empty (null) Initial Value
-				 * If the XTCE definition doesn't contain a default value, then the parameter gets the initial value of '0'. 
-				 * CATEGORY XTCE FAQ */
-				
+				/**
+				 * TITLE XTCE Empty (null) Initial Value If the XTCE definition doesn't contain a default value, then
+				 * the parameter gets the initial value of '0'. CATEGORY XTCE FAQ
+				 */
+
 				String initialValueAsString = item.getIntegerParameterType().getInitialValue();
-				
+
 				long initialValue = 0;
-				
+
 				if (initialValueAsString != null) {
 					initialValue = Long.decode(initialValueAsString);
-					// FIXME decode() will ONLY work with base10 and hex, NOT with octal (wrong representation) and not with binary.
+					// FIXME decode() will ONLY work with base10 and hex, NOT with octal (wrong representation) and not
+					// with binary.
 				}
-				
-				
-				NumberParameterType type = new NumberParameterType(					
-						item.getIntegerParameterType().getName(),
-						item.getIntegerParameterType().getShortDescription(),
-						item.getIntegerParameterType().getLongDescription(),
-						NumberParameterType.eParameterType.INTEGER,
-						item.getIntegerParameterType().getSigned(),
-						initialValue,				
-						item.getIntegerParameterType().getSizeInBits());
-				
+
+				NumberParameterType type = new NumberParameterType(item.getIntegerParameterType().getName(), item.getIntegerParameterType()
+						.getShortDescription(), item.getIntegerParameterType().getLongDescription(), new IntegerUnsignedBehaviour(item
+						.getIntegerParameterType().getSizeInBits()), item.getIntegerParameterType().getSigned(), initialValue);
 
 				types.put(type.getName(), type);
 			}
@@ -141,26 +139,37 @@ public class XtceModelFactory implements ContainerFactory {
 					for (int unitTypeIndex = 0; unitTypeIndex < item.getFloatParameterType().getUnitSet().getUnitCount(); ++unitTypeIndex) {
 						unit = units.get(item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getContent());
 						if (unit == null) {
-							unit = new Unit(
-									item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(),
-									item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getDescription(),
-									item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getDescription(),
-									item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getPower(),
-									item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getFactor());
+							unit = new Unit(item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(), 
+											item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getDescription(), 
+											item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getDescription(), 
+											item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getPower(), item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getFactor());
 
 							units.put(item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(), unit);
 						}
 					}
 				}
 
-				NumberParameterType type = new NumberParameterType(					
-						item.getFloatParameterType().getName(),
-						item.getFloatParameterType().getShortDescription(),
-						item.getFloatParameterType().getLongDescription(),
-						NumberParameterType.eParameterType.FLOAT,
-						false,
-						(long) item.getFloatParameterType().getInitialValue(),				
-						Long.parseLong(item.getFloatParameterType().getSizeInBits().value()));
+				NumberParameterType type = null;
+				long size = Long.parseLong(item.getFloatParameterType().getSizeInBits().value());
+				if (size == 32) {
+					type = new NumberParameterType(item.getFloatParameterType().getName(), 
+																	   item.getFloatParameterType().getShortDescription(), 
+																	   item.getFloatParameterType().getLongDescription(), 
+																	   new Float32Behaviour(), 
+																	   false, 
+																	   (long) item.getFloatParameterType().getInitialValue());
+				}
+				else if (size == 64) {
+					type = new NumberParameterType(item.getFloatParameterType().getName(), 
+																	   item.getFloatParameterType().getShortDescription(), 
+																	   item.getFloatParameterType().getLongDescription(), 
+																	   new Float64Behaviour(), 
+																	   false, 
+																	   (long) item.getFloatParameterType().getInitialValue());
+				}
+				else {
+					throw new InvalidXtceFileException("Invalid float type Parameter definition.  Hummingbird only supports size 32 or 64 bit floats");
+				}
 
 				types.put(type.getName(), type);
 			}
@@ -174,21 +183,19 @@ public class XtceModelFactory implements ContainerFactory {
 			NumberParameterType type = types.get(item.getParameter().getParameterTypeRef());
 			if (type != null) {
 
-				if (type.getType() == NumberParameterType.eParameterType.INTEGER) {
-					model = new IntegerParameter(					
-							item.getParameter().getName(),
-							item.getParameter().getShortDescription(),
-							item.getParameter().getLongDescription(),
-							type,
-							(int) type.getInitialValue());
+				if (type.getNumberBehaviour() instanceof AbstractIntegerBehaviour) {
+					model = new IntegerParameter(item.getParameter().getName(), 
+												 item.getParameter().getShortDescription(), 
+												 item.getParameter().getLongDescription(), 
+												 type, 
+												 (int) type.getInitialValue());
 				}
-				else if (type.getType() == NumberParameterType.eParameterType.FLOAT) {
-					model = new FloatParameter(					
-							item.getParameter().getName(),
-							item.getParameter().getShortDescription(),
-							item.getParameter().getLongDescription(),
-							type,
-							(int) type.getInitialValue());	
+				else if (type.getNumberBehaviour() instanceof AbstractFloatBehaviour) {
+					model = new FloatParameter(item.getParameter().getName(), 
+											   item.getParameter().getShortDescription(), 
+											   item.getParameter().getLongDescription(), 
+											   type, 
+											   (int) type.getInitialValue());
 				}
 			}
 
@@ -196,29 +203,31 @@ public class XtceModelFactory implements ContainerFactory {
 			containers.put(model.getName(), model);
 		}
 
-		/** Create all containers. 
-		 * In this iteration we create the container models, but do not create the references between 
-		 * them as the referenced objects do not yet exit. The creation of the references is done in
-		 * the second iteration below. */
+		/**
+		 * Create all containers. In this iteration we create the container models, but do not create the references
+		 * between them as the referenced objects do not yet exit. The creation of the references is done in the second
+		 * iteration below.
+		 */
 		for (int containerIndex = 0; containerIndex < spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItemCount(); ++containerIndex) {
-			SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex).getSequenceContainer();
+			SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex)
+					.getSequenceContainer();
 
-			ContainerImpl container = new ContainerImpl(xtceContainer.getName(), xtceContainer.getShortDescription(), xtceContainer.getLongDescription());			
-			containers.put(container.getName(), container);			
+			ContainerImpl container = new ContainerImpl(xtceContainer.getName(), xtceContainer.getShortDescription(), xtceContainer.getLongDescription());
+			containers.put(container.getName(), container);
 		}
 
-		/** Reiterate through the containers and set the references between the objects. 
-		 * Three types of references exist;
-		 * 1. Base. A container may have a base container. 
-		 * 2. Sub containers.
-		 * 3. Restrictions. */
+		/**
+		 * Reiterate through the containers and set the references between the objects. Three types of references exist;
+		 * 1. Base. A container may have a base container. 2. Sub containers. 3. Restrictions.
+		 */
 		for (int containerIndex = 0; containerIndex < spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItemCount(); ++containerIndex) {
-			SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex).getSequenceContainer();
+			SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex)
+					.getSequenceContainer();
 
 			ContainerImpl thisContainer = containers.get(xtceContainer.getName());
 
 			/** Register this container with the base container to make sure it gets processed. */
-			if (xtceContainer.getBaseContainer() != null) {				
+			if (xtceContainer.getBaseContainer() != null) {
 				for (Comparison comparison : xtceContainer.getBaseContainer().getRestrictionCriteria().getComparisonList().getComparison()) {
 					thisContainer.addRestriction((ParameterContainer) containers.get(comparison.getParameterRef()), comparison.getValue());
 				}
@@ -235,12 +244,12 @@ public class XtceModelFactory implements ContainerFactory {
 				else if (xtceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getContainerRefEntry() != null) {
 					name = xtceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getContainerRefEntry().getContainerRef();
 				}
-				
+
 				thisContainer.addContainer(containers.get(name));
 			}
 		}
 	}
-	
+
 	public SpaceSystem getSpaceSystem() {
 		if (spaceSystem == null) {
 
@@ -260,13 +269,16 @@ public class XtceModelFactory implements ContainerFactory {
 
 				// Unmarshal the space system object
 				spaceSystem = (SpaceSystem) unmarshaller.unmarshal(new FileReader(spacesystemmodelFilename));
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (MarshalException e) {
+			}
+			catch (MarshalException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (ValidationException e) {
+			}
+			catch (ValidationException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -302,5 +314,5 @@ public class XtceModelFactory implements ContainerFactory {
 	@Override
 	public Map<String, ParameterContainer> getAllParameters() {
 		return parameters;
-	}	
+	}
 }

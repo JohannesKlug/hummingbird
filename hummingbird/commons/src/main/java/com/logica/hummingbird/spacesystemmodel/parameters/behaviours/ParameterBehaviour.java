@@ -4,7 +4,7 @@ import java.util.BitSet;
 
 public interface ParameterBehaviour {
 	
-	public int getSizeIntBits();
+	public long getSizeIntBits();
 	
 	public void insertIntoBitSet(BitSet bitSetTarget);
 	

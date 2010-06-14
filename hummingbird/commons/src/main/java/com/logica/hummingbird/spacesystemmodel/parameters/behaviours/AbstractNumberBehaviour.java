@@ -9,14 +9,14 @@ package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
  */
 public abstract class AbstractNumberBehaviour implements NumberParameterTypeBehaviour {
 	
-	private final int SIZE_IN_BITS;
+	private final long SIZE_IN_BITS;
 	
-	public AbstractNumberBehaviour(int sizeInBits) {
+	public AbstractNumberBehaviour(long sizeInBits) {
 		this.SIZE_IN_BITS = sizeInBits;
 	}
 
 	@Override
-	public int getSizeIntBits() {
+	public long getSizeIntBits() {
 		return SIZE_IN_BITS;
 	}
 }

@@ -7,10 +7,10 @@ import java.util.BitSet;
  * @author Mark Doyle
  *
  */
-public class Float32Behaviour extends AbstractNumberBehaviour implements NumberParameterTypeBehaviour {
+public class Float32Behaviour extends AbstractFloatBehaviour {
 
 	public Float32Behaviour() {
-		super(32);
+		super(32l);
 	}
 
 	@Override

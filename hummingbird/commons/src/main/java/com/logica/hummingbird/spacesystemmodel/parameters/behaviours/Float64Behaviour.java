@@ -7,14 +7,14 @@ import java.util.BitSet;
  * @author Mark Doyle
  *
  */
-public class Float64Behaviour extends AbstractNumberBehaviour implements NumberParameterTypeBehaviour {
+public class Float64Behaviour extends AbstractFloatBehaviour {
 
 	public Float64Behaviour() {
-		super(64);
+		super(64l);
 	}
 
 	@Override
-	public Float valueFromBitSet(BitSet packet) {
+	public Double valueFromBitSet(BitSet packet) {
 		// TODO Auto-generated method stub
 		return null;
 	}

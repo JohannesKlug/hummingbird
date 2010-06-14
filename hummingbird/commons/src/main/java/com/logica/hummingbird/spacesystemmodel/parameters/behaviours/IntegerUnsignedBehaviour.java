@@ -4,9 +4,9 @@ import java.util.BitSet;
 
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 
-public class IntegerUnsignedBehaviour extends AbstractNumberBehaviour implements NumberParameterTypeBehaviour {
+public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 	
-	public IntegerUnsignedBehaviour(int sizeInBits) throws InvalidParameterTypeException {
+	public IntegerUnsignedBehaviour(long sizeInBits) throws InvalidParameterTypeException {
 		super(sizeInBits);
 		if(sizeInBits > 32) {
 			throw new InvalidParameterTypeException("Integer unsigned cannot be greater than 32-bits in size.");

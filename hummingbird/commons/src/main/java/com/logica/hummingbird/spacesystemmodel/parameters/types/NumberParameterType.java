@@ -59,9 +59,6 @@ public class NumberParameterType extends NamedElement {
 	/** The initial value of the parameter. */
 	protected final long initialValue;
 	
-	/** The size of the parameter type in bits. Allowed values are between 1 and 64. */
-	protected final long sizeInBits;
-	
 	/** The unit of the parameter. */
 	protected List<Unit> unit = null;
 
@@ -78,14 +75,13 @@ public class NumberParameterType extends NamedElement {
 	 * @throws InvalidParameterTypeException 
 	 *
 	 */
-	public NumberParameterType(String name, String shortDescription, String longDescription, NumberParameterTypeBehaviour numberType, boolean signed, long initialValue, long sizeInBits) throws InvalidParameterTypeException {
+	public NumberParameterType(String name, String shortDescription, String longDescription, NumberParameterTypeBehaviour numberType, boolean signed, long initialValue) throws InvalidParameterTypeException {
 		super(name, shortDescription, longDescription);
 		
 		this.numberBehaviour = numberType;
 //		this.type = type;
 		this.signed = signed;
 		this.initialValue = initialValue;
-		this.sizeInBits = sizeInBits;
 	}
 
 
@@ -149,6 +145,11 @@ public class NumberParameterType extends NamedElement {
 	 */
 	public void addUnit(Unit unit) {
 		this.unit.add(unit);
+	}
+
+
+	public NumberParameterTypeBehaviour getNumberBehaviour() {
+		return numberBehaviour;
 	}
 
 	/**
