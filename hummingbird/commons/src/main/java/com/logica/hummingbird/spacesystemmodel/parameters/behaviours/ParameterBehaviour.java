@@ -6,8 +6,16 @@ public interface ParameterBehaviour {
 	
 	public long getSizeIntBits();
 	
-	public BitSet insertIntoBitSet(BitSet bitSetTarget, int offset);
-	
-	public BitSet getRawParameterBinary(BitSet packet); 
+	public BitSet getRawParameterBinary(BitSet packet);
+
+	/**
+	 * Inserts the Number into the bitSetTarget at position offset.
+	 * 
+	 * @param number
+	 * @param bitSetTarget
+	 * @param offset
+	 * @return
+	 */
+	public BitSet insertIntoBitSet(Number number, BitSet bitSetTarget, int offset); 
 
 }

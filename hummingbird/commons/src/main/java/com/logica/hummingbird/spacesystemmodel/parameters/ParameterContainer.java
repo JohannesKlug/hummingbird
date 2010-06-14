@@ -46,7 +46,7 @@ import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterT
 public abstract class ParameterContainer extends ContainerImpl implements Parameter {
 	private static final Logger LOG = LoggerFactory.getLogger(ParameterContainer.class);
 
-	/** The type of the parameter. */
+	/** The NumberParameterType of the parameter. */
 	protected NumberParameterType type = null;
 	
 

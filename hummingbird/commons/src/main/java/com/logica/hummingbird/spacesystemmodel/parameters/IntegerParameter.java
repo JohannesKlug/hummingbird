@@ -58,7 +58,7 @@ public class IntegerParameter extends ParameterContainer {
 
 	@Override
 	public int marshall(BitSet packet, int offset) {
-		packet = this.type.getNumberBehaviour().insertIntoBitSet(packet, offset);
+		packet = this.type.getNumberBehaviour().insertIntoBitSet(getValue(), packet, offset);
 
 		return offset + (int) type.getSizeInBits();
 	}

@@ -4,6 +4,12 @@ import java.util.BitSet;
 
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 
+/**
+ * HOw do we handle unsigned longs in Java?  Long is always signed.  Perhaps some math package?
+ * @author Mark Doyle
+ * @author Johannes Klug
+ *
+ */
 public class LongUnsignedBehaviour extends AbstractIntegerBehaviour {
 	
 	public LongUnsignedBehaviour(long sizeInBits) throws InvalidParameterTypeException {
@@ -26,7 +32,7 @@ public class LongUnsignedBehaviour extends AbstractIntegerBehaviour {
 	}
 
 	@Override
-	public BitSet insertIntoBitSet(BitSet bitSetTarget, int offset) {
+	public BitSet insertIntoBitSet(Number number, BitSet bitSetTarget, int offset) {
 		return bitSetTarget;
 		// TODO Auto-generated method stub
 	}
