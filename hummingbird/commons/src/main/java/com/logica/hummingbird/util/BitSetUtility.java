@@ -209,7 +209,6 @@ public class BitSetUtility {
 			// Treat it like 64 bit floating point number.
 			return Double.longBitsToDouble(Long.parseLong(actualBitSetString, 2));
 		}
-
 	}
 
 	public static BitSet insertFloat(BitSet bitSet, int offset, FloatSizeInBits floatSize, double value) throws BitSetOperationException {
@@ -359,9 +358,9 @@ public class BitSetUtility {
 	 * @param data
 	 * @return
 	 */
-	public static String bitSetToBinaryString(BitSet data, boolean logicalSize) {
+	public static String bitSetToBinaryString(BitSet data, boolean useLogicalSize) {
 		int bitSetSize;
-		if (logicalSize) {
+		if (useLogicalSize) {
 			bitSetSize = data.length();
 		}
 		else {
