@@ -42,7 +42,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeEx
  * 
  * The simple type corresponds to a specific java class.
  */
-public class ParameterType extends NamedElement {
+public class NumberParameterType extends NamedElement {
 
 	/** Enumeration of the available simple java types. */
 	public enum eParameterType {INTEGER, FLOAT};
@@ -75,7 +75,7 @@ public class ParameterType extends NamedElement {
 	 * @throws InvalidParameterTypeException 
 	 *
 	 */
-	public ParameterType(String name, String shortDescription, String longDescription, eParameterType type, boolean signed, long initialValue, long sizeInBits) throws InvalidParameterTypeException {
+	public NumberParameterType(String name, String shortDescription, String longDescription, eParameterType type, boolean signed, long initialValue, long sizeInBits) throws InvalidParameterTypeException {
 		super(name, shortDescription, longDescription);
 
 		if (sizeInBits == 1 && signed) {

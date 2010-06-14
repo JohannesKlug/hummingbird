@@ -35,7 +35,7 @@ public interface Parameter {
 	 * @return ParameterType The type of the parameter.
 	 *
 	 */
-	public ParameterType getType();
+	public NumberParameterType getType();
 	
 	
 	/**

@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
+import com.logica.hummingbird.spacesystemmodel.parameters.NumberParameterType;
 
 public class ParameterArchiver {
 	
@@ -18,12 +18,12 @@ public class ParameterArchiver {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 		
 		for (ParameterContainer parameter : containerFactory.getAllParameters().values()) {
-			if (parameter.getType().getType() == ParameterType.eParameterType.FLOAT) {
+			if (parameter.getType().getType() == NumberParameterType.eParameterType.FLOAT) {
 				// create float table
 				this.jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS " + parameter.getName()
 						+ " (onBoardTime BIGINT, filingTime BIGINT, value REAL)");
 				
-			} else if (parameter.getType().getType() == ParameterType.eParameterType.INTEGER) {
+			} else if (parameter.getType().getType() == NumberParameterType.eParameterType.INTEGER) {
 				// create integer table
 				this.jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS " + parameter.getName() 
 						+ " (onBoardTime BIGINT, filingTime BIGINT, value INTEGER)");

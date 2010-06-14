@@ -8,7 +8,7 @@ import org.junit.Test;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
+import com.logica.hummingbird.spacesystemmodel.parameters.NumberParameterType;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
 
 public class MockContainerModelFactoryTest {
@@ -24,10 +24,10 @@ public class MockContainerModelFactoryTest {
 	public void testMockContainerFactoryTypes() {
 
 		for (ParameterContainer parameter : containerFactory.getAllParameters().values()) {
-			if (parameter.getType().getType() == ParameterType.eParameterType.FLOAT) {
+			if (parameter.getType().getType() == NumberParameterType.eParameterType.FLOAT) {
 				assertTrue("Parameter data type mismatch", parameter.getValue() instanceof Double);
 			}
-			else if (parameter.getType().getType() == ParameterType.eParameterType.INTEGER) {
+			else if (parameter.getType().getType() == NumberParameterType.eParameterType.INTEGER) {
 				assertTrue("Parameter data type mismatch", parameter.getValue() instanceof Long);
 			}
 			else {

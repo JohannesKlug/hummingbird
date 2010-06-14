@@ -46,7 +46,7 @@ public abstract class ParameterContainer extends ContainerImpl implements Parame
 	private static final Logger LOG = LoggerFactory.getLogger(ParameterContainer.class);
 
 	/** The type of the parameter. */
-	protected ParameterType type = null;
+	protected NumberParameterType type = null;
 	
 
 	/**
@@ -58,7 +58,7 @@ public abstract class ParameterContainer extends ContainerImpl implements Parame
 	 * @param type The parameter type.
 	 *
 	 */
-	public ParameterContainer(String name, String shortDescription, String longDescription, ParameterType type) {
+	public ParameterContainer(String name, String shortDescription, String longDescription, NumberParameterType type) {
 		super(name, shortDescription, longDescription);
 		this.type = type;
 	}
@@ -73,7 +73,7 @@ public abstract class ParameterContainer extends ContainerImpl implements Parame
 	abstract public void setValue(double value);
 	
 	@Override
-	public ParameterType getType() {
+	public NumberParameterType getType() {
 		return type;
 	}
 	
@@ -84,7 +84,7 @@ public abstract class ParameterContainer extends ContainerImpl implements Parame
 	 * @param type The type to be set. 
 	 *
 	 */
-	public void setType(ParameterType type) {
+	public void setType(NumberParameterType type) {
 		this.type = type;
 	}
 	 

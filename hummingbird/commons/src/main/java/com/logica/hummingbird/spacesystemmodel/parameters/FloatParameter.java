@@ -65,11 +65,11 @@ public class FloatParameter extends ParameterContainer {
 	 * @param name The name of the container. Used as the unique identifier of the container.
 	 * @param shortDescription A one-line description, tooltip style, of the container.
 	 * @param longDescription A full description of the container, help style. 
-	 * @param ParameterType The type of the container. The type defines the length and behaviour of the parameter.
+	 * @param NumberParameterType The type of the container. The type defines the length and behaviour of the parameter.
 	 * @param value The initial value.
 	 * @throws InvalidParameterTypeException 
 	 */
-	public FloatParameter(String name, String shortDescription, String longDescription, ParameterType type, double value) throws InvalidParameterTypeException {
+	public FloatParameter(String name, String shortDescription, String longDescription, NumberParameterType type, double value) throws InvalidParameterTypeException {
 		super(name, shortDescription, longDescription, type);
 		
 		if(!type.signed) {

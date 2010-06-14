@@ -25,12 +25,12 @@ public class IntegerParameter extends ParameterContainer {
 	 *            A one-line description, tooltip style, of the container.
 	 * @param longDescription
 	 *            A full description of the container, help style.
-	 * @param ParameterType
+	 * @param NumberParameterType
 	 *            The type of the container. The type defines the length and behaviour of the parameter.
 	 * @param value
 	 *            The initial value.
 	 */
-	public IntegerParameter(String name, String shortDescription, String longDescription, ParameterType type, long value) {
+	public IntegerParameter(String name, String shortDescription, String longDescription, NumberParameterType type, long value) {
 		super(name, shortDescription, longDescription, type);
 		this.value = value;
 	}

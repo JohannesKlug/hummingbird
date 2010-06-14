@@ -25,7 +25,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameEx
 import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterType;
+import com.logica.hummingbird.spacesystemmodel.parameters.NumberParameterType;
 import com.logica.hummingbird.xtce.exceptions.InvalidXtceFileException;
 
 /**
@@ -38,7 +38,7 @@ public class XtceModelFactory implements ContainerFactory {
 	private static final Logger LOG = LoggerFactory.getLogger(XtceModelFactory.class);
 
 	protected Map<String, Unit> units = new HashMap<String, Unit>();
-	protected Map<String, ParameterType> types = new HashMap<String, ParameterType>();
+	protected Map<String, NumberParameterType> types = new HashMap<String, NumberParameterType>();
 	protected Map<String, ContainerImpl> containers = new HashMap<String, ContainerImpl>();
 	protected Map<String, ParameterContainer> parameters = new HashMap<String, ParameterContainer>();
 
@@ -119,11 +119,11 @@ public class XtceModelFactory implements ContainerFactory {
 				}
 				
 				
-				ParameterType type = new ParameterType(					
+				NumberParameterType type = new NumberParameterType(					
 						item.getIntegerParameterType().getName(),
 						item.getIntegerParameterType().getShortDescription(),
 						item.getIntegerParameterType().getLongDescription(),
-						ParameterType.eParameterType.INTEGER,
+						NumberParameterType.eParameterType.INTEGER,
 						item.getIntegerParameterType().getSigned(),
 						initialValue,				
 						item.getIntegerParameterType().getSizeInBits());
@@ -153,11 +153,11 @@ public class XtceModelFactory implements ContainerFactory {
 					}
 				}
 
-				ParameterType type = new ParameterType(					
+				NumberParameterType type = new NumberParameterType(					
 						item.getFloatParameterType().getName(),
 						item.getFloatParameterType().getShortDescription(),
 						item.getFloatParameterType().getLongDescription(),
-						ParameterType.eParameterType.FLOAT,
+						NumberParameterType.eParameterType.FLOAT,
 						false,
 						(long) item.getFloatParameterType().getInitialValue(),				
 						Long.parseLong(item.getFloatParameterType().getSizeInBits().value()));
@@ -171,10 +171,10 @@ public class XtceModelFactory implements ContainerFactory {
 			ParameterSetTypeItem item = spaceSystem.getTelemetryMetaData().getParameterSet().getParameterSetTypeItem(parameterIndex);
 
 			ParameterContainer model = null;
-			ParameterType type = types.get(item.getParameter().getParameterTypeRef());
+			NumberParameterType type = types.get(item.getParameter().getParameterTypeRef());
 			if (type != null) {
 
-				if (type.getType() == ParameterType.eParameterType.INTEGER) {
+				if (type.getType() == NumberParameterType.eParameterType.INTEGER) {
 					model = new IntegerParameter(					
 							item.getParameter().getName(),
 							item.getParameter().getShortDescription(),
@@ -182,7 +182,7 @@ public class XtceModelFactory implements ContainerFactory {
 							type,
 							(int) type.getInitialValue());
 				}
-				else if (type.getType() == ParameterType.eParameterType.FLOAT) {
+				else if (type.getType() == NumberParameterType.eParameterType.FLOAT) {
 					model = new FloatParameter(					
 							item.getParameter().getName(),
 							item.getParameter().getShortDescription(),
