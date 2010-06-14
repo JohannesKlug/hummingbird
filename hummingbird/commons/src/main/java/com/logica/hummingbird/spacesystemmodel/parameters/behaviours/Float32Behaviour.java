@@ -1,0 +1,34 @@
+package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
+
+import java.util.BitSet;
+
+/**
+ * Parameter behaviour for an IEEE 754 32-bit precision FLoat.
+ * @author Mark Doyle
+ *
+ */
+public class Float32Behaviour extends AbstractNumberBehaviour implements NumberParameterTypeBehaviour {
+
+	public Float32Behaviour() {
+		super(32);
+	}
+
+	@Override
+	public Float valueFromBitSet(BitSet packet) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BitSet getRawParameterBinary(BitSet packet) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void insertIntoBitSet(BitSet bitSetTarget) {
+		// TODO Auto-generated method stub
+
+	}
+}

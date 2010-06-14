@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.spacesystemmodel.parameters.NumberParameterType;
+import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
 
 public class ParameterArchiver {
 	

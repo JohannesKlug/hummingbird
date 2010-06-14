@@ -24,13 +24,14 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.spacesystemmodel.parameters;
+package com.logica.hummingbird.spacesystemmodel.parameters.types;
 
 import java.util.List;
 
 import com.logica.hummingbird.spacesystemmodel.NamedElement;
 import com.logica.hummingbird.spacesystemmodel.Unit;
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.NumberParameterTypeBehaviour;
 
 /**
  * A parameter type. The parameter type consists of two elements;
@@ -45,10 +46,12 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeEx
 public class NumberParameterType extends NamedElement {
 
 	/** Enumeration of the available simple java types. */
-	public enum eParameterType {INTEGER, FLOAT};
+//	public enum eParameterType {INTEGER, FLOAT};
 	
 	/** The simple java type corresponding to this parameter. */
-	protected final eParameterType type;
+//	protected final eParameterType type;
+	
+	private final NumberParameterTypeBehaviour numberBehaviour;
 	
 	/** Flag defining whether the type is signed or unsigned. */
 	protected final boolean signed;	
@@ -75,18 +78,11 @@ public class NumberParameterType extends NamedElement {
 	 * @throws InvalidParameterTypeException 
 	 *
 	 */
-	public NumberParameterType(String name, String shortDescription, String longDescription, eParameterType type, boolean signed, long initialValue, long sizeInBits) throws InvalidParameterTypeException {
+	public NumberParameterType(String name, String shortDescription, String longDescription, NumberParameterTypeBehaviour numberType, boolean signed, long initialValue, long sizeInBits) throws InvalidParameterTypeException {
 		super(name, shortDescription, longDescription);
-
-		if (sizeInBits == 1 && signed) {
-			throw new InvalidParameterTypeException("Exception creating parameter type " + name + ".  A single-bit signed parameter makes no sense - you're doing it wrong!");
-		}
 		
-		if (sizeInBits == 0) {
-			throw new InvalidParameterTypeException("Exception creating parameter type " + name + ".  A size zero parameter makes no sense - you're doing it wrong!");
-		}
-		
-		this.type = type;
+		this.numberBehaviour = numberType;
+//		this.type = type;
 		this.signed = signed;
 		this.initialValue = initialValue;
 		this.sizeInBits = sizeInBits;
@@ -121,7 +117,7 @@ public class NumberParameterType extends NamedElement {
 	 *
 	 */
 	public long getSizeInBits() {
-		return sizeInBits;
+		return numberBehaviour.getSizeIntBits();
 	}
 
 	
@@ -161,7 +157,7 @@ public class NumberParameterType extends NamedElement {
 	 * @return Returns the simple java type of the parameter. 
 	 *
 	 */
-	public eParameterType getType() {
-		return type;
-	}
+//	public eParameterType getType() {
+//		return type;
+//	}
 }

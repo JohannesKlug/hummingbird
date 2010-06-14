@@ -26,6 +26,8 @@
  */
 package com.logica.hummingbird.spacesystemmodel.parameters;
 
+import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
+
 /**
  * Interface of a parameter container. */
 public interface Parameter {

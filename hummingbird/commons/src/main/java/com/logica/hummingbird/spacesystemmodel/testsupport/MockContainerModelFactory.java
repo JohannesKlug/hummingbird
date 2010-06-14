@@ -8,16 +8,17 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.spacesystemmodel.parameters.NumberParameterType;
-import com.logica.hummingbird.spacesystemmodel.parameters.NumberParameterType.eParameterType;
+import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float64Behaviour;
+import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
+import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
 
 /**
  * This class is used for testing the Container model and anything that uses the SpaceSystemModel. It is a simple
@@ -111,7 +112,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 		// Add the header, packet and tail to the frame container.
 		ArrayList<Container> containersToAdd = new ArrayList<Container>(3);
 		
-		NumberParameterType paramType1bitInt = new NumberParameterType("1bitInt", "1bit integer type", "Parameter type for 1bit integers", eParameterType.INTEGER,
+		NumberParameterType paramType1bitInt = new NumberParameterType("1bitInt", "1bit integer type", "Parameter type for 1bit integers", new IntegerUnsignedBehaviour(1),
 				false, 0, 1);
 
 		// Add a flag to the Frame Header
@@ -140,7 +141,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 		this.addToContainers(tmPacketHeader);
 
 		// Create the apid (ID) parameter type and add it to the packet header and the parameters collection.
-		NumberParameterType paramType11bitInt = new NumberParameterType("11bitInt", "11bit integer type", "Parameter type for 11bit integers", eParameterType.INTEGER,
+		NumberParameterType paramType11bitInt = new NumberParameterType("11bitInt", "11bit integer type", "Parameter type for 11bit integers", new IntegerUnsignedBehaviour(11),
 				false, 0, 11);
 		IntegerParameter packetIdParameter = new IntegerParameter(PACKET_ID_ALIAS, "Test Apid", "Test Application Id", paramType11bitInt, 0);
 		this.addToParameters(packetIdParameter);
@@ -148,7 +149,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 		tmPacketHeader.addContainer(packetIdParameter);
 
 		// Create the payload length parameter type and add it to the packet header and the parameters collection.
-		NumberParameterType paramType16bitInt = new NumberParameterType("16bitInt", "16bit integer type", "Parameter type for 16bit integers", eParameterType.INTEGER,
+		NumberParameterType paramType16bitInt = new NumberParameterType("16bitInt", "16bit integer type", "Parameter type for 16bit integers", new IntegerUnsignedBehaviour(16),
 				false, 0, 16);
 		IntegerParameter payloadLengthParameter = new IntegerParameter(PAYLOAD_LENGTH_PARAM_ALIAS, "Payload length", "Payload lenght parameter", paramType16bitInt, 0);
 		this.addToContainers(payloadLengthParameter);
@@ -168,7 +169,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 
 		// Create a parameter for packetTypeA and add it to the packet type and
 		// the container collection
-		NumberParameterType test32bitInt = new NumberParameterType("test32bitInt", "test param", "32 bit int test param", eParameterType.INTEGER, false, 1, 32);
+		NumberParameterType test32bitInt = new NumberParameterType("test32bitInt", "test param", "32 bit int test param", new IntegerUnsignedBehaviour(32), false, 1, 32);
 		IntegerParameter testParameterA = new IntegerParameter(TEST_PARAM_A, "test param", "test param holding an int value", test32bitInt, 0);
 		packetTypeA.addContainer(testParameterA);
 		this.addToParameters(testParameterA);
@@ -183,7 +184,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 
 		// Create a parameter for packetTypeB and add it to the packet type and
 		// the container collection
-		NumberParameterType test64bitFloat = new NumberParameterType("test64bitFloat", "test param", "64 float test param", eParameterType.FLOAT, true, 0, 64);
+		NumberParameterType test64bitFloat = new NumberParameterType("test64bitFloat", "test param", "64 float test param", new Float64Behaviour(), true, 0, 64);
 		FloatParameter testParameterB = new FloatParameter(TEST_PARAM_B, "test param", "test param holding a float value", test64bitFloat, 0.0);
 		packetTypeB.addContainer(testParameterB);
 		this.addToParameters(testParameterB);

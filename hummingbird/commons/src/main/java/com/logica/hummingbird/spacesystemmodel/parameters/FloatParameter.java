@@ -34,6 +34,7 @@ import org.slf4j.LoggerFactory;
 import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
 import com.logica.hummingbird.util.BitSetUtility;
 import com.logica.hummingbird.util.BitSetUtility.FloatSizeInBits;
 
@@ -72,7 +73,7 @@ public class FloatParameter extends ParameterContainer {
 	public FloatParameter(String name, String shortDescription, String longDescription, NumberParameterType type, double value) throws InvalidParameterTypeException {
 		super(name, shortDescription, longDescription, type);
 		
-		if(!type.signed) {
+		if(!type.isSigned()) {
 			throw new InvalidParameterTypeException("Floats must be signed; sorry");
 		}
 		
@@ -96,7 +97,7 @@ public class FloatParameter extends ParameterContainer {
 			paramObserver.updated(name, value);
 		}
 		
-		return packet.get((int) type.sizeInBits, packet.length());
+		return packet.get((int) type.getSizeInBits(), packet.length());
 	}
 
 	@Override
@@ -108,12 +109,12 @@ public class FloatParameter extends ParameterContainer {
 			LOG.error(e.toString());
 		}
 
-		return offset + (int) type.sizeInBits;
+		return offset + (int) type.getSizeInBits();
 	}
 
 	@Override
 	public String toString() {
-		return "[float (" + this.type.sizeInBits + ") " + this.name + "=" + this.value + "]"; 
+		return "[float (" + this.type.getSizeInBits() + ") " + this.name + "=" + this.value + "]"; 
 	}
 
 	@Override

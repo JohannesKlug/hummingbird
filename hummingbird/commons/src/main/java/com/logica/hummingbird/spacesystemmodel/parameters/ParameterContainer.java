@@ -30,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
+import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
 
 /**
  * The abstract base class for all parameter <b><i>containers</i></b>. The class
@@ -90,9 +91,9 @@ public abstract class ParameterContainer extends ContainerImpl implements Parame
 	 
 	@Override
 	public int getLength() {
-		LOG.debug("returning length " + (length + (int) type.sizeInBits) + " for " + getName());
+		LOG.debug("returning length " + (length + (int) type.getSizeInBits()) + " for " + getName());
 		
 		//FIXME Why is the length field here?
-		return length + (int) type.sizeInBits;
+		return length + (int) type.getSizeInBits();
 	}
 }

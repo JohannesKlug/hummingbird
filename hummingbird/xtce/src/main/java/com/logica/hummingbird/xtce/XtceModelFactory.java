@@ -25,7 +25,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameEx
 import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.spacesystemmodel.parameters.NumberParameterType;
+import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
 import com.logica.hummingbird.xtce.exceptions.InvalidXtceFileException;
 
 /**

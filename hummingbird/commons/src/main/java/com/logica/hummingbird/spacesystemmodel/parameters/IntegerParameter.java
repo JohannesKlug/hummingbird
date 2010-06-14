@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
+import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
 import com.logica.hummingbird.util.BitSetUtility;
 
 public class IntegerParameter extends ParameterContainer {
@@ -41,31 +42,31 @@ public class IntegerParameter extends ParameterContainer {
 			LOG.debug("Unmarshalling " + this.name + " from packet : " + packet);
 		}
 
-		value = BitSetUtility.extractInteger(packet, 0, (int) type.sizeInBits, type.signed);
+		value = BitSetUtility.extractInteger(packet, 0, (int) type.getSizeInBits(), type.isSigned());
 
 		for (ParameterObserver paramObserver : updatedParameterObservers) {
 			paramObserver.updated(name, value);
 		}
 
-		BitSet returnPacket = packet.get((int) type.sizeInBits, packet.length());
+		BitSet returnPacket = packet.get((int) type.getSizeInBits(), packet.length());
 		return returnPacket;
 	}
 
 	@Override
 	public int marshall(BitSet packet, int offset) {
 		try {
-			BitSetUtility.insertInteger(packet, offset, (int) type.sizeInBits, value);
+			BitSetUtility.insertInteger(packet, offset, (int) type.getSizeInBits(), value);
 		}
 		catch (RuntimeException e) {
-			LOG.error("Error encoding parameter '" + this.name + "'. The value '" + this.value + "' cannot be encoded in " + type.sizeInBits + " bit(s).");
+			LOG.error("Error encoding parameter '" + this.name + "'. The value '" + this.value + "' cannot be encoded in " + type.getSizeInBits() + " bit(s).");
 		}
 
-		return offset + (int) type.sizeInBits;
+		return offset + (int) type.getSizeInBits();
 	}
 
 	@Override
 	public String toString() {
-		return "[int (" + this.type.sizeInBits + ") " + this.name + "=" + this.value + "]";
+		return "[int (" + this.type.getSizeInBits() + ") " + this.name + "=" + this.value + "]";
 	}
 
 	@Override
