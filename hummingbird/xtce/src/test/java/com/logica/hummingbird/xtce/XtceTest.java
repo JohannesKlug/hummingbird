@@ -1,16 +1,18 @@
 package com.logica.hummingbird.xtce;
 
+import java.net.URL;
+
 import org.junit.Before;
 import org.junit.Test;
 
 public class XtceTest {
 
-	XtceModelFactory xtceFactory;
+	private XtceModelFactory xtceFactory = null;
 
 	@Before
 	public void setUp() throws Exception {
-		xtceFactory = new XtceModelFactory("src/main/resources/humsat.xml");
-//		xtceFactory.setSpacesystemmodelFilename("src/main/resources/humsat.xml");
+		URL spacesystemmodelFilename = this.getClass().getResource("/humsat.xml");
+		xtceFactory = new XtceModelFactory(spacesystemmodelFilename.getPath());
 	}
 
 	@Test
