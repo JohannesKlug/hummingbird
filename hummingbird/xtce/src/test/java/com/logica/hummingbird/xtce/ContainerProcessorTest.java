@@ -6,6 +6,7 @@ import junit.framework.TestCase;
 
 import com.logica.hummingbird.framebroker.FrameBrokerImpl;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.util.BitSetUtility;
 import com.logica.hummingbird.xtce.exceptions.InvalidXtceFileException;
@@ -13,7 +14,7 @@ import com.logica.hummingbird.xtce.exceptions.InvalidXtceFileException;
 // FIXME Not a unit test. This tests integration of separate components.  Needs moving.
 public class ContainerProcessorTest extends TestCase {
 
-	public void testMarshall() throws UnknownContainerNameException, InvalidXtceFileException {
+	public void testMarshall() throws UnknownContainerNameException, InvalidXtceFileException, BitSetOperationException {
 		ContainerFactory factory = new XtceModelFactory("src/main/resources/humsat.xml");
 //		factory.initialise();
 		

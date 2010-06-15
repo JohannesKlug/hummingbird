@@ -29,6 +29,7 @@ package com.logica.hummingbird.framebroker;
 import java.util.BitSet;
 
 import com.logica.hummingbird.spacesystemmodel.Container;
+import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.telemetry.TelemetryFrame;
 
@@ -57,9 +58,10 @@ public interface IFrameBroker {
 	 * @param container The name of the container as registered within the container factory.
 	 * @param data The data stream from which the data shall be extracted. 
 	 * @throws UnknownContainerNameException 
+	 * @throws BitSetOperationException 
 	 *
 	 */	
-	public void marshall(String container, BitSet data) throws UnknownContainerNameException;
+	public void marshall(String container, BitSet data) throws UnknownContainerNameException, BitSetOperationException;
 
 	/**
 	 * Marshalls the container identified through the container parameter name into

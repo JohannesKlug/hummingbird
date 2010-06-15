@@ -37,6 +37,7 @@ import com.logica.hummingbird.framebroker.producers.CcsdsParameterProducer;
 import com.logica.hummingbird.framebroker.producers.CcsdsProducer;
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
+import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.telemetry.TelemetryFrame;
 
@@ -78,7 +79,7 @@ public class FrameBrokerImpl implements IFrameBroker {
 	}
 
 	@Override
-	public void marshall(String packetname, BitSet packet) throws UnknownContainerNameException {
+	public void marshall(String packetname, BitSet packet) throws UnknownContainerNameException, BitSetOperationException {
 		factory.getContainer(packetname).marshall(packet, 0);
 	}
 
