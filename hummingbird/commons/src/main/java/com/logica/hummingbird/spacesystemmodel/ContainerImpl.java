@@ -38,6 +38,7 @@ import java.util.Map.Entry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.parameters.Parameter;
 
 /**
@@ -185,7 +186,7 @@ public class ContainerImpl extends NamedElement implements Container {
 	}
 
 	@Override
-	public int marshall(BitSet packet, int offset) {
+	public int marshall(BitSet packet, int offset) throws BitSetOperationException {
 		/** If the packet should be processed by this container. */
 		if (matchRestrictions() == true) {
 			for (Container container : subContainers) {

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
+import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
 
 public class IntegerParameter extends ParameterContainer {
@@ -57,7 +58,7 @@ public class IntegerParameter extends ParameterContainer {
 	}
 
 	@Override
-	public int marshall(BitSet packet, int offset) {
+	public int marshall(BitSet packet, int offset) throws BitSetOperationException {
 		packet = this.type.getNumberBehaviour().insertIntoBitSet(getValue(), packet, offset);
 
 		return offset + (int) type.getSizeInBits();

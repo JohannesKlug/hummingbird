@@ -29,6 +29,8 @@ package com.logica.hummingbird.spacesystemmodel;
 import java.util.BitSet;
 import java.util.List;
 
+import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
+
 
 /**
  * The standard interface of a marshaller container. The interface supports the
@@ -52,8 +54,9 @@ public interface Container {
 	 * @param packet The data set to be inserted into.
 	 * @param offset The current position to be inserted into. 
 	 * @return int The offset of the last inserted data. 
+	 * @throws BitSetOperationException 
 	 */
-	public int marshall(BitSet packet, int offset);
+	public int marshall(BitSet packet, int offset) throws BitSetOperationException;
 	
 	
 	/**
