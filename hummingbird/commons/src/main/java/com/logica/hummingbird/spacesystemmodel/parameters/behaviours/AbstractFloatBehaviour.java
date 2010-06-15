@@ -15,8 +15,15 @@ public abstract class AbstractFloatBehaviour extends AbstractNumberBehaviour {
 	 * @param binaryString the binary string to convert
 	 * @return a new BitSet matching the supplied string
 	 * @throws BitSetOperationException if an invalid character is encountered.  Strings must be made up of 1's or 0's
+	 * 									or if the binary string is too long for this float type behaviour
 	 */
 	protected BitSet bitSetFromString(String binaryString) throws BitSetOperationException {
+		if(binaryString.length() > getSizeIntBits()) {
+			throw new BitSetOperationException("The provided binary string is longer than this floats behaviour. " + 
+											   "String length = " + binaryString.length() + " and float length = " + getSizeIntBits() + 
+											   ".  Note: This is a " + getTypeName() + " behaviour");
+		}
+		
 		BitSet valueBitSet = new BitSet((int) getSizeIntBits());
 
 		for (int bitIndex = 0; bitIndex < getSizeIntBits(); bitIndex++) {
