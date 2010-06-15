@@ -111,12 +111,24 @@ public class ContainerTest {
 	 * See {@link ContainerTest} class javadoc for details
 	 */
 	private final static String TEST_BITSET_STRING_PKT_TYPE_B = "110110010100000000100000000001000000000010010010000111111011010100111100100011010100111100011";
+	
+	/** The test bitset string based upon the TEST_BITSET_STRING_PKT_TYPE_B as a bitset */
+	private static final BitSet TEST_BITSET_PKT_TYPE_B = new BitSet(93);
 
 	/** The packet ID value based upon the TEST_BITSET_STRING_PKT_TYPE_B */
 	private static final String PACKET_TYPE_ID_333 = "333";
+	
+	/** The packet ID value based upon the TEST_BITSET_STRING_PKT_TYPE_A as a bitset */
+	private static final BitSet PACKET_TYPE_ID_333_AS_BITSET = new BitSet(11);
+	
+	/** The payload length of packet type B as a bitset */
+	private final static BitSet PKT_TYPE_B_PAYLOAD_LENGTH_AS_BITSET = new BitSet(16);
 
 	/** The test parameter B value based upon the TEST_BITSET_STRING_PKT_TYPE_B */
-	private final static double PI = 3.14159265d;
+	private final static double PARAM_B_TEST_VALUE = 3.14159265d;
+	
+	/** The test parameter B value based upon the TEST_BITSET_STRING_PKT_TYPE_B as a bitset */
+	private static final BitSet PARAM_B_TEST_VALUE_AS_BITSET = new BitSet(64);
 
 	/** The total length of the mock factory container model with a packet type B set (333). */
 	private final static int PKT_TYPE_B_MODEL_FRAME_LENGTH = 93;
@@ -146,7 +158,7 @@ public class ContainerTest {
 		TEST_BITSET_PKT_TYPE_A.set(31, 35);
 		TEST_BITSET_PKT_TYPE_A.set(60);
 		
-		// Set to 11011110000000000000000000000000 (note: this is big endian)
+		// Set to 11011110000000000000000000000000 which is 123 in decimal (note: this is big endian)
 		PARAM_A_TEST_VALUE_AS_BITSET.set(0, 2);
 		PARAM_A_TEST_VALUE_AS_BITSET.set(3, 7);
 		
@@ -161,6 +173,56 @@ public class ContainerTest {
 		
 		FLAG_ON_BITSET.set(0);
 		FLAG_OFF_BITSET.clear();
+		
+		// Set to 110110010100000000100000000001000000000010010010000111111011010100111100100011010100111100011
+		// Note: This is the complete raw data of the model.  It cannot be interpreted as number.  It is read left to right
+		// but parameters can be little or big endian
+		TEST_BITSET_PKT_TYPE_B.set(0, 2);
+		TEST_BITSET_PKT_TYPE_B.set(3, 5);
+		TEST_BITSET_PKT_TYPE_B.set(7);
+		TEST_BITSET_PKT_TYPE_B.set(9);
+		TEST_BITSET_PKT_TYPE_B.set(18);
+		TEST_BITSET_PKT_TYPE_B.set(29);
+		TEST_BITSET_PKT_TYPE_B.set(40);
+		TEST_BITSET_PKT_TYPE_B.set(43);
+		TEST_BITSET_PKT_TYPE_B.set(46);
+		TEST_BITSET_PKT_TYPE_B.set(51, 57);
+		TEST_BITSET_PKT_TYPE_B.set(58, 60);
+		TEST_BITSET_PKT_TYPE_B.set(61);
+		TEST_BITSET_PKT_TYPE_B.set(63);
+		TEST_BITSET_PKT_TYPE_B.set(66, 70);
+		TEST_BITSET_PKT_TYPE_B.set(72);
+		TEST_BITSET_PKT_TYPE_B.set(76, 78);
+		TEST_BITSET_PKT_TYPE_B.set(79);
+		TEST_BITSET_PKT_TYPE_B.set(81);
+		TEST_BITSET_PKT_TYPE_B.set(84, 88);
+		TEST_BITSET_PKT_TYPE_B.set(91, 93);
+		
+		// Set to 10110010100 which is 333 in decimal (note: this is big endian)
+		PACKET_TYPE_ID_333_AS_BITSET.set(0);
+		PACKET_TYPE_ID_333_AS_BITSET.set(2, 4);
+		PACKET_TYPE_ID_333_AS_BITSET.set(6);
+		PACKET_TYPE_ID_333_AS_BITSET.set(8);
+		
+		// Payload length for type A is 64 so set to 0000001000000000 (note: this is little endian)
+		PKT_TYPE_B_PAYLOAD_LENGTH_AS_BITSET.set(6);
+		
+		// Set to 0100000000001001001000011111101101010011110010001101010011110001 which is pi (note: this is big endian)
+		PARAM_B_TEST_VALUE_AS_BITSET.set(1);
+		PARAM_B_TEST_VALUE_AS_BITSET.set(12);
+		PARAM_B_TEST_VALUE_AS_BITSET.set(15);
+		PARAM_B_TEST_VALUE_AS_BITSET.set(18);
+		PARAM_B_TEST_VALUE_AS_BITSET.set(23, 29);
+		PARAM_B_TEST_VALUE_AS_BITSET.set(30, 32);
+		PARAM_B_TEST_VALUE_AS_BITSET.set(33);
+		PARAM_B_TEST_VALUE_AS_BITSET.set(35);
+		PARAM_B_TEST_VALUE_AS_BITSET.set(38, 42);
+		PARAM_B_TEST_VALUE_AS_BITSET.set(44);
+		PARAM_B_TEST_VALUE_AS_BITSET.set(48, 50);
+		PARAM_B_TEST_VALUE_AS_BITSET.set(51);
+		PARAM_B_TEST_VALUE_AS_BITSET.set(53);
+		PARAM_B_TEST_VALUE_AS_BITSET.set(56, 60);
+		PARAM_B_TEST_VALUE_AS_BITSET.set(63);
 	}
 
 	@Before
@@ -287,7 +349,7 @@ public class ContainerTest {
 		Number testParamBvalue = ((FloatParameter) testParamB).getValue();
 		LOG.info("Extracted value = " + testParamBvalue);
 		LOG.info("Asserting " + MockContainerModelFactory.TEST_PARAM_B);
-		assertEquals("Parameter has incorrect value.", PI, testParamBvalue.doubleValue(), 0);
+		assertEquals("Parameter has incorrect value.", PARAM_B_TEST_VALUE, testParamBvalue.doubleValue(), 0);
 		LOG.debug(MockContainerModelFactory.TEST_PARAM_B + " parameter passed with value : " + testParamBvalue.doubleValue());
 
 		// Test the container models happy flag and the validity flag
@@ -459,7 +521,7 @@ public class ContainerTest {
 
 		// Set parameter B value to test value pi
 		ParameterContainer paramB = mockContainerFactory.getParameter(MockContainerModelFactory.TEST_PARAM_B);
-		paramB.setValue(PI);
+		paramB.setValue(PARAM_B_TEST_VALUE);
 
 		// Set the Frame Tail
 		mockContainerFactory.getParameter(MockContainerModelFactory.VALIDITY_FLAG_ALIAS).setValue(1);
@@ -482,32 +544,72 @@ public class ContainerTest {
 		String binDump = BitSetUtility.binDump(marshalledFrame);
 		LOG.debug(binDump);
 
-		assertEquals("BitSets not equal", BitSetUtility.stringToBitSet(TEST_BITSET_STRING_PKT_TYPE_B), marshalledFrame);
-
+		// Check the marshalled frame is the as expected.
+		if (LOG.isDebugEnabled()) {
+			logAssertValues(MockContainerModelFactory.TM_FRAME_ALIAS, TEST_BITSET_PKT_TYPE_B, marshalledFrame);
+		}
+		assertEquals("BitSets not equal", TEST_BITSET_PKT_TYPE_B, marshalledFrame);
 		assertEquals("BitSets length not as expected", marshalledFrame.length(), TEST_BITSET_STRING_PKT_TYPE_B.length());
 
-		// Now let's marshall a parameter and run some tests.
-		BitSet apidBitSet = new BitSet(mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS).getLength());
+		// Now let's marshall the packet ID parameter and run some asserts
+		BitSet packetIdMarshalled = new BitSet(mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS).getLength());
 		Container packet = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS);
-		packet.marshall(apidBitSet, 0);
-		String apidBinDump = BitSetUtility.binDump(apidBitSet);
+		packet.marshall(packetIdMarshalled, 0);
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS) + " = " + apidBinDump);
+			LOG.debug(mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS) + " = " + BitSetUtility.binDump(packetIdMarshalled));
 		}
 
-		String apidBinValue = Integer.toBinaryString(Integer.valueOf(MockContainerModelFactory.PACKET_TYPE_B_ID));
-		// LSB first so we need to reverse the dumped string.
-		apidBinValue = new StringBuffer(apidBinValue).reverse().toString();
-		// BitSets are rounded up to 64 bits so we will have to pad the marshalled APID with extra 0's
-		// We will calculate the required zeros using the apid's length so we don't spoil the test
-		int requiredPadding = 64 - apidBinValue.length();
-		char[] zeroPadding = new char[requiredPadding];
-		for (int c = 0; c < requiredPadding; c++) {
-			zeroPadding[c] = '0';
+		if (LOG.isDebugEnabled()) {
+			logAssertValues(MockContainerModelFactory.PACKET_ID_ALIAS, PACKET_TYPE_ID_333_AS_BITSET, packetIdMarshalled);
 		}
-		StringBuffer apidBinValueWithPadding = new StringBuffer(apidBinValue);
-		apidBinValueWithPadding.append(zeroPadding);
-		assertEquals("Apid does not match", StringUtils.deleteWhitespace(apidBinDump), apidBinValueWithPadding.toString());
+		assertEquals("Apid should match expected", PACKET_TYPE_ID_333_AS_BITSET, packetIdMarshalled);
+		
+		// Check the payload length parameter
+		BitSet payloadLength = new BitSet(mockContainerFactory.getParameter(MockContainerModelFactory.PAYLOAD_LENGTH_PARAM_ALIAS).getLength());
+		packet = mockContainerFactory.getParameter(MockContainerModelFactory.PAYLOAD_LENGTH_PARAM_ALIAS);
+		packet.marshall(payloadLength, 0);
+		
+		if (LOG.isDebugEnabled()) {
+			LOG.debug(mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS) + " = " + BitSetUtility.binDump(payloadLength));
+		}
+
+		if (LOG.isDebugEnabled()) {
+			logAssertValues(MockContainerModelFactory.PAYLOAD_LENGTH_PARAM_ALIAS, PKT_TYPE_B_PAYLOAD_LENGTH_AS_BITSET, payloadLength);
+		}
+		
+		assertEquals("Apid should match expected", PKT_TYPE_B_PAYLOAD_LENGTH_AS_BITSET, payloadLength);
+		
+		// Check the Test Parameter B marshalling
+		BitSet testParamBmarshalled = new BitSet(mockContainerFactory.getParameter(MockContainerModelFactory.TEST_PARAM_B).getLength());
+		packet = mockContainerFactory.getParameter(MockContainerModelFactory.TEST_PARAM_B);
+		packet.marshall(testParamBmarshalled, 0);
+
+		if (LOG.isDebugEnabled()) {
+			logAssertValues(MockContainerModelFactory.TEST_PARAM_B, PARAM_B_TEST_VALUE_AS_BITSET, testParamBmarshalled);
+		}
+		
+		assertEquals("Test parameter A should be equal", PARAM_B_TEST_VALUE_AS_BITSET, testParamBmarshalled);
+		
+		// Finally check the flags
+		BitSet marshalledFlag = new BitSet(mockContainerFactory.getParameter(MockContainerModelFactory.HAPPY_FLAG_ALIAS).getLength());
+		packet = mockContainerFactory.getParameter(MockContainerModelFactory.HAPPY_FLAG_ALIAS);
+		packet.marshall(marshalledFlag, 0);
+		
+		if (LOG.isDebugEnabled()) {
+			logAssertValues(MockContainerModelFactory.HAPPY_FLAG_ALIAS, FLAG_ON_BITSET, marshalledFlag);
+		}
+		
+		assertEquals("Flag should be on", FLAG_ON_BITSET, marshalledFlag);
+		
+		marshalledFlag = new BitSet(mockContainerFactory.getParameter(MockContainerModelFactory.VALIDITY_FLAG_ALIAS).getLength());
+		packet = mockContainerFactory.getParameter(MockContainerModelFactory.VALIDITY_FLAG_ALIAS);
+		packet.marshall(marshalledFlag, 0);
+		
+		if (LOG.isDebugEnabled()) {
+			logAssertValues(MockContainerModelFactory.VALIDITY_FLAG_ALIAS, FLAG_ON_BITSET, marshalledFlag);
+		}
+		
+		assertEquals("Flag should be on", FLAG_ON_BITSET, marshalledFlag);
 	}
 	
 	
