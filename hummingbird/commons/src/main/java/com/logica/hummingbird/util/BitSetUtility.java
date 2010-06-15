@@ -28,6 +28,7 @@ package com.logica.hummingbird.util;
 
 import java.util.BitSet;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -317,9 +318,11 @@ public class BitSetUtility {
 				dump += System.getProperty("line.separator");
 				lineIndex = 0;
 			}
-
 		}
 
+		// trim the trailing line.separator from the dump
+		dump = StringUtils.trim(dump);
+		
 		return dump;
 	}
 
