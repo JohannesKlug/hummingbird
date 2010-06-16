@@ -53,8 +53,8 @@ public class Float64Behaviour extends AbstractFloatBehaviour {
 
 	@Override
 	public BitSet getRawParameterBinary(BitSet packet) {
-		// TODO Auto-generated method stub
-		return null;
+		int offset = 0;
+		return packet.get(offset, offset + (int) getSizeIntBits());
 	}
 
 	@Override
