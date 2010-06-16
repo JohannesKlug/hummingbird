@@ -35,12 +35,7 @@ public class Float64Behaviour extends AbstractFloatBehaviour {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Float Parameter BitSet taken from bitset in = " + BitSetUtility.binDump(actualBitSet));
 		}
-
-		int length = actualBitSet.size();
-		if (length != FloatSizeInBits.THIRTY_TWO.getSize() && length != FloatSizeInBits.SIXTY_FOUR.getSize()) {
-			LOG.error("A float BitSet of invalid length was passed. This is an error! Size is: " + length);
-		}
-
+		
 		String actualBitSetString = BitSetUtility.bitSetToBinaryString(actualBitSet, false);
 
 		if (LOG.isDebugEnabled()) {
