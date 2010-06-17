@@ -26,7 +26,7 @@ public class Float64Behaviour extends AbstractFloatBehaviour {
 	public Double valueFromBitSet(BitSet packet) {
 		// The technique this method uses is to convert the bitset to a string and then parse it as a double
 		// Awesome tekkers.
-		
+
 		int offset = 0;
 
 		BitSet actualBitSet = packet.get(offset, offset + (int) getSizeIntBits());
@@ -47,7 +47,6 @@ public class Float64Behaviour extends AbstractFloatBehaviour {
 		
 		// Float 64 so convert to a Double
 		return Double.longBitsToDouble(Long.parseLong(actualBitSetString, 2));
-
 	}
 
 	@Override
