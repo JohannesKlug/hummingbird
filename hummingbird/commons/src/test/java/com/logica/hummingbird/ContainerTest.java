@@ -7,10 +7,10 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.BitSet;
 
-import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.internal.runners.statements.Fail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
@@ -610,6 +610,11 @@ public class ContainerTest {
 		}
 		
 		assertEquals("Flag should be on", FLAG_ON_BITSET, marshalledFlag);
+	}
+	
+	@Test(expected=UnknownContainerNameException.class)
+	public void testGetInvalidContainerName() throws UnknownContainerNameException {
+		mockContainerFactory.getContainer("You're doing it wrong!");
 	}
 	
 	
