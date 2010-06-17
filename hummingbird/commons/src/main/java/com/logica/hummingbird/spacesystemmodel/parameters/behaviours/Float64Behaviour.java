@@ -19,7 +19,7 @@ public class Float64Behaviour extends AbstractFloatBehaviour {
 	private final static Logger LOG = LoggerFactory.getLogger(Float64Behaviour.class);
 
 	public Float64Behaviour() {
-		super(64l);
+		super(64);
 	}
 
 	@Override

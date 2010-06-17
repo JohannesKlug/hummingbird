@@ -11,20 +11,20 @@ import java.util.BitSet;
  */
 public abstract class AbstractNumberBehaviour implements NumberParameterTypeBehaviour {
 	
-	private final long SIZE_IN_BITS;
+	private final int SIZE_IN_BITS;
 	
-	public AbstractNumberBehaviour(long sizeInBits) {
+	public AbstractNumberBehaviour(int sizeInBits) {
 		this.SIZE_IN_BITS = sizeInBits;
 	}
 
 	@Override
-	public long getSizeIntBits() {
+	public int getSizeIntBits() {
 		return SIZE_IN_BITS;
 	}
 
 	@Override
 	public BitSet getRawParameterBinary(BitSet packet) {
 		int offset = 0;
-		return packet.get(offset, offset + (int) getSizeIntBits());
+		return packet.get(offset, offset + getSizeIntBits());
 	}
 }

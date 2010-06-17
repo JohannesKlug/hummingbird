@@ -6,7 +6,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationExcepti
 
 public interface ParameterBehaviour {
 	
-	public long getSizeIntBits();
+	public int getSizeIntBits();
 	
 	/**
 	 * Returns the raw binary data of the parameter as a BitSet

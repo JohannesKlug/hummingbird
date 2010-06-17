@@ -10,7 +10,7 @@ import java.util.BitSet;
 public class Float32Behaviour extends AbstractFloatBehaviour {
 
 	public Float32Behaviour() {
-		super(32l);
+		super(32);
 	}
 
 	@Override
