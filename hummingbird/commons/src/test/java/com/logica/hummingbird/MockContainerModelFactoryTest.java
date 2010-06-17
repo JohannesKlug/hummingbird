@@ -42,7 +42,6 @@ public class MockContainerModelFactoryTest {
 		for (ParameterContainer parameter : containerFactory.getAllParameters().values()) {
 			assertTrue("Parameter name '" + parameter.getName() + "' contains invalid characters.", parameter.getName().matches("\\p{Alnum}*"));
 		}
-
 	}
 
 }
