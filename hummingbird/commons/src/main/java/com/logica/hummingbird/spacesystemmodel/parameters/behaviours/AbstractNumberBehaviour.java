@@ -1,5 +1,7 @@
 package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
 
+import java.util.BitSet;
+
 /**
  * Abstract class providing the get size in bits functionality which is common across all
  * NumberParameterTypeBehaviours.
@@ -18,5 +20,11 @@ public abstract class AbstractNumberBehaviour implements NumberParameterTypeBeha
 	@Override
 	public long getSizeIntBits() {
 		return SIZE_IN_BITS;
+	}
+
+	@Override
+	public BitSet getRawParameterBinary(BitSet packet) {
+		int offset = 0;
+		return packet.get(offset, offset + (int) getSizeIntBits());
 	}
 }

@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.util.BitSetUtility;
-import com.logica.hummingbird.util.BitSetUtility.FloatSizeInBits;
 
 /**
  * Parameter behaviour for an IEEE 754 64-bit precision Float.
@@ -49,12 +48,6 @@ public class Float64Behaviour extends AbstractFloatBehaviour {
 		// Float 64 so convert to a Double
 		return Double.longBitsToDouble(Long.parseLong(actualBitSetString, 2));
 
-	}
-
-	@Override
-	public BitSet getRawParameterBinary(BitSet packet) {
-		int offset = 0;
-		return packet.get(offset, offset + (int) getSizeIntBits());
 	}
 
 	@Override
