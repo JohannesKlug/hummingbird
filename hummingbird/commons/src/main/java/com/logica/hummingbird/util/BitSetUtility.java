@@ -356,9 +356,21 @@ public class BitSetUtility {
 	}
 
 	/**
-	 * Uses the complete BitSet i.e. the size and <b><i>not</i></b> the length
+	 * Converts the passed BitSet into a binary string.
+	 * 
+	 * A flag is used to determine whether you wish to convert the logical bitSet or
+	 * the entire BitSet.
+	 * If useLogicalSize is set to false it will use the complete BitSet i.e. the size 
+	 * and <b><i>not</i></b> the length.  Note: BitSets always finish on 64 bit a boundary.
+	 * 
+	 * If useLogicalSize is set to true it will use the logical BitSet, that is, only the 
+	 * relevant set bits
+	 * 
+	 * Whichever one you choose the returned value will equate to the same, however, if you
+	 * set useLogicalSize to false you will get the complete 0 padded BitSet.
 	 * 
 	 * @param data
+	 * @param useLogicalSize
 	 * @return
 	 */
 	public static String bitSetToBinaryString(BitSet data, boolean useLogicalSize) {

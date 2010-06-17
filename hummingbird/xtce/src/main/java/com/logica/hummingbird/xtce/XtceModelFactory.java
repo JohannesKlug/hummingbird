@@ -123,9 +123,12 @@ public class XtceModelFactory implements ContainerFactory {
 					// with binary.
 				}
 
-				NumberParameterType type = new NumberParameterType(item.getIntegerParameterType().getName(), item.getIntegerParameterType()
-						.getShortDescription(), item.getIntegerParameterType().getLongDescription(), new IntegerUnsignedBehaviour(item
-						.getIntegerParameterType().getSizeInBits()), item.getIntegerParameterType().getSigned(), initialValue);
+				NumberParameterType type = new NumberParameterType(item.getIntegerParameterType().getName(), 
+																   item.getIntegerParameterType().getShortDescription(), 
+																   item.getIntegerParameterType().getLongDescription(), 
+																   new IntegerUnsignedBehaviour((int) item.getIntegerParameterType().getSizeInBits()), 
+																   item.getIntegerParameterType().getSigned(), 
+																   initialValue);
 
 				types.put(type.getName(), type);
 			}

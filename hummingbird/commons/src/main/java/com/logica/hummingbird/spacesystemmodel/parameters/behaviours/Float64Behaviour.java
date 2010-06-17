@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.util.BitSetUtility;
-import com.logica.hummingbird.util.BitSetUtility.FloatSizeInBits;
 
 /**
  * Parameter behaviour for an IEEE 754 64-bit precision Float.
@@ -20,14 +19,14 @@ public class Float64Behaviour extends AbstractFloatBehaviour {
 	private final static Logger LOG = LoggerFactory.getLogger(Float64Behaviour.class);
 
 	public Float64Behaviour() {
-		super(64l);
+		super(64);
 	}
 
 	@Override
 	public Double valueFromBitSet(BitSet packet) {
 		// The technique this method uses is to convert the bitset to a string and then parse it as a double
 		// Awesome tekkers.
-		
+
 		int offset = 0;
 
 		BitSet actualBitSet = packet.get(offset, offset + (int) getSizeIntBits());
@@ -48,13 +47,6 @@ public class Float64Behaviour extends AbstractFloatBehaviour {
 		
 		// Float 64 so convert to a Double
 		return Double.longBitsToDouble(Long.parseLong(actualBitSetString, 2));
-
-	}
-
-	@Override
-	public BitSet getRawParameterBinary(BitSet packet) {
-		int offset = 0;
-		return packet.get(offset, offset + (int) getSizeIntBits());
 	}
 
 	@Override
