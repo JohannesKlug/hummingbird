@@ -26,12 +26,6 @@ public class LongUnsignedBehaviour extends AbstractIntegerBehaviour {
 	}
 
 	@Override
-	public BitSet getRawParameterBinary(BitSet packet) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public BitSet insertIntoBitSet(Number number, BitSet bitSetTarget, int offset) {
 		return bitSetTarget;
 		// TODO Auto-generated method stub

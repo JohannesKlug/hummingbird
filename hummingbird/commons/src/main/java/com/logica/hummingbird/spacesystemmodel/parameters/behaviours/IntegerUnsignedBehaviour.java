@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import com.logica.hummingbird.util.BitSetUtility;
 
+//TODO javadoc
 public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 	private static final Logger LOG = LoggerFactory.getLogger(IntegerUnsignedBehaviour.class);
 	
@@ -34,12 +35,6 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 			LOG.debug("Calculated value from bitset was: " + parameterValue);
 		}
 		return parameterValue;
-	}
-
-	@Override
-	public BitSet getRawParameterBinary(BitSet packet) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

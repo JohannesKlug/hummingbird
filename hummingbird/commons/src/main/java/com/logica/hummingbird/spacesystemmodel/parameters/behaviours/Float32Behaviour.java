@@ -3,8 +3,10 @@ package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
 import java.util.BitSet;
 
 /**
- * Parameter behaviour for an IEEE 754 32-bit precision FLoat.
+ * Parameter behaviour for an IEEE 754 32-bit precision Float.
+ * 
  * @author Mark Doyle
+ * @author Johannes Klug
  *
  */
 public class Float32Behaviour extends AbstractFloatBehaviour {
@@ -15,12 +17,6 @@ public class Float32Behaviour extends AbstractFloatBehaviour {
 
 	@Override
 	public Float valueFromBitSet(BitSet packet) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BitSet getRawParameterBinary(BitSet packet) {
 		// TODO Auto-generated method stub
 		return null;
 	}
