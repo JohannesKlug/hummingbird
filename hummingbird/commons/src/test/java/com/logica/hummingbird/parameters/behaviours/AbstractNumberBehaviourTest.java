@@ -58,7 +58,12 @@ public class AbstractNumberBehaviourTest {
 	}
 
 	/**
-	 * 
+	 * This test simply extracts the raw data representing the parameter from a BitSet.  The behaviour expects
+	 * the parameter to starts at offset 0 so the test BitSets have been setup to support this.  The Test BitSets
+	 * are set so the parameter contains the min and max values (all 0's or all 1's) with a number of bits set 
+	 * to the opposite tagged on the end.  This enables us to easily test whether the extracted BitSet is 
+	 *  correct, that is, the right size and only containing 0's or 1's (depending upon which test BitSet
+	 *  is used of course).
 	 */
 	@Test
 	public void testGetRawParameter() {
