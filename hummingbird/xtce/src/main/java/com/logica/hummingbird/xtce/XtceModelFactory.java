@@ -30,6 +30,7 @@ import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.AbstractInt
 import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float32Behaviour;
 import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float64Behaviour;
 import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
+import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.NumberParameterTypeBehaviour;
 import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
 import com.logica.hummingbird.xtce.exceptions.InvalidXtceFileException;
 
@@ -122,12 +123,19 @@ public class XtceModelFactory implements ContainerFactory {
 					// FIXME decode() will ONLY work with base10 and hex, NOT with octal (wrong representation) and not
 					// with binary.
 				}
-
+				
+				// FIXME Add more logica to cater for multiple integer behaviours.
+				NumberParameterTypeBehaviour numberTypeBehaviour = null;
+				if(!item.getIntegerParameterType().getSigned()) {
+					numberTypeBehaviour = new IntegerUnsignedBehaviour((int) item.getIntegerParameterType().getSizeInBits());
+				}
+				else {
+					LOG.error("Not enough information to construct the behaviour type");
+				}
 				NumberParameterType type = new NumberParameterType(item.getIntegerParameterType().getName(), 
 																   item.getIntegerParameterType().getShortDescription(), 
 																   item.getIntegerParameterType().getLongDescription(), 
-																   new IntegerUnsignedBehaviour((int) item.getIntegerParameterType().getSizeInBits()), 
-																   item.getIntegerParameterType().getSigned(), 
+																   numberTypeBehaviour,  
 																   initialValue);
 
 				types.put(type.getName(), type);
@@ -156,19 +164,17 @@ public class XtceModelFactory implements ContainerFactory {
 				long size = Long.parseLong(item.getFloatParameterType().getSizeInBits().value());
 				if (size == 32) {
 					type = new NumberParameterType(item.getFloatParameterType().getName(), 
-																	   item.getFloatParameterType().getShortDescription(), 
-																	   item.getFloatParameterType().getLongDescription(), 
-																	   new Float32Behaviour(), 
-																	   false, 
-																	   (long) item.getFloatParameterType().getInitialValue());
+												   item.getFloatParameterType().getShortDescription(), 
+												   item.getFloatParameterType().getLongDescription(), 
+												   new Float32Behaviour(),
+												   (long) item.getFloatParameterType().getInitialValue());
 				}
 				else if (size == 64) {
-					type = new NumberParameterType(item.getFloatParameterType().getName(), 
-																	   item.getFloatParameterType().getShortDescription(), 
-																	   item.getFloatParameterType().getLongDescription(), 
-																	   new Float64Behaviour(), 
-																	   false, 
-																	   (long) item.getFloatParameterType().getInitialValue());
+					type = new NumberParameterType(item.getFloatParameterType().getName(),
+												   item.getFloatParameterType().getShortDescription(), 
+												   item.getFloatParameterType().getLongDescription(), 
+												   new Float64Behaviour(),
+												   (long) item.getFloatParameterType().getInitialValue());
 				}
 				else {
 					throw new InvalidXtceFileException("Invalid float type Parameter definition.  Hummingbird only supports size 32 or 64 bit floats");

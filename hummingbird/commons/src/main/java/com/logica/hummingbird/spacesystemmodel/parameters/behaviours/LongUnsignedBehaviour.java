@@ -5,7 +5,7 @@ import java.util.BitSet;
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 
 /**
- * HOw do we handle unsigned longs in Java?  Long is always signed.  Perhaps some math package?
+ * How do we handle unsigned longs in Java?  Long is always signed.  Perhaps some math package?
  * @author Mark Doyle
  * @author Johannes Klug
  *

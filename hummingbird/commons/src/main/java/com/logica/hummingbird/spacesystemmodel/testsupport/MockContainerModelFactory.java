@@ -70,15 +70,15 @@ public class MockContainerModelFactory implements ContainerFactory {
 	public static final String TEST_PARAM_B = "TestParamB";
 
 	public static final String PACKET_ID_ALIAS = "ApId";
-	
+
 	public static final String PAYLOAD_LENGTH_PARAM_ALIAS = "PayloadLength";
 
 	public static final String PACKET_TYPE_B_ID = "333";
 
 	public static final String PACKET_TYPE_A_ID = "555";
-	
+
 	public static final String HAPPY_FLAG_ALIAS = "HappyFlag";
-	
+
 	public static final String VALIDITY_FLAG_ALIAS = "ValidityFlag";
 
 	private Map<String, ContainerImpl> containers = new HashMap<String, ContainerImpl>();
@@ -90,7 +90,8 @@ public class MockContainerModelFactory implements ContainerFactory {
 
 	/**
 	 * Creates an operational mock Container hierarchy which is used by the FrameBroker.
-	 * @throws InvalidParameterTypeException 
+	 * 
+	 * @throws InvalidParameterTypeException
 	 * 
 	 */
 	private void initialise() throws InvalidParameterTypeException {
@@ -111,19 +112,22 @@ public class MockContainerModelFactory implements ContainerFactory {
 		this.addToContainers(tmFrameTail);
 		// Add the header, packet and tail to the frame container.
 		ArrayList<Container> containersToAdd = new ArrayList<Container>(3);
-		
-		NumberParameterType paramType1bitInt = new NumberParameterType("1bitInt", "1bit integer type", "Parameter type for 1bit integers", new IntegerUnsignedBehaviour(1),
-				false, 0);
+
+		NumberParameterType paramType1bitInt = new NumberParameterType("1bitInt",
+																	   "1bit integer type",
+																	   "Parameter type for 1bit integers",
+																	   new IntegerUnsignedBehaviour(1),
+																	   0);
 
 		// Add a flag to the Frame Header
-		
+
 		IntegerParameter happyFlagParameter = new IntegerParameter(HAPPY_FLAG_ALIAS, "happy?", "Flag of Happiness", paramType1bitInt, 0);
 		tmFrameHeader.addContainer(happyFlagParameter);
 		this.addToContainers(happyFlagParameter);
 		this.addToParameters(happyFlagParameter);
 
 		containersToAdd.add(tmFrameHeader);
-		
+
 		containersToAdd.add(tmPacket);
 
 		// Add a flag to the Frame Tail
@@ -132,7 +136,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 		containersToAdd.add(tmFrameTail);
 		this.addToContainers(validityFlagParameter);
 		this.addToParameters(validityFlagParameter);
-		
+
 		tmFrame.addContainer(containersToAdd);
 
 		/** Build the lower packet level of the model **/
@@ -141,17 +145,24 @@ public class MockContainerModelFactory implements ContainerFactory {
 		this.addToContainers(tmPacketHeader);
 
 		// Create the apid (ID) parameter type and add it to the packet header and the parameters collection.
-		NumberParameterType paramType11bitInt = new NumberParameterType("11bitInt", "11bit integer type", "Parameter type for 11bit integers", new IntegerUnsignedBehaviour(11),
-				false, 0);
+		NumberParameterType paramType11bitInt = new NumberParameterType("11bitInt",
+																		"11bit integer type",
+																		"Parameter type for 11bit integers",
+																		new IntegerUnsignedBehaviour(11),
+																		0);
 		IntegerParameter packetIdParameter = new IntegerParameter(PACKET_ID_ALIAS, "Test Apid", "Test Application Id", paramType11bitInt, 0);
 		this.addToParameters(packetIdParameter);
 		this.addToContainers(packetIdParameter);
 		tmPacketHeader.addContainer(packetIdParameter);
 
 		// Create the payload length parameter type and add it to the packet header and the parameters collection.
-		NumberParameterType paramType16bitInt = new NumberParameterType("16bitInt", "16bit integer type", "Parameter type for 16bit integers", new IntegerUnsignedBehaviour(16),
-				false, 0);
-		IntegerParameter payloadLengthParameter = new IntegerParameter(PAYLOAD_LENGTH_PARAM_ALIAS, "Payload length", "Payload lenght parameter", paramType16bitInt, 0);
+		NumberParameterType paramType16bitInt = new NumberParameterType("16bitInt",
+																		"16bit integer type",
+																		"Parameter type for 16bit integers",
+																		new IntegerUnsignedBehaviour(16),
+																		0);
+		IntegerParameter payloadLengthParameter = new IntegerParameter(PAYLOAD_LENGTH_PARAM_ALIAS, "Payload length", "Payload lenght parameter",
+				paramType16bitInt, 0);
 		this.addToContainers(payloadLengthParameter);
 		this.addToParameters(payloadLengthParameter);
 		tmPacketHeader.addContainer(payloadLengthParameter);
@@ -169,7 +180,11 @@ public class MockContainerModelFactory implements ContainerFactory {
 
 		// Create a parameter for packetTypeA and add it to the packet type and
 		// the container collection
-		NumberParameterType test32bitInt = new NumberParameterType("test32bitInt", "test param", "32 bit int test param", new IntegerUnsignedBehaviour(32), false, 1);
+		NumberParameterType test32bitInt = new NumberParameterType("test32bitInt",
+																   "test param",
+																   "32 bit int test param",
+																   new IntegerUnsignedBehaviour(32),
+																   1);
 		IntegerParameter testParameterA = new IntegerParameter(TEST_PARAM_A, "test param", "test param holding an int value", test32bitInt, 0);
 		packetTypeA.addContainer(testParameterA);
 		this.addToParameters(testParameterA);
@@ -184,7 +199,11 @@ public class MockContainerModelFactory implements ContainerFactory {
 
 		// Create a parameter for packetTypeB and add it to the packet type and
 		// the container collection
-		NumberParameterType test64bitFloat = new NumberParameterType("test64bitFloat", "test param", "64 float test param", new Float64Behaviour(), true, 0);
+		NumberParameterType test64bitFloat = new NumberParameterType("test64bitFloat",
+																	 "test param",
+																	 "64 float test param",
+																	 new Float64Behaviour(),
+																	 0);
 		FloatParameter testParameterB = new FloatParameter(TEST_PARAM_B, "test param", "test param holding a float value", test64bitFloat, 0.0);
 		packetTypeB.addContainer(testParameterB);
 		this.addToParameters(testParameterB);
@@ -207,8 +226,8 @@ public class MockContainerModelFactory implements ContainerFactory {
 		ContainerImpl container = containers.get(name);
 
 		if (container == null) {
-			throw new UnknownContainerNameException(containers,
-					"Your container lookup for '" + name + "' did not return any containers. Check your SpaceSystem configuration.");
+			throw new UnknownContainerNameException(containers, "Your container lookup for '" + name
+					+ "' did not return any containers. Check your SpaceSystem configuration.");
 		}
 
 		return container;
