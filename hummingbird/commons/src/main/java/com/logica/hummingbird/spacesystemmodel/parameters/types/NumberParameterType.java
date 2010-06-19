@@ -138,14 +138,4 @@ public class NumberParameterType extends NamedElement {
 	public NumberParameterTypeBehaviour getNumberBehaviour() {
 		return numberBehaviour;
 	}
-
-	/**
-	 * Returns the simple java type of the type.
-	 * 
-	 * @return Returns the simple java type of the parameter. 
-	 *
-	 */
-//	public eParameterType getType() {
-//		return type;
-//	}
 }
