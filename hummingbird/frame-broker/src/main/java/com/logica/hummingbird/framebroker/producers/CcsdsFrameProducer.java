@@ -35,7 +35,6 @@ import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.ContainerObserver;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.telemetry.TelemetryFrame;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
 
 /**
@@ -44,7 +43,7 @@ import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
 public class CcsdsFrameProducer extends CcsdsProducer implements ContainerObserver {
 	private final static Logger LOG = LoggerFactory.getLogger(CcsdsFrameProducer.class);
 
-	TelemetryFrame tmFrame = new CcsdsTmFrame();
+	CcsdsTmFrame tmFrame = new CcsdsTmFrame();
 
 	public CcsdsFrameProducer(ContainerFactory containerFactory) {
 		super(containerFactory);
@@ -79,7 +78,7 @@ public class CcsdsFrameProducer extends CcsdsProducer implements ContainerObserv
 		}
 	}
 
-	public TelemetryFrame getTmFrame() {
+	public CcsdsTmFrame getTmFrame() {
 		return tmFrame;
 	}
 

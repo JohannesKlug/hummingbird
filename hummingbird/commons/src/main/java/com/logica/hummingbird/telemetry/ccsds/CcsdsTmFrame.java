@@ -3,34 +3,29 @@ package com.logica.hummingbird.telemetry.ccsds;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.logica.hummingbird.telemetry.TelemetryFrame;
-import com.logica.hummingbird.telemetry.TelemetryFrameHeader;
-import com.logica.hummingbird.telemetry.TelemetryFrameTail;
-import com.logica.hummingbird.telemetry.TelemetryPacket;
-
-public class CcsdsTmFrame implements TelemetryFrame {
+public class CcsdsTmFrame {
 	
 	/**
 	 * This frames telemetry header.
 	 */
-	TelemetryFrameHeader frameHeader;
+	CcsdsTmFrameHeader frameHeader;
 	
 	/**
 	 * List of Telemetry Packets contained by this frame.
 	 * Initialised with an initial capacity of 1
 	 */
-	List<TelemetryPacket> packets = new ArrayList<TelemetryPacket>(1);
+	List<CcsdsTmPacket> packets = new ArrayList<CcsdsTmPacket>(1);
 	
 	/**
 	 * This frames tail.
 	 */
-	TelemetryFrameTail frameTail;
+	CcsdsTmFrameTail frameTail;
 	
 	public CcsdsTmFrame() {
 		super();
 	}
 
-	public CcsdsTmFrame(TelemetryFrameHeader frameHeader, List<TelemetryPacket> packets, TelemetryFrameTail frameTail) {
+	public CcsdsTmFrame(CcsdsTmFrameHeader frameHeader, List<CcsdsTmPacket> packets, CcsdsTmFrameTail frameTail) {
 		super();
 		this.frameHeader = frameHeader;
 		this.packets = packets;
@@ -41,11 +36,11 @@ public class CcsdsTmFrame implements TelemetryFrame {
 	/* (non-Javadoc)
 	 * @see com.logica.hummingbird.ccsds.telemetry.TelemetryFrame#getPackets()
 	 */
-	public List<TelemetryPacket> getPackets() {
+	public List<CcsdsTmPacket> getPackets() {
 		return packets;
 	}
 
-	public void setPackets(List<TelemetryPacket> packets) {
+	public void setPackets(List<CcsdsTmPacket> packets) {
 		this.packets = packets;
 	}
 
@@ -62,7 +57,7 @@ public class CcsdsTmFrame implements TelemetryFrame {
 			return false;
 		}
 		
-	    TelemetryFrame otherFrame = (TelemetryFrame)obj;
+	    CcsdsTmFrame otherFrame = (CcsdsTmFrame)obj;
 	    
 	    boolean equal = packets.equals(otherFrame.getPackets());
 
@@ -72,23 +67,19 @@ public class CcsdsTmFrame implements TelemetryFrame {
 
 
 
-	@Override
-	public void setHeader(TelemetryFrameHeader header) {
+	public void setHeader(CcsdsTmFrameHeader header) {
 		this.frameHeader = header;
 	}
 
-	@Override
-	public void addPacket(TelemetryPacket packet) {
+	public void addPacket(CcsdsTmPacket packet) {
 		this.packets.add(packet);
 	}
 
-	@Override
-	public void addPackets(List<TelemetryPacket> packets) {
+	public void addPackets(List<CcsdsTmPacket> packets) {
 		this.packets.addAll(this.packets);
 	}
 
-	@Override
-	public void setTail(TelemetryFrameTail tail) {
+	public void setTail(CcsdsTmFrameTail tail) {
 		this.frameTail = tail;
 	}
 
