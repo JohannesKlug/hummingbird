@@ -71,12 +71,15 @@ public class CcsdsTmFrame {
 		return equal;
 	}
 
-	public void setParameter(CcsdsTmNumberParameter parameter) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException {
+	public void setParameterInFrame(CcsdsTmNumberParameter parameter) throws SecurityException, IllegalArgumentException, IllegalAccessException {
 		String name = parameter.getName();
+
+		// Check the frame header for a parameter of this name
+		Class<? extends CcsdsTmFrameHeader> headerClass = this.frameHeader.getClass();
+		Field field;
 		try {
-			// Check the frame header for a parameter of this name
-			Class<? extends CcsdsTmFrameHeader> headerClass = this.frameHeader.getClass();
-			Field field = headerClass.getDeclaredField(name);
+			field = headerClass.getDeclaredField(name);
+
 			if (field != null) {
 				field.set(this.frameHeader, parameter.getValue());
 				return;
@@ -91,12 +94,18 @@ public class CcsdsTmFrame {
 			}
 		}
 		catch (NoSuchFieldException e) {
-			LOG.debug(name + " field not found in the header or tail.  Checking packets");
+			if(LOG.isDebugEnabled()) {
+				LOG.debug(parameter.getName() + " is not a field of the CCSDS Frame header or tail.  Checking parameters");
+			}
 		}
 
+		// Must be a packet parameter so set it there.
 		for (CcsdsTmPacket packet : packets) {
-
+			packet.setParameterInPacket(parameter);
+			return;
 		}
+		
+		LOG.error("Could not find a field for " + parameter.getName() + " parameter");
 
 	}
 
