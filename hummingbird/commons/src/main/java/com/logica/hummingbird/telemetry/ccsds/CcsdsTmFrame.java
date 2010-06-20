@@ -71,7 +71,7 @@ public class CcsdsTmFrame {
 		return equal;
 	}
 
-	public void setParameterInFrame(CcsdsTmNumberParameter parameter) throws SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void setParameterInFrame(CcsdsTmParameter parameter) throws SecurityException, IllegalArgumentException, IllegalAccessException {
 		String name = parameter.getName();
 
 		// Check the frame header for a parameter of this name
@@ -107,10 +107,6 @@ public class CcsdsTmFrame {
 		
 		LOG.error("Could not find a field for " + parameter.getName() + " parameter");
 
-	}
-
-	public void setParameterInFrame(CcsdsTmStringParameter ccsdsTmStringParameter) {
-		// TODO Auto-generated method stub. Might not need this.  Just use Object value?
 	}
 	
 	public void setHeader(CcsdsTmFrameHeader header) {

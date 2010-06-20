@@ -32,8 +32,7 @@ import org.slf4j.LoggerFactory;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmNumberParameter;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmStringParameter;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
 
 /**
  * TODO write here a description of the class
@@ -61,7 +60,7 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 		}
 
 		try {
-			this.getTmFrame().setParameterInFrame(new CcsdsTmNumberParameter(field, value, Integer.class));
+			this.getTmFrame().setParameterInFrame(new CcsdsTmParameter(field, value, Integer.class));
 		}
 		catch (SecurityException e) {
 			LOG.error(e.getMessage());
@@ -82,7 +81,21 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value);
 		}
-		this.getTmFrame().setParameterInFrame(new CcsdsTmStringParameter(field, value, String.class));
+		try {
+			this.getTmFrame().setParameterInFrame(new CcsdsTmParameter(field, value, String.class));
+		}
+		catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -92,7 +105,7 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 		}
 
 		try {
-			this.getTmFrame().setParameterInFrame(new CcsdsTmNumberParameter(field, value, Double.class));
+			this.getTmFrame().setParameterInFrame(new CcsdsTmParameter(field, value, Double.class));
 		}
 		catch (SecurityException e) {
 			LOG.error(e.getMessage());

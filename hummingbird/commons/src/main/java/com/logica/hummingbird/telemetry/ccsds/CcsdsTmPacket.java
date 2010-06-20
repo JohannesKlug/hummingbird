@@ -29,7 +29,7 @@ public class CcsdsTmPacket {
 		this.payload = payload;
 	}
 
-	public void setParameterInPacket(CcsdsTmNumberParameter parameter) throws SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void setParameterInPacket(CcsdsTmParameter parameter) throws SecurityException, IllegalArgumentException, IllegalAccessException {
 		String name = parameter.getName();
 
 		Class<? extends CcsdsTmPacketHeader> headerClass = this.packetHeader.getClass();
@@ -64,4 +64,5 @@ public class CcsdsTmPacket {
 		builder.append("\n]");
 		return builder.toString();
 	}
+
 }

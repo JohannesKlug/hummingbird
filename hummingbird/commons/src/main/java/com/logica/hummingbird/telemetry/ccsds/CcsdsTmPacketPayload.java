@@ -5,19 +5,18 @@ import java.util.List;
 
 public class CcsdsTmPacketPayload {
 
-	List<CcsdsTmNumberParameter> numberParameters = new ArrayList<CcsdsTmNumberParameter>();
-	List<CcsdsTmStringParameter> stringParameters = new ArrayList<CcsdsTmStringParameter>();
+	List<CcsdsTmParameter> parameters = new ArrayList<CcsdsTmParameter>();
 
-	public void addParameter(CcsdsTmNumberParameter parameter) {
-		this.numberParameters.add(parameter);
+	public void addParameter(CcsdsTmParameter parameter) {
+		this.parameters.add(parameter);
 	}
 	
-	public void addParameter(CcsdsTmStringParameter parameter) {
-		this.stringParameters.add(parameter);
-	}
+//	public void addParameter(CcsdsTmStringParameter parameter) {
+//		this.stringParameters.add(parameter);
+//	}
 
-	public CcsdsTmNumberParameter getParameter(String parameterName) {
-		for(CcsdsTmNumberParameter parameter : this.numberParameters) {
+	public CcsdsTmParameter getParameter(String parameterName) {
+		for(CcsdsTmParameter parameter : this.parameters) {
 			if(parameter.getName().equals(parameterName)) {
 				return parameter;
 			}
@@ -27,19 +26,19 @@ public class CcsdsTmPacketPayload {
 		return null;
 	}
 
-	public List<CcsdsTmNumberParameter> getNumberParameters() {
-		return this.numberParameters;
+	public List<CcsdsTmParameter> getTmParameters() {
+		return this.parameters;
 	}
 	
-	public List<CcsdsTmStringParameter> getStringParameters() {
-		return this.stringParameters;
-	}
+//	public List<CcsdsTmStringParameter> getStringParameters() {
+//		return this.stringParameters;
+//	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("CcsdsTmPacketPayload [\n\tparameters = ");
-		builder.append(numberParameters);
+		builder.append(parameters);
 		builder.append("\n]");
 		return builder.toString();
 	}

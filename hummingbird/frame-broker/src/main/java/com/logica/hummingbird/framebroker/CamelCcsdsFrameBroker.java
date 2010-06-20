@@ -12,7 +12,7 @@ import com.logica.hummingbird.MessageType;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmNumberParameter;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
 
 public class CamelCcsdsFrameBroker extends CcsdsFrameBrokerImpl {
 
@@ -54,7 +54,7 @@ public class CamelCcsdsFrameBroker extends CcsdsFrameBrokerImpl {
 			packetMessage.setBody(packet);
 			messages.add(packetMessage);
 
-			for (CcsdsTmNumberParameter parameter : ((CcsdsTmPacket) packet).getPayload().getNumberParameters()) {
+			for (CcsdsTmParameter parameter : ((CcsdsTmPacket) packet).getPayload().getTmParameters()) {
 				Message parameterMessage = new DefaultMessage();
 				parameterMessage.setHeader("Type", MessageType.TMParameter);
 				parameterMessage.setBody(parameter);

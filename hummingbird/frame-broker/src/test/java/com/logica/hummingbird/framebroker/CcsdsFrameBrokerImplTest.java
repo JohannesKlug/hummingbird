@@ -24,7 +24,7 @@ import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrameTail;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacketHeader;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacketPayload;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmNumberParameter;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
 import com.logica.hummingbird.util.BitSetUtility;
 
 /**
@@ -91,10 +91,10 @@ public class CcsdsFrameBrokerImplTest {
 		
 		// Create the payload
 		int APID_555 = 555;
-		testFrame.setParameterInFrame(new CcsdsTmNumberParameter("apid", APID_555, Integer.class));
+		testFrame.setParameterInFrame(new CcsdsTmParameter("apid", APID_555, Integer.class));
 		
 		// Use the reflection setter from Frame?
-		CcsdsTmNumberParameter testParamA = new CcsdsTmNumberParameter("Test Param A", 123, Integer.class);
+		CcsdsTmParameter testParamA = new CcsdsTmParameter("Test Param A", 123, Integer.class);
 		payload.addParameter(testParamA);		
 		
 		LOG.info("Hummingbird frame: " + testFrame);
