@@ -26,7 +26,7 @@ public class CcsdsTmFrameTest {
 	}
 
 	@Test
-	public final void testSetParameter() throws SecurityException, IllegalArgumentException, IllegalAccessException {
+	public final void testSetParameter() throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException {
 		CcsdsTmNumberParameter frameVersionNum = new CcsdsTmNumberParameter("frameVersionNum", FRAME_VERSION_NUM, Integer.class);
 		frame.setParameter(frameVersionNum);
 		

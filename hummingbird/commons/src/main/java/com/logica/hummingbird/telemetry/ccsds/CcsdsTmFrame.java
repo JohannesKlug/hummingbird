@@ -1,6 +1,7 @@
 package com.logica.hummingbird.telemetry.ccsds;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,15 +71,14 @@ public class CcsdsTmFrame {
 		return equal;
 	}
 
-	public void setParameter(CcsdsTmNumberParameter parameter) throws SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void setParameter(CcsdsTmNumberParameter parameter) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException {
 		String name = parameter.getName();
 		try {
 			// Check the frame header for a parameter of this name
 			Class<? extends CcsdsTmFrameHeader> headerClass = this.frameHeader.getClass();
 			Field field = headerClass.getDeclaredField(name);
-			
 			if (field != null) {
-				field.set(headerClass, parameter.getValue());
+				field.set(this.frameHeader, parameter.getValue());
 				return;
 			}
 
@@ -86,7 +86,7 @@ public class CcsdsTmFrame {
 			Class<? extends CcsdsTmFrameTail> tailClass = this.frameTail.getClass();
 			field = tailClass.getDeclaredField(name);
 			if (field != null) {
-				field.set(tailClass, parameter.getValue());
+				field.set(this.frameTail, parameter.getValue());
 				return;
 			}
 		}
