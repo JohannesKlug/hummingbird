@@ -13,7 +13,7 @@ import com.logica.hummingbird.MessageType;
 import com.logica.hummingbird.framebroker.CamelCcsdsFrameBroker;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmNumberParameter;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 
 public class RouterTest extends CamelTestSupport {
@@ -90,7 +90,7 @@ public class RouterTest extends CamelTestSupport {
 		assertNotNull("template is null.", template);
 		template.sendBody(getFrame());
     	
-    	assertIsInstanceOf(CcsdsTmNumberParameter.class, parameterEndpoint.getReceivedExchanges().get(0).getIn().getBody());
+    	assertIsInstanceOf(CcsdsTmParameter.class, parameterEndpoint.getReceivedExchanges().get(0).getIn().getBody());
     	assertIsInstanceOf(CcsdsTmPacket.class, packetEndpoint.getReceivedExchanges().get(0).getIn().getBody());
     	assertIsInstanceOf(CcsdsTmFrame.class, frameEndpoint.getReceivedExchanges().get(0).getIn().getBody());
     	
