@@ -32,7 +32,8 @@ import org.slf4j.LoggerFactory;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmNumberParameter;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmStringParameter;
 
 /**
  * TODO write here a description of the class
@@ -58,7 +59,9 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value);
 		}
-		this.parent.getTmPacket().getPayload().addParameter(new CcsdsTmParameter(field, value, Integer.class));
+		
+		// FIXME only sets payload parameters!
+		this.parent.getTmPacket().getPayload().addParameter(new CcsdsTmNumberParameter(field, value, Integer.class));
 	}
 
 	@Override
@@ -66,7 +69,7 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value);
 		}
-		this.parent.getTmPacket().getPayload().addParameter(new CcsdsTmParameter(field, value, String.class));
+		this.parent.getTmPacket().getPayload().addParameter(new CcsdsTmStringParameter(field, value, String.class));
 	}
 
 	@Override
@@ -74,7 +77,7 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value);
 		}
-		this.parent.getTmPacket().getPayload().addParameter(new CcsdsTmParameter(field, value, Double.class));
+		this.parent.getTmPacket().getPayload().addParameter(new CcsdsTmNumberParameter(field, value, Double.class));
 	}
 
 }

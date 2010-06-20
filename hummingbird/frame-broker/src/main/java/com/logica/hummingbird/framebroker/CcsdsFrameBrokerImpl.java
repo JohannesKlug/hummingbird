@@ -102,7 +102,7 @@ public class CcsdsFrameBrokerImpl implements CcsdsFrameBroker {
 
 	@Override
 	public CcsdsTmFrame getFrame() {
-		return this.frameProducer.getFrame();
+		return this.frameProducer.getTmFrame();
 	}
 
 }

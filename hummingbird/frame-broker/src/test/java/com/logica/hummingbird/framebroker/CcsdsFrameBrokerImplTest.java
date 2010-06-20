@@ -24,19 +24,19 @@ import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrameTail;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacketHeader;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacketPayload;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmNumberParameter;
 import com.logica.hummingbird.util.BitSetUtility;
 
 /**
  * @author Mark Doyle
  * @TODO Test is not complete - awaiting commons telemetry models to be finalised
  */
-public class FrameBrokerImplTest {
+public class CcsdsFrameBrokerImplTest {
 	
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOG = LoggerFactory.getLogger(FrameBrokerImplTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CcsdsFrameBrokerImplTest.class);
 
 	private CcsdsFrameBroker frameBroker;
 
@@ -82,10 +82,10 @@ public class FrameBrokerImplTest {
 		packet.setPayload(payload);
 		
 		// Create the payload
-//		TelemetryParameter apid = new CcsdsTmParameter("APID", 555, Integer.class);
-		packetHeader.addApid(555);
+		int APID_555 = 555;
+		packetHeader.addApid(APID_555);
 		
-		CcsdsTmParameter testParamA = new CcsdsTmParameter("Test Param A", 123, Integer.class);
+		CcsdsTmNumberParameter testParamA = new CcsdsTmNumberParameter("Test Param A", 123, Integer.class);
 		payload.addParameter(testParamA);
 
 		
@@ -126,7 +126,6 @@ public class FrameBrokerImplTest {
 		frameBroker.unmarshall(MockContainerModelFactory.TM_FRAME_ALIAS, mockFrame);
 		CcsdsTmFrame unmarshalledFrame = frameBroker.getFrame();
 		LOG.info("Unmarshalled Frame: " + unmarshalledFrame);
-
 	}
 	
 	@Ignore
@@ -140,11 +139,6 @@ public class FrameBrokerImplTest {
 		CcsdsTmFrame unmarshalledFrameHeader = frameBroker.getFrame();
 		LOG.info("Unmarshalled Frame: " + unmarshalledFrameHeader);
 	}
-		
-//		frameBroker.unmarshall(MockContainerModelFactory.TM_FRAME_TAIL_ALIAS, mockFrame);
-//		frameBroker.unmarshall(MockContainerModelFactory.TM_PACKET_ALIAS, mockFrame);
-//		frameBroker.unmarshall(MockContainerModelFactory.TM_PACKET_HEADER_ALIAS, mockFrame);
-//		frameBroker.unmarshall(MockContainerModelFactory.TM_PACKET_BODY_ALIAS, mockFrame);
 
 	/**
 	 * Test method for

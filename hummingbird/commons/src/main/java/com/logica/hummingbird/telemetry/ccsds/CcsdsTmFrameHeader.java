@@ -27,7 +27,7 @@ public class CcsdsTmFrameHeader {
 	public final static String TRANSFER_FRAME_SECONDARY_HEADER_VERSION_NUM = "CCSDS_TF_HV";
 	public final static String TRANSFER_FRAME_SECONDARY_HEADER_LENGTH = "CCSDS_TF_HL";
 
-	private BitSet frameVersionNum;
+	Integer frameVersionNum;
 	private BitSet spaceCraftId;
 	private BitSet virtualChannelId;
 	private BitSet operationControlFieldFlag;
@@ -60,11 +60,11 @@ public class CcsdsTmFrameHeader {
 		this.secondaryHeader = secondaryHeader;
 	}
 
-	public BitSet getFrameVersionNum() {
+	public int getFrameVersionNum() {
 		return frameVersionNum;
 	}
 
-	public void setFrameVersionNum(BitSet frameVersionNum) {
+	public void setFrameVersionNum(int frameVersionNum) {
 		this.frameVersionNum = frameVersionNum;
 	}
 

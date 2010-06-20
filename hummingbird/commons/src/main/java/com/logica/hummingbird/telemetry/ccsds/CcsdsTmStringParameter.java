@@ -1,22 +1,22 @@
 package com.logica.hummingbird.telemetry.ccsds;
 
 
-public class CcsdsTmParameter {
+public class CcsdsTmStringParameter {
 
 	private String name;
 	
-	private Class valueClazz;
+	private Class<? extends Object> valueClazz;
 
-	private Object value;
+	private String value;
 	
 	
-	public CcsdsTmParameter(String name, Object value, Class valueClazz) {
+	public CcsdsTmStringParameter(String name, String value, Class<? extends Object> valueClazz) {
 		this.value = value;
 		this.valueClazz = valueClazz;
 		this.name = name;
 	}
 	
-	public Object getValue() {
+	public String getValue() {
 		return value;
 	}
 
@@ -30,11 +30,11 @@ public class CcsdsTmParameter {
 		}
 
 		// Check we can actually compare this object to ourselves.
-		if (!(obj instanceof CcsdsTmParameter)) {
+		if (!(obj instanceof CcsdsTmStringParameter)) {
 			return false;
 		}
 		
-		CcsdsTmParameter otherParameter = (CcsdsTmParameter)obj;
+		CcsdsTmStringParameter otherParameter = (CcsdsTmStringParameter)obj;
 	    
 	    boolean equal = value.equals(otherParameter.value);
 		return equal;
@@ -55,6 +55,13 @@ public class CcsdsTmParameter {
 		builder.append(valueClazz);
 		builder.append("\n]");
 		return builder.toString();
+	}
+
+	/**
+	 * @return the valueClazz
+	 */
+	public Class<? extends Object> getValueClazz() {
+		return valueClazz;
 	}
 
 
