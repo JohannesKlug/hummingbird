@@ -66,9 +66,12 @@ public class CcsdsFrameBrokerImplTest {
 
 	/**
 	 * Set up the Mock Container Factory and create the testFrame for use by the tests.
+	 * @throws IllegalAccessException 
+	 * @throws IllegalArgumentException 
+	 * @throws SecurityException 
 	 */
 	@BeforeClass
-	public static void setupForAll() {		
+	public static void setupForAll() throws SecurityException, IllegalArgumentException, IllegalAccessException {		
 		// Create the test frame
 		testFrame = new CcsdsTmFrame();
 		
@@ -81,18 +84,18 @@ public class CcsdsFrameBrokerImplTest {
 		packet.setHeader(packetHeader);
 		packet.setPayload(payload);
 		
-		// Create the payload
-		int APID_555 = 555;
-		packetHeader.addApid(APID_555);
-		
-		CcsdsTmNumberParameter testParamA = new CcsdsTmNumberParameter("Test Param A", 123, Integer.class);
-		payload.addParameter(testParamA);
-
-		
 		// Add the inners to the test frame
 		testFrame.setHeader(testFrameHeader);
 		testFrame.addPacket(packet);
 		testFrame.setTail(testFrameTail);
+		
+		// Create the payload
+		int APID_555 = 555;
+		testFrame.setParameterInFrame(new CcsdsTmNumberParameter("apid", APID_555, Integer.class));
+		
+		// Use the reflection setter from Frame?
+		CcsdsTmNumberParameter testParamA = new CcsdsTmNumberParameter("Test Param A", 123, Integer.class);
+		payload.addParameter(testParamA);		
 		
 		LOG.info("Hummingbird frame: " + testFrame);
 	}

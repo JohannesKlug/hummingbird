@@ -109,6 +109,10 @@ public class CcsdsTmFrame {
 
 	}
 
+	public void setParameterInFrame(CcsdsTmStringParameter ccsdsTmStringParameter) {
+		// TODO Auto-generated method stub. Might not need this.  Just use Object value?
+	}
+	
 	public void setHeader(CcsdsTmFrameHeader header) {
 		this.frameHeader = header;
 	}
@@ -137,5 +141,6 @@ public class CcsdsTmFrame {
 		builder.append("\n]");
 		return builder.toString();
 	}
+
 
 }

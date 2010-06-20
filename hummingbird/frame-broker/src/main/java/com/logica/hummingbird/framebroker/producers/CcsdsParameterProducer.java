@@ -59,9 +59,22 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value);
 		}
-		
-		// FIXME only sets payload parameters!
-		this.parent.getTmPacket().getPayload().addParameter(new CcsdsTmNumberParameter(field, value, Integer.class));
+
+		try {
+			this.getTmFrame().setParameterInFrame(new CcsdsTmNumberParameter(field, value, Integer.class));
+		}
+		catch (SecurityException e) {
+			LOG.error(e.getMessage());
+			e.printStackTrace();
+		}
+		catch (IllegalArgumentException e) {
+			LOG.error(e.getMessage());
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			LOG.error(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -69,7 +82,7 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value);
 		}
-		this.parent.getTmPacket().getPayload().addParameter(new CcsdsTmStringParameter(field, value, String.class));
+		this.getTmFrame().setParameterInFrame(new CcsdsTmStringParameter(field, value, String.class));
 	}
 
 	@Override
@@ -77,7 +90,22 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value);
 		}
-		this.parent.getTmPacket().getPayload().addParameter(new CcsdsTmNumberParameter(field, value, Double.class));
+
+		try {
+			this.getTmFrame().setParameterInFrame(new CcsdsTmNumberParameter(field, value, Double.class));
+		}
+		catch (SecurityException e) {
+			LOG.error(e.getMessage());
+			e.printStackTrace();
+		}
+		catch (IllegalArgumentException e) {
+			LOG.error(e.getMessage());
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			LOG.error(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 }
