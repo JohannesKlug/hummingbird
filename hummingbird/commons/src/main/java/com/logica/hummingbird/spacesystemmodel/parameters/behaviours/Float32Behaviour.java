@@ -41,11 +41,14 @@ public class Float32Behaviour extends AbstractFloatBehaviour {
 		}
 
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("Extracting value using longBitsToDouble");
+			LOG.debug("Extracting value using longBitsToDouble...");
 		}
 		
 		// Float 32 so convert to a Float
-		return Float.intBitsToFloat(Integer.parseInt(actualBitSetString));
+//		return Float.intBitsToFloat(Integer.parseInt(actualBitSetString));
+		Double doubleRep = Double.longBitsToDouble(Long.parseLong(actualBitSetString, 2));
+		
+		return doubleRep.floatValue();
 	}
 
 	@Override
