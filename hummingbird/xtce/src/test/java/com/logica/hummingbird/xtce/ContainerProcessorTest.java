@@ -4,7 +4,7 @@ import java.util.BitSet;
 
 import junit.framework.TestCase;
 
-import com.logica.hummingbird.framebroker.FrameBrokerImpl;
+import com.logica.hummingbird.framebroker.CcsdsFrameBrokerImpl;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
@@ -82,7 +82,7 @@ public class ContainerProcessorTest extends TestCase {
 		}
 		
 		/** Marshall it to a BitSet. */
-		FrameBrokerImpl processor = new FrameBrokerImpl(factory);
+		CcsdsFrameBrokerImpl processor = new CcsdsFrameBrokerImpl(factory);
 		processor.marshall("TMFrame", frame);
 		
 		/** Visualize the BitSet*/

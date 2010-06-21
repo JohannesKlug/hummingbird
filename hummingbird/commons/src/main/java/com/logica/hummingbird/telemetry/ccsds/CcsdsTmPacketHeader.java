@@ -1,8 +1,7 @@
 package com.logica.hummingbird.telemetry.ccsds;
 
-import com.logica.hummingbird.telemetry.CcsdsTelemetryPacketHeader;
 
-public class CcsdsTmPacketHeader implements CcsdsTelemetryPacketHeader {
+public class CcsdsTmPacketHeader {
 	
 	int apid;
 	
@@ -19,7 +18,6 @@ public class CcsdsTmPacketHeader implements CcsdsTelemetryPacketHeader {
 		return builder.toString();
 	}
 
-	@Override
 	public void addApid(int apid) {
 		this.apid = apid;
 	}

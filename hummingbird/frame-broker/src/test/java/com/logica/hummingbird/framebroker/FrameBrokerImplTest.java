@@ -3,14 +3,14 @@
  */
 package com.logica.hummingbird.framebroker;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.BitSet;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import static org.junit.Assert.*;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,17 +18,12 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationExcepti
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
-import com.logica.hummingbird.telemetry.TelemetryFrame;
-import com.logica.hummingbird.telemetry.TelemetryPacket;
-import com.logica.hummingbird.telemetry.CcsdsTelemetryPacketHeader;
-import com.logica.hummingbird.telemetry.TelemetryPacketPayload;
-import com.logica.hummingbird.telemetry.TelemetryParameter;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsFrameHeader;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsFrameTail;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrameHeader;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrameTail;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacketHeader;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacketPayload;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
 import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
 import com.logica.hummingbird.util.BitSetUtility;
 
@@ -43,7 +38,7 @@ public class FrameBrokerImplTest {
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(FrameBrokerImplTest.class);
 
-	private IFrameBroker frameBroker;
+	private CcsdsFrameBroker frameBroker;
 
 	/**
 	 * Based upon the MockContainerFactory this Bit String encodes the Mock Container model with a param type ID of 555
@@ -60,7 +55,7 @@ public class FrameBrokerImplTest {
 	/**
 	 * The TelemetryFrame version of the test bitset frame.
 	 */
-	private static TelemetryFrame testFrame = null;
+	private static CcsdsTmFrame testFrame = null;
 
 	private MockContainerModelFactory mockSpaceSystemFactory;
 	
@@ -78,11 +73,11 @@ public class FrameBrokerImplTest {
 		testFrame = new CcsdsTmFrame();
 		
 		// Create the test frame inners
-		CcsdsFrameHeader testFrameHeader = new CcsdsFrameHeader();
-		CcsdsFrameTail testFrameTail = new CcsdsFrameTail();
-		TelemetryPacket packet = new CcsdsTmPacket();
-		CcsdsTelemetryPacketHeader packetHeader = new CcsdsTmPacketHeader();
-		TelemetryPacketPayload payload = new CcsdsTmPacketPayload();
+		CcsdsTmFrameHeader testFrameHeader = new CcsdsTmFrameHeader();
+		CcsdsTmFrameTail testFrameTail = new CcsdsTmFrameTail();
+		CcsdsTmPacket packet = new CcsdsTmPacket();
+		CcsdsTmPacketHeader packetHeader = new CcsdsTmPacketHeader();
+		CcsdsTmPacketPayload payload = new CcsdsTmPacketPayload();
 		packet.setHeader(packetHeader);
 		packet.setPayload(payload);
 		
@@ -90,7 +85,7 @@ public class FrameBrokerImplTest {
 //		TelemetryParameter apid = new CcsdsTmParameter("APID", 555, Integer.class);
 		packetHeader.addApid(555);
 		
-		TelemetryParameter testParamA = new CcsdsTmParameter("Test Param A", 123, Integer.class);
+		CcsdsTmParameter testParamA = new CcsdsTmParameter("Test Param A", 123, Integer.class);
 		payload.addParameter(testParamA);
 
 		
@@ -112,12 +107,12 @@ public class FrameBrokerImplTest {
 	@Before
 	public void setUp() throws Exception {
 		mockSpaceSystemFactory = new MockContainerModelFactory();
-		frameBroker = new FrameBrokerImpl(mockSpaceSystemFactory);
+		frameBroker = new CcsdsFrameBrokerImpl(mockSpaceSystemFactory);
 	}
 
 	/**
 	 * Test method for
-	 * {@link com.logica.hummingbird.framebroker.FrameBrokerImpl#unmarshall(java.lang.String, java.util.BitSet)}.
+	 * {@link com.logica.hummingbird.framebroker.CcsdsFrameBrokerImpl#unmarshall(java.lang.String, java.util.BitSet)}.
 	 * 
 	 * @throws UnknownContainerNameException
 	 * @throws BitSetOperationException
@@ -129,7 +124,7 @@ public class FrameBrokerImplTest {
 
 		// Unmarshall each telemetry element in the space system model
 		frameBroker.unmarshall(MockContainerModelFactory.TM_FRAME_ALIAS, mockFrame);
-		TelemetryFrame unmarshalledFrame = frameBroker.getFrame();
+		CcsdsTmFrame unmarshalledFrame = frameBroker.getFrame();
 		LOG.info("Unmarshalled Frame: " + unmarshalledFrame);
 
 	}
@@ -142,7 +137,7 @@ public class FrameBrokerImplTest {
 		
 		frameBroker.unmarshall(MockContainerModelFactory.TM_FRAME_HEADER_ALIAS, mockFrame);
 		
-		TelemetryFrame unmarshalledFrameHeader = frameBroker.getFrame();
+		CcsdsTmFrame unmarshalledFrameHeader = frameBroker.getFrame();
 		LOG.info("Unmarshalled Frame: " + unmarshalledFrameHeader);
 	}
 		
@@ -153,7 +148,7 @@ public class FrameBrokerImplTest {
 
 	/**
 	 * Test method for
-	 * {@link com.logica.hummingbird.framebroker.FrameBrokerImpl#marshall(java.lang.String, java.util.BitSet)}.
+	 * {@link com.logica.hummingbird.framebroker.CcsdsFrameBrokerImpl#marshall(java.lang.String, java.util.BitSet)}.
 	 * @throws UnknownContainerNameException 
 	 * @throws BitSetOperationException 
 	 */
@@ -187,7 +182,7 @@ public class FrameBrokerImplTest {
 
 	/**
 	 * Test method for
-	 * {@link com.logica.hummingbird.framebroker.FrameBrokerImpl#marshall(java.lang.String, java.lang.String)}.
+	 * {@link com.logica.hummingbird.framebroker.CcsdsFrameBrokerImpl#marshall(java.lang.String, java.lang.String)}.
 	 */
 	@Ignore
 	@Test

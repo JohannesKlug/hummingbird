@@ -2,8 +2,6 @@ package com.logica.hummingbird.telemetry.ccsds;
 
 import java.util.BitSet;
 
-import com.logica.hummingbird.telemetry.TelemetryFrameHeader;
-
 
 /**
  * 
@@ -11,9 +9,9 @@ import com.logica.hummingbird.telemetry.TelemetryFrameHeader;
  * @author Johannes Klug
  *
  */
-public class CcsdsFrameHeader implements TelemetryFrameHeader {
+public class CcsdsTmFrameHeader {
 	
-	CcsdsFrameHeader secondaryHeader = null;
+	CcsdsTmFrameHeader secondaryHeader = null;
 
 	public final static String FRAME_VERSION_NUM = "CCSDS_FVERSION";
 	public final static String SPACECRAFT_ID = "CCSDS_SC_ID";
@@ -46,7 +44,7 @@ public class CcsdsFrameHeader implements TelemetryFrameHeader {
 	/**
 	 * 
 	 */
-	public CcsdsFrameHeader() {
+	public CcsdsTmFrameHeader() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -54,11 +52,11 @@ public class CcsdsFrameHeader implements TelemetryFrameHeader {
 	//----------------------------------------------------------
 	// Getter and setters.  No trespassing.
 	//----------------------------------------------------------
-	public CcsdsFrameHeader getSecondaryHeader() {
+	public CcsdsTmFrameHeader getSecondaryHeader() {
 		return secondaryHeader;
 	}
 
-	public void setSecondaryHeader(CcsdsFrameHeader secondaryHeader) {
+	public void setSecondaryHeader(CcsdsTmFrameHeader secondaryHeader) {
 		this.secondaryHeader = secondaryHeader;
 	}
 

@@ -39,7 +39,7 @@ import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.telemetry.TelemetryFrame;
+import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
 
 /**
  * TODO Improve comment.
@@ -48,8 +48,8 @@ import com.logica.hummingbird.telemetry.TelemetryFrame;
  * pleasing as there is a direct coupling between the 2. Notify the observers
  * when the complete container has been unmarshalled.
  */
-public class FrameBrokerImpl implements IFrameBroker {
-	private final static Logger LOG = LoggerFactory.getLogger(FrameBrokerImpl.class);
+public class CcsdsFrameBrokerImpl implements CcsdsFrameBroker {
+	private final static Logger LOG = LoggerFactory.getLogger(CcsdsFrameBrokerImpl.class);
 
 	/** The factory used to locate the models. */
 	protected ContainerFactory factory = null;
@@ -66,7 +66,7 @@ public class FrameBrokerImpl implements IFrameBroker {
 	 * @param factory
 	 *            The factory to be used to obtain references to the container.
 	 * */
-	public FrameBrokerImpl(ContainerFactory factory) {
+	public CcsdsFrameBrokerImpl(ContainerFactory factory) {
 		this.factory = factory;
 		this.frameProducer = new CcsdsFrameProducer(factory);
 		this.packetProducer = new CcsdsPacketProducer(factory, (CcsdsFrameProducer) frameProducer);
@@ -101,7 +101,7 @@ public class FrameBrokerImpl implements IFrameBroker {
 	}
 
 	@Override
-	public TelemetryFrame getFrame() {
+	public CcsdsTmFrame getFrame() {
 		return this.frameProducer.getFrame();
 	}
 

@@ -3,21 +3,16 @@ package com.logica.hummingbird.telemetry.ccsds;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.logica.hummingbird.telemetry.TelemetryPacketPayload;
-import com.logica.hummingbird.telemetry.TelemetryParameter;
+public class CcsdsTmPacketPayload {
 
-public class CcsdsTmPacketPayload implements TelemetryPacketPayload {
+	List<CcsdsTmParameter> parameters = new ArrayList<CcsdsTmParameter>();
 
-	List<TelemetryParameter> parameters = new ArrayList<TelemetryParameter>();
-
-	@Override
-	public void addParameter(TelemetryParameter parameter) {
+	public void addParameter(CcsdsTmParameter parameter) {
 		this.parameters.add(parameter);
 	}
 
-	@Override
-	public TelemetryParameter getParameter(String parameterName) {
-		for(TelemetryParameter parameter : this.parameters) {
+	public CcsdsTmParameter getParameter(String parameterName) {
+		for(CcsdsTmParameter parameter : this.parameters) {
 			if(parameter.getName().equals(parameterName)) {
 				return parameter;
 			}
@@ -27,8 +22,7 @@ public class CcsdsTmPacketPayload implements TelemetryPacketPayload {
 		return null;
 	}
 
-	@Override
-	public List<TelemetryParameter> getParameters() {
+	public List<CcsdsTmParameter> getParameters() {
 		return this.parameters;
 	}
 

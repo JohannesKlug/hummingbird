@@ -54,7 +54,7 @@ public class NumberParameterType extends NamedElement {
 	private final NumberParameterTypeBehaviour numberBehaviour;
 	
 	/** Flag defining whether the type is signed or unsigned. */
-	protected final boolean signed;	
+//	protected final boolean signed;	
 	
 	/** The initial value of the parameter. */
 	protected final long initialValue;
@@ -75,24 +75,11 @@ public class NumberParameterType extends NamedElement {
 	 * @throws InvalidParameterTypeException 
 	 *
 	 */
-	public NumberParameterType(String name, String shortDescription, String longDescription, NumberParameterTypeBehaviour numberType, boolean signed, long initialValue) throws InvalidParameterTypeException {
+	public NumberParameterType(String name, String shortDescription, String longDescription, NumberParameterTypeBehaviour numberType, long initialValue) throws InvalidParameterTypeException {
 		super(name, shortDescription, longDescription);
 		
 		this.numberBehaviour = numberType;
-//		this.type = type;
-		this.signed = signed;
 		this.initialValue = initialValue;
-	}
-
-
-	/**
-	 * Returns the value of the signed flag.
-	 * 
-	 * @return boolean Flag indicating whether the parameter is signed or not. 
-	 *
-	 */
-	public boolean isSigned() {
-		return signed;
 	}
 
 	/**
@@ -151,14 +138,4 @@ public class NumberParameterType extends NamedElement {
 	public NumberParameterTypeBehaviour getNumberBehaviour() {
 		return numberBehaviour;
 	}
-
-	/**
-	 * Returns the simple java type of the type.
-	 * 
-	 * @return Returns the simple java type of the parameter. 
-	 *
-	 */
-//	public eParameterType getType() {
-//		return type;
-//	}
 }

@@ -1,31 +1,24 @@
 package com.logica.hummingbird.telemetry.ccsds;
 
-import com.logica.hummingbird.telemetry.TelemetryPacket;
-import com.logica.hummingbird.telemetry.CcsdsTelemetryPacketHeader;
-import com.logica.hummingbird.telemetry.TelemetryPacketPayload;
 
-public class CcsdsTmPacket implements TelemetryPacket {    
-    CcsdsTelemetryPacketHeader packetHeader = new CcsdsTmPacketHeader();
+public class CcsdsTmPacket {    
+    CcsdsTmPacketHeader packetHeader = new CcsdsTmPacketHeader();
     
-    TelemetryPacketPayload payload = new CcsdsTmPacketPayload();
+    CcsdsTmPacketPayload payload = new CcsdsTmPacketPayload();
 
-	@Override
-	public CcsdsTelemetryPacketHeader getHeader() {
+	public CcsdsTmPacketHeader getHeader() {
 		return this.packetHeader;
 	}
 
-	@Override
-	public TelemetryPacketPayload getPayload() {
+	public CcsdsTmPacketPayload getPayload() {
 		return this.payload;
 	}
 
-	@Override
-	public void setHeader(CcsdsTelemetryPacketHeader header) {
+	public void setHeader(CcsdsTmPacketHeader header) {
 		this.packetHeader = header;
 	}
 
-	@Override
-	public void setPayload(TelemetryPacketPayload payload) {
+	public void setPayload(CcsdsTmPacketPayload payload) {
 		this.payload = payload;		
 	}
 

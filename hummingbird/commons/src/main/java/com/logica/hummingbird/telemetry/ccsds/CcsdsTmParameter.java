@@ -1,8 +1,7 @@
 package com.logica.hummingbird.telemetry.ccsds;
 
-import com.logica.hummingbird.telemetry.TelemetryParameter;
 
-public class CcsdsTmParameter implements TelemetryParameter {
+public class CcsdsTmParameter {
 
 	private String name;
 	
@@ -41,7 +40,6 @@ public class CcsdsTmParameter implements TelemetryParameter {
 		return equal;
 	}
 
-	@Override
 	public String getName() {
 		return this.name;
 	}

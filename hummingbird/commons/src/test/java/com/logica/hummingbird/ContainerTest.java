@@ -53,7 +53,7 @@ import com.logica.hummingbird.util.BitSetUtility;
  * </pre>
  * 
  * @author Mark Doyle
- * 
+ * @author Johannes Klug
  */
 public class ContainerTest {
 	/** Logger for this class */

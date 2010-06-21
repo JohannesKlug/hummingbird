@@ -42,11 +42,6 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 		int length = (int) getSizeIntBits();
 		
 		long unsignedInt = number.longValue();
-		
-		// checking the bit length against unsigned int
-		if (length > Integer.SIZE + 1) {
-			throw new RuntimeException("You can not set a higher length than " + (Integer.SIZE + 1) + " bits.");
-		}
 
 		// checking whether the value fits into the bit string of length - 1
 		long absValue = Math.abs(unsignedInt);
@@ -74,7 +69,7 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 
 	@Override
 	public String getTypeName() {
-		return "Unsigned integer";
+		return getSizeIntBits() + "bit Unsigned integer";
 	}
 
 
