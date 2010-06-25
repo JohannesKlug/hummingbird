@@ -31,12 +31,12 @@ import com.logica.hummingbird.util.BitSetUtility;
  * @author Mark Doyle
  * @TODO Test is not complete - awaiting commons telemetry models to be finalised
  */
-public class FrameBrokerImplTest {
+public class CcsdsFrameBrokerImplTest {
 	
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOG = LoggerFactory.getLogger(FrameBrokerImplTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CcsdsFrameBrokerImplTest.class);
 
 	private CcsdsFrameBroker frameBroker;
 
@@ -66,9 +66,12 @@ public class FrameBrokerImplTest {
 
 	/**
 	 * Set up the Mock Container Factory and create the testFrame for use by the tests.
+	 * @throws IllegalAccessException 
+	 * @throws IllegalArgumentException 
+	 * @throws SecurityException 
 	 */
 	@BeforeClass
-	public static void setupForAll() {		
+	public static void setupForAll() throws SecurityException, IllegalArgumentException, IllegalAccessException {		
 		// Create the test frame
 		testFrame = new CcsdsTmFrame();
 		
@@ -81,18 +84,18 @@ public class FrameBrokerImplTest {
 		packet.setHeader(packetHeader);
 		packet.setPayload(payload);
 		
-		// Create the payload
-//		TelemetryParameter apid = new CcsdsTmParameter("APID", 555, Integer.class);
-		packetHeader.addApid(555);
-		
-		CcsdsTmParameter testParamA = new CcsdsTmParameter("Test Param A", 123, Integer.class);
-		payload.addParameter(testParamA);
-
-		
 		// Add the inners to the test frame
 		testFrame.setHeader(testFrameHeader);
 		testFrame.addPacket(packet);
 		testFrame.setTail(testFrameTail);
+		
+		// Create the payload
+		int APID_555 = 555;
+		testFrame.setParameterInFrame(new CcsdsTmParameter("apid", APID_555, Integer.class));
+		
+		// Use the reflection setter from Frame?
+		CcsdsTmParameter testParamA = new CcsdsTmParameter("Test Param A", 123, Integer.class);
+		payload.addParameter(testParamA);		
 		
 		LOG.info("Hummingbird frame: " + testFrame);
 	}
@@ -126,7 +129,6 @@ public class FrameBrokerImplTest {
 		frameBroker.unmarshall(MockContainerModelFactory.TM_FRAME_ALIAS, mockFrame);
 		CcsdsTmFrame unmarshalledFrame = frameBroker.getFrame();
 		LOG.info("Unmarshalled Frame: " + unmarshalledFrame);
-
 	}
 	
 	@Ignore
@@ -140,11 +142,6 @@ public class FrameBrokerImplTest {
 		CcsdsTmFrame unmarshalledFrameHeader = frameBroker.getFrame();
 		LOG.info("Unmarshalled Frame: " + unmarshalledFrameHeader);
 	}
-		
-//		frameBroker.unmarshall(MockContainerModelFactory.TM_FRAME_TAIL_ALIAS, mockFrame);
-//		frameBroker.unmarshall(MockContainerModelFactory.TM_PACKET_ALIAS, mockFrame);
-//		frameBroker.unmarshall(MockContainerModelFactory.TM_PACKET_HEADER_ALIAS, mockFrame);
-//		frameBroker.unmarshall(MockContainerModelFactory.TM_PACKET_BODY_ALIAS, mockFrame);
 
 	/**
 	 * Test method for

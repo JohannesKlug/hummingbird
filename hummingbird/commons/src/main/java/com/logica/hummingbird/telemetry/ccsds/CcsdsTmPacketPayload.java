@@ -10,6 +10,10 @@ public class CcsdsTmPacketPayload {
 	public void addParameter(CcsdsTmParameter parameter) {
 		this.parameters.add(parameter);
 	}
+	
+//	public void addParameter(CcsdsTmStringParameter parameter) {
+//		this.stringParameters.add(parameter);
+//	}
 
 	public CcsdsTmParameter getParameter(String parameterName) {
 		for(CcsdsTmParameter parameter : this.parameters) {
@@ -22,9 +26,13 @@ public class CcsdsTmPacketPayload {
 		return null;
 	}
 
-	public List<CcsdsTmParameter> getParameters() {
+	public List<CcsdsTmParameter> getTmParameters() {
 		return this.parameters;
 	}
+	
+//	public List<CcsdsTmStringParameter> getStringParameters() {
+//		return this.stringParameters;
+//	}
 
 	@Override
 	public String toString() {

@@ -3,10 +3,14 @@ package com.logica.hummingbird.telemetry.ccsds;
 
 public class CcsdsTmPacketHeader {
 	
-	int apid;
+	protected int apid;
 	
 	public CcsdsTmPacketHeader() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public int getApid() {
+		return this.apid;
 	}
 
 	@Override
@@ -17,11 +21,5 @@ public class CcsdsTmPacketHeader {
 		builder.append("\n]");
 		return builder.toString();
 	}
-
-	public void addApid(int apid) {
-		this.apid = apid;
-	}
-
-
 
 }

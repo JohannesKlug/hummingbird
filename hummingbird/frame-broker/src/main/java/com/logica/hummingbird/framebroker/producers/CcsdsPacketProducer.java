@@ -79,14 +79,14 @@ public class CcsdsPacketProducer extends CcsdsProducer implements ContainerObser
 			LOG.debug("TmPacket completely updated");
 			LOG.debug("TmPacket = " + tmPacket);
 		}
-//		parent.getTmFrame().getPackets().add(tmPacket);
 		parent.getTmFrame().addPacket(tmPacket);
 	}
 
 	@Override
 	public void updated(String field, BitSet value) {
-		// TODO Auto-generated method stub
-		
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("TmPacket updated: " + field);
+		}
 	}
 
 }

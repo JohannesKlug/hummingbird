@@ -35,15 +35,12 @@ import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.ContainerObserver;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
 
 /**
  * TODO write here a description of the class
  */
 public class CcsdsFrameProducer extends CcsdsProducer implements ContainerObserver {
 	private final static Logger LOG = LoggerFactory.getLogger(CcsdsFrameProducer.class);
-
-	CcsdsTmFrame tmFrame = new CcsdsTmFrame();
 
 	public CcsdsFrameProducer(ContainerFactory containerFactory) {
 		super(containerFactory);
@@ -72,19 +69,21 @@ public class CcsdsFrameProducer extends CcsdsProducer implements ContainerObserv
 	public void completed() {
 		// Now the complete frame is complete we can set the ccsds tmframe in the model
 		this.setFrame(tmFrame);
+
 		if(LOG.isDebugEnabled()) {
 			LOG.debug("TmFrame completely updated");
 			LOG.debug("TmFrame = " + tmFrame);
 		}
+
+		// Send frame out in message..
 	}
 
-	public CcsdsTmFrame getTmFrame() {
-		return tmFrame;
-	}
 
 	@Override
 	public void updated(String field, BitSet value) {
-		
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("TmFrame updated: " + field);
+		}
 	}
 
 }

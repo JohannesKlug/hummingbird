@@ -44,17 +44,17 @@ public class CamelCcsdsFrameBroker extends CcsdsFrameBrokerImpl {
 		// Prepare the frame message - with POJO structure as payload (as opposed to uninterpreted BitSet)
 		Message frameMessage = new DefaultMessage();
 		frameMessage.setHeader("Type", MessageType.TMFrame);
-		frameMessage.setBody(frameProducer.getFrame());
+		frameMessage.setBody(frameProducer.getTmFrame());
 		messages.add(frameMessage);
 
 		// for (CcsdsTmPacket packet : CcsdsProducer.getFrame().getPackets()) {
-		for (CcsdsTmPacket packet : frameProducer.getFrame().getPackets()) {
+		for (CcsdsTmPacket packet : frameProducer.getTmFrame().getPackets()) {
 			Message packetMessage = new DefaultMessage();
 			packetMessage.setHeader("Type", MessageType.TMPacket);
 			packetMessage.setBody(packet);
 			messages.add(packetMessage);
 
-			for (CcsdsTmParameter parameter : ((CcsdsTmPacket) packet).getPayload().getParameters()) {
+			for (CcsdsTmParameter parameter : ((CcsdsTmPacket) packet).getPayload().getTmParameters()) {
 				Message parameterMessage = new DefaultMessage();
 				parameterMessage.setHeader("Type", MessageType.TMParameter);
 				parameterMessage.setBody(parameter);

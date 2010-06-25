@@ -9,7 +9,7 @@ public abstract class CcsdsProducer {
 	 * This is a CCSDS TmFrame model which is populated each time the spacesystemmodel
 	 * is updated.
 	 */
-	protected CcsdsTmFrame frame;
+	protected CcsdsTmFrame tmFrame = new CcsdsTmFrame();
 
 	private ContainerFactory containerFactory;
 
@@ -26,11 +26,11 @@ public abstract class CcsdsProducer {
 	}
 
 	public void setFrame(CcsdsTmFrame tmFrame) {
-		this.frame = tmFrame;
+		this.tmFrame = tmFrame;
 	}
 
-	public CcsdsTmFrame getFrame() {
-		return frame;
+	public CcsdsTmFrame getTmFrame() {
+		return tmFrame;
 	}
 
 }

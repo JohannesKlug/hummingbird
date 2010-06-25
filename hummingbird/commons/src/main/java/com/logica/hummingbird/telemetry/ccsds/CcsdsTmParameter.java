@@ -5,12 +5,12 @@ public class CcsdsTmParameter {
 
 	private String name;
 	
-	private Class valueClazz;
+	private Class<? extends Object> valueClazz;
 
 	private Object value;
 	
 	
-	public CcsdsTmParameter(String name, Object value, Class valueClazz) {
+	public CcsdsTmParameter(String name, Object value, Class<? extends Object> valueClazz) {
 		this.value = value;
 		this.valueClazz = valueClazz;
 		this.name = name;
@@ -55,6 +55,13 @@ public class CcsdsTmParameter {
 		builder.append(valueClazz);
 		builder.append("\n]");
 		return builder.toString();
+	}
+
+	/**
+	 * @return the valueClazz
+	 */
+	public Class<? extends Object> getValueClazz() {
+		return valueClazz;
 	}
 
 

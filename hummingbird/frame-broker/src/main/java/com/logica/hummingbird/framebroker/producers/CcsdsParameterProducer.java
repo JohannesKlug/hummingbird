@@ -58,7 +58,22 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value);
 		}
-		this.parent.getTmPacket().getPayload().addParameter(new CcsdsTmParameter(field, value, Integer.class));
+
+		try {
+			this.getTmFrame().setParameterInFrame(new CcsdsTmParameter(field, value, Integer.class));
+		}
+		catch (SecurityException e) {
+			LOG.error(e.getMessage());
+			e.printStackTrace();
+		}
+		catch (IllegalArgumentException e) {
+			LOG.error(e.getMessage());
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			LOG.error(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -66,7 +81,21 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value);
 		}
-		this.parent.getTmPacket().getPayload().addParameter(new CcsdsTmParameter(field, value, String.class));
+		try {
+			this.getTmFrame().setParameterInFrame(new CcsdsTmParameter(field, value, String.class));
+		}
+		catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -74,7 +103,22 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value);
 		}
-		this.parent.getTmPacket().getPayload().addParameter(new CcsdsTmParameter(field, value, Double.class));
+
+		try {
+			this.getTmFrame().setParameterInFrame(new CcsdsTmParameter(field, value, Double.class));
+		}
+		catch (SecurityException e) {
+			LOG.error(e.getMessage());
+			e.printStackTrace();
+		}
+		catch (IllegalArgumentException e) {
+			LOG.error(e.getMessage());
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			LOG.error(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 }
