@@ -10,9 +10,9 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeEx
  * @author Johannes Klug
  *
  */
-public class LongUnsignedBehaviour extends AbstractIntegerBehaviour {
+public class LongSignedBehaviour extends AbstractIntegerBehaviour {
 	
-	public LongUnsignedBehaviour(int sizeInBits) throws InvalidParameterTypeException {
+	public LongSignedBehaviour(int sizeInBits) throws InvalidParameterTypeException {
 		super(sizeInBits);
 		if(sizeInBits > 64) {
 			throw new InvalidParameterTypeException("LongUnsigned cannot be greater than 64-bits in size.");

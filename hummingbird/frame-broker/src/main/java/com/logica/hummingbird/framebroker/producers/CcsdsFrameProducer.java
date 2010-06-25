@@ -74,6 +74,8 @@ public class CcsdsFrameProducer extends CcsdsProducer implements ContainerObserv
 			LOG.debug("TmFrame completely updated");
 			LOG.debug("TmFrame = " + tmFrame);
 		}
+
+		// Send frame out in message..
 	}
 
 

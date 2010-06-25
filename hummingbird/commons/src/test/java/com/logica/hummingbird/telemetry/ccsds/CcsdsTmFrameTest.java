@@ -67,9 +67,9 @@ public class CcsdsTmFrameTest {
 		frame.setParameterInFrame(syncFlag);
 
 		assertEquals("Header should have frameversionnum set and be " + FRAME_VERSION_NUM, FRAME_VERSION_NUM, frame.frameHeader.getFrameVersionNum());
-		assertEquals("Header should have frameversionnum set and be " + SPACE_CRAFT_ID, SPACE_CRAFT_ID, frame.frameHeader.getSpaceCraftId());
-		assertEquals("Header should have frameversionnum set and be " + OP_CTRL_FIELD_FLAG, OP_CTRL_FIELD_FLAG, frame.frameHeader.isOperationControlFieldFlag());
-		assertEquals("Header should have frameversionnum set and be " + SYNC_FLAG, SYNC_FLAG, frame.frameHeader.isSyncFlag());
+		assertEquals("Header should have space craft id set and be " + SPACE_CRAFT_ID, SPACE_CRAFT_ID, frame.frameHeader.getSpaceCraftId());
+		assertEquals("Header should have op ctrl flag set and be " + OP_CTRL_FIELD_FLAG, OP_CTRL_FIELD_FLAG, frame.frameHeader.isOperationControlFieldFlag());
+		assertEquals("Header should have sync flag set and be " + SYNC_FLAG, SYNC_FLAG, frame.frameHeader.isSyncFlag());
 	}
 
 	@Test

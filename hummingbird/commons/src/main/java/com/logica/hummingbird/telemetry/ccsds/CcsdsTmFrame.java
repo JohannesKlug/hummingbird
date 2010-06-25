@@ -1,7 +1,6 @@
 package com.logica.hummingbird.telemetry.ccsds;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
