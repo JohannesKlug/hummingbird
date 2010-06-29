@@ -19,7 +19,7 @@ public class CcsdsFrameDispatcherTest {
 	@Before
 	public void setUp() throws Exception {
 		FileInputStream in = null;
-		ByteArrayOutputStream out = new ByteArrayOutputStream(2048);
+		ByteArrayOutputStream out = new ByteArrayOutputStream(1115);
 		try {
 			in = new FileInputStream("src/test/resources/frame0.raw");
 			int c;
@@ -44,7 +44,13 @@ public class CcsdsFrameDispatcherTest {
 	public void testReadFrame() {
 		assertEquals(0x20, frame0[0]);
 		assertEquals(0x11, frame0[1]);
-		assertEquals(2048, frame0.length);
+		assertEquals(1115, frame0.length);
+	}
+	
+	@Test(expected=InvalidFrameLengthException.class)
+	public void testInvalidFrameLength() throws InvalidFrameLengthException {
+		CcsdsFrameDispatcher dispatcher = new CcsdsFrameDispatcher();
+		dispatcher.process(new byte[2047]);
 	}
 	
 	@Test

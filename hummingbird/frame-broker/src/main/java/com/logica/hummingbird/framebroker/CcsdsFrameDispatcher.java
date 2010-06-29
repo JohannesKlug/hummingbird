@@ -8,10 +8,12 @@ import com.logica.hummingbird.framebroker.exceptions.InvalidFrameLengthException
 
 public class CcsdsFrameDispatcher extends Observable {
 
+	
+	public final static int FRAME_LENGTH_IN_OCTETS = 1115;
 	/**
 	 * For now, we consider frames to be of the maximum allowed length, i.e. 16384 bits or 2048 octets.
 	 */
-	public final static int FRAME_LENGTH_IN_OCTETS = 16384 / 8;
+	//public final static int FRAME_LENGTH_IN_OCTETS = 16384 / 8;
 	
 	/**
 	 * For now, we expect operational control (4 octets) field and error control field  (2 octets) to be present. 
