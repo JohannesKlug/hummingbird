@@ -18,6 +18,19 @@ public class CcsdsFrameDispatcher extends Observable {
 	 */
 	private final static int PAYLOAD_END = FRAME_LENGTH_IN_OCTETS - 4 - 2;
 	
+	private VirtualChannel[] virtualChannel = new VirtualChannel[8];
+	
+	public CcsdsFrameDispatcher() {
+		
+		/*
+		 * Create 8 VirtualChannels, accessed using their array index.
+		 */
+		for (int i=0; i<8; i++) {
+			virtualChannel[i] = new VirtualChannel();
+		}
+		
+	}
+	
 	
 	public void process(byte[] frame) throws InvalidFrameLengthException {
 		
@@ -67,6 +80,9 @@ public class CcsdsFrameDispatcher extends Observable {
 		
 		int firstHeaderPointer = firstHeaderPointerHighByte + firstHeaderPointerLowByte;
 		
+		int masterChannelFrameCount = primaryHeader[2];
+		int virtualChannelFrameCount = primaryHeader[3];
+		
 		
 		int payloadOffset = 8;
 		
@@ -94,6 +110,9 @@ public class CcsdsFrameDispatcher extends Observable {
 		
 		byte[] payload = ArrayUtils.subarray(frame, payloadOffset, PAYLOAD_END);
 		
+		virtualChannel[virtualChannelId].addPayload(payload, virtualChannelFrameCount, firstHeaderPointer);
+		
+		
 		byte[] operationalControlField = ArrayUtils.subarray(frame, PAYLOAD_END, PAYLOAD_END + 4);
 		byte[] errorControlField = ArrayUtils.subarray(frame, PAYLOAD_END + 4, PAYLOAD_END + 4 +2);
 		
@@ -103,6 +122,14 @@ public class CcsdsFrameDispatcher extends Observable {
 	private boolean crcValid(byte[] frame) {
 		// FIXME Implement CRC checking here.
 		return true;
+	}
+	
+	public static boolean isNextFrame(int lastFrameCount, int frameCount) {
+		if (Math.abs((lastFrameCount-frameCount)%256) == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 
