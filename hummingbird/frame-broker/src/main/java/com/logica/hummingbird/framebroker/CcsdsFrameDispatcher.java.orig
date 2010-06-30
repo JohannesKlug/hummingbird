@@ -17,14 +17,25 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 	/**
 	 * For now, we consider frames to be of the maximum allowed length, i.e. 16384 bits or 2048 octets.
 	 */
-	//public final static int FRAME_LENGTH_IN_OCTETS = 16384 / 8;
+<<<<<<< HEAD
+	public final static int FRAME_LENGTH_IN_OCTETS = 16384 / 8;
 
+=======
+	//public final static int FRAME_LENGTH_IN_OCTETS = 16384 / 8;
+	
+>>>>>>> 3c9b6d542e3f49473a3ca7f4ce13b47c4984c1e7
 	/**
 	 * For now, we expect operational control (4 octets) field and error control field (2 octets) to be present.
 	 */
 	private final static int PAYLOAD_END = FRAME_LENGTH_IN_OCTETS - 4 - 2;
+<<<<<<< HEAD
 
+	public void process(byte[] frame) throws InvalidFrameLengthException {
+		// Check for Frame Length
+=======
+	
 	private VirtualChannel[] virtualChannel = new VirtualChannel[8];
+	
 	public CcsdsFrameDispatcher() {
 		
 		/*
@@ -42,6 +53,7 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 		/*
 		 * Check for Frame Length
 		 */
+>>>>>>> 3c9b6d542e3f49473a3ca7f4ce13b47c4984c1e7
 		if (frame.length != FRAME_LENGTH_IN_OCTETS) {
 			throw new InvalidFrameLengthException("Expected Frame length in bytes: " + FRAME_LENGTH_IN_OCTETS + ", actual frame length: " + frame.length);
 		}
@@ -60,22 +72,35 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 		byte[] dataFieldStatus;
 
 		primaryHeader = ArrayUtils.subarray(frame, 0, 6);
+<<<<<<< HEAD
 
+		int virtualChannelId = (0x0E & primaryHeader[1]) >> 1;
+
+		dataFieldStatus = ArrayUtils.subarray(frame, 6, 8);
+
+		int firstHeaderPointerHighByte = (0x03 & dataFieldStatus[0]) >> 8;
+=======
+		
 		
 		int spacecraftIdHighByte = (0x3F & primaryHeader[0]) << 4 ;
 		int spacecraftIdLowByte = (0xF0 & primaryHeader[1]) >> 4;
 		int spacecraftId = spacecraftIdHighByte + spacecraftIdLowByte;
 		LOG.debug("Spacecraft ID: " + spacecraftId);
 		
-		int virtualChannelId = (0x0E & primaryHeader[1]) >> 1;
+		int virtualChannelId = (0x0E & primaryHeader[1])>>1;
 		LOG.debug("Virtual Channel Id: " + virtualChannelId);
-
+		
 		dataFieldStatus = ArrayUtils.subarray(frame, 6, 8);
-
+		
+		
 		int firstHeaderPointerHighByte = (0x03 & dataFieldStatus[0]) << 8;
+>>>>>>> 3c9b6d542e3f49473a3ca7f4ce13b47c4984c1e7
 		int firstHeaderPointerLowByte = 0xFF & dataFieldStatus[1];
 
 		int firstHeaderPointer = firstHeaderPointerHighByte + firstHeaderPointerLowByte;
+<<<<<<< HEAD
+
+=======
 		LOG.debug("First Header Pointer:" + firstHeaderPointer);
 		
 		int masterChannelFrameCount = primaryHeader[2] & 0xFF;
@@ -83,7 +108,9 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 		
 		LOG.debug("Master Channel Frame Count: " + masterChannelFrameCount);
 		LOG.debug("Virtual Channel Frame Count: " + virtualChannelFrameCount);
-
+		
+		
+>>>>>>> 3c9b6d542e3f49473a3ca7f4ce13b47c4984c1e7
 		int payloadOffset = 8;
 
 		// check for secondary header flag (1st bit in dataFieldStatus
@@ -108,10 +135,14 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 		}
 
 		byte[] payload = ArrayUtils.subarray(frame, payloadOffset, PAYLOAD_END);
+<<<<<<< HEAD
 
+=======
+		
 		virtualChannel[virtualChannelId].addPayload(payload, virtualChannelFrameCount, firstHeaderPointer);
 		
 		
+>>>>>>> 3c9b6d542e3f49473a3ca7f4ce13b47c4984c1e7
 		byte[] operationalControlField = ArrayUtils.subarray(frame, PAYLOAD_END, PAYLOAD_END + 4);
 		byte[] errorControlField = ArrayUtils.subarray(frame, PAYLOAD_END + 4, PAYLOAD_END + 4 + 2);
 
@@ -121,6 +152,8 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 		// FIXME Implement CRC checking here.
 		return true;
 	}
+<<<<<<< HEAD
+=======
 	
 	public static boolean isNextFrame(int lastFrameCount, int frameCount) {
 		if (Math.abs((lastFrameCount-frameCount)%256) == 1) {
@@ -136,5 +169,7 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 		// TODO Auto-generated method stub
 		
 	}
+	
+>>>>>>> 3c9b6d542e3f49473a3ca7f4ce13b47c4984c1e7
 
 }

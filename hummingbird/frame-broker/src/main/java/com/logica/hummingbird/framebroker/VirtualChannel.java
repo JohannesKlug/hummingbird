@@ -11,14 +11,14 @@ public class VirtualChannel {
 		reset();
 	}
 	
-	public void addPayload(byte[] payload, int frameCount) {
+	public void addPayload(byte[] payload, int frameCount, int firstHeaderPointer) {
 		/*
 		 * Checking for lastFrameCount == -1 will happen millions of times, this should probably optimised.
 		 */
 		if (lastFrameCount == -1) {
 			lastFrameCount = frameCount;
 		} else {
-			if (isNextFrame(frameCount)) {
+			if (CcsdsFrameDispatcher.isNextFrame(lastFrameCount, frameCount)) {
 				// we can safely add the payload
 				totalPayload = ArrayUtils.addAll(totalPayload, payload);
 			} else {
@@ -38,11 +38,5 @@ public class VirtualChannel {
 		lastFrameCount = -1;
 	}
 	
-	private boolean isNextFrame(int frameCount) {
-		if (Math.abs((lastFrameCount-frameCount)%256) == 1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+
 }
