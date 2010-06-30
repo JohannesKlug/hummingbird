@@ -12,13 +12,14 @@ import com.logica.hummingbird.util.BitSetUtility;
 public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 	private static final Logger LOG = LoggerFactory.getLogger(IntegerUnsignedBehaviour.class);
 	
-	public IntegerUnsignedBehaviour(int sizeInBits) throws InvalidParameterTypeException {
-		super(sizeInBits);
+	public IntegerUnsignedBehaviour(int sizeInBits, boolean isBigEndian) throws InvalidParameterTypeException {
+		super(sizeInBits, isBigEndian);
 		if(sizeInBits > 32) {
 			throw new InvalidParameterTypeException("Integer unsigned cannot be greater than 32-bits in size.");
 		}
 	}
 
+	// FIXME Using an int to contain the result, this means it will be treated as a signed int.  Boundary tests will have picked this up.
 	@Override
 	public Integer valueFromBitSet(BitSet packet) {
 		int parameterValue = 0;
@@ -39,7 +40,7 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 
 	@Override
 	public BitSet insertIntoBitSet(Number number, BitSet bitSetTarget, int offset) {
-		int length = (int) getSizeIntBits();
+		int length = getSizeIntBits();
 		
 		long unsignedInt = number.longValue();
 

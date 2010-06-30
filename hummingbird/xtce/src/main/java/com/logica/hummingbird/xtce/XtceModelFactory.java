@@ -124,10 +124,10 @@ public class XtceModelFactory implements ContainerFactory {
 					// with binary.
 				}
 				
-				// FIXME Add more logica to cater for multiple integer behaviours.
+				// FIXME Add more logic to cater for multiple integer behaviours.
 				NumberParameterTypeBehaviour numberTypeBehaviour = null;
 				if(!item.getIntegerParameterType().getSigned()) {
-					numberTypeBehaviour = new IntegerUnsignedBehaviour((int) item.getIntegerParameterType().getSizeInBits());
+					numberTypeBehaviour = new IntegerUnsignedBehaviour((int) item.getIntegerParameterType().getSizeInBits(), true);
 				}
 				else {
 					LOG.error("Not enough information to construct the behaviour type");

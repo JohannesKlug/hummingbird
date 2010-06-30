@@ -26,11 +26,11 @@ public class IntegerUnsignedBehaviourTest {
 
 	@Test(expected=InvalidParameterTypeException.class)
 	public void testInvalidSizeConstruction() throws InvalidParameterTypeException {
-		new IntegerUnsignedBehaviour(45);
+		new IntegerUnsignedBehaviour(45, true);
 	}
 
 	@Test
 	public void testGetName() throws InvalidParameterTypeException {
-		assertEquals(new IntegerUnsignedBehaviour(1).getTypeName(), 1 + TYPE_NAME);
+		assertEquals(new IntegerUnsignedBehaviour(1, true).getTypeName(), 1 + TYPE_NAME);
 	}
 }

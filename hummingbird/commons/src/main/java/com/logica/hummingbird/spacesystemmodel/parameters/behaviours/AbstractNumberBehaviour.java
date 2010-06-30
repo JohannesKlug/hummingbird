@@ -13,8 +13,11 @@ public abstract class AbstractNumberBehaviour implements NumberParameterTypeBeha
 	
 	private final int SIZE_IN_BITS;
 	
-	public AbstractNumberBehaviour(int sizeInBits) {
+	protected final boolean isBigEndian;
+	
+	public AbstractNumberBehaviour(int sizeInBits, boolean isBigEndian) {
 		this.SIZE_IN_BITS = sizeInBits;
+		this.isBigEndian = isBigEndian;
 	}
 
 	@Override

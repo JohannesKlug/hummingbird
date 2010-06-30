@@ -86,85 +86,6 @@ public class BitSetUtilityTest {
 		TEST_BIT_SET_STR_INVALID = "11015100010110111150000000900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
 	}
 
-	@Test
-	public void testExtractSignedInteger() {
-		BitSet signedIntegerInBitset = new BitSet(4);
-		signedIntegerInBitset.set(0, 4);
-		Long extractedInteger = BitSetUtility.extractInteger(signedIntegerInBitset, 0, 4, true);
-
-		assertEquals("1111 as a signed Integer should be read as -7.", new Long(-7), extractedInteger);
-	}
-
-	@Test
-	public void testExtractUnsignedInteger() {
-		BitSet unsignedIntegerInBitset = new BitSet(4);
-		unsignedIntegerInBitset.set(0, 4);
-		Long extractedInteger = BitSetUtility.extractInteger(unsignedIntegerInBitset, 0, 4, false);
-
-		assertEquals("1111 as an unsigned Integer should be read as 15.", new Long(15), extractedInteger);
-	}
-
-	@Test
-	public void testExtractUnsigned1BitInteger() {
-		BitSet unsignedIntegerInBitset = new BitSet(1);
-		unsignedIntegerInBitset.set(0);
-		Long extractedInteger = BitSetUtility.extractInteger(unsignedIntegerInBitset, 0, 1, false);
-
-		assertEquals("1 as an unsigned Integer should be read as 1.", new Long(1), extractedInteger);
-
-		unsignedIntegerInBitset = new BitSet(1);
-		extractedInteger = BitSetUtility.extractInteger(unsignedIntegerInBitset, 0, 1, false);
-
-		assertEquals("0 as an unsigned Integer should be read as 0.", new Long(0), extractedInteger);
-	}
-
-	@Ignore
-	@Test
-	public void testInsertInteger() {
-//		BitSet bitSet = BitSetUtility.stringToBitSet(PI_32BIT_STRING);
-//		Double actual = BitSetUtility.extractFloat(bitSet, 0, FloatSizeInBits.THIRTY_TWO);
-//		System.out.println(actual);
-//		assertEquals(PI, actual,0.01);
-	}
-
-	@Test
-	public void testExtractFloat32() throws BitSetOperationException {
-		BitSet bitSet = BitSetUtility.stringToBitSet(PI_32BIT_STRING);
-		Double actual = BitSetUtility.extractFloat(bitSet, 0, FloatSizeInBits.THIRTY_TWO);
-		System.out.println(actual);
-		assertEquals(PI, actual,0.01);
-	}
-
-	@Test
-	public void testExtractFloat64() throws BitSetOperationException {
-		BitSet bitSet = BitSetUtility.stringToBitSet(PI_64BIT_STRING);
-		Double actual = BitSetUtility.extractFloat(bitSet, 0, FloatSizeInBits.SIXTY_FOUR);
-		System.out.println(actual);
-		assertEquals(PI, actual,0.01);
-	}
-
-	@Test
-	public void testInsertDouble32() throws BitSetOperationException {
-		BitSet floatBitSet = new BitSet(0);
-		BitSet actual = BitSetUtility.insertFloat(floatBitSet, 0, FloatSizeInBits.THIRTY_TWO, PI);
-		
-		BitSet expected = BitSetUtility.stringToBitSet(PI_32BIT_STRING);
-		
-		assertEquals(expected, actual);
-
-	}
-	
-	@Test
-	public void testInsertDouble64() throws BitSetOperationException {
-		BitSet floatBitSet = new BitSet(0);
-		BitSet actual = BitSetUtility.insertFloat(floatBitSet, 0, FloatSizeInBits.SIXTY_FOUR, PI);
-		
-		BitSet expected = BitSetUtility.stringToBitSet(PI_64BIT_STRING);
-		
-		assertEquals(expected, actual);
-
-	}
-
 	/**
 	 * Tests if the creation of a BitSet from a valid string.
 	 */
@@ -174,7 +95,7 @@ public class BitSetUtilityTest {
 			LOG.debug("Test BitSet = " + TEST_BIT_SET_STR_VALID);
 		}
 
-		BitSet actual = BitSetUtility.stringToBitSet(TEST_BIT_SET_STR_VALID);
+		BitSet actual = BitSetUtility.stringToBitSet(TEST_BIT_SET_STR_VALID, true);
 
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("BitSet created from a string = " + actual);
@@ -195,7 +116,7 @@ public class BitSetUtilityTest {
 
 		BitSet actual = null;
 		try {
-			actual = BitSetUtility.stringToBitSet(TEST_BIT_SET_STR_INVALID);
+			actual = BitSetUtility.stringToBitSet(TEST_BIT_SET_STR_INVALID, true);
 		}
 		catch (BitSetOperationException e) {
 			if (LOG.isDebugEnabled()) {
@@ -205,49 +126,6 @@ public class BitSetUtilityTest {
 		}
 
 		fail("BitSetOperationException exception was not thrown for " + TEST_BIT_SET_STR_INVALID + ". BitSetUtility.fromString created " + actual);
-	}
-
-
-	@Test
-	public void testFloatToBitSet() throws BitSetOperationException {
-
-		// Testing the Float->Integer->BinaryString->Integer->Float chain
-		Long longBits = Double.doubleToLongBits(PI);
-		String binaryString = Long.toBinaryString(longBits);
-		Long longBitsRecovered = Long.parseLong(binaryString, 2);
-		assertEquals(longBits, longBitsRecovered);
-
-		double piRecovered = Double.longBitsToDouble(longBitsRecovered);
-		assertEquals(PI, piRecovered, 0.0);
-
-		// Testing the actual BitSet conversion functions
-		BitSet bitSet = new BitSet();
-
-		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, ZERO);
-		assertEquals(BitSetUtility.stringToBitSet(ZERO_AS_32BIT_STRING), bitSet);
-
-		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, ZERO);
-		assertEquals(BitSetUtility.stringToBitSet(ZERO_AS_64BIT_STRING), bitSet);
-
-		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, THREE);
-		assertEquals(BitSetUtility.stringToBitSet(THREE_AS_32BIT_STRING), bitSet);
-
-		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, THREE);
-		assertEquals(BitSetUtility.stringToBitSet(THREE_AS_64BIT_STRING), bitSet);
-
-		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, PI);
-		assertEquals(BitSetUtility.stringToBitSet(PI_32BIT_STRING), bitSet);
-
-		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, PI);
-		assertEquals(BitSetUtility.stringToBitSet(PI_64BIT_STRING), bitSet);
-		
-		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.THIRTY_TWO, MINUS_FIFTYFOUR_SEVENEIGHT);
-		assertEquals(BitSetUtility.stringToBitSet(MINUS_FIFTYFOR_SEVENEIGHT_32BIT_STRING), bitSet);
-
-		bitSet = BitSetUtility.floatToBitSet(FloatSizeInBits.SIXTY_FOUR, MINUS_FIFTYFOUR_SEVENEIGHT);
-		assertEquals(BitSetUtility.stringToBitSet(MINUS_FIFTYFOR_SEVENEIGHT_64BIT_STRING), bitSet);
-
-		// 64bit pi result: 3.1415927410125732421875 → 0x400921FB60000000
 	}
 	
 	@Test

@@ -261,7 +261,7 @@ public class ContainerTest {
 		BitSet marshalledFrame = new BitSet();
 		tmframe.marshall(marshalledFrame, 0);
 
-		assertEquals(BitSetUtility.stringToBitSet(EMPTY_CONTAINER_MODEL_BITSET_STRING), marshalledFrame);
+		assertEquals(BitSetUtility.stringToBitSet(EMPTY_CONTAINER_MODEL_BITSET_STRING, true), marshalledFrame);
 	}
 
 	/**
@@ -278,7 +278,7 @@ public class ContainerTest {
 	public void testUnmarshallFrameTestParamA() throws UnknownContainerNameException, BitSetOperationException {
 		LOG.info("Beginning test");
 
-		BitSet frame = BitSetUtility.stringToBitSet(TEST_BITSET_STRING_PKT_TYPE_A);
+		BitSet frame = BitSetUtility.stringToBitSet(TEST_BITSET_STRING_PKT_TYPE_A, false);
 
 		Container tmframe = mockContainerFactory.getContainer("TMFrame");
 		tmframe.unmarshall(frame);
@@ -326,7 +326,7 @@ public class ContainerTest {
 	public void testUnmarshallFrameTestParamB() throws UnknownContainerNameException, BitSetOperationException {
 		LOG.info("Beginning test");
 
-		BitSet frame = BitSetUtility.stringToBitSet(TEST_BITSET_STRING_PKT_TYPE_B);
+		BitSet frame = BitSetUtility.stringToBitSet(TEST_BITSET_STRING_PKT_TYPE_B, false);
 
 		Container tmframe = mockContainerFactory.getContainer("TMFrame");
 		tmframe.unmarshall(frame);

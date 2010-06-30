@@ -61,214 +61,6 @@ public class BitSetUtility {
 	}
 
 	/**
-	 * Extracts an integer value from the given <tt>BitSet</tt> from offset of the given amount of bits (given by
-	 * <tt>lenght</tt>).
-	 * 
-	 * @param bitSet
-	 *            the bit set to operate on
-	 * @param offset
-	 *            the offset in the bit set
-	 * @param length
-	 *            the length of the bit string that represents the encoded int
-	 * @param isSigned
-	 * @return the extracted integer value
-	 * @throws RuntimeException
-	 *             if <tt>length</tt> is greater than the bit-count of int
-	 */
-	public static long extractInteger(BitSet bitSet, int offset, int length, boolean isSigned) {
-		long newValue = 0;
-		int mask = 1;
-
-		int end = length;
-		if (isSigned) {
-			end = length - 1;
-		}
-
-		for (int i = 0; i < end; i++, mask <<= 1) {
-			if (bitSet.get(offset + i)) {
-				newValue |= mask;
-			}
-		}
-
-		if (isSigned && bitSet.get(offset + length - 1)) {
-			newValue *= -1;
-		}
-
-		return newValue;
-	}
-
-	/**
-	 * Encodes the given integer value in the <tt>BitSet</tt> from the position offset by the given amount of bits.
-	 * 
-	 * @param bitSet
-	 *            the <tt>BitSet</tt> to operate on
-	 * @param offset
-	 *            the offset in the bit set
-	 * @param length
-	 *            the length of the bit string that should represent the given value
-	 * @param value
-	 *            the value to encode in the bit set
-	 * @return the modified bit set
-	 * @throws RuntimeException
-	 *             if <tt>length</tt> is greater than the amount of bits in an integer value
-	 * @throws RuntimeException
-	 *             if <tt>value</tt> is greater than the value encodeable by the given amount of bits or if value ==
-	 *             Integer.MIN_VALUE (no absolute value available as int)
-	 */
-	public static BitSet insertInteger(BitSet bitSet, int offset, int length, long value) {
-		// checking the bit length
-		if (length > Integer.SIZE) {
-			throw new RuntimeException("You can not set a higher length than " + Integer.SIZE + " bits.");
-		}
-
-		// checking whether the value fits into the bit string of length - 1
-		int absValue = Math.abs((int) value);
-		if (absValue > Math.pow(2.0, length) - 1 || value == Integer.MIN_VALUE) {
-			throw new RuntimeException("The value of " + value + " does not fit into a bit string of " + (length - 1) + " bits.");
-		}
-
-		// setting all bits to zero
-		bitSet.clear(offset, offset + length - 1);
-
-		// setting up the number in reverse order
-		int mask = 1;
-		for (int i = 0; i < length; ++i, mask <<= 1) {
-			if ((mask & absValue) > 0) {
-				bitSet.set(offset + i);
-			}
-		}
-
-		// setting up the sign
-		if (value < 0) {
-			bitSet.set(offset + length - 1);
-		}
-
-		return bitSet;
-	}
-
-	/**
-	 * Extracts a floating point number from <tt>bitSet</tt> from the offset position to the given offset+length-1. It
-	 * does the reverse scaling done by
-	 * <tt>public static BitSet doubleToBitSet(BitSet bitSet, int offset, int length, double minValue,
-	 double maxValue, double value)</tt>.
-	 * 
-	 * @param bitSet
-	 *            the bit set to operate on
-	 * @param offset
-	 *            the offset position in the bit set
-	 * @param length
-	 *            the number of bit that represent the value
-	 * @param minValue
-	 *            the same value set in <tt>doubleToBitSet(...)</tt>
-	 * @param maxValue
-	 *            the same value set in <tt>doubleToBitSet(...)</tt>
-	 * @return the back scaled value from the bit set
-	 * @see public static BitSet doubleToBitSet(BitSet bitSet, int offset, int length, double minValue, double maxValue,
-	 *      double value)
-	 * @throws RuntimeException
-	 *             if the number of bits given by <tt>length</tt> is greater than Long.SIZE
-	 */
-	public static double extractFloat(BitSet bitSet, int offset, FloatSizeInBits floatSize) {
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Float size: " + floatSize.getSize());
-			LOG.debug("BitSet in = " + BitSetUtility.binDump(bitSet));
-		}
-		BitSet actualBitSet = bitSet.get(offset, offset + floatSize.size);
-
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Float Parameter BitSet taken from bitset in = " + BitSetUtility.binDump(actualBitSet));
-		}
-
-		int length = actualBitSet.size();
-		if (length != FloatSizeInBits.THIRTY_TWO.getSize() && length != FloatSizeInBits.SIXTY_FOUR.getSize()) {
-			LOG.error("A float BitSet of invalid length was passed. This is an error! Size is: " + length);
-		}
-
-		String actualBitSetString = null;
-		if (floatSize == FloatSizeInBits.SIXTY_FOUR) {
-			actualBitSetString = BitSetUtility.bitSetToBinaryString(actualBitSet, false);
-		}
-		else if (floatSize == FloatSizeInBits.THIRTY_TWO) {
-			actualBitSetString = BitSetUtility.bitSetToBinaryString(actualBitSet, true);
-			actualBitSetString = padStringFromTheFront(actualBitSetString, FloatSizeInBits.THIRTY_TWO.getSize());
-		}
-
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("BinaryString representation of actual bitset = " + actualBitSetString);
-		}
-
-		if (floatSize == FloatSizeInBits.THIRTY_TWO) {
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("Extracting value using intBitsToFloat");
-			}
-			return Float.intBitsToFloat(Integer.parseInt(actualBitSetString, 2));
-		}
-		else {
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("Extracting value using longBitsToDouble");
-			}
-			// Treat it like 64 bit floating point number.
-			return Double.longBitsToDouble(Long.parseLong(actualBitSetString, 2));
-		}
-	}
-
-	public static BitSet insertFloat(BitSet bitSet, int offset, FloatSizeInBits floatSize, double value) throws BitSetOperationException {
-		BitSet floatBitSet = floatToBitSet(floatSize, value);
-
-		for (int i = 0; i < floatSize.getSize(); i++) {
-			if (floatBitSet.get(i)) {
-				bitSet.set(i + offset);
-			}
-			else {
-				bitSet.clear(i + offset);
-			}
-		}
-		return bitSet;
-	}
-
-	public static BitSet floatToBitSet(FloatSizeInBits floatSize, double value) throws BitSetOperationException {
-		BitSet bitSet = new BitSet(floatSize.getSize());
-
-		String binaryString = new String();
-		if (floatSize == FloatSizeInBits.THIRTY_TWO) {
-			// Parse as IEEE-754 Single Precision (32-bit) (Java Float)
-			int intBits = Float.floatToIntBits((float) value);
-			binaryString = Integer.toBinaryString(intBits);
-		}
-		else if (floatSize == FloatSizeInBits.SIXTY_FOUR) {
-			// Parse as IEEE-754 Double Precision (64-bit) (Java Double)
-			Long longBits = Double.doubleToLongBits(value);
-			binaryString = Long.toBinaryString(longBits);
-		}
-
-		if (value >= 0) {
-			// We have to add the Sign bit manually for positive Numbers
-			binaryString = '0' + binaryString;
-		}
-
-		for (int bitIndex = 0; bitIndex < floatSize.getSize(); bitIndex++) {
-			if (bitIndex < binaryString.length()) {
-				if (binaryString.charAt(bitIndex) == '0') {
-					bitSet.clear(bitIndex);
-				}
-				else if (binaryString.charAt(bitIndex) == '1') {
-					bitSet.set(bitIndex);
-				}
-				else {
-					throw new BitSetOperationException("Error converting floating point number '" + value + "' to a BitSet: invalid character '"
-							+ binaryString.charAt(bitIndex) + "' encountered at position " + bitIndex + ".");
-				}
-			}
-			else {
-				// When we run out of characters in our binaryString, set the rest to zero.
-				bitSet.clear(bitIndex);
-			}
-		}
-
-		return bitSet;
-	}
-
-	/**
 	 * Encodes a bitset in binary format, i.e. a string in the format '01100101...'.
 	 * 
 	 * The encoding always follows sequentially from the least significant bit to the most significant bit, i.e. the
@@ -336,10 +128,28 @@ public class BitSetUtility {
 	 * @throws BitSetOperationException
 	 *             if the input string contains invalid characters, that is, not equal to 1 or 0
 	 */
-	public static BitSet stringToBitSet(String str) throws BitSetOperationException {
+	public static BitSet stringToBitSet(String str, boolean isBigEndian) throws BitSetOperationException {
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("I was passed: " + str);
+		}
+		
 		str = str.trim();
+		
+		
+		if (isBigEndian) {
+			str = StringUtils.reverse(str);
+		}
+		
 		BitSet result = new BitSet(str.length());
+		
 		int count = 0;
+		int crement = 1;
+		
+		if (isBigEndian) {
+			count = result.size() - 1;
+			crement = -1;
+		}
+		
 		for (byte c : str.getBytes()) {
 			// If character '1' flip the bit to "on"
 			if (c == '1') {
@@ -349,7 +159,11 @@ public class BitSetUtility {
 			else if (c != '0') {
 				throw new BitSetOperationException("Invalid bit string, cannot infer 0 or 1 from character " + c);
 			}
-			count++;
+			count += crement;
+		}
+		
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Returning: " + binDump(result));
 		}
 
 		return result;
@@ -409,5 +223,21 @@ public class BitSetUtility {
 		newString += string;
 
 		return newString;
+	}
+	
+	public static String padStringFromTheBack(String string, int finalLength) {
+		int zeroesToAdd = finalLength - string.length();
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Padding " + zeroesToAdd + " zero(s) to the front of the binary string");
+		}
+
+		String newString = "0";
+		for (int i = 1; i < zeroesToAdd; i++) {
+			newString += '0';
+		}
+
+		string += newString;
+
+		return string;
 	}
 }

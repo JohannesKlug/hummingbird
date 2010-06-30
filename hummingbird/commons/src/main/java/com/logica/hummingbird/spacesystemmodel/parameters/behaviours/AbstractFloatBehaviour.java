@@ -7,7 +7,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationExcepti
 public abstract class AbstractFloatBehaviour extends AbstractNumberBehaviour {
 
 	public AbstractFloatBehaviour(int sizeInBits) {
-		super(sizeInBits);
+		super(sizeInBits, true);
 	}
 
 	/**
