@@ -1,13 +1,17 @@
 package com.logica.hummingbird.framebroker;
 
 import java.util.Observable;
+import java.util.Observer;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.logica.hummingbird.framebroker.exceptions.FrameFailedCrcCheckException;
 import com.logica.hummingbird.framebroker.exceptions.InvalidFrameLengthException;
 
-public class CcsdsFrameDispatcher extends Observable {
-
+public class CcsdsFrameDispatcher extends Observable implements Observer {
+	private final static Logger LOG = LoggerFactory.getLogger(CcsdsFrameDispatcher.class);
 	
 	public final static int FRAME_LENGTH_IN_OCTETS = 1115;
 	/**
@@ -34,7 +38,7 @@ public class CcsdsFrameDispatcher extends Observable {
 	}
 	
 	
-	public void process(byte[] frame) throws InvalidFrameLengthException {
+	public void process(byte[] frame) throws InvalidFrameLengthException, FrameFailedCrcCheckException {
 		
 		/*
 		 * Check for Frame Length
@@ -49,7 +53,7 @@ public class CcsdsFrameDispatcher extends Observable {
 		 * Check for CRC erros
 		 */
 		if (crcValid(frame) == false) {
-			return;
+			throw new FrameFailedCrcCheckException();
 		}
 		
 		
@@ -72,18 +76,29 @@ public class CcsdsFrameDispatcher extends Observable {
 		
 		primaryHeader = ArrayUtils.subarray(frame, 0, 6);
 		
+		
+		int spacecraftIdHighByte = (0x3F & primaryHeader[0]) << 4 ;
+		int spacecraftIdLowByte = (0xF0 & primaryHeader[1]) >> 4;
+		int spacecraftId = spacecraftIdHighByte + spacecraftIdLowByte;
+		LOG.debug("Spacecraft ID: " + spacecraftId);
+		
 		int virtualChannelId = (0x0E & primaryHeader[1])>>1;
+		LOG.debug("Virtual Channel Id: " + virtualChannelId);
 		
 		dataFieldStatus = ArrayUtils.subarray(frame, 6, 8);
 		
 		
-		int firstHeaderPointerHighByte = (0x03 & dataFieldStatus[0]) >> 8;
+		int firstHeaderPointerHighByte = (0x03 & dataFieldStatus[0]) << 8;
 		int firstHeaderPointerLowByte = 0xFF & dataFieldStatus[1];
 		
 		int firstHeaderPointer = firstHeaderPointerHighByte + firstHeaderPointerLowByte;
+		LOG.debug("First Header Pointer:" + firstHeaderPointer);
 		
-		int masterChannelFrameCount = primaryHeader[2];
-		int virtualChannelFrameCount = primaryHeader[3];
+		int masterChannelFrameCount = primaryHeader[2] & 0xFF;
+		int virtualChannelFrameCount = primaryHeader[3] & 0xFF;
+		
+		LOG.debug("Master Channel Frame Count: " + masterChannelFrameCount);
+		LOG.debug("Virtual Channel Frame Count: " + virtualChannelFrameCount);
 		
 		
 		int payloadOffset = 8;
@@ -132,6 +147,13 @@ public class CcsdsFrameDispatcher extends Observable {
 		} else {
 			return false;
 		}
+	}
+
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 
