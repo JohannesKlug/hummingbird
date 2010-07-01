@@ -7,9 +7,9 @@ import junit.framework.TestCase;
 
 import com.logica.hummingbird.framebroker.CcsdsPacketBrokerImpl;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.util.BitSetUtility;
+import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 import com.logica.hummingbird.xtce.exceptions.InvalidXtceFileException;
 
 // FIXME Not a unit test. This tests integration of separate components.  Needs moving.

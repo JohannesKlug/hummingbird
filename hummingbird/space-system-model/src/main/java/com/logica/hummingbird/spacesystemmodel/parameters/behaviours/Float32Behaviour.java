@@ -5,8 +5,8 @@ import java.util.BitSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.util.BitSetUtility;
+import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 /**
  * Parameter behaviour for an IEEE 754 32-bit precision Float.

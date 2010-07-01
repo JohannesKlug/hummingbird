@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.logica.hummingbird.parameters.behaviours;
+package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
 
 import static org.junit.Assert.assertEquals;
 

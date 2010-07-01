@@ -31,14 +31,13 @@ import java.util.BitSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.ccsds.telemetry.CcsdsTmFrame;
 import com.logica.hummingbird.framebroker.producers.CcsdsPacketProducer;
 import com.logica.hummingbird.framebroker.producers.CcsdsParameterProducer;
 import com.logica.hummingbird.framebroker.producers.CcsdsProducer;
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 /**
  * TODO Improve comment.

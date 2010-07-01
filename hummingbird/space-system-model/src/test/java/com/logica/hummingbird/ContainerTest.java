@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
 import com.logica.hummingbird.spacesystemmodel.Container;
-import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
@@ -23,6 +22,7 @@ import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
 import com.logica.hummingbird.util.BitSetUtility;
+import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 /**
  * The test uses the following BitSets:

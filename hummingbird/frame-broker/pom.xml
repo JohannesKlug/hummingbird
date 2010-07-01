@@ -78,14 +78,14 @@
 		</dependency>
 		<dependency>
 			<groupId>com.logica.hummingbird</groupId>
-			<artifactId>test-support</artifactId>
+			<artifactId>ccsds</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>
-			<scope>test</scope>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.logica.hummingbird</groupId>
-			<artifactId>ccsds</artifactId>
+			<artifactId>space-system-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>

@@ -23,6 +23,7 @@
 		<module>simulator</module>
 		<module>test-support</module>
     <module>ccsds</module>
+    <module>space-system-model</module>
   </modules>
 
 	<licenses>

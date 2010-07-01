@@ -1,13 +1,14 @@
 package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
 
+import java.math.BigInteger;
 import java.util.BitSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import com.logica.hummingbird.util.BitSetUtility;
+import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 /**
  * How do we handle unsigned longs in Java? Long is always signed. Perhaps some math package? 

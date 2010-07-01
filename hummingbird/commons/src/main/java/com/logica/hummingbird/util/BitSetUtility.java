@@ -6,7 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
+import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 /**
  * The bitset utilities class helps the encoding / decoding of simple java types such as integer and float to a bitset.

@@ -32,9 +32,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
-import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
+import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 /**
  * The float container encodes / decodes a float parameter from the data stream.

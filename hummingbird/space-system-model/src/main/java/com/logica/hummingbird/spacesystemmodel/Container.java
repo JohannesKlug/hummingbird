@@ -29,7 +29,7 @@ package com.logica.hummingbird.spacesystemmodel;
 import java.util.BitSet;
 import java.util.List;
 
-import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
+import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 
 /**

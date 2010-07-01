@@ -38,8 +38,8 @@ import java.util.Map.Entry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.parameters.Parameter;
+import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 /**
  * The container is the basic element in the Frame Broker's POJO hierarchy. A container is an ordered sequence of other

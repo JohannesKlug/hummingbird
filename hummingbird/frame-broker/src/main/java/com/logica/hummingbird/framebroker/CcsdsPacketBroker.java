@@ -29,8 +29,8 @@ package com.logica.hummingbird.framebroker;
 import java.util.BitSet;
 
 import com.logica.hummingbird.spacesystemmodel.Container;
-import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 /**
  * The interface of the Frame Broker. 

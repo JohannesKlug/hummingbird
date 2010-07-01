@@ -1,4 +1,4 @@
-package com.logica.hummingbird.parameters.behaviours;
+package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,15 +6,13 @@ import java.util.BitSet;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
-import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.LongSignedBehaviour;
 import com.logica.hummingbird.util.BitSetUtility;
+import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 public class LongSignedBehaviourTest {
 	private final static Logger LOG = LoggerFactory.getLogger(LongSignedBehaviourTest.class);

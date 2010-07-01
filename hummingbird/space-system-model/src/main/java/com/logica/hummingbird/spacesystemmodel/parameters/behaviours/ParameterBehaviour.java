@@ -2,7 +2,7 @@ package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
 
 import java.util.BitSet;
 
-import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
+import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 public interface ParameterBehaviour {
 	

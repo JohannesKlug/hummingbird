@@ -21,11 +21,11 @@ import com.logica.ccsds.telemetry.CcsdsTmPacket;
 import com.logica.ccsds.telemetry.CcsdsTmPacketHeader;
 import com.logica.ccsds.telemetry.CcsdsTmPacketPayload;
 import com.logica.ccsds.telemetry.CcsdsTmParameter;
-import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
 import com.logica.hummingbird.util.BitSetUtility;
+import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 /**
  * @author Mark Doyle

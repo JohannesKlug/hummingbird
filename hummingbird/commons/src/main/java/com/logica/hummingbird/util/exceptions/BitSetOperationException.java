@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.logica.hummingbird.spacesystemmodel.exceptions;
+package com.logica.hummingbird.util.exceptions;
 
 
 /**
