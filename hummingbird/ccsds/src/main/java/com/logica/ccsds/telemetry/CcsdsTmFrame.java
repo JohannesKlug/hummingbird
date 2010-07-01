@@ -28,6 +28,8 @@ public class CcsdsTmFrame {
 
 	public CcsdsTmFrame() {
 		super();
+		this.setHeader(new CcsdsTmFrameHeader());
+		this.setTail(new CcsdsTmFrameTail());
 	}
 
 	public CcsdsTmFrame(CcsdsTmFrameHeader frameHeader, List<CcsdsTmPacket> packets, CcsdsTmFrameTail frameTail) {
