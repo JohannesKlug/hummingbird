@@ -29,10 +29,10 @@ package com.logica.hummingbird.framebroker.producers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.logica.ccsds.telemetry.CcsdsTmParameter;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
 
 /**
  * TODO write here a description of the class

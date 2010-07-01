@@ -14,17 +14,17 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.logica.ccsds.telemetry.CcsdsTmFrame;
+import com.logica.ccsds.telemetry.CcsdsTmFrameHeader;
+import com.logica.ccsds.telemetry.CcsdsTmFrameTail;
+import com.logica.ccsds.telemetry.CcsdsTmPacket;
+import com.logica.ccsds.telemetry.CcsdsTmPacketHeader;
+import com.logica.ccsds.telemetry.CcsdsTmPacketPayload;
+import com.logica.ccsds.telemetry.CcsdsTmParameter;
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrameHeader;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrameTail;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacketHeader;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacketPayload;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
 import com.logica.hummingbird.util.BitSetUtility;
 
 /**

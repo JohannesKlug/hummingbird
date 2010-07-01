@@ -8,11 +8,11 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
 
+import com.logica.ccsds.telemetry.CcsdsTmPacket;
+import com.logica.ccsds.telemetry.CcsdsTmParameter;
 import com.logica.hummingbird.MessageType;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
 
 public class CamelCcsdsFrameBroker extends CcsdsFrameBrokerImpl {
 

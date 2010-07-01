@@ -6,14 +6,12 @@ import static org.junit.Assert.fail;
 import java.util.BitSet;
 
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.util.BitSetUtility;
-import com.logica.hummingbird.util.BitSetUtility.FloatSizeInBits;
 
 /**
  * 
@@ -45,21 +43,22 @@ public class BitSetUtilityTest {
 	private static String TEST_BIT_SET_STR_INVALID = new String();
 	
 	
-	private final static double ZERO = 0d;
-	private final static String ZERO_AS_32BIT_STRING = "00000000000000000000000000000000";
-	private final static String ZERO_AS_64BIT_STRING = "0000000000000000000000000000000000000000000000000000000000000000";
-
-	private final static double THREE = 3.0d;
-	private final static String THREE_AS_32BIT_STRING = "01000000010000000000000000000000";
-	private final static String THREE_AS_64BIT_STRING = "0100000000001000000000000000000000000000000000000000000000000000";
-
-	private final static double PI = 3.14159265d;
-	private final static String PI_32BIT_STRING = "01000000010010010000111111011011";
-	private final static String PI_64BIT_STRING = "0100000000001001001000011111101101010011110010001101010011110001";
-	
-	private final static double MINUS_FIFTYFOUR_SEVENEIGHT = -54.78;
-	private final static String MINUS_FIFTYFOR_SEVENEIGHT_32BIT_STRING = "11000010010110110001111010111000";
-	private final static String MINUS_FIFTYFOR_SEVENEIGHT_64BIT_STRING= "1100000001001011011000111101011100001010001111010111000010100100";
+//	TEST DATA FOR REMOVED TESTS -  CAN EVENTUALLY BE REMOVED.
+//	private final static double ZERO = 0d;
+//	private final static String ZERO_AS_32BIT_STRING = "00000000000000000000000000000000";
+//	private final static String ZERO_AS_64BIT_STRING = "0000000000000000000000000000000000000000000000000000000000000000";
+//
+//	private final static double THREE = 3.0d;
+//	private final static String THREE_AS_32BIT_STRING = "01000000010000000000000000000000";
+//	private final static String THREE_AS_64BIT_STRING = "0100000000001000000000000000000000000000000000000000000000000000";
+//
+//	private final static double PI = 3.14159265d;
+//	private final static String PI_32BIT_STRING = "01000000010010010000111111011011";
+//	private final static String PI_64BIT_STRING = "0100000000001001001000011111101101010011110010001101010011110001";
+//	
+//	private final static double MINUS_FIFTYFOUR_SEVENEIGHT = -54.78;
+//	private final static String MINUS_FIFTYFOR_SEVENEIGHT_32BIT_STRING = "11000010010110110001111010111000";
+//	private final static String MINUS_FIFTYFOR_SEVENEIGHT_64BIT_STRING= "1100000001001011011000111101011100001010001111010111000010100100";
 	
 
 	/**

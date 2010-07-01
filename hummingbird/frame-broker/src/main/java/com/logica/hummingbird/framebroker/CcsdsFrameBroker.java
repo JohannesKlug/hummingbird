@@ -28,10 +28,10 @@ package com.logica.hummingbird.framebroker;
 
 import java.util.BitSet;
 
+import com.logica.ccsds.telemetry.CcsdsTmFrame;
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
 
 /**
  * The interface of the Frame Broker. 
