@@ -7,6 +7,9 @@
 			<IntegerParameterType name="4ByteInteger" sizeInBits="32" signed="false">
 				<UnitSet/>
 			</IntegerParameterType>
+			<IntegerParameterType name="8ByteInteger" sizeInBits="64" signed="true">
+				<UnitSet/>
+			</IntegerParameterType>
 			<IntegerParameterType name="2ByteInteger" sizeInBits="16" signed="false">
 				<UnitSet/>
 			</IntegerParameterType>
@@ -92,43 +95,19 @@
 				</ParameterProperties>
 			</Parameter>
 			<Parameter parameterTypeRef="4ByteInteger" name="TEST_COUNTER"/>
+			<Parameter parameterTypeRef="8ByteInteger" name="BIG_TEST_COUNTER"/>
 	
 		</ParameterSet>
 		
 		
 		<ContainerSet>
-		
-			<SequenceContainer name="TMFrame" shortDescription="CCSDS TM Frame">
+			<SequenceContainer name="TMPacket" shortDescription="CCSDS TM Packet">
 				<EntryList>
-					<ContainerRefEntry containerRef="TMFrameHeader"/>
-					<ContainerRefEntry containerRef="TMPacket"/>
-					<ContainerRefEntry containerRef="TMFrameTail"/>
+					<ContainerRefEntry containerRef="TMPacketHeader"/>
 				</EntryList>
 			</SequenceContainer>
-			<SequenceContainer name="TMFrameTail" shortDescription="CCSDS TM Frame Tail" abstract="true">
-				<EntryList>
-					<ParameterRefEntry parameterRef="CCSDS_TF_OC"/>
-					<ParameterRefEntry parameterRef="CCSDS_TF_EC"/>
-				</EntryList>
-			</SequenceContainer>
-			<SequenceContainer name="TMFrameHeader" shortDescription="CCSDS TM Frame Header" abstract="true">
-				<EntryList>
-					<ParameterRefEntry parameterRef="CCSDS_FVERSION"/>
-					<ParameterRefEntry parameterRef="CCSDS_SC_ID"/>
-					<ParameterRefEntry parameterRef="CCSDS_TF_VC"/>
-					<ParameterRefEntry parameterRef="CCSDS_OP_CTRL"/>
-					<ParameterRefEntry parameterRef="CCSDS_MS_CNT"/>
-					<ParameterRefEntry parameterRef="CCSDS_VC_CNT"/>
-					<ParameterRefEntry parameterRef="CCSDS_TF_SECH"/>
-					<ParameterRefEntry parameterRef="CCSDS_TF_SYNC"/>
-					<ParameterRefEntry parameterRef="CCSDS_TF_ORDER"/>
-					<ParameterRefEntry parameterRef="CCSDS_TF_SEGM"/>
-					<ParameterRefEntry parameterRef="CCSDS_TF_FH"/>
-					<ParameterRefEntry parameterRef="CCSDS_TF_HV"/>
-					<ParameterRefEntry parameterRef="CCSDS_TF_HL"/>
-				</EntryList>
-			</SequenceContainer>
-			<SequenceContainer name="TMPacket" shortDescription="CCSDS TM Packet Header" abstract="true">
+			
+			<SequenceContainer name="TMPacketHeader" shortDescription="CCSDS TM Packet Header" abstract="true">
 				<EntryList>
 					<ParameterRefEntry parameterRef="CCSDS_VERSION"/>
 					<ParameterRefEntry parameterRef="CCSDS_TYPE"/>
@@ -140,19 +119,33 @@
 				</EntryList>
 			</SequenceContainer>
 			
-			<SequenceContainer name="TestPacket" shortDescription="contains all telemetred data parameter for example purposes">
+			<SequenceContainer name="TestPacketA" shortDescription="contains all telemetred data parameter for example purposes">
 				<EntryList>
 					<ParameterRefEntry parameterRef="TEST_COUNTER"/>
 					<ParameterRefEntry parameterRef="AST10061"/>
 				</EntryList>
-				<BaseContainer containerRef="TMPacket">
+				<BaseContainer containerRef="TMPacketHeader">
 					<RestrictionCriteria>
 						<ComparisonList>
 							<Comparison parameterRef="CCSDS_APID" value="123"/>
 						</ComparisonList>
 					</RestrictionCriteria>
 				</BaseContainer>
-			</SequenceContainer>		
+			</SequenceContainer>
+			
+			<SequenceContainer name="TestPacketB" shortDescription="contains all telemetred data parameter for example purposes">
+				<EntryList>
+					<ParameterRefEntry parameterRef="BIG_TEST_COUNTER"/>
+					<ParameterRefEntry parameterRef="AST10061"/>
+				</EntryList>
+				<BaseContainer containerRef="TMPacketHeader">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison parameterRef="CCSDS_APID" value="321"/>
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+			</SequenceContainer>
 		
 		</ContainerSet>
 		
