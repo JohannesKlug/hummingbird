@@ -3,7 +3,6 @@ package com.logica.hummingbird.framebroker;
 import java.util.Observable;
 
 import org.apache.commons.lang.ArrayUtils;
-import org.fusesource.commons.management.Statistic.UpdateMode;
 
 public class CcsdsPacketDispatcher extends Observable{
 
