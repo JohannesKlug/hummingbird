@@ -75,7 +75,6 @@
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>2.5</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.logica.hummingbird</groupId>
@@ -85,9 +84,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.5</version>
+			<groupId>com.logica.hummingbird</groupId>
+			<artifactId>ccsds</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>

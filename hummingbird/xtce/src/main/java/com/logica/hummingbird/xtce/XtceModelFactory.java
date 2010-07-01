@@ -30,6 +30,7 @@ import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.AbstractInt
 import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float32Behaviour;
 import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float64Behaviour;
 import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
+import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.LongSignedBehaviour;
 import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.NumberParameterTypeBehaviour;
 import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
 import com.logica.hummingbird.xtce.exceptions.InvalidXtceFileException;
@@ -53,7 +54,7 @@ public class XtceModelFactory implements ContainerFactory {
 	protected String packetBaseReference = "TMPacket";
 	protected String frameBaseReference = "TMFrame";
 
-	protected String spacesystemmodelFilename = "src/main/resources/humsat.xml";
+	protected String spacesystemmodelFilename;
 
 	public XtceModelFactory(String spacesystemmodelFilename) throws InvalidXtceFileException {
 		this.spacesystemmodelFilename = spacesystemmodelFilename;
@@ -130,8 +131,11 @@ public class XtceModelFactory implements ContainerFactory {
 					numberTypeBehaviour = new IntegerUnsignedBehaviour((int) item.getIntegerParameterType().getSizeInBits(), true);
 				}
 				else {
-					LOG.error("Not enough information to construct the behaviour type");
+					numberTypeBehaviour = new LongSignedBehaviour((int)item.getIntegerParameterType().getSizeInBits(), true);
 				}
+//				else {
+//					LOG.error("Not enough information to construct the behaviour type");
+//				}
 				NumberParameterType type = new NumberParameterType(item.getIntegerParameterType().getName(), 
 																   item.getIntegerParameterType().getShortDescription(), 
 																   item.getIntegerParameterType().getLongDescription(), 
@@ -188,10 +192,12 @@ public class XtceModelFactory implements ContainerFactory {
 		for (int parameterIndex = 0; parameterIndex < spaceSystem.getTelemetryMetaData().getParameterSet().getParameterSetTypeItemCount(); ++parameterIndex) {
 			ParameterSetTypeItem item = spaceSystem.getTelemetryMetaData().getParameterSet().getParameterSetTypeItem(parameterIndex);
 
+			LOG.debug(item.getParameter().getName());
+			
 			ParameterContainer model = null;
 			NumberParameterType type = types.get(item.getParameter().getParameterTypeRef());
+			
 			if (type != null) {
-
 				if (type.getNumberBehaviour() instanceof AbstractIntegerBehaviour) {
 					model = new IntegerParameter(item.getParameter().getName(), 
 												 item.getParameter().getShortDescription(), 
@@ -221,6 +227,7 @@ public class XtceModelFactory implements ContainerFactory {
 			SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex)
 					.getSequenceContainer();
 
+			LOG.debug("Creating container " +xtceContainer.getName() );
 			ContainerImpl container = new ContainerImpl(xtceContainer.getName(), xtceContainer.getShortDescription(), xtceContainer.getLongDescription());
 			containers.put(container.getName(), container);
 		}
@@ -242,6 +249,8 @@ public class XtceModelFactory implements ContainerFactory {
 				}
 
 				containers.get(xtceContainer.getBaseContainer().getContainerRef()).addContainer(thisContainer);
+				
+				LOG.debug("Added container " + thisContainer.getName() + " to base container " +  xtceContainer.getBaseContainer().getContainerRef());
 			}
 
 			/** Register all sub containers. */
@@ -255,6 +264,7 @@ public class XtceModelFactory implements ContainerFactory {
 				}
 
 				thisContainer.addContainer(containers.get(name));
+				LOG.debug("Added subcontainer " + containers.get(name) + " to container " + thisContainer.getName());
 			}
 		}
 	}

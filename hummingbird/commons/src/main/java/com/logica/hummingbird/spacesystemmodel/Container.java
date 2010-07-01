@@ -95,11 +95,9 @@ public interface Container {
 	 */
 	public BitSet getRawValue();
 
-	public void addCompletionObserver(ContainerObserver observer);
-
-	public void addUpdateObserver(ContainerObserver observer);
+	public void addPacketObserver(PacketObserver observer);
 	
-	public void addParameterUpdateObserve(ParameterObserver observer);
+	public void addParameterUpdateObserver(ParameterObserver observer);
 	
 	public List<Container> getSubContainers();
 }

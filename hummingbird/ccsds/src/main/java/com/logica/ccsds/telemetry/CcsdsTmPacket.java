@@ -1,4 +1,4 @@
-package com.logica.hummingbird.telemetry.ccsds;
+package com.logica.ccsds.telemetry;
 
 import java.lang.reflect.Field;
 
@@ -9,9 +9,20 @@ public class CcsdsTmPacket {
 	/** Logger for this class */
 	private final static Logger LOG = LoggerFactory.getLogger(CcsdsTmPacket.class);
 	
+	protected String packetName;
+	
 	CcsdsTmPacketHeader packetHeader = new CcsdsTmPacketHeader();
 
 	CcsdsTmPacketPayload payload = new CcsdsTmPacketPayload();
+
+	
+	public CcsdsTmPacket() {
+		this.packetName = "Default empty Packet";
+	}
+	
+	public CcsdsTmPacket(String packetName) {
+		this.packetName = packetName;
+	}
 
 	public CcsdsTmPacketHeader getHeader() {
 		return this.packetHeader;
@@ -57,12 +68,26 @@ public class CcsdsTmPacket {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CcsdsTmPacket [\n\tpacketHeader = ");
+		builder.append("CcsdsTmPacket [packetName=");
+		builder.append(packetName);
+		builder.append(", packetHeader=");
 		builder.append(packetHeader);
-		builder.append("\n\tpayload = ");
+		builder.append(", payload=");
 		builder.append(payload);
-		builder.append("\n]");
+		builder.append("]");
 		return builder.toString();
+	}
+
+	public void setName(String field) {
+		this.packetName = field;
+	}
+
+	public String getPacketName() {
+		return packetName;
+	}
+
+	public void setPacketName(String packetName) {
+		this.packetName = packetName;
 	}
 
 }

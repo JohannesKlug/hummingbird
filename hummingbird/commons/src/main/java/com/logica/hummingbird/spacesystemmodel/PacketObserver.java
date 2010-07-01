@@ -26,15 +26,12 @@
  */
 package com.logica.hummingbird.spacesystemmodel;
 
-import java.util.BitSet;
 
 
 /**
  * TODO write here a description of the class
  */
-public interface ContainerObserver {
+public interface PacketObserver {
 
-	public void updated(String field, BitSet value);
-
-	public void completed();
+	public void completed(String field);
 }

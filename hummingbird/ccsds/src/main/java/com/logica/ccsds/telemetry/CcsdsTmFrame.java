@@ -1,4 +1,4 @@
-package com.logica.hummingbird.telemetry.ccsds;
+package com.logica.ccsds.telemetry;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -28,6 +28,8 @@ public class CcsdsTmFrame {
 
 	public CcsdsTmFrame() {
 		super();
+		this.setHeader(new CcsdsTmFrameHeader());
+		this.setTail(new CcsdsTmFrameTail());
 	}
 
 	public CcsdsTmFrame(CcsdsTmFrameHeader frameHeader, List<CcsdsTmPacket> packets, CcsdsTmFrameTail frameTail) {
@@ -135,6 +137,38 @@ public class CcsdsTmFrame {
 		builder.append(frameTail);
 		builder.append("\n]");
 		return builder.toString();
+	}
+
+	/**
+	 * Searches the packets contained by this frame for one named the same as the passed
+	 * parameter.  If it finds one it returns true.
+	 * @param field
+	 * @return
+	 */
+	public boolean containsPacket(String field) {
+		for(CcsdsTmPacket packet : packets) {
+			if(packet.packetName.equals(field)) {
+				if(LOG.isDebugEnabled()) {
+					LOG.debug("TmPacket " + field + " found!");
+				}	
+				return true;
+			}
+		}
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("TmPacket " + field + " not found in this TmFrame");
+		}
+		return false;
+	}
+
+	public CcsdsTmPacket getPacket(String field) {
+		CcsdsTmPacket found = null;
+		for(CcsdsTmPacket packet : packets) {
+			if(packet.packetName.equals(field)) {
+				found = packet;
+				break;
+			}
+		}
+		return found;
 	}
 
 

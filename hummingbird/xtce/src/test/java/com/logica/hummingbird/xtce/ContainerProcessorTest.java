@@ -1,10 +1,11 @@
 package com.logica.hummingbird.xtce;
 
+import java.net.URL;
 import java.util.BitSet;
 
 import junit.framework.TestCase;
 
-import com.logica.hummingbird.framebroker.CcsdsFrameBrokerImpl;
+import com.logica.hummingbird.framebroker.CcsdsPacketBrokerImpl;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
@@ -15,8 +16,8 @@ import com.logica.hummingbird.xtce.exceptions.InvalidXtceFileException;
 public class ContainerProcessorTest extends TestCase {
 
 	public void testMarshall() throws UnknownContainerNameException, InvalidXtceFileException, BitSetOperationException {
-		ContainerFactory factory = new XtceModelFactory("src/main/resources/humsat.xml");
-//		factory.initialise();
+		URL spacesystemmodelFilename = this.getClass().getResource("/humsat.xml");
+		ContainerFactory factory = new XtceModelFactory(spacesystemmodelFilename.getPath());
 		
 		/** Build the frame. */
 		factory.getParameter("CCSDS_FVERSION").setValue(1);
@@ -82,7 +83,7 @@ public class ContainerProcessorTest extends TestCase {
 		}
 		
 		/** Marshall it to a BitSet. */
-		CcsdsFrameBrokerImpl processor = new CcsdsFrameBrokerImpl(factory);
+		CcsdsPacketBrokerImpl processor = new CcsdsPacketBrokerImpl(factory);
 		processor.marshall("TMFrame", frame);
 		
 		/** Visualize the BitSet*/
