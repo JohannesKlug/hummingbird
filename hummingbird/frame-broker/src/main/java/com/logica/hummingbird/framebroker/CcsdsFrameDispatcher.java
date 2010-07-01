@@ -31,7 +31,8 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 		 * Create 8 VirtualChannels, accessed using their array index.
 		 */
 		for (int i=0; i<8; i++) {
-			virtualChannel[i] = new VirtualChannel();
+			virtualChannel[i] = new VirtualChannel(i);
+			virtualChannel[i].addObserver(this);
 		}
 		
 	}
@@ -133,8 +134,8 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+		// we received a FramePayload from one of our virtual channels - pass this on to our observers.
+		notifyObservers(arg);
 	}
 
 }

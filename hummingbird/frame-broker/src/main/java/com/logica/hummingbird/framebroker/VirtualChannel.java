@@ -1,42 +1,36 @@
 package com.logica.hummingbird.framebroker;
 
+import java.util.Observable;
+
 import org.apache.commons.lang.ArrayUtils;
 
-public class VirtualChannel {
-	private byte[] totalPayload = ArrayUtils.EMPTY_BYTE_ARRAY;
+public class VirtualChannel extends Observable {
 	
-	private int lastFrameCount;
+	private int lastFrameCount = -1;
+	private int id;
 	
-	public VirtualChannel() {
-		reset();
+	public VirtualChannel(int id) {
+		this.id = id;
 	}
 	
 	public void addPayload(byte[] payload, int frameCount, int firstHeaderPointer) {
-		/*
-		 * Checking for lastFrameCount == -1 will happen millions of times, this should probably optimised.
-		 */
-		if (lastFrameCount == -1) {
-			lastFrameCount = frameCount;
+		
+		if (CcsdsFrameDispatcher.isNextFrame(lastFrameCount, frameCount)) {
+			// we can safely pass on the whole payload
+			notifyObservers(new FramePayload(id, payload));
 		} else {
-			if (CcsdsFrameDispatcher.isNextFrame(lastFrameCount, frameCount)) {
-				// we can safely add the payload
-				totalPayload = ArrayUtils.addAll(totalPayload, payload);
-			} else {
-				// we received frames out of order and have to throw away what we have
-				reset();
-			}
+			// we received frames out of order
+			// payload before firstHeaderPointer must be thrown away.
+			byte[] goodPayload = ArrayUtils.subarray(payload, firstHeaderPointer, payload.length);
+			notifyObservers(new FramePayload(id, goodPayload));
 		}
+		lastFrameCount = frameCount;
+		
 		
 	}
 	
-	private void reset() {
-		totalPayload = ArrayUtils.EMPTY_BYTE_ARRAY;
-		
-		/**
-		 * Initialise lastFrameCount with invalid value
-		 */
-		lastFrameCount = -1;
+	public int getId() {
+		return id;
 	}
 	
-
 }
