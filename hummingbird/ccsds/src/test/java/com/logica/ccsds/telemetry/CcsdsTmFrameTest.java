@@ -1,4 +1,4 @@
-package com.logica.hummingbird.telemetry.ccsds;
+package com.logica.ccsds.telemetry;
 
 import static org.junit.Assert.assertEquals;
 

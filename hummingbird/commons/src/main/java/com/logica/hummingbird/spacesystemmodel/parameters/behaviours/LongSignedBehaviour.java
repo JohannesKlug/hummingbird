@@ -10,7 +10,8 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeEx
 import com.logica.hummingbird.util.BitSetUtility;
 
 /**
- * How do we handle unsigned longs in Java? Long is always signed. Perhaps some math package?
+ * How do we handle unsigned longs in Java? Long is always signed. Perhaps some math package? 
+ * Mark:  Looks like we must use {@link BigInteger}
  * 
  * @author Mark Doyle
  * @author Johannes Klug

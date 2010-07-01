@@ -9,11 +9,11 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
+import com.logica.ccsds.telemetry.CcsdsTmFrame;
+import com.logica.ccsds.telemetry.CcsdsTmPacket;
+import com.logica.ccsds.telemetry.CcsdsTmParameter;
 import com.logica.hummingbird.MessageType;
 import com.logica.hummingbird.framebroker.CamelCcsdsFrameBroker;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmFrame;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmPacket;
-import com.logica.hummingbird.telemetry.ccsds.CcsdsTmParameter;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 
 public class RouterTest extends CamelTestSupport {

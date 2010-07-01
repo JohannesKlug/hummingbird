@@ -1,4 +1,4 @@
-package com.logica.hummingbird.telemetry.ccsds;
+package com.logica.ccsds.telemetry;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
