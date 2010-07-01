@@ -5,8 +5,12 @@ import java.util.Observable;
 import org.apache.commons.lang.ArrayUtils;
 
 public class CcsdsPacketDispatcher extends Observable{
+	
+	private byte[] packetBuffer;
 
 	public void process(byte[] packet) {
+		
+		// FIXME Implement a packet buffer
 		
 		byte[] primaryHeader = ArrayUtils.subarray(packet, 0, 6);
 		
