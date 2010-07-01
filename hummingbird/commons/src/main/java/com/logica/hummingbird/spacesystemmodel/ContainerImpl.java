@@ -83,8 +83,7 @@ public class ContainerImpl extends NamedElement implements Container {
 	 */
 	protected int length = 0;
 
-	protected List<ContainerObserver> updateObservers = new ArrayList<ContainerObserver>();
-	protected List<ContainerObserver> completionObservers = new ArrayList<ContainerObserver>();
+	protected List<PacketObserver> completionObservers = new ArrayList<PacketObserver>();
 	protected List<ParameterObserver> updatedParameterObservers = new ArrayList<ParameterObserver>();
 
 	protected Container parent = null;
@@ -168,12 +167,8 @@ public class ContainerImpl extends NamedElement implements Container {
 				completeBitData = container.unmarshall(completeBitData);
 			}
 
-			for (ContainerObserver updateObserver : updateObservers) {
-				updateObserver.updated(name, completeBitData);
-			}
-
-			for (ContainerObserver completionObserver : completionObservers) {
-				completionObserver.completed();
+			for (PacketObserver completionObserver : completionObservers) {
+				completionObserver.completed(name);
 			}
 		}
 
@@ -292,19 +287,13 @@ public class ContainerImpl extends NamedElement implements Container {
 	}
 
 	@Override
-	public void addCompletionObserver(ContainerObserver observer) {
+	public void addPacketObserver(PacketObserver observer) {
 		this.completionObservers.add(observer);
 
 	}
 
 	@Override
-	public void addUpdateObserver(ContainerObserver observer) {
-		this.updateObservers.add(observer);
-
-	}
-
-	@Override
-	public void addParameterUpdateObserve(ParameterObserver observer) {
+	public void addParameterUpdateObserver(ParameterObserver observer) {
 		this.updatedParameterObservers.add(observer);
 	}
 

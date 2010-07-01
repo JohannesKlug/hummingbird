@@ -26,15 +26,12 @@
  */
 package com.logica.hummingbird.framebroker.producers;
 
-import java.util.BitSet;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.ccsds.telemetry.CcsdsTmPacket;
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.spacesystemmodel.ContainerObserver;
+import com.logica.hummingbird.spacesystemmodel.PacketObserver;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 
 /**
@@ -42,20 +39,11 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameEx
  * packet body which is binary data. This producer registers for the parameters in the 
  * header, and for the packet itself to get the raw data.
  */
-public class CcsdsPacketProducer extends CcsdsProducer implements ContainerObserver {
+public class CcsdsPacketProducer extends CcsdsProducer implements PacketObserver {
 	private final static Logger LOG = LoggerFactory.getLogger(CcsdsPacketProducer.class);
-	
-	CcsdsFrameProducer parent;
-	
-	CcsdsTmPacket tmPacket = new CcsdsTmPacket();
-	
-	public CcsdsTmPacket getTmPacket() {
-		return tmPacket;
-	}
 
-	public CcsdsPacketProducer(ContainerFactory containerFactory, CcsdsFrameProducer parent) {
+	public CcsdsPacketProducer(ContainerFactory containerFactory) {
 		super(containerFactory);
-		this.parent = parent;
 
 		/** The packet base container (should have the name TMPacket by convention) contains as sub containers;
 		 *   1. A parameter per header field. For example CCSDS_APID
@@ -63,9 +51,9 @@ public class CcsdsPacketProducer extends CcsdsProducer implements ContainerObser
 		 *      the header parameter 'CCSDS_APID == 123' is valid, then a specific layout will be used. */
 		try {
 			for (Container sub : containerFactory.getContainer("TMPacket").getSubContainers()) {
-				sub.addUpdateObserver(this);
+				sub.addPacketObserver(this);
 			}
-			containerFactory.getContainer("TMPacket").addCompletionObserver(this);
+			containerFactory.getContainer("TMPacket").addPacketObserver(this);
 		}
 		catch (UnknownContainerNameException e) {
 			LOG.error(e.toString());
@@ -74,19 +62,12 @@ public class CcsdsPacketProducer extends CcsdsProducer implements ContainerObser
 	}
 	
 	@Override
-	public void completed() {
+	public void completed(String name) {
 		if(LOG.isDebugEnabled()) {
-			LOG.debug("TmPacket completely updated");
-			LOG.debug("TmPacket = " + tmPacket);
+			LOG.debug("TmPacket " + name + " completely updated");
+			LOG.debug("TmPacket = " + packet);
 		}
-		parent.getTmFrame().addPacket(tmPacket);
-	}
-
-	@Override
-	public void updated(String field, BitSet value) {
-		if(LOG.isDebugEnabled()) {
-			LOG.debug("TmPacket updated: " + field);
-		}
+		packet.setName(name);
 	}
 
 }

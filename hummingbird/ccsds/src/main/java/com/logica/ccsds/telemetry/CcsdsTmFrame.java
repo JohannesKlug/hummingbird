@@ -139,5 +139,37 @@ public class CcsdsTmFrame {
 		return builder.toString();
 	}
 
+	/**
+	 * Searches the packets contained by this frame for one named the same as the passed
+	 * parameter.  If it finds one it returns true.
+	 * @param field
+	 * @return
+	 */
+	public boolean containsPacket(String field) {
+		for(CcsdsTmPacket packet : packets) {
+			if(packet.packetName.equals(field)) {
+				if(LOG.isDebugEnabled()) {
+					LOG.debug("TmPacket " + field + " found!");
+				}	
+				return true;
+			}
+		}
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("TmPacket " + field + " not found in this TmFrame");
+		}
+		return false;
+	}
+
+	public CcsdsTmPacket getPacket(String field) {
+		CcsdsTmPacket found = null;
+		for(CcsdsTmPacket packet : packets) {
+			if(packet.packetName.equals(field)) {
+				found = packet;
+				break;
+			}
+		}
+		return found;
+	}
+
 
 }

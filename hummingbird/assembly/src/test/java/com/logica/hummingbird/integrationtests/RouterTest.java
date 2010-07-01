@@ -21,9 +21,6 @@ public class RouterTest extends CamelTestSupport {
 	protected static XtceModelFactory xtceFactory;
 	
 	protected static CamelCcsdsFrameBroker processor = null; 
-	
-    @EndpointInject(uri = "mock:frames")
-    protected MockEndpoint frameEndpoint;
     
     @EndpointInject(uri = "mock:packets")
     protected MockEndpoint packetEndpoint;
@@ -54,7 +51,6 @@ public class RouterTest extends CamelTestSupport {
                 .choice()
                 .when(header("Type").isEqualTo(MessageType.TMPacket)).to(packetEndpoint)
                 .when(header("Type").isEqualTo(MessageType.TMParameter)).to(parameterEndpoint)
-                .when(header("Type").isEqualTo(MessageType.TMFrame)).to(frameEndpoint)
                     ;
             }
         };
@@ -68,16 +64,12 @@ public class RouterTest extends CamelTestSupport {
 		template.sendBody(getFrame());
         
         /** Check we got the expected output. */        
-		parameterEndpoint.expectedMessageCount(24);
+		parameterEndpoint.expectedMessageCount(9);
 		parameterEndpoint.assertIsSatisfied();
 		
 		packetEndpoint.expectedMessageCount(1);
 		packetEndpoint.assertIsSatisfied();
 		
-		frameEndpoint.expectedMessageCount(1);
-		frameEndpoint.assertIsSatisfied();
-		
-		System.out.println("Number of received frames: " + frameEndpoint.getReceivedCounter());
 		System.out.println("Number of received packets: " + packetEndpoint.getReceivedCounter());
 		System.out.println("Number of received parameters: " + parameterEndpoint.getReceivedCounter());
 
@@ -92,7 +84,6 @@ public class RouterTest extends CamelTestSupport {
     	
     	assertIsInstanceOf(CcsdsTmParameter.class, parameterEndpoint.getReceivedExchanges().get(0).getIn().getBody());
     	assertIsInstanceOf(CcsdsTmPacket.class, packetEndpoint.getReceivedExchanges().get(0).getIn().getBody());
-    	assertIsInstanceOf(CcsdsTmFrame.class, frameEndpoint.getReceivedExchanges().get(0).getIn().getBody());
     	
     }
     

@@ -14,7 +14,7 @@ import com.logica.hummingbird.MessageType;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 
-public class CamelCcsdsFrameBroker extends CcsdsFrameBrokerImpl {
+public class CamelCcsdsFrameBroker extends CcsdsPacketBrokerImpl {
 
 	public CamelCcsdsFrameBroker(ContainerFactory factory) {
 		super(factory);
@@ -34,32 +34,23 @@ public class CamelCcsdsFrameBroker extends CcsdsFrameBrokerImpl {
 	 * @throws UnknownContainerNameException
 	 */
 	public List<Message> split(Exchange camelExchange) throws UnknownContainerNameException {
-		this.unmarshall("TMFrame", (BitSet) camelExchange.getIn().getBody());
+		this.unmarshall("TMPacket", (BitSet) camelExchange.getIn().getBody());
 
-		// List<Message> messages = new ArrayList<Message>(CamelMessageProducer.getMessages());
-		// CamelMessageProducer.clearMessages();
-
+		CcsdsTmPacket packet = packetProducer.getPacket();
+		
 		List<Message> messages = new ArrayList<Message>();
 
-		// Prepare the frame message - with POJO structure as payload (as opposed to uninterpreted BitSet)
-		Message frameMessage = new DefaultMessage();
-		frameMessage.setHeader("Type", MessageType.TMFrame);
-		frameMessage.setBody(frameProducer.getTmFrame());
-		messages.add(frameMessage);
+		Message packetMessage = new DefaultMessage();
+		packetMessage.setHeader("Type", MessageType.TMPacket);
+		
+		packetMessage.setBody(packet);
+		messages.add(packetMessage);
 
-		// for (CcsdsTmPacket packet : CcsdsProducer.getFrame().getPackets()) {
-		for (CcsdsTmPacket packet : frameProducer.getTmFrame().getPackets()) {
-			Message packetMessage = new DefaultMessage();
-			packetMessage.setHeader("Type", MessageType.TMPacket);
-			packetMessage.setBody(packet);
-			messages.add(packetMessage);
-
-			for (CcsdsTmParameter parameter : ((CcsdsTmPacket) packet).getPayload().getTmParameters()) {
-				Message parameterMessage = new DefaultMessage();
-				parameterMessage.setHeader("Type", MessageType.TMParameter);
-				parameterMessage.setBody(parameter);
-				messages.add(parameterMessage);
-			}
+		for (CcsdsTmParameter parameter : packet.getPayload().getTmParameters()) {
+			Message parameterMessage = new DefaultMessage();
+			parameterMessage.setHeader("Type", MessageType.TMParameter);
+			parameterMessage.setBody(parameter);
+			messages.add(parameterMessage);
 		}
 
 		return messages;

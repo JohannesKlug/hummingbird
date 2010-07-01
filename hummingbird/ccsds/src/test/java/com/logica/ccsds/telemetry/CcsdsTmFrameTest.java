@@ -29,7 +29,7 @@ public class CcsdsTmFrameTest {
 	@Before
 	public void setUp() throws Exception {
 		ArrayList<CcsdsTmPacket> packets = new ArrayList<CcsdsTmPacket>(1);
-		packets.add(new CcsdsTmPacket());
+		packets.add(new CcsdsTmPacket("Test packet"));
 		frame = new CcsdsTmFrame(new CcsdsTmFrameHeader(), packets, new CcsdsTmFrameTail());
 	}
 

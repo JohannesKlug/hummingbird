@@ -53,7 +53,7 @@ public class XtceModelFactory implements ContainerFactory {
 	protected String packetBaseReference = "TMPacket";
 	protected String frameBaseReference = "TMFrame";
 
-	protected String spacesystemmodelFilename = "src/main/resources/humsat.xml";
+	protected String spacesystemmodelFilename;
 
 	public XtceModelFactory(String spacesystemmodelFilename) throws InvalidXtceFileException {
 		this.spacesystemmodelFilename = spacesystemmodelFilename;

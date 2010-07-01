@@ -75,7 +75,6 @@
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>2.5</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.logica.hummingbird</groupId>

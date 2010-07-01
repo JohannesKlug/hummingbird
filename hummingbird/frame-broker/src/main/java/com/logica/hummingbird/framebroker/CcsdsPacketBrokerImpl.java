@@ -32,7 +32,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.ccsds.telemetry.CcsdsTmFrame;
-import com.logica.hummingbird.framebroker.producers.CcsdsFrameProducer;
 import com.logica.hummingbird.framebroker.producers.CcsdsPacketProducer;
 import com.logica.hummingbird.framebroker.producers.CcsdsParameterProducer;
 import com.logica.hummingbird.framebroker.producers.CcsdsProducer;
@@ -48,13 +47,12 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameEx
  * pleasing as there is a direct coupling between the 2. Notify the observers
  * when the complete container has been unmarshalled.
  */
-public class CcsdsFrameBrokerImpl implements CcsdsFrameBroker {
-	private final static Logger LOG = LoggerFactory.getLogger(CcsdsFrameBrokerImpl.class);
+public class CcsdsPacketBrokerImpl implements CcsdsPacketBroker {
+	private final static Logger LOG = LoggerFactory.getLogger(CcsdsPacketBrokerImpl.class);
 
 	/** The factory used to locate the models. */
 	protected ContainerFactory factory = null;
 
-	CcsdsProducer frameProducer;
 	CcsdsProducer packetProducer;
 	CcsdsProducer parameterProducer;
 
@@ -66,10 +64,9 @@ public class CcsdsFrameBrokerImpl implements CcsdsFrameBroker {
 	 * @param factory
 	 *            The factory to be used to obtain references to the container.
 	 * */
-	public CcsdsFrameBrokerImpl(ContainerFactory factory) {
+	public CcsdsPacketBrokerImpl(ContainerFactory factory) {
 		this.factory = factory;
-		this.frameProducer = new CcsdsFrameProducer(factory);
-		this.packetProducer = new CcsdsPacketProducer(factory, (CcsdsFrameProducer) frameProducer);
+		this.packetProducer = new CcsdsPacketProducer(factory);
 		this.parameterProducer = new CcsdsParameterProducer(factory, (CcsdsPacketProducer) packetProducer);
 	}
 
@@ -99,10 +96,4 @@ public class CcsdsFrameBrokerImpl implements CcsdsFrameBroker {
 	public void setFactory(ContainerFactory factory) {
 		this.factory = factory;
 	}
-
-	@Override
-	public CcsdsTmFrame getFrame() {
-		return this.frameProducer.getTmFrame();
-	}
-
 }

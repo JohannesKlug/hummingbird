@@ -28,7 +28,6 @@ package com.logica.hummingbird.framebroker;
 
 import java.util.BitSet;
 
-import com.logica.ccsds.telemetry.CcsdsTmFrame;
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.exceptions.BitSetOperationException;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
@@ -37,7 +36,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameEx
  * The interface of the Frame Broker. 
  * @author Gert Villemos
  */
-public interface CcsdsFrameBroker {
+public interface CcsdsPacketBroker {
 	
 	/**
 	 * Unmarshalls the bit-set using the container identified through the
@@ -83,11 +82,4 @@ public interface CcsdsFrameBroker {
 	 *
 	 */
 	public Container getContainer(String container) throws UnknownContainerNameException ;
-
-	
-	/**
-	 * Returns the {@link TelemetryFrame} the framebroker has loaded.
-	 * @return
-	 */
-	public CcsdsTmFrame getFrame();
 }

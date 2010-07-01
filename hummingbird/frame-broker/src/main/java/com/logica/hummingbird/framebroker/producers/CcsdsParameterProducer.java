@@ -49,7 +49,7 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 
 		// Register with all parameters corresponding to header fields.
 		for (ParameterContainer parameter : containerFactory.getAllParameters().values()) {
-			parameter.addParameterUpdateObserve(this);
+			parameter.addParameterUpdateObserver(this);
 		}
 	}
 
@@ -60,7 +60,7 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 		}
 
 		try {
-			this.getTmFrame().setParameterInFrame(new CcsdsTmParameter(field, value, Integer.class));
+			this.parent.packet.setParameterInPacket(new CcsdsTmParameter(field, value, Integer.class));
 		}
 		catch (SecurityException e) {
 			LOG.error(e.getMessage());
@@ -82,7 +82,7 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 			LOG.debug("Updated Parameter: " + field + " : " + value);
 		}
 		try {
-			this.getTmFrame().setParameterInFrame(new CcsdsTmParameter(field, value, String.class));
+			this.parent.packet.setParameterInPacket(new CcsdsTmParameter(field, value, String.class));
 		}
 		catch (SecurityException e) {
 			// TODO Auto-generated catch block
@@ -105,7 +105,7 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 		}
 
 		try {
-			this.getTmFrame().setParameterInFrame(new CcsdsTmParameter(field, value, Double.class));
+			this.parent.packet.setParameterInPacket(new CcsdsTmParameter(field, value, Double.class));
 		}
 		catch (SecurityException e) {
 			LOG.error(e.getMessage());
