@@ -124,6 +124,10 @@ public class BitSetUtility {
 	 * 
 	 * @param str
 	 *            {@link String} encoding the required BitSet using 1's and 0's
+	 * @param isBigEndian
+	 * 			  Parameter determines whether to write the value from the left or right of the returned BitSet.
+	 * 			  In other words, if you wish to interpret the BitSet later you must chose the endianess that
+	 * 			  will be used.
 	 * @return a {@link BitSet} equal to the BitSet encoded by the input String
 	 * @throws BitSetOperationException
 	 *             if the input string contains invalid characters, that is, not equal to 1 or 0
