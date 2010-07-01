@@ -1,0 +1,37 @@
+package com.logica.hummingbird.framebroker;
+
+import org.apache.commons.lang.ArrayUtils;
+
+public class CcsdsPacketDispatcher {
+
+	public void process(byte[] packet) {
+		
+		byte[] primaryHeader = ArrayUtils.subarray(packet, 0, 6);
+		
+		int packetVersionNumber = ((0xE0 & primaryHeader[0]) & 0xFF) >>> 5;
+		
+		String packetType;
+		if ((0x10 & primaryHeader[0]) == 0x10) {
+			packetType = "TC";
+		} else {
+			packetType = "TM";
+		}
+		
+		// check for secondary header flag (5th bit in primary header
+		if ((0x08 & primaryHeader[0]) == 0x08) {
+			
+		}
+		
+		int apidHighByte = (0x07 & primaryHeader[0]) << 8;
+		int apidLowByte = 0xFF & primaryHeader[1];
+		int apid = apidHighByte + apidLowByte;
+		
+		
+		
+		int packetDataLengthHighByte = (0xFF & primaryHeader[4]) << 8;
+		int packetDataLengthLowByte = 0xFF & primaryHeader[5];
+		int packetDataLength = packetDataLengthHighByte + packetDataLengthLowByte;
+		
+		
+	}
+}
