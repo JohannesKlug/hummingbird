@@ -1,6 +1,7 @@
 package com.logica.hummingbird.framebroker;
 
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -98,9 +99,10 @@ public class CcsdsFrameDispatcherTest {
 	
 	@Test
 	public void testIsNextFrame() {
-		//CcsdsFrameDispatcher
 		assertTrue(CcsdsFrameDispatcher.isNextFrame(0, 1));
-		assertTrue(CcsdsFrameDispatcher.isNextFrame(0, 1));
+		assertFalse(CcsdsFrameDispatcher.isNextFrame(1, 0));
+		assertTrue(CcsdsFrameDispatcher.isNextFrame(255, 0));
+		assertFalse(CcsdsFrameDispatcher.isNextFrame(123, 125));
 	}
 
 }

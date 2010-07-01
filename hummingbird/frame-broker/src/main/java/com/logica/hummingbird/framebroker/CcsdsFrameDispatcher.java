@@ -123,7 +123,7 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 	}
 	
 	public static boolean isNextFrame(int lastFrameCount, int frameCount) {
-		if (Math.abs((lastFrameCount-frameCount)%256) == 1) {
+		if (((frameCount-lastFrameCount+256)%256) == 1) {
 			return true;
 		} else {
 			return false;
