@@ -6,13 +6,24 @@ import org.apache.commons.lang.ArrayUtils;
 
 public class CcsdsPacketDispatcher extends Observable{
 	
-	private byte[] packetBuffer;
+	private byte[] packetBuffer = ArrayUtils.EMPTY_BYTE_ARRAY;
 
-	public void process(byte[] packet) {
+	public void process(byte[] packet, boolean isNextPacket) {
 		
-		// FIXME Implement a packet buffer
+		if (!isNextPacket) {
+			// this is not the next packet in sequence
+			// clear the packet buffer
+			packetBuffer = ArrayUtils.EMPTY_BYTE_ARRAY;
+		}
 		
-		byte[] primaryHeader = ArrayUtils.subarray(packet, 0, 6);
+		packetBuffer = ArrayUtils.addAll(packetBuffer, packet);
+		
+		// the minimum defined length for a packet is 7 bytes (6 bytes in the header, 1 byte payload)
+		if (packetBuffer.length < 7) {
+			return;
+		}
+		
+		byte[] primaryHeader = ArrayUtils.subarray(packetBuffer, 0, 6);
 		
 		int payloadOffset = 6;
 		
@@ -39,9 +50,24 @@ public class CcsdsPacketDispatcher extends Observable{
 		int packetDataLengthLowByte = 0xFF & primaryHeader[5];
 		int packetDataLength = packetDataLengthHighByte + packetDataLengthLowByte + 1;
 		
-		byte[] packetPayload = ArrayUtils.subarray(packet, payloadOffset, packetDataLength);
+		int payloadEnd = payloadOffset + packetDataLength;
 		
+		if (packetBuffer.length < (6 + payloadEnd)) {
+			// Not enough bytes in packetBuffer, return and wait for more data
+			return;
+		}
+		
+		byte[] packetPayload = ArrayUtils.subarray(packetBuffer, payloadOffset, payloadEnd);
+		
+		// return the current payload
 		notifyObservers(new PacketPayload(apid, packetPayload));
+		
+		// put the rest into the packet buffer and reprocess
+		packetBuffer = ArrayUtils.subarray(packetBuffer, payloadEnd, packetBuffer.length);
+
+		// pass an empty byte array to ourself.
+		// Recursion, yeah!
+		this.process(ArrayUtils.EMPTY_BYTE_ARRAY, true);
 		
 		
 		

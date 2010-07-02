@@ -17,12 +17,12 @@ public class VirtualChannel extends Observable {
 		
 		if (CcsdsFrameDispatcher.isNextFrame(lastFrameCount, frameCount)) {
 			// we can safely pass on the whole payload
-			notifyObservers(new FramePayload(id, payload));
+			notifyObservers(new FramePayload(id, payload, true));
 		} else {
 			// we received frames out of order
 			// payload before firstHeaderPointer must be thrown away.
 			byte[] goodPayload = ArrayUtils.subarray(payload, firstHeaderPointer, payload.length);
-			notifyObservers(new FramePayload(id, goodPayload));
+			notifyObservers(new FramePayload(id, goodPayload, false));
 		}
 		lastFrameCount = frameCount;
 		
