@@ -22,6 +22,10 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 	// FIXME Using an int to contain the result, this means it will be treated as a signed int.  Boundary tests will have picked this up.
 	@Override
 	public Integer valueFromBitSet(BitSet packet) {
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Extracting value from " + BitSetUtility.binDump(packet));
+		}
+		
 		int parameterValue = 0;
 		int offset = 0;
 		int mask = 1;

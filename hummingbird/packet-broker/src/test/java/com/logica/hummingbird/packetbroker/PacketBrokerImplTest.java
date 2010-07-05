@@ -24,11 +24,11 @@ import com.logica.hummingbird.util.exceptions.BitSetOperationException;
  */
 public class PacketBrokerImplTest {
 	/** APID 333 */
-	public static final String FLIGHT_DATA_APID = "00101001101";
+	public static final String FLIGHT_DATA_APID = "10110010100";
 	/** APID 555 */
-	public static final String LASER_DATA_APID = "01000101011";
+	public static final String LASER_DATA_APID = "11010100010";
 	/** APID 999 */
-	public static final String ALL_SYS_DATA_APID = "01111100111";
+	public static final String ALL_SYS_DATA_APID = "11100111110";
 
 	// packet length (16bit unsigned int)
 	public static final String PACKET_LENGTH_32 = "0000000000100000";
