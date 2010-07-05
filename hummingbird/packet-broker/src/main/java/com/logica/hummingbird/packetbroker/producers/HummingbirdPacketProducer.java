@@ -24,7 +24,7 @@
  * Created on   : 13.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.framebroker.producers;
+package com.logica.hummingbird.packetbroker.producers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,10 +39,10 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameEx
  * packet body which is binary data. This producer registers for the parameters in the 
  * header, and for the packet itself to get the raw data.
  */
-public class CcsdsPacketProducer extends CcsdsProducer implements PacketObserver {
-	private final static Logger LOG = LoggerFactory.getLogger(CcsdsPacketProducer.class);
+public class HummingbirdPacketProducer extends AbstractProducer implements PacketObserver {
+	private final static Logger LOG = LoggerFactory.getLogger(HummingbirdPacketProducer.class);
 
-	public CcsdsPacketProducer(ContainerFactory containerFactory) {
+	public HummingbirdPacketProducer(ContainerFactory containerFactory) {
 		super(containerFactory);
 
 		/** The packet base container (should have the name TMPacket by convention) contains as sub containers;
@@ -63,11 +63,11 @@ public class CcsdsPacketProducer extends CcsdsProducer implements PacketObserver
 	
 	@Override
 	public void completed(String name) {
+		packet.setName(name);
 		if(LOG.isDebugEnabled()) {
 			LOG.debug("TmPacket " + name + " completely updated");
 			LOG.debug("TmPacket = " + packet);
 		}
-		packet.setName(name);
 	}
 
 }

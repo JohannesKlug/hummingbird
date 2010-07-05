@@ -5,7 +5,7 @@ import java.util.BitSet;
 
 import junit.framework.TestCase;
 
-import com.logica.hummingbird.framebroker.CcsdsPacketBrokerImpl;
+import com.logica.hummingbird.packetbroker.HummingbirdPacketBroker;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.util.BitSetUtility;
@@ -83,10 +83,10 @@ public class ContainerProcessorTest extends TestCase {
 		}
 		
 		/** Marshall it to a BitSet. */
-		CcsdsPacketBrokerImpl processor = new CcsdsPacketBrokerImpl(factory);
+		HummingbirdPacketBroker processor = new HummingbirdPacketBroker(factory);
 		processor.marshall("TMFrame", frame);
 		
-		/** Visualize the BitSet*/
+		/** Visualise the BitSet*/
 		System.out.println(BitSetUtility.binDump(frame));
 		
 		/** Reset all values. */

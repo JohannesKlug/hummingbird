@@ -24,6 +24,7 @@
 		<module>test-support</module>
     <module>ccsds</module>
     <module>space-system-model</module>
+    <module>packet-broker</module>
   </modules>
 
 	<licenses>
@@ -148,7 +149,7 @@
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<type>jar</type>
-			<scope>compile</scope>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

@@ -24,19 +24,20 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.framebroker;
+package com.logica.hummingbird.packetbroker;
 
 import java.util.BitSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.framebroker.producers.CcsdsPacketProducer;
-import com.logica.hummingbird.framebroker.producers.CcsdsParameterProducer;
-import com.logica.hummingbird.framebroker.producers.CcsdsProducer;
+import com.logica.hummingbird.packetbroker.producers.HummingbirdPacketProducer;
+import com.logica.hummingbird.packetbroker.producers.HummingbirdParameterProducer;
+import com.logica.hummingbird.packetbroker.producers.AbstractProducer;
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.telemetry.HummingbirdPacket;
 import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 /**
@@ -46,14 +47,14 @@ import com.logica.hummingbird.util.exceptions.BitSetOperationException;
  * pleasing as there is a direct coupling between the 2. Notify the observers
  * when the complete container has been unmarshalled.
  */
-public class CcsdsPacketBrokerImpl implements CcsdsPacketBroker {
-	private final static Logger LOG = LoggerFactory.getLogger(CcsdsPacketBrokerImpl.class);
+public class HummingbirdPacketBroker implements PacketBroker {
+	private final static Logger LOG = LoggerFactory.getLogger(HummingbirdPacketBroker.class);
 
 	/** The factory used to locate the models. */
 	protected ContainerFactory factory = null;
 
-	CcsdsProducer packetProducer;
-	CcsdsProducer parameterProducer;
+	AbstractProducer packetProducer;
+	AbstractProducer parameterProducer;
 
 	/**
 	 * Constructor.
@@ -63,19 +64,25 @@ public class CcsdsPacketBrokerImpl implements CcsdsPacketBroker {
 	 * @param factory
 	 *            The factory to be used to obtain references to the container.
 	 * */
-	public CcsdsPacketBrokerImpl(ContainerFactory factory) {
+	public HummingbirdPacketBroker(ContainerFactory factory) {
 		this.factory = factory;
-		this.packetProducer = new CcsdsPacketProducer(factory);
-		this.parameterProducer = new CcsdsParameterProducer(factory, (CcsdsPacketProducer) packetProducer);
+		this.packetProducer = new HummingbirdPacketProducer(factory);
+		this.parameterProducer = new HummingbirdParameterProducer(factory, (HummingbirdPacketProducer) packetProducer);
 	}
 
 	@Override
 	public void unmarshall(String packetname, BitSet packet) throws UnknownContainerNameException {
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Unmarshalling container " + packetname + " with BitSet " + packet);
+		}
 		factory.getContainer(packetname).unmarshall(packet);
 	}
 
 	@Override
 	public void marshall(String packetname, BitSet packet) throws UnknownContainerNameException, BitSetOperationException {
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Unmarshalling container " + packetname + " with BitSet " + packet + " at offset 0");
+		}
 		factory.getContainer(packetname).marshall(packet, 0);
 	}
 
@@ -94,5 +101,10 @@ public class CcsdsPacketBrokerImpl implements CcsdsPacketBroker {
 
 	public void setFactory(ContainerFactory factory) {
 		this.factory = factory;
+	}
+
+	@Override
+	public HummingbirdPacket getPacket() {
+		return this.packetProducer.getPacket();
 	}
 }

@@ -1,4 +1,4 @@
-package com.logica.hummingbird.framebroker;
+package com.logica.hummingbird.packetbroker;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -8,15 +8,15 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
 
-import com.logica.ccsds.telemetry.CcsdsTmPacket;
-import com.logica.ccsds.telemetry.CcsdsTmParameter;
 import com.logica.hummingbird.MessageType;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.telemetry.HummingbirdPacket;
+import com.logica.hummingbird.telemetry.HummingbirdParameter;
 
-public class CamelCcsdsFrameBroker extends CcsdsPacketBrokerImpl {
+public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 
-	public CamelCcsdsFrameBroker(ContainerFactory factory) {
+	public HummingbirdCamelPacketBroker(ContainerFactory factory) {
 		super(factory);
 		// TODO Auto-generated constructor stub
 	}
@@ -36,7 +36,7 @@ public class CamelCcsdsFrameBroker extends CcsdsPacketBrokerImpl {
 	public List<Message> split(Exchange camelExchange) throws UnknownContainerNameException {
 		this.unmarshall("TMPacket", (BitSet) camelExchange.getIn().getBody());
 
-		CcsdsTmPacket packet = packetProducer.getPacket();
+		HummingbirdPacket packet = packetProducer.getPacket();
 		
 		List<Message> messages = new ArrayList<Message>();
 
@@ -46,7 +46,7 @@ public class CamelCcsdsFrameBroker extends CcsdsPacketBrokerImpl {
 		packetMessage.setBody(packet);
 		messages.add(packetMessage);
 
-		for (CcsdsTmParameter parameter : packet.getPayload().getTmParameters()) {
+		for (HummingbirdParameter parameter : packet.getParameters()) {
 			Message parameterMessage = new DefaultMessage();
 			parameterMessage.setHeader("Type", MessageType.TMParameter);
 			parameterMessage.setBody(parameter);

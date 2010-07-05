@@ -58,6 +58,7 @@ import com.logica.hummingbird.util.exceptions.BitSetOperationException;
  * 
  * @author Gert Villemos
  * @author Mark Doyle
+ * @author Johannes Klug
  */
 public class ContainerImpl extends NamedElement implements Container {
 	/**
@@ -110,6 +111,12 @@ public class ContainerImpl extends NamedElement implements Container {
 	 * 
 	 */
 	protected boolean matchRestrictions() {
+		if(restrictions.size() == 0) {
+			if(LOG.isDebugEnabled()) {
+				LOG.debug("No restrictions on container " + this.getName() + " therefore return true");
+			}
+			return true;
+		}
 		// Check for match against the restriction criteria. The base container will forward the data to all containers
 		// which have been defined with the base container as a base. The sub containers themselves must decide whether
 		// they are relevant for the processing.
@@ -125,7 +132,6 @@ public class ContainerImpl extends NamedElement implements Container {
 			// process specific APIDs, based on a restriction on the APID.
 			match = entry.getKey().match(entry.getValue());
 		}
-
 		return match;
 	}
 

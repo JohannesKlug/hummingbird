@@ -24,19 +24,20 @@
  * Created on   : 10.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.framebroker;
+package com.logica.hummingbird.packetbroker;
 
 import java.util.BitSet;
 
 import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.telemetry.HummingbirdPacket;
 import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 /**
  * The interface of the Frame Broker. 
  * @author Gert Villemos
  */
-public interface CcsdsPacketBroker {
+public interface PacketBroker {
 	
 	/**
 	 * Unmarshalls the bit-set using the container identified through the
@@ -81,5 +82,7 @@ public interface CcsdsPacketBroker {
 	 * @throws Exception 
 	 *
 	 */
-	public Container getContainer(String container) throws UnknownContainerNameException ;
+	public Container getContainer(String container) throws UnknownContainerNameException;
+	
+	public HummingbirdPacket getPacket();
 }
