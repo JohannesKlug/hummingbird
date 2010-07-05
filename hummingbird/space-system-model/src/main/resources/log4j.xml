@@ -30,7 +30,7 @@
 		<level value="WARN" />
 	</logger>
 	
-	<logger name="com.logica.hummingbird">
+	<logger name="com.logica.hummingbird.spacesystemmodel">
 		<level value="DEBUG"></level>
 	</logger>
 	
