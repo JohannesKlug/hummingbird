@@ -190,11 +190,11 @@ public class BitSetUtility {
 	public static String padStringFromTheFront(String string, int finalLength) {
 		int zeroesToAdd = finalLength - string.length();
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("Padding " + zeroesToAdd + " zero(s) to the front of the binary string");
+			LOG.debug("Padding " + zeroesToAdd + " zero(s) to the front of the binary string " + string);
 		}
 
-		String newString = "0";
-		for (int i = 1; i < zeroesToAdd; i++) {
+		String newString = "";
+		for (int i = 0; i < zeroesToAdd; i++) {
 			newString += '0';
 		}
 
@@ -206,11 +206,11 @@ public class BitSetUtility {
 	public static String padStringFromTheBack(String string, int finalLength) {
 		int zeroesToAdd = finalLength - string.length();
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("Padding " + zeroesToAdd + " zero(s) to the front of the binary string");
+			LOG.debug("Padding " + zeroesToAdd + " zero(s) to the back of the binary string " + string);
 		}
 
-		String newString = "0";
-		for (int i = 1; i < zeroesToAdd; i++) {
+		String newString = "";
+		for (int i = 0; i < zeroesToAdd; i++) {
 			newString += '0';
 		}
 
