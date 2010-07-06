@@ -132,11 +132,18 @@ public class ContainerImpl extends NamedElement implements Container {
 			// process specific APIDs, based on a restriction on the APID.
 			match = entry.getKey().match(entry.getValue());
 		}
+		
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Restriction evaluated as " + match + " for container " + this.getName());
+		}
 		return match;
 	}
 
 	@Override
 	public BitSet unmarshall(BitSet packet) {
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Unmarshalling " + this.getName());
+		}
 		// Check if the BitSet has been truncated by testing it against the known length of the container.
 		// This should only be possible on the root container since it's the first thing to be tested; everything
 		// else that is passed in is a subset of the root container. If a "truncation reversal" bit is tagged on
@@ -146,6 +153,7 @@ public class ContainerImpl extends NamedElement implements Container {
 			truncated = true;
 
 			if (LOG.isDebugEnabled()) {
+				// TODO Could we just use size instead of length?
 				LOG.debug("The " + name + " packet length (" + getLength() + ") is less than expected.  Truncation has occured");
 				LOG.debug("The input packet length = " + packet.length());
 				LOG.debug("The " + name + " packet has been trucated by " + (getLength() - packet.length()));

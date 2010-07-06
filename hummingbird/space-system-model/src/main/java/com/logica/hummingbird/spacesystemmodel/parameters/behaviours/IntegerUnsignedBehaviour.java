@@ -38,14 +38,9 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
                 if (packet.get(i)) {
                 	parameterValue |= (1 << i); 
                 }
-                if(LOG.isDebugEnabled()) {
-                	LOG.debug("Bit position " + i + " parameter value = " + Long.toBinaryString(parameterValue));
-                }
             }
             parameterValue = parameterValue & Long.MAX_VALUE;
-            LOG.debug("Extracted parameter value with max long anded = " + Long.toBinaryString(parameterValue));
             parameterValue = Long.reverse(parameterValue);
-            LOG.debug("Reversed Long = " + Long.toBinaryString(parameterValue));
             try {
 				BitSet paramBitset = BitSetUtility.stringToBitSet(Long.toBinaryString(parameterValue), false);
 				BitSet paraBitSet = paramBitset.get(0, getSizeIntBits()+1);
@@ -55,6 +50,7 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 			catch (BitSetOperationException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				LOG.error(e.getMessage());
 			}
 		}
 		else {

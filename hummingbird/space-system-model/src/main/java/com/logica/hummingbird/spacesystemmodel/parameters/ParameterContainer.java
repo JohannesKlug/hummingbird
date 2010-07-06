@@ -91,7 +91,7 @@ public abstract class ParameterContainer extends ContainerImpl implements Parame
 	 
 	@Override
 	public int getLength() {
-		LOG.debug("returning length " + (length + (int) type.getSizeInBits()) + " for " + getName());
+//		LOG.debug("returning length " + (length + (int) type.getSizeInBits()) + " for " + getName());
 		
 		//FIXME Why is the length field here?
 		return length + (int) type.getSizeInBits();

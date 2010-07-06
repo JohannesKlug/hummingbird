@@ -47,4 +47,9 @@ public class Packet implements HummingbirdPacket {
 		return builder.toString();
 	}
 
+	@Override
+	public String getName() {
+		return this.name;
+	}
+
 }

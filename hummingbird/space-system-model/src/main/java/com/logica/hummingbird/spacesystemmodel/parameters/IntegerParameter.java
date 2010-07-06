@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
 import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
+import com.logica.hummingbird.util.BitSetUtility;
 import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 public class IntegerParameter extends ParameterContainer {
@@ -51,8 +52,13 @@ public class IntegerParameter extends ParameterContainer {
 		}
 
 		// Chop off this integer parameter because it has now been unmarshalled
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Bitset before post unmarshall chop = " + BitSetUtility.binDump(packet));
+		}
 		BitSet returnPacket = packet.get((int) type.getSizeInBits(), packet.length());
-		
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Bitset after post unmarshall chop = " + BitSetUtility.binDump(returnPacket));
+		}
 		// Return the rest of the binary bitset to the calling container 
 		return returnPacket;
 	}

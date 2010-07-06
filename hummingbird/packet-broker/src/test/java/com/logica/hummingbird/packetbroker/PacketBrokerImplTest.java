@@ -23,22 +23,22 @@ import com.logica.hummingbird.util.exceptions.BitSetOperationException;
  * @TODO Test is not complete - awaiting commons telemetry models to be finalised
  */
 public class PacketBrokerImplTest {
-	/** APID 333 */
+	/** APID 333 LE unsigned */
 	public static final String FLIGHT_DATA_APID = "10110010100";
-	/** APID 555 */
+	/** APID 555 LE unsigned */
 	public static final String LASER_DATA_APID = "11010100010";
-	/** APID 999 */
+	/** APID 999 LE unsigned */
 	public static final String ALL_SYS_DATA_APID = "11100111110";
 
-	// packet length (16bit unsigned int)
-	public static final String PACKET_LENGTH_32 = "0000000000100000";
-	public static final String PACKET_LENGTH_64 = "0000000001000000";
-	public static final String PACKET_LENGTH_96 = "0000000001100000";
-	//
-	// 1024 flight hours (32bit int big endian unsigned)
+	/** 32 bit packet length represented as a 16bit LE unsigned */
+	public static final String PACKET_LENGTH_32 = "0000010000000000";
+	public static final String PACKET_LENGTH_64 = "0000001000000000";
+	public static final String PACKET_LENGTH_96 = "0000011000000000";
+
+	/** 1024 flight hours (32 bit big endian unsigned int) */
 	public static final String FLIGHT_HOURS_1024 = "00000000000000000000010000000000";
-	//
-	// 17949.25 Laser temperature (64 bit signed float)
+
+	/** 17949.25 Laser temperature (64 bit signed float) */
 	public static final String LASER_TEMP_17959_25 = "0100000011010001100001110101000000000000000000000000000000000000";
 
 	/**

@@ -50,11 +50,11 @@ public class MockParameterContainerModel implements ContainerFactory {
 	 */
 	public static final String TM_PACKET_PAYLOAD_ALIAS = "TMPacketPayload";
 
-	public static final String TM_FLIGHT_DATA_PAYLOAD = "TMPayload A";
+	public static final String TM_FLIGHT_DATA_PAYLOAD = "TMPayload Flight data";
 
-	public static final String TM_LASER_DATA_PAYLOAD = "TMPayload B";
+	public static final String TM_LASER_DATA_PAYLOAD = "TMPayload Weapon data";
 
-	public static final String TM_ALL_SYS_PAYLOAD = "TMPayload C";
+	public static final String TM_ALL_SYS_PAYLOAD = "TMPayload All systems data";
 
 	public static final String FLIGHT_HOURS_PARAM = "TestParamA";
 
@@ -88,10 +88,10 @@ public class MockParameterContainerModel implements ContainerFactory {
 
 		// Create the parameter types
 		NumberParameterType paramType11bitInt = new NumberParameterType("11bitInt", "11bit integer type", "Parameter type for 11bit integers",
-				new IntegerUnsignedBehaviour(11, true), 0);
+				new IntegerUnsignedBehaviour(11, false), 0);
 
 		NumberParameterType paramType16bitInt = new NumberParameterType("16bitInt", "16bit integer type", "Parameter type for 16bit integers",
-				new IntegerUnsignedBehaviour(16, true), 0);
+				new IntegerUnsignedBehaviour(16, false), 0);
 
 		NumberParameterType test32bitInt = new NumberParameterType("test32bitInt", "test param", "32 bit int test param",
 				new IntegerUnsignedBehaviour(32, true), 1);
