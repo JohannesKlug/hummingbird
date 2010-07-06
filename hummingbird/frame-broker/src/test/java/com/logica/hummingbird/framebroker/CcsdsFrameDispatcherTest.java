@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -85,12 +86,20 @@ public class CcsdsFrameDispatcherTest implements Observer {
 	public void injectFrame() throws InvalidFrameLengthException, FrameFailedCrcCheckException, InterruptedException {
 		frameDispatcher.addObserver(this);
 		packetDispatcher.addObserver(this);
+//		List<byte[]> manyFrames = frames.
+		
+		long start = System.currentTimeMillis();
 		for (byte[] frame : frames) {
 			frameDispatcher.process(frame);
 		}
-		Thread.sleep(1000);
+		long runningTime = System.currentTimeMillis()-start;
+		System.out.println("Ran " + runningTime + "ms.");
 		assertEquals(52, receivedFramePayloads.size());
 		assertEquals(318, receivedPacketPayloads.size());
+		
+//		for (PacketPayload packetPayload : receivedPacketPayloads) {
+//			System.out.println("Packet with apid " + packetPayload.apid + " has length " + packetPayload.payload.length + " bytes.");
+//		}
 	}
 	
 	@Test

@@ -3,6 +3,7 @@ package com.logica.hummingbird.framebroker;
 import org.apache.commons.lang.ArrayUtils;
 
 public class FramePayload {
+	public int spacecraftId;
 	public int vcId;
 	public byte[] payload;
 	public boolean isNextFrame;
