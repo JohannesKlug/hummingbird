@@ -3,8 +3,11 @@ package com.logica.hummingbird.framebroker;
 import java.util.Observable;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class VirtualChannel extends Observable {
+	private final static Logger LOG = LoggerFactory.getLogger(VirtualChannel.class);
 	
 	private int lastFrameCount = -1;
 	private int id;
@@ -15,16 +18,29 @@ public class VirtualChannel extends Observable {
 	
 	public void addPayload(byte[] payload, int frameCount, int firstHeaderPointer) {
 		
+		if (this.countObservers() < 1) {
+			LOG.error("VirtualChannel " + id + " has no observers! This is an error.");
+		}
+		
+		int payloadOffset = 0;
+		boolean isNext;
+		
 		if (CcsdsFrameDispatcher.isNextFrame(lastFrameCount, frameCount)) {
-			// we can safely pass on the whole payload
-			notifyObservers(new FramePayload(id, payload, true));
+			isNext = true;
 		} else {
 			// we received frames out of order
 			// payload before firstHeaderPointer must be thrown away.
-			byte[] goodPayload = ArrayUtils.subarray(payload, firstHeaderPointer, payload.length);
-			notifyObservers(new FramePayload(id, goodPayload, false));
+			payloadOffset = firstHeaderPointer;
+			isNext = false;
 		}
+		
 		lastFrameCount = frameCount;
+		
+		byte[] goodPayload = ArrayUtils.subarray(payload, payloadOffset, payload.length);
+		LOG.debug("Passing payload of length " + goodPayload.length);
+		
+		this.setChanged();
+		notifyObservers(new FramePayload(id, goodPayload, isNext));
 		
 		
 	}
