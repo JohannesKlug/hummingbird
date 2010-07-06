@@ -24,25 +24,25 @@
  * Created on   : 13.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.framebroker.producers;
+package com.logica.hummingbird.packetbroker.producers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.ccsds.telemetry.CcsdsTmParameter;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
+import com.logica.hummingbird.telemetry.Parameter;
 
 /**
  * TODO write here a description of the class
  */
-public class CcsdsParameterProducer extends CcsdsProducer implements ParameterObserver {
-	private final static Logger LOG = LoggerFactory.getLogger(CcsdsParameterProducer.class);
+public class HummingbirdParameterProducer extends AbstractProducer implements ParameterObserver {
+	private final static Logger LOG = LoggerFactory.getLogger(HummingbirdParameterProducer.class);
 
-	CcsdsPacketProducer parent;
+	HummingbirdPacketProducer parent;
 
-	public CcsdsParameterProducer(ContainerFactory containerFactory, CcsdsPacketProducer parent) {
+	public HummingbirdParameterProducer(ContainerFactory containerFactory, HummingbirdPacketProducer parent) {
 		super(containerFactory);
 
 		this.parent = parent;
@@ -58,22 +58,8 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value);
 		}
-
-		try {
-			this.parent.packet.setParameterInPacket(new CcsdsTmParameter(field, value, Integer.class));
-		}
-		catch (SecurityException e) {
-			LOG.error(e.getMessage());
-			e.printStackTrace();
-		}
-		catch (IllegalArgumentException e) {
-			LOG.error(e.getMessage());
-			e.printStackTrace();
-		}
-		catch (IllegalAccessException e) {
-			LOG.error(e.getMessage());
-			e.printStackTrace();
-		}
+		
+		parent.packet.addParameters(new Parameter(field, Integer.class, value));
 	}
 
 	@Override
@@ -81,21 +67,8 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value);
 		}
-		try {
-			this.parent.packet.setParameterInPacket(new CcsdsTmParameter(field, value, String.class));
-		}
-		catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		parent.packet.addParameters(new Parameter(field, value.getClass(), value));
 	}
 
 	@Override
@@ -104,21 +77,7 @@ public class CcsdsParameterProducer extends CcsdsProducer implements ParameterOb
 			LOG.debug("Updated Parameter: " + field + " : " + value);
 		}
 
-		try {
-			this.parent.packet.setParameterInPacket(new CcsdsTmParameter(field, value, Double.class));
-		}
-		catch (SecurityException e) {
-			LOG.error(e.getMessage());
-			e.printStackTrace();
-		}
-		catch (IllegalArgumentException e) {
-			LOG.error(e.getMessage());
-			e.printStackTrace();
-		}
-		catch (IllegalAccessException e) {
-			LOG.error(e.getMessage());
-			e.printStackTrace();
-		}
+		parent.packet.addParameters(new Parameter(field, Double.class, value));
 	}
 
 }

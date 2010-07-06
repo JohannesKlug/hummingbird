@@ -10,18 +10,17 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
-import com.logica.ccsds.telemetry.CcsdsTmFrame;
-import com.logica.ccsds.telemetry.CcsdsTmPacket;
-import com.logica.ccsds.telemetry.CcsdsTmParameter;
 import com.logica.hummingbird.MessageType;
-import com.logica.hummingbird.framebroker.CamelCcsdsFrameBroker;
+import com.logica.hummingbird.packetbroker.HummingbirdCamelPacketBroker;
+import com.logica.hummingbird.telemetry.HummingbirdPacket;
+import com.logica.hummingbird.telemetry.HummingbirdParameter;
 import com.logica.hummingbird.xtce.XtceModelFactory;
 
 public class RouterTest extends CamelTestSupport {
 
 	protected static XtceModelFactory xtceFactory;
 
-	protected static CamelCcsdsFrameBroker processor = null;
+	protected static HummingbirdCamelPacketBroker processor = null;
 
 	@EndpointInject(uri = "mock:packets")
 	protected MockEndpoint packetEndpoint;
@@ -45,7 +44,7 @@ public class RouterTest extends CamelTestSupport {
 			public void configure() throws Exception {
 
 				xtceFactory = new XtceModelFactory("src/test/resources/humsat.xml");
-				processor = new CamelCcsdsFrameBroker(xtceFactory);
+				processor = new HummingbirdCamelPacketBroker(xtceFactory);
 
 				from("direct:start").split().method(processor, "split").choice().when(header("Type").isEqualTo(MessageType.TMPacket)).to(packetEndpoint).when(
 						header("Type").isEqualTo(MessageType.TMParameter)).to(parameterEndpoint);
@@ -79,8 +78,8 @@ public class RouterTest extends CamelTestSupport {
 		assertNotNull("template is null.", template);
 		template.sendBody(getFrame());
 
-		assertIsInstanceOf(CcsdsTmParameter.class, parameterEndpoint.getReceivedExchanges().get(0).getIn().getBody());
-		assertIsInstanceOf(CcsdsTmPacket.class, packetEndpoint.getReceivedExchanges().get(0).getIn().getBody());
+		assertIsInstanceOf(HummingbirdParameter.class, parameterEndpoint.getReceivedExchanges().get(0).getIn().getBody());
+		assertIsInstanceOf(HummingbirdPacket.class, packetEndpoint.getReceivedExchanges().get(0).getIn().getBody());
 
 	}
 
@@ -137,7 +136,7 @@ public class RouterTest extends CamelTestSupport {
 		/** Marshall it to a BitSet. */
 		// ContainerProcessor processor = new ContainerProcessor(xtceFactory);
 		if (processor == null) {
-			processor = new CamelCcsdsFrameBroker(xtceFactory);
+			processor = new HummingbirdCamelPacketBroker(xtceFactory);
 		}
 		processor.marshall("TMPacket", frame);
 

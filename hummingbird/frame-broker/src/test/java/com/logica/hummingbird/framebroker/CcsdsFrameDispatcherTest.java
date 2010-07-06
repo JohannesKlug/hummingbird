@@ -9,6 +9,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,9 +18,15 @@ import org.junit.Test;
 import com.logica.hummingbird.framebroker.exceptions.FrameFailedCrcCheckException;
 import com.logica.hummingbird.framebroker.exceptions.InvalidFrameLengthException;
 
-public class CcsdsFrameDispatcherTest {
+public class CcsdsFrameDispatcherTest implements Observer {
 
 	private List<byte[]> frames = new ArrayList<byte[]>();
+	
+	private CcsdsFrameDispatcher frameDispatcher = new CcsdsFrameDispatcher();
+	private CcsdsPacketDispatcher packetDispatcher = new CcsdsPacketDispatcher();
+
+	List<FramePayload> receivedFramePayloads = new ArrayList<FramePayload>();
+	List<PacketPayload> receivedPacketPayloads = new ArrayList<PacketPayload>();
 	
 	@Before
 	public void setUp() throws Exception {
@@ -74,11 +82,15 @@ public class CcsdsFrameDispatcherTest {
 	}
 	
 	@Test
-	public void injectFrame() throws InvalidFrameLengthException, FrameFailedCrcCheckException {
-		CcsdsFrameDispatcher dispatcher = new CcsdsFrameDispatcher();
+	public void injectFrame() throws InvalidFrameLengthException, FrameFailedCrcCheckException, InterruptedException {
+		frameDispatcher.addObserver(this);
+		packetDispatcher.addObserver(this);
 		for (byte[] frame : frames) {
-			dispatcher.process(frame);
+			frameDispatcher.process(frame);
 		}
+		Thread.sleep(1000);
+		assertEquals(52, receivedFramePayloads.size());
+		assertEquals(318, receivedPacketPayloads.size());
 	}
 	
 	@Test
@@ -103,6 +115,31 @@ public class CcsdsFrameDispatcherTest {
 		assertFalse(CcsdsFrameDispatcher.isNextFrame(1, 0));
 		assertTrue(CcsdsFrameDispatcher.isNextFrame(255, 0));
 		assertFalse(CcsdsFrameDispatcher.isNextFrame(123, 125));
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+//		System.out.println("Called from: " + o + " with object: " + arg);
+		if (o == frameDispatcher) {
+			if (arg instanceof FramePayload) {
+				FramePayload framePayload = (FramePayload) arg;
+				receivedFramePayloads.add(framePayload);
+				packetDispatcher.process(framePayload.payload, framePayload.isNextFrame);
+			}
+			
+		} else if (o == packetDispatcher) {
+			if (arg instanceof PacketPayload) {
+				PacketPayload packetPayload = (PacketPayload) arg;
+				receivedPacketPayloads.add(packetPayload);
+			}
+			
+		}
+		
+		
+	}
+	
+	@Test
+	public void testChain() {
 	}
 
 }

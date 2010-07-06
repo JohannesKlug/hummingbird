@@ -1,0 +1,50 @@
+package com.logica.hummingbird.telemetry;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class Packet implements HummingbirdPacket {
+	private final static Logger LOG = LoggerFactory.getLogger(Packet.class);
+	
+	String name = "Default packet";
+	List<HummingbirdParameter> parameters;
+
+	public Packet() {
+	}
+
+	@Override
+	public List<HummingbirdParameter> getParameters() {
+		return parameters;
+	}
+
+	@Override
+	public void addParameters(HummingbirdParameter parameter) {
+		if (this.parameters == null) {
+			this.parameters = new ArrayList<HummingbirdParameter>();
+		}
+		this.parameters.add(parameter);
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Added parameter " + parameter + " to " + this.name + " packet.");
+		}
+	}
+
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Packet [name=");
+		builder.append(name);
+		builder.append(", parameters=");
+		builder.append(parameters);
+		builder.append("]");
+		return builder.toString();
+	}
+
+}

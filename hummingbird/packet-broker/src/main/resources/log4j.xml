@@ -30,7 +30,19 @@
 		<level value="WARN" />
 	</logger>
 	
-	<logger name="com.logica.hummingbird">
+	<logger name="com.logica.hummingbird.packetbroker">
+		<level value="DEBUG"></level>
+	</logger>
+	
+	<logger name="com.logica.hummingbird.spacesystemmodel">
+		<level value="DEBUG"></level>
+	</logger>
+	
+	<logger name="com.logica.hummingbird.tele">
+		<level value="DEBUG"></level>
+	</logger>
+	
+	<logger name="com.logica.hummingbird.util">
 		<level value="DEBUG"></level>
 	</logger>
 	

@@ -3,8 +3,12 @@ package com.logica.hummingbird.framebroker;
 import java.util.Observable;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CcsdsPacketDispatcher extends Observable{
+	
+	private final static Logger LOG = LoggerFactory.getLogger(CcsdsPacketDispatcher.class);
 	
 	private byte[] packetBuffer = ArrayUtils.EMPTY_BYTE_ARRAY;
 
@@ -17,6 +21,7 @@ public class CcsdsPacketDispatcher extends Observable{
 		}
 		
 		packetBuffer = ArrayUtils.addAll(packetBuffer, packet);
+		LOG.debug("Packet Buffer is now " + packetBuffer.length + " bytes long.");
 		
 		// the minimum defined length for a packet is 7 bytes (6 bytes in the header, 1 byte payload)
 		if (packetBuffer.length < 7) {
@@ -35,6 +40,7 @@ public class CcsdsPacketDispatcher extends Observable{
 		} else {
 			packetType = "TM";
 		}
+		LOG.debug("Packet Type: " + packetType);
 		
 		// check for secondary header flag (5th bit in primary header
 		if ((0x08 & primaryHeader[0]) == 0x08) {
@@ -45,10 +51,12 @@ public class CcsdsPacketDispatcher extends Observable{
 		int apidHighByte = (0x07 & primaryHeader[0]) << 8;
 		int apidLowByte = 0xFF & primaryHeader[1];
 		int apid = apidHighByte + apidLowByte;
+		LOG.debug("Apid: " + apid);
 		
 		int packetDataLengthHighByte = (0xFF & primaryHeader[4]) << 8;
 		int packetDataLengthLowByte = 0xFF & primaryHeader[5];
 		int packetDataLength = packetDataLengthHighByte + packetDataLengthLowByte + 1;
+		LOG.debug("Packet Data Length: " + packetDataLength);
 		
 		int payloadEnd = payloadOffset + packetDataLength;
 		
@@ -60,6 +68,7 @@ public class CcsdsPacketDispatcher extends Observable{
 		byte[] packetPayload = ArrayUtils.subarray(packetBuffer, payloadOffset, payloadEnd);
 		
 		// return the current payload
+		setChanged();
 		notifyObservers(new PacketPayload(apid, packetPayload));
 		
 		// put the rest into the packet buffer and reprocess

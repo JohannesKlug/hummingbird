@@ -24,6 +24,9 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 	@Override
 	public Long valueFromBitSet(BitSet packet) {
 		long parameterValue = 0;
+			LOG.debug("Extracting value from " + BitSetUtility.binDump(packet));
+		}
+		
 		int mask = 1;
 
 		if (!isBigEndian) {

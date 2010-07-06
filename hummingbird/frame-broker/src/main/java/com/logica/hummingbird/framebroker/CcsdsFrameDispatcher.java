@@ -13,11 +13,11 @@ import com.logica.hummingbird.framebroker.exceptions.InvalidFrameLengthException
 public class CcsdsFrameDispatcher extends Observable implements Observer {
 	private final static Logger LOG = LoggerFactory.getLogger(CcsdsFrameDispatcher.class);
 	
-	public final static int FRAME_LENGTH_IN_OCTETS = 1115;
 	/**
 	 * For now, we consider frames to be of the maximum allowed length, i.e. 16384 bits or 2048 octets.
 	 */
 	//public final static int FRAME_LENGTH_IN_OCTETS = 16384 / 8;
+	public final static int FRAME_LENGTH_IN_OCTETS = 1115;
 
 	/**
 	 * For now, we expect operational control (4 octets) field and error control field (2 octets) to be present.
@@ -25,6 +25,7 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 	private final static int PAYLOAD_END = FRAME_LENGTH_IN_OCTETS - 4 - 2;
 
 	private VirtualChannel[] virtualChannel = new VirtualChannel[8];
+	
 	public CcsdsFrameDispatcher() {
 		
 		/*
@@ -71,7 +72,7 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 		int virtualChannelId = (0x0E & primaryHeader[1]) >> 1;
 		LOG.debug("Virtual Channel Id: " + virtualChannelId);
 
-		dataFieldStatus = ArrayUtils.subarray(frame, 6, 8);
+		dataFieldStatus = ArrayUtils.subarray(frame, 4, 6);
 
 		int firstHeaderPointerHighByte = (0x03 & dataFieldStatus[0]) << 8;
 		int firstHeaderPointerLowByte = 0xFF & dataFieldStatus[1];
@@ -85,11 +86,12 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 		LOG.debug("Master Channel Frame Count: " + masterChannelFrameCount);
 		LOG.debug("Virtual Channel Frame Count: " + virtualChannelFrameCount);
 
-		int payloadOffset = 8;
+		int payloadOffset = 6;
 
 		// check for secondary header flag (1st bit in dataFieldStatus
 		if ((0x80 & dataFieldStatus[0]) == 0x80) {
 			// secondary header present
+			LOG.debug("This frame has a secondary header");
 
 			byte secondaryHeaderStatus = frame[8];
 
@@ -101,10 +103,11 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 			 * actual header length is one less than that. Since ArrayUtils uses
 			 */
 			int secondaryHeaderLength = (0x3F & secondaryHeaderStatus) - 1;
+			LOG.debug("Secondary Header Length: " + secondaryHeaderLength);
 
-			secondaryHeader = ArrayUtils.subarray(frame, 9, 9 + secondaryHeaderLength);
+			secondaryHeader = ArrayUtils.subarray(frame, payloadOffset, payloadOffset + secondaryHeaderLength);
 
-			payloadOffset = 9 + secondaryHeaderLength;
+			payloadOffset = payloadOffset + secondaryHeaderLength;
 
 		}
 
@@ -135,6 +138,7 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// we received a FramePayload from one of our virtual channels - pass this on to our observers.
+		this.setChanged();
 		notifyObservers(arg);
 	}
 
