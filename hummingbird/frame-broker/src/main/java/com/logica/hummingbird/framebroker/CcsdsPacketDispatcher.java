@@ -34,6 +34,10 @@ public class CcsdsPacketDispatcher extends Observable{
 		
 		int packetVersionNumber = ((0xE0 & primaryHeader[0]) & 0xFF) >>> 5;
 		
+		if (packetVersionNumber != 0) {
+			LOG.error("Packet with invalid version number encountered. Version number was: " + packetVersionNumber);
+		}
+		
 		String packetType;
 		if ((0x10 & primaryHeader[0]) == 0x10) {
 			packetType = "TC";
@@ -52,6 +56,16 @@ public class CcsdsPacketDispatcher extends Observable{
 		int apidLowByte = 0xFF & primaryHeader[1];
 		int apid = apidHighByte + apidLowByte;
 		LOG.debug("Apid: " + apid);
+		
+		int packetSequenceFlags = (0xC0 & primaryHeader[2] >>> 6);
+		LOG.debug("Packet Sequence Flags: " + packetSequenceFlags);
+		
+		int packetSequenceCountOrPacketNameHighByte = (0x3F &primaryHeader[2]) << 8;
+		int packetSequenceCountOrPacketNameLowByte = 0xFF & primaryHeader[3];
+		int packetSequenceCountOrPacketName = packetSequenceCountOrPacketNameHighByte + packetSequenceCountOrPacketNameLowByte;
+		LOG.debug("Packet Sequence Count or Packet Name: " + packetSequenceCountOrPacketName);
+		
+		
 		
 		int packetDataLengthHighByte = (0xFF & primaryHeader[4]) << 8;
 		int packetDataLengthLowByte = 0xFF & primaryHeader[5];
