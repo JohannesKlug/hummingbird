@@ -24,26 +24,28 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 	@Override
 	public Long valueFromBitSet(BitSet packet) {
 		long parameterValue = 0;
-		if(LOG.isDebugEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Extracting value from " + BitSetUtility.binDump(packet));
 		}
 
 		if (!isBigEndian) {
 			// TODO Not the most elegant solution with all the conversions to strings, reversals, reparsing etc.
-			if(LOG.isDebugEnabled()) {
+			if (LOG.isDebugEnabled()) {
 				LOG.debug("Extracting little endian value");
 			}
 
-            for(int i = packet.length(); i >= 0; i--) {
-                if (packet.get(i)) {
-                	parameterValue |= (1 << i); 
-                }
-            }
-            parameterValue = parameterValue & Long.MAX_VALUE;
-            parameterValue = Long.reverse(parameterValue);
-            try {
+			for (int i = packet.length(); i >= 0; i--) {
+				if (packet.get(i)) {
+					parameterValue |= (1 << i);
+				}
+			}
+
+			parameterValue = parameterValue & Long.MAX_VALUE;
+
+			parameterValue = Long.reverse(parameterValue);
+			try {
 				BitSet paramBitset = BitSetUtility.stringToBitSet(Long.toBinaryString(parameterValue), false);
-				BitSet paraBitSet = paramBitset.get(0, getSizeIntBits()+1);
+				BitSet paraBitSet = paramBitset.get(0, getSizeIntBits() + 1);
 				String finalParam = BitSetUtility.bitSetToBinaryString(paraBitSet, true);
 				parameterValue = Long.parseLong(finalParam, 2);
 			}
@@ -54,15 +56,27 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 			}
 		}
 		else {
-			if(LOG.isDebugEnabled()) {
+			if (LOG.isDebugEnabled()) {
 				LOG.debug("Extracting big endian value");
 			}
-			for(int i = 0;i < packet.length();i++) {
-                if (packet.get(i)) {
-                	parameterValue |= (1 << i); 
-                }
-            }
-            parameterValue = parameterValue & Long.MAX_VALUE;
+
+			// for(int i = 0; i < packet.length(); i++) {
+			for (int i = 0; i < getSizeIntBits(); i++) {
+				if (packet.get(i)) {
+					parameterValue |= (1 << i);
+					if (LOG.isDebugEnabled()) {
+						LOG.debug("Parameter value = " + parameterValue + " / " + Long.toBinaryString(parameterValue));
+					}
+				}
+			}
+			// Pad out the long value which will be truncated in the previous loop if the packet isn't bounded by 1's
+			LOG.debug("padding to " + getSizeIntBits());
+			parameterValue = Long.parseLong(BitSetUtility.padStringFromTheBack(Long.toBinaryString(parameterValue), getSizeIntBits()), 2);
+			
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("Parameter value = " + Long.toBinaryString(parameterValue));
+			}
+			parameterValue = parameterValue & Long.MAX_VALUE;
 		}
 
 		if (LOG.isDebugEnabled()) {
