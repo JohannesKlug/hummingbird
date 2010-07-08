@@ -166,6 +166,9 @@ public class BitSetUtility {
 	 * @return
 	 */
 	public static String bitSetToBinaryString(BitSet data, boolean useLogicalSize) {
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("I was passed: " + BitSetUtility.binDump(data));
+		}
 		int bitSetSize;
 		if (useLogicalSize) {
 			bitSetSize = data.length();
@@ -175,7 +178,6 @@ public class BitSetUtility {
 		}
 
 		StringBuilder binaryString = new StringBuilder(bitSetSize);
-
 		for (int i = 0; i < bitSetSize; i++) {
 			if (data.get(i)) {
 				binaryString.append('1');
@@ -184,6 +186,11 @@ public class BitSetUtility {
 				binaryString.append('0');
 			}
 		}
+		
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Returning: " + binaryString.toString());
+		}
+		
 		return binaryString.toString();
 	}
 

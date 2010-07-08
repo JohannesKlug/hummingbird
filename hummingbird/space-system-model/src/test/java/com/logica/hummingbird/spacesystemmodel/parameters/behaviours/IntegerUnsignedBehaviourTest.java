@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import com.logica.hummingbird.util.BitSetUtility;
 
 public class IntegerUnsignedBehaviourTest {
 	private final static Logger LOG = LoggerFactory.getLogger(IntegerUnsignedBehaviourTest.class);
@@ -35,25 +36,31 @@ public class IntegerUnsignedBehaviourTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		LOG.debug("Setting up test bitsets....");
 		TEST_BITSET_VALUE_LE_555 = new BitSet();
 		TEST_BITSET_VALUE_LE_555.set(0);
-		TEST_BITSET_VALUE_LE_555.set(4);
-		TEST_BITSET_VALUE_LE_555.set(6);
-		TEST_BITSET_VALUE_LE_555.set(8);
+		TEST_BITSET_VALUE_LE_555.set(1);
+		TEST_BITSET_VALUE_LE_555.set(3);
+		TEST_BITSET_VALUE_LE_555.set(5);
 		TEST_BITSET_VALUE_LE_555.set(9);
+		assertEquals(TEST_STR_VALUE_LE_555, BitSetUtility.bitSetToBinaryString(TEST_BITSET_VALUE_LE_555, true));
 		
 		TEST_BITSET_VALUE_BE_555 = new BitSet();
 		TEST_BITSET_VALUE_BE_555.set(0);
-		TEST_BITSET_VALUE_BE_555.set(1);
-		TEST_BITSET_VALUE_BE_555.set(3);
-		TEST_BITSET_VALUE_BE_555.set(5);
+		TEST_BITSET_VALUE_BE_555.set(4);
+		TEST_BITSET_VALUE_BE_555.set(6);
+		TEST_BITSET_VALUE_BE_555.set(8);
 		TEST_BITSET_VALUE_BE_555.set(9);
+		assertEquals(TEST_STR_VALUE_BE_555, BitSetUtility.bitSetToBinaryString(TEST_BITSET_VALUE_BE_555, true));
 		
 		TEST_BITSET_VALUE_BE_1024 = new BitSet(TEST_VALUE_LENGTH_1024);
 		TEST_BITSET_VALUE_BE_1024.set(0);
+		assertEquals(TEST_STR_VALUE_BE_1024, BitSetUtility.bitSetToBinaryString(TEST_BITSET_VALUE_BE_1024, false).substring(0, TEST_VALUE_LENGTH_1024));
 		
 		TEST_BITSET_VALUE_LE_1024 = new BitSet(TEST_VALUE_LENGTH_1024);
-		TEST_BITSET_VALUE_LE_1024.set(11);
+		TEST_BITSET_VALUE_LE_1024.set(10);
+		assertEquals(TEST_STR_VALUE_LE_1024, BitSetUtility.bitSetToBinaryString(TEST_BITSET_VALUE_LE_1024, false).substring(0, TEST_VALUE_LENGTH_1024));
+		LOG.debug("Test bitsets set-up completed successfully");
 	}
 
 	@Before
