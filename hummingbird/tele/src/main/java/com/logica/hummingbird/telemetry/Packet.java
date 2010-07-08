@@ -52,4 +52,15 @@ public class Packet implements HummingbirdPacket {
 		return this.name;
 	}
 
+	@Override
+	public HummingbirdParameter getParameter(String name) {
+		HummingbirdParameter found = null;
+		for(HummingbirdParameter param : this.parameters) {
+			if(param.getName().equals(name)) {
+				found = param;
+			}
+		}
+		return found;
+	}
+
 }
