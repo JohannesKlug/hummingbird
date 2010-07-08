@@ -71,6 +71,12 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 			if (binString.length() < getSizeIntBits()) {
 				binString = BitSetUtility.padStringFromTheBack(binString, getSizeIntBits());
 			}
+			else if (binString.length() > getSizeIntBits()) {
+				if(LOG.isDebugEnabled()) {
+					LOG.debug("THe binary string is too long, we must not parse past the size of the parameter.  Chomping string now...");
+				}
+				binString = binString.substring(0, getSizeIntBits());
+			}
 			parameterValue = Long.parseLong(binString, 2);
 
 			if (LOG.isDebugEnabled()) {
