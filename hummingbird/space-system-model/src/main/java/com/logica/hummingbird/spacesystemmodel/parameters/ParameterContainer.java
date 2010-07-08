@@ -33,11 +33,11 @@ import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
 import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
 
 /**
- * The abstract base class for all parameter <b><i>containers</i></b>. The class
- * is intended to be subtyped for each simple Java type type. 
+ * The abstract base class for all parameter <b><i>containers</i></b>. The class is intended to be subtyped for each
+ * simple Java type type.
  * 
- * A parameter is the leaf of the container tree. Each parameter
- * has a type, which defines among others the length in bits.  
+ * A parameter is the leaf of the container tree. Each parameter has a type, which defines among others the length in
+ * bits.
  * 
  * @author Gert Villemos
  * @author Mark Doyle
@@ -48,52 +48,52 @@ public abstract class ParameterContainer extends ContainerImpl implements Parame
 
 	/** The NumberParameterType of the parameter. */
 	protected NumberParameterType type = null;
-	
 
 	/**
 	 * Constructor of the Parameter class.
-	 *
-	 * @param name The name of the container.
-	 * @param shortDescription A one line description of the container, used for tooltip type information.
-	 * @param longDescription A detailed description of the container.
-	 * @param type The parameter type.
-	 *
+	 * 
+	 * @param name
+	 *            The name of the container.
+	 * @param shortDescription
+	 *            A one line description of the container, used for tooltip type information.
+	 * @param longDescription
+	 *            A detailed description of the container.
+	 * @param type
+	 *            The parameter type.
+	 * 
 	 */
 	public ParameterContainer(String name, String shortDescription, String longDescription, NumberParameterType type) {
 		super(name, shortDescription, longDescription);
 		this.type = type;
 	}
-	
-	
+
 	/**
 	 * Sets the value of the parameter.
-	 *
-	 * @param value The value to be set. 
-	 *
+	 * 
+	 * @param value
+	 *            The value to be set.
+	 * 
 	 */
 	abstract public void setValue(double value);
-	
+
 	@Override
 	public NumberParameterType getType() {
 		return type;
 	}
-	
-	
+
 	/**
 	 * Sets the type of the parameter.
-	 *
-	 * @param type The type to be set. 
-	 *
+	 * 
+	 * @param type
+	 *            The type to be set.
+	 * 
 	 */
 	public void setType(NumberParameterType type) {
 		this.type = type;
 	}
-	 
+
 	@Override
 	public int getLength() {
-//		LOG.debug("returning length " + (length + (int) type.getSizeInBits()) + " for " + getName());
-		
-		//FIXME Why is the length field here?
 		return length + (int) type.getSizeInBits();
 	}
 }

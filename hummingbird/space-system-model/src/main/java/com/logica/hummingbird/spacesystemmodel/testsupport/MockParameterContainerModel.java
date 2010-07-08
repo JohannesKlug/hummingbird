@@ -56,9 +56,9 @@ public class MockParameterContainerModel implements ContainerFactory {
 
 	public static final String TM_ALL_SYS_PAYLOAD = "TMPayload All systems data";
 
-	public static final String FLIGHT_HOURS_PARAM = "TestParamA";
+	public static final String FLIGHT_HOURS_PARAM = "FlightHours";
 
-	public static final String LASER_TEMP_PARAM = "TestParamB";
+	public static final String LASER_TEMP_PARAM = "LaserTemp";
 
 	public static final String FLIGHT_DATA_PAYLOAD_APID = "333";
 
@@ -94,7 +94,7 @@ public class MockParameterContainerModel implements ContainerFactory {
 				new IntegerUnsignedBehaviour(16, false), 0);
 
 		NumberParameterType test32bitInt = new NumberParameterType("test32bitInt", "test param", "32 bit int test param",
-				new IntegerUnsignedBehaviour(32, true), 1);
+				new IntegerUnsignedBehaviour(32, true), 0);
 
 		NumberParameterType test64bitFloat = new NumberParameterType("test64bitFloat", "test param", "64 float test param", new Float64Behaviour(), 0);
 

@@ -39,6 +39,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.parameters.Parameter;
+import com.logica.hummingbird.util.BitSetUtility;
 import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 /**
@@ -112,9 +113,6 @@ public class ContainerImpl extends NamedElement implements Container {
 	 */
 	protected boolean matchRestrictions() {
 		if(restrictions.size() == 0) {
-			if(LOG.isDebugEnabled()) {
-				LOG.debug("No restrictions on container " + this.getName() + " therefore return true");
-			}
 			return true;
 		}
 		// Check for match against the restriction criteria. The base container will forward the data to all containers
@@ -133,9 +131,6 @@ public class ContainerImpl extends NamedElement implements Container {
 			match = entry.getKey().match(entry.getValue());
 		}
 		
-		if(LOG.isDebugEnabled()) {
-			LOG.debug("Restriction evaluated as " + match + " for container " + this.getName());
-		}
 		return match;
 	}
 
@@ -154,7 +149,7 @@ public class ContainerImpl extends NamedElement implements Container {
 
 			if (LOG.isDebugEnabled()) {
 				// TODO Could we just use size instead of length?
-				LOG.debug("The " + name + " packet length (" + getLength() + ") is less than expected.  Truncation has occured");
+				LOG.debug("The " + name + " packet length (" + packet.length() + ") is less than expected (" + getLength() + ")" + ".  Truncation has occured");
 				LOG.debug("The input packet length = " + packet.length());
 				LOG.debug("The " + name + " packet has been trucated by " + (getLength() - packet.length()));
 			}
@@ -166,11 +161,15 @@ public class ContainerImpl extends NamedElement implements Container {
 		// we'll get a null pointer.
 		if (truncated) {
 			completeBitData = packet.get(0, getLength());
-			completeBitData.set(getLength() + 1);
+			completeBitData.set(getLength());
+			if(LOG.isDebugEnabled()) {
+				LOG.debug("CompletedBitData post truncation fix = " + BitSetUtility.binDump(completeBitData));
+			}
 		}
 		else {
 			completeBitData = packet;
 		}
+		
 
 		// If the packet should be processed by this container.
 		if (matchRestrictions() == true) {
@@ -190,13 +189,14 @@ public class ContainerImpl extends NamedElement implements Container {
 		// subcontainers chunk off the previous sections
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("The completeBitData for " + name + " is " + completeBitData.length() + "/" + completeBitData.size() + " long");
+			LOG.debug("CompletedBitData = " + BitSetUtility.binDump(completeBitData));
 		}
 		return completeBitData;
 	}
 
 	@Override
 	public int marshall(BitSet packet, int offset) throws BitSetOperationException {
-		/** If the packet should be processed by this container. */
+		// If the packet should be processed by this container.
 		if (matchRestrictions() == true) {
 			for (Container container : subContainers) {
 				offset = container.marshall(packet, offset);
