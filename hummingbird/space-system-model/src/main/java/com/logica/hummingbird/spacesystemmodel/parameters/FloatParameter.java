@@ -82,7 +82,7 @@ public class FloatParameter extends ParameterContainer {
 			paramObserver.updated(name, value.doubleValue());
 		}
 
-		return packet.get((int) type.getSizeInBits(), packet.length());
+		return packet.get((int) type.getSizeInBits(), packet.length() + 1);
 	}
 
 	@Override

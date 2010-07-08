@@ -55,7 +55,7 @@ public class IntegerParameter extends ParameterContainer {
 		if(LOG.isDebugEnabled()) {
 			LOG.debug("Bitset before post unmarshall chop = " + BitSetUtility.binDump(packet));
 		}
-		BitSet returnPacket = packet.get((int) type.getSizeInBits(), packet.length());
+		BitSet returnPacket = packet.get((int) type.getSizeInBits(), packet.length() + 1);
 		if(LOG.isDebugEnabled()) {
 			LOG.debug("Bitset after post unmarshall chop = " + BitSetUtility.binDump(returnPacket));
 		}
