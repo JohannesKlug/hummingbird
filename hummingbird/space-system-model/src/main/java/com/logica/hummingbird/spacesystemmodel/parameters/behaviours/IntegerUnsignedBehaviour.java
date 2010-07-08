@@ -25,7 +25,7 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 	public Long valueFromBitSet(BitSet packet) {
 		long parameterValue = 0;
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("Extracting value from " + BitSetUtility.binDump(packet));
+			LOG.debug("Extracting " + getSizeIntBits() + " bit int value from " + BitSetUtility.binDump(packet));
 		}
 
 		if (!isBigEndian) {
@@ -34,7 +34,7 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 				LOG.debug("Extracting little endian value");
 			}
 
-			for (int i = packet.length() - 1; i >= 0; i--) {
+			for (int i = getSizeIntBits() - 1; i >= 0; i--) {
 				if (packet.get(i)) {
 					parameterValue |= (1 << i);
 				}
