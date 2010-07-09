@@ -29,10 +29,12 @@ public class Float32BehaviourTest {
 	private Float32Behaviour float32behvaiour = null;
 
 	private final static Float GOLDEN_RATIO = 1.61803398874f;
-	
 	private final static BitSet GOLDEN_RATIO_TEST_BITSET = new BitSet(32);
-
 	private final static String GOLDEN_RATIO_TEST_BITSET_STRING = "00111111110011110001101110111101";
+	
+	public static final Float BOUNDARY_SET_TEST_FLOAT = -6.000000476837158203125f;
+	public static final String BOUNDARY_SET_TEST_FLOAT_STRING = "-11000000110000000000000000000001";
+	private final static BitSet BOUNDARY_SET_TEST_FLOAT_BITSET = new BitSet(32);
 	
 	
 
@@ -47,10 +49,22 @@ public class Float32BehaviourTest {
 		GOLDEN_RATIO_TEST_BITSET.set(22, 25);
 		GOLDEN_RATIO_TEST_BITSET.set(26, 30);
 		GOLDEN_RATIO_TEST_BITSET.set(31);
+		String binString = BitSetUtility.bitSetToBinaryString(GOLDEN_RATIO_TEST_BITSET, true);
+		binString = BitSetUtility.padStringFromTheBack(binString, 32);
+		assertEquals(GOLDEN_RATIO_TEST_BITSET_STRING, binString);
+		
+		BOUNDARY_SET_TEST_FLOAT_BITSET.set(0, 2);
+		BOUNDARY_SET_TEST_FLOAT_BITSET.set(8, 10);
+		BOUNDARY_SET_TEST_FLOAT_BITSET.set(31);
+		binString = BitSetUtility.bitSetToBinaryString(BOUNDARY_SET_TEST_FLOAT_BITSET, true);
+		binString = BitSetUtility.padStringFromTheBack(binString, 32);
+		assertEquals(BOUNDARY_SET_TEST_FLOAT_STRING, '-' + binString);
 		
 		if(LOG.isDebugEnabled()) {
 			LOG.debug("Setup Golden ratio BitSet: " + BitSetUtility.binDump(GOLDEN_RATIO_TEST_BITSET));
+			LOG.debug("Setup boundary value BitSet: " + BitSetUtility.binDump(BOUNDARY_SET_TEST_FLOAT_BITSET));
 		}
+		
 	}
 
 	@Before
@@ -63,12 +77,21 @@ public class Float32BehaviourTest {
 	 * {@link com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float32Behaviour#valueFromBitSet(java.util.BitSet)}
 	 * .
 	 */
-	@Ignore
 	@Test
 	public void testValueFromBitSet() {
-		// FIXME Fix this test.
 		Float actual = float32behvaiour.valueFromBitSet(GOLDEN_RATIO_TEST_BITSET);
 		assertEquals("Extracted value must match", GOLDEN_RATIO, actual);
+	}
+	
+	/**
+	 * Test method for
+	 * {@link com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float32Behaviour#valueFromBitSet(java.util.BitSet)}
+	 * .
+	 */
+	@Test
+	public void testBoundaryValueFromBitSet() {
+		Float actual = float32behvaiour.valueFromBitSet(BOUNDARY_SET_TEST_FLOAT_BITSET);
+		assertEquals("Extracted value must match", BOUNDARY_SET_TEST_FLOAT, actual);
 	}
 
 	/**

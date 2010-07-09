@@ -36,6 +36,15 @@ public class Float32Behaviour extends AbstractFloatBehaviour {
 		}
 		
 		String actualBitSetString = BitSetUtility.bitSetToBinaryString(actualBitSet, true);
+		if(actualBitSetString.startsWith("1")) {
+//			actualBitSetString = '-' + actualBitSetString;
+			System.out.println("Old string: " + actualBitSetString);
+			System.out.println("Replacing leading 1 with '-'");
+			char[] replacementCharArray = actualBitSetString.toCharArray();
+			replacementCharArray[0] = '-';
+			actualBitSetString = new String(replacementCharArray);
+			System.out.println("New string: " + actualBitSetString);
+		}
 
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("BinaryString representation of actual bitset = " + actualBitSetString);
@@ -44,12 +53,11 @@ public class Float32Behaviour extends AbstractFloatBehaviour {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Extracting value using longBitsToDouble...");
 		}
+		return Float.intBitsToFloat(Integer.parseInt(actualBitSetString, 2));
 		
-		// Float 32 so convert to a Float
-//		return Float.intBitsToFloat(Integer.parseInt(actualBitSetString));
-		Double doubleRep = Double.longBitsToDouble(Long.parseLong(actualBitSetString, 2));
+//		Double doubleRep = Double.longBitsToDouble(Long.parseLong(actualBitSetString, 2));
 		
-		return doubleRep.floatValue();
+		//return doubleRep.floatValue();
 	}
 
 	@Override
