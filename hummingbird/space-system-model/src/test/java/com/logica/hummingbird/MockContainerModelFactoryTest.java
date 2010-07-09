@@ -11,6 +11,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeEx
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
 
+// TODO Implement this test.
 public class MockContainerModelFactoryTest {
 
 	private ContainerFactory containerFactory;
