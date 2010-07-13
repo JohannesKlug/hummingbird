@@ -88,14 +88,21 @@ public class CcsdsFrameDispatcherTest implements Observer {
 		packetDispatcher.addObserver(this);
 //		List<byte[]> manyFrames = frames.
 		
+		int multiplier = 1;
+		
 		long start = System.currentTimeMillis();
-		for (byte[] frame : frames) {
-			frameDispatcher.process(frame);
+		for (int i=0; i<multiplier; i++) {
+			for (byte[] frame : frames) {
+				frameDispatcher.process(frame);
+			}
 		}
+		
 		long runningTime = System.currentTimeMillis()-start;
 		System.out.println("Ran " + runningTime + "ms.");
-		assertEquals(52, receivedFramePayloads.size());
-		assertEquals(318, receivedPacketPayloads.size());
+		System.out.println("Processed " + receivedFramePayloads.size() + " frames (" + (float)receivedFramePayloads.size()/runningTime*1000 + " frames/sec)");
+		System.out.println("Processed " + receivedPacketPayloads.size() + " packets (" + (float)receivedPacketPayloads.size()/runningTime*1000 + " packets/sec)");
+		assertEquals(52 * multiplier, receivedFramePayloads.size());
+		assertEquals(318 * multiplier, receivedPacketPayloads.size());
 		
 //		for (PacketPayload packetPayload : receivedPacketPayloads) {
 //			System.out.println("Packet with apid " + packetPayload.apid + " has length " + packetPayload.payload.length + " bytes.");
