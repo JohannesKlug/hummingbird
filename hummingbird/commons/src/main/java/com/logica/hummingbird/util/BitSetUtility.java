@@ -193,6 +193,29 @@ public class BitSetUtility {
 		
 		return binaryString.toString();
 	}
+	
+	public static String bitSetToBinaryString(BitSet data, int length) {
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("I was passed: " + BitSetUtility.binDump(data));
+		}
+		int bitSetSize = length;
+
+		StringBuilder binaryString = new StringBuilder(bitSetSize);
+		for (int i = 0; i < bitSetSize; i++) {
+			if (data.get(i)) {
+				binaryString.append('1');
+			}
+			else {
+				binaryString.append('0');
+			}
+		}
+		
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Returning: " + binaryString.toString());
+		}
+		
+		return binaryString.toString();
+	}
 
 	public static String padStringFromTheFront(String string, int finalLength) {
 		int zeroesToAdd = finalLength - string.length();
@@ -225,4 +248,53 @@ public class BitSetUtility {
 
 		return string;
 	}
+	
+	public static int toInt(BitSet bits) {
+		int bitSetPosition = 0;
+		byte[] bytes = new byte[4];
+		for (int byteNo=0; byteNo<4; byteNo++) {
+			bytes[byteNo] = 0;
+			for (int i=8; i>=1; i--) {
+				if (bits.get(bitSetPosition)) {
+					bytes[byteNo] += Math.pow(2, i-1);
+				}
+				bitSetPosition++;
+			}
+		}
+		int intFromBitset = 0;
+		
+		intFromBitset += (bytes[0] & 0xFF) << 24;
+		intFromBitset += (bytes[1] & 0xFF) << 16;
+		intFromBitset += (bytes[2] & 0xFF) << 8;
+		intFromBitset += (bytes[3] & 0xFF);
+		
+		return intFromBitset;
+	}
+	
+	public static long toLong(BitSet bits) {
+		int bitSetPosition = 0;
+		byte[] bytes = new byte[8];
+		for (int byteNo=0; byteNo<8; byteNo++) {
+			bytes[byteNo] = 0;
+			for (int i=8; i>=1; i--) {
+				if (bits.get(bitSetPosition)) {
+					bytes[byteNo] += Math.pow(2, i-1);
+				}
+				bitSetPosition++;
+			}
+		}
+		long longFromBitset = 0;
+		
+		longFromBitset += (long) (bytes[0] & 0xFF) << 56;
+		longFromBitset += (long) (bytes[1] & 0xFF) << 48;
+		longFromBitset += (long) (bytes[2] & 0xFF) << 40;
+		longFromBitset += (long) (bytes[3] & 0xFF) << 32;
+		longFromBitset += (long) (bytes[4] & 0xFF) << 24;
+		longFromBitset += (long) (bytes[5] & 0xFF) << 16;
+		longFromBitset += (long) (bytes[6] & 0xFF) << 8;
+		longFromBitset += (long) (bytes[7] & 0xFF);
+		
+		return longFromBitset;
+	}
+	
 }

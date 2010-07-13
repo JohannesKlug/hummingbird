@@ -13,7 +13,7 @@ import com.logica.hummingbird.util.exceptions.BitSetOperationException;
  * 
  * @author Mark Doyle
  * @author Johannes Klug
- *
+ * 
  */
 public class Float32Behaviour extends AbstractFloatBehaviour {
 	private final static Logger LOG = LoggerFactory.getLogger(Float32Behaviour.class);
@@ -24,9 +24,6 @@ public class Float32Behaviour extends AbstractFloatBehaviour {
 
 	@Override
 	public Float valueFromBitSet(BitSet packet) {
-		// The technique this method uses is to convert the bitset to a string and then parse it as a double
-		// Awesome tekkers.
-
 		int offset = 0;
 
 		BitSet actualBitSet = packet.get(offset, offset + (int) getSizeIntBits());
@@ -34,30 +31,8 @@ public class Float32Behaviour extends AbstractFloatBehaviour {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Float Parameter BitSet taken from bitset in = " + BitSetUtility.binDump(actualBitSet));
 		}
-		
-		String actualBitSetString = BitSetUtility.bitSetToBinaryString(actualBitSet, true);
-		if(actualBitSetString.startsWith("1")) {
-//			actualBitSetString = '-' + actualBitSetString;
-			System.out.println("Old string: " + actualBitSetString);
-			System.out.println("Replacing leading 1 with '-'");
-			char[] replacementCharArray = actualBitSetString.toCharArray();
-			replacementCharArray[0] = '-';
-			actualBitSetString = new String(replacementCharArray);
-			System.out.println("New string: " + actualBitSetString);
-		}
 
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("BinaryString representation of actual bitset = " + actualBitSetString);
-		}
-
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Extracting value using longBitsToDouble...");
-		}
-		return Float.intBitsToFloat(Integer.parseInt(actualBitSetString, 2));
-		
-//		Double doubleRep = Double.longBitsToDouble(Long.parseLong(actualBitSetString, 2));
-		
-		//return doubleRep.floatValue();
+		return Float.intBitsToFloat(BitSetUtility.toInt(actualBitSet));
 	}
 
 	@Override
@@ -92,8 +67,7 @@ public class Float32Behaviour extends AbstractFloatBehaviour {
 
 	@Override
 	public String getTypeName() {
-		return "Float (IEEE754 Single precision 32-bit)"; 
+		return "Float (IEEE754 Single precision 32-bit)";
 	}
-
 
 }

@@ -52,8 +52,6 @@ public class FloatParameter extends ParameterContainer {
 	/** The maximal possible value. */
 	protected final double maximumValue = Double.MAX_VALUE;
 
-	// private FloatSizeInBits floatSize;
-
 	/**
 	 * Constructor of the FloatParameter class.
 	 * 

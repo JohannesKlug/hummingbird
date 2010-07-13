@@ -103,9 +103,22 @@
 			</roles>
 			<timezone>0</timezone>
 		</developer>
-
+		
 		<developer>
 			<id>2</id>
+			<organization>Logica</organization>
+			<name>Mark Doyle</name>
+			<email>mark.doyle@logica.com</email>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+				<role>Imperator</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+
+		<developer>
+			<id>3</id>
 			<organization>Logica</organization>
 			<name>Steven James</name>
 			<email>steven.james@logica.com</email>

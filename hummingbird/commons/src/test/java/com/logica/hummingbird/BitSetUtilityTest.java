@@ -152,4 +152,28 @@ public class BitSetUtilityTest {
 		result = BitSetUtility.bitSetToBinaryString(TEST_BIT_SET, false);
 		assertEquals("Strings expected to be equal", TEST_BIT_SET_STR_VALID, result);
 	}
+	
+	@Test
+	public void testToInt() {
+		BitSet bits = new BitSet();
+		assertEquals(0, BitSetUtility.toInt(bits));
+		
+		bits.set(31);
+		assertEquals(1, BitSetUtility.toInt(bits));
+		
+		bits.set(0);
+		assertEquals(-2147483647, BitSetUtility.toInt(bits));
+	}
+	
+	@Test
+	public void testToLong() {
+		BitSet bits = new BitSet();
+		assertEquals(0, BitSetUtility.toLong(bits));
+		
+		bits.set(63);
+		assertEquals(1, BitSetUtility.toLong(bits));
+		
+		bits.set(0);
+		assertEquals(-9223372036854775807l, BitSetUtility.toLong(bits));
+	}
 }

@@ -32,8 +32,8 @@ public class Float32BehaviourTest {
 	private final static BitSet GOLDEN_RATIO_TEST_BITSET = new BitSet(32);
 	private final static String GOLDEN_RATIO_TEST_BITSET_STRING = "00111111110011110001101110111101";
 	
-	public static final Float BOUNDARY_SET_TEST_FLOAT = -6.000000476837158203125f;
-	public static final String BOUNDARY_SET_TEST_FLOAT_STRING = "-11000000110000000000000000000001";
+	public static final Float BOUNDARY_SET_TEST_FLOAT = -6.0000005f;
+	public static final String BOUNDARY_SET_TEST_FLOAT_STRING = "11000000110000000000000000000001";
 	private final static BitSet BOUNDARY_SET_TEST_FLOAT_BITSET = new BitSet(32);
 	
 	
@@ -58,13 +58,12 @@ public class Float32BehaviourTest {
 		BOUNDARY_SET_TEST_FLOAT_BITSET.set(31);
 		binString = BitSetUtility.bitSetToBinaryString(BOUNDARY_SET_TEST_FLOAT_BITSET, true);
 		binString = BitSetUtility.padStringFromTheBack(binString, 32);
-		assertEquals(BOUNDARY_SET_TEST_FLOAT_STRING, '-' + binString);
+		assertEquals(BOUNDARY_SET_TEST_FLOAT_STRING, binString);
 		
 		if(LOG.isDebugEnabled()) {
 			LOG.debug("Setup Golden ratio BitSet: " + BitSetUtility.binDump(GOLDEN_RATIO_TEST_BITSET));
 			LOG.debug("Setup boundary value BitSet: " + BitSetUtility.binDump(BOUNDARY_SET_TEST_FLOAT_BITSET));
 		}
-		
 	}
 
 	@Before
@@ -90,6 +89,14 @@ public class Float32BehaviourTest {
 	 */
 	@Test
 	public void testBoundaryValueFromBitSet() {
+		
+		Float myFloat = new Float(BOUNDARY_SET_TEST_FLOAT);
+		Integer myInt = Float.floatToIntBits(myFloat);
+		System.out.println(myFloat);
+		System.out.println(myInt);
+		
+		assertEquals(BOUNDARY_SET_TEST_FLOAT, Float.intBitsToFloat(myInt),0.00001);
+		
 		Float actual = float32behvaiour.valueFromBitSet(BOUNDARY_SET_TEST_FLOAT_BITSET);
 		assertEquals("Extracted value must match", BOUNDARY_SET_TEST_FLOAT, actual);
 	}

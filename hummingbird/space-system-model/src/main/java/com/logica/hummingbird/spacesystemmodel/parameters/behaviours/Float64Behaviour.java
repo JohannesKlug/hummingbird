@@ -35,18 +35,8 @@ public class Float64Behaviour extends AbstractFloatBehaviour {
 			LOG.debug("Float Parameter BitSet taken from bitset in = " + BitSetUtility.binDump(actualBitSet));
 		}
 		
-		String actualBitSetString = BitSetUtility.bitSetToBinaryString(actualBitSet, false);
-
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("BinaryString representation of actual bitset = " + actualBitSetString);
-		}
-
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Extracting value using longBitsToDouble");
-		}
-		
 		// Float 64 so convert to a Double
-		return Double.longBitsToDouble(Long.parseLong(actualBitSetString, 2));
+		return Double.longBitsToDouble(BitSetUtility.toLong(actualBitSet));
 	}
 
 	@Override
