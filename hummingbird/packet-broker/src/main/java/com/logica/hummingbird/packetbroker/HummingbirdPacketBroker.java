@@ -59,7 +59,7 @@ public class HummingbirdPacketBroker implements PacketBroker {
 	/**
 	 * Constructor.
 	 * 
-	 * SEt up the SpaceSystemModelFactory and the necessary message producers.
+	 * Set up the SpaceSystemModelFactory and the necessary message producers.
 	 * 
 	 * @param factory
 	 *            The factory to be used to obtain references to the container.

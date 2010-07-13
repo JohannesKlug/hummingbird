@@ -59,7 +59,7 @@ public class LongSignedBehaviour extends AbstractIntegerBehaviour {
 
 		String bitString = Long.toBinaryString(longValue);
 		
-		BitSet bitset = BitSetUtility.stringToBitSet(bitString, isBigEndian);
+		BitSet bitset = BitSetUtility.stringToBitSet(bitString, isBigEndian, true);
 
 		// Set all the target area bits to zero
 		bitSetTarget.clear(offset, offset + length - 1);

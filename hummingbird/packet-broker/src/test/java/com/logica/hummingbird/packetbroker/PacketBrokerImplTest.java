@@ -91,7 +91,7 @@ public class PacketBrokerImplTest {
 	public final void testUnmarshallFlightDataPacket() throws UnknownContainerNameException, BitSetOperationException {
 		LOG.info("---------- testUnmarshall -------------");
 		
-		BitSet mockPacket = BitSetUtility.stringToBitSet(FLIGHT_DATA_APID + PACKET_LENGTH_32 + FLIGHT_HOURS_1024, false);
+		BitSet mockPacket = BitSetUtility.stringToBitSet(FLIGHT_DATA_APID + PACKET_LENGTH_32 + FLIGHT_HOURS_1024, false, false);
 		final int PAYLOAD_PACKET_LENGTH = 32;
 
 		// Unmarshall each telemetry element in the space system model
@@ -118,7 +118,7 @@ public class PacketBrokerImplTest {
 	public final void testUnmarshallLaserDataPacket() throws UnknownContainerNameException, BitSetOperationException {
 		LOG.info("---------- testUnmarshall -------------");
 		
-		BitSet mockPacket = BitSetUtility.stringToBitSet(LASER_DATA_APID + PACKET_LENGTH_64 + LASER_TEMP_17959_25, false);
+		BitSet mockPacket = BitSetUtility.stringToBitSet(LASER_DATA_APID + PACKET_LENGTH_64 + LASER_TEMP_17959_25, false, false);
 		final int PAYLOAD_PACKET_LENGTH = 64;
 
 		// Unmarshall each telemetry element in the space system model

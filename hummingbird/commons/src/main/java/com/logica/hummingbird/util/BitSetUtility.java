@@ -106,7 +106,7 @@ public class BitSetUtility {
 	 * @throws BitSetOperationException
 	 *             if the input string contains invalid characters, that is, not equal to 1 or 0
 	 */
-	public static BitSet stringToBitSet(String str, boolean isBigEndian) throws BitSetOperationException {
+	public static BitSet stringToBitSet(String str, boolean isBigEndian, boolean bigEndianOut) throws BitSetOperationException {
 		if(LOG.isDebugEnabled()) {
 			LOG.debug("I was passed: " + str);
 		}
@@ -114,9 +114,23 @@ public class BitSetUtility {
 		str = str.trim();
 		
 		
-		if (isBigEndian) {
-			str = StringUtils.reverse(str);
+		// If little endian
+		if (!isBigEndian) {
+			if(bigEndianOut) {
+				str = StringUtils.reverse(str);
+			}
+			else {
+			}
 		}
+		else {
+			if(bigEndianOut) {
+				
+			}
+			else {
+				
+			}
+		}
+		
 		
 		BitSet result = new BitSet(str.length());
 		
@@ -250,17 +264,8 @@ public class BitSetUtility {
 	}
 	
 	public static int toInt(BitSet bits) {
-		int bitSetPosition = 0;
-		byte[] bytes = new byte[4];
-		for (int byteNo=0; byteNo<4; byteNo++) {
-			bytes[byteNo] = 0;
-			for (int i=8; i>=1; i--) {
-				if (bits.get(bitSetPosition)) {
-					bytes[byteNo] += Math.pow(2, i-1);
-				}
-				bitSetPosition++;
-			}
-		}
+		byte[] bytes = toByteArray(bits, 32);
+		
 		int intFromBitset = 0;
 		
 		intFromBitset += (bytes[0] & 0xFF) << 24;
@@ -272,17 +277,8 @@ public class BitSetUtility {
 	}
 	
 	public static long toLong(BitSet bits) {
-		int bitSetPosition = 0;
-		byte[] bytes = new byte[8];
-		for (int byteNo=0; byteNo<8; byteNo++) {
-			bytes[byteNo] = 0;
-			for (int i=8; i>=1; i--) {
-				if (bits.get(bitSetPosition)) {
-					bytes[byteNo] += Math.pow(2, i-1);
-				}
-				bitSetPosition++;
-			}
-		}
+		byte[] bytes = toByteArray(bits, 64);
+		
 		long longFromBitset = 0;
 		
 		longFromBitset += (long) (bytes[0] & 0xFF) << 56;
@@ -295,6 +291,26 @@ public class BitSetUtility {
 		longFromBitset += (long) (bytes[7] & 0xFF);
 		
 		return longFromBitset;
+	}
+	
+	public static byte[] toByteArray(BitSet bits, int sizeInBits) {
+		int numberOfBytes = sizeInBits/8;
+		if (sizeInBits%8 != 0) {
+			numberOfBytes++;
+		}
+		byte[] bytes = new byte[numberOfBytes];
+		int bitSetPosition = 0;
+		for (int byteNo=0; byteNo<numberOfBytes; byteNo++) {
+			bytes[byteNo] = 0;
+			for (int i=8; i>=1; i--) {
+				if (bits.get(bitSetPosition)) {
+					bytes[byteNo] += Math.pow(2, i-1);
+				}
+				bitSetPosition++;
+			}
+		}
+		
+		return bytes;
 	}
 	
 }

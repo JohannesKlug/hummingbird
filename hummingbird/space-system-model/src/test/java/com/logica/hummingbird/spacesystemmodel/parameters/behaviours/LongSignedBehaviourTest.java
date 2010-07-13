@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.LongSignedBehaviour;
 import com.logica.hummingbird.util.BitSetUtility;
 import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
@@ -31,9 +32,9 @@ public class LongSignedBehaviourTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		LOG.info("--------- Setup stuff -------------------------");
-		TEST_LONG_BITSET = BitSetUtility.stringToBitSet(TEST_LONG_STR, true);
-		TEST_MAX_LONG_BITSET = BitSetUtility.stringToBitSet(TEST_MAX_LONG_STR, true);
-		TEST_MIN_LONG_BITSET = BitSetUtility.stringToBitSet(TEST_MIN_LONG_STR, true);
+		TEST_LONG_BITSET = BitSetUtility.stringToBitSet(TEST_LONG_STR, true, true);
+		TEST_MAX_LONG_BITSET = BitSetUtility.stringToBitSet(TEST_MAX_LONG_STR, true, true);
+		TEST_MIN_LONG_BITSET = BitSetUtility.stringToBitSet(TEST_MIN_LONG_STR, true, true);
 		LOG.info("-----------------------------------------------");
 	}
 

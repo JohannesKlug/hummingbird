@@ -1,5 +1,6 @@
 package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
 
+import java.math.BigInteger;
 import java.util.BitSet;
 
 import org.slf4j.Logger;
@@ -7,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import com.logica.hummingbird.util.BitSetUtility;
-import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 //TODO javadoc
 //TODO 32 bit sized int test.  will need to convert to use a long otherwise the sign bit will be set in java int.
@@ -22,69 +22,44 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 	}
 
 	@Override
-	public Long valueFromBitSet(BitSet packet) {
-		long parameterValue = 0;
+	public Number valueFromBitSet(BitSet packet) {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Extracting " + getSizeIntBits() + " bit int value from " + BitSetUtility.binDump(packet));
 		}
-
-		if (!isBigEndian) {
-			// TODO Not the most elegant solution with all the conversions to strings, reversals, reparsing etc.
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("Extracting little endian value");
+		
+		BitSet actualParameter = packet.get(0, getSizeIntBits());
+				
+		byte[] byteArray = BitSetUtility.toByteArray(actualParameter, getSizeIntBits());
+		boolean signedBit = ((byteArray[0] & 0x80) == 0x80);
+		
+		if (signedBit) {
+			if(LOG.isDebugEnabled()) {
+				LOG.debug("Detected set sign bit in unsigned number.  Setting signBit flag and clearing sign...");
 			}
-
-			for (int i = getSizeIntBits() - 1; i >= 0; i--) {
-				if (packet.get(i)) {
-					parameterValue |= (1 << i);
-				}
-				if (LOG.isDebugEnabled()) {
-					LOG.debug("Parameter value construction steps = " + Long.toBinaryString(parameterValue));
-				}
-			}
-
-			parameterValue = parameterValue & Long.MAX_VALUE;
-
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("Parameter value = " + Long.toBinaryString(parameterValue));
-			}
-
-			try {
-				// Note, we have reverse the bitset in the above loop so the stringToBitSet must be passed true for
-				// isBigEndian
-				BitSet paramBitset = BitSetUtility.stringToBitSet(Long.toBinaryString(parameterValue), true);
-				String finalParam = BitSetUtility.bitSetToBinaryString(paramBitset, false);
-				parameterValue = Long.parseLong(finalParam, 2);
-			}
-			catch (BitSetOperationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				LOG.error(e.getMessage());
-			}
-		}
-		else {
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("Extracting big endian value");
-			}
-
-			String binString = BitSetUtility.bitSetToBinaryString(packet, true);
-			if (binString.length() < getSizeIntBits()) {
-				binString = BitSetUtility.padStringFromTheBack(binString, getSizeIntBits());
-			}
-			else if (binString.length() > getSizeIntBits()) {
-				if(LOG.isDebugEnabled()) {
-					LOG.debug("THe binary string is too long, we must not parse past the size of the parameter.  Chomping string now...");
-				}
-				binString = binString.substring(0, getSizeIntBits());
-			}
-			parameterValue = Long.parseLong(binString, 2);
-
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("Calculated value from bitset was: " + parameterValue);
-			}
+			byteArray[0] = (byte) (byteArray[0] ^ 0x80);
 		}
 		
-		return parameterValue;
+		BigInteger parameterValue = new BigInteger(byteArray);
+		
+		if (signedBit) {
+			// we have to add 2^SizeInBits-1
+			if(LOG.isDebugEnabled()) {
+				LOG.debug("Sign bit was detected.  Adding 2^" + (getSizeIntBits()-1) + " to value");
+			}
+			BigInteger powValue = new BigInteger("2");
+			powValue = powValue.pow(getSizeIntBits()-1);
+			parameterValue.add(powValue);
+		}
+		
+		//FIXME ARGH!!!!!!!
+		if (!isBigEndian) {
+	
+		}
+		else {
+
+		}
+		
+		return parameterValue.longValue();
 	}
 
 	@Override

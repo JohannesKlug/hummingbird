@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
 import com.logica.hummingbird.util.BitSetUtility;
 
 public class IntegerUnsignedBehaviourTest {
@@ -70,29 +71,29 @@ public class IntegerUnsignedBehaviourTest {
 	@Test
 	public void testLittleEndianValueFromBitSet() throws InvalidParameterTypeException {
 		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_LE_555, false);
-		Long actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_LE_555);
-		assertEquals(new Long(555), actual);
+		Number actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_LE_555);
+		assertEquals(555, actual);
 	}
 
 	@Test
 	public void testBigEndianValueFromBitSet() throws InvalidParameterTypeException {
 		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_BE_555, true);
-		Long actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_BE_555);
-		assertEquals(new Long(555), actual);
+		Number actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_BE_555);
+		assertEquals(555, actual);
 	}
 	
 	@Test
 	public void testBigEndianBoundaryValueFromBitSet() throws InvalidParameterTypeException {
 		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_1024, true);
-		Long actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_BE_1024);
-		assertEquals(new Long(1024), actual);
+		Number actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_BE_1024);
+		assertEquals(1024, actual);
 	}
 	
 	@Test
 	public void testLittleEndianBoundaryValueFromBitSet() throws InvalidParameterTypeException {
 		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_1024, false);
-		Long actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_LE_1024);
-		assertEquals(new Long(1024), actual);
+		Number actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_LE_1024);
+		assertEquals(1024, actual);
 	}
 
 	@Test(expected=InvalidParameterTypeException.class)

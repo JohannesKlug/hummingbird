@@ -44,17 +44,7 @@ import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
  * monitoring component. 
  *
  */
-public interface ContainerFactory {
-
-	/**
-	 * Initialises the container factory. Must be called prior to
-	 * calling any other methods.
-	 * 
-	 * 2010-04-21: I'm removing this --Johannes
-	 */
-//	public void initialise();
-	
-	
+public interface ContainerFactory {	
 	/**
 	 * Retrieves a container. 
 	 *
