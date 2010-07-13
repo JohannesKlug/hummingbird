@@ -88,7 +88,7 @@ public class CcsdsFrameDispatcherTest implements Observer {
 		packetDispatcher.addObserver(this);
 //		List<byte[]> manyFrames = frames.
 		
-		int multiplier = 100;
+		int multiplier = 1;
 		
 		long start = System.currentTimeMillis();
 		for (int i=0; i<multiplier; i++) {
