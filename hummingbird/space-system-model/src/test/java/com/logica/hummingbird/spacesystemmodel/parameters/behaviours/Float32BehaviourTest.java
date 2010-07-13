@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float32Behaviour;
 import com.logica.hummingbird.util.BitSetUtility;
+import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 /**
  * @author doylemr
@@ -26,7 +27,7 @@ public class Float32BehaviourTest {
 	/** Logger for this class */
 	private final static Logger LOG = LoggerFactory.getLogger(Float32BehaviourTest.class);
 	
-	private Float32Behaviour float32behvaiour = null;
+	private Float32Behaviour float32behaviour = null;
 
 	private final static Float GOLDEN_RATIO = 1.61803398874f;
 	private final static BitSet GOLDEN_RATIO_TEST_BITSET = new BitSet(32);
@@ -68,7 +69,7 @@ public class Float32BehaviourTest {
 
 	@Before
 	public void setUpForTest() {
-		float32behvaiour = new Float32Behaviour();
+		float32behaviour = new Float32Behaviour();
 	}
 
 	/**
@@ -78,7 +79,7 @@ public class Float32BehaviourTest {
 	 */
 	@Test
 	public void testValueFromBitSet() {
-		Float actual = float32behvaiour.valueFromBitSet(GOLDEN_RATIO_TEST_BITSET);
+		Float actual = float32behaviour.valueFromBitSet(GOLDEN_RATIO_TEST_BITSET);
 		assertEquals("Extracted value must match", GOLDEN_RATIO, actual);
 	}
 	
@@ -97,7 +98,7 @@ public class Float32BehaviourTest {
 		
 		assertEquals(BOUNDARY_SET_TEST_FLOAT, Float.intBitsToFloat(myInt),0.00001);
 		
-		Float actual = float32behvaiour.valueFromBitSet(BOUNDARY_SET_TEST_FLOAT_BITSET);
+		Float actual = float32behaviour.valueFromBitSet(BOUNDARY_SET_TEST_FLOAT_BITSET);
 		assertEquals("Extracted value must match", BOUNDARY_SET_TEST_FLOAT, actual);
 	}
 
@@ -112,4 +113,24 @@ public class Float32BehaviourTest {
 		fail("Not yet implemented");
 	}
 
+	@Test(expected=BitSetOperationException.class)
+	public void testBitSetFromStringTooLong() throws BitSetOperationException {
+		final String TOO_LONG = "10101010100000000000000000000011111111111111100000000000000000000000000000000000011111";
+		float32behaviour.bitSetFromString(TOO_LONG);
+	}
+	
+	@Test(expected=BitSetOperationException.class)
+	public void testBitSetFromStringInvalidChar() throws BitSetOperationException {
+		final String INVALID_CHAR = "11010101010105010101010101010101";
+		float32behaviour.bitSetFromString(INVALID_CHAR);
+	}
+	
+	@Test()
+	public void testBitSetFromStringShortInput() throws BitSetOperationException {
+		final String SHORT_INPUT = "1";
+		BitSet expected = new BitSet(32);
+		expected.set(0);
+		BitSet actual = float32behaviour.bitSetFromString(SHORT_INPUT);
+		assertEquals(expected, actual);
+	}
 }
