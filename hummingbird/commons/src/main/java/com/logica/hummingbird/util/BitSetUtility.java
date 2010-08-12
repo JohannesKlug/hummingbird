@@ -294,11 +294,14 @@ public class BitSetUtility {
 	}
 	
 	public static byte[] toByteArray(BitSet bits, int sizeInBits) {
+		// Split into Bytes.
 		int numberOfBytes = sizeInBits/8;
+		// Any remaining bits require an extra Byte
 		if (sizeInBits%8 != 0) {
 			numberOfBytes++;
 		}
 		byte[] bytes = new byte[numberOfBytes];
+		
 		int bitSetPosition = 0;
 		for (int byteNo=0; byteNo<numberOfBytes; byteNo++) {
 			bytes[byteNo] = 0;

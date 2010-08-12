@@ -70,6 +70,7 @@ public class IntegerUnsignedBehaviourTest {
 	
 	@Test
 	public void testLittleEndianValueFromBitSet() throws InvalidParameterTypeException {
+		LOG.info("###################### Beginning test #######################");
 		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_LE_555, false);
 		Number actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_LE_555);
 		assertEquals(555, actual);

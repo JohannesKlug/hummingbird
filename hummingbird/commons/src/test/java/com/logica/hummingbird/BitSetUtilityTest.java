@@ -94,7 +94,7 @@ public class BitSetUtilityTest {
 			LOG.debug("Test BitSet = " + TEST_BIT_SET_STR_VALID);
 		}
 
-		BitSet actual = BitSetUtility.stringToBitSet(TEST_BIT_SET_STR_VALID, true, true);
+		BitSet actual = BitSetUtility.stringToBitSet(TEST_BIT_SET_STR_VALID, true, false);
 
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("BitSet created from a string = " + actual);
@@ -176,4 +176,16 @@ public class BitSetUtilityTest {
 		bits.set(0);
 		assertEquals(-9223372036854775807l, BitSetUtility.toLong(bits));
 	}
+	
+	
+	@Test
+	public void testToByteArrayZero() {
+		BitSet bitSet = new BitSet();
+		
+		byte[] bytes = BitSetUtility.toByteArray(bitSet, 8);
+		assertEquals(0, bytes[0]);
+	}
+	
+	
+	
 }
