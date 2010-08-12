@@ -94,7 +94,7 @@ public class BitSetUtilityTest {
 			LOG.debug("Test BitSet = " + TEST_BIT_SET_STR_VALID);
 		}
 
-		BitSet actual = BitSetUtility.stringToBitSet(TEST_BIT_SET_STR_VALID, true, false);
+		BitSet actual = BitSetUtility.stringToBitSet(TEST_BIT_SET_STR_VALID, true, true);
 
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("BitSet created from a string = " + actual);
