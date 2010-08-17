@@ -112,25 +112,21 @@ public class BitSetUtility {
 		}
 		
 		str = str.trim();
-		
-		
+	
 		// If little endian
 		if (!isBigEndian) {
+			// ...and we want big endian output
 			if(bigEndianOut) {
 				str = StringUtils.reverse(str);
 			}
-			else {
-			}
 		}
+		// else if the input is big endian
 		else {
-			if(bigEndianOut) {
-				
-			}
-			else {
-				
+			// ...and we want little endian
+			if(!bigEndianOut) {
+				str = StringUtils.reverse(str);
 			}
 		}
-		
 		
 		BitSet result = new BitSet(str.length());
 		
