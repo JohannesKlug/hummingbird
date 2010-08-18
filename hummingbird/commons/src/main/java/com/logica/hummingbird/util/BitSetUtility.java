@@ -124,7 +124,10 @@ public class BitSetUtility {
 		else {
 			// ...and we want little endian
 			if(!bigEndianOut) {
+				
+			} else {
 				str = StringUtils.reverse(str);
+				str = padStringFromTheFront(str, 64);
 			}
 		}
 		

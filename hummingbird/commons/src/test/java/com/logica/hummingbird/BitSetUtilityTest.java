@@ -1,5 +1,6 @@
 package com.logica.hummingbird;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -102,6 +103,23 @@ public class BitSetUtilityTest {
 		}
 
 		assertEquals("BitSet not equal", TEST_BIT_SET, actual);
+	}
+	
+	/**
+	 * Tests from big endian to big endian
+	 * @throws BitSetOperationException 
+	 */
+	@Test
+	public void testStringToBitSetBigEndianToBigEndian() throws BitSetOperationException {
+		String string = "10";
+		
+		BitSet resultBitSet = BitSetUtility.stringToBitSet(string, true, true);
+		
+		BitSetUtility.binDump(resultBitSet);
+		
+		assertTrue(resultBitSet.get(0));
+		assertFalse(resultBitSet.get(1));
+		
 	}
 
 	/**
