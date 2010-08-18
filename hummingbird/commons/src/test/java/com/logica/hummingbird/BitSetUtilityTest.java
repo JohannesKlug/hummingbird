@@ -95,7 +95,7 @@ public class BitSetUtilityTest {
 			LOG.debug("Test BitSet = " + TEST_BIT_SET_STR_VALID);
 		}
 
-		BitSet actual = BitSetUtility.stringToBitSet(TEST_BIT_SET_STR_VALID, false, false);
+		BitSet actual = BitSetUtility.stringToBitSet(TEST_BIT_SET_STR_VALID, true, true);
 
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("BitSet created from a string = " + actual);
@@ -119,6 +119,57 @@ public class BitSetUtilityTest {
 		
 		assertTrue(resultBitSet.get(0));
 		assertFalse(resultBitSet.get(1));
+		
+	}
+	
+	/**
+	 * Tests from little endian to big endian
+	 * @throws BitSetOperationException 
+	 */
+	@Test
+	public void testStringToBitSetLittleEndianToBigEndian() throws BitSetOperationException {
+		String string = "01";
+		
+		BitSet resultBitSet = BitSetUtility.stringToBitSet(string, false, true);
+		
+		BitSetUtility.binDump(resultBitSet);
+		
+		assertTrue(resultBitSet.get(0));
+		assertFalse(resultBitSet.get(1));
+		
+	}
+	
+	/**
+	 * Tests from big endian to little endian
+	 * @throws BitSetOperationException 
+	 */
+	@Test
+	public void testStringToBitSetBigEndianToLittleEndian() throws BitSetOperationException {
+		String string = "10";
+		
+		BitSet resultBitSet = BitSetUtility.stringToBitSet(string, true, false);
+		
+		BitSetUtility.binDump(resultBitSet);
+		
+		assertTrue(resultBitSet.get(62));
+		assertFalse(resultBitSet.get(63));
+		
+	}
+	
+	/**
+	 * Tests from little endian to little endian
+	 * @throws BitSetOperationException 
+	 */
+	@Test
+	public void testStringToBitSetLittleEndianToLittleEndian() throws BitSetOperationException {
+		String string = "01";
+		
+		BitSet resultBitSet = BitSetUtility.stringToBitSet(string, true, false);
+		
+		BitSetUtility.binDump(resultBitSet);
+		
+		assertTrue(resultBitSet.get(63));
+		assertFalse(resultBitSet.get(62));
 		
 	}
 

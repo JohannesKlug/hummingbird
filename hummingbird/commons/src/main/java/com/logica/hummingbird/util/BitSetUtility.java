@@ -118,13 +118,15 @@ public class BitSetUtility {
 			// ...and we want big endian output
 			if(bigEndianOut) {
 				str = StringUtils.reverse(str);
+			} else {
+				str = StringUtils.reverse(str);
 			}
 		}
 		// else if the input is big endian
 		else {
 			// ...and we want little endian
 			if(!bigEndianOut) {
-				
+				str = StringUtils.reverse(str);
 			} else {
 				str = StringUtils.reverse(str);
 				str = padStringFromTheFront(str, 64);
