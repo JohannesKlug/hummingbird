@@ -78,6 +78,7 @@ public class IntegerUnsignedBehaviourTest {
 
 	@Test
 	public void testBigEndianValueFromBitSet() throws InvalidParameterTypeException {
+		LOG.info("###################### Beginning test #######################");
 		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_BE_555, true);
 		Number actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_BE_555);
 		assertEquals(555, actual);
@@ -85,6 +86,7 @@ public class IntegerUnsignedBehaviourTest {
 	
 	@Test
 	public void testBigEndianBoundaryValueFromBitSet() throws InvalidParameterTypeException {
+		LOG.info("###################### Beginning test #######################");
 		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_1024, true);
 		Number actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_BE_1024);
 		assertEquals(1024, actual);
@@ -92,6 +94,7 @@ public class IntegerUnsignedBehaviourTest {
 	
 	@Test
 	public void testLittleEndianBoundaryValueFromBitSet() throws InvalidParameterTypeException {
+		LOG.info("###################### Beginning test #######################");
 		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_1024, false);
 		Number actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_LE_1024);
 		assertEquals(1024, actual);
@@ -99,11 +102,13 @@ public class IntegerUnsignedBehaviourTest {
 
 	@Test(expected=InvalidParameterTypeException.class)
 	public void testInvalidSizeConstruction() throws InvalidParameterTypeException {
+		LOG.info("###################### Beginning test #######################");
 		new IntegerUnsignedBehaviour(45, true);
 	}
 
 	@Test
 	public void testGetName() throws InvalidParameterTypeException {
+		LOG.info("###################### Beginning test #######################");
 		assertEquals(new IntegerUnsignedBehaviour(1, true).getTypeName(), 1 + TYPE_NAME);
 	}
 }

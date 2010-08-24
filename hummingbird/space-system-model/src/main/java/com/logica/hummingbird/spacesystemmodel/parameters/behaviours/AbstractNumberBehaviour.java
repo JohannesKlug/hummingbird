@@ -11,7 +11,7 @@ import java.util.BitSet;
  */
 public abstract class AbstractNumberBehaviour implements NumberParameterTypeBehaviour {
 	
-	private final int SIZE_IN_BITS;
+	protected final int SIZE_IN_BITS;
 	
 	protected final boolean isBigEndian;
 	

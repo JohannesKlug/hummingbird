@@ -120,6 +120,17 @@ public class BitSetUtilityTest {
 		assertTrue(resultBitSet.get(0));
 		assertFalse(resultBitSet.get(1));
 		
+		string = "10111001";
+		resultBitSet = BitSetUtility.stringToBitSet(string, true, true);
+		BitSetUtility.binDump(resultBitSet);
+		assertTrue(resultBitSet.get(0));
+		assertFalse(resultBitSet.get(1));
+		assertTrue(resultBitSet.get(2));
+		assertTrue(resultBitSet.get(3));
+		assertTrue(resultBitSet.get(4));
+		assertFalse(resultBitSet.get(5));
+		assertFalse(resultBitSet.get(6));
+		assertTrue(resultBitSet.get(7));
 	}
 	
 	/**

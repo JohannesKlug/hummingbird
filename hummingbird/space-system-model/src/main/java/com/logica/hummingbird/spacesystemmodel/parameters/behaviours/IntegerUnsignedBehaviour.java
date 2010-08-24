@@ -30,36 +30,39 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 		BitSet actualParameter = packet.get(0, getSizeIntBits());
 				
 		byte[] byteArray = BitSetUtility.toByteArray(actualParameter, getSizeIntBits());
-		boolean signedBit = ((byteArray[0] & 0x80) == 0x80);
 		
-		if (signedBit) {
-			if(LOG.isDebugEnabled()) {
-				LOG.debug("Detected set sign bit in unsigned number.  Setting signBit flag and clearing sign...");
-			}
-			byteArray[0] = (byte) (byteArray[0] ^ 0x80);
-		}
+		long output = BitSetUtility.combine(byteArray, this.isBigEndian, this.SIZE_IN_BITS);
+		LOG.debug("Testing combine.  Output(bin) = " + Long.toBinaryString(output));
+		LOG.debug("Testing combine.  Output(dec) = "  + output);
 		
-		BigInteger parameterValue = new BigInteger(byteArray);
-		
-		if (signedBit) {
-			// we have to add 2^SizeInBits-1
-			if(LOG.isDebugEnabled()) {
-				LOG.debug("Sign bit was detected.  Adding 2^" + (getSizeIntBits()-1) + " to value");
-			}
-			BigInteger powValue = new BigInteger("2");
-			powValue = powValue.pow(getSizeIntBits()-1);
-			parameterValue.add(powValue);
-		}
-		
-		//FIXME ARGH!!!!!!!
-		if (!isBigEndian) {
-	
-		}
-		else {
+//		boolean signedBit = ((byteArray[0] & 0x80) == 0x80);
+//		
+//		if (signedBit) {
+//			if(LOG.isDebugEnabled()) {
+//				LOG.debug("Detected set sign bit in unsigned number.  Setting signBit flag and clearing sign...");
+//			}
+//			byteArray[0] = (byte) (byteArray[0] ^ 0x80);
+//		}
+//		
+//		BigInteger parameterValue = new BigInteger(byteArray);
+//		
+//		if(LOG.isDebugEnabled()) {
+//			LOG.debug("BigInt minus the sign value = " + parameterValue);
+//		}
+//		
+//		if (signedBit) {
+//			// we have to add 2^SizeInBits-1
+//			if(LOG.isDebugEnabled()) {
+//				LOG.debug("Sign bit was detected.  Adding 2^" + (getSizeIntBits()-1) + " to value");
+//			}
+//			BigInteger powValue = new BigInteger("2");
+//			powValue = powValue.pow(getSizeIntBits()-1);
+//			parameterValue.add(powValue);
+//		}
 
-		}
 		
-		return parameterValue.longValue();
+//		return parameterValue.longValue();
+		return output;
 	}
 
 	@Override

@@ -88,7 +88,7 @@ public class BitSetUtility {
 
 		// trim the trailing line.separator from the dump
 		dump = StringUtils.trim(dump);
-		
+
 		return dump;
 	}
 
@@ -99,50 +99,51 @@ public class BitSetUtility {
 	 * @param str
 	 *            {@link String} encoding the required BitSet using 1's and 0's
 	 * @param isBigEndian
-	 * 			  Parameter determines whether to write the value from the left or right of the returned BitSet.
-	 * 			  In other words, if you wish to interpret the BitSet later you must chose the endianess that
-	 * 			  will be used.
+	 *            Parameter determines whether to write the value from the left or right of the returned BitSet. In
+	 *            other words, if you wish to interpret the BitSet later you must chose the endianess that will be used.
 	 * @return a {@link BitSet} equal to the BitSet encoded by the input String
 	 * @throws BitSetOperationException
 	 *             if the input string contains invalid characters, that is, not equal to 1 or 0
 	 */
 	public static BitSet stringToBitSet(String str, boolean isBigEndian, boolean bigEndianOut) throws BitSetOperationException {
-		if(LOG.isDebugEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("I was passed: " + str);
 		}
-		
+
 		str = str.trim();
-	
+
 		// If little endian
 		if (!isBigEndian) {
 			// ...and we want big endian output
-			if(bigEndianOut) {
+			if (bigEndianOut) {
 				str = StringUtils.reverse(str);
-			} else {
+			}
+			else {
 				str = StringUtils.reverse(str);
 			}
 		}
 		// else if the input is big endian
 		else {
 			// ...and we want little endian
-			if(!bigEndianOut) {
+			if (!bigEndianOut) {
 				str = StringUtils.reverse(str);
-			} else {
+			}
+			else {
 				str = StringUtils.reverse(str);
 				str = padStringFromTheFront(str, 64);
 			}
 		}
-		
+
 		BitSet result = new BitSet(str.length());
-		
+
 		int count = 0;
 		int crement = 1;
-		
+
 		if (isBigEndian) {
 			count = result.size() - 1;
 			crement = -1;
 		}
-		
+
 		for (byte c : str.getBytes()) {
 			// If character '1' flip the bit to "on"
 			if (c == '1') {
@@ -154,8 +155,8 @@ public class BitSetUtility {
 			}
 			count += crement;
 		}
-		
-		if(LOG.isDebugEnabled()) {
+
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Returning: " + binDump(result));
 		}
 
@@ -165,23 +166,21 @@ public class BitSetUtility {
 	/**
 	 * Converts the passed BitSet into a binary string.
 	 * 
-	 * A flag is used to determine whether you wish to convert the logical bitSet or
-	 * the entire BitSet.
-	 * If useLogicalSize is set to false it will use the complete BitSet i.e. the size 
-	 * and <b><i>not</i></b> the length.  Note: BitSets always finish on 64 bit a boundary.
+	 * A flag is used to determine whether you wish to convert the logical bitSet or the entire BitSet. If
+	 * useLogicalSize is set to false it will use the complete BitSet i.e. the size and <b><i>not</i></b> the length.
+	 * Note: BitSets always finish on 64 bit a boundary.
 	 * 
-	 * If useLogicalSize is set to true it will use the logical BitSet, that is, only the 
-	 * relevant set bits
+	 * If useLogicalSize is set to true it will use the logical BitSet, that is, only the relevant set bits
 	 * 
-	 * Whichever one you choose the returned value will equate to the same, however, if you
-	 * set useLogicalSize to false you will get the complete 0 padded BitSet.
+	 * Whichever one you choose the returned value will equate to the same, however, if you set useLogicalSize to false
+	 * you will get the complete 0 padded BitSet.
 	 * 
 	 * @param data
 	 * @param useLogicalSize
 	 * @return
 	 */
 	public static String bitSetToBinaryString(BitSet data, boolean useLogicalSize) {
-		if(LOG.isDebugEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("I was passed: " + BitSetUtility.binDump(data));
 		}
 		int bitSetSize;
@@ -201,16 +200,16 @@ public class BitSetUtility {
 				binaryString.append('0');
 			}
 		}
-		
-		if(LOG.isDebugEnabled()) {
+
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Returning: " + binaryString.toString());
 		}
-		
+
 		return binaryString.toString();
 	}
-	
+
 	public static String bitSetToBinaryString(BitSet data, int length) {
-		if(LOG.isDebugEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("I was passed: " + BitSetUtility.binDump(data));
 		}
 		int bitSetSize = length;
@@ -224,11 +223,11 @@ public class BitSetUtility {
 				binaryString.append('0');
 			}
 		}
-		
-		if(LOG.isDebugEnabled()) {
+
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Returning: " + binaryString.toString());
 		}
-		
+
 		return binaryString.toString();
 	}
 
@@ -247,7 +246,7 @@ public class BitSetUtility {
 
 		return newString;
 	}
-	
+
 	public static String padStringFromTheBack(String string, int finalLength) {
 		int zeroesToAdd = finalLength - string.length();
 		if (LOG.isDebugEnabled()) {
@@ -263,25 +262,25 @@ public class BitSetUtility {
 
 		return string;
 	}
-	
+
 	public static int toInt(BitSet bits) {
 		byte[] bytes = toByteArray(bits, 32);
-		
+
 		int intFromBitset = 0;
-		
+
 		intFromBitset += (bytes[0] & 0xFF) << 24;
 		intFromBitset += (bytes[1] & 0xFF) << 16;
 		intFromBitset += (bytes[2] & 0xFF) << 8;
 		intFromBitset += (bytes[3] & 0xFF);
-		
+
 		return intFromBitset;
 	}
-	
+
 	public static long toLong(BitSet bits) {
 		byte[] bytes = toByteArray(bits, 64);
-		
+
 		long longFromBitset = 0;
-		
+
 		longFromBitset += (long) (bytes[0] & 0xFF) << 56;
 		longFromBitset += (long) (bytes[1] & 0xFF) << 48;
 		longFromBitset += (long) (bytes[2] & 0xFF) << 40;
@@ -290,31 +289,49 @@ public class BitSetUtility {
 		longFromBitset += (long) (bytes[5] & 0xFF) << 16;
 		longFromBitset += (long) (bytes[6] & 0xFF) << 8;
 		longFromBitset += (long) (bytes[7] & 0xFF);
-		
+
 		return longFromBitset;
 	}
-	
+
 	public static byte[] toByteArray(BitSet bits, int sizeInBits) {
 		// Split into Bytes.
-		int numberOfBytes = sizeInBits/8;
+		int numberOfBytes = sizeInBits / 8;
 		// Any remaining bits require an extra Byte
-		if (sizeInBits%8 != 0) {
+		if (sizeInBits % 8 != 0) {
 			numberOfBytes++;
 		}
 		byte[] bytes = new byte[numberOfBytes];
-		
+
 		int bitSetPosition = 0;
-		for (int byteNo=0; byteNo<numberOfBytes; byteNo++) {
+		for (int byteNo = 0; byteNo < numberOfBytes; byteNo++) {
 			bytes[byteNo] = 0;
-			for (int i=8; i>=1; i--) {
+			for (int i = 8; i >= 1; i--) {
 				if (bits.get(bitSetPosition)) {
-					bytes[byteNo] += Math.pow(2, i-1);
+					bytes[byteNo] += Math.pow(2, i - 1);
 				}
 				bitSetPosition++;
 			}
 		}
-		
+
 		return bytes;
 	}
-	
+
+	public static long combine(byte[] b, boolean isBigEndian, int sizeIntBits) {
+		// Defensive!
+		if (b.length > 4) {
+			throw new IllegalArgumentException("An int is only 4 bytes");
+		}
+
+		long value = 0;
+		for (int i = 0; i < b.length; ++i) {
+			value |= (b[isBigEndian ? b.length - 1 - i : i] & 0xff) << (i << 3);
+		}
+
+		int completeBytesRequired = sizeIntBits / 4;
+		int extraBitsRequired = sizeIntBits % 4;
+		LOG.debug("completeBytesRequired = " + completeBytesRequired + " extraBitsRequired = " + extraBitsRequired);
+		
+		return value;
+	}
+
 }
