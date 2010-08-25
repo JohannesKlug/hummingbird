@@ -40,10 +40,15 @@
 
 	<distributionManagement>
 		<repository>
-			<id>internal-releases</id>
-			<name>Logica Repository</name>
-			<url>http://10.48.29.168:8888/artifactory/internal-releases</url>
+			<id>artifactory.openspace.logica.com</id>
+			<name>Logica Artifactory releases</name>
+			<url>${releases.url}</url>
 		</repository>
+		<snapshotRepository>
+			<id>artifactory.openspace.logica.com</id>
+			<name>Logica Artifactory snapshots</name>
+			<url>${snapshots.url}</url>
+		</snapshotRepository>
 	</distributionManagement>
 
 	<properties>
@@ -59,6 +64,9 @@
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		
+		<releases.url>http://open.logicaspace.com:8080/artifactory/libs-releases-local</releases.url>
+		<snapshots.url>http://open.logicaspace.com:8080/artifactory/libs-snapshots-local</snapshots.url>
 	</properties>
 
 	<ciManagement>
