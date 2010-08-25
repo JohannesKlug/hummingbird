@@ -31,6 +31,7 @@ public class LongSignedBehaviour extends AbstractIntegerBehaviour {
 		}
 	}
 
+	// TODO Ditch strings, use bytes instead (like in the integer behv.)
 	@Override
 	public Long valueFromBitSet(BitSet packet) {
 		long parameterValue = 0;

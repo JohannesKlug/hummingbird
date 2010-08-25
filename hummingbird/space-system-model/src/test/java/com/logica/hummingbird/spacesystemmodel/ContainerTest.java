@@ -281,7 +281,7 @@ public class ContainerTest {
 	 */
 	@Test
 	public void testUnmarshallFrameTestParamA() throws UnknownContainerNameException, BitSetOperationException {
-		LOG.info("Beginning test");
+		LOG.info("########################## Beginning test #############################");
 
 		BitSet frame = BitSetUtility.stringToBitSet(TEST_BITSET_STRING_PKT_TYPE_A, false, false);
 

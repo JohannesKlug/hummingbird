@@ -162,8 +162,8 @@ public class BitSetUtilityTest {
 		
 		BitSetUtility.binDump(resultBitSet);
 		
-		assertTrue(resultBitSet.get(62));
-		assertFalse(resultBitSet.get(63));
+		assertFalse(resultBitSet.get(0));
+		assertTrue(resultBitSet.get(1));
 		
 	}
 	
@@ -175,12 +175,12 @@ public class BitSetUtilityTest {
 	public void testStringToBitSetLittleEndianToLittleEndian() throws BitSetOperationException {
 		String string = "01";
 		
-		BitSet resultBitSet = BitSetUtility.stringToBitSet(string, true, false);
+		BitSet resultBitSet = BitSetUtility.stringToBitSet(string, false, false);
 		
 		BitSetUtility.binDump(resultBitSet);
 		
-		assertTrue(resultBitSet.get(63));
-		assertFalse(resultBitSet.get(62));
+		assertFalse(resultBitSet.get(0));
+		assertTrue(resultBitSet.get(1));
 		
 	}
 
@@ -266,6 +266,7 @@ public class BitSetUtilityTest {
 		assertEquals(0, bytes[0]);
 	}
 	
+	// TODO Improve this test!
 	@Test
 	public void testReverse() {
 		BitSet bitset = new BitSet();
