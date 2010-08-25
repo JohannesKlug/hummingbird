@@ -1,6 +1,5 @@
 package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
 
-import java.math.BigInteger;
 import java.util.BitSet;
 
 import org.slf4j.Logger;
@@ -24,64 +23,43 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 	@Override
 	public Number valueFromBitSet(BitSet packet) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("Extracting " + getSizeIntBits() + " bit int value from " + BitSetUtility.binDump(packet));
+			LOG.debug("Extracting " + this.SIZE_IN_BITS + " bit int value from " + BitSetUtility.binDump(packet));
 		}
 		
-		BitSet actualParameter = packet.get(0, getSizeIntBits());
-				
-		byte[] byteArray = BitSetUtility.toByteArray(actualParameter, getSizeIntBits());
-		boolean signedBit = ((byteArray[0] & 0x80) == 0x80);
-		
-		if (signedBit) {
-			if(LOG.isDebugEnabled()) {
-				LOG.debug("Detected set sign bit in unsigned number.  Setting signBit flag and clearing sign...");
-			}
-			byteArray[0] = (byte) (byteArray[0] ^ 0x80);
-		}
-		
-		BigInteger parameterValue = new BigInteger(byteArray);
-		
-		if (signedBit) {
-			// we have to add 2^SizeInBits-1
-			if(LOG.isDebugEnabled()) {
-				LOG.debug("Sign bit was detected.  Adding 2^" + (getSizeIntBits()-1) + " to value");
-			}
-			BigInteger powValue = new BigInteger("2");
-			powValue = powValue.pow(getSizeIntBits()-1);
-			parameterValue.add(powValue);
-		}
-		
-		//FIXME ARGH!!!!!!!
-		if (!isBigEndian) {
-	
-		}
-		else {
+		BitSet actualParameter = packet.get(0, this.SIZE_IN_BITS);
 
+		if (!isBigEndian) {
+			actualParameter = BitSetUtility.reverse(actualParameter, this.SIZE_IN_BITS);
 		}
+		byte[] byteArray = BitSetUtility.toByteArray(actualParameter, this.SIZE_IN_BITS);
 		
-		return parameterValue.longValue();
+		long output = BitSetUtility.combine(byteArray, this.SIZE_IN_BITS);
+		LOG.debug("Testing combine.  Output(bin) = " + Long.toBinaryString(output));
+		LOG.debug("Testing combine.  Output(dec) = "  + output);
+		
+		return output;
 	}
 
 	@Override
 	public BitSet insertIntoBitSet(Number number, BitSet bitSetTarget, int offset) {
-		int length = getSizeIntBits();
 
 		long unsignedInt = number.longValue();
 
 		// checking whether the value fits into the bit string of length - 1
 		long absValue = Math.abs(unsignedInt);
-		if (absValue > Math.pow(2.0, length) - 1 || unsignedInt == Long.MIN_VALUE) {
-			throw new RuntimeException("The value of " + unsignedInt + " does not fit into a bit string of " + (length - 1) + " bits.");
+		if (absValue > Math.pow(2.0, SIZE_IN_BITS) - 1 || unsignedInt == Long.MIN_VALUE) {
+			throw new RuntimeException("The value of " + unsignedInt + " does not fit into a bit string of " + (SIZE_IN_BITS - 1) + " bits.");
 		}
 
 		// setting all bits to zero
-		bitSetTarget.clear(offset, offset + length - 1);
+		bitSetTarget.clear(offset, offset + SIZE_IN_BITS - 1);
 
 		// setting up the number in reverse order
 		int mask = 1;
-		for (int i = 0; i < length; ++i, mask <<= 1) {
+		offset += SIZE_IN_BITS - 1;
+		for (int i = 0; i < SIZE_IN_BITS; i++, mask <<= 1) {
 			if ((mask & absValue) > 0) {
-				bitSetTarget.set(offset + i);
+				bitSetTarget.set(offset - i);
 			}
 		}
 
@@ -94,7 +72,7 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 
 	@Override
 	public String getTypeName() {
-		return getSizeIntBits() + "bit Unsigned integer";
+		return getSizeInBits() + "bit Unsigned integer";
 	}
 
 }

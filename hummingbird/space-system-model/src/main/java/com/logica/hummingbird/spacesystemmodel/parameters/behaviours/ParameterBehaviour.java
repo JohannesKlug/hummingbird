@@ -6,7 +6,7 @@ import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 public interface ParameterBehaviour {
 	
-	public int getSizeIntBits();
+	public int getSizeInBits();
 	
 	/**
 	 * Returns the raw binary data of the parameter as a BitSet

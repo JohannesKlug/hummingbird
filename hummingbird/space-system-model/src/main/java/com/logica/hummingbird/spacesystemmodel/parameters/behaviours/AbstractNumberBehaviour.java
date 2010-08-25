@@ -11,7 +11,7 @@ import java.util.BitSet;
  */
 public abstract class AbstractNumberBehaviour implements NumberParameterTypeBehaviour {
 	
-	private final int SIZE_IN_BITS;
+	protected final int SIZE_IN_BITS;
 	
 	protected final boolean isBigEndian;
 	
@@ -21,13 +21,13 @@ public abstract class AbstractNumberBehaviour implements NumberParameterTypeBeha
 	}
 
 	@Override
-	public int getSizeIntBits() {
+	public int getSizeInBits() {
 		return SIZE_IN_BITS;
 	}
 
 	@Override
 	public BitSet getRawParameterBinary(BitSet packet) {
 		int offset = 0;
-		return packet.get(offset, offset + getSizeIntBits());
+		return packet.get(offset, offset + getSizeInBits());
 	}
 }
