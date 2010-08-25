@@ -21,13 +21,13 @@ public abstract class AbstractNumberBehaviour implements NumberParameterTypeBeha
 	}
 
 	@Override
-	public int getSizeIntBits() {
+	public int getSizeInBits() {
 		return SIZE_IN_BITS;
 	}
 
 	@Override
 	public BitSet getRawParameterBinary(BitSet packet) {
 		int offset = 0;
-		return packet.get(offset, offset + getSizeIntBits());
+		return packet.get(offset, offset + getSizeInBits());
 	}
 }

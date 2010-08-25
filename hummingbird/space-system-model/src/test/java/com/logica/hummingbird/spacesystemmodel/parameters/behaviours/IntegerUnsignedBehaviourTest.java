@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
 import com.logica.hummingbird.util.BitSetUtility;
+import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 public class IntegerUnsignedBehaviourTest {
 	private final static Logger LOG = LoggerFactory.getLogger(IntegerUnsignedBehaviourTest.class);
@@ -73,7 +74,7 @@ public class IntegerUnsignedBehaviourTest {
 		LOG.info("###################### Beginning test #######################");
 		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_LE_555, false);
 		Number actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_LE_555);
-		assertEquals(555, actual);
+		assertEquals(555l, actual);
 	}
 
 	@Test
@@ -97,7 +98,7 @@ public class IntegerUnsignedBehaviourTest {
 		LOG.info("###################### Beginning test #######################");
 		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_1024, false);
 		Number actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_LE_1024);
-		assertEquals(1024, actual);
+		assertEquals(1024l, actual);
 	}
 
 	@Test(expected=InvalidParameterTypeException.class)
@@ -110,6 +111,14 @@ public class IntegerUnsignedBehaviourTest {
 	public void testGetName() throws InvalidParameterTypeException {
 		LOG.info("###################### Beginning test #######################");
 		assertEquals(new IntegerUnsignedBehaviour(1, true).getTypeName(), 1 + TYPE_NAME);
+	}
+	
+	@Test
+	public final void testInsertIntoBitSet() throws BitSetOperationException, InvalidParameterTypeException {
+		BitSet actual = new BitSet();
+		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_BE_555, true);
+		actual = behaviour.insertIntoBitSet(555, actual, 0);
+		assertEquals(actual, TEST_BITSET_VALUE_BE_555);
 	}
 }
 

@@ -266,6 +266,14 @@ public class BitSetUtilityTest {
 		assertEquals(0, bytes[0]);
 	}
 	
+	@Test
+	public void testReverse() {
+		BitSet bitset = new BitSet();
+		bitset.set(9);
+		assertEquals(bitset, BitSetUtility.reverse(BitSetUtility.reverse(bitset, 10), 10));
+		
+	}
+	
 	
 	
 }

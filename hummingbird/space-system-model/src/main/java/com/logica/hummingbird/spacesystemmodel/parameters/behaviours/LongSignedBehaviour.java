@@ -54,26 +54,24 @@ public class LongSignedBehaviour extends AbstractIntegerBehaviour {
 
 	@Override
 	public BitSet insertIntoBitSet(Number number, BitSet bitSetTarget, int offset) throws BitSetOperationException {		
-		int length = getSizeIntBits();
+
 		long longValue = number.longValue();
 
-		String bitString = Long.toBinaryString(longValue);
-		
-		BitSet bitset = BitSetUtility.stringToBitSet(bitString, isBigEndian, true);
-
-		// Set all the target area bits to zero
-		bitSetTarget.clear(offset, offset + length - 1);
+		// setting all bits to zero
+		bitSetTarget.clear(offset, offset + SIZE_IN_BITS - 1);
 
 		// setting up the number in reverse order
-		int mask = 1;
-		for (int i = 0; i < length; ++i, mask <<= 1) {
-			if (bitset.get(i)) {
-				bitSetTarget.set(offset + i);
+		long mask = 1;
+		
+		offset += SIZE_IN_BITS - 1;
+		for (int i = 0; i < SIZE_IN_BITS; i++, mask <<= 1) {
+			if ((mask & longValue) > 0) {
+				bitSetTarget.set(offset - i);
 			}
 		}
 
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("Calculated Bitset from value " + longValue + " was: " + BitSetUtility.binDump(bitSetTarget));
+			LOG.debug("Calculated Bitset from value " + number.longValue() + " was: " + BitSetUtility.binDump(bitSetTarget));
 		}
 
 		return bitSetTarget;
