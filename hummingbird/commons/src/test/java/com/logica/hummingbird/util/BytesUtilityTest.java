@@ -1,4 +1,4 @@
-package com.logica.hummingbird;
+package com.logica.hummingbird.util;
 
 import static org.junit.Assert.assertEquals;
 
@@ -38,14 +38,14 @@ public class BytesUtilityTest {
 		assertEquals(TEST_STR_VALUE_BE_555, BitSetUtility.bitSetToBinaryString(TEST_BITSET_VALUE_BE_555, true));
 		
 		BYTE_ARRAY_555_10bit = BitSetUtility.toByteArray(TEST_BITSET_VALUE_BE_555, 10);
-		LOG.info("10bit 555 array = " + BYTE_ARRAY_555_10bit.toString());
+		LOG.info("Decimal dump of 10bit 555 array = " + BytesUtility.decimalDump(BYTE_ARRAY_555_10bit));
 		BYTE_ARRAY_555_32bit = BitSetUtility.toByteArray(TEST_BITSET_VALUE_BE_555, 32);
-		LOG.info("32bit 555 array = " + BYTE_ARRAY_555_32bit.toString());
+		LOG.debug("Decimal dump of 32bit 555 array = " + BytesUtility.decimalDump(BYTE_ARRAY_555_32bit));
 		
 		TEST_BITSET_VALUE_BE_NEG_28895 = BitSetUtility.stringToBitSet(TEST_STR_VALUE_BE_NEG_28895, true, true);
 		
 		BYTE_ARRAY_NEG_28895_16bit = BitSetUtility.toByteArray(TEST_BITSET_VALUE_BE_NEG_28895, 16);
-		LOG.info("32bit -28895 array = " + BYTE_ARRAY_NEG_28895_16bit);
+		LOG.debug("Decimal dump of 32bit -28895 array = " + BytesUtility.decimalDump(BYTE_ARRAY_NEG_28895_16bit));
 		
 		
 		
@@ -67,7 +67,6 @@ public class BytesUtilityTest {
 	public void testCombine32bitBoundary() {
 		int actual = BytesUtility.combine(BYTE_ARRAY_NEG_28895_16bit, 16);
 		assertEquals(-28895, actual);
-		
 	}
 	
 

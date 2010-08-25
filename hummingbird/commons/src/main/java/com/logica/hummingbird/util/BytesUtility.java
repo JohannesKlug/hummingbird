@@ -59,4 +59,14 @@ public class BytesUtility {
 		return value;
 	}
 
+	
+	public static String decimalDump(byte[] bytes) {
+		StringBuffer buffer = new StringBuffer();
+		for(byte b : bytes) {
+			buffer.append(Byte.toString(b));
+			buffer.append(" ");
+		}
+		
+		return buffer.toString();
+	}
 }
