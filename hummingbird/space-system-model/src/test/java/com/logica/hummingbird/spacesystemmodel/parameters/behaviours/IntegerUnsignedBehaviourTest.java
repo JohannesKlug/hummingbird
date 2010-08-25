@@ -81,7 +81,7 @@ public class IntegerUnsignedBehaviourTest {
 		LOG.info("###################### Beginning test #######################");
 		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_BE_555, true);
 		Number actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_BE_555);
-		assertEquals(555, actual);
+		assertEquals(555l, actual);
 	}
 	
 	@Test
@@ -89,7 +89,7 @@ public class IntegerUnsignedBehaviourTest {
 		LOG.info("###################### Beginning test #######################");
 		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_1024, true);
 		Number actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_BE_1024);
-		assertEquals(1024, actual);
+		assertEquals(1024l, actual);
 	}
 	
 	@Test

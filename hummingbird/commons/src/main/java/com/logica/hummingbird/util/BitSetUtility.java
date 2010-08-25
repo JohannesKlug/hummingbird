@@ -316,20 +316,42 @@ public class BitSetUtility {
 		return bytes;
 	}
 
-	public static long combine(byte[] b, boolean isBigEndian, int sizeIntBits) {
+	public static int combine(byte[] b, boolean isBigEndian, int sizeIntBits) {
 		// Defensive!
 		if (b.length > 4) {
 			throw new IllegalArgumentException("An int is only 4 bytes");
 		}
 
-		long value = 0;
+		int value = 0;
 		for (int i = 0; i < b.length; ++i) {
 			value |= (b[isBigEndian ? b.length - 1 - i : i] & 0xff) << (i << 3);
 		}
 
-		int completeBytesRequired = sizeIntBits / 4;
-		int extraBitsRequired = sizeIntBits % 4;
-		LOG.debug("completeBytesRequired = " + completeBytesRequired + " extraBitsRequired = " + extraBitsRequired);
+		// Calculate how much we have to chop off to make the sizeInBits integer
+		int numCompleteBytesUsed = sizeIntBits / 8;
+		int extraBitsRequired = sizeIntBits % 8;
+		
+		int totalBytesRequired;
+		if(extraBitsRequired != 0 ){
+			// We need to keep completeBytesRequired + 1
+			totalBytesRequired = numCompleteBytesUsed + 1;
+		}
+		else {
+			totalBytesRequired = numCompleteBytesUsed;
+		}
+	
+		// We need to chop off (right shift) the size of an int (4 Bytes) minus the required bytes.
+		// We also need to chop off any surplus bits in the last Byte; so..
+		// number of Bytes in an Int - total required Bytes * number of Bits in a Byte gives us the base chop value
+		int chopBits = (2 - totalBytesRequired) * 8;
+		chopBits +=  8 - extraBitsRequired; 
+			
+		LOG.debug("Number of complete Bytes used = " + numCompleteBytesUsed);
+		LOG.debug("Number of extra bits required = " + extraBitsRequired);
+		LOG.debug("Total Bytes required to store value = " + extraBitsRequired);
+		LOG.debug("Need to chop " + chopBits + " bits off");
+		
+		value = value >>> chopBits;
 		
 		return value;
 	}

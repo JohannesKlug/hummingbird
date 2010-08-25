@@ -29,7 +29,7 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 		
 		BitSet actualParameter = packet.get(0, getSizeIntBits());
 				
-		byte[] byteArray = BitSetUtility.toByteArray(actualParameter, getSizeIntBits());
+		byte[] byteArray = BitSetUtility.toByteArray(actualParameter, this.SIZE_IN_BITS);
 		
 		long output = BitSetUtility.combine(byteArray, this.isBigEndian, this.SIZE_IN_BITS);
 		LOG.debug("Testing combine.  Output(bin) = " + Long.toBinaryString(output));
