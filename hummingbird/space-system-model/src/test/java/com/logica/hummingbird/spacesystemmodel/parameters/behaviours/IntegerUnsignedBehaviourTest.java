@@ -136,11 +136,21 @@ public class IntegerUnsignedBehaviourTest {
 	}
 	
 	@Test
-	public final void testInsertIntoBitSet() throws BitSetOperationException, InvalidParameterTypeException {
+	public final void testInsertIntoBitSetBE555() throws BitSetOperationException, InvalidParameterTypeException {
+		LOG.info("###################### Beginning test #######################");
 		BitSet actual = new BitSet();
 		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_BE_555, true);
 		actual = behaviour.insertIntoBitSet(555, actual, 0);
 		assertEquals(actual, TEST_BITSET_VALUE_BE_555);
+	}
+	
+	@Test
+	public final void testInsertIntoBitSetLE555() throws BitSetOperationException, InvalidParameterTypeException {
+		LOG.info("###################### Beginning test #######################");
+		BitSet actual = new BitSet();
+		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_LE_555, false);
+		actual = behaviour.insertIntoBitSet(555, actual, 0);
+		assertEquals(actual, TEST_BITSET_VALUE_LE_555);
 	}
 }
 

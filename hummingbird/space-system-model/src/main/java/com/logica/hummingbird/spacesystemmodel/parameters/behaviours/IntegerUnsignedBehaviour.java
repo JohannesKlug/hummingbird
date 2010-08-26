@@ -26,7 +26,7 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Extracting " + this.SIZE_IN_BITS + " bit int value from " + BitSetUtility.binDump(packet));
 		}
-		
+
 		BitSet actualParameter = packet.get(0, this.SIZE_IN_BITS);
 
 		if (!isBigEndian) {
@@ -34,11 +34,11 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 		}
 		byte[] byteArray = BitSetUtility.toByteArray(actualParameter, this.SIZE_IN_BITS);
 		LOG.debug("Byte array = " + BytesUtility.decimalDump(byteArray));
-		
+
 		long output = BytesUtility.combine(byteArray, this.SIZE_IN_BITS).longValue();
 		LOG.debug("Testing combine.  Output(bin) = " + Long.toBinaryString(output));
-		LOG.debug("Testing combine.  Output(dec) = "  + output);
-		
+		LOG.debug("Testing combine.  Output(dec) = " + output);
+
 		return output;
 	}
 
@@ -58,10 +58,17 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 
 		// setting up the number in reverse order
 		int mask = 1;
-		offset += SIZE_IN_BITS - 1;
+		if (isBigEndian) {
+			offset += SIZE_IN_BITS - 1;
+		}
 		for (int i = 0; i < SIZE_IN_BITS; i++, mask <<= 1) {
 			if ((mask & absValue) > 0) {
-				bitSetTarget.set(offset - i);
+				if (isBigEndian) {
+					bitSetTarget.set(offset - i);
+				}
+				else {
+					bitSetTarget.set(offset = i);
+				}
 			}
 		}
 

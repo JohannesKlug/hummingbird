@@ -621,7 +621,7 @@ public class ContainerTest {
 	
 	private void logAssertValues(String assertDescription, BitSet expected, BitSet marshalledFlag) {
 		LOG.debug("Debug for " + assertDescription);
-		LOG.debug("Expected bitset = " + expected);
-		LOG.debug("Actual bitset = " + marshalledFlag);
+		LOG.debug("Expected bitset = " + BitSetUtility.binDump(expected));
+		LOG.debug("Actual bitset = " + BitSetUtility.binDump(marshalledFlag));
 	}
 }
