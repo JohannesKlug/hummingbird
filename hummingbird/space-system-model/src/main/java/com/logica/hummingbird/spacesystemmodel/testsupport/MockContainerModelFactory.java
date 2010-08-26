@@ -183,7 +183,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 		NumberParameterType test32bitInt = new NumberParameterType("test32bitInt",
 																   "test param",
 																   "32 bit int test param",
-																   new IntegerUnsignedBehaviour(32, true),
+																   new IntegerUnsignedBehaviour(32, false),
 																   0);
 		IntegerParameter testParameterA = new IntegerParameter(TEST_PARAM_A, "test param", "test param holding an int value", test32bitInt, 0);
 		packetTypeA.addContainer(testParameterA);

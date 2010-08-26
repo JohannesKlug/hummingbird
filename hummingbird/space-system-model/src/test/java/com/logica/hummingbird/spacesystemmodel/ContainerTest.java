@@ -159,11 +159,9 @@ public class ContainerTest {
 		TEST_BITSET_PKT_TYPE_A.set(31, 35);
 		TEST_BITSET_PKT_TYPE_A.set(60);
 		
-		// Set to 11011110000000000000000000000000 which is 123 in decimal (note: this is big endian)
+		// Set to 00000000000000000000000001111011 which is 123 in decimal (note: this is big endian)
 		LOG.debug("Setting up param a test value bitset");
 		PARAM_A_TEST_VALUE_AS_BITSET = BitSetUtility.stringToBitSet(PARAM_A_TEST_VALUE_AS_BIN_STRING, true, true);
-//		PARAM_A_TEST_VALUE_AS_BITSET.set(0, 2);
-//		PARAM_A_TEST_VALUE_AS_BITSET.set(3, 7);
 		
 		//  Set to 11010100010 (note: this is little endian)
 		PACKET_TYPE_ID_555_AS_BITSET.set(0, 2);

@@ -33,6 +33,7 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 			actualParameter = BitSetUtility.reverse(actualParameter, this.SIZE_IN_BITS);
 		}
 		byte[] byteArray = BitSetUtility.toByteArray(actualParameter, this.SIZE_IN_BITS);
+		LOG.debug("Byte array = " + BytesUtility.decimalDump(byteArray));
 		
 		long output = BytesUtility.combine(byteArray, this.SIZE_IN_BITS).longValue();
 		LOG.debug("Testing combine.  Output(bin) = " + Long.toBinaryString(output));
