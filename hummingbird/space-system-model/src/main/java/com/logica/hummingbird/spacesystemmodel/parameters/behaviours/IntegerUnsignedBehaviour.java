@@ -67,7 +67,7 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 					bitSetTarget.set(offset - i);
 				}
 				else {
-					bitSetTarget.set(offset = i);
+					bitSetTarget.set(offset + i);
 				}
 			}
 		}
