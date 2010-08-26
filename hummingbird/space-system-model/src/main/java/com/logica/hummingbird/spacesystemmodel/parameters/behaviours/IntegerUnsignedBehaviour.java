@@ -34,7 +34,7 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 		}
 		byte[] byteArray = BitSetUtility.toByteArray(actualParameter, this.SIZE_IN_BITS);
 		
-		long output = BytesUtility.combine(byteArray, this.SIZE_IN_BITS);
+		long output = BytesUtility.combine(byteArray, this.SIZE_IN_BITS).longValue();
 		LOG.debug("Testing combine.  Output(bin) = " + Long.toBinaryString(output));
 		LOG.debug("Testing combine.  Output(dec) = "  + output);
 		

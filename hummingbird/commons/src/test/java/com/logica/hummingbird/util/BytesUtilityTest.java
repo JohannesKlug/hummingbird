@@ -92,27 +92,29 @@ public class BytesUtilityTest {
 
 	@Test
 	public void testCombineSimple() {
-		int actual = BytesUtility.combine(BYTE_ARRAY_555_10bit, 10);
+		int actual = BytesUtility.combine(BYTE_ARRAY_555_10bit, 10).intValue();
 		assertEquals(555, actual);
 	}
 
 	@Test
 	public void testCombine32bit() {
-		int actual = BytesUtility.combine(BYTE_ARRAY_555_32bit, 10);
+		int actual = BytesUtility.combine(BYTE_ARRAY_555_32bit, 10).intValue();
+		LOG.debug("Expected = 0000000000000000000000" + TEST_STR_VALUE_BE_555); // 32bit rep (intValue) of 10 bit int
+		LOG.debug("Actual = " + Integer.toBinaryString(actual));
 		assertEquals(555, actual);
 	}
 
 	@Test
 	public void testCombine32bitBoundarys() {
-		short actual = (short) BytesUtility.combine(BYTE_ARRAY_NEG_28895_16bit, 16);
+		short actual = (short) BytesUtility.combine(BYTE_ARRAY_NEG_28895_16bit, 16).shortValue();
 		LOG.debug("Expected = " + TEST_STR_VALUE_BE_NEG_28895);
-		LOG.debug("Actual = " + Integer.toBinaryString(actual).substring(16)); //yeah,there's probably a better way to handle short to bin str.
+		LOG.debug("Actual = " + Integer.toBinaryString(actual).substring(16)); //yeah,there's probably a better way to handle short to bin str.TEST_STR_VALUE_BE_555
 		assertEquals(-28895, actual);
 	}
 	
 	@Test
 	public void testCombineMax32bit() {
-		int actual = BytesUtility.combine(BYTE_ARRAY_BE_MAX_32bit, 32);
+		int actual = BytesUtility.combine(BYTE_ARRAY_BE_MAX_32bit, 32).intValue();
 		LOG.debug("Expected = " + TEST_STR_VALUE_BE_MAX_32bit);
 		LOG.debug("Actual = 0" + Integer.toBinaryString(actual)); // toBinaryStirng cuts off the first zero if positive.
 		assertEquals(2147483647, actual);
@@ -120,7 +122,7 @@ public class BytesUtilityTest {
 
 	@Test
 	public void testCombineMin32bit() {
-		int actual = BytesUtility.combine(BYTE_ARRAY_BE_MIN_32bit, 32);
+		int actual = BytesUtility.combine(BYTE_ARRAY_BE_MIN_32bit, 32).intValue();
 		LOG.debug("Expected = " + TEST_STR_VALUE_BE_MIN_32bit);
 		LOG.debug("Actual = " + Integer.toBinaryString(actual)); // toBinaryStirng cuts off the first zero if positive.
 		assertEquals(-2147483648, actual);
@@ -128,7 +130,7 @@ public class BytesUtilityTest {
 	
 	@Test
 	public void testCombine8bitBoundary() {
-		byte actual = (byte) BytesUtility.combine(BYTE_ARRAY_BE_NEG_127_8bit, 8);
+		byte actual = (byte) BytesUtility.combine(BYTE_ARRAY_BE_NEG_127_8bit, 8).byteValue();
 		LOG.debug("Expected = " + TEST_STR_VALUE_BE_NEG_127_8bit);
 		LOG.debug("Actual = " + Integer.toBinaryString(actual).substring(24)); // toBinaryStirng cuts off the first zero if positive.
 		assertEquals(-127, actual);
