@@ -15,13 +15,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockParameterContainerModel;
 import com.logica.hummingbird.telemetry.HummingbirdPacket;
 import com.logica.hummingbird.telemetry.HummingbirdParameter;
-import com.logica.hummingbird.telemetry.Packet;
-import com.logica.hummingbird.telemetry.Parameter;
 import com.logica.hummingbird.util.BitSetUtility;
 import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
@@ -158,7 +155,27 @@ public class PacketBrokerImplTest {
 		BitSet marshalledPacket = new BitSet();
 		packetBroker.marshall(MockParameterContainerModel.TM_PACKET_ALIAS, marshalledPacket);
 		
-		LOG.debug(BitSetUtility.binDump(marshalledPacket));
+		LOG.debug("Marshalled Packet = " + BitSetUtility.binDump(marshalledPacket));
+		
+		assertEquals(expected, marshalledPacket);
+	}
+	
+	@Test
+	public final void testMarshallBitSetLaserTempData() throws UnknownContainerNameException, BitSetOperationException {
+		LOG.info("---------- testMarshall -------------");
+		
+		// Populate the space system model that we will marshall into binary.	
+		// Set flight hours packet (apid 333) with packet length 32 and flight hours parameter 1024.
+		mockSpaceSystemFactory.getParameter(MockParameterContainerModel.PAYLOAD_APID_ALIAS).setValue(LASER_DATA_APID_VALUE);
+		mockSpaceSystemFactory.getParameter(MockParameterContainerModel.PAYLOAD_LENGTH_PARAM_ALIAS).setValue(64);
+		mockSpaceSystemFactory.getParameter(MockParameterContainerModel.LASER_TEMP_PARAM_ALIAS).setValue(17959.25);
+		
+		BitSet expected = BitSetUtility.stringToBitSet(LASER_DATA_APID + PACKET_LENGTH_64 + LASER_TEMP_17959_25, false, false);
+		
+		BitSet marshalledPacket = new BitSet();
+		packetBroker.marshall(MockParameterContainerModel.TM_PACKET_ALIAS, marshalledPacket);
+		
+		LOG.debug("Marshalled Packet = " + BitSetUtility.binDump(marshalledPacket));
 		
 		assertEquals(expected, marshalledPacket);
 	}
