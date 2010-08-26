@@ -97,7 +97,7 @@ public class ContainerTest {
 	private static final int PARAM_A_TEST_VALUE = 123;
 
 	/** The test parameter A value based upon the TEST_BITSET_STRING_PKT_TYPE_A as a binary String */
-	private static final String PARAM_A_TEST_VALUE_AS_BIN_STRING = "00000000000000000000000001111011";
+	private static final String PARAM_A_TEST_VALUE_AS_BIN_STRING = "11011110000000000000000000000000";
 
 	/** The test parameter A value based upon the TEST_BITSET_STRING_PKT_TYPE_A as a bitset */
 	private static BitSet PARAM_A_TEST_VALUE_AS_BITSET = new BitSet(32);
@@ -159,9 +159,9 @@ public class ContainerTest {
 		TEST_BITSET_PKT_TYPE_A.set(31, 35);
 		TEST_BITSET_PKT_TYPE_A.set(60);
 		
-		// Set to 00000000000000000000000001111011 which is 123 in decimal (note: this is big endian)
+		// Set to 11011110000000000000000000000000 which is 123 in decimal (note: this is little endian)
 		LOG.debug("Setting up param a test value bitset");
-		PARAM_A_TEST_VALUE_AS_BITSET = BitSetUtility.stringToBitSet(PARAM_A_TEST_VALUE_AS_BIN_STRING, true, true);
+		PARAM_A_TEST_VALUE_AS_BITSET = BitSetUtility.stringToBitSet(PARAM_A_TEST_VALUE_AS_BIN_STRING, false, false);
 		
 		//  Set to 11010100010 (note: this is little endian)
 		PACKET_TYPE_ID_555_AS_BITSET.set(0, 2);
