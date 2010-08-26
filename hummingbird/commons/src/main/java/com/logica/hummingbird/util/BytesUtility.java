@@ -14,17 +14,11 @@ public class BytesUtility {
 		}
 	
 		int value = 0;
-		for (int i = 0; i < b.length; ++i) {
-			// value |= (b[isBigEndian ? b.length - 1 - i : i] & 0xff) << (i << 3);
-	
+		for (int i = 0; i < b.length; ++i) {	
 			int index;
-			// if(networkOrder) {
 			index = b.length - 1 - i;
-			// }
-			// else {
-			// index = i;
-			// }
 			System.out.println("index = " + index);
+			
 			value |= (b[index] & 0xff) << (i << 3);
 		}
 	
@@ -59,7 +53,11 @@ public class BytesUtility {
 		return value;
 	}
 
-	
+	/**
+	 * Dumps the byte array into a string as a series of 8bit decimal numbers
+	 * @param bytes
+	 * @return
+	 */
 	public static String decimalDump(byte[] bytes) {
 		StringBuffer buffer = new StringBuffer();
 		for(byte b : bytes) {
