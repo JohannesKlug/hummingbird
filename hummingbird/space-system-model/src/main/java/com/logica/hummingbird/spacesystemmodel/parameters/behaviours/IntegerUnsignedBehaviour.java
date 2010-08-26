@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import com.logica.hummingbird.util.BitSetUtility;
+import com.logica.hummingbird.util.BytesUtility;
 
 //TODO javadoc
 //TODO 32 bit sized int test.  will need to convert to use a long otherwise the sign bit will be set in java int.
@@ -33,7 +34,7 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 		}
 		byte[] byteArray = BitSetUtility.toByteArray(actualParameter, this.SIZE_IN_BITS);
 		
-		long output = BitSetUtility.combine(byteArray, this.SIZE_IN_BITS);
+		long output = BytesUtility.combine(byteArray, this.SIZE_IN_BITS);
 		LOG.debug("Testing combine.  Output(bin) = " + Long.toBinaryString(output));
 		LOG.debug("Testing combine.  Output(dec) = "  + output);
 		
