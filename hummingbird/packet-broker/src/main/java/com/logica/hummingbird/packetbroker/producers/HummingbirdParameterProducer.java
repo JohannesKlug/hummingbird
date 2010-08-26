@@ -55,7 +55,7 @@ public class HummingbirdParameterProducer extends AbstractProducer implements Pa
 
 	@Override
 	public void updated(String field, int value) {
-		parent.packet.addParameters(new Parameter(field, Integer.class, value));
+		parent.packet.addParameter(new Parameter(field, Integer.class, value));
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value + " and added to parent " + parent.getPacket().getName());
 		}
@@ -63,7 +63,7 @@ public class HummingbirdParameterProducer extends AbstractProducer implements Pa
 
 	@Override
 	public void updated(String field, String value) {		
-		parent.packet.addParameters(new Parameter(field, value.getClass(), value));
+		parent.packet.addParameter(new Parameter(field, value.getClass(), value));
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value + " and added to parent " + parent.getPacket().getName());
 		}
@@ -71,7 +71,7 @@ public class HummingbirdParameterProducer extends AbstractProducer implements Pa
 
 	@Override
 	public void updated(String field, double value) {
-		parent.packet.addParameters(new Parameter(field, Double.class, value));
+		parent.packet.addParameter(new Parameter(field, Double.class, value));
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value + " and added to parent " + parent.getPacket().getName());
 		}

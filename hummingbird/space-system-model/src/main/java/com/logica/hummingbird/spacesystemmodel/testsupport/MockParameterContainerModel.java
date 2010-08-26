@@ -21,8 +21,8 @@ import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterT
 /**
  * This class is used for testing the Container model and anything that uses the SpaceSystemModel. It is a simple
  * Container model representing a space system which can be populated with values by tests. The container model follows
- * the CCSDS standards and therefore uses the TMFrame, TMFrameHeader, TMPacket, and a TMFrameTail concepts. They can go
- * by any name since they are accessed using the constants X_ALIAS defined in the class.
+ * the CCSDS standards and therefore uses the TMFrame, TMFrameHeader, TMPacket, and a TMFrameTail concepts. 
+ * They will be read by CCSDS packet 
  * 
  * @author Mark Doyle <markjohndoyle@googlemail.com>, <mark.doyle@logica.com>
  * @since Hummingbird 0.0.1
@@ -56,9 +56,9 @@ public class MockParameterContainerModel implements ContainerFactory {
 
 	public static final String TM_ALL_SYS_PAYLOAD = "TMPayload All systems data";
 
-	public static final String FLIGHT_HOURS_PARAM = "FlightHours";
+	public static final String FLIGHT_HOURS_PARAM_ALIAS = "FlightHours";
 
-	public static final String LASER_TEMP_PARAM = "LaserTemp";
+	public static final String LASER_TEMP_PARAM_ALIAS = "LaserTemp";
 
 	public static final String FLIGHT_DATA_PAYLOAD_APID = "333";
 
@@ -117,7 +117,7 @@ public class MockParameterContainerModel implements ContainerFactory {
 		tmPacketHeader.addContainer(apidParameter);
 
 		// Create the payload length parameter type and add it to the packet header and the parameters collection.
-		IntegerParameter payloadLengthParameter = new IntegerParameter(PAYLOAD_LENGTH_PARAM_ALIAS, "Payload length", "Payload lenght parameter",
+		IntegerParameter payloadLengthParameter = new IntegerParameter(PAYLOAD_LENGTH_PARAM_ALIAS, "Payload length", "Payload length parameter",
 				paramType16bitInt, 0);
 		this.addToContainers(payloadLengthParameter);
 		this.addToParameters(payloadLengthParameter);
@@ -139,13 +139,13 @@ public class MockParameterContainerModel implements ContainerFactory {
 		this.addToContainers(allSystemsPayload);
 		tmPacketPayload.addContainer(allSystemsPayload);
 
-		IntegerParameter flightHoursParameter = new IntegerParameter(FLIGHT_HOURS_PARAM, "test param", "test param holding flight hours as an int value",
+		IntegerParameter flightHoursParameter = new IntegerParameter(FLIGHT_HOURS_PARAM_ALIAS, "test param", "test param holding flight hours as an int value",
 				test32bitInt, 0);
 		flightDataPayload.addContainer(flightHoursParameter);
 		this.addToParameters(flightHoursParameter);
 		this.addToContainers(flightHoursParameter);
 
-		FloatParameter laserTemperatureParameter = new FloatParameter(LASER_TEMP_PARAM, "test param", "test param holding a float value", test64bitFloat, 0.0);
+		FloatParameter laserTemperatureParameter = new FloatParameter(LASER_TEMP_PARAM_ALIAS, "test param", "test param holding a float value", test64bitFloat, 0.0);
 		laserDataPayload.addContainer(laserTemperatureParameter);
 		this.addToParameters(laserTemperatureParameter);
 		this.addToContainers(laserTemperatureParameter);

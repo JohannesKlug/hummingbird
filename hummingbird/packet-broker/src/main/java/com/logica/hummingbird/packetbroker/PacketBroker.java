@@ -53,10 +53,10 @@ public interface PacketBroker {
 	
 	/**
 	 * Marshalls the container identified through the container parameter name 
-	 * into the bit-set. 
+	 * into the BitSet. 
 	 *
 	 * @param container The name of the container as registered within the container factory.
-	 * @param data The data stream from which the data shall be extracted. 
+	 * @param data The data stream into which the data shall be marshalled. 
 	 * @throws UnknownContainerNameException 
 	 * @throws BitSetOperationException 
 	 *

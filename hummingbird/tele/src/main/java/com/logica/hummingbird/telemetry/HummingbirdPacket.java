@@ -7,7 +7,7 @@ public interface HummingbirdPacket {
 
 	public String getName();
 
-	public void addParameters(HummingbirdParameter parameter);
+	public void addParameter(HummingbirdParameter parameter);
 	
 	public List<HummingbirdParameter> getParameters();
 	
