@@ -65,7 +65,9 @@ public class BytesUtilityTest {
 	
 	@Test
 	public void testCombine32bitBoundary() {
-		int actual = BytesUtility.combine(BYTE_ARRAY_NEG_28895_16bit, 16);
+		short actual = (short) BytesUtility.combine(BYTE_ARRAY_NEG_28895_16bit, 16);
+		LOG.debug("Expected = 1000111100100001");
+		LOG.debug("Actual = " + Integer.toBinaryString(actual));
 		assertEquals(-28895, actual);
 	}
 	
