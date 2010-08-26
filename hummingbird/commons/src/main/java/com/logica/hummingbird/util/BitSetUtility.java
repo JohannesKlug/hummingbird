@@ -118,9 +118,6 @@ public class BitSetUtility {
 			if (bigEndianOut) {
 				str = StringUtils.reverse(str);
 			}
-			else {
-				//str = StringUtils.reverse(str);
-			}
 		}
 		// else if the input is big endian
 		else {
