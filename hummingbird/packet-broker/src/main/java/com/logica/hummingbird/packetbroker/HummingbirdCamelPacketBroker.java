@@ -32,7 +32,7 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 	 * @return a list of camel messages
 	 * @throws UnknownContainerNameException
 	 */
-	public List<Message> split(Exchange camelExchange) throws UnknownContainerNameException {
+	public final List<Message> split(Exchange camelExchange) throws UnknownContainerNameException {
 		this.unmarshall("TMPacket", (BitSet) camelExchange.getIn().getBody());
 
 		HummingbirdPacket packet = packetProducer.getPacket();

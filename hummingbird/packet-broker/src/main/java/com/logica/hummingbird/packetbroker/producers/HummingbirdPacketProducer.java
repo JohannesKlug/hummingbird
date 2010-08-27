@@ -57,7 +57,6 @@ public class HummingbirdPacketProducer extends AbstractProducer implements Packe
 		}
 		catch (UnknownContainerNameException e) {
 			LOG.error(e.toString());
-			e.printStackTrace();
 		}
 	}
 	

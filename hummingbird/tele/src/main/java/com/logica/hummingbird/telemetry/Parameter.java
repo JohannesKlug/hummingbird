@@ -3,10 +3,10 @@ package com.logica.hummingbird.telemetry;
 public class Parameter implements HummingbirdParameter {
 	
 	String name;
-	Class clazz;
+	Class<?> clazz;
 	Object value;
 	
-	public Parameter(String name, Class clazz, Object value) {
+	public Parameter(String name, Class<?> clazz, Object value) {
 		super();
 		this.name = name;
 		this.clazz = clazz;
@@ -14,7 +14,7 @@ public class Parameter implements HummingbirdParameter {
 	}
 
 	@Override
-	public Class<? extends Object> getClassType() {
+	public Class<?> getClassType() {
 		return clazz;
 	}
 

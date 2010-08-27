@@ -15,6 +15,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.logica.hummingbird.spacesystemmodel.Container;
+import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockParameterContainerModel;
 import com.logica.hummingbird.telemetry.HummingbirdPacket;
@@ -26,9 +28,9 @@ import com.logica.hummingbird.util.exceptions.BitSetOperationException;
  * @author Mark Doyle
  * @TODO Test is not complete - awaiting commons telemetry models to be finalised
  */
-public class PacketBrokerImplTest {
+public class HummingbirdPacketBrokerTest {
 	/** Logger for this class */
-	private static final Logger LOG = LoggerFactory.getLogger(PacketBrokerImplTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(HummingbirdPacketBrokerTest.class);
 	
 	/** APID 333 LE unsigned */
 	public static final String FLIGHT_DATA_APID = "10110010100";
@@ -58,8 +60,7 @@ public class PacketBrokerImplTest {
 
 	private PacketBroker packetBroker;
 
-	/** The HumminbirdPacket version of the test bitset packet. */
-	private static HummingbirdPacket testPacket = null;
+
 
 	/**
 	 * Set up the Mock Container Factory and create the testFrame for use by the tests.
@@ -180,6 +181,13 @@ public class PacketBrokerImplTest {
 		assertEquals(expected, marshalledPacket);
 	}
 
+	@Test
+	public final void testGetFactory() {
+		ContainerFactory actual = packetBroker.getFactory();
+		assertEquals(mockSpaceSystemFactory, actual);
+	}
+
+	
 	@Ignore
 	@Test
 	public final void testMarshallStringString() {

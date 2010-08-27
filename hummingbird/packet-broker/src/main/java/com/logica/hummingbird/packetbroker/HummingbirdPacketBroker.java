@@ -48,13 +48,13 @@ import com.logica.hummingbird.util.exceptions.BitSetOperationException;
  * when the complete container has been unmarshalled.
  */
 public class HummingbirdPacketBroker implements PacketBroker {
-	private final static Logger LOG = LoggerFactory.getLogger(HummingbirdPacketBroker.class);
+	private static final Logger LOG = LoggerFactory.getLogger(HummingbirdPacketBroker.class);
 
 	/** The factory used to locate the models. */
 	protected ContainerFactory factory = null;
 
-	AbstractProducer packetProducer;
-	AbstractProducer parameterProducer;
+	protected AbstractProducer packetProducer;
+	protected AbstractProducer parameterProducer;
 
 	/**
 	 * Constructor.
@@ -71,7 +71,7 @@ public class HummingbirdPacketBroker implements PacketBroker {
 	}
 
 	@Override
-	public void unmarshall(String packetname, BitSet packet) throws UnknownContainerNameException {
+	public final void unmarshall(String packetname, BitSet packet) throws UnknownContainerNameException {
 		if(LOG.isDebugEnabled()) {
 			LOG.debug("Unmarshalling container " + packetname + " with BitSet " + packet);
 		}
@@ -79,7 +79,7 @@ public class HummingbirdPacketBroker implements PacketBroker {
 	}
 
 	@Override
-	public void marshall(String packetname, BitSet packet) throws UnknownContainerNameException, BitSetOperationException {
+	public final void marshall(String packetname, BitSet packet) throws UnknownContainerNameException, BitSetOperationException {
 		if(LOG.isDebugEnabled()) {
 			LOG.debug("Unmarshalling container " + packetname + " with BitSet " + packet + " at offset 0");
 		}
@@ -87,24 +87,27 @@ public class HummingbirdPacketBroker implements PacketBroker {
 	}
 
 	@Override
-	public void marshall(String packetname, String packet) throws UnknownContainerNameException {
+	public final void marshall(String packetname, String packet) throws UnknownContainerNameException {
 		packet = factory.getContainer(packetname).toString();
 	}
 
-	public Container getContainer(String container) throws UnknownContainerNameException {
+	@Override
+	public final Container getContainer(String container) throws UnknownContainerNameException {
 		return factory.getContainer(container);
 	}
 
-	public ContainerFactory getFactory() {
+	@Override
+	public final ContainerFactory getFactory() {
 		return factory;
 	}
 
-	public void setFactory(ContainerFactory factory) {
+	@Override
+	public final void setFactory(ContainerFactory factory) {
 		this.factory = factory;
 	}
 
 	@Override
-	public HummingbirdPacket getPacket() {
+	public final HummingbirdPacket getPacket() {
 		return this.packetProducer.getPacket();
 	}
 }

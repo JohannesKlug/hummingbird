@@ -32,6 +32,5 @@ package com.logica.hummingbird.spacesystemmodel;
  * TODO write here a description of the class
  */
 public interface PacketObserver {
-
-	public void completed(String field);
+	void completed(String field);
 }
