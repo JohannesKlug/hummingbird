@@ -31,8 +31,22 @@ public class SpacePacketGenerator {
 		 * Sequence Count 			= continuous
 		 */
 		
-		int apidHighByte = (0x700 & apId) >> 8;
-		packet[0] = (byte) (0 & apidHighByte);
+		/*
+		 * first byte contains:
+		 *  * packet version number
+		 *  * packet type
+		 *  * sec hdr flag
+		 *  * three bits of apid
+		 */
+		byte firstByte = 0x00;
+		
+		Integer apidHighByteInteger = (0x700 & apId) >> 8;
+		Integer apidLowByteInteger = (0xFF & apId);
+		byte apidHighByte = apidHighByteInteger.byteValue();
+		// FIXME cast to byte goes wrong :(
+		packet[0] = (byte) (firstByte & apidHighByte);
+		packet[0] = apidHighByteInteger.byteValue();
+		packet[1] = apidLowByteInteger.byteValue();
 		
 		return packet;
 		
