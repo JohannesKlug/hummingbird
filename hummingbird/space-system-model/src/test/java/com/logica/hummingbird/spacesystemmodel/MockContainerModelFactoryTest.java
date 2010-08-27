@@ -1,4 +1,4 @@
-package com.logica.hummingbird;
+package com.logica.hummingbird.spacesystemmodel;
 
 import static org.junit.Assert.assertTrue;
 

@@ -29,6 +29,7 @@ package com.logica.hummingbird.packetbroker;
 import java.util.BitSet;
 
 import com.logica.hummingbird.spacesystemmodel.Container;
+import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.telemetry.HummingbirdPacket;
 import com.logica.hummingbird.util.exceptions.BitSetOperationException;
@@ -49,19 +50,19 @@ public interface PacketBroker {
 	 * @throws UnknownContainerNameException 
 	 *
 	 */
-	public void unmarshall(String container, BitSet data) throws UnknownContainerNameException;
+	void unmarshall(String container, BitSet data) throws UnknownContainerNameException;
 	
 	/**
 	 * Marshalls the container identified through the container parameter name 
-	 * into the bit-set. 
+	 * into the BitSet. 
 	 *
 	 * @param container The name of the container as registered within the container factory.
-	 * @param data The data stream from which the data shall be extracted. 
+	 * @param data The data stream into which the data shall be marshalled. 
 	 * @throws UnknownContainerNameException 
 	 * @throws BitSetOperationException 
 	 *
 	 */	
-	public void marshall(String container, BitSet data) throws UnknownContainerNameException, BitSetOperationException;
+	void marshall(String container, BitSet data) throws UnknownContainerNameException, BitSetOperationException;
 
 	/**
 	 * Marshalls the container identified through the container parameter name into
@@ -72,7 +73,7 @@ public interface PacketBroker {
 	 * @throws UnknownContainerNameException 
 	 *
 	 */	
-	public void marshall(String container, String data) throws UnknownContainerNameException;
+	void marshall(String container, String data) throws UnknownContainerNameException;
 		
 	/**
 	 * Returns a container reference.
@@ -82,7 +83,11 @@ public interface PacketBroker {
 	 * @throws Exception 
 	 *
 	 */
-	public Container getContainer(String container) throws UnknownContainerNameException;
+	Container getContainer(String container) throws UnknownContainerNameException;
 	
-	public HummingbirdPacket getPacket();
+	HummingbirdPacket getPacket();
+
+	ContainerFactory getFactory();
+
+	void setFactory(ContainerFactory factory);
 }

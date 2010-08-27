@@ -100,7 +100,7 @@ public class NumberParameterType extends NamedElement {
 	 *
 	 */
 	public long getSizeInBits() {
-		return numberBehaviour.getSizeIntBits();
+		return numberBehaviour.getSizeInBits();
 	}
 
 	

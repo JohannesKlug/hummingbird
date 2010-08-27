@@ -116,7 +116,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 		NumberParameterType paramType1bitInt = new NumberParameterType("1bitInt",
 																	   "1bit integer type",
 																	   "Parameter type for 1bit integers",
-																	   new IntegerUnsignedBehaviour(1, true),
+																	   new IntegerUnsignedBehaviour(1, false),
 																	   0);
 
 		// Add a flag to the Frame Header
@@ -148,7 +148,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 		NumberParameterType paramType11bitInt = new NumberParameterType("11bitInt",
 																		"11bit integer type",
 																		"Parameter type for 11bit integers",
-																		new IntegerUnsignedBehaviour(11, true),
+																		new IntegerUnsignedBehaviour(11, false),
 																		0);
 		IntegerParameter packetIdParameter = new IntegerParameter(PACKET_ID_ALIAS, "Test Apid", "Test Application Id", paramType11bitInt, 0);
 		this.addToParameters(packetIdParameter);
@@ -159,7 +159,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 		NumberParameterType paramType16bitInt = new NumberParameterType("16bitInt",
 																		"16bit integer type",
 																		"Parameter type for 16bit integers",
-																		new IntegerUnsignedBehaviour(16, true),
+																		new IntegerUnsignedBehaviour(16, false),
 																		0);
 		IntegerParameter payloadLengthParameter = new IntegerParameter(PAYLOAD_LENGTH_PARAM_ALIAS, "Payload length", "Payload lenght parameter",
 				paramType16bitInt, 0);
@@ -183,8 +183,8 @@ public class MockContainerModelFactory implements ContainerFactory {
 		NumberParameterType test32bitInt = new NumberParameterType("test32bitInt",
 																   "test param",
 																   "32 bit int test param",
-																   new IntegerUnsignedBehaviour(32, true),
-																   1);
+																   new IntegerUnsignedBehaviour(32, false),
+																   0);
 		IntegerParameter testParameterA = new IntegerParameter(TEST_PARAM_A, "test param", "test param holding an int value", test32bitInt, 0);
 		packetTypeA.addContainer(testParameterA);
 		this.addToParameters(testParameterA);

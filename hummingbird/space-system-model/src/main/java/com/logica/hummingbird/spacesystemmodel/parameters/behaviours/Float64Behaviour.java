@@ -29,7 +29,7 @@ public class Float64Behaviour extends AbstractFloatBehaviour {
 
 		int offset = 0;
 
-		BitSet actualBitSet = packet.get(offset, offset + (int) getSizeIntBits());
+		BitSet actualBitSet = packet.get(offset, offset + (int) getSizeInBits());
 
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Float Parameter BitSet taken from bitset in = " + BitSetUtility.binDump(actualBitSet));
@@ -58,7 +58,7 @@ public class Float64Behaviour extends AbstractFloatBehaviour {
 		BitSet valueBitSet = this.bitSetFromString(binaryString);
 
 		// Insert the value BitSet into the target BitSet and return
-		for (int i = 0; i < getSizeIntBits(); i++) {
+		for (int i = 0; i < getSizeInBits(); i++) {
 			if (valueBitSet.get(i)) {
 				bitSetTarget.set(i + offset);
 			}

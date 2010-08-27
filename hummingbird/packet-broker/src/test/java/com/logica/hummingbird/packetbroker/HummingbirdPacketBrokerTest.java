@@ -15,6 +15,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.logica.hummingbird.spacesystemmodel.Container;
+import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.testsupport.MockParameterContainerModel;
 import com.logica.hummingbird.telemetry.HummingbirdPacket;
@@ -26,9 +28,9 @@ import com.logica.hummingbird.util.exceptions.BitSetOperationException;
  * @author Mark Doyle
  * @TODO Test is not complete - awaiting commons telemetry models to be finalised
  */
-public class PacketBrokerImplTest {
+public class HummingbirdPacketBrokerTest {
 	/** Logger for this class */
-	private static final Logger LOG = LoggerFactory.getLogger(PacketBrokerImplTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(HummingbirdPacketBrokerTest.class);
 	
 	/** APID 333 LE unsigned */
 	public static final String FLIGHT_DATA_APID = "10110010100";
@@ -58,8 +60,7 @@ public class PacketBrokerImplTest {
 
 	private PacketBroker packetBroker;
 
-	/** The HumminbirdPacket version of the test bitset packet. */
-	private static HummingbirdPacket testPacket = null;
+
 
 	/**
 	 * Set up the Mock Container Factory and create the testFrame for use by the tests.
@@ -91,7 +92,7 @@ public class PacketBrokerImplTest {
 	public final void testUnmarshallFlightDataPacket() throws UnknownContainerNameException, BitSetOperationException {
 		LOG.info("---------- testUnmarshall -------------");
 		
-		BitSet mockPacket = BitSetUtility.stringToBitSet(FLIGHT_DATA_APID + PACKET_LENGTH_32 + FLIGHT_HOURS_1024, false);
+		BitSet mockPacket = BitSetUtility.stringToBitSet(FLIGHT_DATA_APID + PACKET_LENGTH_32 + FLIGHT_HOURS_1024, false, false);
 		final int PAYLOAD_PACKET_LENGTH = 32;
 
 		// Unmarshall each telemetry element in the space system model
@@ -108,17 +109,15 @@ public class PacketBrokerImplTest {
 		HummingbirdParameter packetPayloadLength = unmarshalledPacket.getParameter(MockParameterContainerModel.PAYLOAD_LENGTH_PARAM_ALIAS);
 		assertEquals("Packet payload length should be " + PAYLOAD_PACKET_LENGTH, PAYLOAD_PACKET_LENGTH, packetPayloadLength.getValue());
 		
-		HummingbirdParameter flightHourParam = unmarshalledPacket.getParameter(MockParameterContainerModel.FLIGHT_HOURS_PARAM);
+		HummingbirdParameter flightHourParam = unmarshalledPacket.getParameter(MockParameterContainerModel.FLIGHT_HOURS_PARAM_ALIAS);
 		assertEquals("Flight hours should be " + FLIGHT_HOURS_VALUE, FLIGHT_HOURS_VALUE, flightHourParam.getValue());
-
-		LOG.info("---------- testUnmarshall finish -------------");
 	}
 	
 	@Test
 	public final void testUnmarshallLaserDataPacket() throws UnknownContainerNameException, BitSetOperationException {
 		LOG.info("---------- testUnmarshall -------------");
 		
-		BitSet mockPacket = BitSetUtility.stringToBitSet(LASER_DATA_APID + PACKET_LENGTH_64 + LASER_TEMP_17959_25, false);
+		BitSet mockPacket = BitSetUtility.stringToBitSet(LASER_DATA_APID + PACKET_LENGTH_64 + LASER_TEMP_17959_25, false, false);
 		final int PAYLOAD_PACKET_LENGTH = 64;
 
 		// Unmarshall each telemetry element in the space system model
@@ -137,19 +136,58 @@ public class PacketBrokerImplTest {
 		HummingbirdParameter packetPayloadLength = unmarshalledPacket.getParameter(MockParameterContainerModel.PAYLOAD_LENGTH_PARAM_ALIAS);
 		assertEquals("Packet payload length should be " + PAYLOAD_PACKET_LENGTH, PAYLOAD_PACKET_LENGTH, packetPayloadLength.getValue());
 		
-		HummingbirdParameter laserTempParam = unmarshalledPacket.getParameter(MockParameterContainerModel.LASER_TEMP_PARAM);
+		HummingbirdParameter laserTempParam = unmarshalledPacket.getParameter(MockParameterContainerModel.LASER_TEMP_PARAM_ALIAS);
 		assertEquals("Flight hours should be " + LASER_TEMP_VALUE, LASER_TEMP_VALUE, laserTempParam.getValue());
-
-		LOG.info("---------- testUnmarshall finish -------------");
 	}
 
 
 	@Test
-	@Ignore
-	public final void testMarshallStringBitSet() throws UnknownContainerNameException, BitSetOperationException {
-
+	public final void testMarshallBitSetFlightData() throws UnknownContainerNameException, BitSetOperationException {
+		LOG.info("---------- testMarshall -------------");
+		
+		// Populate the space system model that we will marshall into binary.	
+		// Set flight hours packet (apid 333) with packet length 32 and flight hours parameter 1024.
+		mockSpaceSystemFactory.getParameter(MockParameterContainerModel.PAYLOAD_APID_ALIAS).setValue(FLIGHT_DATA_APID_VALUE);
+		mockSpaceSystemFactory.getParameter(MockParameterContainerModel.PAYLOAD_LENGTH_PARAM_ALIAS).setValue(32);
+		mockSpaceSystemFactory.getParameter(MockParameterContainerModel.FLIGHT_HOURS_PARAM_ALIAS).setValue(1024);
+		
+		BitSet expected = BitSetUtility.stringToBitSet(FLIGHT_DATA_APID + PACKET_LENGTH_32 + FLIGHT_HOURS_1024, false, false);
+		
+		BitSet marshalledPacket = new BitSet();
+		packetBroker.marshall(MockParameterContainerModel.TM_PACKET_ALIAS, marshalledPacket);
+		
+		LOG.debug("Marshalled Packet = " + BitSetUtility.binDump(marshalledPacket));
+		
+		assertEquals(expected, marshalledPacket);
+	}
+	
+	@Test
+	public final void testMarshallBitSetLaserTempData() throws UnknownContainerNameException, BitSetOperationException {
+		LOG.info("---------- testMarshall -------------");
+		
+		// Populate the space system model that we will marshall into binary.	
+		// Set flight hours packet (apid 333) with packet length 32 and flight hours parameter 1024.
+		mockSpaceSystemFactory.getParameter(MockParameterContainerModel.PAYLOAD_APID_ALIAS).setValue(LASER_DATA_APID_VALUE);
+		mockSpaceSystemFactory.getParameter(MockParameterContainerModel.PAYLOAD_LENGTH_PARAM_ALIAS).setValue(64);
+		mockSpaceSystemFactory.getParameter(MockParameterContainerModel.LASER_TEMP_PARAM_ALIAS).setValue(17959.25);
+		
+		BitSet expected = BitSetUtility.stringToBitSet(LASER_DATA_APID + PACKET_LENGTH_64 + LASER_TEMP_17959_25, false, false);
+		
+		BitSet marshalledPacket = new BitSet();
+		packetBroker.marshall(MockParameterContainerModel.TM_PACKET_ALIAS, marshalledPacket);
+		
+		LOG.debug("Marshalled Packet = " + BitSetUtility.binDump(marshalledPacket));
+		
+		assertEquals(expected, marshalledPacket);
 	}
 
+	@Test
+	public final void testGetFactory() {
+		ContainerFactory actual = packetBroker.getFactory();
+		assertEquals(mockSpaceSystemFactory, actual);
+	}
+
+	
 	@Ignore
 	@Test
 	public final void testMarshallStringString() {

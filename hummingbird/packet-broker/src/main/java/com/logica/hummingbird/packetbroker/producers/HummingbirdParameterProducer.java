@@ -38,7 +38,7 @@ import com.logica.hummingbird.telemetry.Parameter;
  * TODO write here a description of the class
  */
 public class HummingbirdParameterProducer extends AbstractProducer implements ParameterObserver {
-	private final static Logger LOG = LoggerFactory.getLogger(HummingbirdParameterProducer.class);
+	private static final Logger LOG = LoggerFactory.getLogger(HummingbirdParameterProducer.class);
 
 	HummingbirdPacketProducer parent;
 
@@ -53,25 +53,22 @@ public class HummingbirdParameterProducer extends AbstractProducer implements Pa
 		}
 	}
 
-	@Override
-	public void updated(String field, int value) {
-		parent.packet.addParameters(new Parameter(field, Integer.class, value));
+	@Override public final void updated(String field, int value) {
+		parent.packet.addParameter(new Parameter(field, Integer.class, value));
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value + " and added to parent " + parent.getPacket().getName());
 		}
 	}
 
-	@Override
-	public void updated(String field, String value) {		
-		parent.packet.addParameters(new Parameter(field, value.getClass(), value));
+	@Override public final void updated(String field, String value) {		
+		parent.packet.addParameter(new Parameter(field, value.getClass(), value));
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value + " and added to parent " + parent.getPacket().getName());
 		}
 	}
 
-	@Override
-	public void updated(String field, double value) {
-		parent.packet.addParameters(new Parameter(field, Double.class, value));
+	@Override public final void updated(String field, double value) {
+		parent.packet.addParameter(new Parameter(field, Double.class, value));
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value + " and added to parent " + parent.getPacket().getName());
 		}

@@ -14,6 +14,10 @@ public class Packet implements HummingbirdPacket {
 
 	public Packet() {
 	}
+	
+	public Packet(String name) {
+		this.name = name;
+	}
 
 	@Override
 	public List<HummingbirdParameter> getParameters() {
@@ -21,7 +25,7 @@ public class Packet implements HummingbirdPacket {
 	}
 
 	@Override
-	public void addParameters(HummingbirdParameter parameter) {
+	public void addParameter(HummingbirdParameter parameter) {
 		if (this.parameters == null) {
 			this.parameters = new ArrayList<HummingbirdParameter>();
 		}

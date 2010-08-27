@@ -1,6 +1,8 @@
-package com.logica.hummingbird;
+package com.logica.hummingbird.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.BitSet;
@@ -10,7 +12,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.util.BitSetUtility;
 import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 /**
@@ -94,7 +95,7 @@ public class BitSetUtilityTest {
 			LOG.debug("Test BitSet = " + TEST_BIT_SET_STR_VALID);
 		}
 
-		BitSet actual = BitSetUtility.stringToBitSet(TEST_BIT_SET_STR_VALID, true);
+		BitSet actual = BitSetUtility.stringToBitSet(TEST_BIT_SET_STR_VALID, true, true);
 
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("BitSet created from a string = " + actual);
@@ -102,6 +103,85 @@ public class BitSetUtilityTest {
 		}
 
 		assertEquals("BitSet not equal", TEST_BIT_SET, actual);
+	}
+	
+	/**
+	 * Tests from big endian to big endian
+	 * @throws BitSetOperationException 
+	 */
+	@Test
+	public void testStringToBitSetBigEndianToBigEndian() throws BitSetOperationException {
+		String string = "10";
+		
+		BitSet resultBitSet = BitSetUtility.stringToBitSet(string, true, true);
+		
+		BitSetUtility.binDump(resultBitSet);
+		
+		assertTrue(resultBitSet.get(0));
+		assertFalse(resultBitSet.get(1));
+		
+		string = "10111001";
+		resultBitSet = BitSetUtility.stringToBitSet(string, true, true);
+		BitSetUtility.binDump(resultBitSet);
+		assertTrue(resultBitSet.get(0));
+		assertFalse(resultBitSet.get(1));
+		assertTrue(resultBitSet.get(2));
+		assertTrue(resultBitSet.get(3));
+		assertTrue(resultBitSet.get(4));
+		assertFalse(resultBitSet.get(5));
+		assertFalse(resultBitSet.get(6));
+		assertTrue(resultBitSet.get(7));
+	}
+	
+	/**
+	 * Tests from little endian to big endian
+	 * @throws BitSetOperationException 
+	 */
+	@Test
+	public void testStringToBitSetLittleEndianToBigEndian() throws BitSetOperationException {
+		String string = "01";
+		
+		BitSet resultBitSet = BitSetUtility.stringToBitSet(string, false, true);
+		
+		BitSetUtility.binDump(resultBitSet);
+		
+		assertTrue(resultBitSet.get(0));
+		assertFalse(resultBitSet.get(1));
+		
+	}
+	
+	/**
+	 * Tests from big endian to little endian
+	 * @throws BitSetOperationException 
+	 */
+	@Test
+	public void testStringToBitSetBigEndianToLittleEndian() throws BitSetOperationException {
+		String string = "10";
+		
+		BitSet resultBitSet = BitSetUtility.stringToBitSet(string, true, false);
+		
+		BitSetUtility.binDump(resultBitSet);
+		
+		assertFalse(resultBitSet.get(0));
+		assertTrue(resultBitSet.get(1));
+		
+	}
+	
+	/**
+	 * Tests from little endian to little endian
+	 * @throws BitSetOperationException 
+	 */
+	@Test
+	public void testStringToBitSetLittleEndianToLittleEndian() throws BitSetOperationException {
+		String string = "01";
+		
+		BitSet resultBitSet = BitSetUtility.stringToBitSet(string, false, false);
+		
+		BitSetUtility.binDump(resultBitSet);
+		
+		assertFalse(resultBitSet.get(0));
+		assertTrue(resultBitSet.get(1));
+		
 	}
 
 	/**
@@ -115,7 +195,7 @@ public class BitSetUtilityTest {
 
 		BitSet actual = null;
 		try {
-			actual = BitSetUtility.stringToBitSet(TEST_BIT_SET_STR_INVALID, true);
+			actual = BitSetUtility.stringToBitSet(TEST_BIT_SET_STR_INVALID, true, true);
 		}
 		catch (BitSetOperationException e) {
 			if (LOG.isDebugEnabled()) {
@@ -176,4 +256,25 @@ public class BitSetUtilityTest {
 		bits.set(0);
 		assertEquals(-9223372036854775807l, BitSetUtility.toLong(bits));
 	}
+	
+	
+	@Test
+	public void testToByteArrayZero() {
+		BitSet bitSet = new BitSet();
+		
+		byte[] bytes = BitSetUtility.toByteArray(bitSet, 8);
+		assertEquals(0, bytes[0]);
+	}
+	
+	// TODO Improve this test!
+	@Test
+	public void testReverse() {
+		BitSet bitset = new BitSet();
+		bitset.set(9);
+		assertEquals(bitset, BitSetUtility.reverse(BitSetUtility.reverse(bitset, 10), 10));
+		
+	}
+	
+	
+	
 }

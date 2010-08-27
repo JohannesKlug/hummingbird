@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.logica.hummingbird;
+package com.logica.hummingbird.spacesystemmodel;
 
 import static org.junit.Assert.assertEquals;
 
@@ -100,7 +100,7 @@ public class ContainerTest {
 	private static final String PARAM_A_TEST_VALUE_AS_BIN_STRING = "11011110000000000000000000000000";
 
 	/** The test parameter A value based upon the TEST_BITSET_STRING_PKT_TYPE_A as a bitset */
-	private static final BitSet PARAM_A_TEST_VALUE_AS_BITSET = new BitSet(32);
+	private static BitSet PARAM_A_TEST_VALUE_AS_BITSET = new BitSet(32);
 
 
 	/**
@@ -140,9 +140,11 @@ public class ContainerTest {
 
 	/**
 	 * Set's up the test values used for all tests.
+	 * @throws BitSetOperationException 
 	 */
 	@BeforeClass
-	public static void setUpForAllTests() {
+	public static void setUpForAllTests() throws BitSetOperationException {
+		LOG.debug("-------------------------Setup for all -------------------------------");
 		// Set up test BitSets
 		
 		// Set to 1110101000100000010000000000110111100000000000000000000000001
@@ -157,9 +159,9 @@ public class ContainerTest {
 		TEST_BITSET_PKT_TYPE_A.set(31, 35);
 		TEST_BITSET_PKT_TYPE_A.set(60);
 		
-		// Set to 11011110000000000000000000000000 which is 123 in decimal (note: this is big endian)
-		PARAM_A_TEST_VALUE_AS_BITSET.set(0, 2);
-		PARAM_A_TEST_VALUE_AS_BITSET.set(3, 7);
+		// Set to 11011110000000000000000000000000 which is 123 in decimal (note: this is little endian)
+		LOG.debug("Setting up param a test value bitset");
+		PARAM_A_TEST_VALUE_AS_BITSET = BitSetUtility.stringToBitSet(PARAM_A_TEST_VALUE_AS_BIN_STRING, false, false);
 		
 		//  Set to 11010100010 (note: this is little endian)
 		PACKET_TYPE_ID_555_AS_BITSET.set(0, 2);
@@ -222,6 +224,7 @@ public class ContainerTest {
 		PARAM_B_TEST_VALUE_AS_BITSET.set(53);
 		PARAM_B_TEST_VALUE_AS_BITSET.set(56, 60);
 		PARAM_B_TEST_VALUE_AS_BITSET.set(63);
+		LOG.debug("-----------------------------------------------------------------------------");
 	}
 
 	@Before
@@ -261,7 +264,7 @@ public class ContainerTest {
 		BitSet marshalledFrame = new BitSet();
 		tmframe.marshall(marshalledFrame, 0);
 
-		assertEquals(BitSetUtility.stringToBitSet(EMPTY_CONTAINER_MODEL_BITSET_STRING, true), marshalledFrame);
+		assertEquals(BitSetUtility.stringToBitSet(EMPTY_CONTAINER_MODEL_BITSET_STRING, false, false), marshalledFrame);
 	}
 
 	/**
@@ -276,9 +279,9 @@ public class ContainerTest {
 	 */
 	@Test
 	public void testUnmarshallFrameTestParamA() throws UnknownContainerNameException, BitSetOperationException {
-		LOG.info("Beginning test");
+		LOG.info("########################## Beginning test #############################");
 
-		BitSet frame = BitSetUtility.stringToBitSet(TEST_BITSET_STRING_PKT_TYPE_A, false);
+		BitSet frame = BitSetUtility.stringToBitSet(TEST_BITSET_STRING_PKT_TYPE_A, false, false);
 
 		Container tmframe = mockContainerFactory.getContainer("TMFrame");
 		tmframe.unmarshall(frame);
@@ -296,7 +299,6 @@ public class ContainerTest {
 		LOG.debug(MockContainerModelFactory.PACKET_ID_ALIAS + " parameter (apid) passed with value : " + value.intValue());
 
 		// Test that there is a Test Param A (32 bit unsigned int) as expected.
-		// Container testParamA = testFrameBroker.getContainer(MockContainerModelFactory.TEST_PARAM_A);
 		Container testParamA = mockContainerFactory.getContainer(MockContainerModelFactory.TEST_PARAM_A);
 		Assert.isInstanceOf(IntegerParameter.class, testParamA);
 		Number testParamAvalue = ((IntegerParameter) testParamA).getValue();
@@ -326,8 +328,8 @@ public class ContainerTest {
 	public void testUnmarshallFrameTestParamB() throws UnknownContainerNameException, BitSetOperationException {
 		LOG.info("Beginning test");
 
-		BitSet frame = BitSetUtility.stringToBitSet(TEST_BITSET_STRING_PKT_TYPE_B, false);
-
+		BitSet frame = BitSetUtility.stringToBitSet(TEST_BITSET_STRING_PKT_TYPE_B, false, false);
+		
 		Container tmframe = mockContainerFactory.getContainer("TMFrame");
 		tmframe.unmarshall(frame);
 
@@ -619,7 +621,7 @@ public class ContainerTest {
 	
 	private void logAssertValues(String assertDescription, BitSet expected, BitSet marshalledFlag) {
 		LOG.debug("Debug for " + assertDescription);
-		LOG.debug("Expected bitset = " + expected);
-		LOG.debug("Actual bitset = " + marshalledFlag);
+		LOG.debug("Expected bitset = " + BitSetUtility.binDump(expected));
+		LOG.debug("Actual bitset = " + BitSetUtility.binDump(marshalledFlag));
 	}
 }

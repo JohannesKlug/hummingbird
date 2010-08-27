@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.BitSet;
 
+import javax.swing.DebugGraphics;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -11,7 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
 import com.logica.hummingbird.util.BitSetUtility;
+import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 public class IntegerUnsignedBehaviourTest {
 	private final static Logger LOG = LoggerFactory.getLogger(IntegerUnsignedBehaviourTest.class);
@@ -34,9 +38,14 @@ public class IntegerUnsignedBehaviourTest {
 	private static BitSet TEST_BITSET_VALUE_BE_1024;
 	private static BitSet TEST_BITSET_VALUE_LE_1024;
 	
+	private static final String TEST_STR_VALUE_BE_123_32bit = "00000000000000000000000001111011";
+	private static final int TEST_VALUE_LENGTH_BE_123_32bit = 32;
+	private static BitSet TEST_BITSET_VALUE_123_32bit;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		LOG.debug("Setting up test bitsets....");
+		LOG.debug("Creating LE 555 Bitset");
 		TEST_BITSET_VALUE_LE_555 = new BitSet();
 		TEST_BITSET_VALUE_LE_555.set(0);
 		TEST_BITSET_VALUE_LE_555.set(1);
@@ -45,6 +54,7 @@ public class IntegerUnsignedBehaviourTest {
 		TEST_BITSET_VALUE_LE_555.set(9);
 		assertEquals(TEST_STR_VALUE_LE_555, BitSetUtility.bitSetToBinaryString(TEST_BITSET_VALUE_LE_555, true));
 		
+		LOG.debug("Creating BE 555 Bitset");
 		TEST_BITSET_VALUE_BE_555 = new BitSet();
 		TEST_BITSET_VALUE_BE_555.set(0);
 		TEST_BITSET_VALUE_BE_555.set(4);
@@ -53,10 +63,16 @@ public class IntegerUnsignedBehaviourTest {
 		TEST_BITSET_VALUE_BE_555.set(9);
 		assertEquals(TEST_STR_VALUE_BE_555, BitSetUtility.bitSetToBinaryString(TEST_BITSET_VALUE_BE_555, true));
 		
+		LOG.debug("Creating BE 123 32bit Bitset");
+		TEST_BITSET_VALUE_123_32bit = BitSetUtility.stringToBitSet(TEST_STR_VALUE_BE_123_32bit, true, true);
+		assertEquals(TEST_STR_VALUE_BE_123_32bit, BitSetUtility.bitSetToBinaryString(TEST_BITSET_VALUE_123_32bit, true));
+		
+		LOG.debug("Creating BE 1024 Bitset");
 		TEST_BITSET_VALUE_BE_1024 = new BitSet(TEST_VALUE_LENGTH_1024);
 		TEST_BITSET_VALUE_BE_1024.set(0);
 		assertEquals(TEST_STR_VALUE_BE_1024, BitSetUtility.bitSetToBinaryString(TEST_BITSET_VALUE_BE_1024, false).substring(0, TEST_VALUE_LENGTH_1024));
 		
+		LOG.debug("Creating LE 1024 Bitset");
 		TEST_BITSET_VALUE_LE_1024 = new BitSet(TEST_VALUE_LENGTH_1024);
 		TEST_BITSET_VALUE_LE_1024.set(10);
 		assertEquals(TEST_STR_VALUE_LE_1024, BitSetUtility.bitSetToBinaryString(TEST_BITSET_VALUE_LE_1024, false).substring(0, TEST_VALUE_LENGTH_1024));
@@ -69,40 +85,72 @@ public class IntegerUnsignedBehaviourTest {
 	
 	@Test
 	public void testLittleEndianValueFromBitSet() throws InvalidParameterTypeException {
+		LOG.info("###################### Beginning test #######################");
 		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_LE_555, false);
-		Long actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_LE_555);
-		assertEquals(new Long(555), actual);
+		Number actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_LE_555);
+		assertEquals(555l, actual);
 	}
 
 	@Test
 	public void testBigEndianValueFromBitSet() throws InvalidParameterTypeException {
+		LOG.info("###################### Beginning test #######################");
 		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_BE_555, true);
-		Long actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_BE_555);
-		assertEquals(new Long(555), actual);
+		Number actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_BE_555);
+		assertEquals(555l, actual);
 	}
 	
 	@Test
 	public void testBigEndianBoundaryValueFromBitSet() throws InvalidParameterTypeException {
+		LOG.info("###################### Beginning test #######################");
 		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_1024, true);
-		Long actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_BE_1024);
-		assertEquals(new Long(1024), actual);
+		Number actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_BE_1024);
+		assertEquals(1024l, actual);
 	}
 	
 	@Test
 	public void testLittleEndianBoundaryValueFromBitSet() throws InvalidParameterTypeException {
+		LOG.info("###################### Beginning test #######################");
 		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_1024, false);
-		Long actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_LE_1024);
-		assertEquals(new Long(1024), actual);
+		Number actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_LE_1024);
+		assertEquals(1024l, actual);
+	}
+	
+	@Test
+	public void testZeroByteContainingValueFromBitSet() throws InvalidParameterTypeException {
+		LOG.info("###################### Beginning test #######################");
+		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_BE_123_32bit, true);
+		Number actual = behaviour.valueFromBitSet(TEST_BITSET_VALUE_123_32bit);
+		assertEquals(123, actual.intValue());
 	}
 
 	@Test(expected=InvalidParameterTypeException.class)
 	public void testInvalidSizeConstruction() throws InvalidParameterTypeException {
+		LOG.info("###################### Beginning test #######################");
 		new IntegerUnsignedBehaviour(45, true);
 	}
 
 	@Test
 	public void testGetName() throws InvalidParameterTypeException {
+		LOG.info("###################### Beginning test #######################");
 		assertEquals(new IntegerUnsignedBehaviour(1, true).getTypeName(), 1 + TYPE_NAME);
+	}
+	
+	@Test
+	public final void testInsertIntoBitSetBE555() throws BitSetOperationException, InvalidParameterTypeException {
+		LOG.info("###################### Beginning test #######################");
+		BitSet actual = new BitSet();
+		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_BE_555, true);
+		actual = behaviour.insertIntoBitSet(555, actual, 0);
+		assertEquals(actual, TEST_BITSET_VALUE_BE_555);
+	}
+	
+	@Test
+	public final void testInsertIntoBitSetLE555() throws BitSetOperationException, InvalidParameterTypeException {
+		LOG.info("###################### Beginning test #######################");
+		BitSet actual = new BitSet();
+		IntegerUnsignedBehaviour behaviour = new IntegerUnsignedBehaviour(TEST_VALUE_LENGTH_LE_555, false);
+		actual = behaviour.insertIntoBitSet(555, actual, 0);
+		assertEquals(actual, TEST_BITSET_VALUE_LE_555);
 	}
 }
 

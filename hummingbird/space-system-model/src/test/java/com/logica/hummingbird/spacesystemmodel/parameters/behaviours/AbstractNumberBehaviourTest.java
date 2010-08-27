@@ -70,7 +70,7 @@ public class AbstractNumberBehaviourTest {
 		BitSet actual = float64Behaviour.getRawParameterBinary(ZERO);
 		LOG.debug("ZERO = " + BitSetUtility.binDump(ZERO));
 		LOG.debug("actual = " + BitSetUtility.binDump(actual));
-		assertEquals(float64Behaviour.getSizeIntBits(), actual.size());
+		assertEquals(float64Behaviour.getSizeInBits(), actual.size());
 		// Assert that a one does not appear in the returned BitSet.
 		assertEquals("The test fails if there are set bits in the getRawParameter return", -1, actual.nextSetBit(0));
 		
@@ -79,7 +79,7 @@ public class AbstractNumberBehaviourTest {
 		actual = float64Behaviour.getRawParameterBinary(ONE);
 		LOG.debug("ONE = " + BitSetUtility.binDump(ONE));
 		LOG.debug("actual = " + BitSetUtility.binDump(actual));
-		assertEquals(float64Behaviour.getSizeIntBits(), actual.length());
+		assertEquals(float64Behaviour.getSizeInBits(), actual.length());
 		// Assert there are 64 set bits.
 		int numberSetBits = actual.cardinality();
 		assertEquals("The test fails if there are clear bits in the getRawParameter return", 64, numberSetBits);

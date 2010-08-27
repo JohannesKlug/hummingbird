@@ -18,13 +18,12 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 
 	public HummingbirdCamelPacketBroker(ContainerFactory factory) {
 		super(factory);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * Split takes a TMFrame and calls unmarshall. The messages produced buy the various producers listening to the
-	 * unmarshalling are then returned to the caller. Since this ContainerProcessor contains a frameProducer,
-	 * packetProducer, and parameterProducer which all register themselves are listeners it will return a list of
+	 * Split takes a Packet and calls unmarshall. The messages produced by the various producers listening to the
+	 * unmarshalling are then returned to the caller. Since this ContainerProcessor contains a packetProducer and 
+	 * parameterProducer, which all register themselves are listeners, it will return a list of
 	 * messages identified by their headers for each type. Note, the individual producers set the header to the required
 	 * type for the messages they create.
 	 * 
@@ -33,7 +32,7 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 	 * @return a list of camel messages
 	 * @throws UnknownContainerNameException
 	 */
-	public List<Message> split(Exchange camelExchange) throws UnknownContainerNameException {
+	public final List<Message> split(Exchange camelExchange) throws UnknownContainerNameException {
 		this.unmarshall("TMPacket", (BitSet) camelExchange.getIn().getBody());
 
 		HummingbirdPacket packet = packetProducer.getPacket();
