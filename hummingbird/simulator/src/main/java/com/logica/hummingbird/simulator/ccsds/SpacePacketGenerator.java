@@ -28,7 +28,7 @@ public class SpacePacketGenerator {
 		 * Sec Hdr Flag				= 0
 		 * ApId (11 bits)			= from argument
 		 * Sequence Flag (1st Seg)	= 01 bin
-		 * Sequence Count 			= continuous
+		 * Sequence Count (14 bits)	= continuous
 		 */
 		
 		/*
@@ -37,16 +37,28 @@ public class SpacePacketGenerator {
 		 *  * packet type
 		 *  * sec hdr flag
 		 *  * three bits of apid
+		 *  
+		 *  therefore: last three bits of the bit mask must be set.
+		 *  result: 0x07.
 		 */
-		byte firstByte = 0x00;
+		int firstByte = 0x07;
 		
 		Integer apidHighByteInteger = (0x700 & apId) >> 8;
 		Integer apidLowByteInteger = (0xFF & apId);
-		byte apidHighByte = apidHighByteInteger.byteValue();
-		// FIXME cast to byte goes wrong :(
-		packet[0] = (byte) (firstByte & apidHighByte);
-		packet[0] = apidHighByteInteger.byteValue();
+		Integer apidInteger = firstByte & apidHighByteInteger;
+		packet[0] = apidInteger.byteValue();
 		packet[1] = apidLowByteInteger.byteValue();
+		
+		int sequenceFlag = 0x01 << 6; // right shift by 6 to end up in top two bits
+		
+		Integer sequenceCountHighByte = (0x3F00 & sequenceCount) >>> 8;
+		Integer sequenceCountLowByte = (0xFF & sequenceCount);
+		
+		Integer sequenceFirstByte = sequenceFlag | sequenceCountHighByte;
+		packet[2] = sequenceFirstByte.byteValue();
+		packet[3] = sequenceCountLowByte.byteValue();
+		
+		sequenceCount = (sequenceCount + 1) % 16384;
 		
 		return packet;
 		
