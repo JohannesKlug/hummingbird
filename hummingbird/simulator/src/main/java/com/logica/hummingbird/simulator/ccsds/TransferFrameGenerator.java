@@ -25,7 +25,18 @@ public class TransferFrameGenerator {
 		int numberOfFrames = (payload.length / payloadPerFrame) + 1;
 		
 		for (int i = 0; i < numberOfFrames; i++) {
-			frames.add(ArrayUtils.subarray(payload, i*payloadPerFrame, i*payloadPerFrame+payloadPerFrame));
+			byte[] frame = new byte[6];
+			
+			
+			byte[] currentPayload = ArrayUtils.subarray(payload, i*payloadPerFrame, i*payloadPerFrame+payloadPerFrame);
+			
+			if (currentPayload.length < payloadPerFrame) {
+				byte[] padding = new byte[payloadPerFrame-currentPayload.length];
+				currentPayload = ArrayUtils.addAll(currentPayload, padding);
+			}
+			
+			frame = ArrayUtils.addAll(frame, currentPayload);
+			frames.add(frame);
 		}
 		
 		

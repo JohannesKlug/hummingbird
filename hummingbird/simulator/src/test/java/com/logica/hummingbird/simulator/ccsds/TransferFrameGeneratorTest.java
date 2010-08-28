@@ -19,6 +19,11 @@ public class TransferFrameGeneratorTest {
 		List<byte[]> frames = generator.generateTransferFrames(0, payload);
 		assertEquals(33, frames.size());
 		
+		for (byte[] frame : frames) {
+			assertEquals(2048, frame.length);
+		}
+		
+		
 	}
 
 }
