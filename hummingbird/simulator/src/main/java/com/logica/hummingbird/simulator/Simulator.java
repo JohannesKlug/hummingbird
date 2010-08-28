@@ -12,50 +12,52 @@ import org.apache.camel.impl.DefaultExchange;
 import org.apache.camel.impl.DefaultMessage;
 import org.apache.camel.impl.DefaultProducerTemplate;
 
+import com.logica.hummingbird.simulator.ccsds.SpacePacketGenerator;
 import com.logica.hummingbird.simulator.waveforms.Waveform;
 
 public class Simulator implements Runnable {
-	
+
+	private SpacePacketGenerator packetGenerator = new SpacePacketGenerator();
+
 	private DefaultProducerTemplate template;
 	private CamelContext context;
 	private List<Waveform> waveforms;
-	
+
 	private boolean run;
-	
+
 	private long messageInterval = 1000;
-	
-	public Simulator(Endpoint endpoint)  {
+
+	public Simulator(Endpoint endpoint) {
 		this.context = new DefaultCamelContext();
 		this.template = new DefaultProducerTemplate(context, endpoint);
 		this.waveforms = new ArrayList<Waveform>();
 	}
-	
+
 	public void setMessageInterval(long messageInterval) {
 		this.messageInterval = messageInterval;
 	}
-	
+
 	public void addWaveform(Waveform waveform) {
 		waveforms.add(waveform);
 	}
-	
-	public Message nextMessage(double value) {
+
+	public Message nextMessage(Object value) {
 		Message message = new DefaultMessage();
 		message.setHeader("Header field", "value");
 		message.setBody(value);
 		return message;
-		
+
 	}
-	
-	public Exchange nextExchange(double value) {
+
+	public Exchange nextExchange(Object value) {
 		Exchange exchange = new DefaultExchange(context);
 		exchange.setIn(nextMessage(value));
 		return exchange;
 	}
-	
-	public void sendMessage(double value) {
+
+	public void sendMessage(Object value) {
 		template.send(nextExchange(value));
 	}
-	
 
 	public void stopSimulator() {
 		run = false;
@@ -69,7 +71,28 @@ public class Simulator implements Runnable {
 				for (int i = 0; i< waveform.getReadings(); i++) {
 					
 					// TODO Passing the value down to nextMessage() is ugly. Refactor?
-					sendMessage(waveform.nextValue());
+//					sendMessage(waveform.nextValue());
+					
+					Double doubleValue = waveform.nextValue();
+					
+					Long value = Double.doubleToLongBits(doubleValue);
+					
+					Long byte0 = value >> 24;
+					Long byte1 = value >> 16;
+					Long byte2 = value >> 8;
+					Long byte3 = value;
+					
+					byte[] payload = new byte[] {	
+												byte0.byteValue(),
+												byte1.byteValue(),
+												byte2.byteValue(),
+												byte3.byteValue()
+												};
+					
+					
+					sendMessage(packetGenerator.generateSpacePacket(0, payload));
+					
+					
 					
 					try {
 						Thread.sleep(messageInterval);
@@ -82,5 +105,4 @@ public class Simulator implements Runnable {
 
 		}
 	}
-
 }
