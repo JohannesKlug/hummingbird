@@ -1,10 +1,8 @@
-package com.logica.hummingbird.simulator.cssds;
+package com.logica.hummingbird.simulator.ccsds;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import com.logica.hummingbird.simulator.ccsds.SpacePacketGenerator;
 
 public class SpacePacketGeneratorTest {
 	
