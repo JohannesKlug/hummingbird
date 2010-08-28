@@ -13,6 +13,7 @@ import org.apache.camel.impl.DefaultMessage;
 import org.apache.camel.impl.DefaultProducerTemplate;
 
 import com.logica.hummingbird.simulator.ccsds.SpacePacketGenerator;
+import com.logica.hummingbird.simulator.graphics.URLReader;
 import com.logica.hummingbird.simulator.waveforms.Waveform;
 
 public class Simulator implements Runnable {
@@ -91,6 +92,13 @@ public class Simulator implements Runnable {
 					
 					
 					sendMessage(packetGenerator.generateSpacePacket(0, payload));
+					
+					try {
+						sendMessage(packetGenerator.generateSpacePacket(1, URLReader.readUrl("http://localhost:8888/")));
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					
 					
 					
