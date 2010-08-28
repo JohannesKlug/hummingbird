@@ -1,5 +1,6 @@
 package com.logica.hummingbird.simulator.ccsds;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,12 +16,14 @@ public class SpacePacketGenerator {
 	
 	public byte[] generateSpacePacket(int apId, byte[] payload) {
 		
-		if ( (payload.length < 1) || (payload.length > 65536) ) {
+		int payloadLength = payload.length;
+
+		if ( (payloadLength < 1) || (payloadLength > 65536) ) {
 			// TODO throw an exception here
-			LOG.error("Invalid payload size (" + payload.length + "), must be between 1 and 65536)");
+			LOG.error("Invalid payload size (" + payloadLength + "), must be between 1 and 65536)");
 		}
 		
-		byte[] packet = new byte[payload.length+6];
+		byte[] packet = new byte[6];
 		
 		/*
 		 * Packet Version Number 	= 000
@@ -60,7 +63,13 @@ public class SpacePacketGenerator {
 		
 		sequenceCount = (sequenceCount + 1) % 16384;
 		
-		return packet;
+		Integer lengthHighByte = (0xFF00 & payloadLength) >> 8;
+		Integer lengthLowByte = (0xFF & payloadLength) - 1;
+		
+		packet[4] = lengthHighByte.byteValue();
+		packet[5] = lengthLowByte.byteValue();
+		
+		return ArrayUtils.addAll(packet, payload);
 		
 	}
 

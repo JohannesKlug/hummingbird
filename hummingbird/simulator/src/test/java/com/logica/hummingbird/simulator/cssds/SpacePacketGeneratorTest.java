@@ -56,5 +56,29 @@ public class SpacePacketGeneratorTest {
 		}
 		
 	}
+	
+	@Test
+	public void testWithPayload() {
+		generator = new SpacePacketGenerator();
+		
+		byte byte0 = new Integer(0x00).byteValue();
+		byte byte1 = new Integer(0xFF).byteValue();
+		byte byte2 = new Integer(0xAA).byteValue();
+		
+		byte[] payload = {byte0, byte1, byte2};
+		
+		byte[] packet = generator.generateSpacePacket(0, payload);
+		
+		assertEquals(byte0, packet[6]);
+		assertEquals(byte1, packet[7]);
+		assertEquals(byte2, packet[8]);
+		
+		int packetDataLengthHighByte = (0xFF & packet[4]) << 8;
+		int packetDataLengthLowByte = 0xFF & packet[5];
+		int packetDataLength = packetDataLengthHighByte + packetDataLengthLowByte + 1;
+		
+		assertEquals(3, packetDataLength);
+		
+	}
 
 }
