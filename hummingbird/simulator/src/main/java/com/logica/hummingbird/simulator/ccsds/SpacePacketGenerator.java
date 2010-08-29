@@ -4,6 +4,8 @@ import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.logica.hummingbird.util.BytesUtility;
+
 public class SpacePacketGenerator {
 	
 	private final static Logger LOG = LoggerFactory.getLogger(SpacePacketGenerator.class);
@@ -17,6 +19,7 @@ public class SpacePacketGenerator {
 	public byte[] generateSpacePacket(int apId, byte[] payload) {
 		
 		int payloadLength = payload.length;
+		LOG.debug("Payload length = " + payloadLength + " bytes");
 
 		if ( (payloadLength < 1) || (payloadLength > 65536) ) {
 			// TODO throw an exception here
@@ -69,6 +72,7 @@ public class SpacePacketGenerator {
 		packet[4] = lengthHighByte.byteValue();
 		packet[5] = lengthLowByte.byteValue();
 		
+		LOG.debug("Generated space packet payload dec dump = " + BytesUtility.decimalDump(payload));
 		return ArrayUtils.addAll(packet, payload);
 		
 	}

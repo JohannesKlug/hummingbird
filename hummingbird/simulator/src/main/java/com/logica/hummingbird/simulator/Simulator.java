@@ -94,7 +94,7 @@ public class Simulator implements Runnable {
 					sendMessage(packetGenerator.generateSpacePacket(0, payload));
 					
 					try {
-						sendMessage(packetGenerator.generateSpacePacket(1, URLReader.readUrl("http://localhost:8888/")));
+						sendMessage(packetGenerator.generateSpacePacket(1, URLReader.readUrl("http://www.tpwd.state.tx.us/kids/wild_things/birds/images/hummingbird500.gif")));
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

@@ -31,7 +31,7 @@
 	</logger>
 	
 	<logger name="com.logica.hummingbird.simulator">
-		<level value="INFO"></level>
+		<level value="DEBUG"></level>
 	</logger>
 	
 	

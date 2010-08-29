@@ -54,6 +54,12 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.logica.hummingbird</groupId>
+			<artifactId>commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<description>A Simulator that produces telemetry according to its setup.</description>
