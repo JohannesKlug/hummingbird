@@ -5,8 +5,12 @@
 						http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi-1.2.xsd 
 						http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-	<bean id="packetDispatcher" class="com.logica.hummingbird.framebroker.CamelPacketDispatcher">
+	<!-- <bean id="packetDispatcher" class="com.logica.hummingbird.framebroker.CamelPacketDispatcher">
+	</bean> -->
+	
+	<bean id="packetViewer" class="com.logica.hummingbird.PacketViewer">
 	</bean>
+	
 
   <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
     <property name="brokerURL" value="tcp://127.0.0.1:61616"/>
@@ -16,9 +20,17 @@
 	<camelContext xmlns="http://camel.apache.org/schema/spring">
 		<route>
 			<from uri="activemq:packetsIn"/>
-			<to uri="bean:packetDispatcher"/>
+			<to uri="bean:packetViewer?method=packetIn"/>
+			
+		</route>
+		
+	<!-- 	<route>
+			<from uri="activemq:packetsOut"/>
+			<to uri="bean:packetDispatcher?method=process"/>
 			<to uri="activemq:packetsOut"/>
 		</route>
+		 -->
 	</camelContext>
-
+	
+	
 </beans>

@@ -32,7 +32,7 @@ public class SimulatorRunner {
 			Simulator simulator = new Simulator(context.getEndpoint("activemq:packetsIn"));
 			simulator.addWaveform(new LinearWaveform(101, 0, 1));
 			
-			simulator.setMessageInterval(1000);
+			simulator.setMessageInterval(200);
 			
 			Thread simulatorThread = new Thread(simulator);
 			simulatorThread.start();

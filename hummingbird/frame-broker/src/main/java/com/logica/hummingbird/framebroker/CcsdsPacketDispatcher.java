@@ -18,6 +18,7 @@ public class CcsdsPacketDispatcher extends Observable{
 			// this is not the next packet in sequence
 			// clear the packet buffer
 			packetBuffer = ArrayUtils.EMPTY_BYTE_ARRAY;
+//			packetBuffer = new byte[0];
 		}
 		
 		packetBuffer = ArrayUtils.addAll(packetBuffer, packet);
@@ -36,6 +37,8 @@ public class CcsdsPacketDispatcher extends Observable{
 		
 		if (packetVersionNumber != 0) {
 			LOG.error("Packet with invalid version number encountered. Version number was: " + packetVersionNumber);
+			packetBuffer = new byte[0];
+			return;
 		}
 		
 		String packetType;
