@@ -5,7 +5,6 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultCamelContext;
 
 import com.logica.hummingbird.simulator.Simulator;
-import com.logica.hummingbird.simulator.waveforms.FlatWaveform;
 import com.logica.hummingbird.simulator.waveforms.LinearWaveform;
 
 public class SimulatorRunner {
