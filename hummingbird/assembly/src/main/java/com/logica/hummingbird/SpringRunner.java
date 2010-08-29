@@ -9,7 +9,7 @@ public class SpringRunner {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		BeanFactory factory = new FileSystemXmlApplicationContext("target/classes/SpringActiveMQTest.xml");
+		BeanFactory factory = new FileSystemXmlApplicationContext("target/classes/PacketDispatcher.xml");
 
 	}
 

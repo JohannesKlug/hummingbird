@@ -30,7 +30,7 @@ public class SimulatorRunner {
 		try {
 			// TODO Make Topic configurable via Spring
 //			Simulator simulator = new Simulator(context.getEndpoint("activemq:topic:newtopic"));
-			Simulator simulator = new Simulator(context.getEndpoint("activemq:q1"));
+			Simulator simulator = new Simulator(context.getEndpoint("activemq:packetsIn"));
 			simulator.addWaveform(new LinearWaveform(101, 0, 1));
 			
 			simulator.setMessageInterval(1000);
