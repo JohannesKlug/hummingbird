@@ -141,6 +141,7 @@ public class Simulator implements Runnable {
 					sendMessage(packetGenerator.generateSpacePacket(0, payload));
 					
 					try {
+<<<<<<< HEAD
 						
 //						int numread = is.read(bytes);
 //
@@ -159,6 +160,9 @@ public class Simulator implements Runnable {
 //						LOG.info("Read image of length:" + imageBytes.length + " bytes.");
 //						sendMessage(packetGenerator.generateSpacePacket(1, imageBytes));
 						sendMessage(packetGenerator.generateSpacePacket(1, URLReader.readUrl("http://localhost:8888/")));
+=======
+						sendMessage(packetGenerator.generateSpacePacket(1, URLReader.readUrl("http://www.tpwd.state.tx.us/kids/wild_things/birds/images/hummingbird500.gif")));
+>>>>>>> 511ec22d175d86b54fcc1250822ed4b551cff8a9
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
