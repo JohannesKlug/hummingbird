@@ -1,18 +1,10 @@
 package com.logica.hummingbird.simulator;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
@@ -22,15 +14,12 @@ import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.impl.DefaultExchange;
 import org.apache.camel.impl.DefaultMessage;
 import org.apache.camel.impl.DefaultProducerTemplate;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.logica.hummingbird.simulator.ccsds.SpacePacketGenerator;
 import com.logica.hummingbird.simulator.graphics.URLReader;
 import com.logica.hummingbird.simulator.waveforms.Waveform;
-import com.sun.tools.javac.util.Log;
 
 public class Simulator implements Runnable {
 	
@@ -141,7 +130,6 @@ public class Simulator implements Runnable {
 					sendMessage(packetGenerator.generateSpacePacket(0, payload));
 					
 					try {
-<<<<<<< HEAD
 						
 //						int numread = is.read(bytes);
 //
@@ -159,10 +147,8 @@ public class Simulator implements Runnable {
 //						
 //						LOG.info("Read image of length:" + imageBytes.length + " bytes.");
 //						sendMessage(packetGenerator.generateSpacePacket(1, imageBytes));
-						sendMessage(packetGenerator.generateSpacePacket(1, URLReader.readUrl("http://localhost:8888/")));
-=======
+//						sendMessage(packetGenerator.generateSpacePacket(1, URLReader.readUrl("http://localhost:8888/")));
 						sendMessage(packetGenerator.generateSpacePacket(1, URLReader.readUrl("http://www.tpwd.state.tx.us/kids/wild_things/birds/images/hummingbird500.gif")));
->>>>>>> 511ec22d175d86b54fcc1250822ed4b551cff8a9
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
