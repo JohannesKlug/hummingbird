@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SpaceSystem xmlns="http://www.omg.org/space/xtce" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.omg.org/space/xtce SpaceSystemV1.0.xsd" name="TrivSat">
+
+	<TelemetryMetaData>
+		<ParameterTypeSet>
+			<IntegerParameterType name="11BitInteger" sizeInBits="11" signed="false">
+				<UnitSet/>
+			</IntegerParameterType>
+
+			<IntegerParameterType name="16BitInteger" sizeInBits="16" signed="false">
+				<UnitSet/>
+			</IntegerParameterType>
+
+			<IntegerParameterType name="32BitInteger" sizeInBits="32" signed="false">
+				<UnitSet/>
+			</IntegerParameterType>
+
+			<FloatParameterType name="32bitFloat" sizeInBits="32">
+			</FloatParameterType>
+
+			<FloatParameterType name="64bitFloat" sizeInBits="64">
+			</FloatParameterType>
+		</ParameterTypeSet>
+
+
+		<ParameterSet>
+			<Parameter parameterTypeRef="11BitInteger" name="XWING_APID"/>
+			<Parameter parameterTypeRef="16BitInteger" name="PACKET_LENGTH"/>
+			<Parameter parameterTypeRef="32BitInteger" name="XWING_FLIGHT_HOURS"/>
+			<Parameter parameterTypeRef="64itInteger" name="XWING_LASER_TEMP"/>	
+		</ParameterSet>
+		
+		
+		<ContainerSet>
+			<SequenceContainer name="TMPacket" shortDescription="CCSDS TM Packet">
+				<EntryList>
+					<ContainerRefEntry containerRef="TMPacketHeader"/>
+				</EntryList>
+			</SequenceContainer>
+			
+			<SequenceContainer name="TMPacketHeader" shortDescription="CCSDS TM Packet Header" abstract="true">
+				<EntryList>
+					<ParameterRefEntry parameterRef="XWING_APID"/>
+					<ParameterRefEntry parameterRef="PACKET_LENGTH"/>
+					<ParameterRefEntry parameterRef="XWING_FLIGHT_HOURS"/>
+					<ParameterRefEntry parameterRef="XWING_LASER_TEMP"/>
+				</EntryList>
+			</SequenceContainer>
+			
+			<SequenceContainer name="FlightHours" shortDescription="contains all telemetred data parameters for for X=Wing flight hours">
+				<EntryList>
+					<ParameterRefEntry parameterRef="PACKET_LENGTH"/>
+					<ParameterRefEntry parameterRef="XWING_FLIGHT_HOURS"/>
+				</EntryList>
+				<BaseContainer containerRef="TMPacketHeader">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison parameterRef="XWING_APID" value="555"/>
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+			</SequenceContainer>
+			
+			<SequenceContainer name="LaserTemp" shortDescription="contains all telemetred data parameters for X-Wing laser temp">
+				<EntryList>
+					<ParameterRefEntry parameterRef="PACKET_LENGTH"/>
+					<ParameterRefEntry parameterRef="XWING_LASER_TEMP"/>
+				</EntryList>
+				<BaseContainer containerRef="TMPacketHeader">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison parameterRef="XWING_APID" value="888"/>
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+			</SequenceContainer>
+			
+			<SequenceContainer name="AllSystems" shortDescription="contains all telemetred data parameters for X-Wing laser temp and flight hours">
+				<EntryList>
+					<ParameterRefEntry parameterRef="PACKET_LENGTH"/>
+					<ParameterRefEntry parameterRef="XWING_LASER_TEMP"/>
+					<ParameterRefEntry parameterRef="XWING_FLIGHT_HOURS"/>
+				</EntryList>
+				<BaseContainer containerRef="TMPacketHeader">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison parameterRef="XWING_APID" value="1"/>
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+			</SequenceContainer>
+		
+		</ContainerSet>
+	
+	</TelemetryMetaData>
+
+</SpaceSystem>
+
+
