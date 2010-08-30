@@ -1,5 +1,6 @@
 package com.logica.hummingbird.simulator.graphics;
 
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -7,7 +8,7 @@ import org.apache.commons.io.IOUtils;
 
 public class URLReader {
 
-	public static byte[] readUrl(String urlString) throws Exception {
+	public static byte[] readUrl(String urlString) throws IOException {
 
 			URL url = new URL(urlString);
 			URLConnection urlConnection = url.openConnection();

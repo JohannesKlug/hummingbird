@@ -22,7 +22,7 @@ import com.logica.hummingbird.simulator.graphics.URLReader;
 import com.logica.hummingbird.simulator.waveforms.Waveform;
 
 public class Simulator implements Runnable {
-	
+
 	private final static Logger LOG = LoggerFactory.getLogger(Simulator.class);
 
 	private SpacePacketGenerator packetGenerator = new SpacePacketGenerator();
@@ -34,6 +34,15 @@ public class Simulator implements Runnable {
 	private boolean run;
 
 	private long messageInterval = 1000;
+
+	private String urlToPacketise;
+
+	public Simulator(Endpoint endpoint, String urlToPacketise) {
+		this.context = new DefaultCamelContext();
+		this.template = new DefaultProducerTemplate(context, endpoint);
+		this.waveforms = new ArrayList<Waveform>();
+		this.urlToPacketise = urlToPacketise;
+	}
 
 	public Simulator(Endpoint endpoint) {
 		this.context = new DefaultCamelContext();
@@ -73,92 +82,77 @@ public class Simulator implements Runnable {
 
 	public void run() {
 		run = true;
-		
-//		File file = new File("/dev/video0");
-////		byte[] image =  FileUtils.readFileToByteArray(file);
-//		byte[] bytes = new byte[640 * 480 * 3];
-//		BufferedImage image = new BufferedImage(640, 480, BufferedImage.TYPE_INT_RGB);
-//
-//		FileInputStream is = null;
-//		try {
-//			is = new FileInputStream(file);
-//		} catch (FileNotFoundException e2) {
-//			// TODO Auto-generated catch block
-//			e2.printStackTrace();
-//		}
-		
+
+		// File file = new File("/dev/video0");
+		// // byte[] image = FileUtils.readFileToByteArray(file);
+		// byte[] bytes = new byte[640 * 480 * 3];
+		// BufferedImage image = new BufferedImage(640, 480, BufferedImage.TYPE_INT_RGB);
+		//
+		// FileInputStream is = null;
+		// try {
+		// is = new FileInputStream(file);
+		// } catch (FileNotFoundException e2) {
+		// // TODO Auto-generated catch block
+		// e2.printStackTrace();
+		// }
+
 		while (run) {
-			
+
 			for (Waveform waveform : waveforms) {
-				for (int i = 0; i< waveform.getReadings(); i++) {
-					
+				for (int i = 0; i < waveform.getReadings(); i++) {
+
 					// TODO Passing the value down to nextMessage() is ugly. Refactor?
-//					sendMessage(waveform.nextValue());
-					
+					// sendMessage(waveform.nextValue());
+
 					Double doubleValue = waveform.nextValue();
-					
-//					Long value = Double.doubleToLongBits(doubleValue);
-//					Long byte0 = (value & 0xFF000000 ) >>> 24;
-//					Long byte1 = (value & 0x00FF0000 ) >>> 16;
-//					Long byte2 = (value & 0x0000FF00 ) >>> 8;
-//					Long byte3 = (value & 0x000000FF );
-//					System.out.println(doubleValue);
-//					byte[] payload = new byte[] {	
-//												byte0.byteValue(),
-//												byte1.byteValue(),
-//												byte2.byteValue(),
-//												byte3.byteValue()
-//												};
-//					System.out.println();
-//					System.out.println(byte0.byteValue());
-//					System.out.println(byte1.byteValue());
-//					System.out.println(byte2.byteValue());
-//					System.out.println(byte3.byteValue());
-					
+
+					// Long value = Double.doubleToLongBits(doubleValue);
+					// Long byte0 = (value & 0xFF000000 ) >>> 24;
+					// Long byte1 = (value & 0x00FF0000 ) >>> 16;
+					// Long byte2 = (value & 0x0000FF00 ) >>> 8;
+					// Long byte3 = (value & 0x000000FF );
+					// System.out.println(doubleValue);
+					// byte[] payload = new byte[] {
+					// byte0.byteValue(),
+					// byte1.byteValue(),
+					// byte2.byteValue(),
+					// byte3.byteValue()
+					// };
+					// System.out.println();
+					// System.out.println(byte0.byteValue());
+					// System.out.println(byte1.byteValue());
+					// System.out.println(byte2.byteValue());
+					// System.out.println(byte3.byteValue());
+
 					ByteArrayOutputStream bos = new ByteArrayOutputStream();
 					DataOutputStream dos = new DataOutputStream(bos);
 					try {
 						dos.writeDouble(doubleValue);
 						dos.flush();
-					} catch (IOException e2) {
+					}
+					catch (IOException e2) {
 						// TODO Auto-generated catch block
 						e2.printStackTrace();
 					}
 					// etc.
 					byte[] payload = bos.toByteArray();
-					
+
 					sendMessage(packetGenerator.generateSpacePacket(0, payload));
-					
-					try {
-						
-//						int numread = is.read(bytes);
-//
-//						InputStream in = new ByteArrayInputStream(bytes);
-//						in.reset();
-//
-//						image = ImageIO.read(in);
-//						
-//						ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//						ImageIO.write(image, "jpg", baos);
-//						byte[] imageBytes = baos.toByteArray();
-//
-//
-//						
-//						
-//						LOG.info("Read image of length:" + imageBytes.length + " bytes.");
-//						sendMessage(packetGenerator.generateSpacePacket(1, imageBytes));
-//						sendMessage(packetGenerator.generateSpacePacket(1, URLReader.readUrl("http://localhost:8888/")));
-						sendMessage(packetGenerator.generateSpacePacket(1, URLReader.readUrl("http://www.tpwd.state.tx.us/kids/wild_things/birds/images/hummingbird500.gif")));
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+
+					if (!(urlToPacketise == null)) {
+						try {
+							sendMessage(packetGenerator.generateSpacePacket(1, URLReader.readUrl(urlToPacketise)));
+						}
+						catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
-					
-					
-					
+
 					try {
 						Thread.sleep(messageInterval);
-					} catch (InterruptedException e) {
+					}
+					catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}

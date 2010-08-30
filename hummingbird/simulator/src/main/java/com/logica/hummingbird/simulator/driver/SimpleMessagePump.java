@@ -14,7 +14,8 @@ public class SimpleMessagePump {
 	public static void main(String[] args) {
 		String uri = args[0];
 		String jmsLocation = args[1];
-		int messageRate = Integer.parseInt(args[2]);
+		String urlToPacketise = args[2];
+		int messageRate = Integer.parseInt(args[3]);
 		
 		try {
 			cc.start();
@@ -24,7 +25,7 @@ public class SimpleMessagePump {
 		
 		cc.addComponent("activemq", ActiveMQComponent.activeMQComponent(uri));
 		
-		Simulator sim = new Simulator(cc.getEndpoint(jmsLocation));
+		Simulator sim = new Simulator(cc.getEndpoint(jmsLocation), urlToPacketise);
 		sim.sendMessage(messageRate);
 		
 		
