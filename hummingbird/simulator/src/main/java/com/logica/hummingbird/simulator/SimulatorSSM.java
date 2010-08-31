@@ -1,5 +1,7 @@
 package com.logica.hummingbird.simulator;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import com.logica.hummingbird.spacesystemmodel.Container;
@@ -31,6 +33,10 @@ public class SimulatorSSM {
 		this.ssmFactory = new XtceModelFactory(xtceSsmFilePath);
 		this.packetRoot = ssmFactory.getContainer(packetRootName);
 		this.allParams = ssmFactory.getAllParameters();
+	}
+	
+	public final Collection<ParameterContainer> getAllParameters() {
+		return this.ssmFactory.getAllParameters().values();
 	}
 
 }
