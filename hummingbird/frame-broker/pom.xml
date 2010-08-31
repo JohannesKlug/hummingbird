@@ -31,8 +31,6 @@
 					<instructions>
 						<Export-Package>
 							com.logica.hummingbird.framebroker,
-							com.logica.hummingbird.framebroker.parameters,
-							com.logica.hummingbird.framebroker.producers,
 							com.logica.hummingbird.framebroker.exceptions							
 						</Export-Package>
 						<Private-Package>
