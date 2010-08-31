@@ -257,4 +257,9 @@ public class MockContainerModelFactory implements ContainerFactory {
 		this.parameters.put(parameter.getName(), parameter);
 	}
 
+	@Override
+	public String getSpaceSystemModelFilePath() {
+		return null;
+	}
+
 }

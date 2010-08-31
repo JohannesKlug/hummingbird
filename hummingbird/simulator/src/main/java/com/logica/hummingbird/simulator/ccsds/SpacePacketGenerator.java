@@ -71,8 +71,9 @@ public class SpacePacketGenerator {
 		
 		packet[4] = lengthHighByte.byteValue();
 		packet[5] = lengthLowByte.byteValue();
-		
+
 		LOG.debug("Generated space packet payload dec dump = " + BytesUtility.decimalDump(payload));
+
 		return ArrayUtils.addAll(packet, payload);
 		
 	}

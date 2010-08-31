@@ -11,6 +11,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.logica.hummingbird</groupId>
 	<artifactId>xtce</artifactId>
+	<packaging>bundle</packaging>
 	<name>XTCE</name>
 	<version>0.0.1-SNAPSHOT</version>
 
@@ -46,6 +47,32 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<instructions>
+						<Export-Package>
+							com.logica.hummingbird.xtce,
+							com.logica.hummingbird.xtce.exceptions,
+						</Export-Package>
+						<Private-Package>
+							com.logica.hummingbird.generatedcode*
+						</Private-Package>
+					</instructions>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

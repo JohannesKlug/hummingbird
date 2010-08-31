@@ -269,7 +269,7 @@ public class XtceModelFactory implements ContainerFactory {
 		}
 	}
 
-	public SpaceSystem getSpaceSystem() {
+	public final SpaceSystem getSpaceSystem() {
 		if (spaceSystem == null) {
 
 			try {
@@ -333,5 +333,10 @@ public class XtceModelFactory implements ContainerFactory {
 	@Override
 	public Map<String, ParameterContainer> getAllParameters() {
 		return parameters;
+	}
+
+	@Override
+	public String getSpaceSystemModelFilePath() {
+		return this.spacesystemmodelFilename;
 	}
 }
