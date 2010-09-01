@@ -34,8 +34,8 @@
 		<ParameterSet>
 			<Parameter parameterTypeRef="11bitInteger" name="XWING_APID" />
 			<Parameter parameterTypeRef="16bitInteger" name="PACKET_LENGTH" />
-			<Parameter parameterTypeRef="32bitInteger" name="XWING_FLIGHT_HOURS" />
-			<Parameter parameterTypeRef="64bitInteger" name="XWING_LASER_TEMP" />
+			<Parameter parameterTypeRef="32bitFloat" name="XWING_FLIGHT_HOURS" />
+			<Parameter parameterTypeRef="64bitFloat" name="XWING_LASER_TEMP" />
 		</ParameterSet>
 
 
