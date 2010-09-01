@@ -111,7 +111,7 @@ public class ContainerImpl extends NamedElement implements Container {
 	 * @return false if at least one restriction is not meet. True otherwise.
 	 * 
 	 */
-	protected boolean matchRestrictions() {
+	protected final boolean matchRestrictions() {
 		if(restrictions.size() == 0) {
 			return true;
 		}
@@ -121,7 +121,7 @@ public class ContainerImpl extends NamedElement implements Container {
 		boolean match = true;
 		Iterator<Entry<Parameter, String>> it = restrictions.entrySet().iterator();
 
-		while (it.hasNext() == true && match == true) {
+		while (it.hasNext() == true && match) {
 			Entry<Parameter, String> entry = it.next();
 
 			// The restriction is against a parameter value. The value may thus depend on a parameter which has already
@@ -172,7 +172,7 @@ public class ContainerImpl extends NamedElement implements Container {
 		
 
 		// If the packet should be processed by this container.
-		if (matchRestrictions() == true) {
+		if (matchRestrictions()) {
 			for (Container container : subContainers) {
 				// The nested calls unmarshall down through the sub containers Specific Containers,
 				// NOTE: Parameter Containers will "chunk" the bitSet (Packet) in order to remove
@@ -197,7 +197,7 @@ public class ContainerImpl extends NamedElement implements Container {
 	@Override
 	public int marshall(BitSet packet, int offset) throws BitSetOperationException {
 		// If the packet should be processed by this container.
-		if (matchRestrictions() == true) {
+		if (matchRestrictions()) {
 			for (Container container : subContainers) {
 				offset = container.marshall(packet, offset);
 			}
@@ -211,7 +211,7 @@ public class ContainerImpl extends NamedElement implements Container {
 		String str = "";
 
 		// If the packet should be processed by this container...
-		if (matchRestrictions() == true) {
+		if (matchRestrictions()) {
 			str += "{" + this.name;
 			for (Container container : subContainers) {
 				str += container.toString();
@@ -235,7 +235,7 @@ public class ContainerImpl extends NamedElement implements Container {
 			this.subContainers.add(container);
 		}
 		else {
-			LOG.warn("Argument IContainer passed to me was null");
+			LOG.warn("Argument Container passed to me was null");
 		}
 	}
 
@@ -285,7 +285,7 @@ public class ContainerImpl extends NamedElement implements Container {
 	@Override
 	public int getLength() {
 		length = 0;
-		if (matchRestrictions() == true) {
+		if (matchRestrictions()) {
 			// Iterate through all sub-containers and sum the size.
 			for (Container container : subContainers) {
 				length += container.getLength();
@@ -313,5 +313,10 @@ public class ContainerImpl extends NamedElement implements Container {
 
 	public List<Container> getSubContainers() {
 		return subContainers;
+	}
+
+	@Override
+	public Map<Parameter, String> getRestrictions() {
+		return restrictions;
 	}
 }

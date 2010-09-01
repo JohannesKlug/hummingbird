@@ -15,6 +15,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeEx
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
+import com.logica.hummingbird.spacesystemmodel.parameters.Parameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
 import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float64Behaviour;
 import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
@@ -259,6 +260,12 @@ public class MockContainerModelFactory implements ContainerFactory {
 
 	@Override
 	public String getSpaceSystemModelFilePath() {
+		return null;
+	}
+
+	@Override
+	public Map<Parameter, List<String>> getAllParameterRestrictions() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

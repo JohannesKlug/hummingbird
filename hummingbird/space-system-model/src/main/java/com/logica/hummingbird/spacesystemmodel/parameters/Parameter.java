@@ -37,7 +37,7 @@ public interface Parameter {
 	 * @return ParameterType The type of the parameter.
 	 *
 	 */
-	public NumberParameterType getType();
+	NumberParameterType getType();
 	
 	
 	/**
@@ -46,7 +46,7 @@ public interface Parameter {
 	 * @return float The value of the parameter. 
 	 *
 	 */
-	public Number getValue();
+	Number getValue();
 	
 	
 	/**
@@ -56,5 +56,7 @@ public interface Parameter {
 	 * @param value The value to be compared against. 
 	 *
 	 */
-	public boolean match(String value);
+	boolean match(String value);
+	
+	String getName();
 }

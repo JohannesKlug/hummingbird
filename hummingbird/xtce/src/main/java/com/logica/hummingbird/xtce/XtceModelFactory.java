@@ -2,7 +2,9 @@ package com.logica.hummingbird.xtce;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.exolab.castor.xml.MarshalException;
@@ -24,6 +26,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeEx
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
+import com.logica.hummingbird.spacesystemmodel.parameters.Parameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
 import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.AbstractFloatBehaviour;
 import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.AbstractIntegerBehaviour;
@@ -48,6 +51,7 @@ public class XtceModelFactory implements ContainerFactory {
 	protected Map<String, NumberParameterType> types = new HashMap<String, NumberParameterType>();
 	protected Map<String, ContainerImpl> containers = new HashMap<String, ContainerImpl>();
 	protected Map<String, ParameterContainer> parameters = new HashMap<String, ParameterContainer>();
+	protected Map<Parameter, List<String>> restrictions = new HashMap<Parameter, List<String>>();
 
 	protected SpaceSystem spaceSystem = null;
 
@@ -83,7 +87,7 @@ public class XtceModelFactory implements ContainerFactory {
 		return container;
 	}
 
-	private void initialise() throws InvalidParameterTypeException, InvalidXtceFileException {
+	private final void initialise() throws InvalidParameterTypeException, InvalidXtceFileException {
 
 		spaceSystem = getSpaceSystem();
 
@@ -234,7 +238,9 @@ public class XtceModelFactory implements ContainerFactory {
 
 		/**
 		 * Reiterate through the containers and set the references between the objects. Three types of references exist;
-		 * 1. Base. A container may have a base container. 2. Sub containers. 3. Restrictions.
+		 * 1. Base.  A container may have a base container.
+		 * 2. Sub containers.
+		 * 3. Restrictions.
 		 */
 		for (int containerIndex = 0; containerIndex < spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItemCount(); ++containerIndex) {
 			SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex)
@@ -245,7 +251,10 @@ public class XtceModelFactory implements ContainerFactory {
 			/** Register this container with the base container to make sure it gets processed. */
 			if (xtceContainer.getBaseContainer() != null) {
 				for (Comparison comparison : xtceContainer.getBaseContainer().getRestrictionCriteria().getComparisonList().getComparison()) {
-					thisContainer.addRestriction((ParameterContainer) containers.get(comparison.getParameterRef()), comparison.getValue());
+					ParameterContainer paramContainer = (ParameterContainer) containers.get(comparison.getParameterRef());
+					String comparisonValue = comparison.getValue();
+					addRestrictionToGlobalMap(paramContainer, comparisonValue);
+					thisContainer.addRestriction(paramContainer, comparisonValue);
 				}
 
 				containers.get(xtceContainer.getBaseContainer().getContainerRef()).addContainer(thisContainer);
@@ -266,6 +275,19 @@ public class XtceModelFactory implements ContainerFactory {
 				thisContainer.addContainer(containers.get(name));
 				LOG.debug("Added subcontainer " + containers.get(name) + " to container " + thisContainer.getName());
 			}
+		}
+	}
+
+	private void addRestrictionToGlobalMap(ParameterContainer paramContainer, String comparisonValue) {
+		List<String> pList;
+		if(restrictions.containsKey(paramContainer)) {
+			pList = restrictions.get(paramContainer);
+			pList.add(comparisonValue);						
+		}
+		else {
+			pList = new ArrayList<String>();
+			pList.add(comparisonValue);
+			restrictions.put(paramContainer, pList);
 		}
 	}
 
@@ -338,5 +360,10 @@ public class XtceModelFactory implements ContainerFactory {
 	@Override
 	public String getSpaceSystemModelFilePath() {
 		return this.spacesystemmodelFilename;
+	}
+
+	@Override
+	public Map<Parameter, List<String>> getAllParameterRestrictions() {
+		return restrictions;
 	}
 }

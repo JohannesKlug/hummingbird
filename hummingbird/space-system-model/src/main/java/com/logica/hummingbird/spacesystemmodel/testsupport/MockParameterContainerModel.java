@@ -1,6 +1,8 @@
 package com.logica.hummingbird.spacesystemmodel.testsupport;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -13,6 +15,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeEx
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
+import com.logica.hummingbird.spacesystemmodel.parameters.Parameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
 import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float64Behaviour;
 import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
@@ -71,6 +74,8 @@ public class MockParameterContainerModel implements ContainerFactory {
 	private Map<String, ContainerImpl> containers = new HashMap<String, ContainerImpl>();
 	private Map<String, ParameterContainer> parameters = new HashMap<String, ParameterContainer>();
 
+	private Map<Parameter, List<String>> restrictions = new HashMap<Parameter, List<String>>();
+
 	public MockParameterContainerModel() throws InvalidParameterTypeException {
 		initialiseModel();
 	}
@@ -125,16 +130,19 @@ public class MockParameterContainerModel implements ContainerFactory {
 
 		// Create the Packet Payloads and add them to the payload container
 		ContainerImpl flightDataPayload = new ContainerImpl(TM_FLIGHT_DATA_PAYLOAD, "Flight hours payload", "Test TM packet payload containing flight data");
+		this.addRestrictionToGlobalMap(apidParameter, FLIGHT_DATA_PAYLOAD_APID);
 		flightDataPayload.addRestriction(apidParameter, FLIGHT_DATA_PAYLOAD_APID);
 		this.addToContainers(flightDataPayload);
 		tmPacketPayload.addContainer(flightDataPayload);
 
 		ContainerImpl laserDataPayload = new ContainerImpl(TM_LASER_DATA_PAYLOAD, "Laser temp payload", "Test TM packet payload containing laser data");
+		this.addRestrictionToGlobalMap(apidParameter, LASER_DATA_PAYLOAD_APID);
 		laserDataPayload.addRestriction(apidParameter, LASER_DATA_PAYLOAD_APID);
 		this.addToContainers(laserDataPayload);
 		tmPacketPayload.addContainer(laserDataPayload);
 
 		ContainerImpl allSystemsPayload = new ContainerImpl(TM_ALL_SYS_PAYLOAD, "All systems payload", "Test TM packet payload containing all data");
+		this.addRestrictionToGlobalMap(apidParameter, ALL_SYS_PAYLOAD_APID);
 		allSystemsPayload.addRestriction(apidParameter, ALL_SYS_PAYLOAD_APID);
 		this.addToContainers(allSystemsPayload);
 		tmPacketPayload.addContainer(allSystemsPayload);
@@ -180,6 +188,19 @@ public class MockParameterContainerModel implements ContainerFactory {
 	public ParameterContainer getParameter(String name) {
 		return parameters.get(name);
 	}
+	
+	private void addRestrictionToGlobalMap(ParameterContainer paramContainer, String comparisonValue) {
+		List<String> pList;
+		if(restrictions.containsKey(paramContainer)) {
+			pList = restrictions.get(paramContainer);
+			pList.add(comparisonValue);						
+		}
+		else {
+			pList = new ArrayList<String>();
+			pList.add(comparisonValue);
+			restrictions.put(paramContainer, pList);
+		}
+	}
 
 	/**
 	 * Convenience method to add a container with the key set to the containers name. This is less error prone and less
@@ -198,6 +219,11 @@ public class MockParameterContainerModel implements ContainerFactory {
 	@Override
 	public String getSpaceSystemModelFilePath() {
 		return null;
+	}
+
+	@Override
+	public Map<Parameter, List<String>> getAllParameterRestrictions() {
+		return restrictions;
 	}
 
 }

@@ -28,7 +28,9 @@ package com.logica.hummingbird.spacesystemmodel;
 
 import java.util.BitSet;
 import java.util.List;
+import java.util.Map;
 
+import com.logica.hummingbird.spacesystemmodel.parameters.Parameter;
 import com.logica.hummingbird.util.exceptions.BitSetOperationException;
 
 
@@ -46,7 +48,7 @@ public interface Container {
 	 * has been truncated to the right position by the caller, i.e. the
 	 * offset to this packet is always '0'.
 	 */
-	public BitSet unmarshall(BitSet packet);
+	BitSet unmarshall(BitSet packet);
 	
 	/**
 	 * Encodes this container into the bitset, from the provider offset.
@@ -56,7 +58,7 @@ public interface Container {
 	 * @return int The offset of the last inserted data. 
 	 * @throws BitSetOperationException 
 	 */
-	public int marshall(BitSet packet, int offset) throws BitSetOperationException;
+	int marshall(BitSet packet, int offset) throws BitSetOperationException;
 	
 	
 	/**
@@ -74,7 +76,7 @@ public interface Container {
 	 * @return String Encoded representation of the container.
 	 *
 	 */
-	public String toString();
+	String toString();
 
 	
 	/**
@@ -84,7 +86,7 @@ public interface Container {
 	 * @return int The parsed length + the length of the container. 
 	 *
 	 */
-	public int getLength();
+	int getLength();
 
 	
 	/**
@@ -93,11 +95,15 @@ public interface Container {
 	 * @return The container value as a bitset.  
 	 *
 	 */
-	public BitSet getRawValue();
+	BitSet getRawValue();
 
-	public void addPacketObserver(PacketObserver observer);
+	void addPacketObserver(PacketObserver observer);
 	
-	public void addParameterUpdateObserver(ParameterObserver observer);
+	void addParameterUpdateObserver(ParameterObserver observer);
 	
-	public List<Container> getSubContainers();
+	List<Container> getSubContainers();
+	
+	String getName();
+	
+	Map<Parameter, String> getRestrictions();
 }

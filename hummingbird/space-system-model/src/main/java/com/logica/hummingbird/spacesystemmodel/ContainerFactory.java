@@ -27,9 +27,11 @@
 package com.logica.hummingbird.spacesystemmodel;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import com.logica.hummingbird.spacesystemmodel.parameters.Parameter;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
 
 /**
@@ -66,8 +68,9 @@ public interface ContainerFactory {
 	ParameterContainer getParameter(String name);
 	
 	// TODO Get all parameters function.
-	
 	Map<String, ParameterContainer> getAllParameters();
+	
+	Map<Parameter, List<String>> getAllParameterRestrictions();
 	
 	// FIXME Remove this?  Container model does not necessarily have to have a corresponding file.
 	String getSpaceSystemModelFilePath();
