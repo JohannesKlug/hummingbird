@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<SpaceSystem xmlns="http://www.omg.org/space/xtce"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.omg.org/space/xtce SpaceSystemV1.0.xsd"
-	name="TrivSat">
+<SpaceSystem xmlns="http://www.omg.org/space/xtce" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.omg.org/space/xtce SpaceSystemV1.0.xsd" name="TrivSat">
 
 	<TelemetryMetaData>
 		<ParameterTypeSet>
-			<IntegerParameterType name="11bitInteger"
-				sizeInBits="11" signed="false">
+			<IntegerParameterType name="11bitInteger" sizeInBits="11" signed="false">
 				<UnitSet />
 			</IntegerParameterType>
 
-			<IntegerParameterType name="16bitInteger"
-				sizeInBits="16" signed="false">
+			<IntegerParameterType name="16bitInteger" sizeInBits="16" signed="false">
 				<UnitSet />
 			</IntegerParameterType>
 
-			<IntegerParameterType name="32bitInteger"
-				sizeInBits="32" signed="false">
+			<IntegerParameterType name="32bitInteger" sizeInBits="32" signed="false">
 				<UnitSet />
 			</IntegerParameterType>
 
@@ -40,27 +35,22 @@
 
 
 		<ContainerSet>
-			<SequenceContainer name="TMPacket"
-				shortDescription="CCSDS TM Packet">
+			<SequenceContainer name="TMPacket" shortDescription="CCSDS TM Packet">
 				<EntryList>
 					<ContainerRefEntry containerRef="TMPacketHeader" />
 				</EntryList>
 			</SequenceContainer>
 
-			<SequenceContainer name="TMPacketHeader"
-				shortDescription="CCSDS TM Packet Header" abstract="true">
+			<SequenceContainer name="TMPacketHeader" shortDescription="CCSDS TM Packet Header" abstract="true">
 				<EntryList>
 					<ParameterRefEntry parameterRef="XWING_APID" />
 					<ParameterRefEntry parameterRef="PACKET_LENGTH" />
-					<ParameterRefEntry parameterRef="XWING_FLIGHT_HOURS" />
-					<ParameterRefEntry parameterRef="XWING_LASER_TEMP" />
 				</EntryList>
 			</SequenceContainer>
 
 			<SequenceContainer name="FlightHours"
 				shortDescription="contains all telemetred data parameters for for X=Wing flight hours">
 				<EntryList>
-					<ParameterRefEntry parameterRef="PACKET_LENGTH" />
 					<ParameterRefEntry parameterRef="XWING_FLIGHT_HOURS" />
 				</EntryList>
 				<BaseContainer containerRef="TMPacketHeader">
@@ -75,7 +65,6 @@
 			<SequenceContainer name="LaserTemp"
 				shortDescription="contains all telemetred data parameters for X-Wing laser temp">
 				<EntryList>
-					<ParameterRefEntry parameterRef="PACKET_LENGTH" />
 					<ParameterRefEntry parameterRef="XWING_LASER_TEMP" />
 				</EntryList>
 				<BaseContainer containerRef="TMPacketHeader">
