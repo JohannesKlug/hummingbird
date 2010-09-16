@@ -1,0 +1,7 @@
+Ability to send telecommands
+Display parameters in the GUI
+XTCE designer
+Overview documentation
+Submodule documentation
+Radio interface to the rocket
+
