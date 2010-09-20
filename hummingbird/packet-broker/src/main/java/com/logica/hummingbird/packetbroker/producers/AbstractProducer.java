@@ -2,7 +2,7 @@ package com.logica.hummingbird.packetbroker.producers;
 
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.telemetry.HummingbirdPacket;
-import com.logica.hummingbird.telemetry.Packet;
+import com.logica.hummingbird.telemetry.DefaultSpacePacket;
 
 public abstract class AbstractProducer {
 
@@ -12,7 +12,7 @@ public abstract class AbstractProducer {
 	 */
 	private ContainerFactory containerFactory;
 	
-	protected HummingbirdPacket packet = new Packet();
+	protected HummingbirdPacket packet = new DefaultSpacePacket();
 
 	public AbstractProducer(ContainerFactory containerFactory) {
 		this.setContainerFactory(containerFactory);

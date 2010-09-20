@@ -6,6 +6,7 @@ package com.logica.hummingbird.spacesystemmodel.exceptions;
 import java.util.Map;
 import java.util.Set;
 
+import com.logica.hummingbird.spacesystemmodel.Container;
 import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
 
 /**
@@ -18,19 +19,19 @@ import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
 public class UnknownContainerNameException extends Exception {
 	private static final long serialVersionUID = 3499163979287233832L;
 	
-	Map<String, ContainerImpl> containers = null;
+	Map<String, Container> containers = null;
 
 	/**
 	 * 
 	 */
-	public UnknownContainerNameException(Map<String, ContainerImpl> containers) {
+	public UnknownContainerNameException(Map<String, Container> containers) {
 		this.containers = containers;
 	}
 
 	/**
 	 * @param message
 	 */
-	public UnknownContainerNameException(Map<String, ContainerImpl> containers, String message) {
+	public UnknownContainerNameException(Map<String, Container> containers, String message) {
 		super(message);
 		this.containers = containers;
 	}
@@ -38,7 +39,7 @@ public class UnknownContainerNameException extends Exception {
 	/**
 	 * @param cause
 	 */
-	public UnknownContainerNameException(Map<String, ContainerImpl> containers, Throwable cause) {
+	public UnknownContainerNameException(Map<String, Container> containers, Throwable cause) {
 		super(cause);
 		this.containers = containers;
 	}
@@ -47,7 +48,7 @@ public class UnknownContainerNameException extends Exception {
 	 * @param message
 	 * @param cause
 	 */
-	public UnknownContainerNameException(Map<String, ContainerImpl> containers, String message, Throwable cause) {
+	public UnknownContainerNameException(Map<String, Container> containers, String message, Throwable cause) {
 		super(message, cause);
 		this.containers = containers;
 	}

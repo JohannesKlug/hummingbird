@@ -1,12 +1,12 @@
 package com.logica.hummingbird.telemetry;
 
-public class Parameter implements HummingbirdParameter {
+public class DefaultSpaceParameter implements HummingbirdParameter {
 	
 	String name;
 	Class<?> clazz;
 	Object value;
 	
-	public Parameter(String name, Class<?> clazz, Object value) {
+	public DefaultSpaceParameter(String name, Class<?> clazz, Object value) {
 		super();
 		this.name = name;
 		this.clazz = clazz;

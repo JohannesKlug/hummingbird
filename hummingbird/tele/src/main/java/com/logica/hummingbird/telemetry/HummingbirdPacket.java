@@ -8,8 +8,8 @@ public interface HummingbirdPacket {
 	public String getName();
 
 	public void addParameter(HummingbirdParameter parameter);
-	
+
 	public List<HummingbirdParameter> getParameters();
-	
-	public HummingbirdParameter getParameter(String name);	
+
+	public HummingbirdParameter getParameter(String name);
 }

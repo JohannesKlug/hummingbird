@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
 import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
 import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.telemetry.Parameter;
+import com.logica.hummingbird.telemetry.DefaultSpaceParameter;
 
 /**
  * TODO write here a description of the class
@@ -54,21 +54,21 @@ public class HummingbirdParameterProducer extends AbstractProducer implements Pa
 	}
 
 	@Override public final void updated(String field, int value) {
-		parent.packet.addParameter(new Parameter(field, Integer.class, value));
+		parent.packet.addParameter(new DefaultSpaceParameter(field, Integer.class, value));
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value + " and added to parent " + parent.getPacket().getName());
 		}
 	}
 
 	@Override public final void updated(String field, String value) {		
-		parent.packet.addParameter(new Parameter(field, value.getClass(), value));
+		parent.packet.addParameter(new DefaultSpaceParameter(field, value.getClass(), value));
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value + " and added to parent " + parent.getPacket().getName());
 		}
 	}
 
 	@Override public final void updated(String field, double value) {
-		parent.packet.addParameter(new Parameter(field, Double.class, value));
+		parent.packet.addParameter(new DefaultSpaceParameter(field, Double.class, value));
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value + " and added to parent " + parent.getPacket().getName());
 		}

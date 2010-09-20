@@ -6,16 +6,16 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Packet implements HummingbirdPacket {
-	private final static Logger LOG = LoggerFactory.getLogger(Packet.class);
+public class DefaultSpacePacket implements HummingbirdPacket {
+	private final static Logger LOG = LoggerFactory.getLogger(DefaultSpacePacket.class);
 	
 	String name = "Default packet";
 	List<HummingbirdParameter> parameters;
 
-	public Packet() {
+	public DefaultSpacePacket() {
 	}
 	
-	public Packet(String name) {
+	public DefaultSpacePacket(String name) {
 		this.name = name;
 	}
 

@@ -1,6 +1,7 @@
 package com.logica.hummingbird.spacesystemmodel.testsupport;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterT
  * They will be read by CCSDS packet 
  * 
  * @author Mark Doyle <markjohndoyle@googlemail.com>, <mark.doyle@logica.com>
+ * @author Johannes Klug
  * @since Hummingbird 0.0.1
  */
 public class MockParameterContainerModel implements ContainerFactory {
@@ -71,7 +73,7 @@ public class MockParameterContainerModel implements ContainerFactory {
 
 	public static final String PAYLOAD_LENGTH_PARAM_ALIAS = "PayloadLength";
 
-	private Map<String, ContainerImpl> containers = new HashMap<String, ContainerImpl>();
+	private Map<String, Container> containers = new HashMap<String, Container>();
 	private Map<String, ParameterContainer> parameters = new HashMap<String, ParameterContainer>();
 
 	private Map<Parameter, List<String>> restrictions = new HashMap<Parameter, List<String>>();
@@ -169,7 +171,7 @@ public class MockParameterContainerModel implements ContainerFactory {
 	@Override
 	public Container getContainer(String name) throws UnknownContainerNameException {
 
-		ContainerImpl container = containers.get(name);
+		Container container = containers.get(name);
 
 		if (container == null) {
 			throw new UnknownContainerNameException(containers,
@@ -224,6 +226,11 @@ public class MockParameterContainerModel implements ContainerFactory {
 	@Override
 	public Map<Parameter, List<String>> getAllParameterRestrictions() {
 		return restrictions;
+	}
+
+	@Override
+	public Collection<Container> getAllContainers() {
+		return containers.values();
 	}
 
 }

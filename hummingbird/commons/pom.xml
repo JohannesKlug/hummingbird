@@ -32,9 +32,9 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							com.logica.hummingbird.*,
-							com.logica.hummingbird.util*
-							com.logica.hummingbird.util.exceptions*					
+							com.logica.hummingbird*,
+							com.logica.hummingbird.util*,
+							com.logica.hummingbird.util.exceptions*	
 						</Export-Package>
 					</instructions>
 				</configuration>

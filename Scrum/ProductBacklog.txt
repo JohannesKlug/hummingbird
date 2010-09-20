@@ -4,4 +4,5 @@ XTCE designer
 Overview documentation
 Submodule documentation
 Radio interface to the rocket
+Simulator capable of generating and sending both binary data and hummingbird tm/tc objects over camel.
 

@@ -27,66 +27,65 @@
 
 
 		<ParameterSet>
-			<Parameter parameterTypeRef="11bitInteger" name="XWING_APID" />
-			<Parameter parameterTypeRef="16bitInteger" name="PACKET_LENGTH" />
-			<Parameter parameterTypeRef="32bitFloat" name="XWING_FLIGHT_HOURS" />
-			<Parameter parameterTypeRef="64bitFloat" name="XWING_LASER_TEMP" />
+			<Parameter parameterTypeRef="11bitInteger" name="apid" />
+			<Parameter parameterTypeRef="16bitInteger" name="packet_Length" />
+			<Parameter parameterTypeRef="32bitFloat" name="flight_hours" />
+			<Parameter parameterTypeRef="64bitFloat" name="laser_temp" />
 		</ParameterSet>
 
 
 		<ContainerSet>
-			<SequenceContainer name="TMPacket" shortDescription="CCSDS TM Packet">
+			<SequenceContainer name="TM_PACKET" shortDescription="CCSDS TM Packet">
 				<EntryList>
-					<ContainerRefEntry containerRef="TMPacketHeader" />
+					<ContainerRefEntry containerRef="TM_PACKET_HEADER" />
 				</EntryList>
 			</SequenceContainer>
 
-			<SequenceContainer name="TMPacketHeader" shortDescription="CCSDS TM Packet Header" abstract="true">
+			<SequenceContainer name="TM_PACKET_HEADER" shortDescription="CCSDS TM Packet Header" abstract="true">
 				<EntryList>
-					<ParameterRefEntry parameterRef="XWING_APID" />
-					<ParameterRefEntry parameterRef="PACKET_LENGTH" />
+					<ParameterRefEntry parameterRef="apid" />
+					<ParameterRefEntry parameterRef="packet_length" />
 				</EntryList>
 			</SequenceContainer>
 
-			<SequenceContainer name="FlightHours"
+			<SequenceContainer name="TM_FLIGHT_HOURS"
 				shortDescription="contains all telemetred data parameters for for X=Wing flight hours">
 				<EntryList>
-					<ParameterRefEntry parameterRef="XWING_FLIGHT_HOURS" />
+					<ParameterRefEntry parameterRef="flight_hours" />
 				</EntryList>
-				<BaseContainer containerRef="TMPacketHeader">
+				<BaseContainer containerRef="TM_PACKET_HEADER">
 					<RestrictionCriteria>
 						<ComparisonList>
-							<Comparison parameterRef="XWING_APID" value="555" />
+							<Comparison parameterRef="apid" value="555" />
 						</ComparisonList>
 					</RestrictionCriteria>
 				</BaseContainer>
 			</SequenceContainer>
 
-			<SequenceContainer name="LaserTemp"
+			<SequenceContainer name="TM_LASER_TEMP"
 				shortDescription="contains all telemetred data parameters for X-Wing laser temp">
 				<EntryList>
-					<ParameterRefEntry parameterRef="XWING_LASER_TEMP" />
+					<ParameterRefEntry parameterRef="laser_temp" />
 				</EntryList>
-				<BaseContainer containerRef="TMPacketHeader">
+				<BaseContainer containerRef="TM_PACKET_HEADER">
 					<RestrictionCriteria>
 						<ComparisonList>
-							<Comparison parameterRef="XWING_APID" value="888" />
+							<Comparison parameterRef="apid" value="888" />
 						</ComparisonList>
 					</RestrictionCriteria>
 				</BaseContainer>
 			</SequenceContainer>
 
-			<SequenceContainer name="AllSystems"
+			<SequenceContainer name="TM_ALL_SYSTEMS"
 				shortDescription="contains all telemetred data parameters for X-Wing laser temp and flight hours">
 				<EntryList>
-					<ParameterRefEntry parameterRef="PACKET_LENGTH" />
-					<ParameterRefEntry parameterRef="XWING_LASER_TEMP" />
-					<ParameterRefEntry parameterRef="XWING_FLIGHT_HOURS" />
+					<ParameterRefEntry parameterRef="laser_temp" />
+					<ParameterRefEntry parameterRef="flight_hours" />
 				</EntryList>
-				<BaseContainer containerRef="TMPacketHeader">
+				<BaseContainer containerRef="TM_PACKET_HEADER">
 					<RestrictionCriteria>
 						<ComparisonList>
-							<Comparison parameterRef="XWING_APID" value="1" />
+							<Comparison parameterRef="apid" value="1" />
 						</ComparisonList>
 					</RestrictionCriteria>
 				</BaseContainer>

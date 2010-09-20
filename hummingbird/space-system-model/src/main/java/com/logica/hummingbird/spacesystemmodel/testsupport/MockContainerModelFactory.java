@@ -1,6 +1,7 @@
 package com.logica.hummingbird.spacesystemmodel.testsupport;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,7 +83,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 
 	public static final String VALIDITY_FLAG_ALIAS = "ValidityFlag";
 
-	private Map<String, ContainerImpl> containers = new HashMap<String, ContainerImpl>();
+	private Map<String, Container> containers = new HashMap<String, Container>();
 	private Map<String, ParameterContainer> parameters = new HashMap<String, ParameterContainer>();
 
 	public MockContainerModelFactory() throws InvalidParameterTypeException {
@@ -224,7 +225,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 	@Override
 	public Container getContainer(String name) throws UnknownContainerNameException {
 
-		ContainerImpl container = containers.get(name);
+		Container container = containers.get(name);
 
 		if (container == null) {
 			throw new UnknownContainerNameException(containers, "Your container lookup for '" + name
@@ -267,6 +268,11 @@ public class MockContainerModelFactory implements ContainerFactory {
 	public Map<Parameter, List<String>> getAllParameterRestrictions() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Collection<Container> getAllContainers() {
+		return containers.values();
 	}
 
 }

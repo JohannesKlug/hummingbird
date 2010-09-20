@@ -27,6 +27,7 @@
 package com.logica.hummingbird.spacesystemmodel;
 
 import java.util.BitSet;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -106,4 +107,14 @@ public interface Container {
 	String getName();
 	
 	Map<Parameter, String> getRestrictions();
+
+	void addRestriction(Parameter param, String comparisonValue);
+
+	void addContainer(Container container);
+	
+	void addContainer(Collection<? extends Container> containers);
+
+	void addParent(Container parentContainer);
+
+	List<Container> getParents();
 }

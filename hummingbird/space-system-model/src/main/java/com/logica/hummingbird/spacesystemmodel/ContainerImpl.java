@@ -88,7 +88,7 @@ public class ContainerImpl extends NamedElement implements Container {
 	protected List<PacketObserver> completionObservers = new ArrayList<PacketObserver>();
 	protected List<ParameterObserver> updatedParameterObservers = new ArrayList<ParameterObserver>();
 
-	protected Container parent = null;
+	protected List<Container> parents = new ArrayList<Container>();
 
 	/**
 	 * Constructor of the Container class.
@@ -105,6 +105,13 @@ public class ContainerImpl extends NamedElement implements Container {
 		super(name, shortDescription, longDescription);
 	}
 
+	public ContainerImpl(String name, String shortDescription, String longDescription, List<Container> parents) {
+		super(name, shortDescription, longDescription);
+		for(Container p : parents) {
+			this.parents.add(p);
+		}
+	}
+
 	/**
 	 * Validate whether the restrictions set on this container are fulfilled.
 	 * 
@@ -112,7 +119,7 @@ public class ContainerImpl extends NamedElement implements Container {
 	 * 
 	 */
 	protected final boolean matchRestrictions() {
-		if(restrictions.size() == 0) {
+		if (restrictions.size() == 0) {
 			return true;
 		}
 		// Check for match against the restriction criteria. The base container will forward the data to all containers
@@ -130,13 +137,13 @@ public class ContainerImpl extends NamedElement implements Container {
 			// process specific APIDs, based on a restriction on the APID.
 			match = entry.getKey().match(entry.getValue());
 		}
-		
+
 		return match;
 	}
 
 	@Override
 	public BitSet unmarshall(BitSet packet) {
-		if(LOG.isDebugEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Unmarshalling " + this.getName());
 		}
 		// Check if the BitSet has been truncated by testing it against the known length of the container.
@@ -162,14 +169,13 @@ public class ContainerImpl extends NamedElement implements Container {
 		if (truncated) {
 			completeBitData = packet.get(0, getLength());
 			completeBitData.set(getLength());
-			if(LOG.isDebugEnabled()) {
+			if (LOG.isDebugEnabled()) {
 				LOG.debug("CompletedBitData post truncation fix = " + BitSetUtility.binDump(completeBitData));
 			}
 		}
 		else {
 			completeBitData = packet;
 		}
-		
 
 		// If the packet should be processed by this container.
 		if (matchRestrictions()) {
@@ -212,7 +218,7 @@ public class ContainerImpl extends NamedElement implements Container {
 
 		// If the packet should be processed by this container...
 		if (matchRestrictions()) {
-			str += "{" + this.name;
+			str += this.name + "{";
 			for (Container container : subContainers) {
 				str += container.toString();
 			}
@@ -271,14 +277,13 @@ public class ContainerImpl extends NamedElement implements Container {
 
 	/**
 	 * Returns the length of the complete container in bits. This simply iterates over all the sub containers until
-	 * getting the lengths of each one that matches the restrictions. The length of a Container is defined as the 
-	 * length of all it's SubContainers parameters <b>taking any restrictions into account</b>. These parameters may be 
-	 * grouped into other containers, e.g., headers, packet body etc but these are conceptual and have no size. For  
-	 * example, a FrameHeader Container is an abstract container consisting of n sub containers, x of this will be 
-	 * concrete parameter values (where x <= n). When iterating over its sub containers it will eventually hit the 
-	 * parameters of which it is made up; these know how large they are and return their length value. This value 
-	 * is propagated back up to the initial container having been summed with all the other sub-containers via the 
-	 * getLength methods loop.
+	 * getting the lengths of each one that matches the restrictions. The length of a Container is defined as the length
+	 * of all it's SubContainers parameters <b>taking any restrictions into account</b>. These parameters may be grouped
+	 * into other containers, e.g., headers, packet body etc but these are conceptual and have no size. For example, a
+	 * FrameHeader Container is an abstract container consisting of n sub containers, x of this will be concrete
+	 * parameter values (where x <= n). When iterating over its sub containers it will eventually hit the parameters of
+	 * which it is made up; these know how large they are and return their length value. This value is propagated back
+	 * up to the initial container having been summed with all the other sub-containers via the getLength methods loop.
 	 * 
 	 * The length is reset before each call.
 	 */
@@ -319,4 +324,23 @@ public class ContainerImpl extends NamedElement implements Container {
 	public Map<Parameter, String> getRestrictions() {
 		return restrictions;
 	}
+
+	@Override
+	public List<Container> getParents() {
+		return parents;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.logica.hummingbird.spacesystemmodel.Container#setParent(com.logica.hummingbird.spacesystemmodel.Container)
+	 */
+	@Override
+	public void addParent(Container parentContainer) {
+		if (parentContainer != null) {
+			this.parents.add(parentContainer);
+		}
+	}
 }
+
