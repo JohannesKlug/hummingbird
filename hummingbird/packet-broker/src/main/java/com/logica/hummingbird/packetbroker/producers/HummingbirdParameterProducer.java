@@ -53,22 +53,25 @@ public class HummingbirdParameterProducer extends AbstractProducer implements Pa
 		}
 	}
 
-	@Override public final void updated(String field, int value) {
-		parent.packet.addParameter(new DefaultSpaceParameter(field, Integer.class, value));
+	@Override
+	public final void updated(String field, int value, String shortDescription, String longDescription) {
+		parent.packet.addParameter(new DefaultSpaceParameter(field, Integer.class, value, shortDescription, longDescription));
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value + " and added to parent " + parent.getPacket().getName());
 		}
 	}
 
-	@Override public final void updated(String field, String value) {		
-		parent.packet.addParameter(new DefaultSpaceParameter(field, value.getClass(), value));
+	@Override
+	public final void updated(String field, String value, String shortDescription, String longDescription) {
+		parent.packet.addParameter(new DefaultSpaceParameter(field, value.getClass(), value, shortDescription, longDescription));
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value + " and added to parent " + parent.getPacket().getName());
 		}
 	}
 
-	@Override public final void updated(String field, double value) {
-		parent.packet.addParameter(new DefaultSpaceParameter(field, Double.class, value));
+	@Override
+	public final void updated(String field, double value, String shortDescription, String longDescription) {
+		parent.packet.addParameter(new DefaultSpaceParameter(field, Double.class, value, shortDescription, longDescription));
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Updated Parameter: " + field + " : " + value + " and added to parent " + parent.getPacket().getName());
 		}

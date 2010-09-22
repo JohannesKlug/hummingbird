@@ -48,18 +48,18 @@ public class IntegerParameter extends ParameterContainer {
 
 		// Notify all our observers that the value has changed.
 		for (ParameterObserver paramObserver : updatedParameterObservers) {
-			paramObserver.updated(name, value.intValue());
+			paramObserver.updated(name, value.intValue(), shortDescription, longDescription);
 		}
 
 		// Chop off this integer parameter because it has now been unmarshalled
-		if(LOG.isDebugEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Bitset before post unmarshall chop = " + BitSetUtility.binDump(packet));
 		}
 		BitSet returnPacket = packet.get((int) type.getSizeInBits(), packet.length() + 1);
-		if(LOG.isDebugEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Bitset after post unmarshall chop = " + BitSetUtility.binDump(returnPacket));
 		}
-		// Return the rest of the binary bitset to the calling container 
+		// Return the rest of the binary bitset to the calling container
 		return returnPacket;
 	}
 

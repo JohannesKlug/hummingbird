@@ -1,16 +1,27 @@
 package com.logica.hummingbird.telemetry;
 
 public class DefaultSpaceParameter implements HummingbirdParameter {
-	
-	String name;
-	Class<?> clazz;
-	Object value;
-	
+
+	private String name;
+	private Class<?> clazz;
+	private Object value;
+	private String shortDescription = null;
+	private String longDescription = null;
+
 	public DefaultSpaceParameter(String name, Class<?> clazz, Object value) {
 		super();
 		this.name = name;
 		this.clazz = clazz;
 		this.value = value;
+	}
+
+	public DefaultSpaceParameter(String name, Class<?> clazz, Object value, String shortDescription, String longDescription) {
+		super();
+		this.name = name;
+		this.clazz = clazz;
+		this.value = value;
+		this.shortDescription = shortDescription;
+		this.longDescription = longDescription;
 	}
 
 	@Override
@@ -29,6 +40,16 @@ public class DefaultSpaceParameter implements HummingbirdParameter {
 	}
 
 	@Override
+	public String getShortDescription() {
+		return this.shortDescription;
+	}
+
+	@Override
+	public String getLongDescription() {
+		return this.longDescription;
+	}
+
+	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Parameter [clazz=");
@@ -40,5 +61,4 @@ public class DefaultSpaceParameter implements HummingbirdParameter {
 		builder.append("]");
 		return builder.toString();
 	}
-
 }

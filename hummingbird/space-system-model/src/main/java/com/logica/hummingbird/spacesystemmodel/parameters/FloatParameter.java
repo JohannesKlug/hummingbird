@@ -77,7 +77,7 @@ public class FloatParameter extends ParameterContainer {
 		value = this.getType().getNumberBehaviour().valueFromBitSet(packet);
 
 		for (ParameterObserver paramObserver : updatedParameterObservers) {
-			paramObserver.updated(name, value.doubleValue());
+			paramObserver.updated(name, value.doubleValue(), shortDescription, longDescription);
 		}
 
 		return packet.get((int) type.getSizeInBits(), packet.length() + 1);
