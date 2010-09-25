@@ -28,9 +28,7 @@ public class Float32Behaviour extends AbstractFloatBehaviour {
 
 		BitSet actualBitSet = packet.get(offset, offset + (int) getSizeInBits());
 
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Float Parameter BitSet taken from bitset in = " + BitSetUtility.binDump(actualBitSet));
-		}
+		LOG.debug("Float Parameter BitSet taken from bitset in = " + BitSetUtility.binDump(actualBitSet));
 
 		return Float.intBitsToFloat(BitSetUtility.toInt(actualBitSet));
 	}

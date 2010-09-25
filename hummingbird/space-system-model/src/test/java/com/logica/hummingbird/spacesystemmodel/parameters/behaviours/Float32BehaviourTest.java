@@ -9,7 +9,6 @@ import java.util.BitSet;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -109,6 +108,13 @@ public class Float32BehaviourTest {
 		BitSet actual = new BitSet();
 		actual = float32behaviour.insertIntoBitSet(GOLDEN_RATIO, actual, 0);
 		assertEquals(actual, GOLDEN_RATIO_TEST_BITSET);
+	}
+
+	@Test
+	public void testInsertIntoBitSetBoundaryTest() throws BitSetOperationException {
+		BitSet actual = new BitSet();
+		actual = float32behaviour.insertIntoBitSet(BOUNDARY_SET_TEST_FLOAT, actual, 0);
+		assertEquals(actual, BOUNDARY_SET_TEST_FLOAT_BITSET);
 	}
 
 	@Test(expected = BitSetOperationException.class)
