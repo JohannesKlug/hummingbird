@@ -44,6 +44,7 @@ public class Float32Behaviour extends AbstractFloatBehaviour {
 		int intBits = Float.floatToIntBits(value);
 
 		String binaryString = Integer.toBinaryString(intBits);
+		LOG.debug("Float32 insertIntoBitSet - Binary string = " + binaryString);
 
 		if (value >= 0) {
 			// We have to add the Sign bit manually for positive Numbers
@@ -52,6 +53,18 @@ public class Float32Behaviour extends AbstractFloatBehaviour {
 
 		// Get the BitSet from the String.
 		BitSet valueBitSet = this.bitSetFromString(binaryString);
+
+		// If the floats has leading zeros the int conversion above will truncate them. This is expected as
+		// the leading zeros are surplus for a Java big endian int. They are however vital to an IEEE-754 float
+		// since they contain the sign, exponent and mantissa. We must repair the bitset in this case.
+		if (valueBitSet.length() < 32) {
+			// int truncation = 32 - valueBitSet.length();
+			String bitsetString = BitSetUtility.bitSetToBinaryString(valueBitSet, true);
+			LOG.debug("Truncated bitset = " + bitsetString);
+			bitsetString = BitSetUtility.padStringFromTheFront(bitsetString, 32);
+			LOG.debug("Repaired bitset = " + bitsetString);
+			valueBitSet = BitSetUtility.stringToBitSet(bitsetString, true, true);
+		}
 
 		// Insert the value BitSet into the target BitSet and return
 		for (int i = 0; i < getSizeInBits(); i++) {
@@ -62,6 +75,8 @@ public class Float32Behaviour extends AbstractFloatBehaviour {
 				bitSetTarget.clear(i + offset);
 			}
 		}
+
+		LOG.debug("Returning BitSet = " + BitSetUtility.binDump(bitSetTarget));
 		return bitSetTarget;
 	}
 
