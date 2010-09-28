@@ -60,7 +60,7 @@ public class CcsdsPacketDispatcher extends Observable{
 		int apid = apidHighByte + apidLowByte;
 		LOG.debug("Apid: " + apid);
 		
-		int packetSequenceFlags = (0xC0 & primaryHeader[2] >>> 6);
+		int packetSequenceFlags = (0xC0 & primaryHeader[2]) >> 6;
 		LOG.debug("Packet Sequence Flags: " + packetSequenceFlags);
 		
 		int packetSequenceCountOrPacketNameHighByte = (0x3F &primaryHeader[2]) << 8;
