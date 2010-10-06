@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  	<parent>
+		<artifactId>hummingbird</artifactId>
+		<groupId>com.logica.hummingbird</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.logica.hummingbird</groupId>
+	<artifactId>validation</artifactId>
+	<packaging>bundle</packaging>
+	<name>validation</name>
+	<version>0.0.1-SNAPSHOT</version>
+  	<description>A Simulator that produces telemetry according to its setup.</description>
+  	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<instructions>
+						<Export-Package>
+							com.logica.hummingbird.validation							
+						</Export-Package>
+						<Private-Package>
+							com.logica.hummingbird,
+							org.slf4j.*
+						</Private-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test</artifactId>
+		<scope>test</scope>
+	</dependency>
+		
+	</dependencies>
+	
+</project>
