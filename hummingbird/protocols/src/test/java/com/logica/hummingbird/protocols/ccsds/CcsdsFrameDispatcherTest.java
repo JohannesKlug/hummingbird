@@ -1,4 +1,4 @@
-package com.logica.hummingbird.framebroker;
+package com.logica.hummingbird.protocols.ccsds;
 
 
 import static org.junit.Assert.assertEquals;
@@ -12,12 +12,15 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.logica.hummingbird.framebroker.exceptions.FrameFailedCrcCheckException;
-import com.logica.hummingbird.framebroker.exceptions.InvalidFrameLengthException;
+import com.logica.hummingbird.protocols.ccsds.spacepacket.CcsdsPacketDispatcher;
+import com.logica.hummingbird.protocols.ccsds.spacepacket.PacketPayload;
+import com.logica.hummingbird.protocols.ccsds.transferframe.CcsdsFrameDispatcher;
+import com.logica.hummingbird.protocols.ccsds.transferframe.FramePayload;
+import com.logica.hummingbird.protocols.ccsds.transferframe.exceptions.FrameFailedCrcCheckException;
+import com.logica.hummingbird.protocols.ccsds.transferframe.exceptions.InvalidFrameLengthException;
 
 public class CcsdsFrameDispatcherTest implements Observer {
 

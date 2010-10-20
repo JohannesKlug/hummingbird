@@ -1,4 +1,4 @@
-package com.logica.hummingbird.framebroker;
+package com.logica.hummingbird.protocols.ccsds.transferframe;
 
 import org.apache.commons.lang.ArrayUtils;
 

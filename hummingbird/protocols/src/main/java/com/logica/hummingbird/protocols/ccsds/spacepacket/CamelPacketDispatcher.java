@@ -1,4 +1,4 @@
-package com.logica.hummingbird.framebroker;
+package com.logica.hummingbird.protocols.ccsds.spacepacket;
 
 import java.util.Observable;
 import java.util.Observer;

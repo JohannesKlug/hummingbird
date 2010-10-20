@@ -1,4 +1,4 @@
-package com.logica.hummingbird.framebroker.exceptions;
+package com.logica.hummingbird.protocols.ccsds.transferframe.exceptions;
 
 public class FrameFailedCrcCheckException extends Exception {
 
