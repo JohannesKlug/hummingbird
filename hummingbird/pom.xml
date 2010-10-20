@@ -14,11 +14,11 @@
 
 	<modules>
 		<module>commons</module>
+		<module>protocols</module>
 		<module>tele</module>
 		<module>ccsds</module>
 		<module>space-system-model</module>
 		<module>xtce</module>
-		<module>frame-broker</module>
 		<module>packetarchive</module>
 		<module>parameterarchive</module>
 		<module>help</module>
