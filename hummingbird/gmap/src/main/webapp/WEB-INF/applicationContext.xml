@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context-2.5.xsd
+       http://camel.apache.org/schema/spring 
+       http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="tcp://localhost:61616" />
+	</bean>
+
+	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
+		<property name="maxConnections" value="8" />
+		<property name="maximumActive" value="500" />
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+	</bean>
+
+
+	<bean id="jmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
+		<property name="connectionFactory" ref="pooledConnectionFactory" />
+		<property name="transacted" value="false" />
+		<property name="concurrentConsumers" value="10" />
+	</bean>
+
+	<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+		<property name="configuration" ref="jmsConfig" />
+	</bean>
+
+
+	<!-- double timeCounter, double angularFrequency, double amplitude, double phase, String name -->
+	<bean id="sender" class="com.logica.hummingbird.gmap.PositionSender">
+		<property name="template" ref="template"/>
+	</bean>
+
+
+	<camelContext id="simulatorContext" xmlns="http://camel.apache.org/schema/spring">
+
+		<template id="template"/>
+		
+		<route>
+			<from uri="timer://sender?fixedRate=true&amp;period=2000" />
+			<to uri="bean:sender?method=processSend" />
+			<to uri="cometd://0.0.0.0:8081/gui-cometd-gmap-0.0.1-SNAPSHOT/position?baseResource=classpath:webapp" />
+		</route>
+
+		<route>
+			<from uri="activemq:topic:Parameter?selector=Name='longitude'" />
+			<to uri="bean:sender?method=processLongitude" />
+		</route>
+
+		<route>
+			<from uri="activemq:topic:Parameter?selector=Name='latitude'" />
+			<to uri="bean:sender?method=processLatitude" />
+		</route>
+
+		<route>
+			<from uri="activemq:topic:Parameter?selector=Name='elevation'" />
+			<to uri="bean:sender?method=processElevation" />
+		</route>
+
+		<route>
+			<from uri="activemq:topic:Parameter?selector=StateOff='battery'" />
+			<to uri="bean:sender?method=processState" />
+		</route>
+		
+	</camelContext>
+</beans>

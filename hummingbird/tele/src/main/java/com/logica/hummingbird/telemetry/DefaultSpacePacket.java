@@ -11,6 +11,7 @@ public class DefaultSpacePacket implements HummingbirdPacket {
 	
 	String name = "Default packet";
 	List<HummingbirdParameter> parameters;
+	protected long sourceSequenceCounter = 0;
 
 	public DefaultSpacePacket() {
 	}
@@ -65,6 +66,11 @@ public class DefaultSpacePacket implements HummingbirdPacket {
 			}
 		}
 		return found;
+	}
+
+	@Override
+	public long getSouceSequenceCounter() {
+		return sourceSequenceCounter;
 	}
 
 }
