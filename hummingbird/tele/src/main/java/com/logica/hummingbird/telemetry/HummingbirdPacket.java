@@ -12,4 +12,6 @@ public interface HummingbirdPacket {
 	public List<HummingbirdParameter> getParameters();
 
 	public HummingbirdParameter getParameter(String name);
+	
+	public long getSouceSequenceCounter();
 }

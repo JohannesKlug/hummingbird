@@ -11,4 +11,8 @@ public interface HummingbirdParameter {
 	String getShortDescription();
 
 	String getLongDescription();
+	
+	int compareTo(HummingbirdParameter rightHandSide) throws NotComparableTypeException;
+	
+	boolean asBoolean();
 }
