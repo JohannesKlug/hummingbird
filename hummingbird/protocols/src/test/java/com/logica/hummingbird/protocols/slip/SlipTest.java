@@ -76,9 +76,20 @@ public class SlipTest implements Observer {
 					}
 				}
 		).start();
-		Thread.sleep(100);
+		Thread.sleep(1000);
 		assertEquals(0, receivedBytes.length);
 	
+		
+		os.write(0);
+		os.write(1);
+		os.write(255);
+		os.write(END);
+		
+		Thread.sleep(2000);
+		assertEquals(3, receivedBytes.length);
+		assertEquals(0, receivedBytes[0] & 0xFF);
+		assertEquals(1, receivedBytes[1] & 0xFF);
+		assertEquals(255, receivedBytes[2] & 0xFF);
 		
 
 	}
