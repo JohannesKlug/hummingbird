@@ -7,3 +7,5 @@ hummingbird/xtce/src/main/java/com/logica/hummingbird/xtce/castor/
 .springBeans
 .idea/
 *.iml
+
+hummingbird/validation/logs/limit-validation.log

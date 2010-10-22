@@ -1,8 +1,26 @@
+/**
+ * Licensed to the Hummingbird Foundation (HF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The HF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.logica.hummingbird.validation.packet;
 
-import com.logica.hummingbird.validation.TmPacketDummy;
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 
-
+import com.logica.hummingbird.telemetry.DefaultSpaceParameter;
+import com.logica.hummingbird.telemetry.HummingbirdPacket;
 
 
 /**
@@ -12,8 +30,12 @@ import com.logica.hummingbird.validation.TmPacketDummy;
  * @author Villemosg
  *
  */
-public class SequenceCounterGapCheck extends BasePacketRule {
+public class SequenceCounterGapCheck implements Processor {
 
+	static String stateName = "Continiuity";
+	static String ruleName = "Sequence Counter Based Check";
+
+	
 	/** The counter at which the SSC wraps. The last value is NOT included, i.e. the 
 	 * counter goes {0, 1, 2, ... , 65533, 65534, 0, 1, 2, ...}. */
 	private int wrapCount = 65535;
@@ -29,12 +51,9 @@ public class SequenceCounterGapCheck extends BasePacketRule {
 	/** How many packets (based on the SSC) must be lost to trigger the rule? */
 	protected long triggerLimit = 1;
 	
-	public SequenceCounterGapCheck() {
-		stateName = "Continiuity";
-		ruleName = "Sequence Counter Based Check";
-	}
-	
-	public boolean rule(TmPacketDummy packet) {
+	@Override
+	public void process(Exchange arg0) throws Exception {
+		HummingbirdPacket packet = (HummingbirdPacket) arg0.getIn(HummingbirdPacket.class); 
 		boolean ruleParsed = true;
 		
 		if (initialised == false) {
@@ -43,14 +62,14 @@ public class SequenceCounterGapCheck extends BasePacketRule {
 		else {			
 			/** Only trigger an alarm if more packets have been lost than the 
 			 * minimum trigger limit. */
-			if (triggerLimit <= packet.ssc%getWrapCount() - expectedSsc) {
+			if (triggerLimit <= packet.getSouceSequenceCounter()%getWrapCount() - expectedSsc) {
 				ruleParsed = false;	
 			}	
 		}				
 				
-		expectedSsc = (packet.ssc + 1)%getWrapCount();
+		expectedSsc = (packet.getSouceSequenceCounter() + 1)%getWrapCount();
 		
-		return ruleParsed;
+		arg0.getIn().setBody(new DefaultSpaceParameter(stateName, Boolean.class, ruleParsed));
 	}
 
 	public void reset() {

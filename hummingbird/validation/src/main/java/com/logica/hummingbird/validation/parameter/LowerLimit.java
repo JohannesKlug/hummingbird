@@ -1,20 +1,55 @@
+/**
+ * Licensed to the Hummingbird Foundation (HF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The HF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.logica.hummingbird.validation.parameter;
 
-import com.logica.hummingbird.validation.TmParameterDummy;
+import com.logica.hummingbird.telemetry.NotComparableTypeException;
 
-public class LowerLimit extends BaseParameterRule {
-
-	protected Parameter limit = null;
-
-	public LowerLimit(Parameter parameter) {
-		limit = parameter;
+/**
+ * Limit class for checking whether a lower end limit has been violated.
+ */
+public class LowerLimit extends BaseLimit {
+	
+	
+	/**
+	 * Constructor with no initial limit value. The limit will NOT start processing
+	 * before a limit value has been received through the processLimit() method.
+	 * 
+	 * @param stateName Name of the state parameter that will be issued.
+	 */
+	public LowerLimit(String stateName) {
+		super(stateName);
 	}
 
-	public LowerLimit(double value) {
-		limit = new Parameter(value);
+	/**
+	 * Constructor with an initial limit value. The limit will start processing
+	 * Immediately. The limit value may later be changed through the processLimit() method.
+	 * 
+	 * @param stateName Name of the state parameter that will be issued.
+	 * @param limit Initial limit value.
+	 */
+	public LowerLimit(String stateName, double limit) {
+		super(stateName);
+		this.limit = limit;
 	}
 
-	public boolean rule(TmParameterDummy packet) {		
-		return limit.getValue().getValue() <= packet.getValue();
-	}
+	/* (non-Javadoc)
+	 * @see com.logica.hummingbird.validation.parameter.BaseLimit#checkLimit()
+	 */
+	protected boolean checkLimit() throws NotComparableTypeException {
+		return (Double) parameter >= limit;
+	}	
 }
