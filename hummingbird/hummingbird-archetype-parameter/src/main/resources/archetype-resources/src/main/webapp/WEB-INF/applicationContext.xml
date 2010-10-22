@@ -1,0 +1,93 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context-2.5.xsd
+       http://camel.apache.org/schema/spring 
+       http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="tcp://localhost:61616" />
+	</bean>
+
+	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
+		<property name="maxConnections" value="8" />
+		<property name="maximumActive" value="500" />
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+	</bean>
+
+	<bean id="jmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
+		<property name="connectionFactory" ref="pooledConnectionFactory" />
+		<property name="transacted" value="false" />
+		<property name="concurrentConsumers" value="10" />
+	</bean>
+
+	<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+		<property name="configuration" ref="jmsConfig" />
+	</bean>
+
+	<bean id="lowerLimitLinear1" class="com.logica.hummingbird.validation.parameter.LowerLimit">
+		<constructor-arg index="0" value="LINEAR1"/>
+		<constructor-arg index="1" value="10"/>
+	</bean>
+
+	<bean id="upperLimitLinear1" class="com.logica.hummingbird.validation.parameter.UpperLimit">
+		<constructor-arg index="0" value="LINEAR1"/>
+		<constructor-arg index="1" value="50"/>
+	</bean>
+
+	<bean id="lowerLimitLinear2" class="com.logica.hummingbird.validation.parameter.LowerLimit">
+		<constructor-arg index="0" value="LINEAR2"/>
+		<constructor-arg index="1" value="20"/>
+	</bean>
+
+	<bean id="lowerLimitSinus2" class="com.logica.hummingbird.validation.parameter.LowerLimit">
+		<constructor-arg index="0" value="SINUS2"/>
+		<constructor-arg index="1" value="-40"/>
+	</bean>
+
+	<bean id="upperLimitSinus2" class="com.logica.hummingbird.validation.parameter.UpperLimit">
+		<constructor-arg index="0" value="SINUS2"/>
+		<constructor-arg index="1" value="40"/>
+	</bean>
+
+	<bean id="onlyChangeLinear1" class="com.logica.hummingbird.validation.base.OnlyChangeFilter"/>
+
+
+
+
+	<camelContext xmlns="http://camel.apache.org/schema/spring">
+		<route>
+			<from uri="activemq:topic:Parameter" />
+			<filter>
+  	        	<xpath>$Name = 'LINEAR1'</xpath>
+            	<multicast>
+            		<to uri="direct:lowerLimitLinear1"/>
+            		<to uri="direct:upperLimitLinear1"/>
+            	</multicast>
+			</filter>
+		</route>		
+		
+		<route>
+			<from uri="direct:lowerLimitLinear1"/>
+			<to uri="bean:lowerLimitLinear1?method=process"/>
+			<to uri="bean:onlyChangeLinear1?method=process"/>
+			<to uri="activemq:topic:Parameter"/>			
+		</route>
+
+		<route>
+			<from uri="direct:upperLimitLinear1"/>
+			<to uri="bean:upperLimitLinear1?method=process"/>
+			<to uri="bean:onlyChangeLinear1?method=process"/>
+			<to uri="activemq:topic:Parameter"/>			
+		</route>
+				
+	</camelContext>
+</beans>
