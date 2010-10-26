@@ -114,13 +114,9 @@ public class CommandReleaser {
 		/** Command is forwarded in the route, i.e. released. */
 	}
 
-	
-	
 	public void setProducer(ProducerTemplate producer) {
 		this.producer = producer;
 	}
-
-
 
 	public void setStateConnector(IParameterStateConnector stateConnector) {
 		this.stateConnector = stateConnector;

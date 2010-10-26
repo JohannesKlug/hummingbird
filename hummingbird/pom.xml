@@ -33,7 +33,7 @@
 		<module>simple-parameter-simulator</module>
 		<module>hummingbird-archetype-parameter</module>
 
-		<module>commanding-chain</module>
+		<module>command-chain</module>
 	</modules>
 
 	<licenses>
