@@ -2,20 +2,23 @@ package com.logica.hummingbird.simulator;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.apache.camel.test.junit4.CamelTestSupport;
-import org.junit.Test;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
 import com.logica.hummingbird.simulator.waveforms.FlatWaveform;
 
-public class SimulatorTest extends CamelTestSupport {
+/** Will read the Spring configuration of the route from the local file '[filename]-context.xml'*/
+@ContextConfiguration
+public class SimulatorTest extends AbstractJUnit38SpringContextTests  {
 	
+	/** End point injected when the context XML file is read. */
     @EndpointInject(uri = "mock:result")
     protected MockEndpoint resultEndpoint;
     
-    @Test
-    public void TestSimulator() throws Exception {
-    	
-    	resultEndpoint.reset();
+    /** Ensures that the context is reloaded every time a test is run, i.e. no need to reset. */
+	@DirtiesContext
+    public void testSimulator() throws Exception {
     	
     	Simulator simulator = new Simulator(resultEndpoint);
     	
@@ -40,10 +43,8 @@ public class SimulatorTest extends CamelTestSupport {
     	resultEndpoint.assertIsSatisfied();
     }
     
-    @Test
-    public void TestRunningSimulator() throws Exception {
-    	
-    	resultEndpoint.reset();
+	@DirtiesContext
+    public void testRunningSimulator() throws Exception {
     	
     	Simulator simulator = new Simulator(resultEndpoint);
     	simulator.addWaveform(new FlatWaveform(100, 2));
@@ -58,10 +59,8 @@ public class SimulatorTest extends CamelTestSupport {
     	
     }
     
-    @Test
-    public void TestRunningSimulatorPerformance() throws Exception {
-    	
-    	resultEndpoint.reset();
+	@DirtiesContext
+    public void testRunningSimulatorPerformance() throws Exception {
     	
     	resultEndpoint.setExpectedMessageCount(0);
     	resultEndpoint.assertIsSatisfied();
@@ -90,5 +89,4 @@ public class SimulatorTest extends CamelTestSupport {
     	resultEndpoint.assertIsSatisfied();
     	
     }
-
 }
