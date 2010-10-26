@@ -116,12 +116,6 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
-			<artifactId>frame-broker</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
