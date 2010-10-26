@@ -1,14 +1,12 @@
 package com.logica.hummingbird.commandreleaser.scheduler;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 
 import com.logica.hummingbird.interfaces.CommandDefinition;
 import com.logica.hummingbird.interfaces.ICommandConnector;
+import com.logica.hummingbird.interfaces.IParameterStateConnector;
 
 public class Scheduler {
 
