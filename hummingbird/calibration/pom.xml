@@ -2,5 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.logica.hummingbird</groupId>
   <artifactId>calibration</artifactId>
+  <name>Calibration</name>
   <version>0.0.1-SNAPSHOT</version>
+  <description>Component for calculating derived parameters.</description>
 </project>

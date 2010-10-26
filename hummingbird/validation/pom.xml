@@ -11,7 +11,7 @@
 	<groupId>com.logica.hummingbird</groupId>	
 	<artifactId>validation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	
 	<name>Validation Component</name>  	
 	<description>Library containing the logic for validation parameters.</description>
@@ -46,13 +46,25 @@
 			<plugin>
 				<groupId>com.clearstream.build</groupId>
 				<artifactId>maven-inlinedoc-plugin</artifactId>
+				<version>0.0.9</version>
 				<configuration>
-					<input>${project.loc}</input>
+					<input>./</input>
 					<publishers>
 						<publisher implementation="com.clearstream.build.inlinedoc.GithubPublisher">
+							<username>gert.villemos@logica.com</username>
+							<userpassword>path2000</userpassword>						
 							<project>JohannesKlug/Hummingbird</project>
-						</publisher>
+							<proxyEnabled>false</proxyEnabled>
+							<proxyProtocol>http</proxyProtocol>
+							<proxyServer>10.48.187.80</proxyServer>
+							<proxyPort>8080</proxyPort>
+							<format>textile</format>
+						</publisher>						
 					</publishers>
+					
+					<parsers>
+						<parser implementation="com.clearstream.build.inlinedoc.BasicParser"></parser>
+					</parsers>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -69,7 +81,7 @@
 		<dependency>
 			<groupId>com.logica.hummingbird</groupId>
 			<artifactId>jms-helper</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 	
 		<dependency>
@@ -101,6 +113,7 @@
 		<dependency>
 			<groupId>com.clearstream.build</groupId>
 			<artifactId>maven-inlinedoc-plugin</artifactId>
+			<version>0.0.9</version>
 		</dependency>
 
 		<dependency>
