@@ -49,6 +49,6 @@ public class UpperLimit extends BaseLimit {
 	 * @see com.logica.hummingbird.validation.parameter.BaseLimit#checkLimit()
 	 */
 	protected boolean checkLimit() throws NotComparableTypeException {
-		return (Double) parameter > limit;
+		return (Double) parameter <= limit;
 	}	
 }

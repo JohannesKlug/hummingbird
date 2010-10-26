@@ -19,8 +19,6 @@ package com.logica.hummingbird.validation.base;
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 
-import com.logica.hummingbird.telemetry.HummingbirdParameter;
-
 
 /**
  * Handler which only triggers the next downstream handler if a specific number
@@ -55,13 +53,14 @@ public class ViolationCountFilter {
 	}
 	
 	public void process(Exchange arg0) throws Exception {
-		HummingbirdParameter state = (HummingbirdParameter) arg0.getIn().getBody(HummingbirdParameter.class) ;
+		Boolean state = (Boolean) arg0.getIn().getHeader("Value") ;
+		String name = (String) arg0.getIn().getHeader("Name") ;
 
-		if (state.asBoolean() == false) {
+		if (state == false) {
 			violations++;
 
 			if (violations >= triggerLimit) {
-				logger.debug(violations + " registered. Forwarding state " + state.getName() + " with value " + state.asBoolean());
+				logger.debug(violations + " registered. Forwarding state " + name + " with value " + state);
 				/** Continue route... */
 			}
 			else {
