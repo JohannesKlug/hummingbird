@@ -8,10 +8,10 @@
 	</parent>
 
 	<groupId>com.logica.hummingbird</groupId>	
-	<artifactId>command-generator</artifactId>
+	<artifactId>command-chain</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	
-	<name>Command Generator</name>  	
+	<name>Command Chain</name>  	
 	<description>FIXME Fill in description</description>
 	
 	<build>
@@ -67,7 +67,7 @@
 		<dependency>
 			<groupId>com.logica.hummingbird</groupId>
 			<artifactId>jms-helper</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 	
 		<dependency>

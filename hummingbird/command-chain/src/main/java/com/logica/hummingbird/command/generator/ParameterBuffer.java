@@ -1,4 +1,4 @@
-package com.logica.hummingbird.commandgenerator;
+package com.logica.hummingbird.command.generator;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
