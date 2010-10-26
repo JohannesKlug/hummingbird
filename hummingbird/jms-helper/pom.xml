@@ -19,6 +19,11 @@
 			<artifactId>camel-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
+			<scope>compile</scope>
+		</dependency>
 
 <!--		<dependency>-->
 <!--			<groupId>com.logica.hummingbird</groupId>-->
