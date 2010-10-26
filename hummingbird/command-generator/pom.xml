@@ -10,7 +10,6 @@
 	<groupId>com.logica.hummingbird</groupId>	
 	<artifactId>command-generator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
 	
 	<name>Command releaser</name>  	
 	<description>The command releaser takes command from the command-release query, validate that they can be released and schedule the validation tasks .</description>
