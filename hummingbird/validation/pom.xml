@@ -11,7 +11,6 @@
 	<groupId>com.logica.hummingbird</groupId>	
 	<artifactId>validation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
 	
 	<name>Validation Component</name>  	
 	<description>Library containing the logic for validation parameters.</description>
