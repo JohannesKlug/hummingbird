@@ -9,7 +9,7 @@ import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTest
 import com.logica.hummingbird.simulator.waveforms.FlatWaveform;
 
 /** Will read the Spring configuration of the route from the local file '[filename]-context.xml'*/
-@ContextConfiguration (locations={"./SimulatorTest-context.xml"})
+@ContextConfiguration (locations={"/SimulatorTest-context.xml"})
 public class SimulatorTest extends AbstractJUnit38SpringContextTests  {
 	
 	/** End point injected when the context XML file is read. */
