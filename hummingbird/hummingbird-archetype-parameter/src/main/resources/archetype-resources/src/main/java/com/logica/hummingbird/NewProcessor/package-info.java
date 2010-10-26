@@ -3,10 +3,8 @@
 #set( $symbol_escape = '\' )
 /**
  * @TITLE [Title] Design
- * [Description]
+ * [Description of the design]
  * @CATEGORY Design
  * 
  * */
-
-
 package ${package}.NewProcessor;
