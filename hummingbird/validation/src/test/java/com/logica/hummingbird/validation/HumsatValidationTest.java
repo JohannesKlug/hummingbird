@@ -28,6 +28,9 @@ public class HumsatValidationTest extends CamelTestSupport {
 	protected MockEndpoint resultEndpoint;
 
 	public void testEjectionMessage() throws Exception {
+		
+		fail("This is horrible code and not testing anything.");
+		
 		logger.info("Testing all simulators.");
 		Thread.sleep(10000);
 		
