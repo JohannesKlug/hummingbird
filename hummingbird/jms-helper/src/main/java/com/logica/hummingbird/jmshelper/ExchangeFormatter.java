@@ -17,9 +17,15 @@
 package com.logica.hummingbird.jmshelper;
 
 import java.util.Date;
+import java.util.List;
 
+import org.apache.camel.CamelContext;
+import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
+
+import com.logica.hummingbird.interfaces.CommandDefinition;
+import com.logica.hummingbird.interfaces.ITask;
 
 /**
  * Helper class for embedding data into a Camel exchange. Using these functions
@@ -58,11 +64,34 @@ public class ExchangeFormatter {
 		return message;
 	};
 	
-	public static Message createCommand() {
+	public static String getParameterName(Exchange exchange) {
+		return (String) exchange.getIn().getHeader(HeaderFields.NAME);
+	}
+
+	public static String getParameterType(Exchange exchange) {
+		return (String) exchange.getIn().getHeader(HeaderFields.TYPE);
+	}
+
+	public static String getParameterTimestamp(Exchange exchange) {
+		return (String) exchange.getIn().getHeader(HeaderFields.TIMESTAMP);
+	}
+
+	public static Message createCommand(CamelContext context, String name, long releaseTime, List<String> lockStates, List<ITask> tasks) {
 		Message message = new DefaultMessage();
-	
+		message.setHeader("ReleaseTime", releaseTime);
+		message.setHeader("Name", name);		
+		message.setBody(new CommandDefinition(name, lockStates, tasks));
 		
-		
+		return message;
+	}
+
+	public static Message createTask(String string, long executionTime, String name, ITask task) {
+		Message message = new DefaultMessage();
+		message.setHeader(HeaderFields.TYPE, "Task");
+		message.setHeader(HeaderFields.TASK_EXECUTIONTIME, executionTime);
+		message.setHeader(HeaderFields.TASK_OFF, name);
+		message.setBody(task);			
+
 		return message;
 	}
 }
