@@ -11,8 +11,8 @@
 	<artifactId>command-generator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	
-	<name>Command releaser</name>  	
-	<description>The command releaser takes command from the command-release query, validate that they can be released and schedule the validation tasks .</description>
+	<name>Command Generator</name>  	
+	<description>FIXME Fill in description</description>
 	
 	<build>
 		<plugins>
