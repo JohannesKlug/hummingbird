@@ -1,0 +1,195 @@
+2010-10-26 22:46:09 SimpleParameterSimulatorTest [INFO] ********************************************************************************
+2010-10-26 22:46:09 SimpleParameterSimulatorTest [INFO] Testing: testEjectionMessage(com.logica.hummingbird.simpleparametersimulator.SimpleParameterSimulatorTest)
+2010-10-26 22:46:09 SimpleParameterSimulatorTest [INFO] ********************************************************************************
+2010-10-26 22:46:11 AnnotationTypeConverterLoader [INFO] Found 4 packages with 15 @Converter classes to load
+2010-10-26 22:46:11 DefaultTypeConverter [INFO] Loaded 146 type converters in 0.944 seconds
+2010-10-26 22:46:11 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) is starting
+2010-10-26 22:46:11 DefaultCamelContext [INFO] JMX is disabled. Using DefaultManagementStrategy.
+2010-10-26 22:46:11 DefaultCamelContext [INFO] Route: route1 started and consuming from: Endpoint[timer://timer1?fixedRate=true&period=1000]
+2010-10-26 22:46:11 DefaultCamelContext [INFO] Route: route2 started and consuming from: Endpoint[timer://timer2?fixedRate=true&period=100]
+2010-10-26 22:46:11 DefaultCamelContext [INFO] Route: route3 started and consuming from: Endpoint[timer://timer3?fixedRate=true&period=1000]
+2010-10-26 22:46:11 DefaultCamelContext [INFO] Route: route4 started and consuming from: Endpoint[timer://timer4?fixedRate=true&period=1000]
+2010-10-26 22:46:11 DefaultCamelContext [INFO] Started 4 routes
+2010-10-26 22:46:11 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) started in 0.222 seconds
+2010-10-26 22:46:11 SimpleParameterSimulatorTest [INFO] Testing all simulators.
+2010-10-26 22:46:21 SimpleParameterSimulatorTest [INFO] Works fine.
+2010-10-26 22:46:21 SimpleParameterSimulatorTest [INFO] Testing done: testEjectionMessage(com.logica.hummingbird.simpleparametersimulator.SimpleParameterSimulatorTest)
+2010-10-26 22:46:21 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext:camel-1) is shutting down
+2010-10-26 22:46:21 DefaultShutdownStrategy [INFO] Starting to graceful shutdown 4 routes (timeout 10 seconds)
+2010-10-26 22:46:21 DefaultShutdownStrategy [INFO] Route: route4 shutdown complete, was consuming from: Endpoint[timer://timer4?fixedRate=true&period=1000]
+2010-10-26 22:46:21 DefaultShutdownStrategy [INFO] Route: route3 shutdown complete, was consuming from: Endpoint[timer://timer3?fixedRate=true&period=1000]
+2010-10-26 22:46:21 DefaultShutdownStrategy [INFO] Route: route2 shutdown complete, was consuming from: Endpoint[timer://timer2?fixedRate=true&period=100]
+2010-10-26 22:46:21 DefaultShutdownStrategy [INFO] Route: route1 shutdown complete, was consuming from: Endpoint[timer://timer1?fixedRate=true&period=1000]
+2010-10-26 22:46:21 DefaultShutdownStrategy [INFO] Graceful shutdown of 4 routes completed in 0 seconds
+2010-10-26 22:46:21 DefaultInflightRepository [INFO] Shutting down with no inflight exchanges.
+2010-10-26 22:46:21 DefaultCamelContext [INFO] Uptime: 10.252 seconds
+2010-10-26 22:46:21 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) is shutdown in 0.024 seconds
+2010-10-26 22:46:21 SimpleParameterSimulatorLinearTest [INFO] ********************************************************************************
+2010-10-26 22:46:21 SimpleParameterSimulatorLinearTest [INFO] Testing: testEjectionMessage(com.logica.hummingbird.simpleparametersimulator.SimpleParameterSimulatorLinearTest)
+2010-10-26 22:46:21 SimpleParameterSimulatorLinearTest [INFO] ********************************************************************************
+2010-10-26 22:46:22 AnnotationTypeConverterLoader [INFO] Found 4 packages with 15 @Converter classes to load
+2010-10-26 22:46:22 DefaultTypeConverter [INFO] Loaded 146 type converters in 0.634 seconds
+2010-10-26 22:46:22 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) is starting
+2010-10-26 22:46:22 DefaultCamelContext [INFO] JMX is disabled. Using DefaultManagementStrategy.
+2010-10-26 22:46:22 DefaultCamelContext [INFO] Route: route1 started and consuming from: Endpoint[timer://timer1?fixedRate=true&period=100]
+2010-10-26 22:46:22 DefaultCamelContext [INFO] Started 1 routes
+2010-10-26 22:46:22 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) started in 0.006 seconds
+2010-10-26 22:46:22 SimpleParameterSimulatorLinearTest [INFO] Testing linear simulator.
+2010-10-26 22:46:32 SimpleParameterSimulatorLinearTest [INFO] Works fine.
+2010-10-26 22:46:32 SimpleParameterSimulatorLinearTest [INFO] Testing done: testEjectionMessage(com.logica.hummingbird.simpleparametersimulator.SimpleParameterSimulatorLinearTest)
+2010-10-26 22:46:32 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext:camel-1) is shutting down
+2010-10-26 22:46:32 DefaultShutdownStrategy [INFO] Starting to graceful shutdown 1 routes (timeout 10 seconds)
+2010-10-26 22:46:32 DefaultShutdownStrategy [INFO] Route: route1 shutdown complete, was consuming from: Endpoint[timer://timer1?fixedRate=true&period=100]
+2010-10-26 22:46:32 DefaultShutdownStrategy [INFO] Graceful shutdown of 1 routes completed in 0 seconds
+2010-10-26 22:46:32 DefaultInflightRepository [INFO] Shutting down with no inflight exchanges.
+2010-10-26 22:46:32 DefaultCamelContext [INFO] Uptime: 10.028 seconds
+2010-10-26 22:46:32 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) is shutdown in 0.007 seconds
+2010-10-26 22:46:32 SimpleParameterSimulatorBinaryTest [INFO] ********************************************************************************
+2010-10-26 22:46:32 SimpleParameterSimulatorBinaryTest [INFO] Testing: testEjectionMessage(com.logica.hummingbird.simpleparametersimulator.SimpleParameterSimulatorBinaryTest)
+2010-10-26 22:46:32 SimpleParameterSimulatorBinaryTest [INFO] ********************************************************************************
+2010-10-26 22:46:33 AnnotationTypeConverterLoader [INFO] Found 4 packages with 15 @Converter classes to load
+2010-10-26 22:46:33 DefaultTypeConverter [INFO] Loaded 146 type converters in 0.804 seconds
+2010-10-26 22:46:33 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) is starting
+2010-10-26 22:46:33 DefaultCamelContext [INFO] JMX is disabled. Using DefaultManagementStrategy.
+2010-10-26 22:46:33 DefaultCamelContext [INFO] Route: route1 started and consuming from: Endpoint[timer://timer1?fixedRate=true&period=100]
+2010-10-26 22:46:33 DefaultCamelContext [INFO] Started 1 routes
+2010-10-26 22:46:33 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) started in 0.006 seconds
+2010-10-26 22:46:33 SimpleParameterSimulatorBinaryTest [INFO] Testing the boolean simulator.
+2010-10-26 22:46:43 SimpleParameterSimulatorBinaryTest [INFO] Works fine.
+2010-10-26 22:46:43 SimpleParameterSimulatorBinaryTest [INFO] Testing done: testEjectionMessage(com.logica.hummingbird.simpleparametersimulator.SimpleParameterSimulatorBinaryTest)
+2010-10-26 22:46:43 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext:camel-1) is shutting down
+2010-10-26 22:46:43 DefaultShutdownStrategy [INFO] Starting to graceful shutdown 1 routes (timeout 10 seconds)
+2010-10-26 22:46:43 DefaultShutdownStrategy [INFO] Route: route1 shutdown complete, was consuming from: Endpoint[timer://timer1?fixedRate=true&period=100]
+2010-10-26 22:46:43 DefaultShutdownStrategy [INFO] Graceful shutdown of 1 routes completed in 0 seconds
+2010-10-26 22:46:43 DefaultInflightRepository [INFO] Shutting down with no inflight exchanges.
+2010-10-26 22:46:43 DefaultCamelContext [INFO] Uptime: 10.025 seconds
+2010-10-26 22:46:43 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) is shutdown in 0.013 seconds
+2010-10-26 22:46:43 HumsatSimulationTest [INFO] ********************************************************************************
+2010-10-26 22:46:43 HumsatSimulationTest [INFO] Testing: testEjectionMessage(com.logica.hummingbird.simpleparametersimulator.HumsatSimulationTest)
+2010-10-26 22:46:43 HumsatSimulationTest [INFO] ********************************************************************************
+2010-10-26 22:46:44 AnnotationTypeConverterLoader [INFO] Found 4 packages with 15 @Converter classes to load
+2010-10-26 22:46:44 DefaultTypeConverter [INFO] Loaded 146 type converters in 0.580 seconds
+2010-10-26 22:46:44 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) is starting
+2010-10-26 22:46:44 DefaultCamelContext [INFO] JMX is disabled. Using DefaultManagementStrategy.
+2010-10-26 22:46:44 DefaultCamelContext [INFO] Route: route1 started and consuming from: Endpoint[timer://latitude?fixedRate=true&period=1000]
+2010-10-26 22:46:44 DefaultCamelContext [INFO] Route: route2 started and consuming from: Endpoint[timer://longitude?fixedRate=true&period=1000]
+2010-10-26 22:46:44 DefaultCamelContext [INFO] Route: route3 started and consuming from: Endpoint[timer://elevation?fixedRate=true&period=1000]
+2010-10-26 22:46:44 DefaultCamelContext [INFO] Route: route4 started and consuming from: Endpoint[timer://battery?fixedRate=true&period=1000]
+2010-10-26 22:46:44 DefaultCamelContext [INFO] Started 4 routes
+2010-10-26 22:46:44 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) started in 0.152 seconds
+2010-10-26 22:46:44 HumsatSimulationTest [INFO] Testing all simulators.
+2010-10-26 22:46:44 HumsatSimulationTest [INFO] Testing done: testEjectionMessage(com.logica.hummingbird.simpleparametersimulator.HumsatSimulationTest)
+2010-10-26 22:46:44 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext:camel-1) is shutting down
+2010-10-26 22:46:44 DefaultShutdownStrategy [INFO] Starting to graceful shutdown 4 routes (timeout 10 seconds)
+2010-10-26 22:46:44 DefaultShutdownStrategy [INFO] Route: route4 shutdown complete, was consuming from: Endpoint[timer://battery?fixedRate=true&period=1000]
+2010-10-26 22:46:44 DefaultShutdownStrategy [INFO] Route: route3 shutdown complete, was consuming from: Endpoint[timer://elevation?fixedRate=true&period=1000]
+2010-10-26 22:46:44 DefaultShutdownStrategy [INFO] Route: route2 shutdown complete, was consuming from: Endpoint[timer://longitude?fixedRate=true&period=1000]
+2010-10-26 22:46:44 DefaultShutdownStrategy [INFO] Route: route1 shutdown complete, was consuming from: Endpoint[timer://latitude?fixedRate=true&period=1000]
+2010-10-26 22:46:44 DefaultShutdownStrategy [INFO] Waiting as there are still 3 inflight and pending exchanges to complete before we can shutdown
+2010-10-26 22:46:44 FailoverTransport [INFO] Successfully connected to tcp://localhost:61616
+2010-10-26 22:46:44 FailoverTransport [INFO] Successfully connected to tcp://localhost:61616
+2010-10-26 22:46:45 DefaultShutdownStrategy [INFO] Waiting as there are still 4 inflight and pending exchanges to complete before we can shutdown
+2010-10-26 22:46:46 DefaultShutdownStrategy [INFO] Waiting as there are still 4 inflight and pending exchanges to complete before we can shutdown
+2010-10-26 22:46:46 FailoverTransport [INFO] Successfully connected to tcp://localhost:61616
+2010-10-26 22:46:46 FailoverTransport [INFO] Successfully connected to tcp://localhost:61616
+2010-10-26 22:46:47 DefaultShutdownStrategy [INFO] Graceful shutdown of 4 routes completed in 3 seconds
+2010-10-26 22:46:47 DefaultInflightRepository [INFO] Shutting down with no inflight exchanges.
+2010-10-26 22:46:47 DefaultCamelContext [INFO] Uptime: 3.688 seconds
+2010-10-26 22:46:47 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) is shutdown in 3.528 seconds
+2010-10-26 22:52:18 SimpleParameterSimulatorTest [INFO] ********************************************************************************
+2010-10-26 22:52:18 SimpleParameterSimulatorTest [INFO] Testing: testEjectionMessage(com.logica.hummingbird.simpleparametersimulator.SimpleParameterSimulatorTest)
+2010-10-26 22:52:18 SimpleParameterSimulatorTest [INFO] ********************************************************************************
+2010-10-26 22:52:18 AnnotationTypeConverterLoader [INFO] Found 4 packages with 15 @Converter classes to load
+2010-10-26 22:52:18 DefaultTypeConverter [INFO] Loaded 146 type converters in 0.619 seconds
+2010-10-26 22:52:19 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) is starting
+2010-10-26 22:52:19 DefaultCamelContext [INFO] JMX is disabled. Using DefaultManagementStrategy.
+2010-10-26 22:52:19 DefaultCamelContext [INFO] Route: route1 started and consuming from: Endpoint[timer://timer1?fixedRate=true&period=1000]
+2010-10-26 22:52:19 DefaultCamelContext [INFO] Route: route2 started and consuming from: Endpoint[timer://timer2?fixedRate=true&period=100]
+2010-10-26 22:52:19 DefaultCamelContext [INFO] Route: route3 started and consuming from: Endpoint[timer://timer3?fixedRate=true&period=1000]
+2010-10-26 22:52:19 DefaultCamelContext [INFO] Route: route4 started and consuming from: Endpoint[timer://timer4?fixedRate=true&period=1000]
+2010-10-26 22:52:19 DefaultCamelContext [INFO] Started 4 routes
+2010-10-26 22:52:19 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) started in 0.205 seconds
+2010-10-26 22:52:19 SimpleParameterSimulatorTest [INFO] Testing all simulators.
+2010-10-26 22:52:29 SimpleParameterSimulatorTest [INFO] Works fine.
+2010-10-26 22:52:29 SimpleParameterSimulatorTest [INFO] Testing done: testEjectionMessage(com.logica.hummingbird.simpleparametersimulator.SimpleParameterSimulatorTest)
+2010-10-26 22:52:29 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext:camel-1) is shutting down
+2010-10-26 22:52:29 DefaultShutdownStrategy [INFO] Starting to graceful shutdown 4 routes (timeout 10 seconds)
+2010-10-26 22:52:29 DefaultShutdownStrategy [INFO] Route: route4 shutdown complete, was consuming from: Endpoint[timer://timer4?fixedRate=true&period=1000]
+2010-10-26 22:52:29 DefaultShutdownStrategy [INFO] Route: route3 shutdown complete, was consuming from: Endpoint[timer://timer3?fixedRate=true&period=1000]
+2010-10-26 22:52:29 DefaultShutdownStrategy [INFO] Route: route2 shutdown complete, was consuming from: Endpoint[timer://timer2?fixedRate=true&period=100]
+2010-10-26 22:52:29 DefaultShutdownStrategy [INFO] Route: route1 shutdown complete, was consuming from: Endpoint[timer://timer1?fixedRate=true&period=1000]
+2010-10-26 22:52:29 DefaultShutdownStrategy [INFO] Graceful shutdown of 4 routes completed in 0 seconds
+2010-10-26 22:52:29 DefaultInflightRepository [INFO] Shutting down with no inflight exchanges.
+2010-10-26 22:52:29 DefaultCamelContext [INFO] Uptime: 10.279 seconds
+2010-10-26 22:52:29 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) is shutdown in 0.063 seconds
+2010-10-26 22:52:29 SimpleParameterSimulatorLinearTest [INFO] ********************************************************************************
+2010-10-26 22:52:29 SimpleParameterSimulatorLinearTest [INFO] Testing: testEjectionMessage(com.logica.hummingbird.simpleparametersimulator.SimpleParameterSimulatorLinearTest)
+2010-10-26 22:52:29 SimpleParameterSimulatorLinearTest [INFO] ********************************************************************************
+2010-10-26 22:52:30 AnnotationTypeConverterLoader [INFO] Found 4 packages with 15 @Converter classes to load
+2010-10-26 22:52:30 DefaultTypeConverter [INFO] Loaded 146 type converters in 0.688 seconds
+2010-10-26 22:52:30 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) is starting
+2010-10-26 22:52:30 DefaultCamelContext [INFO] JMX is disabled. Using DefaultManagementStrategy.
+2010-10-26 22:52:30 DefaultCamelContext [INFO] Route: route1 started and consuming from: Endpoint[timer://timer1?fixedRate=true&period=100]
+2010-10-26 22:52:30 DefaultCamelContext [INFO] Started 1 routes
+2010-10-26 22:52:30 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) started in 0.005 seconds
+2010-10-26 22:52:30 SimpleParameterSimulatorLinearTest [INFO] Testing linear simulator.
+2010-10-26 22:52:40 SimpleParameterSimulatorLinearTest [INFO] Works fine.
+2010-10-26 22:52:40 SimpleParameterSimulatorLinearTest [INFO] Testing done: testEjectionMessage(com.logica.hummingbird.simpleparametersimulator.SimpleParameterSimulatorLinearTest)
+2010-10-26 22:52:40 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext:camel-1) is shutting down
+2010-10-26 22:52:40 DefaultShutdownStrategy [INFO] Starting to graceful shutdown 1 routes (timeout 10 seconds)
+2010-10-26 22:52:40 DefaultShutdownStrategy [INFO] Route: route1 shutdown complete, was consuming from: Endpoint[timer://timer1?fixedRate=true&period=100]
+2010-10-26 22:52:40 DefaultShutdownStrategy [INFO] Graceful shutdown of 1 routes completed in 0 seconds
+2010-10-26 22:52:40 DefaultInflightRepository [INFO] Shutting down with no inflight exchanges.
+2010-10-26 22:52:40 DefaultCamelContext [INFO] Uptime: 10.028 seconds
+2010-10-26 22:52:40 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) is shutdown in 0.016 seconds
+2010-10-26 22:52:40 SimpleParameterSimulatorBinaryTest [INFO] ********************************************************************************
+2010-10-26 22:52:40 SimpleParameterSimulatorBinaryTest [INFO] Testing: testEjectionMessage(com.logica.hummingbird.simpleparametersimulator.SimpleParameterSimulatorBinaryTest)
+2010-10-26 22:52:40 SimpleParameterSimulatorBinaryTest [INFO] ********************************************************************************
+2010-10-26 22:52:40 AnnotationTypeConverterLoader [INFO] Found 4 packages with 15 @Converter classes to load
+2010-10-26 22:52:40 DefaultTypeConverter [INFO] Loaded 146 type converters in 0.517 seconds
+2010-10-26 22:52:40 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) is starting
+2010-10-26 22:52:40 DefaultCamelContext [INFO] JMX is disabled. Using DefaultManagementStrategy.
+2010-10-26 22:52:40 DefaultCamelContext [INFO] Route: route1 started and consuming from: Endpoint[timer://timer1?fixedRate=true&period=100]
+2010-10-26 22:52:40 DefaultCamelContext [INFO] Started 1 routes
+2010-10-26 22:52:40 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) started in 0.004 seconds
+2010-10-26 22:52:40 SimpleParameterSimulatorBinaryTest [INFO] Testing the boolean simulator.
+2010-10-26 22:52:50 SimpleParameterSimulatorBinaryTest [INFO] Works fine.
+2010-10-26 22:52:50 SimpleParameterSimulatorBinaryTest [INFO] Testing done: testEjectionMessage(com.logica.hummingbird.simpleparametersimulator.SimpleParameterSimulatorBinaryTest)
+2010-10-26 22:52:50 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext:camel-1) is shutting down
+2010-10-26 22:52:50 DefaultShutdownStrategy [INFO] Starting to graceful shutdown 1 routes (timeout 10 seconds)
+2010-10-26 22:52:50 DefaultShutdownStrategy [INFO] Route: route1 shutdown complete, was consuming from: Endpoint[timer://timer1?fixedRate=true&period=100]
+2010-10-26 22:52:50 DefaultShutdownStrategy [INFO] Graceful shutdown of 1 routes completed in 0 seconds
+2010-10-26 22:52:50 DefaultInflightRepository [INFO] Shutting down with no inflight exchanges.
+2010-10-26 22:52:50 DefaultCamelContext [INFO] Uptime: 10.038 seconds
+2010-10-26 22:52:50 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) is shutdown in 0.002 seconds
+2010-10-26 22:52:50 HumsatSimulationTest [INFO] ********************************************************************************
+2010-10-26 22:52:50 HumsatSimulationTest [INFO] Testing: testEjectionMessage(com.logica.hummingbird.simpleparametersimulator.HumsatSimulationTest)
+2010-10-26 22:52:50 HumsatSimulationTest [INFO] ********************************************************************************
+2010-10-26 22:52:51 AnnotationTypeConverterLoader [INFO] Found 4 packages with 15 @Converter classes to load
+2010-10-26 22:52:51 DefaultTypeConverter [INFO] Loaded 146 type converters in 0.328 seconds
+2010-10-26 22:52:51 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) is starting
+2010-10-26 22:52:51 DefaultCamelContext [INFO] JMX is disabled. Using DefaultManagementStrategy.
+2010-10-26 22:52:51 DefaultCamelContext [INFO] Route: route1 started and consuming from: Endpoint[timer://latitude?fixedRate=true&period=1000]
+2010-10-26 22:52:51 DefaultCamelContext [INFO] Route: route2 started and consuming from: Endpoint[timer://longitude?fixedRate=true&period=1000]
+2010-10-26 22:52:51 DefaultCamelContext [INFO] Route: route3 started and consuming from: Endpoint[timer://elevation?fixedRate=true&period=1000]
+2010-10-26 22:52:51 DefaultCamelContext [INFO] Route: route4 started and consuming from: Endpoint[timer://battery?fixedRate=true&period=1000]
+2010-10-26 22:52:51 DefaultCamelContext [INFO] Started 4 routes
+2010-10-26 22:52:51 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) started in 0.079 seconds
+2010-10-26 22:52:51 HumsatSimulationTest [INFO] Testing all simulators.
+2010-10-26 22:52:51 HumsatSimulationTest [INFO] Testing done: testEjectionMessage(com.logica.hummingbird.simpleparametersimulator.HumsatSimulationTest)
+2010-10-26 22:52:51 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext:camel-1) is shutting down
+2010-10-26 22:52:51 DefaultShutdownStrategy [INFO] Starting to graceful shutdown 4 routes (timeout 10 seconds)
+2010-10-26 22:52:51 DefaultShutdownStrategy [INFO] Route: route4 shutdown complete, was consuming from: Endpoint[timer://battery?fixedRate=true&period=1000]
+2010-10-26 22:52:51 DefaultShutdownStrategy [INFO] Route: route3 shutdown complete, was consuming from: Endpoint[timer://elevation?fixedRate=true&period=1000]
+2010-10-26 22:52:51 DefaultShutdownStrategy [INFO] Route: route2 shutdown complete, was consuming from: Endpoint[timer://longitude?fixedRate=true&period=1000]
+2010-10-26 22:52:51 DefaultShutdownStrategy [INFO] Route: route1 shutdown complete, was consuming from: Endpoint[timer://latitude?fixedRate=true&period=1000]
+2010-10-26 22:52:51 DefaultShutdownStrategy [INFO] Waiting as there are still 4 inflight and pending exchanges to complete before we can shutdown
+2010-10-26 22:52:51 FailoverTransport [INFO] Successfully connected to tcp://localhost:61616
+2010-10-26 22:52:51 FailoverTransport [INFO] Successfully connected to tcp://localhost:61616
+2010-10-26 22:52:52 FailoverTransport [INFO] Successfully connected to tcp://localhost:61616
+2010-10-26 22:52:52 FailoverTransport [INFO] Successfully connected to tcp://localhost:61616
+2010-10-26 22:52:52 DefaultShutdownStrategy [INFO] Waiting as there are still 4 inflight and pending exchanges to complete before we can shutdown
+2010-10-26 22:52:53 DefaultShutdownStrategy [INFO] Graceful shutdown of 4 routes completed in 2 seconds
+2010-10-26 22:52:53 DefaultInflightRepository [INFO] Shutting down with no inflight exchanges.
+2010-10-26 22:52:53 DefaultCamelContext [INFO] Uptime: 2.208 seconds
+2010-10-26 22:52:53 DefaultCamelContext [INFO] Apache Camel 2.4.0 (CamelContext: camel-1) is shutdown in 2.126 seconds

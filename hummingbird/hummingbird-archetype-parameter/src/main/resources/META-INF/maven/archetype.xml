@@ -6,12 +6,12 @@
 	<id>hummingbird-archetype-parameter</id>
 
 	<sources>
-		<source>src/main/java/ParameterProcessor.java</source>
-		<source>src/main/java/package-info.java</source>
+		<source>src/main/java/com/logica/hummingbird/NewProcessor/ParameterProcessor.java</source>
+		<source>src/main/java/com/logica/hummingbird/NewProcessor/package-info.java</source>
 	</sources>
 
 	<testSources>
-		<source>src/test/java/ParameterProcessorTest.java</source>
+		<source>src/test/java/com/logica/hummingbird/NewProcessor/ParameterProcessorTest.java</source>
 	</testSources>
 
 	<resources>

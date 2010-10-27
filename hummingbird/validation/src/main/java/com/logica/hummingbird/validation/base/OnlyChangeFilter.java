@@ -22,8 +22,6 @@ import java.util.Map;
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 
-import com.logica.hummingbird.telemetry.HummingbirdParameter;
-
 public class OnlyChangeFilter {
 
 	private static org.apache.log4j.Logger logger = Logger.getLogger(OnlyChangeFilter.class);
@@ -31,12 +29,13 @@ public class OnlyChangeFilter {
 	protected Map<String, Boolean> currentState = new HashMap<String, Boolean>();
 	
 	public void process(Exchange arg0) throws Exception {
-		HummingbirdParameter state = (HummingbirdParameter) arg0.getIn().getBody(HummingbirdParameter.class) ;
+		Boolean state = (Boolean) arg0.getIn().getHeader("Value");
+		String name = (String) arg0.getIn().getHeader("Name");
 		
-		if (currentState.containsKey(state.getName()) == true) {
-			if (currentState.get(state.getName()) != state.asBoolean()) {
-				logger.debug("Setting state " + state.getName() + " to " + state.asBoolean() + " as it has changed.");
-				currentState.put(state.getName(), state.asBoolean());
+		if (currentState.containsKey(name) == true) {
+			if (currentState.get(name) != state) {
+				logger.debug("Setting state " + name + " to " + state + " as it has changed.");
+				currentState.put(name, state);
 			}
 			else {
 				logger.info("State change filtered out as not delta change.");
@@ -44,8 +43,8 @@ public class OnlyChangeFilter {
 			}
 		}
 		else {
-			logger.debug("Setting state " + state.getName() + " to " + state.asBoolean() + " as it is new.");
-			currentState.put(state.getName(), state.asBoolean());
+			logger.debug("Setting state " + name + " to " + state + " as it is new.");
+			currentState.put(name, state);
 		}
 	}
 }

@@ -11,8 +11,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.logica.hummingbird</groupId>
 	<artifactId>jms-helper</artifactId>
+	<name>JMS Helper</name>
 	<version>0.0.2-SNAPSHOT</version>
 
+	<description>Library for formatting. reading and writing JMS messages, including headers and bodies.</description>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.camel</groupId>

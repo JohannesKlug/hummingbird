@@ -13,8 +13,8 @@
 	<groupId>com.logica.hummingbird</groupId>
 	<artifactId>gui-cometd-gmap</artifactId>
 	<packaging>war</packaging>
+	<name>Hummingbird cometd map display</name>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>A Camel COMETD Route Example</name>
 
 	<dependencies>
 		<dependency>
@@ -87,6 +87,7 @@
 		
 	</dependencies>
 
+	<description>A Gogle based map display, streaming data from camel to the webapp using cometd.</description>
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<plugins>

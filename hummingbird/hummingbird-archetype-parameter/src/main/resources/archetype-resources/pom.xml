@@ -61,12 +61,6 @@
 	
 		<dependency>
 			<groupId>com.logica.hummingbird</groupId>
-			<artifactId>tele</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
 			<artifactId>jms-helper</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

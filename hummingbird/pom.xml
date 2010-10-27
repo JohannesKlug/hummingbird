@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.logica.hummingbird</groupId>
@@ -10,7 +9,7 @@
 
 	<name>Hummingbird Root Project</name>
 	<description>The Hummingbird root project is a container for all Hummingbird components, each created in a separate maven module. By building this project, the complete system can be built.</description>
-	<url />
+	<url/>
 
 	<modules>
 		<module>commons</module>
@@ -29,20 +28,20 @@
 		<module>packet-broker</module>
 		
 		<module>jms-helper</module>
-		<module>command-generator</module>
-		<module>command-releaser</module>
 		<module>calibration</module>
 		<module>validation</module>
 		<module>simple-parameter-simulator</module>
 		<module>hummingbird-archetype-parameter</module>
+
+		<module>command-chain</module>
 	</modules>
 
 	<licenses>
 		<license>
-			<name>GPL</name>
-			<url>http://www.gnu.org/licenses/gpl.html</url>
+			<name>Apache V2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
 			<distribution>manual</distribution>
-			<comments>(c) Logica 2009. All rights reserved.</comments>
+			<comments>(c) Hummingbird Community, all rights reserved.</comments>
 		</license>
 	</licenses>
 
@@ -89,8 +88,8 @@
 	</organization>
 
 	<issueManagement>
-		<system />
-		<url />
+		<system/>
+		<url/>
 	</issueManagement>
 
 	<developers>
@@ -185,6 +184,14 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.logica.hummingbird</groupId>
+			<artifactId>hummingbird-archetype-parameter</artifactId>
+			<version>0.0.2</version>
+			<type>jar</type>
+		</dependency>
+		
 	</dependencies>
 
 	<dependencyManagement>

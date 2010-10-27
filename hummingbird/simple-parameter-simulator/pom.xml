@@ -13,7 +13,7 @@
 	<artifactId>simple-parameter-simulator</artifactId>
 	<version>0.0.3-SNAPSHOT</version>
 	
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	
 	<name>Simple Parameter Simulator</name>
 	<description>A Simulator that produces parameters according to its setup.</description>

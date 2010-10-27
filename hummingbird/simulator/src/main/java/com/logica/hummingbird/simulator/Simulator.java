@@ -39,14 +39,48 @@ public class Simulator implements Runnable {
 
 	public Simulator(Endpoint endpoint, String urlToPacketise) {
 		this.context = new DefaultCamelContext();
+		try {
+			this.context.start();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		this.template = new DefaultProducerTemplate(context, endpoint);
+		try {
+			this.template.start();
+		}
+		catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		
 		this.waveforms = new ArrayList<Waveform>();
 		this.urlToPacketise = urlToPacketise;
+		try {
+			this.context.start();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Simulator(Endpoint endpoint) {
 		this.context = new DefaultCamelContext();
+		try {
+			this.context.start();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		this.template = new DefaultProducerTemplate(context, endpoint);
+		try {
+			this.template.start();
+		}
+		catch (Exception e1) {
+			e1.printStackTrace();
+		}
+
 		this.waveforms = new ArrayList<Waveform>();
 	}
 

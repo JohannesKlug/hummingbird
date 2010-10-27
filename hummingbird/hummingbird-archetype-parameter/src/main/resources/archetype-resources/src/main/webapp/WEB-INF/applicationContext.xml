@@ -33,61 +33,18 @@
 		<property name="configuration" ref="jmsConfig" />
 	</bean>
 
-	<bean id="lowerLimitLinear1" class="com.logica.hummingbird.validation.parameter.LowerLimit">
-		<constructor-arg index="0" value="LINEAR1"/>
-		<constructor-arg index="1" value="10"/>
-	</bean>
-
-	<bean id="upperLimitLinear1" class="com.logica.hummingbird.validation.parameter.UpperLimit">
-		<constructor-arg index="0" value="LINEAR1"/>
-		<constructor-arg index="1" value="50"/>
-	</bean>
-
-	<bean id="lowerLimitLinear2" class="com.logica.hummingbird.validation.parameter.LowerLimit">
-		<constructor-arg index="0" value="LINEAR2"/>
-		<constructor-arg index="1" value="20"/>
-	</bean>
-
-	<bean id="lowerLimitSinus2" class="com.logica.hummingbird.validation.parameter.LowerLimit">
-		<constructor-arg index="0" value="SINUS2"/>
-		<constructor-arg index="1" value="-40"/>
-	</bean>
-
-	<bean id="upperLimitSinus2" class="com.logica.hummingbird.validation.parameter.UpperLimit">
-		<constructor-arg index="0" value="SINUS2"/>
-		<constructor-arg index="1" value="40"/>
-	</bean>
-
-	<bean id="onlyChangeLinear1" class="com.logica.hummingbird.validation.base.OnlyChangeFilter"/>
-
-
-
+	<!-- Create the bean. -->
+	<bean id="myBean" class="com.logica.hummingbird.${package}.ParameterProcessor"/>
 
 	<camelContext xmlns="http://camel.apache.org/schema/spring">
+	
+		<!-- Route for receiving the parameters with Name='someParameterName' from 
+		     the activemq topic 'Parameter', let the bean process it, and forward
+		     a parameter back to the Parameter topic. -->
 		<route>
-			<from uri="activemq:topic:Parameter" />
-			<filter>
-  	        	<xpath>$Name = 'LINEAR1'</xpath>
-            	<multicast>
-            		<to uri="direct:lowerLimitLinear1"/>
-            		<to uri="direct:upperLimitLinear1"/>
-            	</multicast>
-			</filter>
-		</route>		
-		
-		<route>
-			<from uri="direct:lowerLimitLinear1"/>
-			<to uri="bean:lowerLimitLinear1?method=process"/>
-			<to uri="bean:onlyChangeLinear1?method=process"/>
+			<from uri="activemq:topic:Parameter?selector=Name='someParameterName'"/>
+			<to uri="bean:myBean?method=process"/>
 			<to uri="activemq:topic:Parameter"/>			
 		</route>
-
-		<route>
-			<from uri="direct:upperLimitLinear1"/>
-			<to uri="bean:upperLimitLinear1?method=process"/>
-			<to uri="bean:onlyChangeLinear1?method=process"/>
-			<to uri="activemq:topic:Parameter"/>			
-		</route>
-				
 	</camelContext>
 </beans>

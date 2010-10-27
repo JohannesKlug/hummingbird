@@ -15,7 +15,7 @@ public class HumsatSimulationTest extends CamelTestSupport {
 
 	public void testEjectionMessage() throws Exception {
 		logger.info("Testing all simulators.");
-		Thread.sleep(10000);
+		// Thread.sleep(10000);
 		
 //		while (true) {
 //			Thread.sleep(1000);
