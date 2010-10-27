@@ -1,5 +1,6 @@
 package com.logica.hummingbird.protocols.hardware;
 
+import java.io.File;
 import java.util.Enumeration;
 
 import gnu.io.CommPortIdentifier;
@@ -7,9 +8,14 @@ import gnu.io.CommPortIdentifier;
 public class SerialPortDriver {
 	
 	public SerialPortDriver() {
-		Enumeration pList = CommPortIdentifier.getPortIdentifiers();
+		
+//		String s = "/src/main/resources/";
+//		System.setProperty("java.library.path", System.getProperty("java.library.path") + File.pathSeparator + s);
+//
+//		System.out.println(System.getProperty("java.library.path"));
+		
+		Enumeration<?> pList = CommPortIdentifier.getPortIdentifiers();
 
-	    // Process the list.
 	    while (pList.hasMoreElements()) {
 	      CommPortIdentifier cpi = (CommPortIdentifier) pList.nextElement();
 	      System.out.print("Port " + cpi.getName() + " ");
