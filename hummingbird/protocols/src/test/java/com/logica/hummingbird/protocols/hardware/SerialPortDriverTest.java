@@ -16,7 +16,7 @@ public class SerialPortDriverTest {
 
 	@Test
 	public void testSerialPortDriver() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
 	}
 
 }

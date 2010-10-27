@@ -40,6 +40,60 @@
 					</instructions>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.rxtx</groupId>
+									<artifactId>rxtx-native</artifactId>
+									<version>2.1.7r2</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/lib</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+				<!-- 
+				
+				Setting system properties apparently does not work.
+				
+				This blog post says it should:
+				http://www.buildanddeploy.com/node/17
+				
+				This JIRA entry says it doesn't:
+				http://jira.codehaus.org/browse/SUREFIRE-634?page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel&focusedCommentId=231569#action_231569
+				
+				This is why I chose the argLine option (see below).
+				
+				2010-10-27 Johannes
+				
+					<systemProperties>
+						<property>
+							<name>java.library.path</name>
+							<value>${project.build.directory}/lib/</value>
+						</property>
+					</systemProperties> 
+					
+					-->
+					<argLine>-Djava.library.path=${project.build.directory}/lib/</argLine>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -92,6 +146,13 @@
 			<groupId>org.rxtx</groupId>
 			<artifactId>rxtx</artifactId>
 			<version>2.1.7</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.rxtx</groupId>
+			<artifactId>rxtx-native</artifactId>
+			<version>2.1.7r2</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
