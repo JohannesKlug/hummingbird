@@ -67,6 +67,12 @@ public class CommandReleaser {
 	/** The context we are running in. */
 	protected CamelContext context = null;
 	
+	/**
+	 * Basic constructure
+	 * 
+	 * @param context the context of the component.
+	 * @param producer The producer template of the context.
+	 */
 	public CommandReleaser(CamelContext context, ProducerTemplate producer) {
 		this.context = context;
 		this.producer = producer;
@@ -107,7 +113,7 @@ public class CommandReleaser {
 		/** Schedule all tasks. */
 		for (ITask task : definition.getTasks()) {
 			Exchange exchange = new DefaultExchange(context);
-			exchange.setIn(ExchangeFormatter.createTask("Task", (Long) arg0.getIn().getHeader(HeaderFields.RELEASETIME) + task.deltaTime(), (String) arg0.getIn().getHeader("Name"), task));
+			exchange.setIn(ExchangeFormatter.createTask("Task", (Long) arg0.getIn().getHeader(HeaderFields.RELEASETIME) + task.deltaTime(), (String) arg0.getIn().getHeader(HeaderFields.NAME), task));
 			producer.send("direct:tasks", exchange);			
 		}
 		
@@ -125,4 +131,6 @@ public class CommandReleaser {
 	public void setContext(CamelContext context) {
 		this.context = context;
 	}
+	
+	
 }
