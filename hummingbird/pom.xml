@@ -59,6 +59,17 @@
 	</distributionManagement>
 
 	<properties>
+		<!-- This is very important. Set your build type here!
+		This is necessary in order to select the correct version of
+		native libraries for rxtx for your platform.
+		Valid types are:
+		* win32
+		* linux32
+		* linux64
+		* mac
+		 -->
+		<build.type>linux64</build.type>
+		<rxtx.version>2.1.7</rxtx.version>
 		<log4j.version>1.2.15</log4j.version>
 		<spring.version>3.0.2.RELEASE</spring.version>
 		<junit.version>4.8.1</junit.version>
