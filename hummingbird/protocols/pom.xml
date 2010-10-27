@@ -56,7 +56,7 @@
 									<groupId>org.rxtx</groupId>
 									<artifactId>rxtx-native</artifactId>
 									<version>${rxtx.version}</version>
-									<classifier>${os.family}${os.arch}</classifier>
+									<classifier>${build.type}</classifier>
 									<type>jar</type>
 									<overWrite>true</overWrite>
 									<outputDirectory>${project.build.directory}/lib</outputDirectory>
@@ -154,7 +154,7 @@
 			<groupId>org.rxtx</groupId>
 			<artifactId>rxtx-native</artifactId>
 			<version>${rxtx.version}</version>
-			<classifier>${os.family}${os.arch}</classifier>
+			<classifier>${build.type}</classifier>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
