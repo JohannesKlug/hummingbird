@@ -9,20 +9,18 @@
        http://camel.apache.org/schema/spring 
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-	<bean id="simulator" class="com.logica.hummingbird.simulator.Simulator">
+
+	<bean id="taskexecutor" class="com.logica.hummingbird.command.task.Executor">
 		<constructor-arg index="0" ref="context"/>
 		<constructor-arg index="1" ref="producer"/>
-		<constructor-arg index="2"><null/></constructor-arg>
-		<property name="messageInterval" value="1000"/>
 	</bean>
-
 
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>
 
 		<route>
-			<from uri="direct:sendMessage" />
-			<to uri="mock:result" />
+			<from uri="direct:start" />
+			<to uri="bean:taskexecutor" />
 		</route>
 	
 	</camelContext>

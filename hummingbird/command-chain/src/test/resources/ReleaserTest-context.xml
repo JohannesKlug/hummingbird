@@ -9,20 +9,27 @@
        http://camel.apache.org/schema/spring 
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-	<bean id="simulator" class="com.logica.hummingbird.simulator.Simulator">
-		<constructor-arg index="0" ref="context"/>
-		<constructor-arg index="1" ref="producer"/>
-		<constructor-arg index="2"><null/></constructor-arg>
-		<property name="messageInterval" value="1000"/>
-	</bean>
 
+	<bean id="stateConnector" class="com.logica.hummingbird.command.releaser.DummyParameterStateConnector"/>
+
+	<bean id="commandreleaser" class="com.logica.hummingbird.command.releaser.CommandReleaser">
+		<constructor-arg index="0" ref="context"/>
+		<constructor-arg index="1" ref="producer"/>	
+		<property name="stateConnector" ref="stateConnector"/>
+	</bean>
 
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>
 
 		<route>
-			<from uri="direct:sendMessage" />
-			<to uri="mock:result" />
+			<from uri="direct:Commands" />
+			<to uri="bean:commandreleaser" />
+			<to uri="mock:ReleasedCommands" />
+		</route>
+		
+		<route>
+			<from uri="direct:tasks" />
+			<to uri="mock:Tasks" />
 		</route>
 	
 	</camelContext>

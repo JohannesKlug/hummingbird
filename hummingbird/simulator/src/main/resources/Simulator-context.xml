@@ -9,11 +9,17 @@
        http://camel.apache.org/schema/spring 
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
+	<bean id="waweForm" class="com.logica.hummingbird.simulator.waveforms.FlatWaveform">
+		<constructor-arg index="0" value="100"/>
+		<constructor-arg index="1" value="2"/>
+	</bean>
+
 	<bean id="simulator" class="com.logica.hummingbird.simulator.Simulator">
 		<constructor-arg index="0" ref="context"/>
 		<constructor-arg index="1" ref="producer"/>
 		<constructor-arg index="2"><null/></constructor-arg>
 		<property name="messageInterval" value="1000"/>
+		<property name="waveforms" ref="waweForm"/>
 	</bean>
 
 
@@ -22,7 +28,7 @@
 
 		<route>
 			<from uri="direct:sendMessage" />
-			<to uri="mock:result" />
+			<to uri="activemq:Parameters" />
 		</route>
 	
 	</camelContext>

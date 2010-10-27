@@ -1,37 +1,37 @@
 package com.logica.hummingbird.simulator.driver;
 
-import org.apache.activemq.camel.component.ActiveMQComponent;
-import org.apache.camel.CamelContext;
-import org.apache.camel.impl.DefaultCamelContext;
+import org.springframework.beans.BeansException;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import com.logica.hummingbird.simulator.Simulator;
-import com.logica.hummingbird.simulator.waveforms.LinearWaveform;
 
+
+/**
+ * Driver for creating a simulator from a spring assembly file and starting it.
+ *
+ */
 public class SimpleMessagePump {
 	
-	static CamelContext cc = new DefaultCamelContext();
-	
+	/**
+	 * Main method for starting the simulator.
+	 * 
+	 * @param args First parameter must be the name of the Spring assembly file. Default is 'classpath:Simulator-context.xml'. 
+	 */
 	public static void main(String[] args) {
-		String uri = args[0];
-		String jmsLocation = args[1];
-		String urlToPacketise = args[2];
-		int messageRate = Integer.parseInt(args[3]);
 		
-		try {
-			cc.start();
-		} catch (Exception e1) {
-			System.err.println(e1);
+		/** Read the configuration file as the first argument. If not set, then we try the default name. */
+		String assemblyFile = "classpath:Simulator-context.xml";		
+		if (args.length > 0) {
+			assemblyFile = args[0];
 		}
-		
-		cc.addComponent("activemq", ActiveMQComponent.activeMQComponent(uri));
-		
-		Simulator sim = new Simulator(cc.getEndpoint(jmsLocation), urlToPacketise);
-		sim.sendMessage(messageRate);
-		
-		
-		sim.addWaveform(new LinearWaveform(101, 0, 1));
-		
-		Thread simulatorThread = new Thread(sim);
-		simulatorThread.start();
+
+		/** Assemble the simulator and start it. */
+		FileSystemXmlApplicationContext context = new FileSystemXmlApplicationContext(assemblyFile);
+		try {
+			((Simulator) context.getBean("simulator")).run();
+		}
+		catch (BeansException e) {
+			e.printStackTrace();
+		}
 	}
 }
