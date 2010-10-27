@@ -55,7 +55,8 @@
 								<artifactItem>
 									<groupId>org.rxtx</groupId>
 									<artifactId>rxtx-native</artifactId>
-									<version>2.1.7r2</version>
+									<version>2.1.7</version>
+									<classifier>linux64</classifier>
 									<type>jar</type>
 									<overWrite>true</overWrite>
 									<outputDirectory>${project.build.directory}/lib</outputDirectory>
