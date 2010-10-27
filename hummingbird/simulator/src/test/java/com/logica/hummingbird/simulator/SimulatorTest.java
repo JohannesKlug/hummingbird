@@ -2,6 +2,7 @@ package com.logica.hummingbird.simulator;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.component.mock.MockEndpoint;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
@@ -14,14 +15,14 @@ public class SimulatorTest extends AbstractJUnit38SpringContextTests  {
 	
 	/** End point injected when the context XML file is read. */
     @EndpointInject(uri = "mock:result")
-    protected MockEndpoint resultEndpoint;
+    protected MockEndpoint resultEndpoint = null;
+
+    @Autowired
+    protected Simulator simulator = null;
     
     /** Ensures that the context is reloaded every time a test is run, i.e. no need to reset. */
 	@DirtiesContext
     public void testSimulator() throws Exception {
-    	
-    	Simulator simulator = new Simulator(resultEndpoint);
-    	
     	resultEndpoint.setExpectedMessageCount(0);
     	resultEndpoint.assertIsSatisfied();
     	
@@ -45,8 +46,6 @@ public class SimulatorTest extends AbstractJUnit38SpringContextTests  {
     
 	@DirtiesContext
     public void testRunningSimulator() throws Exception {
-    	
-    	Simulator simulator = new Simulator(resultEndpoint);
     	simulator.addWaveform(new FlatWaveform(100, 2));
     	
     	Thread simulatorThread = new Thread(simulator);
@@ -56,18 +55,16 @@ public class SimulatorTest extends AbstractJUnit38SpringContextTests  {
     	
     	resultEndpoint.setMinimumExpectedMessageCount(2);
     	resultEndpoint.assertIsSatisfied();
-    	
     }
     
 	@DirtiesContext
     public void testRunningSimulatorPerformance() throws Exception {
-    	
     	resultEndpoint.setExpectedMessageCount(0);
     	resultEndpoint.assertIsSatisfied();
     	
-    	resultEndpoint.reset();
-    	
-    	Simulator simulator = new Simulator(resultEndpoint);
+    	/** Reset expectations. */
+		resultEndpoint.reset();
+		
     	simulator.addWaveform(new FlatWaveform(100, 2));
     	simulator.setMessageInterval(0);
     	
@@ -86,7 +83,7 @@ public class SimulatorTest extends AbstractJUnit38SpringContextTests  {
     	simulator.stopSimulator();
     	
     	resultEndpoint.setMinimumExpectedMessageCount(2);
-    	resultEndpoint.assertIsSatisfied();
     	
+    	resultEndpoint.assertIsSatisfied();    	
     }
 }

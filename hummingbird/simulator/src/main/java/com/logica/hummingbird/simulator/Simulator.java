@@ -7,13 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.Endpoint;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
-import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultExchange;
 import org.apache.camel.impl.DefaultMessage;
-import org.apache.camel.impl.DefaultProducerTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,9 +25,13 @@ public class Simulator implements Runnable {
 
 	private SpacePacketGenerator packetGenerator = new SpacePacketGenerator();
 
-	private DefaultProducerTemplate template;
+	/** The context of the route, used to create exchanges. */
 	private CamelContext context;
-	private List<Waveform> waveforms;
+	
+	/** The producer sending the exchanges. */
+	private ProducerTemplate template;
+	
+	private List<Waveform> waveforms = new ArrayList<Waveform>();
 
 	private boolean run;
 
@@ -37,51 +39,17 @@ public class Simulator implements Runnable {
 
 	private String urlToPacketise;
 
-	public Simulator(Endpoint endpoint, String urlToPacketise) {
-		this.context = new DefaultCamelContext();
-		try {
-			this.context.start();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		this.template = new DefaultProducerTemplate(context, endpoint);
-		try {
-			this.template.start();
-		}
-		catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		
-		this.waveforms = new ArrayList<Waveform>();
+	/**
+	 * Basic constructor.
+	 * 
+	 * @param context The Camel context of the route.
+	 * @param template The exchange producer used to create new exchanges.
+	 * @param urlToPacketise The URL from which data will be read from the packetizer.
+	 */
+	public Simulator(CamelContext context, ProducerTemplate template, String urlToPacketise) {
+		this.context = context;
+		this.template = template;
 		this.urlToPacketise = urlToPacketise;
-		try {
-			this.context.start();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public Simulator(Endpoint endpoint) {
-		this.context = new DefaultCamelContext();
-		try {
-			this.context.start();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		this.template = new DefaultProducerTemplate(context, endpoint);
-		try {
-			this.template.start();
-		}
-		catch (Exception e1) {
-			e1.printStackTrace();
-		}
-
-		this.waveforms = new ArrayList<Waveform>();
 	}
 
 	public void setMessageInterval(long messageInterval) {
@@ -107,7 +75,7 @@ public class Simulator implements Runnable {
 	}
 
 	public void sendMessage(Object value) {
-		template.send(nextExchange(value));
+		template.send("direct:sendMessage", nextExchange(value));
 	}
 
 	public void stopSimulator() {
@@ -133,7 +101,7 @@ public class Simulator implements Runnable {
 		while (run) {
 
 			for (Waveform waveform : waveforms) {
-				for (int i = 0; i < waveform.getReadings(); i++) {
+				for (int i = 0; i < waveform.getReadings() && run == true; i++) {
 
 					// TODO Passing the value down to nextMessage() is ugly. Refactor?
 					// sendMessage(waveform.nextValue());
@@ -194,5 +162,9 @@ public class Simulator implements Runnable {
 			}
 
 		}
+	}
+
+	public void setWaveforms(List<Waveform> waveforms) {
+		this.waveforms = waveforms;
 	}
 }
