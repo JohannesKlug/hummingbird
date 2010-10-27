@@ -91,6 +91,28 @@ public class SlipTest implements Observer {
 		assertEquals(1, receivedBytes[1] & 0xFF);
 		assertEquals(255, receivedBytes[2] & 0xFF);
 		
+		
+		// Testing values outside [0-255]
+		
+		os.write(256);
+		os.write(257);
+		os.write(-1);
+		os.write(-2);
+		os.write(END);
+		
+		Thread.sleep(2000);
+		// 256 rolls over and is 0
+		assertEquals(0, receivedBytes[0] & 0xFF);
+
+		// 257 rolls over and is 1
+		assertEquals(1, receivedBytes[1] & 0xFF);
+		
+		// -1 rolls over and is 255
+		assertEquals(255, receivedBytes[2] & 0xFF);
+		
+		// -2 rolls over and is 254
+		assertEquals(254, receivedBytes[3] & 0xFF);
+		
 
 	}
 
