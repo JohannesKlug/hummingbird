@@ -1,0 +1,11 @@
+We, the Hummingbird team, consider work to be done when the following criteria are met:
+
+ * Code is well documented 
+ * All your tests pass, no existing tests are broken
+ * All your tests are correctly stubbed and do not require access to network locations or local files outside the test resources directory
+ * Your code compiles and runs alongside all the existing Hummingbird code, thus is well integrated 
+ * Hudson must accept your build, no failing tests anywhere, no exceptions
+ * Sonar finds no "Blockers" or critical violations
+ 
+If any of these criteria are not met, your work is not considered done by the rest of the team. Go back, and fix all remaining issues.
+ 

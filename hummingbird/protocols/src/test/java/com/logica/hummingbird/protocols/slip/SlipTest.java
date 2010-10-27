@@ -64,18 +64,23 @@ public class SlipTest implements Observer {
 	
 	@Test
 	public void testReception() throws IOException, InterruptedException {
+	
 		PipedOutputStream os = new PipedOutputStream();
-		
 		final InputStream is = new PipedInputStream(os);
-		os.write(END & 0xFF);
+
 		slip.addObserver(this);
-		new Thread(
+		
+		Thread receiver = new Thread(
 				new Runnable(){
 					public void run() {
 						slip.readFromStream(is);
 					}
 				}
-		).start();
+		);
+		receiver.start();
+		
+		os.write(END & 0xFF);
+		
 		Thread.sleep(1000);
 		assertEquals(0, receivedBytes.length);
 	
@@ -91,6 +96,76 @@ public class SlipTest implements Observer {
 		assertEquals(1, receivedBytes[1] & 0xFF);
 		assertEquals(255, receivedBytes[2] & 0xFF);
 		
+	}
+
+	@Test
+	public void testReceptionOutside0and255() throws IOException, InterruptedException {
+
+		PipedOutputStream os = new PipedOutputStream();
+		final InputStream is = new PipedInputStream(os);
+		
+		slip.addObserver(this);
+		
+		Thread receiver = new Thread(
+				new Runnable(){
+					public void run() {
+						slip.readFromStream(is);
+					}
+				}
+		);
+		receiver.start();
+	
+		// Testing values outside [0-255]
+		
+		os.write(256);
+		os.write(257);
+		os.write(-1);
+		os.write(-2);
+		os.write(END);
+		
+		Thread.sleep(2000);
+		// 256 rolls over and is 0
+		assertEquals(0, receivedBytes[0] & 0xFF);
+
+		// 257 rolls over and is 1
+		assertEquals(1, receivedBytes[1] & 0xFF);
+		
+		// -1 rolls over and is 255
+		assertEquals(255, receivedBytes[2] & 0xFF);
+		
+		// -2 rolls over and is 254
+		assertEquals(254, receivedBytes[3] & 0xFF);
+		
+	}
+
+	@Test
+	public void testReceptionWithEscapes() throws IOException, InterruptedException {
+
+		PipedOutputStream os = new PipedOutputStream();
+		final InputStream is = new PipedInputStream(os);
+		
+		slip.addObserver(this);
+		
+		Thread receiver = new Thread(
+				new Runnable(){
+					public void run() {
+						slip.readFromStream(is);
+					}
+				}
+		);
+		receiver.start();
+	
+		
+		// Testing escapes
+		
+		// We should receive a single byte (END) with this sequence
+		os.write(ESCEND);
+		os.write(END);
+		os.write(END);
+		
+		Thread.sleep(2000);
+		assertEquals(1, receivedBytes.length);
+		assertEquals(END, receivedBytes[0] & 0xFF);
 
 	}
 
