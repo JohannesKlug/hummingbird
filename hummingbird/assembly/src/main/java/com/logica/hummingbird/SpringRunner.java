@@ -1,16 +1,31 @@
 package com.logica.hummingbird;
 
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
+/**
+ * Simple driver for any route that demands no specific start. Will assemble the simulator based on a spring XML 
+ * bean file, whose path can be parsed as the first argument to the application.
+ * 
+ * To change the simulator output, edit the Spring XML bean file. 
+ * 
+ */
 public class SpringRunner {
 
 	/**
-	 * @param args
+	 * Main method for starting the simulator.
+	 * 
+	 * @param args The path to the Spring assembly file. Must be in the format 'classpath:[relative path]' or 'file:[full path]'.
 	 */
 	public static void main(String[] args) {
-		BeanFactory factory = new FileSystemXmlApplicationContext("target/classes/PacketDispatcher.xml");
+		
+		/** Read the configuration file as the first argument. If not set, then we try the default name. */
+		String assemblyFile = "classpath:PacketDispatcher.xml";
+		if (args.length > 0) {
+			assemblyFile = args[0];
+		}
+		
+		System.out.println("Starting simulator runner based on assembly file '" + assemblyFile + "'.");
 
+		new FileSystemXmlApplicationContext(assemblyFile);
 	}
-
 }

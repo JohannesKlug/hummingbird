@@ -1,47 +1,41 @@
 package com.logica.hummingbird;
 
-import org.apache.activemq.camel.component.ActiveMQComponent;
-import org.apache.camel.CamelContext;
-import org.apache.camel.impl.DefaultCamelContext;
+import org.springframework.beans.BeansException;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import com.logica.hummingbird.simulator.Simulator;
-import com.logica.hummingbird.simulator.waveforms.LinearWaveform;
 
+/**
+ * Simple driver for the Simulator bean. Will assemble the simulator based on a spring XML 
+ * bean file, whose path can be parsed as the first argument to the application.
+ * 
+ * To change the simulator output, edit the Spring XML bean file. 
+ * 
+ */
 public class SimulatorRunner {
 	
 	/**
-	 * @param args
+	 * Main method for starting the simulator.
+	 * 
+	 * @param args The path to the Spring assembly file. Must be in the format 'classpath:[relative path]' or 'file:[full path]'.
 	 */
 	public static void main(String[] args) {
 		
-		CamelContext context = new DefaultCamelContext();
-		try {
-			context.start();
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		/** Read the configuration file as the first argument. If not set, then we try the default name. */
+		String assemblyFile = "classpath:SimulatorRunner-context.xml";		
+		if (args.length > 0) {
+			assemblyFile = args[0];
 		}
 		
-		// TODO Make broker URL configurable via Spring
-		context.addComponent("activemq", ActiveMQComponent.activeMQComponent("tcp://127.0.0.1:61616"));
-		
-		
+		System.out.println("Starting simulator runner based on assembly file '" + assemblyFile + "'.");
+
+		/** Assemble the simulator and start it. */
+		FileSystemXmlApplicationContext context = new FileSystemXmlApplicationContext(assemblyFile);
 		try {
-			// TODO Make Topic configurable via Spring
-//			Simulator simulator = new Simulator(context.getEndpoint("activemq:topic:newtopic"));
-			Simulator simulator = new Simulator(context.getEndpoint("activemq:packetsIn"));
-			simulator.addWaveform(new LinearWaveform(101, 0, 1));
-			
-			simulator.setMessageInterval(200);
-			
-			Thread simulatorThread = new Thread(simulator);
-			simulatorThread.start();
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			((Simulator) context.getBean("simulator")).run();
+		}
+		catch (BeansException e) {
 			e.printStackTrace();
 		}
-
-	}
-	
+	}	
 }
