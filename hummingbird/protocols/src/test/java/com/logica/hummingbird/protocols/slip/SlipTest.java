@@ -1,11 +1,9 @@
 package com.logica.hummingbird.protocols.slip;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.util.Observable;
@@ -14,8 +12,6 @@ import java.util.Observer;
 import org.apache.commons.lang.ArrayUtils;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.logica.hummingbird.protocols.hardware.SerialPortDriver;
 
 public class SlipTest implements Observer {
 	
