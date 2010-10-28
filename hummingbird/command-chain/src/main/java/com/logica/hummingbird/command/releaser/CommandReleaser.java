@@ -22,6 +22,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultExchange;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.logica.hummingbird.interfaces.CommandDefinition;
 import com.logica.hummingbird.interfaces.IParameterStateConnector;
@@ -59,25 +60,16 @@ import com.logica.hummingbird.jmshelper.HeaderFields;
 public class CommandReleaser {
 
 	/** Queue for the task schedule. */
+	@Autowired
 	protected ProducerTemplate producer = null;
+
+	/** The context in which the component is running. */
+	@Autowired
+	protected CamelContext context = null;
 	
 	/** Provider of state parameters*/
 	protected IParameterStateConnector stateConnector = null;
-	
-	/** The context we are running in. */
-	protected CamelContext context = null;
-	
-	/**
-	 * Basic constructure
-	 * 
-	 * @param context the context of the component.
-	 * @param producer The producer template of the context.
-	 */
-	public CommandReleaser(CamelContext context, ProducerTemplate producer) {
-		this.context = context;
-		this.producer = producer;
-	}
-	
+		
 	/**
 	 * Processor for the scheduling of validation task for a command as well as the
 	 * release of the command.
@@ -120,17 +112,12 @@ public class CommandReleaser {
 		/** Command is forwarded in the route, i.e. released. */
 	}
 
-	public void setProducer(ProducerTemplate producer) {
-		this.producer = producer;
-	}
-
+	/**
+	 * Sets the state connector used to retrieve the current states of all lock states.
+	 * 
+	 * @param stateConnector The connector providing the states.
+	 */
 	public void setStateConnector(IParameterStateConnector stateConnector) {
 		this.stateConnector = stateConnector;
 	}
-
-	public void setContext(CamelContext context) {
-		this.context = context;
-	}
-	
-	
 }

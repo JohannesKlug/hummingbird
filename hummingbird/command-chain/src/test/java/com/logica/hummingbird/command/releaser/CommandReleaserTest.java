@@ -22,8 +22,8 @@ import com.logica.hummingbird.interfaces.CommandDefinition;
 import com.logica.hummingbird.interfaces.ITask;
 import com.logica.hummingbird.jmshelper.HeaderFields;
 
-@ContextConfiguration (locations={"/ReleaserTest-context.xml"})
-public class ReleaserTest extends AbstractJUnit38SpringContextTests  {
+@ContextConfiguration (locations={"/CommandReleaserTest-context.xml"})
+public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 
 	@Produce(uri = "direct:Commands")
     protected ProducerTemplate template;
@@ -52,7 +52,9 @@ public class ReleaserTest extends AbstractJUnit38SpringContextTests  {
 		
 		List<ITask> tasks = Arrays.asList(new ITask[] {new DummyTask(), new DummyTask()});
 
-		CommandDefinition definition = new CommandDefinition("TestCommand", lockStates, tasks);
+		List<String> arguments = Arrays.asList(new String[] {});
+		
+		CommandDefinition definition = new CommandDefinition(arguments, lockStates, tasks);
 		
 		/** Release command with states that will fail, i.e. locked. */
 		Exchange exchange = new DefaultExchange(camelContext);
@@ -84,7 +86,9 @@ public class ReleaserTest extends AbstractJUnit38SpringContextTests  {
 		
 		List<ITask> tasks = Arrays.asList(new ITask[] {new DummyTask(), new DummyTask()});
 
-		CommandDefinition definition = new CommandDefinition("TestCommand", lockStates, tasks);
+		List<String> arguments = Arrays.asList(new String[] {});
+		
+		CommandDefinition definition = new CommandDefinition(arguments, lockStates, tasks);
 		
 		/** Release command with states that will fail, i.e. locked. */
 		Exchange exchange = new DefaultExchange(camelContext);

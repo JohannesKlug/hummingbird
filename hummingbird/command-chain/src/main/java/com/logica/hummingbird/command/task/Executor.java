@@ -21,6 +21,7 @@ import java.util.Date;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.logica.hummingbird.interfaces.ITask;
 import com.logica.hummingbird.jmshelper.HeaderFields;
@@ -33,24 +34,13 @@ import com.logica.hummingbird.jmshelper.HeaderFields;
 public class Executor {
 
 	/** Queue for the task schedule. */
+	@Autowired
 	protected ProducerTemplate producer = null;
 
 	/** The context in which the component is running. */
+	@Autowired
 	protected CamelContext context = null;
 	
-	
-	/**
-	 * Basic constructor.
-	 * 
-	 * @param context Context in which the component is running.
-	 * @param producer The producer template of the context.
-	 */
-	public Executor(CamelContext context, ProducerTemplate producer) {
-		super();
-		this.producer = producer;
-		this.context = context;
-	}
-
 	/** 
 	 * Method for actually executing the task. The task will be extracted from the
 	 * exchange body, which is expected to contain a task object.

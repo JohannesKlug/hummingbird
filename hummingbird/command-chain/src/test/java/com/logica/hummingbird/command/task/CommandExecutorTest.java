@@ -14,8 +14,8 @@ import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTest
 
 import com.logica.hummingbird.jmshelper.HeaderFields;
 
-@ContextConfiguration (locations={"/ExecutorTest-context.xml"})
-public class ExecutorTest extends AbstractJUnit38SpringContextTests  {
+@ContextConfiguration (locations={"/CommandExecutorTest-context.xml"})
+public class CommandExecutorTest extends AbstractJUnit38SpringContextTests  {
 
 	@Produce(uri = "direct:start")
     protected ProducerTemplate template;

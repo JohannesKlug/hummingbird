@@ -18,6 +18,7 @@ package com.logica.hummingbird.jmshelper;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
@@ -76,11 +77,11 @@ public class ExchangeFormatter {
 		return (String) exchange.getIn().getHeader(HeaderFields.TIMESTAMP);
 	}
 
-	public static Message createCommand(CamelContext context, String name, long releaseTime, List<String> lockStates, List<ITask> tasks) {
+	public static Message createCommand(CamelContext context, String name, long releaseTime, CommandDefinition definition) {
 		Message message = new DefaultMessage();
 		message.setHeader("ReleaseTime", releaseTime);
 		message.setHeader("Name", name);		
-		message.setBody(new CommandDefinition(name, lockStates, tasks));
+		message.setBody(definition);
 		
 		return message;
 	}

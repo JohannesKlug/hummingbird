@@ -10,10 +10,7 @@
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
 
-	<bean id="taskexecutor" class="com.logica.hummingbird.command.task.Executor">
-		<constructor-arg index="0" ref="context"/>
-		<constructor-arg index="1" ref="producer"/>
-	</bean>
+	<bean id="taskexecutor" class="com.logica.hummingbird.command.task.Executor"/>
 
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>

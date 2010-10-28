@@ -10,27 +10,18 @@
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
 
-	<bean id="stateConnector" class="com.logica.hummingbird.command.releaser.DummyParameterStateConnector"/>
+	<bean id="definition" class="com.logica.hummingbird.interfaces.CommandDefinition"/>
 
-	<bean id="commandreleaser" class="com.logica.hummingbird.command.releaser.CommandReleaser">
-		<constructor-arg index="0" ref="context"/>
-		<constructor-arg index="1" ref="producer"/>	
-		<property name="stateConnector" ref="stateConnector"/>
-	</bean>
+	<bean id="commandgenerator" class="com.logica.hummingbird.command.generator.CommandGenerator"/>
 
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>
 
 		<route>
 			<from uri="direct:Commands" />
-			<to uri="bean:commandreleaser" />
+			<to uri="bean:commandgenerator?method=process" />
 			<to uri="mock:ReleasedCommands" />
 		</route>
 		
-		<route>
-			<from uri="direct:tasks" />
-			<to uri="mock:Tasks" />
-		</route>
-	
 	</camelContext>
 </beans>
