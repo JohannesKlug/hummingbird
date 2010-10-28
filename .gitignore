@@ -8,8 +8,6 @@ hummingbird/xtce/src/main/java/com/logica/hummingbird/xtce/castor/
 .idea/
 *.iml
 .DS_Store
-hummingbird/validation/logs/limit-validation.log
-hummingbird/command-generator/logs/limit-validation.log
-hummingbird/simple-parameter-simulator/logs/bensApps.log
-hummingbird/simple-parameter-simulator/logs/simple-parameter-simulator.log
-hummingbird/simple-parameter-simulator/logs/simple-parameter-simulator.log.10-10-11
+hummingbird/validation/logs/
+hummingbird/command-generator/logs/
+hummingbird/simple-parameter-simulator/logs/
