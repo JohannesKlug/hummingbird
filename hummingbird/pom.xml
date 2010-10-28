@@ -17,6 +17,20 @@
 		</properties>
 	  </profile>
 	  <profile>
+	    <id>win64</id>
+	    <activation>
+	      <os>
+	        <!-- <name>Windows XP</name> -->
+	        <family>Windows</family>
+	        <arch>amd64</arch>
+	        <!-- <version>5.1.2600</version> -->
+	      </os>
+	    </activation>
+	    <properties>
+		  <build.type>win64</build.type>
+		</properties>
+	  </profile>
+	  <profile>
 	    <id>mac</id>
 	    <activation>
 	      <os>
