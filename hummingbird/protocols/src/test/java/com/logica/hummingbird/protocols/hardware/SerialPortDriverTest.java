@@ -1,6 +1,7 @@
 package com.logica.hummingbird.protocols.hardware;
 
 import static org.junit.Assert.*;
+import gnu.io.NoSuchPortException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +12,11 @@ public class SerialPortDriverTest {
 
 	@Before
 	public void setUp() throws Exception {
-		driver = new SerialPortDriver();
+		try {
+			driver = new SerialPortDriver("/dev/ttyUSB0");
+		} catch (NoSuchPortException ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	@Test
