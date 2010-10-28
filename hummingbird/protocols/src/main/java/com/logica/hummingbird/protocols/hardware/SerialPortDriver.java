@@ -48,5 +48,9 @@ public class SerialPortDriver {
 	public InputStream getInputStream() throws IOException {
 		return serialPort.getInputStream();
 	}
+	
+	public void closePort() {
+		serialPort.close();
+	}
 
 }
