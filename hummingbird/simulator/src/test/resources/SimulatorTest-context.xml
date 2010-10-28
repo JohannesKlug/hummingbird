@@ -29,7 +29,7 @@
 
 		<route>
 			<from uri="direct:sendMessage" />
-			<to uri="activemq:PacketsIn" />
+			<to uri="mock:result" />
 		</route>
 	
 	</camelContext>
