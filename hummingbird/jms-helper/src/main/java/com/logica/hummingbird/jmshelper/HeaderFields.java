@@ -12,7 +12,7 @@ public interface HeaderFields {
 	public static final String ISSTATEOF = "isStateOf";
 	public static final String RELEASETIME = "ReleaseTime";
 	public static final String TASK_OFF = "TaskOff";
-	public static final String TASK_EXECUTIONTIME = "TaskExecutionTime";
+	public static final String EXECUTIONTIME = "TaskExecutionTime";
 
 	
 }

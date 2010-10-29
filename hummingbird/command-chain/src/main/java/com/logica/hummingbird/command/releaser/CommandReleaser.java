@@ -85,10 +85,10 @@ public class CommandReleaser {
 
 		/** Wait until the execution time. */
 		Date now = new Date();
-		long executionTime = (Long) arg0.getIn().getHeader(HeaderFields.TASK_EXECUTIONTIME);
+		long releaseTime = (Long) arg0.getIn().getHeader(HeaderFields.RELEASETIME);
 
-		if (executionTime > now.getTime()) {
-			Thread.sleep(executionTime - now.getTime());
+		if (releaseTime > now.getTime()) {
+			Thread.sleep(releaseTime - now.getTime());
 		} 
 
 		/** Validate the lock state(s). */

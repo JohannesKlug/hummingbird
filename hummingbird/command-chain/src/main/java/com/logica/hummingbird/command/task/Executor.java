@@ -56,7 +56,7 @@ public class Executor {
 
 		/** Wait until the execution time. */
 		Date now = new Date();
-		long executionTime = (Long) arg0.getIn().getHeader(HeaderFields.TASK_EXECUTIONTIME);
+		long executionTime = (Long) arg0.getIn().getHeader(HeaderFields.EXECUTIONTIME);
 
 		if (executionTime > now.getTime()) {
 			Thread.sleep(executionTime - now.getTime());

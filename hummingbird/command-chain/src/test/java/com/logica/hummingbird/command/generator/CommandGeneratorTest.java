@@ -43,7 +43,7 @@ public class CommandGeneratorTest extends AbstractJUnit38SpringContextTests  {
 		
 		Exchange exchange = new DefaultExchange(context);
 		exchange.getIn().setHeader(HeaderFields.NAME, "TestCommand");
-		exchange.getIn().setHeader(HeaderFields.TASK_EXECUTIONTIME, now.getTime());
+		exchange.getIn().setHeader(HeaderFields.EXECUTIONTIME, now.getTime());
 		exchange.getIn().setHeader("TestArgument1", 1d);
 		exchange.getIn().setHeader("TestArgument2", 1d);
 		exchange.getIn().setHeader("TestArgument3", 1d);

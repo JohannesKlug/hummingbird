@@ -28,12 +28,18 @@ public class CommandExecutorTest extends AbstractJUnit38SpringContextTests  {
 		DummyTask task = new DummyTask();
 		task.deltaTime = 1000;
 		
+		sendExchange(task, ((new Date()).getTime() + 1000));
+		sendExchange(task, 0);
+	}
+	
+	public void sendExchange(DummyTask task, long delay) {
 		Exchange exchange = new DefaultExchange(context);
 		exchange.getIn().setBody(task);
-		exchange.getIn().setHeader(HeaderFields.TASK_EXECUTIONTIME, ((new Date()).getTime() + 1000));
+		exchange.getIn().setHeader(HeaderFields.EXECUTIONTIME, delay);
 
 		template.send(exchange);
-		
+
 		assertTrue(task.executeCalled == true);
+		task.executeCalled = false;		
 	}
 }

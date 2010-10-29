@@ -84,7 +84,7 @@ public class ExchangeFormatter {
 	public static Message createTask(String string, long executionTime, String name, ITask task) {
 		Message message = new DefaultMessage();
 		message.setHeader(HeaderFields.TYPE, "Task");
-		message.setHeader(HeaderFields.TASK_EXECUTIONTIME, executionTime);
+		message.setHeader(HeaderFields.EXECUTIONTIME, executionTime);
 		message.setHeader(HeaderFields.TASK_OFF, name);
 		message.setBody(task);			
 
