@@ -108,7 +108,7 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 
 	@DirtiesContext
 	@Test
-	public void testimmediateRelease() {
+	public void testImmediateRelease() {
 
 		stateConnector.states.put("STATE1", true);
 		stateConnector.states.put("STATE2", true);
@@ -118,7 +118,7 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 		
 		List<ITask> tasks = Arrays.asList(new ITask[] {new DummyTask(), new DummyTask()});
 
-		List<String> arguments = Arrays.asList(new String[] {});
+		List<String> arguments = Arrays.asList(new String[] {"Argument1", "Argument2", "Argument3"});
 		
 		CommandDefinition definition = new CommandDefinition("TestCommand", arguments, lockStates, tasks);
 		
@@ -127,16 +127,24 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 		exchange.getIn().setBody(definition);
 		exchange.getIn().setHeader(HeaderFields.RELEASETIME, 0l);
 		exchange.getIn().setHeader(HeaderFields.NAME, "TestCommand");
+		
+		exchange.getIn().setHeader("Argument1", "Arg1");
+		exchange.getIn().setHeader("Argument2", "Arg2");
+		exchange.getIn().setHeader("Argument3", "Arg3");
 
 		template.send(exchange);
 		
 		/** Lock state is true, so exchange should be stopped. */
-		assertTrue("ReleaseCommands count is " + releasedCommands.getReceivedCounter(), releasedCommands.getReceivedCounter() == 1);
+		assertTrue(releasedCommands.getReceivedCounter() == 1);
 		assertTrue(scheduledTasks.getReceivedCounter() == 2);
 		
 		for (ITask task : tasks) {
 			assertTrue(((DummyTask) task).executeCalled == false);
 		}
+
+		assertTrue(releasedCommands.getExchanges().get(0).getIn().getHeader("Argument1").equals("Arg1") == true);
+		assertTrue(releasedCommands.getExchanges().get(0).getIn().getHeader("Argument2").equals("Arg2") == true);
+		assertTrue(releasedCommands.getExchanges().get(0).getIn().getHeader("Argument3").equals("Arg3") == true);
 	}
 
 }
