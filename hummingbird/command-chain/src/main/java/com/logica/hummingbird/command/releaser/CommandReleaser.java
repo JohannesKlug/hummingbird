@@ -24,7 +24,7 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultExchange;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.logica.hummingbird.interfaces.CommandDefinition;
+import com.logica.hummingbird.command.CommandDefinition;
 import com.logica.hummingbird.interfaces.IParameterStateConnector;
 import com.logica.hummingbird.interfaces.ITask;
 import com.logica.hummingbird.jmshelper.ExchangeFormatter;

@@ -33,6 +33,7 @@ import com.logica.hummingbird.jmshelper.HeaderFields;
  */
 public class Executor {
 
+	
 	/** Queue for the task schedule. */
 	@Autowired
 	protected ProducerTemplate producer = null;

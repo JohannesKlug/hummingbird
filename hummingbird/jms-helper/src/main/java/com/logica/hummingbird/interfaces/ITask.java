@@ -7,6 +7,7 @@ public interface ITask {
 
 	public long deltaTime();
 
+	
 	/**
 	 * Method for running the task.
 	 * 

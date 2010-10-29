@@ -9,10 +9,13 @@
        http://camel.apache.org/schema/spring 
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-
-	<bean id="definition" class="com.logica.hummingbird.interfaces.CommandDefinition"/>
+	<bean id="definition" class="com.logica.hummingbird.command.CommandDefinition">
+		<constructor-arg index="0" value="TestCommand4"/>
+	</bean>
 
 	<bean id="commandgenerator" class="com.logica.hummingbird.command.generator.CommandGenerator"/>
+
+	<bean id="buffer" class="com.logica.hummingbird.command.buffer.CommandBuffer"/>
 
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>

@@ -17,15 +17,11 @@
 package com.logica.hummingbird.jmshelper;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
 
-import com.logica.hummingbird.interfaces.CommandDefinition;
 import com.logica.hummingbird.interfaces.ITask;
 
 /**
@@ -64,6 +60,14 @@ public class ExchangeFormatter {
 		setParameterMandatory(message, parameterName, clazz, value);		
 		return message;
 	};
+
+	public static Message createCommandDefinition(String name, Object value) {
+		Message message = new DefaultMessage();
+		message.setHeader(HeaderFields.NAME, name);
+		message.setBody(value);
+		return message;
+	};
+	
 	
 	public static String getParameterName(Exchange exchange) {
 		return (String) exchange.getIn().getHeader(HeaderFields.NAME);
@@ -77,15 +81,6 @@ public class ExchangeFormatter {
 		return (String) exchange.getIn().getHeader(HeaderFields.TIMESTAMP);
 	}
 
-	public static Message createCommand(CamelContext context, String name, long releaseTime, CommandDefinition definition) {
-		Message message = new DefaultMessage();
-		message.setHeader("ReleaseTime", releaseTime);
-		message.setHeader("Name", name);		
-		message.setBody(definition);
-		
-		return message;
-	}
-
 	public static Message createTask(String string, long executionTime, String name, ITask task) {
 		Message message = new DefaultMessage();
 		message.setHeader(HeaderFields.TYPE, "Task");
@@ -94,5 +89,9 @@ public class ExchangeFormatter {
 		message.setBody(task);			
 
 		return message;
+	}
+
+	public static String getName(Exchange arg0) {
+		return (String) arg0.getIn().getHeader(HeaderFields.NAME);
 	}
 }

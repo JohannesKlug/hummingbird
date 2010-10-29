@@ -14,7 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
-import com.logica.hummingbird.interfaces.CommandDefinition;
+import com.logica.hummingbird.command.CommandDefinition;
+import com.logica.hummingbird.command.buffer.CommandBuffer;
 import com.logica.hummingbird.jmshelper.HeaderFields;
 
 @ContextConfiguration (locations={"/CommandGeneratorTest-context.xml"})
@@ -27,14 +28,20 @@ public class CommandGeneratorTest extends AbstractJUnit38SpringContextTests  {
 	protected MockEndpoint releaseQueue;
 
 	@Autowired
-    protected CamelContext camelContext;
+    protected CamelContext context;
+	
+	@Autowired
+	protected CommandBuffer buffer;
 	
 	@Test
 	public void testReceive() {
 		
+		CommandDefinition definition = new CommandDefinition("TestCommand"); 
+		buffer.addEntry(definition.getName(), definition);
+		
 		Date now = new Date();
 		
-		Exchange exchange = new DefaultExchange(camelContext);
+		Exchange exchange = new DefaultExchange(context);
 		exchange.getIn().setHeader(HeaderFields.NAME, "TestCommand");
 		exchange.getIn().setHeader(HeaderFields.TASK_EXECUTIONTIME, now.getTime());
 		exchange.getIn().setHeader("TestArgument1", 1d);

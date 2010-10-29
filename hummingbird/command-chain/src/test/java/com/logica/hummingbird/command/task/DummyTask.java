@@ -7,6 +7,7 @@ import com.logica.hummingbird.interfaces.ITask;
 
 public class DummyTask implements ITask {
 
+	
 	public long deltaTime = 0;
 	
 	public boolean executeCalled = false;

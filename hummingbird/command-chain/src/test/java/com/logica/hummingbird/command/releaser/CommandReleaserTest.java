@@ -17,8 +17,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
+import com.logica.hummingbird.command.CommandDefinition;
 import com.logica.hummingbird.command.task.DummyTask;
-import com.logica.hummingbird.interfaces.CommandDefinition;
 import com.logica.hummingbird.interfaces.ITask;
 import com.logica.hummingbird.jmshelper.HeaderFields;
 
@@ -35,7 +35,7 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 	protected MockEndpoint scheduledTasks;
 	
 	@Autowired
-    protected CamelContext camelContext;
+    protected CamelContext context;
 
 	@Autowired
 	protected DummyParameterStateConnector stateConnector;
@@ -54,10 +54,10 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 
 		List<String> arguments = Arrays.asList(new String[] {});
 		
-		CommandDefinition definition = new CommandDefinition(arguments, lockStates, tasks);
+		CommandDefinition definition = new CommandDefinition("TestCommand", arguments, lockStates, tasks);
 		
 		/** Release command with states that will fail, i.e. locked. */
-		Exchange exchange = new DefaultExchange(camelContext);
+		Exchange exchange = new DefaultExchange(context);
 		exchange.getIn().setBody(definition);
 		exchange.getIn().setHeader(HeaderFields.TASK_EXECUTIONTIME, ((new Date()).getTime() + 1000));
 		exchange.getIn().setHeader(HeaderFields.NAME, "TestCommand");
@@ -88,10 +88,10 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 
 		List<String> arguments = Arrays.asList(new String[] {});
 		
-		CommandDefinition definition = new CommandDefinition(arguments, lockStates, tasks);
+		CommandDefinition definition = new CommandDefinition("TestCommand", arguments, lockStates, tasks);
 		
 		/** Release command with states that will fail, i.e. locked. */
-		Exchange exchange = new DefaultExchange(camelContext);
+		Exchange exchange = new DefaultExchange(context);
 		exchange.getIn().setBody(definition);
 		exchange.getIn().setHeader(HeaderFields.TASK_EXECUTIONTIME, ((new Date()).getTime() + 1000));
 		exchange.getIn().setHeader(HeaderFields.NAME, "TestCommand");

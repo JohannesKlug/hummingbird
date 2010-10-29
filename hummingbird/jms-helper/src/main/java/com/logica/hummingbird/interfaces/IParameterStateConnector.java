@@ -19,5 +19,6 @@ package com.logica.hummingbird.interfaces;
 
 public interface IParameterStateConnector {
 
+	
 	public boolean getState(String stateName);
 }

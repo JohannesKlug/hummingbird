@@ -21,14 +21,14 @@ public class CommandExecutorTest extends AbstractJUnit38SpringContextTests  {
     protected ProducerTemplate template;
 	
 	@Autowired
-    protected CamelContext camelContext;
+    protected CamelContext context;
 	
 	@Test
 	public void testReceive() {
 		DummyTask task = new DummyTask();
 		task.deltaTime = 1000;
 		
-		Exchange exchange = new DefaultExchange(camelContext);
+		Exchange exchange = new DefaultExchange(context);
 		exchange.getIn().setBody(task);
 		exchange.getIn().setHeader(HeaderFields.TASK_EXECUTIONTIME, ((new Date()).getTime() + 1000));
 

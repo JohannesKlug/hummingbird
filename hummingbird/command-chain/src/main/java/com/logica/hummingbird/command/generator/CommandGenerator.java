@@ -17,10 +17,12 @@
 package com.logica.hummingbird.command.generator;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.Exchange;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.logica.hummingbird.interfaces.CommandDefinition;
+import com.logica.hummingbird.command.buffer.CommandBuffer;
+import com.logica.hummingbird.jmshelper.ExchangeFormatter;
 
 
 /**
@@ -35,6 +37,12 @@ public class CommandGenerator {
 	/** The context in which the component is running. */
 	@Autowired
 	protected CamelContext context = null;
+
+	@Autowired
+	protected ConsumerTemplate consumer = null; 
+
+	@Autowired
+	protected CommandBuffer buffer = null;
 
 	/**
 	 * Method for creating and sending a command. The command generator can be linked
@@ -52,11 +60,7 @@ public class CommandGenerator {
 	 * @param arg0 The exchange triggering the command. Can be a timer or a request.
 	 */
 	public void process(Exchange arg0) {
-		
-		/** TODO get the command definition from the command buffer. */
-		CommandDefinition definition = new CommandDefinition();
-		
 		/** Release the command to the command query, i.e. schedule it for release to the spacecraft. */
-		arg0.getIn().setBody(definition);
+		arg0.getIn().setBody(buffer.getCommandDefinition(ExchangeFormatter.getName(arg0)));
 	}
 }
