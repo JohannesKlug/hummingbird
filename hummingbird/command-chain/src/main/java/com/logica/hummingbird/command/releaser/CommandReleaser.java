@@ -66,33 +66,31 @@ public class CommandReleaser {
 	/** The context in which the component is running. */
 	@Autowired
 	protected CamelContext context = null;
-	
+
 	/** Provider of state parameters*/
+	@Autowired
 	protected IParameterStateConnector stateConnector = null;
-		
+
 	/**
 	 * Processor for the scheduling of validation task for a command as well as the
 	 * release of the command.
 	 * 
 	 * @param arg0
+	 * @throws InterruptedException 
 	 */
-	public void process(Exchange arg0) {
+	public void process(Exchange arg0) throws InterruptedException {
 
 		/** Get the command definition. */
 		CommandDefinition definition = (CommandDefinition) arg0.getIn().getBody();
-		
+
 		/** Wait until the execution time. */
 		Date now = new Date();
 		long executionTime = (Long) arg0.getIn().getHeader(HeaderFields.TASK_EXECUTIONTIME);
-		
+
 		if (executionTime > now.getTime()) {
-			try {
-				Thread.sleep(executionTime - now.getTime());
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			Thread.sleep(executionTime - now.getTime());
 		} 
-		
+
 		/** Validate the lock state(s). */
 		for (String state : definition.getLockStates()) {
 			if (stateConnector.getState(state) == false) {				
@@ -101,23 +99,14 @@ public class CommandReleaser {
 				return;
 			}
 		}
-		
+
 		/** Schedule all tasks. */
 		for (ITask task : definition.getTasks()) {
 			Exchange exchange = new DefaultExchange(context);
 			exchange.setIn(ExchangeFormatter.createTask("Task", (Long) arg0.getIn().getHeader(HeaderFields.RELEASETIME) + task.deltaTime(), (String) arg0.getIn().getHeader(HeaderFields.NAME), task));
 			producer.send("direct:tasks", exchange);			
 		}
-		
-		/** Command is forwarded in the route, i.e. released. */
-	}
 
-	/**
-	 * Sets the state connector used to retrieve the current states of all lock states.
-	 * 
-	 * @param stateConnector The connector providing the states.
-	 */
-	public void setStateConnector(IParameterStateConnector stateConnector) {
-		this.stateConnector = stateConnector;
+		/** Command is forwarded in the route, i.e. released. */
 	}
 }

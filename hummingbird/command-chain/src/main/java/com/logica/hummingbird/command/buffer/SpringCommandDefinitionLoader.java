@@ -22,7 +22,6 @@ import java.util.List;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
-import org.apache.camel.ProducerTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.logica.hummingbird.command.CommandDefinition;
@@ -38,13 +37,10 @@ public class SpringCommandDefinitionLoader {
 	@Autowired
 	protected CamelContext context = null;
 
-	@Autowired
-	protected ProducerTemplate producer = null; 
-
+	/** List of command definitions to be injected. */
 	@Autowired
 	protected List<CommandDefinition> definitions = null;
-	
-	
+		
 	/**
 	 * Method to split the message. The returned message list is actually loaded
 	 * from a Spring file, i.e. the original Exchange is ignored.

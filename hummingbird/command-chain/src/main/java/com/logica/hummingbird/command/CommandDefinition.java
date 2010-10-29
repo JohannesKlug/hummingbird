@@ -65,6 +65,7 @@ public class CommandDefinition implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/** The name of the command. */
 	protected String name;
 	
 	/** List of arguments. The value is embedded in the header of the exchange. */

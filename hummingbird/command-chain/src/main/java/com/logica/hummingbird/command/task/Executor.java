@@ -33,7 +33,7 @@ import com.logica.hummingbird.jmshelper.HeaderFields;
  */
 public class Executor {
 
-	
+
 	/** Queue for the task schedule. */
 	@Autowired
 	protected ProducerTemplate producer = null;
@@ -41,28 +41,25 @@ public class Executor {
 	/** The context in which the component is running. */
 	@Autowired
 	protected CamelContext context = null;
-	
+
 	/** 
 	 * Method for actually executing the task. The task will be extracted from the
 	 * exchange body, which is expected to contain a task object.
 	 * 
 	 * @param arg0 The exchange carrying a task as its body.
+	 * @throws InterruptedException 
 	 */
-	public void receive(Exchange arg0) {
-		
+	public void receive(Exchange arg0) throws InterruptedException {
+
 		/** Get the task. */
 		ITask task = (ITask) arg0.getIn().getBody();
 
 		/** Wait until the execution time. */
 		Date now = new Date();
 		long executionTime = (Long) arg0.getIn().getHeader(HeaderFields.TASK_EXECUTIONTIME);
-		
+
 		if (executionTime > now.getTime()) {
-			try {
-				Thread.sleep(executionTime - now.getTime());
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			Thread.sleep(executionTime - now.getTime());
 		} 
 
 		/** Execute the task */

@@ -16,14 +16,11 @@
  */
 package com.logica.hummingbird.command.generator;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.Exchange;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.logica.hummingbird.command.buffer.CommandBuffer;
 import com.logica.hummingbird.jmshelper.ExchangeFormatter;
-
 
 /**
  * @TITLE Command Generator Design
@@ -34,13 +31,7 @@ import com.logica.hummingbird.jmshelper.ExchangeFormatter;
  */
 public class CommandGenerator {
 
-	/** The context in which the component is running. */
-	@Autowired
-	protected CamelContext context = null;
-
-	@Autowired
-	protected ConsumerTemplate consumer = null; 
-
+	/** The buffer holding the command definitions. */
 	@Autowired
 	protected CommandBuffer buffer = null;
 
