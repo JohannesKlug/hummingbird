@@ -22,6 +22,7 @@ import org.apache.log4j.Logger;
 import com.logica.hummingbird.jmshelper.ExchangeFormatter;
 
 
+
 /**
  * A constant parameter. Every time process is called, a new instance of the
  * parameter is send.
@@ -58,6 +59,17 @@ public class ConstantParameter extends BaseParameter {
 			logger.error("Courght exception " + e);
 			e.printStackTrace();
 		}
-
 	}
+
+
+	public Double getValue() {
+		return value;
+	}
+
+
+	public void setValue(Double value) {
+		this.value = value;
+	}
+	
+	
 }

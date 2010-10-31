@@ -24,6 +24,7 @@ import org.apache.log4j.Logger;
 import com.logica.hummingbird.jmshelper.ExchangeFormatter;
 
 
+
 /**
  * A linearly changing parameter. The value is calculated as
  *   f(time) = intercept + deltaFrequency * (time - startTime) % modolus
@@ -77,6 +78,29 @@ public class LinearParameter extends BaseParameter {
 			logger.error("Courght exception " + e);
 			e.printStackTrace();
 		}
+	}
 
+	public double getIntercept() {
+		return intercept;
+	}
+
+	public void setIntercept(double intercept) {
+		this.intercept = intercept;
+	}
+
+	public double getDeltaFrequency() {
+		return deltaFrequency;
+	}
+
+	public void setDeltaFrequency(double deltaFrequency) {
+		this.deltaFrequency = deltaFrequency;
+	}
+
+	public long getModolus() {
+		return modolus;
+	}
+
+	public void setModolus(long modolus) {
+		this.modolus = modolus;
 	}
 }

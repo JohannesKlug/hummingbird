@@ -21,6 +21,7 @@ import org.apache.log4j.Logger;
 
 import com.logica.hummingbird.jmshelper.ExchangeFormatter;
 
+
 /**
  * Class simulating a boolean parameter. The parameter flips each time the process
  * method is called, i.e. value = !value.
@@ -58,5 +59,13 @@ public class BooleanParameter extends BaseParameter {
 			logger.error("Courght exception " + e);
 			e.printStackTrace();
 		}
+	}
+
+	public void setValue(Boolean value) {
+		this.value = value;
+	}
+
+	public Boolean getValue() {
+		return value;
 	}
 }
