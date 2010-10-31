@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
+import com.logica.hummingbird.buffers.CommandBuffer;
+
 @ContextConfiguration (locations={"/CommandBufferTest-context.xml"})
 public class CommandBufferTest extends AbstractJUnit38SpringContextTests  {
 
@@ -25,8 +27,8 @@ public class CommandBufferTest extends AbstractJUnit38SpringContextTests  {
 	public void testPopulateBuffer() {
 		/** Trigger the loading of command definitions. */
 		template.send(new DefaultExchange(context));
-		
+
 		/** Check that the buffer was populated. */
-		assertTrue(buffer.getBuffer().size() == 4);
+		assertTrue(buffer.getSize() == 4);
 	}		
 }

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.logica.hummingbird.command;
+package com.logica.hummingbird.type;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -58,18 +58,15 @@ import com.logica.hummingbird.interfaces.ITask;
  * @CATEGORY Information Type
  * @END
  */
-public class CommandDefinition implements Serializable {
+public class CommandDefinition extends Named implements Serializable {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	/** The name of the command. */
-	protected String name;
 	
 	/** List of arguments. The value is embedded in the header of the exchange. */
-	protected List<String> arguments = new ArrayList<String>();
+	protected List<Argument> arguments = new ArrayList<Argument>();
 	
 	/** List of states which at release time must all be 'true' for the comamnd to be released. */
 	protected List<String> lockStates = new ArrayList<String>();
@@ -78,8 +75,8 @@ public class CommandDefinition implements Serializable {
 	protected List<ITask> tasks = new ArrayList<ITask>();
 	
 	
-	public CommandDefinition(String name) {
-		this.name = name;
+	public CommandDefinition(String name, String description) {
+		super(name, description);
 	}
 	/**
 	 * Basic constructor
@@ -89,9 +86,8 @@ public class CommandDefinition implements Serializable {
 	 * @param lockStates The states of the command which must be true upon release.
 	 * @param tasks The tasks to be performed as part of the command validation.
 	 */
-	public CommandDefinition(String name, List<String> arguments, List<String> lockStates, List<ITask> tasks) {
-		super();
-		this.name = name;
+	public CommandDefinition(String name, String description, List<Argument> arguments, List<String> lockStates, List<ITask> tasks) {
+		super(name, description);
 		this.arguments = arguments;
 		this.lockStates = lockStates;
 		this.tasks = tasks;
@@ -102,7 +98,7 @@ public class CommandDefinition implements Serializable {
 	 * 
 	 * @return Map keyed on the argument name and with the value of the argument.
 	 */
-	public List<String> getArguments() {
+	public List<Argument> getArguments() {
 		return arguments;
 	}
 
@@ -124,9 +120,5 @@ public class CommandDefinition implements Serializable {
 	 */
 	public List<ITask> getTasks() {
 		return tasks;
-	}
-	
-	public String getName() {
-		return name;
 	}
 }

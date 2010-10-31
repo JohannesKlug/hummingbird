@@ -14,11 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.logica.hummingbird.interfaces;
+package com.logica.hummingbird.buffers;
 
+import com.logica.hummingbird.type.CommandDefinition;
 
-public interface IParameterStateConnector {
+/**
+ * Class for buffering command definitions. The last of all command definitions,
+ * identified through their name, is buffered.
+ */
+public class CommandBuffer extends ObjectBuffer {
 
-	
-	public boolean getState(String stateName);
+	public CommandDefinition getCommandDefinition(String name) {
+		return (CommandDefinition) buffer.get(name);
+	}
 }

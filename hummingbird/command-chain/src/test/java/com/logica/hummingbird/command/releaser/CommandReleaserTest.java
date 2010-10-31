@@ -17,10 +17,14 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
-import com.logica.hummingbird.command.CommandDefinition;
+import com.logica.hummingbird.buffers.StateBuffer;
 import com.logica.hummingbird.command.task.DummyTask;
 import com.logica.hummingbird.interfaces.ITask;
 import com.logica.hummingbird.jmshelper.HeaderFields;
+import com.logica.hummingbird.type.Argument;
+import com.logica.hummingbird.type.CommandDefinition;
+import com.logica.hummingbird.type.IntArgument;
+import com.logica.hummingbird.type.LongArgument;
 
 @ContextConfiguration (locations={"/CommandReleaserTest-context.xml"})
 public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
@@ -38,23 +42,23 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
     protected CamelContext context;
 
 	@Autowired
-	protected DummyParameterStateConnector stateConnector;
+	protected StateBuffer stateConnector;
 	
 	@DirtiesContext
 	@Test
 	public void testFailingRelease() {
-
-		stateConnector.states.put("STATE1", true);
-		stateConnector.states.put("STATE2", true);
-		stateConnector.states.put("STATE3", false);
+		
+		stateConnector.addEntry(createExchange("STATE1", true));
+		stateConnector.addEntry(createExchange("STATE2", true));
+		stateConnector.addEntry(createExchange("STATE3", false));
 		
 		List<String> lockStates = Arrays.asList(new String[] {"STATE1", "STATE2", "STATE3"});
 		
 		List<ITask> tasks = Arrays.asList(new ITask[] {new DummyTask(), new DummyTask()});
 
-		List<String> arguments = Arrays.asList(new String[] {});
+		List<Argument> arguments = Arrays.asList(new Argument[] {new LongArgument("TestArgument1", "A test argument", 64), new IntArgument("TestArgument2", "A test argument", 64), new LongArgument("TestArgument3", "A test argument", 64)});
 		
-		CommandDefinition definition = new CommandDefinition("TestCommand", arguments, lockStates, tasks);
+		CommandDefinition definition = new CommandDefinition("TestCommand", "Test description", arguments, lockStates, tasks);
 		
 		/** Release command with states that will fail, i.e. locked. */
 		Exchange exchange = new DefaultExchange(context);
@@ -77,17 +81,17 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 	@Test
 	public void testSuccessfulRelease() {
 
-		stateConnector.states.put("STATE1", true);
-		stateConnector.states.put("STATE2", true);
-		stateConnector.states.put("STATE3", true);
+		stateConnector.addEntry(createExchange("STATE1", true));
+		stateConnector.addEntry(createExchange("STATE2", true));
+		stateConnector.addEntry(createExchange("STATE3", true));
 		
 		List<String> lockStates = Arrays.asList(new String[] {"STATE1", "STATE2", "STATE3"});
 		
 		List<ITask> tasks = Arrays.asList(new ITask[] {new DummyTask(), new DummyTask()});
 
-		List<String> arguments = Arrays.asList(new String[] {});
+		List<Argument> arguments = Arrays.asList(new Argument[] {new LongArgument("TestArgument1", "A test argument", 64), new IntArgument("TestArgument2", "A test argument", 64), new LongArgument("TestArgument3", "A test argument", 64)});
 		
-		CommandDefinition definition = new CommandDefinition("TestCommand", arguments, lockStates, tasks);
+		CommandDefinition definition = new CommandDefinition("TestCommand", "Test description", arguments, lockStates, tasks);
 		
 		/** Release command with states that will fail, i.e. locked. */
 		Exchange exchange = new DefaultExchange(context);
@@ -110,17 +114,18 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 	@Test
 	public void testImmediateRelease() {
 
-		stateConnector.states.put("STATE1", true);
-		stateConnector.states.put("STATE2", true);
-		stateConnector.states.put("STATE3", true);
+		
+		stateConnector.addEntry(createExchange("STATE1", true));
+		stateConnector.addEntry(createExchange("STATE2", true));
+		stateConnector.addEntry(createExchange("STATE3", true));
 		
 		List<String> lockStates = Arrays.asList(new String[] {"STATE1", "STATE2", "STATE3"});
 		
 		List<ITask> tasks = Arrays.asList(new ITask[] {new DummyTask(), new DummyTask()});
 
-		List<String> arguments = Arrays.asList(new String[] {"Argument1", "Argument2", "Argument3"});
+		List<Argument> arguments = Arrays.asList(new Argument[] {new LongArgument("TestArgument1", "A test argument", 64), new IntArgument("TestArgument2", "A test argument", 64), new LongArgument("TestArgument3", "A test argument", 64)});
 		
-		CommandDefinition definition = new CommandDefinition("TestCommand", arguments, lockStates, tasks);
+		CommandDefinition definition = new CommandDefinition("TestCommand", "Test description", arguments, lockStates, tasks);
 		
 		/** Release command with states that will fail, i.e. locked. */
 		Exchange exchange = new DefaultExchange(context);
@@ -128,9 +133,9 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 		exchange.getIn().setHeader(HeaderFields.RELEASETIME, 0l);
 		exchange.getIn().setHeader(HeaderFields.NAME, "TestCommand");
 		
-		exchange.getIn().setHeader("Argument1", "Arg1");
-		exchange.getIn().setHeader("Argument2", "Arg2");
-		exchange.getIn().setHeader("Argument3", "Arg3");
+		exchange.getIn().setHeader("TestArgument1", "Arg1");
+		exchange.getIn().setHeader("TestArgument2", "Arg2");
+		exchange.getIn().setHeader("TestArgument3", "Arg3");
 
 		template.send(exchange);
 		
@@ -142,9 +147,15 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 			assertTrue(((DummyTask) task).executeCalled == false);
 		}
 
-		assertTrue(releasedCommands.getExchanges().get(0).getIn().getHeader("Argument1").equals("Arg1") == true);
-		assertTrue(releasedCommands.getExchanges().get(0).getIn().getHeader("Argument2").equals("Arg2") == true);
-		assertTrue(releasedCommands.getExchanges().get(0).getIn().getHeader("Argument3").equals("Arg3") == true);
+		for (Argument argument : ((CommandDefinition) releasedCommands.getExchanges().get(0).getIn().getBody()).getArguments()) {
+			assertTrue(releasedCommands.getExchanges().get(0).getIn().getHeader(argument.getName()) != null);
+		}
 	}
 
+	protected Exchange createExchange(String name, boolean value) {
+		Exchange exchange = new DefaultExchange(context);
+		exchange.getIn().setHeader(HeaderFields.NAME, name);
+		exchange.getIn().setBody(value);
+		return exchange;
+	}
 }

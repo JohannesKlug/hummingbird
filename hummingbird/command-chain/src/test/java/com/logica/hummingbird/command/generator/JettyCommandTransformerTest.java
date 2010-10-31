@@ -14,12 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
-import com.logica.hummingbird.command.CommandDefinition;
-import com.logica.hummingbird.command.buffer.CommandBuffer;
+import com.logica.hummingbird.buffers.CommandBuffer;
 import com.logica.hummingbird.jmshelper.HeaderFields;
+import com.logica.hummingbird.type.CommandDefinition;
 
-@ContextConfiguration (locations={"/CommandGeneratorTest-context.xml"})
-public class CommandGeneratorTest extends AbstractJUnit38SpringContextTests  {
+@ContextConfiguration (locations={"/JettyCommandTransformerTest-context.xml"})
+public class JettyCommandTransformerTest extends AbstractJUnit38SpringContextTests  {
 
 	@Produce(uri = "direct:Commands")
     protected ProducerTemplate template;
@@ -36,18 +36,20 @@ public class CommandGeneratorTest extends AbstractJUnit38SpringContextTests  {
 	@Test
 	public void testReceive() {
 		
-		CommandDefinition definition = new CommandDefinition("TestCommand"); 
-		buffer.addEntry(definition.getName(), definition);
-		
+		CommandDefinition definition = new CommandDefinition("TestCommand", "Test description"); 
+
 		Date now = new Date();
 		
 		Exchange exchange = new DefaultExchange(context);
+		exchange = new DefaultExchange(context);
 		exchange.getIn().setHeader(HeaderFields.NAME, "TestCommand");
-		exchange.getIn().setHeader(HeaderFields.EXECUTIONTIME, now.getTime());
+		exchange.getIn().setHeader(HeaderFields.RELEASETIME, Long.toString(now.getTime()));
 		exchange.getIn().setHeader("TestArgument1", 1d);
 		exchange.getIn().setHeader("TestArgument2", 1d);
 		exchange.getIn().setHeader("TestArgument3", 1d);
+		exchange.getIn().setBody(definition);
 		
+		buffer.addEntry(exchange);
 		template.send(exchange);
 		
 		assertTrue(releaseQueue.getReceivedCounter() == 1);

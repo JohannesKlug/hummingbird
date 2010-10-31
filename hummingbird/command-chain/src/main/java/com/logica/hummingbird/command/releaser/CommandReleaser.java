@@ -24,11 +24,11 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultExchange;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.logica.hummingbird.command.CommandDefinition;
-import com.logica.hummingbird.interfaces.IParameterStateConnector;
+import com.logica.hummingbird.buffers.StateBuffer;
 import com.logica.hummingbird.interfaces.ITask;
 import com.logica.hummingbird.jmshelper.ExchangeFormatter;
 import com.logica.hummingbird.jmshelper.HeaderFields;
+import com.logica.hummingbird.type.CommandDefinition;
 
 /**
  * @TITLE Command Releaser Design
@@ -69,7 +69,7 @@ public class CommandReleaser {
 
 	/** Provider of state parameters*/
 	@Autowired
-	protected IParameterStateConnector stateConnector = null;
+	protected StateBuffer stateBuffer = null;
 
 	/**
 	 * Processor for the scheduling of validation task for a command as well as the
@@ -93,7 +93,7 @@ public class CommandReleaser {
 
 		/** Validate the lock state(s). */
 		for (String state : definition.getLockStates()) {
-			if (stateConnector.getState(state) == false) {				
+			if (stateBuffer.getState(state) == false) {				
 				/** Stop the release of the command. */
 				arg0.setProperty(Exchange.ROUTE_STOP, true);
 				return;

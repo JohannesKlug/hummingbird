@@ -9,22 +9,17 @@
        http://camel.apache.org/schema/spring 
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-	<bean id="definition" class="com.logica.hummingbird.command.CommandDefinition">
-		<constructor-arg index="0" value="TestCommand4"/>
-	</bean>
+	<bean id="commandBuffer" class="com.logica.hummingbird.buffers.CommandBuffer"/>
 
-	<bean id="commandgenerator" class="com.logica.hummingbird.command.generator.CommandGenerator"/>
-
-	<bean id="buffer" class="com.logica.hummingbird.command.buffer.CommandBuffer"/>
+	<bean id="stateBuffer" class="com.logica.hummingbird.buffers.StateBuffer"/>
 
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>
 
 		<route>
-			<from uri="direct:Commands" />
-			<to uri="bean:commandgenerator?method=process" />
-			<to uri="mock:ReleasedCommands" />
+			<from uri="direct:start" />
+			<to uri="mock:result"/>
 		</route>
-		
+	
 	</camelContext>
 </beans>

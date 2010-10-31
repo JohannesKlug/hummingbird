@@ -7,6 +7,7 @@ import org.apache.camel.ProducerTemplate;
 
 import com.logica.hummingbird.interfaces.ITask;
 
+
 public abstract class AbstractTask implements ITask, Serializable {
 
 	/**

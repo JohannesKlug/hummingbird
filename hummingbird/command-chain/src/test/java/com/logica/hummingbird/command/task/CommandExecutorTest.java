@@ -9,6 +9,7 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultExchange;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
@@ -23,6 +24,7 @@ public class CommandExecutorTest extends AbstractJUnit38SpringContextTests  {
 	@Autowired
     protected CamelContext context;
 	
+	@DirtiesContext
 	@Test
 	public void testReceive() {
 		DummyTask task = new DummyTask();

@@ -24,6 +24,7 @@ import org.apache.camel.impl.DefaultMessage;
 
 import com.logica.hummingbird.interfaces.ITask;
 
+
 /**
  * Helper class for embedding data into a Camel exchange. Using these functions
  * guarantee that the right header fields are set and that the body of the exchange
@@ -48,10 +49,8 @@ public class ExchangeFormatter {
 	
 	public static Message createStateParameterMessage(String stateName, String stateOff, Boolean validity) {
 		Message message = new DefaultMessage();
-		setParameterMandatory(message, stateName, Boolean.class.toString(), validity);
-		
-		message.setHeader("StateOff", stateOff);
-		
+		setParameterMandatory(message, stateName, Boolean.class.toString(), validity);		
+		message.setHeader("StateOff", stateOff);		
 		return message;
 	};
 
@@ -64,10 +63,21 @@ public class ExchangeFormatter {
 	public static Message createCommandDefinition(String name, Object value) {
 		Message message = new DefaultMessage();
 		message.setHeader(HeaderFields.NAME, name);
+		message.setHeader(HeaderFields.ID, name);
 		message.setBody(value);
 		return message;
 	};
-	
+
+	public static Message createTask(String string, long executionTime, String name, ITask task) {
+		Message message = new DefaultMessage();
+		message.setHeader(HeaderFields.TYPE, "Task");
+		message.setHeader(HeaderFields.EXECUTIONTIME, executionTime);
+		message.setHeader(HeaderFields.TASK_OFF, name);
+		message.setBody(task);			
+
+		return message;
+	}
+
 	
 	public static String getParameterName(Exchange exchange) {
 		return (String) exchange.getIn().getHeader(HeaderFields.NAME);
@@ -81,17 +91,11 @@ public class ExchangeFormatter {
 		return (String) exchange.getIn().getHeader(HeaderFields.TIMESTAMP);
 	}
 
-	public static Message createTask(String string, long executionTime, String name, ITask task) {
-		Message message = new DefaultMessage();
-		message.setHeader(HeaderFields.TYPE, "Task");
-		message.setHeader(HeaderFields.EXECUTIONTIME, executionTime);
-		message.setHeader(HeaderFields.TASK_OFF, name);
-		message.setBody(task);			
-
-		return message;
-	}
-
 	public static String getName(Exchange arg0) {
 		return (String) arg0.getIn().getHeader(HeaderFields.NAME);
+	}
+
+	public static String getReleaseTime(Exchange arg0) {
+		return (String) arg0.getIn().getHeader(HeaderFields.RELEASETIME);
 	}
 }

@@ -24,8 +24,8 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.logica.hummingbird.command.CommandDefinition;
 import com.logica.hummingbird.jmshelper.ExchangeFormatter;
+import com.logica.hummingbird.type.CommandDefinition;
 
 /**
  * Camel 'Splitter' for loading command definitions from a Spring bean file and inject

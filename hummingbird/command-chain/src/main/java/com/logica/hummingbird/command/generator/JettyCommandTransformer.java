@@ -19,8 +19,11 @@ package com.logica.hummingbird.command.generator;
 import org.apache.camel.Exchange;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.logica.hummingbird.command.buffer.CommandBuffer;
+import com.logica.hummingbird.buffers.CommandBuffer;
 import com.logica.hummingbird.jmshelper.ExchangeFormatter;
+import com.logica.hummingbird.jmshelper.HeaderFields;
+import com.logica.hummingbird.type.Argument;
+import com.logica.hummingbird.type.CommandDefinition;
 
 /**
  * @TITLE Command Generator Design
@@ -29,7 +32,7 @@ import com.logica.hummingbird.jmshelper.ExchangeFormatter;
  * @CATEGORY Component Design
  * @END
  */
-public class CommandGenerator {
+public class JettyCommandTransformer {
 
 	/** The buffer holding the command definitions. */
 	@Autowired
@@ -50,8 +53,18 @@ public class CommandGenerator {
 	 * 
 	 * @param arg0 The exchange triggering the command. Can be a timer or a request.
 	 */
-	public void process(Exchange arg0) {
+	public void process(Exchange arg0) throws Exception {
 		/** Release the command to the command query, i.e. schedule it for release to the spacecraft. */
-		arg0.getIn().setBody(buffer.getCommandDefinition(ExchangeFormatter.getName(arg0)));
+		CommandDefinition definition = buffer.getCommandDefinition(ExchangeFormatter.getName(arg0)); 
+		arg0.getIn().setBody(definition);
+		
+		/** Convert releasetime to long. */
+		arg0.getIn().setHeader(HeaderFields.RELEASETIME, Long.parseLong(ExchangeFormatter.getReleaseTime(arg0)));
+		
+		/** Convert arguments from String to their real type. */
+		for (Argument argument : definition.getArguments()) { 
+			Object value = argument.getValue(arg0.getIn().getHeader(argument.getName()));
+			arg0.getIn().setHeader(argument.getName(), value);
+		}
 	}
 }
