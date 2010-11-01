@@ -12,6 +12,8 @@
        http://camel.apache.org/schema/spring 
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
+	<!-- Ensure that the annotations in the code are processed. -->
+	<context:annotation-config />
 
 	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL" value="tcp://localhost:61616" />
@@ -36,7 +38,11 @@
 	<!-- Create the bean. -->
 	<bean id="myBean" class="com.logica.hummingbird.${package}.ParameterProcessor"/>
 
-	<camelContext xmlns="http://camel.apache.org/schema/spring">
+	<!-- The context. Notice that the context and the producer are both named. This allows the @Autowired annotation
+	to be used in the Processor. -->
+	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
+		<template id="producer"/>
+
 	
 		<!-- Route for receiving the parameters with Name='someParameterName' from 
 		     the activemq topic 'Parameter', let the bean process it, and forward
@@ -44,7 +50,7 @@
 		<route>
 			<from uri="activemq:topic:Parameter?selector=Name='someParameterName'"/>
 			<to uri="bean:myBean?method=process"/>
-			<to uri="activemq:topic:Parameter"/>			
+			<to uri="activemq:topic:Parameters"/>			
 		</route>
 	</camelContext>
 </beans>

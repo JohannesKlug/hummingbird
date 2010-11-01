@@ -19,8 +19,11 @@
  */
 package ${package}.NewProcessor;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
+import org.apache.camel.ProducerTemplate;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @TITLE [Title] Configuration
@@ -34,6 +37,14 @@ public abstract class ParameterProcessor {
 	/** The class logger. */
 	private static org.apache.log4j.Logger logger = Logger.getLogger(ParameterProcessor.class);
 	
+	/** An autowired producer, i.e. Spring will locate the bean named 'producer' in the XML file and set it automatically. */
+	@Autowired
+	protected ProducerTemplate producer = null;
+
+	/** An autowired context, i.e. Spring will locate the bean named 'context' in the XML file and set it automatically. */
+	@Autowired
+	protected CamelContext context = null;
+	
 	/**
 	 * Method to process messages from one route.
 	 * 
@@ -41,8 +52,8 @@ public abstract class ParameterProcessor {
 	 * @throws Exception
 	 */
 	public void process(Exchange arg0) throws Exception {
-		/** TODO Process parameter. */
-		String parameterName = ExchangeFormatter.getParameterName();
 		
+		/** TODO Process parameter. */
+		String parameterName = ExchangeFormatter.getParameterName();		
 	}	
 }

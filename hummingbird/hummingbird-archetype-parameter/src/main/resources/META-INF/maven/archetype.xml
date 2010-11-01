@@ -12,6 +12,7 @@
 
 	<testSources>
 		<source>src/test/java/com/logica/hummingbird/NewProcessor/ParameterProcessorTest.java</source>
+		<source>src/test/resources/ParameterProcessorTest-context.xml</source>
 	</testSources>
 
 	<resources>
