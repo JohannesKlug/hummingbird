@@ -24,7 +24,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.logica.hummingbird.jmshelper.ExchangeFormatter;
+import com.logica.hummingbird.formatter.ExchangeFormatter;
 import com.logica.hummingbird.type.CommandDefinition;
 
 /**

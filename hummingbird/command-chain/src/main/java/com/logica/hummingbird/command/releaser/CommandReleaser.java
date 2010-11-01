@@ -25,9 +25,9 @@ import org.apache.camel.impl.DefaultExchange;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.logica.hummingbird.buffers.StateBuffer;
+import com.logica.hummingbird.formatter.ExchangeFormatter;
+import com.logica.hummingbird.formatter.HeaderFields;
 import com.logica.hummingbird.interfaces.ITask;
-import com.logica.hummingbird.jmshelper.ExchangeFormatter;
-import com.logica.hummingbird.jmshelper.HeaderFields;
 import com.logica.hummingbird.type.CommandDefinition;
 
 /**
@@ -102,6 +102,8 @@ public class CommandReleaser {
 
 		/** Schedule all tasks. */
 		for (ITask task : definition.getTasks()) {
+			task.configure(arg0.getIn());
+			
 			Exchange exchange = new DefaultExchange(context);
 			exchange.setIn(ExchangeFormatter.createTask("Task", (Long) arg0.getIn().getHeader(HeaderFields.RELEASETIME) + task.deltaTime(), (String) arg0.getIn().getHeader(HeaderFields.NAME), task));
 			producer.send("direct:tasks", exchange);			

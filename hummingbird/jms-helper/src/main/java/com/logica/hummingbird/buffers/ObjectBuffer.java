@@ -32,6 +32,10 @@ public class ObjectBuffer  {
 		buffer.put((String) arg0.getIn().getHeader("Name"), arg0.getIn().getBody());
 	}
 
+	public Object getEntry(String name) {
+		return buffer.get(name);
+	}
+	
 	public int getSize() {
 		return buffer.size();
 	}

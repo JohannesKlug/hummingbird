@@ -1,5 +1,6 @@
 package com.logica.hummingbird.command.generator;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.camel.CamelContext;
@@ -15,7 +16,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
 import com.logica.hummingbird.buffers.CommandBuffer;
-import com.logica.hummingbird.jmshelper.HeaderFields;
+import com.logica.hummingbird.formatter.HeaderFields;
+import com.logica.hummingbird.tasks.checks.Range;
+import com.logica.hummingbird.tasks.checks.StaticValue;
+import com.logica.hummingbird.type.Argument;
 import com.logica.hummingbird.type.CommandDefinition;
 
 @ContextConfiguration (locations={"/JettyCommandTransformerTest-context.xml"})
@@ -35,18 +39,19 @@ public class JettyCommandTransformerTest extends AbstractJUnit38SpringContextTes
 	
 	@Test
 	public void testReceive() {
+		Range range = new Range(0, "TestStateParameter", "TestParameter", new StaticValue(0d), new StaticValue(10d));
+		CommandDefinition definition = new CommandDefinition("TestCommand", "Test description", Arrays.asList(new Argument[]{new Argument("TestArgument1", "Test description", Long.class.toString(), 64l, range), new Argument("TestArgument2", "Test description", Long.class.toString(), 64l, range), new Argument("TestArgument3", "Test description", Long.class.toString(), 64l, range)}), null, null); 
 		
-		CommandDefinition definition = new CommandDefinition("TestCommand", "Test description"); 
-
+		
 		Date now = new Date();
 		
 		Exchange exchange = new DefaultExchange(context);
 		exchange = new DefaultExchange(context);
 		exchange.getIn().setHeader(HeaderFields.NAME, "TestCommand");
 		exchange.getIn().setHeader(HeaderFields.RELEASETIME, Long.toString(now.getTime()));
-		exchange.getIn().setHeader("TestArgument1", 1d);
-		exchange.getIn().setHeader("TestArgument2", 1d);
-		exchange.getIn().setHeader("TestArgument3", 1d);
+		exchange.getIn().setHeader("TestArgument1", "1");
+		exchange.getIn().setHeader("TestArgument2", "2");
+		exchange.getIn().setHeader("TestArgument3", "3");
 		exchange.getIn().setBody(definition);
 		
 		buffer.addEntry(exchange);

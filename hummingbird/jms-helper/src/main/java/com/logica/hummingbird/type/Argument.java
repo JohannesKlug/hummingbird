@@ -1,5 +1,10 @@
 package com.logica.hummingbird.type;
 
+import com.logica.hummingbird.buffers.ObjectBuffer;
+import com.logica.hummingbird.tasks.checks.ParameterNotSetException;
+import com.logica.hummingbird.tasks.checks.Range;
+import com.logica.hummingbird.tasks.checks.StaticValue;
+
 
 /**
  * A command argument definition. The value itself is maintained some where else,
@@ -11,7 +16,7 @@ package com.logica.hummingbird.type;
  * The bit length defines the min / max value of the type.
  *
  */
-public abstract class Argument extends Named {
+public class Argument extends Named {
 
 
 	/**
@@ -22,8 +27,14 @@ public abstract class Argument extends Named {
 	/** The length of the argument type in bits. */
 	protected long bitLength = 64;
 	
+	protected String type;
+	
 	/** The unit of the argument. */
 	protected String unit;
+	
+	protected Range range;
+	
+	protected Number value;
 	
 	/**
 	 * Creates a new argument. 
@@ -32,9 +43,11 @@ public abstract class Argument extends Named {
 	 * @param description The description of the argument.
 	 * @param bitLength The length in bits of the argument.
 	 */
-	public Argument(String name, String description, long bitLength) {
+	public Argument(String name, String description, String type, long bitLength, Range range) {
 		super(name, description);
+		this.type = type;
 		this.bitLength = bitLength;
+		this.range = range;
 	}
 
 	/**
@@ -43,7 +56,30 @@ public abstract class Argument extends Named {
 	 * @param value The value expressed as a String object.
 	 * @return The value expressed as the arguments type object, for example Long.
 	 */
-	public abstract Object getValue(Object value);
+	public Object getValue() {
+		return value;
+	}
 	
-	public abstract boolean validate(Object value);
+	public boolean validate(ObjectBuffer buffer) throws ParameterNotSetException {
+		range.setParameter(new StaticValue(value));
+		return range.validate(buffer);
+	}
+
+	public long getBitLength() {
+		return bitLength;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public Range getRange() {
+		return range;
+	}
+	
+	
 }

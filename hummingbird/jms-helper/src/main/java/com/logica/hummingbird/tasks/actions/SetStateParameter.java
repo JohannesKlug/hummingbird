@@ -9,35 +9,25 @@ import com.logica.hummingbird.buffers.ObjectBuffer;
 import com.logica.hummingbird.formatter.ExchangeFormatter;
 import com.logica.hummingbird.tasks.AbstractTask;
 
-/**
- * Task that sets a parameter to a specific value at a given time.
- * 
- * The task among others be used to;
- * 1) Enable / disable state checking in specific intervals.
- * 2) Change a limit to a new value.
- *
- */
-public class SetParameter extends AbstractTask {
+public class SetStateParameter extends AbstractTask {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	protected String name;
 
-	/** The name of the parameter to set. */
-	protected String name = "";
+	protected String stateOff;
 	
-	/** The value be set. */
-	protected Object value = null;
+	protected Boolean value;
 	
-	/** The class of the value. */
-	protected String clazz = null;
-	
-	public SetParameter(long deltaTime, String name, Object value, String clazz) {
+	public SetStateParameter(long deltaTime, String name, String stateOff, Boolean value) {
 		super(deltaTime);
+		
 		this.name = name;
+		this.stateOff = stateOff;
 		this.value = value;
-		this.clazz = clazz;
 	}
 
 	/**
@@ -47,7 +37,7 @@ public class SetParameter extends AbstractTask {
 	 */
 	public void execute(CamelContext context, ProducerTemplate producer, ObjectBuffer buffer) {
 		Exchange exchange = new DefaultExchange(context);
-		exchange.setIn(ExchangeFormatter.createParameterMessage(name, clazz, value));
-		producer.send("direct:Parameters", exchange);
-	}
+		exchange.setIn(ExchangeFormatter.createStateParameterMessage(name, stateOff, value));
+		producer.send("direct:Parameters", exchange);	
+	}	
 }

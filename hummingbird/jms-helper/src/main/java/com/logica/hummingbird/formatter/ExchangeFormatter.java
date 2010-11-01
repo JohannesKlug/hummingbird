@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.logica.hummingbird.jmshelper;
+package com.logica.hummingbird.formatter;
 
 import java.util.Date;
 
@@ -41,22 +41,23 @@ public class ExchangeFormatter {
 	 * @param value
 	 */
 	protected static void setParameterMandatory(Message message, String name, String type, Object value) {
-		message.setHeader("Name", name);
-		message.setHeader("Type", Boolean.class.toString());		
-		message.setHeader("Value", value);
-		message.setHeader("Timestamp", new Long((new Date()).getTime()));		
+		message.setHeader(HeaderFields.NAME, name);
+		message.setHeader(HeaderFields.TYPE, type);		
+		message.setHeader(HeaderFields.VALUE, value);
+		message.setHeader(HeaderFields.TIMESTAMP, new Long((new Date()).getTime()));
+		message.setBody(value);
 	}
 	
 	public static Message createStateParameterMessage(String stateName, String stateOff, Boolean validity) {
 		Message message = new DefaultMessage();
 		setParameterMandatory(message, stateName, Boolean.class.toString(), validity);		
-		message.setHeader("StateOff", stateOff);		
+		message.setHeader(HeaderFields.ISSTATEOF, stateOff);		
 		return message;
 	};
 
 	public static Message createParameterMessage(String parameterName, String clazz, Object value) {
 		Message message = new DefaultMessage();
-		setParameterMandatory(message, parameterName, clazz, value);		
+		setParameterMandatory(message, parameterName, clazz, value);	
 		return message;
 	};
 
@@ -74,7 +75,6 @@ public class ExchangeFormatter {
 		message.setHeader(HeaderFields.EXECUTIONTIME, executionTime);
 		message.setHeader(HeaderFields.TASK_OFF, name);
 		message.setBody(task);			
-
 		return message;
 	}
 
@@ -97,5 +97,27 @@ public class ExchangeFormatter {
 
 	public static String getReleaseTime(Exchange arg0) {
 		return (String) arg0.getIn().getHeader(HeaderFields.RELEASETIME);
+	}
+
+	public static Object convert(String type, String header) {
+		Object nativeValue = null;
+		
+		if (type.equals(Double.class.toString()) == true) {
+			nativeValue = Double.parseDouble(header);
+		}
+		else if (type.equals(Long.class.toString()) == true) {
+			nativeValue = Long.parseLong(header);
+		}
+		else if (type.equals(Integer.class.toString()) == true) {
+			nativeValue = Integer.parseInt(header);
+		}
+		else if (type.equals(Float.class.toString()) == true) {
+			nativeValue = Float.parseFloat(header);
+		}
+		else if (type.equals(String.class.toString()) == true) {
+			nativeValue = header;
+		}
+
+		return nativeValue;
 	}
 }

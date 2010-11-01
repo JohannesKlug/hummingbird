@@ -23,8 +23,9 @@ import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.logica.hummingbird.buffers.ObjectBuffer;
+import com.logica.hummingbird.formatter.HeaderFields;
 import com.logica.hummingbird.interfaces.ITask;
-import com.logica.hummingbird.jmshelper.HeaderFields;
 
 
 /**
@@ -40,6 +41,10 @@ public class Executor {
 	/** The context in which the component is running. */
 	@Autowired
 	protected CamelContext context = null;
+
+	/** The context in which the component is running. */
+	@Autowired
+	protected ObjectBuffer buffer = null;
 
 	/** 
 	 * Method for actually executing the task. The task will be extracted from the
@@ -62,6 +67,6 @@ public class Executor {
 		} 
 
 		/** Execute the task */
-		task.execute(context, producer);
+		task.execute(context, producer, buffer);
 	}
 }

@@ -20,8 +20,8 @@ import org.apache.camel.Exchange;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.logica.hummingbird.buffers.CommandBuffer;
-import com.logica.hummingbird.jmshelper.ExchangeFormatter;
-import com.logica.hummingbird.jmshelper.HeaderFields;
+import com.logica.hummingbird.formatter.ExchangeFormatter;
+import com.logica.hummingbird.formatter.HeaderFields;
 import com.logica.hummingbird.type.Argument;
 import com.logica.hummingbird.type.CommandDefinition;
 
@@ -63,7 +63,7 @@ public class JettyCommandTransformer {
 		
 		/** Convert arguments from String to their real type. */
 		for (Argument argument : definition.getArguments()) { 
-			Object value = argument.getValue(arg0.getIn().getHeader(argument.getName()));
+			Object value = ExchangeFormatter.convert(argument.getType(), (String) arg0.getIn().getHeader(argument.getName()));
 			arg0.getIn().setHeader(argument.getName(), value);
 		}
 	}
