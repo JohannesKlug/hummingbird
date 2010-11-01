@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.apache.camel.Exchange;
 
-import com.logica.hummingbird.jmshelper.ExchangeFormatter;
+import com.logica.hummingbird.formatter.ExchangeFormatter;
 
 public class TimeParameter extends BaseParameter {
 

@@ -19,7 +19,7 @@ package com.logica.hummingbird.simpleparametersimulator;
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 
-import com.logica.hummingbird.jmshelper.ExchangeFormatter;
+import com.logica.hummingbird.formatter.ExchangeFormatter;
 
 
 /**
