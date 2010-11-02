@@ -2,5 +2,5 @@ Hummingbird
 an open-source, lightweight and standards-compliant mission control system for small spacecraft.
 
 You are at the root of the Hummingbird project.
-To get started, refer to the GettingStarted guide in the Documentation sub-directory: "GettingStarted":hummingbird/wiki/GettingStarted
+To get started, refer to the GettingStarted guide in the Documentation sub-directory, or its auto-generated version on the Github wiki: "GettingStarted":hummingbird/wiki/Getting-Started-Guide
 
