@@ -3,4 +3,5 @@ an open-source, lightweight and standards-compliant mission control system for s
 
 You are at the root of the Hummingbird project.
 To get started, refer to the GettingStarted guide in the Documentation sub-directory, or its auto-generated version on the Github wiki: "Getting Started Guide at Github":http://github.com/JohannesKlug/hummingbird/wiki/Getting-Started-Guide
+(raw version availabe through Github as well: "GettingStarted":http://github.com/JohannesKlug/hummingbird/raw/master/Documentation/GettingStarted)
 
