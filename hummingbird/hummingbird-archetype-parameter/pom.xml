@@ -4,7 +4,7 @@
 	<groupId>com.logica.hummingbird</groupId>
 	<artifactId>hummingbird-archetype-parameter</artifactId>
 	<name>Hummingbird Parameter Archetype</name>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 
 	<description>A Hummingbird archetype, defining the structure of a typical project for processing parameters.</description>
 	<build>

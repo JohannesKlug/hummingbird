@@ -9,19 +9,18 @@
        http://camel.apache.org/schema/spring 
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
+	<!-- Create your bean and any other beans you need for the tests. -->
+	<bean id="myBean" class="com.logica.hummingbird.${package}.NewProcessor.ParameterProcessor"/>	
 
-	<bean id="definition" class="com.logica.hummingbird.interfaces.CommandDefinition"/>
-
-	<bean id="commandgenerator" class="com.logica.hummingbird.command.generator.CommandGenerator"/>
-
+	<!-- Configure a (set of) route(s). -->
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>
 
 		<route>
-			<from uri="direct:Commands" />
-			<to uri="bean:commandgenerator?method=process" />
-			<to uri="mock:ReleasedCommands" />
+			<from uri="direct:start" />
+			<to uri="bean:myBean"/>
+			<to uri="mock:results"/>
 		</route>
-		
+	
 	</camelContext>
 </beans>

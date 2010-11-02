@@ -14,19 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.logica.hummingbird.jmshelper;
+package com.logica.hummingbird.formatter;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
 
-import com.logica.hummingbird.interfaces.CommandDefinition;
 import com.logica.hummingbird.interfaces.ITask;
+
 
 /**
  * Helper class for embedding data into a Camel exchange. Using these functions
@@ -44,26 +41,43 @@ public class ExchangeFormatter {
 	 * @param value
 	 */
 	protected static void setParameterMandatory(Message message, String name, String type, Object value) {
-		message.setHeader("Name", name);
-		message.setHeader("Type", Boolean.class.toString());		
-		message.setHeader("Value", value);
-		message.setHeader("Timestamp", new Long((new Date()).getTime()));		
+		message.setHeader(HeaderFields.NAME, name);
+		message.setHeader(HeaderFields.TYPE, type);		
+		message.setHeader(HeaderFields.VALUE, value);
+		message.setHeader(HeaderFields.TIMESTAMP, new Long((new Date()).getTime()));
+		message.setBody(value);
 	}
 	
 	public static Message createStateParameterMessage(String stateName, String stateOff, Boolean validity) {
 		Message message = new DefaultMessage();
-		setParameterMandatory(message, stateName, Boolean.class.toString(), validity);
-		
-		message.setHeader("StateOff", stateOff);
-		
+		setParameterMandatory(message, stateName, Boolean.class.toString(), validity);		
+		message.setHeader(HeaderFields.ISSTATEOF, stateOff);		
 		return message;
 	};
 
 	public static Message createParameterMessage(String parameterName, String clazz, Object value) {
 		Message message = new DefaultMessage();
-		setParameterMandatory(message, parameterName, clazz, value);		
+		setParameterMandatory(message, parameterName, clazz, value);	
 		return message;
 	};
+
+	public static Message createCommandDefinition(String name, Object value) {
+		Message message = new DefaultMessage();
+		message.setHeader(HeaderFields.NAME, name);
+		message.setHeader(HeaderFields.ID, name);
+		message.setBody(value);
+		return message;
+	};
+
+	public static Message createTask(String string, long executionTime, String name, ITask task) {
+		Message message = new DefaultMessage();
+		message.setHeader(HeaderFields.TYPE, "Task");
+		message.setHeader(HeaderFields.EXECUTIONTIME, executionTime);
+		message.setHeader(HeaderFields.TASK_OFF, name);
+		message.setBody(task);			
+		return message;
+	}
+
 	
 	public static String getParameterName(Exchange exchange) {
 		return (String) exchange.getIn().getHeader(HeaderFields.NAME);
@@ -77,22 +91,33 @@ public class ExchangeFormatter {
 		return (String) exchange.getIn().getHeader(HeaderFields.TIMESTAMP);
 	}
 
-	public static Message createCommand(CamelContext context, String name, long releaseTime, CommandDefinition definition) {
-		Message message = new DefaultMessage();
-		message.setHeader("ReleaseTime", releaseTime);
-		message.setHeader("Name", name);		
-		message.setBody(definition);
-		
-		return message;
+	public static String getName(Exchange arg0) {
+		return (String) arg0.getIn().getHeader(HeaderFields.NAME);
 	}
 
-	public static Message createTask(String string, long executionTime, String name, ITask task) {
-		Message message = new DefaultMessage();
-		message.setHeader(HeaderFields.TYPE, "Task");
-		message.setHeader(HeaderFields.TASK_EXECUTIONTIME, executionTime);
-		message.setHeader(HeaderFields.TASK_OFF, name);
-		message.setBody(task);			
+	public static String getReleaseTime(Exchange arg0) {
+		return (String) arg0.getIn().getHeader(HeaderFields.RELEASETIME);
+	}
 
-		return message;
+	public static Object convert(String type, String header) {
+		Object nativeValue = null;
+		
+		if (type.equals(Double.class.toString()) == true) {
+			nativeValue = Double.parseDouble(header);
+		}
+		else if (type.equals(Long.class.toString()) == true) {
+			nativeValue = Long.parseLong(header);
+		}
+		else if (type.equals(Integer.class.toString()) == true) {
+			nativeValue = Integer.parseInt(header);
+		}
+		else if (type.equals(Float.class.toString()) == true) {
+			nativeValue = Float.parseFloat(header);
+		}
+		else if (type.equals(String.class.toString()) == true) {
+			nativeValue = header;
+		}
+
+		return nativeValue;
 	}
 }

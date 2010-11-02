@@ -19,7 +19,7 @@ package com.logica.hummingbird.validation.parameter;
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 
-import com.logica.hummingbird.jmshelper.ExchangeFormatter;
+import com.logica.hummingbird.formatter.ExchangeFormatter;
 import com.logica.hummingbird.telemetry.NotComparableTypeException;
 
 /** 

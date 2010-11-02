@@ -5,7 +5,8 @@ import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultExchange;
 
-import com.logica.hummingbird.jmshelper.ExchangeFormatter;
+import com.logica.hummingbird.buffers.ObjectBuffer;
+import com.logica.hummingbird.formatter.ExchangeFormatter;
 import com.logica.hummingbird.tasks.AbstractTask;
 
 /**
@@ -30,10 +31,10 @@ public class SetParameter extends AbstractTask {
 	protected Object value = null;
 	
 	/** The class of the value. */
-	protected String clazz = null;	
-		
-	public SetParameter(long executionTime, String name, Object value, String clazz) {
-		super(executionTime);
+	protected String clazz = null;
+	
+	public SetParameter(long deltaTime, String name, Object value, String clazz) {
+		super(deltaTime);
 		this.name = name;
 		this.value = value;
 		this.clazz = clazz;
@@ -44,15 +45,9 @@ public class SetParameter extends AbstractTask {
 	 * 
 	 * @param arg0 The exchange to be send.
 	 */
-	public void process(Exchange arg0) {
-		arg0.getIn().setBody(ExchangeFormatter.createParameterMessage(name, clazz, value));
-		producerTemplate.send(arg0);
-	}
-
-	@Override
-	public void execute(CamelContext context, ProducerTemplate producer) {
+	public void execute(CamelContext context, ProducerTemplate producer, ObjectBuffer buffer) {
 		Exchange exchange = new DefaultExchange(context);
 		exchange.setIn(ExchangeFormatter.createParameterMessage(name, clazz, value));
-		producer.send("direct:parameters", exchange);		
+		producer.send("direct:Parameters", exchange);
 	}
 }

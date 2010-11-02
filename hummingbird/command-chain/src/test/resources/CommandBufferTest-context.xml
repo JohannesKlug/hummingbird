@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context-2.5.xsd
+       http://camel.apache.org/schema/spring 
+       http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<bean id="definition1" class="com.logica.hummingbird.type.CommandDefinition">	
+		<constructor-arg index="0" value="TestCommand1"/>
+		<constructor-arg index="1" value="This is a test command."/>
+	</bean>
+
+	<bean id="definition2" class="com.logica.hummingbird.type.CommandDefinition">
+		<constructor-arg index="0" value="TestCommand2"/>
+		<constructor-arg index="1" value="This is a test command."/>
+	</bean>
+
+	<bean id="definition3" class="com.logica.hummingbird.type.CommandDefinition">
+		<constructor-arg index="0" value="TestCommand3"/>
+		<constructor-arg index="1" value="This is a test command."/>
+	</bean>
+
+	<bean id="definition4" class="com.logica.hummingbird.type.CommandDefinition">
+		<constructor-arg index="0" value="TestCommand4"/>
+		<constructor-arg index="1" value="This is a test command."/>
+	</bean>
+
+	<bean id="definitions" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<ref bean="definition1"/>
+				<ref bean="definition2"/>
+				<ref bean="definition3"/>
+				<ref bean="definition4"/>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="springloader" class="com.logica.hummingbird.command.buffer.SpringCommandDefinitionLoader"/>
+	
+	<bean id="buffer" class="com.logica.hummingbird.buffers.CommandBuffer"/>
+
+	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
+		<template id="producer"/>
+
+		<route>
+			<from uri="direct:Trigger" />
+			<split>
+				<method ref="springloader" method="process"/> 
+				<to uri="bean:buffer" />
+			</split>
+		</route>
+	
+	</camelContext>
+</beans>

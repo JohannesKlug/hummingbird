@@ -16,12 +16,14 @@
  */
 package com.logica.hummingbird.command.generator;
 
-import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.logica.hummingbird.interfaces.CommandDefinition;
-
+import com.logica.hummingbird.buffers.CommandBuffer;
+import com.logica.hummingbird.formatter.ExchangeFormatter;
+import com.logica.hummingbird.formatter.HeaderFields;
+import com.logica.hummingbird.type.Argument;
+import com.logica.hummingbird.type.CommandDefinition;
 
 /**
  * @TITLE Command Generator Design
@@ -30,11 +32,11 @@ import com.logica.hummingbird.interfaces.CommandDefinition;
  * @CATEGORY Component Design
  * @END
  */
-public class CommandGenerator {
+public class JettyCommandTransformer {
 
-	/** The context in which the component is running. */
+	/** The buffer holding the command definitions. */
 	@Autowired
-	protected CamelContext context = null;
+	protected CommandBuffer buffer = null;
 
 	/**
 	 * Method for creating and sending a command. The command generator can be linked
@@ -51,12 +53,18 @@ public class CommandGenerator {
 	 * 
 	 * @param arg0 The exchange triggering the command. Can be a timer or a request.
 	 */
-	public void process(Exchange arg0) {
-		
-		/** TODO get the command definition from the command buffer. */
-		CommandDefinition definition = new CommandDefinition();
-		
+	public void process(Exchange arg0) throws Exception {
 		/** Release the command to the command query, i.e. schedule it for release to the spacecraft. */
+		CommandDefinition definition = buffer.getCommandDefinition(ExchangeFormatter.getName(arg0)); 
 		arg0.getIn().setBody(definition);
+		
+		/** Convert releasetime to long. */
+		arg0.getIn().setHeader(HeaderFields.RELEASETIME, Long.parseLong(ExchangeFormatter.getReleaseTime(arg0)));
+		
+		/** Convert arguments from String to their real type. */
+		for (Argument argument : definition.getArguments()) { 
+			Object value = ExchangeFormatter.convert(argument.getType(), (String) arg0.getIn().getHeader(argument.getName()));
+			arg0.getIn().setHeader(argument.getName(), value);
+		}
 	}
 }

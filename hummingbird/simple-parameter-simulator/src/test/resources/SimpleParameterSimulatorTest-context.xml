@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context-2.5.xsd
+       http://camel.apache.org/schema/spring 
+       http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+
+	<bean id="Parameter1" class="com.logica.hummingbird.simpleparametersimulator.BooleanParameter">
+		<constructor-arg index="0" value="true"/>
+		<constructor-arg index="1" value="Parameter1"/>		
+	</bean>
+
+	<bean id="Parameter2" class="com.logica.hummingbird.simpleparametersimulator.LinearParameter">
+		<constructor-arg index="0" value="0"/>
+		<constructor-arg index="1" value="1"/>
+		<constructor-arg index="2" value="1000"/>
+		<constructor-arg index="3" value="Parameter2"/>				
+	</bean>
+
+	<bean id="Parameter3" class="com.logica.hummingbird.simpleparametersimulator.SinusCurveParameter">
+		<constructor-arg index="0" value="0.01"/>
+		<constructor-arg index="1" value="10"/>
+		<constructor-arg index="2" value="0"/>
+		<constructor-arg index="3" value="0"/>
+		<constructor-arg index="4" value="100"/>				
+		<constructor-arg index="5" value="Parameter3"/>
+	</bean>
+
+	<bean id="Parameter4" class="com.logica.hummingbird.simpleparametersimulator.ConstantParameter">
+		<constructor-arg index="0" value="1"/>
+		<constructor-arg index="1" value="Parameter4"/>
+	</bean>
+
+	<bean id="commandHandler" class="com.logica.hummingbird.simpleparametersimulator.CommandReader"/>
+
+	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
+		<template id="producer"/>
+
+		<route>
+			<from uri="direct:Commands" />
+			<to uri="bean:commandHandler"/>
+		</route>
+
+		<route>
+			<from uri="timer://timer1?fixedRate=true&amp;period=1000" />
+			<to uri="bean:Parameter1"/>
+			<to uri="mock:result"/>
+		</route>
+
+		<route>
+			<from uri="timer://timer2?fixedRate=true&amp;period=1000" />
+			<to uri="bean:Parameter2"/>
+			<to uri="mock:result"/>
+		</route>
+
+		<route>
+			<from uri="timer://timer3?fixedRate=true&amp;period=1000" />
+			<to uri="bean:Parameter3"/>
+			<to uri="mock:result"/>
+		</route>
+
+		<route>
+			<from uri="timer://timer4?fixedRate=true&amp;period=1000" />
+			<to uri="bean:Parameter4"/>
+			<to uri="mock:result"/>
+		</route>
+	
+	</camelContext>
+	
+</beans>

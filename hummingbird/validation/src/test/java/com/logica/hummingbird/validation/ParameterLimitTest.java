@@ -19,7 +19,7 @@ import org.apache.camel.impl.DefaultExchange;
 import org.apache.camel.impl.JndiRegistry;
 import org.apache.camel.test.CamelTestSupport;
 
-import com.logica.hummingbird.jmshelper.ExchangeFormatter;
+import com.logica.hummingbird.formatter.ExchangeFormatter;
 import com.logica.hummingbird.telemetry.DefaultSpaceParameter;
 import com.logica.hummingbird.validation.base.OnlyChangeFilter;
 import com.logica.hummingbird.validation.base.ViolationCountFilter;

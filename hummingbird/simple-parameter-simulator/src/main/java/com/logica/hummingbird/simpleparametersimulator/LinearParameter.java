@@ -21,7 +21,8 @@ import java.util.Date;
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 
-import com.logica.hummingbird.jmshelper.ExchangeFormatter;
+import com.logica.hummingbird.formatter.ExchangeFormatter;
+
 
 
 /**
@@ -77,6 +78,29 @@ public class LinearParameter extends BaseParameter {
 			logger.error("Courght exception " + e);
 			e.printStackTrace();
 		}
+	}
 
+	public double getIntercept() {
+		return intercept;
+	}
+
+	public void setIntercept(double intercept) {
+		this.intercept = intercept;
+	}
+
+	public double getDeltaFrequency() {
+		return deltaFrequency;
+	}
+
+	public void setDeltaFrequency(double deltaFrequency) {
+		this.deltaFrequency = deltaFrequency;
+	}
+
+	public long getModolus() {
+		return modolus;
+	}
+
+	public void setModolus(long modolus) {
+		this.modolus = modolus;
 	}
 }

@@ -21,7 +21,8 @@ import java.util.Date;
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 
-import com.logica.hummingbird.jmshelper.ExchangeFormatter;
+import com.logica.hummingbird.formatter.ExchangeFormatter;
+
 
 
 /**
@@ -99,5 +100,45 @@ public class SinusCurveParameter extends BaseParameter {
 			logger.error("Courght exception " + e);
 			e.printStackTrace();
 		}
+	}
+
+	public double getAngularFrequency() {
+		return angularFrequency;
+	}
+
+	public void setAngularFrequency(double angularFrequency) {
+		this.angularFrequency = angularFrequency;
+	}
+
+	public double getAmplitude() {
+		return amplitude;
+	}
+
+	public void setAmplitude(double amplitude) {
+		this.amplitude = amplitude;
+	}
+
+	public double getPhase() {
+		return phase;
+	}
+
+	public void setPhase(double phase) {
+		this.phase = phase;
+	}
+
+	public double getIntercept() {
+		return intercept;
+	}
+
+	public void setIntercept(double intercept) {
+		this.intercept = intercept;
+	}
+
+	public long getModolus() {
+		return modolus;
+	}
+
+	public void setModolus(long modolus) {
+		this.modolus = modolus;
 	}
 }

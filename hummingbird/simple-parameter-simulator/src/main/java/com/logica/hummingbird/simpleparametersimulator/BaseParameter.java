@@ -18,7 +18,6 @@ package com.logica.hummingbird.simpleparametersimulator;
 
 import org.apache.camel.Exchange;
 
-
 /**
  * Base type for all simulated parameters. Holds the name and implements the Camel
  * callback method. 

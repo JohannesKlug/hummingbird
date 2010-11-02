@@ -10,11 +10,9 @@
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
 
-	<bean id="stateConnector" class="com.logica.hummingbird.command.releaser.DummyParameterStateConnector"/>
+	<bean id="stateBuffer" class="com.logica.hummingbird.buffers.StateBuffer"/>
 
-	<bean id="commandreleaser" class="com.logica.hummingbird.command.releaser.CommandReleaser">
-		<property name="stateConnector" ref="stateConnector"/>
-	</bean>
+	<bean id="commandreleaser" class="com.logica.hummingbird.command.releaser.CommandReleaser"/>
 
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>

@@ -374,6 +374,12 @@
 			</dependency>
 
 			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-jetty</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>org.codehaus.castor</groupId>
 				<artifactId>castor-core</artifactId>
 				<version>${castor.version}</version>

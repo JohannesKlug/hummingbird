@@ -35,7 +35,10 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.impl.JndiRegistry;
 import org.apache.camel.test.CamelTestSupport;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
+import com.logica.hummingbird.formatter.ExchangeFormatter;
 import com.logica.hummingbird.telemetry.DefaultSpaceParameter;
 import com.logica.hummingbird.validation.base.OnlyChangeFilter;
 import com.logica.hummingbird.validation.base.ViolationCountFilter;
@@ -50,55 +53,50 @@ import com.logica.hummingbird.validation.parameter.UpperLimit;
  * 
  *    http://camel.apache.org/testing.html
  */
-public class ParameterProcessorTest extends CamelTestSupport {
 
-	/** The registry used to resolve beans. */
-	protected JndiRegistry registry = null;
-	
+
+@ContextConfiguration (locations={"/ParameterProcessorTest-context.xml"})
+public class ParameterProcessorTest extends AbstractJUnit38SpringContextTests {
+
+	/** End point from which you can read the results from the routes. */
 	@EndpointInject(uri = "mock:result")
 	protected MockEndpoint mockResult;
 	
+	/** A producer which you can use to inject messages in the routes. */
 	@Produce(uri = "direct:start")
     protected ProducerTemplate directStart;
 
+	/** An autowired producer, i.e. Spring will locate the bean named 'producer' in the XML file and set it automatically. */
+	@Autowired
+	protected ProducerTemplate producer = null;
+
+	/** An autowired context, i.e. Spring will locate the bean named 'context' in the XML file and set it automatically. */
+	@Autowired
+	protected CamelContext context = null;
+
+	/** To get a reference to any bean defined in the Spring XML assembly file, simply write... */
+	@Autowired
+	protected NewProcessor myBean;
+	
+	
 	/** The test function. */
 	public void testProcessing() throws Exception {
-		/** Insert your test code here. Use the "directStart" producer to inject exchanges. Read
-		 * the exchange after the processing through the "mockResult* endpoint. */
-		start.send();
-	}
-
-	@Override
-	protected RouteBuilder createRouteBuilder() {
-		return new RouteBuilder() {
-			public void configure() {
-
-				/** Create bean and register it in the registry under some name. */
-				ParameterProcessor myBean = new ParameterProcessor();
-				registry.bind("myBeanName", myBean);
-				
-				/** A simpel route, from the endpoint "direct:start", over the bean identified through the
-				 * name it was registered with above. The specification of a method is optional and is only
-				 * mandatory if multiple methods have a signature 'public void [name](Exchange arg0)'. The
-				 * route ends at the testing endpoint "mock:result". 
-				 * */
-				from("direct:start").to("bean:myBeanName?method=process").to("mock:result");
-			}
-		};
-	}
-	
-	protected CamelContext createCamelContext() throws Exception {
-		return new DefaultCamelContext(createRegistry());
-	}
-
-	protected JndiRegistry createRegistry() throws Exception {
-		return new JndiRegistry(createJndiContext()); 
-	}
-
-	@SuppressWarnings("unchecked")
-	protected Context createJndiContext() throws Exception {
-		Properties properties = new Properties();
-		properties.put("java.naming.factory.initial", "org.apache.camel.util.jndi.CamelInitialContextFactory");
-		return new InitialContext(new Hashtable(properties));
+		/** Insert your test code here. */
+		
+		/** To get a reference to one of the beans defined in the Spring XML assembly file, either
+		 * use the @Autowired annotation as described above, or look it up in the registry as shown below. */
+		NewProcessor processor = (NewProcessor) context.getRegistry().lookup("myBean");
+		
+		/** Use the context to build new exchanges. */
+		Exchange exchange = new DefaultExchange(context);
+		
+		/** Use the ExchangeFormatter to set the in message of the exchange, in this case a state parameter. */
+		exchange.setIn(ExchangeFormatter.createStateParameterMessage("aTestState", "myParameter", true));
+		
+		/** Use the "directStart" producer to inject exchanges. */
+		directStart.send(exchange);
+		
+		/** Read the exchange after the processing through the "mockResult* endpoint. */
+		assertTrue(mockResult.getExchanges().size() == 1);
 	}
 }

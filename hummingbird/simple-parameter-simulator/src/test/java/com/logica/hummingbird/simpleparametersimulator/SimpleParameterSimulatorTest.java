@@ -1,19 +1,33 @@
 package com.logica.hummingbird.simpleparametersimulator;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
-import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.Exchange;
+import org.apache.camel.Produce;
+import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.apache.camel.test.CamelTestSupport;
-import org.apache.log4j.Logger;
+import org.apache.camel.impl.DefaultExchange;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
-public class SimpleParameterSimulatorTest extends CamelTestSupport {
+@ContextConfiguration (locations={"/SimpleParameterSimulatorTest-context.xml"})
+public class SimpleParameterSimulatorTest extends AbstractJUnit38SpringContextTests  {
 
-	private static org.apache.log4j.Logger logger = Logger.getLogger(SimpleParameterSimulatorTest.class);
+	@Produce(uri = "direct:Commands")
+    protected ProducerTemplate template;
+
+	@Autowired
+    protected CamelContext context;
 	
 	@EndpointInject(uri = "mock:result")
 	protected MockEndpoint resultEndpoint;
 
-	public void testEjectionMessage() throws Exception {
+	@DirtiesContext
+	@Test
+	public void testParameterGeneration() throws Exception {
 		logger.info("Testing all simulators.");
 		Thread.sleep(10000);
 		
@@ -23,17 +37,19 @@ public class SimpleParameterSimulatorTest extends CamelTestSupport {
 		
 		logger.info("Works fine.");
 	}
-
-	@Override
-	protected RouteBuilder createRouteBuilder() {
-		return new RouteBuilder() {
-			public void configure() {
-				from("timer://timer1?fixedRate=true&period=1000").bean(new BooleanParameter(true, "BINARY1_PER_1000M"), "process").to("mock:result");
-				from("timer://timer2?fixedRate=true&period=100").bean(new LinearParameter(0, 1, 1000, "LINEAR1_PER_100M"), "process").to("mock:result");
-				from("timer://timer3?fixedRate=true&period=1000").bean(new LinearParameter(0, 1, 1000, "LINEAR1_PER_1000M"), "process").to("mock:result");
-				from("timer://timer4?fixedRate=true&period=1000").bean(new SinusCurveParameter(0.01, 10, 0, 0, 100, "SINUS1_PER_SECOND"), "process").to("mock:result");
-			}
-		};
+	
+	@DirtiesContext
+	@Test
+	public void testCommanding() throws Exception {
+	
+		Exchange exchange = new DefaultExchange(context);
+		
+		exchange.getIn().setHeader("Bean", "Parameter1");
+		exchange.getIn().setHeader("Attribute", "Value");
+		exchange.getIn().setHeader("Value", false);
+		
+		template.send(exchange);
+		
+		assertTrue( ((BooleanParameter) context.getRegistry().lookup("Parameter1")).getValue() == false);
 	}
-
 }
