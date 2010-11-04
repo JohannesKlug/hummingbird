@@ -18,15 +18,21 @@ For the graphical user interface, two additional repositories are maintained, bo
 
 h2. Check out the source code
 
-Source code is hosted on github:
+Source code is hosted on "Github":http://github.com/JohannesKlug/hummingbird
 
-"website":http://github.com/JohannesKlug/hummingbird
-
-You need to install git, create an account at github and submit your public key. Comprehensive documentation is available
+You need to install git, create an account at github and submit your public key. Comprehensive documentation is available on "Github":http://help.github.com/.
 
 After signing up, you can check out the code by using this git URL: git@github.com:JohannesKlug/hummingbird.git
 
 On the command line, that would be accomplished using "git clone _url_".
+
+h3. Getting the source code from within the Logica corporate network
+
+Those of you operating within the Logica network normally can't access Github using ssh directly. There are two possibilities here:
+ * Tunneling ssh through a host on the Logica DMZ (see this description on the "internal wiki":http://10.48.29.100/wiki/index.php5/Git#Setting_up_remote_git_access.
+ * Using Logica's own git repository on open.logicaspace.com. Email Johannes.Klug@logica.com or Mark.Doyle@logica.com to grant you access. Attach your public key to that email!
+ 
+h2. Building Hummingbird
 
 The Hummingbird Core is defined as a Maven project, so you will need Maven to build the software conveniently. On the command line, you can do so with _mvn install_ or _mvn.bat install_ on Windows.
 
@@ -34,7 +40,7 @@ For usage in Eclipse, see the next section.
 
 h3. (Optional) Importing Hummingbird into Eclipse
 
-If you haven't got it installed yet, get yourself the "m2eclipse" plugin for Eclipse, see "m2eclipse Website":http://m2eclipse.sonatype.org/ .
+If you haven't got it installed yet, get yourself the "m2eclipse" plugin for Eclipse, see "m2eclipse Website":http://m2eclipse.sonatype.org/. m2eclipse requires you to use a full JDK (as opposed to a JRE) distribution of Java. If you are running a JRE, m2eclipse will notify you about this and you need to install a proper JDK and point Eclipse to it.
 
 Now the Import Projects tool will let you locate Hummingbird ("Existing Maven project"). Choose the "hummingbird" sub-directory, so that all the sub-modules are selected as well. After that, you can trigger a full build with a right-click on the root project ("hummingbird"), and selecting "Run As" -> "Maven Install".
 
