@@ -87,14 +87,13 @@
 				$dialog.dialog('open');
 		    }
 		    else {
-		    				var $dialog = $('<div></div>')
-					.html('The command could not be submitted.')
+				var $dialog = $('<div></div>')
+					.html('The command has been added to the command queue.')
 					.dialog({
 								autoOpen: false,
-								title: 'Warning'
+								title: 'Confirmation'
 					});
 				$dialog.dialog('open');
-		    
 		    }
 		    
 			}
@@ -103,8 +102,6 @@
 	</head>
 
 	<body>
-
-		<div id="wrapper">
 
 		<div id="title"></div>
 	
@@ -121,13 +118,8 @@
 
 			<div id="logging" style="visibility:hidden">
 			
-	<table id="logs"> 
-		<tr> 
-			<th>Timestamp</th> 
-			<th>Level</th> 
-			<th>Description</th>  
-		</tr> 
-	</table>			
+
+
 			</div>
 
 			<div id="commanding" style="visibility:hidden">
@@ -174,8 +166,6 @@
 				</li> 
 			</ul> 
 		</div> 
-
-		</div>		
 
 	</body>
 </html>
