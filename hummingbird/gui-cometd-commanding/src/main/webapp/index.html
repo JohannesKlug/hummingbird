@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	
+<title>Thunderbird</title>
+
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css"> 
+ 
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script> 
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"></script> 
+
+	
+<script type="text/javascript" 
+	src="dojo/dojo/dojo.js.uncompressed.js">
+</script>
+
+<script type="text/javascript"
+	src="dojo/dojox/cometd.js.uncompressed.js">
+</script>
+
+	<script type="text/javascript">
+	
+		function toggle(show, hide1, hide2) {
+			document.getElementById(show).style.visibility = 'visible';
+			document.getElementById(hide1).style.visibility = 'hidden';
+			document.getElementById(hide2).style.visibility = 'hidden';
+		}
+
+		dojo.require("dojox.cometd");
+
+		function setupComet(){
+		  dojox.cometd.init('http://localhost/cometd');
+		  dojox.cometd.subscribe("/logging", callback);
+		}
+		
+		dojo.addOnLoad(setupComet);
+
+
+		 function callback(logMsg){
+			  if (logMsg) {
+				appendRow(logMsg.data.tim, logMsg.data.lev, logMsg.data.des);				  
+			  }
+		  }
+		
+		
+		function appendRow(timestamp, level, description){
+			  var tbl = document.getElementById('logs'); // table reference
+			    
+			  // append table row  
+			  var row = tbl.insertRow(tbl.rows.length);
+			    
+			  // insert table cells to the new row 			   
+			  createCell(row.insertCell(0), timestamp, 'row');
+			  createCell(row.insertCell(1), level, 'row');
+			  createCell(row.insertCell(2), description, 'row');
+			}  
+			  
+			// create DIV element and append to the table cell  
+			function createCell(cell, text, style){  
+			  var div = document.createElement('div'); // create DIV element  
+			  var txt = document.createTextNode(text); // create text node  
+			  div.appendChild(txt);                    // append text node to the DIV  
+			  div.setAttribute('class', style);        // set DIV class attribute  
+			  div.setAttribute('className', style);    // set DIV class attribute for IE (?!)  
+			  cell.appendChild(div);                   // append DIV to the table cell  
+			}  
+
+			var xmlhttp;
+
+			function sendCommand(targetUrl) {
+				xmlhttp=new XMLHttpRequest();
+				xmlhttp.onreadystatechange=state_Change;
+		      	xmlhttp.open("GET",targetUrl,true);
+			    xmlhttp.send(null);			    
+			}
+			
+			function state_Change() {
+			
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				var $dialog = $('<div></div>')
+					.html('The command has been added to the command queue.')
+					.dialog({
+								autoOpen: false,
+								title: 'Confirmation'
+					});
+				$dialog.dialog('open');
+		    }
+		    else {
+		    				var $dialog = $('<div></div>')
+					.html('The command could not be submitted.')
+					.dialog({
+								autoOpen: false,
+								title: 'Warning'
+					});
+				$dialog.dialog('open');
+		    
+		    }
+		    
+			}
+	</script>
+		<link rel=stylesheet href=style.css type=text/css>
+	</head>
+
+	<body>
+
+		<div id="wrapper">
+
+		<div id="title"></div>
+	
+		<div id="navigation"> 
+			<a class="option monitoring medium" title="Monitor the status of your satellite." onmouseover="javascript:toggle('monitoring', 'commanding', 'logging')" onclick="javascript:toggle('monitoring', 'commanding', 'logging')"><img src="monitoring.png"></a>
+			<a class="option commanding medium" title="Command your satellite." onmouseover="javascript:toggle('commanding', 'monitoring', 'logging')" onclick="javascript:toggle('commanding', 'monitoring', 'logging')"><img src="commanding.png"></a>
+			<a class="option logging medium" title="View the logs of the system."  onmouseover="javascript:toggle('logging', 'monitoring', 'commanding')" onclick="javascript:toggle('logging', 'monitoring', 'commanding')"><img src="logging.png"></a>
+		</div>
+		
+		<div id="formarea">
+
+			<div id="monitoring" style="visibility:hidden">
+			</div>
+
+			<div id="logging" style="visibility:hidden">
+			
+	<table id="logs"> 
+		<tr> 
+			<th>Timestamp</th> 
+			<th>Level</th> 
+			<th>Description</th>  
+		</tr> 
+	</table>			
+			</div>
+
+			<div id="commanding" style="visibility:hidden">
+			
+					<form id=commanding>
+			<fieldset>
+				<legend>Commands</legend>
+				<ol>
+					<li>
+						<input type="button" style="height: 50px; width: 400px" value="Set Time" onClick="javascript:sendCommand('http://localhost:6789/humsat?Name=Set Time&Release Time=0');"/>
+					</li>				
+					<li>
+						<input type="button" style="height: 50px; width: 400px" value="Restart Flight Computer" onClick="javascript:sendCommand('http://localhost:6789/humsat?Name=Restart Flight Computer&Release Time=0');" />
+					</li>
+					<li>
+						<input type="button" style="height: 50px; width: 400px" value="Video Camera On" onClick="javascript:sendCommand('http://localhost:6789/humsat?Name=Video Camera On&Release Time=0');" />
+					</li>
+					<li>
+						<input type="button" style="height: 50px; width: 400px" value="Video Camera Off" onClick="javascript:sendCommand('http://localhost:6789/humsat?Name=Video Camera Off&Release Time=0');" />
+					</li>
+					<li>
+						<input type="button" style="height: 50px; width: 400px" value="Deploy Payload" onClick="javascript:sendCommand('http://localhost:6789/humsat?Name=Deploy Payload&Release Time=0');" />
+					</li>
+				</ol>
+			</fieldset>
+		</form>
+			
+			</div>
+
+			
+		</div>
+		
+
+		<div id="footer" style="visibility:hidden"> 
+			<ul id="bottomLinks"> 
+				<li class="first"> 
+					<a href="http://github.com/JohannesKlug/hummingbird/wiki">Hummingbird Wiki</a> 
+				</li> 
+				<li> 
+					<a href="http://groups.google.com/group/hummingbird-users">User Forum</a> 
+				</li> 
+				<li> 
+					<a href="mailto:villemosg@yahoo.de">Contact Us</a> 
+				</li> 
+			</ul> 
+		</div> 
+
+		</div>		
+
+	</body>
+</html>

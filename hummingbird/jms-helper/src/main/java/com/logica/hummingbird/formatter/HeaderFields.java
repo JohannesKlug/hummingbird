@@ -9,11 +9,12 @@ public interface HeaderFields {
 	public static final String TIMESTAMP = "Timestamp";
 	
 	/** Header fields for state parameters. */
-	public static final String ISSTATEOF = "isStateOf";
-	public static final String RELEASETIME = "ReleaseTime";
-	public static final String TASK_OFF = "TaskOff";
-	public static final String EXECUTIONTIME = "TaskExecutionTime";
+	public static final String ISSTATEOF = "is State Of";
+	public static final String RELEASETIME = "Release Time";
+	public static final String TASK_OFF = "Task Off";
+	public static final String EXECUTIONTIME = "Task Execution Time";
 	
 	public static final String ID = "JMSMessageId";
+	public static final String LEVEL = "Log Level";
 
 }

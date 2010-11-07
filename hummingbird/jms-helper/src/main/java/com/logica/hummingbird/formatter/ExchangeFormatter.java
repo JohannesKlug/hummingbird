@@ -21,6 +21,7 @@ import java.util.Date;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
+import org.apache.log4j.spi.LoggingEvent;
 
 import com.logica.hummingbird.interfaces.ITask;
 
@@ -79,10 +80,6 @@ public class ExchangeFormatter {
 	}
 
 	
-	public static String getParameterName(Exchange exchange) {
-		return (String) exchange.getIn().getHeader(HeaderFields.NAME);
-	}
-
 	public static String getParameterType(Exchange exchange) {
 		return (String) exchange.getIn().getHeader(HeaderFields.TYPE);
 	}
@@ -119,5 +116,19 @@ public class ExchangeFormatter {
 		}
 
 		return nativeValue;
+	}
+
+	public static Message createLogMessage(LoggingEvent event) {
+		Message message = new DefaultMessage();		
+		message.setHeader(HeaderFields.TYPE, "Log Message");
+		message.setHeader(HeaderFields.RELEASETIME, (new Date()).toString());
+		message.setHeader(HeaderFields.LEVEL, event.getLevel().toString());
+		message.setHeader(HeaderFields.VALUE, event.getRenderedMessage());
+		message.setBody(event);
+		return message;
+	}
+
+	public static String getMessageId(Exchange arg0) {
+		return (String) arg0.getIn().getHeader(HeaderFields.ID);
 	}
 }

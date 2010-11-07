@@ -57,7 +57,7 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 		List<ITask> tasks = Arrays.asList(new ITask[] {new DummyTask(), new DummyTask()});
 
 		Range range = new Range(0, "TestStateParameter", "TestParameter", new StaticValue(0d), new StaticValue(10d)); 
-		List<Argument> arguments = Arrays.asList(new Argument[]{new Argument("TestArgument1", "Test description", Long.class.toString(), 64l, range), new Argument("TestArgument2", "Test description", Long.class.toString(), 64l, range), new Argument("TestArgument3", "Test description", Long.class.toString(), 64l, range)});
+		List<Argument> arguments = Arrays.asList(new Argument[]{new Argument("TestArgument1", "Test description", Long.class.toString(), 64l, "m/s", range), new Argument("TestArgument2", "Test description", Long.class.toString(), 64l, "m/s", range), new Argument("TestArgument3", "Test description", Long.class.toString(), 64l, "m/s", range)});
 		
 		CommandDefinition definition = new CommandDefinition("TestCommand", "Test description", arguments, lockStates, tasks);
 		
@@ -91,7 +91,7 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 		List<ITask> tasks = Arrays.asList(new ITask[] {new DummyTask(), new DummyTask()});
 
 		Range range = new Range(0, "TestStateParameter", "TestParameter", new StaticValue(0d), new StaticValue(10d)); 
-		List<Argument> arguments = Arrays.asList(new Argument[]{new Argument("TestArgument1", "Test description", Long.class.toString(), 64l, range), new Argument("TestArgument2", "Test description", Long.class.toString(), 64l, range), new Argument("TestArgument3", "Test description", Long.class.toString(), 64l, range)});
+		List<Argument> arguments = Arrays.asList(new Argument[]{new Argument("TestArgument1", "Test description", Long.class.toString(), 64l, "m/s", range), new Argument("TestArgument2", "Test description", Long.class.toString(), 64l, "m/s", range), new Argument("TestArgument3", "Test description", Long.class.toString(), 64l, "m/s", range)});
 		
 		CommandDefinition definition = new CommandDefinition("TestCommand", "Test description", arguments, lockStates, tasks);
 		
@@ -126,7 +126,7 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 		List<ITask> tasks = Arrays.asList(new ITask[] {new DummyTask(), new DummyTask()});
 
 		Range range = new Range(0, "TestStateParameter", "TestParameter", new StaticValue(0d), new StaticValue(10d)); 
-		List<Argument> arguments = Arrays.asList(new Argument[]{new Argument("TestArgument1", "Test description", Long.class.toString(), 64l, range), new Argument("TestArgument2", "Test description", Long.class.toString(), 64l, range), new Argument("TestArgument3", "Test description", Long.class.toString(), 64l, range)});
+		List<Argument> arguments = Arrays.asList(new Argument[]{new Argument("TestArgument1", "Test description", Long.class.toString(), 64l, "m/s", range), new Argument("TestArgument2", "Test description", Long.class.toString(), 64l, "m/s", range), new Argument("TestArgument3", "Test description", Long.class.toString(), 64l, "m/s", range)});
 		
 		CommandDefinition definition = new CommandDefinition("TestCommand", "Test description", arguments, lockStates, tasks);
 		

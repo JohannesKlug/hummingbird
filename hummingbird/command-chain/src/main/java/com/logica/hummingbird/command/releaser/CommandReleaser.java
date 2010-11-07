@@ -22,6 +22,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultExchange;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.logica.hummingbird.buffers.StateBuffer;
@@ -59,6 +60,8 @@ import com.logica.hummingbird.type.CommandDefinition;
  */
 public class CommandReleaser {
 
+	protected static Logger logger = Logger.getLogger(CommandReleaser.class);
+	
 	/** Queue for the task schedule. */
 	@Autowired
 	protected ProducerTemplate producer = null;
@@ -80,6 +83,8 @@ public class CommandReleaser {
 	 */
 	public void process(Exchange arg0) throws InterruptedException {
 
+		logger.info("Processing command '" + ExchangeFormatter.getName(arg0) + "' with ID " + ExchangeFormatter.getMessageId(arg0) + "'.");
+		
 		/** Get the command definition. */
 		CommandDefinition definition = (CommandDefinition) arg0.getIn().getBody();
 
@@ -106,7 +111,9 @@ public class CommandReleaser {
 			
 			Exchange exchange = new DefaultExchange(context);
 			exchange.setIn(ExchangeFormatter.createTask("Task", (Long) arg0.getIn().getHeader(HeaderFields.RELEASETIME) + task.deltaTime(), (String) arg0.getIn().getHeader(HeaderFields.NAME), task));
-			producer.send("direct:tasks", exchange);			
+			producer.send("direct:tasks", exchange);
+			
+			logger.info("Scheduling task '" + task.getClass().toString() + "' with ID " + ExchangeFormatter.getMessageId(exchange) + "'.");
 		}
 
 		/** Command is forwarded in the route, i.e. released. */

@@ -107,6 +107,7 @@
 		<module>hummingbird-archetype-parameter</module>
 
 		<module>command-chain</module>
+		<module>gui-cometd-commanding</module>
 	</modules>
 
 	<licenses>

@@ -43,10 +43,11 @@ public class Argument extends Named {
 	 * @param description The description of the argument.
 	 * @param bitLength The length in bits of the argument.
 	 */
-	public Argument(String name, String description, String type, long bitLength, Range range) {
+	public Argument(String name, String description, String type, long bitLength, String unit, Range range) {
 		super(name, description);
 		this.type = type;
 		this.bitLength = bitLength;
+		this.unit = unit;
 		this.range = range;
 	}
 

@@ -25,10 +25,13 @@ import com.logica.hummingbird.type.CommandDefinition;
 @ContextConfiguration (locations={"/JettyCommandTransformerTest-context.xml"})
 public class JettyCommandTransformerTest extends AbstractJUnit38SpringContextTests  {
 
-	@Produce(uri = "direct:Commands")
+	@Produce(uri = "direct:HttpCommands")
     protected ProducerTemplate template;
 
-	@EndpointInject(uri = "mock:ReleasedCommands")
+	@EndpointInject(uri = "mock:HttpCommands")
+	protected MockEndpoint httpQueue;
+
+	@EndpointInject(uri = "mock:Commands")
 	protected MockEndpoint releaseQueue;
 
 	@Autowired
@@ -40,8 +43,7 @@ public class JettyCommandTransformerTest extends AbstractJUnit38SpringContextTes
 	@Test
 	public void testReceive() {
 		Range range = new Range(0, "TestStateParameter", "TestParameter", new StaticValue(0d), new StaticValue(10d));
-		CommandDefinition definition = new CommandDefinition("TestCommand", "Test description", Arrays.asList(new Argument[]{new Argument("TestArgument1", "Test description", Long.class.toString(), 64l, range), new Argument("TestArgument2", "Test description", Long.class.toString(), 64l, range), new Argument("TestArgument3", "Test description", Long.class.toString(), 64l, range)}), null, null); 
-		
+		CommandDefinition definition = new CommandDefinition("TestCommand", "Test description", Arrays.asList(new Argument[]{new Argument("TestArgument1", "Test description", Long.class.toString(), 64l, "m/s", range), new Argument("TestArgument2", "Test description", Long.class.toString(), 64l, "m/s", range), new Argument("TestArgument3", "Test description", Long.class.toString(), 64l, "m/s", range)}), null, null); 
 		
 		Date now = new Date();
 		
@@ -60,5 +62,7 @@ public class JettyCommandTransformerTest extends AbstractJUnit38SpringContextTes
 		assertTrue(releaseQueue.getReceivedCounter() == 1);
 		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader(HeaderFields.NAME)).equals("TestCommand"));
 		assertTrue((((CommandDefinition) releaseQueue.getReceivedExchanges().get(0).getIn().getBody()) != null));
+		
+		assertTrue(releaseQueue.getReceivedCounter() == 1);
 	}		
 }

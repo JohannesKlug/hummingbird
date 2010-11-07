@@ -4,6 +4,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultExchange;
+import org.apache.log4j.Logger;
 
 import com.logica.hummingbird.buffers.ObjectBuffer;
 import com.logica.hummingbird.formatter.ExchangeFormatter;
@@ -19,6 +20,8 @@ import com.logica.hummingbird.tasks.AbstractTask;
  */
 public class SetParameter extends AbstractTask {
 
+	protected static Logger logger = Logger.getLogger(SetParameter.class);
+	
 	/**
 	 * 
 	 */
@@ -46,6 +49,8 @@ public class SetParameter extends AbstractTask {
 	 * @param arg0 The exchange to be send.
 	 */
 	public void execute(CamelContext context, ProducerTemplate producer, ObjectBuffer buffer) {
+		logger.info("Setting parameter '" + name + "' to value '" + value.toString() + "'.");
+		
 		Exchange exchange = new DefaultExchange(context);
 		exchange.setIn(ExchangeFormatter.createParameterMessage(name, clazz, value));
 		producer.send("direct:Parameters", exchange);

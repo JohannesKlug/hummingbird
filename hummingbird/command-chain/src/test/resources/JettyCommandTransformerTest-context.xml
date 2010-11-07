@@ -22,9 +22,14 @@
 		<template id="producer"/>
 
 		<route>
-			<from uri="direct:Commands" />
+			<from uri="direct:HttpCommands" />
 			<to uri="bean:commandgenerator?method=process" />
-			<to uri="mock:ReleasedCommands" />
+			<to uri="mock:HttpCommands" />
+		</route>
+
+		<route>
+			<from uri="direct:Commands" />
+			<to uri="mock:Commands" />
 		</route>
 		
 	</camelContext>

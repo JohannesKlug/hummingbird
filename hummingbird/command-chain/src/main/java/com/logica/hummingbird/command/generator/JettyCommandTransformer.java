@@ -16,7 +16,11 @@
  */
 package com.logica.hummingbird.command.generator;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
+import org.apache.camel.ProducerTemplate;
+import org.apache.camel.impl.DefaultExchange;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.logica.hummingbird.buffers.CommandBuffer;
@@ -34,9 +38,18 @@ import com.logica.hummingbird.type.CommandDefinition;
  */
 public class JettyCommandTransformer {
 
+	protected static Logger logger = Logger.getLogger(JettyCommandTransformer.class);
+	
 	/** The buffer holding the command definitions. */
 	@Autowired
 	protected CommandBuffer buffer = null;
+
+	/** Queue for the scheduled commands. */
+	@Autowired
+	protected ProducerTemplate producer = null;
+
+	@Autowired
+	protected CamelContext context = null;
 
 	/**
 	 * Method for creating and sending a command. The command generator can be linked
@@ -54,17 +67,33 @@ public class JettyCommandTransformer {
 	 * @param arg0 The exchange triggering the command. Can be a timer or a request.
 	 */
 	public void process(Exchange arg0) throws Exception {
-		/** Release the command to the command query, i.e. schedule it for release to the spacecraft. */
-		CommandDefinition definition = buffer.getCommandDefinition(ExchangeFormatter.getName(arg0)); 
-		arg0.getIn().setBody(definition);
+
+
+		CommandDefinition definition = buffer.getCommandDefinition(ExchangeFormatter.getName(arg0));
 		
-		/** Convert releasetime to long. */
-		arg0.getIn().setHeader(HeaderFields.RELEASETIME, Long.parseLong(ExchangeFormatter.getReleaseTime(arg0)));
+		/** Create exchange holding the command. */
+		Exchange exchange = new DefaultExchange(context);
+		exchange.getIn().setBody(definition);
+		exchange.getIn().setHeader(HeaderFields.NAME, ExchangeFormatter.getName(arg0));
+		
+		if (arg0.getIn().getHeader(HeaderFields.RELEASETIME) != null) {
+			exchange.getIn().setHeader(HeaderFields.RELEASETIME, Long.parseLong(ExchangeFormatter.getReleaseTime(arg0)));
+		}
+		else {
+			exchange.getIn().setHeader(HeaderFields.RELEASETIME, 0l);
+		}
 		
 		/** Convert arguments from String to their real type. */
 		for (Argument argument : definition.getArguments()) { 
 			Object value = ExchangeFormatter.convert(argument.getType(), (String) arg0.getIn().getHeader(argument.getName()));
-			arg0.getIn().setHeader(argument.getName(), value);
+			exchange.getIn().setHeader(argument.getName(), value);
 		}
+
+		/** Release the command to the command query, i.e. schedule it for release to the spacecraft. */
+		logger.info("Scheduling command '" + ExchangeFormatter.getName(exchange) + "' with ID " + ExchangeFormatter.getMessageId(exchange) + "'.");
+		producer.send("direct:Commands", exchange);
+		
+		/** send a html response back to the GUI. */
+        arg0.getOut().setBody("HTTP/1.1 200 OK");
 	}
 }

@@ -21,9 +21,11 @@ import java.util.Date;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.logica.hummingbird.buffers.ObjectBuffer;
+import com.logica.hummingbird.formatter.ExchangeFormatter;
 import com.logica.hummingbird.formatter.HeaderFields;
 import com.logica.hummingbird.interfaces.ITask;
 
@@ -34,6 +36,8 @@ import com.logica.hummingbird.interfaces.ITask;
  */
 public class Executor {
 
+	protected static Logger logger = Logger.getLogger(Executor.class);
+	
 	/** Queue for the task schedule. */
 	@Autowired
 	protected ProducerTemplate producer = null;
@@ -66,6 +70,8 @@ public class Executor {
 			Thread.sleep(executionTime - now.getTime());
 		} 
 
+		logger.info("Executing task '" + task.getClass().toString() + "' with ID " + ExchangeFormatter.getMessageId(arg0) + "'.");
+		
 		/** Execute the task */
 		task.execute(context, producer, buffer);
 	}

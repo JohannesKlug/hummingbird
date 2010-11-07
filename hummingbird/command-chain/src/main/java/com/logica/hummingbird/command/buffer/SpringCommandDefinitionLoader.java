@@ -22,6 +22,7 @@ import java.util.List;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.logica.hummingbird.formatter.ExchangeFormatter;
@@ -32,6 +33,8 @@ import com.logica.hummingbird.type.CommandDefinition;
  * them into a route, for example to a ActiveMQ queue.
  */
 public class SpringCommandDefinitionLoader {
+	
+	protected static Logger logger = Logger.getLogger(SpringCommandDefinitionLoader.class);
 	
 	/** The context in which the component is running. */
 	@Autowired
@@ -50,6 +53,8 @@ public class SpringCommandDefinitionLoader {
 	 */
 	public List<Message> process(Exchange arg0) {
 
+		logger.info("Loading command definitions from Spring file.");
+		
 		/** Iterate through definitions and create Messages. */
 		List<Message> messages = new ArrayList<Message>();
 		for (CommandDefinition definition : definitions) {
