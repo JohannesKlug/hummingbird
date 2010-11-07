@@ -87,7 +87,7 @@ public abstract class BaseLimit {
 	 * @throws Exception
 	 */
 	public void processParameter(Exchange arg0) throws Exception {
-		logger.debug(stateName + " received parameter value for validation.");
+		logger.debug("Limit state '" + stateName + "' received parameter value for validation.");
 		parameter = arg0.getIn().getHeader("Value");
 		parameterName = (String) arg0.getIn().getHeader("Name");
 		doProcess(arg0);	
@@ -102,8 +102,8 @@ public abstract class BaseLimit {
 	 * @throws Exception
 	 */
 	public void processLimit(Exchange arg0) throws Exception {
-		logger.debug(stateName + " received limit change parameter.");
 		limit = (Double) arg0.getIn().getHeader("Value");
+		logger.info("Limit '" + stateName + "' set to '" + limit + "'.");
 		doProcess(arg0);	
 	}
 
@@ -116,8 +116,8 @@ public abstract class BaseLimit {
 	 * @throws Exception
 	 */
 	public void processEnabled(Exchange arg0) throws Exception {
-		logger.debug(stateName + " received enable setting.");
 		enabled = (Boolean) arg0.getIn().getHeader("Value");
+		logger.info("Limit '" + stateName + "' switches to '" + enabled + "'.");
 		doProcess(arg0);
 	}
 	
@@ -136,7 +136,11 @@ public abstract class BaseLimit {
 	protected void doProcess(Exchange arg0) throws NotComparableTypeException {
 		if (isEnabled() == true && isReady()) {
 			logger.debug(stateName + " creating state variable.");
-			arg0.setIn(ExchangeFormatter.createStateParameterMessage(stateName, parameterName, checkLimit()));
+			boolean state = checkLimit();
+			arg0.setIn(ExchangeFormatter.createStateParameterMessage(stateName, parameterName, state));
+			if (state == false) {
+				logger.error("Parameter " + parameterName + " out of limit.");
+			}
 		}
 		else {
 			logger.debug(stateName + " is not enabled and / or ready. Route terminated.");
