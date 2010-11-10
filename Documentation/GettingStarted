@@ -40,7 +40,9 @@ The Hummingbird Core is defined as a Maven project, so you will need Maven to bu
 
 h3. Prerequisite: Configure Maven to use Logica's Artifactory
 
-You need an Artifactory account. Send an email to the developers mailing list (hummingbird-dev@googlegroups.com), and we will provide you with one.
+You need an Artifactory account. Send an email to the developers mailing list (hummingbird-dev@googlegroups.com), and we will provide you with one. Once we have created an account for you, change your password!
+
+Next, you need your password in encrypted form. Have a look here to learn how to get this: http://open.logicaspace.com:8080/content/how-obtain-your-encrypted-artifactory-password
 
 Add Logica's Artifactory server to your ~/.m2/settings.xml. The address is http://open.logicaspace.com:8080/artifactory/. A sample settings.xml file is supplied in the "Documentation" subdirectory of the Hummingbird source tree.
 
