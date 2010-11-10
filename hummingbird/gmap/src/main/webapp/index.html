@@ -35,7 +35,7 @@ body {
 	dojo.require("dojox.cometd");
 
 	function setupComet(){
-	  dojox.cometd.init('/cometd');
+	  dojox.cometd.init('http://0.0.0.0:8081/cometd');
 	  dojox.cometd.subscribe("/gui-cometd-gmap-0.0.1-SNAPSHOT/position", callback);
 	}
 	

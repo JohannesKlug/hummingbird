@@ -1,5 +1,6 @@
 package com.logica.hummingbird.util;
 
+/** TODO Put in the transport.common */
 import java.util.BitSet;
 
 import org.apache.commons.lang.StringUtils;

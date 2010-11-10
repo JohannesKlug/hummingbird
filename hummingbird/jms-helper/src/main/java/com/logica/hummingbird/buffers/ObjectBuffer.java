@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Camel processor that will buffer requests.
  * 
  * TODO Does this exist already in Camel?
+ * TODO When is stuff deleted?
  *
  */
 public class ObjectBuffer  {

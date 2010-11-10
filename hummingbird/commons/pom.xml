@@ -8,7 +8,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.logica.hummingbird</groupId>
+	<groupId>com.hummingbird.transport</groupId>
 	<artifactId>commons</artifactId>
 	<name>commons</name>
 	<version>0.0.1-SNAPSHOT</version>

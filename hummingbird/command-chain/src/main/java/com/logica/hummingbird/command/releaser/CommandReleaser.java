@@ -93,6 +93,7 @@ public class CommandReleaser {
 		long releaseTime = (Long) arg0.getIn().getHeader(HeaderFields.RELEASETIME);
 
 		if (releaseTime > now.getTime()) {
+			logger.info("Delaying command for " + (releaseTime - now.getTime())/1000 + " seconds.");
 			Thread.sleep(releaseTime - now.getTime());
 		} 
 

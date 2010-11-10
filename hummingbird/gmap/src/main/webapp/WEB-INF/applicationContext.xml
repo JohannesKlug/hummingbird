@@ -43,7 +43,7 @@
 		<template id="template"/>
 		
 		<route>
-			<from uri="timer://sender?fixedRate=true&amp;period=2000" />
+			<from uri="activemq:topic:Logging" />
 			<to uri="bean:sender?method=processSend" />
 			<to uri="cometd://0.0.0.0:8081/gui-cometd-gmap-0.0.1-SNAPSHOT/position?baseResource=classpath:webapp" />
 		</route>

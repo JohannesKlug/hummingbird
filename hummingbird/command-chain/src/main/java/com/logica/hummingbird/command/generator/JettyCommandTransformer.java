@@ -16,6 +16,8 @@
  */
 package com.logica.hummingbird.command.generator;
 
+import java.util.Date;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
@@ -80,7 +82,7 @@ public class JettyCommandTransformer {
 			exchange.getIn().setHeader(HeaderFields.RELEASETIME, Long.parseLong(ExchangeFormatter.getReleaseTime(arg0)));
 		}
 		else {
-			exchange.getIn().setHeader(HeaderFields.RELEASETIME, 0l);
+			exchange.getIn().setHeader(HeaderFields.RELEASETIME, (new Date()).getTime());
 		}
 		
 		/** Convert arguments from String to their real type. */
@@ -95,5 +97,6 @@ public class JettyCommandTransformer {
 		
 		/** send a html response back to the GUI. */
         arg0.getOut().setBody("HTTP/1.1 200 OK");
+        arg0.getOut().setHeader(Exchange.HTTP_RESPONSE_CODE, 200);
 	}
 }

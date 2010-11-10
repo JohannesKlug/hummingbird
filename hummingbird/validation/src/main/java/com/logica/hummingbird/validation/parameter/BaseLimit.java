@@ -134,6 +134,7 @@ public abstract class BaseLimit {
 	 * @throws NotComparableTypeException
 	 */
 	protected void doProcess(Exchange arg0) throws NotComparableTypeException {
+		logger.info("Do limit check.");
 		if (isEnabled() == true && isReady()) {
 			logger.debug(stateName + " creating state variable.");
 			boolean state = checkLimit();

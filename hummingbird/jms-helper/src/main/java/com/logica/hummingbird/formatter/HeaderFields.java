@@ -15,6 +15,8 @@ public interface HeaderFields {
 	public static final String EXECUTIONTIME = "Task Execution Time";
 	
 	public static final String ID = "JMSMessageId";
+	
+	/** Log message header fields. */
 	public static final String LEVEL = "Log Level";
 
 }

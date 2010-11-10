@@ -4,6 +4,7 @@
 package com.logica.hummingbird.util.exceptions;
 
 
+/** TODO Put in the transport.common */
 /**
  * This is a checked exception class which will allow the client to take steps to 
  * rectify the situation or display useful information to the user.

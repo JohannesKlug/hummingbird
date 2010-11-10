@@ -67,6 +67,7 @@ public class Executor {
 		long executionTime = (Long) arg0.getIn().getHeader(HeaderFields.EXECUTIONTIME);
 
 		if (executionTime > now.getTime()) {
+			logger.info("Delaying task '" + task.getClass().toString() + "' for " + (executionTime - now.getTime())/1000 + " seconds.");
 			Thread.sleep(executionTime - now.getTime());
 		} 
 

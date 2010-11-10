@@ -14,6 +14,7 @@ import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameEx
 import com.logica.hummingbird.telemetry.HummingbirdPacket;
 import com.logica.hummingbird.telemetry.HummingbirdParameter;
 
+/** TODO Remove hardcoded 'strings', put them in the HeaderFields class. */
 public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 
 	public HummingbirdCamelPacketBroker(ContainerFactory factory) {

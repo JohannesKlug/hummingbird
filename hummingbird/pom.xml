@@ -95,7 +95,6 @@
 		<module>parameterarchive</module>
 		<module>help</module>
 		<module>assembly</module>
-		<module>example-endpoint</module>
 		<module>simulator</module>
 		<module>test-support</module>
 		<module>packet-broker</module>
@@ -108,6 +107,7 @@
 
 		<module>command-chain</module>
 		<module>gui-cometd-commanding</module>
+		<module>core</module>
 	</modules>
 
 	<licenses>
@@ -348,6 +348,24 @@
 				<artifactId>camel-spring</artifactId>
 				<version>${camel.version}</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-jms</artifactId>
+				<version>${camel.version}</version>
+			</dependency>			
+
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-http</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-jetty</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.apache.camel</groupId>
@@ -366,18 +384,6 @@
 				<groupId>org.jencks</groupId>
 				<artifactId>jencks-amqpool</artifactId>
 				<version>${jencks.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.camel</groupId>
-				<artifactId>camel-jms</artifactId>
-				<version>${camel.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.camel</groupId>
-				<artifactId>camel-jetty</artifactId>
-				<version>${camel.version}</version>
 			</dependency>
 
 			<dependency>

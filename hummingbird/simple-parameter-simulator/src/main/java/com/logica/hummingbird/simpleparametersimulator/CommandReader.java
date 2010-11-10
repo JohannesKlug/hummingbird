@@ -7,7 +7,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
+// FIXME refactor hard-coded header fields
 
 /**
  * @TITLE Command Reader
