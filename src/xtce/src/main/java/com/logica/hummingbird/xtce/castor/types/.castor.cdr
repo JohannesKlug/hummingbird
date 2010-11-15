@@ -1,0 +1,25 @@
+#Thu Mar 18 08:40:36 CET 2010
+com.logica.hummingbird.xtce.castor.types.InterlockVerificationToWaitForType=com.logica.hummingbird.xtce.castor.types.descriptors.InterlockVerificationToWaitForTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.DataEncodingTypeBitOrderType=com.logica.hummingbird.xtce.castor.types.descriptors.DataEncodingTypeBitOrderTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.RadixType=com.logica.hummingbird.xtce.castor.types.descriptors.RadixTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.ParameterPropertiesTypeDataSourceType=com.logica.hummingbird.xtce.castor.types.descriptors.ParameterPropertiesTypeDataSourceTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.ParameterToSetTypeVerifierToTriggerOnType=com.logica.hummingbird.xtce.castor.types.descriptors.ParameterToSetTypeVerifierToTriggerOnTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.EncodingUnitsType=com.logica.hummingbird.xtce.castor.types.descriptors.EncodingUnitsTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.NumberFormatNotationType=com.logica.hummingbird.xtce.castor.types.descriptors.NumberFormatNotationTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.SignificanceTypeConsequenceLevelType=com.logica.hummingbird.xtce.castor.types.descriptors.SignificanceTypeConsequenceLevelTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.PCMStreamTypePcmTypeType=com.logica.hummingbird.xtce.castor.types.descriptors.PCMStreamTypePcmTypeTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.RateInStreamTypeBasisType=com.logica.hummingbird.xtce.castor.types.descriptors.RateInStreamTypeBasisTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.FloatDataEncodingTypeEncodingType=com.logica.hummingbird.xtce.castor.types.descriptors.FloatDataEncodingTypeEncodingTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.FlagFlagBitTypeType=com.logica.hummingbird.xtce.castor.types.descriptors.FlagFlagBitTypeTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.ParityTypeType=com.logica.hummingbird.xtce.castor.types.descriptors.ParityTypeTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.StringDataEncodingTypeEncodingType=com.logica.hummingbird.xtce.castor.types.descriptors.StringDataEncodingTypeEncodingTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.BaseDataTypeCharacterWidthType=com.logica.hummingbird.xtce.castor.types.descriptors.BaseDataTypeCharacterWidthTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.ComparisonOperatorsType=com.logica.hummingbird.xtce.castor.types.descriptors.ComparisonOperatorsTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.MathOperatorsType=com.logica.hummingbird.xtce.castor.types.descriptors.MathOperatorsTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.CRCReferenceType=com.logica.hummingbird.xtce.castor.types.descriptors.CRCReferenceTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.FloatDataTypeSizeInBitsType=com.logica.hummingbird.xtce.castor.types.descriptors.FloatDataTypeSizeInBitsTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.FloatDataEncodingTypeSizeInBitsType=com.logica.hummingbird.xtce.castor.types.descriptors.FloatDataEncodingTypeSizeInBitsTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.HeaderTypeValidationStatusType=com.logica.hummingbird.xtce.castor.types.descriptors.HeaderTypeValidationStatusTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.ParityReferenceType=com.logica.hummingbird.xtce.castor.types.descriptors.ParityReferenceTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType=com.logica.hummingbird.xtce.castor.types.descriptors.LocationInContainerInBitsReferenceLocationTypeDescriptor
+com.logica.hummingbird.xtce.castor.types.IntegerDataEncodingTypeEncodingType=com.logica.hummingbird.xtce.castor.types.descriptors.IntegerDataEncodingTypeEncodingTypeDescriptor
