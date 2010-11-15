@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.PhysicalAddress;
+import org.hbird.xtce.castor.PhysicalAddress;
 
 /**
  * Class PhysicalAddressDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class PhysicalAddressDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.PhysicalAddressTypeDescriptor {
+public class PhysicalAddressDescriptor extends org.hbird.xtce.castor.descriptors.PhysicalAddressTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class PhysicalAddressDescriptor extends com.logica.hummingbird.xtce.casto
 
     public PhysicalAddressDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.PhysicalAddressTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.PhysicalAddressTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "PhysicalAddress";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class PhysicalAddressDescriptor extends com.logica.hummingbird.xtce.casto
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.PhysicalAddress.class;
+        return org.hbird.xtce.castor.PhysicalAddress.class;
     }
 
     /**

@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.MessageRefType;
+import org.hbird.xtce.castor.MessageRefType;
 
 /**
  * Class MessageRefTypeDescriptor.
@@ -149,7 +149,7 @@ public class MessageRefTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.MessageRefType.class;
+        return org.hbird.xtce.castor.MessageRefType.class;
     }
 
     /**

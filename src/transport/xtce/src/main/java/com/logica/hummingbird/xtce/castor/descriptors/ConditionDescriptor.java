@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Condition;
+import org.hbird.xtce.castor.Condition;
 
 /**
  * Class ConditionDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ConditionDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ComparisonCheckTypeDescriptor {
+public class ConditionDescriptor extends org.hbird.xtce.castor.descriptors.ComparisonCheckTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ConditionDescriptor extends com.logica.hummingbird.xtce.castor.desc
 
     public ConditionDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ComparisonCheckTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ComparisonCheckTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "Condition";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class ConditionDescriptor extends com.logica.hummingbird.xtce.castor.desc
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Condition.class;
+        return org.hbird.xtce.castor.Condition.class;
     }
 
     /**

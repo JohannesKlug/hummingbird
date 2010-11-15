@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Contains an unordered Set of Command Containers
@@ -23,7 +23,7 @@ public class CommandContainerSetType implements java.io.Serializable {
     /**
      * Field _commandContainerList.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer> _commandContainerList;
+    private java.util.List<org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer> _commandContainerList;
 
 
       //----------------/
@@ -32,7 +32,7 @@ public class CommandContainerSetType implements java.io.Serializable {
 
     public CommandContainerSetType() {
         super();
-        this._commandContainerList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer>();
+        this._commandContainerList = new java.util.ArrayList<org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer>();
     }
 
 
@@ -48,7 +48,7 @@ public class CommandContainerSetType implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addCommandContainer(
-            final com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer vCommandContainer)
+            final org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer vCommandContainer)
     throws java.lang.IndexOutOfBoundsException {
         this._commandContainerList.add(vCommandContainer);
     }
@@ -63,7 +63,7 @@ public class CommandContainerSetType implements java.io.Serializable {
      */
     public void addCommandContainer(
             final int index,
-            final com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer vCommandContainer)
+            final org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer vCommandContainer)
     throws java.lang.IndexOutOfBoundsException {
         this._commandContainerList.add(index, vCommandContainer);
     }
@@ -74,7 +74,7 @@ public class CommandContainerSetType implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer> enumerateCommandContainer(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer> enumerateCommandContainer(
     ) {
         return java.util.Collections.enumeration(this._commandContainerList);
     }
@@ -86,10 +86,10 @@ public class CommandContainerSetType implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer
+     * org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer
      * at the given index
      */
-    public com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer getCommandContainer(
+    public org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer getCommandContainer(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -97,7 +97,7 @@ public class CommandContainerSetType implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getCommandContainer: Index value '" + index + "' not in range [0.." + (this._commandContainerList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer) _commandContainerList.get(index);
+        return (org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer) _commandContainerList.get(index);
     }
 
     /**
@@ -110,10 +110,10 @@ public class CommandContainerSetType implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer[] getCommandContainer(
+    public org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer[] getCommandContainer(
     ) {
-        com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer[] array = new com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer[0];
-        return (com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer[]) this._commandContainerList.toArray(array);
+        org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer[] array = new org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer[0];
+        return (org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer[]) this._commandContainerList.toArray(array);
     }
 
     /**
@@ -147,7 +147,7 @@ public class CommandContainerSetType implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer> iterateCommandContainer(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer> iterateCommandContainer(
     ) {
         return this._commandContainerList.iterator();
     }
@@ -198,7 +198,7 @@ public class CommandContainerSetType implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeCommandContainer(
-            final com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer vCommandContainer) {
+            final org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer vCommandContainer) {
         boolean removed = _commandContainerList.remove(vCommandContainer);
         return removed;
     }
@@ -209,10 +209,10 @@ public class CommandContainerSetType implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer removeCommandContainerAt(
+    public org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer removeCommandContainerAt(
             final int index) {
         java.lang.Object obj = this._commandContainerList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer) obj;
+        return (org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer) obj;
     }
 
     /**
@@ -225,7 +225,7 @@ public class CommandContainerSetType implements java.io.Serializable {
      */
     public void setCommandContainer(
             final int index,
-            final com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer vCommandContainer)
+            final org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer vCommandContainer)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._commandContainerList.size()) {
@@ -241,7 +241,7 @@ public class CommandContainerSetType implements java.io.Serializable {
      * @param vCommandContainerArray
      */
     public void setCommandContainer(
-            final com.logica.hummingbird.xtce.castor.CommandContainerSetTypeCommandContainer[] vCommandContainerArray) {
+            final org.hbird.xtce.castor.CommandContainerSetTypeCommandContainer[] vCommandContainerArray) {
         //-- copy array
         _commandContainerList.clear();
 
@@ -259,12 +259,12 @@ public class CommandContainerSetType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.CommandContainerSetType
+     * org.hbird.xtce.castor.CommandContainerSetType
      */
-    public static com.logica.hummingbird.xtce.castor.CommandContainerSetType unmarshal(
+    public static org.hbird.xtce.castor.CommandContainerSetType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.CommandContainerSetType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.CommandContainerSetType.class, reader);
+        return (org.hbird.xtce.castor.CommandContainerSetType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.CommandContainerSetType.class, reader);
     }
 
     /**

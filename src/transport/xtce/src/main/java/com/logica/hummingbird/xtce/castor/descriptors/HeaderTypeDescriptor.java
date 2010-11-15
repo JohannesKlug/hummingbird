@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.HeaderType;
+import org.hbird.xtce.castor.HeaderType;
 
 /**
  * Class HeaderTypeDescriptor.
@@ -237,7 +237,7 @@ public class HeaderTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
         }
         desc.setValidator(fieldValidator);
         //-- _validationStatus
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.HeaderTypeValidationStatusType.class, "_validationStatus", "validationStatus", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.HeaderTypeValidationStatusType.class, "_validationStatus", "validationStatus", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -252,7 +252,7 @@ public class HeaderTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
             {
                 try {
                     HeaderType target = (HeaderType) object;
-                    target.setValidationStatus( (com.logica.hummingbird.xtce.castor.types.HeaderTypeValidationStatusType) value);
+                    target.setValidationStatus( (org.hbird.xtce.castor.types.HeaderTypeValidationStatusType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -263,7 +263,7 @@ public class HeaderTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.HeaderTypeValidationStatusType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.HeaderTypeValidationStatusType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("HeaderTypeValidationStatusType");
         desc.setHandler(handler);
@@ -280,7 +280,7 @@ public class HeaderTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
         //-- initialize element descriptors
 
         //-- _authorSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.AuthorSet.class, "_authorSet", "AuthorSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.AuthorSet.class, "_authorSet", "AuthorSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -295,7 +295,7 @@ public class HeaderTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
             {
                 try {
                     HeaderType target = (HeaderType) object;
-                    target.setAuthorSet( (com.logica.hummingbird.xtce.castor.AuthorSet) value);
+                    target.setAuthorSet( (org.hbird.xtce.castor.AuthorSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -303,10 +303,10 @@ public class HeaderTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.AuthorSet();
+                return new org.hbird.xtce.castor.AuthorSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.AuthorSet");
+        desc.setSchemaType("org.hbird.xtce.castor.AuthorSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -319,7 +319,7 @@ public class HeaderTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
         }
         desc.setValidator(fieldValidator);
         //-- _noteSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.NoteSet.class, "_noteSet", "NoteSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.NoteSet.class, "_noteSet", "NoteSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -334,7 +334,7 @@ public class HeaderTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
             {
                 try {
                     HeaderType target = (HeaderType) object;
-                    target.setNoteSet( (com.logica.hummingbird.xtce.castor.NoteSet) value);
+                    target.setNoteSet( (org.hbird.xtce.castor.NoteSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -342,10 +342,10 @@ public class HeaderTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.NoteSet();
+                return new org.hbird.xtce.castor.NoteSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.NoteSet");
+        desc.setSchemaType("org.hbird.xtce.castor.NoteSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -358,7 +358,7 @@ public class HeaderTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
         }
         desc.setValidator(fieldValidator);
         //-- _historySet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.HistorySet.class, "_historySet", "HistorySet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.HistorySet.class, "_historySet", "HistorySet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -373,7 +373,7 @@ public class HeaderTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
             {
                 try {
                     HeaderType target = (HeaderType) object;
-                    target.setHistorySet( (com.logica.hummingbird.xtce.castor.HistorySet) value);
+                    target.setHistorySet( (org.hbird.xtce.castor.HistorySet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -381,10 +381,10 @@ public class HeaderTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.HistorySet();
+                return new org.hbird.xtce.castor.HistorySet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.HistorySet");
+        desc.setSchemaType("org.hbird.xtce.castor.HistorySet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -434,7 +434,7 @@ public class HeaderTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.HeaderType.class;
+        return org.hbird.xtce.castor.HeaderType.class;
     }
 
     /**

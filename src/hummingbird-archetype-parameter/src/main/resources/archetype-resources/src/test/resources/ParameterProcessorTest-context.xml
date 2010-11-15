@@ -10,7 +10,7 @@
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
 	<!-- Create your bean and any other beans you need for the tests. -->
-	<bean id="myBean" class="com.logica.hummingbird.${package}.NewProcessor.ParameterProcessor"/>	
+	<bean id="myBean" class="org.hbird.${package}.NewProcessor.ParameterProcessor"/>	
 
 	<!-- Configure a (set of) route(s). -->
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">

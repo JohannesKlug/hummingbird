@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * SpaceSystem is a collection of SpaceSystem(s) including space
@@ -18,7 +18,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class SpaceSystemType extends com.logica.hummingbird.xtce.castor.NameDescriptionType 
+public class SpaceSystemType extends org.hbird.xtce.castor.NameDescriptionType 
 implements java.io.Serializable
 {
 
@@ -30,22 +30,22 @@ implements java.io.Serializable
     /**
      * Field _header.
      */
-    private com.logica.hummingbird.xtce.castor.Header _header;
+    private org.hbird.xtce.castor.Header _header;
 
     /**
      * Field _telemetryMetaData.
      */
-    private com.logica.hummingbird.xtce.castor.TelemetryMetaData _telemetryMetaData;
+    private org.hbird.xtce.castor.TelemetryMetaData _telemetryMetaData;
 
     /**
      * Field _commandMetaData.
      */
-    private com.logica.hummingbird.xtce.castor.CommandMetaData _commandMetaData;
+    private org.hbird.xtce.castor.CommandMetaData _commandMetaData;
 
     /**
      * A service is a logical grouping of container and/or messages.
      */
-    private com.logica.hummingbird.xtce.castor.ServiceSet _serviceSet;
+    private org.hbird.xtce.castor.ServiceSet _serviceSet;
 
     /**
      * Defaults has default data encoding for ParameterTypes and
@@ -56,12 +56,12 @@ implements java.io.Serializable
      * a means to avoid repeating attributes such as ‘bit order’
      * for every Type definition.
      */
-    private com.logica.hummingbird.xtce.castor.Defaults _defaults;
+    private org.hbird.xtce.castor.Defaults _defaults;
 
     /**
      * The ROOT Element
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.SpaceSystem> _spaceSystemList;
+    private java.util.List<org.hbird.xtce.castor.SpaceSystem> _spaceSystemList;
 
 
       //----------------/
@@ -70,7 +70,7 @@ implements java.io.Serializable
 
     public SpaceSystemType() {
         super();
-        this._spaceSystemList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.SpaceSystem>();
+        this._spaceSystemList = new java.util.ArrayList<org.hbird.xtce.castor.SpaceSystem>();
     }
 
 
@@ -86,7 +86,7 @@ implements java.io.Serializable
      * given is outside the bounds of the collection
      */
     public void addSpaceSystem(
-            final com.logica.hummingbird.xtce.castor.SpaceSystem vSpaceSystem)
+            final org.hbird.xtce.castor.SpaceSystem vSpaceSystem)
     throws java.lang.IndexOutOfBoundsException {
         this._spaceSystemList.add(vSpaceSystem);
     }
@@ -101,7 +101,7 @@ implements java.io.Serializable
      */
     public void addSpaceSystem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.SpaceSystem vSpaceSystem)
+            final org.hbird.xtce.castor.SpaceSystem vSpaceSystem)
     throws java.lang.IndexOutOfBoundsException {
         this._spaceSystemList.add(index, vSpaceSystem);
     }
@@ -112,7 +112,7 @@ implements java.io.Serializable
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.SpaceSystem> enumerateSpaceSystem(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.SpaceSystem> enumerateSpaceSystem(
     ) {
         return java.util.Collections.enumeration(this._spaceSystemList);
     }
@@ -122,7 +122,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'CommandMetaData'.
      */
-    public com.logica.hummingbird.xtce.castor.CommandMetaData getCommandMetaData(
+    public org.hbird.xtce.castor.CommandMetaData getCommandMetaData(
     ) {
         return this._commandMetaData;
     }
@@ -140,7 +140,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'Defaults'.
      */
-    public com.logica.hummingbird.xtce.castor.Defaults getDefaults(
+    public org.hbird.xtce.castor.Defaults getDefaults(
     ) {
         return this._defaults;
     }
@@ -150,7 +150,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'Header'.
      */
-    public com.logica.hummingbird.xtce.castor.Header getHeader(
+    public org.hbird.xtce.castor.Header getHeader(
     ) {
         return this._header;
     }
@@ -162,7 +162,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ServiceSet'.
      */
-    public com.logica.hummingbird.xtce.castor.ServiceSet getServiceSet(
+    public org.hbird.xtce.castor.ServiceSet getServiceSet(
     ) {
         return this._serviceSet;
     }
@@ -174,10 +174,10 @@ implements java.io.Serializable
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.SpaceSystem at the given
+     * org.hbird.xtce.castor.SpaceSystem at the given
      * index
      */
-    public com.logica.hummingbird.xtce.castor.SpaceSystem getSpaceSystem(
+    public org.hbird.xtce.castor.SpaceSystem getSpaceSystem(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -185,7 +185,7 @@ implements java.io.Serializable
             throw new IndexOutOfBoundsException("getSpaceSystem: Index value '" + index + "' not in range [0.." + (this._spaceSystemList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.SpaceSystem) _spaceSystemList.get(index);
+        return (org.hbird.xtce.castor.SpaceSystem) _spaceSystemList.get(index);
     }
 
     /**
@@ -197,10 +197,10 @@ implements java.io.Serializable
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.SpaceSystem[] getSpaceSystem(
+    public org.hbird.xtce.castor.SpaceSystem[] getSpaceSystem(
     ) {
-        com.logica.hummingbird.xtce.castor.SpaceSystem[] array = new com.logica.hummingbird.xtce.castor.SpaceSystem[0];
-        return (com.logica.hummingbird.xtce.castor.SpaceSystem[]) this._spaceSystemList.toArray(array);
+        org.hbird.xtce.castor.SpaceSystem[] array = new org.hbird.xtce.castor.SpaceSystem[0];
+        return (org.hbird.xtce.castor.SpaceSystem[]) this._spaceSystemList.toArray(array);
     }
 
     /**
@@ -218,7 +218,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'TelemetryMetaData'.
      */
-    public com.logica.hummingbird.xtce.castor.TelemetryMetaData getTelemetryMetaData(
+    public org.hbird.xtce.castor.TelemetryMetaData getTelemetryMetaData(
     ) {
         return this._telemetryMetaData;
     }
@@ -244,7 +244,7 @@ implements java.io.Serializable
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.SpaceSystem> iterateSpaceSystem(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.SpaceSystem> iterateSpaceSystem(
     ) {
         return this._spaceSystemList.iterator();
     }
@@ -295,7 +295,7 @@ implements java.io.Serializable
      * @return true if the object was removed from the collection.
      */
     public boolean removeSpaceSystem(
-            final com.logica.hummingbird.xtce.castor.SpaceSystem vSpaceSystem) {
+            final org.hbird.xtce.castor.SpaceSystem vSpaceSystem) {
         boolean removed = _spaceSystemList.remove(vSpaceSystem);
         return removed;
     }
@@ -306,10 +306,10 @@ implements java.io.Serializable
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.SpaceSystem removeSpaceSystemAt(
+    public org.hbird.xtce.castor.SpaceSystem removeSpaceSystemAt(
             final int index) {
         java.lang.Object obj = this._spaceSystemList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.SpaceSystem) obj;
+        return (org.hbird.xtce.castor.SpaceSystem) obj;
     }
 
     /**
@@ -318,7 +318,7 @@ implements java.io.Serializable
      * @param commandMetaData the value of field 'commandMetaData'.
      */
     public void setCommandMetaData(
-            final com.logica.hummingbird.xtce.castor.CommandMetaData commandMetaData) {
+            final org.hbird.xtce.castor.CommandMetaData commandMetaData) {
         this._commandMetaData = commandMetaData;
     }
 
@@ -336,7 +336,7 @@ implements java.io.Serializable
      * @param defaults the value of field 'defaults'.
      */
     public void setDefaults(
-            final com.logica.hummingbird.xtce.castor.Defaults defaults) {
+            final org.hbird.xtce.castor.Defaults defaults) {
         this._defaults = defaults;
     }
 
@@ -346,7 +346,7 @@ implements java.io.Serializable
      * @param header the value of field 'header'.
      */
     public void setHeader(
-            final com.logica.hummingbird.xtce.castor.Header header) {
+            final org.hbird.xtce.castor.Header header) {
         this._header = header;
     }
 
@@ -358,7 +358,7 @@ implements java.io.Serializable
      * @param serviceSet the value of field 'serviceSet'.
      */
     public void setServiceSet(
-            final com.logica.hummingbird.xtce.castor.ServiceSet serviceSet) {
+            final org.hbird.xtce.castor.ServiceSet serviceSet) {
         this._serviceSet = serviceSet;
     }
 
@@ -372,7 +372,7 @@ implements java.io.Serializable
      */
     public void setSpaceSystem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.SpaceSystem vSpaceSystem)
+            final org.hbird.xtce.castor.SpaceSystem vSpaceSystem)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._spaceSystemList.size()) {
@@ -388,7 +388,7 @@ implements java.io.Serializable
      * @param vSpaceSystemArray
      */
     public void setSpaceSystem(
-            final com.logica.hummingbird.xtce.castor.SpaceSystem[] vSpaceSystemArray) {
+            final org.hbird.xtce.castor.SpaceSystem[] vSpaceSystemArray) {
         //-- copy array
         _spaceSystemList.clear();
 
@@ -404,7 +404,7 @@ implements java.io.Serializable
      * 'telemetryMetaData'.
      */
     public void setTelemetryMetaData(
-            final com.logica.hummingbird.xtce.castor.TelemetryMetaData telemetryMetaData) {
+            final org.hbird.xtce.castor.TelemetryMetaData telemetryMetaData) {
         this._telemetryMetaData = telemetryMetaData;
     }
 
@@ -417,12 +417,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.SpaceSystemType
+     * org.hbird.xtce.castor.SpaceSystemType
      */
-    public static com.logica.hummingbird.xtce.castor.SpaceSystemType unmarshal(
+    public static org.hbird.xtce.castor.SpaceSystemType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.SpaceSystemType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.SpaceSystemType.class, reader);
+        return (org.hbird.xtce.castor.SpaceSystemType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.SpaceSystemType.class, reader);
     }
 
     /**

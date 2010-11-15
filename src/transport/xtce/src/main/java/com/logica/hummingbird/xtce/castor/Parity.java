@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Bit position starts with 'zero'.
@@ -23,7 +23,7 @@ public class Parity implements java.io.Serializable {
     /**
      * Field _type.
      */
-    private com.logica.hummingbird.xtce.castor.types.ParityTypeType _type;
+    private org.hbird.xtce.castor.types.ParityTypeType _type;
 
     /**
      * Field _bitsFromReference.
@@ -38,7 +38,7 @@ public class Parity implements java.io.Serializable {
     /**
      * Field _reference.
      */
-    private com.logica.hummingbird.xtce.castor.types.ParityReferenceType _reference = com.logica.hummingbird.xtce.castor.types.ParityReferenceType.fromValue("start");
+    private org.hbird.xtce.castor.types.ParityReferenceType _reference = org.hbird.xtce.castor.types.ParityReferenceType.fromValue("start");
 
 
       //----------------/
@@ -47,7 +47,7 @@ public class Parity implements java.io.Serializable {
 
     public Parity() {
         super();
-        setReference(com.logica.hummingbird.xtce.castor.types.ParityReferenceType.fromValue("start"));
+        setReference(org.hbird.xtce.castor.types.ParityReferenceType.fromValue("start"));
     }
 
 
@@ -77,7 +77,7 @@ public class Parity implements java.io.Serializable {
      * 
      * @return the value of field 'Reference'.
      */
-    public com.logica.hummingbird.xtce.castor.types.ParityReferenceType getReference(
+    public org.hbird.xtce.castor.types.ParityReferenceType getReference(
     ) {
         return this._reference;
     }
@@ -87,7 +87,7 @@ public class Parity implements java.io.Serializable {
      * 
      * @return the value of field 'Type'.
      */
-    public com.logica.hummingbird.xtce.castor.types.ParityTypeType getType(
+    public org.hbird.xtce.castor.types.ParityTypeType getType(
     ) {
         return this._type;
     }
@@ -167,7 +167,7 @@ public class Parity implements java.io.Serializable {
      * @param reference the value of field 'reference'.
      */
     public void setReference(
-            final com.logica.hummingbird.xtce.castor.types.ParityReferenceType reference) {
+            final org.hbird.xtce.castor.types.ParityReferenceType reference) {
         this._reference = reference;
     }
 
@@ -177,7 +177,7 @@ public class Parity implements java.io.Serializable {
      * @param type the value of field 'type'.
      */
     public void setType(
-            final com.logica.hummingbird.xtce.castor.types.ParityTypeType type) {
+            final org.hbird.xtce.castor.types.ParityTypeType type) {
         this._type = type;
     }
 
@@ -190,12 +190,12 @@ public class Parity implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.Parity
+     * org.hbird.xtce.castor.Parity
      */
-    public static com.logica.hummingbird.xtce.castor.Parity unmarshal(
+    public static org.hbird.xtce.castor.Parity unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.Parity) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.Parity.class, reader);
+        return (org.hbird.xtce.castor.Parity) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.Parity.class, reader);
     }
 
     /**

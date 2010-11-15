@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class TriggerTypeItem.
@@ -31,7 +31,7 @@ public class TriggerTypeItem implements java.io.Serializable {
      * parameter that when it changes, will cause this algorithm to
      * be executed.
      */
-    private com.logica.hummingbird.xtce.castor.TriggerTypeParameterRef _parameterRef;
+    private org.hbird.xtce.castor.TriggerTypeParameterRef _parameterRef;
 
     /**
      * Field _triggerFrequency.
@@ -74,7 +74,7 @@ public class TriggerTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'ParameterRef'.
      */
-    public com.logica.hummingbird.xtce.castor.TriggerTypeParameterRef getParameterRef(
+    public org.hbird.xtce.castor.TriggerTypeParameterRef getParameterRef(
     ) {
         return this._parameterRef;
     }
@@ -100,7 +100,7 @@ public class TriggerTypeItem implements java.io.Serializable {
      * @param parameterRef the value of field 'parameterRef'.
      */
     public void setParameterRef(
-            final com.logica.hummingbird.xtce.castor.TriggerTypeParameterRef parameterRef) {
+            final org.hbird.xtce.castor.TriggerTypeParameterRef parameterRef) {
         this._parameterRef = parameterRef;
         this._choiceValue = parameterRef;
     }

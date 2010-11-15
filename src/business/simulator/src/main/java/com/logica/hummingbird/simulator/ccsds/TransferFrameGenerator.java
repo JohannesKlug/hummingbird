@@ -1,4 +1,4 @@
-package com.logica.hummingbird.simulator.ccsds;
+package org.hbird.simulator.ccsds;
 
 import java.util.ArrayList;
 import java.util.List;

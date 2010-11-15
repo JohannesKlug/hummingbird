@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * After serching for the frame sync marker for some number of
@@ -36,7 +36,7 @@ public class AutoInvert implements java.io.Serializable {
     /**
      * Field _invertAlgorithm.
      */
-    private com.logica.hummingbird.xtce.castor.InvertAlgorithm _invertAlgorithm;
+    private org.hbird.xtce.castor.InvertAlgorithm _invertAlgorithm;
 
 
       //----------------/
@@ -74,7 +74,7 @@ public class AutoInvert implements java.io.Serializable {
      * 
      * @return the value of field 'InvertAlgorithm'.
      */
-    public com.logica.hummingbird.xtce.castor.InvertAlgorithm getInvertAlgorithm(
+    public org.hbird.xtce.castor.InvertAlgorithm getInvertAlgorithm(
     ) {
         return this._invertAlgorithm;
     }
@@ -155,7 +155,7 @@ public class AutoInvert implements java.io.Serializable {
      * @param invertAlgorithm the value of field 'invertAlgorithm'.
      */
     public void setInvertAlgorithm(
-            final com.logica.hummingbird.xtce.castor.InvertAlgorithm invertAlgorithm) {
+            final org.hbird.xtce.castor.InvertAlgorithm invertAlgorithm) {
         this._invertAlgorithm = invertAlgorithm;
     }
 
@@ -168,12 +168,12 @@ public class AutoInvert implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.AutoInvert
+     * org.hbird.xtce.castor.AutoInvert
      */
-    public static com.logica.hummingbird.xtce.castor.AutoInvert unmarshal(
+    public static org.hbird.xtce.castor.AutoInvert unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.AutoInvert) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.AutoInvert.class, reader);
+        return (org.hbird.xtce.castor.AutoInvert) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.AutoInvert.class, reader);
     }
 
     /**

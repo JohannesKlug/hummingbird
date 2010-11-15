@@ -3,11 +3,11 @@
   
   	<parent>
 		<artifactId>hummingbird</artifactId>
-		<groupId>com.logica.hummingbird</groupId>
+		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<groupId>com.logica.hummingbird</groupId>	
+	<groupId>org.hbird</groupId>	
 	<artifactId>command-chain</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -32,10 +32,10 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							com.logica.hummingbird.validation							
+							org.hbird.validation							
 						</Export-Package>
 						<Private-Package>
-							com.logica.hummingbird,
+							org.hbird,
 							org.slf4j.*
 						</Private-Package>
 					</instructions>
@@ -73,7 +73,7 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
+			<groupId>org.hbird</groupId>
 			<artifactId>jms-helper</artifactId>
 			<version>0.0.2-SNAPSHOT</version>
 		</dependency>

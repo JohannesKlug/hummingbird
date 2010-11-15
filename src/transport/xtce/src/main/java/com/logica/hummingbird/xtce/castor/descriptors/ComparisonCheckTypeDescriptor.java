@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ComparisonCheckType;
+import org.hbird.xtce.castor.ComparisonCheckType;
 
 /**
  * Class ComparisonCheckTypeDescriptor.
@@ -71,7 +71,7 @@ public class ComparisonCheckTypeDescriptor extends org.exolab.castor.xml.util.XM
         //-- initialize element descriptors
 
         //-- _parameterInstanceRef
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ParameterInstanceRef.class, "_parameterInstanceRef", "ParameterInstanceRef", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ParameterInstanceRef.class, "_parameterInstanceRef", "ParameterInstanceRef", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class ComparisonCheckTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     ComparisonCheckType target = (ComparisonCheckType) object;
-                    target.setParameterInstanceRef( (com.logica.hummingbird.xtce.castor.ParameterInstanceRef) value);
+                    target.setParameterInstanceRef( (org.hbird.xtce.castor.ParameterInstanceRef) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class ComparisonCheckTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ParameterInstanceRef();
+                return new org.hbird.xtce.castor.ParameterInstanceRef();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ParameterInstanceRef");
+        desc.setSchemaType("org.hbird.xtce.castor.ParameterInstanceRef");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -112,7 +112,7 @@ public class ComparisonCheckTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _comparisonOperator
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.ComparisonOperatorsType.class, "_comparisonOperator", "ComparisonOperator", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.ComparisonOperatorsType.class, "_comparisonOperator", "ComparisonOperator", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -127,7 +127,7 @@ public class ComparisonCheckTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     ComparisonCheckType target = (ComparisonCheckType) object;
-                    target.setComparisonOperator( (com.logica.hummingbird.xtce.castor.types.ComparisonOperatorsType) value);
+                    target.setComparisonOperator( (org.hbird.xtce.castor.types.ComparisonOperatorsType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -138,7 +138,7 @@ public class ComparisonCheckTypeDescriptor extends org.exolab.castor.xml.util.XM
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.ComparisonOperatorsType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.ComparisonOperatorsType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("ComparisonOperatorsType");
         desc.setHandler(handler);
@@ -155,7 +155,7 @@ public class ComparisonCheckTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _comparisonCheckTypeChoice
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ComparisonCheckTypeChoice.class, "_comparisonCheckTypeChoice", "-error-if-this-is-used-", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ComparisonCheckTypeChoice.class, "_comparisonCheckTypeChoice", "-error-if-this-is-used-", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -170,7 +170,7 @@ public class ComparisonCheckTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     ComparisonCheckType target = (ComparisonCheckType) object;
-                    target.setComparisonCheckTypeChoice( (com.logica.hummingbird.xtce.castor.ComparisonCheckTypeChoice) value);
+                    target.setComparisonCheckTypeChoice( (org.hbird.xtce.castor.ComparisonCheckTypeChoice) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -178,13 +178,13 @@ public class ComparisonCheckTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ComparisonCheckTypeChoice();
+                return new org.hbird.xtce.castor.ComparisonCheckTypeChoice();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ComparisonCheckTypeChoice");
+        desc.setSchemaType("org.hbird.xtce.castor.ComparisonCheckTypeChoice");
         desc.setHandler(handler);
         desc.setContainer(true);
-        desc.setClassDescriptor(new com.logica.hummingbird.xtce.castor.descriptors.ComparisonCheckTypeChoiceDescriptor());
+        desc.setClassDescriptor(new org.hbird.xtce.castor.descriptors.ComparisonCheckTypeChoiceDescriptor());
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
         desc.setMultivalued(false);
@@ -235,7 +235,7 @@ public class ComparisonCheckTypeDescriptor extends org.exolab.castor.xml.util.XM
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ComparisonCheckType.class;
+        return org.hbird.xtce.castor.ComparisonCheckType.class;
     }
 
     /**

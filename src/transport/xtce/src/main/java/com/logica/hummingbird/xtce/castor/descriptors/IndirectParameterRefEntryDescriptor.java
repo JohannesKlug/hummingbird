@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.IndirectParameterRefEntry;
+import org.hbird.xtce.castor.IndirectParameterRefEntry;
 
 /**
  * Class IndirectParameterRefEntryDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class IndirectParameterRefEntryDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.IndirectParameterRefEntryTypeDescriptor {
+public class IndirectParameterRefEntryDescriptor extends org.hbird.xtce.castor.descriptors.IndirectParameterRefEntryTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class IndirectParameterRefEntryDescriptor extends com.logica.hummingbird.
 
     public IndirectParameterRefEntryDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.IndirectParameterRefEntryTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.IndirectParameterRefEntryTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "IndirectParameterRefEntry";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class IndirectParameterRefEntryDescriptor extends com.logica.hummingbird.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.IndirectParameterRefEntry.class;
+        return org.hbird.xtce.castor.IndirectParameterRefEntry.class;
     }
 
     /**

@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ToString;
+import org.hbird.xtce.castor.ToString;
 
 /**
  * Class ToStringDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ToStringDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.NumberToStringTypeDescriptor {
+public class ToStringDescriptor extends org.hbird.xtce.castor.descriptors.NumberToStringTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ToStringDescriptor extends com.logica.hummingbird.xtce.castor.descr
 
     public ToStringDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.NumberToStringTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.NumberToStringTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ToString";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class ToStringDescriptor extends com.logica.hummingbird.xtce.castor.descr
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ToString.class;
+        return org.hbird.xtce.castor.ToString.class;
     }
 
     /**

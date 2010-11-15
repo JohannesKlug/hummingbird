@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.CustomAlgorithm;
+import org.hbird.xtce.castor.CustomAlgorithm;
 
 /**
  * Class CustomAlgorithmDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class CustomAlgorithmDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor {
+public class CustomAlgorithmDescriptor extends org.hbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class CustomAlgorithmDescriptor extends com.logica.hummingbird.xtce.casto
 
     public CustomAlgorithmDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "CustomAlgorithm";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class CustomAlgorithmDescriptor extends com.logica.hummingbird.xtce.casto
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.CustomAlgorithm.class;
+        return org.hbird.xtce.castor.CustomAlgorithm.class;
     }
 
     /**

@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ValueEnumerationType;
+import org.hbird.xtce.castor.ValueEnumerationType;
 
 /**
  * Class ValueEnumerationTypeDescriptor.
@@ -195,7 +195,7 @@ public class ValueEnumerationTypeDescriptor extends org.exolab.castor.xml.util.X
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ValueEnumerationType.class;
+        return org.hbird.xtce.castor.ValueEnumerationType.class;
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.logica.hummingbird.simulator.waveforms;
+package org.hbird.simulator.waveforms;
 
 import static org.junit.Assert.*;
 

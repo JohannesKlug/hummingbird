@@ -1,14 +1,14 @@
-package com.logica.hummingbird.parameterArchiver;
+package org.hbird.parameterArchiver;
 
 import javax.sql.DataSource;
 
 import org.apache.camel.Message;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.AbstractFloatBehaviour;
-import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.AbstractIntegerBehaviour;
+import org.hbird.spacesystemmodel.ContainerFactory;
+import org.hbird.spacesystemmodel.parameters.ParameterContainer;
+import org.hbird.spacesystemmodel.parameters.behaviours.AbstractFloatBehaviour;
+import org.hbird.spacesystemmodel.parameters.behaviours.AbstractIntegerBehaviour;
 
 public class ParameterArchiver {
 

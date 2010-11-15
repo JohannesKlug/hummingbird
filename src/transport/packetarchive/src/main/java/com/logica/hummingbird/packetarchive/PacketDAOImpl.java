@@ -1,9 +1,9 @@
-package com.logica.hummingbird.packetarchive;
+package org.hbird.packetarchive;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.logica.hummingbird.packetarchive.Packet;
-import com.logica.hummingbird.packetarchive.PacketExample;
-import com.logica.hummingbird.packetarchive.PacketKey;
+import org.hbird.packetarchive.Packet;
+import org.hbird.packetarchive.PacketExample;
+import org.hbird.packetarchive.PacketKey;
 
 import java.sql.SQLException;
 import java.util.List;

@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.AlarmRangesType;
+import org.hbird.xtce.castor.AlarmRangesType;
 
 /**
  * Class AlarmRangesTypeDescriptor.
@@ -117,7 +117,7 @@ public class AlarmRangesTypeDescriptor extends org.exolab.castor.xml.util.XMLCla
         //-- initialize element descriptors
 
         //-- _watchRange
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.WatchRange.class, "_watchRange", "WatchRange", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.WatchRange.class, "_watchRange", "WatchRange", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -132,7 +132,7 @@ public class AlarmRangesTypeDescriptor extends org.exolab.castor.xml.util.XMLCla
             {
                 try {
                     AlarmRangesType target = (AlarmRangesType) object;
-                    target.setWatchRange( (com.logica.hummingbird.xtce.castor.WatchRange) value);
+                    target.setWatchRange( (org.hbird.xtce.castor.WatchRange) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -140,10 +140,10 @@ public class AlarmRangesTypeDescriptor extends org.exolab.castor.xml.util.XMLCla
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.WatchRange();
+                return new org.hbird.xtce.castor.WatchRange();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.WatchRange");
+        desc.setSchemaType("org.hbird.xtce.castor.WatchRange");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -156,7 +156,7 @@ public class AlarmRangesTypeDescriptor extends org.exolab.castor.xml.util.XMLCla
         }
         desc.setValidator(fieldValidator);
         //-- _warningRange
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.WarningRange.class, "_warningRange", "WarningRange", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.WarningRange.class, "_warningRange", "WarningRange", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -171,7 +171,7 @@ public class AlarmRangesTypeDescriptor extends org.exolab.castor.xml.util.XMLCla
             {
                 try {
                     AlarmRangesType target = (AlarmRangesType) object;
-                    target.setWarningRange( (com.logica.hummingbird.xtce.castor.WarningRange) value);
+                    target.setWarningRange( (org.hbird.xtce.castor.WarningRange) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -179,10 +179,10 @@ public class AlarmRangesTypeDescriptor extends org.exolab.castor.xml.util.XMLCla
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.WarningRange();
+                return new org.hbird.xtce.castor.WarningRange();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.WarningRange");
+        desc.setSchemaType("org.hbird.xtce.castor.WarningRange");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -195,7 +195,7 @@ public class AlarmRangesTypeDescriptor extends org.exolab.castor.xml.util.XMLCla
         }
         desc.setValidator(fieldValidator);
         //-- _distressRange
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.DistressRange.class, "_distressRange", "DistressRange", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.DistressRange.class, "_distressRange", "DistressRange", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -210,7 +210,7 @@ public class AlarmRangesTypeDescriptor extends org.exolab.castor.xml.util.XMLCla
             {
                 try {
                     AlarmRangesType target = (AlarmRangesType) object;
-                    target.setDistressRange( (com.logica.hummingbird.xtce.castor.DistressRange) value);
+                    target.setDistressRange( (org.hbird.xtce.castor.DistressRange) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -218,10 +218,10 @@ public class AlarmRangesTypeDescriptor extends org.exolab.castor.xml.util.XMLCla
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.DistressRange();
+                return new org.hbird.xtce.castor.DistressRange();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.DistressRange");
+        desc.setSchemaType("org.hbird.xtce.castor.DistressRange");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -234,7 +234,7 @@ public class AlarmRangesTypeDescriptor extends org.exolab.castor.xml.util.XMLCla
         }
         desc.setValidator(fieldValidator);
         //-- _criticalRange
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.CriticalRange.class, "_criticalRange", "CriticalRange", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.CriticalRange.class, "_criticalRange", "CriticalRange", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -249,7 +249,7 @@ public class AlarmRangesTypeDescriptor extends org.exolab.castor.xml.util.XMLCla
             {
                 try {
                     AlarmRangesType target = (AlarmRangesType) object;
-                    target.setCriticalRange( (com.logica.hummingbird.xtce.castor.CriticalRange) value);
+                    target.setCriticalRange( (org.hbird.xtce.castor.CriticalRange) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -257,10 +257,10 @@ public class AlarmRangesTypeDescriptor extends org.exolab.castor.xml.util.XMLCla
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.CriticalRange();
+                return new org.hbird.xtce.castor.CriticalRange();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.CriticalRange");
+        desc.setSchemaType("org.hbird.xtce.castor.CriticalRange");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -273,7 +273,7 @@ public class AlarmRangesTypeDescriptor extends org.exolab.castor.xml.util.XMLCla
         }
         desc.setValidator(fieldValidator);
         //-- _severeRange
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.SevereRange.class, "_severeRange", "SevereRange", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.SevereRange.class, "_severeRange", "SevereRange", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -288,7 +288,7 @@ public class AlarmRangesTypeDescriptor extends org.exolab.castor.xml.util.XMLCla
             {
                 try {
                     AlarmRangesType target = (AlarmRangesType) object;
-                    target.setSevereRange( (com.logica.hummingbird.xtce.castor.SevereRange) value);
+                    target.setSevereRange( (org.hbird.xtce.castor.SevereRange) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -296,10 +296,10 @@ public class AlarmRangesTypeDescriptor extends org.exolab.castor.xml.util.XMLCla
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.SevereRange();
+                return new org.hbird.xtce.castor.SevereRange();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.SevereRange");
+        desc.setSchemaType("org.hbird.xtce.castor.SevereRange");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -349,7 +349,7 @@ public class AlarmRangesTypeDescriptor extends org.exolab.castor.xml.util.XMLCla
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.AlarmRangesType.class;
+        return org.hbird.xtce.castor.AlarmRangesType.class;
     }
 
     /**

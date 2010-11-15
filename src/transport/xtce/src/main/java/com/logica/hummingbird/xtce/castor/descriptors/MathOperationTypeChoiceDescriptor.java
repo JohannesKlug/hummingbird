@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.MathOperationTypeChoice;
+import org.hbird.xtce.castor.MathOperationTypeChoice;
 
 /**
  * Class MathOperationTypeChoiceDescriptor.
@@ -70,7 +70,7 @@ public class MathOperationTypeChoiceDescriptor extends org.exolab.castor.xml.uti
         //-- initialize element descriptors
 
         //-- _parameterInstanceRef
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ParameterInstanceRef.class, "_parameterInstanceRef", "ParameterInstanceRef", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ParameterInstanceRef.class, "_parameterInstanceRef", "ParameterInstanceRef", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -85,7 +85,7 @@ public class MathOperationTypeChoiceDescriptor extends org.exolab.castor.xml.uti
             {
                 try {
                     MathOperationTypeChoice target = (MathOperationTypeChoice) object;
-                    target.setParameterInstanceRef( (com.logica.hummingbird.xtce.castor.ParameterInstanceRef) value);
+                    target.setParameterInstanceRef( (org.hbird.xtce.castor.ParameterInstanceRef) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -93,10 +93,10 @@ public class MathOperationTypeChoiceDescriptor extends org.exolab.castor.xml.uti
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ParameterInstanceRef();
+                return new org.hbird.xtce.castor.ParameterInstanceRef();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ParameterInstanceRef");
+        desc.setSchemaType("org.hbird.xtce.castor.ParameterInstanceRef");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -194,7 +194,7 @@ public class MathOperationTypeChoiceDescriptor extends org.exolab.castor.xml.uti
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.MathOperationTypeChoice.class;
+        return org.hbird.xtce.castor.MathOperationTypeChoice.class;
     }
 
     /**

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A list of boolean comparisons, or boolean groups that are
@@ -25,7 +25,7 @@ public class ORedConditionsType implements java.io.Serializable {
     /**
      * Field _items.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem> _items;
+    private java.util.List<org.hbird.xtce.castor.ORedConditionsTypeItem> _items;
 
 
       //----------------/
@@ -34,7 +34,7 @@ public class ORedConditionsType implements java.io.Serializable {
 
     public ORedConditionsType() {
         super();
-        this._items = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem>();
+        this._items = new java.util.ArrayList<org.hbird.xtce.castor.ORedConditionsTypeItem>();
     }
 
 
@@ -50,7 +50,7 @@ public class ORedConditionsType implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addORedConditionsTypeItem(
-            final com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem vORedConditionsTypeItem)
+            final org.hbird.xtce.castor.ORedConditionsTypeItem vORedConditionsTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         this._items.add(vORedConditionsTypeItem);
     }
@@ -65,7 +65,7 @@ public class ORedConditionsType implements java.io.Serializable {
      */
     public void addORedConditionsTypeItem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem vORedConditionsTypeItem)
+            final org.hbird.xtce.castor.ORedConditionsTypeItem vORedConditionsTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         this._items.add(index, vORedConditionsTypeItem);
     }
@@ -76,7 +76,7 @@ public class ORedConditionsType implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem> enumerateORedConditionsTypeItem(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.ORedConditionsTypeItem> enumerateORedConditionsTypeItem(
     ) {
         return java.util.Collections.enumeration(this._items);
     }
@@ -88,10 +88,10 @@ public class ORedConditionsType implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem at
+     * org.hbird.xtce.castor.ORedConditionsTypeItem at
      * the given index
      */
-    public com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem getORedConditionsTypeItem(
+    public org.hbird.xtce.castor.ORedConditionsTypeItem getORedConditionsTypeItem(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -99,7 +99,7 @@ public class ORedConditionsType implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getORedConditionsTypeItem: Index value '" + index + "' not in range [0.." + (this._items.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem) _items.get(index);
+        return (org.hbird.xtce.castor.ORedConditionsTypeItem) _items.get(index);
     }
 
     /**
@@ -112,10 +112,10 @@ public class ORedConditionsType implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem[] getORedConditionsTypeItem(
+    public org.hbird.xtce.castor.ORedConditionsTypeItem[] getORedConditionsTypeItem(
     ) {
-        com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem[] array = new com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem[0];
-        return (com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem[]) this._items.toArray(array);
+        org.hbird.xtce.castor.ORedConditionsTypeItem[] array = new org.hbird.xtce.castor.ORedConditionsTypeItem[0];
+        return (org.hbird.xtce.castor.ORedConditionsTypeItem[]) this._items.toArray(array);
     }
 
     /**
@@ -149,7 +149,7 @@ public class ORedConditionsType implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem> iterateORedConditionsTypeItem(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.ORedConditionsTypeItem> iterateORedConditionsTypeItem(
     ) {
         return this._items.iterator();
     }
@@ -200,7 +200,7 @@ public class ORedConditionsType implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeORedConditionsTypeItem(
-            final com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem vORedConditionsTypeItem) {
+            final org.hbird.xtce.castor.ORedConditionsTypeItem vORedConditionsTypeItem) {
         boolean removed = _items.remove(vORedConditionsTypeItem);
         return removed;
     }
@@ -211,10 +211,10 @@ public class ORedConditionsType implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem removeORedConditionsTypeItemAt(
+    public org.hbird.xtce.castor.ORedConditionsTypeItem removeORedConditionsTypeItemAt(
             final int index) {
         java.lang.Object obj = this._items.remove(index);
-        return (com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem) obj;
+        return (org.hbird.xtce.castor.ORedConditionsTypeItem) obj;
     }
 
     /**
@@ -227,7 +227,7 @@ public class ORedConditionsType implements java.io.Serializable {
      */
     public void setORedConditionsTypeItem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem vORedConditionsTypeItem)
+            final org.hbird.xtce.castor.ORedConditionsTypeItem vORedConditionsTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._items.size()) {
@@ -243,7 +243,7 @@ public class ORedConditionsType implements java.io.Serializable {
      * @param vORedConditionsTypeItemArray
      */
     public void setORedConditionsTypeItem(
-            final com.logica.hummingbird.xtce.castor.ORedConditionsTypeItem[] vORedConditionsTypeItemArray) {
+            final org.hbird.xtce.castor.ORedConditionsTypeItem[] vORedConditionsTypeItemArray) {
         //-- copy array
         _items.clear();
 
@@ -261,12 +261,12 @@ public class ORedConditionsType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ORedConditionsType
+     * org.hbird.xtce.castor.ORedConditionsType
      */
-    public static com.logica.hummingbird.xtce.castor.ORedConditionsType unmarshal(
+    public static org.hbird.xtce.castor.ORedConditionsType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ORedConditionsType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ORedConditionsType.class, reader);
+        return (org.hbird.xtce.castor.ORedConditionsType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ORedConditionsType.class, reader);
     }
 
     /**

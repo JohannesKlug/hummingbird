@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * 
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class Parameter extends com.logica.hummingbird.xtce.castor.NameDescriptionType 
+public class Parameter extends org.hbird.xtce.castor.NameDescriptionType 
 implements java.io.Serializable
 {
 
@@ -30,7 +30,7 @@ implements java.io.Serializable
     /**
      * Field _parameterProperties.
      */
-    private com.logica.hummingbird.xtce.castor.ParameterProperties _parameterProperties;
+    private org.hbird.xtce.castor.ParameterProperties _parameterProperties;
 
 
       //----------------/
@@ -51,7 +51,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ParameterProperties'.
      */
-    public com.logica.hummingbird.xtce.castor.ParameterProperties getParameterProperties(
+    public org.hbird.xtce.castor.ParameterProperties getParameterProperties(
     ) {
         return this._parameterProperties;
     }
@@ -120,7 +120,7 @@ implements java.io.Serializable
      * 'parameterProperties'.
      */
     public void setParameterProperties(
-            final com.logica.hummingbird.xtce.castor.ParameterProperties parameterProperties) {
+            final org.hbird.xtce.castor.ParameterProperties parameterProperties) {
         this._parameterProperties = parameterProperties;
     }
 
@@ -143,12 +143,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.Parameter
+     * org.hbird.xtce.castor.Parameter
      */
-    public static com.logica.hummingbird.xtce.castor.Parameter unmarshal(
+    public static org.hbird.xtce.castor.Parameter unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.Parameter) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.Parameter.class, reader);
+        return (org.hbird.xtce.castor.Parameter) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.Parameter.class, reader);
     }
 
     /**

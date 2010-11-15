@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.logica.hummingbird.packetbroker;
+package org.hbird.packetbroker;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,14 +15,14 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.Container;
-import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.spacesystemmodel.testsupport.MockParameterContainerModel;
-import com.logica.hummingbird.telemetry.HummingbirdPacket;
-import com.logica.hummingbird.telemetry.HummingbirdParameter;
-import com.logica.hummingbird.util.BitSetUtility;
-import com.logica.hummingbird.util.exceptions.BitSetOperationException;
+import org.hbird.spacesystemmodel.Container;
+import org.hbird.spacesystemmodel.ContainerFactory;
+import org.hbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.spacesystemmodel.testsupport.MockParameterContainerModel;
+import org.hbird.telemetry.HummingbirdPacket;
+import org.hbird.telemetry.HummingbirdParameter;
+import org.hbird.util.BitSetUtility;
+import org.hbird.util.exceptions.BitSetOperationException;
 
 /**
  * @author Mark Doyle
@@ -83,7 +83,7 @@ public class HummingbirdPacketBrokerTest {
 
 	/**
 	 * Test method for
-	 * {@link com.logica.hummingbird.framebroker.PacketBrokerImpl#unmarshall(java.lang.String, java.util.BitSet)}.
+	 * {@link org.hbird.framebroker.PacketBrokerImpl#unmarshall(java.lang.String, java.util.BitSet)}.
 	 * 
 	 * @throws UnknownContainerNameException
 	 * @throws BitSetOperationException

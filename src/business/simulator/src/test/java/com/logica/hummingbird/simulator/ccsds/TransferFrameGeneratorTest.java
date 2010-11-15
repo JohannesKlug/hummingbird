@@ -1,4 +1,4 @@
-package com.logica.hummingbird.simulator.ccsds;
+package org.hbird.simulator.ccsds;
 
 import static org.junit.Assert.assertEquals;
 

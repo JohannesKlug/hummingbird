@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A simple element that provides for simple, but common error
@@ -29,13 +29,13 @@ public class ErrorDetectCorrectType implements java.io.Serializable {
     /**
      * Bit position starts with 'zero'.
      */
-    private com.logica.hummingbird.xtce.castor.Parity _parity;
+    private org.hbird.xtce.castor.Parity _parity;
 
     /**
      * Cyclic Redundancy Check definition. Legal values for
      * coefficient's are 0 or 1. Exponents must be integer values.
      */
-    private com.logica.hummingbird.xtce.castor.CRC _CRC;
+    private org.hbird.xtce.castor.CRC _CRC;
 
 
       //----------------/
@@ -59,7 +59,7 @@ public class ErrorDetectCorrectType implements java.io.Serializable {
      * 
      * @return the value of field 'CRC'.
      */
-    public com.logica.hummingbird.xtce.castor.CRC getCRC(
+    public org.hbird.xtce.castor.CRC getCRC(
     ) {
         return this._CRC;
     }
@@ -82,7 +82,7 @@ public class ErrorDetectCorrectType implements java.io.Serializable {
      * 
      * @return the value of field 'Parity'.
      */
-    public com.logica.hummingbird.xtce.castor.Parity getParity(
+    public org.hbird.xtce.castor.Parity getParity(
     ) {
         return this._parity;
     }
@@ -143,7 +143,7 @@ public class ErrorDetectCorrectType implements java.io.Serializable {
      * @param CRC the value of field 'CRC'.
      */
     public void setCRC(
-            final com.logica.hummingbird.xtce.castor.CRC CRC) {
+            final org.hbird.xtce.castor.CRC CRC) {
         this._CRC = CRC;
         this._choiceValue = CRC;
     }
@@ -155,7 +155,7 @@ public class ErrorDetectCorrectType implements java.io.Serializable {
      * @param parity the value of field 'parity'.
      */
     public void setParity(
-            final com.logica.hummingbird.xtce.castor.Parity parity) {
+            final org.hbird.xtce.castor.Parity parity) {
         this._parity = parity;
         this._choiceValue = parity;
     }
@@ -169,12 +169,12 @@ public class ErrorDetectCorrectType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ErrorDetectCorrectType
+     * org.hbird.xtce.castor.ErrorDetectCorrectType
      */
-    public static com.logica.hummingbird.xtce.castor.ErrorDetectCorrectType unmarshal(
+    public static org.hbird.xtce.castor.ErrorDetectCorrectType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ErrorDetectCorrectType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ErrorDetectCorrectType.class, reader);
+        return (org.hbird.xtce.castor.ErrorDetectCorrectType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ErrorDetectCorrectType.class, reader);
     }
 
     /**

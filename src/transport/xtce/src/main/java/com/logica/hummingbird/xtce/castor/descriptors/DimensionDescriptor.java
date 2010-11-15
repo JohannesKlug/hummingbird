@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Dimension;
+import org.hbird.xtce.castor.Dimension;
 
 /**
  * Class DimensionDescriptor.
@@ -71,7 +71,7 @@ public class DimensionDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
         //-- initialize element descriptors
 
         //-- _startingIndex
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.StartingIndex.class, "_startingIndex", "StartingIndex", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.StartingIndex.class, "_startingIndex", "StartingIndex", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class DimensionDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             {
                 try {
                     Dimension target = (Dimension) object;
-                    target.setStartingIndex( (com.logica.hummingbird.xtce.castor.StartingIndex) value);
+                    target.setStartingIndex( (org.hbird.xtce.castor.StartingIndex) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class DimensionDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.StartingIndex();
+                return new org.hbird.xtce.castor.StartingIndex();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.StartingIndex");
+        desc.setSchemaType("org.hbird.xtce.castor.StartingIndex");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -112,7 +112,7 @@ public class DimensionDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
         }
         desc.setValidator(fieldValidator);
         //-- _endingIndex
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.EndingIndex.class, "_endingIndex", "EndingIndex", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.EndingIndex.class, "_endingIndex", "EndingIndex", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -127,7 +127,7 @@ public class DimensionDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             {
                 try {
                     Dimension target = (Dimension) object;
-                    target.setEndingIndex( (com.logica.hummingbird.xtce.castor.EndingIndex) value);
+                    target.setEndingIndex( (org.hbird.xtce.castor.EndingIndex) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -135,10 +135,10 @@ public class DimensionDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.EndingIndex();
+                return new org.hbird.xtce.castor.EndingIndex();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.EndingIndex");
+        desc.setSchemaType("org.hbird.xtce.castor.EndingIndex");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -190,7 +190,7 @@ public class DimensionDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Dimension.class;
+        return org.hbird.xtce.castor.Dimension.class;
     }
 
     /**

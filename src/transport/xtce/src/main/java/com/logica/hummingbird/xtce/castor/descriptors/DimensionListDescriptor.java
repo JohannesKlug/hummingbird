@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.DimensionList;
+import org.hbird.xtce.castor.DimensionList;
 
 /**
  * Class DimensionListDescriptor.
@@ -71,7 +71,7 @@ public class DimensionListDescriptor extends org.exolab.castor.xml.util.XMLClass
         //-- initialize element descriptors
 
         //-- _dimensionList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Dimension.class, "_dimensionList", "Dimension", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Dimension.class, "_dimensionList", "Dimension", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class DimensionListDescriptor extends org.exolab.castor.xml.util.XMLClass
             {
                 try {
                     DimensionList target = (DimensionList) object;
-                    target.addDimension( (com.logica.hummingbird.xtce.castor.Dimension) value);
+                    target.addDimension( (org.hbird.xtce.castor.Dimension) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -102,11 +102,11 @@ public class DimensionListDescriptor extends org.exolab.castor.xml.util.XMLClass
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Dimension();
+                return new org.hbird.xtce.castor.Dimension();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.Dimension");
+        desc.setComponentType("org.hbird.xtce.castor.Dimension");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -158,7 +158,7 @@ public class DimensionListDescriptor extends org.exolab.castor.xml.util.XMLClass
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.DimensionList.class;
+        return org.hbird.xtce.castor.DimensionList.class;
     }
 
     /**

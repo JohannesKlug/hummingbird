@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.logica.hummingbird.validation.parameter;
+package org.hbird.validation.parameter;
 
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 
-import com.logica.hummingbird.formatter.ExchangeFormatter;
-import com.logica.hummingbird.telemetry.NotComparableTypeException;
+import org.hbird.formatter.ExchangeFormatter;
+import org.hbird.telemetry.NotComparableTypeException;
 
 /** 
  * The baselimit is an abstract base class for all limit check types. It

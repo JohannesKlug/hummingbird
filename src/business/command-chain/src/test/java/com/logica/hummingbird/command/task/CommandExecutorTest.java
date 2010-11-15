@@ -1,4 +1,4 @@
-package com.logica.hummingbird.command.task;
+package org.hbird.command.task;
 
 import java.util.Date;
 
@@ -13,7 +13,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
-import com.logica.hummingbird.formatter.HeaderFields;
+import org.hbird.formatter.HeaderFields;
 
 @ContextConfiguration (locations={"/CommandExecutorTest-context.xml"})
 public class CommandExecutorTest extends AbstractJUnit38SpringContextTests  {

@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.SpaceSystemType;
+import org.hbird.xtce.castor.SpaceSystemType;
 
 /**
  * Class SpaceSystemTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
+public class SpaceSystemTypeDescriptor extends org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
 
     public SpaceSystemTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "SpaceSystemType";
         _elementDefinition = false;
@@ -72,7 +72,7 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
         //-- initialize element descriptors
 
         //-- _header
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Header.class, "_header", "Header", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Header.class, "_header", "Header", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     SpaceSystemType target = (SpaceSystemType) object;
-                    target.setHeader( (com.logica.hummingbird.xtce.castor.Header) value);
+                    target.setHeader( (org.hbird.xtce.castor.Header) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,10 +95,10 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Header();
+                return new org.hbird.xtce.castor.Header();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.Header");
+        desc.setSchemaType("org.hbird.xtce.castor.Header");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -111,7 +111,7 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
         }
         desc.setValidator(fieldValidator);
         //-- _telemetryMetaData
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.TelemetryMetaData.class, "_telemetryMetaData", "TelemetryMetaData", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.TelemetryMetaData.class, "_telemetryMetaData", "TelemetryMetaData", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -126,7 +126,7 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     SpaceSystemType target = (SpaceSystemType) object;
-                    target.setTelemetryMetaData( (com.logica.hummingbird.xtce.castor.TelemetryMetaData) value);
+                    target.setTelemetryMetaData( (org.hbird.xtce.castor.TelemetryMetaData) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -134,10 +134,10 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.TelemetryMetaData();
+                return new org.hbird.xtce.castor.TelemetryMetaData();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.TelemetryMetaData");
+        desc.setSchemaType("org.hbird.xtce.castor.TelemetryMetaData");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -150,7 +150,7 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
         }
         desc.setValidator(fieldValidator);
         //-- _commandMetaData
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.CommandMetaData.class, "_commandMetaData", "CommandMetaData", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.CommandMetaData.class, "_commandMetaData", "CommandMetaData", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -165,7 +165,7 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     SpaceSystemType target = (SpaceSystemType) object;
-                    target.setCommandMetaData( (com.logica.hummingbird.xtce.castor.CommandMetaData) value);
+                    target.setCommandMetaData( (org.hbird.xtce.castor.CommandMetaData) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -173,10 +173,10 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.CommandMetaData();
+                return new org.hbird.xtce.castor.CommandMetaData();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.CommandMetaData");
+        desc.setSchemaType("org.hbird.xtce.castor.CommandMetaData");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -189,7 +189,7 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
         }
         desc.setValidator(fieldValidator);
         //-- _serviceSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ServiceSet.class, "_serviceSet", "ServiceSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ServiceSet.class, "_serviceSet", "ServiceSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -204,7 +204,7 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     SpaceSystemType target = (SpaceSystemType) object;
-                    target.setServiceSet( (com.logica.hummingbird.xtce.castor.ServiceSet) value);
+                    target.setServiceSet( (org.hbird.xtce.castor.ServiceSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -212,10 +212,10 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ServiceSet();
+                return new org.hbird.xtce.castor.ServiceSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ServiceSet");
+        desc.setSchemaType("org.hbird.xtce.castor.ServiceSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -228,7 +228,7 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
         }
         desc.setValidator(fieldValidator);
         //-- _defaults
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Defaults.class, "_defaults", "Defaults", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Defaults.class, "_defaults", "Defaults", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -243,7 +243,7 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     SpaceSystemType target = (SpaceSystemType) object;
-                    target.setDefaults( (com.logica.hummingbird.xtce.castor.Defaults) value);
+                    target.setDefaults( (org.hbird.xtce.castor.Defaults) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -251,10 +251,10 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Defaults();
+                return new org.hbird.xtce.castor.Defaults();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.Defaults");
+        desc.setSchemaType("org.hbird.xtce.castor.Defaults");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -267,7 +267,7 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
         }
         desc.setValidator(fieldValidator);
         //-- _spaceSystemList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.SpaceSystem.class, "_spaceSystemList", "SpaceSystem", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.SpaceSystem.class, "_spaceSystemList", "SpaceSystem", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -282,7 +282,7 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     SpaceSystemType target = (SpaceSystemType) object;
-                    target.addSpaceSystem( (com.logica.hummingbird.xtce.castor.SpaceSystem) value);
+                    target.addSpaceSystem( (org.hbird.xtce.castor.SpaceSystem) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -298,11 +298,11 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.SpaceSystem();
+                return new org.hbird.xtce.castor.SpaceSystem();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.SpaceSystem");
+        desc.setComponentType("org.hbird.xtce.castor.SpaceSystem");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setNillable(true);
@@ -357,7 +357,7 @@ public class SpaceSystemTypeDescriptor extends com.logica.hummingbird.xtce.casto
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.SpaceSystemType.class;
+        return org.hbird.xtce.castor.SpaceSystemType.class;
     }
 
     /**

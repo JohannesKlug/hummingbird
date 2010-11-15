@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types;
+package org.hbird.xtce.castor.types;
 
 /**
  * Enumeration ParityReferenceType.
@@ -58,7 +58,7 @@ public enum ParityReferenceType implements java.io.Serializable {
      * @param value
      * @return the constant for this value
      */
-    public static com.logica.hummingbird.xtce.castor.types.ParityReferenceType fromValue(
+    public static org.hbird.xtce.castor.types.ParityReferenceType fromValue(
             final java.lang.String value) {
         for (ParityReferenceType c: ParityReferenceType.values()) {
             if (c.value.equals(value)) {

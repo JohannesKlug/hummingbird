@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.AbsoluteTimeParameterType;
+import org.hbird.xtce.castor.AbsoluteTimeParameterType;
 
 /**
  * Class AbsoluteTimeParameterTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class AbsoluteTimeParameterTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.AbsoluteTimeDataTypeDescriptor {
+public class AbsoluteTimeParameterTypeDescriptor extends org.hbird.xtce.castor.descriptors.AbsoluteTimeDataTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class AbsoluteTimeParameterTypeDescriptor extends com.logica.hummingbird.
 
     public AbsoluteTimeParameterTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.AbsoluteTimeDataTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.AbsoluteTimeDataTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "AbsoluteTimeParameterType";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class AbsoluteTimeParameterTypeDescriptor extends com.logica.hummingbird.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.AbsoluteTimeParameterType.class;
+        return org.hbird.xtce.castor.AbsoluteTimeParameterType.class;
     }
 
     /**

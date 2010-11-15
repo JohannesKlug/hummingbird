@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Messages are an alternative method of uniquely identifying
@@ -33,7 +33,7 @@ public class MessageSet implements java.io.Serializable {
     /**
      * Field _messageList.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.Message> _messageList;
+    private java.util.List<org.hbird.xtce.castor.Message> _messageList;
 
 
       //----------------/
@@ -42,7 +42,7 @@ public class MessageSet implements java.io.Serializable {
 
     public MessageSet() {
         super();
-        this._messageList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.Message>();
+        this._messageList = new java.util.ArrayList<org.hbird.xtce.castor.Message>();
     }
 
 
@@ -58,7 +58,7 @@ public class MessageSet implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addMessage(
-            final com.logica.hummingbird.xtce.castor.Message vMessage)
+            final org.hbird.xtce.castor.Message vMessage)
     throws java.lang.IndexOutOfBoundsException {
         this._messageList.add(vMessage);
     }
@@ -73,7 +73,7 @@ public class MessageSet implements java.io.Serializable {
      */
     public void addMessage(
             final int index,
-            final com.logica.hummingbird.xtce.castor.Message vMessage)
+            final org.hbird.xtce.castor.Message vMessage)
     throws java.lang.IndexOutOfBoundsException {
         this._messageList.add(index, vMessage);
     }
@@ -84,7 +84,7 @@ public class MessageSet implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.Message> enumerateMessage(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.Message> enumerateMessage(
     ) {
         return java.util.Collections.enumeration(this._messageList);
     }
@@ -96,9 +96,9 @@ public class MessageSet implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.Message at the given index
+     * org.hbird.xtce.castor.Message at the given index
      */
-    public com.logica.hummingbird.xtce.castor.Message getMessage(
+    public org.hbird.xtce.castor.Message getMessage(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -106,7 +106,7 @@ public class MessageSet implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getMessage: Index value '" + index + "' not in range [0.." + (this._messageList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.Message) _messageList.get(index);
+        return (org.hbird.xtce.castor.Message) _messageList.get(index);
     }
 
     /**
@@ -118,10 +118,10 @@ public class MessageSet implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.Message[] getMessage(
+    public org.hbird.xtce.castor.Message[] getMessage(
     ) {
-        com.logica.hummingbird.xtce.castor.Message[] array = new com.logica.hummingbird.xtce.castor.Message[0];
-        return (com.logica.hummingbird.xtce.castor.Message[]) this._messageList.toArray(array);
+        org.hbird.xtce.castor.Message[] array = new org.hbird.xtce.castor.Message[0];
+        return (org.hbird.xtce.castor.Message[]) this._messageList.toArray(array);
     }
 
     /**
@@ -165,7 +165,7 @@ public class MessageSet implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.Message> iterateMessage(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.Message> iterateMessage(
     ) {
         return this._messageList.iterator();
     }
@@ -216,7 +216,7 @@ public class MessageSet implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeMessage(
-            final com.logica.hummingbird.xtce.castor.Message vMessage) {
+            final org.hbird.xtce.castor.Message vMessage) {
         boolean removed = _messageList.remove(vMessage);
         return removed;
     }
@@ -227,10 +227,10 @@ public class MessageSet implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.Message removeMessageAt(
+    public org.hbird.xtce.castor.Message removeMessageAt(
             final int index) {
         java.lang.Object obj = this._messageList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.Message) obj;
+        return (org.hbird.xtce.castor.Message) obj;
     }
 
     /**
@@ -243,7 +243,7 @@ public class MessageSet implements java.io.Serializable {
      */
     public void setMessage(
             final int index,
-            final com.logica.hummingbird.xtce.castor.Message vMessage)
+            final org.hbird.xtce.castor.Message vMessage)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._messageList.size()) {
@@ -259,7 +259,7 @@ public class MessageSet implements java.io.Serializable {
      * @param vMessageArray
      */
     public void setMessage(
-            final com.logica.hummingbird.xtce.castor.Message[] vMessageArray) {
+            final org.hbird.xtce.castor.Message[] vMessageArray) {
         //-- copy array
         _messageList.clear();
 
@@ -287,12 +287,12 @@ public class MessageSet implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.MessageSet
+     * org.hbird.xtce.castor.MessageSet
      */
-    public static com.logica.hummingbird.xtce.castor.MessageSet unmarshal(
+    public static org.hbird.xtce.castor.MessageSet unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.MessageSet) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.MessageSet.class, reader);
+        return (org.hbird.xtce.castor.MessageSet) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.MessageSet.class, reader);
     }
 
     /**

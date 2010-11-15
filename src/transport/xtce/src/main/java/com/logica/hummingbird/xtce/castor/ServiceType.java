@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Holds a set of services, logical groups of containers OR
@@ -14,7 +14,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class ServiceType extends com.logica.hummingbird.xtce.castor.NameDescriptionType 
+public class ServiceType extends org.hbird.xtce.castor.NameDescriptionType 
 implements java.io.Serializable
 {
 
@@ -26,12 +26,12 @@ implements java.io.Serializable
     /**
      * Field _messageRefSet.
      */
-    private com.logica.hummingbird.xtce.castor.MessageRefSet _messageRefSet;
+    private org.hbird.xtce.castor.MessageRefSet _messageRefSet;
 
     /**
      * Field _containerRefSet.
      */
-    private com.logica.hummingbird.xtce.castor.ContainerRefSet _containerRefSet;
+    private org.hbird.xtce.castor.ContainerRefSet _containerRefSet;
 
 
       //----------------/
@@ -52,7 +52,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ContainerRefSet'.
      */
-    public com.logica.hummingbird.xtce.castor.ContainerRefSet getContainerRefSet(
+    public org.hbird.xtce.castor.ContainerRefSet getContainerRefSet(
     ) {
         return this._containerRefSet;
     }
@@ -62,7 +62,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'MessageRefSet'.
      */
-    public com.logica.hummingbird.xtce.castor.MessageRefSet getMessageRefSet(
+    public org.hbird.xtce.castor.MessageRefSet getMessageRefSet(
     ) {
         return this._messageRefSet;
     }
@@ -120,7 +120,7 @@ implements java.io.Serializable
      * @param containerRefSet the value of field 'containerRefSet'.
      */
     public void setContainerRefSet(
-            final com.logica.hummingbird.xtce.castor.ContainerRefSet containerRefSet) {
+            final org.hbird.xtce.castor.ContainerRefSet containerRefSet) {
         this._containerRefSet = containerRefSet;
     }
 
@@ -130,7 +130,7 @@ implements java.io.Serializable
      * @param messageRefSet the value of field 'messageRefSet'.
      */
     public void setMessageRefSet(
-            final com.logica.hummingbird.xtce.castor.MessageRefSet messageRefSet) {
+            final org.hbird.xtce.castor.MessageRefSet messageRefSet) {
         this._messageRefSet = messageRefSet;
     }
 
@@ -143,12 +143,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ServiceType
+     * org.hbird.xtce.castor.ServiceType
      */
-    public static com.logica.hummingbird.xtce.castor.ServiceType unmarshal(
+    public static org.hbird.xtce.castor.ServiceType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ServiceType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ServiceType.class, reader);
+        return (org.hbird.xtce.castor.ServiceType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ServiceType.class, reader);
     }
 
     /**

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * The MetaCommand is derived from this Base. Arguments of the base
@@ -29,7 +29,7 @@ public class BaseMetaCommand implements java.io.Serializable {
     /**
      * Field _argumentAssignmentList.
      */
-    private com.logica.hummingbird.xtce.castor.ArgumentAssignmentList _argumentAssignmentList;
+    private org.hbird.xtce.castor.ArgumentAssignmentList _argumentAssignmentList;
 
 
       //----------------/
@@ -50,7 +50,7 @@ public class BaseMetaCommand implements java.io.Serializable {
      * 
      * @return the value of field 'ArgumentAssignmentList'.
      */
-    public com.logica.hummingbird.xtce.castor.ArgumentAssignmentList getArgumentAssignmentList(
+    public org.hbird.xtce.castor.ArgumentAssignmentList getArgumentAssignmentList(
     ) {
         return this._argumentAssignmentList;
     }
@@ -119,7 +119,7 @@ public class BaseMetaCommand implements java.io.Serializable {
      * 'argumentAssignmentList'.
      */
     public void setArgumentAssignmentList(
-            final com.logica.hummingbird.xtce.castor.ArgumentAssignmentList argumentAssignmentList) {
+            final org.hbird.xtce.castor.ArgumentAssignmentList argumentAssignmentList) {
         this._argumentAssignmentList = argumentAssignmentList;
     }
 
@@ -142,12 +142,12 @@ public class BaseMetaCommand implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.BaseMetaCommand
+     * org.hbird.xtce.castor.BaseMetaCommand
      */
-    public static com.logica.hummingbird.xtce.castor.BaseMetaCommand unmarshal(
+    public static org.hbird.xtce.castor.BaseMetaCommand unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.BaseMetaCommand) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.BaseMetaCommand.class, reader);
+        return (org.hbird.xtce.castor.BaseMetaCommand) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.BaseMetaCommand.class, reader);
     }
 
     /**

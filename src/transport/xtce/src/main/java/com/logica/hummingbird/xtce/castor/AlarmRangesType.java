@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Contains five ranges: Watch, Warning, Distress, Critical, and
@@ -41,27 +41,27 @@ public class AlarmRangesType implements java.io.Serializable {
     /**
      * Field _watchRange.
      */
-    private com.logica.hummingbird.xtce.castor.WatchRange _watchRange;
+    private org.hbird.xtce.castor.WatchRange _watchRange;
 
     /**
      * Field _warningRange.
      */
-    private com.logica.hummingbird.xtce.castor.WarningRange _warningRange;
+    private org.hbird.xtce.castor.WarningRange _warningRange;
 
     /**
      * Field _distressRange.
      */
-    private com.logica.hummingbird.xtce.castor.DistressRange _distressRange;
+    private org.hbird.xtce.castor.DistressRange _distressRange;
 
     /**
      * Field _criticalRange.
      */
-    private com.logica.hummingbird.xtce.castor.CriticalRange _criticalRange;
+    private org.hbird.xtce.castor.CriticalRange _criticalRange;
 
     /**
      * Field _severeRange.
      */
-    private com.logica.hummingbird.xtce.castor.SevereRange _severeRange;
+    private org.hbird.xtce.castor.SevereRange _severeRange;
 
 
       //----------------/
@@ -99,7 +99,7 @@ public class AlarmRangesType implements java.io.Serializable {
      * 
      * @return the value of field 'CriticalRange'.
      */
-    public com.logica.hummingbird.xtce.castor.CriticalRange getCriticalRange(
+    public org.hbird.xtce.castor.CriticalRange getCriticalRange(
     ) {
         return this._criticalRange;
     }
@@ -109,7 +109,7 @@ public class AlarmRangesType implements java.io.Serializable {
      * 
      * @return the value of field 'DistressRange'.
      */
-    public com.logica.hummingbird.xtce.castor.DistressRange getDistressRange(
+    public org.hbird.xtce.castor.DistressRange getDistressRange(
     ) {
         return this._distressRange;
     }
@@ -119,7 +119,7 @@ public class AlarmRangesType implements java.io.Serializable {
      * 
      * @return the value of field 'SevereRange'.
      */
-    public com.logica.hummingbird.xtce.castor.SevereRange getSevereRange(
+    public org.hbird.xtce.castor.SevereRange getSevereRange(
     ) {
         return this._severeRange;
     }
@@ -129,7 +129,7 @@ public class AlarmRangesType implements java.io.Serializable {
      * 
      * @return the value of field 'WarningRange'.
      */
-    public com.logica.hummingbird.xtce.castor.WarningRange getWarningRange(
+    public org.hbird.xtce.castor.WarningRange getWarningRange(
     ) {
         return this._warningRange;
     }
@@ -139,7 +139,7 @@ public class AlarmRangesType implements java.io.Serializable {
      * 
      * @return the value of field 'WatchRange'.
      */
-    public com.logica.hummingbird.xtce.castor.WatchRange getWatchRange(
+    public org.hbird.xtce.castor.WatchRange getWatchRange(
     ) {
         return this._watchRange;
     }
@@ -230,7 +230,7 @@ public class AlarmRangesType implements java.io.Serializable {
      * @param criticalRange the value of field 'criticalRange'.
      */
     public void setCriticalRange(
-            final com.logica.hummingbird.xtce.castor.CriticalRange criticalRange) {
+            final org.hbird.xtce.castor.CriticalRange criticalRange) {
         this._criticalRange = criticalRange;
     }
 
@@ -240,7 +240,7 @@ public class AlarmRangesType implements java.io.Serializable {
      * @param distressRange the value of field 'distressRange'.
      */
     public void setDistressRange(
-            final com.logica.hummingbird.xtce.castor.DistressRange distressRange) {
+            final org.hbird.xtce.castor.DistressRange distressRange) {
         this._distressRange = distressRange;
     }
 
@@ -250,7 +250,7 @@ public class AlarmRangesType implements java.io.Serializable {
      * @param severeRange the value of field 'severeRange'.
      */
     public void setSevereRange(
-            final com.logica.hummingbird.xtce.castor.SevereRange severeRange) {
+            final org.hbird.xtce.castor.SevereRange severeRange) {
         this._severeRange = severeRange;
     }
 
@@ -260,7 +260,7 @@ public class AlarmRangesType implements java.io.Serializable {
      * @param warningRange the value of field 'warningRange'.
      */
     public void setWarningRange(
-            final com.logica.hummingbird.xtce.castor.WarningRange warningRange) {
+            final org.hbird.xtce.castor.WarningRange warningRange) {
         this._warningRange = warningRange;
     }
 
@@ -270,7 +270,7 @@ public class AlarmRangesType implements java.io.Serializable {
      * @param watchRange the value of field 'watchRange'.
      */
     public void setWatchRange(
-            final com.logica.hummingbird.xtce.castor.WatchRange watchRange) {
+            final org.hbird.xtce.castor.WatchRange watchRange) {
         this._watchRange = watchRange;
     }
 
@@ -283,12 +283,12 @@ public class AlarmRangesType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.AlarmRangesType
+     * org.hbird.xtce.castor.AlarmRangesType
      */
-    public static com.logica.hummingbird.xtce.castor.AlarmRangesType unmarshal(
+    public static org.hbird.xtce.castor.AlarmRangesType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.AlarmRangesType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.AlarmRangesType.class, reader);
+        return (org.hbird.xtce.castor.AlarmRangesType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.AlarmRangesType.class, reader);
     }
 
     /**

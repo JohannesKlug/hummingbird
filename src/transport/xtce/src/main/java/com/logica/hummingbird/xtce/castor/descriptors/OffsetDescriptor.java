@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Offset;
+import org.hbird.xtce.castor.Offset;
 
 /**
  * Class OffsetDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class OffsetDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.IntegerValueTypeDescriptor {
+public class OffsetDescriptor extends org.hbird.xtce.castor.descriptors.IntegerValueTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class OffsetDescriptor extends com.logica.hummingbird.xtce.castor.descrip
 
     public OffsetDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.IntegerValueTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.IntegerValueTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "Offset";
         _elementDefinition = true;
@@ -156,7 +156,7 @@ public class OffsetDescriptor extends com.logica.hummingbird.xtce.castor.descrip
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Offset.class;
+        return org.hbird.xtce.castor.Offset.class;
     }
 
     /**

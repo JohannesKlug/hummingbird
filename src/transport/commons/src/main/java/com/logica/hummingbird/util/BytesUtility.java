@@ -1,4 +1,4 @@
-package com.logica.hummingbird.util;
+package org.hbird.util;
 
 /** TODO Put in the transport.common */
 import org.slf4j.Logger;

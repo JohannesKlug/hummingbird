@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ArgumentAssignment;
+import org.hbird.xtce.castor.ArgumentAssignment;
 
 /**
  * Class ArgumentAssignmentDescriptor.
@@ -193,7 +193,7 @@ public class ArgumentAssignmentDescriptor extends org.exolab.castor.xml.util.XML
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ArgumentAssignment.class;
+        return org.hbird.xtce.castor.ArgumentAssignment.class;
     }
 
     /**

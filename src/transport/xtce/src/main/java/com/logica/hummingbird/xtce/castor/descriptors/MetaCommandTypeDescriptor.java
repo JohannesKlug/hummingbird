@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.MetaCommandType;
+import org.hbird.xtce.castor.MetaCommandType;
 
 /**
  * Class MetaCommandTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
+public class MetaCommandTypeDescriptor extends org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
 
     public MetaCommandTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "MetaCommandType";
         _elementDefinition = false;
@@ -118,7 +118,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
         //-- initialize element descriptors
 
         //-- _baseMetaCommand
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.BaseMetaCommand.class, "_baseMetaCommand", "BaseMetaCommand", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.BaseMetaCommand.class, "_baseMetaCommand", "BaseMetaCommand", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -133,7 +133,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     MetaCommandType target = (MetaCommandType) object;
-                    target.setBaseMetaCommand( (com.logica.hummingbird.xtce.castor.BaseMetaCommand) value);
+                    target.setBaseMetaCommand( (org.hbird.xtce.castor.BaseMetaCommand) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -141,10 +141,10 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.BaseMetaCommand();
+                return new org.hbird.xtce.castor.BaseMetaCommand();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.BaseMetaCommand");
+        desc.setSchemaType("org.hbird.xtce.castor.BaseMetaCommand");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -201,7 +201,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
         }
         desc.setValidator(fieldValidator);
         //-- _argumentList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ArgumentList.class, "_argumentList", "ArgumentList", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ArgumentList.class, "_argumentList", "ArgumentList", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -216,7 +216,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     MetaCommandType target = (MetaCommandType) object;
-                    target.setArgumentList( (com.logica.hummingbird.xtce.castor.ArgumentList) value);
+                    target.setArgumentList( (org.hbird.xtce.castor.ArgumentList) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -224,10 +224,10 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ArgumentList();
+                return new org.hbird.xtce.castor.ArgumentList();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ArgumentList");
+        desc.setSchemaType("org.hbird.xtce.castor.ArgumentList");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -240,7 +240,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
         }
         desc.setValidator(fieldValidator);
         //-- _commandContainer
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.CommandContainer.class, "_commandContainer", "CommandContainer", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.CommandContainer.class, "_commandContainer", "CommandContainer", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -255,7 +255,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     MetaCommandType target = (MetaCommandType) object;
-                    target.setCommandContainer( (com.logica.hummingbird.xtce.castor.CommandContainer) value);
+                    target.setCommandContainer( (org.hbird.xtce.castor.CommandContainer) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -263,10 +263,10 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.CommandContainer();
+                return new org.hbird.xtce.castor.CommandContainer();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.CommandContainer");
+        desc.setSchemaType("org.hbird.xtce.castor.CommandContainer");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -279,7 +279,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
         }
         desc.setValidator(fieldValidator);
         //-- _transmissionConstraintList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.TransmissionConstraintList.class, "_transmissionConstraintList", "TransmissionConstraintList", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.TransmissionConstraintList.class, "_transmissionConstraintList", "TransmissionConstraintList", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -294,7 +294,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     MetaCommandType target = (MetaCommandType) object;
-                    target.setTransmissionConstraintList( (com.logica.hummingbird.xtce.castor.TransmissionConstraintList) value);
+                    target.setTransmissionConstraintList( (org.hbird.xtce.castor.TransmissionConstraintList) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -302,10 +302,10 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.TransmissionConstraintList();
+                return new org.hbird.xtce.castor.TransmissionConstraintList();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.TransmissionConstraintList");
+        desc.setSchemaType("org.hbird.xtce.castor.TransmissionConstraintList");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -318,7 +318,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
         }
         desc.setValidator(fieldValidator);
         //-- _defaultSignificance
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.DefaultSignificance.class, "_defaultSignificance", "DefaultSignificance", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.DefaultSignificance.class, "_defaultSignificance", "DefaultSignificance", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -333,7 +333,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     MetaCommandType target = (MetaCommandType) object;
-                    target.setDefaultSignificance( (com.logica.hummingbird.xtce.castor.DefaultSignificance) value);
+                    target.setDefaultSignificance( (org.hbird.xtce.castor.DefaultSignificance) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -341,10 +341,10 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.DefaultSignificance();
+                return new org.hbird.xtce.castor.DefaultSignificance();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.DefaultSignificance");
+        desc.setSchemaType("org.hbird.xtce.castor.DefaultSignificance");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -357,7 +357,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
         }
         desc.setValidator(fieldValidator);
         //-- _contextSignificanceList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ContextSignificanceList.class, "_contextSignificanceList", "ContextSignificanceList", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ContextSignificanceList.class, "_contextSignificanceList", "ContextSignificanceList", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -372,7 +372,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     MetaCommandType target = (MetaCommandType) object;
-                    target.setContextSignificanceList( (com.logica.hummingbird.xtce.castor.ContextSignificanceList) value);
+                    target.setContextSignificanceList( (org.hbird.xtce.castor.ContextSignificanceList) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -380,10 +380,10 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ContextSignificanceList();
+                return new org.hbird.xtce.castor.ContextSignificanceList();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ContextSignificanceList");
+        desc.setSchemaType("org.hbird.xtce.castor.ContextSignificanceList");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -396,7 +396,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
         }
         desc.setValidator(fieldValidator);
         //-- _interlock
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Interlock.class, "_interlock", "Interlock", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Interlock.class, "_interlock", "Interlock", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -411,7 +411,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     MetaCommandType target = (MetaCommandType) object;
-                    target.setInterlock( (com.logica.hummingbird.xtce.castor.Interlock) value);
+                    target.setInterlock( (org.hbird.xtce.castor.Interlock) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -419,10 +419,10 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Interlock();
+                return new org.hbird.xtce.castor.Interlock();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.Interlock");
+        desc.setSchemaType("org.hbird.xtce.castor.Interlock");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -435,7 +435,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
         }
         desc.setValidator(fieldValidator);
         //-- _verifiers
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Verifiers.class, "_verifiers", "Verifiers", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Verifiers.class, "_verifiers", "Verifiers", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -450,7 +450,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     MetaCommandType target = (MetaCommandType) object;
-                    target.setVerifiers( (com.logica.hummingbird.xtce.castor.Verifiers) value);
+                    target.setVerifiers( (org.hbird.xtce.castor.Verifiers) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -458,10 +458,10 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Verifiers();
+                return new org.hbird.xtce.castor.Verifiers();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.Verifiers");
+        desc.setSchemaType("org.hbird.xtce.castor.Verifiers");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -474,7 +474,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
         }
         desc.setValidator(fieldValidator);
         //-- _parameterToSetList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ParameterToSetList.class, "_parameterToSetList", "ParameterToSetList", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ParameterToSetList.class, "_parameterToSetList", "ParameterToSetList", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -489,7 +489,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     MetaCommandType target = (MetaCommandType) object;
-                    target.setParameterToSetList( (com.logica.hummingbird.xtce.castor.ParameterToSetList) value);
+                    target.setParameterToSetList( (org.hbird.xtce.castor.ParameterToSetList) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -497,10 +497,10 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ParameterToSetList();
+                return new org.hbird.xtce.castor.ParameterToSetList();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ParameterToSetList");
+        desc.setSchemaType("org.hbird.xtce.castor.ParameterToSetList");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -553,7 +553,7 @@ public class MetaCommandTypeDescriptor extends com.logica.hummingbird.xtce.casto
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.MetaCommandType.class;
+        return org.hbird.xtce.castor.MetaCommandType.class;
     }
 
     /**

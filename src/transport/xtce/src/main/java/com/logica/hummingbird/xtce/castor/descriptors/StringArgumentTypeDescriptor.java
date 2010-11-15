@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.StringArgumentType;
+import org.hbird.xtce.castor.StringArgumentType;
 
 /**
  * Class StringArgumentTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class StringArgumentTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.StringDataTypeDescriptor {
+public class StringArgumentTypeDescriptor extends org.hbird.xtce.castor.descriptors.StringDataTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class StringArgumentTypeDescriptor extends com.logica.hummingbird.xtce.ca
 
     public StringArgumentTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.StringDataTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.StringDataTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "StringArgumentType";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class StringArgumentTypeDescriptor extends com.logica.hummingbird.xtce.ca
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.StringArgumentType.class;
+        return org.hbird.xtce.castor.StringArgumentType.class;
     }
 
     /**

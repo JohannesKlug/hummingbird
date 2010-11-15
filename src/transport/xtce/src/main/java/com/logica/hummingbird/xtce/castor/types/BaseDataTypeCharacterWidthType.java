@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types;
+package org.hbird.xtce.castor.types;
 
 /**
  * Enumeration BaseDataTypeCharacterWidthType.
@@ -58,7 +58,7 @@ public enum BaseDataTypeCharacterWidthType implements java.io.Serializable {
      * @param value
      * @return the constant for this value
      */
-    public static com.logica.hummingbird.xtce.castor.types.BaseDataTypeCharacterWidthType fromValue(
+    public static org.hbird.xtce.castor.types.BaseDataTypeCharacterWidthType fromValue(
             final java.lang.String value) {
         for (BaseDataTypeCharacterWidthType c: BaseDataTypeCharacterWidthType.values()) {
             if (c.value.equals(value)) {

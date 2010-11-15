@@ -24,15 +24,15 @@
  * Created on   : 13.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.packetbroker.producers;
+package org.hbird.packetbroker.producers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.Container;
-import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.spacesystemmodel.PacketObserver;
-import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.spacesystemmodel.Container;
+import org.hbird.spacesystemmodel.ContainerFactory;
+import org.hbird.spacesystemmodel.PacketObserver;
+import org.hbird.spacesystemmodel.exceptions.UnknownContainerNameException;
 
 /**
  * The packet consists of a sequence of packet header fields, which are parameters, and a 

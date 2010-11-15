@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.BooleanParameterType;
+import org.hbird.xtce.castor.BooleanParameterType;
 
 /**
  * Class BooleanParameterTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class BooleanParameterTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.BooleanDataTypeDescriptor {
+public class BooleanParameterTypeDescriptor extends org.hbird.xtce.castor.descriptors.BooleanDataTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class BooleanParameterTypeDescriptor extends com.logica.hummingbird.xtce.
 
     public BooleanParameterTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.BooleanDataTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.BooleanDataTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "BooleanParameterType";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class BooleanParameterTypeDescriptor extends com.logica.hummingbird.xtce.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.BooleanParameterType.class;
+        return org.hbird.xtce.castor.BooleanParameterType.class;
     }
 
     /**

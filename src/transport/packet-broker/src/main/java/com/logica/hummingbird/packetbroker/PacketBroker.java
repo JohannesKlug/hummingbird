@@ -24,15 +24,15 @@
  * Created on   : 10.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.packetbroker;
+package org.hbird.packetbroker;
 
 import java.util.BitSet;
 
-import com.logica.hummingbird.spacesystemmodel.Container;
-import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.telemetry.HummingbirdPacket;
-import com.logica.hummingbird.util.exceptions.BitSetOperationException;
+import org.hbird.spacesystemmodel.Container;
+import org.hbird.spacesystemmodel.ContainerFactory;
+import org.hbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.telemetry.HummingbirdPacket;
+import org.hbird.util.exceptions.BitSetOperationException;
 
 /**
  * The interface of the Frame Broker. 

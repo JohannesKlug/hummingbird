@@ -5,11 +5,11 @@
 	
 	<parent>
 		<artifactId>hummingbird</artifactId>
-		<groupId>com.logica.hummingbird</groupId>
+		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<groupId>com.logica.hummingbird</groupId>
+	<groupId>org.hbird</groupId>
 	<artifactId>tele</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
@@ -48,7 +48,7 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							com.logica.hummingbird.telemetry*						
+							org.hbird.telemetry*						
 						</Export-Package>
 					</instructions>
 				</configuration>

@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ArgumentTypeSetItem;
+import org.hbird.xtce.castor.ArgumentTypeSetItem;
 
 /**
  * Class ArgumentTypeSetItemDescriptor.
@@ -71,7 +71,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
         //-- initialize element descriptors
 
         //-- _stringArgumentType
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.StringArgumentType.class, "_stringArgumentType", "StringArgumentType", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.StringArgumentType.class, "_stringArgumentType", "StringArgumentType", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     ArgumentTypeSetItem target = (ArgumentTypeSetItem) object;
-                    target.setStringArgumentType( (com.logica.hummingbird.xtce.castor.StringArgumentType) value);
+                    target.setStringArgumentType( (org.hbird.xtce.castor.StringArgumentType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.StringArgumentType();
+                return new org.hbird.xtce.castor.StringArgumentType();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.StringArgumentType");
+        desc.setSchemaType("org.hbird.xtce.castor.StringArgumentType");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -112,7 +112,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _enumeratedArgumentType
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.EnumeratedArgumentType.class, "_enumeratedArgumentType", "EnumeratedArgumentType", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.EnumeratedArgumentType.class, "_enumeratedArgumentType", "EnumeratedArgumentType", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -127,7 +127,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     ArgumentTypeSetItem target = (ArgumentTypeSetItem) object;
-                    target.setEnumeratedArgumentType( (com.logica.hummingbird.xtce.castor.EnumeratedArgumentType) value);
+                    target.setEnumeratedArgumentType( (org.hbird.xtce.castor.EnumeratedArgumentType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -135,10 +135,10 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.EnumeratedArgumentType();
+                return new org.hbird.xtce.castor.EnumeratedArgumentType();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.EnumeratedArgumentType");
+        desc.setSchemaType("org.hbird.xtce.castor.EnumeratedArgumentType");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -153,7 +153,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _integerArgumentType
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.IntegerArgumentType.class, "_integerArgumentType", "IntegerArgumentType", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.IntegerArgumentType.class, "_integerArgumentType", "IntegerArgumentType", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -168,7 +168,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     ArgumentTypeSetItem target = (ArgumentTypeSetItem) object;
-                    target.setIntegerArgumentType( (com.logica.hummingbird.xtce.castor.IntegerArgumentType) value);
+                    target.setIntegerArgumentType( (org.hbird.xtce.castor.IntegerArgumentType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -176,10 +176,10 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.IntegerArgumentType();
+                return new org.hbird.xtce.castor.IntegerArgumentType();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.IntegerArgumentType");
+        desc.setSchemaType("org.hbird.xtce.castor.IntegerArgumentType");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -194,7 +194,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _binaryArgumentType
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.BinaryArgumentType.class, "_binaryArgumentType", "BinaryArgumentType", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.BinaryArgumentType.class, "_binaryArgumentType", "BinaryArgumentType", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -209,7 +209,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     ArgumentTypeSetItem target = (ArgumentTypeSetItem) object;
-                    target.setBinaryArgumentType( (com.logica.hummingbird.xtce.castor.BinaryArgumentType) value);
+                    target.setBinaryArgumentType( (org.hbird.xtce.castor.BinaryArgumentType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -217,10 +217,10 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.BinaryArgumentType();
+                return new org.hbird.xtce.castor.BinaryArgumentType();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.BinaryArgumentType");
+        desc.setSchemaType("org.hbird.xtce.castor.BinaryArgumentType");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -235,7 +235,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _floatArgumentType
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.FloatArgumentType.class, "_floatArgumentType", "FloatArgumentType", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.FloatArgumentType.class, "_floatArgumentType", "FloatArgumentType", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -250,7 +250,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     ArgumentTypeSetItem target = (ArgumentTypeSetItem) object;
-                    target.setFloatArgumentType( (com.logica.hummingbird.xtce.castor.FloatArgumentType) value);
+                    target.setFloatArgumentType( (org.hbird.xtce.castor.FloatArgumentType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -258,10 +258,10 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.FloatArgumentType();
+                return new org.hbird.xtce.castor.FloatArgumentType();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.FloatArgumentType");
+        desc.setSchemaType("org.hbird.xtce.castor.FloatArgumentType");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -276,7 +276,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _booleanArgumentType
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.BooleanArgumentType.class, "_booleanArgumentType", "BooleanArgumentType", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.BooleanArgumentType.class, "_booleanArgumentType", "BooleanArgumentType", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -291,7 +291,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     ArgumentTypeSetItem target = (ArgumentTypeSetItem) object;
-                    target.setBooleanArgumentType( (com.logica.hummingbird.xtce.castor.BooleanArgumentType) value);
+                    target.setBooleanArgumentType( (org.hbird.xtce.castor.BooleanArgumentType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -299,10 +299,10 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.BooleanArgumentType();
+                return new org.hbird.xtce.castor.BooleanArgumentType();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.BooleanArgumentType");
+        desc.setSchemaType("org.hbird.xtce.castor.BooleanArgumentType");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -317,7 +317,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _relativeTimeAgumentType
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.RelativeTimeAgumentType.class, "_relativeTimeAgumentType", "RelativeTimeAgumentType", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.RelativeTimeAgumentType.class, "_relativeTimeAgumentType", "RelativeTimeAgumentType", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -332,7 +332,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     ArgumentTypeSetItem target = (ArgumentTypeSetItem) object;
-                    target.setRelativeTimeAgumentType( (com.logica.hummingbird.xtce.castor.RelativeTimeAgumentType) value);
+                    target.setRelativeTimeAgumentType( (org.hbird.xtce.castor.RelativeTimeAgumentType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -340,10 +340,10 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.RelativeTimeAgumentType();
+                return new org.hbird.xtce.castor.RelativeTimeAgumentType();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.RelativeTimeAgumentType");
+        desc.setSchemaType("org.hbird.xtce.castor.RelativeTimeAgumentType");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -358,7 +358,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _absoluteTimeArgumentType
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.AbsoluteTimeArgumentType.class, "_absoluteTimeArgumentType", "AbsoluteTimeArgumentType", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.AbsoluteTimeArgumentType.class, "_absoluteTimeArgumentType", "AbsoluteTimeArgumentType", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -373,7 +373,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     ArgumentTypeSetItem target = (ArgumentTypeSetItem) object;
-                    target.setAbsoluteTimeArgumentType( (com.logica.hummingbird.xtce.castor.AbsoluteTimeArgumentType) value);
+                    target.setAbsoluteTimeArgumentType( (org.hbird.xtce.castor.AbsoluteTimeArgumentType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -381,10 +381,10 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.AbsoluteTimeArgumentType();
+                return new org.hbird.xtce.castor.AbsoluteTimeArgumentType();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.AbsoluteTimeArgumentType");
+        desc.setSchemaType("org.hbird.xtce.castor.AbsoluteTimeArgumentType");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -399,7 +399,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _argumementArrayType
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ArgumementArrayType.class, "_argumementArrayType", "ArgumementArrayType", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ArgumementArrayType.class, "_argumementArrayType", "ArgumementArrayType", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -414,7 +414,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     ArgumentTypeSetItem target = (ArgumentTypeSetItem) object;
-                    target.setArgumementArrayType( (com.logica.hummingbird.xtce.castor.ArgumementArrayType) value);
+                    target.setArgumementArrayType( (org.hbird.xtce.castor.ArgumementArrayType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -422,10 +422,10 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ArgumementArrayType();
+                return new org.hbird.xtce.castor.ArgumementArrayType();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ArgumementArrayType");
+        desc.setSchemaType("org.hbird.xtce.castor.ArgumementArrayType");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -477,7 +477,7 @@ public class ArgumentTypeSetItemDescriptor extends org.exolab.castor.xml.util.XM
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ArgumentTypeSetItem.class;
+        return org.hbird.xtce.castor.ArgumentTypeSetItem.class;
     }
 
     /**

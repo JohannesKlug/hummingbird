@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.SubAddress;
+import org.hbird.xtce.castor.SubAddress;
 
 /**
  * Class SubAddressDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class SubAddressDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.PhysicalAddressTypeDescriptor {
+public class SubAddressDescriptor extends org.hbird.xtce.castor.descriptors.PhysicalAddressTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class SubAddressDescriptor extends com.logica.hummingbird.xtce.castor.des
 
     public SubAddressDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.PhysicalAddressTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.PhysicalAddressTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "SubAddress";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class SubAddressDescriptor extends com.logica.hummingbird.xtce.castor.des
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.SubAddress.class;
+        return org.hbird.xtce.castor.SubAddress.class;
     }
 
     /**

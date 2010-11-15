@@ -75,7 +75,7 @@
 	</profiles>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.logica.hummingbird</groupId>
+	<groupId>org.hbird</groupId>
 	<artifactId>hummingbird</artifactId>
 	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
@@ -261,7 +261,7 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
+			<groupId>org.hbird</groupId>
 			<artifactId>hummingbird-archetype-parameter</artifactId>
 			<version>0.0.2</version>
 			<type>jar</type>

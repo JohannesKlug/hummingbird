@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.TransmissionConstraint;
+import org.hbird.xtce.castor.TransmissionConstraint;
 
 /**
  * Class TransmissionConstraintDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class TransmissionConstraintDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor {
+public class TransmissionConstraintDescriptor extends org.hbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class TransmissionConstraintDescriptor extends com.logica.hummingbird.xtc
 
     public TransmissionConstraintDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "TransmissionConstraint";
         _elementDefinition = true;
@@ -195,7 +195,7 @@ public class TransmissionConstraintDescriptor extends com.logica.hummingbird.xtc
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.TransmissionConstraint.class;
+        return org.hbird.xtce.castor.TransmissionConstraint.class;
     }
 
     /**

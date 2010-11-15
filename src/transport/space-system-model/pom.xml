@@ -5,11 +5,11 @@
 
 	<parent>
 		<artifactId>hummingbird</artifactId>
-		<groupId>com.logica.hummingbird</groupId>
+		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<groupId>com.logica.hummingbird</groupId>
+	<groupId>org.hbird</groupId>
 	<artifactId>space-system-model</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
@@ -37,14 +37,14 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							com.logica.hummingbird.spacesystemmodel*,
-							com.logica.hummingbird.parameters*,
-							com.logica.hummingbird.exceptions*
+							org.hbird.spacesystemmodel*,
+							org.hbird.parameters*,
+							org.hbird.exceptions*
 						</Export-Package>
 						<Private-Package>
-							com.logica.hummingbird,
+							org.hbird,
 							org.slf4j.*,
-							com.logica.hummingbird.spacesystemmodel.testsupport,
+							org.hbird.spacesystemmodel.testsupport,
 						</Private-Package>
 					</instructions>
 				</configuration>
@@ -54,7 +54,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
+			<groupId>org.hbird</groupId>
 			<artifactId>commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>

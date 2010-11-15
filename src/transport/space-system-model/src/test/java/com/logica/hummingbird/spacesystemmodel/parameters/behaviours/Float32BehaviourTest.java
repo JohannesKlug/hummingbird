@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
+package org.hbird.spacesystemmodel.parameters.behaviours;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,8 +13,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.util.BitSetUtility;
-import com.logica.hummingbird.util.exceptions.BitSetOperationException;
+import org.hbird.util.BitSetUtility;
+import org.hbird.util.exceptions.BitSetOperationException;
 
 /**
  * @author doylemr
@@ -69,7 +69,7 @@ public class Float32BehaviourTest {
 
 	/**
 	 * Test method for
-	 * {@link com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float32Behaviour#valueFromBitSet(java.util.BitSet)}
+	 * {@link org.hbird.spacesystemmodel.parameters.behaviours.Float32Behaviour#valueFromBitSet(java.util.BitSet)}
 	 * .
 	 */
 	@Test
@@ -80,7 +80,7 @@ public class Float32BehaviourTest {
 
 	/**
 	 * Test method for
-	 * {@link com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float32Behaviour#valueFromBitSet(java.util.BitSet)}
+	 * {@link org.hbird.spacesystemmodel.parameters.behaviours.Float32Behaviour#valueFromBitSet(java.util.BitSet)}
 	 * .
 	 */
 	@Test
@@ -98,7 +98,7 @@ public class Float32BehaviourTest {
 
 	/**
 	 * Test method for
-	 * {@link com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float32Behaviour#insertIntoBitSet(java.lang.Number, java.util.BitSet, int)}
+	 * {@link org.hbird.spacesystemmodel.parameters.behaviours.Float32Behaviour#insertIntoBitSet(java.lang.Number, java.util.BitSet, int)}
 	 * .
 	 * 
 	 * @throws BitSetOperationException

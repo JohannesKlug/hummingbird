@@ -1,4 +1,4 @@
-package com.logica.hummingbird.spacesystemmodel;
+package org.hbird.spacesystemmodel;
 
 import static org.junit.Assert.assertTrue;
 
@@ -6,10 +6,10 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
+import org.hbird.spacesystemmodel.ContainerFactory;
+import org.hbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import org.hbird.spacesystemmodel.parameters.ParameterContainer;
+import org.hbird.spacesystemmodel.testsupport.MockContainerModelFactory;
 
 // TODO Implement this test.
 public class MockContainerModelFactoryTest {

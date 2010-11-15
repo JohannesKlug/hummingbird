@@ -9,9 +9,9 @@
        http://camel.apache.org/schema/spring 
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-	<bean id="commandBuffer" class="com.logica.hummingbird.buffers.CommandBuffer"/>
+	<bean id="commandBuffer" class="org.hbird.buffers.CommandBuffer"/>
 
-	<bean id="stateBuffer" class="com.logica.hummingbird.buffers.StateBuffer"/>
+	<bean id="stateBuffer" class="org.hbird.buffers.StateBuffer"/>
 
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>

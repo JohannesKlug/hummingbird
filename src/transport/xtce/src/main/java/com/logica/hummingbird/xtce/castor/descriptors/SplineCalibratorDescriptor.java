@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.SplineCalibrator;
+import org.hbird.xtce.castor.SplineCalibrator;
 
 /**
  * Class SplineCalibratorDescriptor.
@@ -164,7 +164,7 @@ public class SplineCalibratorDescriptor extends org.exolab.castor.xml.util.XMLCl
         //-- initialize element descriptors
 
         //-- _splinePointList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.SplinePoint.class, "_splinePointList", "SplinePoint", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.SplinePoint.class, "_splinePointList", "SplinePoint", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -179,7 +179,7 @@ public class SplineCalibratorDescriptor extends org.exolab.castor.xml.util.XMLCl
             {
                 try {
                     SplineCalibrator target = (SplineCalibrator) object;
-                    target.addSplinePoint( (com.logica.hummingbird.xtce.castor.SplinePoint) value);
+                    target.addSplinePoint( (org.hbird.xtce.castor.SplinePoint) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -195,11 +195,11 @@ public class SplineCalibratorDescriptor extends org.exolab.castor.xml.util.XMLCl
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.SplinePoint();
+                return new org.hbird.xtce.castor.SplinePoint();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.SplinePoint");
+        desc.setComponentType("org.hbird.xtce.castor.SplinePoint");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -251,7 +251,7 @@ public class SplineCalibratorDescriptor extends org.exolab.castor.xml.util.XMLCl
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.SplineCalibrator.class;
+        return org.hbird.xtce.castor.SplineCalibrator.class;
     }
 
     /**

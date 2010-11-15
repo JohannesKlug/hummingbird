@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.NextContainer;
+import org.hbird.xtce.castor.NextContainer;
 
 /**
  * Class NextContainerDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class NextContainerDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ContainerRefTypeDescriptor {
+public class NextContainerDescriptor extends org.hbird.xtce.castor.descriptors.ContainerRefTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class NextContainerDescriptor extends com.logica.hummingbird.xtce.castor.
 
     public NextContainerDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ContainerRefTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ContainerRefTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "NextContainer";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class NextContainerDescriptor extends com.logica.hummingbird.xtce.castor.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.NextContainer.class;
+        return org.hbird.xtce.castor.NextContainer.class;
     }
 
     /**

@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.PercentComplete;
+import org.hbird.xtce.castor.PercentComplete;
 
 /**
  * Class PercentCompleteDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class PercentCompleteDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.DecimalValueTypeDescriptor {
+public class PercentCompleteDescriptor extends org.hbird.xtce.castor.descriptors.DecimalValueTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class PercentCompleteDescriptor extends com.logica.hummingbird.xtce.casto
 
     public PercentCompleteDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.DecimalValueTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.DecimalValueTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "PercentComplete";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class PercentCompleteDescriptor extends com.logica.hummingbird.xtce.casto
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.PercentComplete.class;
+        return org.hbird.xtce.castor.PercentComplete.class;
     }
 
     /**

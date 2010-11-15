@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.MetaCommand;
+import org.hbird.xtce.castor.MetaCommand;
 
 /**
  * Class MetaCommandDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class MetaCommandDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.MetaCommandTypeDescriptor {
+public class MetaCommandDescriptor extends org.hbird.xtce.castor.descriptors.MetaCommandTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class MetaCommandDescriptor extends com.logica.hummingbird.xtce.castor.de
 
     public MetaCommandDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.MetaCommandTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.MetaCommandTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "MetaCommand";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class MetaCommandDescriptor extends com.logica.hummingbird.xtce.castor.de
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.MetaCommand.class;
+        return org.hbird.xtce.castor.MetaCommand.class;
     }
 
     /**

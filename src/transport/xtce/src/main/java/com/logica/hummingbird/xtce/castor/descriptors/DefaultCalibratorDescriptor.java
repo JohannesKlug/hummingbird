@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.DefaultCalibrator;
+import org.hbird.xtce.castor.DefaultCalibrator;
 
 /**
  * Class DefaultCalibratorDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class DefaultCalibratorDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.CalibratorTypeDescriptor {
+public class DefaultCalibratorDescriptor extends org.hbird.xtce.castor.descriptors.CalibratorTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class DefaultCalibratorDescriptor extends com.logica.hummingbird.xtce.cas
 
     public DefaultCalibratorDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.CalibratorTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.CalibratorTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "DefaultCalibrator";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class DefaultCalibratorDescriptor extends com.logica.hummingbird.xtce.cas
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.DefaultCalibrator.class;
+        return org.hbird.xtce.castor.DefaultCalibrator.class;
     }
 
     /**

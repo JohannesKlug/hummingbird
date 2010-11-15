@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.NoteSet;
+import org.hbird.xtce.castor.NoteSet;
 
 /**
  * Class NoteSetDescriptor.
@@ -162,7 +162,7 @@ public class NoteSetDescriptor extends org.exolab.castor.xml.util.XMLClassDescri
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.NoteSet.class;
+        return org.hbird.xtce.castor.NoteSet.class;
     }
 
     /**

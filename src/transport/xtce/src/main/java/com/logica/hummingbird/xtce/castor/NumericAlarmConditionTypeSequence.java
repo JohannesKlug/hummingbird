@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class NumericAlarmConditionTypeSequence.
@@ -24,7 +24,7 @@ public class NumericAlarmConditionTypeSequence implements java.io.Serializable {
      * StaticAlarmRanges are used to trigger alarms when the
      * parameter value passes some threshold value
      */
-    private com.logica.hummingbird.xtce.castor.StaticAlarmRanges _staticAlarmRanges;
+    private org.hbird.xtce.castor.StaticAlarmRanges _staticAlarmRanges;
 
     /**
      * ChangePerSecondAlarmRanges are used to trigger alarms when
@@ -32,7 +32,7 @@ public class NumericAlarmConditionTypeSequence implements java.io.Serializable {
      * value. An alarm condition that triggers when the value
      * changes too fast (or too slow)
      */
-    private com.logica.hummingbird.xtce.castor.ChangePerSecondAlarmRanges _changePerSecondAlarmRanges;
+    private org.hbird.xtce.castor.ChangePerSecondAlarmRanges _changePerSecondAlarmRanges;
 
 
       //----------------/
@@ -58,7 +58,7 @@ public class NumericAlarmConditionTypeSequence implements java.io.Serializable {
      * 
      * @return the value of field 'ChangePerSecondAlarmRanges'.
      */
-    public com.logica.hummingbird.xtce.castor.ChangePerSecondAlarmRanges getChangePerSecondAlarmRanges(
+    public org.hbird.xtce.castor.ChangePerSecondAlarmRanges getChangePerSecondAlarmRanges(
     ) {
         return this._changePerSecondAlarmRanges;
     }
@@ -71,7 +71,7 @@ public class NumericAlarmConditionTypeSequence implements java.io.Serializable {
      * 
      * @return the value of field 'StaticAlarmRanges'.
      */
-    public com.logica.hummingbird.xtce.castor.StaticAlarmRanges getStaticAlarmRanges(
+    public org.hbird.xtce.castor.StaticAlarmRanges getStaticAlarmRanges(
     ) {
         return this._staticAlarmRanges;
     }
@@ -135,7 +135,7 @@ public class NumericAlarmConditionTypeSequence implements java.io.Serializable {
      * 'changePerSecondAlarmRanges'.
      */
     public void setChangePerSecondAlarmRanges(
-            final com.logica.hummingbird.xtce.castor.ChangePerSecondAlarmRanges changePerSecondAlarmRanges) {
+            final org.hbird.xtce.castor.ChangePerSecondAlarmRanges changePerSecondAlarmRanges) {
         this._changePerSecondAlarmRanges = changePerSecondAlarmRanges;
     }
 
@@ -149,7 +149,7 @@ public class NumericAlarmConditionTypeSequence implements java.io.Serializable {
      * 'staticAlarmRanges'.
      */
     public void setStaticAlarmRanges(
-            final com.logica.hummingbird.xtce.castor.StaticAlarmRanges staticAlarmRanges) {
+            final org.hbird.xtce.castor.StaticAlarmRanges staticAlarmRanges) {
         this._staticAlarmRanges = staticAlarmRanges;
     }
 
@@ -162,12 +162,12 @@ public class NumericAlarmConditionTypeSequence implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.NumericAlarmConditionTypeSequence
+     * org.hbird.xtce.castor.NumericAlarmConditionTypeSequence
      */
-    public static com.logica.hummingbird.xtce.castor.NumericAlarmConditionTypeSequence unmarshal(
+    public static org.hbird.xtce.castor.NumericAlarmConditionTypeSequence unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.NumericAlarmConditionTypeSequence) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.NumericAlarmConditionTypeSequence.class, reader);
+        return (org.hbird.xtce.castor.NumericAlarmConditionTypeSequence) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.NumericAlarmConditionTypeSequence.class, reader);
     }
 
     /**

@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.CommandContainerEntryListType;
+import org.hbird.xtce.castor.CommandContainerEntryListType;
 
 /**
  * Class CommandContainerEntryListTypeDescriptor.
@@ -67,7 +67,7 @@ public class CommandContainerEntryListTypeDescriptor extends org.exolab.castor.x
         //-- initialize element descriptors
 
         //-- _items
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.CommandContainerEntryListTypeItem.class, "_items", (java.lang.String) null, org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.CommandContainerEntryListTypeItem.class, "_items", (java.lang.String) null, org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -82,7 +82,7 @@ public class CommandContainerEntryListTypeDescriptor extends org.exolab.castor.x
             {
                 try {
                     CommandContainerEntryListType target = (CommandContainerEntryListType) object;
-                    target.addCommandContainerEntryListTypeItem( (com.logica.hummingbird.xtce.castor.CommandContainerEntryListTypeItem) value);
+                    target.addCommandContainerEntryListTypeItem( (org.hbird.xtce.castor.CommandContainerEntryListTypeItem) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -98,14 +98,14 @@ public class CommandContainerEntryListTypeDescriptor extends org.exolab.castor.x
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.CommandContainerEntryListTypeItem();
+                return new org.hbird.xtce.castor.CommandContainerEntryListTypeItem();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.CommandContainerEntryListTypeItem");
+        desc.setComponentType("org.hbird.xtce.castor.CommandContainerEntryListTypeItem");
         desc.setHandler(handler);
         desc.setContainer(true);
-        desc.setClassDescriptor(new com.logica.hummingbird.xtce.castor.descriptors.CommandContainerEntryListTypeItemDescriptor());
+        desc.setClassDescriptor(new org.hbird.xtce.castor.descriptors.CommandContainerEntryListTypeItemDescriptor());
         desc.setMultivalued(true);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
@@ -154,7 +154,7 @@ public class CommandContainerEntryListTypeDescriptor extends org.exolab.castor.x
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.CommandContainerEntryListType.class;
+        return org.hbird.xtce.castor.CommandContainerEntryListType.class;
     }
 
     /**

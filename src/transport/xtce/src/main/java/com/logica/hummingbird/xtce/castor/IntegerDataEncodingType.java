@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * For all major encodings of integer data
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class IntegerDataEncodingType extends com.logica.hummingbird.xtce.castor.DataEncodingType 
+public class IntegerDataEncodingType extends org.hbird.xtce.castor.DataEncodingType 
 implements java.io.Serializable
 {
 
@@ -25,7 +25,7 @@ implements java.io.Serializable
     /**
      * Field _encoding.
      */
-    private com.logica.hummingbird.xtce.castor.types.IntegerDataEncodingTypeEncodingType _encoding = com.logica.hummingbird.xtce.castor.types.IntegerDataEncodingTypeEncodingType.fromValue("unsigned");
+    private org.hbird.xtce.castor.types.IntegerDataEncodingTypeEncodingType _encoding = org.hbird.xtce.castor.types.IntegerDataEncodingTypeEncodingType.fromValue("unsigned");
 
     /**
      * Field _sizeInBits.
@@ -40,14 +40,14 @@ implements java.io.Serializable
     /**
      * Field _defaultCalibrator.
      */
-    private com.logica.hummingbird.xtce.castor.DefaultCalibrator _defaultCalibrator;
+    private org.hbird.xtce.castor.DefaultCalibrator _defaultCalibrator;
 
     /**
      * Use when different calibrations must be used on the
      * Parameter in different contexts. Use the first one that
      * tests true
      */
-    private com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorList _contextCalibratorList;
+    private org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorList _contextCalibratorList;
 
 
       //----------------/
@@ -56,7 +56,7 @@ implements java.io.Serializable
 
     public IntegerDataEncodingType() {
         super();
-        setEncoding(com.logica.hummingbird.xtce.castor.types.IntegerDataEncodingTypeEncodingType.fromValue("unsigned"));
+        setEncoding(org.hbird.xtce.castor.types.IntegerDataEncodingTypeEncodingType.fromValue("unsigned"));
     }
 
 
@@ -80,7 +80,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ContextCalibratorList'.
      */
-    public com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorList getContextCalibratorList(
+    public org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorList getContextCalibratorList(
     ) {
         return this._contextCalibratorList;
     }
@@ -90,7 +90,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'DefaultCalibrator'.
      */
-    public com.logica.hummingbird.xtce.castor.DefaultCalibrator getDefaultCalibrator(
+    public org.hbird.xtce.castor.DefaultCalibrator getDefaultCalibrator(
     ) {
         return this._defaultCalibrator;
     }
@@ -100,7 +100,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'Encoding'.
      */
-    public com.logica.hummingbird.xtce.castor.types.IntegerDataEncodingTypeEncodingType getEncoding(
+    public org.hbird.xtce.castor.types.IntegerDataEncodingTypeEncodingType getEncoding(
     ) {
         return this._encoding;
     }
@@ -182,7 +182,7 @@ implements java.io.Serializable
      * 'contextCalibratorList'.
      */
     public void setContextCalibratorList(
-            final com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorList contextCalibratorList) {
+            final org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorList contextCalibratorList) {
         this._contextCalibratorList = contextCalibratorList;
     }
 
@@ -193,7 +193,7 @@ implements java.io.Serializable
      * 'defaultCalibrator'.
      */
     public void setDefaultCalibrator(
-            final com.logica.hummingbird.xtce.castor.DefaultCalibrator defaultCalibrator) {
+            final org.hbird.xtce.castor.DefaultCalibrator defaultCalibrator) {
         this._defaultCalibrator = defaultCalibrator;
     }
 
@@ -203,7 +203,7 @@ implements java.io.Serializable
      * @param encoding the value of field 'encoding'.
      */
     public void setEncoding(
-            final com.logica.hummingbird.xtce.castor.types.IntegerDataEncodingTypeEncodingType encoding) {
+            final org.hbird.xtce.castor.types.IntegerDataEncodingTypeEncodingType encoding) {
         this._encoding = encoding;
     }
 
@@ -227,12 +227,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.IntegerDataEncodingType
+     * org.hbird.xtce.castor.IntegerDataEncodingType
      */
-    public static com.logica.hummingbird.xtce.castor.IntegerDataEncodingType unmarshal(
+    public static org.hbird.xtce.castor.IntegerDataEncodingType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.IntegerDataEncodingType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.IntegerDataEncodingType.class, reader);
+        return (org.hbird.xtce.castor.IntegerDataEncodingType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.IntegerDataEncodingType.class, reader);
     }
 
     /**

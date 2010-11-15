@@ -1,4 +1,4 @@
-package com.logica.hummingbird.logger;
+package org.hbird.logger;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
@@ -8,7 +8,7 @@ import org.apache.camel.impl.DefaultExchange;
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.spi.LoggingEvent;
 
-import com.logica.hummingbird.formatter.ExchangeFormatter;
+import org.hbird.formatter.ExchangeFormatter;
 
 public class ActivemqAppender extends AppenderSkeleton {
 

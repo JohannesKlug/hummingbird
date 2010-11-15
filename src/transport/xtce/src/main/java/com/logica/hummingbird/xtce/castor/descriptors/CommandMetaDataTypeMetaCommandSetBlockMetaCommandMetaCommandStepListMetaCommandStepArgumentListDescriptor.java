@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList;
+import org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList;
 
 /**
  * Class
@@ -72,7 +72,7 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
         //-- initialize element descriptors
 
         //-- _argumentList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument.class, "_argumentList", "Argument", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument.class, "_argumentList", "Argument", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
             {
                 try {
                     CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList target = (CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList) object;
-                    target.addArgument( (com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument) value);
+                    target.addArgument( (org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -103,11 +103,11 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument();
+                return new org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument");
+        desc.setComponentType("org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -159,7 +159,7 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList.class;
+        return org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList.class;
     }
 
     /**

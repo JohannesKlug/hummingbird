@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class SevereAlarm.
@@ -87,12 +87,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.SevereAlarm
+     * org.hbird.xtce.castor.SevereAlarm
      */
-    public static com.logica.hummingbird.xtce.castor.SevereAlarm unmarshal(
+    public static org.hbird.xtce.castor.SevereAlarm unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.SevereAlarm) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.SevereAlarm.class, reader);
+        return (org.hbird.xtce.castor.SevereAlarm) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.SevereAlarm.class, reader);
     }
 
     /**

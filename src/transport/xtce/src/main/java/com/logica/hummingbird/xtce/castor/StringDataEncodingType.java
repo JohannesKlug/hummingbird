@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * For common encodings of string data
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class StringDataEncodingType extends com.logica.hummingbird.xtce.castor.DataEncodingType 
+public class StringDataEncodingType extends org.hbird.xtce.castor.DataEncodingType 
 implements java.io.Serializable
 {
 
@@ -25,24 +25,24 @@ implements java.io.Serializable
     /**
      * Field _encoding.
      */
-    private com.logica.hummingbird.xtce.castor.types.StringDataEncodingTypeEncodingType _encoding = com.logica.hummingbird.xtce.castor.types.StringDataEncodingTypeEncodingType.fromValue("UTF-8");
+    private org.hbird.xtce.castor.types.StringDataEncodingTypeEncodingType _encoding = org.hbird.xtce.castor.types.StringDataEncodingTypeEncodingType.fromValue("UTF-8");
 
     /**
      * Field _defaultCalibrator.
      */
-    private com.logica.hummingbird.xtce.castor.DefaultCalibrator _defaultCalibrator;
+    private org.hbird.xtce.castor.DefaultCalibrator _defaultCalibrator;
 
     /**
      * Use when different calibrations must be used on the
      * Parameter in different contexts. Use the first one that
      * tests true
      */
-    private com.logica.hummingbird.xtce.castor.StringDataEncodingTypeContextCalibratorList _contextCalibratorList;
+    private org.hbird.xtce.castor.StringDataEncodingTypeContextCalibratorList _contextCalibratorList;
 
     /**
      * Field _sizeInBits.
      */
-    private com.logica.hummingbird.xtce.castor.StringDataEncodingTypeSizeInBits _sizeInBits;
+    private org.hbird.xtce.castor.StringDataEncodingTypeSizeInBits _sizeInBits;
 
 
       //----------------/
@@ -51,7 +51,7 @@ implements java.io.Serializable
 
     public StringDataEncodingType() {
         super();
-        setEncoding(com.logica.hummingbird.xtce.castor.types.StringDataEncodingTypeEncodingType.fromValue("UTF-8"));
+        setEncoding(org.hbird.xtce.castor.types.StringDataEncodingTypeEncodingType.fromValue("UTF-8"));
     }
 
 
@@ -68,7 +68,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ContextCalibratorList'.
      */
-    public com.logica.hummingbird.xtce.castor.StringDataEncodingTypeContextCalibratorList getContextCalibratorList(
+    public org.hbird.xtce.castor.StringDataEncodingTypeContextCalibratorList getContextCalibratorList(
     ) {
         return this._contextCalibratorList;
     }
@@ -78,7 +78,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'DefaultCalibrator'.
      */
-    public com.logica.hummingbird.xtce.castor.DefaultCalibrator getDefaultCalibrator(
+    public org.hbird.xtce.castor.DefaultCalibrator getDefaultCalibrator(
     ) {
         return this._defaultCalibrator;
     }
@@ -88,7 +88,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'Encoding'.
      */
-    public com.logica.hummingbird.xtce.castor.types.StringDataEncodingTypeEncodingType getEncoding(
+    public org.hbird.xtce.castor.types.StringDataEncodingTypeEncodingType getEncoding(
     ) {
         return this._encoding;
     }
@@ -98,7 +98,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'SizeInBits'.
      */
-    public com.logica.hummingbird.xtce.castor.StringDataEncodingTypeSizeInBits getSizeInBits(
+    public org.hbird.xtce.castor.StringDataEncodingTypeSizeInBits getSizeInBits(
     ) {
         return this._sizeInBits;
     }
@@ -160,7 +160,7 @@ implements java.io.Serializable
      * 'contextCalibratorList'.
      */
     public void setContextCalibratorList(
-            final com.logica.hummingbird.xtce.castor.StringDataEncodingTypeContextCalibratorList contextCalibratorList) {
+            final org.hbird.xtce.castor.StringDataEncodingTypeContextCalibratorList contextCalibratorList) {
         this._contextCalibratorList = contextCalibratorList;
     }
 
@@ -171,7 +171,7 @@ implements java.io.Serializable
      * 'defaultCalibrator'.
      */
     public void setDefaultCalibrator(
-            final com.logica.hummingbird.xtce.castor.DefaultCalibrator defaultCalibrator) {
+            final org.hbird.xtce.castor.DefaultCalibrator defaultCalibrator) {
         this._defaultCalibrator = defaultCalibrator;
     }
 
@@ -181,7 +181,7 @@ implements java.io.Serializable
      * @param encoding the value of field 'encoding'.
      */
     public void setEncoding(
-            final com.logica.hummingbird.xtce.castor.types.StringDataEncodingTypeEncodingType encoding) {
+            final org.hbird.xtce.castor.types.StringDataEncodingTypeEncodingType encoding) {
         this._encoding = encoding;
     }
 
@@ -191,7 +191,7 @@ implements java.io.Serializable
      * @param sizeInBits the value of field 'sizeInBits'.
      */
     public void setSizeInBits(
-            final com.logica.hummingbird.xtce.castor.StringDataEncodingTypeSizeInBits sizeInBits) {
+            final org.hbird.xtce.castor.StringDataEncodingTypeSizeInBits sizeInBits) {
         this._sizeInBits = sizeInBits;
     }
 
@@ -204,12 +204,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.StringDataEncodingType
+     * org.hbird.xtce.castor.StringDataEncodingType
      */
-    public static com.logica.hummingbird.xtce.castor.StringDataEncodingType unmarshal(
+    public static org.hbird.xtce.castor.StringDataEncodingType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.StringDataEncodingType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.StringDataEncodingType.class, reader);
+        return (org.hbird.xtce.castor.StringDataEncodingType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.StringDataEncodingType.class, reader);
     }
 
     /**

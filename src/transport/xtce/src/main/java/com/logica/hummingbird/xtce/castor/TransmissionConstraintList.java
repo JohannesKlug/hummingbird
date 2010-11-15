@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Appended to the TramsmissionConstraint List of the base command.
@@ -27,7 +27,7 @@ public class TransmissionConstraintList implements java.io.Serializable {
      * block the transmission of the command if the constraint
      * condition is true.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.TransmissionConstraint> _transmissionConstraintList;
+    private java.util.List<org.hbird.xtce.castor.TransmissionConstraint> _transmissionConstraintList;
 
 
       //----------------/
@@ -36,7 +36,7 @@ public class TransmissionConstraintList implements java.io.Serializable {
 
     public TransmissionConstraintList() {
         super();
-        this._transmissionConstraintList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.TransmissionConstraint>();
+        this._transmissionConstraintList = new java.util.ArrayList<org.hbird.xtce.castor.TransmissionConstraint>();
     }
 
 
@@ -52,7 +52,7 @@ public class TransmissionConstraintList implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addTransmissionConstraint(
-            final com.logica.hummingbird.xtce.castor.TransmissionConstraint vTransmissionConstraint)
+            final org.hbird.xtce.castor.TransmissionConstraint vTransmissionConstraint)
     throws java.lang.IndexOutOfBoundsException {
         this._transmissionConstraintList.add(vTransmissionConstraint);
     }
@@ -67,7 +67,7 @@ public class TransmissionConstraintList implements java.io.Serializable {
      */
     public void addTransmissionConstraint(
             final int index,
-            final com.logica.hummingbird.xtce.castor.TransmissionConstraint vTransmissionConstraint)
+            final org.hbird.xtce.castor.TransmissionConstraint vTransmissionConstraint)
     throws java.lang.IndexOutOfBoundsException {
         this._transmissionConstraintList.add(index, vTransmissionConstraint);
     }
@@ -78,7 +78,7 @@ public class TransmissionConstraintList implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.TransmissionConstraint> enumerateTransmissionConstraint(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.TransmissionConstraint> enumerateTransmissionConstraint(
     ) {
         return java.util.Collections.enumeration(this._transmissionConstraintList);
     }
@@ -90,10 +90,10 @@ public class TransmissionConstraintList implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.TransmissionConstraint at
+     * org.hbird.xtce.castor.TransmissionConstraint at
      * the given index
      */
-    public com.logica.hummingbird.xtce.castor.TransmissionConstraint getTransmissionConstraint(
+    public org.hbird.xtce.castor.TransmissionConstraint getTransmissionConstraint(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -101,7 +101,7 @@ public class TransmissionConstraintList implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getTransmissionConstraint: Index value '" + index + "' not in range [0.." + (this._transmissionConstraintList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.TransmissionConstraint) _transmissionConstraintList.get(index);
+        return (org.hbird.xtce.castor.TransmissionConstraint) _transmissionConstraintList.get(index);
     }
 
     /**
@@ -114,10 +114,10 @@ public class TransmissionConstraintList implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.TransmissionConstraint[] getTransmissionConstraint(
+    public org.hbird.xtce.castor.TransmissionConstraint[] getTransmissionConstraint(
     ) {
-        com.logica.hummingbird.xtce.castor.TransmissionConstraint[] array = new com.logica.hummingbird.xtce.castor.TransmissionConstraint[0];
-        return (com.logica.hummingbird.xtce.castor.TransmissionConstraint[]) this._transmissionConstraintList.toArray(array);
+        org.hbird.xtce.castor.TransmissionConstraint[] array = new org.hbird.xtce.castor.TransmissionConstraint[0];
+        return (org.hbird.xtce.castor.TransmissionConstraint[]) this._transmissionConstraintList.toArray(array);
     }
 
     /**
@@ -151,7 +151,7 @@ public class TransmissionConstraintList implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.TransmissionConstraint> iterateTransmissionConstraint(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.TransmissionConstraint> iterateTransmissionConstraint(
     ) {
         return this._transmissionConstraintList.iterator();
     }
@@ -202,7 +202,7 @@ public class TransmissionConstraintList implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeTransmissionConstraint(
-            final com.logica.hummingbird.xtce.castor.TransmissionConstraint vTransmissionConstraint) {
+            final org.hbird.xtce.castor.TransmissionConstraint vTransmissionConstraint) {
         boolean removed = _transmissionConstraintList.remove(vTransmissionConstraint);
         return removed;
     }
@@ -213,10 +213,10 @@ public class TransmissionConstraintList implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.TransmissionConstraint removeTransmissionConstraintAt(
+    public org.hbird.xtce.castor.TransmissionConstraint removeTransmissionConstraintAt(
             final int index) {
         java.lang.Object obj = this._transmissionConstraintList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.TransmissionConstraint) obj;
+        return (org.hbird.xtce.castor.TransmissionConstraint) obj;
     }
 
     /**
@@ -229,7 +229,7 @@ public class TransmissionConstraintList implements java.io.Serializable {
      */
     public void setTransmissionConstraint(
             final int index,
-            final com.logica.hummingbird.xtce.castor.TransmissionConstraint vTransmissionConstraint)
+            final org.hbird.xtce.castor.TransmissionConstraint vTransmissionConstraint)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._transmissionConstraintList.size()) {
@@ -245,7 +245,7 @@ public class TransmissionConstraintList implements java.io.Serializable {
      * @param vTransmissionConstraintArray
      */
     public void setTransmissionConstraint(
-            final com.logica.hummingbird.xtce.castor.TransmissionConstraint[] vTransmissionConstraintArray) {
+            final org.hbird.xtce.castor.TransmissionConstraint[] vTransmissionConstraintArray) {
         //-- copy array
         _transmissionConstraintList.clear();
 
@@ -263,12 +263,12 @@ public class TransmissionConstraintList implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.TransmissionConstraintList
+     * org.hbird.xtce.castor.TransmissionConstraintList
      */
-    public static com.logica.hummingbird.xtce.castor.TransmissionConstraintList unmarshal(
+    public static org.hbird.xtce.castor.TransmissionConstraintList unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.TransmissionConstraintList) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.TransmissionConstraintList.class, reader);
+        return (org.hbird.xtce.castor.TransmissionConstraintList) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.TransmissionConstraintList.class, reader);
     }
 
     /**

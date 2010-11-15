@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types.descriptors;
+package org.hbird.xtce.castor.types.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.types.IntegerDataEncodingTypeEncodingType;
+import org.hbird.xtce.castor.types.IntegerDataEncodingTypeEncodingType;
 
 /**
  * Class IntegerDataEncodingTypeEncodingTypeDescriptor.
@@ -98,7 +98,7 @@ public class IntegerDataEncodingTypeEncodingTypeDescriptor extends org.exolab.ca
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.types.IntegerDataEncodingTypeEncodingType.class;
+        return org.hbird.xtce.castor.types.IntegerDataEncodingTypeEncodingType.class;
     }
 
     /**

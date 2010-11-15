@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * The Key = Command Op Code. Each MetaCommand may have one
@@ -14,7 +14,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class CommandContainerType extends com.logica.hummingbird.xtce.castor.ContainerType 
+public class CommandContainerType extends org.hbird.xtce.castor.ContainerType 
 implements java.io.Serializable
 {
 
@@ -26,12 +26,12 @@ implements java.io.Serializable
     /**
      * Field _entryList.
      */
-    private com.logica.hummingbird.xtce.castor.CommandContainerTypeEntryList _entryList;
+    private org.hbird.xtce.castor.CommandContainerTypeEntryList _entryList;
 
     /**
      * Field _baseContainer.
      */
-    private com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainer _baseContainer;
+    private org.hbird.xtce.castor.CommandContainerTypeBaseContainer _baseContainer;
 
 
       //----------------/
@@ -52,7 +52,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'BaseContainer'.
      */
-    public com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainer getBaseContainer(
+    public org.hbird.xtce.castor.CommandContainerTypeBaseContainer getBaseContainer(
     ) {
         return this._baseContainer;
     }
@@ -62,7 +62,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'EntryList'.
      */
-    public com.logica.hummingbird.xtce.castor.CommandContainerTypeEntryList getEntryList(
+    public org.hbird.xtce.castor.CommandContainerTypeEntryList getEntryList(
     ) {
         return this._entryList;
     }
@@ -120,7 +120,7 @@ implements java.io.Serializable
      * @param baseContainer the value of field 'baseContainer'.
      */
     public void setBaseContainer(
-            final com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainer baseContainer) {
+            final org.hbird.xtce.castor.CommandContainerTypeBaseContainer baseContainer) {
         this._baseContainer = baseContainer;
     }
 
@@ -130,7 +130,7 @@ implements java.io.Serializable
      * @param entryList the value of field 'entryList'.
      */
     public void setEntryList(
-            final com.logica.hummingbird.xtce.castor.CommandContainerTypeEntryList entryList) {
+            final org.hbird.xtce.castor.CommandContainerTypeEntryList entryList) {
         this._entryList = entryList;
     }
 
@@ -143,12 +143,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.CommandContainerType
+     * org.hbird.xtce.castor.CommandContainerType
      */
-    public static com.logica.hummingbird.xtce.castor.CommandContainerType unmarshal(
+    public static org.hbird.xtce.castor.CommandContainerType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.CommandContainerType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.CommandContainerType.class, reader);
+        return (org.hbird.xtce.castor.CommandContainerType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.CommandContainerType.class, reader);
     }
 
     /**

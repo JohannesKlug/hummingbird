@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Where the Dimension list is in this form:
@@ -30,7 +30,7 @@ public class DimensionList implements java.io.Serializable {
      * index for each dimension, OR the Size must be specified.
      * Indexes are zero based.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.Dimension> _dimensionList;
+    private java.util.List<org.hbird.xtce.castor.Dimension> _dimensionList;
 
 
       //----------------/
@@ -39,7 +39,7 @@ public class DimensionList implements java.io.Serializable {
 
     public DimensionList() {
         super();
-        this._dimensionList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.Dimension>();
+        this._dimensionList = new java.util.ArrayList<org.hbird.xtce.castor.Dimension>();
     }
 
 
@@ -55,7 +55,7 @@ public class DimensionList implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addDimension(
-            final com.logica.hummingbird.xtce.castor.Dimension vDimension)
+            final org.hbird.xtce.castor.Dimension vDimension)
     throws java.lang.IndexOutOfBoundsException {
         this._dimensionList.add(vDimension);
     }
@@ -70,7 +70,7 @@ public class DimensionList implements java.io.Serializable {
      */
     public void addDimension(
             final int index,
-            final com.logica.hummingbird.xtce.castor.Dimension vDimension)
+            final org.hbird.xtce.castor.Dimension vDimension)
     throws java.lang.IndexOutOfBoundsException {
         this._dimensionList.add(index, vDimension);
     }
@@ -81,7 +81,7 @@ public class DimensionList implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.Dimension> enumerateDimension(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.Dimension> enumerateDimension(
     ) {
         return java.util.Collections.enumeration(this._dimensionList);
     }
@@ -93,10 +93,10 @@ public class DimensionList implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.Dimension at the given
+     * org.hbird.xtce.castor.Dimension at the given
      * index
      */
-    public com.logica.hummingbird.xtce.castor.Dimension getDimension(
+    public org.hbird.xtce.castor.Dimension getDimension(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -104,7 +104,7 @@ public class DimensionList implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getDimension: Index value '" + index + "' not in range [0.." + (this._dimensionList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.Dimension) _dimensionList.get(index);
+        return (org.hbird.xtce.castor.Dimension) _dimensionList.get(index);
     }
 
     /**
@@ -116,10 +116,10 @@ public class DimensionList implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.Dimension[] getDimension(
+    public org.hbird.xtce.castor.Dimension[] getDimension(
     ) {
-        com.logica.hummingbird.xtce.castor.Dimension[] array = new com.logica.hummingbird.xtce.castor.Dimension[0];
-        return (com.logica.hummingbird.xtce.castor.Dimension[]) this._dimensionList.toArray(array);
+        org.hbird.xtce.castor.Dimension[] array = new org.hbird.xtce.castor.Dimension[0];
+        return (org.hbird.xtce.castor.Dimension[]) this._dimensionList.toArray(array);
     }
 
     /**
@@ -153,7 +153,7 @@ public class DimensionList implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.Dimension> iterateDimension(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.Dimension> iterateDimension(
     ) {
         return this._dimensionList.iterator();
     }
@@ -204,7 +204,7 @@ public class DimensionList implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeDimension(
-            final com.logica.hummingbird.xtce.castor.Dimension vDimension) {
+            final org.hbird.xtce.castor.Dimension vDimension) {
         boolean removed = _dimensionList.remove(vDimension);
         return removed;
     }
@@ -215,10 +215,10 @@ public class DimensionList implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.Dimension removeDimensionAt(
+    public org.hbird.xtce.castor.Dimension removeDimensionAt(
             final int index) {
         java.lang.Object obj = this._dimensionList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.Dimension) obj;
+        return (org.hbird.xtce.castor.Dimension) obj;
     }
 
     /**
@@ -231,7 +231,7 @@ public class DimensionList implements java.io.Serializable {
      */
     public void setDimension(
             final int index,
-            final com.logica.hummingbird.xtce.castor.Dimension vDimension)
+            final org.hbird.xtce.castor.Dimension vDimension)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._dimensionList.size()) {
@@ -247,7 +247,7 @@ public class DimensionList implements java.io.Serializable {
      * @param vDimensionArray
      */
     public void setDimension(
-            final com.logica.hummingbird.xtce.castor.Dimension[] vDimensionArray) {
+            final org.hbird.xtce.castor.Dimension[] vDimensionArray) {
         //-- copy array
         _dimensionList.clear();
 
@@ -265,12 +265,12 @@ public class DimensionList implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.DimensionList
+     * org.hbird.xtce.castor.DimensionList
      */
-    public static com.logica.hummingbird.xtce.castor.DimensionList unmarshal(
+    public static org.hbird.xtce.castor.DimensionList unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.DimensionList) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.DimensionList.class, reader);
+        return (org.hbird.xtce.castor.DimensionList) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.DimensionList.class, reader);
     }
 
     /**

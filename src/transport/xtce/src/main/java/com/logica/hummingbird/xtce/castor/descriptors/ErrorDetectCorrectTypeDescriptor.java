@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ErrorDetectCorrectType;
+import org.hbird.xtce.castor.ErrorDetectCorrectType;
 
 /**
  * Class ErrorDetectCorrectTypeDescriptor.
@@ -71,7 +71,7 @@ public class ErrorDetectCorrectTypeDescriptor extends org.exolab.castor.xml.util
         //-- initialize element descriptors
 
         //-- _parity
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Parity.class, "_parity", "Parity", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Parity.class, "_parity", "Parity", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class ErrorDetectCorrectTypeDescriptor extends org.exolab.castor.xml.util
             {
                 try {
                     ErrorDetectCorrectType target = (ErrorDetectCorrectType) object;
-                    target.setParity( (com.logica.hummingbird.xtce.castor.Parity) value);
+                    target.setParity( (org.hbird.xtce.castor.Parity) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class ErrorDetectCorrectTypeDescriptor extends org.exolab.castor.xml.util
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Parity();
+                return new org.hbird.xtce.castor.Parity();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.Parity");
+        desc.setSchemaType("org.hbird.xtce.castor.Parity");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -112,7 +112,7 @@ public class ErrorDetectCorrectTypeDescriptor extends org.exolab.castor.xml.util
         }
         desc.setValidator(fieldValidator);
         //-- _CRC
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.CRC.class, "_CRC", "CRC", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.CRC.class, "_CRC", "CRC", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -127,7 +127,7 @@ public class ErrorDetectCorrectTypeDescriptor extends org.exolab.castor.xml.util
             {
                 try {
                     ErrorDetectCorrectType target = (ErrorDetectCorrectType) object;
-                    target.setCRC( (com.logica.hummingbird.xtce.castor.CRC) value);
+                    target.setCRC( (org.hbird.xtce.castor.CRC) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -135,10 +135,10 @@ public class ErrorDetectCorrectTypeDescriptor extends org.exolab.castor.xml.util
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.CRC();
+                return new org.hbird.xtce.castor.CRC();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.CRC");
+        desc.setSchemaType("org.hbird.xtce.castor.CRC");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -190,7 +190,7 @@ public class ErrorDetectCorrectTypeDescriptor extends org.exolab.castor.xml.util
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ErrorDetectCorrectType.class;
+        return org.hbird.xtce.castor.ErrorDetectCorrectType.class;
     }
 
     /**

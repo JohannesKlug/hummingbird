@@ -30,7 +30,7 @@
 		<level value="WARN" />
 	</logger>
 	
-	<logger name="com.logica.hummingbird.xtce">
+	<logger name="org.hbird.xtce">
 		<level value="DEBUG"></level>
 	</logger>
 	

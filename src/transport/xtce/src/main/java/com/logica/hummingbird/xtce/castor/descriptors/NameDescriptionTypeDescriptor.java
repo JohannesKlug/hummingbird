@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.NameDescriptionType;
+import org.hbird.xtce.castor.NameDescriptionType;
 
 /**
  * Class NameDescriptionTypeDescriptor.
@@ -201,7 +201,7 @@ public class NameDescriptionTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _aliasSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.AliasSet.class, "_aliasSet", "AliasSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.AliasSet.class, "_aliasSet", "AliasSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -216,7 +216,7 @@ public class NameDescriptionTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     NameDescriptionType target = (NameDescriptionType) object;
-                    target.setAliasSet( (com.logica.hummingbird.xtce.castor.AliasSet) value);
+                    target.setAliasSet( (org.hbird.xtce.castor.AliasSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -224,10 +224,10 @@ public class NameDescriptionTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.AliasSet();
+                return new org.hbird.xtce.castor.AliasSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.AliasSet");
+        desc.setSchemaType("org.hbird.xtce.castor.AliasSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -277,7 +277,7 @@ public class NameDescriptionTypeDescriptor extends org.exolab.castor.xml.util.XM
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.NameDescriptionType.class;
+        return org.hbird.xtce.castor.NameDescriptionType.class;
     }
 
     /**

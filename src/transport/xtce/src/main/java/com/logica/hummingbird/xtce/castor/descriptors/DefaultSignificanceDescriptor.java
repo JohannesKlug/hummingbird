@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.DefaultSignificance;
+import org.hbird.xtce.castor.DefaultSignificance;
 
 /**
  * Class DefaultSignificanceDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class DefaultSignificanceDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.SignificanceTypeDescriptor {
+public class DefaultSignificanceDescriptor extends org.hbird.xtce.castor.descriptors.SignificanceTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class DefaultSignificanceDescriptor extends com.logica.hummingbird.xtce.c
 
     public DefaultSignificanceDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.SignificanceTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.SignificanceTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "DefaultSignificance";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class DefaultSignificanceDescriptor extends com.logica.hummingbird.xtce.c
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.DefaultSignificance.class;
+        return org.hbird.xtce.castor.DefaultSignificance.class;
     }
 
     /**

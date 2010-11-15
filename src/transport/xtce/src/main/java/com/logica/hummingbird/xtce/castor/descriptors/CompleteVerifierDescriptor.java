@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.CompleteVerifier;
+import org.hbird.xtce.castor.CompleteVerifier;
 
 /**
  * Class CompleteVerifierDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class CompleteVerifierDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor {
+public class CompleteVerifierDescriptor extends org.hbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class CompleteVerifierDescriptor extends com.logica.hummingbird.xtce.cast
 
     public CompleteVerifierDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "CompleteVerifier";
         _elementDefinition = true;
@@ -72,7 +72,7 @@ public class CompleteVerifierDescriptor extends com.logica.hummingbird.xtce.cast
         //-- initialize element descriptors
 
         //-- _returnParmRef
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ReturnParmRef.class, "_returnParmRef", "ReturnParmRef", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ReturnParmRef.class, "_returnParmRef", "ReturnParmRef", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class CompleteVerifierDescriptor extends com.logica.hummingbird.xtce.cast
             {
                 try {
                     CompleteVerifier target = (CompleteVerifier) object;
-                    target.setReturnParmRef( (com.logica.hummingbird.xtce.castor.ReturnParmRef) value);
+                    target.setReturnParmRef( (org.hbird.xtce.castor.ReturnParmRef) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,10 +95,10 @@ public class CompleteVerifierDescriptor extends com.logica.hummingbird.xtce.cast
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ReturnParmRef();
+                return new org.hbird.xtce.castor.ReturnParmRef();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ReturnParmRef");
+        desc.setSchemaType("org.hbird.xtce.castor.ReturnParmRef");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -151,7 +151,7 @@ public class CompleteVerifierDescriptor extends com.logica.hummingbird.xtce.cast
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.CompleteVerifier.class;
+        return org.hbird.xtce.castor.CompleteVerifier.class;
     }
 
     /**

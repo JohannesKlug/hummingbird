@@ -8,9 +8,9 @@
 
   <ibatorContext id="context1" >
     <jdbcConnection driverClass="org.h2.Driver" connectionURL="jdbc:h2:~/test" userId="sa" password="" />
-    <javaModelGenerator targetPackage="com.logica.hummingbird.packetarchive" targetProject="packetarchive/src/main/java" />
-    <sqlMapGenerator targetPackage="com.logica.hummingbird.packetarchive" targetProject="packetarchive/src/main/java" />
-    <daoGenerator targetPackage="com.logica.hummingbird.packetarchive" targetProject="packetarchive/src/main/java" type="GENERIC-CI" />
+    <javaModelGenerator targetPackage="org.hbird.packetarchive" targetProject="packetarchive/src/main/java" />
+    <sqlMapGenerator targetPackage="org.hbird.packetarchive" targetProject="packetarchive/src/main/java" />
+    <daoGenerator targetPackage="org.hbird.packetarchive" targetProject="packetarchive/src/main/java" type="GENERIC-CI" />
     <table schema="hummingbird" tableName="packet"></table>
   </ibatorContext>
 </ibatorConfiguration>

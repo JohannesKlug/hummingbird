@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.CRC;
+import org.hbird.xtce.castor.CRC;
 
 /**
  * Class CRCDescriptor.
@@ -116,7 +116,7 @@ public class CRCDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptor
         }
         desc.setValidator(fieldValidator);
         //-- _reference
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.CRCReferenceType.class, "_reference", "reference", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.CRCReferenceType.class, "_reference", "reference", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -131,7 +131,7 @@ public class CRCDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptor
             {
                 try {
                     CRC target = (CRC) object;
-                    target.setReference( (com.logica.hummingbird.xtce.castor.types.CRCReferenceType) value);
+                    target.setReference( (org.hbird.xtce.castor.types.CRCReferenceType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -142,7 +142,7 @@ public class CRCDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptor
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.CRCReferenceType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.CRCReferenceType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("CRCReferenceType");
         desc.setHandler(handler);
@@ -157,7 +157,7 @@ public class CRCDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptor
         //-- initialize element descriptors
 
         //-- _polynomial
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Polynomial.class, "_polynomial", "Polynomial", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Polynomial.class, "_polynomial", "Polynomial", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -172,7 +172,7 @@ public class CRCDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptor
             {
                 try {
                     CRC target = (CRC) object;
-                    target.setPolynomial( (com.logica.hummingbird.xtce.castor.Polynomial) value);
+                    target.setPolynomial( (org.hbird.xtce.castor.Polynomial) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -180,10 +180,10 @@ public class CRCDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptor
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Polynomial();
+                return new org.hbird.xtce.castor.Polynomial();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.Polynomial");
+        desc.setSchemaType("org.hbird.xtce.castor.Polynomial");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -235,7 +235,7 @@ public class CRCDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptor
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.CRC.class;
+        return org.hbird.xtce.castor.CRC.class;
     }
 
     /**

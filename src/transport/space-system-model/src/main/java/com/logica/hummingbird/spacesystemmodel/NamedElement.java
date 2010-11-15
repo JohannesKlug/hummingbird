@@ -24,7 +24,7 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.spacesystemmodel;
+package org.hbird.spacesystemmodel;
 
 import java.util.HashMap;
 import java.util.Map;

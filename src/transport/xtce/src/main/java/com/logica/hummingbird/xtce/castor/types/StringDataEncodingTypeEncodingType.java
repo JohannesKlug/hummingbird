@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types;
+package org.hbird.xtce.castor.types;
 
 /**
  * Enumeration StringDataEncodingTypeEncodingType.
@@ -58,7 +58,7 @@ public enum StringDataEncodingTypeEncodingType implements java.io.Serializable {
      * @param value
      * @return the constant for this value
      */
-    public static com.logica.hummingbird.xtce.castor.types.StringDataEncodingTypeEncodingType fromValue(
+    public static org.hbird.xtce.castor.types.StringDataEncodingTypeEncodingType fromValue(
             final java.lang.String value) {
         for (StringDataEncodingTypeEncodingType c: StringDataEncodingTypeEncodingType.values()) {
             if (c.value.equals(value)) {

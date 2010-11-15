@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ContainerType;
+import org.hbird.xtce.castor.ContainerType;
 
 /**
  * Class ContainerTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ContainerTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
+public class ContainerTypeDescriptor extends org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ContainerTypeDescriptor extends com.logica.hummingbird.xtce.castor.
 
     public ContainerTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ContainerType";
         _elementDefinition = false;
@@ -72,7 +72,7 @@ public class ContainerTypeDescriptor extends com.logica.hummingbird.xtce.castor.
         //-- initialize element descriptors
 
         //-- _defaultRateInStream
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.DefaultRateInStream.class, "_defaultRateInStream", "DefaultRateInStream", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.DefaultRateInStream.class, "_defaultRateInStream", "DefaultRateInStream", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class ContainerTypeDescriptor extends com.logica.hummingbird.xtce.castor.
             {
                 try {
                     ContainerType target = (ContainerType) object;
-                    target.setDefaultRateInStream( (com.logica.hummingbird.xtce.castor.DefaultRateInStream) value);
+                    target.setDefaultRateInStream( (org.hbird.xtce.castor.DefaultRateInStream) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,10 +95,10 @@ public class ContainerTypeDescriptor extends com.logica.hummingbird.xtce.castor.
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.DefaultRateInStream();
+                return new org.hbird.xtce.castor.DefaultRateInStream();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.DefaultRateInStream");
+        desc.setSchemaType("org.hbird.xtce.castor.DefaultRateInStream");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -111,7 +111,7 @@ public class ContainerTypeDescriptor extends com.logica.hummingbird.xtce.castor.
         }
         desc.setValidator(fieldValidator);
         //-- _rateInStreamSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.RateInStreamSet.class, "_rateInStreamSet", "RateInStreamSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.RateInStreamSet.class, "_rateInStreamSet", "RateInStreamSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -126,7 +126,7 @@ public class ContainerTypeDescriptor extends com.logica.hummingbird.xtce.castor.
             {
                 try {
                     ContainerType target = (ContainerType) object;
-                    target.setRateInStreamSet( (com.logica.hummingbird.xtce.castor.RateInStreamSet) value);
+                    target.setRateInStreamSet( (org.hbird.xtce.castor.RateInStreamSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -134,10 +134,10 @@ public class ContainerTypeDescriptor extends com.logica.hummingbird.xtce.castor.
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.RateInStreamSet();
+                return new org.hbird.xtce.castor.RateInStreamSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.RateInStreamSet");
+        desc.setSchemaType("org.hbird.xtce.castor.RateInStreamSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -150,7 +150,7 @@ public class ContainerTypeDescriptor extends com.logica.hummingbird.xtce.castor.
         }
         desc.setValidator(fieldValidator);
         //-- _binaryEncoding
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.BinaryEncoding.class, "_binaryEncoding", "BinaryEncoding", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.BinaryEncoding.class, "_binaryEncoding", "BinaryEncoding", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -165,7 +165,7 @@ public class ContainerTypeDescriptor extends com.logica.hummingbird.xtce.castor.
             {
                 try {
                     ContainerType target = (ContainerType) object;
-                    target.setBinaryEncoding( (com.logica.hummingbird.xtce.castor.BinaryEncoding) value);
+                    target.setBinaryEncoding( (org.hbird.xtce.castor.BinaryEncoding) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -173,10 +173,10 @@ public class ContainerTypeDescriptor extends com.logica.hummingbird.xtce.castor.
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.BinaryEncoding();
+                return new org.hbird.xtce.castor.BinaryEncoding();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.BinaryEncoding");
+        desc.setSchemaType("org.hbird.xtce.castor.BinaryEncoding");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -229,7 +229,7 @@ public class ContainerTypeDescriptor extends com.logica.hummingbird.xtce.castor.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ContainerType.class;
+        return org.hbird.xtce.castor.ContainerType.class;
     }
 
     /**

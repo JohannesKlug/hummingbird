@@ -1,10 +1,10 @@
-package com.logica.hummingbird.tasks;
+package org.hbird.tasks;
 
 import java.io.Serializable;
 
 import org.apache.camel.Message;
 
-import com.logica.hummingbird.interfaces.ITask;
+import org.hbird.interfaces.ITask;
 
 
 public abstract class AbstractTask implements ITask, Serializable {

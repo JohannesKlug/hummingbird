@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * When it's important to know the physical address(s) on the
@@ -34,7 +34,7 @@ public class PhysicalAddressType implements java.io.Serializable {
     /**
      * Field _subAddress.
      */
-    private com.logica.hummingbird.xtce.castor.SubAddress _subAddress;
+    private org.hbird.xtce.castor.SubAddress _subAddress;
 
 
       //----------------/
@@ -75,7 +75,7 @@ public class PhysicalAddressType implements java.io.Serializable {
      * 
      * @return the value of field 'SubAddress'.
      */
-    public com.logica.hummingbird.xtce.castor.SubAddress getSubAddress(
+    public org.hbird.xtce.castor.SubAddress getSubAddress(
     ) {
         return this._subAddress;
     }
@@ -153,7 +153,7 @@ public class PhysicalAddressType implements java.io.Serializable {
      * @param subAddress the value of field 'subAddress'.
      */
     public void setSubAddress(
-            final com.logica.hummingbird.xtce.castor.SubAddress subAddress) {
+            final org.hbird.xtce.castor.SubAddress subAddress) {
         this._subAddress = subAddress;
     }
 
@@ -166,12 +166,12 @@ public class PhysicalAddressType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.PhysicalAddressType
+     * org.hbird.xtce.castor.PhysicalAddressType
      */
-    public static com.logica.hummingbird.xtce.castor.PhysicalAddressType unmarshal(
+    public static org.hbird.xtce.castor.PhysicalAddressType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.PhysicalAddressType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.PhysicalAddressType.class, reader);
+        return (org.hbird.xtce.castor.PhysicalAddressType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.PhysicalAddressType.class, reader);
     }
 
     /**

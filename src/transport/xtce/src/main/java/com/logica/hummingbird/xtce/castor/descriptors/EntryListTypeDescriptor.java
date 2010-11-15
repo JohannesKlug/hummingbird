@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.EntryListType;
+import org.hbird.xtce.castor.EntryListType;
 
 /**
  * Class EntryListTypeDescriptor.
@@ -67,7 +67,7 @@ public class EntryListTypeDescriptor extends org.exolab.castor.xml.util.XMLClass
         //-- initialize element descriptors
 
         //-- _items
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.EntryListTypeItem.class, "_items", (java.lang.String) null, org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.EntryListTypeItem.class, "_items", (java.lang.String) null, org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -82,7 +82,7 @@ public class EntryListTypeDescriptor extends org.exolab.castor.xml.util.XMLClass
             {
                 try {
                     EntryListType target = (EntryListType) object;
-                    target.addEntryListTypeItem( (com.logica.hummingbird.xtce.castor.EntryListTypeItem) value);
+                    target.addEntryListTypeItem( (org.hbird.xtce.castor.EntryListTypeItem) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -98,14 +98,14 @@ public class EntryListTypeDescriptor extends org.exolab.castor.xml.util.XMLClass
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.EntryListTypeItem();
+                return new org.hbird.xtce.castor.EntryListTypeItem();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.EntryListTypeItem");
+        desc.setComponentType("org.hbird.xtce.castor.EntryListTypeItem");
         desc.setHandler(handler);
         desc.setContainer(true);
-        desc.setClassDescriptor(new com.logica.hummingbird.xtce.castor.descriptors.EntryListTypeItemDescriptor());
+        desc.setClassDescriptor(new org.hbird.xtce.castor.descriptors.EntryListTypeItemDescriptor());
         desc.setMultivalued(true);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
@@ -154,7 +154,7 @@ public class EntryListTypeDescriptor extends org.exolab.castor.xml.util.XMLClass
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.EntryListType.class;
+        return org.hbird.xtce.castor.EntryListType.class;
     }
 
     /**

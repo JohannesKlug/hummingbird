@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.SevereRange;
+import org.hbird.xtce.castor.SevereRange;
 
 /**
  * Class SevereRangeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class SevereRangeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor {
+public class SevereRangeDescriptor extends org.hbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class SevereRangeDescriptor extends com.logica.hummingbird.xtce.castor.de
 
     public SevereRangeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "SevereRange";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class SevereRangeDescriptor extends com.logica.hummingbird.xtce.castor.de
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.SevereRange.class;
+        return org.hbird.xtce.castor.SevereRange.class;
     }
 
     /**

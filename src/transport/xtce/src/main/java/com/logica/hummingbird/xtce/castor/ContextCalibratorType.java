@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Context calibrations are applied when the ContextMatch is true.
@@ -24,12 +24,12 @@ public class ContextCalibratorType implements java.io.Serializable {
     /**
      * Field _contextMatch.
      */
-    private com.logica.hummingbird.xtce.castor.ContextMatch _contextMatch;
+    private org.hbird.xtce.castor.ContextMatch _contextMatch;
 
     /**
      * Field _calibrator.
      */
-    private com.logica.hummingbird.xtce.castor.Calibrator _calibrator;
+    private org.hbird.xtce.castor.Calibrator _calibrator;
 
 
       //----------------/
@@ -50,7 +50,7 @@ public class ContextCalibratorType implements java.io.Serializable {
      * 
      * @return the value of field 'Calibrator'.
      */
-    public com.logica.hummingbird.xtce.castor.Calibrator getCalibrator(
+    public org.hbird.xtce.castor.Calibrator getCalibrator(
     ) {
         return this._calibrator;
     }
@@ -60,7 +60,7 @@ public class ContextCalibratorType implements java.io.Serializable {
      * 
      * @return the value of field 'ContextMatch'.
      */
-    public com.logica.hummingbird.xtce.castor.ContextMatch getContextMatch(
+    public org.hbird.xtce.castor.ContextMatch getContextMatch(
     ) {
         return this._contextMatch;
     }
@@ -118,7 +118,7 @@ public class ContextCalibratorType implements java.io.Serializable {
      * @param calibrator the value of field 'calibrator'.
      */
     public void setCalibrator(
-            final com.logica.hummingbird.xtce.castor.Calibrator calibrator) {
+            final org.hbird.xtce.castor.Calibrator calibrator) {
         this._calibrator = calibrator;
     }
 
@@ -128,7 +128,7 @@ public class ContextCalibratorType implements java.io.Serializable {
      * @param contextMatch the value of field 'contextMatch'.
      */
     public void setContextMatch(
-            final com.logica.hummingbird.xtce.castor.ContextMatch contextMatch) {
+            final org.hbird.xtce.castor.ContextMatch contextMatch) {
         this._contextMatch = contextMatch;
     }
 
@@ -141,12 +141,12 @@ public class ContextCalibratorType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ContextCalibratorType
+     * org.hbird.xtce.castor.ContextCalibratorType
      */
-    public static com.logica.hummingbird.xtce.castor.ContextCalibratorType unmarshal(
+    public static org.hbird.xtce.castor.ContextCalibratorType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ContextCalibratorType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ContextCalibratorType.class, reader);
+        return (org.hbird.xtce.castor.ContextCalibratorType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ContextCalibratorType.class, reader);
     }
 
     /**

@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.UseWhenCondition;
+import org.hbird.xtce.castor.UseWhenCondition;
 
 /**
  * Class UseWhenConditionDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class UseWhenConditionDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.BooleanExpressionTypeDescriptor {
+public class UseWhenConditionDescriptor extends org.hbird.xtce.castor.descriptors.BooleanExpressionTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class UseWhenConditionDescriptor extends com.logica.hummingbird.xtce.cast
 
     public UseWhenConditionDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.BooleanExpressionTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.BooleanExpressionTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "UseWhenCondition";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class UseWhenConditionDescriptor extends com.logica.hummingbird.xtce.cast
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.UseWhenCondition.class;
+        return org.hbird.xtce.castor.UseWhenCondition.class;
     }
 
     /**

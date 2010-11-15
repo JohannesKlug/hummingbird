@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Contains an integral value
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class IntegerDataType extends com.logica.hummingbird.xtce.castor.NumericDataType 
+public class IntegerDataType extends org.hbird.xtce.castor.NumericDataType 
 implements java.io.Serializable
 {
 
@@ -250,12 +250,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.IntegerDataType
+     * org.hbird.xtce.castor.IntegerDataType
      */
-    public static com.logica.hummingbird.xtce.castor.IntegerDataType unmarshal(
+    public static org.hbird.xtce.castor.IntegerDataType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.IntegerDataType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.IntegerDataType.class, reader);
+        return (org.hbird.xtce.castor.IntegerDataType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.IntegerDataType.class, reader);
     }
 
     /**

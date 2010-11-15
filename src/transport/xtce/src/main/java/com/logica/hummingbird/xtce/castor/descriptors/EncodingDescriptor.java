@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Encoding;
+import org.hbird.xtce.castor.Encoding;
 
 /**
  * Class EncodingDescriptor.
@@ -69,7 +69,7 @@ public class EncodingDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
         //-- initialize attribute descriptors
 
         //-- _units
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.EncodingUnitsType.class, "_units", "units", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.EncodingUnitsType.class, "_units", "units", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -84,7 +84,7 @@ public class EncodingDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             {
                 try {
                     Encoding target = (Encoding) object;
-                    target.setUnits( (com.logica.hummingbird.xtce.castor.types.EncodingUnitsType) value);
+                    target.setUnits( (org.hbird.xtce.castor.types.EncodingUnitsType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,7 +95,7 @@ public class EncodingDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.EncodingUnitsType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.EncodingUnitsType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("EncodingUnitsType");
         desc.setHandler(handler);
@@ -206,7 +206,7 @@ public class EncodingDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
         //-- initialize element descriptors
 
         //-- _binaryDataEncoding
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.BinaryDataEncoding.class, "_binaryDataEncoding", "BinaryDataEncoding", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.BinaryDataEncoding.class, "_binaryDataEncoding", "BinaryDataEncoding", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -221,7 +221,7 @@ public class EncodingDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             {
                 try {
                     Encoding target = (Encoding) object;
-                    target.setBinaryDataEncoding( (com.logica.hummingbird.xtce.castor.BinaryDataEncoding) value);
+                    target.setBinaryDataEncoding( (org.hbird.xtce.castor.BinaryDataEncoding) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -229,10 +229,10 @@ public class EncodingDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.BinaryDataEncoding();
+                return new org.hbird.xtce.castor.BinaryDataEncoding();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.BinaryDataEncoding");
+        desc.setSchemaType("org.hbird.xtce.castor.BinaryDataEncoding");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -247,7 +247,7 @@ public class EncodingDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
         }
         desc.setValidator(fieldValidator);
         //-- _floatDataEncoding
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.FloatDataEncoding.class, "_floatDataEncoding", "FloatDataEncoding", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.FloatDataEncoding.class, "_floatDataEncoding", "FloatDataEncoding", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -262,7 +262,7 @@ public class EncodingDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             {
                 try {
                     Encoding target = (Encoding) object;
-                    target.setFloatDataEncoding( (com.logica.hummingbird.xtce.castor.FloatDataEncoding) value);
+                    target.setFloatDataEncoding( (org.hbird.xtce.castor.FloatDataEncoding) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -270,10 +270,10 @@ public class EncodingDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.FloatDataEncoding();
+                return new org.hbird.xtce.castor.FloatDataEncoding();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.FloatDataEncoding");
+        desc.setSchemaType("org.hbird.xtce.castor.FloatDataEncoding");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -288,7 +288,7 @@ public class EncodingDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
         }
         desc.setValidator(fieldValidator);
         //-- _integerDataEncoding
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.IntegerDataEncoding.class, "_integerDataEncoding", "IntegerDataEncoding", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.IntegerDataEncoding.class, "_integerDataEncoding", "IntegerDataEncoding", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -303,7 +303,7 @@ public class EncodingDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             {
                 try {
                     Encoding target = (Encoding) object;
-                    target.setIntegerDataEncoding( (com.logica.hummingbird.xtce.castor.IntegerDataEncoding) value);
+                    target.setIntegerDataEncoding( (org.hbird.xtce.castor.IntegerDataEncoding) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -311,10 +311,10 @@ public class EncodingDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.IntegerDataEncoding();
+                return new org.hbird.xtce.castor.IntegerDataEncoding();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.IntegerDataEncoding");
+        desc.setSchemaType("org.hbird.xtce.castor.IntegerDataEncoding");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -329,7 +329,7 @@ public class EncodingDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
         }
         desc.setValidator(fieldValidator);
         //-- _stringDataEncoding
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.StringDataEncoding.class, "_stringDataEncoding", "StringDataEncoding", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.StringDataEncoding.class, "_stringDataEncoding", "StringDataEncoding", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -344,7 +344,7 @@ public class EncodingDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             {
                 try {
                     Encoding target = (Encoding) object;
-                    target.setStringDataEncoding( (com.logica.hummingbird.xtce.castor.StringDataEncoding) value);
+                    target.setStringDataEncoding( (org.hbird.xtce.castor.StringDataEncoding) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -352,10 +352,10 @@ public class EncodingDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.StringDataEncoding();
+                return new org.hbird.xtce.castor.StringDataEncoding();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.StringDataEncoding");
+        desc.setSchemaType("org.hbird.xtce.castor.StringDataEncoding");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -407,7 +407,7 @@ public class EncodingDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Encoding.class;
+        return org.hbird.xtce.castor.Encoding.class;
     }
 
     /**

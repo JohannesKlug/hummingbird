@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ByteOrderType;
+import org.hbird.xtce.castor.ByteOrderType;
 
 /**
  * Class ByteOrderTypeDescriptor.
@@ -67,7 +67,7 @@ public class ByteOrderTypeDescriptor extends org.exolab.castor.xml.util.XMLClass
         //-- initialize element descriptors
 
         //-- _items
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ByteOrderTypeItem.class, "_items", (java.lang.String) null, org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ByteOrderTypeItem.class, "_items", (java.lang.String) null, org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -82,7 +82,7 @@ public class ByteOrderTypeDescriptor extends org.exolab.castor.xml.util.XMLClass
             {
                 try {
                     ByteOrderType target = (ByteOrderType) object;
-                    target.addByteOrderTypeItem( (com.logica.hummingbird.xtce.castor.ByteOrderTypeItem) value);
+                    target.addByteOrderTypeItem( (org.hbird.xtce.castor.ByteOrderTypeItem) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -98,14 +98,14 @@ public class ByteOrderTypeDescriptor extends org.exolab.castor.xml.util.XMLClass
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ByteOrderTypeItem();
+                return new org.hbird.xtce.castor.ByteOrderTypeItem();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.ByteOrderTypeItem");
+        desc.setComponentType("org.hbird.xtce.castor.ByteOrderTypeItem");
         desc.setHandler(handler);
         desc.setContainer(true);
-        desc.setClassDescriptor(new com.logica.hummingbird.xtce.castor.descriptors.ByteOrderTypeItemDescriptor());
+        desc.setClassDescriptor(new org.hbird.xtce.castor.descriptors.ByteOrderTypeItemDescriptor());
         desc.setMultivalued(true);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
@@ -154,7 +154,7 @@ public class ByteOrderTypeDescriptor extends org.exolab.castor.xml.util.XMLClass
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ByteOrderType.class;
+        return org.hbird.xtce.castor.ByteOrderType.class;
     }
 
     /**

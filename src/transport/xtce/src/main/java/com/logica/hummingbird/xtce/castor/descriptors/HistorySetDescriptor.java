@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.HistorySet;
+import org.hbird.xtce.castor.HistorySet;
 
 /**
  * Class HistorySetDescriptor.
@@ -162,7 +162,7 @@ public class HistorySetDescriptor extends org.exolab.castor.xml.util.XMLClassDes
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.HistorySet.class;
+        return org.hbird.xtce.castor.HistorySet.class;
     }
 
     /**

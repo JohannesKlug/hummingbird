@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * The type definition used by most elements that require a name
@@ -43,7 +43,7 @@ public class NameDescriptionType implements java.io.Serializable {
     /**
      * Field _aliasSet.
      */
-    private com.logica.hummingbird.xtce.castor.AliasSet _aliasSet;
+    private org.hbird.xtce.castor.AliasSet _aliasSet;
 
 
       //----------------/
@@ -64,7 +64,7 @@ public class NameDescriptionType implements java.io.Serializable {
      * 
      * @return the value of field 'AliasSet'.
      */
-    public com.logica.hummingbird.xtce.castor.AliasSet getAliasSet(
+    public org.hbird.xtce.castor.AliasSet getAliasSet(
     ) {
         return this._aliasSet;
     }
@@ -159,7 +159,7 @@ public class NameDescriptionType implements java.io.Serializable {
      * @param aliasSet the value of field 'aliasSet'.
      */
     public void setAliasSet(
-            final com.logica.hummingbird.xtce.castor.AliasSet aliasSet) {
+            final org.hbird.xtce.castor.AliasSet aliasSet) {
         this._aliasSet = aliasSet;
     }
 
@@ -209,12 +209,12 @@ public class NameDescriptionType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.NameDescriptionType
+     * org.hbird.xtce.castor.NameDescriptionType
      */
-    public static com.logica.hummingbird.xtce.castor.NameDescriptionType unmarshal(
+    public static org.hbird.xtce.castor.NameDescriptionType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.NameDescriptionType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.NameDescriptionType.class, reader);
+        return (org.hbird.xtce.castor.NameDescriptionType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.NameDescriptionType.class, reader);
     }
 
     /**

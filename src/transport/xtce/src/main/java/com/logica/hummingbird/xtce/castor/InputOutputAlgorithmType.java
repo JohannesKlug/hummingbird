@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A set of labled outputs are added to the
@@ -14,7 +14,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class InputOutputAlgorithmType extends com.logica.hummingbird.xtce.castor.InputAlgorithmType 
+public class InputOutputAlgorithmType extends org.hbird.xtce.castor.InputAlgorithmType 
 implements java.io.Serializable
 {
 
@@ -36,7 +36,7 @@ implements java.io.Serializable
     /**
      * Field _outputSet.
      */
-    private com.logica.hummingbird.xtce.castor.OutputSet _outputSet;
+    private org.hbird.xtce.castor.OutputSet _outputSet;
 
 
       //----------------/
@@ -64,7 +64,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'OutputSet'.
      */
-    public com.logica.hummingbird.xtce.castor.OutputSet getOutputSet(
+    public org.hbird.xtce.castor.OutputSet getOutputSet(
     ) {
         return this._outputSet;
     }
@@ -152,7 +152,7 @@ implements java.io.Serializable
      * @param outputSet the value of field 'outputSet'.
      */
     public void setOutputSet(
-            final com.logica.hummingbird.xtce.castor.OutputSet outputSet) {
+            final org.hbird.xtce.castor.OutputSet outputSet) {
         this._outputSet = outputSet;
     }
 
@@ -176,12 +176,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.InputOutputAlgorithmType
+     * org.hbird.xtce.castor.InputOutputAlgorithmType
      */
-    public static com.logica.hummingbird.xtce.castor.InputOutputAlgorithmType unmarshal(
+    public static org.hbird.xtce.castor.InputOutputAlgorithmType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.InputOutputAlgorithmType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.InputOutputAlgorithmType.class, reader);
+        return (org.hbird.xtce.castor.InputOutputAlgorithmType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.InputOutputAlgorithmType.class, reader);
     }
 
     /**

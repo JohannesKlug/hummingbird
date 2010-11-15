@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types;
+package org.hbird.xtce.castor.types;
 
 /**
  * Enumeration ParameterPropertiesTypeDataSourceType.
@@ -66,7 +66,7 @@ public enum ParameterPropertiesTypeDataSourceType implements java.io.Serializabl
      * @param value
      * @return the constant for this value
      */
-    public static com.logica.hummingbird.xtce.castor.types.ParameterPropertiesTypeDataSourceType fromValue(
+    public static org.hbird.xtce.castor.types.ParameterPropertiesTypeDataSourceType fromValue(
             final java.lang.String value) {
         for (ParameterPropertiesTypeDataSourceType c: ParameterPropertiesTypeDataSourceType.values()) {
             if (c.value.equals(value)) {

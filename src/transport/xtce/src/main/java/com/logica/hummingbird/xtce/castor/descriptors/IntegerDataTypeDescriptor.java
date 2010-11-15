@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.IntegerDataType;
+import org.hbird.xtce.castor.IntegerDataType;
 
 /**
  * Class IntegerDataTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class IntegerDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.NumericDataTypeDescriptor {
+public class IntegerDataTypeDescriptor extends org.hbird.xtce.castor.descriptors.NumericDataTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class IntegerDataTypeDescriptor extends com.logica.hummingbird.xtce.casto
 
     public IntegerDataTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.NumericDataTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.NumericDataTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "IntegerDataType";
         _elementDefinition = false;
@@ -248,7 +248,7 @@ public class IntegerDataTypeDescriptor extends com.logica.hummingbird.xtce.casto
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.IntegerDataType.class;
+        return org.hbird.xtce.castor.IntegerDataType.class;
     }
 
     /**

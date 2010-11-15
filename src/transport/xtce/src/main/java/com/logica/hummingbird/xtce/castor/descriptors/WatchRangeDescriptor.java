@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.WatchRange;
+import org.hbird.xtce.castor.WatchRange;
 
 /**
  * Class WatchRangeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class WatchRangeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor {
+public class WatchRangeDescriptor extends org.hbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class WatchRangeDescriptor extends com.logica.hummingbird.xtce.castor.des
 
     public WatchRangeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "WatchRange";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class WatchRangeDescriptor extends com.logica.hummingbird.xtce.castor.des
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.WatchRange.class;
+        return org.hbird.xtce.castor.WatchRange.class;
     }
 
     /**

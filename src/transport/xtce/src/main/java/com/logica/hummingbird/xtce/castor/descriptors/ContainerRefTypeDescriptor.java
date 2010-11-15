@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ContainerRefType;
+import org.hbird.xtce.castor.ContainerRefType;
 
 /**
  * Class ContainerRefTypeDescriptor.
@@ -149,7 +149,7 @@ public class ContainerRefTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ContainerRefType.class;
+        return org.hbird.xtce.castor.ContainerRefType.class;
     }
 
     /**

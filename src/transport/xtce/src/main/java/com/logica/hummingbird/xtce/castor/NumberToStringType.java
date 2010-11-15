@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * There are two ways numeric data can be changed to string data:
@@ -31,12 +31,12 @@ public class NumberToStringType implements java.io.Serializable {
     /**
      * Field _numberToStringTypeChoice.
      */
-    private com.logica.hummingbird.xtce.castor.NumberToStringTypeChoice _numberToStringTypeChoice;
+    private org.hbird.xtce.castor.NumberToStringTypeChoice _numberToStringTypeChoice;
 
     /**
      * Field _numberFormat.
      */
-    private com.logica.hummingbird.xtce.castor.NumberFormat _numberFormat;
+    private org.hbird.xtce.castor.NumberFormat _numberFormat;
 
 
       //----------------/
@@ -69,7 +69,7 @@ public class NumberToStringType implements java.io.Serializable {
      * 
      * @return the value of field 'NumberFormat'.
      */
-    public com.logica.hummingbird.xtce.castor.NumberFormat getNumberFormat(
+    public org.hbird.xtce.castor.NumberFormat getNumberFormat(
     ) {
         return this._numberFormat;
     }
@@ -79,7 +79,7 @@ public class NumberToStringType implements java.io.Serializable {
      * 
      * @return the value of field 'NumberToStringTypeChoice'.
      */
-    public com.logica.hummingbird.xtce.castor.NumberToStringTypeChoice getNumberToStringTypeChoice(
+    public org.hbird.xtce.castor.NumberToStringTypeChoice getNumberToStringTypeChoice(
     ) {
         return this._numberToStringTypeChoice;
     }
@@ -137,7 +137,7 @@ public class NumberToStringType implements java.io.Serializable {
      * @param numberFormat the value of field 'numberFormat'.
      */
     public void setNumberFormat(
-            final com.logica.hummingbird.xtce.castor.NumberFormat numberFormat) {
+            final org.hbird.xtce.castor.NumberFormat numberFormat) {
         this._numberFormat = numberFormat;
         this._choiceValue = numberFormat;
     }
@@ -149,7 +149,7 @@ public class NumberToStringType implements java.io.Serializable {
      * 'numberToStringTypeChoice'.
      */
     public void setNumberToStringTypeChoice(
-            final com.logica.hummingbird.xtce.castor.NumberToStringTypeChoice numberToStringTypeChoice) {
+            final org.hbird.xtce.castor.NumberToStringTypeChoice numberToStringTypeChoice) {
         this._numberToStringTypeChoice = numberToStringTypeChoice;
         this._choiceValue = numberToStringTypeChoice;
     }
@@ -163,12 +163,12 @@ public class NumberToStringType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.NumberToStringType
+     * org.hbird.xtce.castor.NumberToStringType
      */
-    public static com.logica.hummingbird.xtce.castor.NumberToStringType unmarshal(
+    public static org.hbird.xtce.castor.NumberToStringType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.NumberToStringType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.NumberToStringType.class, reader);
+        return (org.hbird.xtce.castor.NumberToStringType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.NumberToStringType.class, reader);
     }
 
     /**

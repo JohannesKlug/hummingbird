@@ -1,8 +1,8 @@
-package com.logica.hummingbird.tasks.checks;
+package org.hbird.tasks.checks;
 
 import org.apache.camel.Message;
 
-import com.logica.hummingbird.buffers.ObjectBuffer;
+import org.hbird.buffers.ObjectBuffer;
 
 public class DynamicHeaderBasedValue extends ConfigurableValue {
 

@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.FixedValueEntry;
+import org.hbird.xtce.castor.FixedValueEntry;
 
 /**
  * Class FixedValueEntryDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class FixedValueEntryDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor {
+public class FixedValueEntryDescriptor extends org.hbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class FixedValueEntryDescriptor extends com.logica.hummingbird.xtce.casto
 
     public FixedValueEntryDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "FixedValueEntry";
         _elementDefinition = true;
@@ -194,7 +194,7 @@ public class FixedValueEntryDescriptor extends com.logica.hummingbird.xtce.casto
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.FixedValueEntry.class;
+        return org.hbird.xtce.castor.FixedValueEntry.class;
     }
 
     /**

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
+package org.hbird.spacesystemmodel.parameters.behaviours;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,8 +13,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float64Behaviour;
-import com.logica.hummingbird.util.BitSetUtility;
+import org.hbird.spacesystemmodel.parameters.behaviours.Float64Behaviour;
+import org.hbird.util.BitSetUtility;
 
 /**
  * @author Mark Doyle

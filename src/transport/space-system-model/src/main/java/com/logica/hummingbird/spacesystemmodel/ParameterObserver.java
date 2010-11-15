@@ -1,4 +1,4 @@
-package com.logica.hummingbird.spacesystemmodel;
+package org.hbird.spacesystemmodel;
 
 public interface ParameterObserver {
 	public void updated(String field, int value, String shortDescription, String longDescription);

@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.TelemetryMetaDataType;
+import org.hbird.xtce.castor.TelemetryMetaDataType;
 
 /**
  * Class TelemetryMetaDataTypeDescriptor.
@@ -71,7 +71,7 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
         //-- initialize element descriptors
 
         //-- _parameterTypeSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ParameterTypeSet.class, "_parameterTypeSet", "ParameterTypeSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ParameterTypeSet.class, "_parameterTypeSet", "ParameterTypeSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
             {
                 try {
                     TelemetryMetaDataType target = (TelemetryMetaDataType) object;
-                    target.setParameterTypeSet( (com.logica.hummingbird.xtce.castor.ParameterTypeSet) value);
+                    target.setParameterTypeSet( (org.hbird.xtce.castor.ParameterTypeSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ParameterTypeSet();
+                return new org.hbird.xtce.castor.ParameterTypeSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ParameterTypeSet");
+        desc.setSchemaType("org.hbird.xtce.castor.ParameterTypeSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -110,7 +110,7 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
         }
         desc.setValidator(fieldValidator);
         //-- _parameterSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ParameterSet.class, "_parameterSet", "ParameterSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ParameterSet.class, "_parameterSet", "ParameterSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -125,7 +125,7 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
             {
                 try {
                     TelemetryMetaDataType target = (TelemetryMetaDataType) object;
-                    target.setParameterSet( (com.logica.hummingbird.xtce.castor.ParameterSet) value);
+                    target.setParameterSet( (org.hbird.xtce.castor.ParameterSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -133,10 +133,10 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ParameterSet();
+                return new org.hbird.xtce.castor.ParameterSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ParameterSet");
+        desc.setSchemaType("org.hbird.xtce.castor.ParameterSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -149,7 +149,7 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
         }
         desc.setValidator(fieldValidator);
         //-- _containerSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ContainerSet.class, "_containerSet", "ContainerSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ContainerSet.class, "_containerSet", "ContainerSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -164,7 +164,7 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
             {
                 try {
                     TelemetryMetaDataType target = (TelemetryMetaDataType) object;
-                    target.setContainerSet( (com.logica.hummingbird.xtce.castor.ContainerSet) value);
+                    target.setContainerSet( (org.hbird.xtce.castor.ContainerSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -172,10 +172,10 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ContainerSet();
+                return new org.hbird.xtce.castor.ContainerSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ContainerSet");
+        desc.setSchemaType("org.hbird.xtce.castor.ContainerSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -188,7 +188,7 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
         }
         desc.setValidator(fieldValidator);
         //-- _messageSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.MessageSet.class, "_messageSet", "MessageSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.MessageSet.class, "_messageSet", "MessageSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -203,7 +203,7 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
             {
                 try {
                     TelemetryMetaDataType target = (TelemetryMetaDataType) object;
-                    target.setMessageSet( (com.logica.hummingbird.xtce.castor.MessageSet) value);
+                    target.setMessageSet( (org.hbird.xtce.castor.MessageSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -211,10 +211,10 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.MessageSet();
+                return new org.hbird.xtce.castor.MessageSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.MessageSet");
+        desc.setSchemaType("org.hbird.xtce.castor.MessageSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -227,7 +227,7 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
         }
         desc.setValidator(fieldValidator);
         //-- _streamSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.StreamSet.class, "_streamSet", "StreamSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.StreamSet.class, "_streamSet", "StreamSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -242,7 +242,7 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
             {
                 try {
                     TelemetryMetaDataType target = (TelemetryMetaDataType) object;
-                    target.setStreamSet( (com.logica.hummingbird.xtce.castor.StreamSet) value);
+                    target.setStreamSet( (org.hbird.xtce.castor.StreamSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -250,10 +250,10 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.StreamSet();
+                return new org.hbird.xtce.castor.StreamSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.StreamSet");
+        desc.setSchemaType("org.hbird.xtce.castor.StreamSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -266,7 +266,7 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
         }
         desc.setValidator(fieldValidator);
         //-- _algorithmSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.AlgorithmSet.class, "_algorithmSet", "AlgorithmSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.AlgorithmSet.class, "_algorithmSet", "AlgorithmSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -281,7 +281,7 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
             {
                 try {
                     TelemetryMetaDataType target = (TelemetryMetaDataType) object;
-                    target.setAlgorithmSet( (com.logica.hummingbird.xtce.castor.AlgorithmSet) value);
+                    target.setAlgorithmSet( (org.hbird.xtce.castor.AlgorithmSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -289,10 +289,10 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.AlgorithmSet();
+                return new org.hbird.xtce.castor.AlgorithmSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.AlgorithmSet");
+        desc.setSchemaType("org.hbird.xtce.castor.AlgorithmSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -342,7 +342,7 @@ public class TelemetryMetaDataTypeDescriptor extends org.exolab.castor.xml.util.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.TelemetryMetaDataType.class;
+        return org.hbird.xtce.castor.TelemetryMetaDataType.class;
     }
 
     /**

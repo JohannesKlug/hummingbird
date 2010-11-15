@@ -1,4 +1,4 @@
-package com.logica.hummingbird.util;
+package org.hbird.util;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,8 +9,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.util.BitSetUtility;
-import com.logica.hummingbird.util.BytesUtility;
+import org.hbird.util.BitSetUtility;
+import org.hbird.util.BytesUtility;
 
 /**
  * ACRONYMS USED:

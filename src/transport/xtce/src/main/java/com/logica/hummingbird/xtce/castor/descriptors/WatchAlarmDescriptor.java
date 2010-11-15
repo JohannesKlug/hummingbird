@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.WatchAlarm;
+import org.hbird.xtce.castor.WatchAlarm;
 
 /**
  * Class WatchAlarmDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class WatchAlarmDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor {
+public class WatchAlarmDescriptor extends org.hbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class WatchAlarmDescriptor extends com.logica.hummingbird.xtce.castor.des
 
     public WatchAlarmDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "WatchAlarm";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class WatchAlarmDescriptor extends com.logica.hummingbird.xtce.castor.des
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.WatchAlarm.class;
+        return org.hbird.xtce.castor.WatchAlarm.class;
     }
 
     /**

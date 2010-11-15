@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types;
+package org.hbird.xtce.castor.types;
 
 /**
  * Enumeration DataEncodingTypeBitOrderType.
@@ -58,7 +58,7 @@ public enum DataEncodingTypeBitOrderType implements java.io.Serializable {
      * @param value
      * @return the constant for this value
      */
-    public static com.logica.hummingbird.xtce.castor.types.DataEncodingTypeBitOrderType fromValue(
+    public static org.hbird.xtce.castor.types.DataEncodingTypeBitOrderType fromValue(
             final java.lang.String value) {
         for (DataEncodingTypeBitOrderType c: DataEncodingTypeBitOrderType.values()) {
             if (c.value.equals(value)) {

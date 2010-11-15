@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ArgumentAssignmentList;
+import org.hbird.xtce.castor.ArgumentAssignmentList;
 
 /**
  * Class ArgumentAssignmentListDescriptor.
@@ -71,7 +71,7 @@ public class ArgumentAssignmentListDescriptor extends org.exolab.castor.xml.util
         //-- initialize element descriptors
 
         //-- _argumentAssignmentList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ArgumentAssignment.class, "_argumentAssignmentList", "ArgumentAssignment", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ArgumentAssignment.class, "_argumentAssignmentList", "ArgumentAssignment", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class ArgumentAssignmentListDescriptor extends org.exolab.castor.xml.util
             {
                 try {
                     ArgumentAssignmentList target = (ArgumentAssignmentList) object;
-                    target.addArgumentAssignment( (com.logica.hummingbird.xtce.castor.ArgumentAssignment) value);
+                    target.addArgumentAssignment( (org.hbird.xtce.castor.ArgumentAssignment) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -102,11 +102,11 @@ public class ArgumentAssignmentListDescriptor extends org.exolab.castor.xml.util
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ArgumentAssignment();
+                return new org.hbird.xtce.castor.ArgumentAssignment();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.ArgumentAssignment");
+        desc.setComponentType("org.hbird.xtce.castor.ArgumentAssignment");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -158,7 +158,7 @@ public class ArgumentAssignmentListDescriptor extends org.exolab.castor.xml.util
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ArgumentAssignmentList.class;
+        return org.hbird.xtce.castor.ArgumentAssignmentList.class;
     }
 
     /**

@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Property;
+import org.hbird.xtce.castor.Property;
 
 /**
  * Class PropertyDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class PropertyDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.PropertyTypeDescriptor {
+public class PropertyDescriptor extends org.hbird.xtce.castor.descriptors.PropertyTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class PropertyDescriptor extends com.logica.hummingbird.xtce.castor.descr
 
     public PropertyDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.PropertyTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.PropertyTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "Property";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class PropertyDescriptor extends com.logica.hummingbird.xtce.castor.descr
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Property.class;
+        return org.hbird.xtce.castor.Property.class;
     }
 
     /**

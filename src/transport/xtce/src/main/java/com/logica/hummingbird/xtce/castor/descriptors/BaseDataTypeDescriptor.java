@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.BaseDataType;
+import org.hbird.xtce.castor.BaseDataType;
 
 /**
  * Class BaseDataTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class BaseDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
+public class BaseDataTypeDescriptor extends org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class BaseDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.d
 
     public BaseDataTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "BaseDataType";
         _elementDefinition = false;
@@ -72,7 +72,7 @@ public class BaseDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.d
         //-- initialize element descriptors
 
         //-- _unitSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.UnitSet.class, "_unitSet", "UnitSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.UnitSet.class, "_unitSet", "UnitSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class BaseDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.d
             {
                 try {
                     BaseDataType target = (BaseDataType) object;
-                    target.setUnitSet( (com.logica.hummingbird.xtce.castor.UnitSet) value);
+                    target.setUnitSet( (org.hbird.xtce.castor.UnitSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,10 +95,10 @@ public class BaseDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.d
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.UnitSet();
+                return new org.hbird.xtce.castor.UnitSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.UnitSet");
+        desc.setSchemaType("org.hbird.xtce.castor.UnitSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -113,7 +113,7 @@ public class BaseDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.d
         }
         desc.setValidator(fieldValidator);
         //-- _baseDataTypeChoice
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.BaseDataTypeChoice.class, "_baseDataTypeChoice", "-error-if-this-is-used-", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.BaseDataTypeChoice.class, "_baseDataTypeChoice", "-error-if-this-is-used-", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -128,7 +128,7 @@ public class BaseDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.d
             {
                 try {
                     BaseDataType target = (BaseDataType) object;
-                    target.setBaseDataTypeChoice( (com.logica.hummingbird.xtce.castor.BaseDataTypeChoice) value);
+                    target.setBaseDataTypeChoice( (org.hbird.xtce.castor.BaseDataTypeChoice) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -136,13 +136,13 @@ public class BaseDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.d
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.BaseDataTypeChoice();
+                return new org.hbird.xtce.castor.BaseDataTypeChoice();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.BaseDataTypeChoice");
+        desc.setSchemaType("org.hbird.xtce.castor.BaseDataTypeChoice");
         desc.setHandler(handler);
         desc.setContainer(true);
-        desc.setClassDescriptor(new com.logica.hummingbird.xtce.castor.descriptors.BaseDataTypeChoiceDescriptor());
+        desc.setClassDescriptor(new org.hbird.xtce.castor.descriptors.BaseDataTypeChoiceDescriptor());
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
         addFieldDescriptor(desc);
@@ -194,7 +194,7 @@ public class BaseDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.d
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.BaseDataType.class;
+        return org.hbird.xtce.castor.BaseDataType.class;
     }
 
     /**

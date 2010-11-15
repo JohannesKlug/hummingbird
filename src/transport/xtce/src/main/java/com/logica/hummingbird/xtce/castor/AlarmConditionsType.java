@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * When the alarm is determined by boolean logic
@@ -23,27 +23,27 @@ public class AlarmConditionsType implements java.io.Serializable {
     /**
      * Field _watchAlarm.
      */
-    private com.logica.hummingbird.xtce.castor.WatchAlarm _watchAlarm;
+    private org.hbird.xtce.castor.WatchAlarm _watchAlarm;
 
     /**
      * Field _warningAlarm.
      */
-    private com.logica.hummingbird.xtce.castor.WarningAlarm _warningAlarm;
+    private org.hbird.xtce.castor.WarningAlarm _warningAlarm;
 
     /**
      * Field _distressAlarm.
      */
-    private com.logica.hummingbird.xtce.castor.DistressAlarm _distressAlarm;
+    private org.hbird.xtce.castor.DistressAlarm _distressAlarm;
 
     /**
      * Field _critialAlarm.
      */
-    private com.logica.hummingbird.xtce.castor.CritialAlarm _critialAlarm;
+    private org.hbird.xtce.castor.CritialAlarm _critialAlarm;
 
     /**
      * Field _severeAlarm.
      */
-    private com.logica.hummingbird.xtce.castor.SevereAlarm _severeAlarm;
+    private org.hbird.xtce.castor.SevereAlarm _severeAlarm;
 
 
       //----------------/
@@ -64,7 +64,7 @@ public class AlarmConditionsType implements java.io.Serializable {
      * 
      * @return the value of field 'CritialAlarm'.
      */
-    public com.logica.hummingbird.xtce.castor.CritialAlarm getCritialAlarm(
+    public org.hbird.xtce.castor.CritialAlarm getCritialAlarm(
     ) {
         return this._critialAlarm;
     }
@@ -74,7 +74,7 @@ public class AlarmConditionsType implements java.io.Serializable {
      * 
      * @return the value of field 'DistressAlarm'.
      */
-    public com.logica.hummingbird.xtce.castor.DistressAlarm getDistressAlarm(
+    public org.hbird.xtce.castor.DistressAlarm getDistressAlarm(
     ) {
         return this._distressAlarm;
     }
@@ -84,7 +84,7 @@ public class AlarmConditionsType implements java.io.Serializable {
      * 
      * @return the value of field 'SevereAlarm'.
      */
-    public com.logica.hummingbird.xtce.castor.SevereAlarm getSevereAlarm(
+    public org.hbird.xtce.castor.SevereAlarm getSevereAlarm(
     ) {
         return this._severeAlarm;
     }
@@ -94,7 +94,7 @@ public class AlarmConditionsType implements java.io.Serializable {
      * 
      * @return the value of field 'WarningAlarm'.
      */
-    public com.logica.hummingbird.xtce.castor.WarningAlarm getWarningAlarm(
+    public org.hbird.xtce.castor.WarningAlarm getWarningAlarm(
     ) {
         return this._warningAlarm;
     }
@@ -104,7 +104,7 @@ public class AlarmConditionsType implements java.io.Serializable {
      * 
      * @return the value of field 'WatchAlarm'.
      */
-    public com.logica.hummingbird.xtce.castor.WatchAlarm getWatchAlarm(
+    public org.hbird.xtce.castor.WatchAlarm getWatchAlarm(
     ) {
         return this._watchAlarm;
     }
@@ -162,7 +162,7 @@ public class AlarmConditionsType implements java.io.Serializable {
      * @param critialAlarm the value of field 'critialAlarm'.
      */
     public void setCritialAlarm(
-            final com.logica.hummingbird.xtce.castor.CritialAlarm critialAlarm) {
+            final org.hbird.xtce.castor.CritialAlarm critialAlarm) {
         this._critialAlarm = critialAlarm;
     }
 
@@ -172,7 +172,7 @@ public class AlarmConditionsType implements java.io.Serializable {
      * @param distressAlarm the value of field 'distressAlarm'.
      */
     public void setDistressAlarm(
-            final com.logica.hummingbird.xtce.castor.DistressAlarm distressAlarm) {
+            final org.hbird.xtce.castor.DistressAlarm distressAlarm) {
         this._distressAlarm = distressAlarm;
     }
 
@@ -182,7 +182,7 @@ public class AlarmConditionsType implements java.io.Serializable {
      * @param severeAlarm the value of field 'severeAlarm'.
      */
     public void setSevereAlarm(
-            final com.logica.hummingbird.xtce.castor.SevereAlarm severeAlarm) {
+            final org.hbird.xtce.castor.SevereAlarm severeAlarm) {
         this._severeAlarm = severeAlarm;
     }
 
@@ -192,7 +192,7 @@ public class AlarmConditionsType implements java.io.Serializable {
      * @param warningAlarm the value of field 'warningAlarm'.
      */
     public void setWarningAlarm(
-            final com.logica.hummingbird.xtce.castor.WarningAlarm warningAlarm) {
+            final org.hbird.xtce.castor.WarningAlarm warningAlarm) {
         this._warningAlarm = warningAlarm;
     }
 
@@ -202,7 +202,7 @@ public class AlarmConditionsType implements java.io.Serializable {
      * @param watchAlarm the value of field 'watchAlarm'.
      */
     public void setWatchAlarm(
-            final com.logica.hummingbird.xtce.castor.WatchAlarm watchAlarm) {
+            final org.hbird.xtce.castor.WatchAlarm watchAlarm) {
         this._watchAlarm = watchAlarm;
     }
 
@@ -215,12 +215,12 @@ public class AlarmConditionsType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.AlarmConditionsType
+     * org.hbird.xtce.castor.AlarmConditionsType
      */
-    public static com.logica.hummingbird.xtce.castor.AlarmConditionsType unmarshal(
+    public static org.hbird.xtce.castor.AlarmConditionsType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.AlarmConditionsType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.AlarmConditionsType.class, reader);
+        return (org.hbird.xtce.castor.AlarmConditionsType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.AlarmConditionsType.class, reader);
     }
 
     /**

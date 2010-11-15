@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.RelativeTimeParameterType;
+import org.hbird.xtce.castor.RelativeTimeParameterType;
 
 /**
  * Class RelativeTimeParameterTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class RelativeTimeParameterTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.RelativeTimeDataTypeDescriptor {
+public class RelativeTimeParameterTypeDescriptor extends org.hbird.xtce.castor.descriptors.RelativeTimeDataTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class RelativeTimeParameterTypeDescriptor extends com.logica.hummingbird.
 
     public RelativeTimeParameterTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.RelativeTimeDataTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.RelativeTimeDataTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "RelativeTimeParameterType";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class RelativeTimeParameterTypeDescriptor extends com.logica.hummingbird.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.RelativeTimeParameterType.class;
+        return org.hbird.xtce.castor.RelativeTimeParameterType.class;
     }
 
     /**

@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ContainerSegmentRefEntry;
+import org.hbird.xtce.castor.ContainerSegmentRefEntry;
 
 /**
  * Class ContainerSegmentRefEntryDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ContainerSegmentRefEntryDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ContainerSegmentRefEntryTypeDescriptor {
+public class ContainerSegmentRefEntryDescriptor extends org.hbird.xtce.castor.descriptors.ContainerSegmentRefEntryTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ContainerSegmentRefEntryDescriptor extends com.logica.hummingbird.x
 
     public ContainerSegmentRefEntryDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ContainerSegmentRefEntryTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ContainerSegmentRefEntryTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ContainerSegmentRefEntry";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class ContainerSegmentRefEntryDescriptor extends com.logica.hummingbird.x
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ContainerSegmentRefEntry.class;
+        return org.hbird.xtce.castor.ContainerSegmentRefEntry.class;
     }
 
     /**

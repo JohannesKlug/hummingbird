@@ -1,9 +1,9 @@
-package com.logica.hummingbird.type;
+package org.hbird.type;
 
-import com.logica.hummingbird.buffers.ObjectBuffer;
-import com.logica.hummingbird.tasks.checks.ParameterNotSetException;
-import com.logica.hummingbird.tasks.checks.Range;
-import com.logica.hummingbird.tasks.checks.StaticValue;
+import org.hbird.buffers.ObjectBuffer;
+import org.hbird.tasks.checks.ParameterNotSetException;
+import org.hbird.tasks.checks.Range;
+import org.hbird.tasks.checks.StaticValue;
 
 
 /**

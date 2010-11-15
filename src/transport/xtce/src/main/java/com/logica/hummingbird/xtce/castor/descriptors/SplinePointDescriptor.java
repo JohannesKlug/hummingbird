@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.SplinePoint;
+import org.hbird.xtce.castor.SplinePoint;
 
 /**
  * Class SplinePointDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class SplinePointDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.SplinePointTypeDescriptor {
+public class SplinePointDescriptor extends org.hbird.xtce.castor.descriptors.SplinePointTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class SplinePointDescriptor extends com.logica.hummingbird.xtce.castor.de
 
     public SplinePointDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.SplinePointTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.SplinePointTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "SplinePoint";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class SplinePointDescriptor extends com.logica.hummingbird.xtce.castor.de
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.SplinePoint.class;
+        return org.hbird.xtce.castor.SplinePoint.class;
     }
 
     /**

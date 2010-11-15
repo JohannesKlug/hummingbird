@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Used by Meta Command to indicate ground Parameters that should
@@ -24,12 +24,12 @@ public class ParameterToSetType implements java.io.Serializable {
     /**
      * Field _parameterRef.
      */
-    private com.logica.hummingbird.xtce.castor.ParameterRef _parameterRef;
+    private org.hbird.xtce.castor.ParameterRef _parameterRef;
 
     /**
      * Field _derivation.
      */
-    private com.logica.hummingbird.xtce.castor.Derivation _derivation;
+    private org.hbird.xtce.castor.Derivation _derivation;
 
 
       //----------------/
@@ -50,7 +50,7 @@ public class ParameterToSetType implements java.io.Serializable {
      * 
      * @return the value of field 'Derivation'.
      */
-    public com.logica.hummingbird.xtce.castor.Derivation getDerivation(
+    public org.hbird.xtce.castor.Derivation getDerivation(
     ) {
         return this._derivation;
     }
@@ -60,7 +60,7 @@ public class ParameterToSetType implements java.io.Serializable {
      * 
      * @return the value of field 'ParameterRef'.
      */
-    public com.logica.hummingbird.xtce.castor.ParameterRef getParameterRef(
+    public org.hbird.xtce.castor.ParameterRef getParameterRef(
     ) {
         return this._parameterRef;
     }
@@ -118,7 +118,7 @@ public class ParameterToSetType implements java.io.Serializable {
      * @param derivation the value of field 'derivation'.
      */
     public void setDerivation(
-            final com.logica.hummingbird.xtce.castor.Derivation derivation) {
+            final org.hbird.xtce.castor.Derivation derivation) {
         this._derivation = derivation;
     }
 
@@ -128,7 +128,7 @@ public class ParameterToSetType implements java.io.Serializable {
      * @param parameterRef the value of field 'parameterRef'.
      */
     public void setParameterRef(
-            final com.logica.hummingbird.xtce.castor.ParameterRef parameterRef) {
+            final org.hbird.xtce.castor.ParameterRef parameterRef) {
         this._parameterRef = parameterRef;
     }
 
@@ -141,12 +141,12 @@ public class ParameterToSetType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ParameterToSetType
+     * org.hbird.xtce.castor.ParameterToSetType
      */
-    public static com.logica.hummingbird.xtce.castor.ParameterToSetType unmarshal(
+    public static org.hbird.xtce.castor.ParameterToSetType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ParameterToSetType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ParameterToSetType.class, reader);
+        return (org.hbird.xtce.castor.ParameterToSetType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ParameterToSetType.class, reader);
     }
 
     /**

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class BaseDataTypeChoice.
@@ -23,22 +23,22 @@ public class BaseDataTypeChoice implements java.io.Serializable {
     /**
      * Field _binaryDataEncoding.
      */
-    private com.logica.hummingbird.xtce.castor.BinaryDataEncoding _binaryDataEncoding;
+    private org.hbird.xtce.castor.BinaryDataEncoding _binaryDataEncoding;
 
     /**
      * Field _floatDataEncoding.
      */
-    private com.logica.hummingbird.xtce.castor.FloatDataEncoding _floatDataEncoding;
+    private org.hbird.xtce.castor.FloatDataEncoding _floatDataEncoding;
 
     /**
      * Field _integerDataEncoding.
      */
-    private com.logica.hummingbird.xtce.castor.IntegerDataEncoding _integerDataEncoding;
+    private org.hbird.xtce.castor.IntegerDataEncoding _integerDataEncoding;
 
     /**
      * Field _stringDataEncoding.
      */
-    private com.logica.hummingbird.xtce.castor.StringDataEncoding _stringDataEncoding;
+    private org.hbird.xtce.castor.StringDataEncoding _stringDataEncoding;
 
 
       //----------------/
@@ -59,7 +59,7 @@ public class BaseDataTypeChoice implements java.io.Serializable {
      * 
      * @return the value of field 'BinaryDataEncoding'.
      */
-    public com.logica.hummingbird.xtce.castor.BinaryDataEncoding getBinaryDataEncoding(
+    public org.hbird.xtce.castor.BinaryDataEncoding getBinaryDataEncoding(
     ) {
         return this._binaryDataEncoding;
     }
@@ -69,7 +69,7 @@ public class BaseDataTypeChoice implements java.io.Serializable {
      * 
      * @return the value of field 'FloatDataEncoding'.
      */
-    public com.logica.hummingbird.xtce.castor.FloatDataEncoding getFloatDataEncoding(
+    public org.hbird.xtce.castor.FloatDataEncoding getFloatDataEncoding(
     ) {
         return this._floatDataEncoding;
     }
@@ -79,7 +79,7 @@ public class BaseDataTypeChoice implements java.io.Serializable {
      * 
      * @return the value of field 'IntegerDataEncoding'.
      */
-    public com.logica.hummingbird.xtce.castor.IntegerDataEncoding getIntegerDataEncoding(
+    public org.hbird.xtce.castor.IntegerDataEncoding getIntegerDataEncoding(
     ) {
         return this._integerDataEncoding;
     }
@@ -89,7 +89,7 @@ public class BaseDataTypeChoice implements java.io.Serializable {
      * 
      * @return the value of field 'StringDataEncoding'.
      */
-    public com.logica.hummingbird.xtce.castor.StringDataEncoding getStringDataEncoding(
+    public org.hbird.xtce.castor.StringDataEncoding getStringDataEncoding(
     ) {
         return this._stringDataEncoding;
     }
@@ -148,7 +148,7 @@ public class BaseDataTypeChoice implements java.io.Serializable {
      * 'binaryDataEncoding'.
      */
     public void setBinaryDataEncoding(
-            final com.logica.hummingbird.xtce.castor.BinaryDataEncoding binaryDataEncoding) {
+            final org.hbird.xtce.castor.BinaryDataEncoding binaryDataEncoding) {
         this._binaryDataEncoding = binaryDataEncoding;
     }
 
@@ -159,7 +159,7 @@ public class BaseDataTypeChoice implements java.io.Serializable {
      * 'floatDataEncoding'.
      */
     public void setFloatDataEncoding(
-            final com.logica.hummingbird.xtce.castor.FloatDataEncoding floatDataEncoding) {
+            final org.hbird.xtce.castor.FloatDataEncoding floatDataEncoding) {
         this._floatDataEncoding = floatDataEncoding;
     }
 
@@ -170,7 +170,7 @@ public class BaseDataTypeChoice implements java.io.Serializable {
      * 'integerDataEncoding'.
      */
     public void setIntegerDataEncoding(
-            final com.logica.hummingbird.xtce.castor.IntegerDataEncoding integerDataEncoding) {
+            final org.hbird.xtce.castor.IntegerDataEncoding integerDataEncoding) {
         this._integerDataEncoding = integerDataEncoding;
     }
 
@@ -181,7 +181,7 @@ public class BaseDataTypeChoice implements java.io.Serializable {
      * 'stringDataEncoding'.
      */
     public void setStringDataEncoding(
-            final com.logica.hummingbird.xtce.castor.StringDataEncoding stringDataEncoding) {
+            final org.hbird.xtce.castor.StringDataEncoding stringDataEncoding) {
         this._stringDataEncoding = stringDataEncoding;
     }
 
@@ -194,12 +194,12 @@ public class BaseDataTypeChoice implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.BaseDataTypeChoice
+     * org.hbird.xtce.castor.BaseDataTypeChoice
      */
-    public static com.logica.hummingbird.xtce.castor.BaseDataTypeChoice unmarshal(
+    public static org.hbird.xtce.castor.BaseDataTypeChoice unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.BaseDataTypeChoice) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.BaseDataTypeChoice.class, reader);
+        return (org.hbird.xtce.castor.BaseDataTypeChoice) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.BaseDataTypeChoice.class, reader);
     }
 
     /**

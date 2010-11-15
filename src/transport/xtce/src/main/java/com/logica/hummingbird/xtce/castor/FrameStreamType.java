@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * The top level type definition for all data streams that are
@@ -14,7 +14,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class FrameStreamType extends com.logica.hummingbird.xtce.castor.PCMStreamType 
+public class FrameStreamType extends org.hbird.xtce.castor.PCMStreamType 
 implements java.io.Serializable
 {
 
@@ -26,13 +26,13 @@ implements java.io.Serializable
     /**
      * Field _frameStreamTypeChoice.
      */
-    private com.logica.hummingbird.xtce.castor.FrameStreamTypeChoice _frameStreamTypeChoice;
+    private org.hbird.xtce.castor.FrameStreamTypeChoice _frameStreamTypeChoice;
 
     /**
      * This is a reference to a connecting stream - say a custom
      * stream.
      */
-    private com.logica.hummingbird.xtce.castor.StreamRef _streamRef;
+    private org.hbird.xtce.castor.StreamRef _streamRef;
 
 
       //----------------/
@@ -53,7 +53,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'FrameStreamTypeChoice'.
      */
-    public com.logica.hummingbird.xtce.castor.FrameStreamTypeChoice getFrameStreamTypeChoice(
+    public org.hbird.xtce.castor.FrameStreamTypeChoice getFrameStreamTypeChoice(
     ) {
         return this._frameStreamTypeChoice;
     }
@@ -65,7 +65,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'StreamRef'.
      */
-    public com.logica.hummingbird.xtce.castor.StreamRef getStreamRef(
+    public org.hbird.xtce.castor.StreamRef getStreamRef(
     ) {
         return this._streamRef;
     }
@@ -124,7 +124,7 @@ implements java.io.Serializable
      * 'frameStreamTypeChoice'.
      */
     public void setFrameStreamTypeChoice(
-            final com.logica.hummingbird.xtce.castor.FrameStreamTypeChoice frameStreamTypeChoice) {
+            final org.hbird.xtce.castor.FrameStreamTypeChoice frameStreamTypeChoice) {
         this._frameStreamTypeChoice = frameStreamTypeChoice;
     }
 
@@ -136,7 +136,7 @@ implements java.io.Serializable
      * @param streamRef the value of field 'streamRef'.
      */
     public void setStreamRef(
-            final com.logica.hummingbird.xtce.castor.StreamRef streamRef) {
+            final org.hbird.xtce.castor.StreamRef streamRef) {
         this._streamRef = streamRef;
     }
 
@@ -149,12 +149,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.FrameStreamType
+     * org.hbird.xtce.castor.FrameStreamType
      */
-    public static com.logica.hummingbird.xtce.castor.FrameStreamType unmarshal(
+    public static org.hbird.xtce.castor.FrameStreamType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.FrameStreamType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.FrameStreamType.class, reader);
+        return (org.hbird.xtce.castor.FrameStreamType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.FrameStreamType.class, reader);
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.logica.hummingbird.telemetry;
+package org.hbird.telemetry;
 
 import java.util.ArrayList;
 import java.util.List;

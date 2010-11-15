@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * For common encodings of floating point data
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class FloatDataEncodingType extends com.logica.hummingbird.xtce.castor.DataEncodingType 
+public class FloatDataEncodingType extends org.hbird.xtce.castor.DataEncodingType 
 implements java.io.Serializable
 {
 
@@ -25,24 +25,24 @@ implements java.io.Serializable
     /**
      * Field _encoding.
      */
-    private com.logica.hummingbird.xtce.castor.types.FloatDataEncodingTypeEncodingType _encoding = com.logica.hummingbird.xtce.castor.types.FloatDataEncodingTypeEncodingType.fromValue("IEEE754_1985");
+    private org.hbird.xtce.castor.types.FloatDataEncodingTypeEncodingType _encoding = org.hbird.xtce.castor.types.FloatDataEncodingTypeEncodingType.fromValue("IEEE754_1985");
 
     /**
      * Field _sizeInBits.
      */
-    private com.logica.hummingbird.xtce.castor.types.FloatDataEncodingTypeSizeInBitsType _sizeInBits = com.logica.hummingbird.xtce.castor.types.FloatDataEncodingTypeSizeInBitsType.fromValue("32");
+    private org.hbird.xtce.castor.types.FloatDataEncodingTypeSizeInBitsType _sizeInBits = org.hbird.xtce.castor.types.FloatDataEncodingTypeSizeInBitsType.fromValue("32");
 
     /**
      * Field _defaultCalibrator.
      */
-    private com.logica.hummingbird.xtce.castor.DefaultCalibrator _defaultCalibrator;
+    private org.hbird.xtce.castor.DefaultCalibrator _defaultCalibrator;
 
     /**
      * Use when different calibrations must be used on the
      * Parameter in different contexts. Use the first one that
      * tests true
      */
-    private com.logica.hummingbird.xtce.castor.FloatDataEncodingTypeContextCalibratorList _contextCalibratorList;
+    private org.hbird.xtce.castor.FloatDataEncodingTypeContextCalibratorList _contextCalibratorList;
 
 
       //----------------/
@@ -51,8 +51,8 @@ implements java.io.Serializable
 
     public FloatDataEncodingType() {
         super();
-        setEncoding(com.logica.hummingbird.xtce.castor.types.FloatDataEncodingTypeEncodingType.fromValue("IEEE754_1985"));
-        setSizeInBits(com.logica.hummingbird.xtce.castor.types.FloatDataEncodingTypeSizeInBitsType.fromValue("32"));
+        setEncoding(org.hbird.xtce.castor.types.FloatDataEncodingTypeEncodingType.fromValue("IEEE754_1985"));
+        setSizeInBits(org.hbird.xtce.castor.types.FloatDataEncodingTypeSizeInBitsType.fromValue("32"));
     }
 
 
@@ -69,7 +69,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ContextCalibratorList'.
      */
-    public com.logica.hummingbird.xtce.castor.FloatDataEncodingTypeContextCalibratorList getContextCalibratorList(
+    public org.hbird.xtce.castor.FloatDataEncodingTypeContextCalibratorList getContextCalibratorList(
     ) {
         return this._contextCalibratorList;
     }
@@ -79,7 +79,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'DefaultCalibrator'.
      */
-    public com.logica.hummingbird.xtce.castor.DefaultCalibrator getDefaultCalibrator(
+    public org.hbird.xtce.castor.DefaultCalibrator getDefaultCalibrator(
     ) {
         return this._defaultCalibrator;
     }
@@ -89,7 +89,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'Encoding'.
      */
-    public com.logica.hummingbird.xtce.castor.types.FloatDataEncodingTypeEncodingType getEncoding(
+    public org.hbird.xtce.castor.types.FloatDataEncodingTypeEncodingType getEncoding(
     ) {
         return this._encoding;
     }
@@ -99,7 +99,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'SizeInBits'.
      */
-    public com.logica.hummingbird.xtce.castor.types.FloatDataEncodingTypeSizeInBitsType getSizeInBits(
+    public org.hbird.xtce.castor.types.FloatDataEncodingTypeSizeInBitsType getSizeInBits(
     ) {
         return this._sizeInBits;
     }
@@ -161,7 +161,7 @@ implements java.io.Serializable
      * 'contextCalibratorList'.
      */
     public void setContextCalibratorList(
-            final com.logica.hummingbird.xtce.castor.FloatDataEncodingTypeContextCalibratorList contextCalibratorList) {
+            final org.hbird.xtce.castor.FloatDataEncodingTypeContextCalibratorList contextCalibratorList) {
         this._contextCalibratorList = contextCalibratorList;
     }
 
@@ -172,7 +172,7 @@ implements java.io.Serializable
      * 'defaultCalibrator'.
      */
     public void setDefaultCalibrator(
-            final com.logica.hummingbird.xtce.castor.DefaultCalibrator defaultCalibrator) {
+            final org.hbird.xtce.castor.DefaultCalibrator defaultCalibrator) {
         this._defaultCalibrator = defaultCalibrator;
     }
 
@@ -182,7 +182,7 @@ implements java.io.Serializable
      * @param encoding the value of field 'encoding'.
      */
     public void setEncoding(
-            final com.logica.hummingbird.xtce.castor.types.FloatDataEncodingTypeEncodingType encoding) {
+            final org.hbird.xtce.castor.types.FloatDataEncodingTypeEncodingType encoding) {
         this._encoding = encoding;
     }
 
@@ -192,7 +192,7 @@ implements java.io.Serializable
      * @param sizeInBits the value of field 'sizeInBits'.
      */
     public void setSizeInBits(
-            final com.logica.hummingbird.xtce.castor.types.FloatDataEncodingTypeSizeInBitsType sizeInBits) {
+            final org.hbird.xtce.castor.types.FloatDataEncodingTypeSizeInBitsType sizeInBits) {
         this._sizeInBits = sizeInBits;
     }
 
@@ -205,12 +205,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.FloatDataEncodingType
+     * org.hbird.xtce.castor.FloatDataEncodingType
      */
-    public static com.logica.hummingbird.xtce.castor.FloatDataEncodingType unmarshal(
+    public static org.hbird.xtce.castor.FloatDataEncodingType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.FloatDataEncodingType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.FloatDataEncodingType.class, reader);
+        return (org.hbird.xtce.castor.FloatDataEncodingType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.FloatDataEncodingType.class, reader);
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.logica.hummingbird.tasks.actions;
+package org.hbird.tasks.actions;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
@@ -6,9 +6,9 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultExchange;
 import org.apache.log4j.Logger;
 
-import com.logica.hummingbird.buffers.ObjectBuffer;
-import com.logica.hummingbird.formatter.ExchangeFormatter;
-import com.logica.hummingbird.tasks.AbstractTask;
+import org.hbird.buffers.ObjectBuffer;
+import org.hbird.formatter.ExchangeFormatter;
+import org.hbird.tasks.AbstractTask;
 
 /**
  * Task that sets a parameter to a specific value at a given time.

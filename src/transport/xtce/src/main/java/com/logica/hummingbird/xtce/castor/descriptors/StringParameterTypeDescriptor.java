@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.StringParameterType;
+import org.hbird.xtce.castor.StringParameterType;
 
 /**
  * Class StringParameterTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class StringParameterTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.StringDataTypeDescriptor {
+public class StringParameterTypeDescriptor extends org.hbird.xtce.castor.descriptors.StringDataTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class StringParameterTypeDescriptor extends com.logica.hummingbird.xtce.c
 
     public StringParameterTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.StringDataTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.StringDataTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "StringParameterType";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class StringParameterTypeDescriptor extends com.logica.hummingbird.xtce.c
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.StringParameterType.class;
+        return org.hbird.xtce.castor.StringParameterType.class;
     }
 
     /**

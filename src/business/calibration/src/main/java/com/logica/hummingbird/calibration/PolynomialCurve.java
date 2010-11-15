@@ -1,4 +1,4 @@
-package com.logica.hummingbird.calibration;
+package org.hbird.calibration;
 
 public class PolynomialCurve {
 

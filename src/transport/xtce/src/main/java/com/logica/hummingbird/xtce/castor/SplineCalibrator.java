@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A calibration type where a segmented line in a raw vs calibrated
@@ -47,7 +47,7 @@ public class SplineCalibrator implements java.io.Serializable {
     /**
      * Field _splinePointList.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.SplinePoint> _splinePointList;
+    private java.util.List<org.hbird.xtce.castor.SplinePoint> _splinePointList;
 
 
       //----------------/
@@ -56,7 +56,7 @@ public class SplineCalibrator implements java.io.Serializable {
 
     public SplineCalibrator() {
         super();
-        this._splinePointList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.SplinePoint>();
+        this._splinePointList = new java.util.ArrayList<org.hbird.xtce.castor.SplinePoint>();
     }
 
 
@@ -72,7 +72,7 @@ public class SplineCalibrator implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addSplinePoint(
-            final com.logica.hummingbird.xtce.castor.SplinePoint vSplinePoint)
+            final org.hbird.xtce.castor.SplinePoint vSplinePoint)
     throws java.lang.IndexOutOfBoundsException {
         this._splinePointList.add(vSplinePoint);
     }
@@ -87,7 +87,7 @@ public class SplineCalibrator implements java.io.Serializable {
      */
     public void addSplinePoint(
             final int index,
-            final com.logica.hummingbird.xtce.castor.SplinePoint vSplinePoint)
+            final org.hbird.xtce.castor.SplinePoint vSplinePoint)
     throws java.lang.IndexOutOfBoundsException {
         this._splinePointList.add(index, vSplinePoint);
     }
@@ -112,7 +112,7 @@ public class SplineCalibrator implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.SplinePoint> enumerateSplinePoint(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.SplinePoint> enumerateSplinePoint(
     ) {
         return java.util.Collections.enumeration(this._splinePointList);
     }
@@ -144,10 +144,10 @@ public class SplineCalibrator implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.SplinePoint at the given
+     * org.hbird.xtce.castor.SplinePoint at the given
      * index
      */
-    public com.logica.hummingbird.xtce.castor.SplinePoint getSplinePoint(
+    public org.hbird.xtce.castor.SplinePoint getSplinePoint(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -155,7 +155,7 @@ public class SplineCalibrator implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getSplinePoint: Index value '" + index + "' not in range [0.." + (this._splinePointList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.SplinePoint) _splinePointList.get(index);
+        return (org.hbird.xtce.castor.SplinePoint) _splinePointList.get(index);
     }
 
     /**
@@ -167,10 +167,10 @@ public class SplineCalibrator implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.SplinePoint[] getSplinePoint(
+    public org.hbird.xtce.castor.SplinePoint[] getSplinePoint(
     ) {
-        com.logica.hummingbird.xtce.castor.SplinePoint[] array = new com.logica.hummingbird.xtce.castor.SplinePoint[0];
-        return (com.logica.hummingbird.xtce.castor.SplinePoint[]) this._splinePointList.toArray(array);
+        org.hbird.xtce.castor.SplinePoint[] array = new org.hbird.xtce.castor.SplinePoint[0];
+        return (org.hbird.xtce.castor.SplinePoint[]) this._splinePointList.toArray(array);
     }
 
     /**
@@ -234,7 +234,7 @@ public class SplineCalibrator implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.SplinePoint> iterateSplinePoint(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.SplinePoint> iterateSplinePoint(
     ) {
         return this._splinePointList.iterator();
     }
@@ -285,7 +285,7 @@ public class SplineCalibrator implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeSplinePoint(
-            final com.logica.hummingbird.xtce.castor.SplinePoint vSplinePoint) {
+            final org.hbird.xtce.castor.SplinePoint vSplinePoint) {
         boolean removed = _splinePointList.remove(vSplinePoint);
         return removed;
     }
@@ -296,10 +296,10 @@ public class SplineCalibrator implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.SplinePoint removeSplinePointAt(
+    public org.hbird.xtce.castor.SplinePoint removeSplinePointAt(
             final int index) {
         java.lang.Object obj = this._splinePointList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.SplinePoint) obj;
+        return (org.hbird.xtce.castor.SplinePoint) obj;
     }
 
     /**
@@ -334,7 +334,7 @@ public class SplineCalibrator implements java.io.Serializable {
      */
     public void setSplinePoint(
             final int index,
-            final com.logica.hummingbird.xtce.castor.SplinePoint vSplinePoint)
+            final org.hbird.xtce.castor.SplinePoint vSplinePoint)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._splinePointList.size()) {
@@ -350,7 +350,7 @@ public class SplineCalibrator implements java.io.Serializable {
      * @param vSplinePointArray
      */
     public void setSplinePoint(
-            final com.logica.hummingbird.xtce.castor.SplinePoint[] vSplinePointArray) {
+            final org.hbird.xtce.castor.SplinePoint[] vSplinePointArray) {
         //-- copy array
         _splinePointList.clear();
 
@@ -368,12 +368,12 @@ public class SplineCalibrator implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.SplineCalibrator
+     * org.hbird.xtce.castor.SplineCalibrator
      */
-    public static com.logica.hummingbird.xtce.castor.SplineCalibrator unmarshal(
+    public static org.hbird.xtce.castor.SplineCalibrator unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.SplineCalibrator) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.SplineCalibrator.class, reader);
+        return (org.hbird.xtce.castor.SplineCalibrator) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.SplineCalibrator.class, reader);
     }
 
     /**

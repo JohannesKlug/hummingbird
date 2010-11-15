@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class FloatArgumentType.
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class FloatArgumentType extends com.logica.hummingbird.xtce.castor.FloatDataType 
+public class FloatArgumentType extends org.hbird.xtce.castor.FloatDataType 
 implements java.io.Serializable
 {
 
@@ -25,12 +25,12 @@ implements java.io.Serializable
     /**
      * Field _defaultAlarm.
      */
-    private com.logica.hummingbird.xtce.castor.DefaultAlarm _defaultAlarm;
+    private org.hbird.xtce.castor.DefaultAlarm _defaultAlarm;
 
     /**
      * Field _contextAlarmList.
      */
-    private com.logica.hummingbird.xtce.castor.CommandMetaDataTypeArgumentTypeSetFloatArgumentTypeContextAlarmList _contextAlarmList;
+    private org.hbird.xtce.castor.CommandMetaDataTypeArgumentTypeSetFloatArgumentTypeContextAlarmList _contextAlarmList;
 
 
       //----------------/
@@ -51,7 +51,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ContextAlarmList'.
      */
-    public com.logica.hummingbird.xtce.castor.CommandMetaDataTypeArgumentTypeSetFloatArgumentTypeContextAlarmList getContextAlarmList(
+    public org.hbird.xtce.castor.CommandMetaDataTypeArgumentTypeSetFloatArgumentTypeContextAlarmList getContextAlarmList(
     ) {
         return this._contextAlarmList;
     }
@@ -61,7 +61,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'DefaultAlarm'.
      */
-    public com.logica.hummingbird.xtce.castor.DefaultAlarm getDefaultAlarm(
+    public org.hbird.xtce.castor.DefaultAlarm getDefaultAlarm(
     ) {
         return this._defaultAlarm;
     }
@@ -119,7 +119,7 @@ implements java.io.Serializable
      * @param contextAlarmList the value of field 'contextAlarmList'
      */
     public void setContextAlarmList(
-            final com.logica.hummingbird.xtce.castor.CommandMetaDataTypeArgumentTypeSetFloatArgumentTypeContextAlarmList contextAlarmList) {
+            final org.hbird.xtce.castor.CommandMetaDataTypeArgumentTypeSetFloatArgumentTypeContextAlarmList contextAlarmList) {
         this._contextAlarmList = contextAlarmList;
     }
 
@@ -129,7 +129,7 @@ implements java.io.Serializable
      * @param defaultAlarm the value of field 'defaultAlarm'.
      */
     public void setDefaultAlarm(
-            final com.logica.hummingbird.xtce.castor.DefaultAlarm defaultAlarm) {
+            final org.hbird.xtce.castor.DefaultAlarm defaultAlarm) {
         this._defaultAlarm = defaultAlarm;
     }
 
@@ -142,12 +142,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.FloatArgumentType
+     * org.hbird.xtce.castor.FloatArgumentType
      */
-    public static com.logica.hummingbird.xtce.castor.FloatArgumentType unmarshal(
+    public static org.hbird.xtce.castor.FloatArgumentType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.FloatArgumentType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.FloatArgumentType.class, reader);
+        return (org.hbird.xtce.castor.FloatArgumentType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.FloatArgumentType.class, reader);
     }
 
     /**

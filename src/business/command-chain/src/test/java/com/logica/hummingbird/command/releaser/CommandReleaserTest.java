@@ -1,4 +1,4 @@
-package com.logica.hummingbird.command.releaser;
+package org.hbird.command.releaser;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -17,14 +17,14 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
-import com.logica.hummingbird.buffers.StateBuffer;
-import com.logica.hummingbird.command.task.DummyTask;
-import com.logica.hummingbird.formatter.HeaderFields;
-import com.logica.hummingbird.interfaces.ITask;
-import com.logica.hummingbird.tasks.checks.Range;
-import com.logica.hummingbird.tasks.checks.StaticValue;
-import com.logica.hummingbird.type.Argument;
-import com.logica.hummingbird.type.CommandDefinition;
+import org.hbird.buffers.StateBuffer;
+import org.hbird.command.task.DummyTask;
+import org.hbird.formatter.HeaderFields;
+import org.hbird.interfaces.ITask;
+import org.hbird.tasks.checks.Range;
+import org.hbird.tasks.checks.StaticValue;
+import org.hbird.type.Argument;
+import org.hbird.type.CommandDefinition;
 
 @ContextConfiguration (locations={"/CommandReleaserTest-context.xml"})
 public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {

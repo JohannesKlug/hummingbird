@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.InputAlgorithmType;
+import org.hbird.xtce.castor.InputAlgorithmType;
 
 /**
  * Class InputAlgorithmTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class InputAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.SimpleAlgorithmTypeDescriptor {
+public class InputAlgorithmTypeDescriptor extends org.hbird.xtce.castor.descriptors.SimpleAlgorithmTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class InputAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.ca
 
     public InputAlgorithmTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.SimpleAlgorithmTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.SimpleAlgorithmTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "InputAlgorithmType";
         _elementDefinition = false;
@@ -72,7 +72,7 @@ public class InputAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.ca
         //-- initialize element descriptors
 
         //-- _inputSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.InputSet.class, "_inputSet", "InputSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.InputSet.class, "_inputSet", "InputSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class InputAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.ca
             {
                 try {
                     InputAlgorithmType target = (InputAlgorithmType) object;
-                    target.setInputSet( (com.logica.hummingbird.xtce.castor.InputSet) value);
+                    target.setInputSet( (org.hbird.xtce.castor.InputSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,10 +95,10 @@ public class InputAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.ca
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.InputSet();
+                return new org.hbird.xtce.castor.InputSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.InputSet");
+        desc.setSchemaType("org.hbird.xtce.castor.InputSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -151,7 +151,7 @@ public class InputAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.ca
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.InputAlgorithmType.class;
+        return org.hbird.xtce.castor.InputAlgorithmType.class;
     }
 
     /**

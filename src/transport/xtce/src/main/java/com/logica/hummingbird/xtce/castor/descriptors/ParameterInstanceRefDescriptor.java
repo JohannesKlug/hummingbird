@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ParameterInstanceRef;
+import org.hbird.xtce.castor.ParameterInstanceRef;
 
 /**
  * Class ParameterInstanceRefDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ParameterInstanceRefDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ParameterInstanceRefTypeDescriptor {
+public class ParameterInstanceRefDescriptor extends org.hbird.xtce.castor.descriptors.ParameterInstanceRefTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ParameterInstanceRefDescriptor extends com.logica.hummingbird.xtce.
 
     public ParameterInstanceRefDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ParameterInstanceRefTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ParameterInstanceRefTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ParameterInstanceRef";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class ParameterInstanceRefDescriptor extends com.logica.hummingbird.xtce.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ParameterInstanceRef.class;
+        return org.hbird.xtce.castor.ParameterInstanceRef.class;
     }
 
     /**

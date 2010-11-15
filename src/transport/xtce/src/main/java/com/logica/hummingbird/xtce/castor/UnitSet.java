@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class UnitSet.
@@ -23,7 +23,7 @@ public class UnitSet implements java.io.Serializable {
     /**
      * Field _unitList.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.Unit> _unitList;
+    private java.util.List<org.hbird.xtce.castor.Unit> _unitList;
 
 
       //----------------/
@@ -32,7 +32,7 @@ public class UnitSet implements java.io.Serializable {
 
     public UnitSet() {
         super();
-        this._unitList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.Unit>();
+        this._unitList = new java.util.ArrayList<org.hbird.xtce.castor.Unit>();
     }
 
 
@@ -48,7 +48,7 @@ public class UnitSet implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addUnit(
-            final com.logica.hummingbird.xtce.castor.Unit vUnit)
+            final org.hbird.xtce.castor.Unit vUnit)
     throws java.lang.IndexOutOfBoundsException {
         this._unitList.add(vUnit);
     }
@@ -63,7 +63,7 @@ public class UnitSet implements java.io.Serializable {
      */
     public void addUnit(
             final int index,
-            final com.logica.hummingbird.xtce.castor.Unit vUnit)
+            final org.hbird.xtce.castor.Unit vUnit)
     throws java.lang.IndexOutOfBoundsException {
         this._unitList.add(index, vUnit);
     }
@@ -74,7 +74,7 @@ public class UnitSet implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.Unit> enumerateUnit(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.Unit> enumerateUnit(
     ) {
         return java.util.Collections.enumeration(this._unitList);
     }
@@ -86,9 +86,9 @@ public class UnitSet implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.Unit at the given index
+     * org.hbird.xtce.castor.Unit at the given index
      */
-    public com.logica.hummingbird.xtce.castor.Unit getUnit(
+    public org.hbird.xtce.castor.Unit getUnit(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -96,7 +96,7 @@ public class UnitSet implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getUnit: Index value '" + index + "' not in range [0.." + (this._unitList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.Unit) _unitList.get(index);
+        return (org.hbird.xtce.castor.Unit) _unitList.get(index);
     }
 
     /**
@@ -108,10 +108,10 @@ public class UnitSet implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.Unit[] getUnit(
+    public org.hbird.xtce.castor.Unit[] getUnit(
     ) {
-        com.logica.hummingbird.xtce.castor.Unit[] array = new com.logica.hummingbird.xtce.castor.Unit[0];
-        return (com.logica.hummingbird.xtce.castor.Unit[]) this._unitList.toArray(array);
+        org.hbird.xtce.castor.Unit[] array = new org.hbird.xtce.castor.Unit[0];
+        return (org.hbird.xtce.castor.Unit[]) this._unitList.toArray(array);
     }
 
     /**
@@ -145,7 +145,7 @@ public class UnitSet implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.Unit> iterateUnit(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.Unit> iterateUnit(
     ) {
         return this._unitList.iterator();
     }
@@ -196,7 +196,7 @@ public class UnitSet implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeUnit(
-            final com.logica.hummingbird.xtce.castor.Unit vUnit) {
+            final org.hbird.xtce.castor.Unit vUnit) {
         boolean removed = _unitList.remove(vUnit);
         return removed;
     }
@@ -207,10 +207,10 @@ public class UnitSet implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.Unit removeUnitAt(
+    public org.hbird.xtce.castor.Unit removeUnitAt(
             final int index) {
         java.lang.Object obj = this._unitList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.Unit) obj;
+        return (org.hbird.xtce.castor.Unit) obj;
     }
 
     /**
@@ -223,7 +223,7 @@ public class UnitSet implements java.io.Serializable {
      */
     public void setUnit(
             final int index,
-            final com.logica.hummingbird.xtce.castor.Unit vUnit)
+            final org.hbird.xtce.castor.Unit vUnit)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._unitList.size()) {
@@ -239,7 +239,7 @@ public class UnitSet implements java.io.Serializable {
      * @param vUnitArray
      */
     public void setUnit(
-            final com.logica.hummingbird.xtce.castor.Unit[] vUnitArray) {
+            final org.hbird.xtce.castor.Unit[] vUnitArray) {
         //-- copy array
         _unitList.clear();
 
@@ -257,12 +257,12 @@ public class UnitSet implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.UnitSet
+     * org.hbird.xtce.castor.UnitSet
      */
-    public static com.logica.hummingbird.xtce.castor.UnitSet unmarshal(
+    public static org.hbird.xtce.castor.UnitSet unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.UnitSet) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.UnitSet.class, reader);
+        return (org.hbird.xtce.castor.UnitSet) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.UnitSet.class, reader);
     }
 
     /**

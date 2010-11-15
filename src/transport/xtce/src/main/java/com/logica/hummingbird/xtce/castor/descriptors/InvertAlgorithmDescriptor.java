@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.InvertAlgorithm;
+import org.hbird.xtce.castor.InvertAlgorithm;
 
 /**
  * Class InvertAlgorithmDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class InvertAlgorithmDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor {
+public class InvertAlgorithmDescriptor extends org.hbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class InvertAlgorithmDescriptor extends com.logica.hummingbird.xtce.casto
 
     public InvertAlgorithmDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "InvertAlgorithm";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class InvertAlgorithmDescriptor extends com.logica.hummingbird.xtce.casto
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.InvertAlgorithm.class;
+        return org.hbird.xtce.castor.InvertAlgorithm.class;
     }
 
     /**

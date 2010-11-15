@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Verifiers;
+import org.hbird.xtce.castor.Verifiers;
 
 /**
  * Class VerifiersDescriptor.
@@ -71,7 +71,7 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
         //-- initialize element descriptors
 
         //-- _transferredToRangeVerifier
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.TransferredToRangeVerifier.class, "_transferredToRangeVerifier", "TransferredToRangeVerifier", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.TransferredToRangeVerifier.class, "_transferredToRangeVerifier", "TransferredToRangeVerifier", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             {
                 try {
                     Verifiers target = (Verifiers) object;
-                    target.setTransferredToRangeVerifier( (com.logica.hummingbird.xtce.castor.TransferredToRangeVerifier) value);
+                    target.setTransferredToRangeVerifier( (org.hbird.xtce.castor.TransferredToRangeVerifier) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.TransferredToRangeVerifier();
+                return new org.hbird.xtce.castor.TransferredToRangeVerifier();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.TransferredToRangeVerifier");
+        desc.setSchemaType("org.hbird.xtce.castor.TransferredToRangeVerifier");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -110,7 +110,7 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
         }
         desc.setValidator(fieldValidator);
         //-- _sentFromRangeVerifier
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.SentFromRangeVerifier.class, "_sentFromRangeVerifier", "SentFromRangeVerifier", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.SentFromRangeVerifier.class, "_sentFromRangeVerifier", "SentFromRangeVerifier", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -125,7 +125,7 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             {
                 try {
                     Verifiers target = (Verifiers) object;
-                    target.setSentFromRangeVerifier( (com.logica.hummingbird.xtce.castor.SentFromRangeVerifier) value);
+                    target.setSentFromRangeVerifier( (org.hbird.xtce.castor.SentFromRangeVerifier) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -133,10 +133,10 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.SentFromRangeVerifier();
+                return new org.hbird.xtce.castor.SentFromRangeVerifier();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.SentFromRangeVerifier");
+        desc.setSchemaType("org.hbird.xtce.castor.SentFromRangeVerifier");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -149,7 +149,7 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
         }
         desc.setValidator(fieldValidator);
         //-- _receivedVerifier
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ReceivedVerifier.class, "_receivedVerifier", "ReceivedVerifier", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ReceivedVerifier.class, "_receivedVerifier", "ReceivedVerifier", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -164,7 +164,7 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             {
                 try {
                     Verifiers target = (Verifiers) object;
-                    target.setReceivedVerifier( (com.logica.hummingbird.xtce.castor.ReceivedVerifier) value);
+                    target.setReceivedVerifier( (org.hbird.xtce.castor.ReceivedVerifier) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -172,10 +172,10 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ReceivedVerifier();
+                return new org.hbird.xtce.castor.ReceivedVerifier();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ReceivedVerifier");
+        desc.setSchemaType("org.hbird.xtce.castor.ReceivedVerifier");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -188,7 +188,7 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
         }
         desc.setValidator(fieldValidator);
         //-- _acceptedVerifier
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.AcceptedVerifier.class, "_acceptedVerifier", "AcceptedVerifier", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.AcceptedVerifier.class, "_acceptedVerifier", "AcceptedVerifier", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -203,7 +203,7 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             {
                 try {
                     Verifiers target = (Verifiers) object;
-                    target.setAcceptedVerifier( (com.logica.hummingbird.xtce.castor.AcceptedVerifier) value);
+                    target.setAcceptedVerifier( (org.hbird.xtce.castor.AcceptedVerifier) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -211,10 +211,10 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.AcceptedVerifier();
+                return new org.hbird.xtce.castor.AcceptedVerifier();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.AcceptedVerifier");
+        desc.setSchemaType("org.hbird.xtce.castor.AcceptedVerifier");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -227,7 +227,7 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
         }
         desc.setValidator(fieldValidator);
         //-- _queuedVerifier
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.QueuedVerifier.class, "_queuedVerifier", "QueuedVerifier", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.QueuedVerifier.class, "_queuedVerifier", "QueuedVerifier", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -242,7 +242,7 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             {
                 try {
                     Verifiers target = (Verifiers) object;
-                    target.setQueuedVerifier( (com.logica.hummingbird.xtce.castor.QueuedVerifier) value);
+                    target.setQueuedVerifier( (org.hbird.xtce.castor.QueuedVerifier) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -250,10 +250,10 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.QueuedVerifier();
+                return new org.hbird.xtce.castor.QueuedVerifier();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.QueuedVerifier");
+        desc.setSchemaType("org.hbird.xtce.castor.QueuedVerifier");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -266,7 +266,7 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
         }
         desc.setValidator(fieldValidator);
         //-- _executionVerifier
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ExecutionVerifier.class, "_executionVerifier", "ExecutionVerifier", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ExecutionVerifier.class, "_executionVerifier", "ExecutionVerifier", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -281,7 +281,7 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             {
                 try {
                     Verifiers target = (Verifiers) object;
-                    target.setExecutionVerifier( (com.logica.hummingbird.xtce.castor.ExecutionVerifier) value);
+                    target.setExecutionVerifier( (org.hbird.xtce.castor.ExecutionVerifier) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -289,10 +289,10 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ExecutionVerifier();
+                return new org.hbird.xtce.castor.ExecutionVerifier();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ExecutionVerifier");
+        desc.setSchemaType("org.hbird.xtce.castor.ExecutionVerifier");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -305,7 +305,7 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
         }
         desc.setValidator(fieldValidator);
         //-- _completeVerifierList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.CompleteVerifier.class, "_completeVerifierList", "CompleteVerifier", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.CompleteVerifier.class, "_completeVerifierList", "CompleteVerifier", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -320,7 +320,7 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             {
                 try {
                     Verifiers target = (Verifiers) object;
-                    target.addCompleteVerifier( (com.logica.hummingbird.xtce.castor.CompleteVerifier) value);
+                    target.addCompleteVerifier( (org.hbird.xtce.castor.CompleteVerifier) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -336,11 +336,11 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.CompleteVerifier();
+                return new org.hbird.xtce.castor.CompleteVerifier();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.CompleteVerifier");
+        desc.setComponentType("org.hbird.xtce.castor.CompleteVerifier");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(true);
@@ -354,7 +354,7 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
         }
         desc.setValidator(fieldValidator);
         //-- _failedVerifier
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.FailedVerifier.class, "_failedVerifier", "FailedVerifier", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.FailedVerifier.class, "_failedVerifier", "FailedVerifier", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -369,7 +369,7 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             {
                 try {
                     Verifiers target = (Verifiers) object;
-                    target.setFailedVerifier( (com.logica.hummingbird.xtce.castor.FailedVerifier) value);
+                    target.setFailedVerifier( (org.hbird.xtce.castor.FailedVerifier) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -377,10 +377,10 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.FailedVerifier();
+                return new org.hbird.xtce.castor.FailedVerifier();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.FailedVerifier");
+        desc.setSchemaType("org.hbird.xtce.castor.FailedVerifier");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -430,7 +430,7 @@ public class VerifiersDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Verifiers.class;
+        return org.hbird.xtce.castor.Verifiers.class;
     }
 
     /**

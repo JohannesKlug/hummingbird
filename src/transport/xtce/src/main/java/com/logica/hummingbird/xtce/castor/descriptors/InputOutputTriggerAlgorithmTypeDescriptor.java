@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.InputOutputTriggerAlgorithmType;
+import org.hbird.xtce.castor.InputOutputTriggerAlgorithmType;
 
 /**
  * Class InputOutputTriggerAlgorithmTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class InputOutputTriggerAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.InputOutputAlgorithmTypeDescriptor {
+public class InputOutputTriggerAlgorithmTypeDescriptor extends org.hbird.xtce.castor.descriptors.InputOutputAlgorithmTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class InputOutputTriggerAlgorithmTypeDescriptor extends com.logica.hummin
 
     public InputOutputTriggerAlgorithmTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.InputOutputAlgorithmTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.InputOutputAlgorithmTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "InputOutputTriggerAlgorithmType";
         _elementDefinition = false;
@@ -160,7 +160,7 @@ public class InputOutputTriggerAlgorithmTypeDescriptor extends com.logica.hummin
         //-- initialize element descriptors
 
         //-- _triggerSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.TriggerSet.class, "_triggerSet", "TriggerSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.TriggerSet.class, "_triggerSet", "TriggerSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -175,7 +175,7 @@ public class InputOutputTriggerAlgorithmTypeDescriptor extends com.logica.hummin
             {
                 try {
                     InputOutputTriggerAlgorithmType target = (InputOutputTriggerAlgorithmType) object;
-                    target.setTriggerSet( (com.logica.hummingbird.xtce.castor.TriggerSet) value);
+                    target.setTriggerSet( (org.hbird.xtce.castor.TriggerSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -183,10 +183,10 @@ public class InputOutputTriggerAlgorithmTypeDescriptor extends com.logica.hummin
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.TriggerSet();
+                return new org.hbird.xtce.castor.TriggerSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.TriggerSet");
+        desc.setSchemaType("org.hbird.xtce.castor.TriggerSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -239,7 +239,7 @@ public class InputOutputTriggerAlgorithmTypeDescriptor extends com.logica.hummin
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.InputOutputTriggerAlgorithmType.class;
+        return org.hbird.xtce.castor.InputOutputTriggerAlgorithmType.class;
     }
 
     /**

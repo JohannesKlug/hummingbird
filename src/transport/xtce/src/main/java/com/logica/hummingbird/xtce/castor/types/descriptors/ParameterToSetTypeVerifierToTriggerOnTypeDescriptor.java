@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types.descriptors;
+package org.hbird.xtce.castor.types.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.types.ParameterToSetTypeVerifierToTriggerOnType;
+import org.hbird.xtce.castor.types.ParameterToSetTypeVerifierToTriggerOnType;
 
 /**
  * Class ParameterToSetTypeVerifierToTriggerOnTypeDescriptor.
@@ -98,7 +98,7 @@ public class ParameterToSetTypeVerifierToTriggerOnTypeDescriptor extends org.exo
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.types.ParameterToSetTypeVerifierToTriggerOnType.class;
+        return org.hbird.xtce.castor.types.ParameterToSetTypeVerifierToTriggerOnType.class;
     }
 
     /**

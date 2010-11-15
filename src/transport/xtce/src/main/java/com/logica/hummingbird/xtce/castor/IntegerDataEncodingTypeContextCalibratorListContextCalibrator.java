@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class ContextCalibrator.
@@ -23,12 +23,12 @@ public class IntegerDataEncodingTypeContextCalibratorListContextCalibrator imple
     /**
      * Field _useWhenCondition.
      */
-    private com.logica.hummingbird.xtce.castor.UseWhenCondition _useWhenCondition;
+    private org.hbird.xtce.castor.UseWhenCondition _useWhenCondition;
 
     /**
      * Field _calibrator.
      */
-    private com.logica.hummingbird.xtce.castor.Calibrator _calibrator;
+    private org.hbird.xtce.castor.Calibrator _calibrator;
 
 
       //----------------/
@@ -49,7 +49,7 @@ public class IntegerDataEncodingTypeContextCalibratorListContextCalibrator imple
      * 
      * @return the value of field 'Calibrator'.
      */
-    public com.logica.hummingbird.xtce.castor.Calibrator getCalibrator(
+    public org.hbird.xtce.castor.Calibrator getCalibrator(
     ) {
         return this._calibrator;
     }
@@ -59,7 +59,7 @@ public class IntegerDataEncodingTypeContextCalibratorListContextCalibrator imple
      * 
      * @return the value of field 'UseWhenCondition'.
      */
-    public com.logica.hummingbird.xtce.castor.UseWhenCondition getUseWhenCondition(
+    public org.hbird.xtce.castor.UseWhenCondition getUseWhenCondition(
     ) {
         return this._useWhenCondition;
     }
@@ -117,7 +117,7 @@ public class IntegerDataEncodingTypeContextCalibratorListContextCalibrator imple
      * @param calibrator the value of field 'calibrator'.
      */
     public void setCalibrator(
-            final com.logica.hummingbird.xtce.castor.Calibrator calibrator) {
+            final org.hbird.xtce.castor.Calibrator calibrator) {
         this._calibrator = calibrator;
     }
 
@@ -127,7 +127,7 @@ public class IntegerDataEncodingTypeContextCalibratorListContextCalibrator imple
      * @param useWhenCondition the value of field 'useWhenCondition'
      */
     public void setUseWhenCondition(
-            final com.logica.hummingbird.xtce.castor.UseWhenCondition useWhenCondition) {
+            final org.hbird.xtce.castor.UseWhenCondition useWhenCondition) {
         this._useWhenCondition = useWhenCondition;
     }
 
@@ -140,12 +140,12 @@ public class IntegerDataEncodingTypeContextCalibratorListContextCalibrator imple
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator
+     * org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator
      */
-    public static com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator unmarshal(
+    public static org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator.class, reader);
+        return (org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator.class, reader);
     }
 
     /**

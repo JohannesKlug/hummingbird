@@ -24,14 +24,14 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.spacesystemmodel.parameters.types;
+package org.hbird.spacesystemmodel.parameters.types;
 
 import java.util.List;
 
-import com.logica.hummingbird.spacesystemmodel.NamedElement;
-import com.logica.hummingbird.spacesystemmodel.Unit;
-import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
-import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.NumberParameterTypeBehaviour;
+import org.hbird.spacesystemmodel.NamedElement;
+import org.hbird.spacesystemmodel.Unit;
+import org.hbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import org.hbird.spacesystemmodel.parameters.behaviours.NumberParameterTypeBehaviour;
 
 /**
  * A parameter type. The parameter type consists of two elements;

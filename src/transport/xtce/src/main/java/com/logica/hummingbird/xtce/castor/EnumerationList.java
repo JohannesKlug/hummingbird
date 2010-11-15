@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class EnumerationList.
@@ -23,7 +23,7 @@ public class EnumerationList implements java.io.Serializable {
     /**
      * Field _enumerationList.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.Enumeration> _enumerationList;
+    private java.util.List<org.hbird.xtce.castor.Enumeration> _enumerationList;
 
 
       //----------------/
@@ -32,7 +32,7 @@ public class EnumerationList implements java.io.Serializable {
 
     public EnumerationList() {
         super();
-        this._enumerationList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.Enumeration>();
+        this._enumerationList = new java.util.ArrayList<org.hbird.xtce.castor.Enumeration>();
     }
 
 
@@ -48,7 +48,7 @@ public class EnumerationList implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addEnumeration(
-            final com.logica.hummingbird.xtce.castor.Enumeration vEnumeration)
+            final org.hbird.xtce.castor.Enumeration vEnumeration)
     throws java.lang.IndexOutOfBoundsException {
         this._enumerationList.add(vEnumeration);
     }
@@ -63,7 +63,7 @@ public class EnumerationList implements java.io.Serializable {
      */
     public void addEnumeration(
             final int index,
-            final com.logica.hummingbird.xtce.castor.Enumeration vEnumeration)
+            final org.hbird.xtce.castor.Enumeration vEnumeration)
     throws java.lang.IndexOutOfBoundsException {
         this._enumerationList.add(index, vEnumeration);
     }
@@ -74,7 +74,7 @@ public class EnumerationList implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.Enumeration> enumerateEnumeration(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.Enumeration> enumerateEnumeration(
     ) {
         return java.util.Collections.enumeration(this._enumerationList);
     }
@@ -86,10 +86,10 @@ public class EnumerationList implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.Enumeration at the given
+     * org.hbird.xtce.castor.Enumeration at the given
      * index
      */
-    public com.logica.hummingbird.xtce.castor.Enumeration getEnumeration(
+    public org.hbird.xtce.castor.Enumeration getEnumeration(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -97,7 +97,7 @@ public class EnumerationList implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getEnumeration: Index value '" + index + "' not in range [0.." + (this._enumerationList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.Enumeration) _enumerationList.get(index);
+        return (org.hbird.xtce.castor.Enumeration) _enumerationList.get(index);
     }
 
     /**
@@ -109,10 +109,10 @@ public class EnumerationList implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.Enumeration[] getEnumeration(
+    public org.hbird.xtce.castor.Enumeration[] getEnumeration(
     ) {
-        com.logica.hummingbird.xtce.castor.Enumeration[] array = new com.logica.hummingbird.xtce.castor.Enumeration[0];
-        return (com.logica.hummingbird.xtce.castor.Enumeration[]) this._enumerationList.toArray(array);
+        org.hbird.xtce.castor.Enumeration[] array = new org.hbird.xtce.castor.Enumeration[0];
+        return (org.hbird.xtce.castor.Enumeration[]) this._enumerationList.toArray(array);
     }
 
     /**
@@ -146,7 +146,7 @@ public class EnumerationList implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.Enumeration> iterateEnumeration(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.Enumeration> iterateEnumeration(
     ) {
         return this._enumerationList.iterator();
     }
@@ -197,7 +197,7 @@ public class EnumerationList implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeEnumeration(
-            final com.logica.hummingbird.xtce.castor.Enumeration vEnumeration) {
+            final org.hbird.xtce.castor.Enumeration vEnumeration) {
         boolean removed = _enumerationList.remove(vEnumeration);
         return removed;
     }
@@ -208,10 +208,10 @@ public class EnumerationList implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.Enumeration removeEnumerationAt(
+    public org.hbird.xtce.castor.Enumeration removeEnumerationAt(
             final int index) {
         java.lang.Object obj = this._enumerationList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.Enumeration) obj;
+        return (org.hbird.xtce.castor.Enumeration) obj;
     }
 
     /**
@@ -224,7 +224,7 @@ public class EnumerationList implements java.io.Serializable {
      */
     public void setEnumeration(
             final int index,
-            final com.logica.hummingbird.xtce.castor.Enumeration vEnumeration)
+            final org.hbird.xtce.castor.Enumeration vEnumeration)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._enumerationList.size()) {
@@ -240,7 +240,7 @@ public class EnumerationList implements java.io.Serializable {
      * @param vEnumerationArray
      */
     public void setEnumeration(
-            final com.logica.hummingbird.xtce.castor.Enumeration[] vEnumerationArray) {
+            final org.hbird.xtce.castor.Enumeration[] vEnumerationArray) {
         //-- copy array
         _enumerationList.clear();
 
@@ -258,12 +258,12 @@ public class EnumerationList implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.EnumerationList
+     * org.hbird.xtce.castor.EnumerationList
      */
-    public static com.logica.hummingbird.xtce.castor.EnumerationList unmarshal(
+    public static org.hbird.xtce.castor.EnumerationList unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.EnumerationList) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.EnumerationList.class, reader);
+        return (org.hbird.xtce.castor.EnumerationList) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.EnumerationList.class, reader);
     }
 
     /**

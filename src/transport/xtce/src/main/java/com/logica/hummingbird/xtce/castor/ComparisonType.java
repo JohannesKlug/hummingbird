@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A simple ParameterInstanceRef to value comparison. The string
@@ -19,7 +19,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class ComparisonType extends com.logica.hummingbird.xtce.castor.ParameterInstanceRefType 
+public class ComparisonType extends org.hbird.xtce.castor.ParameterInstanceRefType 
 implements java.io.Serializable
 {
 
@@ -36,7 +36,7 @@ implements java.io.Serializable
     /**
      * Field _comparisonOperator.
      */
-    private com.logica.hummingbird.xtce.castor.types.ComparisonOperatorsType _comparisonOperator = com.logica.hummingbird.xtce.castor.types.ComparisonOperatorsType.fromValue("==");
+    private org.hbird.xtce.castor.types.ComparisonOperatorsType _comparisonOperator = org.hbird.xtce.castor.types.ComparisonOperatorsType.fromValue("==");
 
     /**
      * Field _value.
@@ -51,7 +51,7 @@ implements java.io.Serializable
     public ComparisonType() {
         super();
         setContent("");
-        setComparisonOperator(com.logica.hummingbird.xtce.castor.types.ComparisonOperatorsType.fromValue("=="));
+        setComparisonOperator(org.hbird.xtce.castor.types.ComparisonOperatorsType.fromValue("=="));
     }
 
     public ComparisonType(final java.lang.String defaultValue) {
@@ -72,7 +72,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ComparisonOperator'.
      */
-    public com.logica.hummingbird.xtce.castor.types.ComparisonOperatorsType getComparisonOperator(
+    public org.hbird.xtce.castor.types.ComparisonOperatorsType getComparisonOperator(
     ) {
         return this._comparisonOperator;
     }
@@ -152,7 +152,7 @@ implements java.io.Serializable
      * 'comparisonOperator'.
      */
     public void setComparisonOperator(
-            final com.logica.hummingbird.xtce.castor.types.ComparisonOperatorsType comparisonOperator) {
+            final org.hbird.xtce.castor.types.ComparisonOperatorsType comparisonOperator) {
         this._comparisonOperator = comparisonOperator;
     }
 
@@ -186,12 +186,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ComparisonType
+     * org.hbird.xtce.castor.ComparisonType
      */
-    public static com.logica.hummingbird.xtce.castor.ComparisonType unmarshal(
+    public static org.hbird.xtce.castor.ComparisonType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ComparisonType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ComparisonType.class, reader);
+        return (org.hbird.xtce.castor.ComparisonType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ComparisonType.class, reader);
     }
 
     /**

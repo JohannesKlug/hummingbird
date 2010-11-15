@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * An unordered collection of algorithms
@@ -23,7 +23,7 @@ public class AlgorithmSetType implements java.io.Serializable {
     /**
      * Field _items.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem> _items;
+    private java.util.List<org.hbird.xtce.castor.AlgorithmSetTypeItem> _items;
 
 
       //----------------/
@@ -32,7 +32,7 @@ public class AlgorithmSetType implements java.io.Serializable {
 
     public AlgorithmSetType() {
         super();
-        this._items = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem>();
+        this._items = new java.util.ArrayList<org.hbird.xtce.castor.AlgorithmSetTypeItem>();
     }
 
 
@@ -48,7 +48,7 @@ public class AlgorithmSetType implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addAlgorithmSetTypeItem(
-            final com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem vAlgorithmSetTypeItem)
+            final org.hbird.xtce.castor.AlgorithmSetTypeItem vAlgorithmSetTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         this._items.add(vAlgorithmSetTypeItem);
     }
@@ -63,7 +63,7 @@ public class AlgorithmSetType implements java.io.Serializable {
      */
     public void addAlgorithmSetTypeItem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem vAlgorithmSetTypeItem)
+            final org.hbird.xtce.castor.AlgorithmSetTypeItem vAlgorithmSetTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         this._items.add(index, vAlgorithmSetTypeItem);
     }
@@ -74,7 +74,7 @@ public class AlgorithmSetType implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem> enumerateAlgorithmSetTypeItem(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.AlgorithmSetTypeItem> enumerateAlgorithmSetTypeItem(
     ) {
         return java.util.Collections.enumeration(this._items);
     }
@@ -86,10 +86,10 @@ public class AlgorithmSetType implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem at
+     * org.hbird.xtce.castor.AlgorithmSetTypeItem at
      * the given index
      */
-    public com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem getAlgorithmSetTypeItem(
+    public org.hbird.xtce.castor.AlgorithmSetTypeItem getAlgorithmSetTypeItem(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -97,7 +97,7 @@ public class AlgorithmSetType implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getAlgorithmSetTypeItem: Index value '" + index + "' not in range [0.." + (this._items.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem) _items.get(index);
+        return (org.hbird.xtce.castor.AlgorithmSetTypeItem) _items.get(index);
     }
 
     /**
@@ -110,10 +110,10 @@ public class AlgorithmSetType implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem[] getAlgorithmSetTypeItem(
+    public org.hbird.xtce.castor.AlgorithmSetTypeItem[] getAlgorithmSetTypeItem(
     ) {
-        com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem[] array = new com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem[0];
-        return (com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem[]) this._items.toArray(array);
+        org.hbird.xtce.castor.AlgorithmSetTypeItem[] array = new org.hbird.xtce.castor.AlgorithmSetTypeItem[0];
+        return (org.hbird.xtce.castor.AlgorithmSetTypeItem[]) this._items.toArray(array);
     }
 
     /**
@@ -147,7 +147,7 @@ public class AlgorithmSetType implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem> iterateAlgorithmSetTypeItem(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.AlgorithmSetTypeItem> iterateAlgorithmSetTypeItem(
     ) {
         return this._items.iterator();
     }
@@ -191,7 +191,7 @@ public class AlgorithmSetType implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeAlgorithmSetTypeItem(
-            final com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem vAlgorithmSetTypeItem) {
+            final org.hbird.xtce.castor.AlgorithmSetTypeItem vAlgorithmSetTypeItem) {
         boolean removed = _items.remove(vAlgorithmSetTypeItem);
         return removed;
     }
@@ -202,10 +202,10 @@ public class AlgorithmSetType implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem removeAlgorithmSetTypeItemAt(
+    public org.hbird.xtce.castor.AlgorithmSetTypeItem removeAlgorithmSetTypeItemAt(
             final int index) {
         java.lang.Object obj = this._items.remove(index);
-        return (com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem) obj;
+        return (org.hbird.xtce.castor.AlgorithmSetTypeItem) obj;
     }
 
     /**
@@ -225,7 +225,7 @@ public class AlgorithmSetType implements java.io.Serializable {
      */
     public void setAlgorithmSetTypeItem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem vAlgorithmSetTypeItem)
+            final org.hbird.xtce.castor.AlgorithmSetTypeItem vAlgorithmSetTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._items.size()) {
@@ -241,7 +241,7 @@ public class AlgorithmSetType implements java.io.Serializable {
      * @param vAlgorithmSetTypeItemArray
      */
     public void setAlgorithmSetTypeItem(
-            final com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem[] vAlgorithmSetTypeItemArray) {
+            final org.hbird.xtce.castor.AlgorithmSetTypeItem[] vAlgorithmSetTypeItemArray) {
         //-- copy array
         _items.clear();
 
@@ -259,12 +259,12 @@ public class AlgorithmSetType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.AlgorithmSetType
+     * org.hbird.xtce.castor.AlgorithmSetType
      */
-    public static com.logica.hummingbird.xtce.castor.AlgorithmSetType unmarshal(
+    public static org.hbird.xtce.castor.AlgorithmSetType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.AlgorithmSetType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.AlgorithmSetType.class, reader);
+        return (org.hbird.xtce.castor.AlgorithmSetType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.AlgorithmSetType.class, reader);
     }
 
     /**

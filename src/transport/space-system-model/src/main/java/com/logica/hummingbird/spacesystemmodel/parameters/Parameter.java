@@ -24,9 +24,9 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.spacesystemmodel.parameters;
+package org.hbird.spacesystemmodel.parameters;
 
-import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
+import org.hbird.spacesystemmodel.parameters.types.NumberParameterType;
 
 /**
  * Interface of a parameter container. */

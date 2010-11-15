@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<artifactId>hummingbird</artifactId>
-		<groupId>com.logica.hummingbird</groupId>
+		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
@@ -32,9 +32,9 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							com.logica.hummingbird*,
-							com.logica.hummingbird.util*,
-							com.logica.hummingbird.util.exceptions*	
+							org.hbird*,
+							org.hbird.util*,
+							org.hbird.util.exceptions*	
 						</Export-Package>
 					</instructions>
 				</configuration>

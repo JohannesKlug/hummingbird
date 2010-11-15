@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A term in a polynomial expresssion. 
@@ -186,12 +186,12 @@ public class Term implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.Term
+     * org.hbird.xtce.castor.Term
      */
-    public static com.logica.hummingbird.xtce.castor.Term unmarshal(
+    public static org.hbird.xtce.castor.Term unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.Term) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.Term.class, reader);
+        return (org.hbird.xtce.castor.Term) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.Term.class, reader);
     }
 
     /**

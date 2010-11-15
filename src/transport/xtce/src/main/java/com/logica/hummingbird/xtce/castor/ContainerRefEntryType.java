@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * An entry that is simply a reference to another container.
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class ContainerRefEntryType extends com.logica.hummingbird.xtce.castor.SequenceEntryType 
+public class ContainerRefEntryType extends org.hbird.xtce.castor.SequenceEntryType 
 implements java.io.Serializable
 {
 
@@ -117,12 +117,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ContainerRefEntryType
+     * org.hbird.xtce.castor.ContainerRefEntryType
      */
-    public static com.logica.hummingbird.xtce.castor.ContainerRefEntryType unmarshal(
+    public static org.hbird.xtce.castor.ContainerRefEntryType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ContainerRefEntryType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ContainerRefEntryType.class, reader);
+        return (org.hbird.xtce.castor.ContainerRefEntryType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ContainerRefEntryType.class, reader);
     }
 
     /**

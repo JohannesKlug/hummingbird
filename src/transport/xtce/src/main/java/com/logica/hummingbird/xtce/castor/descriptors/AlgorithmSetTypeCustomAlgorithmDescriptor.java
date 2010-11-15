@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm;
+import org.hbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm;
 
 /**
  * Class AlgorithmSetTypeCustomAlgorithmDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class AlgorithmSetTypeCustomAlgorithmDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.InputOutputTriggerAlgorithmTypeDescriptor {
+public class AlgorithmSetTypeCustomAlgorithmDescriptor extends org.hbird.xtce.castor.descriptors.InputOutputTriggerAlgorithmTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class AlgorithmSetTypeCustomAlgorithmDescriptor extends com.logica.hummin
 
     public AlgorithmSetTypeCustomAlgorithmDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.InputOutputTriggerAlgorithmTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.InputOutputTriggerAlgorithmTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "CustomAlgorithm";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class AlgorithmSetTypeCustomAlgorithmDescriptor extends com.logica.hummin
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm.class;
+        return org.hbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm.class;
     }
 
     /**

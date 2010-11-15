@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.FloatParameterType;
+import org.hbird.xtce.castor.FloatParameterType;
 
 /**
  * Class FloatParameterTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class FloatParameterTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.FloatDataTypeDescriptor {
+public class FloatParameterTypeDescriptor extends org.hbird.xtce.castor.descriptors.FloatDataTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class FloatParameterTypeDescriptor extends com.logica.hummingbird.xtce.ca
 
     public FloatParameterTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.FloatDataTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.FloatDataTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "FloatParameterType";
         _elementDefinition = true;
@@ -72,7 +72,7 @@ public class FloatParameterTypeDescriptor extends com.logica.hummingbird.xtce.ca
         //-- initialize element descriptors
 
         //-- _defaultAlarm
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.DefaultAlarm.class, "_defaultAlarm", "DefaultAlarm", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.DefaultAlarm.class, "_defaultAlarm", "DefaultAlarm", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class FloatParameterTypeDescriptor extends com.logica.hummingbird.xtce.ca
             {
                 try {
                     FloatParameterType target = (FloatParameterType) object;
-                    target.setDefaultAlarm( (com.logica.hummingbird.xtce.castor.DefaultAlarm) value);
+                    target.setDefaultAlarm( (org.hbird.xtce.castor.DefaultAlarm) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,10 +95,10 @@ public class FloatParameterTypeDescriptor extends com.logica.hummingbird.xtce.ca
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.DefaultAlarm();
+                return new org.hbird.xtce.castor.DefaultAlarm();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.DefaultAlarm");
+        desc.setSchemaType("org.hbird.xtce.castor.DefaultAlarm");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -111,7 +111,7 @@ public class FloatParameterTypeDescriptor extends com.logica.hummingbird.xtce.ca
         }
         desc.setValidator(fieldValidator);
         //-- _contextAlarmList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ParameterTypeSetTypeFloatParameterTypeContextAlarmList.class, "_contextAlarmList", "ContextAlarmList", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ParameterTypeSetTypeFloatParameterTypeContextAlarmList.class, "_contextAlarmList", "ContextAlarmList", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -126,7 +126,7 @@ public class FloatParameterTypeDescriptor extends com.logica.hummingbird.xtce.ca
             {
                 try {
                     FloatParameterType target = (FloatParameterType) object;
-                    target.setContextAlarmList( (com.logica.hummingbird.xtce.castor.ParameterTypeSetTypeFloatParameterTypeContextAlarmList) value);
+                    target.setContextAlarmList( (org.hbird.xtce.castor.ParameterTypeSetTypeFloatParameterTypeContextAlarmList) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -134,10 +134,10 @@ public class FloatParameterTypeDescriptor extends com.logica.hummingbird.xtce.ca
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ParameterTypeSetTypeFloatParameterTypeContextAlarmList();
+                return new org.hbird.xtce.castor.ParameterTypeSetTypeFloatParameterTypeContextAlarmList();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ParameterTypeSetTypeFloatParameterTypeContextAlarmList");
+        desc.setSchemaType("org.hbird.xtce.castor.ParameterTypeSetTypeFloatParameterTypeContextAlarmList");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -190,7 +190,7 @@ public class FloatParameterTypeDescriptor extends com.logica.hummingbird.xtce.ca
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.FloatParameterType.class;
+        return org.hbird.xtce.castor.FloatParameterType.class;
     }
 
     /**

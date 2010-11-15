@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class Message.
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class Message extends com.logica.hummingbird.xtce.castor.NameDescriptionType 
+public class Message extends org.hbird.xtce.castor.NameDescriptionType 
 implements java.io.Serializable
 {
 
@@ -25,13 +25,13 @@ implements java.io.Serializable
     /**
      * Field _matchCriteria.
      */
-    private com.logica.hummingbird.xtce.castor.MatchCriteria _matchCriteria;
+    private org.hbird.xtce.castor.MatchCriteria _matchCriteria;
 
     /**
      * The ContainerRef should point to ROOT container that will
      * describe an entire packet/minor frame or chunk of telemetry.
      */
-    private com.logica.hummingbird.xtce.castor.ContainRef _containRef;
+    private org.hbird.xtce.castor.ContainRef _containRef;
 
 
       //----------------/
@@ -55,7 +55,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ContainRef'.
      */
-    public com.logica.hummingbird.xtce.castor.ContainRef getContainRef(
+    public org.hbird.xtce.castor.ContainRef getContainRef(
     ) {
         return this._containRef;
     }
@@ -65,7 +65,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'MatchCriteria'.
      */
-    public com.logica.hummingbird.xtce.castor.MatchCriteria getMatchCriteria(
+    public org.hbird.xtce.castor.MatchCriteria getMatchCriteria(
     ) {
         return this._matchCriteria;
     }
@@ -126,7 +126,7 @@ implements java.io.Serializable
      * @param containRef the value of field 'containRef'.
      */
     public void setContainRef(
-            final com.logica.hummingbird.xtce.castor.ContainRef containRef) {
+            final org.hbird.xtce.castor.ContainRef containRef) {
         this._containRef = containRef;
     }
 
@@ -136,7 +136,7 @@ implements java.io.Serializable
      * @param matchCriteria the value of field 'matchCriteria'.
      */
     public void setMatchCriteria(
-            final com.logica.hummingbird.xtce.castor.MatchCriteria matchCriteria) {
+            final org.hbird.xtce.castor.MatchCriteria matchCriteria) {
         this._matchCriteria = matchCriteria;
     }
 
@@ -149,12 +149,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.Message
+     * org.hbird.xtce.castor.Message
      */
-    public static com.logica.hummingbird.xtce.castor.Message unmarshal(
+    public static org.hbird.xtce.castor.Message unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.Message) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.Message.class, reader);
+        return (org.hbird.xtce.castor.Message) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.Message.class, reader);
     }
 
     /**

@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.BinaryDataEncoding;
+import org.hbird.xtce.castor.BinaryDataEncoding;
 
 /**
  * Class BinaryDataEncodingDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class BinaryDataEncodingDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.BinaryDataEncodingTypeDescriptor {
+public class BinaryDataEncodingDescriptor extends org.hbird.xtce.castor.descriptors.BinaryDataEncodingTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class BinaryDataEncodingDescriptor extends com.logica.hummingbird.xtce.ca
 
     public BinaryDataEncodingDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.BinaryDataEncodingTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.BinaryDataEncodingTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "BinaryDataEncoding";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class BinaryDataEncodingDescriptor extends com.logica.hummingbird.xtce.ca
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.BinaryDataEncoding.class;
+        return org.hbird.xtce.castor.BinaryDataEncoding.class;
     }
 
     /**

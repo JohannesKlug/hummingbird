@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ParameterSetTypeItem;
+import org.hbird.xtce.castor.ParameterSetTypeItem;
 
 /**
  * Class ParameterSetTypeItemDescriptor.
@@ -71,7 +71,7 @@ public class ParameterSetTypeItemDescriptor extends org.exolab.castor.xml.util.X
         //-- initialize element descriptors
 
         //-- _parameter
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Parameter.class, "_parameter", "Parameter", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Parameter.class, "_parameter", "Parameter", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class ParameterSetTypeItemDescriptor extends org.exolab.castor.xml.util.X
             {
                 try {
                     ParameterSetTypeItem target = (ParameterSetTypeItem) object;
-                    target.setParameter( (com.logica.hummingbird.xtce.castor.Parameter) value);
+                    target.setParameter( (org.hbird.xtce.castor.Parameter) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class ParameterSetTypeItemDescriptor extends org.exolab.castor.xml.util.X
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Parameter();
+                return new org.hbird.xtce.castor.Parameter();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.Parameter");
+        desc.setSchemaType("org.hbird.xtce.castor.Parameter");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -112,7 +112,7 @@ public class ParameterSetTypeItemDescriptor extends org.exolab.castor.xml.util.X
         }
         desc.setValidator(fieldValidator);
         //-- _parameterRef
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ParameterRef.class, "_parameterRef", "ParameterRef", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ParameterRef.class, "_parameterRef", "ParameterRef", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -127,7 +127,7 @@ public class ParameterSetTypeItemDescriptor extends org.exolab.castor.xml.util.X
             {
                 try {
                     ParameterSetTypeItem target = (ParameterSetTypeItem) object;
-                    target.setParameterRef( (com.logica.hummingbird.xtce.castor.ParameterRef) value);
+                    target.setParameterRef( (org.hbird.xtce.castor.ParameterRef) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -135,10 +135,10 @@ public class ParameterSetTypeItemDescriptor extends org.exolab.castor.xml.util.X
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ParameterRef();
+                return new org.hbird.xtce.castor.ParameterRef();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ParameterRef");
+        desc.setSchemaType("org.hbird.xtce.castor.ParameterRef");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -190,7 +190,7 @@ public class ParameterSetTypeItemDescriptor extends org.exolab.castor.xml.util.X
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ParameterSetTypeItem.class;
+        return org.hbird.xtce.castor.ParameterSetTypeItem.class;
     }
 
     /**

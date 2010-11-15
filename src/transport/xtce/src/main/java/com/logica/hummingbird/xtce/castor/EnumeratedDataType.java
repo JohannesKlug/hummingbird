@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Contains an enumerated value - a value that has both an integral
@@ -14,7 +14,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class EnumeratedDataType extends com.logica.hummingbird.xtce.castor.BaseDataType 
+public class EnumeratedDataType extends org.hbird.xtce.castor.BaseDataType 
 implements java.io.Serializable
 {
 
@@ -31,7 +31,7 @@ implements java.io.Serializable
     /**
      * Field _enumerationList.
      */
-    private com.logica.hummingbird.xtce.castor.EnumerationList _enumerationList;
+    private org.hbird.xtce.castor.EnumerationList _enumerationList;
 
 
       //----------------/
@@ -52,7 +52,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'EnumerationList'.
      */
-    public com.logica.hummingbird.xtce.castor.EnumerationList getEnumerationList(
+    public org.hbird.xtce.castor.EnumerationList getEnumerationList(
     ) {
         return this._enumerationList;
     }
@@ -120,7 +120,7 @@ implements java.io.Serializable
      * @param enumerationList the value of field 'enumerationList'.
      */
     public void setEnumerationList(
-            final com.logica.hummingbird.xtce.castor.EnumerationList enumerationList) {
+            final org.hbird.xtce.castor.EnumerationList enumerationList) {
         this._enumerationList = enumerationList;
     }
 
@@ -143,12 +143,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.EnumeratedDataType
+     * org.hbird.xtce.castor.EnumeratedDataType
      */
-    public static com.logica.hummingbird.xtce.castor.EnumeratedDataType unmarshal(
+    public static org.hbird.xtce.castor.EnumeratedDataType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.EnumeratedDataType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.EnumeratedDataType.class, reader);
+        return (org.hbird.xtce.castor.EnumeratedDataType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.EnumeratedDataType.class, reader);
     }
 
     /**

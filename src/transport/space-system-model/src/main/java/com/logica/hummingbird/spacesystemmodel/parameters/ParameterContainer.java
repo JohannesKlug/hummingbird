@@ -24,13 +24,13 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.spacesystemmodel.parameters;
+package org.hbird.spacesystemmodel.parameters;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
-import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
+import org.hbird.spacesystemmodel.ContainerImpl;
+import org.hbird.spacesystemmodel.parameters.types.NumberParameterType;
 
 /**
  * The abstract base class for all parameter <b><i>containers</i></b>. The class is intended to be subtyped for each

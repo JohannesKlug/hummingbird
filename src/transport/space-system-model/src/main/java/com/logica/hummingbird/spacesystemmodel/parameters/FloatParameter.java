@@ -24,17 +24,17 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.spacesystemmodel.parameters;
+package org.hbird.spacesystemmodel.parameters;
 
 import java.util.BitSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
-import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
-import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
-import com.logica.hummingbird.util.exceptions.BitSetOperationException;
+import org.hbird.spacesystemmodel.ParameterObserver;
+import org.hbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import org.hbird.spacesystemmodel.parameters.types.NumberParameterType;
+import org.hbird.util.exceptions.BitSetOperationException;
 
 /**
  * The float container encodes / decodes a float parameter from the data stream.

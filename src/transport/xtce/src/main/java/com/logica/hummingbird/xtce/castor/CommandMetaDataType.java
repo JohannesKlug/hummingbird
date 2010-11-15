@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Command Meta Data contains information about commands
@@ -23,39 +23,39 @@ public class CommandMetaDataType implements java.io.Serializable {
     /**
      * A list of parameter types
      */
-    private com.logica.hummingbird.xtce.castor.ParameterTypeSet _parameterTypeSet;
+    private org.hbird.xtce.castor.ParameterTypeSet _parameterTypeSet;
 
     /**
      * Parameters referenced by MetaCommands. This Parameter Set is
      * located here so that MetaCommand data can be built
      * independantly of TelemetryMetaData.
      */
-    private com.logica.hummingbird.xtce.castor.ParameterSet _parameterSet;
+    private org.hbird.xtce.castor.ParameterSet _parameterSet;
 
     /**
      * Field _argumentTypeSet.
      */
-    private com.logica.hummingbird.xtce.castor.ArgumentTypeSet _argumentTypeSet;
+    private org.hbird.xtce.castor.ArgumentTypeSet _argumentTypeSet;
 
     /**
      * A set of Command Definitions
      */
-    private com.logica.hummingbird.xtce.castor.MetaCommandSet _metaCommandSet;
+    private org.hbird.xtce.castor.MetaCommandSet _metaCommandSet;
 
     /**
      * The Command Container defines the construction of a Command.
      */
-    private com.logica.hummingbird.xtce.castor.CommandContainerSet _commandContainerSet;
+    private org.hbird.xtce.castor.CommandContainerSet _commandContainerSet;
 
     /**
      * Field _streamSet.
      */
-    private com.logica.hummingbird.xtce.castor.StreamSet _streamSet;
+    private org.hbird.xtce.castor.StreamSet _streamSet;
 
     /**
      * Field _algorithmSet.
      */
-    private com.logica.hummingbird.xtce.castor.AlgorithmSet _algorithmSet;
+    private org.hbird.xtce.castor.AlgorithmSet _algorithmSet;
 
 
       //----------------/
@@ -76,7 +76,7 @@ public class CommandMetaDataType implements java.io.Serializable {
      * 
      * @return the value of field 'AlgorithmSet'.
      */
-    public com.logica.hummingbird.xtce.castor.AlgorithmSet getAlgorithmSet(
+    public org.hbird.xtce.castor.AlgorithmSet getAlgorithmSet(
     ) {
         return this._algorithmSet;
     }
@@ -86,7 +86,7 @@ public class CommandMetaDataType implements java.io.Serializable {
      * 
      * @return the value of field 'ArgumentTypeSet'.
      */
-    public com.logica.hummingbird.xtce.castor.ArgumentTypeSet getArgumentTypeSet(
+    public org.hbird.xtce.castor.ArgumentTypeSet getArgumentTypeSet(
     ) {
         return this._argumentTypeSet;
     }
@@ -98,7 +98,7 @@ public class CommandMetaDataType implements java.io.Serializable {
      * 
      * @return the value of field 'CommandContainerSet'.
      */
-    public com.logica.hummingbird.xtce.castor.CommandContainerSet getCommandContainerSet(
+    public org.hbird.xtce.castor.CommandContainerSet getCommandContainerSet(
     ) {
         return this._commandContainerSet;
     }
@@ -110,7 +110,7 @@ public class CommandMetaDataType implements java.io.Serializable {
      * 
      * @return the value of field 'MetaCommandSet'.
      */
-    public com.logica.hummingbird.xtce.castor.MetaCommandSet getMetaCommandSet(
+    public org.hbird.xtce.castor.MetaCommandSet getMetaCommandSet(
     ) {
         return this._metaCommandSet;
     }
@@ -124,7 +124,7 @@ public class CommandMetaDataType implements java.io.Serializable {
      * 
      * @return the value of field 'ParameterSet'.
      */
-    public com.logica.hummingbird.xtce.castor.ParameterSet getParameterSet(
+    public org.hbird.xtce.castor.ParameterSet getParameterSet(
     ) {
         return this._parameterSet;
     }
@@ -136,7 +136,7 @@ public class CommandMetaDataType implements java.io.Serializable {
      * 
      * @return the value of field 'ParameterTypeSet'.
      */
-    public com.logica.hummingbird.xtce.castor.ParameterTypeSet getParameterTypeSet(
+    public org.hbird.xtce.castor.ParameterTypeSet getParameterTypeSet(
     ) {
         return this._parameterTypeSet;
     }
@@ -146,7 +146,7 @@ public class CommandMetaDataType implements java.io.Serializable {
      * 
      * @return the value of field 'StreamSet'.
      */
-    public com.logica.hummingbird.xtce.castor.StreamSet getStreamSet(
+    public org.hbird.xtce.castor.StreamSet getStreamSet(
     ) {
         return this._streamSet;
     }
@@ -204,7 +204,7 @@ public class CommandMetaDataType implements java.io.Serializable {
      * @param algorithmSet the value of field 'algorithmSet'.
      */
     public void setAlgorithmSet(
-            final com.logica.hummingbird.xtce.castor.AlgorithmSet algorithmSet) {
+            final org.hbird.xtce.castor.AlgorithmSet algorithmSet) {
         this._algorithmSet = algorithmSet;
     }
 
@@ -214,7 +214,7 @@ public class CommandMetaDataType implements java.io.Serializable {
      * @param argumentTypeSet the value of field 'argumentTypeSet'.
      */
     public void setArgumentTypeSet(
-            final com.logica.hummingbird.xtce.castor.ArgumentTypeSet argumentTypeSet) {
+            final org.hbird.xtce.castor.ArgumentTypeSet argumentTypeSet) {
         this._argumentTypeSet = argumentTypeSet;
     }
 
@@ -227,7 +227,7 @@ public class CommandMetaDataType implements java.io.Serializable {
      * 'commandContainerSet'.
      */
     public void setCommandContainerSet(
-            final com.logica.hummingbird.xtce.castor.CommandContainerSet commandContainerSet) {
+            final org.hbird.xtce.castor.CommandContainerSet commandContainerSet) {
         this._commandContainerSet = commandContainerSet;
     }
 
@@ -239,7 +239,7 @@ public class CommandMetaDataType implements java.io.Serializable {
      * @param metaCommandSet the value of field 'metaCommandSet'.
      */
     public void setMetaCommandSet(
-            final com.logica.hummingbird.xtce.castor.MetaCommandSet metaCommandSet) {
+            final org.hbird.xtce.castor.MetaCommandSet metaCommandSet) {
         this._metaCommandSet = metaCommandSet;
     }
 
@@ -253,7 +253,7 @@ public class CommandMetaDataType implements java.io.Serializable {
      * @param parameterSet the value of field 'parameterSet'.
      */
     public void setParameterSet(
-            final com.logica.hummingbird.xtce.castor.ParameterSet parameterSet) {
+            final org.hbird.xtce.castor.ParameterSet parameterSet) {
         this._parameterSet = parameterSet;
     }
 
@@ -265,7 +265,7 @@ public class CommandMetaDataType implements java.io.Serializable {
      * @param parameterTypeSet the value of field 'parameterTypeSet'
      */
     public void setParameterTypeSet(
-            final com.logica.hummingbird.xtce.castor.ParameterTypeSet parameterTypeSet) {
+            final org.hbird.xtce.castor.ParameterTypeSet parameterTypeSet) {
         this._parameterTypeSet = parameterTypeSet;
     }
 
@@ -275,7 +275,7 @@ public class CommandMetaDataType implements java.io.Serializable {
      * @param streamSet the value of field 'streamSet'.
      */
     public void setStreamSet(
-            final com.logica.hummingbird.xtce.castor.StreamSet streamSet) {
+            final org.hbird.xtce.castor.StreamSet streamSet) {
         this._streamSet = streamSet;
     }
 
@@ -288,12 +288,12 @@ public class CommandMetaDataType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.CommandMetaDataType
+     * org.hbird.xtce.castor.CommandMetaDataType
      */
-    public static com.logica.hummingbird.xtce.castor.CommandMetaDataType unmarshal(
+    public static org.hbird.xtce.castor.CommandMetaDataType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.CommandMetaDataType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.CommandMetaDataType.class, reader);
+        return (org.hbird.xtce.castor.CommandMetaDataType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.CommandMetaDataType.class, reader);
     }
 
     /**

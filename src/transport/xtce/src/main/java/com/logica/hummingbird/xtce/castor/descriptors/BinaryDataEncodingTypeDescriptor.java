@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.BinaryDataEncodingType;
+import org.hbird.xtce.castor.BinaryDataEncodingType;
 
 /**
  * Class BinaryDataEncodingTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class BinaryDataEncodingTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.DataEncodingTypeDescriptor {
+public class BinaryDataEncodingTypeDescriptor extends org.hbird.xtce.castor.descriptors.DataEncodingTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class BinaryDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
 
     public BinaryDataEncodingTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.DataEncodingTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.DataEncodingTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "BinaryDataEncodingType";
         _elementDefinition = false;
@@ -72,7 +72,7 @@ public class BinaryDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
         //-- initialize element descriptors
 
         //-- _sizeInBits
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.SizeInBits.class, "_sizeInBits", "SizeInBits", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.SizeInBits.class, "_sizeInBits", "SizeInBits", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class BinaryDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
             {
                 try {
                     BinaryDataEncodingType target = (BinaryDataEncodingType) object;
-                    target.setSizeInBits( (com.logica.hummingbird.xtce.castor.SizeInBits) value);
+                    target.setSizeInBits( (org.hbird.xtce.castor.SizeInBits) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,10 +95,10 @@ public class BinaryDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.SizeInBits();
+                return new org.hbird.xtce.castor.SizeInBits();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.SizeInBits");
+        desc.setSchemaType("org.hbird.xtce.castor.SizeInBits");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -113,7 +113,7 @@ public class BinaryDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
         }
         desc.setValidator(fieldValidator);
         //-- _fromBinaryTransformAlgorithm
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.FromBinaryTransformAlgorithm.class, "_fromBinaryTransformAlgorithm", "FromBinaryTransformAlgorithm", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.FromBinaryTransformAlgorithm.class, "_fromBinaryTransformAlgorithm", "FromBinaryTransformAlgorithm", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -128,7 +128,7 @@ public class BinaryDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
             {
                 try {
                     BinaryDataEncodingType target = (BinaryDataEncodingType) object;
-                    target.setFromBinaryTransformAlgorithm( (com.logica.hummingbird.xtce.castor.FromBinaryTransformAlgorithm) value);
+                    target.setFromBinaryTransformAlgorithm( (org.hbird.xtce.castor.FromBinaryTransformAlgorithm) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -136,10 +136,10 @@ public class BinaryDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.FromBinaryTransformAlgorithm();
+                return new org.hbird.xtce.castor.FromBinaryTransformAlgorithm();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.FromBinaryTransformAlgorithm");
+        desc.setSchemaType("org.hbird.xtce.castor.FromBinaryTransformAlgorithm");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -152,7 +152,7 @@ public class BinaryDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
         }
         desc.setValidator(fieldValidator);
         //-- _toBinaryTransformAlgorithm
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ToBinaryTransformAlgorithm.class, "_toBinaryTransformAlgorithm", "ToBinaryTransformAlgorithm", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ToBinaryTransformAlgorithm.class, "_toBinaryTransformAlgorithm", "ToBinaryTransformAlgorithm", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -167,7 +167,7 @@ public class BinaryDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
             {
                 try {
                     BinaryDataEncodingType target = (BinaryDataEncodingType) object;
-                    target.setToBinaryTransformAlgorithm( (com.logica.hummingbird.xtce.castor.ToBinaryTransformAlgorithm) value);
+                    target.setToBinaryTransformAlgorithm( (org.hbird.xtce.castor.ToBinaryTransformAlgorithm) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -175,10 +175,10 @@ public class BinaryDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ToBinaryTransformAlgorithm();
+                return new org.hbird.xtce.castor.ToBinaryTransformAlgorithm();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ToBinaryTransformAlgorithm");
+        desc.setSchemaType("org.hbird.xtce.castor.ToBinaryTransformAlgorithm");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -231,7 +231,7 @@ public class BinaryDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.BinaryDataEncodingType.class;
+        return org.hbird.xtce.castor.BinaryDataEncodingType.class;
     }
 
     /**

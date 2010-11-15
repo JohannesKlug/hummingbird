@@ -1,4 +1,4 @@
-package com.logica.hummingbird.formatter;
+package org.hbird.formatter;
 
 public interface HeaderFields {
 

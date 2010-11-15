@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.logica.hummingbird.command.releaser;
+package org.hbird.command.releaser;
 
 import java.util.Date;
 
@@ -25,11 +25,11 @@ import org.apache.camel.impl.DefaultExchange;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.logica.hummingbird.buffers.StateBuffer;
-import com.logica.hummingbird.formatter.ExchangeFormatter;
-import com.logica.hummingbird.formatter.HeaderFields;
-import com.logica.hummingbird.interfaces.ITask;
-import com.logica.hummingbird.type.CommandDefinition;
+import org.hbird.buffers.StateBuffer;
+import org.hbird.formatter.ExchangeFormatter;
+import org.hbird.formatter.HeaderFields;
+import org.hbird.interfaces.ITask;
+import org.hbird.type.CommandDefinition;
 
 /**
  * @TITLE Command Releaser Design

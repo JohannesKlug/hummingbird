@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Defaults has default data encoding for ParameterTypes and
@@ -32,12 +32,12 @@ public class Defaults implements java.io.Serializable {
      * element allows that data encoding to be specified as a
      * default.
      */
-    private com.logica.hummingbird.xtce.castor.DefaultDataEncoding _defaultDataEncoding;
+    private org.hbird.xtce.castor.DefaultDataEncoding _defaultDataEncoding;
 
     /**
      * Default time to associate each ParameterInstance with.
      */
-    private com.logica.hummingbird.xtce.castor.ParameterTimeAssociation _parameterTimeAssociation;
+    private org.hbird.xtce.castor.ParameterTimeAssociation _parameterTimeAssociation;
 
 
       //----------------/
@@ -62,7 +62,7 @@ public class Defaults implements java.io.Serializable {
      * 
      * @return the value of field 'DefaultDataEncoding'.
      */
-    public com.logica.hummingbird.xtce.castor.DefaultDataEncoding getDefaultDataEncoding(
+    public org.hbird.xtce.castor.DefaultDataEncoding getDefaultDataEncoding(
     ) {
         return this._defaultDataEncoding;
     }
@@ -75,7 +75,7 @@ public class Defaults implements java.io.Serializable {
      * 
      * @return the value of field 'ParameterTimeAssociation'.
      */
-    public com.logica.hummingbird.xtce.castor.ParameterTimeAssociation getParameterTimeAssociation(
+    public org.hbird.xtce.castor.ParameterTimeAssociation getParameterTimeAssociation(
     ) {
         return this._parameterTimeAssociation;
     }
@@ -138,7 +138,7 @@ public class Defaults implements java.io.Serializable {
      * 'defaultDataEncoding'.
      */
     public void setDefaultDataEncoding(
-            final com.logica.hummingbird.xtce.castor.DefaultDataEncoding defaultDataEncoding) {
+            final org.hbird.xtce.castor.DefaultDataEncoding defaultDataEncoding) {
         this._defaultDataEncoding = defaultDataEncoding;
     }
 
@@ -152,7 +152,7 @@ public class Defaults implements java.io.Serializable {
      * 'parameterTimeAssociation'.
      */
     public void setParameterTimeAssociation(
-            final com.logica.hummingbird.xtce.castor.ParameterTimeAssociation parameterTimeAssociation) {
+            final org.hbird.xtce.castor.ParameterTimeAssociation parameterTimeAssociation) {
         this._parameterTimeAssociation = parameterTimeAssociation;
     }
 
@@ -165,12 +165,12 @@ public class Defaults implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.Defaults
+     * org.hbird.xtce.castor.Defaults
      */
-    public static com.logica.hummingbird.xtce.castor.Defaults unmarshal(
+    public static org.hbird.xtce.castor.Defaults unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.Defaults) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.Defaults.class, reader);
+        return (org.hbird.xtce.castor.Defaults) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.Defaults.class, reader);
     }
 
     /**

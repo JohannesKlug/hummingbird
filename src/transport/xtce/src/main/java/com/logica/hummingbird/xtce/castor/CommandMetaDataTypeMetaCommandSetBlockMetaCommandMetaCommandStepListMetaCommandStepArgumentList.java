@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class ArgumentList.
@@ -23,7 +23,7 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
     /**
      * Field _argumentList.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument> _argumentList;
+    private java.util.List<org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument> _argumentList;
 
 
       //----------------/
@@ -32,7 +32,7 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
 
     public CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList() {
         super();
-        this._argumentList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument>();
+        this._argumentList = new java.util.ArrayList<org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument>();
     }
 
 
@@ -48,7 +48,7 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
      * given is outside the bounds of the collection
      */
     public void addArgument(
-            final com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument vArgument)
+            final org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument vArgument)
     throws java.lang.IndexOutOfBoundsException {
         this._argumentList.add(vArgument);
     }
@@ -63,7 +63,7 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
      */
     public void addArgument(
             final int index,
-            final com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument vArgument)
+            final org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument vArgument)
     throws java.lang.IndexOutOfBoundsException {
         this._argumentList.add(index, vArgument);
     }
@@ -74,7 +74,7 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument> enumerateArgument(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument> enumerateArgument(
     ) {
         return java.util.Collections.enumeration(this._argumentList);
     }
@@ -86,10 +86,10 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument
+     * org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument
      * at the given index
      */
-    public com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument getArgument(
+    public org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument getArgument(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -97,7 +97,7 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
             throw new IndexOutOfBoundsException("getArgument: Index value '" + index + "' not in range [0.." + (this._argumentList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument) _argumentList.get(index);
+        return (org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument) _argumentList.get(index);
     }
 
     /**
@@ -109,10 +109,10 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument[] getArgument(
+    public org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument[] getArgument(
     ) {
-        com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument[] array = new com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument[0];
-        return (com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument[]) this._argumentList.toArray(array);
+        org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument[] array = new org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument[0];
+        return (org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument[]) this._argumentList.toArray(array);
     }
 
     /**
@@ -146,7 +146,7 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument> iterateArgument(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument> iterateArgument(
     ) {
         return this._argumentList.iterator();
     }
@@ -197,7 +197,7 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
      * @return true if the object was removed from the collection.
      */
     public boolean removeArgument(
-            final com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument vArgument) {
+            final org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument vArgument) {
         boolean removed = _argumentList.remove(vArgument);
         return removed;
     }
@@ -208,10 +208,10 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument removeArgumentAt(
+    public org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument removeArgumentAt(
             final int index) {
         java.lang.Object obj = this._argumentList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument) obj;
+        return (org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument) obj;
     }
 
     /**
@@ -224,7 +224,7 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
      */
     public void setArgument(
             final int index,
-            final com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument vArgument)
+            final org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument vArgument)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._argumentList.size()) {
@@ -240,7 +240,7 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
      * @param vArgumentArray
      */
     public void setArgument(
-            final com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument[] vArgumentArray) {
+            final org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentListArgument[] vArgumentArray) {
         //-- copy array
         _argumentList.clear();
 
@@ -258,12 +258,12 @@ public class CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepLis
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList
+     * org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList
      */
-    public static com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList unmarshal(
+    public static org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList.class, reader);
+        return (org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList.class, reader);
     }
 
     /**

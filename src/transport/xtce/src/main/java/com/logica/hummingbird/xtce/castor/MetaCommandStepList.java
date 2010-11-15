@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class MetaCommandStepList.
@@ -23,7 +23,7 @@ public class MetaCommandStepList implements java.io.Serializable {
     /**
      * Field _metaCommandStepList.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.MetaCommandStep> _metaCommandStepList;
+    private java.util.List<org.hbird.xtce.castor.MetaCommandStep> _metaCommandStepList;
 
 
       //----------------/
@@ -32,7 +32,7 @@ public class MetaCommandStepList implements java.io.Serializable {
 
     public MetaCommandStepList() {
         super();
-        this._metaCommandStepList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.MetaCommandStep>();
+        this._metaCommandStepList = new java.util.ArrayList<org.hbird.xtce.castor.MetaCommandStep>();
     }
 
 
@@ -48,7 +48,7 @@ public class MetaCommandStepList implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addMetaCommandStep(
-            final com.logica.hummingbird.xtce.castor.MetaCommandStep vMetaCommandStep)
+            final org.hbird.xtce.castor.MetaCommandStep vMetaCommandStep)
     throws java.lang.IndexOutOfBoundsException {
         this._metaCommandStepList.add(vMetaCommandStep);
     }
@@ -63,7 +63,7 @@ public class MetaCommandStepList implements java.io.Serializable {
      */
     public void addMetaCommandStep(
             final int index,
-            final com.logica.hummingbird.xtce.castor.MetaCommandStep vMetaCommandStep)
+            final org.hbird.xtce.castor.MetaCommandStep vMetaCommandStep)
     throws java.lang.IndexOutOfBoundsException {
         this._metaCommandStepList.add(index, vMetaCommandStep);
     }
@@ -74,7 +74,7 @@ public class MetaCommandStepList implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.MetaCommandStep> enumerateMetaCommandStep(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.MetaCommandStep> enumerateMetaCommandStep(
     ) {
         return java.util.Collections.enumeration(this._metaCommandStepList);
     }
@@ -86,10 +86,10 @@ public class MetaCommandStepList implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.MetaCommandStep at the
+     * org.hbird.xtce.castor.MetaCommandStep at the
      * given index
      */
-    public com.logica.hummingbird.xtce.castor.MetaCommandStep getMetaCommandStep(
+    public org.hbird.xtce.castor.MetaCommandStep getMetaCommandStep(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -97,7 +97,7 @@ public class MetaCommandStepList implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getMetaCommandStep: Index value '" + index + "' not in range [0.." + (this._metaCommandStepList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.MetaCommandStep) _metaCommandStepList.get(index);
+        return (org.hbird.xtce.castor.MetaCommandStep) _metaCommandStepList.get(index);
     }
 
     /**
@@ -110,10 +110,10 @@ public class MetaCommandStepList implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.MetaCommandStep[] getMetaCommandStep(
+    public org.hbird.xtce.castor.MetaCommandStep[] getMetaCommandStep(
     ) {
-        com.logica.hummingbird.xtce.castor.MetaCommandStep[] array = new com.logica.hummingbird.xtce.castor.MetaCommandStep[0];
-        return (com.logica.hummingbird.xtce.castor.MetaCommandStep[]) this._metaCommandStepList.toArray(array);
+        org.hbird.xtce.castor.MetaCommandStep[] array = new org.hbird.xtce.castor.MetaCommandStep[0];
+        return (org.hbird.xtce.castor.MetaCommandStep[]) this._metaCommandStepList.toArray(array);
     }
 
     /**
@@ -147,7 +147,7 @@ public class MetaCommandStepList implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.MetaCommandStep> iterateMetaCommandStep(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.MetaCommandStep> iterateMetaCommandStep(
     ) {
         return this._metaCommandStepList.iterator();
     }
@@ -198,7 +198,7 @@ public class MetaCommandStepList implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeMetaCommandStep(
-            final com.logica.hummingbird.xtce.castor.MetaCommandStep vMetaCommandStep) {
+            final org.hbird.xtce.castor.MetaCommandStep vMetaCommandStep) {
         boolean removed = _metaCommandStepList.remove(vMetaCommandStep);
         return removed;
     }
@@ -209,10 +209,10 @@ public class MetaCommandStepList implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.MetaCommandStep removeMetaCommandStepAt(
+    public org.hbird.xtce.castor.MetaCommandStep removeMetaCommandStepAt(
             final int index) {
         java.lang.Object obj = this._metaCommandStepList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.MetaCommandStep) obj;
+        return (org.hbird.xtce.castor.MetaCommandStep) obj;
     }
 
     /**
@@ -225,7 +225,7 @@ public class MetaCommandStepList implements java.io.Serializable {
      */
     public void setMetaCommandStep(
             final int index,
-            final com.logica.hummingbird.xtce.castor.MetaCommandStep vMetaCommandStep)
+            final org.hbird.xtce.castor.MetaCommandStep vMetaCommandStep)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._metaCommandStepList.size()) {
@@ -241,7 +241,7 @@ public class MetaCommandStepList implements java.io.Serializable {
      * @param vMetaCommandStepArray
      */
     public void setMetaCommandStep(
-            final com.logica.hummingbird.xtce.castor.MetaCommandStep[] vMetaCommandStepArray) {
+            final org.hbird.xtce.castor.MetaCommandStep[] vMetaCommandStepArray) {
         //-- copy array
         _metaCommandStepList.clear();
 
@@ -259,12 +259,12 @@ public class MetaCommandStepList implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.MetaCommandStepList
+     * org.hbird.xtce.castor.MetaCommandStepList
      */
-    public static com.logica.hummingbird.xtce.castor.MetaCommandStepList unmarshal(
+    public static org.hbird.xtce.castor.MetaCommandStepList unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.MetaCommandStepList) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.MetaCommandStepList.class, reader);
+        return (org.hbird.xtce.castor.MetaCommandStepList) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.MetaCommandStepList.class, reader);
     }
 
     /**

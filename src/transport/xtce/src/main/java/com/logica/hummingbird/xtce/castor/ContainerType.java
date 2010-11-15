@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * An abstract block of data; used as the base type for more
@@ -14,7 +14,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public abstract class ContainerType extends com.logica.hummingbird.xtce.castor.NameDescriptionType 
+public abstract class ContainerType extends org.hbird.xtce.castor.NameDescriptionType 
 implements java.io.Serializable
 {
 
@@ -26,19 +26,19 @@ implements java.io.Serializable
     /**
      * Field _defaultRateInStream.
      */
-    private com.logica.hummingbird.xtce.castor.DefaultRateInStream _defaultRateInStream;
+    private org.hbird.xtce.castor.DefaultRateInStream _defaultRateInStream;
 
     /**
      * Field _rateInStreamSet.
      */
-    private com.logica.hummingbird.xtce.castor.RateInStreamSet _rateInStreamSet;
+    private org.hbird.xtce.castor.RateInStreamSet _rateInStreamSet;
 
     /**
      * May be used to indicate error detection and correction,
      * chage byte order, provide the size (when it can't be
      * derived), or perform some custom processing.
      */
-    private com.logica.hummingbird.xtce.castor.BinaryEncoding _binaryEncoding;
+    private org.hbird.xtce.castor.BinaryEncoding _binaryEncoding;
 
 
       //----------------/
@@ -63,7 +63,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'BinaryEncoding'.
      */
-    public com.logica.hummingbird.xtce.castor.BinaryEncoding getBinaryEncoding(
+    public org.hbird.xtce.castor.BinaryEncoding getBinaryEncoding(
     ) {
         return this._binaryEncoding;
     }
@@ -73,7 +73,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'DefaultRateInStream'.
      */
-    public com.logica.hummingbird.xtce.castor.DefaultRateInStream getDefaultRateInStream(
+    public org.hbird.xtce.castor.DefaultRateInStream getDefaultRateInStream(
     ) {
         return this._defaultRateInStream;
     }
@@ -83,7 +83,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'RateInStreamSet'.
      */
-    public com.logica.hummingbird.xtce.castor.RateInStreamSet getRateInStreamSet(
+    public org.hbird.xtce.castor.RateInStreamSet getRateInStreamSet(
     ) {
         return this._rateInStreamSet;
     }
@@ -113,7 +113,7 @@ implements java.io.Serializable
      * @param binaryEncoding the value of field 'binaryEncoding'.
      */
     public void setBinaryEncoding(
-            final com.logica.hummingbird.xtce.castor.BinaryEncoding binaryEncoding) {
+            final org.hbird.xtce.castor.BinaryEncoding binaryEncoding) {
         this._binaryEncoding = binaryEncoding;
     }
 
@@ -124,7 +124,7 @@ implements java.io.Serializable
      * 'defaultRateInStream'.
      */
     public void setDefaultRateInStream(
-            final com.logica.hummingbird.xtce.castor.DefaultRateInStream defaultRateInStream) {
+            final org.hbird.xtce.castor.DefaultRateInStream defaultRateInStream) {
         this._defaultRateInStream = defaultRateInStream;
     }
 
@@ -134,7 +134,7 @@ implements java.io.Serializable
      * @param rateInStreamSet the value of field 'rateInStreamSet'.
      */
     public void setRateInStreamSet(
-            final com.logica.hummingbird.xtce.castor.RateInStreamSet rateInStreamSet) {
+            final org.hbird.xtce.castor.RateInStreamSet rateInStreamSet) {
         this._rateInStreamSet = rateInStreamSet;
     }
 

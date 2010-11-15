@@ -1,4 +1,4 @@
-package com.logica.hummingbird.util;
+package org.hbird.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.util.exceptions.BitSetOperationException;
+import org.hbird.util.exceptions.BitSetOperationException;
 
 /**
  * 

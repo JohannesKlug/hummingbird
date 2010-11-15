@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.RepeatType;
+import org.hbird.xtce.castor.RepeatType;
 
 /**
  * Class RepeatTypeDescriptor.
@@ -71,7 +71,7 @@ public class RepeatTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
         //-- initialize element descriptors
 
         //-- _count
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Count.class, "_count", "Count", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Count.class, "_count", "Count", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class RepeatTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
             {
                 try {
                     RepeatType target = (RepeatType) object;
-                    target.setCount( (com.logica.hummingbird.xtce.castor.Count) value);
+                    target.setCount( (org.hbird.xtce.castor.Count) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class RepeatTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Count();
+                return new org.hbird.xtce.castor.Count();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.Count");
+        desc.setSchemaType("org.hbird.xtce.castor.Count");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -112,7 +112,7 @@ public class RepeatTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
         }
         desc.setValidator(fieldValidator);
         //-- _offset
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Offset.class, "_offset", "Offset", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Offset.class, "_offset", "Offset", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -127,7 +127,7 @@ public class RepeatTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
             {
                 try {
                     RepeatType target = (RepeatType) object;
-                    target.setOffset( (com.logica.hummingbird.xtce.castor.Offset) value);
+                    target.setOffset( (org.hbird.xtce.castor.Offset) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -135,10 +135,10 @@ public class RepeatTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Offset();
+                return new org.hbird.xtce.castor.Offset();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.Offset");
+        desc.setSchemaType("org.hbird.xtce.castor.Offset");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -188,7 +188,7 @@ public class RepeatTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDes
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.RepeatType.class;
+        return org.hbird.xtce.castor.RepeatType.class;
     }
 
     /**

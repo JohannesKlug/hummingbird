@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ArgumentListItem;
+import org.hbird.xtce.castor.ArgumentListItem;
 
 /**
  * Class ArgumentListItemDescriptor.
@@ -71,7 +71,7 @@ public class ArgumentListItemDescriptor extends org.exolab.castor.xml.util.XMLCl
         //-- initialize element descriptors
 
         //-- _argumentList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Argument.class, "_argumentList", "Argument", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Argument.class, "_argumentList", "Argument", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class ArgumentListItemDescriptor extends org.exolab.castor.xml.util.XMLCl
             {
                 try {
                     ArgumentListItem target = (ArgumentListItem) object;
-                    target.addArgument( (com.logica.hummingbird.xtce.castor.Argument) value);
+                    target.addArgument( (org.hbird.xtce.castor.Argument) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -102,11 +102,11 @@ public class ArgumentListItemDescriptor extends org.exolab.castor.xml.util.XMLCl
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Argument();
+                return new org.hbird.xtce.castor.Argument();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.Argument");
+        desc.setComponentType("org.hbird.xtce.castor.Argument");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -158,7 +158,7 @@ public class ArgumentListItemDescriptor extends org.exolab.castor.xml.util.XMLCl
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ArgumentListItem.class;
+        return org.hbird.xtce.castor.ArgumentListItem.class;
     }
 
     /**

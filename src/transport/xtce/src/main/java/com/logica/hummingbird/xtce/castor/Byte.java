@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class Byte.
@@ -138,12 +138,12 @@ public class Byte implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.Byte
+     * org.hbird.xtce.castor.Byte
      */
-    public static com.logica.hummingbird.xtce.castor.Byte unmarshal(
+    public static org.hbird.xtce.castor.Byte unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.Byte) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.Byte.class, reader);
+        return (org.hbird.xtce.castor.Byte) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.Byte.class, reader);
     }
 
     /**

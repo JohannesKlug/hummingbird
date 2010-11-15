@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.CommandContainerType;
+import org.hbird.xtce.castor.CommandContainerType;
 
 /**
  * Class CommandContainerTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class CommandContainerTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ContainerTypeDescriptor {
+public class CommandContainerTypeDescriptor extends org.hbird.xtce.castor.descriptors.ContainerTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class CommandContainerTypeDescriptor extends com.logica.hummingbird.xtce.
 
     public CommandContainerTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ContainerTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ContainerTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "CommandContainerType";
         _elementDefinition = false;
@@ -72,7 +72,7 @@ public class CommandContainerTypeDescriptor extends com.logica.hummingbird.xtce.
         //-- initialize element descriptors
 
         //-- _entryList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.CommandContainerTypeEntryList.class, "_entryList", "EntryList", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.CommandContainerTypeEntryList.class, "_entryList", "EntryList", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class CommandContainerTypeDescriptor extends com.logica.hummingbird.xtce.
             {
                 try {
                     CommandContainerType target = (CommandContainerType) object;
-                    target.setEntryList( (com.logica.hummingbird.xtce.castor.CommandContainerTypeEntryList) value);
+                    target.setEntryList( (org.hbird.xtce.castor.CommandContainerTypeEntryList) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,10 +95,10 @@ public class CommandContainerTypeDescriptor extends com.logica.hummingbird.xtce.
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.CommandContainerTypeEntryList();
+                return new org.hbird.xtce.castor.CommandContainerTypeEntryList();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.CommandContainerTypeEntryList");
+        desc.setSchemaType("org.hbird.xtce.castor.CommandContainerTypeEntryList");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -113,7 +113,7 @@ public class CommandContainerTypeDescriptor extends com.logica.hummingbird.xtce.
         }
         desc.setValidator(fieldValidator);
         //-- _baseContainer
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainer.class, "_baseContainer", "BaseContainer", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.CommandContainerTypeBaseContainer.class, "_baseContainer", "BaseContainer", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -128,7 +128,7 @@ public class CommandContainerTypeDescriptor extends com.logica.hummingbird.xtce.
             {
                 try {
                     CommandContainerType target = (CommandContainerType) object;
-                    target.setBaseContainer( (com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainer) value);
+                    target.setBaseContainer( (org.hbird.xtce.castor.CommandContainerTypeBaseContainer) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -136,10 +136,10 @@ public class CommandContainerTypeDescriptor extends com.logica.hummingbird.xtce.
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainer();
+                return new org.hbird.xtce.castor.CommandContainerTypeBaseContainer();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainer");
+        desc.setSchemaType("org.hbird.xtce.castor.CommandContainerTypeBaseContainer");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -192,7 +192,7 @@ public class CommandContainerTypeDescriptor extends com.logica.hummingbird.xtce.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.CommandContainerType.class;
+        return org.hbird.xtce.castor.CommandContainerType.class;
     }
 
     /**

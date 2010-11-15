@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.logica.hummingbird.validation.base;
+package org.hbird.validation.base;
 
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * If no LocationInContainer value is given, the entry is assumed
@@ -14,7 +14,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class LocationInContainerInBits extends com.logica.hummingbird.xtce.castor.IntegerValueType 
+public class LocationInContainerInBits extends org.hbird.xtce.castor.IntegerValueType 
 implements java.io.Serializable
 {
 
@@ -33,7 +33,7 @@ implements java.io.Serializable
      * of the Entry. If going backwards (containerEnd and
      * nextEntry) then, the location refers to the end of the entry.
      */
-    private com.logica.hummingbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType _referenceLocation = com.logica.hummingbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType.fromValue("previousEntry");
+    private org.hbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType _referenceLocation = org.hbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType.fromValue("previousEntry");
 
 
       //----------------/
@@ -42,7 +42,7 @@ implements java.io.Serializable
 
     public LocationInContainerInBits() {
         super();
-        setReferenceLocation(com.logica.hummingbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType.fromValue("previousEntry"));
+        setReferenceLocation(org.hbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType.fromValue("previousEntry"));
     }
 
 
@@ -65,7 +65,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ReferenceLocation'.
      */
-    public com.logica.hummingbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType getReferenceLocation(
+    public org.hbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType getReferenceLocation(
     ) {
         return this._referenceLocation;
     }
@@ -134,7 +134,7 @@ implements java.io.Serializable
      * 'referenceLocation'.
      */
     public void setReferenceLocation(
-            final com.logica.hummingbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType referenceLocation) {
+            final org.hbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType referenceLocation) {
         this._referenceLocation = referenceLocation;
     }
 
@@ -147,12 +147,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.LocationInContainerInBits
+     * org.hbird.xtce.castor.LocationInContainerInBits
      */
-    public static com.logica.hummingbird.xtce.castor.LocationInContainerInBits unmarshal(
+    public static org.hbird.xtce.castor.LocationInContainerInBits unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.LocationInContainerInBits) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.LocationInContainerInBits.class, reader);
+        return (org.hbird.xtce.castor.LocationInContainerInBits) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.LocationInContainerInBits.class, reader);
     }
 
     /**

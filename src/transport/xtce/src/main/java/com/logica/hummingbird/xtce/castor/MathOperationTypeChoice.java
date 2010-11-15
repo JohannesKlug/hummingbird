@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class MathOperationTypeChoice.
@@ -23,7 +23,7 @@ public class MathOperationTypeChoice implements java.io.Serializable {
     /**
      * Field _parameterInstanceRef.
      */
-    private com.logica.hummingbird.xtce.castor.ParameterInstanceRef _parameterInstanceRef;
+    private org.hbird.xtce.castor.ParameterInstanceRef _parameterInstanceRef;
 
     /**
      * Value is assumed to be of the same type as the Parameter
@@ -49,7 +49,7 @@ public class MathOperationTypeChoice implements java.io.Serializable {
      * 
      * @return the value of field 'ParameterInstanceRef'.
      */
-    public com.logica.hummingbird.xtce.castor.ParameterInstanceRef getParameterInstanceRef(
+    public org.hbird.xtce.castor.ParameterInstanceRef getParameterInstanceRef(
     ) {
         return this._parameterInstanceRef;
     }
@@ -120,7 +120,7 @@ public class MathOperationTypeChoice implements java.io.Serializable {
      * 'parameterInstanceRef'.
      */
     public void setParameterInstanceRef(
-            final com.logica.hummingbird.xtce.castor.ParameterInstanceRef parameterInstanceRef) {
+            final org.hbird.xtce.castor.ParameterInstanceRef parameterInstanceRef) {
         this._parameterInstanceRef = parameterInstanceRef;
     }
 
@@ -145,12 +145,12 @@ public class MathOperationTypeChoice implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.MathOperationTypeChoice
+     * org.hbird.xtce.castor.MathOperationTypeChoice
      */
-    public static com.logica.hummingbird.xtce.castor.MathOperationTypeChoice unmarshal(
+    public static org.hbird.xtce.castor.MathOperationTypeChoice unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.MathOperationTypeChoice) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.MathOperationTypeChoice.class, reader);
+        return (org.hbird.xtce.castor.MathOperationTypeChoice) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.MathOperationTypeChoice.class, reader);
     }
 
     /**

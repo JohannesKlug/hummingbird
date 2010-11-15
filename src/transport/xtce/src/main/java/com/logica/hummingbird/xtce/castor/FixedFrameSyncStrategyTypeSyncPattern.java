@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * The pattern of bits used to look for frame synchronization.
@@ -286,12 +286,12 @@ public class FixedFrameSyncStrategyTypeSyncPattern implements java.io.Serializab
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern
+     * org.hbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern
      */
-    public static com.logica.hummingbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern unmarshal(
+    public static org.hbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern.class, reader);
+        return (org.hbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern.class, reader);
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.logica.hummingbird.command.buffer;
+package org.hbird.command.buffer;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Produce;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
-import com.logica.hummingbird.buffers.CommandBuffer;
+import org.hbird.buffers.CommandBuffer;
 
 @ContextConfiguration (locations={"/CommandBufferTest-context.xml"})
 public class CommandBufferTest extends AbstractJUnit38SpringContextTests  {

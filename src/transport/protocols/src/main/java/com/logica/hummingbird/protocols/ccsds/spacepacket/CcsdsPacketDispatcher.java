@@ -1,4 +1,4 @@
-package com.logica.hummingbird.protocols.ccsds.spacepacket;
+package org.hbird.protocols.ccsds.spacepacket;
 
 import java.util.Observable;
 

@@ -1,16 +1,16 @@
-package com.logica.hummingbird.xtce;
+package org.hbird.xtce;
 
 import java.net.URL;
 import java.util.BitSet;
 
 import junit.framework.TestCase;
 
-import com.logica.hummingbird.packetbroker.HummingbirdPacketBroker;
-import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.util.BitSetUtility;
-import com.logica.hummingbird.util.exceptions.BitSetOperationException;
-import com.logica.hummingbird.xtce.exceptions.InvalidXtceFileException;
+import org.hbird.packetbroker.HummingbirdPacketBroker;
+import org.hbird.spacesystemmodel.ContainerFactory;
+import org.hbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.util.BitSetUtility;
+import org.hbird.util.exceptions.BitSetOperationException;
+import org.hbird.xtce.exceptions.InvalidXtceFileException;
 
 // FIXME Not a unit test. This tests integration of separate components.  Needs moving.
 public class ContainerProcessorTest extends TestCase {

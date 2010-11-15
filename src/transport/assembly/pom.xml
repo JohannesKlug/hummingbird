@@ -4,11 +4,11 @@
 
 	<parent>
 		<artifactId>hummingbird</artifactId>
-		<groupId>com.logica.hummingbird</groupId>
+		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<groupId>com.logica.hummingbird</groupId>
+	<groupId>org.hbird</groupId>
 	<artifactId>assembly</artifactId>
 	<name>Assembly</name>
 	<version>0.0.1-SNAPSHOT</version>
@@ -16,7 +16,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
+			<groupId>org.hbird</groupId>
 			<artifactId>xtce</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
@@ -25,12 +25,12 @@
 			<artifactId>camel-test</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
+			<groupId>org.hbird</groupId>
 			<artifactId>example-endpoint</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
+			<groupId>org.hbird</groupId>
 			<artifactId>simulator</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
@@ -54,32 +54,32 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
+			<groupId>org.hbird</groupId>
 			<artifactId>commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
+			<groupId>org.hbird</groupId>
 			<artifactId>space-system-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
+			<groupId>org.hbird</groupId>
 			<artifactId>packet-broker</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
+			<groupId>org.hbird</groupId>
 			<artifactId>validation</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
+			<groupId>org.hbird</groupId>
 			<artifactId>protocols</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>

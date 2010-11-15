@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ContextAlarm;
+import org.hbird.xtce.castor.ContextAlarm;
 
 /**
  * Class ContextAlarmDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ContextAlarmDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ContextAlarmTypeDescriptor {
+public class ContextAlarmDescriptor extends org.hbird.xtce.castor.descriptors.ContextAlarmTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ContextAlarmDescriptor extends com.logica.hummingbird.xtce.castor.d
 
     public ContextAlarmDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ContextAlarmTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ContextAlarmTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ContextAlarm";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class ContextAlarmDescriptor extends com.logica.hummingbird.xtce.castor.d
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ContextAlarm.class;
+        return org.hbird.xtce.castor.ContextAlarm.class;
     }
 
     /**

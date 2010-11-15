@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ExternalAlgorithm;
+import org.hbird.xtce.castor.ExternalAlgorithm;
 
 /**
  * Class ExternalAlgorithmDescriptor.
@@ -193,7 +193,7 @@ public class ExternalAlgorithmDescriptor extends org.exolab.castor.xml.util.XMLC
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ExternalAlgorithm.class;
+        return org.hbird.xtce.castor.ExternalAlgorithm.class;
     }
 
     /**

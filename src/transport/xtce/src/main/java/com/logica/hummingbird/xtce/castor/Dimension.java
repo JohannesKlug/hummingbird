@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * For partial entries of an array, the starting and ending index
@@ -25,12 +25,12 @@ public class Dimension implements java.io.Serializable {
     /**
      * zero based index
      */
-    private com.logica.hummingbird.xtce.castor.StartingIndex _startingIndex;
+    private org.hbird.xtce.castor.StartingIndex _startingIndex;
 
     /**
      * Field _endingIndex.
      */
-    private com.logica.hummingbird.xtce.castor.EndingIndex _endingIndex;
+    private org.hbird.xtce.castor.EndingIndex _endingIndex;
 
 
       //----------------/
@@ -51,7 +51,7 @@ public class Dimension implements java.io.Serializable {
      * 
      * @return the value of field 'EndingIndex'.
      */
-    public com.logica.hummingbird.xtce.castor.EndingIndex getEndingIndex(
+    public org.hbird.xtce.castor.EndingIndex getEndingIndex(
     ) {
         return this._endingIndex;
     }
@@ -63,7 +63,7 @@ public class Dimension implements java.io.Serializable {
      * 
      * @return the value of field 'StartingIndex'.
      */
-    public com.logica.hummingbird.xtce.castor.StartingIndex getStartingIndex(
+    public org.hbird.xtce.castor.StartingIndex getStartingIndex(
     ) {
         return this._startingIndex;
     }
@@ -121,7 +121,7 @@ public class Dimension implements java.io.Serializable {
      * @param endingIndex the value of field 'endingIndex'.
      */
     public void setEndingIndex(
-            final com.logica.hummingbird.xtce.castor.EndingIndex endingIndex) {
+            final org.hbird.xtce.castor.EndingIndex endingIndex) {
         this._endingIndex = endingIndex;
     }
 
@@ -133,7 +133,7 @@ public class Dimension implements java.io.Serializable {
      * @param startingIndex the value of field 'startingIndex'.
      */
     public void setStartingIndex(
-            final com.logica.hummingbird.xtce.castor.StartingIndex startingIndex) {
+            final org.hbird.xtce.castor.StartingIndex startingIndex) {
         this._startingIndex = startingIndex;
     }
 
@@ -146,12 +146,12 @@ public class Dimension implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.Dimension
+     * org.hbird.xtce.castor.Dimension
      */
-    public static com.logica.hummingbird.xtce.castor.Dimension unmarshal(
+    public static org.hbird.xtce.castor.Dimension unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.Dimension) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.Dimension.class, reader);
+        return (org.hbird.xtce.castor.Dimension) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.Dimension.class, reader);
     }
 
     /**

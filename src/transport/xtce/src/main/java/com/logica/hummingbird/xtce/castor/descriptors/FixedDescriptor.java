@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Fixed;
+import org.hbird.xtce.castor.Fixed;
 
 /**
  * Class FixedDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class FixedDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.IntegerValueTypeDescriptor {
+public class FixedDescriptor extends org.hbird.xtce.castor.descriptors.IntegerValueTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class FixedDescriptor extends com.logica.hummingbird.xtce.castor.descript
 
     public FixedDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.IntegerValueTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.IntegerValueTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "Fixed";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class FixedDescriptor extends com.logica.hummingbird.xtce.castor.descript
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Fixed.class;
+        return org.hbird.xtce.castor.Fixed.class;
     }
 
     /**

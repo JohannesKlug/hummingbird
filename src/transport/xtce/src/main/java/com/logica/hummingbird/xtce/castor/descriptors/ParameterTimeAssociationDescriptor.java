@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ParameterTimeAssociation;
+import org.hbird.xtce.castor.ParameterTimeAssociation;
 
 /**
  * Class ParameterTimeAssociationDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ParameterTimeAssociationDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.TimeAssociationTypeDescriptor {
+public class ParameterTimeAssociationDescriptor extends org.hbird.xtce.castor.descriptors.TimeAssociationTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ParameterTimeAssociationDescriptor extends com.logica.hummingbird.x
 
     public ParameterTimeAssociationDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.TimeAssociationTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.TimeAssociationTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ParameterTimeAssociation";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class ParameterTimeAssociationDescriptor extends com.logica.hummingbird.x
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ParameterTimeAssociation.class;
+        return org.hbird.xtce.castor.ParameterTimeAssociation.class;
     }
 
     /**

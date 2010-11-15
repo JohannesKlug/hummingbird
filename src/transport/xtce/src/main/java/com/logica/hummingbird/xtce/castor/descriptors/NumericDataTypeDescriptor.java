@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.NumericDataType;
+import org.hbird.xtce.castor.NumericDataType;
 
 /**
  * Class NumericDataTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class NumericDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.BaseDataTypeDescriptor {
+public class NumericDataTypeDescriptor extends org.hbird.xtce.castor.descriptors.BaseDataTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class NumericDataTypeDescriptor extends com.logica.hummingbird.xtce.casto
 
     public NumericDataTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.BaseDataTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.BaseDataTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "NumericDataType";
         _elementDefinition = false;
@@ -118,7 +118,7 @@ public class NumericDataTypeDescriptor extends com.logica.hummingbird.xtce.casto
         //-- initialize element descriptors
 
         //-- _toString
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ToString.class, "_toString", "ToString", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ToString.class, "_toString", "ToString", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -133,7 +133,7 @@ public class NumericDataTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     NumericDataType target = (NumericDataType) object;
-                    target.setToString( (com.logica.hummingbird.xtce.castor.ToString) value);
+                    target.setToString( (org.hbird.xtce.castor.ToString) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -141,10 +141,10 @@ public class NumericDataTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ToString();
+                return new org.hbird.xtce.castor.ToString();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ToString");
+        desc.setSchemaType("org.hbird.xtce.castor.ToString");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -157,7 +157,7 @@ public class NumericDataTypeDescriptor extends com.logica.hummingbird.xtce.casto
         }
         desc.setValidator(fieldValidator);
         //-- _validRange
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ValidRange.class, "_validRange", "ValidRange", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ValidRange.class, "_validRange", "ValidRange", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -172,7 +172,7 @@ public class NumericDataTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     NumericDataType target = (NumericDataType) object;
-                    target.setValidRange( (com.logica.hummingbird.xtce.castor.ValidRange) value);
+                    target.setValidRange( (org.hbird.xtce.castor.ValidRange) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -180,10 +180,10 @@ public class NumericDataTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ValidRange();
+                return new org.hbird.xtce.castor.ValidRange();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ValidRange");
+        desc.setSchemaType("org.hbird.xtce.castor.ValidRange");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -196,7 +196,7 @@ public class NumericDataTypeDescriptor extends com.logica.hummingbird.xtce.casto
         }
         desc.setValidator(fieldValidator);
         //-- _defaultCalibrator
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.DefaultCalibrator.class, "_defaultCalibrator", "DefaultCalibrator", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.DefaultCalibrator.class, "_defaultCalibrator", "DefaultCalibrator", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -211,7 +211,7 @@ public class NumericDataTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     NumericDataType target = (NumericDataType) object;
-                    target.setDefaultCalibrator( (com.logica.hummingbird.xtce.castor.DefaultCalibrator) value);
+                    target.setDefaultCalibrator( (org.hbird.xtce.castor.DefaultCalibrator) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -219,10 +219,10 @@ public class NumericDataTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.DefaultCalibrator();
+                return new org.hbird.xtce.castor.DefaultCalibrator();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.DefaultCalibrator");
+        desc.setSchemaType("org.hbird.xtce.castor.DefaultCalibrator");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -235,7 +235,7 @@ public class NumericDataTypeDescriptor extends com.logica.hummingbird.xtce.casto
         }
         desc.setValidator(fieldValidator);
         //-- _contextCalibratorList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.NumericDataTypeContextCalibratorList.class, "_contextCalibratorList", "ContextCalibratorList", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.NumericDataTypeContextCalibratorList.class, "_contextCalibratorList", "ContextCalibratorList", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -250,7 +250,7 @@ public class NumericDataTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     NumericDataType target = (NumericDataType) object;
-                    target.setContextCalibratorList( (com.logica.hummingbird.xtce.castor.NumericDataTypeContextCalibratorList) value);
+                    target.setContextCalibratorList( (org.hbird.xtce.castor.NumericDataTypeContextCalibratorList) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -258,10 +258,10 @@ public class NumericDataTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.NumericDataTypeContextCalibratorList();
+                return new org.hbird.xtce.castor.NumericDataTypeContextCalibratorList();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.NumericDataTypeContextCalibratorList");
+        desc.setSchemaType("org.hbird.xtce.castor.NumericDataTypeContextCalibratorList");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -314,7 +314,7 @@ public class NumericDataTypeDescriptor extends com.logica.hummingbird.xtce.casto
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.NumericDataType.class;
+        return org.hbird.xtce.castor.NumericDataType.class;
     }
 
     /**

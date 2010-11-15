@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.StreamSegmentEntryType;
+import org.hbird.xtce.castor.StreamSegmentEntryType;
 
 /**
  * Class StreamSegmentEntryTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class StreamSegmentEntryTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor {
+public class StreamSegmentEntryTypeDescriptor extends org.hbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class StreamSegmentEntryTypeDescriptor extends com.logica.hummingbird.xtc
 
     public StreamSegmentEntryTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "StreamSegmentEntryType";
         _elementDefinition = false;
@@ -247,7 +247,7 @@ public class StreamSegmentEntryTypeDescriptor extends com.logica.hummingbird.xtc
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.StreamSegmentEntryType.class;
+        return org.hbird.xtce.castor.StreamSegmentEntryType.class;
     }
 
     /**

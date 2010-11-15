@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Used to look for relative change in a Parameter value. Only
@@ -24,12 +24,12 @@ public class ParameterValueChange implements java.io.Serializable {
     /**
      * Field _parameterRef.
      */
-    private com.logica.hummingbird.xtce.castor.ParameterRef _parameterRef;
+    private org.hbird.xtce.castor.ParameterRef _parameterRef;
 
     /**
      * Field _change.
      */
-    private com.logica.hummingbird.xtce.castor.Change _change;
+    private org.hbird.xtce.castor.Change _change;
 
 
       //----------------/
@@ -50,7 +50,7 @@ public class ParameterValueChange implements java.io.Serializable {
      * 
      * @return the value of field 'Change'.
      */
-    public com.logica.hummingbird.xtce.castor.Change getChange(
+    public org.hbird.xtce.castor.Change getChange(
     ) {
         return this._change;
     }
@@ -60,7 +60,7 @@ public class ParameterValueChange implements java.io.Serializable {
      * 
      * @return the value of field 'ParameterRef'.
      */
-    public com.logica.hummingbird.xtce.castor.ParameterRef getParameterRef(
+    public org.hbird.xtce.castor.ParameterRef getParameterRef(
     ) {
         return this._parameterRef;
     }
@@ -118,7 +118,7 @@ public class ParameterValueChange implements java.io.Serializable {
      * @param change the value of field 'change'.
      */
     public void setChange(
-            final com.logica.hummingbird.xtce.castor.Change change) {
+            final org.hbird.xtce.castor.Change change) {
         this._change = change;
     }
 
@@ -128,7 +128,7 @@ public class ParameterValueChange implements java.io.Serializable {
      * @param parameterRef the value of field 'parameterRef'.
      */
     public void setParameterRef(
-            final com.logica.hummingbird.xtce.castor.ParameterRef parameterRef) {
+            final org.hbird.xtce.castor.ParameterRef parameterRef) {
         this._parameterRef = parameterRef;
     }
 
@@ -141,12 +141,12 @@ public class ParameterValueChange implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ParameterValueChange
+     * org.hbird.xtce.castor.ParameterValueChange
      */
-    public static com.logica.hummingbird.xtce.castor.ParameterValueChange unmarshal(
+    public static org.hbird.xtce.castor.ParameterValueChange unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ParameterValueChange) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ParameterValueChange.class, reader);
+        return (org.hbird.xtce.castor.ParameterValueChange) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ParameterValueChange.class, reader);
     }
 
     /**

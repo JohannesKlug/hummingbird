@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A range of numbers. "minInclusive", "minExclusive",
@@ -192,12 +192,12 @@ public class DecimalRangeType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.DecimalRangeType
+     * org.hbird.xtce.castor.DecimalRangeType
      */
-    public static com.logica.hummingbird.xtce.castor.DecimalRangeType unmarshal(
+    public static org.hbird.xtce.castor.DecimalRangeType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.DecimalRangeType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.DecimalRangeType.class, reader);
+        return (org.hbird.xtce.castor.DecimalRangeType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.DecimalRangeType.class, reader);
     }
 
     /**

@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.FixedFrameStreamType;
+import org.hbird.xtce.castor.FixedFrameStreamType;
 
 /**
  * Class FixedFrameStreamTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class FixedFrameStreamTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.FrameStreamTypeDescriptor {
+public class FixedFrameStreamTypeDescriptor extends org.hbird.xtce.castor.descriptors.FrameStreamTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class FixedFrameStreamTypeDescriptor extends com.logica.hummingbird.xtce.
 
     public FixedFrameStreamTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.FrameStreamTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.FrameStreamTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "FixedFrameStreamType";
         _elementDefinition = false;
@@ -167,7 +167,7 @@ public class FixedFrameStreamTypeDescriptor extends com.logica.hummingbird.xtce.
         //-- initialize element descriptors
 
         //-- _syncStrategy
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.SyncStrategy.class, "_syncStrategy", "SyncStrategy", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.SyncStrategy.class, "_syncStrategy", "SyncStrategy", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -182,7 +182,7 @@ public class FixedFrameStreamTypeDescriptor extends com.logica.hummingbird.xtce.
             {
                 try {
                     FixedFrameStreamType target = (FixedFrameStreamType) object;
-                    target.setSyncStrategy( (com.logica.hummingbird.xtce.castor.SyncStrategy) value);
+                    target.setSyncStrategy( (org.hbird.xtce.castor.SyncStrategy) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -190,10 +190,10 @@ public class FixedFrameStreamTypeDescriptor extends com.logica.hummingbird.xtce.
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.SyncStrategy();
+                return new org.hbird.xtce.castor.SyncStrategy();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.SyncStrategy");
+        desc.setSchemaType("org.hbird.xtce.castor.SyncStrategy");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -248,7 +248,7 @@ public class FixedFrameStreamTypeDescriptor extends com.logica.hummingbird.xtce.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.FixedFrameStreamType.class;
+        return org.hbird.xtce.castor.FixedFrameStreamType.class;
     }
 
     /**

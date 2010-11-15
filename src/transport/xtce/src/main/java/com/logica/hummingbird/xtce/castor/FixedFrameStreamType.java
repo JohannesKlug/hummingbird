@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * For streams that contain a series of frames with a fixed frame
@@ -16,7 +16,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class FixedFrameStreamType extends com.logica.hummingbird.xtce.castor.FrameStreamType 
+public class FixedFrameStreamType extends org.hbird.xtce.castor.FrameStreamType 
 implements java.io.Serializable
 {
 
@@ -49,7 +49,7 @@ implements java.io.Serializable
     /**
      * Field _syncStrategy.
      */
-    private com.logica.hummingbird.xtce.castor.SyncStrategy _syncStrategy;
+    private org.hbird.xtce.castor.SyncStrategy _syncStrategy;
 
 
       //----------------/
@@ -106,7 +106,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'SyncStrategy'.
      */
-    public com.logica.hummingbird.xtce.castor.SyncStrategy getSyncStrategy(
+    public org.hbird.xtce.castor.SyncStrategy getSyncStrategy(
     ) {
         return this._syncStrategy;
     }
@@ -210,7 +210,7 @@ implements java.io.Serializable
      * @param syncStrategy the value of field 'syncStrategy'.
      */
     public void setSyncStrategy(
-            final com.logica.hummingbird.xtce.castor.SyncStrategy syncStrategy) {
+            final org.hbird.xtce.castor.SyncStrategy syncStrategy) {
         this._syncStrategy = syncStrategy;
     }
 
@@ -223,12 +223,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.FixedFrameStreamType
+     * org.hbird.xtce.castor.FixedFrameStreamType
      */
-    public static com.logica.hummingbird.xtce.castor.FixedFrameStreamType unmarshal(
+    public static org.hbird.xtce.castor.FixedFrameStreamType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.FixedFrameStreamType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.FixedFrameStreamType.class, reader);
+        return (org.hbird.xtce.castor.FixedFrameStreamType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.FixedFrameStreamType.class, reader);
     }
 
     /**

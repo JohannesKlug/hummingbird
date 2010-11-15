@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class OutputSet.
@@ -27,7 +27,7 @@ public class OutputSet implements java.io.Serializable {
      * that will be updated by this algorithm. outputName is an
      * optional "friendly" name for the output parameter.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.OutputParameterRef> _outputParameterRefList;
+    private java.util.List<org.hbird.xtce.castor.OutputParameterRef> _outputParameterRefList;
 
 
       //----------------/
@@ -36,7 +36,7 @@ public class OutputSet implements java.io.Serializable {
 
     public OutputSet() {
         super();
-        this._outputParameterRefList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.OutputParameterRef>();
+        this._outputParameterRefList = new java.util.ArrayList<org.hbird.xtce.castor.OutputParameterRef>();
     }
 
 
@@ -52,7 +52,7 @@ public class OutputSet implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addOutputParameterRef(
-            final com.logica.hummingbird.xtce.castor.OutputParameterRef vOutputParameterRef)
+            final org.hbird.xtce.castor.OutputParameterRef vOutputParameterRef)
     throws java.lang.IndexOutOfBoundsException {
         this._outputParameterRefList.add(vOutputParameterRef);
     }
@@ -67,7 +67,7 @@ public class OutputSet implements java.io.Serializable {
      */
     public void addOutputParameterRef(
             final int index,
-            final com.logica.hummingbird.xtce.castor.OutputParameterRef vOutputParameterRef)
+            final org.hbird.xtce.castor.OutputParameterRef vOutputParameterRef)
     throws java.lang.IndexOutOfBoundsException {
         this._outputParameterRefList.add(index, vOutputParameterRef);
     }
@@ -78,7 +78,7 @@ public class OutputSet implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.OutputParameterRef> enumerateOutputParameterRef(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.OutputParameterRef> enumerateOutputParameterRef(
     ) {
         return java.util.Collections.enumeration(this._outputParameterRefList);
     }
@@ -90,10 +90,10 @@ public class OutputSet implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.OutputParameterRef at the
+     * org.hbird.xtce.castor.OutputParameterRef at the
      * given index
      */
-    public com.logica.hummingbird.xtce.castor.OutputParameterRef getOutputParameterRef(
+    public org.hbird.xtce.castor.OutputParameterRef getOutputParameterRef(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -101,7 +101,7 @@ public class OutputSet implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getOutputParameterRef: Index value '" + index + "' not in range [0.." + (this._outputParameterRefList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.OutputParameterRef) _outputParameterRefList.get(index);
+        return (org.hbird.xtce.castor.OutputParameterRef) _outputParameterRefList.get(index);
     }
 
     /**
@@ -114,10 +114,10 @@ public class OutputSet implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.OutputParameterRef[] getOutputParameterRef(
+    public org.hbird.xtce.castor.OutputParameterRef[] getOutputParameterRef(
     ) {
-        com.logica.hummingbird.xtce.castor.OutputParameterRef[] array = new com.logica.hummingbird.xtce.castor.OutputParameterRef[0];
-        return (com.logica.hummingbird.xtce.castor.OutputParameterRef[]) this._outputParameterRefList.toArray(array);
+        org.hbird.xtce.castor.OutputParameterRef[] array = new org.hbird.xtce.castor.OutputParameterRef[0];
+        return (org.hbird.xtce.castor.OutputParameterRef[]) this._outputParameterRefList.toArray(array);
     }
 
     /**
@@ -151,7 +151,7 @@ public class OutputSet implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.OutputParameterRef> iterateOutputParameterRef(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.OutputParameterRef> iterateOutputParameterRef(
     ) {
         return this._outputParameterRefList.iterator();
     }
@@ -202,7 +202,7 @@ public class OutputSet implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeOutputParameterRef(
-            final com.logica.hummingbird.xtce.castor.OutputParameterRef vOutputParameterRef) {
+            final org.hbird.xtce.castor.OutputParameterRef vOutputParameterRef) {
         boolean removed = _outputParameterRefList.remove(vOutputParameterRef);
         return removed;
     }
@@ -213,10 +213,10 @@ public class OutputSet implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.OutputParameterRef removeOutputParameterRefAt(
+    public org.hbird.xtce.castor.OutputParameterRef removeOutputParameterRefAt(
             final int index) {
         java.lang.Object obj = this._outputParameterRefList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.OutputParameterRef) obj;
+        return (org.hbird.xtce.castor.OutputParameterRef) obj;
     }
 
     /**
@@ -229,7 +229,7 @@ public class OutputSet implements java.io.Serializable {
      */
     public void setOutputParameterRef(
             final int index,
-            final com.logica.hummingbird.xtce.castor.OutputParameterRef vOutputParameterRef)
+            final org.hbird.xtce.castor.OutputParameterRef vOutputParameterRef)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._outputParameterRefList.size()) {
@@ -245,7 +245,7 @@ public class OutputSet implements java.io.Serializable {
      * @param vOutputParameterRefArray
      */
     public void setOutputParameterRef(
-            final com.logica.hummingbird.xtce.castor.OutputParameterRef[] vOutputParameterRefArray) {
+            final org.hbird.xtce.castor.OutputParameterRef[] vOutputParameterRefArray) {
         //-- copy array
         _outputParameterRefList.clear();
 
@@ -263,12 +263,12 @@ public class OutputSet implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.OutputSet
+     * org.hbird.xtce.castor.OutputSet
      */
-    public static com.logica.hummingbird.xtce.castor.OutputSet unmarshal(
+    public static org.hbird.xtce.castor.OutputSet unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.OutputSet) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.OutputSet.class, reader);
+        return (org.hbird.xtce.castor.OutputSet) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.OutputSet.class, reader);
     }
 
     /**

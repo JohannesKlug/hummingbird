@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * One or more physical addresses may be associated with each
@@ -27,7 +27,7 @@ public class PhysicalAddressSet implements java.io.Serializable {
      * process the spacecraft telemetry streams. May be an onboard
      * id, a mux address, or a physical location.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.PhysicalAddress> _physicalAddressList;
+    private java.util.List<org.hbird.xtce.castor.PhysicalAddress> _physicalAddressList;
 
 
       //----------------/
@@ -36,7 +36,7 @@ public class PhysicalAddressSet implements java.io.Serializable {
 
     public PhysicalAddressSet() {
         super();
-        this._physicalAddressList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.PhysicalAddress>();
+        this._physicalAddressList = new java.util.ArrayList<org.hbird.xtce.castor.PhysicalAddress>();
     }
 
 
@@ -52,7 +52,7 @@ public class PhysicalAddressSet implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addPhysicalAddress(
-            final com.logica.hummingbird.xtce.castor.PhysicalAddress vPhysicalAddress)
+            final org.hbird.xtce.castor.PhysicalAddress vPhysicalAddress)
     throws java.lang.IndexOutOfBoundsException {
         this._physicalAddressList.add(vPhysicalAddress);
     }
@@ -67,7 +67,7 @@ public class PhysicalAddressSet implements java.io.Serializable {
      */
     public void addPhysicalAddress(
             final int index,
-            final com.logica.hummingbird.xtce.castor.PhysicalAddress vPhysicalAddress)
+            final org.hbird.xtce.castor.PhysicalAddress vPhysicalAddress)
     throws java.lang.IndexOutOfBoundsException {
         this._physicalAddressList.add(index, vPhysicalAddress);
     }
@@ -78,7 +78,7 @@ public class PhysicalAddressSet implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.PhysicalAddress> enumeratePhysicalAddress(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.PhysicalAddress> enumeratePhysicalAddress(
     ) {
         return java.util.Collections.enumeration(this._physicalAddressList);
     }
@@ -90,10 +90,10 @@ public class PhysicalAddressSet implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.PhysicalAddress at the
+     * org.hbird.xtce.castor.PhysicalAddress at the
      * given index
      */
-    public com.logica.hummingbird.xtce.castor.PhysicalAddress getPhysicalAddress(
+    public org.hbird.xtce.castor.PhysicalAddress getPhysicalAddress(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -101,7 +101,7 @@ public class PhysicalAddressSet implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getPhysicalAddress: Index value '" + index + "' not in range [0.." + (this._physicalAddressList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.PhysicalAddress) _physicalAddressList.get(index);
+        return (org.hbird.xtce.castor.PhysicalAddress) _physicalAddressList.get(index);
     }
 
     /**
@@ -114,10 +114,10 @@ public class PhysicalAddressSet implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.PhysicalAddress[] getPhysicalAddress(
+    public org.hbird.xtce.castor.PhysicalAddress[] getPhysicalAddress(
     ) {
-        com.logica.hummingbird.xtce.castor.PhysicalAddress[] array = new com.logica.hummingbird.xtce.castor.PhysicalAddress[0];
-        return (com.logica.hummingbird.xtce.castor.PhysicalAddress[]) this._physicalAddressList.toArray(array);
+        org.hbird.xtce.castor.PhysicalAddress[] array = new org.hbird.xtce.castor.PhysicalAddress[0];
+        return (org.hbird.xtce.castor.PhysicalAddress[]) this._physicalAddressList.toArray(array);
     }
 
     /**
@@ -151,7 +151,7 @@ public class PhysicalAddressSet implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.PhysicalAddress> iteratePhysicalAddress(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.PhysicalAddress> iteratePhysicalAddress(
     ) {
         return this._physicalAddressList.iterator();
     }
@@ -202,7 +202,7 @@ public class PhysicalAddressSet implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removePhysicalAddress(
-            final com.logica.hummingbird.xtce.castor.PhysicalAddress vPhysicalAddress) {
+            final org.hbird.xtce.castor.PhysicalAddress vPhysicalAddress) {
         boolean removed = _physicalAddressList.remove(vPhysicalAddress);
         return removed;
     }
@@ -213,10 +213,10 @@ public class PhysicalAddressSet implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.PhysicalAddress removePhysicalAddressAt(
+    public org.hbird.xtce.castor.PhysicalAddress removePhysicalAddressAt(
             final int index) {
         java.lang.Object obj = this._physicalAddressList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.PhysicalAddress) obj;
+        return (org.hbird.xtce.castor.PhysicalAddress) obj;
     }
 
     /**
@@ -229,7 +229,7 @@ public class PhysicalAddressSet implements java.io.Serializable {
      */
     public void setPhysicalAddress(
             final int index,
-            final com.logica.hummingbird.xtce.castor.PhysicalAddress vPhysicalAddress)
+            final org.hbird.xtce.castor.PhysicalAddress vPhysicalAddress)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._physicalAddressList.size()) {
@@ -245,7 +245,7 @@ public class PhysicalAddressSet implements java.io.Serializable {
      * @param vPhysicalAddressArray
      */
     public void setPhysicalAddress(
-            final com.logica.hummingbird.xtce.castor.PhysicalAddress[] vPhysicalAddressArray) {
+            final org.hbird.xtce.castor.PhysicalAddress[] vPhysicalAddressArray) {
         //-- copy array
         _physicalAddressList.clear();
 
@@ -263,12 +263,12 @@ public class PhysicalAddressSet implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.PhysicalAddressSet
+     * org.hbird.xtce.castor.PhysicalAddressSet
      */
-    public static com.logica.hummingbird.xtce.castor.PhysicalAddressSet unmarshal(
+    public static org.hbird.xtce.castor.PhysicalAddressSet unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.PhysicalAddressSet) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.PhysicalAddressSet.class, reader);
+        return (org.hbird.xtce.castor.PhysicalAddressSet) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.PhysicalAddressSet.class, reader);
     }
 
     /**

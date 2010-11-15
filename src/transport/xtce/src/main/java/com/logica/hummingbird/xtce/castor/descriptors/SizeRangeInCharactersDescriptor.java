@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.SizeRangeInCharacters;
+import org.hbird.xtce.castor.SizeRangeInCharacters;
 
 /**
  * Class SizeRangeInCharactersDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class SizeRangeInCharactersDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.IntegerRangeTypeDescriptor {
+public class SizeRangeInCharactersDescriptor extends org.hbird.xtce.castor.descriptors.IntegerRangeTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class SizeRangeInCharactersDescriptor extends com.logica.hummingbird.xtce
 
     public SizeRangeInCharactersDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.IntegerRangeTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.IntegerRangeTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "SizeRangeInCharacters";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class SizeRangeInCharactersDescriptor extends com.logica.hummingbird.xtce
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.SizeRangeInCharacters.class;
+        return org.hbird.xtce.castor.SizeRangeInCharacters.class;
     }
 
     /**

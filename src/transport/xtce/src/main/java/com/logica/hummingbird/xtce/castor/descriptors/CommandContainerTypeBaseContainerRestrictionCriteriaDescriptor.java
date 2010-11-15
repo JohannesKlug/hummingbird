@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria;
+import org.hbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria;
 
 /**
  * Class
@@ -19,7 +19,7 @@ import com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainerRestr
  * 
  * @version $Revision$ $Date$
  */
-public class CommandContainerTypeBaseContainerRestrictionCriteriaDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor {
+public class CommandContainerTypeBaseContainerRestrictionCriteriaDescriptor extends org.hbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor {
 
 
       //--------------------------/
@@ -58,7 +58,7 @@ public class CommandContainerTypeBaseContainerRestrictionCriteriaDescriptor exte
 
     public CommandContainerTypeBaseContainerRestrictionCriteriaDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "RestrictionCriteria";
         _elementDefinition = true;
@@ -73,7 +73,7 @@ public class CommandContainerTypeBaseContainerRestrictionCriteriaDescriptor exte
         //-- initialize element descriptors
 
         //-- _nextContainer
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.NextContainer.class, "_nextContainer", "NextContainer", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.NextContainer.class, "_nextContainer", "NextContainer", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -88,7 +88,7 @@ public class CommandContainerTypeBaseContainerRestrictionCriteriaDescriptor exte
             {
                 try {
                     CommandContainerTypeBaseContainerRestrictionCriteria target = (CommandContainerTypeBaseContainerRestrictionCriteria) object;
-                    target.setNextContainer( (com.logica.hummingbird.xtce.castor.NextContainer) value);
+                    target.setNextContainer( (org.hbird.xtce.castor.NextContainer) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -96,10 +96,10 @@ public class CommandContainerTypeBaseContainerRestrictionCriteriaDescriptor exte
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.NextContainer();
+                return new org.hbird.xtce.castor.NextContainer();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.NextContainer");
+        desc.setSchemaType("org.hbird.xtce.castor.NextContainer");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -152,7 +152,7 @@ public class CommandContainerTypeBaseContainerRestrictionCriteriaDescriptor exte
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria.class;
+        return org.hbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria.class;
     }
 
     /**

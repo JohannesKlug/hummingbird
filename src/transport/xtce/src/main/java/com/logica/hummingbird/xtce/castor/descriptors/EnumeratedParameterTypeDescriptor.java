@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.EnumeratedParameterType;
+import org.hbird.xtce.castor.EnumeratedParameterType;
 
 /**
  * Class EnumeratedParameterTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class EnumeratedParameterTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.EnumeratedDataTypeDescriptor {
+public class EnumeratedParameterTypeDescriptor extends org.hbird.xtce.castor.descriptors.EnumeratedDataTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class EnumeratedParameterTypeDescriptor extends com.logica.hummingbird.xt
 
     public EnumeratedParameterTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.EnumeratedDataTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.EnumeratedDataTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "EnumeratedParameterType";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class EnumeratedParameterTypeDescriptor extends com.logica.hummingbird.xt
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.EnumeratedParameterType.class;
+        return org.hbird.xtce.castor.EnumeratedParameterType.class;
     }
 
     /**

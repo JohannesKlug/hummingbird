@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A list of raw parameters, parameter segments, stream segments,
@@ -20,7 +20,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class SequenceContainerType extends com.logica.hummingbird.xtce.castor.ContainerType 
+public class SequenceContainerType extends org.hbird.xtce.castor.ContainerType 
 implements java.io.Serializable
 {
 
@@ -47,12 +47,12 @@ implements java.io.Serializable
     /**
      * Field _entryList.
      */
-    private com.logica.hummingbird.xtce.castor.EntryList _entryList;
+    private org.hbird.xtce.castor.EntryList _entryList;
 
     /**
      * Field _baseContainer.
      */
-    private com.logica.hummingbird.xtce.castor.BaseContainer _baseContainer;
+    private org.hbird.xtce.castor.BaseContainer _baseContainer;
 
 
       //----------------/
@@ -91,7 +91,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'BaseContainer'.
      */
-    public com.logica.hummingbird.xtce.castor.BaseContainer getBaseContainer(
+    public org.hbird.xtce.castor.BaseContainer getBaseContainer(
     ) {
         return this._baseContainer;
     }
@@ -101,7 +101,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'EntryList'.
      */
-    public com.logica.hummingbird.xtce.castor.EntryList getEntryList(
+    public org.hbird.xtce.castor.EntryList getEntryList(
     ) {
         return this._entryList;
     }
@@ -201,7 +201,7 @@ implements java.io.Serializable
      * @param baseContainer the value of field 'baseContainer'.
      */
     public void setBaseContainer(
-            final com.logica.hummingbird.xtce.castor.BaseContainer baseContainer) {
+            final org.hbird.xtce.castor.BaseContainer baseContainer) {
         this._baseContainer = baseContainer;
     }
 
@@ -211,7 +211,7 @@ implements java.io.Serializable
      * @param entryList the value of field 'entryList'.
      */
     public void setEntryList(
-            final com.logica.hummingbird.xtce.castor.EntryList entryList) {
+            final org.hbird.xtce.castor.EntryList entryList) {
         this._entryList = entryList;
     }
 
@@ -234,12 +234,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.SequenceContainerType
+     * org.hbird.xtce.castor.SequenceContainerType
      */
-    public static com.logica.hummingbird.xtce.castor.SequenceContainerType unmarshal(
+    public static org.hbird.xtce.castor.SequenceContainerType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.SequenceContainerType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.SequenceContainerType.class, reader);
+        return (org.hbird.xtce.castor.SequenceContainerType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.SequenceContainerType.class, reader);
     }
 
     /**

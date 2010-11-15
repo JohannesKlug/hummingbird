@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Used when the significance of a command varies by the operating
@@ -24,7 +24,7 @@ public class ContextSignificanceList implements java.io.Serializable {
     /**
      * Field _contextSignificanceList.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.ContextSignificance> _contextSignificanceList;
+    private java.util.List<org.hbird.xtce.castor.ContextSignificance> _contextSignificanceList;
 
 
       //----------------/
@@ -33,7 +33,7 @@ public class ContextSignificanceList implements java.io.Serializable {
 
     public ContextSignificanceList() {
         super();
-        this._contextSignificanceList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.ContextSignificance>();
+        this._contextSignificanceList = new java.util.ArrayList<org.hbird.xtce.castor.ContextSignificance>();
     }
 
 
@@ -49,7 +49,7 @@ public class ContextSignificanceList implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addContextSignificance(
-            final com.logica.hummingbird.xtce.castor.ContextSignificance vContextSignificance)
+            final org.hbird.xtce.castor.ContextSignificance vContextSignificance)
     throws java.lang.IndexOutOfBoundsException {
         this._contextSignificanceList.add(vContextSignificance);
     }
@@ -64,7 +64,7 @@ public class ContextSignificanceList implements java.io.Serializable {
      */
     public void addContextSignificance(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ContextSignificance vContextSignificance)
+            final org.hbird.xtce.castor.ContextSignificance vContextSignificance)
     throws java.lang.IndexOutOfBoundsException {
         this._contextSignificanceList.add(index, vContextSignificance);
     }
@@ -75,7 +75,7 @@ public class ContextSignificanceList implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.ContextSignificance> enumerateContextSignificance(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.ContextSignificance> enumerateContextSignificance(
     ) {
         return java.util.Collections.enumeration(this._contextSignificanceList);
     }
@@ -87,10 +87,10 @@ public class ContextSignificanceList implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.ContextSignificance at
+     * org.hbird.xtce.castor.ContextSignificance at
      * the given index
      */
-    public com.logica.hummingbird.xtce.castor.ContextSignificance getContextSignificance(
+    public org.hbird.xtce.castor.ContextSignificance getContextSignificance(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -98,7 +98,7 @@ public class ContextSignificanceList implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getContextSignificance: Index value '" + index + "' not in range [0.." + (this._contextSignificanceList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.ContextSignificance) _contextSignificanceList.get(index);
+        return (org.hbird.xtce.castor.ContextSignificance) _contextSignificanceList.get(index);
     }
 
     /**
@@ -111,10 +111,10 @@ public class ContextSignificanceList implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.ContextSignificance[] getContextSignificance(
+    public org.hbird.xtce.castor.ContextSignificance[] getContextSignificance(
     ) {
-        com.logica.hummingbird.xtce.castor.ContextSignificance[] array = new com.logica.hummingbird.xtce.castor.ContextSignificance[0];
-        return (com.logica.hummingbird.xtce.castor.ContextSignificance[]) this._contextSignificanceList.toArray(array);
+        org.hbird.xtce.castor.ContextSignificance[] array = new org.hbird.xtce.castor.ContextSignificance[0];
+        return (org.hbird.xtce.castor.ContextSignificance[]) this._contextSignificanceList.toArray(array);
     }
 
     /**
@@ -148,7 +148,7 @@ public class ContextSignificanceList implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.ContextSignificance> iterateContextSignificance(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.ContextSignificance> iterateContextSignificance(
     ) {
         return this._contextSignificanceList.iterator();
     }
@@ -199,7 +199,7 @@ public class ContextSignificanceList implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeContextSignificance(
-            final com.logica.hummingbird.xtce.castor.ContextSignificance vContextSignificance) {
+            final org.hbird.xtce.castor.ContextSignificance vContextSignificance) {
         boolean removed = _contextSignificanceList.remove(vContextSignificance);
         return removed;
     }
@@ -210,10 +210,10 @@ public class ContextSignificanceList implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.ContextSignificance removeContextSignificanceAt(
+    public org.hbird.xtce.castor.ContextSignificance removeContextSignificanceAt(
             final int index) {
         java.lang.Object obj = this._contextSignificanceList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.ContextSignificance) obj;
+        return (org.hbird.xtce.castor.ContextSignificance) obj;
     }
 
     /**
@@ -226,7 +226,7 @@ public class ContextSignificanceList implements java.io.Serializable {
      */
     public void setContextSignificance(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ContextSignificance vContextSignificance)
+            final org.hbird.xtce.castor.ContextSignificance vContextSignificance)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._contextSignificanceList.size()) {
@@ -242,7 +242,7 @@ public class ContextSignificanceList implements java.io.Serializable {
      * @param vContextSignificanceArray
      */
     public void setContextSignificance(
-            final com.logica.hummingbird.xtce.castor.ContextSignificance[] vContextSignificanceArray) {
+            final org.hbird.xtce.castor.ContextSignificance[] vContextSignificanceArray) {
         //-- copy array
         _contextSignificanceList.clear();
 
@@ -260,12 +260,12 @@ public class ContextSignificanceList implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ContextSignificanceList
+     * org.hbird.xtce.castor.ContextSignificanceList
      */
-    public static com.logica.hummingbird.xtce.castor.ContextSignificanceList unmarshal(
+    public static org.hbird.xtce.castor.ContextSignificanceList unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ContextSignificanceList) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ContextSignificanceList.class, reader);
+        return (org.hbird.xtce.castor.ContextSignificanceList) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ContextSignificanceList.class, reader);
     }
 
     /**

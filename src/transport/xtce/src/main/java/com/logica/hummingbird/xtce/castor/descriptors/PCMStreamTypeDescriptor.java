@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.PCMStreamType;
+import org.hbird.xtce.castor.PCMStreamType;
 
 /**
  * Class PCMStreamTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class PCMStreamTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
+public class PCMStreamTypeDescriptor extends org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class PCMStreamTypeDescriptor extends com.logica.hummingbird.xtce.castor.
 
     public PCMStreamTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "PCMStreamType";
         _elementDefinition = false;
@@ -115,7 +115,7 @@ public class PCMStreamTypeDescriptor extends com.logica.hummingbird.xtce.castor.
         }
         desc.setValidator(fieldValidator);
         //-- _pcmType
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.PCMStreamTypePcmTypeType.class, "_pcmType", "pcmType", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.PCMStreamTypePcmTypeType.class, "_pcmType", "pcmType", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -130,7 +130,7 @@ public class PCMStreamTypeDescriptor extends com.logica.hummingbird.xtce.castor.
             {
                 try {
                     PCMStreamType target = (PCMStreamType) object;
-                    target.setPcmType( (com.logica.hummingbird.xtce.castor.types.PCMStreamTypePcmTypeType) value);
+                    target.setPcmType( (org.hbird.xtce.castor.types.PCMStreamTypePcmTypeType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -141,7 +141,7 @@ public class PCMStreamTypeDescriptor extends com.logica.hummingbird.xtce.castor.
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.PCMStreamTypePcmTypeType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.PCMStreamTypePcmTypeType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("PCMStreamTypePcmTypeType");
         desc.setHandler(handler);
@@ -242,7 +242,7 @@ public class PCMStreamTypeDescriptor extends com.logica.hummingbird.xtce.castor.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.PCMStreamType.class;
+        return org.hbird.xtce.castor.PCMStreamType.class;
     }
 
     /**

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Used in packaging to define the expected rate that any
@@ -24,7 +24,7 @@ public class RateInStreamType implements java.io.Serializable {
     /**
      * Field _basis.
      */
-    private com.logica.hummingbird.xtce.castor.types.RateInStreamTypeBasisType _basis = com.logica.hummingbird.xtce.castor.types.RateInStreamTypeBasisType.fromValue("perSecond");
+    private org.hbird.xtce.castor.types.RateInStreamTypeBasisType _basis = org.hbird.xtce.castor.types.RateInStreamTypeBasisType.fromValue("perSecond");
 
     /**
      * Field _minimumValue.
@@ -53,7 +53,7 @@ public class RateInStreamType implements java.io.Serializable {
 
     public RateInStreamType() {
         super();
-        setBasis(com.logica.hummingbird.xtce.castor.types.RateInStreamTypeBasisType.fromValue("perSecond"));
+        setBasis(org.hbird.xtce.castor.types.RateInStreamTypeBasisType.fromValue("perSecond"));
     }
 
 
@@ -80,7 +80,7 @@ public class RateInStreamType implements java.io.Serializable {
      * 
      * @return the value of field 'Basis'.
      */
-    public com.logica.hummingbird.xtce.castor.types.RateInStreamTypeBasisType getBasis(
+    public org.hbird.xtce.castor.types.RateInStreamTypeBasisType getBasis(
     ) {
         return this._basis;
     }
@@ -178,7 +178,7 @@ public class RateInStreamType implements java.io.Serializable {
      * @param basis the value of field 'basis'.
      */
     public void setBasis(
-            final com.logica.hummingbird.xtce.castor.types.RateInStreamTypeBasisType basis) {
+            final org.hbird.xtce.castor.types.RateInStreamTypeBasisType basis) {
         this._basis = basis;
     }
 
@@ -213,12 +213,12 @@ public class RateInStreamType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.RateInStreamType
+     * org.hbird.xtce.castor.RateInStreamType
      */
-    public static com.logica.hummingbird.xtce.castor.RateInStreamType unmarshal(
+    public static org.hbird.xtce.castor.RateInStreamType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.RateInStreamType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.RateInStreamType.class, reader);
+        return (org.hbird.xtce.castor.RateInStreamType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.RateInStreamType.class, reader);
     }
 
     /**

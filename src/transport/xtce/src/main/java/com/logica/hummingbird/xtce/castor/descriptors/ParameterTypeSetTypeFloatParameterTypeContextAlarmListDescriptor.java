@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ParameterTypeSetTypeFloatParameterTypeContextAlarmList;
+import org.hbird.xtce.castor.ParameterTypeSetTypeFloatParameterTypeContextAlarmList;
 
 /**
  * Class
@@ -72,7 +72,7 @@ public class ParameterTypeSetTypeFloatParameterTypeContextAlarmListDescriptor ex
         //-- initialize element descriptors
 
         //-- _contextAlarmList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ContextAlarm.class, "_contextAlarmList", "ContextAlarm", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ContextAlarm.class, "_contextAlarmList", "ContextAlarm", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class ParameterTypeSetTypeFloatParameterTypeContextAlarmListDescriptor ex
             {
                 try {
                     ParameterTypeSetTypeFloatParameterTypeContextAlarmList target = (ParameterTypeSetTypeFloatParameterTypeContextAlarmList) object;
-                    target.addContextAlarm( (com.logica.hummingbird.xtce.castor.ContextAlarm) value);
+                    target.addContextAlarm( (org.hbird.xtce.castor.ContextAlarm) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -103,11 +103,11 @@ public class ParameterTypeSetTypeFloatParameterTypeContextAlarmListDescriptor ex
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ContextAlarm();
+                return new org.hbird.xtce.castor.ContextAlarm();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.ContextAlarm");
+        desc.setComponentType("org.hbird.xtce.castor.ContextAlarm");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -159,7 +159,7 @@ public class ParameterTypeSetTypeFloatParameterTypeContextAlarmListDescriptor ex
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ParameterTypeSetTypeFloatParameterTypeContextAlarmList.class;
+        return org.hbird.xtce.castor.ParameterTypeSetTypeFloatParameterTypeContextAlarmList.class;
     }
 
     /**

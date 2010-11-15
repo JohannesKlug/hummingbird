@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Contains the address (e.g., channel information) required to
@@ -17,7 +17,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class PhysicalAddress extends com.logica.hummingbird.xtce.castor.PhysicalAddressType 
+public class PhysicalAddress extends org.hbird.xtce.castor.PhysicalAddressType 
 implements java.io.Serializable
 {
 
@@ -91,12 +91,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.PhysicalAddress
+     * org.hbird.xtce.castor.PhysicalAddress
      */
-    public static com.logica.hummingbird.xtce.castor.PhysicalAddress unmarshal(
+    public static org.hbird.xtce.castor.PhysicalAddress unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.PhysicalAddress) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.PhysicalAddress.class, reader);
+        return (org.hbird.xtce.castor.PhysicalAddress) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.PhysicalAddress.class, reader);
     }
 
     /**

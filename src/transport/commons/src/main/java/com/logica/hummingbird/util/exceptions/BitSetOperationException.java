@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.logica.hummingbird.util.exceptions;
+package org.hbird.util.exceptions;
 
 
 /** TODO Put in the transport.common */

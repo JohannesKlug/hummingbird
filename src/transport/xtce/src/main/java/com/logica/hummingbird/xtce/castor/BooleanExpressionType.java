@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Holds an arbitrarily complex boolean expression
@@ -28,17 +28,17 @@ public class BooleanExpressionType implements java.io.Serializable {
     /**
      * Field _condition.
      */
-    private com.logica.hummingbird.xtce.castor.Condition _condition;
+    private org.hbird.xtce.castor.Condition _condition;
 
     /**
      * Field _ANDedConditions.
      */
-    private com.logica.hummingbird.xtce.castor.ANDedConditions _ANDedConditions;
+    private org.hbird.xtce.castor.ANDedConditions _ANDedConditions;
 
     /**
      * Field _ORedConditions.
      */
-    private com.logica.hummingbird.xtce.castor.ORedConditions _ORedConditions;
+    private org.hbird.xtce.castor.ORedConditions _ORedConditions;
 
 
       //----------------/
@@ -59,7 +59,7 @@ public class BooleanExpressionType implements java.io.Serializable {
      * 
      * @return the value of field 'ANDedConditions'.
      */
-    public com.logica.hummingbird.xtce.castor.ANDedConditions getANDedConditions(
+    public org.hbird.xtce.castor.ANDedConditions getANDedConditions(
     ) {
         return this._ANDedConditions;
     }
@@ -81,7 +81,7 @@ public class BooleanExpressionType implements java.io.Serializable {
      * 
      * @return the value of field 'Condition'.
      */
-    public com.logica.hummingbird.xtce.castor.Condition getCondition(
+    public org.hbird.xtce.castor.Condition getCondition(
     ) {
         return this._condition;
     }
@@ -91,7 +91,7 @@ public class BooleanExpressionType implements java.io.Serializable {
      * 
      * @return the value of field 'ORedConditions'.
      */
-    public com.logica.hummingbird.xtce.castor.ORedConditions getORedConditions(
+    public org.hbird.xtce.castor.ORedConditions getORedConditions(
     ) {
         return this._ORedConditions;
     }
@@ -149,7 +149,7 @@ public class BooleanExpressionType implements java.io.Serializable {
      * @param ANDedConditions the value of field 'ANDedConditions'.
      */
     public void setANDedConditions(
-            final com.logica.hummingbird.xtce.castor.ANDedConditions ANDedConditions) {
+            final org.hbird.xtce.castor.ANDedConditions ANDedConditions) {
         this._ANDedConditions = ANDedConditions;
         this._choiceValue = ANDedConditions;
     }
@@ -160,7 +160,7 @@ public class BooleanExpressionType implements java.io.Serializable {
      * @param condition the value of field 'condition'.
      */
     public void setCondition(
-            final com.logica.hummingbird.xtce.castor.Condition condition) {
+            final org.hbird.xtce.castor.Condition condition) {
         this._condition = condition;
         this._choiceValue = condition;
     }
@@ -171,7 +171,7 @@ public class BooleanExpressionType implements java.io.Serializable {
      * @param ORedConditions the value of field 'ORedConditions'.
      */
     public void setORedConditions(
-            final com.logica.hummingbird.xtce.castor.ORedConditions ORedConditions) {
+            final org.hbird.xtce.castor.ORedConditions ORedConditions) {
         this._ORedConditions = ORedConditions;
         this._choiceValue = ORedConditions;
     }
@@ -185,12 +185,12 @@ public class BooleanExpressionType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.BooleanExpressionType
+     * org.hbird.xtce.castor.BooleanExpressionType
      */
-    public static com.logica.hummingbird.xtce.castor.BooleanExpressionType unmarshal(
+    public static org.hbird.xtce.castor.BooleanExpressionType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.BooleanExpressionType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.BooleanExpressionType.class, reader);
+        return (org.hbird.xtce.castor.BooleanExpressionType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.BooleanExpressionType.class, reader);
     }
 
     /**

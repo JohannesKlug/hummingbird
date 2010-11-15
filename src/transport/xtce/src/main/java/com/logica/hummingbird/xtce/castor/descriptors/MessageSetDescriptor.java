@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.MessageSet;
+import org.hbird.xtce.castor.MessageSet;
 
 /**
  * Class MessageSetDescriptor.
@@ -113,7 +113,7 @@ public class MessageSetDescriptor extends org.exolab.castor.xml.util.XMLClassDes
         //-- initialize element descriptors
 
         //-- _messageList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Message.class, "_messageList", "Message", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Message.class, "_messageList", "Message", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -128,7 +128,7 @@ public class MessageSetDescriptor extends org.exolab.castor.xml.util.XMLClassDes
             {
                 try {
                     MessageSet target = (MessageSet) object;
-                    target.addMessage( (com.logica.hummingbird.xtce.castor.Message) value);
+                    target.addMessage( (org.hbird.xtce.castor.Message) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -144,11 +144,11 @@ public class MessageSetDescriptor extends org.exolab.castor.xml.util.XMLClassDes
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Message();
+                return new org.hbird.xtce.castor.Message();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.Message");
+        desc.setComponentType("org.hbird.xtce.castor.Message");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -200,7 +200,7 @@ public class MessageSetDescriptor extends org.exolab.castor.xml.util.XMLClassDes
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.MessageSet.class;
+        return org.hbird.xtce.castor.MessageSet.class;
     }
 
     /**

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * An abstract type used by sequence containers. An entry contains
@@ -28,13 +28,13 @@ public class SequenceEntryType implements java.io.Serializable {
      * If no LocationInContainer value is given, the entry is
      * assumed to begin immediately after the previous entry.
      */
-    private com.logica.hummingbird.xtce.castor.LocationInContainerInBits _locationInContainerInBits;
+    private org.hbird.xtce.castor.LocationInContainerInBits _locationInContainerInBits;
 
     /**
      * May be used when this entry repeats itself in the sequence
      * container. If not supplied, the entry does not repeat.
      */
-    private com.logica.hummingbird.xtce.castor.RepeatEntry _repeatEntry;
+    private org.hbird.xtce.castor.RepeatEntry _repeatEntry;
 
     /**
      * This entry will only be included in the sequence when this
@@ -42,7 +42,7 @@ public class SequenceEntryType implements java.io.Serializable {
      * is will be included. A parameter that is not included will
      * be treated as if it did not exist in the sequence at all.
      */
-    private com.logica.hummingbird.xtce.castor.IncludeCondition _includeCondition;
+    private org.hbird.xtce.castor.IncludeCondition _includeCondition;
 
 
       //----------------/
@@ -68,7 +68,7 @@ public class SequenceEntryType implements java.io.Serializable {
      * 
      * @return the value of field 'IncludeCondition'.
      */
-    public com.logica.hummingbird.xtce.castor.IncludeCondition getIncludeCondition(
+    public org.hbird.xtce.castor.IncludeCondition getIncludeCondition(
     ) {
         return this._includeCondition;
     }
@@ -82,7 +82,7 @@ public class SequenceEntryType implements java.io.Serializable {
      * 
      * @return the value of field 'LocationInContainerInBits'.
      */
-    public com.logica.hummingbird.xtce.castor.LocationInContainerInBits getLocationInContainerInBits(
+    public org.hbird.xtce.castor.LocationInContainerInBits getLocationInContainerInBits(
     ) {
         return this._locationInContainerInBits;
     }
@@ -95,7 +95,7 @@ public class SequenceEntryType implements java.io.Serializable {
      * 
      * @return the value of field 'RepeatEntry'.
      */
-    public com.logica.hummingbird.xtce.castor.RepeatEntry getRepeatEntry(
+    public org.hbird.xtce.castor.RepeatEntry getRepeatEntry(
     ) {
         return this._repeatEntry;
     }
@@ -158,7 +158,7 @@ public class SequenceEntryType implements java.io.Serializable {
      * @param includeCondition the value of field 'includeCondition'
      */
     public void setIncludeCondition(
-            final com.logica.hummingbird.xtce.castor.IncludeCondition includeCondition) {
+            final org.hbird.xtce.castor.IncludeCondition includeCondition) {
         this._includeCondition = includeCondition;
     }
 
@@ -173,7 +173,7 @@ public class SequenceEntryType implements java.io.Serializable {
      * 'locationInContainerInBits'.
      */
     public void setLocationInContainerInBits(
-            final com.logica.hummingbird.xtce.castor.LocationInContainerInBits locationInContainerInBits) {
+            final org.hbird.xtce.castor.LocationInContainerInBits locationInContainerInBits) {
         this._locationInContainerInBits = locationInContainerInBits;
     }
 
@@ -186,7 +186,7 @@ public class SequenceEntryType implements java.io.Serializable {
      * @param repeatEntry the value of field 'repeatEntry'.
      */
     public void setRepeatEntry(
-            final com.logica.hummingbird.xtce.castor.RepeatEntry repeatEntry) {
+            final org.hbird.xtce.castor.RepeatEntry repeatEntry) {
         this._repeatEntry = repeatEntry;
     }
 
@@ -199,12 +199,12 @@ public class SequenceEntryType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.SequenceEntryType
+     * org.hbird.xtce.castor.SequenceEntryType
      */
-    public static com.logica.hummingbird.xtce.castor.SequenceEntryType unmarshal(
+    public static org.hbird.xtce.castor.SequenceEntryType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.SequenceEntryType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.SequenceEntryType.class, reader);
+        return (org.hbird.xtce.castor.SequenceEntryType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.SequenceEntryType.class, reader);
     }
 
     /**

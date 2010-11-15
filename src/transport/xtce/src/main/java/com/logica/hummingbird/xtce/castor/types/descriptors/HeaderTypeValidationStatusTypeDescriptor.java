@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types.descriptors;
+package org.hbird.xtce.castor.types.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.types.HeaderTypeValidationStatusType;
+import org.hbird.xtce.castor.types.HeaderTypeValidationStatusType;
 
 /**
  * Class HeaderTypeValidationStatusTypeDescriptor.
@@ -98,7 +98,7 @@ public class HeaderTypeValidationStatusTypeDescriptor extends org.exolab.castor.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.types.HeaderTypeValidationStatusType.class;
+        return org.hbird.xtce.castor.types.HeaderTypeValidationStatusType.class;
     }
 
     /**

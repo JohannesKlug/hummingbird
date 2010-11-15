@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Indicates the distance between repeating entries (the last bit
@@ -14,7 +14,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class Offset extends com.logica.hummingbird.xtce.castor.IntegerValueType 
+public class Offset extends org.hbird.xtce.castor.IntegerValueType 
 implements java.io.Serializable
 {
 
@@ -141,12 +141,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.Offset
+     * org.hbird.xtce.castor.Offset
      */
-    public static com.logica.hummingbird.xtce.castor.Offset unmarshal(
+    public static org.hbird.xtce.castor.Offset unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.Offset) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.Offset.class, reader);
+        return (org.hbird.xtce.castor.Offset) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.Offset.class, reader);
     }
 
     /**

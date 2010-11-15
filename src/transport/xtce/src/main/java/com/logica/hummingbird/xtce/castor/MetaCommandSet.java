@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A set of Command Definitions
@@ -23,7 +23,7 @@ public class MetaCommandSet implements java.io.Serializable {
     /**
      * Field _items.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.MetaCommandSetItem> _items;
+    private java.util.List<org.hbird.xtce.castor.MetaCommandSetItem> _items;
 
 
       //----------------/
@@ -32,7 +32,7 @@ public class MetaCommandSet implements java.io.Serializable {
 
     public MetaCommandSet() {
         super();
-        this._items = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.MetaCommandSetItem>();
+        this._items = new java.util.ArrayList<org.hbird.xtce.castor.MetaCommandSetItem>();
     }
 
 
@@ -48,7 +48,7 @@ public class MetaCommandSet implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addMetaCommandSetItem(
-            final com.logica.hummingbird.xtce.castor.MetaCommandSetItem vMetaCommandSetItem)
+            final org.hbird.xtce.castor.MetaCommandSetItem vMetaCommandSetItem)
     throws java.lang.IndexOutOfBoundsException {
         this._items.add(vMetaCommandSetItem);
     }
@@ -63,7 +63,7 @@ public class MetaCommandSet implements java.io.Serializable {
      */
     public void addMetaCommandSetItem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.MetaCommandSetItem vMetaCommandSetItem)
+            final org.hbird.xtce.castor.MetaCommandSetItem vMetaCommandSetItem)
     throws java.lang.IndexOutOfBoundsException {
         this._items.add(index, vMetaCommandSetItem);
     }
@@ -74,7 +74,7 @@ public class MetaCommandSet implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.MetaCommandSetItem> enumerateMetaCommandSetItem(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.MetaCommandSetItem> enumerateMetaCommandSetItem(
     ) {
         return java.util.Collections.enumeration(this._items);
     }
@@ -86,10 +86,10 @@ public class MetaCommandSet implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.MetaCommandSetItem at the
+     * org.hbird.xtce.castor.MetaCommandSetItem at the
      * given index
      */
-    public com.logica.hummingbird.xtce.castor.MetaCommandSetItem getMetaCommandSetItem(
+    public org.hbird.xtce.castor.MetaCommandSetItem getMetaCommandSetItem(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -97,7 +97,7 @@ public class MetaCommandSet implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getMetaCommandSetItem: Index value '" + index + "' not in range [0.." + (this._items.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.MetaCommandSetItem) _items.get(index);
+        return (org.hbird.xtce.castor.MetaCommandSetItem) _items.get(index);
     }
 
     /**
@@ -110,10 +110,10 @@ public class MetaCommandSet implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.MetaCommandSetItem[] getMetaCommandSetItem(
+    public org.hbird.xtce.castor.MetaCommandSetItem[] getMetaCommandSetItem(
     ) {
-        com.logica.hummingbird.xtce.castor.MetaCommandSetItem[] array = new com.logica.hummingbird.xtce.castor.MetaCommandSetItem[0];
-        return (com.logica.hummingbird.xtce.castor.MetaCommandSetItem[]) this._items.toArray(array);
+        org.hbird.xtce.castor.MetaCommandSetItem[] array = new org.hbird.xtce.castor.MetaCommandSetItem[0];
+        return (org.hbird.xtce.castor.MetaCommandSetItem[]) this._items.toArray(array);
     }
 
     /**
@@ -147,7 +147,7 @@ public class MetaCommandSet implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.MetaCommandSetItem> iterateMetaCommandSetItem(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.MetaCommandSetItem> iterateMetaCommandSetItem(
     ) {
         return this._items.iterator();
     }
@@ -198,7 +198,7 @@ public class MetaCommandSet implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeMetaCommandSetItem(
-            final com.logica.hummingbird.xtce.castor.MetaCommandSetItem vMetaCommandSetItem) {
+            final org.hbird.xtce.castor.MetaCommandSetItem vMetaCommandSetItem) {
         boolean removed = _items.remove(vMetaCommandSetItem);
         return removed;
     }
@@ -209,10 +209,10 @@ public class MetaCommandSet implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.MetaCommandSetItem removeMetaCommandSetItemAt(
+    public org.hbird.xtce.castor.MetaCommandSetItem removeMetaCommandSetItemAt(
             final int index) {
         java.lang.Object obj = this._items.remove(index);
-        return (com.logica.hummingbird.xtce.castor.MetaCommandSetItem) obj;
+        return (org.hbird.xtce.castor.MetaCommandSetItem) obj;
     }
 
     /**
@@ -225,7 +225,7 @@ public class MetaCommandSet implements java.io.Serializable {
      */
     public void setMetaCommandSetItem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.MetaCommandSetItem vMetaCommandSetItem)
+            final org.hbird.xtce.castor.MetaCommandSetItem vMetaCommandSetItem)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._items.size()) {
@@ -241,7 +241,7 @@ public class MetaCommandSet implements java.io.Serializable {
      * @param vMetaCommandSetItemArray
      */
     public void setMetaCommandSetItem(
-            final com.logica.hummingbird.xtce.castor.MetaCommandSetItem[] vMetaCommandSetItemArray) {
+            final org.hbird.xtce.castor.MetaCommandSetItem[] vMetaCommandSetItemArray) {
         //-- copy array
         _items.clear();
 
@@ -259,12 +259,12 @@ public class MetaCommandSet implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.MetaCommandSet
+     * org.hbird.xtce.castor.MetaCommandSet
      */
-    public static com.logica.hummingbird.xtce.castor.MetaCommandSet unmarshal(
+    public static org.hbird.xtce.castor.MetaCommandSet unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.MetaCommandSet) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.MetaCommandSet.class, reader);
+        return (org.hbird.xtce.castor.MetaCommandSet) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.MetaCommandSet.class, reader);
     }
 
     /**

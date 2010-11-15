@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A MatchCriteria may be specifiec for each of the 5 alarm levels.
@@ -25,12 +25,12 @@ public class ConditionalAlarm implements java.io.Serializable {
     /**
      * Field _staticAlarmConditions.
      */
-    private com.logica.hummingbird.xtce.castor.StaticAlarmConditions _staticAlarmConditions;
+    private org.hbird.xtce.castor.StaticAlarmConditions _staticAlarmConditions;
 
     /**
      * Field _changePerSecondAlarmConditions.
      */
-    private com.logica.hummingbird.xtce.castor.ChangePerSecondAlarmConditions _changePerSecondAlarmConditions;
+    private org.hbird.xtce.castor.ChangePerSecondAlarmConditions _changePerSecondAlarmConditions;
 
 
       //----------------/
@@ -51,7 +51,7 @@ public class ConditionalAlarm implements java.io.Serializable {
      * 
      * @return the value of field 'ChangePerSecondAlarmConditions'.
      */
-    public com.logica.hummingbird.xtce.castor.ChangePerSecondAlarmConditions getChangePerSecondAlarmConditions(
+    public org.hbird.xtce.castor.ChangePerSecondAlarmConditions getChangePerSecondAlarmConditions(
     ) {
         return this._changePerSecondAlarmConditions;
     }
@@ -61,7 +61,7 @@ public class ConditionalAlarm implements java.io.Serializable {
      * 
      * @return the value of field 'StaticAlarmConditions'.
      */
-    public com.logica.hummingbird.xtce.castor.StaticAlarmConditions getStaticAlarmConditions(
+    public org.hbird.xtce.castor.StaticAlarmConditions getStaticAlarmConditions(
     ) {
         return this._staticAlarmConditions;
     }
@@ -120,7 +120,7 @@ public class ConditionalAlarm implements java.io.Serializable {
      * 'changePerSecondAlarmConditions'.
      */
     public void setChangePerSecondAlarmConditions(
-            final com.logica.hummingbird.xtce.castor.ChangePerSecondAlarmConditions changePerSecondAlarmConditions) {
+            final org.hbird.xtce.castor.ChangePerSecondAlarmConditions changePerSecondAlarmConditions) {
         this._changePerSecondAlarmConditions = changePerSecondAlarmConditions;
     }
 
@@ -131,7 +131,7 @@ public class ConditionalAlarm implements java.io.Serializable {
      * 'staticAlarmConditions'.
      */
     public void setStaticAlarmConditions(
-            final com.logica.hummingbird.xtce.castor.StaticAlarmConditions staticAlarmConditions) {
+            final org.hbird.xtce.castor.StaticAlarmConditions staticAlarmConditions) {
         this._staticAlarmConditions = staticAlarmConditions;
     }
 
@@ -144,12 +144,12 @@ public class ConditionalAlarm implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ConditionalAlarm
+     * org.hbird.xtce.castor.ConditionalAlarm
      */
-    public static com.logica.hummingbird.xtce.castor.ConditionalAlarm unmarshal(
+    public static org.hbird.xtce.castor.ConditionalAlarm unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ConditionalAlarm) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ConditionalAlarm.class, reader);
+        return (org.hbird.xtce.castor.ConditionalAlarm) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ConditionalAlarm.class, reader);
     }
 
     /**

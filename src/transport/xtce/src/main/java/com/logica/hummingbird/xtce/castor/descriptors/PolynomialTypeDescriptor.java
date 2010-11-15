@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.PolynomialType;
+import org.hbird.xtce.castor.PolynomialType;
 
 /**
  * Class PolynomialTypeDescriptor.
@@ -71,7 +71,7 @@ public class PolynomialTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
         //-- initialize element descriptors
 
         //-- _termList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Term.class, "_termList", "Term", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Term.class, "_termList", "Term", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class PolynomialTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
             {
                 try {
                     PolynomialType target = (PolynomialType) object;
-                    target.addTerm( (com.logica.hummingbird.xtce.castor.Term) value);
+                    target.addTerm( (org.hbird.xtce.castor.Term) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -102,11 +102,11 @@ public class PolynomialTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Term();
+                return new org.hbird.xtce.castor.Term();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.Term");
+        desc.setComponentType("org.hbird.xtce.castor.Term");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -158,7 +158,7 @@ public class PolynomialTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.PolynomialType.class;
+        return org.hbird.xtce.castor.PolynomialType.class;
     }
 
     /**

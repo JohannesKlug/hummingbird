@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Parity;
+import org.hbird.xtce.castor.Parity;
 
 /**
  * Class ParityDescriptor.
@@ -66,7 +66,7 @@ public class ParityDescriptor extends org.exolab.castor.xml.util.XMLClassDescrip
         //-- initialize attribute descriptors
 
         //-- _type
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.ParityTypeType.class, "_type", "type", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.ParityTypeType.class, "_type", "type", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -81,7 +81,7 @@ public class ParityDescriptor extends org.exolab.castor.xml.util.XMLClassDescrip
             {
                 try {
                     Parity target = (Parity) object;
-                    target.setType( (com.logica.hummingbird.xtce.castor.types.ParityTypeType) value);
+                    target.setType( (org.hbird.xtce.castor.types.ParityTypeType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -92,7 +92,7 @@ public class ParityDescriptor extends org.exolab.castor.xml.util.XMLClassDescrip
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.ParityTypeType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.ParityTypeType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("ParityTypeType");
         desc.setHandler(handler);
@@ -154,7 +154,7 @@ public class ParityDescriptor extends org.exolab.castor.xml.util.XMLClassDescrip
         }
         desc.setValidator(fieldValidator);
         //-- _reference
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.ParityReferenceType.class, "_reference", "reference", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.ParityReferenceType.class, "_reference", "reference", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -169,7 +169,7 @@ public class ParityDescriptor extends org.exolab.castor.xml.util.XMLClassDescrip
             {
                 try {
                     Parity target = (Parity) object;
-                    target.setReference( (com.logica.hummingbird.xtce.castor.types.ParityReferenceType) value);
+                    target.setReference( (org.hbird.xtce.castor.types.ParityReferenceType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -180,7 +180,7 @@ public class ParityDescriptor extends org.exolab.castor.xml.util.XMLClassDescrip
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.ParityReferenceType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.ParityReferenceType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("ParityReferenceType");
         desc.setHandler(handler);
@@ -232,7 +232,7 @@ public class ParityDescriptor extends org.exolab.castor.xml.util.XMLClassDescrip
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Parity.class;
+        return org.hbird.xtce.castor.Parity.class;
     }
 
     /**

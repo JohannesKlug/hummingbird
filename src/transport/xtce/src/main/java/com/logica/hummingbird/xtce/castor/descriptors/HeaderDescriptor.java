@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Header;
+import org.hbird.xtce.castor.Header;
 
 /**
  * Class HeaderDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class HeaderDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.HeaderTypeDescriptor {
+public class HeaderDescriptor extends org.hbird.xtce.castor.descriptors.HeaderTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class HeaderDescriptor extends com.logica.hummingbird.xtce.castor.descrip
 
     public HeaderDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.HeaderTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.HeaderTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "Header";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class HeaderDescriptor extends com.logica.hummingbird.xtce.castor.descrip
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Header.class;
+        return org.hbird.xtce.castor.Header.class;
     }
 
     /**

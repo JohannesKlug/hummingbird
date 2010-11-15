@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.OffsetFrom;
+import org.hbird.xtce.castor.OffsetFrom;
 
 /**
  * Class OffsetFromDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class OffsetFromDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ParameterInstanceRefTypeDescriptor {
+public class OffsetFromDescriptor extends org.hbird.xtce.castor.descriptors.ParameterInstanceRefTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class OffsetFromDescriptor extends com.logica.hummingbird.xtce.castor.des
 
     public OffsetFromDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ParameterInstanceRefTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ParameterInstanceRefTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "OffsetFrom";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class OffsetFromDescriptor extends com.logica.hummingbird.xtce.castor.des
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.OffsetFrom.class;
+        return org.hbird.xtce.castor.OffsetFrom.class;
     }
 
     /**

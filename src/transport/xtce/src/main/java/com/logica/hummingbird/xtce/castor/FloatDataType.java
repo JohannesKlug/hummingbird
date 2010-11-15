@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Contains a floating point value
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class FloatDataType extends com.logica.hummingbird.xtce.castor.NumericDataType 
+public class FloatDataType extends org.hbird.xtce.castor.NumericDataType 
 implements java.io.Serializable
 {
 
@@ -30,7 +30,7 @@ implements java.io.Serializable
     /**
      * Field _sizeInBits.
      */
-    private com.logica.hummingbird.xtce.castor.types.FloatDataTypeSizeInBitsType _sizeInBits = com.logica.hummingbird.xtce.castor.types.FloatDataTypeSizeInBitsType.fromValue("32");
+    private org.hbird.xtce.castor.types.FloatDataTypeSizeInBitsType _sizeInBits = org.hbird.xtce.castor.types.FloatDataTypeSizeInBitsType.fromValue("32");
 
 
       //----------------/
@@ -39,7 +39,7 @@ implements java.io.Serializable
 
     public FloatDataType() {
         super();
-        setSizeInBits(com.logica.hummingbird.xtce.castor.types.FloatDataTypeSizeInBitsType.fromValue("32"));
+        setSizeInBits(org.hbird.xtce.castor.types.FloatDataTypeSizeInBitsType.fromValue("32"));
     }
 
 
@@ -62,7 +62,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'SizeInBits'.
      */
-    public com.logica.hummingbird.xtce.castor.types.FloatDataTypeSizeInBitsType getSizeInBits(
+    public org.hbird.xtce.castor.types.FloatDataTypeSizeInBitsType getSizeInBits(
     ) {
         return this._sizeInBits;
     }
@@ -130,7 +130,7 @@ implements java.io.Serializable
      * @param sizeInBits the value of field 'sizeInBits'.
      */
     public void setSizeInBits(
-            final com.logica.hummingbird.xtce.castor.types.FloatDataTypeSizeInBitsType sizeInBits) {
+            final org.hbird.xtce.castor.types.FloatDataTypeSizeInBitsType sizeInBits) {
         this._sizeInBits = sizeInBits;
     }
 
@@ -143,12 +143,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.FloatDataType
+     * org.hbird.xtce.castor.FloatDataType
      */
-    public static com.logica.hummingbird.xtce.castor.FloatDataType unmarshal(
+    public static org.hbird.xtce.castor.FloatDataType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.FloatDataType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.FloatDataType.class, reader);
+        return (org.hbird.xtce.castor.FloatDataType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.FloatDataType.class, reader);
     }
 
     /**

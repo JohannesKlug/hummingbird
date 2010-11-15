@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A list of parameter types
@@ -87,12 +87,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ParameterTypeSet
+     * org.hbird.xtce.castor.ParameterTypeSet
      */
-    public static com.logica.hummingbird.xtce.castor.ParameterTypeSet unmarshal(
+    public static org.hbird.xtce.castor.ParameterTypeSet unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ParameterTypeSet) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ParameterTypeSet.class, reader);
+        return (org.hbird.xtce.castor.ParameterTypeSet) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ParameterTypeSet.class, reader);
     }
 
     /**

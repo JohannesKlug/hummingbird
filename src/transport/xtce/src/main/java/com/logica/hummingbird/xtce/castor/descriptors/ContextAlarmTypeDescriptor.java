@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ContextAlarmType;
+import org.hbird.xtce.castor.ContextAlarmType;
 
 /**
  * Class ContextAlarmTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ContextAlarmTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.NumericAlarmConditionTypeDescriptor {
+public class ContextAlarmTypeDescriptor extends org.hbird.xtce.castor.descriptors.NumericAlarmConditionTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ContextAlarmTypeDescriptor extends com.logica.hummingbird.xtce.cast
 
     public ContextAlarmTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.NumericAlarmConditionTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.NumericAlarmConditionTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ContextAlarmType";
         _elementDefinition = false;
@@ -72,7 +72,7 @@ public class ContextAlarmTypeDescriptor extends com.logica.hummingbird.xtce.cast
         //-- initialize element descriptors
 
         //-- _contextMatch
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ContextMatch.class, "_contextMatch", "ContextMatch", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ContextMatch.class, "_contextMatch", "ContextMatch", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class ContextAlarmTypeDescriptor extends com.logica.hummingbird.xtce.cast
             {
                 try {
                     ContextAlarmType target = (ContextAlarmType) object;
-                    target.setContextMatch( (com.logica.hummingbird.xtce.castor.ContextMatch) value);
+                    target.setContextMatch( (org.hbird.xtce.castor.ContextMatch) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,10 +95,10 @@ public class ContextAlarmTypeDescriptor extends com.logica.hummingbird.xtce.cast
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ContextMatch();
+                return new org.hbird.xtce.castor.ContextMatch();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ContextMatch");
+        desc.setSchemaType("org.hbird.xtce.castor.ContextMatch");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -153,7 +153,7 @@ public class ContextAlarmTypeDescriptor extends com.logica.hummingbird.xtce.cast
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ContextAlarmType.class;
+        return org.hbird.xtce.castor.ContextAlarmType.class;
     }
 
     /**

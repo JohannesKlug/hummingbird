@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.CustomStreamType;
+import org.hbird.xtce.castor.CustomStreamType;
 
 /**
  * Class CustomStreamTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class CustomStreamTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.PCMStreamTypeDescriptor {
+public class CustomStreamTypeDescriptor extends org.hbird.xtce.castor.descriptors.PCMStreamTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class CustomStreamTypeDescriptor extends com.logica.hummingbird.xtce.cast
 
     public CustomStreamTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.PCMStreamTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.PCMStreamTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "CustomStreamType";
         _elementDefinition = false;
@@ -160,7 +160,7 @@ public class CustomStreamTypeDescriptor extends com.logica.hummingbird.xtce.cast
         //-- initialize element descriptors
 
         //-- _encodingAlgorithm
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.EncodingAlgorithm.class, "_encodingAlgorithm", "EncodingAlgorithm", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.EncodingAlgorithm.class, "_encodingAlgorithm", "EncodingAlgorithm", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -175,7 +175,7 @@ public class CustomStreamTypeDescriptor extends com.logica.hummingbird.xtce.cast
             {
                 try {
                     CustomStreamType target = (CustomStreamType) object;
-                    target.setEncodingAlgorithm( (com.logica.hummingbird.xtce.castor.EncodingAlgorithm) value);
+                    target.setEncodingAlgorithm( (org.hbird.xtce.castor.EncodingAlgorithm) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -183,10 +183,10 @@ public class CustomStreamTypeDescriptor extends com.logica.hummingbird.xtce.cast
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.EncodingAlgorithm();
+                return new org.hbird.xtce.castor.EncodingAlgorithm();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.EncodingAlgorithm");
+        desc.setSchemaType("org.hbird.xtce.castor.EncodingAlgorithm");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -201,7 +201,7 @@ public class CustomStreamTypeDescriptor extends com.logica.hummingbird.xtce.cast
         }
         desc.setValidator(fieldValidator);
         //-- _decodingAlgorithm
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.DecodingAlgorithm.class, "_decodingAlgorithm", "DecodingAlgorithm", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.DecodingAlgorithm.class, "_decodingAlgorithm", "DecodingAlgorithm", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -216,7 +216,7 @@ public class CustomStreamTypeDescriptor extends com.logica.hummingbird.xtce.cast
             {
                 try {
                     CustomStreamType target = (CustomStreamType) object;
-                    target.setDecodingAlgorithm( (com.logica.hummingbird.xtce.castor.DecodingAlgorithm) value);
+                    target.setDecodingAlgorithm( (org.hbird.xtce.castor.DecodingAlgorithm) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -224,10 +224,10 @@ public class CustomStreamTypeDescriptor extends com.logica.hummingbird.xtce.cast
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.DecodingAlgorithm();
+                return new org.hbird.xtce.castor.DecodingAlgorithm();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.DecodingAlgorithm");
+        desc.setSchemaType("org.hbird.xtce.castor.DecodingAlgorithm");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -282,7 +282,7 @@ public class CustomStreamTypeDescriptor extends com.logica.hummingbird.xtce.cast
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.CustomStreamType.class;
+        return org.hbird.xtce.castor.CustomStreamType.class;
     }
 
     /**

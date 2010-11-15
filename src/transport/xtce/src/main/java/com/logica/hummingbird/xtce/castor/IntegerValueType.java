@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Contains an Integer value; value may be provided directly or via
@@ -37,13 +37,13 @@ public class IntegerValueType implements java.io.Serializable {
      * of boolean expressions to lookup the value. Anything more
      * complex and a DynamicValue with a CustomAlgorithm may be used
      */
-    private com.logica.hummingbird.xtce.castor.DynamicValue _dynamicValue;
+    private org.hbird.xtce.castor.DynamicValue _dynamicValue;
 
     /**
      * Lookup a value using the lookup list supplied. Use the first
      * match found.
      */
-    private com.logica.hummingbird.xtce.castor.DiscreteLookupList _discreteLookupList;
+    private org.hbird.xtce.castor.DiscreteLookupList _discreteLookupList;
 
 
       //----------------/
@@ -79,7 +79,7 @@ public class IntegerValueType implements java.io.Serializable {
      * 
      * @return the value of field 'DiscreteLookupList'.
      */
-    public com.logica.hummingbird.xtce.castor.DiscreteLookupList getDiscreteLookupList(
+    public org.hbird.xtce.castor.DiscreteLookupList getDiscreteLookupList(
     ) {
         return this._discreteLookupList;
     }
@@ -95,7 +95,7 @@ public class IntegerValueType implements java.io.Serializable {
      * 
      * @return the value of field 'DynamicValue'.
      */
-    public com.logica.hummingbird.xtce.castor.DynamicValue getDynamicValue(
+    public org.hbird.xtce.castor.DynamicValue getDynamicValue(
     ) {
         return this._dynamicValue;
     }
@@ -167,7 +167,7 @@ public class IntegerValueType implements java.io.Serializable {
      * 'discreteLookupList'.
      */
     public void setDiscreteLookupList(
-            final com.logica.hummingbird.xtce.castor.DiscreteLookupList discreteLookupList) {
+            final org.hbird.xtce.castor.DiscreteLookupList discreteLookupList) {
         this._discreteLookupList = discreteLookupList;
         this._choiceValue = discreteLookupList;
     }
@@ -184,7 +184,7 @@ public class IntegerValueType implements java.io.Serializable {
      * @param dynamicValue the value of field 'dynamicValue'.
      */
     public void setDynamicValue(
-            final com.logica.hummingbird.xtce.castor.DynamicValue dynamicValue) {
+            final org.hbird.xtce.castor.DynamicValue dynamicValue) {
         this._dynamicValue = dynamicValue;
         this._choiceValue = dynamicValue;
     }
@@ -209,12 +209,12 @@ public class IntegerValueType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.IntegerValueType
+     * org.hbird.xtce.castor.IntegerValueType
      */
-    public static com.logica.hummingbird.xtce.castor.IntegerValueType unmarshal(
+    public static org.hbird.xtce.castor.IntegerValueType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.IntegerValueType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.IntegerValueType.class, reader);
+        return (org.hbird.xtce.castor.IntegerValueType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.IntegerValueType.class, reader);
     }
 
     /**

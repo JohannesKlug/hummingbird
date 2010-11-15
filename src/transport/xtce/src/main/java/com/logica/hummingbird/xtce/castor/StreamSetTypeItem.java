@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class StreamSetTypeItem.
@@ -28,17 +28,17 @@ public class StreamSetTypeItem implements java.io.Serializable {
     /**
      * Field _fixedFrameStream.
      */
-    private com.logica.hummingbird.xtce.castor.FixedFrameStream _fixedFrameStream;
+    private org.hbird.xtce.castor.FixedFrameStream _fixedFrameStream;
 
     /**
      * Field _variableFrameStream.
      */
-    private com.logica.hummingbird.xtce.castor.VariableFrameStream _variableFrameStream;
+    private org.hbird.xtce.castor.VariableFrameStream _variableFrameStream;
 
     /**
      * Field _customStream.
      */
-    private com.logica.hummingbird.xtce.castor.CustomStream _customStream;
+    private org.hbird.xtce.castor.CustomStream _customStream;
 
 
       //----------------/
@@ -71,7 +71,7 @@ public class StreamSetTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'CustomStream'.
      */
-    public com.logica.hummingbird.xtce.castor.CustomStream getCustomStream(
+    public org.hbird.xtce.castor.CustomStream getCustomStream(
     ) {
         return this._customStream;
     }
@@ -81,7 +81,7 @@ public class StreamSetTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'FixedFrameStream'.
      */
-    public com.logica.hummingbird.xtce.castor.FixedFrameStream getFixedFrameStream(
+    public org.hbird.xtce.castor.FixedFrameStream getFixedFrameStream(
     ) {
         return this._fixedFrameStream;
     }
@@ -91,7 +91,7 @@ public class StreamSetTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'VariableFrameStream'.
      */
-    public com.logica.hummingbird.xtce.castor.VariableFrameStream getVariableFrameStream(
+    public org.hbird.xtce.castor.VariableFrameStream getVariableFrameStream(
     ) {
         return this._variableFrameStream;
     }
@@ -102,7 +102,7 @@ public class StreamSetTypeItem implements java.io.Serializable {
      * @param customStream the value of field 'customStream'.
      */
     public void setCustomStream(
-            final com.logica.hummingbird.xtce.castor.CustomStream customStream) {
+            final org.hbird.xtce.castor.CustomStream customStream) {
         this._customStream = customStream;
         this._choiceValue = customStream;
     }
@@ -113,7 +113,7 @@ public class StreamSetTypeItem implements java.io.Serializable {
      * @param fixedFrameStream the value of field 'fixedFrameStream'
      */
     public void setFixedFrameStream(
-            final com.logica.hummingbird.xtce.castor.FixedFrameStream fixedFrameStream) {
+            final org.hbird.xtce.castor.FixedFrameStream fixedFrameStream) {
         this._fixedFrameStream = fixedFrameStream;
         this._choiceValue = fixedFrameStream;
     }
@@ -125,7 +125,7 @@ public class StreamSetTypeItem implements java.io.Serializable {
      * 'variableFrameStream'.
      */
     public void setVariableFrameStream(
-            final com.logica.hummingbird.xtce.castor.VariableFrameStream variableFrameStream) {
+            final org.hbird.xtce.castor.VariableFrameStream variableFrameStream) {
         this._variableFrameStream = variableFrameStream;
         this._choiceValue = variableFrameStream;
     }

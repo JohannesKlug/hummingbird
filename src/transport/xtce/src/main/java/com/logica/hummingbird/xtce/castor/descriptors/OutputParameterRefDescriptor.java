@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.OutputParameterRef;
+import org.hbird.xtce.castor.OutputParameterRef;
 
 /**
  * Class OutputParameterRefDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class OutputParameterRefDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ParameterRefTypeDescriptor {
+public class OutputParameterRefDescriptor extends org.hbird.xtce.castor.descriptors.ParameterRefTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class OutputParameterRefDescriptor extends com.logica.hummingbird.xtce.ca
 
     public OutputParameterRefDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ParameterRefTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ParameterRefTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "OutputParameterRef";
         _elementDefinition = true;
@@ -192,7 +192,7 @@ public class OutputParameterRefDescriptor extends com.logica.hummingbird.xtce.ca
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.OutputParameterRef.class;
+        return org.hbird.xtce.castor.OutputParameterRef.class;
     }
 
     /**

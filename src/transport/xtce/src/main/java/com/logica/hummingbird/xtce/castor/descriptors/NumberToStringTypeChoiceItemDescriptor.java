@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.NumberToStringTypeChoiceItem;
+import org.hbird.xtce.castor.NumberToStringTypeChoiceItem;
 
 /**
  * Class NumberToStringTypeChoiceItemDescriptor.
@@ -70,7 +70,7 @@ public class NumberToStringTypeChoiceItemDescriptor extends org.exolab.castor.xm
         //-- initialize element descriptors
 
         //-- _valueEnumeration
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ValueEnumeration.class, "_valueEnumeration", "ValueEnumeration", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ValueEnumeration.class, "_valueEnumeration", "ValueEnumeration", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -85,7 +85,7 @@ public class NumberToStringTypeChoiceItemDescriptor extends org.exolab.castor.xm
             {
                 try {
                     NumberToStringTypeChoiceItem target = (NumberToStringTypeChoiceItem) object;
-                    target.setValueEnumeration( (com.logica.hummingbird.xtce.castor.ValueEnumeration) value);
+                    target.setValueEnumeration( (org.hbird.xtce.castor.ValueEnumeration) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -93,10 +93,10 @@ public class NumberToStringTypeChoiceItemDescriptor extends org.exolab.castor.xm
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ValueEnumeration();
+                return new org.hbird.xtce.castor.ValueEnumeration();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ValueEnumeration");
+        desc.setSchemaType("org.hbird.xtce.castor.ValueEnumeration");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -111,7 +111,7 @@ public class NumberToStringTypeChoiceItemDescriptor extends org.exolab.castor.xm
         }
         desc.setValidator(fieldValidator);
         //-- _rangeEnumeration
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.RangeEnumeration.class, "_rangeEnumeration", "RangeEnumeration", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.RangeEnumeration.class, "_rangeEnumeration", "RangeEnumeration", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -126,7 +126,7 @@ public class NumberToStringTypeChoiceItemDescriptor extends org.exolab.castor.xm
             {
                 try {
                     NumberToStringTypeChoiceItem target = (NumberToStringTypeChoiceItem) object;
-                    target.setRangeEnumeration( (com.logica.hummingbird.xtce.castor.RangeEnumeration) value);
+                    target.setRangeEnumeration( (org.hbird.xtce.castor.RangeEnumeration) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -134,10 +134,10 @@ public class NumberToStringTypeChoiceItemDescriptor extends org.exolab.castor.xm
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.RangeEnumeration();
+                return new org.hbird.xtce.castor.RangeEnumeration();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.RangeEnumeration");
+        desc.setSchemaType("org.hbird.xtce.castor.RangeEnumeration");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -189,7 +189,7 @@ public class NumberToStringTypeChoiceItemDescriptor extends org.exolab.castor.xm
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.NumberToStringTypeChoiceItem.class;
+        return org.hbird.xtce.castor.NumberToStringTypeChoiceItem.class;
     }
 
     /**

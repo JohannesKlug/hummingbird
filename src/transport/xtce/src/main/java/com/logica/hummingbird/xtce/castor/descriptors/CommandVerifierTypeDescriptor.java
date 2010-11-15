@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.CommandVerifierType;
+import org.hbird.xtce.castor.CommandVerifierType;
 
 /**
  * Class CommandVerifierTypeDescriptor.
@@ -113,7 +113,7 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
         //-- initialize element descriptors
 
         //-- _comparison
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Comparison.class, "_comparison", "Comparison", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Comparison.class, "_comparison", "Comparison", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -128,7 +128,7 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     CommandVerifierType target = (CommandVerifierType) object;
-                    target.setComparison( (com.logica.hummingbird.xtce.castor.Comparison) value);
+                    target.setComparison( (org.hbird.xtce.castor.Comparison) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -136,10 +136,10 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Comparison();
+                return new org.hbird.xtce.castor.Comparison();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.Comparison");
+        desc.setSchemaType("org.hbird.xtce.castor.Comparison");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -154,7 +154,7 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _comparisonList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.CommandVerifierTypeComparisonList.class, "_comparisonList", "ComparisonList", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.CommandVerifierTypeComparisonList.class, "_comparisonList", "ComparisonList", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -169,7 +169,7 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     CommandVerifierType target = (CommandVerifierType) object;
-                    target.setComparisonList( (com.logica.hummingbird.xtce.castor.CommandVerifierTypeComparisonList) value);
+                    target.setComparisonList( (org.hbird.xtce.castor.CommandVerifierTypeComparisonList) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -177,10 +177,10 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.CommandVerifierTypeComparisonList();
+                return new org.hbird.xtce.castor.CommandVerifierTypeComparisonList();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.CommandVerifierTypeComparisonList");
+        desc.setSchemaType("org.hbird.xtce.castor.CommandVerifierTypeComparisonList");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -195,7 +195,7 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _booleanExpression
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.BooleanExpression.class, "_booleanExpression", "BooleanExpression", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.BooleanExpression.class, "_booleanExpression", "BooleanExpression", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -210,7 +210,7 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     CommandVerifierType target = (CommandVerifierType) object;
-                    target.setBooleanExpression( (com.logica.hummingbird.xtce.castor.BooleanExpression) value);
+                    target.setBooleanExpression( (org.hbird.xtce.castor.BooleanExpression) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -218,10 +218,10 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.BooleanExpression();
+                return new org.hbird.xtce.castor.BooleanExpression();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.BooleanExpression");
+        desc.setSchemaType("org.hbird.xtce.castor.BooleanExpression");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -236,7 +236,7 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _containerRef
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ContainerRef.class, "_containerRef", "ContainerRef", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ContainerRef.class, "_containerRef", "ContainerRef", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -251,7 +251,7 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     CommandVerifierType target = (CommandVerifierType) object;
-                    target.setContainerRef( (com.logica.hummingbird.xtce.castor.ContainerRef) value);
+                    target.setContainerRef( (org.hbird.xtce.castor.ContainerRef) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -259,10 +259,10 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ContainerRef();
+                return new org.hbird.xtce.castor.ContainerRef();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ContainerRef");
+        desc.setSchemaType("org.hbird.xtce.castor.ContainerRef");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -277,7 +277,7 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _parameterValueChange
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ParameterValueChange.class, "_parameterValueChange", "ParameterValueChange", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ParameterValueChange.class, "_parameterValueChange", "ParameterValueChange", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -292,7 +292,7 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     CommandVerifierType target = (CommandVerifierType) object;
-                    target.setParameterValueChange( (com.logica.hummingbird.xtce.castor.ParameterValueChange) value);
+                    target.setParameterValueChange( (org.hbird.xtce.castor.ParameterValueChange) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -300,10 +300,10 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ParameterValueChange();
+                return new org.hbird.xtce.castor.ParameterValueChange();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ParameterValueChange");
+        desc.setSchemaType("org.hbird.xtce.castor.ParameterValueChange");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -318,7 +318,7 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _customAlgorithm
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.CustomAlgorithm.class, "_customAlgorithm", "CustomAlgorithm", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.CustomAlgorithm.class, "_customAlgorithm", "CustomAlgorithm", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -333,7 +333,7 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     CommandVerifierType target = (CommandVerifierType) object;
-                    target.setCustomAlgorithm( (com.logica.hummingbird.xtce.castor.CustomAlgorithm) value);
+                    target.setCustomAlgorithm( (org.hbird.xtce.castor.CustomAlgorithm) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -341,10 +341,10 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.CustomAlgorithm();
+                return new org.hbird.xtce.castor.CustomAlgorithm();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.CustomAlgorithm");
+        desc.setSchemaType("org.hbird.xtce.castor.CustomAlgorithm");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -396,7 +396,7 @@ public class CommandVerifierTypeDescriptor extends org.exolab.castor.xml.util.XM
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.CommandVerifierType.class;
+        return org.hbird.xtce.castor.CommandVerifierType.class;
     }
 
     /**

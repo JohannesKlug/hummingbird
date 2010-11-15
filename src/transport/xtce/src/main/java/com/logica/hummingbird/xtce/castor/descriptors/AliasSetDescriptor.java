@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.AliasSet;
+import org.hbird.xtce.castor.AliasSet;
 
 /**
  * Class AliasSetDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class AliasSetDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.AliasSetTypeDescriptor {
+public class AliasSetDescriptor extends org.hbird.xtce.castor.descriptors.AliasSetTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class AliasSetDescriptor extends com.logica.hummingbird.xtce.castor.descr
 
     public AliasSetDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.AliasSetTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.AliasSetTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "AliasSet";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class AliasSetDescriptor extends com.logica.hummingbird.xtce.castor.descr
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.AliasSet.class;
+        return org.hbird.xtce.castor.AliasSet.class;
     }
 
     /**

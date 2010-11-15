@@ -1,4 +1,4 @@
-package com.logica.hummingbird.util;
+package org.hbird.util;
 
 /** TODO Put in the transport.common */
 import java.util.BitSet;
@@ -7,7 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.util.exceptions.BitSetOperationException;
+import org.hbird.util.exceptions.BitSetOperationException;
 
 /**
  * The bitset utilities class helps the encoding / decoding of simple java types such as integer and float to a bitset.

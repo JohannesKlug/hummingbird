@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Change;
+import org.hbird.xtce.castor.Change;
 
 /**
  * Class ChangeDescriptor.
@@ -148,7 +148,7 @@ public class ChangeDescriptor extends org.exolab.castor.xml.util.XMLClassDescrip
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Change.class;
+        return org.hbird.xtce.castor.Change.class;
     }
 
     /**

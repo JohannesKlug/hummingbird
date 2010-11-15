@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ReturnParmRef;
+import org.hbird.xtce.castor.ReturnParmRef;
 
 /**
  * Class ReturnParmRefDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ReturnParmRefDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ParameterRefTypeDescriptor {
+public class ReturnParmRefDescriptor extends org.hbird.xtce.castor.descriptors.ParameterRefTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ReturnParmRefDescriptor extends com.logica.hummingbird.xtce.castor.
 
     public ReturnParmRefDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ParameterRefTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ParameterRefTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ReturnParmRef";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class ReturnParmRefDescriptor extends com.logica.hummingbird.xtce.castor.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ReturnParmRef.class;
+        return org.hbird.xtce.castor.ReturnParmRef.class;
     }
 
     /**

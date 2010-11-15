@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class MathOperation.
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class MathOperation extends com.logica.hummingbird.xtce.castor.MathOperationType 
+public class MathOperation extends org.hbird.xtce.castor.MathOperationType 
 implements java.io.Serializable
 {
 
@@ -30,7 +30,7 @@ implements java.io.Serializable
     /**
      * Field _triggerSet.
      */
-    private com.logica.hummingbird.xtce.castor.TriggerSet _triggerSet;
+    private org.hbird.xtce.castor.TriggerSet _triggerSet;
 
 
       //----------------/
@@ -61,7 +61,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'TriggerSet'.
      */
-    public com.logica.hummingbird.xtce.castor.TriggerSet getTriggerSet(
+    public org.hbird.xtce.castor.TriggerSet getTriggerSet(
     ) {
         return this._triggerSet;
     }
@@ -130,7 +130,7 @@ implements java.io.Serializable
      * @param triggerSet the value of field 'triggerSet'.
      */
     public void setTriggerSet(
-            final com.logica.hummingbird.xtce.castor.TriggerSet triggerSet) {
+            final org.hbird.xtce.castor.TriggerSet triggerSet) {
         this._triggerSet = triggerSet;
     }
 
@@ -143,12 +143,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.MathOperation
+     * org.hbird.xtce.castor.MathOperation
      */
-    public static com.logica.hummingbird.xtce.castor.MathOperation unmarshal(
+    public static org.hbird.xtce.castor.MathOperation unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.MathOperation) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.MathOperation.class, reader);
+        return (org.hbird.xtce.castor.MathOperation) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.MathOperation.class, reader);
     }
 
     /**

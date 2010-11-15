@@ -33,7 +33,7 @@
 
 
 	<!-- double timeCounter, double angularFrequency, double amplitude, double phase, String name -->
-	<bean id="sender" class="com.logica.hummingbird.gmap.PositionSender">
+	<bean id="sender" class="org.hbird.gmap.PositionSender">
 		<property name="template" ref="template"/>
 	</bean>
 

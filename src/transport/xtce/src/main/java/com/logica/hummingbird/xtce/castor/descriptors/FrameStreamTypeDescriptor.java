@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.FrameStreamType;
+import org.hbird.xtce.castor.FrameStreamType;
 
 /**
  * Class FrameStreamTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class FrameStreamTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.PCMStreamTypeDescriptor {
+public class FrameStreamTypeDescriptor extends org.hbird.xtce.castor.descriptors.PCMStreamTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class FrameStreamTypeDescriptor extends com.logica.hummingbird.xtce.casto
 
     public FrameStreamTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.PCMStreamTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.PCMStreamTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "FrameStreamType";
         _elementDefinition = false;
@@ -72,7 +72,7 @@ public class FrameStreamTypeDescriptor extends com.logica.hummingbird.xtce.casto
         //-- initialize element descriptors
 
         //-- _frameStreamTypeChoice
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.FrameStreamTypeChoice.class, "_frameStreamTypeChoice", "-error-if-this-is-used-", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.FrameStreamTypeChoice.class, "_frameStreamTypeChoice", "-error-if-this-is-used-", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class FrameStreamTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     FrameStreamType target = (FrameStreamType) object;
-                    target.setFrameStreamTypeChoice( (com.logica.hummingbird.xtce.castor.FrameStreamTypeChoice) value);
+                    target.setFrameStreamTypeChoice( (org.hbird.xtce.castor.FrameStreamTypeChoice) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,13 +95,13 @@ public class FrameStreamTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.FrameStreamTypeChoice();
+                return new org.hbird.xtce.castor.FrameStreamTypeChoice();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.FrameStreamTypeChoice");
+        desc.setSchemaType("org.hbird.xtce.castor.FrameStreamTypeChoice");
         desc.setHandler(handler);
         desc.setContainer(true);
-        desc.setClassDescriptor(new com.logica.hummingbird.xtce.castor.descriptors.FrameStreamTypeChoiceDescriptor());
+        desc.setClassDescriptor(new org.hbird.xtce.castor.descriptors.FrameStreamTypeChoiceDescriptor());
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
         desc.setMultivalued(false);
@@ -115,7 +115,7 @@ public class FrameStreamTypeDescriptor extends com.logica.hummingbird.xtce.casto
         }
         desc.setValidator(fieldValidator);
         //-- _streamRef
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.StreamRef.class, "_streamRef", "StreamRef", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.StreamRef.class, "_streamRef", "StreamRef", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -130,7 +130,7 @@ public class FrameStreamTypeDescriptor extends com.logica.hummingbird.xtce.casto
             {
                 try {
                     FrameStreamType target = (FrameStreamType) object;
-                    target.setStreamRef( (com.logica.hummingbird.xtce.castor.StreamRef) value);
+                    target.setStreamRef( (org.hbird.xtce.castor.StreamRef) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -138,10 +138,10 @@ public class FrameStreamTypeDescriptor extends com.logica.hummingbird.xtce.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.StreamRef();
+                return new org.hbird.xtce.castor.StreamRef();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.StreamRef");
+        desc.setSchemaType("org.hbird.xtce.castor.StreamRef");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -194,7 +194,7 @@ public class FrameStreamTypeDescriptor extends com.logica.hummingbird.xtce.casto
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.FrameStreamType.class;
+        return org.hbird.xtce.castor.FrameStreamType.class;
     }
 
     /**

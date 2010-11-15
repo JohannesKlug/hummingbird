@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class MetaCommandStep.
@@ -28,7 +28,7 @@ public class MetaCommandStep implements java.io.Serializable {
     /**
      * Field _argumentList.
      */
-    private com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList _argumentList;
+    private org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList _argumentList;
 
 
       //----------------/
@@ -49,7 +49,7 @@ public class MetaCommandStep implements java.io.Serializable {
      * 
      * @return the value of field 'ArgumentList'.
      */
-    public com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList getArgumentList(
+    public org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList getArgumentList(
     ) {
         return this._argumentList;
     }
@@ -117,7 +117,7 @@ public class MetaCommandStep implements java.io.Serializable {
      * @param argumentList the value of field 'argumentList'.
      */
     public void setArgumentList(
-            final com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList argumentList) {
+            final org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList argumentList) {
         this._argumentList = argumentList;
     }
 
@@ -140,12 +140,12 @@ public class MetaCommandStep implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.MetaCommandStep
+     * org.hbird.xtce.castor.MetaCommandStep
      */
-    public static com.logica.hummingbird.xtce.castor.MetaCommandStep unmarshal(
+    public static org.hbird.xtce.castor.MetaCommandStep unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.MetaCommandStep) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.MetaCommandStep.class, reader);
+        return (org.hbird.xtce.castor.MetaCommandStep) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.MetaCommandStep.class, reader);
     }
 
     /**

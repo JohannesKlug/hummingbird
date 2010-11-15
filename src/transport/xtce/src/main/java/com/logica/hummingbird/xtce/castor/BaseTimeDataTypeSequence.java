@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class BaseTimeDataTypeSequence.
@@ -28,7 +28,7 @@ public class BaseTimeDataTypeSequence implements java.io.Serializable {
      * transform algorithm to convert time data formats that are
      * too difficult to describe in XTCE.
      */
-    private com.logica.hummingbird.xtce.castor.Encoding _encoding;
+    private org.hbird.xtce.castor.Encoding _encoding;
 
 
       //----------------/
@@ -56,7 +56,7 @@ public class BaseTimeDataTypeSequence implements java.io.Serializable {
      * 
      * @return the value of field 'Encoding'.
      */
-    public com.logica.hummingbird.xtce.castor.Encoding getEncoding(
+    public org.hbird.xtce.castor.Encoding getEncoding(
     ) {
         return this._encoding;
     }
@@ -121,7 +121,7 @@ public class BaseTimeDataTypeSequence implements java.io.Serializable {
      * @param encoding the value of field 'encoding'.
      */
     public void setEncoding(
-            final com.logica.hummingbird.xtce.castor.Encoding encoding) {
+            final org.hbird.xtce.castor.Encoding encoding) {
         this._encoding = encoding;
     }
 
@@ -134,12 +134,12 @@ public class BaseTimeDataTypeSequence implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.BaseTimeDataTypeSequence
+     * org.hbird.xtce.castor.BaseTimeDataTypeSequence
      */
-    public static com.logica.hummingbird.xtce.castor.BaseTimeDataTypeSequence unmarshal(
+    public static org.hbird.xtce.castor.BaseTimeDataTypeSequence unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.BaseTimeDataTypeSequence) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.BaseTimeDataTypeSequence.class, reader);
+        return (org.hbird.xtce.castor.BaseTimeDataTypeSequence) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.BaseTimeDataTypeSequence.class, reader);
     }
 
     /**

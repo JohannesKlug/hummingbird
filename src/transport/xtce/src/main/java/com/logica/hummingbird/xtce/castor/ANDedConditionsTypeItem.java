@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class ANDedConditionsTypeItem.
@@ -28,12 +28,12 @@ public class ANDedConditionsTypeItem implements java.io.Serializable {
     /**
      * Field _condition.
      */
-    private com.logica.hummingbird.xtce.castor.Condition _condition;
+    private org.hbird.xtce.castor.Condition _condition;
 
     /**
      * Field _ORedConditions.
      */
-    private com.logica.hummingbird.xtce.castor.ORedConditions _ORedConditions;
+    private org.hbird.xtce.castor.ORedConditions _ORedConditions;
 
 
       //----------------/
@@ -66,7 +66,7 @@ public class ANDedConditionsTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'Condition'.
      */
-    public com.logica.hummingbird.xtce.castor.Condition getCondition(
+    public org.hbird.xtce.castor.Condition getCondition(
     ) {
         return this._condition;
     }
@@ -76,7 +76,7 @@ public class ANDedConditionsTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'ORedConditions'.
      */
-    public com.logica.hummingbird.xtce.castor.ORedConditions getORedConditions(
+    public org.hbird.xtce.castor.ORedConditions getORedConditions(
     ) {
         return this._ORedConditions;
     }
@@ -87,7 +87,7 @@ public class ANDedConditionsTypeItem implements java.io.Serializable {
      * @param condition the value of field 'condition'.
      */
     public void setCondition(
-            final com.logica.hummingbird.xtce.castor.Condition condition) {
+            final org.hbird.xtce.castor.Condition condition) {
         this._condition = condition;
         this._choiceValue = condition;
     }
@@ -98,7 +98,7 @@ public class ANDedConditionsTypeItem implements java.io.Serializable {
      * @param ORedConditions the value of field 'ORedConditions'.
      */
     public void setORedConditions(
-            final com.logica.hummingbird.xtce.castor.ORedConditions ORedConditions) {
+            final org.hbird.xtce.castor.ORedConditions ORedConditions) {
         this._ORedConditions = ORedConditions;
         this._choiceValue = ORedConditions;
     }

@@ -1,4 +1,4 @@
-package com.logica.hummingbird.simulator.waveforms;
+package org.hbird.simulator.waveforms;
 
 public abstract class WaveformImpl implements Waveform {
 	

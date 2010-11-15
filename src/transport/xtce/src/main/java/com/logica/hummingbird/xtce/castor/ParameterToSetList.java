@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Parameters that are set with a new value after the command has
@@ -25,7 +25,7 @@ public class ParameterToSetList implements java.io.Serializable {
      * Sets a Parameter to a new value after the command has been
      * verified (all verifications have passed)
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.ParameterToSet> _parameterToSetList;
+    private java.util.List<org.hbird.xtce.castor.ParameterToSet> _parameterToSetList;
 
 
       //----------------/
@@ -34,7 +34,7 @@ public class ParameterToSetList implements java.io.Serializable {
 
     public ParameterToSetList() {
         super();
-        this._parameterToSetList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.ParameterToSet>();
+        this._parameterToSetList = new java.util.ArrayList<org.hbird.xtce.castor.ParameterToSet>();
     }
 
 
@@ -50,7 +50,7 @@ public class ParameterToSetList implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addParameterToSet(
-            final com.logica.hummingbird.xtce.castor.ParameterToSet vParameterToSet)
+            final org.hbird.xtce.castor.ParameterToSet vParameterToSet)
     throws java.lang.IndexOutOfBoundsException {
         this._parameterToSetList.add(vParameterToSet);
     }
@@ -65,7 +65,7 @@ public class ParameterToSetList implements java.io.Serializable {
      */
     public void addParameterToSet(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ParameterToSet vParameterToSet)
+            final org.hbird.xtce.castor.ParameterToSet vParameterToSet)
     throws java.lang.IndexOutOfBoundsException {
         this._parameterToSetList.add(index, vParameterToSet);
     }
@@ -76,7 +76,7 @@ public class ParameterToSetList implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.ParameterToSet> enumerateParameterToSet(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.ParameterToSet> enumerateParameterToSet(
     ) {
         return java.util.Collections.enumeration(this._parameterToSetList);
     }
@@ -88,10 +88,10 @@ public class ParameterToSetList implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.ParameterToSet at the
+     * org.hbird.xtce.castor.ParameterToSet at the
      * given index
      */
-    public com.logica.hummingbird.xtce.castor.ParameterToSet getParameterToSet(
+    public org.hbird.xtce.castor.ParameterToSet getParameterToSet(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -99,7 +99,7 @@ public class ParameterToSetList implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getParameterToSet: Index value '" + index + "' not in range [0.." + (this._parameterToSetList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.ParameterToSet) _parameterToSetList.get(index);
+        return (org.hbird.xtce.castor.ParameterToSet) _parameterToSetList.get(index);
     }
 
     /**
@@ -112,10 +112,10 @@ public class ParameterToSetList implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.ParameterToSet[] getParameterToSet(
+    public org.hbird.xtce.castor.ParameterToSet[] getParameterToSet(
     ) {
-        com.logica.hummingbird.xtce.castor.ParameterToSet[] array = new com.logica.hummingbird.xtce.castor.ParameterToSet[0];
-        return (com.logica.hummingbird.xtce.castor.ParameterToSet[]) this._parameterToSetList.toArray(array);
+        org.hbird.xtce.castor.ParameterToSet[] array = new org.hbird.xtce.castor.ParameterToSet[0];
+        return (org.hbird.xtce.castor.ParameterToSet[]) this._parameterToSetList.toArray(array);
     }
 
     /**
@@ -149,7 +149,7 @@ public class ParameterToSetList implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.ParameterToSet> iterateParameterToSet(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.ParameterToSet> iterateParameterToSet(
     ) {
         return this._parameterToSetList.iterator();
     }
@@ -200,7 +200,7 @@ public class ParameterToSetList implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeParameterToSet(
-            final com.logica.hummingbird.xtce.castor.ParameterToSet vParameterToSet) {
+            final org.hbird.xtce.castor.ParameterToSet vParameterToSet) {
         boolean removed = _parameterToSetList.remove(vParameterToSet);
         return removed;
     }
@@ -211,10 +211,10 @@ public class ParameterToSetList implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.ParameterToSet removeParameterToSetAt(
+    public org.hbird.xtce.castor.ParameterToSet removeParameterToSetAt(
             final int index) {
         java.lang.Object obj = this._parameterToSetList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.ParameterToSet) obj;
+        return (org.hbird.xtce.castor.ParameterToSet) obj;
     }
 
     /**
@@ -227,7 +227,7 @@ public class ParameterToSetList implements java.io.Serializable {
      */
     public void setParameterToSet(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ParameterToSet vParameterToSet)
+            final org.hbird.xtce.castor.ParameterToSet vParameterToSet)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._parameterToSetList.size()) {
@@ -243,7 +243,7 @@ public class ParameterToSetList implements java.io.Serializable {
      * @param vParameterToSetArray
      */
     public void setParameterToSet(
-            final com.logica.hummingbird.xtce.castor.ParameterToSet[] vParameterToSetArray) {
+            final org.hbird.xtce.castor.ParameterToSet[] vParameterToSetArray) {
         //-- copy array
         _parameterToSetList.clear();
 
@@ -261,12 +261,12 @@ public class ParameterToSetList implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ParameterToSetList
+     * org.hbird.xtce.castor.ParameterToSetList
      */
-    public static com.logica.hummingbird.xtce.castor.ParameterToSetList unmarshal(
+    public static org.hbird.xtce.castor.ParameterToSetList unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ParameterToSetList) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ParameterToSetList.class, reader);
+        return (org.hbird.xtce.castor.ParameterToSetList) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ParameterToSetList.class, reader);
     }
 
     /**

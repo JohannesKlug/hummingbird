@@ -1,4 +1,4 @@
-package com.logica.hummingbird.gmap;
+package org.hbird.gmap;
 
 import java.util.Iterator;
 import java.util.Map;

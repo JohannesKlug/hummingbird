@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Uses a parameter to for the value. The parameter value may be
@@ -26,13 +26,13 @@ public class DynamicValue implements java.io.Serializable {
     /**
      * Field _parameterInstanceRef.
      */
-    private com.logica.hummingbird.xtce.castor.ParameterInstanceRef _parameterInstanceRef;
+    private org.hbird.xtce.castor.ParameterInstanceRef _parameterInstanceRef;
 
     /**
      * A slope and intercept may be applied to scale or shift the
      * value of the parameter in the dynamic value
      */
-    private com.logica.hummingbird.xtce.castor.LinearAdjustment _linearAdjustment;
+    private org.hbird.xtce.castor.LinearAdjustment _linearAdjustment;
 
 
       //----------------/
@@ -56,7 +56,7 @@ public class DynamicValue implements java.io.Serializable {
      * 
      * @return the value of field 'LinearAdjustment'.
      */
-    public com.logica.hummingbird.xtce.castor.LinearAdjustment getLinearAdjustment(
+    public org.hbird.xtce.castor.LinearAdjustment getLinearAdjustment(
     ) {
         return this._linearAdjustment;
     }
@@ -66,7 +66,7 @@ public class DynamicValue implements java.io.Serializable {
      * 
      * @return the value of field 'ParameterInstanceRef'.
      */
-    public com.logica.hummingbird.xtce.castor.ParameterInstanceRef getParameterInstanceRef(
+    public org.hbird.xtce.castor.ParameterInstanceRef getParameterInstanceRef(
     ) {
         return this._parameterInstanceRef;
     }
@@ -127,7 +127,7 @@ public class DynamicValue implements java.io.Serializable {
      * @param linearAdjustment the value of field 'linearAdjustment'
      */
     public void setLinearAdjustment(
-            final com.logica.hummingbird.xtce.castor.LinearAdjustment linearAdjustment) {
+            final org.hbird.xtce.castor.LinearAdjustment linearAdjustment) {
         this._linearAdjustment = linearAdjustment;
     }
 
@@ -138,7 +138,7 @@ public class DynamicValue implements java.io.Serializable {
      * 'parameterInstanceRef'.
      */
     public void setParameterInstanceRef(
-            final com.logica.hummingbird.xtce.castor.ParameterInstanceRef parameterInstanceRef) {
+            final org.hbird.xtce.castor.ParameterInstanceRef parameterInstanceRef) {
         this._parameterInstanceRef = parameterInstanceRef;
     }
 
@@ -151,12 +151,12 @@ public class DynamicValue implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.DynamicValue
+     * org.hbird.xtce.castor.DynamicValue
      */
-    public static com.logica.hummingbird.xtce.castor.DynamicValue unmarshal(
+    public static org.hbird.xtce.castor.DynamicValue unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.DynamicValue) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.DynamicValue.class, reader);
+        return (org.hbird.xtce.castor.DynamicValue) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.DynamicValue.class, reader);
     }
 
     /**

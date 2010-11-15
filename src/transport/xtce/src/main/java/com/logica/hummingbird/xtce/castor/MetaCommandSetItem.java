@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class MetaCommandSetItem.
@@ -29,7 +29,7 @@ public class MetaCommandSetItem implements java.io.Serializable {
      * All commands to be sent on this mission are listed here. In
      * addition this area has verification and validation informatio
      */
-    private com.logica.hummingbird.xtce.castor.MetaCommand _metaCommand;
+    private org.hbird.xtce.castor.MetaCommand _metaCommand;
 
     /**
      * Used to include a MetaCommand defined in another sub-system
@@ -42,7 +42,7 @@ public class MetaCommandSetItem implements java.io.Serializable {
      * MetaCommands that can be packaged up in a single
      * BlockMetaCommand.
      */
-    private com.logica.hummingbird.xtce.castor.BlockMetaCommand _blockMetaCommand;
+    private org.hbird.xtce.castor.BlockMetaCommand _blockMetaCommand;
 
 
       //----------------/
@@ -67,7 +67,7 @@ public class MetaCommandSetItem implements java.io.Serializable {
      * 
      * @return the value of field 'BlockMetaCommand'.
      */
-    public com.logica.hummingbird.xtce.castor.BlockMetaCommand getBlockMetaCommand(
+    public org.hbird.xtce.castor.BlockMetaCommand getBlockMetaCommand(
     ) {
         return this._blockMetaCommand;
     }
@@ -92,7 +92,7 @@ public class MetaCommandSetItem implements java.io.Serializable {
      * 
      * @return the value of field 'MetaCommand'.
      */
-    public com.logica.hummingbird.xtce.castor.MetaCommand getMetaCommand(
+    public org.hbird.xtce.castor.MetaCommand getMetaCommand(
     ) {
         return this._metaCommand;
     }
@@ -120,7 +120,7 @@ public class MetaCommandSetItem implements java.io.Serializable {
      * @param blockMetaCommand the value of field 'blockMetaCommand'
      */
     public void setBlockMetaCommand(
-            final com.logica.hummingbird.xtce.castor.BlockMetaCommand blockMetaCommand) {
+            final org.hbird.xtce.castor.BlockMetaCommand blockMetaCommand) {
         this._blockMetaCommand = blockMetaCommand;
         this._choiceValue = blockMetaCommand;
     }
@@ -134,7 +134,7 @@ public class MetaCommandSetItem implements java.io.Serializable {
      * @param metaCommand the value of field 'metaCommand'.
      */
     public void setMetaCommand(
-            final com.logica.hummingbird.xtce.castor.MetaCommand metaCommand) {
+            final org.hbird.xtce.castor.MetaCommand metaCommand) {
         this._metaCommand = metaCommand;
         this._choiceValue = metaCommand;
     }

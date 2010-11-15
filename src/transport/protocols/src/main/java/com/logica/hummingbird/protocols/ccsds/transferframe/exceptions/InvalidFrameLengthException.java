@@ -1,4 +1,4 @@
-package com.logica.hummingbird.protocols.ccsds.transferframe.exceptions;
+package org.hbird.protocols.ccsds.transferframe.exceptions;
 
 public class InvalidFrameLengthException extends Exception {
 

@@ -1,13 +1,13 @@
 /**
  * 
  */
-package com.logica.hummingbird.spacesystemmodel.exceptions;
+package org.hbird.spacesystemmodel.exceptions;
 
 import java.util.Map;
 import java.util.Set;
 
-import com.logica.hummingbird.spacesystemmodel.Container;
-import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
+import org.hbird.spacesystemmodel.Container;
+import org.hbird.spacesystemmodel.ContainerImpl;
 
 /**
  * This is a checked exception class which will allow the client to take steps to 

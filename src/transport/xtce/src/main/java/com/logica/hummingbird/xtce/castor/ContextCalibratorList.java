@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class ContextCalibratorList.
@@ -23,7 +23,7 @@ public class ContextCalibratorList implements java.io.Serializable {
     /**
      * Field _contextCalibrator.
      */
-    private com.logica.hummingbird.xtce.castor.ContextCalibrator _contextCalibrator;
+    private org.hbird.xtce.castor.ContextCalibrator _contextCalibrator;
 
 
       //----------------/
@@ -44,7 +44,7 @@ public class ContextCalibratorList implements java.io.Serializable {
      * 
      * @return the value of field 'ContextCalibrator'.
      */
-    public com.logica.hummingbird.xtce.castor.ContextCalibrator getContextCalibrator(
+    public org.hbird.xtce.castor.ContextCalibrator getContextCalibrator(
     ) {
         return this._contextCalibrator;
     }
@@ -103,7 +103,7 @@ public class ContextCalibratorList implements java.io.Serializable {
      * 'contextCalibrator'.
      */
     public void setContextCalibrator(
-            final com.logica.hummingbird.xtce.castor.ContextCalibrator contextCalibrator) {
+            final org.hbird.xtce.castor.ContextCalibrator contextCalibrator) {
         this._contextCalibrator = contextCalibrator;
     }
 
@@ -116,12 +116,12 @@ public class ContextCalibratorList implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ContextCalibratorList
+     * org.hbird.xtce.castor.ContextCalibratorList
      */
-    public static com.logica.hummingbird.xtce.castor.ContextCalibratorList unmarshal(
+    public static org.hbird.xtce.castor.ContextCalibratorList unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ContextCalibratorList) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ContextCalibratorList.class, reader);
+        return (org.hbird.xtce.castor.ContextCalibratorList) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ContextCalibratorList.class, reader);
     }
 
     /**

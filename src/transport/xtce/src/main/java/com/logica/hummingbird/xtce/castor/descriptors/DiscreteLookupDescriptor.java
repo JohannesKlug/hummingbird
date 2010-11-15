@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.DiscreteLookup;
+import org.hbird.xtce.castor.DiscreteLookup;
 
 /**
  * Class DiscreteLookupDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class DiscreteLookupDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor {
+public class DiscreteLookupDescriptor extends org.hbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class DiscreteLookupDescriptor extends com.logica.hummingbird.xtce.castor
 
     public DiscreteLookupDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "DiscreteLookup";
         _elementDefinition = true;
@@ -155,7 +155,7 @@ public class DiscreteLookupDescriptor extends com.logica.hummingbird.xtce.castor
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.DiscreteLookup.class;
+        return org.hbird.xtce.castor.DiscreteLookup.class;
     }
 
     /**

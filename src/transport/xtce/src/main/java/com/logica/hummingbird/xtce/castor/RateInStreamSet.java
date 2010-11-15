@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class RateInStreamSet.
@@ -23,7 +23,7 @@ public class RateInStreamSet implements java.io.Serializable {
     /**
      * Field _rateInStreamList.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.RateInStream> _rateInStreamList;
+    private java.util.List<org.hbird.xtce.castor.RateInStream> _rateInStreamList;
 
 
       //----------------/
@@ -32,7 +32,7 @@ public class RateInStreamSet implements java.io.Serializable {
 
     public RateInStreamSet() {
         super();
-        this._rateInStreamList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.RateInStream>();
+        this._rateInStreamList = new java.util.ArrayList<org.hbird.xtce.castor.RateInStream>();
     }
 
 
@@ -48,7 +48,7 @@ public class RateInStreamSet implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addRateInStream(
-            final com.logica.hummingbird.xtce.castor.RateInStream vRateInStream)
+            final org.hbird.xtce.castor.RateInStream vRateInStream)
     throws java.lang.IndexOutOfBoundsException {
         this._rateInStreamList.add(vRateInStream);
     }
@@ -63,7 +63,7 @@ public class RateInStreamSet implements java.io.Serializable {
      */
     public void addRateInStream(
             final int index,
-            final com.logica.hummingbird.xtce.castor.RateInStream vRateInStream)
+            final org.hbird.xtce.castor.RateInStream vRateInStream)
     throws java.lang.IndexOutOfBoundsException {
         this._rateInStreamList.add(index, vRateInStream);
     }
@@ -74,7 +74,7 @@ public class RateInStreamSet implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.RateInStream> enumerateRateInStream(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.RateInStream> enumerateRateInStream(
     ) {
         return java.util.Collections.enumeration(this._rateInStreamList);
     }
@@ -86,10 +86,10 @@ public class RateInStreamSet implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.RateInStream at the given
+     * org.hbird.xtce.castor.RateInStream at the given
      * index
      */
-    public com.logica.hummingbird.xtce.castor.RateInStream getRateInStream(
+    public org.hbird.xtce.castor.RateInStream getRateInStream(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -97,7 +97,7 @@ public class RateInStreamSet implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getRateInStream: Index value '" + index + "' not in range [0.." + (this._rateInStreamList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.RateInStream) _rateInStreamList.get(index);
+        return (org.hbird.xtce.castor.RateInStream) _rateInStreamList.get(index);
     }
 
     /**
@@ -110,10 +110,10 @@ public class RateInStreamSet implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.RateInStream[] getRateInStream(
+    public org.hbird.xtce.castor.RateInStream[] getRateInStream(
     ) {
-        com.logica.hummingbird.xtce.castor.RateInStream[] array = new com.logica.hummingbird.xtce.castor.RateInStream[0];
-        return (com.logica.hummingbird.xtce.castor.RateInStream[]) this._rateInStreamList.toArray(array);
+        org.hbird.xtce.castor.RateInStream[] array = new org.hbird.xtce.castor.RateInStream[0];
+        return (org.hbird.xtce.castor.RateInStream[]) this._rateInStreamList.toArray(array);
     }
 
     /**
@@ -147,7 +147,7 @@ public class RateInStreamSet implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.RateInStream> iterateRateInStream(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.RateInStream> iterateRateInStream(
     ) {
         return this._rateInStreamList.iterator();
     }
@@ -198,7 +198,7 @@ public class RateInStreamSet implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeRateInStream(
-            final com.logica.hummingbird.xtce.castor.RateInStream vRateInStream) {
+            final org.hbird.xtce.castor.RateInStream vRateInStream) {
         boolean removed = _rateInStreamList.remove(vRateInStream);
         return removed;
     }
@@ -209,10 +209,10 @@ public class RateInStreamSet implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.RateInStream removeRateInStreamAt(
+    public org.hbird.xtce.castor.RateInStream removeRateInStreamAt(
             final int index) {
         java.lang.Object obj = this._rateInStreamList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.RateInStream) obj;
+        return (org.hbird.xtce.castor.RateInStream) obj;
     }
 
     /**
@@ -225,7 +225,7 @@ public class RateInStreamSet implements java.io.Serializable {
      */
     public void setRateInStream(
             final int index,
-            final com.logica.hummingbird.xtce.castor.RateInStream vRateInStream)
+            final org.hbird.xtce.castor.RateInStream vRateInStream)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._rateInStreamList.size()) {
@@ -241,7 +241,7 @@ public class RateInStreamSet implements java.io.Serializable {
      * @param vRateInStreamArray
      */
     public void setRateInStream(
-            final com.logica.hummingbird.xtce.castor.RateInStream[] vRateInStreamArray) {
+            final org.hbird.xtce.castor.RateInStream[] vRateInStreamArray) {
         //-- copy array
         _rateInStreamList.clear();
 
@@ -259,12 +259,12 @@ public class RateInStreamSet implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.RateInStreamSet
+     * org.hbird.xtce.castor.RateInStreamSet
      */
-    public static com.logica.hummingbird.xtce.castor.RateInStreamSet unmarshal(
+    public static org.hbird.xtce.castor.RateInStreamSet unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.RateInStreamSet) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.RateInStreamSet.class, reader);
+        return (org.hbird.xtce.castor.RateInStreamSet) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.RateInStreamSet.class, reader);
     }
 
     /**

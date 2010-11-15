@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.StringDataType;
+import org.hbird.xtce.castor.StringDataType;
 
 /**
  * Class StringDataTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class StringDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.BaseDataTypeDescriptor {
+public class StringDataTypeDescriptor extends org.hbird.xtce.castor.descriptors.BaseDataTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class StringDataTypeDescriptor extends com.logica.hummingbird.xtce.castor
 
     public StringDataTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.BaseDataTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.BaseDataTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "StringDataType";
         _elementDefinition = false;
@@ -154,7 +154,7 @@ public class StringDataTypeDescriptor extends com.logica.hummingbird.xtce.castor
         }
         desc.setValidator(fieldValidator);
         //-- _characterWidth
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.BaseDataTypeCharacterWidthType.class, "_characterWidth", "characterWidth", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.BaseDataTypeCharacterWidthType.class, "_characterWidth", "characterWidth", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -169,7 +169,7 @@ public class StringDataTypeDescriptor extends com.logica.hummingbird.xtce.castor
             {
                 try {
                     StringDataType target = (StringDataType) object;
-                    target.setCharacterWidth( (com.logica.hummingbird.xtce.castor.types.BaseDataTypeCharacterWidthType) value);
+                    target.setCharacterWidth( (org.hbird.xtce.castor.types.BaseDataTypeCharacterWidthType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -180,7 +180,7 @@ public class StringDataTypeDescriptor extends com.logica.hummingbird.xtce.castor
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.BaseDataTypeCharacterWidthType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.BaseDataTypeCharacterWidthType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("BaseDataTypeCharacterWidthType");
         desc.setHandler(handler);
@@ -195,7 +195,7 @@ public class StringDataTypeDescriptor extends com.logica.hummingbird.xtce.castor
         //-- initialize element descriptors
 
         //-- _sizeRangeInCharacters
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.SizeRangeInCharacters.class, "_sizeRangeInCharacters", "SizeRangeInCharacters", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.SizeRangeInCharacters.class, "_sizeRangeInCharacters", "SizeRangeInCharacters", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -210,7 +210,7 @@ public class StringDataTypeDescriptor extends com.logica.hummingbird.xtce.castor
             {
                 try {
                     StringDataType target = (StringDataType) object;
-                    target.setSizeRangeInCharacters( (com.logica.hummingbird.xtce.castor.SizeRangeInCharacters) value);
+                    target.setSizeRangeInCharacters( (org.hbird.xtce.castor.SizeRangeInCharacters) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -218,10 +218,10 @@ public class StringDataTypeDescriptor extends com.logica.hummingbird.xtce.castor
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.SizeRangeInCharacters();
+                return new org.hbird.xtce.castor.SizeRangeInCharacters();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.SizeRangeInCharacters");
+        desc.setSchemaType("org.hbird.xtce.castor.SizeRangeInCharacters");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -234,7 +234,7 @@ public class StringDataTypeDescriptor extends com.logica.hummingbird.xtce.castor
         }
         desc.setValidator(fieldValidator);
         //-- _defaultCalibrator
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.DefaultCalibrator.class, "_defaultCalibrator", "DefaultCalibrator", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.DefaultCalibrator.class, "_defaultCalibrator", "DefaultCalibrator", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -249,7 +249,7 @@ public class StringDataTypeDescriptor extends com.logica.hummingbird.xtce.castor
             {
                 try {
                     StringDataType target = (StringDataType) object;
-                    target.setDefaultCalibrator( (com.logica.hummingbird.xtce.castor.DefaultCalibrator) value);
+                    target.setDefaultCalibrator( (org.hbird.xtce.castor.DefaultCalibrator) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -257,10 +257,10 @@ public class StringDataTypeDescriptor extends com.logica.hummingbird.xtce.castor
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.DefaultCalibrator();
+                return new org.hbird.xtce.castor.DefaultCalibrator();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.DefaultCalibrator");
+        desc.setSchemaType("org.hbird.xtce.castor.DefaultCalibrator");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -273,7 +273,7 @@ public class StringDataTypeDescriptor extends com.logica.hummingbird.xtce.castor
         }
         desc.setValidator(fieldValidator);
         //-- _contextCalibratorList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ContextCalibratorList.class, "_contextCalibratorList", "ContextCalibratorList", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ContextCalibratorList.class, "_contextCalibratorList", "ContextCalibratorList", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -288,7 +288,7 @@ public class StringDataTypeDescriptor extends com.logica.hummingbird.xtce.castor
             {
                 try {
                     StringDataType target = (StringDataType) object;
-                    target.setContextCalibratorList( (com.logica.hummingbird.xtce.castor.ContextCalibratorList) value);
+                    target.setContextCalibratorList( (org.hbird.xtce.castor.ContextCalibratorList) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -296,10 +296,10 @@ public class StringDataTypeDescriptor extends com.logica.hummingbird.xtce.castor
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ContextCalibratorList();
+                return new org.hbird.xtce.castor.ContextCalibratorList();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ContextCalibratorList");
+        desc.setSchemaType("org.hbird.xtce.castor.ContextCalibratorList");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -352,7 +352,7 @@ public class StringDataTypeDescriptor extends com.logica.hummingbird.xtce.castor
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.StringDataType.class;
+        return org.hbird.xtce.castor.StringDataType.class;
     }
 
     /**

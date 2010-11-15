@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.CommandMetaDataType;
+import org.hbird.xtce.castor.CommandMetaDataType;
 
 /**
  * Class CommandMetaDataTypeDescriptor.
@@ -71,7 +71,7 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
         //-- initialize element descriptors
 
         //-- _parameterTypeSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ParameterTypeSet.class, "_parameterTypeSet", "ParameterTypeSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ParameterTypeSet.class, "_parameterTypeSet", "ParameterTypeSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     CommandMetaDataType target = (CommandMetaDataType) object;
-                    target.setParameterTypeSet( (com.logica.hummingbird.xtce.castor.ParameterTypeSet) value);
+                    target.setParameterTypeSet( (org.hbird.xtce.castor.ParameterTypeSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ParameterTypeSet();
+                return new org.hbird.xtce.castor.ParameterTypeSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ParameterTypeSet");
+        desc.setSchemaType("org.hbird.xtce.castor.ParameterTypeSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -110,7 +110,7 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _parameterSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ParameterSet.class, "_parameterSet", "ParameterSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ParameterSet.class, "_parameterSet", "ParameterSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -125,7 +125,7 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     CommandMetaDataType target = (CommandMetaDataType) object;
-                    target.setParameterSet( (com.logica.hummingbird.xtce.castor.ParameterSet) value);
+                    target.setParameterSet( (org.hbird.xtce.castor.ParameterSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -133,10 +133,10 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ParameterSet();
+                return new org.hbird.xtce.castor.ParameterSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ParameterSet");
+        desc.setSchemaType("org.hbird.xtce.castor.ParameterSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -149,7 +149,7 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _argumentTypeSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ArgumentTypeSet.class, "_argumentTypeSet", "ArgumentTypeSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ArgumentTypeSet.class, "_argumentTypeSet", "ArgumentTypeSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -164,7 +164,7 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     CommandMetaDataType target = (CommandMetaDataType) object;
-                    target.setArgumentTypeSet( (com.logica.hummingbird.xtce.castor.ArgumentTypeSet) value);
+                    target.setArgumentTypeSet( (org.hbird.xtce.castor.ArgumentTypeSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -172,10 +172,10 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ArgumentTypeSet();
+                return new org.hbird.xtce.castor.ArgumentTypeSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ArgumentTypeSet");
+        desc.setSchemaType("org.hbird.xtce.castor.ArgumentTypeSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -188,7 +188,7 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _metaCommandSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.MetaCommandSet.class, "_metaCommandSet", "MetaCommandSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.MetaCommandSet.class, "_metaCommandSet", "MetaCommandSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -203,7 +203,7 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     CommandMetaDataType target = (CommandMetaDataType) object;
-                    target.setMetaCommandSet( (com.logica.hummingbird.xtce.castor.MetaCommandSet) value);
+                    target.setMetaCommandSet( (org.hbird.xtce.castor.MetaCommandSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -211,10 +211,10 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.MetaCommandSet();
+                return new org.hbird.xtce.castor.MetaCommandSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.MetaCommandSet");
+        desc.setSchemaType("org.hbird.xtce.castor.MetaCommandSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -229,7 +229,7 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _commandContainerSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.CommandContainerSet.class, "_commandContainerSet", "CommandContainerSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.CommandContainerSet.class, "_commandContainerSet", "CommandContainerSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -244,7 +244,7 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     CommandMetaDataType target = (CommandMetaDataType) object;
-                    target.setCommandContainerSet( (com.logica.hummingbird.xtce.castor.CommandContainerSet) value);
+                    target.setCommandContainerSet( (org.hbird.xtce.castor.CommandContainerSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -252,10 +252,10 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.CommandContainerSet();
+                return new org.hbird.xtce.castor.CommandContainerSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.CommandContainerSet");
+        desc.setSchemaType("org.hbird.xtce.castor.CommandContainerSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -268,7 +268,7 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _streamSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.StreamSet.class, "_streamSet", "StreamSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.StreamSet.class, "_streamSet", "StreamSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -283,7 +283,7 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     CommandMetaDataType target = (CommandMetaDataType) object;
-                    target.setStreamSet( (com.logica.hummingbird.xtce.castor.StreamSet) value);
+                    target.setStreamSet( (org.hbird.xtce.castor.StreamSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -291,10 +291,10 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.StreamSet();
+                return new org.hbird.xtce.castor.StreamSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.StreamSet");
+        desc.setSchemaType("org.hbird.xtce.castor.StreamSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -307,7 +307,7 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _algorithmSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.AlgorithmSet.class, "_algorithmSet", "AlgorithmSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.AlgorithmSet.class, "_algorithmSet", "AlgorithmSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -322,7 +322,7 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     CommandMetaDataType target = (CommandMetaDataType) object;
-                    target.setAlgorithmSet( (com.logica.hummingbird.xtce.castor.AlgorithmSet) value);
+                    target.setAlgorithmSet( (org.hbird.xtce.castor.AlgorithmSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -330,10 +330,10 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.AlgorithmSet();
+                return new org.hbird.xtce.castor.AlgorithmSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.AlgorithmSet");
+        desc.setSchemaType("org.hbird.xtce.castor.AlgorithmSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -383,7 +383,7 @@ public class CommandMetaDataTypeDescriptor extends org.exolab.castor.xml.util.XM
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.CommandMetaDataType.class;
+        return org.hbird.xtce.castor.CommandMetaDataType.class;
     }
 
     /**

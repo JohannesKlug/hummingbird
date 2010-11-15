@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.TelemetryMetaData;
+import org.hbird.xtce.castor.TelemetryMetaData;
 
 /**
  * Class TelemetryMetaDataDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class TelemetryMetaDataDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.TelemetryMetaDataTypeDescriptor {
+public class TelemetryMetaDataDescriptor extends org.hbird.xtce.castor.descriptors.TelemetryMetaDataTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class TelemetryMetaDataDescriptor extends com.logica.hummingbird.xtce.cas
 
     public TelemetryMetaDataDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.TelemetryMetaDataTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.TelemetryMetaDataTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "TelemetryMetaData";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class TelemetryMetaDataDescriptor extends com.logica.hummingbird.xtce.cas
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.TelemetryMetaData.class;
+        return org.hbird.xtce.castor.TelemetryMetaData.class;
     }
 
     /**

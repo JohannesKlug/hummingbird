@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ArrayParameterRefEntry;
+import org.hbird.xtce.castor.ArrayParameterRefEntry;
 
 /**
  * Class ArrayParameterRefEntryDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ArrayParameterRefEntryDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ArrayParameterRefEntryTypeDescriptor {
+public class ArrayParameterRefEntryDescriptor extends org.hbird.xtce.castor.descriptors.ArrayParameterRefEntryTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ArrayParameterRefEntryDescriptor extends com.logica.hummingbird.xtc
 
     public ArrayParameterRefEntryDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ArrayParameterRefEntryTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ArrayParameterRefEntryTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ArrayParameterRefEntry";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class ArrayParameterRefEntryDescriptor extends com.logica.hummingbird.xtc
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ArrayParameterRefEntry.class;
+        return org.hbird.xtce.castor.ArrayParameterRefEntry.class;
     }
 
     /**

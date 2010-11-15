@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types.descriptors;
+package org.hbird.xtce.castor.types.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.types.PCMStreamTypePcmTypeType;
+import org.hbird.xtce.castor.types.PCMStreamTypePcmTypeType;
 
 /**
  * Class PCMStreamTypePcmTypeTypeDescriptor.
@@ -98,7 +98,7 @@ public class PCMStreamTypePcmTypeTypeDescriptor extends org.exolab.castor.xml.ut
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.types.PCMStreamTypePcmTypeType.class;
+        return org.hbird.xtce.castor.types.PCMStreamTypePcmTypeType.class;
     }
 
     /**

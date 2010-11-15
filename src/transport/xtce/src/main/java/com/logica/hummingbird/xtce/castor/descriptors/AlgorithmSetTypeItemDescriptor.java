@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem;
+import org.hbird.xtce.castor.AlgorithmSetTypeItem;
 
 /**
  * Class AlgorithmSetTypeItemDescriptor.
@@ -71,7 +71,7 @@ public class AlgorithmSetTypeItemDescriptor extends org.exolab.castor.xml.util.X
         //-- initialize element descriptors
 
         //-- _customAlgorithm
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm.class, "_customAlgorithm", "CustomAlgorithm", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm.class, "_customAlgorithm", "CustomAlgorithm", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class AlgorithmSetTypeItemDescriptor extends org.exolab.castor.xml.util.X
             {
                 try {
                     AlgorithmSetTypeItem target = (AlgorithmSetTypeItem) object;
-                    target.setCustomAlgorithm( (com.logica.hummingbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm) value);
+                    target.setCustomAlgorithm( (org.hbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class AlgorithmSetTypeItemDescriptor extends org.exolab.castor.xml.util.X
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm();
+                return new org.hbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm");
+        desc.setSchemaType("org.hbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -112,7 +112,7 @@ public class AlgorithmSetTypeItemDescriptor extends org.exolab.castor.xml.util.X
         }
         desc.setValidator(fieldValidator);
         //-- _mathAlgorithm
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.MathAlgorithm.class, "_mathAlgorithm", "MathAlgorithm", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.MathAlgorithm.class, "_mathAlgorithm", "MathAlgorithm", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -127,7 +127,7 @@ public class AlgorithmSetTypeItemDescriptor extends org.exolab.castor.xml.util.X
             {
                 try {
                     AlgorithmSetTypeItem target = (AlgorithmSetTypeItem) object;
-                    target.setMathAlgorithm( (com.logica.hummingbird.xtce.castor.MathAlgorithm) value);
+                    target.setMathAlgorithm( (org.hbird.xtce.castor.MathAlgorithm) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -135,10 +135,10 @@ public class AlgorithmSetTypeItemDescriptor extends org.exolab.castor.xml.util.X
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.MathAlgorithm();
+                return new org.hbird.xtce.castor.MathAlgorithm();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.MathAlgorithm");
+        desc.setSchemaType("org.hbird.xtce.castor.MathAlgorithm");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -190,7 +190,7 @@ public class AlgorithmSetTypeItemDescriptor extends org.exolab.castor.xml.util.X
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.AlgorithmSetTypeItem.class;
+        return org.hbird.xtce.castor.AlgorithmSetTypeItem.class;
     }
 
     /**

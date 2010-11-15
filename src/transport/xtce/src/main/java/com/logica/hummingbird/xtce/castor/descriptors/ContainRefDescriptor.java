@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ContainRef;
+import org.hbird.xtce.castor.ContainRef;
 
 /**
  * Class ContainRefDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ContainRefDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ContainerRefTypeDescriptor {
+public class ContainRefDescriptor extends org.hbird.xtce.castor.descriptors.ContainerRefTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ContainRefDescriptor extends com.logica.hummingbird.xtce.castor.des
 
     public ContainRefDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ContainerRefTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ContainerRefTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ContainRef";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class ContainRefDescriptor extends com.logica.hummingbird.xtce.castor.des
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ContainRef.class;
+        return org.hbird.xtce.castor.ContainRef.class;
     }
 
     /**

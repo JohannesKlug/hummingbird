@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * For streams that contain a series of frames with a variable
@@ -17,7 +17,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class VariableFrameStreamType extends com.logica.hummingbird.xtce.castor.FrameStreamType 
+public class VariableFrameStreamType extends org.hbird.xtce.castor.FrameStreamType 
 implements java.io.Serializable
 {
 
@@ -29,7 +29,7 @@ implements java.io.Serializable
     /**
      * Field _syncStrategy.
      */
-    private com.logica.hummingbird.xtce.castor.VariableFrameStreamTypeSyncStrategy _syncStrategy;
+    private org.hbird.xtce.castor.VariableFrameStreamTypeSyncStrategy _syncStrategy;
 
 
       //----------------/
@@ -50,7 +50,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'SyncStrategy'.
      */
-    public com.logica.hummingbird.xtce.castor.VariableFrameStreamTypeSyncStrategy getSyncStrategy(
+    public org.hbird.xtce.castor.VariableFrameStreamTypeSyncStrategy getSyncStrategy(
     ) {
         return this._syncStrategy;
     }
@@ -108,7 +108,7 @@ implements java.io.Serializable
      * @param syncStrategy the value of field 'syncStrategy'.
      */
     public void setSyncStrategy(
-            final com.logica.hummingbird.xtce.castor.VariableFrameStreamTypeSyncStrategy syncStrategy) {
+            final org.hbird.xtce.castor.VariableFrameStreamTypeSyncStrategy syncStrategy) {
         this._syncStrategy = syncStrategy;
     }
 
@@ -121,12 +121,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.VariableFrameStreamType
+     * org.hbird.xtce.castor.VariableFrameStreamType
      */
-    public static com.logica.hummingbird.xtce.castor.VariableFrameStreamType unmarshal(
+    public static org.hbird.xtce.castor.VariableFrameStreamType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.VariableFrameStreamType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.VariableFrameStreamType.class, reader);
+        return (org.hbird.xtce.castor.VariableFrameStreamType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.VariableFrameStreamType.class, reader);
     }
 
     /**

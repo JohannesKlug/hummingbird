@@ -1,12 +1,12 @@
-package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
+package org.hbird.spacesystemmodel.parameters.behaviours;
 
 import java.util.BitSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.util.BitSetUtility;
-import com.logica.hummingbird.util.exceptions.BitSetOperationException;
+import org.hbird.util.BitSetUtility;
+import org.hbird.util.exceptions.BitSetOperationException;
 
 /**
  * Parameter behaviour for an IEEE 754 32-bit precision Float.

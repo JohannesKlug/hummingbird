@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class ParameterTypeSetTypeItem.
@@ -28,49 +28,49 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
     /**
      * Field _stringParameterType.
      */
-    private com.logica.hummingbird.xtce.castor.StringParameterType _stringParameterType;
+    private org.hbird.xtce.castor.StringParameterType _stringParameterType;
 
     /**
      * Field _enumeratedParameterType.
      */
-    private com.logica.hummingbird.xtce.castor.EnumeratedParameterType _enumeratedParameterType;
+    private org.hbird.xtce.castor.EnumeratedParameterType _enumeratedParameterType;
 
     /**
      * Field _integerParameterType.
      */
-    private com.logica.hummingbird.xtce.castor.IntegerParameterType _integerParameterType;
+    private org.hbird.xtce.castor.IntegerParameterType _integerParameterType;
 
     /**
      * Field _binaryParameterType.
      */
-    private com.logica.hummingbird.xtce.castor.BinaryParameterType _binaryParameterType;
+    private org.hbird.xtce.castor.BinaryParameterType _binaryParameterType;
 
     /**
      * Field _floatParameterType.
      */
-    private com.logica.hummingbird.xtce.castor.FloatParameterType _floatParameterType;
+    private org.hbird.xtce.castor.FloatParameterType _floatParameterType;
 
     /**
      * Field _booleanParameterType.
      */
-    private com.logica.hummingbird.xtce.castor.BooleanParameterType _booleanParameterType;
+    private org.hbird.xtce.castor.BooleanParameterType _booleanParameterType;
 
     /**
      * Field _relativeTimeParameterType.
      */
-    private com.logica.hummingbird.xtce.castor.RelativeTimeParameterType _relativeTimeParameterType;
+    private org.hbird.xtce.castor.RelativeTimeParameterType _relativeTimeParameterType;
 
     /**
      * Field _absoluteTimeParameterType.
      */
-    private com.logica.hummingbird.xtce.castor.AbsoluteTimeParameterType _absoluteTimeParameterType;
+    private org.hbird.xtce.castor.AbsoluteTimeParameterType _absoluteTimeParameterType;
 
     /**
      * An array type. Will be an array of parameters of the type
      * referenced in 'arrayTypeRef' and have the number of array
      * dimensions as specified in 'numberOfDimensions' 
      */
-    private com.logica.hummingbird.xtce.castor.ArrayParameterType _arrayParameterType;
+    private org.hbird.xtce.castor.ArrayParameterType _arrayParameterType;
 
 
       //----------------/
@@ -91,7 +91,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'AbsoluteTimeParameterType'.
      */
-    public com.logica.hummingbird.xtce.castor.AbsoluteTimeParameterType getAbsoluteTimeParameterType(
+    public org.hbird.xtce.castor.AbsoluteTimeParameterType getAbsoluteTimeParameterType(
     ) {
         return this._absoluteTimeParameterType;
     }
@@ -105,7 +105,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'ArrayParameterType'.
      */
-    public com.logica.hummingbird.xtce.castor.ArrayParameterType getArrayParameterType(
+    public org.hbird.xtce.castor.ArrayParameterType getArrayParameterType(
     ) {
         return this._arrayParameterType;
     }
@@ -115,7 +115,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'BinaryParameterType'.
      */
-    public com.logica.hummingbird.xtce.castor.BinaryParameterType getBinaryParameterType(
+    public org.hbird.xtce.castor.BinaryParameterType getBinaryParameterType(
     ) {
         return this._binaryParameterType;
     }
@@ -125,7 +125,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'BooleanParameterType'.
      */
-    public com.logica.hummingbird.xtce.castor.BooleanParameterType getBooleanParameterType(
+    public org.hbird.xtce.castor.BooleanParameterType getBooleanParameterType(
     ) {
         return this._booleanParameterType;
     }
@@ -147,7 +147,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'EnumeratedParameterType'.
      */
-    public com.logica.hummingbird.xtce.castor.EnumeratedParameterType getEnumeratedParameterType(
+    public org.hbird.xtce.castor.EnumeratedParameterType getEnumeratedParameterType(
     ) {
         return this._enumeratedParameterType;
     }
@@ -157,7 +157,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'FloatParameterType'.
      */
-    public com.logica.hummingbird.xtce.castor.FloatParameterType getFloatParameterType(
+    public org.hbird.xtce.castor.FloatParameterType getFloatParameterType(
     ) {
         return this._floatParameterType;
     }
@@ -167,7 +167,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'IntegerParameterType'.
      */
-    public com.logica.hummingbird.xtce.castor.IntegerParameterType getIntegerParameterType(
+    public org.hbird.xtce.castor.IntegerParameterType getIntegerParameterType(
     ) {
         return this._integerParameterType;
     }
@@ -177,7 +177,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'RelativeTimeParameterType'.
      */
-    public com.logica.hummingbird.xtce.castor.RelativeTimeParameterType getRelativeTimeParameterType(
+    public org.hbird.xtce.castor.RelativeTimeParameterType getRelativeTimeParameterType(
     ) {
         return this._relativeTimeParameterType;
     }
@@ -187,7 +187,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'StringParameterType'.
      */
-    public com.logica.hummingbird.xtce.castor.StringParameterType getStringParameterType(
+    public org.hbird.xtce.castor.StringParameterType getStringParameterType(
     ) {
         return this._stringParameterType;
     }
@@ -199,7 +199,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 'absoluteTimeParameterType'.
      */
     public void setAbsoluteTimeParameterType(
-            final com.logica.hummingbird.xtce.castor.AbsoluteTimeParameterType absoluteTimeParameterType) {
+            final org.hbird.xtce.castor.AbsoluteTimeParameterType absoluteTimeParameterType) {
         this._absoluteTimeParameterType = absoluteTimeParameterType;
         this._choiceValue = absoluteTimeParameterType;
     }
@@ -215,7 +215,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 'arrayParameterType'.
      */
     public void setArrayParameterType(
-            final com.logica.hummingbird.xtce.castor.ArrayParameterType arrayParameterType) {
+            final org.hbird.xtce.castor.ArrayParameterType arrayParameterType) {
         this._arrayParameterType = arrayParameterType;
         this._choiceValue = arrayParameterType;
     }
@@ -227,7 +227,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 'binaryParameterType'.
      */
     public void setBinaryParameterType(
-            final com.logica.hummingbird.xtce.castor.BinaryParameterType binaryParameterType) {
+            final org.hbird.xtce.castor.BinaryParameterType binaryParameterType) {
         this._binaryParameterType = binaryParameterType;
         this._choiceValue = binaryParameterType;
     }
@@ -239,7 +239,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 'booleanParameterType'.
      */
     public void setBooleanParameterType(
-            final com.logica.hummingbird.xtce.castor.BooleanParameterType booleanParameterType) {
+            final org.hbird.xtce.castor.BooleanParameterType booleanParameterType) {
         this._booleanParameterType = booleanParameterType;
         this._choiceValue = booleanParameterType;
     }
@@ -251,7 +251,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 'enumeratedParameterType'.
      */
     public void setEnumeratedParameterType(
-            final com.logica.hummingbird.xtce.castor.EnumeratedParameterType enumeratedParameterType) {
+            final org.hbird.xtce.castor.EnumeratedParameterType enumeratedParameterType) {
         this._enumeratedParameterType = enumeratedParameterType;
         this._choiceValue = enumeratedParameterType;
     }
@@ -263,7 +263,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 'floatParameterType'.
      */
     public void setFloatParameterType(
-            final com.logica.hummingbird.xtce.castor.FloatParameterType floatParameterType) {
+            final org.hbird.xtce.castor.FloatParameterType floatParameterType) {
         this._floatParameterType = floatParameterType;
         this._choiceValue = floatParameterType;
     }
@@ -275,7 +275,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 'integerParameterType'.
      */
     public void setIntegerParameterType(
-            final com.logica.hummingbird.xtce.castor.IntegerParameterType integerParameterType) {
+            final org.hbird.xtce.castor.IntegerParameterType integerParameterType) {
         this._integerParameterType = integerParameterType;
         this._choiceValue = integerParameterType;
     }
@@ -287,7 +287,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 'relativeTimeParameterType'.
      */
     public void setRelativeTimeParameterType(
-            final com.logica.hummingbird.xtce.castor.RelativeTimeParameterType relativeTimeParameterType) {
+            final org.hbird.xtce.castor.RelativeTimeParameterType relativeTimeParameterType) {
         this._relativeTimeParameterType = relativeTimeParameterType;
         this._choiceValue = relativeTimeParameterType;
     }
@@ -299,7 +299,7 @@ public class ParameterTypeSetTypeItem implements java.io.Serializable {
      * 'stringParameterType'.
      */
     public void setStringParameterType(
-            final com.logica.hummingbird.xtce.castor.StringParameterType stringParameterType) {
+            final org.hbird.xtce.castor.StringParameterType stringParameterType) {
         this._stringParameterType = stringParameterType;
         this._choiceValue = stringParameterType;
     }

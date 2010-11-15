@@ -1,4 +1,4 @@
-package com.logica.hummingbird.buffers;
+package org.hbird.buffers;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
@@ -11,8 +11,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
-import com.logica.hummingbird.formatter.ExchangeFormatter;
-import com.logica.hummingbird.type.CommandDefinition;
+import org.hbird.formatter.ExchangeFormatter;
+import org.hbird.type.CommandDefinition;
 
 @ContextConfiguration (locations={"/ObjectBufferTest-context.xml"})
 public class ObjectBufferTest extends AbstractJUnit38SpringContextTests  {

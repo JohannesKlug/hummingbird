@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A Sync Strategy specifies the strategy on how to find frames
@@ -67,7 +67,7 @@ public class SyncStrategyType implements java.io.Serializable {
      * then look for frame sync. In some cases this will require an
      * external algorithm
      */
-    private com.logica.hummingbird.xtce.castor.AutoInvert _autoInvert;
+    private org.hbird.xtce.castor.AutoInvert _autoInvert;
 
 
       //----------------/
@@ -114,7 +114,7 @@ public class SyncStrategyType implements java.io.Serializable {
      * 
      * @return the value of field 'AutoInvert'.
      */
-    public com.logica.hummingbird.xtce.castor.AutoInvert getAutoInvert(
+    public org.hbird.xtce.castor.AutoInvert getAutoInvert(
     ) {
         return this._autoInvert;
     }
@@ -242,7 +242,7 @@ public class SyncStrategyType implements java.io.Serializable {
      * @param autoInvert the value of field 'autoInvert'.
      */
     public void setAutoInvert(
-            final com.logica.hummingbird.xtce.castor.AutoInvert autoInvert) {
+            final org.hbird.xtce.castor.AutoInvert autoInvert) {
         this._autoInvert = autoInvert;
     }
 
@@ -294,12 +294,12 @@ public class SyncStrategyType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.SyncStrategyType
+     * org.hbird.xtce.castor.SyncStrategyType
      */
-    public static com.logica.hummingbird.xtce.castor.SyncStrategyType unmarshal(
+    public static org.hbird.xtce.castor.SyncStrategyType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.SyncStrategyType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.SyncStrategyType.class, reader);
+        return (org.hbird.xtce.castor.SyncStrategyType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.SyncStrategyType.class, reader);
     }
 
     /**

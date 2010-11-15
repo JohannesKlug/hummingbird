@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class CommandContainerEntryListTypeItem.
@@ -28,52 +28,52 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
     /**
      * Field _parameterRefEntry.
      */
-    private com.logica.hummingbird.xtce.castor.ParameterRefEntry _parameterRefEntry;
+    private org.hbird.xtce.castor.ParameterRefEntry _parameterRefEntry;
 
     /**
      * Field _parameterSegmentRefEntry.
      */
-    private com.logica.hummingbird.xtce.castor.ParameterSegmentRefEntry _parameterSegmentRefEntry;
+    private org.hbird.xtce.castor.ParameterSegmentRefEntry _parameterSegmentRefEntry;
 
     /**
      * Field _containerRefEntry.
      */
-    private com.logica.hummingbird.xtce.castor.ContainerRefEntry _containerRefEntry;
+    private org.hbird.xtce.castor.ContainerRefEntry _containerRefEntry;
 
     /**
      * Field _containerSegmentRefEntry.
      */
-    private com.logica.hummingbird.xtce.castor.ContainerSegmentRefEntry _containerSegmentRefEntry;
+    private org.hbird.xtce.castor.ContainerSegmentRefEntry _containerSegmentRefEntry;
 
     /**
      * Field _streamSegmentEntry.
      */
-    private com.logica.hummingbird.xtce.castor.StreamSegmentEntry _streamSegmentEntry;
+    private org.hbird.xtce.castor.StreamSegmentEntry _streamSegmentEntry;
 
     /**
      * Field _indirectParameterRefEntry.
      */
-    private com.logica.hummingbird.xtce.castor.IndirectParameterRefEntry _indirectParameterRefEntry;
+    private org.hbird.xtce.castor.IndirectParameterRefEntry _indirectParameterRefEntry;
 
     /**
      * Field _arrayParameterRefEntry.
      */
-    private com.logica.hummingbird.xtce.castor.ArrayParameterRefEntry _arrayParameterRefEntry;
+    private org.hbird.xtce.castor.ArrayParameterRefEntry _arrayParameterRefEntry;
 
     /**
      * Field _argumentRefEntry.
      */
-    private com.logica.hummingbird.xtce.castor.ArgumentRefEntry _argumentRefEntry;
+    private org.hbird.xtce.castor.ArgumentRefEntry _argumentRefEntry;
 
     /**
      * Field _arrayArgumentRefEntry.
      */
-    private com.logica.hummingbird.xtce.castor.ArrayArgumentRefEntry _arrayArgumentRefEntry;
+    private org.hbird.xtce.castor.ArrayArgumentRefEntry _arrayArgumentRefEntry;
 
     /**
      * Field _fixedValueEntry.
      */
-    private com.logica.hummingbird.xtce.castor.FixedValueEntry _fixedValueEntry;
+    private org.hbird.xtce.castor.FixedValueEntry _fixedValueEntry;
 
 
       //----------------/
@@ -94,7 +94,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'ArgumentRefEntry'.
      */
-    public com.logica.hummingbird.xtce.castor.ArgumentRefEntry getArgumentRefEntry(
+    public org.hbird.xtce.castor.ArgumentRefEntry getArgumentRefEntry(
     ) {
         return this._argumentRefEntry;
     }
@@ -104,7 +104,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'ArrayArgumentRefEntry'.
      */
-    public com.logica.hummingbird.xtce.castor.ArrayArgumentRefEntry getArrayArgumentRefEntry(
+    public org.hbird.xtce.castor.ArrayArgumentRefEntry getArrayArgumentRefEntry(
     ) {
         return this._arrayArgumentRefEntry;
     }
@@ -114,7 +114,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'ArrayParameterRefEntry'.
      */
-    public com.logica.hummingbird.xtce.castor.ArrayParameterRefEntry getArrayParameterRefEntry(
+    public org.hbird.xtce.castor.ArrayParameterRefEntry getArrayParameterRefEntry(
     ) {
         return this._arrayParameterRefEntry;
     }
@@ -136,7 +136,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'ContainerRefEntry'.
      */
-    public com.logica.hummingbird.xtce.castor.ContainerRefEntry getContainerRefEntry(
+    public org.hbird.xtce.castor.ContainerRefEntry getContainerRefEntry(
     ) {
         return this._containerRefEntry;
     }
@@ -146,7 +146,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'ContainerSegmentRefEntry'.
      */
-    public com.logica.hummingbird.xtce.castor.ContainerSegmentRefEntry getContainerSegmentRefEntry(
+    public org.hbird.xtce.castor.ContainerSegmentRefEntry getContainerSegmentRefEntry(
     ) {
         return this._containerSegmentRefEntry;
     }
@@ -156,7 +156,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'FixedValueEntry'.
      */
-    public com.logica.hummingbird.xtce.castor.FixedValueEntry getFixedValueEntry(
+    public org.hbird.xtce.castor.FixedValueEntry getFixedValueEntry(
     ) {
         return this._fixedValueEntry;
     }
@@ -166,7 +166,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'IndirectParameterRefEntry'.
      */
-    public com.logica.hummingbird.xtce.castor.IndirectParameterRefEntry getIndirectParameterRefEntry(
+    public org.hbird.xtce.castor.IndirectParameterRefEntry getIndirectParameterRefEntry(
     ) {
         return this._indirectParameterRefEntry;
     }
@@ -176,7 +176,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'ParameterRefEntry'.
      */
-    public com.logica.hummingbird.xtce.castor.ParameterRefEntry getParameterRefEntry(
+    public org.hbird.xtce.castor.ParameterRefEntry getParameterRefEntry(
     ) {
         return this._parameterRefEntry;
     }
@@ -186,7 +186,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'ParameterSegmentRefEntry'.
      */
-    public com.logica.hummingbird.xtce.castor.ParameterSegmentRefEntry getParameterSegmentRefEntry(
+    public org.hbird.xtce.castor.ParameterSegmentRefEntry getParameterSegmentRefEntry(
     ) {
         return this._parameterSegmentRefEntry;
     }
@@ -196,7 +196,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'StreamSegmentEntry'.
      */
-    public com.logica.hummingbird.xtce.castor.StreamSegmentEntry getStreamSegmentEntry(
+    public org.hbird.xtce.castor.StreamSegmentEntry getStreamSegmentEntry(
     ) {
         return this._streamSegmentEntry;
     }
@@ -207,7 +207,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * @param argumentRefEntry the value of field 'argumentRefEntry'
      */
     public void setArgumentRefEntry(
-            final com.logica.hummingbird.xtce.castor.ArgumentRefEntry argumentRefEntry) {
+            final org.hbird.xtce.castor.ArgumentRefEntry argumentRefEntry) {
         this._argumentRefEntry = argumentRefEntry;
         this._choiceValue = argumentRefEntry;
     }
@@ -219,7 +219,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 'arrayArgumentRefEntry'.
      */
     public void setArrayArgumentRefEntry(
-            final com.logica.hummingbird.xtce.castor.ArrayArgumentRefEntry arrayArgumentRefEntry) {
+            final org.hbird.xtce.castor.ArrayArgumentRefEntry arrayArgumentRefEntry) {
         this._arrayArgumentRefEntry = arrayArgumentRefEntry;
         this._choiceValue = arrayArgumentRefEntry;
     }
@@ -231,7 +231,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 'arrayParameterRefEntry'.
      */
     public void setArrayParameterRefEntry(
-            final com.logica.hummingbird.xtce.castor.ArrayParameterRefEntry arrayParameterRefEntry) {
+            final org.hbird.xtce.castor.ArrayParameterRefEntry arrayParameterRefEntry) {
         this._arrayParameterRefEntry = arrayParameterRefEntry;
         this._choiceValue = arrayParameterRefEntry;
     }
@@ -243,7 +243,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 'containerRefEntry'.
      */
     public void setContainerRefEntry(
-            final com.logica.hummingbird.xtce.castor.ContainerRefEntry containerRefEntry) {
+            final org.hbird.xtce.castor.ContainerRefEntry containerRefEntry) {
         this._containerRefEntry = containerRefEntry;
         this._choiceValue = containerRefEntry;
     }
@@ -255,7 +255,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 'containerSegmentRefEntry'.
      */
     public void setContainerSegmentRefEntry(
-            final com.logica.hummingbird.xtce.castor.ContainerSegmentRefEntry containerSegmentRefEntry) {
+            final org.hbird.xtce.castor.ContainerSegmentRefEntry containerSegmentRefEntry) {
         this._containerSegmentRefEntry = containerSegmentRefEntry;
         this._choiceValue = containerSegmentRefEntry;
     }
@@ -266,7 +266,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * @param fixedValueEntry the value of field 'fixedValueEntry'.
      */
     public void setFixedValueEntry(
-            final com.logica.hummingbird.xtce.castor.FixedValueEntry fixedValueEntry) {
+            final org.hbird.xtce.castor.FixedValueEntry fixedValueEntry) {
         this._fixedValueEntry = fixedValueEntry;
         this._choiceValue = fixedValueEntry;
     }
@@ -278,7 +278,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 'indirectParameterRefEntry'.
      */
     public void setIndirectParameterRefEntry(
-            final com.logica.hummingbird.xtce.castor.IndirectParameterRefEntry indirectParameterRefEntry) {
+            final org.hbird.xtce.castor.IndirectParameterRefEntry indirectParameterRefEntry) {
         this._indirectParameterRefEntry = indirectParameterRefEntry;
         this._choiceValue = indirectParameterRefEntry;
     }
@@ -290,7 +290,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 'parameterRefEntry'.
      */
     public void setParameterRefEntry(
-            final com.logica.hummingbird.xtce.castor.ParameterRefEntry parameterRefEntry) {
+            final org.hbird.xtce.castor.ParameterRefEntry parameterRefEntry) {
         this._parameterRefEntry = parameterRefEntry;
         this._choiceValue = parameterRefEntry;
     }
@@ -302,7 +302,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 'parameterSegmentRefEntry'.
      */
     public void setParameterSegmentRefEntry(
-            final com.logica.hummingbird.xtce.castor.ParameterSegmentRefEntry parameterSegmentRefEntry) {
+            final org.hbird.xtce.castor.ParameterSegmentRefEntry parameterSegmentRefEntry) {
         this._parameterSegmentRefEntry = parameterSegmentRefEntry;
         this._choiceValue = parameterSegmentRefEntry;
     }
@@ -314,7 +314,7 @@ public class CommandContainerEntryListTypeItem implements java.io.Serializable {
      * 'streamSegmentEntry'.
      */
     public void setStreamSegmentEntry(
-            final com.logica.hummingbird.xtce.castor.StreamSegmentEntry streamSegmentEntry) {
+            final org.hbird.xtce.castor.StreamSegmentEntry streamSegmentEntry) {
         this._streamSegmentEntry = streamSegmentEntry;
         this._choiceValue = streamSegmentEntry;
     }

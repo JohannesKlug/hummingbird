@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.BooleanExpression;
+import org.hbird.xtce.castor.BooleanExpression;
 
 /**
  * Class BooleanExpressionDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class BooleanExpressionDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.BooleanExpressionTypeDescriptor {
+public class BooleanExpressionDescriptor extends org.hbird.xtce.castor.descriptors.BooleanExpressionTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class BooleanExpressionDescriptor extends com.logica.hummingbird.xtce.cas
 
     public BooleanExpressionDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.BooleanExpressionTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.BooleanExpressionTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "BooleanExpression";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class BooleanExpressionDescriptor extends com.logica.hummingbird.xtce.cas
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.BooleanExpression.class;
+        return org.hbird.xtce.castor.BooleanExpression.class;
     }
 
     /**

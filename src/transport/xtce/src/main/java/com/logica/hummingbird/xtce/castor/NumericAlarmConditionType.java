@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Alarms associated with numeric data types
@@ -39,20 +39,20 @@ public class NumericAlarmConditionType implements java.io.Serializable {
     /**
      * Field _numericAlarmConditionTypeSequence.
      */
-    private com.logica.hummingbird.xtce.castor.NumericAlarmConditionTypeSequence _numericAlarmConditionTypeSequence;
+    private org.hbird.xtce.castor.NumericAlarmConditionTypeSequence _numericAlarmConditionTypeSequence;
 
     /**
      * A MatchCriteria may be specifiec for each of the 5 alarm
      * levels. Each level is optional and the alarm should be the
      * highest level to test true.
      */
-    private com.logica.hummingbird.xtce.castor.ConditionalAlarm _conditionalAlarm;
+    private org.hbird.xtce.castor.ConditionalAlarm _conditionalAlarm;
 
     /**
      * An escape for ridiculously complex alarm conditions. Will
      * trigger on changes to the containing Parameter. 
      */
-    private com.logica.hummingbird.xtce.castor.CustomAlarm _customAlarm;
+    private org.hbird.xtce.castor.CustomAlarm _customAlarm;
 
 
       //----------------/
@@ -96,7 +96,7 @@ public class NumericAlarmConditionType implements java.io.Serializable {
      * 
      * @return the value of field 'ConditionalAlarm'.
      */
-    public com.logica.hummingbird.xtce.castor.ConditionalAlarm getConditionalAlarm(
+    public org.hbird.xtce.castor.ConditionalAlarm getConditionalAlarm(
     ) {
         return this._conditionalAlarm;
     }
@@ -109,7 +109,7 @@ public class NumericAlarmConditionType implements java.io.Serializable {
      * 
      * @return the value of field 'CustomAlarm'.
      */
-    public com.logica.hummingbird.xtce.castor.CustomAlarm getCustomAlarm(
+    public org.hbird.xtce.castor.CustomAlarm getCustomAlarm(
     ) {
         return this._customAlarm;
     }
@@ -133,7 +133,7 @@ public class NumericAlarmConditionType implements java.io.Serializable {
      * @return the value of field
      * 'NumericAlarmConditionTypeSequence'.
      */
-    public com.logica.hummingbird.xtce.castor.NumericAlarmConditionTypeSequence getNumericAlarmConditionTypeSequence(
+    public org.hbird.xtce.castor.NumericAlarmConditionTypeSequence getNumericAlarmConditionTypeSequence(
     ) {
         return this._numericAlarmConditionTypeSequence;
     }
@@ -205,7 +205,7 @@ public class NumericAlarmConditionType implements java.io.Serializable {
      * @param conditionalAlarm the value of field 'conditionalAlarm'
      */
     public void setConditionalAlarm(
-            final com.logica.hummingbird.xtce.castor.ConditionalAlarm conditionalAlarm) {
+            final org.hbird.xtce.castor.ConditionalAlarm conditionalAlarm) {
         this._conditionalAlarm = conditionalAlarm;
         this._choiceValue = conditionalAlarm;
     }
@@ -219,7 +219,7 @@ public class NumericAlarmConditionType implements java.io.Serializable {
      * @param customAlarm the value of field 'customAlarm'.
      */
     public void setCustomAlarm(
-            final com.logica.hummingbird.xtce.castor.CustomAlarm customAlarm) {
+            final org.hbird.xtce.castor.CustomAlarm customAlarm) {
         this._customAlarm = customAlarm;
         this._choiceValue = customAlarm;
     }
@@ -244,7 +244,7 @@ public class NumericAlarmConditionType implements java.io.Serializable {
      * 'numericAlarmConditionTypeSequence'.
      */
     public void setNumericAlarmConditionTypeSequence(
-            final com.logica.hummingbird.xtce.castor.NumericAlarmConditionTypeSequence numericAlarmConditionTypeSequence) {
+            final org.hbird.xtce.castor.NumericAlarmConditionTypeSequence numericAlarmConditionTypeSequence) {
         this._numericAlarmConditionTypeSequence = numericAlarmConditionTypeSequence;
         this._choiceValue = numericAlarmConditionTypeSequence;
     }
@@ -258,12 +258,12 @@ public class NumericAlarmConditionType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.NumericAlarmConditionType
+     * org.hbird.xtce.castor.NumericAlarmConditionType
      */
-    public static com.logica.hummingbird.xtce.castor.NumericAlarmConditionType unmarshal(
+    public static org.hbird.xtce.castor.NumericAlarmConditionType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.NumericAlarmConditionType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.NumericAlarmConditionType.class, reader);
+        return (org.hbird.xtce.castor.NumericAlarmConditionType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.NumericAlarmConditionType.class, reader);
     }
 
     /**

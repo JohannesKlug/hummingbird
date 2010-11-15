@@ -24,7 +24,7 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.spacesystemmodel;
+package org.hbird.spacesystemmodel;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -38,9 +38,9 @@ import java.util.Map.Entry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.parameters.Parameter;
-import com.logica.hummingbird.util.BitSetUtility;
-import com.logica.hummingbird.util.exceptions.BitSetOperationException;
+import org.hbird.spacesystemmodel.parameters.Parameter;
+import org.hbird.util.BitSetUtility;
+import org.hbird.util.exceptions.BitSetOperationException;
 
 /**
  * The container is the basic element in the Frame Broker's POJO hierarchy. A container is an ordered sequence of other
@@ -334,7 +334,7 @@ public class ContainerImpl extends NamedElement implements Container {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.logica.hummingbird.spacesystemmodel.Container#setParent(com.logica.hummingbird.spacesystemmodel.Container)
+	 * org.hbird.spacesystemmodel.Container#setParent(org.hbird.spacesystemmodel.Container)
 	 */
 	@Override
 	public void addParent(Container parentContainer) {

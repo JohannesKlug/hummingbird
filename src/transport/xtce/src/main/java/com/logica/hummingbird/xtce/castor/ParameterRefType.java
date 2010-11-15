@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A reference to a Parameter. Uses Unix ‘like’ naming across the
@@ -155,12 +155,12 @@ public class ParameterRefType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ParameterRefType
+     * org.hbird.xtce.castor.ParameterRefType
      */
-    public static com.logica.hummingbird.xtce.castor.ParameterRefType unmarshal(
+    public static org.hbird.xtce.castor.ParameterRefType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ParameterRefType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ParameterRefType.class, reader);
+        return (org.hbird.xtce.castor.ParameterRefType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ParameterRefType.class, reader);
     }
 
     /**

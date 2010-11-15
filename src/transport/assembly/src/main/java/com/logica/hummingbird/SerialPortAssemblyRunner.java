@@ -1,4 +1,4 @@
-package com.logica.hummingbird;
+package org.hbird;
 
 import java.io.BufferedReader;
 import java.io.IOException;

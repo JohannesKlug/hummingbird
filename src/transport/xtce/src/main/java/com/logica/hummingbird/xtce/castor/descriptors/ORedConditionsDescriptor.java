@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ORedConditions;
+import org.hbird.xtce.castor.ORedConditions;
 
 /**
  * Class ORedConditionsDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ORedConditionsDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ORedConditionsTypeDescriptor {
+public class ORedConditionsDescriptor extends org.hbird.xtce.castor.descriptors.ORedConditionsTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ORedConditionsDescriptor extends com.logica.hummingbird.xtce.castor
 
     public ORedConditionsDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ORedConditionsTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ORedConditionsTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ORedConditions";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class ORedConditionsDescriptor extends com.logica.hummingbird.xtce.castor
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ORedConditions.class;
+        return org.hbird.xtce.castor.ORedConditions.class;
     }
 
     /**

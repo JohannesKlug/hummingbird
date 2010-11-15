@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Hold a structure that can be repeated X times, where X is the
@@ -25,13 +25,13 @@ public class RepeatType implements java.io.Serializable {
      * Value (either fixed or dynamic) that contains the count of
      * repeated structures.
      */
-    private com.logica.hummingbird.xtce.castor.Count _count;
+    private org.hbird.xtce.castor.Count _count;
 
     /**
      * Indicates the distance between repeating entries (the last
      * bit of one entry to the start bit of the next entry)
      */
-    private com.logica.hummingbird.xtce.castor.Offset _offset;
+    private org.hbird.xtce.castor.Offset _offset;
 
 
       //----------------/
@@ -54,7 +54,7 @@ public class RepeatType implements java.io.Serializable {
      * 
      * @return the value of field 'Count'.
      */
-    public com.logica.hummingbird.xtce.castor.Count getCount(
+    public org.hbird.xtce.castor.Count getCount(
     ) {
         return this._count;
     }
@@ -67,7 +67,7 @@ public class RepeatType implements java.io.Serializable {
      * 
      * @return the value of field 'Offset'.
      */
-    public com.logica.hummingbird.xtce.castor.Offset getOffset(
+    public org.hbird.xtce.castor.Offset getOffset(
     ) {
         return this._offset;
     }
@@ -127,7 +127,7 @@ public class RepeatType implements java.io.Serializable {
      * @param count the value of field 'count'.
      */
     public void setCount(
-            final com.logica.hummingbird.xtce.castor.Count count) {
+            final org.hbird.xtce.castor.Count count) {
         this._count = count;
     }
 
@@ -140,7 +140,7 @@ public class RepeatType implements java.io.Serializable {
      * @param offset the value of field 'offset'.
      */
     public void setOffset(
-            final com.logica.hummingbird.xtce.castor.Offset offset) {
+            final org.hbird.xtce.castor.Offset offset) {
         this._offset = offset;
     }
 
@@ -153,12 +153,12 @@ public class RepeatType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.RepeatType
+     * org.hbird.xtce.castor.RepeatType
      */
-    public static com.logica.hummingbird.xtce.castor.RepeatType unmarshal(
+    public static org.hbird.xtce.castor.RepeatType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.RepeatType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.RepeatType.class, reader);
+        return (org.hbird.xtce.castor.RepeatType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.RepeatType.class, reader);
     }
 
     /**

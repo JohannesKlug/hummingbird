@@ -1,4 +1,4 @@
-package com.logica.hummingbird.gmap;
+package org.hbird.gmap;
 
 import java.io.InputStream;
 import java.util.Hashtable;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.logica.hummingbird.packetarchive;
+package org.hbird.packetarchive;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.logica.hummingbird.validation.parameter;
+package org.hbird.validation.parameter;
 
-import com.logica.hummingbird.telemetry.NotComparableTypeException;
+import org.hbird.telemetry.NotComparableTypeException;
 
 /**
  * Limit class for checking whether a lower end limit has been violated.
@@ -47,7 +47,7 @@ public class LowerLimit extends BaseLimit {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.logica.hummingbird.validation.parameter.BaseLimit#checkLimit()
+	 * @see org.hbird.validation.parameter.BaseLimit#checkLimit()
 	 */
 	protected boolean checkLimit() throws NotComparableTypeException {
 		return (Double) parameter >= limit;

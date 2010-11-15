@@ -1,4 +1,4 @@
-package com.logica.hummingbird.packetarchive;
+package org.hbird.packetarchive;
 
 import java.util.ArrayList;
 import java.util.Date;

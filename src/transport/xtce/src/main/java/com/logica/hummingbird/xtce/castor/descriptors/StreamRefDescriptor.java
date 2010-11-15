@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.StreamRef;
+import org.hbird.xtce.castor.StreamRef;
 
 /**
  * Class StreamRefDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class StreamRefDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.StreamRefTypeDescriptor {
+public class StreamRefDescriptor extends org.hbird.xtce.castor.descriptors.StreamRefTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class StreamRefDescriptor extends com.logica.hummingbird.xtce.castor.desc
 
     public StreamRefDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.StreamRefTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.StreamRefTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "StreamRef";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class StreamRefDescriptor extends com.logica.hummingbird.xtce.castor.desc
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.StreamRef.class;
+        return org.hbird.xtce.castor.StreamRef.class;
     }
 
     /**

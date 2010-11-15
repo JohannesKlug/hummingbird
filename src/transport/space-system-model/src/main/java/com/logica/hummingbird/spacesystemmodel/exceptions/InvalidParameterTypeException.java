@@ -1,4 +1,4 @@
-package com.logica.hummingbird.spacesystemmodel.exceptions;
+package org.hbird.spacesystemmodel.exceptions;
 
 public class InvalidParameterTypeException extends Exception {
 	

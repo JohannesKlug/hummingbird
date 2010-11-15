@@ -6,11 +6,11 @@
 
   	<parent>
 		<artifactId>hummingbird</artifactId>
-		<groupId>com.logica.hummingbird</groupId>
+		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<groupId>com.logica.hummingbird</groupId>
+	<groupId>org.hbird</groupId>
 	<artifactId>gui-cometd-gmap</artifactId>
 	<packaging>war</packaging>
 	<name>Hummingbird cometd map display</name>
@@ -104,7 +104,7 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>com.logica.hummingbird.gmap.RouteMain</mainClass>
+					<mainClass>org.hbird.gmap.RouteMain</mainClass>
 					<includePluginDependencies>false</includePluginDependencies>
 				</configuration>
 			</plugin>

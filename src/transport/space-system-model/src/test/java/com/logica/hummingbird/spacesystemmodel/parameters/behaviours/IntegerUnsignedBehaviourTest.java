@@ -1,4 +1,4 @@
-package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
+package org.hbird.spacesystemmodel.parameters.behaviours;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,10 +12,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
-import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
-import com.logica.hummingbird.util.BitSetUtility;
-import com.logica.hummingbird.util.exceptions.BitSetOperationException;
+import org.hbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import org.hbird.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
+import org.hbird.util.BitSetUtility;
+import org.hbird.util.exceptions.BitSetOperationException;
 
 public class IntegerUnsignedBehaviourTest {
 	private final static Logger LOG = LoggerFactory.getLogger(IntegerUnsignedBehaviourTest.class);

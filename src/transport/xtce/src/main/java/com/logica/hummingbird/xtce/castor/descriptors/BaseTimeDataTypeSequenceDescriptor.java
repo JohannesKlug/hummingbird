@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.BaseTimeDataTypeSequence;
+import org.hbird.xtce.castor.BaseTimeDataTypeSequence;
 
 /**
  * Class BaseTimeDataTypeSequenceDescriptor.
@@ -70,7 +70,7 @@ public class BaseTimeDataTypeSequenceDescriptor extends org.exolab.castor.xml.ut
         //-- initialize element descriptors
 
         //-- _encoding
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Encoding.class, "_encoding", "Encoding", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Encoding.class, "_encoding", "Encoding", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -85,7 +85,7 @@ public class BaseTimeDataTypeSequenceDescriptor extends org.exolab.castor.xml.ut
             {
                 try {
                     BaseTimeDataTypeSequence target = (BaseTimeDataTypeSequence) object;
-                    target.setEncoding( (com.logica.hummingbird.xtce.castor.Encoding) value);
+                    target.setEncoding( (org.hbird.xtce.castor.Encoding) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -93,10 +93,10 @@ public class BaseTimeDataTypeSequenceDescriptor extends org.exolab.castor.xml.ut
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Encoding();
+                return new org.hbird.xtce.castor.Encoding();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.Encoding");
+        desc.setSchemaType("org.hbird.xtce.castor.Encoding");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -146,7 +146,7 @@ public class BaseTimeDataTypeSequenceDescriptor extends org.exolab.castor.xml.ut
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.BaseTimeDataTypeSequence.class;
+        return org.hbird.xtce.castor.BaseTimeDataTypeSequence.class;
     }
 
     /**

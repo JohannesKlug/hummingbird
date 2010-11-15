@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.InputSet;
+import org.hbird.xtce.castor.InputSet;
 
 /**
  * Class InputSetDescriptor.
@@ -67,7 +67,7 @@ public class InputSetDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
         //-- initialize element descriptors
 
         //-- _items
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.InputSetItem.class, "_items", (java.lang.String) null, org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.InputSetItem.class, "_items", (java.lang.String) null, org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -82,7 +82,7 @@ public class InputSetDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             {
                 try {
                     InputSet target = (InputSet) object;
-                    target.addInputSetItem( (com.logica.hummingbird.xtce.castor.InputSetItem) value);
+                    target.addInputSetItem( (org.hbird.xtce.castor.InputSetItem) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -98,14 +98,14 @@ public class InputSetDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.InputSetItem();
+                return new org.hbird.xtce.castor.InputSetItem();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.InputSetItem");
+        desc.setComponentType("org.hbird.xtce.castor.InputSetItem");
         desc.setHandler(handler);
         desc.setContainer(true);
-        desc.setClassDescriptor(new com.logica.hummingbird.xtce.castor.descriptors.InputSetItemDescriptor());
+        desc.setClassDescriptor(new org.hbird.xtce.castor.descriptors.InputSetItemDescriptor());
         desc.setMultivalued(true);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
@@ -154,7 +154,7 @@ public class InputSetDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.InputSet.class;
+        return org.hbird.xtce.castor.InputSet.class;
     }
 
     /**

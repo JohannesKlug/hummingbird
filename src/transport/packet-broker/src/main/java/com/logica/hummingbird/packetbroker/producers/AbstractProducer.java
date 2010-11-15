@@ -1,8 +1,8 @@
-package com.logica.hummingbird.packetbroker.producers;
+package org.hbird.packetbroker.producers;
 
-import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.telemetry.HummingbirdPacket;
-import com.logica.hummingbird.telemetry.DefaultSpacePacket;
+import org.hbird.spacesystemmodel.ContainerFactory;
+import org.hbird.telemetry.HummingbirdPacket;
+import org.hbird.telemetry.DefaultSpacePacket;
 
 public abstract class AbstractProducer {
 

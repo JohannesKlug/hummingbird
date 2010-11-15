@@ -4,12 +4,12 @@
 
 	<parent>
 		<artifactId>hummingbird</artifactId>
-		<groupId>com.logica.hummingbird</groupId>
+		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.logica.hummingbird</groupId>
+	<groupId>org.hbird</groupId>
 	<artifactId>xtce</artifactId>
 	<packaging>bundle</packaging>
 	<name>XTCE</name>
@@ -41,7 +41,7 @@
 						</goals>
 						<configuration>
 							<schemaDirectory>${basedir}/src/main/resources/schemas</schemaDirectory>
-							<packaging>com.logica.hummingbird.generatedcode.xtce</packaging>
+							<packaging>org.hbird.generatedcode.xtce</packaging>
 							<properties>${basedir}/src/main/castor/castorbuilder.properties</properties>
 							<verbose>true</verbose>
 						</configuration>
@@ -65,11 +65,11 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							com.logica.hummingbird.xtce,
-							com.logica.hummingbird.xtce.exceptions,
+							org.hbird.xtce,
+							org.hbird.xtce.exceptions,
 						</Export-Package>
 						<Private-Package>
-							com.logica.hummingbird.generatedcode*
+							org.hbird.generatedcode*
 						</Private-Package>
 					</instructions>
 				</configuration>
@@ -87,19 +87,19 @@
 			<artifactId>castor-xml</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
+			<groupId>org.hbird</groupId>
 			<artifactId>commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
+			<groupId>org.hbird</groupId>
 			<artifactId>space-system-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
+			<groupId>org.hbird</groupId>
 			<artifactId>packet-broker</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>

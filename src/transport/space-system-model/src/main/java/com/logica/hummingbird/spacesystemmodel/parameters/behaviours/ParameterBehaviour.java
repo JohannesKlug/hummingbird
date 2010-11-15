@@ -1,8 +1,8 @@
-package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
+package org.hbird.spacesystemmodel.parameters.behaviours;
 
 import java.util.BitSet;
 
-import com.logica.hummingbird.util.exceptions.BitSetOperationException;
+import org.hbird.util.exceptions.BitSetOperationException;
 
 public interface ParameterBehaviour {
 	

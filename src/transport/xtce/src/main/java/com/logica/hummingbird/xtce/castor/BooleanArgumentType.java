@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class BooleanArgumentType.
@@ -87,12 +87,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.BooleanArgumentType
+     * org.hbird.xtce.castor.BooleanArgumentType
      */
-    public static com.logica.hummingbird.xtce.castor.BooleanArgumentType unmarshal(
+    public static org.hbird.xtce.castor.BooleanArgumentType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.BooleanArgumentType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.BooleanArgumentType.class, reader);
+        return (org.hbird.xtce.castor.BooleanArgumentType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.BooleanArgumentType.class, reader);
     }
 
     /**

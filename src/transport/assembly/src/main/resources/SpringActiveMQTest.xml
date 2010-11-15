@@ -5,7 +5,7 @@
 						http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi-1.2.xsd 
 						http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-	<bean id="exampleEndpoint" class="com.logica.hummingbird.example.ExamplePojoEndpoint">
+	<bean id="exampleEndpoint" class="org.hbird.example.ExamplePojoEndpoint">
 	</bean>
 
   <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">

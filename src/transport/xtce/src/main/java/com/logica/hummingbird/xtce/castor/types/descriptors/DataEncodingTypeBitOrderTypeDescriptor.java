@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types.descriptors;
+package org.hbird.xtce.castor.types.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.types.DataEncodingTypeBitOrderType;
+import org.hbird.xtce.castor.types.DataEncodingTypeBitOrderType;
 
 /**
  * Class DataEncodingTypeBitOrderTypeDescriptor.
@@ -98,7 +98,7 @@ public class DataEncodingTypeBitOrderTypeDescriptor extends org.exolab.castor.xm
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.types.DataEncodingTypeBitOrderType.class;
+        return org.hbird.xtce.castor.types.DataEncodingTypeBitOrderType.class;
     }
 
     /**

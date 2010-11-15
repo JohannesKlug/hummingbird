@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class ValidRange.
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class ValidRange extends com.logica.hummingbird.xtce.castor.DecimalRangeType 
+public class ValidRange extends org.hbird.xtce.castor.DecimalRangeType 
 implements java.io.Serializable
 {
 
@@ -87,12 +87,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ValidRange
+     * org.hbird.xtce.castor.ValidRange
      */
-    public static com.logica.hummingbird.xtce.castor.ValidRange unmarshal(
+    public static org.hbird.xtce.castor.ValidRange unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ValidRange) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ValidRange.class, reader);
+        return (org.hbird.xtce.castor.ValidRange) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ValidRange.class, reader);
     }
 
     /**

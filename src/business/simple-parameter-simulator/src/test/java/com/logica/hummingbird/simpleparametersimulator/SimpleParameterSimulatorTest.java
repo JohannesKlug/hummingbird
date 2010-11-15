@@ -1,4 +1,4 @@
-package com.logica.hummingbird.simpleparametersimulator;
+package org.hbird.simpleparametersimulator;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;

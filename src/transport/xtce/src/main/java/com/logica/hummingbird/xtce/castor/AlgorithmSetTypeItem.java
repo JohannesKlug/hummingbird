@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class AlgorithmSetTypeItem.
@@ -28,12 +28,12 @@ public class AlgorithmSetTypeItem implements java.io.Serializable {
     /**
      * Field _customAlgorithm.
      */
-    private com.logica.hummingbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm _customAlgorithm;
+    private org.hbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm _customAlgorithm;
 
     /**
      * Field _mathAlgorithm.
      */
-    private com.logica.hummingbird.xtce.castor.MathAlgorithm _mathAlgorithm;
+    private org.hbird.xtce.castor.MathAlgorithm _mathAlgorithm;
 
 
       //----------------/
@@ -66,7 +66,7 @@ public class AlgorithmSetTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'CustomAlgorithm'.
      */
-    public com.logica.hummingbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm getCustomAlgorithm(
+    public org.hbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm getCustomAlgorithm(
     ) {
         return this._customAlgorithm;
     }
@@ -76,7 +76,7 @@ public class AlgorithmSetTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'MathAlgorithm'.
      */
-    public com.logica.hummingbird.xtce.castor.MathAlgorithm getMathAlgorithm(
+    public org.hbird.xtce.castor.MathAlgorithm getMathAlgorithm(
     ) {
         return this._mathAlgorithm;
     }
@@ -87,7 +87,7 @@ public class AlgorithmSetTypeItem implements java.io.Serializable {
      * @param customAlgorithm the value of field 'customAlgorithm'.
      */
     public void setCustomAlgorithm(
-            final com.logica.hummingbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm customAlgorithm) {
+            final org.hbird.xtce.castor.AlgorithmSetTypeCustomAlgorithm customAlgorithm) {
         this._customAlgorithm = customAlgorithm;
         this._choiceValue = customAlgorithm;
     }
@@ -98,7 +98,7 @@ public class AlgorithmSetTypeItem implements java.io.Serializable {
      * @param mathAlgorithm the value of field 'mathAlgorithm'.
      */
     public void setMathAlgorithm(
-            final com.logica.hummingbird.xtce.castor.MathAlgorithm mathAlgorithm) {
+            final org.hbird.xtce.castor.MathAlgorithm mathAlgorithm) {
         this._mathAlgorithm = mathAlgorithm;
         this._choiceValue = mathAlgorithm;
     }

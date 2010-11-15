@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types;
+package org.hbird.xtce.castor.types;
 
 /**
  * Enumeration EncodingUnitsType.
@@ -70,7 +70,7 @@ public enum EncodingUnitsType implements java.io.Serializable {
      * @param value
      * @return the constant for this value
      */
-    public static com.logica.hummingbird.xtce.castor.types.EncodingUnitsType fromValue(
+    public static org.hbird.xtce.castor.types.EncodingUnitsType fromValue(
             final java.lang.String value) {
         for (EncodingUnitsType c: EncodingUnitsType.values()) {
             if (c.value.equals(value)) {

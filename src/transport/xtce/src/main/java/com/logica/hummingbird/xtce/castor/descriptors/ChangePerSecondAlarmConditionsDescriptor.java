@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ChangePerSecondAlarmConditions;
+import org.hbird.xtce.castor.ChangePerSecondAlarmConditions;
 
 /**
  * Class ChangePerSecondAlarmConditionsDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ChangePerSecondAlarmConditionsDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.AlarmConditionsTypeDescriptor {
+public class ChangePerSecondAlarmConditionsDescriptor extends org.hbird.xtce.castor.descriptors.AlarmConditionsTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ChangePerSecondAlarmConditionsDescriptor extends com.logica.humming
 
     public ChangePerSecondAlarmConditionsDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.AlarmConditionsTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.AlarmConditionsTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ChangePerSecondAlarmConditions";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class ChangePerSecondAlarmConditionsDescriptor extends com.logica.humming
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ChangePerSecondAlarmConditions.class;
+        return org.hbird.xtce.castor.ChangePerSecondAlarmConditions.class;
     }
 
     /**

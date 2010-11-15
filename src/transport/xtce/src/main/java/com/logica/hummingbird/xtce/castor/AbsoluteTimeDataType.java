@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Used to contain an absolute time. Contains an absolute (to a
@@ -24,7 +24,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class AbsoluteTimeDataType extends com.logica.hummingbird.xtce.castor.BaseTimeDataType 
+public class AbsoluteTimeDataType extends org.hbird.xtce.castor.BaseTimeDataType 
 implements java.io.Serializable
 {
 
@@ -98,12 +98,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.AbsoluteTimeDataType
+     * org.hbird.xtce.castor.AbsoluteTimeDataType
      */
-    public static com.logica.hummingbird.xtce.castor.AbsoluteTimeDataType unmarshal(
+    public static org.hbird.xtce.castor.AbsoluteTimeDataType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.AbsoluteTimeDataType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.AbsoluteTimeDataType.class, reader);
+        return (org.hbird.xtce.castor.AbsoluteTimeDataType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.AbsoluteTimeDataType.class, reader);
     }
 
     /**

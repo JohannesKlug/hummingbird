@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Unit;
+import org.hbird.xtce.castor.Unit;
 
 /**
  * Class UnitDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class UnitDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.UnitTypeDescriptor {
+public class UnitDescriptor extends org.hbird.xtce.castor.descriptors.UnitTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class UnitDescriptor extends com.logica.hummingbird.xtce.castor.descripto
 
     public UnitDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.UnitTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.UnitTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "Unit";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class UnitDescriptor extends com.logica.hummingbird.xtce.castor.descripto
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Unit.class;
+        return org.hbird.xtce.castor.Unit.class;
     }
 
     /**

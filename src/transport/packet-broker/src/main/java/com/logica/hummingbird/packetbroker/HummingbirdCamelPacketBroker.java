@@ -1,4 +1,4 @@
-package com.logica.hummingbird.packetbroker;
+package org.hbird.packetbroker;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -8,11 +8,11 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
 
-import com.logica.hummingbird.MessageType;
-import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.telemetry.HummingbirdPacket;
-import com.logica.hummingbird.telemetry.HummingbirdParameter;
+import org.hbird.MessageType;
+import org.hbird.spacesystemmodel.ContainerFactory;
+import org.hbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.telemetry.HummingbirdPacket;
+import org.hbird.telemetry.HummingbirdParameter;
 
 /** TODO Remove hardcoded 'strings', put them in the HeaderFields class. */
 public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {

@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Defaults;
+import org.hbird.xtce.castor.Defaults;
 
 /**
  * Class DefaultsDescriptor.
@@ -71,7 +71,7 @@ public class DefaultsDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
         //-- initialize element descriptors
 
         //-- _defaultDataEncoding
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.DefaultDataEncoding.class, "_defaultDataEncoding", "DefaultDataEncoding", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.DefaultDataEncoding.class, "_defaultDataEncoding", "DefaultDataEncoding", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class DefaultsDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             {
                 try {
                     Defaults target = (Defaults) object;
-                    target.setDefaultDataEncoding( (com.logica.hummingbird.xtce.castor.DefaultDataEncoding) value);
+                    target.setDefaultDataEncoding( (org.hbird.xtce.castor.DefaultDataEncoding) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class DefaultsDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.DefaultDataEncoding();
+                return new org.hbird.xtce.castor.DefaultDataEncoding();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.DefaultDataEncoding");
+        desc.setSchemaType("org.hbird.xtce.castor.DefaultDataEncoding");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -110,7 +110,7 @@ public class DefaultsDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
         }
         desc.setValidator(fieldValidator);
         //-- _parameterTimeAssociation
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ParameterTimeAssociation.class, "_parameterTimeAssociation", "ParameterTimeAssociation", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ParameterTimeAssociation.class, "_parameterTimeAssociation", "ParameterTimeAssociation", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -125,7 +125,7 @@ public class DefaultsDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             {
                 try {
                     Defaults target = (Defaults) object;
-                    target.setParameterTimeAssociation( (com.logica.hummingbird.xtce.castor.ParameterTimeAssociation) value);
+                    target.setParameterTimeAssociation( (org.hbird.xtce.castor.ParameterTimeAssociation) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -133,10 +133,10 @@ public class DefaultsDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ParameterTimeAssociation();
+                return new org.hbird.xtce.castor.ParameterTimeAssociation();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ParameterTimeAssociation");
+        desc.setSchemaType("org.hbird.xtce.castor.ParameterTimeAssociation");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -186,7 +186,7 @@ public class DefaultsDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Defaults.class;
+        return org.hbird.xtce.castor.Defaults.class;
     }
 
     /**

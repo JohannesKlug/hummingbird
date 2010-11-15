@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.InputOutputAlgorithmType;
+import org.hbird.xtce.castor.InputOutputAlgorithmType;
 
 /**
  * Class InputOutputAlgorithmTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class InputOutputAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor {
+public class InputOutputAlgorithmTypeDescriptor extends org.hbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class InputOutputAlgorithmTypeDescriptor extends com.logica.hummingbird.x
 
     public InputOutputAlgorithmTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "InputOutputAlgorithmType";
         _elementDefinition = false;
@@ -118,7 +118,7 @@ public class InputOutputAlgorithmTypeDescriptor extends com.logica.hummingbird.x
         //-- initialize element descriptors
 
         //-- _outputSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.OutputSet.class, "_outputSet", "OutputSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.OutputSet.class, "_outputSet", "OutputSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -133,7 +133,7 @@ public class InputOutputAlgorithmTypeDescriptor extends com.logica.hummingbird.x
             {
                 try {
                     InputOutputAlgorithmType target = (InputOutputAlgorithmType) object;
-                    target.setOutputSet( (com.logica.hummingbird.xtce.castor.OutputSet) value);
+                    target.setOutputSet( (org.hbird.xtce.castor.OutputSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -141,10 +141,10 @@ public class InputOutputAlgorithmTypeDescriptor extends com.logica.hummingbird.x
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.OutputSet();
+                return new org.hbird.xtce.castor.OutputSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.OutputSet");
+        desc.setSchemaType("org.hbird.xtce.castor.OutputSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -197,7 +197,7 @@ public class InputOutputAlgorithmTypeDescriptor extends com.logica.hummingbird.x
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.InputOutputAlgorithmType.class;
+        return org.hbird.xtce.castor.InputOutputAlgorithmType.class;
     }
 
     /**

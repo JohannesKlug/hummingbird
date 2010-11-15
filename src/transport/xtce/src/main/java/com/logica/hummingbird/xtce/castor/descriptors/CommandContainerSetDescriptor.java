@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.CommandContainerSet;
+import org.hbird.xtce.castor.CommandContainerSet;
 
 /**
  * Class CommandContainerSetDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class CommandContainerSetDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.CommandContainerSetTypeDescriptor {
+public class CommandContainerSetDescriptor extends org.hbird.xtce.castor.descriptors.CommandContainerSetTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class CommandContainerSetDescriptor extends com.logica.hummingbird.xtce.c
 
     public CommandContainerSetDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.CommandContainerSetTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.CommandContainerSetTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "CommandContainerSet";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class CommandContainerSetDescriptor extends com.logica.hummingbird.xtce.c
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.CommandContainerSet.class;
+        return org.hbird.xtce.castor.CommandContainerSet.class;
     }
 
     /**

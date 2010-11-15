@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class SizeInBits.
@@ -28,7 +28,7 @@ public class StringDataEncodingTypeSizeInBits implements java.io.Serializable {
     /**
      * Field _fixed.
      */
-    private com.logica.hummingbird.xtce.castor.Fixed _fixed;
+    private org.hbird.xtce.castor.Fixed _fixed;
 
     /**
      * Like C strings, they are terminated with a special string,
@@ -41,7 +41,7 @@ public class StringDataEncodingTypeSizeInBits implements java.io.Serializable {
      * integer at the start of the string. SizeTag must be an
      * unsigned Integer
      */
-    private com.logica.hummingbird.xtce.castor.LeadingSize _leadingSize;
+    private org.hbird.xtce.castor.LeadingSize _leadingSize;
 
 
       //----------------/
@@ -74,7 +74,7 @@ public class StringDataEncodingTypeSizeInBits implements java.io.Serializable {
      * 
      * @return the value of field 'Fixed'.
      */
-    public com.logica.hummingbird.xtce.castor.Fixed getFixed(
+    public org.hbird.xtce.castor.Fixed getFixed(
     ) {
         return this._fixed;
     }
@@ -87,7 +87,7 @@ public class StringDataEncodingTypeSizeInBits implements java.io.Serializable {
      * 
      * @return the value of field 'LeadingSize'.
      */
-    public com.logica.hummingbird.xtce.castor.LeadingSize getLeadingSize(
+    public org.hbird.xtce.castor.LeadingSize getLeadingSize(
     ) {
         return this._leadingSize;
     }
@@ -158,7 +158,7 @@ public class StringDataEncodingTypeSizeInBits implements java.io.Serializable {
      * @param fixed the value of field 'fixed'.
      */
     public void setFixed(
-            final com.logica.hummingbird.xtce.castor.Fixed fixed) {
+            final org.hbird.xtce.castor.Fixed fixed) {
         this._fixed = fixed;
         this._choiceValue = fixed;
     }
@@ -172,7 +172,7 @@ public class StringDataEncodingTypeSizeInBits implements java.io.Serializable {
      * @param leadingSize the value of field 'leadingSize'.
      */
     public void setLeadingSize(
-            final com.logica.hummingbird.xtce.castor.LeadingSize leadingSize) {
+            final org.hbird.xtce.castor.LeadingSize leadingSize) {
         this._leadingSize = leadingSize;
         this._choiceValue = leadingSize;
     }
@@ -200,12 +200,12 @@ public class StringDataEncodingTypeSizeInBits implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.StringDataEncodingTypeSizeInBits
+     * org.hbird.xtce.castor.StringDataEncodingTypeSizeInBits
      */
-    public static com.logica.hummingbird.xtce.castor.StringDataEncodingTypeSizeInBits unmarshal(
+    public static org.hbird.xtce.castor.StringDataEncodingTypeSizeInBits unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.StringDataEncodingTypeSizeInBits) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.StringDataEncodingTypeSizeInBits.class, reader);
+        return (org.hbird.xtce.castor.StringDataEncodingTypeSizeInBits) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.StringDataEncodingTypeSizeInBits.class, reader);
     }
 
     /**

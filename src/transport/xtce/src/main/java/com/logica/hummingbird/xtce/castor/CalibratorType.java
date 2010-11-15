@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Calibrators are normally used to convert to and from bit
@@ -38,7 +38,7 @@ public class CalibratorType implements java.io.Serializable {
      * position on the line coorosponding to the raw value. The
      * algorithm triggers on the input parameter.
      */
-    private com.logica.hummingbird.xtce.castor.SplineCalibrator _splineCalibrator;
+    private org.hbird.xtce.castor.SplineCalibrator _splineCalibrator;
 
     /**
      * A calibration type where a curve in a raw vs calibrated
@@ -48,7 +48,7 @@ public class CalibratorType implements java.io.Serializable {
      * first coefficient belongs with the X^0 term, the next
      * coefficient belongs to the X^1 term and so on. 
      */
-    private com.logica.hummingbird.xtce.castor.PolynomialCalibrator _polynomialCalibrator;
+    private org.hbird.xtce.castor.PolynomialCalibrator _polynomialCalibrator;
 
 
       //----------------/
@@ -98,7 +98,7 @@ public class CalibratorType implements java.io.Serializable {
      * 
      * @return the value of field 'PolynomialCalibrator'.
      */
-    public com.logica.hummingbird.xtce.castor.PolynomialCalibrator getPolynomialCalibrator(
+    public org.hbird.xtce.castor.PolynomialCalibrator getPolynomialCalibrator(
     ) {
         return this._polynomialCalibrator;
     }
@@ -114,7 +114,7 @@ public class CalibratorType implements java.io.Serializable {
      * 
      * @return the value of field 'SplineCalibrator'.
      */
-    public com.logica.hummingbird.xtce.castor.SplineCalibrator getSplineCalibrator(
+    public org.hbird.xtce.castor.SplineCalibrator getSplineCalibrator(
     ) {
         return this._splineCalibrator;
     }
@@ -190,7 +190,7 @@ public class CalibratorType implements java.io.Serializable {
      * 'polynomialCalibrator'.
      */
     public void setPolynomialCalibrator(
-            final com.logica.hummingbird.xtce.castor.PolynomialCalibrator polynomialCalibrator) {
+            final org.hbird.xtce.castor.PolynomialCalibrator polynomialCalibrator) {
         this._polynomialCalibrator = polynomialCalibrator;
         this._choiceValue = polynomialCalibrator;
     }
@@ -207,7 +207,7 @@ public class CalibratorType implements java.io.Serializable {
      * @param splineCalibrator the value of field 'splineCalibrator'
      */
     public void setSplineCalibrator(
-            final com.logica.hummingbird.xtce.castor.SplineCalibrator splineCalibrator) {
+            final org.hbird.xtce.castor.SplineCalibrator splineCalibrator) {
         this._splineCalibrator = splineCalibrator;
         this._choiceValue = splineCalibrator;
     }
@@ -221,12 +221,12 @@ public class CalibratorType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.CalibratorType
+     * org.hbird.xtce.castor.CalibratorType
      */
-    public static com.logica.hummingbird.xtce.castor.CalibratorType unmarshal(
+    public static org.hbird.xtce.castor.CalibratorType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.CalibratorType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.CalibratorType.class, reader);
+        return (org.hbird.xtce.castor.CalibratorType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.CalibratorType.class, reader);
     }
 
     /**

@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ServiceRefType;
+import org.hbird.xtce.castor.ServiceRefType;
 
 /**
  * Class ServiceRefTypeDescriptor.
@@ -190,7 +190,7 @@ public class ServiceRefTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ServiceRefType.class;
+        return org.hbird.xtce.castor.ServiceRefType.class;
     }
 
     /**

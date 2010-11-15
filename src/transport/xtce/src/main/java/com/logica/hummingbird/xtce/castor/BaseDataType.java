@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * An abstract type used by within the schema to derive other data
@@ -14,7 +14,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public abstract class BaseDataType extends com.logica.hummingbird.xtce.castor.NameDescriptionType 
+public abstract class BaseDataType extends org.hbird.xtce.castor.NameDescriptionType 
 implements java.io.Serializable
 {
 
@@ -26,12 +26,12 @@ implements java.io.Serializable
     /**
      * Field _unitSet.
      */
-    private com.logica.hummingbird.xtce.castor.UnitSet _unitSet;
+    private org.hbird.xtce.castor.UnitSet _unitSet;
 
     /**
      * Field _baseDataTypeChoice.
      */
-    private com.logica.hummingbird.xtce.castor.BaseDataTypeChoice _baseDataTypeChoice;
+    private org.hbird.xtce.castor.BaseDataTypeChoice _baseDataTypeChoice;
 
 
       //----------------/
@@ -52,7 +52,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'BaseDataTypeChoice'.
      */
-    public com.logica.hummingbird.xtce.castor.BaseDataTypeChoice getBaseDataTypeChoice(
+    public org.hbird.xtce.castor.BaseDataTypeChoice getBaseDataTypeChoice(
     ) {
         return this._baseDataTypeChoice;
     }
@@ -62,7 +62,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'UnitSet'.
      */
-    public com.logica.hummingbird.xtce.castor.UnitSet getUnitSet(
+    public org.hbird.xtce.castor.UnitSet getUnitSet(
     ) {
         return this._unitSet;
     }
@@ -89,7 +89,7 @@ implements java.io.Serializable
      * 'baseDataTypeChoice'.
      */
     public void setBaseDataTypeChoice(
-            final com.logica.hummingbird.xtce.castor.BaseDataTypeChoice baseDataTypeChoice) {
+            final org.hbird.xtce.castor.BaseDataTypeChoice baseDataTypeChoice) {
         this._baseDataTypeChoice = baseDataTypeChoice;
     }
 
@@ -99,7 +99,7 @@ implements java.io.Serializable
      * @param unitSet the value of field 'unitSet'.
      */
     public void setUnitSet(
-            final com.logica.hummingbird.xtce.castor.UnitSet unitSet) {
+            final org.hbird.xtce.castor.UnitSet unitSet) {
         this._unitSet = unitSet;
     }
 

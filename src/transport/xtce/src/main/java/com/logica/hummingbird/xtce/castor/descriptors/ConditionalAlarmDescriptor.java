@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ConditionalAlarm;
+import org.hbird.xtce.castor.ConditionalAlarm;
 
 /**
  * Class ConditionalAlarmDescriptor.
@@ -71,7 +71,7 @@ public class ConditionalAlarmDescriptor extends org.exolab.castor.xml.util.XMLCl
         //-- initialize element descriptors
 
         //-- _staticAlarmConditions
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.StaticAlarmConditions.class, "_staticAlarmConditions", "StaticAlarmConditions", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.StaticAlarmConditions.class, "_staticAlarmConditions", "StaticAlarmConditions", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class ConditionalAlarmDescriptor extends org.exolab.castor.xml.util.XMLCl
             {
                 try {
                     ConditionalAlarm target = (ConditionalAlarm) object;
-                    target.setStaticAlarmConditions( (com.logica.hummingbird.xtce.castor.StaticAlarmConditions) value);
+                    target.setStaticAlarmConditions( (org.hbird.xtce.castor.StaticAlarmConditions) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class ConditionalAlarmDescriptor extends org.exolab.castor.xml.util.XMLCl
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.StaticAlarmConditions();
+                return new org.hbird.xtce.castor.StaticAlarmConditions();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.StaticAlarmConditions");
+        desc.setSchemaType("org.hbird.xtce.castor.StaticAlarmConditions");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -110,7 +110,7 @@ public class ConditionalAlarmDescriptor extends org.exolab.castor.xml.util.XMLCl
         }
         desc.setValidator(fieldValidator);
         //-- _changePerSecondAlarmConditions
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ChangePerSecondAlarmConditions.class, "_changePerSecondAlarmConditions", "ChangePerSecondAlarmConditions", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ChangePerSecondAlarmConditions.class, "_changePerSecondAlarmConditions", "ChangePerSecondAlarmConditions", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -125,7 +125,7 @@ public class ConditionalAlarmDescriptor extends org.exolab.castor.xml.util.XMLCl
             {
                 try {
                     ConditionalAlarm target = (ConditionalAlarm) object;
-                    target.setChangePerSecondAlarmConditions( (com.logica.hummingbird.xtce.castor.ChangePerSecondAlarmConditions) value);
+                    target.setChangePerSecondAlarmConditions( (org.hbird.xtce.castor.ChangePerSecondAlarmConditions) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -133,10 +133,10 @@ public class ConditionalAlarmDescriptor extends org.exolab.castor.xml.util.XMLCl
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ChangePerSecondAlarmConditions();
+                return new org.hbird.xtce.castor.ChangePerSecondAlarmConditions();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ChangePerSecondAlarmConditions");
+        desc.setSchemaType("org.hbird.xtce.castor.ChangePerSecondAlarmConditions");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -186,7 +186,7 @@ public class ConditionalAlarmDescriptor extends org.exolab.castor.xml.util.XMLCl
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ConditionalAlarm.class;
+        return org.hbird.xtce.castor.ConditionalAlarm.class;
     }
 
     /**

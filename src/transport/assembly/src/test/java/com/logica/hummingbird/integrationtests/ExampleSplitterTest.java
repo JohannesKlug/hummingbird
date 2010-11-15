@@ -1,4 +1,4 @@
-package com.logica.hummingbird.integrationtests;
+package org.hbird.integrationtests;
 
 import java.util.ArrayList;
 import java.util.List;

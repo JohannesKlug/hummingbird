@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * The simplest form of algorithm, a SimpleAlgorithmType contains
@@ -18,7 +18,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class SimpleAlgorithmType extends com.logica.hummingbird.xtce.castor.NameDescriptionType 
+public class SimpleAlgorithmType extends org.hbird.xtce.castor.NameDescriptionType 
 implements java.io.Serializable
 {
 
@@ -32,12 +32,12 @@ implements java.io.Serializable
      * code for the algorithm. The language for the algorithm is
      * specified with the language attribute
      */
-    private com.logica.hummingbird.xtce.castor.AlgorithmText _algorithmText;
+    private org.hbird.xtce.castor.AlgorithmText _algorithmText;
 
     /**
      * Field _externalAlgorithmSet.
      */
-    private com.logica.hummingbird.xtce.castor.ExternalAlgorithmSet _externalAlgorithmSet;
+    private org.hbird.xtce.castor.ExternalAlgorithmSet _externalAlgorithmSet;
 
 
       //----------------/
@@ -62,7 +62,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'AlgorithmText'.
      */
-    public com.logica.hummingbird.xtce.castor.AlgorithmText getAlgorithmText(
+    public org.hbird.xtce.castor.AlgorithmText getAlgorithmText(
     ) {
         return this._algorithmText;
     }
@@ -72,7 +72,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ExternalAlgorithmSet'.
      */
-    public com.logica.hummingbird.xtce.castor.ExternalAlgorithmSet getExternalAlgorithmSet(
+    public org.hbird.xtce.castor.ExternalAlgorithmSet getExternalAlgorithmSet(
     ) {
         return this._externalAlgorithmSet;
     }
@@ -134,7 +134,7 @@ implements java.io.Serializable
      * @param algorithmText the value of field 'algorithmText'.
      */
     public void setAlgorithmText(
-            final com.logica.hummingbird.xtce.castor.AlgorithmText algorithmText) {
+            final org.hbird.xtce.castor.AlgorithmText algorithmText) {
         this._algorithmText = algorithmText;
     }
 
@@ -145,7 +145,7 @@ implements java.io.Serializable
      * 'externalAlgorithmSet'.
      */
     public void setExternalAlgorithmSet(
-            final com.logica.hummingbird.xtce.castor.ExternalAlgorithmSet externalAlgorithmSet) {
+            final org.hbird.xtce.castor.ExternalAlgorithmSet externalAlgorithmSet) {
         this._externalAlgorithmSet = externalAlgorithmSet;
     }
 
@@ -158,12 +158,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.SimpleAlgorithmType
+     * org.hbird.xtce.castor.SimpleAlgorithmType
      */
-    public static com.logica.hummingbird.xtce.castor.SimpleAlgorithmType unmarshal(
+    public static org.hbird.xtce.castor.SimpleAlgorithmType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.SimpleAlgorithmType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.SimpleAlgorithmType.class, reader);
+        return (org.hbird.xtce.castor.SimpleAlgorithmType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.SimpleAlgorithmType.class, reader);
     }
 
     /**

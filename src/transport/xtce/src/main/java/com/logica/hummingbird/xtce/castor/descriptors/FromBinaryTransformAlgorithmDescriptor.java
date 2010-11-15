@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.FromBinaryTransformAlgorithm;
+import org.hbird.xtce.castor.FromBinaryTransformAlgorithm;
 
 /**
  * Class FromBinaryTransformAlgorithmDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class FromBinaryTransformAlgorithmDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor {
+public class FromBinaryTransformAlgorithmDescriptor extends org.hbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class FromBinaryTransformAlgorithmDescriptor extends com.logica.hummingbi
 
     public FromBinaryTransformAlgorithmDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "FromBinaryTransformAlgorithm";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class FromBinaryTransformAlgorithmDescriptor extends com.logica.hummingbi
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.FromBinaryTransformAlgorithm.class;
+        return org.hbird.xtce.castor.FromBinaryTransformAlgorithm.class;
     }
 
     /**

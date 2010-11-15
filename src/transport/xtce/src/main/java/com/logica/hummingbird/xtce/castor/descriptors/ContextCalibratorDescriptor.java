@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ContextCalibrator;
+import org.hbird.xtce.castor.ContextCalibrator;
 
 /**
  * Class ContextCalibratorDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ContextCalibratorDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ContextCalibratorTypeDescriptor {
+public class ContextCalibratorDescriptor extends org.hbird.xtce.castor.descriptors.ContextCalibratorTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ContextCalibratorDescriptor extends com.logica.hummingbird.xtce.cas
 
     public ContextCalibratorDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ContextCalibratorTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ContextCalibratorTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ContextCalibrator";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class ContextCalibratorDescriptor extends com.logica.hummingbird.xtce.cas
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ContextCalibrator.class;
+        return org.hbird.xtce.castor.ContextCalibrator.class;
     }
 
     /**

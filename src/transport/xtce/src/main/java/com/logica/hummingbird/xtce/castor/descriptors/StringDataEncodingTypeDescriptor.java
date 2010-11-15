@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.StringDataEncodingType;
+import org.hbird.xtce.castor.StringDataEncodingType;
 
 /**
  * Class StringDataEncodingTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class StringDataEncodingTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.DataEncodingTypeDescriptor {
+public class StringDataEncodingTypeDescriptor extends org.hbird.xtce.castor.descriptors.DataEncodingTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class StringDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
 
     public StringDataEncodingTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.DataEncodingTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.DataEncodingTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "StringDataEncodingType";
         _elementDefinition = false;
@@ -70,7 +70,7 @@ public class StringDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
         //-- initialize attribute descriptors
 
         //-- _encoding
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.StringDataEncodingTypeEncodingType.class, "_encoding", "encoding", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.StringDataEncodingTypeEncodingType.class, "_encoding", "encoding", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -85,7 +85,7 @@ public class StringDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
             {
                 try {
                     StringDataEncodingType target = (StringDataEncodingType) object;
-                    target.setEncoding( (com.logica.hummingbird.xtce.castor.types.StringDataEncodingTypeEncodingType) value);
+                    target.setEncoding( (org.hbird.xtce.castor.types.StringDataEncodingTypeEncodingType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -96,7 +96,7 @@ public class StringDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.StringDataEncodingTypeEncodingType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.StringDataEncodingTypeEncodingType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("StringDataEncodingTypeEncodingType");
         desc.setHandler(handler);
@@ -111,7 +111,7 @@ public class StringDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
         //-- initialize element descriptors
 
         //-- _defaultCalibrator
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.DefaultCalibrator.class, "_defaultCalibrator", "DefaultCalibrator", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.DefaultCalibrator.class, "_defaultCalibrator", "DefaultCalibrator", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -126,7 +126,7 @@ public class StringDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
             {
                 try {
                     StringDataEncodingType target = (StringDataEncodingType) object;
-                    target.setDefaultCalibrator( (com.logica.hummingbird.xtce.castor.DefaultCalibrator) value);
+                    target.setDefaultCalibrator( (org.hbird.xtce.castor.DefaultCalibrator) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -134,10 +134,10 @@ public class StringDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.DefaultCalibrator();
+                return new org.hbird.xtce.castor.DefaultCalibrator();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.DefaultCalibrator");
+        desc.setSchemaType("org.hbird.xtce.castor.DefaultCalibrator");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -150,7 +150,7 @@ public class StringDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
         }
         desc.setValidator(fieldValidator);
         //-- _contextCalibratorList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.StringDataEncodingTypeContextCalibratorList.class, "_contextCalibratorList", "ContextCalibratorList", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.StringDataEncodingTypeContextCalibratorList.class, "_contextCalibratorList", "ContextCalibratorList", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -165,7 +165,7 @@ public class StringDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
             {
                 try {
                     StringDataEncodingType target = (StringDataEncodingType) object;
-                    target.setContextCalibratorList( (com.logica.hummingbird.xtce.castor.StringDataEncodingTypeContextCalibratorList) value);
+                    target.setContextCalibratorList( (org.hbird.xtce.castor.StringDataEncodingTypeContextCalibratorList) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -173,10 +173,10 @@ public class StringDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.StringDataEncodingTypeContextCalibratorList();
+                return new org.hbird.xtce.castor.StringDataEncodingTypeContextCalibratorList();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.StringDataEncodingTypeContextCalibratorList");
+        desc.setSchemaType("org.hbird.xtce.castor.StringDataEncodingTypeContextCalibratorList");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -189,7 +189,7 @@ public class StringDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
         }
         desc.setValidator(fieldValidator);
         //-- _sizeInBits
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.StringDataEncodingTypeSizeInBits.class, "_sizeInBits", "SizeInBits", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.StringDataEncodingTypeSizeInBits.class, "_sizeInBits", "SizeInBits", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -204,7 +204,7 @@ public class StringDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
             {
                 try {
                     StringDataEncodingType target = (StringDataEncodingType) object;
-                    target.setSizeInBits( (com.logica.hummingbird.xtce.castor.StringDataEncodingTypeSizeInBits) value);
+                    target.setSizeInBits( (org.hbird.xtce.castor.StringDataEncodingTypeSizeInBits) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -212,10 +212,10 @@ public class StringDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.StringDataEncodingTypeSizeInBits();
+                return new org.hbird.xtce.castor.StringDataEncodingTypeSizeInBits();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.StringDataEncodingTypeSizeInBits");
+        desc.setSchemaType("org.hbird.xtce.castor.StringDataEncodingTypeSizeInBits");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -270,7 +270,7 @@ public class StringDataEncodingTypeDescriptor extends com.logica.hummingbird.xtc
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.StringDataEncodingType.class;
+        return org.hbird.xtce.castor.StringDataEncodingType.class;
     }
 
     /**

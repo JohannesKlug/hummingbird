@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * An abstract type that is a super type of either an Integer or
@@ -14,7 +14,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class NumericDataType extends com.logica.hummingbird.xtce.castor.BaseDataType 
+public class NumericDataType extends org.hbird.xtce.castor.BaseDataType 
 implements java.io.Serializable
 {
 
@@ -36,22 +36,22 @@ implements java.io.Serializable
     /**
      * Field _toString.
      */
-    private com.logica.hummingbird.xtce.castor.ToString _toString;
+    private org.hbird.xtce.castor.ToString _toString;
 
     /**
      * Field _validRange.
      */
-    private com.logica.hummingbird.xtce.castor.ValidRange _validRange;
+    private org.hbird.xtce.castor.ValidRange _validRange;
 
     /**
      * Field _defaultCalibrator.
      */
-    private com.logica.hummingbird.xtce.castor.DefaultCalibrator _defaultCalibrator;
+    private org.hbird.xtce.castor.DefaultCalibrator _defaultCalibrator;
 
     /**
      * Field _contextCalibratorList.
      */
-    private com.logica.hummingbird.xtce.castor.NumericDataTypeContextCalibratorList _contextCalibratorList;
+    private org.hbird.xtce.castor.NumericDataTypeContextCalibratorList _contextCalibratorList;
 
 
       //----------------/
@@ -79,7 +79,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ContextCalibratorList'.
      */
-    public com.logica.hummingbird.xtce.castor.NumericDataTypeContextCalibratorList getContextCalibratorList(
+    public org.hbird.xtce.castor.NumericDataTypeContextCalibratorList getContextCalibratorList(
     ) {
         return this._contextCalibratorList;
     }
@@ -89,7 +89,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'DefaultCalibrator'.
      */
-    public com.logica.hummingbird.xtce.castor.DefaultCalibrator getDefaultCalibrator(
+    public org.hbird.xtce.castor.DefaultCalibrator getDefaultCalibrator(
     ) {
         return this._defaultCalibrator;
     }
@@ -99,7 +99,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ToString'.
      */
-    public com.logica.hummingbird.xtce.castor.ToString getToString(
+    public org.hbird.xtce.castor.ToString getToString(
     ) {
         return this._toString;
     }
@@ -109,7 +109,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ValidRange'.
      */
-    public com.logica.hummingbird.xtce.castor.ValidRange getValidRange(
+    public org.hbird.xtce.castor.ValidRange getValidRange(
     ) {
         return this._validRange;
     }
@@ -199,7 +199,7 @@ implements java.io.Serializable
      * 'contextCalibratorList'.
      */
     public void setContextCalibratorList(
-            final com.logica.hummingbird.xtce.castor.NumericDataTypeContextCalibratorList contextCalibratorList) {
+            final org.hbird.xtce.castor.NumericDataTypeContextCalibratorList contextCalibratorList) {
         this._contextCalibratorList = contextCalibratorList;
     }
 
@@ -210,7 +210,7 @@ implements java.io.Serializable
      * 'defaultCalibrator'.
      */
     public void setDefaultCalibrator(
-            final com.logica.hummingbird.xtce.castor.DefaultCalibrator defaultCalibrator) {
+            final org.hbird.xtce.castor.DefaultCalibrator defaultCalibrator) {
         this._defaultCalibrator = defaultCalibrator;
     }
 
@@ -220,7 +220,7 @@ implements java.io.Serializable
      * @param toString the value of field 'toString'.
      */
     public void setToString(
-            final com.logica.hummingbird.xtce.castor.ToString toString) {
+            final org.hbird.xtce.castor.ToString toString) {
         this._toString = toString;
     }
 
@@ -230,7 +230,7 @@ implements java.io.Serializable
      * @param validRange the value of field 'validRange'.
      */
     public void setValidRange(
-            final com.logica.hummingbird.xtce.castor.ValidRange validRange) {
+            final org.hbird.xtce.castor.ValidRange validRange) {
         this._validRange = validRange;
     }
 
@@ -255,12 +255,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.NumericDataType
+     * org.hbird.xtce.castor.NumericDataType
      */
-    public static com.logica.hummingbird.xtce.castor.NumericDataType unmarshal(
+    public static org.hbird.xtce.castor.NumericDataType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.NumericDataType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.NumericDataType.class, reader);
+        return (org.hbird.xtce.castor.NumericDataType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.NumericDataType.class, reader);
     }
 
     /**

@@ -1,7 +1,7 @@
 <archetype-catalog>
   <archetypes>
     <archetype>
-      <groupId>com.logica.hummingbird</groupId>
+      <groupId>org.hbird</groupId>
       <artifactId>hummingbird-parameter-archetype</artifactId>
       <version>0.0.2</version>
       <description>Creates a Hummingbird component for processing parameters.</description>

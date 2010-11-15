@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.DefaultDataEncoding;
+import org.hbird.xtce.castor.DefaultDataEncoding;
 
 /**
  * Class DefaultDataEncodingDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class DefaultDataEncodingDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.DataEncodingTypeDescriptor {
+public class DefaultDataEncodingDescriptor extends org.hbird.xtce.castor.descriptors.DataEncodingTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class DefaultDataEncodingDescriptor extends com.logica.hummingbird.xtce.c
 
     public DefaultDataEncodingDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.DataEncodingTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.DataEncodingTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "DefaultDataEncoding";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class DefaultDataEncodingDescriptor extends com.logica.hummingbird.xtce.c
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.DefaultDataEncoding.class;
+        return org.hbird.xtce.castor.DefaultDataEncoding.class;
     }
 
     /**

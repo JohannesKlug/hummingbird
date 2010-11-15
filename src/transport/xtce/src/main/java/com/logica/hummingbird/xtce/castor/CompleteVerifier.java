@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A possible set of verifiers that all must be true for the
@@ -14,7 +14,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class CompleteVerifier extends com.logica.hummingbird.xtce.castor.CommandVerifierType 
+public class CompleteVerifier extends org.hbird.xtce.castor.CommandVerifierType 
 implements java.io.Serializable
 {
 
@@ -26,7 +26,7 @@ implements java.io.Serializable
     /**
      * Field _returnParmRef.
      */
-    private com.logica.hummingbird.xtce.castor.ReturnParmRef _returnParmRef;
+    private org.hbird.xtce.castor.ReturnParmRef _returnParmRef;
 
 
       //----------------/
@@ -47,7 +47,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ReturnParmRef'.
      */
-    public com.logica.hummingbird.xtce.castor.ReturnParmRef getReturnParmRef(
+    public org.hbird.xtce.castor.ReturnParmRef getReturnParmRef(
     ) {
         return this._returnParmRef;
     }
@@ -105,7 +105,7 @@ implements java.io.Serializable
      * @param returnParmRef the value of field 'returnParmRef'.
      */
     public void setReturnParmRef(
-            final com.logica.hummingbird.xtce.castor.ReturnParmRef returnParmRef) {
+            final org.hbird.xtce.castor.ReturnParmRef returnParmRef) {
         this._returnParmRef = returnParmRef;
     }
 
@@ -118,12 +118,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.CompleteVerifier
+     * org.hbird.xtce.castor.CompleteVerifier
      */
-    public static com.logica.hummingbird.xtce.castor.CompleteVerifier unmarshal(
+    public static org.hbird.xtce.castor.CompleteVerifier unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.CompleteVerifier) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.CompleteVerifier.class, reader);
+        return (org.hbird.xtce.castor.CompleteVerifier) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.CompleteVerifier.class, reader);
     }
 
     /**

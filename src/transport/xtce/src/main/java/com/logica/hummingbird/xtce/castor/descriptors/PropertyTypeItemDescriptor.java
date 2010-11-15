@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.PropertyTypeItem;
+import org.hbird.xtce.castor.PropertyTypeItem;
 
 /**
  * Class PropertyTypeItemDescriptor.
@@ -71,7 +71,7 @@ public class PropertyTypeItemDescriptor extends org.exolab.castor.xml.util.XMLCl
         //-- initialize element descriptors
 
         //-- _property
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Property.class, "_property", "Property", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Property.class, "_property", "Property", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class PropertyTypeItemDescriptor extends org.exolab.castor.xml.util.XMLCl
             {
                 try {
                     PropertyTypeItem target = (PropertyTypeItem) object;
-                    target.setProperty( (com.logica.hummingbird.xtce.castor.Property) value);
+                    target.setProperty( (org.hbird.xtce.castor.Property) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class PropertyTypeItemDescriptor extends org.exolab.castor.xml.util.XMLCl
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Property();
+                return new org.hbird.xtce.castor.Property();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.Property");
+        desc.setSchemaType("org.hbird.xtce.castor.Property");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -147,7 +147,7 @@ public class PropertyTypeItemDescriptor extends org.exolab.castor.xml.util.XMLCl
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.PropertyTypeItem.class;
+        return org.hbird.xtce.castor.PropertyTypeItem.class;
     }
 
     /**

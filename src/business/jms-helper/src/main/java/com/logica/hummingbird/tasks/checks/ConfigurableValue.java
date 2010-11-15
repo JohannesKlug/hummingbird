@@ -1,10 +1,10 @@
-package com.logica.hummingbird.tasks.checks;
+package org.hbird.tasks.checks;
 
 import java.io.Serializable;
 
 import org.apache.camel.Message;
 
-import com.logica.hummingbird.buffers.ObjectBuffer;
+import org.hbird.buffers.ObjectBuffer;
 
 
 /**

@@ -1,11 +1,11 @@
-package com.logica.hummingbird.command.task;
+package org.hbird.command.task;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Message;
 import org.apache.camel.ProducerTemplate;
 
-import com.logica.hummingbird.buffers.ObjectBuffer;
-import com.logica.hummingbird.interfaces.ITask;
+import org.hbird.buffers.ObjectBuffer;
+import org.hbird.interfaces.ITask;
 
 public class DummyTask implements ITask {
 

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A type definition used as the base type for a CommandDefinition
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class MetaCommandType extends com.logica.hummingbird.xtce.castor.NameDescriptionType 
+public class MetaCommandType extends org.hbird.xtce.castor.NameDescriptionType 
 implements java.io.Serializable
 {
 
@@ -36,7 +36,7 @@ implements java.io.Serializable
      * The MetaCommand is derived from this Base. Arguments of the
      * base MetaCommand are further specified.
      */
-    private com.logica.hummingbird.xtce.castor.BaseMetaCommand _baseMetaCommand;
+    private org.hbird.xtce.castor.BaseMetaCommand _baseMetaCommand;
 
     /**
      * Optional. Normally used when the database is built in a
@@ -50,18 +50,18 @@ implements java.io.Serializable
      * standard data types. MetaCommand arguments are local to the
      * MetaCommand.
      */
-    private com.logica.hummingbird.xtce.castor.ArgumentList _argumentList;
+    private org.hbird.xtce.castor.ArgumentList _argumentList;
 
     /**
      * Tells how to package this command
      */
-    private com.logica.hummingbird.xtce.castor.CommandContainer _commandContainer;
+    private org.hbird.xtce.castor.CommandContainer _commandContainer;
 
     /**
      * Appended to the TramsmissionConstraint List of the base
      * command. Constraints are checked in order. 
      */
-    private com.logica.hummingbird.xtce.castor.TransmissionConstraintList _transmissionConstraintList;
+    private org.hbird.xtce.castor.TransmissionConstraintList _transmissionConstraintList;
 
     /**
      * Some Command and Control Systems may require special user
@@ -69,13 +69,13 @@ implements java.io.Serializable
      * certain levels. Will inherit any level defined in the Base
      * MetaCommand.
      */
-    private com.logica.hummingbird.xtce.castor.DefaultSignificance _defaultSignificance;
+    private org.hbird.xtce.castor.DefaultSignificance _defaultSignificance;
 
     /**
      * Used when the significance of a command varies by the
      * operating context
      */
-    private com.logica.hummingbird.xtce.castor.ContextSignificanceList _contextSignificanceList;
+    private org.hbird.xtce.castor.ContextSignificanceList _contextSignificanceList;
 
     /**
      * An Interlock is a type of Constraint, but not on Command
@@ -85,7 +85,7 @@ implements java.io.Serializable
      * (through verifications). Interlocks are scoped to a
      * SpaceSystem basis.
      */
-    private com.logica.hummingbird.xtce.castor.Interlock _interlock;
+    private org.hbird.xtce.castor.Interlock _interlock;
 
     /**
      * A Command Verifier is a conditional check on the telemetry
@@ -94,13 +94,13 @@ implements java.io.Serializable
      * added to the Base MetaCommand verifiers. All others will
      * replace a verifier defined in a Base MetaCommand.
      */
-    private com.logica.hummingbird.xtce.castor.Verifiers _verifiers;
+    private org.hbird.xtce.castor.Verifiers _verifiers;
 
     /**
      * Parameters that are set with a new value after the command
      * has been sent. Appended to the Base Command list
      */
-    private com.logica.hummingbird.xtce.castor.ParameterToSetList _parameterToSetList;
+    private org.hbird.xtce.castor.ParameterToSetList _parameterToSetList;
 
 
       //----------------/
@@ -143,7 +143,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ArgumentList'.
      */
-    public com.logica.hummingbird.xtce.castor.ArgumentList getArgumentList(
+    public org.hbird.xtce.castor.ArgumentList getArgumentList(
     ) {
         return this._argumentList;
     }
@@ -156,7 +156,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'BaseMetaCommand'.
      */
-    public com.logica.hummingbird.xtce.castor.BaseMetaCommand getBaseMetaCommand(
+    public org.hbird.xtce.castor.BaseMetaCommand getBaseMetaCommand(
     ) {
         return this._baseMetaCommand;
     }
@@ -168,7 +168,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'CommandContainer'.
      */
-    public com.logica.hummingbird.xtce.castor.CommandContainer getCommandContainer(
+    public org.hbird.xtce.castor.CommandContainer getCommandContainer(
     ) {
         return this._commandContainer;
     }
@@ -181,7 +181,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ContextSignificanceList'.
      */
-    public com.logica.hummingbird.xtce.castor.ContextSignificanceList getContextSignificanceList(
+    public org.hbird.xtce.castor.ContextSignificanceList getContextSignificanceList(
     ) {
         return this._contextSignificanceList;
     }
@@ -196,7 +196,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'DefaultSignificance'.
      */
-    public com.logica.hummingbird.xtce.castor.DefaultSignificance getDefaultSignificance(
+    public org.hbird.xtce.castor.DefaultSignificance getDefaultSignificance(
     ) {
         return this._defaultSignificance;
     }
@@ -212,7 +212,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'Interlock'.
      */
-    public com.logica.hummingbird.xtce.castor.Interlock getInterlock(
+    public org.hbird.xtce.castor.Interlock getInterlock(
     ) {
         return this._interlock;
     }
@@ -225,7 +225,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ParameterToSetList'.
      */
-    public com.logica.hummingbird.xtce.castor.ParameterToSetList getParameterToSetList(
+    public org.hbird.xtce.castor.ParameterToSetList getParameterToSetList(
     ) {
         return this._parameterToSetList;
     }
@@ -251,7 +251,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'TransmissionConstraintList'.
      */
-    public com.logica.hummingbird.xtce.castor.TransmissionConstraintList getTransmissionConstraintList(
+    public org.hbird.xtce.castor.TransmissionConstraintList getTransmissionConstraintList(
     ) {
         return this._transmissionConstraintList;
     }
@@ -267,7 +267,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'Verifiers'.
      */
-    public com.logica.hummingbird.xtce.castor.Verifiers getVerifiers(
+    public org.hbird.xtce.castor.Verifiers getVerifiers(
     ) {
         return this._verifiers;
     }
@@ -362,7 +362,7 @@ implements java.io.Serializable
      * @param argumentList the value of field 'argumentList'.
      */
     public void setArgumentList(
-            final com.logica.hummingbird.xtce.castor.ArgumentList argumentList) {
+            final org.hbird.xtce.castor.ArgumentList argumentList) {
         this._argumentList = argumentList;
     }
 
@@ -375,7 +375,7 @@ implements java.io.Serializable
      * @param baseMetaCommand the value of field 'baseMetaCommand'.
      */
     public void setBaseMetaCommand(
-            final com.logica.hummingbird.xtce.castor.BaseMetaCommand baseMetaCommand) {
+            final org.hbird.xtce.castor.BaseMetaCommand baseMetaCommand) {
         this._baseMetaCommand = baseMetaCommand;
     }
 
@@ -387,7 +387,7 @@ implements java.io.Serializable
      * @param commandContainer the value of field 'commandContainer'
      */
     public void setCommandContainer(
-            final com.logica.hummingbird.xtce.castor.CommandContainer commandContainer) {
+            final org.hbird.xtce.castor.CommandContainer commandContainer) {
         this._commandContainer = commandContainer;
     }
 
@@ -401,7 +401,7 @@ implements java.io.Serializable
      * 'contextSignificanceList'.
      */
     public void setContextSignificanceList(
-            final com.logica.hummingbird.xtce.castor.ContextSignificanceList contextSignificanceList) {
+            final org.hbird.xtce.castor.ContextSignificanceList contextSignificanceList) {
         this._contextSignificanceList = contextSignificanceList;
     }
 
@@ -417,7 +417,7 @@ implements java.io.Serializable
      * 'defaultSignificance'.
      */
     public void setDefaultSignificance(
-            final com.logica.hummingbird.xtce.castor.DefaultSignificance defaultSignificance) {
+            final org.hbird.xtce.castor.DefaultSignificance defaultSignificance) {
         this._defaultSignificance = defaultSignificance;
     }
 
@@ -433,7 +433,7 @@ implements java.io.Serializable
      * @param interlock the value of field 'interlock'.
      */
     public void setInterlock(
-            final com.logica.hummingbird.xtce.castor.Interlock interlock) {
+            final org.hbird.xtce.castor.Interlock interlock) {
         this._interlock = interlock;
     }
 
@@ -447,7 +447,7 @@ implements java.io.Serializable
      * 'parameterToSetList'.
      */
     public void setParameterToSetList(
-            final com.logica.hummingbird.xtce.castor.ParameterToSetList parameterToSetList) {
+            final org.hbird.xtce.castor.ParameterToSetList parameterToSetList) {
         this._parameterToSetList = parameterToSetList;
     }
 
@@ -473,7 +473,7 @@ implements java.io.Serializable
      * 'transmissionConstraintList'.
      */
     public void setTransmissionConstraintList(
-            final com.logica.hummingbird.xtce.castor.TransmissionConstraintList transmissionConstraintList) {
+            final org.hbird.xtce.castor.TransmissionConstraintList transmissionConstraintList) {
         this._transmissionConstraintList = transmissionConstraintList;
     }
 
@@ -489,7 +489,7 @@ implements java.io.Serializable
      * @param verifiers the value of field 'verifiers'.
      */
     public void setVerifiers(
-            final com.logica.hummingbird.xtce.castor.Verifiers verifiers) {
+            final org.hbird.xtce.castor.Verifiers verifiers) {
         this._verifiers = verifiers;
     }
 
@@ -502,12 +502,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.MetaCommandType
+     * org.hbird.xtce.castor.MetaCommandType
      */
-    public static com.logica.hummingbird.xtce.castor.MetaCommandType unmarshal(
+    public static org.hbird.xtce.castor.MetaCommandType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.MetaCommandType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.MetaCommandType.class, reader);
+        return (org.hbird.xtce.castor.MetaCommandType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.MetaCommandType.class, reader);
     }
 
     /**

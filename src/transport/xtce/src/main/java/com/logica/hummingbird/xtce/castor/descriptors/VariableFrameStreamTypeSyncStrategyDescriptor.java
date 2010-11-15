@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.VariableFrameStreamTypeSyncStrategy;
+import org.hbird.xtce.castor.VariableFrameStreamTypeSyncStrategy;
 
 /**
  * Class VariableFrameStreamTypeSyncStrategyDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class VariableFrameStreamTypeSyncStrategyDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.SyncStrategyTypeDescriptor {
+public class VariableFrameStreamTypeSyncStrategyDescriptor extends org.hbird.xtce.castor.descriptors.SyncStrategyTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class VariableFrameStreamTypeSyncStrategyDescriptor extends com.logica.hu
 
     public VariableFrameStreamTypeSyncStrategyDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.SyncStrategyTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.SyncStrategyTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "SyncStrategy";
         _elementDefinition = true;
@@ -72,7 +72,7 @@ public class VariableFrameStreamTypeSyncStrategyDescriptor extends com.logica.hu
         //-- initialize element descriptors
 
         //-- _flag
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Flag.class, "_flag", "Flag", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Flag.class, "_flag", "Flag", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class VariableFrameStreamTypeSyncStrategyDescriptor extends com.logica.hu
             {
                 try {
                     VariableFrameStreamTypeSyncStrategy target = (VariableFrameStreamTypeSyncStrategy) object;
-                    target.setFlag( (com.logica.hummingbird.xtce.castor.Flag) value);
+                    target.setFlag( (org.hbird.xtce.castor.Flag) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,10 +95,10 @@ public class VariableFrameStreamTypeSyncStrategyDescriptor extends com.logica.hu
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Flag();
+                return new org.hbird.xtce.castor.Flag();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.Flag");
+        desc.setSchemaType("org.hbird.xtce.castor.Flag");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -153,7 +153,7 @@ public class VariableFrameStreamTypeSyncStrategyDescriptor extends com.logica.hu
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.VariableFrameStreamTypeSyncStrategy.class;
+        return org.hbird.xtce.castor.VariableFrameStreamTypeSyncStrategy.class;
     }
 
     /**

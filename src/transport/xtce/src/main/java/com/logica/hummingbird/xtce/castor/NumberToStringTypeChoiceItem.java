@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class NumberToStringTypeChoiceItem.
@@ -23,12 +23,12 @@ public class NumberToStringTypeChoiceItem implements java.io.Serializable {
     /**
      * A number or range assigned to a string.
      */
-    private com.logica.hummingbird.xtce.castor.ValueEnumeration _valueEnumeration;
+    private org.hbird.xtce.castor.ValueEnumeration _valueEnumeration;
 
     /**
      * A string value associated with a numerical range.
      */
-    private com.logica.hummingbird.xtce.castor.RangeEnumeration _rangeEnumeration;
+    private org.hbird.xtce.castor.RangeEnumeration _rangeEnumeration;
 
 
       //----------------/
@@ -51,7 +51,7 @@ public class NumberToStringTypeChoiceItem implements java.io.Serializable {
      * 
      * @return the value of field 'RangeEnumeration'.
      */
-    public com.logica.hummingbird.xtce.castor.RangeEnumeration getRangeEnumeration(
+    public org.hbird.xtce.castor.RangeEnumeration getRangeEnumeration(
     ) {
         return this._rangeEnumeration;
     }
@@ -63,7 +63,7 @@ public class NumberToStringTypeChoiceItem implements java.io.Serializable {
      * 
      * @return the value of field 'ValueEnumeration'.
      */
-    public com.logica.hummingbird.xtce.castor.ValueEnumeration getValueEnumeration(
+    public org.hbird.xtce.castor.ValueEnumeration getValueEnumeration(
     ) {
         return this._valueEnumeration;
     }
@@ -76,7 +76,7 @@ public class NumberToStringTypeChoiceItem implements java.io.Serializable {
      * @param rangeEnumeration the value of field 'rangeEnumeration'
      */
     public void setRangeEnumeration(
-            final com.logica.hummingbird.xtce.castor.RangeEnumeration rangeEnumeration) {
+            final org.hbird.xtce.castor.RangeEnumeration rangeEnumeration) {
         this._rangeEnumeration = rangeEnumeration;
     }
 
@@ -88,7 +88,7 @@ public class NumberToStringTypeChoiceItem implements java.io.Serializable {
      * @param valueEnumeration the value of field 'valueEnumeration'
      */
     public void setValueEnumeration(
-            final com.logica.hummingbird.xtce.castor.ValueEnumeration valueEnumeration) {
+            final org.hbird.xtce.castor.ValueEnumeration valueEnumeration) {
         this._valueEnumeration = valueEnumeration;
     }
 

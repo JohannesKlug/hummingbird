@@ -1,4 +1,4 @@
-package com.logica.hummingbird.simulator.graphics;
+package org.hbird.simulator.graphics;
 
 import java.io.IOException;
 import java.net.URL;

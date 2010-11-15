@@ -1,10 +1,10 @@
-package com.logica.hummingbird.parameterArchiver;
+package org.hbird.parameterArchiver;
 
 import static org.junit.Assert.*;
 
 import java.lang.reflect.Field;
 
-import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
+import org.hbird.spacesystemmodel.testsupport.MockContainerModelFactory;
 
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;

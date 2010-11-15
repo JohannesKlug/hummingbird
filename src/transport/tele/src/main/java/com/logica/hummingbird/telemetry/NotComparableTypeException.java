@@ -1,4 +1,4 @@
-package com.logica.hummingbird.telemetry;
+package org.hbird.telemetry;
 
 public class NotComparableTypeException extends Exception {
 

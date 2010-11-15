@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Derivation;
+import org.hbird.xtce.castor.Derivation;
 
 /**
  * Class DerivationDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class DerivationDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.MathOperationTypeDescriptor {
+public class DerivationDescriptor extends org.hbird.xtce.castor.descriptors.MathOperationTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class DerivationDescriptor extends com.logica.hummingbird.xtce.castor.des
 
     public DerivationDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.MathOperationTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.MathOperationTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "Derivation";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class DerivationDescriptor extends com.logica.hummingbird.xtce.castor.des
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Derivation.class;
+        return org.hbird.xtce.castor.Derivation.class;
     }
 
     /**

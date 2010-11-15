@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.MathAlgorithm;
+import org.hbird.xtce.castor.MathAlgorithm;
 
 /**
  * Class MathAlgorithmDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class MathAlgorithmDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.MathAlgorithmTypeDescriptor {
+public class MathAlgorithmDescriptor extends org.hbird.xtce.castor.descriptors.MathAlgorithmTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class MathAlgorithmDescriptor extends com.logica.hummingbird.xtce.castor.
 
     public MathAlgorithmDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.MathAlgorithmTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.MathAlgorithmTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "MathAlgorithm";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class MathAlgorithmDescriptor extends com.logica.hummingbird.xtce.castor.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.MathAlgorithm.class;
+        return org.hbird.xtce.castor.MathAlgorithm.class;
     }
 
     /**

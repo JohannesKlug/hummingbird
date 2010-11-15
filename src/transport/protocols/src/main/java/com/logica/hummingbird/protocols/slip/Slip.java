@@ -1,4 +1,4 @@
-package com.logica.hummingbird.protocols.slip;
+package org.hbird.protocols.slip;
 
 import java.io.IOException;
 import java.io.InputStream;

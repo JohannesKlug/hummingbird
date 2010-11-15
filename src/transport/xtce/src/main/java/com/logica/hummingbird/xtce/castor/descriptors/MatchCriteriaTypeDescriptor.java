@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.MatchCriteriaType;
+import org.hbird.xtce.castor.MatchCriteriaType;
 
 /**
  * Class MatchCriteriaTypeDescriptor.
@@ -71,7 +71,7 @@ public class MatchCriteriaTypeDescriptor extends org.exolab.castor.xml.util.XMLC
         //-- initialize element descriptors
 
         //-- _comparison
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Comparison.class, "_comparison", "Comparison", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Comparison.class, "_comparison", "Comparison", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class MatchCriteriaTypeDescriptor extends org.exolab.castor.xml.util.XMLC
             {
                 try {
                     MatchCriteriaType target = (MatchCriteriaType) object;
-                    target.setComparison( (com.logica.hummingbird.xtce.castor.Comparison) value);
+                    target.setComparison( (org.hbird.xtce.castor.Comparison) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class MatchCriteriaTypeDescriptor extends org.exolab.castor.xml.util.XMLC
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Comparison();
+                return new org.hbird.xtce.castor.Comparison();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.Comparison");
+        desc.setSchemaType("org.hbird.xtce.castor.Comparison");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -112,7 +112,7 @@ public class MatchCriteriaTypeDescriptor extends org.exolab.castor.xml.util.XMLC
         }
         desc.setValidator(fieldValidator);
         //-- _comparisonList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ComparisonList.class, "_comparisonList", "ComparisonList", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ComparisonList.class, "_comparisonList", "ComparisonList", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -127,7 +127,7 @@ public class MatchCriteriaTypeDescriptor extends org.exolab.castor.xml.util.XMLC
             {
                 try {
                     MatchCriteriaType target = (MatchCriteriaType) object;
-                    target.setComparisonList( (com.logica.hummingbird.xtce.castor.ComparisonList) value);
+                    target.setComparisonList( (org.hbird.xtce.castor.ComparisonList) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -135,10 +135,10 @@ public class MatchCriteriaTypeDescriptor extends org.exolab.castor.xml.util.XMLC
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ComparisonList();
+                return new org.hbird.xtce.castor.ComparisonList();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ComparisonList");
+        desc.setSchemaType("org.hbird.xtce.castor.ComparisonList");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -153,7 +153,7 @@ public class MatchCriteriaTypeDescriptor extends org.exolab.castor.xml.util.XMLC
         }
         desc.setValidator(fieldValidator);
         //-- _booleanExpression
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.BooleanExpression.class, "_booleanExpression", "BooleanExpression", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.BooleanExpression.class, "_booleanExpression", "BooleanExpression", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -168,7 +168,7 @@ public class MatchCriteriaTypeDescriptor extends org.exolab.castor.xml.util.XMLC
             {
                 try {
                     MatchCriteriaType target = (MatchCriteriaType) object;
-                    target.setBooleanExpression( (com.logica.hummingbird.xtce.castor.BooleanExpression) value);
+                    target.setBooleanExpression( (org.hbird.xtce.castor.BooleanExpression) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -176,10 +176,10 @@ public class MatchCriteriaTypeDescriptor extends org.exolab.castor.xml.util.XMLC
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.BooleanExpression();
+                return new org.hbird.xtce.castor.BooleanExpression();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.BooleanExpression");
+        desc.setSchemaType("org.hbird.xtce.castor.BooleanExpression");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -194,7 +194,7 @@ public class MatchCriteriaTypeDescriptor extends org.exolab.castor.xml.util.XMLC
         }
         desc.setValidator(fieldValidator);
         //-- _customAlgorithm
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.CustomAlgorithm.class, "_customAlgorithm", "CustomAlgorithm", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.CustomAlgorithm.class, "_customAlgorithm", "CustomAlgorithm", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -209,7 +209,7 @@ public class MatchCriteriaTypeDescriptor extends org.exolab.castor.xml.util.XMLC
             {
                 try {
                     MatchCriteriaType target = (MatchCriteriaType) object;
-                    target.setCustomAlgorithm( (com.logica.hummingbird.xtce.castor.CustomAlgorithm) value);
+                    target.setCustomAlgorithm( (org.hbird.xtce.castor.CustomAlgorithm) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -217,10 +217,10 @@ public class MatchCriteriaTypeDescriptor extends org.exolab.castor.xml.util.XMLC
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.CustomAlgorithm();
+                return new org.hbird.xtce.castor.CustomAlgorithm();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.CustomAlgorithm");
+        desc.setSchemaType("org.hbird.xtce.castor.CustomAlgorithm");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -272,7 +272,7 @@ public class MatchCriteriaTypeDescriptor extends org.exolab.castor.xml.util.XMLC
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.MatchCriteriaType.class;
+        return org.hbird.xtce.castor.MatchCriteriaType.class;
     }
 
     /**

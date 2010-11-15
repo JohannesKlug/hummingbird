@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * All comparisons must be true
@@ -23,7 +23,7 @@ public class ComparisonList implements java.io.Serializable {
     /**
      * Field _comparisonList.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.Comparison> _comparisonList;
+    private java.util.List<org.hbird.xtce.castor.Comparison> _comparisonList;
 
 
       //----------------/
@@ -32,7 +32,7 @@ public class ComparisonList implements java.io.Serializable {
 
     public ComparisonList() {
         super();
-        this._comparisonList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.Comparison>();
+        this._comparisonList = new java.util.ArrayList<org.hbird.xtce.castor.Comparison>();
     }
 
 
@@ -48,7 +48,7 @@ public class ComparisonList implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addComparison(
-            final com.logica.hummingbird.xtce.castor.Comparison vComparison)
+            final org.hbird.xtce.castor.Comparison vComparison)
     throws java.lang.IndexOutOfBoundsException {
         this._comparisonList.add(vComparison);
     }
@@ -63,7 +63,7 @@ public class ComparisonList implements java.io.Serializable {
      */
     public void addComparison(
             final int index,
-            final com.logica.hummingbird.xtce.castor.Comparison vComparison)
+            final org.hbird.xtce.castor.Comparison vComparison)
     throws java.lang.IndexOutOfBoundsException {
         this._comparisonList.add(index, vComparison);
     }
@@ -74,7 +74,7 @@ public class ComparisonList implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.Comparison> enumerateComparison(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.Comparison> enumerateComparison(
     ) {
         return java.util.Collections.enumeration(this._comparisonList);
     }
@@ -86,10 +86,10 @@ public class ComparisonList implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.Comparison at the given
+     * org.hbird.xtce.castor.Comparison at the given
      * index
      */
-    public com.logica.hummingbird.xtce.castor.Comparison getComparison(
+    public org.hbird.xtce.castor.Comparison getComparison(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -97,7 +97,7 @@ public class ComparisonList implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getComparison: Index value '" + index + "' not in range [0.." + (this._comparisonList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.Comparison) _comparisonList.get(index);
+        return (org.hbird.xtce.castor.Comparison) _comparisonList.get(index);
     }
 
     /**
@@ -109,10 +109,10 @@ public class ComparisonList implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.Comparison[] getComparison(
+    public org.hbird.xtce.castor.Comparison[] getComparison(
     ) {
-        com.logica.hummingbird.xtce.castor.Comparison[] array = new com.logica.hummingbird.xtce.castor.Comparison[0];
-        return (com.logica.hummingbird.xtce.castor.Comparison[]) this._comparisonList.toArray(array);
+        org.hbird.xtce.castor.Comparison[] array = new org.hbird.xtce.castor.Comparison[0];
+        return (org.hbird.xtce.castor.Comparison[]) this._comparisonList.toArray(array);
     }
 
     /**
@@ -146,7 +146,7 @@ public class ComparisonList implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.Comparison> iterateComparison(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.Comparison> iterateComparison(
     ) {
         return this._comparisonList.iterator();
     }
@@ -197,7 +197,7 @@ public class ComparisonList implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeComparison(
-            final com.logica.hummingbird.xtce.castor.Comparison vComparison) {
+            final org.hbird.xtce.castor.Comparison vComparison) {
         boolean removed = _comparisonList.remove(vComparison);
         return removed;
     }
@@ -208,10 +208,10 @@ public class ComparisonList implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.Comparison removeComparisonAt(
+    public org.hbird.xtce.castor.Comparison removeComparisonAt(
             final int index) {
         java.lang.Object obj = this._comparisonList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.Comparison) obj;
+        return (org.hbird.xtce.castor.Comparison) obj;
     }
 
     /**
@@ -224,7 +224,7 @@ public class ComparisonList implements java.io.Serializable {
      */
     public void setComparison(
             final int index,
-            final com.logica.hummingbird.xtce.castor.Comparison vComparison)
+            final org.hbird.xtce.castor.Comparison vComparison)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._comparisonList.size()) {
@@ -240,7 +240,7 @@ public class ComparisonList implements java.io.Serializable {
      * @param vComparisonArray
      */
     public void setComparison(
-            final com.logica.hummingbird.xtce.castor.Comparison[] vComparisonArray) {
+            final org.hbird.xtce.castor.Comparison[] vComparisonArray) {
         //-- copy array
         _comparisonList.clear();
 
@@ -258,12 +258,12 @@ public class ComparisonList implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ComparisonList
+     * org.hbird.xtce.castor.ComparisonList
      */
-    public static com.logica.hummingbird.xtce.castor.ComparisonList unmarshal(
+    public static org.hbird.xtce.castor.ComparisonList unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ComparisonList) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ComparisonList.class, reader);
+        return (org.hbird.xtce.castor.ComparisonList) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ComparisonList.class, reader);
     }
 
     /**

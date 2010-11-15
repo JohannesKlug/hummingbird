@@ -1,4 +1,4 @@
-package com.logica.hummingbird.integrationtests;
+package org.hbird.integrationtests;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;

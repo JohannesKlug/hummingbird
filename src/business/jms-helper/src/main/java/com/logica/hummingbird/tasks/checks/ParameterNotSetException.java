@@ -1,4 +1,4 @@
-package com.logica.hummingbird.tasks.checks;
+package org.hbird.tasks.checks;
 
 public class ParameterNotSetException extends Exception {
 

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * The pattern of bits used to look for frame synchronization.
@@ -33,7 +33,7 @@ public class Flag implements java.io.Serializable {
     /**
      * Field _flagBitType.
      */
-    private com.logica.hummingbird.xtce.castor.types.FlagFlagBitTypeType _flagBitType = com.logica.hummingbird.xtce.castor.types.FlagFlagBitTypeType.fromValue("ones");
+    private org.hbird.xtce.castor.types.FlagFlagBitTypeType _flagBitType = org.hbird.xtce.castor.types.FlagFlagBitTypeType.fromValue("ones");
 
 
       //----------------/
@@ -42,7 +42,7 @@ public class Flag implements java.io.Serializable {
 
     public Flag() {
         super();
-        setFlagBitType(com.logica.hummingbird.xtce.castor.types.FlagFlagBitTypeType.fromValue("ones"));
+        setFlagBitType(org.hbird.xtce.castor.types.FlagFlagBitTypeType.fromValue("ones"));
     }
 
 
@@ -62,7 +62,7 @@ public class Flag implements java.io.Serializable {
      * 
      * @return the value of field 'FlagBitType'.
      */
-    public com.logica.hummingbird.xtce.castor.types.FlagFlagBitTypeType getFlagBitType(
+    public org.hbird.xtce.castor.types.FlagFlagBitTypeType getFlagBitType(
     ) {
         return this._flagBitType;
     }
@@ -140,7 +140,7 @@ public class Flag implements java.io.Serializable {
      * @param flagBitType the value of field 'flagBitType'.
      */
     public void setFlagBitType(
-            final com.logica.hummingbird.xtce.castor.types.FlagFlagBitTypeType flagBitType) {
+            final org.hbird.xtce.castor.types.FlagFlagBitTypeType flagBitType) {
         this._flagBitType = flagBitType;
     }
 
@@ -164,12 +164,12 @@ public class Flag implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.Flag
+     * org.hbird.xtce.castor.Flag
      */
-    public static com.logica.hummingbird.xtce.castor.Flag unmarshal(
+    public static org.hbird.xtce.castor.Flag unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.Flag) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.Flag.class, reader);
+        return (org.hbird.xtce.castor.Flag) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.Flag.class, reader);
     }
 
     /**

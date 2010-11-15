@@ -1,4 +1,4 @@
-package com.logica.hummingbird.protocols.hardware;
+package org.hbird.protocols.hardware;
 
 import gnu.io.CommPortIdentifier;
 import gnu.io.NoSuchPortException;

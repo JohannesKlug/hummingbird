@@ -1,14 +1,14 @@
-package com.logica.hummingbird.spacesystemmodel.parameters;
+package org.hbird.spacesystemmodel.parameters;
 
 import java.util.BitSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
-import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
-import com.logica.hummingbird.util.BitSetUtility;
-import com.logica.hummingbird.util.exceptions.BitSetOperationException;
+import org.hbird.spacesystemmodel.ParameterObserver;
+import org.hbird.spacesystemmodel.parameters.types.NumberParameterType;
+import org.hbird.util.BitSetUtility;
+import org.hbird.util.exceptions.BitSetOperationException;
 
 public class IntegerParameter extends ParameterContainer {
 	private static final Logger LOG = LoggerFactory.getLogger(IntegerParameter.class);

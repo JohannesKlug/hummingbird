@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class NumberFormat.
@@ -23,7 +23,7 @@ public class NumberFormat implements java.io.Serializable {
     /**
      * Field _numberBase.
      */
-    private com.logica.hummingbird.xtce.castor.types.RadixType _numberBase;
+    private org.hbird.xtce.castor.types.RadixType _numberBase;
 
     /**
      * Field _minimumFractionDigits.
@@ -98,7 +98,7 @@ public class NumberFormat implements java.io.Serializable {
     /**
      * Field _notation.
      */
-    private com.logica.hummingbird.xtce.castor.types.NumberFormatNotationType _notation = com.logica.hummingbird.xtce.castor.types.NumberFormatNotationType.fromValue("normal");
+    private org.hbird.xtce.castor.types.NumberFormatNotationType _notation = org.hbird.xtce.castor.types.NumberFormatNotationType.fromValue("normal");
 
 
       //----------------/
@@ -108,7 +108,7 @@ public class NumberFormat implements java.io.Serializable {
     public NumberFormat() {
         super();
         setNegativePrefix("-");
-        setNotation(com.logica.hummingbird.xtce.castor.types.NumberFormatNotationType.fromValue("normal"));
+        setNotation(org.hbird.xtce.castor.types.NumberFormatNotationType.fromValue("normal"));
     }
 
 
@@ -216,7 +216,7 @@ public class NumberFormat implements java.io.Serializable {
      * 
      * @return the value of field 'Notation'.
      */
-    public com.logica.hummingbird.xtce.castor.types.NumberFormatNotationType getNotation(
+    public org.hbird.xtce.castor.types.NumberFormatNotationType getNotation(
     ) {
         return this._notation;
     }
@@ -226,7 +226,7 @@ public class NumberFormat implements java.io.Serializable {
      * 
      * @return the value of field 'NumberBase'.
      */
-    public com.logica.hummingbird.xtce.castor.types.RadixType getNumberBase(
+    public org.hbird.xtce.castor.types.RadixType getNumberBase(
     ) {
         return this._numberBase;
     }
@@ -447,7 +447,7 @@ public class NumberFormat implements java.io.Serializable {
      * @param notation the value of field 'notation'.
      */
     public void setNotation(
-            final com.logica.hummingbird.xtce.castor.types.NumberFormatNotationType notation) {
+            final org.hbird.xtce.castor.types.NumberFormatNotationType notation) {
         this._notation = notation;
     }
 
@@ -457,7 +457,7 @@ public class NumberFormat implements java.io.Serializable {
      * @param numberBase the value of field 'numberBase'.
      */
     public void setNumberBase(
-            final com.logica.hummingbird.xtce.castor.types.RadixType numberBase) {
+            final org.hbird.xtce.castor.types.RadixType numberBase) {
         this._numberBase = numberBase;
     }
 
@@ -502,12 +502,12 @@ public class NumberFormat implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.NumberFormat
+     * org.hbird.xtce.castor.NumberFormat
      */
-    public static com.logica.hummingbird.xtce.castor.NumberFormat unmarshal(
+    public static org.hbird.xtce.castor.NumberFormat unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.NumberFormat) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.NumberFormat.class, reader);
+        return (org.hbird.xtce.castor.NumberFormat) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.NumberFormat.class, reader);
     }
 
     /**

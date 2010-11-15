@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.FloatDataType;
+import org.hbird.xtce.castor.FloatDataType;
 
 /**
  * Class FloatDataTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class FloatDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.NumericDataTypeDescriptor {
+public class FloatDataTypeDescriptor extends org.hbird.xtce.castor.descriptors.NumericDataTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class FloatDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.
 
     public FloatDataTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.NumericDataTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.NumericDataTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "FloatDataType";
         _elementDefinition = false;
@@ -108,7 +108,7 @@ public class FloatDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.
         }
         desc.setValidator(fieldValidator);
         //-- _sizeInBits
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.FloatDataTypeSizeInBitsType.class, "_sizeInBits", "sizeInBits", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.FloatDataTypeSizeInBitsType.class, "_sizeInBits", "sizeInBits", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -123,7 +123,7 @@ public class FloatDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.
             {
                 try {
                     FloatDataType target = (FloatDataType) object;
-                    target.setSizeInBits( (com.logica.hummingbird.xtce.castor.types.FloatDataTypeSizeInBitsType) value);
+                    target.setSizeInBits( (org.hbird.xtce.castor.types.FloatDataTypeSizeInBitsType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -134,7 +134,7 @@ public class FloatDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.FloatDataTypeSizeInBitsType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.FloatDataTypeSizeInBitsType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("FloatDataTypeSizeInBitsType");
         desc.setHandler(handler);
@@ -189,7 +189,7 @@ public class FloatDataTypeDescriptor extends com.logica.hummingbird.xtce.castor.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.FloatDataType.class;
+        return org.hbird.xtce.castor.FloatDataType.class;
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.logica.hummingbird.packetarchive;
+package org.hbird.packetarchive;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one or more
@@ -31,7 +31,7 @@ import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.logica.hummingbird.packetarchive.*;
+import org.hbird.packetarchive.*;
 /**
  * @version $Revision: 785119 $
  */
@@ -113,15 +113,15 @@ public class PacketArchiveTest extends CamelTestSupport {
 //			<choice>
 //	            <when>
 //	                <xpath>$type = 'frame'</xpath>
-//	                <to uri="activemq:topic:frame?messageConverter=com.logica.hummingbird.marshaller.Converter"/>
+//	                <to uri="activemq:topic:frame?messageConverter=org.hbird.marshaller.Converter"/>
 //	            </when>
 //	            <when>
 //	                <xpath>$type = 'packet'</xpath>
-//	                <to uri="activemq:topic:packet?messageConverter=com.logica.hummingbird.marshaller.Converter"/>
+//	                <to uri="activemq:topic:packet?messageConverter=org.hbird.marshaller.Converter"/>
 //	            </when>
 //	            <otherwise>
 //	                <xpath>$type = 'parameter'</xpath>
-//	                <to uri="activemq:topic:parameter?messageConverter=com.logica.hummingbird.marshaller.Converter"/>
+//	                <to uri="activemq:topic:parameter?messageConverter=org.hbird.marshaller.Converter"/>
 //	            </otherwise>
 //	        </choice>
 //		</route>

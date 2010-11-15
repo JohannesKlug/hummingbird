@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ServiceType;
+import org.hbird.xtce.castor.ServiceType;
 
 /**
  * Class ServiceTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ServiceTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
+public class ServiceTypeDescriptor extends org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ServiceTypeDescriptor extends com.logica.hummingbird.xtce.castor.de
 
     public ServiceTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ServiceType";
         _elementDefinition = false;
@@ -72,7 +72,7 @@ public class ServiceTypeDescriptor extends com.logica.hummingbird.xtce.castor.de
         //-- initialize element descriptors
 
         //-- _messageRefSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.MessageRefSet.class, "_messageRefSet", "MessageRefSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.MessageRefSet.class, "_messageRefSet", "MessageRefSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class ServiceTypeDescriptor extends com.logica.hummingbird.xtce.castor.de
             {
                 try {
                     ServiceType target = (ServiceType) object;
-                    target.setMessageRefSet( (com.logica.hummingbird.xtce.castor.MessageRefSet) value);
+                    target.setMessageRefSet( (org.hbird.xtce.castor.MessageRefSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,10 +95,10 @@ public class ServiceTypeDescriptor extends com.logica.hummingbird.xtce.castor.de
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.MessageRefSet();
+                return new org.hbird.xtce.castor.MessageRefSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.MessageRefSet");
+        desc.setSchemaType("org.hbird.xtce.castor.MessageRefSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -111,7 +111,7 @@ public class ServiceTypeDescriptor extends com.logica.hummingbird.xtce.castor.de
         }
         desc.setValidator(fieldValidator);
         //-- _containerRefSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ContainerRefSet.class, "_containerRefSet", "ContainerRefSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ContainerRefSet.class, "_containerRefSet", "ContainerRefSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -126,7 +126,7 @@ public class ServiceTypeDescriptor extends com.logica.hummingbird.xtce.castor.de
             {
                 try {
                     ServiceType target = (ServiceType) object;
-                    target.setContainerRefSet( (com.logica.hummingbird.xtce.castor.ContainerRefSet) value);
+                    target.setContainerRefSet( (org.hbird.xtce.castor.ContainerRefSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -134,10 +134,10 @@ public class ServiceTypeDescriptor extends com.logica.hummingbird.xtce.castor.de
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ContainerRefSet();
+                return new org.hbird.xtce.castor.ContainerRefSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ContainerRefSet");
+        desc.setSchemaType("org.hbird.xtce.castor.ContainerRefSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -192,7 +192,7 @@ public class ServiceTypeDescriptor extends com.logica.hummingbird.xtce.castor.de
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ServiceType.class;
+        return org.hbird.xtce.castor.ServiceType.class;
     }
 
     /**

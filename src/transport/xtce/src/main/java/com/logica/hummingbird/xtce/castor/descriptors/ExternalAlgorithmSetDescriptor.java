@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ExternalAlgorithmSet;
+import org.hbird.xtce.castor.ExternalAlgorithmSet;
 
 /**
  * Class ExternalAlgorithmSetDescriptor.
@@ -71,7 +71,7 @@ public class ExternalAlgorithmSetDescriptor extends org.exolab.castor.xml.util.X
         //-- initialize element descriptors
 
         //-- _externalAlgorithmList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ExternalAlgorithm.class, "_externalAlgorithmList", "ExternalAlgorithm", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ExternalAlgorithm.class, "_externalAlgorithmList", "ExternalAlgorithm", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class ExternalAlgorithmSetDescriptor extends org.exolab.castor.xml.util.X
             {
                 try {
                     ExternalAlgorithmSet target = (ExternalAlgorithmSet) object;
-                    target.addExternalAlgorithm( (com.logica.hummingbird.xtce.castor.ExternalAlgorithm) value);
+                    target.addExternalAlgorithm( (org.hbird.xtce.castor.ExternalAlgorithm) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -102,11 +102,11 @@ public class ExternalAlgorithmSetDescriptor extends org.exolab.castor.xml.util.X
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ExternalAlgorithm();
+                return new org.hbird.xtce.castor.ExternalAlgorithm();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.ExternalAlgorithm");
+        desc.setComponentType("org.hbird.xtce.castor.ExternalAlgorithm");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -158,7 +158,7 @@ public class ExternalAlgorithmSetDescriptor extends org.exolab.castor.xml.util.X
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ExternalAlgorithmSet.class;
+        return org.hbird.xtce.castor.ExternalAlgorithmSet.class;
     }
 
     /**

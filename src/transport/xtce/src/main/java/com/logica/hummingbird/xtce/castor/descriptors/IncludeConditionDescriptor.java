@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.IncludeCondition;
+import org.hbird.xtce.castor.IncludeCondition;
 
 /**
  * Class IncludeConditionDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class IncludeConditionDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor {
+public class IncludeConditionDescriptor extends org.hbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class IncludeConditionDescriptor extends com.logica.hummingbird.xtce.cast
 
     public IncludeConditionDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "IncludeCondition";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class IncludeConditionDescriptor extends com.logica.hummingbird.xtce.cast
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.IncludeCondition.class;
+        return org.hbird.xtce.castor.IncludeCondition.class;
     }
 
     /**

@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.MetaCommandSet;
+import org.hbird.xtce.castor.MetaCommandSet;
 
 /**
  * Class MetaCommandSetDescriptor.
@@ -67,7 +67,7 @@ public class MetaCommandSetDescriptor extends org.exolab.castor.xml.util.XMLClas
         //-- initialize element descriptors
 
         //-- _items
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.MetaCommandSetItem.class, "_items", (java.lang.String) null, org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.MetaCommandSetItem.class, "_items", (java.lang.String) null, org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -82,7 +82,7 @@ public class MetaCommandSetDescriptor extends org.exolab.castor.xml.util.XMLClas
             {
                 try {
                     MetaCommandSet target = (MetaCommandSet) object;
-                    target.addMetaCommandSetItem( (com.logica.hummingbird.xtce.castor.MetaCommandSetItem) value);
+                    target.addMetaCommandSetItem( (org.hbird.xtce.castor.MetaCommandSetItem) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -98,14 +98,14 @@ public class MetaCommandSetDescriptor extends org.exolab.castor.xml.util.XMLClas
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.MetaCommandSetItem();
+                return new org.hbird.xtce.castor.MetaCommandSetItem();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.MetaCommandSetItem");
+        desc.setComponentType("org.hbird.xtce.castor.MetaCommandSetItem");
         desc.setHandler(handler);
         desc.setContainer(true);
-        desc.setClassDescriptor(new com.logica.hummingbird.xtce.castor.descriptors.MetaCommandSetItemDescriptor());
+        desc.setClassDescriptor(new org.hbird.xtce.castor.descriptors.MetaCommandSetItemDescriptor());
         desc.setMultivalued(true);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
@@ -154,7 +154,7 @@ public class MetaCommandSetDescriptor extends org.exolab.castor.xml.util.XMLClas
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.MetaCommandSet.class;
+        return org.hbird.xtce.castor.MetaCommandSet.class;
     }
 
     /**

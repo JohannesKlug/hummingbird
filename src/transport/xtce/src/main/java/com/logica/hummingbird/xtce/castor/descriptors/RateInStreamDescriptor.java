@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.RateInStream;
+import org.hbird.xtce.castor.RateInStream;
 
 /**
  * Class RateInStreamDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class RateInStreamDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.RateInStreamTypeDescriptor {
+public class RateInStreamDescriptor extends org.hbird.xtce.castor.descriptors.RateInStreamTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class RateInStreamDescriptor extends com.logica.hummingbird.xtce.castor.d
 
     public RateInStreamDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.RateInStreamTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.RateInStreamTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "RateInStream";
         _elementDefinition = true;
@@ -153,7 +153,7 @@ public class RateInStreamDescriptor extends com.logica.hummingbird.xtce.castor.d
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.RateInStream.class;
+        return org.hbird.xtce.castor.RateInStream.class;
     }
 
     /**

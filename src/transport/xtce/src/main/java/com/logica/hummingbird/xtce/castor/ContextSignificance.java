@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class ContextSignificance.
@@ -23,12 +23,12 @@ public class ContextSignificance implements java.io.Serializable {
     /**
      * Field _contextMatch.
      */
-    private com.logica.hummingbird.xtce.castor.ContextMatch _contextMatch;
+    private org.hbird.xtce.castor.ContextMatch _contextMatch;
 
     /**
      * Field _significance.
      */
-    private com.logica.hummingbird.xtce.castor.Significance _significance;
+    private org.hbird.xtce.castor.Significance _significance;
 
 
       //----------------/
@@ -49,7 +49,7 @@ public class ContextSignificance implements java.io.Serializable {
      * 
      * @return the value of field 'ContextMatch'.
      */
-    public com.logica.hummingbird.xtce.castor.ContextMatch getContextMatch(
+    public org.hbird.xtce.castor.ContextMatch getContextMatch(
     ) {
         return this._contextMatch;
     }
@@ -59,7 +59,7 @@ public class ContextSignificance implements java.io.Serializable {
      * 
      * @return the value of field 'Significance'.
      */
-    public com.logica.hummingbird.xtce.castor.Significance getSignificance(
+    public org.hbird.xtce.castor.Significance getSignificance(
     ) {
         return this._significance;
     }
@@ -117,7 +117,7 @@ public class ContextSignificance implements java.io.Serializable {
      * @param contextMatch the value of field 'contextMatch'.
      */
     public void setContextMatch(
-            final com.logica.hummingbird.xtce.castor.ContextMatch contextMatch) {
+            final org.hbird.xtce.castor.ContextMatch contextMatch) {
         this._contextMatch = contextMatch;
     }
 
@@ -127,7 +127,7 @@ public class ContextSignificance implements java.io.Serializable {
      * @param significance the value of field 'significance'.
      */
     public void setSignificance(
-            final com.logica.hummingbird.xtce.castor.Significance significance) {
+            final org.hbird.xtce.castor.Significance significance) {
         this._significance = significance;
     }
 
@@ -140,12 +140,12 @@ public class ContextSignificance implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ContextSignificance
+     * org.hbird.xtce.castor.ContextSignificance
      */
-    public static com.logica.hummingbird.xtce.castor.ContextSignificance unmarshal(
+    public static org.hbird.xtce.castor.ContextSignificance unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ContextSignificance) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ContextSignificance.class, reader);
+        return (org.hbird.xtce.castor.ContextSignificance) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ContextSignificance.class, reader);
     }
 
     /**

@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.StringDataEncodingTypeSizeInBits;
+import org.hbird.xtce.castor.StringDataEncodingTypeSizeInBits;
 
 /**
  * Class StringDataEncodingTypeSizeInBitsDescriptor.
@@ -71,7 +71,7 @@ public class StringDataEncodingTypeSizeInBitsDescriptor extends org.exolab.casto
         //-- initialize element descriptors
 
         //-- _fixed
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Fixed.class, "_fixed", "Fixed", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Fixed.class, "_fixed", "Fixed", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class StringDataEncodingTypeSizeInBitsDescriptor extends org.exolab.casto
             {
                 try {
                     StringDataEncodingTypeSizeInBits target = (StringDataEncodingTypeSizeInBits) object;
-                    target.setFixed( (com.logica.hummingbird.xtce.castor.Fixed) value);
+                    target.setFixed( (org.hbird.xtce.castor.Fixed) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class StringDataEncodingTypeSizeInBitsDescriptor extends org.exolab.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Fixed();
+                return new org.hbird.xtce.castor.Fixed();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.Fixed");
+        desc.setSchemaType("org.hbird.xtce.castor.Fixed");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -153,7 +153,7 @@ public class StringDataEncodingTypeSizeInBitsDescriptor extends org.exolab.casto
         }
         desc.setValidator(fieldValidator);
         //-- _leadingSize
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.LeadingSize.class, "_leadingSize", "LeadingSize", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.LeadingSize.class, "_leadingSize", "LeadingSize", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -168,7 +168,7 @@ public class StringDataEncodingTypeSizeInBitsDescriptor extends org.exolab.casto
             {
                 try {
                     StringDataEncodingTypeSizeInBits target = (StringDataEncodingTypeSizeInBits) object;
-                    target.setLeadingSize( (com.logica.hummingbird.xtce.castor.LeadingSize) value);
+                    target.setLeadingSize( (org.hbird.xtce.castor.LeadingSize) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -176,10 +176,10 @@ public class StringDataEncodingTypeSizeInBitsDescriptor extends org.exolab.casto
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.LeadingSize();
+                return new org.hbird.xtce.castor.LeadingSize();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.LeadingSize");
+        desc.setSchemaType("org.hbird.xtce.castor.LeadingSize");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -231,7 +231,7 @@ public class StringDataEncodingTypeSizeInBitsDescriptor extends org.exolab.casto
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.StringDataEncodingTypeSizeInBits.class;
+        return org.hbird.xtce.castor.StringDataEncodingTypeSizeInBits.class;
     }
 
     /**

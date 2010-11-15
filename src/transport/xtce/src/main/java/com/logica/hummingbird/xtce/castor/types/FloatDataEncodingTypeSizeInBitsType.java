@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types;
+package org.hbird.xtce.castor.types;
 
 /**
  * Enumeration FloatDataEncodingTypeSizeInBitsType.
@@ -62,7 +62,7 @@ public enum FloatDataEncodingTypeSizeInBitsType implements java.io.Serializable 
      * @param value
      * @return the constant for this value
      */
-    public static com.logica.hummingbird.xtce.castor.types.FloatDataEncodingTypeSizeInBitsType fromValue(
+    public static org.hbird.xtce.castor.types.FloatDataEncodingTypeSizeInBitsType fromValue(
             final java.lang.String value) {
         for (FloatDataEncodingTypeSizeInBitsType c: FloatDataEncodingTypeSizeInBitsType.values()) {
             if (c.value.equals(value)) {

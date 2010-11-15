@@ -19,7 +19,7 @@
 
   <!-- List the SQL Map XML files. They can be loaded from the classpath, as they are here (com.domain.data...) -->
 
-  <!-- <sqlMap resource="com/logica/hummingbird/packetarchive/packet_SqlMap.xml"/>-->
+  <!-- <sqlMap resource="org.hbird/packetarchive/packet_SqlMap.xml"/>-->
   <sqlMap resource="packet_SqlMap.xml"/>
 
 </sqlMapConfig>

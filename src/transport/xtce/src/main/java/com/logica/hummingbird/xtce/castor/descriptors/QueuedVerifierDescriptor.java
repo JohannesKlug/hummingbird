@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.QueuedVerifier;
+import org.hbird.xtce.castor.QueuedVerifier;
 
 /**
  * Class QueuedVerifierDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class QueuedVerifierDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor {
+public class QueuedVerifierDescriptor extends org.hbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class QueuedVerifierDescriptor extends com.logica.hummingbird.xtce.castor
 
     public QueuedVerifierDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "QueuedVerifier";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class QueuedVerifierDescriptor extends com.logica.hummingbird.xtce.castor
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.QueuedVerifier.class;
+        return org.hbird.xtce.castor.QueuedVerifier.class;
     }
 
     /**

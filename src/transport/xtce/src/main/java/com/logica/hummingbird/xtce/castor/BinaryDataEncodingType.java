@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * For binary data or for integer, float, string, or time data that
@@ -16,7 +16,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class BinaryDataEncodingType extends com.logica.hummingbird.xtce.castor.DataEncodingType 
+public class BinaryDataEncodingType extends org.hbird.xtce.castor.DataEncodingType 
 implements java.io.Serializable
 {
 
@@ -28,18 +28,18 @@ implements java.io.Serializable
     /**
      * Field _sizeInBits.
      */
-    private com.logica.hummingbird.xtce.castor.SizeInBits _sizeInBits;
+    private org.hbird.xtce.castor.SizeInBits _sizeInBits;
 
     /**
      * Used to convert binary data to an application data type
      */
-    private com.logica.hummingbird.xtce.castor.FromBinaryTransformAlgorithm _fromBinaryTransformAlgorithm;
+    private org.hbird.xtce.castor.FromBinaryTransformAlgorithm _fromBinaryTransformAlgorithm;
 
     /**
      * Used to convert binary data from an application data type to
      * binary data
      */
-    private com.logica.hummingbird.xtce.castor.ToBinaryTransformAlgorithm _toBinaryTransformAlgorithm;
+    private org.hbird.xtce.castor.ToBinaryTransformAlgorithm _toBinaryTransformAlgorithm;
 
 
       //----------------/
@@ -63,7 +63,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'FromBinaryTransformAlgorithm'.
      */
-    public com.logica.hummingbird.xtce.castor.FromBinaryTransformAlgorithm getFromBinaryTransformAlgorithm(
+    public org.hbird.xtce.castor.FromBinaryTransformAlgorithm getFromBinaryTransformAlgorithm(
     ) {
         return this._fromBinaryTransformAlgorithm;
     }
@@ -73,7 +73,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'SizeInBits'.
      */
-    public com.logica.hummingbird.xtce.castor.SizeInBits getSizeInBits(
+    public org.hbird.xtce.castor.SizeInBits getSizeInBits(
     ) {
         return this._sizeInBits;
     }
@@ -86,7 +86,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ToBinaryTransformAlgorithm'.
      */
-    public com.logica.hummingbird.xtce.castor.ToBinaryTransformAlgorithm getToBinaryTransformAlgorithm(
+    public org.hbird.xtce.castor.ToBinaryTransformAlgorithm getToBinaryTransformAlgorithm(
     ) {
         return this._toBinaryTransformAlgorithm;
     }
@@ -148,7 +148,7 @@ implements java.io.Serializable
      * 'fromBinaryTransformAlgorithm'.
      */
     public void setFromBinaryTransformAlgorithm(
-            final com.logica.hummingbird.xtce.castor.FromBinaryTransformAlgorithm fromBinaryTransformAlgorithm) {
+            final org.hbird.xtce.castor.FromBinaryTransformAlgorithm fromBinaryTransformAlgorithm) {
         this._fromBinaryTransformAlgorithm = fromBinaryTransformAlgorithm;
     }
 
@@ -158,7 +158,7 @@ implements java.io.Serializable
      * @param sizeInBits the value of field 'sizeInBits'.
      */
     public void setSizeInBits(
-            final com.logica.hummingbird.xtce.castor.SizeInBits sizeInBits) {
+            final org.hbird.xtce.castor.SizeInBits sizeInBits) {
         this._sizeInBits = sizeInBits;
     }
 
@@ -172,7 +172,7 @@ implements java.io.Serializable
      * 'toBinaryTransformAlgorithm'.
      */
     public void setToBinaryTransformAlgorithm(
-            final com.logica.hummingbird.xtce.castor.ToBinaryTransformAlgorithm toBinaryTransformAlgorithm) {
+            final org.hbird.xtce.castor.ToBinaryTransformAlgorithm toBinaryTransformAlgorithm) {
         this._toBinaryTransformAlgorithm = toBinaryTransformAlgorithm;
     }
 
@@ -185,12 +185,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.BinaryDataEncodingType
+     * org.hbird.xtce.castor.BinaryDataEncodingType
      */
-    public static com.logica.hummingbird.xtce.castor.BinaryDataEncodingType unmarshal(
+    public static org.hbird.xtce.castor.BinaryDataEncodingType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.BinaryDataEncodingType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.BinaryDataEncodingType.class, reader);
+        return (org.hbird.xtce.castor.BinaryDataEncodingType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.BinaryDataEncodingType.class, reader);
     }
 
     /**

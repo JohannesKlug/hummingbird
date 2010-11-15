@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Message;
+import org.hbird.xtce.castor.Message;
 
 /**
  * Class MessageDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class MessageDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
+public class MessageDescriptor extends org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class MessageDescriptor extends com.logica.hummingbird.xtce.castor.descri
 
     public MessageDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "Message";
         _elementDefinition = true;
@@ -72,7 +72,7 @@ public class MessageDescriptor extends com.logica.hummingbird.xtce.castor.descri
         //-- initialize element descriptors
 
         //-- _matchCriteria
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.MatchCriteria.class, "_matchCriteria", "MatchCriteria", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.MatchCriteria.class, "_matchCriteria", "MatchCriteria", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class MessageDescriptor extends com.logica.hummingbird.xtce.castor.descri
             {
                 try {
                     Message target = (Message) object;
-                    target.setMatchCriteria( (com.logica.hummingbird.xtce.castor.MatchCriteria) value);
+                    target.setMatchCriteria( (org.hbird.xtce.castor.MatchCriteria) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,10 +95,10 @@ public class MessageDescriptor extends com.logica.hummingbird.xtce.castor.descri
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.MatchCriteria();
+                return new org.hbird.xtce.castor.MatchCriteria();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.MatchCriteria");
+        desc.setSchemaType("org.hbird.xtce.castor.MatchCriteria");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -113,7 +113,7 @@ public class MessageDescriptor extends com.logica.hummingbird.xtce.castor.descri
         }
         desc.setValidator(fieldValidator);
         //-- _containRef
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ContainRef.class, "_containRef", "ContainRef", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ContainRef.class, "_containRef", "ContainRef", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -128,7 +128,7 @@ public class MessageDescriptor extends com.logica.hummingbird.xtce.castor.descri
             {
                 try {
                     Message target = (Message) object;
-                    target.setContainRef( (com.logica.hummingbird.xtce.castor.ContainRef) value);
+                    target.setContainRef( (org.hbird.xtce.castor.ContainRef) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -136,10 +136,10 @@ public class MessageDescriptor extends com.logica.hummingbird.xtce.castor.descri
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ContainRef();
+                return new org.hbird.xtce.castor.ContainRef();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ContainRef");
+        desc.setSchemaType("org.hbird.xtce.castor.ContainRef");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -194,7 +194,7 @@ public class MessageDescriptor extends com.logica.hummingbird.xtce.castor.descri
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Message.class;
+        return org.hbird.xtce.castor.Message.class;
     }
 
     /**

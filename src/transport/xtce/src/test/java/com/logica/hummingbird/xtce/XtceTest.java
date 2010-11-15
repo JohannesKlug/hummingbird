@@ -1,4 +1,4 @@
-package com.logica.hummingbird.xtce;
+package org.hbird.xtce;
 
 import java.net.URL;
 

@@ -30,7 +30,7 @@
 		<level value="WARN" />
 	</logger>
 	
-	<logger name="com.logica.hummingbird.framebroker">
+	<logger name="org.hbird.framebroker">
 		<level value="DEBUG"></level>
 	</logger>
 	

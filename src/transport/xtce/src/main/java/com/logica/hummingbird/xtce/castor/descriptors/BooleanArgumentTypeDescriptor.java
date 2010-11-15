@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.BooleanArgumentType;
+import org.hbird.xtce.castor.BooleanArgumentType;
 
 /**
  * Class BooleanArgumentTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class BooleanArgumentTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.BooleanDataTypeDescriptor {
+public class BooleanArgumentTypeDescriptor extends org.hbird.xtce.castor.descriptors.BooleanDataTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class BooleanArgumentTypeDescriptor extends com.logica.hummingbird.xtce.c
 
     public BooleanArgumentTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.BooleanDataTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.BooleanDataTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "BooleanArgumentType";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class BooleanArgumentTypeDescriptor extends com.logica.hummingbird.xtce.c
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.BooleanArgumentType.class;
+        return org.hbird.xtce.castor.BooleanArgumentType.class;
     }
 
     /**

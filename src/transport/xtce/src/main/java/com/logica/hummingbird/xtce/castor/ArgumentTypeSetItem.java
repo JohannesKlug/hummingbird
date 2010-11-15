@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class ArgumentTypeSetItem.
@@ -28,47 +28,47 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
     /**
      * Field _stringArgumentType.
      */
-    private com.logica.hummingbird.xtce.castor.StringArgumentType _stringArgumentType;
+    private org.hbird.xtce.castor.StringArgumentType _stringArgumentType;
 
     /**
      * Field _enumeratedArgumentType.
      */
-    private com.logica.hummingbird.xtce.castor.EnumeratedArgumentType _enumeratedArgumentType;
+    private org.hbird.xtce.castor.EnumeratedArgumentType _enumeratedArgumentType;
 
     /**
      * Field _integerArgumentType.
      */
-    private com.logica.hummingbird.xtce.castor.IntegerArgumentType _integerArgumentType;
+    private org.hbird.xtce.castor.IntegerArgumentType _integerArgumentType;
 
     /**
      * Field _binaryArgumentType.
      */
-    private com.logica.hummingbird.xtce.castor.BinaryArgumentType _binaryArgumentType;
+    private org.hbird.xtce.castor.BinaryArgumentType _binaryArgumentType;
 
     /**
      * Field _floatArgumentType.
      */
-    private com.logica.hummingbird.xtce.castor.FloatArgumentType _floatArgumentType;
+    private org.hbird.xtce.castor.FloatArgumentType _floatArgumentType;
 
     /**
      * Field _booleanArgumentType.
      */
-    private com.logica.hummingbird.xtce.castor.BooleanArgumentType _booleanArgumentType;
+    private org.hbird.xtce.castor.BooleanArgumentType _booleanArgumentType;
 
     /**
      * Field _relativeTimeAgumentType.
      */
-    private com.logica.hummingbird.xtce.castor.RelativeTimeAgumentType _relativeTimeAgumentType;
+    private org.hbird.xtce.castor.RelativeTimeAgumentType _relativeTimeAgumentType;
 
     /**
      * Field _absoluteTimeArgumentType.
      */
-    private com.logica.hummingbird.xtce.castor.AbsoluteTimeArgumentType _absoluteTimeArgumentType;
+    private org.hbird.xtce.castor.AbsoluteTimeArgumentType _absoluteTimeArgumentType;
 
     /**
      * Field _argumementArrayType.
      */
-    private com.logica.hummingbird.xtce.castor.ArgumementArrayType _argumementArrayType;
+    private org.hbird.xtce.castor.ArgumementArrayType _argumementArrayType;
 
 
       //----------------/
@@ -89,7 +89,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 
      * @return the value of field 'AbsoluteTimeArgumentType'.
      */
-    public com.logica.hummingbird.xtce.castor.AbsoluteTimeArgumentType getAbsoluteTimeArgumentType(
+    public org.hbird.xtce.castor.AbsoluteTimeArgumentType getAbsoluteTimeArgumentType(
     ) {
         return this._absoluteTimeArgumentType;
     }
@@ -99,7 +99,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 
      * @return the value of field 'ArgumementArrayType'.
      */
-    public com.logica.hummingbird.xtce.castor.ArgumementArrayType getArgumementArrayType(
+    public org.hbird.xtce.castor.ArgumementArrayType getArgumementArrayType(
     ) {
         return this._argumementArrayType;
     }
@@ -109,7 +109,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 
      * @return the value of field 'BinaryArgumentType'.
      */
-    public com.logica.hummingbird.xtce.castor.BinaryArgumentType getBinaryArgumentType(
+    public org.hbird.xtce.castor.BinaryArgumentType getBinaryArgumentType(
     ) {
         return this._binaryArgumentType;
     }
@@ -119,7 +119,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 
      * @return the value of field 'BooleanArgumentType'.
      */
-    public com.logica.hummingbird.xtce.castor.BooleanArgumentType getBooleanArgumentType(
+    public org.hbird.xtce.castor.BooleanArgumentType getBooleanArgumentType(
     ) {
         return this._booleanArgumentType;
     }
@@ -141,7 +141,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 
      * @return the value of field 'EnumeratedArgumentType'.
      */
-    public com.logica.hummingbird.xtce.castor.EnumeratedArgumentType getEnumeratedArgumentType(
+    public org.hbird.xtce.castor.EnumeratedArgumentType getEnumeratedArgumentType(
     ) {
         return this._enumeratedArgumentType;
     }
@@ -151,7 +151,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 
      * @return the value of field 'FloatArgumentType'.
      */
-    public com.logica.hummingbird.xtce.castor.FloatArgumentType getFloatArgumentType(
+    public org.hbird.xtce.castor.FloatArgumentType getFloatArgumentType(
     ) {
         return this._floatArgumentType;
     }
@@ -161,7 +161,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 
      * @return the value of field 'IntegerArgumentType'.
      */
-    public com.logica.hummingbird.xtce.castor.IntegerArgumentType getIntegerArgumentType(
+    public org.hbird.xtce.castor.IntegerArgumentType getIntegerArgumentType(
     ) {
         return this._integerArgumentType;
     }
@@ -171,7 +171,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 
      * @return the value of field 'RelativeTimeAgumentType'.
      */
-    public com.logica.hummingbird.xtce.castor.RelativeTimeAgumentType getRelativeTimeAgumentType(
+    public org.hbird.xtce.castor.RelativeTimeAgumentType getRelativeTimeAgumentType(
     ) {
         return this._relativeTimeAgumentType;
     }
@@ -181,7 +181,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 
      * @return the value of field 'StringArgumentType'.
      */
-    public com.logica.hummingbird.xtce.castor.StringArgumentType getStringArgumentType(
+    public org.hbird.xtce.castor.StringArgumentType getStringArgumentType(
     ) {
         return this._stringArgumentType;
     }
@@ -193,7 +193,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 'absoluteTimeArgumentType'.
      */
     public void setAbsoluteTimeArgumentType(
-            final com.logica.hummingbird.xtce.castor.AbsoluteTimeArgumentType absoluteTimeArgumentType) {
+            final org.hbird.xtce.castor.AbsoluteTimeArgumentType absoluteTimeArgumentType) {
         this._absoluteTimeArgumentType = absoluteTimeArgumentType;
         this._choiceValue = absoluteTimeArgumentType;
     }
@@ -205,7 +205,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 'argumementArrayType'.
      */
     public void setArgumementArrayType(
-            final com.logica.hummingbird.xtce.castor.ArgumementArrayType argumementArrayType) {
+            final org.hbird.xtce.castor.ArgumementArrayType argumementArrayType) {
         this._argumementArrayType = argumementArrayType;
         this._choiceValue = argumementArrayType;
     }
@@ -217,7 +217,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 'binaryArgumentType'.
      */
     public void setBinaryArgumentType(
-            final com.logica.hummingbird.xtce.castor.BinaryArgumentType binaryArgumentType) {
+            final org.hbird.xtce.castor.BinaryArgumentType binaryArgumentType) {
         this._binaryArgumentType = binaryArgumentType;
         this._choiceValue = binaryArgumentType;
     }
@@ -229,7 +229,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 'booleanArgumentType'.
      */
     public void setBooleanArgumentType(
-            final com.logica.hummingbird.xtce.castor.BooleanArgumentType booleanArgumentType) {
+            final org.hbird.xtce.castor.BooleanArgumentType booleanArgumentType) {
         this._booleanArgumentType = booleanArgumentType;
         this._choiceValue = booleanArgumentType;
     }
@@ -241,7 +241,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 'enumeratedArgumentType'.
      */
     public void setEnumeratedArgumentType(
-            final com.logica.hummingbird.xtce.castor.EnumeratedArgumentType enumeratedArgumentType) {
+            final org.hbird.xtce.castor.EnumeratedArgumentType enumeratedArgumentType) {
         this._enumeratedArgumentType = enumeratedArgumentType;
         this._choiceValue = enumeratedArgumentType;
     }
@@ -253,7 +253,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 'floatArgumentType'.
      */
     public void setFloatArgumentType(
-            final com.logica.hummingbird.xtce.castor.FloatArgumentType floatArgumentType) {
+            final org.hbird.xtce.castor.FloatArgumentType floatArgumentType) {
         this._floatArgumentType = floatArgumentType;
         this._choiceValue = floatArgumentType;
     }
@@ -265,7 +265,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 'integerArgumentType'.
      */
     public void setIntegerArgumentType(
-            final com.logica.hummingbird.xtce.castor.IntegerArgumentType integerArgumentType) {
+            final org.hbird.xtce.castor.IntegerArgumentType integerArgumentType) {
         this._integerArgumentType = integerArgumentType;
         this._choiceValue = integerArgumentType;
     }
@@ -277,7 +277,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 'relativeTimeAgumentType'.
      */
     public void setRelativeTimeAgumentType(
-            final com.logica.hummingbird.xtce.castor.RelativeTimeAgumentType relativeTimeAgumentType) {
+            final org.hbird.xtce.castor.RelativeTimeAgumentType relativeTimeAgumentType) {
         this._relativeTimeAgumentType = relativeTimeAgumentType;
         this._choiceValue = relativeTimeAgumentType;
     }
@@ -289,7 +289,7 @@ public class ArgumentTypeSetItem implements java.io.Serializable {
      * 'stringArgumentType'.
      */
     public void setStringArgumentType(
-            final com.logica.hummingbird.xtce.castor.StringArgumentType stringArgumentType) {
+            final org.hbird.xtce.castor.StringArgumentType stringArgumentType) {
         this._stringArgumentType = stringArgumentType;
         this._choiceValue = stringArgumentType;
     }

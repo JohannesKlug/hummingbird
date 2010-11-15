@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Parameters referenced by MetaCommands. This Parameter Set is
@@ -89,12 +89,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ParameterSet
+     * org.hbird.xtce.castor.ParameterSet
      */
-    public static com.logica.hummingbird.xtce.castor.ParameterSet unmarshal(
+    public static org.hbird.xtce.castor.ParameterSet unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ParameterSet) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ParameterSet.class, reader);
+        return (org.hbird.xtce.castor.ParameterSet) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ParameterSet.class, reader);
     }
 
     /**

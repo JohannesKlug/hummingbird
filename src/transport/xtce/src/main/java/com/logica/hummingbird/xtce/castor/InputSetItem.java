@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class InputSetItem.
@@ -32,7 +32,7 @@ public class InputSetItem implements java.io.Serializable {
      * that will be used in this algorithm. inputName is an
      * optional "friendly" name for the input parameter. 
      */
-    private com.logica.hummingbird.xtce.castor.InputAlgorithmTypeInputSetParameterInstanceRef _parameterInstanceRef;
+    private org.hbird.xtce.castor.InputAlgorithmTypeInputSetParameterInstanceRef _parameterInstanceRef;
 
     /**
      * Names and provides a value for a constant input to the
@@ -41,7 +41,7 @@ public class InputSetItem implements java.io.Serializable {
      * the algorithm to be executed. value is the value of the
      * constant to be used.
      */
-    private com.logica.hummingbird.xtce.castor.Constant _constant;
+    private org.hbird.xtce.castor.Constant _constant;
 
 
       //----------------/
@@ -79,7 +79,7 @@ public class InputSetItem implements java.io.Serializable {
      * 
      * @return the value of field 'Constant'.
      */
-    public com.logica.hummingbird.xtce.castor.Constant getConstant(
+    public org.hbird.xtce.castor.Constant getConstant(
     ) {
         return this._constant;
     }
@@ -95,7 +95,7 @@ public class InputSetItem implements java.io.Serializable {
      * 
      * @return the value of field 'ParameterInstanceRef'.
      */
-    public com.logica.hummingbird.xtce.castor.InputAlgorithmTypeInputSetParameterInstanceRef getParameterInstanceRef(
+    public org.hbird.xtce.castor.InputAlgorithmTypeInputSetParameterInstanceRef getParameterInstanceRef(
     ) {
         return this._parameterInstanceRef;
     }
@@ -111,7 +111,7 @@ public class InputSetItem implements java.io.Serializable {
      * @param constant the value of field 'constant'.
      */
     public void setConstant(
-            final com.logica.hummingbird.xtce.castor.Constant constant) {
+            final org.hbird.xtce.castor.Constant constant) {
         this._constant = constant;
         this._choiceValue = constant;
     }
@@ -129,7 +129,7 @@ public class InputSetItem implements java.io.Serializable {
      * 'parameterInstanceRef'.
      */
     public void setParameterInstanceRef(
-            final com.logica.hummingbird.xtce.castor.InputAlgorithmTypeInputSetParameterInstanceRef parameterInstanceRef) {
+            final org.hbird.xtce.castor.InputAlgorithmTypeInputSetParameterInstanceRef parameterInstanceRef) {
         this._parameterInstanceRef = parameterInstanceRef;
         this._choiceValue = parameterInstanceRef;
     }

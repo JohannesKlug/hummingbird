@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types.descriptors;
+package org.hbird.xtce.castor.types.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.types.SignificanceTypeConsequenceLevelType;
+import org.hbird.xtce.castor.types.SignificanceTypeConsequenceLevelType;
 
 /**
  * Class SignificanceTypeConsequenceLevelTypeDescriptor.
@@ -98,7 +98,7 @@ public class SignificanceTypeConsequenceLevelTypeDescriptor extends org.exolab.c
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.types.SignificanceTypeConsequenceLevelType.class;
+        return org.hbird.xtce.castor.types.SignificanceTypeConsequenceLevelType.class;
     }
 
     /**

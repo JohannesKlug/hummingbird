@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.logica.hummingbird.validation.packet;
+package org.hbird.validation.packet;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 
-import com.logica.hummingbird.telemetry.DefaultSpaceParameter;
-import com.logica.hummingbird.telemetry.HummingbirdPacket;
+import org.hbird.telemetry.DefaultSpaceParameter;
+import org.hbird.telemetry.HummingbirdPacket;
 
 public class PeriodicTimeGapCheck implements Processor {
 

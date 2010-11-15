@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class SyncStrategy.
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class VariableFrameStreamTypeSyncStrategy extends com.logica.hummingbird.xtce.castor.SyncStrategyType 
+public class VariableFrameStreamTypeSyncStrategy extends org.hbird.xtce.castor.SyncStrategyType 
 implements java.io.Serializable
 {
 
@@ -25,7 +25,7 @@ implements java.io.Serializable
     /**
      * The pattern of bits used to look for frame synchronization.
      */
-    private com.logica.hummingbird.xtce.castor.Flag _flag;
+    private org.hbird.xtce.castor.Flag _flag;
 
 
       //----------------/
@@ -48,7 +48,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'Flag'.
      */
-    public com.logica.hummingbird.xtce.castor.Flag getFlag(
+    public org.hbird.xtce.castor.Flag getFlag(
     ) {
         return this._flag;
     }
@@ -108,7 +108,7 @@ implements java.io.Serializable
      * @param flag the value of field 'flag'.
      */
     public void setFlag(
-            final com.logica.hummingbird.xtce.castor.Flag flag) {
+            final org.hbird.xtce.castor.Flag flag) {
         this._flag = flag;
     }
 
@@ -121,12 +121,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.VariableFrameStreamTypeSyncStrategy
+     * org.hbird.xtce.castor.VariableFrameStreamTypeSyncStrategy
      */
-    public static com.logica.hummingbird.xtce.castor.VariableFrameStreamTypeSyncStrategy unmarshal(
+    public static org.hbird.xtce.castor.VariableFrameStreamTypeSyncStrategy unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.VariableFrameStreamTypeSyncStrategy) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.VariableFrameStreamTypeSyncStrategy.class, reader);
+        return (org.hbird.xtce.castor.VariableFrameStreamTypeSyncStrategy) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.VariableFrameStreamTypeSyncStrategy.class, reader);
     }
 
     /**

@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ParameterRefType;
+import org.hbird.xtce.castor.ParameterRefType;
 
 /**
  * Class ParameterRefTypeDescriptor.
@@ -190,7 +190,7 @@ public class ParameterRefTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ParameterRefType.class;
+        return org.hbird.xtce.castor.ParameterRefType.class;
     }
 
     /**

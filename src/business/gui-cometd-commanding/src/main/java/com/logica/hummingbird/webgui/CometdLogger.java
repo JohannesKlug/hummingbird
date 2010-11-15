@@ -1,4 +1,4 @@
-package com.logica.hummingbird.webgui;
+package org.hbird.webgui;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 
-import com.logica.hummingbird.formatter.HeaderFields;
+import org.hbird.formatter.HeaderFields;
 
 public class CometdLogger {
 

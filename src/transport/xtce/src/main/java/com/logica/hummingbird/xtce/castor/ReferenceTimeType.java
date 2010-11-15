@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Most time values are relative to another time e.g. seconds are
@@ -32,7 +32,7 @@ public class ReferenceTimeType implements java.io.Serializable {
     /**
      * Field _offsetFrom.
      */
-    private com.logica.hummingbird.xtce.castor.OffsetFrom _offsetFrom;
+    private org.hbird.xtce.castor.OffsetFrom _offsetFrom;
 
     /**
      * Field _epoch.
@@ -80,7 +80,7 @@ public class ReferenceTimeType implements java.io.Serializable {
      * 
      * @return the value of field 'OffsetFrom'.
      */
-    public com.logica.hummingbird.xtce.castor.OffsetFrom getOffsetFrom(
+    public org.hbird.xtce.castor.OffsetFrom getOffsetFrom(
     ) {
         return this._offsetFrom;
     }
@@ -149,7 +149,7 @@ public class ReferenceTimeType implements java.io.Serializable {
      * @param offsetFrom the value of field 'offsetFrom'.
      */
     public void setOffsetFrom(
-            final com.logica.hummingbird.xtce.castor.OffsetFrom offsetFrom) {
+            final org.hbird.xtce.castor.OffsetFrom offsetFrom) {
         this._offsetFrom = offsetFrom;
         this._choiceValue = offsetFrom;
     }
@@ -163,12 +163,12 @@ public class ReferenceTimeType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ReferenceTimeType
+     * org.hbird.xtce.castor.ReferenceTimeType
      */
-    public static com.logica.hummingbird.xtce.castor.ReferenceTimeType unmarshal(
+    public static org.hbird.xtce.castor.ReferenceTimeType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ReferenceTimeType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ReferenceTimeType.class, reader);
+        return (org.hbird.xtce.castor.ReferenceTimeType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ReferenceTimeType.class, reader);
     }
 
     /**

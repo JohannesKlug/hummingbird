@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A trigger is used to initiate the processing of some algorithm.
@@ -41,7 +41,7 @@ public class TriggerType implements java.io.Serializable {
     /**
      * Field _items.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.TriggerTypeItem> _items;
+    private java.util.List<org.hbird.xtce.castor.TriggerTypeItem> _items;
 
 
       //----------------/
@@ -50,7 +50,7 @@ public class TriggerType implements java.io.Serializable {
 
     public TriggerType() {
         super();
-        this._items = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.TriggerTypeItem>();
+        this._items = new java.util.ArrayList<org.hbird.xtce.castor.TriggerTypeItem>();
     }
 
 
@@ -66,7 +66,7 @@ public class TriggerType implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addTriggerTypeItem(
-            final com.logica.hummingbird.xtce.castor.TriggerTypeItem vTriggerTypeItem)
+            final org.hbird.xtce.castor.TriggerTypeItem vTriggerTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         this._items.add(vTriggerTypeItem);
     }
@@ -81,7 +81,7 @@ public class TriggerType implements java.io.Serializable {
      */
     public void addTriggerTypeItem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.TriggerTypeItem vTriggerTypeItem)
+            final org.hbird.xtce.castor.TriggerTypeItem vTriggerTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         this._items.add(index, vTriggerTypeItem);
     }
@@ -99,7 +99,7 @@ public class TriggerType implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.TriggerTypeItem> enumerateTriggerTypeItem(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.TriggerTypeItem> enumerateTriggerTypeItem(
     ) {
         return java.util.Collections.enumeration(this._items);
     }
@@ -131,10 +131,10 @@ public class TriggerType implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.TriggerTypeItem at the
+     * org.hbird.xtce.castor.TriggerTypeItem at the
      * given index
      */
-    public com.logica.hummingbird.xtce.castor.TriggerTypeItem getTriggerTypeItem(
+    public org.hbird.xtce.castor.TriggerTypeItem getTriggerTypeItem(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -142,7 +142,7 @@ public class TriggerType implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getTriggerTypeItem: Index value '" + index + "' not in range [0.." + (this._items.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.TriggerTypeItem) _items.get(index);
+        return (org.hbird.xtce.castor.TriggerTypeItem) _items.get(index);
     }
 
     /**
@@ -155,10 +155,10 @@ public class TriggerType implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.TriggerTypeItem[] getTriggerTypeItem(
+    public org.hbird.xtce.castor.TriggerTypeItem[] getTriggerTypeItem(
     ) {
-        com.logica.hummingbird.xtce.castor.TriggerTypeItem[] array = new com.logica.hummingbird.xtce.castor.TriggerTypeItem[0];
-        return (com.logica.hummingbird.xtce.castor.TriggerTypeItem[]) this._items.toArray(array);
+        org.hbird.xtce.castor.TriggerTypeItem[] array = new org.hbird.xtce.castor.TriggerTypeItem[0];
+        return (org.hbird.xtce.castor.TriggerTypeItem[]) this._items.toArray(array);
     }
 
     /**
@@ -202,7 +202,7 @@ public class TriggerType implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.TriggerTypeItem> iterateTriggerTypeItem(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.TriggerTypeItem> iterateTriggerTypeItem(
     ) {
         return this._items.iterator();
     }
@@ -253,7 +253,7 @@ public class TriggerType implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeTriggerTypeItem(
-            final com.logica.hummingbird.xtce.castor.TriggerTypeItem vTriggerTypeItem) {
+            final org.hbird.xtce.castor.TriggerTypeItem vTriggerTypeItem) {
         boolean removed = _items.remove(vTriggerTypeItem);
         return removed;
     }
@@ -264,10 +264,10 @@ public class TriggerType implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.TriggerTypeItem removeTriggerTypeItemAt(
+    public org.hbird.xtce.castor.TriggerTypeItem removeTriggerTypeItemAt(
             final int index) {
         java.lang.Object obj = this._items.remove(index);
-        return (com.logica.hummingbird.xtce.castor.TriggerTypeItem) obj;
+        return (org.hbird.xtce.castor.TriggerTypeItem) obj;
     }
 
     /**
@@ -301,7 +301,7 @@ public class TriggerType implements java.io.Serializable {
      */
     public void setTriggerTypeItem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.TriggerTypeItem vTriggerTypeItem)
+            final org.hbird.xtce.castor.TriggerTypeItem vTriggerTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._items.size()) {
@@ -317,7 +317,7 @@ public class TriggerType implements java.io.Serializable {
      * @param vTriggerTypeItemArray
      */
     public void setTriggerTypeItem(
-            final com.logica.hummingbird.xtce.castor.TriggerTypeItem[] vTriggerTypeItemArray) {
+            final org.hbird.xtce.castor.TriggerTypeItem[] vTriggerTypeItemArray) {
         //-- copy array
         _items.clear();
 
@@ -335,12 +335,12 @@ public class TriggerType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.TriggerType
+     * org.hbird.xtce.castor.TriggerType
      */
-    public static com.logica.hummingbird.xtce.castor.TriggerType unmarshal(
+    public static org.hbird.xtce.castor.TriggerType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.TriggerType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.TriggerType.class, reader);
+        return (org.hbird.xtce.castor.TriggerType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.TriggerType.class, reader);
     }
 
     /**

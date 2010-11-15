@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.LocationInContainerInBits;
+import org.hbird.xtce.castor.LocationInContainerInBits;
 
 /**
  * Class LocationInContainerInBitsDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class LocationInContainerInBitsDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.IntegerValueTypeDescriptor {
+public class LocationInContainerInBitsDescriptor extends org.hbird.xtce.castor.descriptors.IntegerValueTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class LocationInContainerInBitsDescriptor extends com.logica.hummingbird.
 
     public LocationInContainerInBitsDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.IntegerValueTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.IntegerValueTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "LocationInContainerInBits";
         _elementDefinition = true;
@@ -67,7 +67,7 @@ public class LocationInContainerInBitsDescriptor extends com.logica.hummingbird.
         //-- initialize attribute descriptors
 
         //-- _referenceLocation
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType.class, "_referenceLocation", "referenceLocation", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType.class, "_referenceLocation", "referenceLocation", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -82,7 +82,7 @@ public class LocationInContainerInBitsDescriptor extends com.logica.hummingbird.
             {
                 try {
                     LocationInContainerInBits target = (LocationInContainerInBits) object;
-                    target.setReferenceLocation( (com.logica.hummingbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType) value);
+                    target.setReferenceLocation( (org.hbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -93,7 +93,7 @@ public class LocationInContainerInBitsDescriptor extends com.logica.hummingbird.
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("LocationInContainerInBitsReferenceLocationType");
         desc.setHandler(handler);
@@ -148,7 +148,7 @@ public class LocationInContainerInBitsDescriptor extends com.logica.hummingbird.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.LocationInContainerInBits.class;
+        return org.hbird.xtce.castor.LocationInContainerInBits.class;
     }
 
     /**

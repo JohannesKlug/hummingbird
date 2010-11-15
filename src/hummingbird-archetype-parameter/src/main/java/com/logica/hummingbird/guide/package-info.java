@@ -1,4 +1,4 @@
-package com.logica.hummingbird.guide;
+package org.hbird.guide;
 /**
  * @TITLE Getting Started Guide
  * h1. Getting Started with Hummingbird development
@@ -78,13 +78,13 @@ package com.logica.hummingbird.guide;
  * Enter the root directory of Hummingbird. Then enter the command (one line)
  * 
  * bq. mvn archetype:create                                                                         
- * -DarchetypeGroupId=com.logica.hummingbird                        
+ * -DarchetypeGroupId=org.hbird                        
  * -DarchetypeArtifactId=hummingbird-archetype-parameter        
  * -DarchetypeVersion=0.0.2                                 
- * -DgroupId=com.logica.hummingbird                                      
+ * -DgroupId=org.hbird                                      
  * -DartifactId=[Name of component]
  * 
- * Notice that on Windows systems the arguments must be within quotes, i.e. "-DarchetypeGroupId=com.logica.hummingbird".
+ * Notice that on Windows systems the arguments must be within quotes, i.e. "-DarchetypeGroupId=org.hbird".
  * @CATEGORY Getting Started Guide
  * @END
  * 

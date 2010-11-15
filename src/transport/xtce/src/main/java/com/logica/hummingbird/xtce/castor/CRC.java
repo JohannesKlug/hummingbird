@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Cyclic Redundancy Check definition. Legal values for
@@ -34,12 +34,12 @@ public class CRC implements java.io.Serializable {
     /**
      * Field _reference.
      */
-    private com.logica.hummingbird.xtce.castor.types.CRCReferenceType _reference = com.logica.hummingbird.xtce.castor.types.CRCReferenceType.fromValue("start");
+    private org.hbird.xtce.castor.types.CRCReferenceType _reference = org.hbird.xtce.castor.types.CRCReferenceType.fromValue("start");
 
     /**
      * Field _polynomial.
      */
-    private com.logica.hummingbird.xtce.castor.Polynomial _polynomial;
+    private org.hbird.xtce.castor.Polynomial _polynomial;
 
 
       //----------------/
@@ -48,7 +48,7 @@ public class CRC implements java.io.Serializable {
 
     public CRC() {
         super();
-        setReference(com.logica.hummingbird.xtce.castor.types.CRCReferenceType.fromValue("start"));
+        setReference(org.hbird.xtce.castor.types.CRCReferenceType.fromValue("start"));
     }
 
 
@@ -78,7 +78,7 @@ public class CRC implements java.io.Serializable {
      * 
      * @return the value of field 'Polynomial'.
      */
-    public com.logica.hummingbird.xtce.castor.Polynomial getPolynomial(
+    public org.hbird.xtce.castor.Polynomial getPolynomial(
     ) {
         return this._polynomial;
     }
@@ -88,7 +88,7 @@ public class CRC implements java.io.Serializable {
      * 
      * @return the value of field 'Reference'.
      */
-    public com.logica.hummingbird.xtce.castor.types.CRCReferenceType getReference(
+    public org.hbird.xtce.castor.types.CRCReferenceType getReference(
     ) {
         return this._reference;
     }
@@ -168,7 +168,7 @@ public class CRC implements java.io.Serializable {
      * @param polynomial the value of field 'polynomial'.
      */
     public void setPolynomial(
-            final com.logica.hummingbird.xtce.castor.Polynomial polynomial) {
+            final org.hbird.xtce.castor.Polynomial polynomial) {
         this._polynomial = polynomial;
     }
 
@@ -178,7 +178,7 @@ public class CRC implements java.io.Serializable {
      * @param reference the value of field 'reference'.
      */
     public void setReference(
-            final com.logica.hummingbird.xtce.castor.types.CRCReferenceType reference) {
+            final org.hbird.xtce.castor.types.CRCReferenceType reference) {
         this._reference = reference;
     }
 
@@ -190,12 +190,12 @@ public class CRC implements java.io.Serializable {
      * null or if any SAXException is thrown during marshaling
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
-     * @return the unmarshaled com.logica.hummingbird.xtce.castor.CR
+     * @return the unmarshaled org.hbird.xtce.castor.CR
      */
-    public static com.logica.hummingbird.xtce.castor.CRC unmarshal(
+    public static org.hbird.xtce.castor.CRC unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.CRC) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.CRC.class, reader);
+        return (org.hbird.xtce.castor.CRC) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.CRC.class, reader);
     }
 
     /**

@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.StaticAlarmRanges;
+import org.hbird.xtce.castor.StaticAlarmRanges;
 
 /**
  * Class StaticAlarmRangesDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class StaticAlarmRangesDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.AlarmRangesTypeDescriptor {
+public class StaticAlarmRangesDescriptor extends org.hbird.xtce.castor.descriptors.AlarmRangesTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class StaticAlarmRangesDescriptor extends com.logica.hummingbird.xtce.cas
 
     public StaticAlarmRangesDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.AlarmRangesTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.AlarmRangesTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "StaticAlarmRanges";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class StaticAlarmRangesDescriptor extends com.logica.hummingbird.xtce.cas
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.StaticAlarmRanges.class;
+        return org.hbird.xtce.castor.StaticAlarmRanges.class;
     }
 
     /**

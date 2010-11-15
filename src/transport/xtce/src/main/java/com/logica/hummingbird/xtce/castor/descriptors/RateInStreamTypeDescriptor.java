@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.RateInStreamType;
+import org.hbird.xtce.castor.RateInStreamType;
 
 /**
  * Class RateInStreamTypeDescriptor.
@@ -66,7 +66,7 @@ public class RateInStreamTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
         //-- initialize attribute descriptors
 
         //-- _basis
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.RateInStreamTypeBasisType.class, "_basis", "basis", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.RateInStreamTypeBasisType.class, "_basis", "basis", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -81,7 +81,7 @@ public class RateInStreamTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
             {
                 try {
                     RateInStreamType target = (RateInStreamType) object;
-                    target.setBasis( (com.logica.hummingbird.xtce.castor.types.RateInStreamTypeBasisType) value);
+                    target.setBasis( (org.hbird.xtce.castor.types.RateInStreamTypeBasisType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -92,7 +92,7 @@ public class RateInStreamTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.RateInStreamTypeBasisType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.RateInStreamTypeBasisType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("RateInStreamTypeBasisType");
         desc.setHandler(handler);
@@ -240,7 +240,7 @@ public class RateInStreamTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.RateInStreamType.class;
+        return org.hbird.xtce.castor.RateInStreamType.class;
     }
 
     /**

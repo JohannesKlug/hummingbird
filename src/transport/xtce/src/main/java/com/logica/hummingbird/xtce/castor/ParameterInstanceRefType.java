@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A reference to an instance of a Parameter. Used when the value
@@ -18,7 +18,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class ParameterInstanceRefType extends com.logica.hummingbird.xtce.castor.ParameterRefType 
+public class ParameterInstanceRefType extends org.hbird.xtce.castor.ParameterRefType 
 implements java.io.Serializable
 {
 
@@ -240,12 +240,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ParameterInstanceRefType
+     * org.hbird.xtce.castor.ParameterInstanceRefType
      */
-    public static com.logica.hummingbird.xtce.castor.ParameterInstanceRefType unmarshal(
+    public static org.hbird.xtce.castor.ParameterInstanceRefType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ParameterInstanceRefType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ParameterInstanceRefType.class, reader);
+        return (org.hbird.xtce.castor.ParameterInstanceRefType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ParameterInstanceRefType.class, reader);
     }
 
     /**

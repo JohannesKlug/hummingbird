@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.LeadingSize;
+import org.hbird.xtce.castor.LeadingSize;
 
 /**
  * Class LeadingSizeDescriptor.
@@ -152,7 +152,7 @@ public class LeadingSizeDescriptor extends org.exolab.castor.xml.util.XMLClassDe
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.LeadingSize.class;
+        return org.hbird.xtce.castor.LeadingSize.class;
     }
 
     /**

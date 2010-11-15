@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types.descriptors;
+package org.hbird.xtce.castor.types.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.types.EncodingUnitsType;
+import org.hbird.xtce.castor.types.EncodingUnitsType;
 
 /**
  * Class EncodingUnitsTypeDescriptor.
@@ -98,7 +98,7 @@ public class EncodingUnitsTypeDescriptor extends org.exolab.castor.xml.util.XMLC
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.types.EncodingUnitsType.class;
+        return org.hbird.xtce.castor.types.EncodingUnitsType.class;
     }
 
     /**

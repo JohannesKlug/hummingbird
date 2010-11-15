@@ -36,7 +36,7 @@
 	</bean>
 
 	<!-- Create the bean. -->
-	<bean id="myBean" class="com.logica.hummingbird.${package}.ParameterProcessor"/>
+	<bean id="myBean" class="org.hbird.${package}.ParameterProcessor"/>
 
 	<!-- The context. Notice that the context and the producer are both named. This allows the @Autowired annotation
 	to be used in the Processor. -->

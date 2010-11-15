@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.logica.hummingbird.command.buffer;
+package org.hbird.command.buffer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +25,8 @@ import org.apache.camel.Message;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.logica.hummingbird.formatter.ExchangeFormatter;
-import com.logica.hummingbird.type.CommandDefinition;
+import org.hbird.formatter.ExchangeFormatter;
+import org.hbird.type.CommandDefinition;
 
 /**
  * Camel 'Splitter' for loading command definitions from a Spring bean file and inject

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class Derivation.
@@ -87,12 +87,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.Derivation
+     * org.hbird.xtce.castor.Derivation
      */
-    public static com.logica.hummingbird.xtce.castor.Derivation unmarshal(
+    public static org.hbird.xtce.castor.Derivation unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.Derivation) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.Derivation.class, reader);
+        return (org.hbird.xtce.castor.Derivation) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.Derivation.class, reader);
     }
 
     /**

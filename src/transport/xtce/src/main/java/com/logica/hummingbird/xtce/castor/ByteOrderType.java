@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * An ordered list of bytes where the order of the bytes is in
@@ -25,7 +25,7 @@ public class ByteOrderType implements java.io.Serializable {
     /**
      * Field _items.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.ByteOrderTypeItem> _items;
+    private java.util.List<org.hbird.xtce.castor.ByteOrderTypeItem> _items;
 
 
       //----------------/
@@ -34,7 +34,7 @@ public class ByteOrderType implements java.io.Serializable {
 
     public ByteOrderType() {
         super();
-        this._items = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.ByteOrderTypeItem>();
+        this._items = new java.util.ArrayList<org.hbird.xtce.castor.ByteOrderTypeItem>();
     }
 
 
@@ -50,7 +50,7 @@ public class ByteOrderType implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addByteOrderTypeItem(
-            final com.logica.hummingbird.xtce.castor.ByteOrderTypeItem vByteOrderTypeItem)
+            final org.hbird.xtce.castor.ByteOrderTypeItem vByteOrderTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         this._items.add(vByteOrderTypeItem);
     }
@@ -65,7 +65,7 @@ public class ByteOrderType implements java.io.Serializable {
      */
     public void addByteOrderTypeItem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ByteOrderTypeItem vByteOrderTypeItem)
+            final org.hbird.xtce.castor.ByteOrderTypeItem vByteOrderTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         this._items.add(index, vByteOrderTypeItem);
     }
@@ -76,7 +76,7 @@ public class ByteOrderType implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.ByteOrderTypeItem> enumerateByteOrderTypeItem(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.ByteOrderTypeItem> enumerateByteOrderTypeItem(
     ) {
         return java.util.Collections.enumeration(this._items);
     }
@@ -88,10 +88,10 @@ public class ByteOrderType implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.ByteOrderTypeItem at the
+     * org.hbird.xtce.castor.ByteOrderTypeItem at the
      * given index
      */
-    public com.logica.hummingbird.xtce.castor.ByteOrderTypeItem getByteOrderTypeItem(
+    public org.hbird.xtce.castor.ByteOrderTypeItem getByteOrderTypeItem(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -99,7 +99,7 @@ public class ByteOrderType implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getByteOrderTypeItem: Index value '" + index + "' not in range [0.." + (this._items.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.ByteOrderTypeItem) _items.get(index);
+        return (org.hbird.xtce.castor.ByteOrderTypeItem) _items.get(index);
     }
 
     /**
@@ -112,10 +112,10 @@ public class ByteOrderType implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.ByteOrderTypeItem[] getByteOrderTypeItem(
+    public org.hbird.xtce.castor.ByteOrderTypeItem[] getByteOrderTypeItem(
     ) {
-        com.logica.hummingbird.xtce.castor.ByteOrderTypeItem[] array = new com.logica.hummingbird.xtce.castor.ByteOrderTypeItem[0];
-        return (com.logica.hummingbird.xtce.castor.ByteOrderTypeItem[]) this._items.toArray(array);
+        org.hbird.xtce.castor.ByteOrderTypeItem[] array = new org.hbird.xtce.castor.ByteOrderTypeItem[0];
+        return (org.hbird.xtce.castor.ByteOrderTypeItem[]) this._items.toArray(array);
     }
 
     /**
@@ -149,7 +149,7 @@ public class ByteOrderType implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.ByteOrderTypeItem> iterateByteOrderTypeItem(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.ByteOrderTypeItem> iterateByteOrderTypeItem(
     ) {
         return this._items.iterator();
     }
@@ -200,7 +200,7 @@ public class ByteOrderType implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeByteOrderTypeItem(
-            final com.logica.hummingbird.xtce.castor.ByteOrderTypeItem vByteOrderTypeItem) {
+            final org.hbird.xtce.castor.ByteOrderTypeItem vByteOrderTypeItem) {
         boolean removed = _items.remove(vByteOrderTypeItem);
         return removed;
     }
@@ -211,10 +211,10 @@ public class ByteOrderType implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.ByteOrderTypeItem removeByteOrderTypeItemAt(
+    public org.hbird.xtce.castor.ByteOrderTypeItem removeByteOrderTypeItemAt(
             final int index) {
         java.lang.Object obj = this._items.remove(index);
-        return (com.logica.hummingbird.xtce.castor.ByteOrderTypeItem) obj;
+        return (org.hbird.xtce.castor.ByteOrderTypeItem) obj;
     }
 
     /**
@@ -227,7 +227,7 @@ public class ByteOrderType implements java.io.Serializable {
      */
     public void setByteOrderTypeItem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ByteOrderTypeItem vByteOrderTypeItem)
+            final org.hbird.xtce.castor.ByteOrderTypeItem vByteOrderTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._items.size()) {
@@ -243,7 +243,7 @@ public class ByteOrderType implements java.io.Serializable {
      * @param vByteOrderTypeItemArray
      */
     public void setByteOrderTypeItem(
-            final com.logica.hummingbird.xtce.castor.ByteOrderTypeItem[] vByteOrderTypeItemArray) {
+            final org.hbird.xtce.castor.ByteOrderTypeItem[] vByteOrderTypeItemArray) {
         //-- copy array
         _items.clear();
 
@@ -261,12 +261,12 @@ public class ByteOrderType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ByteOrderType
+     * org.hbird.xtce.castor.ByteOrderType
      */
-    public static com.logica.hummingbird.xtce.castor.ByteOrderType unmarshal(
+    public static org.hbird.xtce.castor.ByteOrderType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ByteOrderType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ByteOrderType.class, reader);
+        return (org.hbird.xtce.castor.ByteOrderType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ByteOrderType.class, reader);
     }
 
     /**

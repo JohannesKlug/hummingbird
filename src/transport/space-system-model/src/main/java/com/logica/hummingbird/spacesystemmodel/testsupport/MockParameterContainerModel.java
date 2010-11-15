@@ -1,4 +1,4 @@
-package com.logica.hummingbird.spacesystemmodel.testsupport;
+package org.hbird.spacesystemmodel.testsupport;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,18 +9,18 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.Container;
-import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
-import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
-import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
-import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
-import com.logica.hummingbird.spacesystemmodel.parameters.Parameter;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float64Behaviour;
-import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
-import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
+import org.hbird.spacesystemmodel.Container;
+import org.hbird.spacesystemmodel.ContainerFactory;
+import org.hbird.spacesystemmodel.ContainerImpl;
+import org.hbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import org.hbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.spacesystemmodel.parameters.FloatParameter;
+import org.hbird.spacesystemmodel.parameters.IntegerParameter;
+import org.hbird.spacesystemmodel.parameters.Parameter;
+import org.hbird.spacesystemmodel.parameters.ParameterContainer;
+import org.hbird.spacesystemmodel.parameters.behaviours.Float64Behaviour;
+import org.hbird.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
+import org.hbird.spacesystemmodel.parameters.types.NumberParameterType;
 
 /**
  * This class is used for testing the Container model and anything that uses the SpaceSystemModel. It is a simple

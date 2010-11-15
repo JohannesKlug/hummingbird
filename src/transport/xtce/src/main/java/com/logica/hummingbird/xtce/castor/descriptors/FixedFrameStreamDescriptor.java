@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.FixedFrameStream;
+import org.hbird.xtce.castor.FixedFrameStream;
 
 /**
  * Class FixedFrameStreamDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class FixedFrameStreamDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.FixedFrameStreamTypeDescriptor {
+public class FixedFrameStreamDescriptor extends org.hbird.xtce.castor.descriptors.FixedFrameStreamTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class FixedFrameStreamDescriptor extends com.logica.hummingbird.xtce.cast
 
     public FixedFrameStreamDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.FixedFrameStreamTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.FixedFrameStreamTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "FixedFrameStream";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class FixedFrameStreamDescriptor extends com.logica.hummingbird.xtce.cast
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.FixedFrameStream.class;
+        return org.hbird.xtce.castor.FixedFrameStream.class;
     }
 
     /**

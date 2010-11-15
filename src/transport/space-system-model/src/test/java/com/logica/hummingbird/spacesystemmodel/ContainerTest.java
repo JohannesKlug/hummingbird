@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.logica.hummingbird.spacesystemmodel;
+package org.hbird.spacesystemmodel;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,14 +15,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
-import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
-import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
-import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.spacesystemmodel.testsupport.MockContainerModelFactory;
-import com.logica.hummingbird.util.BitSetUtility;
-import com.logica.hummingbird.util.exceptions.BitSetOperationException;
+import org.hbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import org.hbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.spacesystemmodel.parameters.FloatParameter;
+import org.hbird.spacesystemmodel.parameters.IntegerParameter;
+import org.hbird.spacesystemmodel.parameters.ParameterContainer;
+import org.hbird.spacesystemmodel.testsupport.MockContainerModelFactory;
+import org.hbird.util.BitSetUtility;
+import org.hbird.util.exceptions.BitSetOperationException;
 
 /**
  * The test uses the following BitSets:
@@ -272,7 +272,7 @@ public class ContainerTest {
 
 	/**
 	 * Test method for checking a valid BitSet can be unmarshalled into a collection of Java objects (the Containers)
-	 * {@link com.logica.hummingbird.spacesystemmodel.ContainerImpl#unmarshall(java.util.BitSet)}.
+	 * {@link org.hbird.spacesystemmodel.ContainerImpl#unmarshall(java.util.BitSet)}.
 	 * 
 	 * NOTE: Test Param B (the 64 bit float) is not checked because the {@link TEST_BITSET_STRING} has the packet type
 	 * id set to 555. The model restricts this id to packet type a which only contains test param A (a 32 bit int).
@@ -376,7 +376,7 @@ public class ContainerTest {
 
 	/**
 	 * Tests marshalling a <b>valid</b> population of a Mock Container Model. The Model is populated in the test method.
-	 * {@link com.logica.hummingbird.spacesystemmodel.ContainerImpl#marshall(java.util.BitSet, int)} .
+	 * {@link org.hbird.spacesystemmodel.ContainerImpl#marshall(java.util.BitSet, int)} .
 	 * 
 	 * @throws UnknownContainerNameException
 	 * @throws BitSetOperationException
@@ -498,7 +498,7 @@ public class ContainerTest {
 
 	/**
 	 * Tests marshalling a <b>valid</b> population of a Mock Container Model. The Model is populated in the test method.
-	 * {@link com.logica.hummingbird.spacesystemmodel.ContainerImpl#marshall(java.util.BitSet, int)} .
+	 * {@link org.hbird.spacesystemmodel.ContainerImpl#marshall(java.util.BitSet, int)} .
 	 * 
 	 * @throws UnknownContainerNameException
 	 * @throws BitSetOperationException

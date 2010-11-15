@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class ComparisonCheckTypeChoice.
@@ -24,7 +24,7 @@ public class ComparisonCheckTypeChoice implements java.io.Serializable {
      * Parameter is assumed to be of the same type as the
      * comparison Parameter
      */
-    private com.logica.hummingbird.xtce.castor.ParameterInstanceRef _parameterInstanceRef;
+    private org.hbird.xtce.castor.ParameterInstanceRef _parameterInstanceRef;
 
     /**
      * Value is assumed to be of the same type as the comparison
@@ -54,7 +54,7 @@ public class ComparisonCheckTypeChoice implements java.io.Serializable {
      * 
      * @return the value of field 'ParameterInstanceRef'.
      */
-    public com.logica.hummingbird.xtce.castor.ParameterInstanceRef getParameterInstanceRef(
+    public org.hbird.xtce.castor.ParameterInstanceRef getParameterInstanceRef(
     ) {
         return this._parameterInstanceRef;
     }
@@ -128,7 +128,7 @@ public class ComparisonCheckTypeChoice implements java.io.Serializable {
      * 'parameterInstanceRef'.
      */
     public void setParameterInstanceRef(
-            final com.logica.hummingbird.xtce.castor.ParameterInstanceRef parameterInstanceRef) {
+            final org.hbird.xtce.castor.ParameterInstanceRef parameterInstanceRef) {
         this._parameterInstanceRef = parameterInstanceRef;
     }
 
@@ -153,12 +153,12 @@ public class ComparisonCheckTypeChoice implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ComparisonCheckTypeChoice
+     * org.hbird.xtce.castor.ComparisonCheckTypeChoice
      */
-    public static com.logica.hummingbird.xtce.castor.ComparisonCheckTypeChoice unmarshal(
+    public static org.hbird.xtce.castor.ComparisonCheckTypeChoice unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ComparisonCheckTypeChoice) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ComparisonCheckTypeChoice.class, reader);
+        return (org.hbird.xtce.castor.ComparisonCheckTypeChoice) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ComparisonCheckTypeChoice.class, reader);
     }
 
     /**

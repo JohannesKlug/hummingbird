@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types;
+package org.hbird.xtce.castor.types;
 
 /**
  * Operators to use when testing a boolean condition for a validity
@@ -75,7 +75,7 @@ public enum ComparisonOperatorsType implements java.io.Serializable {
      * @param value
      * @return the constant for this value
      */
-    public static com.logica.hummingbird.xtce.castor.types.ComparisonOperatorsType fromValue(
+    public static org.hbird.xtce.castor.types.ComparisonOperatorsType fromValue(
             final java.lang.String value) {
         for (ComparisonOperatorsType c: ComparisonOperatorsType.values()) {
             if (c.value.equals(value)) {

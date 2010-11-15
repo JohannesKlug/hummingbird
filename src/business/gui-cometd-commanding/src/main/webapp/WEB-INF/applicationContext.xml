@@ -9,7 +9,7 @@
        http://camel.apache.org/schema/spring 
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-	<bean id="converter" class="com.logica.hummingbird.webgui.CometdLogger"/>
+	<bean id="converter" class="org.hbird.webgui.CometdLogger"/>
 
 	<camelContext id="commandingContext" xmlns="http://camel.apache.org/schema/spring">
 

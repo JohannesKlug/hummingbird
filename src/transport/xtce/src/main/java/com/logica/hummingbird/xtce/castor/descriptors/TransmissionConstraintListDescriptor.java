@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.TransmissionConstraintList;
+import org.hbird.xtce.castor.TransmissionConstraintList;
 
 /**
  * Class TransmissionConstraintListDescriptor.
@@ -71,7 +71,7 @@ public class TransmissionConstraintListDescriptor extends org.exolab.castor.xml.
         //-- initialize element descriptors
 
         //-- _transmissionConstraintList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.TransmissionConstraint.class, "_transmissionConstraintList", "TransmissionConstraint", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.TransmissionConstraint.class, "_transmissionConstraintList", "TransmissionConstraint", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class TransmissionConstraintListDescriptor extends org.exolab.castor.xml.
             {
                 try {
                     TransmissionConstraintList target = (TransmissionConstraintList) object;
-                    target.addTransmissionConstraint( (com.logica.hummingbird.xtce.castor.TransmissionConstraint) value);
+                    target.addTransmissionConstraint( (org.hbird.xtce.castor.TransmissionConstraint) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -102,11 +102,11 @@ public class TransmissionConstraintListDescriptor extends org.exolab.castor.xml.
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.TransmissionConstraint();
+                return new org.hbird.xtce.castor.TransmissionConstraint();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.TransmissionConstraint");
+        desc.setComponentType("org.hbird.xtce.castor.TransmissionConstraint");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -158,7 +158,7 @@ public class TransmissionConstraintListDescriptor extends org.exolab.castor.xml.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.TransmissionConstraintList.class;
+        return org.hbird.xtce.castor.TransmissionConstraintList.class;
     }
 
     /**

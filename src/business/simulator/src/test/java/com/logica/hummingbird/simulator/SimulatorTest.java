@@ -1,4 +1,4 @@
-package com.logica.hummingbird.simulator;
+package org.hbird.simulator;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.component.mock.MockEndpoint;
@@ -7,7 +7,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
-import com.logica.hummingbird.simulator.waveforms.FlatWaveform;
+import org.hbird.simulator.waveforms.FlatWaveform;
 
 /** Will read the Spring configuration of the route from the local file '[filename]-context.xml'*/
 @ContextConfiguration (locations={"/SimulatorTest-context.xml"})

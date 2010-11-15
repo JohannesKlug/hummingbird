@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ArgumementArrayType;
+import org.hbird.xtce.castor.ArgumementArrayType;
 
 /**
  * Class ArgumementArrayTypeDescriptor.
@@ -196,7 +196,7 @@ public class ArgumementArrayTypeDescriptor extends org.exolab.castor.xml.util.XM
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ArgumementArrayType.class;
+        return org.hbird.xtce.castor.ArgumementArrayType.class;
     }
 
     /**

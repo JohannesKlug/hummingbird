@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.AlarmConditionsType;
+import org.hbird.xtce.castor.AlarmConditionsType;
 
 /**
  * Class AlarmConditionsTypeDescriptor.
@@ -71,7 +71,7 @@ public class AlarmConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
         //-- initialize element descriptors
 
         //-- _watchAlarm
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.WatchAlarm.class, "_watchAlarm", "WatchAlarm", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.WatchAlarm.class, "_watchAlarm", "WatchAlarm", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class AlarmConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     AlarmConditionsType target = (AlarmConditionsType) object;
-                    target.setWatchAlarm( (com.logica.hummingbird.xtce.castor.WatchAlarm) value);
+                    target.setWatchAlarm( (org.hbird.xtce.castor.WatchAlarm) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class AlarmConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.WatchAlarm();
+                return new org.hbird.xtce.castor.WatchAlarm();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.WatchAlarm");
+        desc.setSchemaType("org.hbird.xtce.castor.WatchAlarm");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -110,7 +110,7 @@ public class AlarmConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _warningAlarm
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.WarningAlarm.class, "_warningAlarm", "WarningAlarm", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.WarningAlarm.class, "_warningAlarm", "WarningAlarm", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -125,7 +125,7 @@ public class AlarmConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     AlarmConditionsType target = (AlarmConditionsType) object;
-                    target.setWarningAlarm( (com.logica.hummingbird.xtce.castor.WarningAlarm) value);
+                    target.setWarningAlarm( (org.hbird.xtce.castor.WarningAlarm) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -133,10 +133,10 @@ public class AlarmConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.WarningAlarm();
+                return new org.hbird.xtce.castor.WarningAlarm();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.WarningAlarm");
+        desc.setSchemaType("org.hbird.xtce.castor.WarningAlarm");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -149,7 +149,7 @@ public class AlarmConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _distressAlarm
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.DistressAlarm.class, "_distressAlarm", "DistressAlarm", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.DistressAlarm.class, "_distressAlarm", "DistressAlarm", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -164,7 +164,7 @@ public class AlarmConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     AlarmConditionsType target = (AlarmConditionsType) object;
-                    target.setDistressAlarm( (com.logica.hummingbird.xtce.castor.DistressAlarm) value);
+                    target.setDistressAlarm( (org.hbird.xtce.castor.DistressAlarm) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -172,10 +172,10 @@ public class AlarmConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.DistressAlarm();
+                return new org.hbird.xtce.castor.DistressAlarm();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.DistressAlarm");
+        desc.setSchemaType("org.hbird.xtce.castor.DistressAlarm");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -188,7 +188,7 @@ public class AlarmConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _critialAlarm
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.CritialAlarm.class, "_critialAlarm", "CritialAlarm", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.CritialAlarm.class, "_critialAlarm", "CritialAlarm", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -203,7 +203,7 @@ public class AlarmConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     AlarmConditionsType target = (AlarmConditionsType) object;
-                    target.setCritialAlarm( (com.logica.hummingbird.xtce.castor.CritialAlarm) value);
+                    target.setCritialAlarm( (org.hbird.xtce.castor.CritialAlarm) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -211,10 +211,10 @@ public class AlarmConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.CritialAlarm();
+                return new org.hbird.xtce.castor.CritialAlarm();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.CritialAlarm");
+        desc.setSchemaType("org.hbird.xtce.castor.CritialAlarm");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -227,7 +227,7 @@ public class AlarmConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
         }
         desc.setValidator(fieldValidator);
         //-- _severeAlarm
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.SevereAlarm.class, "_severeAlarm", "SevereAlarm", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.SevereAlarm.class, "_severeAlarm", "SevereAlarm", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -242,7 +242,7 @@ public class AlarmConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     AlarmConditionsType target = (AlarmConditionsType) object;
-                    target.setSevereAlarm( (com.logica.hummingbird.xtce.castor.SevereAlarm) value);
+                    target.setSevereAlarm( (org.hbird.xtce.castor.SevereAlarm) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -250,10 +250,10 @@ public class AlarmConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.SevereAlarm();
+                return new org.hbird.xtce.castor.SevereAlarm();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.SevereAlarm");
+        desc.setSchemaType("org.hbird.xtce.castor.SevereAlarm");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -303,7 +303,7 @@ public class AlarmConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.AlarmConditionsType.class;
+        return org.hbird.xtce.castor.AlarmConditionsType.class;
     }
 
     /**

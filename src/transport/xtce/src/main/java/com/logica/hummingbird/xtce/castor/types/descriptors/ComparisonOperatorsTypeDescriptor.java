@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types.descriptors;
+package org.hbird.xtce.castor.types.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.types.ComparisonOperatorsType;
+import org.hbird.xtce.castor.types.ComparisonOperatorsType;
 
 /**
  * Class ComparisonOperatorsTypeDescriptor.
@@ -98,7 +98,7 @@ public class ComparisonOperatorsTypeDescriptor extends org.exolab.castor.xml.uti
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.types.ComparisonOperatorsType.class;
+        return org.hbird.xtce.castor.types.ComparisonOperatorsType.class;
     }
 
     /**

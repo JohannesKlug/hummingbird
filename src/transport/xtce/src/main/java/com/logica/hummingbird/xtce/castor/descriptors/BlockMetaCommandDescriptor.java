@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.BlockMetaCommand;
+import org.hbird.xtce.castor.BlockMetaCommand;
 
 /**
  * Class BlockMetaCommandDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class BlockMetaCommandDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
+public class BlockMetaCommandDescriptor extends org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class BlockMetaCommandDescriptor extends com.logica.hummingbird.xtce.cast
 
     public BlockMetaCommandDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "BlockMetaCommand";
         _elementDefinition = true;
@@ -72,7 +72,7 @@ public class BlockMetaCommandDescriptor extends com.logica.hummingbird.xtce.cast
         //-- initialize element descriptors
 
         //-- _metaCommandStepList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.MetaCommandStepList.class, "_metaCommandStepList", "MetaCommandStepList", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.MetaCommandStepList.class, "_metaCommandStepList", "MetaCommandStepList", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class BlockMetaCommandDescriptor extends com.logica.hummingbird.xtce.cast
             {
                 try {
                     BlockMetaCommand target = (BlockMetaCommand) object;
-                    target.setMetaCommandStepList( (com.logica.hummingbird.xtce.castor.MetaCommandStepList) value);
+                    target.setMetaCommandStepList( (org.hbird.xtce.castor.MetaCommandStepList) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,10 +95,10 @@ public class BlockMetaCommandDescriptor extends com.logica.hummingbird.xtce.cast
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.MetaCommandStepList();
+                return new org.hbird.xtce.castor.MetaCommandStepList();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.MetaCommandStepList");
+        desc.setSchemaType("org.hbird.xtce.castor.MetaCommandStepList");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -153,7 +153,7 @@ public class BlockMetaCommandDescriptor extends com.logica.hummingbird.xtce.cast
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.BlockMetaCommand.class;
+        return org.hbird.xtce.castor.BlockMetaCommand.class;
     }
 
     /**

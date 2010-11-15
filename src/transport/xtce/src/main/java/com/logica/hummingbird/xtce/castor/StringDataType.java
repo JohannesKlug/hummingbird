@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Contains a String Value
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class StringDataType extends com.logica.hummingbird.xtce.castor.BaseDataType 
+public class StringDataType extends org.hbird.xtce.castor.BaseDataType 
 implements java.io.Serializable
 {
 
@@ -35,22 +35,22 @@ implements java.io.Serializable
     /**
      * Field _characterWidth.
      */
-    private com.logica.hummingbird.xtce.castor.types.BaseDataTypeCharacterWidthType _characterWidth;
+    private org.hbird.xtce.castor.types.BaseDataTypeCharacterWidthType _characterWidth;
 
     /**
      * Field _sizeRangeInCharacters.
      */
-    private com.logica.hummingbird.xtce.castor.SizeRangeInCharacters _sizeRangeInCharacters;
+    private org.hbird.xtce.castor.SizeRangeInCharacters _sizeRangeInCharacters;
 
     /**
      * Field _defaultCalibrator.
      */
-    private com.logica.hummingbird.xtce.castor.DefaultCalibrator _defaultCalibrator;
+    private org.hbird.xtce.castor.DefaultCalibrator _defaultCalibrator;
 
     /**
      * Field _contextCalibratorList.
      */
-    private com.logica.hummingbird.xtce.castor.ContextCalibratorList _contextCalibratorList;
+    private org.hbird.xtce.castor.ContextCalibratorList _contextCalibratorList;
 
 
       //----------------/
@@ -71,7 +71,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'CharacterWidth'.
      */
-    public com.logica.hummingbird.xtce.castor.types.BaseDataTypeCharacterWidthType getCharacterWidth(
+    public org.hbird.xtce.castor.types.BaseDataTypeCharacterWidthType getCharacterWidth(
     ) {
         return this._characterWidth;
     }
@@ -81,7 +81,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ContextCalibratorList'.
      */
-    public com.logica.hummingbird.xtce.castor.ContextCalibratorList getContextCalibratorList(
+    public org.hbird.xtce.castor.ContextCalibratorList getContextCalibratorList(
     ) {
         return this._contextCalibratorList;
     }
@@ -91,7 +91,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'DefaultCalibrator'.
      */
-    public com.logica.hummingbird.xtce.castor.DefaultCalibrator getDefaultCalibrator(
+    public org.hbird.xtce.castor.DefaultCalibrator getDefaultCalibrator(
     ) {
         return this._defaultCalibrator;
     }
@@ -121,7 +121,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'SizeRangeInCharacters'.
      */
-    public com.logica.hummingbird.xtce.castor.SizeRangeInCharacters getSizeRangeInCharacters(
+    public org.hbird.xtce.castor.SizeRangeInCharacters getSizeRangeInCharacters(
     ) {
         return this._sizeRangeInCharacters;
     }
@@ -179,7 +179,7 @@ implements java.io.Serializable
      * @param characterWidth the value of field 'characterWidth'.
      */
     public void setCharacterWidth(
-            final com.logica.hummingbird.xtce.castor.types.BaseDataTypeCharacterWidthType characterWidth) {
+            final org.hbird.xtce.castor.types.BaseDataTypeCharacterWidthType characterWidth) {
         this._characterWidth = characterWidth;
     }
 
@@ -190,7 +190,7 @@ implements java.io.Serializable
      * 'contextCalibratorList'.
      */
     public void setContextCalibratorList(
-            final com.logica.hummingbird.xtce.castor.ContextCalibratorList contextCalibratorList) {
+            final org.hbird.xtce.castor.ContextCalibratorList contextCalibratorList) {
         this._contextCalibratorList = contextCalibratorList;
     }
 
@@ -201,7 +201,7 @@ implements java.io.Serializable
      * 'defaultCalibrator'.
      */
     public void setDefaultCalibrator(
-            final com.logica.hummingbird.xtce.castor.DefaultCalibrator defaultCalibrator) {
+            final org.hbird.xtce.castor.DefaultCalibrator defaultCalibrator) {
         this._defaultCalibrator = defaultCalibrator;
     }
 
@@ -233,7 +233,7 @@ implements java.io.Serializable
      * 'sizeRangeInCharacters'.
      */
     public void setSizeRangeInCharacters(
-            final com.logica.hummingbird.xtce.castor.SizeRangeInCharacters sizeRangeInCharacters) {
+            final org.hbird.xtce.castor.SizeRangeInCharacters sizeRangeInCharacters) {
         this._sizeRangeInCharacters = sizeRangeInCharacters;
     }
 
@@ -246,12 +246,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.StringDataType
+     * org.hbird.xtce.castor.StringDataType
      */
-    public static com.logica.hummingbird.xtce.castor.StringDataType unmarshal(
+    public static org.hbird.xtce.castor.StringDataType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.StringDataType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.StringDataType.class, reader);
+        return (org.hbird.xtce.castor.StringDataType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.StringDataType.class, reader);
     }
 
     /**

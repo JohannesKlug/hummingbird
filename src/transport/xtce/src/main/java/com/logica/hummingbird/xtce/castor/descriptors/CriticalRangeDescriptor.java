@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.CriticalRange;
+import org.hbird.xtce.castor.CriticalRange;
 
 /**
  * Class CriticalRangeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class CriticalRangeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor {
+public class CriticalRangeDescriptor extends org.hbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class CriticalRangeDescriptor extends com.logica.hummingbird.xtce.castor.
 
     public CriticalRangeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "CriticalRange";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class CriticalRangeDescriptor extends com.logica.hummingbird.xtce.castor.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.CriticalRange.class;
+        return org.hbird.xtce.castor.CriticalRange.class;
     }
 
     /**

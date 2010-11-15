@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ArrayParameterRefEntryType;
+import org.hbird.xtce.castor.ArrayParameterRefEntryType;
 
 /**
  * Class ArrayParameterRefEntryTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ArrayParameterRefEntryTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor {
+public class ArrayParameterRefEntryTypeDescriptor extends org.hbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ArrayParameterRefEntryTypeDescriptor extends com.logica.hummingbird
 
     public ArrayParameterRefEntryTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ArrayParameterRefEntryType";
         _elementDefinition = false;
@@ -162,7 +162,7 @@ public class ArrayParameterRefEntryTypeDescriptor extends com.logica.hummingbird
         //-- initialize element descriptors
 
         //-- _dimensionList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.DimensionList.class, "_dimensionList", "DimensionList", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.DimensionList.class, "_dimensionList", "DimensionList", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -177,7 +177,7 @@ public class ArrayParameterRefEntryTypeDescriptor extends com.logica.hummingbird
             {
                 try {
                     ArrayParameterRefEntryType target = (ArrayParameterRefEntryType) object;
-                    target.setDimensionList( (com.logica.hummingbird.xtce.castor.DimensionList) value);
+                    target.setDimensionList( (org.hbird.xtce.castor.DimensionList) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -185,10 +185,10 @@ public class ArrayParameterRefEntryTypeDescriptor extends com.logica.hummingbird
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.DimensionList();
+                return new org.hbird.xtce.castor.DimensionList();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.DimensionList");
+        desc.setSchemaType("org.hbird.xtce.castor.DimensionList");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -243,7 +243,7 @@ public class ArrayParameterRefEntryTypeDescriptor extends com.logica.hummingbird
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ArrayParameterRefEntryType.class;
+        return org.hbird.xtce.castor.ArrayParameterRefEntryType.class;
     }
 
     /**

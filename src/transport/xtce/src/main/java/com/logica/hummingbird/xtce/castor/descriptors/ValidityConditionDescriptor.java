@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ValidityCondition;
+import org.hbird.xtce.castor.ValidityCondition;
 
 /**
  * Class ValidityConditionDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ValidityConditionDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor {
+public class ValidityConditionDescriptor extends org.hbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ValidityConditionDescriptor extends com.logica.hummingbird.xtce.cas
 
     public ValidityConditionDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ValidityCondition";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class ValidityConditionDescriptor extends com.logica.hummingbird.xtce.cas
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ValidityCondition.class;
+        return org.hbird.xtce.castor.ValidityCondition.class;
     }
 
     /**

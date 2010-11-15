@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.EntryList;
+import org.hbird.xtce.castor.EntryList;
 
 /**
  * Class EntryListDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class EntryListDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.EntryListTypeDescriptor {
+public class EntryListDescriptor extends org.hbird.xtce.castor.descriptors.EntryListTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class EntryListDescriptor extends com.logica.hummingbird.xtce.castor.desc
 
     public EntryListDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.EntryListTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.EntryListTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "EntryList";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class EntryListDescriptor extends com.logica.hummingbird.xtce.castor.desc
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.EntryList.class;
+        return org.hbird.xtce.castor.EntryList.class;
     }
 
     /**

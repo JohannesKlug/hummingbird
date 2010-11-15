@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Polynomial;
+import org.hbird.xtce.castor.Polynomial;
 
 /**
  * Class PolynomialDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class PolynomialDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.PolynomialTypeDescriptor {
+public class PolynomialDescriptor extends org.hbird.xtce.castor.descriptors.PolynomialTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class PolynomialDescriptor extends com.logica.hummingbird.xtce.castor.des
 
     public PolynomialDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.PolynomialTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.PolynomialTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "Polynomial";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class PolynomialDescriptor extends com.logica.hummingbird.xtce.castor.des
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Polynomial.class;
+        return org.hbird.xtce.castor.Polynomial.class;
     }
 
     /**

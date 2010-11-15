@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.UnitType;
+import org.hbird.xtce.castor.UnitType;
 
 /**
  * Class UnitTypeDescriptor.
@@ -271,7 +271,7 @@ public class UnitTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.UnitType.class;
+        return org.hbird.xtce.castor.UnitType.class;
     }
 
     /**

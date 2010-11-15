@@ -24,15 +24,15 @@
  * Created on   : 13.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.packetbroker.producers;
+package org.hbird.packetbroker.producers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.spacesystemmodel.ParameterObserver;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.telemetry.DefaultSpaceParameter;
+import org.hbird.spacesystemmodel.ContainerFactory;
+import org.hbird.spacesystemmodel.ParameterObserver;
+import org.hbird.spacesystemmodel.parameters.ParameterContainer;
+import org.hbird.telemetry.DefaultSpaceParameter;
 
 /**
  * TODO write here a description of the class

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Names a parameter that upon change will start the execution of
@@ -15,7 +15,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class TriggerTypeParameterRef extends com.logica.hummingbird.xtce.castor.ParameterRefType 
+public class TriggerTypeParameterRef extends org.hbird.xtce.castor.ParameterRefType 
 implements java.io.Serializable
 {
 
@@ -155,12 +155,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.TriggerTypeParameterRef
+     * org.hbird.xtce.castor.TriggerTypeParameterRef
      */
-    public static com.logica.hummingbird.xtce.castor.TriggerTypeParameterRef unmarshal(
+    public static org.hbird.xtce.castor.TriggerTypeParameterRef unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.TriggerTypeParameterRef) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.TriggerTypeParameterRef.class, reader);
+        return (org.hbird.xtce.castor.TriggerTypeParameterRef) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.TriggerTypeParameterRef.class, reader);
     }
 
     /**

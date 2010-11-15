@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ANDedConditionsType;
+import org.hbird.xtce.castor.ANDedConditionsType;
 
 /**
  * Class ANDedConditionsTypeDescriptor.
@@ -67,7 +67,7 @@ public class ANDedConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
         //-- initialize element descriptors
 
         //-- _items
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ANDedConditionsTypeItem.class, "_items", (java.lang.String) null, org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ANDedConditionsTypeItem.class, "_items", (java.lang.String) null, org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -82,7 +82,7 @@ public class ANDedConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     ANDedConditionsType target = (ANDedConditionsType) object;
-                    target.addANDedConditionsTypeItem( (com.logica.hummingbird.xtce.castor.ANDedConditionsTypeItem) value);
+                    target.addANDedConditionsTypeItem( (org.hbird.xtce.castor.ANDedConditionsTypeItem) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -98,14 +98,14 @@ public class ANDedConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ANDedConditionsTypeItem();
+                return new org.hbird.xtce.castor.ANDedConditionsTypeItem();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.ANDedConditionsTypeItem");
+        desc.setComponentType("org.hbird.xtce.castor.ANDedConditionsTypeItem");
         desc.setHandler(handler);
         desc.setContainer(true);
-        desc.setClassDescriptor(new com.logica.hummingbird.xtce.castor.descriptors.ANDedConditionsTypeItemDescriptor());
+        desc.setClassDescriptor(new org.hbird.xtce.castor.descriptors.ANDedConditionsTypeItemDescriptor());
         desc.setMultivalued(true);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
@@ -154,7 +154,7 @@ public class ANDedConditionsTypeDescriptor extends org.exolab.castor.xml.util.XM
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ANDedConditionsType.class;
+        return org.hbird.xtce.castor.ANDedConditionsType.class;
     }
 
     /**

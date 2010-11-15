@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Used for custom user properties
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class PropertyType extends com.logica.hummingbird.xtce.castor.NameDescriptionType 
+public class PropertyType extends org.hbird.xtce.castor.NameDescriptionType 
 implements java.io.Serializable
 {
 
@@ -30,7 +30,7 @@ implements java.io.Serializable
     /**
      * Field _items.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.PropertyTypeItem> _items;
+    private java.util.List<org.hbird.xtce.castor.PropertyTypeItem> _items;
 
 
       //----------------/
@@ -39,7 +39,7 @@ implements java.io.Serializable
 
     public PropertyType() {
         super();
-        this._items = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.PropertyTypeItem>();
+        this._items = new java.util.ArrayList<org.hbird.xtce.castor.PropertyTypeItem>();
     }
 
 
@@ -55,7 +55,7 @@ implements java.io.Serializable
      * given is outside the bounds of the collection
      */
     public void addPropertyTypeItem(
-            final com.logica.hummingbird.xtce.castor.PropertyTypeItem vPropertyTypeItem)
+            final org.hbird.xtce.castor.PropertyTypeItem vPropertyTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         this._items.add(vPropertyTypeItem);
     }
@@ -70,7 +70,7 @@ implements java.io.Serializable
      */
     public void addPropertyTypeItem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.PropertyTypeItem vPropertyTypeItem)
+            final org.hbird.xtce.castor.PropertyTypeItem vPropertyTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         this._items.add(index, vPropertyTypeItem);
     }
@@ -81,7 +81,7 @@ implements java.io.Serializable
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.PropertyTypeItem> enumeratePropertyTypeItem(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.PropertyTypeItem> enumeratePropertyTypeItem(
     ) {
         return java.util.Collections.enumeration(this._items);
     }
@@ -93,10 +93,10 @@ implements java.io.Serializable
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.PropertyTypeItem at the
+     * org.hbird.xtce.castor.PropertyTypeItem at the
      * given index
      */
-    public com.logica.hummingbird.xtce.castor.PropertyTypeItem getPropertyTypeItem(
+    public org.hbird.xtce.castor.PropertyTypeItem getPropertyTypeItem(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -104,7 +104,7 @@ implements java.io.Serializable
             throw new IndexOutOfBoundsException("getPropertyTypeItem: Index value '" + index + "' not in range [0.." + (this._items.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.PropertyTypeItem) _items.get(index);
+        return (org.hbird.xtce.castor.PropertyTypeItem) _items.get(index);
     }
 
     /**
@@ -117,10 +117,10 @@ implements java.io.Serializable
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.PropertyTypeItem[] getPropertyTypeItem(
+    public org.hbird.xtce.castor.PropertyTypeItem[] getPropertyTypeItem(
     ) {
-        com.logica.hummingbird.xtce.castor.PropertyTypeItem[] array = new com.logica.hummingbird.xtce.castor.PropertyTypeItem[0];
-        return (com.logica.hummingbird.xtce.castor.PropertyTypeItem[]) this._items.toArray(array);
+        org.hbird.xtce.castor.PropertyTypeItem[] array = new org.hbird.xtce.castor.PropertyTypeItem[0];
+        return (org.hbird.xtce.castor.PropertyTypeItem[]) this._items.toArray(array);
     }
 
     /**
@@ -164,7 +164,7 @@ implements java.io.Serializable
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.PropertyTypeItem> iteratePropertyTypeItem(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.PropertyTypeItem> iteratePropertyTypeItem(
     ) {
         return this._items.iterator();
     }
@@ -215,7 +215,7 @@ implements java.io.Serializable
      * @return true if the object was removed from the collection.
      */
     public boolean removePropertyTypeItem(
-            final com.logica.hummingbird.xtce.castor.PropertyTypeItem vPropertyTypeItem) {
+            final org.hbird.xtce.castor.PropertyTypeItem vPropertyTypeItem) {
         boolean removed = _items.remove(vPropertyTypeItem);
         return removed;
     }
@@ -226,10 +226,10 @@ implements java.io.Serializable
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.PropertyTypeItem removePropertyTypeItemAt(
+    public org.hbird.xtce.castor.PropertyTypeItem removePropertyTypeItemAt(
             final int index) {
         java.lang.Object obj = this._items.remove(index);
-        return (com.logica.hummingbird.xtce.castor.PropertyTypeItem) obj;
+        return (org.hbird.xtce.castor.PropertyTypeItem) obj;
     }
 
     /**
@@ -242,7 +242,7 @@ implements java.io.Serializable
      */
     public void setPropertyTypeItem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.PropertyTypeItem vPropertyTypeItem)
+            final org.hbird.xtce.castor.PropertyTypeItem vPropertyTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._items.size()) {
@@ -258,7 +258,7 @@ implements java.io.Serializable
      * @param vPropertyTypeItemArray
      */
     public void setPropertyTypeItem(
-            final com.logica.hummingbird.xtce.castor.PropertyTypeItem[] vPropertyTypeItemArray) {
+            final org.hbird.xtce.castor.PropertyTypeItem[] vPropertyTypeItemArray) {
         //-- copy array
         _items.clear();
 
@@ -286,12 +286,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.PropertyType
+     * org.hbird.xtce.castor.PropertyType
      */
-    public static com.logica.hummingbird.xtce.castor.PropertyType unmarshal(
+    public static org.hbird.xtce.castor.PropertyType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.PropertyType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.PropertyType.class, reader);
+        return (org.hbird.xtce.castor.PropertyType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.PropertyType.class, reader);
     }
 
     /**

@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.SplinePointType;
+import org.hbird.xtce.castor.SplinePointType;
 
 /**
  * Class SplinePointTypeDescriptor.
@@ -248,7 +248,7 @@ public class SplinePointTypeDescriptor extends org.exolab.castor.xml.util.XMLCla
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.SplinePointType.class;
+        return org.hbird.xtce.castor.SplinePointType.class;
     }
 
     /**

@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.EndingIndex;
+import org.hbird.xtce.castor.EndingIndex;
 
 /**
  * Class EndingIndexDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class EndingIndexDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.IntegerValueTypeDescriptor {
+public class EndingIndexDescriptor extends org.hbird.xtce.castor.descriptors.IntegerValueTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class EndingIndexDescriptor extends com.logica.hummingbird.xtce.castor.de
 
     public EndingIndexDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.IntegerValueTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.IntegerValueTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "EndingIndex";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class EndingIndexDescriptor extends com.logica.hummingbird.xtce.castor.de
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.EndingIndex.class;
+        return org.hbird.xtce.castor.EndingIndex.class;
     }
 
     /**

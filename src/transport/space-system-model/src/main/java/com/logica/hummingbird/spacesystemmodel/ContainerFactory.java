@@ -24,15 +24,15 @@
  * Created on   : 08.01.2010
  * ----------------------------------------------------------------------------
  */
-package com.logica.hummingbird.spacesystemmodel;
+package org.hbird.spacesystemmodel;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.spacesystemmodel.parameters.Parameter;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
+import org.hbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.spacesystemmodel.parameters.Parameter;
+import org.hbird.spacesystemmodel.parameters.ParameterContainer;
 
 /**
  * Interface to create monitoring models.

@@ -10,9 +10,9 @@
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
 
-	<bean id="taskexecutor" class="com.logica.hummingbird.command.task.Executor"/>
+	<bean id="taskexecutor" class="org.hbird.command.task.Executor"/>
 
-	<bean id="buffer" class="com.logica.hummingbird.buffers.ObjectBuffer"/>
+	<bean id="buffer" class="org.hbird.buffers.ObjectBuffer"/>
 	
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>

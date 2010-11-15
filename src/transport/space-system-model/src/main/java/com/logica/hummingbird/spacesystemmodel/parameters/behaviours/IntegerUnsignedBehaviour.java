@@ -1,13 +1,13 @@
-package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
+package org.hbird.spacesystemmodel.parameters.behaviours;
 
 import java.util.BitSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
-import com.logica.hummingbird.util.BitSetUtility;
-import com.logica.hummingbird.util.BytesUtility;
+import org.hbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import org.hbird.util.BitSetUtility;
+import org.hbird.util.BytesUtility;
 
 //TODO javadoc
 //TODO 32 bit sized int test.  will need to convert to use a long otherwise the sign bit will be set in java int.

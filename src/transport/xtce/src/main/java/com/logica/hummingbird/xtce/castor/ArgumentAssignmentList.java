@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class ArgumentAssignmentList.
@@ -23,7 +23,7 @@ public class ArgumentAssignmentList implements java.io.Serializable {
     /**
      * Field _argumentAssignmentList.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.ArgumentAssignment> _argumentAssignmentList;
+    private java.util.List<org.hbird.xtce.castor.ArgumentAssignment> _argumentAssignmentList;
 
 
       //----------------/
@@ -32,7 +32,7 @@ public class ArgumentAssignmentList implements java.io.Serializable {
 
     public ArgumentAssignmentList() {
         super();
-        this._argumentAssignmentList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.ArgumentAssignment>();
+        this._argumentAssignmentList = new java.util.ArrayList<org.hbird.xtce.castor.ArgumentAssignment>();
     }
 
 
@@ -48,7 +48,7 @@ public class ArgumentAssignmentList implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addArgumentAssignment(
-            final com.logica.hummingbird.xtce.castor.ArgumentAssignment vArgumentAssignment)
+            final org.hbird.xtce.castor.ArgumentAssignment vArgumentAssignment)
     throws java.lang.IndexOutOfBoundsException {
         this._argumentAssignmentList.add(vArgumentAssignment);
     }
@@ -63,7 +63,7 @@ public class ArgumentAssignmentList implements java.io.Serializable {
      */
     public void addArgumentAssignment(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ArgumentAssignment vArgumentAssignment)
+            final org.hbird.xtce.castor.ArgumentAssignment vArgumentAssignment)
     throws java.lang.IndexOutOfBoundsException {
         this._argumentAssignmentList.add(index, vArgumentAssignment);
     }
@@ -74,7 +74,7 @@ public class ArgumentAssignmentList implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.ArgumentAssignment> enumerateArgumentAssignment(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.ArgumentAssignment> enumerateArgumentAssignment(
     ) {
         return java.util.Collections.enumeration(this._argumentAssignmentList);
     }
@@ -86,10 +86,10 @@ public class ArgumentAssignmentList implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.ArgumentAssignment at the
+     * org.hbird.xtce.castor.ArgumentAssignment at the
      * given index
      */
-    public com.logica.hummingbird.xtce.castor.ArgumentAssignment getArgumentAssignment(
+    public org.hbird.xtce.castor.ArgumentAssignment getArgumentAssignment(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -97,7 +97,7 @@ public class ArgumentAssignmentList implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getArgumentAssignment: Index value '" + index + "' not in range [0.." + (this._argumentAssignmentList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.ArgumentAssignment) _argumentAssignmentList.get(index);
+        return (org.hbird.xtce.castor.ArgumentAssignment) _argumentAssignmentList.get(index);
     }
 
     /**
@@ -110,10 +110,10 @@ public class ArgumentAssignmentList implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.ArgumentAssignment[] getArgumentAssignment(
+    public org.hbird.xtce.castor.ArgumentAssignment[] getArgumentAssignment(
     ) {
-        com.logica.hummingbird.xtce.castor.ArgumentAssignment[] array = new com.logica.hummingbird.xtce.castor.ArgumentAssignment[0];
-        return (com.logica.hummingbird.xtce.castor.ArgumentAssignment[]) this._argumentAssignmentList.toArray(array);
+        org.hbird.xtce.castor.ArgumentAssignment[] array = new org.hbird.xtce.castor.ArgumentAssignment[0];
+        return (org.hbird.xtce.castor.ArgumentAssignment[]) this._argumentAssignmentList.toArray(array);
     }
 
     /**
@@ -147,7 +147,7 @@ public class ArgumentAssignmentList implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.ArgumentAssignment> iterateArgumentAssignment(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.ArgumentAssignment> iterateArgumentAssignment(
     ) {
         return this._argumentAssignmentList.iterator();
     }
@@ -198,7 +198,7 @@ public class ArgumentAssignmentList implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeArgumentAssignment(
-            final com.logica.hummingbird.xtce.castor.ArgumentAssignment vArgumentAssignment) {
+            final org.hbird.xtce.castor.ArgumentAssignment vArgumentAssignment) {
         boolean removed = _argumentAssignmentList.remove(vArgumentAssignment);
         return removed;
     }
@@ -209,10 +209,10 @@ public class ArgumentAssignmentList implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.ArgumentAssignment removeArgumentAssignmentAt(
+    public org.hbird.xtce.castor.ArgumentAssignment removeArgumentAssignmentAt(
             final int index) {
         java.lang.Object obj = this._argumentAssignmentList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.ArgumentAssignment) obj;
+        return (org.hbird.xtce.castor.ArgumentAssignment) obj;
     }
 
     /**
@@ -225,7 +225,7 @@ public class ArgumentAssignmentList implements java.io.Serializable {
      */
     public void setArgumentAssignment(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ArgumentAssignment vArgumentAssignment)
+            final org.hbird.xtce.castor.ArgumentAssignment vArgumentAssignment)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._argumentAssignmentList.size()) {
@@ -241,7 +241,7 @@ public class ArgumentAssignmentList implements java.io.Serializable {
      * @param vArgumentAssignmentArray
      */
     public void setArgumentAssignment(
-            final com.logica.hummingbird.xtce.castor.ArgumentAssignment[] vArgumentAssignmentArray) {
+            final org.hbird.xtce.castor.ArgumentAssignment[] vArgumentAssignmentArray) {
         //-- copy array
         _argumentAssignmentList.clear();
 
@@ -259,12 +259,12 @@ public class ArgumentAssignmentList implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ArgumentAssignmentList
+     * org.hbird.xtce.castor.ArgumentAssignmentList
      */
-    public static com.logica.hummingbird.xtce.castor.ArgumentAssignmentList unmarshal(
+    public static org.hbird.xtce.castor.ArgumentAssignmentList unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ArgumentAssignmentList) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ArgumentAssignmentList.class, reader);
+        return (org.hbird.xtce.castor.ArgumentAssignmentList) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ArgumentAssignmentList.class, reader);
     }
 
     /**

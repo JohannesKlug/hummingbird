@@ -1,4 +1,4 @@
-package com.logica.hummingbird.validation;
+package org.hbird.validation;
 
 import java.io.InputStream;
 import java.util.Hashtable;
@@ -19,12 +19,12 @@ import org.apache.camel.impl.DefaultExchange;
 import org.apache.camel.impl.JndiRegistry;
 import org.apache.camel.test.CamelTestSupport;
 
-import com.logica.hummingbird.formatter.ExchangeFormatter;
-import com.logica.hummingbird.telemetry.DefaultSpaceParameter;
-import com.logica.hummingbird.validation.base.OnlyChangeFilter;
-import com.logica.hummingbird.validation.base.ViolationCountFilter;
-import com.logica.hummingbird.validation.parameter.LowerLimit;
-import com.logica.hummingbird.validation.parameter.UpperLimit;
+import org.hbird.formatter.ExchangeFormatter;
+import org.hbird.telemetry.DefaultSpaceParameter;
+import org.hbird.validation.base.OnlyChangeFilter;
+import org.hbird.validation.base.ViolationCountFilter;
+import org.hbird.validation.parameter.LowerLimit;
+import org.hbird.validation.parameter.UpperLimit;
 
 public class ParameterLimitTest extends CamelTestSupport {
 

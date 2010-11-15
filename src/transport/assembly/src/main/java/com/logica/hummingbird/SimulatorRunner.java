@@ -1,9 +1,9 @@
-package com.logica.hummingbird;
+package org.hbird;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import com.logica.hummingbird.simulator.Simulator;
+import org.hbird.simulator.Simulator;
 
 /**
  * Simple driver for the Simulator bean. Will assemble the simulator based on a spring XML 

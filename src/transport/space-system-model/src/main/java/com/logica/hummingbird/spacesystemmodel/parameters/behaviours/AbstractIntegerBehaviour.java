@@ -1,4 +1,4 @@
-package com.logica.hummingbird.spacesystemmodel.parameters.behaviours;
+package org.hbird.spacesystemmodel.parameters.behaviours;
 
 public abstract class AbstractIntegerBehaviour extends AbstractNumberBehaviour {
 

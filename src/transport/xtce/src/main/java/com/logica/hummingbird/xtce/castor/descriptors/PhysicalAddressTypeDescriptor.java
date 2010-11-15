@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.PhysicalAddressType;
+import org.hbird.xtce.castor.PhysicalAddressType;
 
 /**
  * Class PhysicalAddressTypeDescriptor.
@@ -155,7 +155,7 @@ public class PhysicalAddressTypeDescriptor extends org.exolab.castor.xml.util.XM
         //-- initialize element descriptors
 
         //-- _subAddress
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.SubAddress.class, "_subAddress", "SubAddress", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.SubAddress.class, "_subAddress", "SubAddress", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -170,7 +170,7 @@ public class PhysicalAddressTypeDescriptor extends org.exolab.castor.xml.util.XM
             {
                 try {
                     PhysicalAddressType target = (PhysicalAddressType) object;
-                    target.setSubAddress( (com.logica.hummingbird.xtce.castor.SubAddress) value);
+                    target.setSubAddress( (org.hbird.xtce.castor.SubAddress) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -178,10 +178,10 @@ public class PhysicalAddressTypeDescriptor extends org.exolab.castor.xml.util.XM
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.SubAddress();
+                return new org.hbird.xtce.castor.SubAddress();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.SubAddress");
+        desc.setSchemaType("org.hbird.xtce.castor.SubAddress");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -231,7 +231,7 @@ public class PhysicalAddressTypeDescriptor extends org.exolab.castor.xml.util.XM
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.PhysicalAddressType.class;
+        return org.hbird.xtce.castor.PhysicalAddressType.class;
     }
 
     /**

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A stream type where some level of custom processing (e.g.
@@ -16,7 +16,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class CustomStreamType extends com.logica.hummingbird.xtce.castor.PCMStreamType 
+public class CustomStreamType extends org.hbird.xtce.castor.PCMStreamType 
 implements java.io.Serializable
 {
 
@@ -38,13 +38,13 @@ implements java.io.Serializable
     /**
      * Field _encodingAlgorithm.
      */
-    private com.logica.hummingbird.xtce.castor.EncodingAlgorithm _encodingAlgorithm;
+    private org.hbird.xtce.castor.EncodingAlgorithm _encodingAlgorithm;
 
     /**
      * Algorithm outputs may be used to set decoding quality
      * parameters.
      */
-    private com.logica.hummingbird.xtce.castor.DecodingAlgorithm _decodingAlgorithm;
+    private org.hbird.xtce.castor.DecodingAlgorithm _decodingAlgorithm;
 
 
       //----------------/
@@ -77,7 +77,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'DecodingAlgorithm'.
      */
-    public com.logica.hummingbird.xtce.castor.DecodingAlgorithm getDecodingAlgorithm(
+    public org.hbird.xtce.castor.DecodingAlgorithm getDecodingAlgorithm(
     ) {
         return this._decodingAlgorithm;
     }
@@ -97,7 +97,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'EncodingAlgorithm'.
      */
-    public com.logica.hummingbird.xtce.castor.EncodingAlgorithm getEncodingAlgorithm(
+    public org.hbird.xtce.castor.EncodingAlgorithm getEncodingAlgorithm(
     ) {
         return this._encodingAlgorithm;
     }
@@ -168,7 +168,7 @@ implements java.io.Serializable
      * 'decodingAlgorithm'.
      */
     public void setDecodingAlgorithm(
-            final com.logica.hummingbird.xtce.castor.DecodingAlgorithm decodingAlgorithm) {
+            final org.hbird.xtce.castor.DecodingAlgorithm decodingAlgorithm) {
         this._decodingAlgorithm = decodingAlgorithm;
     }
 
@@ -189,7 +189,7 @@ implements java.io.Serializable
      * 'encodingAlgorithm'.
      */
     public void setEncodingAlgorithm(
-            final com.logica.hummingbird.xtce.castor.EncodingAlgorithm encodingAlgorithm) {
+            final org.hbird.xtce.castor.EncodingAlgorithm encodingAlgorithm) {
         this._encodingAlgorithm = encodingAlgorithm;
     }
 
@@ -202,12 +202,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.CustomStreamType
+     * org.hbird.xtce.castor.CustomStreamType
      */
-    public static com.logica.hummingbird.xtce.castor.CustomStreamType unmarshal(
+    public static org.hbird.xtce.castor.CustomStreamType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.CustomStreamType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.CustomStreamType.class, reader);
+        return (org.hbird.xtce.castor.CustomStreamType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.CustomStreamType.class, reader);
     }
 
     /**

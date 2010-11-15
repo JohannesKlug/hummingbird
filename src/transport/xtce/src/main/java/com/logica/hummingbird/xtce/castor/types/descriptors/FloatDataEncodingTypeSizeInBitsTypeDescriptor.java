@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types.descriptors;
+package org.hbird.xtce.castor.types.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.types.FloatDataEncodingTypeSizeInBitsType;
+import org.hbird.xtce.castor.types.FloatDataEncodingTypeSizeInBitsType;
 
 /**
  * Class FloatDataEncodingTypeSizeInBitsTypeDescriptor.
@@ -98,7 +98,7 @@ public class FloatDataEncodingTypeSizeInBitsTypeDescriptor extends org.exolab.ca
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.types.FloatDataEncodingTypeSizeInBitsType.class;
+        return org.hbird.xtce.castor.types.FloatDataEncodingTypeSizeInBitsType.class;
     }
 
     /**

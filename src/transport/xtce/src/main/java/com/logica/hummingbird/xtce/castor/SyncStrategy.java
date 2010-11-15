@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class SyncStrategy.
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class SyncStrategy extends com.logica.hummingbird.xtce.castor.SyncStrategyType 
+public class SyncStrategy extends org.hbird.xtce.castor.SyncStrategyType 
 implements java.io.Serializable
 {
 
@@ -25,7 +25,7 @@ implements java.io.Serializable
     /**
      * The pattern of bits used to look for frame synchronization.
      */
-    private com.logica.hummingbird.xtce.castor.SyncPattern _syncPattern;
+    private org.hbird.xtce.castor.SyncPattern _syncPattern;
 
 
       //----------------/
@@ -48,7 +48,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'SyncPattern'.
      */
-    public com.logica.hummingbird.xtce.castor.SyncPattern getSyncPattern(
+    public org.hbird.xtce.castor.SyncPattern getSyncPattern(
     ) {
         return this._syncPattern;
     }
@@ -108,7 +108,7 @@ implements java.io.Serializable
      * @param syncPattern the value of field 'syncPattern'.
      */
     public void setSyncPattern(
-            final com.logica.hummingbird.xtce.castor.SyncPattern syncPattern) {
+            final org.hbird.xtce.castor.SyncPattern syncPattern) {
         this._syncPattern = syncPattern;
     }
 
@@ -121,12 +121,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.SyncStrategy
+     * org.hbird.xtce.castor.SyncStrategy
      */
-    public static com.logica.hummingbird.xtce.castor.SyncStrategy unmarshal(
+    public static org.hbird.xtce.castor.SyncStrategy unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.SyncStrategy) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.SyncStrategy.class, reader);
+        return (org.hbird.xtce.castor.SyncStrategy) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.SyncStrategy.class, reader);
     }
 
     /**

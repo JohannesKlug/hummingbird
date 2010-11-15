@@ -1,10 +1,10 @@
-package com.logica.hummingbird.simulator.ccsds;
+package org.hbird.simulator.ccsds;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.util.BytesUtility;
+import org.hbird.util.BytesUtility;
 
 public class SpacePacketGenerator {
 	

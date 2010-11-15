@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.FloatDataEncoding;
+import org.hbird.xtce.castor.FloatDataEncoding;
 
 /**
  * Class FloatDataEncodingDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class FloatDataEncodingDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.FloatDataEncodingTypeDescriptor {
+public class FloatDataEncodingDescriptor extends org.hbird.xtce.castor.descriptors.FloatDataEncodingTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class FloatDataEncodingDescriptor extends com.logica.hummingbird.xtce.cas
 
     public FloatDataEncodingDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.FloatDataEncodingTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.FloatDataEncodingTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "FloatDataEncoding";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class FloatDataEncodingDescriptor extends com.logica.hummingbird.xtce.cas
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.FloatDataEncoding.class;
+        return org.hbird.xtce.castor.FloatDataEncoding.class;
     }
 
     /**

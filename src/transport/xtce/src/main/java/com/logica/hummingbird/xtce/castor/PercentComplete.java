@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class PercentComplete.
@@ -87,12 +87,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.PercentComplete
+     * org.hbird.xtce.castor.PercentComplete
      */
-    public static com.logica.hummingbird.xtce.castor.PercentComplete unmarshal(
+    public static org.hbird.xtce.castor.PercentComplete unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.PercentComplete) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.PercentComplete.class, reader);
+        return (org.hbird.xtce.castor.PercentComplete) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.PercentComplete.class, reader);
     }
 
     /**

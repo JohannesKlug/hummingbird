@@ -14,14 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.logica.hummingbird.simpleparametersimulator;
+package org.hbird.simpleparametersimulator;
 
 import java.util.Date;
 
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 
-import com.logica.hummingbird.formatter.ExchangeFormatter;
+import org.hbird.formatter.ExchangeFormatter;
 
 
 
@@ -66,7 +66,7 @@ public class LinearParameter extends BaseParameter {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.logica.hummingbird.simpleparametersimulator.BaseParameter#process(org.apache.camel.Exchange)
+	 * @see org.hbird.simpleparametersimulator.BaseParameter#process(org.apache.camel.Exchange)
 	 */
 	public void process(Exchange arg0) {
 		try {

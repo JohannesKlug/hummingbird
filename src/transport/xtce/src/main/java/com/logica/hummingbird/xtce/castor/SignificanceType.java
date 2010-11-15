@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Significance provides some cautionary information about the
@@ -36,7 +36,7 @@ public class SignificanceType implements java.io.Serializable {
      * No specific meanings have been assigned to these different
      * levels, but they mirror the Alarm levels of Telemetry.
      */
-    private com.logica.hummingbird.xtce.castor.types.SignificanceTypeConsequenceLevelType _consequenceLevel;
+    private org.hbird.xtce.castor.types.SignificanceTypeConsequenceLevelType _consequenceLevel;
 
 
       //----------------/
@@ -60,7 +60,7 @@ public class SignificanceType implements java.io.Serializable {
      * 
      * @return the value of field 'ConsequenceLevel'.
      */
-    public com.logica.hummingbird.xtce.castor.types.SignificanceTypeConsequenceLevelType getConsequenceLevel(
+    public org.hbird.xtce.castor.types.SignificanceTypeConsequenceLevelType getConsequenceLevel(
     ) {
         return this._consequenceLevel;
     }
@@ -144,7 +144,7 @@ public class SignificanceType implements java.io.Serializable {
      * @param consequenceLevel the value of field 'consequenceLevel'
      */
     public void setConsequenceLevel(
-            final com.logica.hummingbird.xtce.castor.types.SignificanceTypeConsequenceLevelType consequenceLevel) {
+            final org.hbird.xtce.castor.types.SignificanceTypeConsequenceLevelType consequenceLevel) {
         this._consequenceLevel = consequenceLevel;
     }
 
@@ -181,12 +181,12 @@ public class SignificanceType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.SignificanceType
+     * org.hbird.xtce.castor.SignificanceType
      */
-    public static com.logica.hummingbird.xtce.castor.SignificanceType unmarshal(
+    public static org.hbird.xtce.castor.SignificanceType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.SignificanceType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.SignificanceType.class, reader);
+        return (org.hbird.xtce.castor.SignificanceType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.SignificanceType.class, reader);
     }
 
     /**

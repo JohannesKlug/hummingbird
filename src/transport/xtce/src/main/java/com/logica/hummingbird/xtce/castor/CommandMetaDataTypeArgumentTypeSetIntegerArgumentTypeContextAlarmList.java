@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class ContextAlarmList.
@@ -23,7 +23,7 @@ public class CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmLi
     /**
      * Field _contextAlarmList.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.ContextAlarm> _contextAlarmList;
+    private java.util.List<org.hbird.xtce.castor.ContextAlarm> _contextAlarmList;
 
 
       //----------------/
@@ -32,7 +32,7 @@ public class CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmLi
 
     public CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmList() {
         super();
-        this._contextAlarmList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.ContextAlarm>();
+        this._contextAlarmList = new java.util.ArrayList<org.hbird.xtce.castor.ContextAlarm>();
     }
 
 
@@ -48,7 +48,7 @@ public class CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmLi
      * given is outside the bounds of the collection
      */
     public void addContextAlarm(
-            final com.logica.hummingbird.xtce.castor.ContextAlarm vContextAlarm)
+            final org.hbird.xtce.castor.ContextAlarm vContextAlarm)
     throws java.lang.IndexOutOfBoundsException {
         this._contextAlarmList.add(vContextAlarm);
     }
@@ -63,7 +63,7 @@ public class CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmLi
      */
     public void addContextAlarm(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ContextAlarm vContextAlarm)
+            final org.hbird.xtce.castor.ContextAlarm vContextAlarm)
     throws java.lang.IndexOutOfBoundsException {
         this._contextAlarmList.add(index, vContextAlarm);
     }
@@ -74,7 +74,7 @@ public class CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmLi
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.ContextAlarm> enumerateContextAlarm(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.ContextAlarm> enumerateContextAlarm(
     ) {
         return java.util.Collections.enumeration(this._contextAlarmList);
     }
@@ -86,10 +86,10 @@ public class CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmLi
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.ContextAlarm at the given
+     * org.hbird.xtce.castor.ContextAlarm at the given
      * index
      */
-    public com.logica.hummingbird.xtce.castor.ContextAlarm getContextAlarm(
+    public org.hbird.xtce.castor.ContextAlarm getContextAlarm(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -97,7 +97,7 @@ public class CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmLi
             throw new IndexOutOfBoundsException("getContextAlarm: Index value '" + index + "' not in range [0.." + (this._contextAlarmList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.ContextAlarm) _contextAlarmList.get(index);
+        return (org.hbird.xtce.castor.ContextAlarm) _contextAlarmList.get(index);
     }
 
     /**
@@ -110,10 +110,10 @@ public class CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmLi
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.ContextAlarm[] getContextAlarm(
+    public org.hbird.xtce.castor.ContextAlarm[] getContextAlarm(
     ) {
-        com.logica.hummingbird.xtce.castor.ContextAlarm[] array = new com.logica.hummingbird.xtce.castor.ContextAlarm[0];
-        return (com.logica.hummingbird.xtce.castor.ContextAlarm[]) this._contextAlarmList.toArray(array);
+        org.hbird.xtce.castor.ContextAlarm[] array = new org.hbird.xtce.castor.ContextAlarm[0];
+        return (org.hbird.xtce.castor.ContextAlarm[]) this._contextAlarmList.toArray(array);
     }
 
     /**
@@ -147,7 +147,7 @@ public class CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmLi
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.ContextAlarm> iterateContextAlarm(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.ContextAlarm> iterateContextAlarm(
     ) {
         return this._contextAlarmList.iterator();
     }
@@ -198,7 +198,7 @@ public class CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmLi
      * @return true if the object was removed from the collection.
      */
     public boolean removeContextAlarm(
-            final com.logica.hummingbird.xtce.castor.ContextAlarm vContextAlarm) {
+            final org.hbird.xtce.castor.ContextAlarm vContextAlarm) {
         boolean removed = _contextAlarmList.remove(vContextAlarm);
         return removed;
     }
@@ -209,10 +209,10 @@ public class CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmLi
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.ContextAlarm removeContextAlarmAt(
+    public org.hbird.xtce.castor.ContextAlarm removeContextAlarmAt(
             final int index) {
         java.lang.Object obj = this._contextAlarmList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.ContextAlarm) obj;
+        return (org.hbird.xtce.castor.ContextAlarm) obj;
     }
 
     /**
@@ -225,7 +225,7 @@ public class CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmLi
      */
     public void setContextAlarm(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ContextAlarm vContextAlarm)
+            final org.hbird.xtce.castor.ContextAlarm vContextAlarm)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._contextAlarmList.size()) {
@@ -241,7 +241,7 @@ public class CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmLi
      * @param vContextAlarmArray
      */
     public void setContextAlarm(
-            final com.logica.hummingbird.xtce.castor.ContextAlarm[] vContextAlarmArray) {
+            final org.hbird.xtce.castor.ContextAlarm[] vContextAlarmArray) {
         //-- copy array
         _contextAlarmList.clear();
 
@@ -259,12 +259,12 @@ public class CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmLi
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmList
+     * org.hbird.xtce.castor.CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmList
      */
-    public static com.logica.hummingbird.xtce.castor.CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmList unmarshal(
+    public static org.hbird.xtce.castor.CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmList unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmList) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmList.class, reader);
+        return (org.hbird.xtce.castor.CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmList) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.CommandMetaDataTypeArgumentTypeSetIntegerArgumentTypeContextAlarmList.class, reader);
     }
 
     /**

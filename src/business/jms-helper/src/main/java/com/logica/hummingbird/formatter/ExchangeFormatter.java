@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.logica.hummingbird.formatter;
+package org.hbird.formatter;
 
 import java.util.Date;
 
@@ -23,7 +23,7 @@ import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
 import org.apache.log4j.spi.LoggingEvent;
 
-import com.logica.hummingbird.interfaces.ITask;
+import org.hbird.interfaces.ITask;
 
 
 /**

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class ContainerSetTypeItem.
@@ -29,7 +29,7 @@ public class ContainerSetTypeItem implements java.io.Serializable {
      * SequenceContainers define sequences of parameters or other
      * containers. 
      */
-    private com.logica.hummingbird.xtce.castor.SequenceContainer _sequenceContainer;
+    private org.hbird.xtce.castor.SequenceContainer _sequenceContainer;
 
 
       //----------------/
@@ -65,7 +65,7 @@ public class ContainerSetTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'SequenceContainer'.
      */
-    public com.logica.hummingbird.xtce.castor.SequenceContainer getSequenceContainer(
+    public org.hbird.xtce.castor.SequenceContainer getSequenceContainer(
     ) {
         return this._sequenceContainer;
     }
@@ -80,7 +80,7 @@ public class ContainerSetTypeItem implements java.io.Serializable {
      * 'sequenceContainer'.
      */
     public void setSequenceContainer(
-            final com.logica.hummingbird.xtce.castor.SequenceContainer sequenceContainer) {
+            final org.hbird.xtce.castor.SequenceContainer sequenceContainer) {
         this._sequenceContainer = sequenceContainer;
         this._choiceValue = sequenceContainer;
     }

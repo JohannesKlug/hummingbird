@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.DecimalValueTypeDynamicValueLinearAdjustment;
+import org.hbird.xtce.castor.DecimalValueTypeDynamicValueLinearAdjustment;
 
 /**
  * Class DecimalValueTypeDynamicValueLinearAdjustmentDescriptor.
@@ -187,7 +187,7 @@ public class DecimalValueTypeDynamicValueLinearAdjustmentDescriptor extends org.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.DecimalValueTypeDynamicValueLinearAdjustment.class;
+        return org.hbird.xtce.castor.DecimalValueTypeDynamicValueLinearAdjustment.class;
     }
 
     /**

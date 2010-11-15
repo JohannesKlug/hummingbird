@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.MatchCriteria;
+import org.hbird.xtce.castor.MatchCriteria;
 
 /**
  * Class MatchCriteriaDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class MatchCriteriaDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor {
+public class MatchCriteriaDescriptor extends org.hbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class MatchCriteriaDescriptor extends com.logica.hummingbird.xtce.castor.
 
     public MatchCriteriaDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "MatchCriteria";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class MatchCriteriaDescriptor extends com.logica.hummingbird.xtce.castor.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.MatchCriteria.class;
+        return org.hbird.xtce.castor.MatchCriteria.class;
     }
 
     /**

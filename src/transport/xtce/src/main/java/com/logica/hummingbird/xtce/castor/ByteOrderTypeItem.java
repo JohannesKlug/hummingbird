@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class ByteOrderTypeItem.
@@ -23,7 +23,7 @@ public class ByteOrderTypeItem implements java.io.Serializable {
     /**
      * Field _byte.
      */
-    private com.logica.hummingbird.xtce.castor.Byte _byte;
+    private org.hbird.xtce.castor.Byte _byte;
 
 
       //----------------/
@@ -44,7 +44,7 @@ public class ByteOrderTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'Byte'.
      */
-    public com.logica.hummingbird.xtce.castor.Byte getByte(
+    public org.hbird.xtce.castor.Byte getByte(
     ) {
         return this._byte;
     }
@@ -56,7 +56,7 @@ public class ByteOrderTypeItem implements java.io.Serializable {
      * @param byte the value of field 'byte'.
      */
     public void setByte(
-            final com.logica.hummingbird.xtce.castor.Byte _byte) {
+            final org.hbird.xtce.castor.Byte _byte) {
         this._byte = _byte;
     }
 

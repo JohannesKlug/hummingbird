@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ReceivedVerifier;
+import org.hbird.xtce.castor.ReceivedVerifier;
 
 /**
  * Class ReceivedVerifierDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ReceivedVerifierDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor {
+public class ReceivedVerifierDescriptor extends org.hbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ReceivedVerifierDescriptor extends com.logica.hummingbird.xtce.cast
 
     public ReceivedVerifierDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ReceivedVerifier";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class ReceivedVerifierDescriptor extends com.logica.hummingbird.xtce.cast
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ReceivedVerifier.class;
+        return org.hbird.xtce.castor.ReceivedVerifier.class;
     }
 
     /**

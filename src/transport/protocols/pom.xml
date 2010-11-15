@@ -2,11 +2,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<artifactId>hummingbird</artifactId>
-		<groupId>com.logica.hummingbird</groupId>
+		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.logica.hummingbird</groupId>
+	<groupId>org.hbird</groupId>
 	<artifactId>protocols</artifactId>
 	<name>Protocols</name>
 
@@ -29,11 +29,11 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							com.logica.hummingbird.framebroker,
-							com.logica.hummingbird.framebroker.exceptions							
+							org.hbird.framebroker,
+							org.hbird.framebroker.exceptions							
 						</Export-Package>
 						<Private-Package>
-							com.logica.hummingbird,
+							org.hbird,
 							org.slf4j.*
 						</Private-Package>
 					</instructions>
@@ -117,7 +117,7 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
+			<groupId>org.hbird</groupId>
 			<artifactId>commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>
@@ -129,14 +129,14 @@
 			<version>2.5</version>
 		</dependency>
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
+			<groupId>org.hbird</groupId>
 			<artifactId>ccsds</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.logica.hummingbird</groupId>
+			<groupId>org.hbird</groupId>
 			<artifactId>space-system-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>

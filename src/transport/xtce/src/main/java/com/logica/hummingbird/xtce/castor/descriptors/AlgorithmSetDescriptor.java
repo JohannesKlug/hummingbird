@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.AlgorithmSet;
+import org.hbird.xtce.castor.AlgorithmSet;
 
 /**
  * Class AlgorithmSetDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class AlgorithmSetDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.AlgorithmSetTypeDescriptor {
+public class AlgorithmSetDescriptor extends org.hbird.xtce.castor.descriptors.AlgorithmSetTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class AlgorithmSetDescriptor extends com.logica.hummingbird.xtce.castor.d
 
     public AlgorithmSetDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.AlgorithmSetTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.AlgorithmSetTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "AlgorithmSet";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class AlgorithmSetDescriptor extends com.logica.hummingbird.xtce.castor.d
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.AlgorithmSet.class;
+        return org.hbird.xtce.castor.AlgorithmSet.class;
     }
 
     /**

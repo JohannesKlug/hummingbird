@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A verifier that simply means the SpaceSystem has received the
@@ -14,7 +14,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class ReceivedVerifier extends com.logica.hummingbird.xtce.castor.CommandVerifierType 
+public class ReceivedVerifier extends org.hbird.xtce.castor.CommandVerifierType 
 implements java.io.Serializable
 {
 
@@ -88,12 +88,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ReceivedVerifier
+     * org.hbird.xtce.castor.ReceivedVerifier
      */
-    public static com.logica.hummingbird.xtce.castor.ReceivedVerifier unmarshal(
+    public static org.hbird.xtce.castor.ReceivedVerifier unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ReceivedVerifier) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ReceivedVerifier.class, reader);
+        return (org.hbird.xtce.castor.ReceivedVerifier) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ReceivedVerifier.class, reader);
     }
 
     /**

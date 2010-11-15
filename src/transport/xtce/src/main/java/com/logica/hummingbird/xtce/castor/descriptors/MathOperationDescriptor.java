@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.MathOperation;
+import org.hbird.xtce.castor.MathOperation;
 
 /**
  * Class MathOperationDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class MathOperationDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.MathOperationTypeDescriptor {
+public class MathOperationDescriptor extends org.hbird.xtce.castor.descriptors.MathOperationTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class MathOperationDescriptor extends com.logica.hummingbird.xtce.castor.
 
     public MathOperationDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.MathOperationTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.MathOperationTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "MathOperation";
         _elementDefinition = true;
@@ -116,7 +116,7 @@ public class MathOperationDescriptor extends com.logica.hummingbird.xtce.castor.
         //-- initialize element descriptors
 
         //-- _triggerSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.TriggerSet.class, "_triggerSet", "TriggerSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.TriggerSet.class, "_triggerSet", "TriggerSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -131,7 +131,7 @@ public class MathOperationDescriptor extends com.logica.hummingbird.xtce.castor.
             {
                 try {
                     MathOperation target = (MathOperation) object;
-                    target.setTriggerSet( (com.logica.hummingbird.xtce.castor.TriggerSet) value);
+                    target.setTriggerSet( (org.hbird.xtce.castor.TriggerSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -139,10 +139,10 @@ public class MathOperationDescriptor extends com.logica.hummingbird.xtce.castor.
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.TriggerSet();
+                return new org.hbird.xtce.castor.TriggerSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.TriggerSet");
+        desc.setSchemaType("org.hbird.xtce.castor.TriggerSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -197,7 +197,7 @@ public class MathOperationDescriptor extends com.logica.hummingbird.xtce.castor.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.MathOperation.class;
+        return org.hbird.xtce.castor.MathOperation.class;
     }
 
     /**

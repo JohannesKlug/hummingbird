@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A set of labeled inputs is added to the SimpleAlgorithmType
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class InputAlgorithmType extends com.logica.hummingbird.xtce.castor.SimpleAlgorithmType 
+public class InputAlgorithmType extends org.hbird.xtce.castor.SimpleAlgorithmType 
 implements java.io.Serializable
 {
 
@@ -25,7 +25,7 @@ implements java.io.Serializable
     /**
      * Field _inputSet.
      */
-    private com.logica.hummingbird.xtce.castor.InputSet _inputSet;
+    private org.hbird.xtce.castor.InputSet _inputSet;
 
 
       //----------------/
@@ -46,7 +46,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'InputSet'.
      */
-    public com.logica.hummingbird.xtce.castor.InputSet getInputSet(
+    public org.hbird.xtce.castor.InputSet getInputSet(
     ) {
         return this._inputSet;
     }
@@ -104,7 +104,7 @@ implements java.io.Serializable
      * @param inputSet the value of field 'inputSet'.
      */
     public void setInputSet(
-            final com.logica.hummingbird.xtce.castor.InputSet inputSet) {
+            final org.hbird.xtce.castor.InputSet inputSet) {
         this._inputSet = inputSet;
     }
 
@@ -117,12 +117,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.InputAlgorithmType
+     * org.hbird.xtce.castor.InputAlgorithmType
      */
-    public static com.logica.hummingbird.xtce.castor.InputAlgorithmType unmarshal(
+    public static org.hbird.xtce.castor.InputAlgorithmType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.InputAlgorithmType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.InputAlgorithmType.class, reader);
+        return (org.hbird.xtce.castor.InputAlgorithmType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.InputAlgorithmType.class, reader);
     }
 
     /**

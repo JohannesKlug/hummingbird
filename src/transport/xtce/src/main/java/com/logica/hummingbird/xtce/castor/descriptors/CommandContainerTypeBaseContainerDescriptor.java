@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainer;
+import org.hbird.xtce.castor.CommandContainerTypeBaseContainer;
 
 /**
  * Class CommandContainerTypeBaseContainerDescriptor.
@@ -115,7 +115,7 @@ public class CommandContainerTypeBaseContainerDescriptor extends org.exolab.cast
         //-- initialize element descriptors
 
         //-- _restrictionCriteria
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria.class, "_restrictionCriteria", "RestrictionCriteria", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria.class, "_restrictionCriteria", "RestrictionCriteria", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -130,7 +130,7 @@ public class CommandContainerTypeBaseContainerDescriptor extends org.exolab.cast
             {
                 try {
                     CommandContainerTypeBaseContainer target = (CommandContainerTypeBaseContainer) object;
-                    target.setRestrictionCriteria( (com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria) value);
+                    target.setRestrictionCriteria( (org.hbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -138,10 +138,10 @@ public class CommandContainerTypeBaseContainerDescriptor extends org.exolab.cast
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria();
+                return new org.hbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria");
+        desc.setSchemaType("org.hbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -191,7 +191,7 @@ public class CommandContainerTypeBaseContainerDescriptor extends org.exolab.cast
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainer.class;
+        return org.hbird.xtce.castor.CommandContainerTypeBaseContainer.class;
     }
 
     /**

@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.WarningRange;
+import org.hbird.xtce.castor.WarningRange;
 
 /**
  * Class WarningRangeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class WarningRangeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor {
+public class WarningRangeDescriptor extends org.hbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class WarningRangeDescriptor extends com.logica.hummingbird.xtce.castor.d
 
     public WarningRangeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "WarningRange";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class WarningRangeDescriptor extends com.logica.hummingbird.xtce.castor.d
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.WarningRange.class;
+        return org.hbird.xtce.castor.WarningRange.class;
     }
 
     /**

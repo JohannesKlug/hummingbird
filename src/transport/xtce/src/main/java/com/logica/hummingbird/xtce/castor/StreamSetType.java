@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Contains an unordered set of Streams.
@@ -23,7 +23,7 @@ public class StreamSetType implements java.io.Serializable {
     /**
      * Field _items.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.StreamSetTypeItem> _items;
+    private java.util.List<org.hbird.xtce.castor.StreamSetTypeItem> _items;
 
 
       //----------------/
@@ -32,7 +32,7 @@ public class StreamSetType implements java.io.Serializable {
 
     public StreamSetType() {
         super();
-        this._items = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.StreamSetTypeItem>();
+        this._items = new java.util.ArrayList<org.hbird.xtce.castor.StreamSetTypeItem>();
     }
 
 
@@ -48,7 +48,7 @@ public class StreamSetType implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addStreamSetTypeItem(
-            final com.logica.hummingbird.xtce.castor.StreamSetTypeItem vStreamSetTypeItem)
+            final org.hbird.xtce.castor.StreamSetTypeItem vStreamSetTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         this._items.add(vStreamSetTypeItem);
     }
@@ -63,7 +63,7 @@ public class StreamSetType implements java.io.Serializable {
      */
     public void addStreamSetTypeItem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.StreamSetTypeItem vStreamSetTypeItem)
+            final org.hbird.xtce.castor.StreamSetTypeItem vStreamSetTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         this._items.add(index, vStreamSetTypeItem);
     }
@@ -74,7 +74,7 @@ public class StreamSetType implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.StreamSetTypeItem> enumerateStreamSetTypeItem(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.StreamSetTypeItem> enumerateStreamSetTypeItem(
     ) {
         return java.util.Collections.enumeration(this._items);
     }
@@ -86,10 +86,10 @@ public class StreamSetType implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.StreamSetTypeItem at the
+     * org.hbird.xtce.castor.StreamSetTypeItem at the
      * given index
      */
-    public com.logica.hummingbird.xtce.castor.StreamSetTypeItem getStreamSetTypeItem(
+    public org.hbird.xtce.castor.StreamSetTypeItem getStreamSetTypeItem(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -97,7 +97,7 @@ public class StreamSetType implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getStreamSetTypeItem: Index value '" + index + "' not in range [0.." + (this._items.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.StreamSetTypeItem) _items.get(index);
+        return (org.hbird.xtce.castor.StreamSetTypeItem) _items.get(index);
     }
 
     /**
@@ -110,10 +110,10 @@ public class StreamSetType implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.StreamSetTypeItem[] getStreamSetTypeItem(
+    public org.hbird.xtce.castor.StreamSetTypeItem[] getStreamSetTypeItem(
     ) {
-        com.logica.hummingbird.xtce.castor.StreamSetTypeItem[] array = new com.logica.hummingbird.xtce.castor.StreamSetTypeItem[0];
-        return (com.logica.hummingbird.xtce.castor.StreamSetTypeItem[]) this._items.toArray(array);
+        org.hbird.xtce.castor.StreamSetTypeItem[] array = new org.hbird.xtce.castor.StreamSetTypeItem[0];
+        return (org.hbird.xtce.castor.StreamSetTypeItem[]) this._items.toArray(array);
     }
 
     /**
@@ -147,7 +147,7 @@ public class StreamSetType implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.StreamSetTypeItem> iterateStreamSetTypeItem(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.StreamSetTypeItem> iterateStreamSetTypeItem(
     ) {
         return this._items.iterator();
     }
@@ -198,7 +198,7 @@ public class StreamSetType implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeStreamSetTypeItem(
-            final com.logica.hummingbird.xtce.castor.StreamSetTypeItem vStreamSetTypeItem) {
+            final org.hbird.xtce.castor.StreamSetTypeItem vStreamSetTypeItem) {
         boolean removed = _items.remove(vStreamSetTypeItem);
         return removed;
     }
@@ -209,10 +209,10 @@ public class StreamSetType implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.StreamSetTypeItem removeStreamSetTypeItemAt(
+    public org.hbird.xtce.castor.StreamSetTypeItem removeStreamSetTypeItemAt(
             final int index) {
         java.lang.Object obj = this._items.remove(index);
-        return (com.logica.hummingbird.xtce.castor.StreamSetTypeItem) obj;
+        return (org.hbird.xtce.castor.StreamSetTypeItem) obj;
     }
 
     /**
@@ -225,7 +225,7 @@ public class StreamSetType implements java.io.Serializable {
      */
     public void setStreamSetTypeItem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.StreamSetTypeItem vStreamSetTypeItem)
+            final org.hbird.xtce.castor.StreamSetTypeItem vStreamSetTypeItem)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._items.size()) {
@@ -241,7 +241,7 @@ public class StreamSetType implements java.io.Serializable {
      * @param vStreamSetTypeItemArray
      */
     public void setStreamSetTypeItem(
-            final com.logica.hummingbird.xtce.castor.StreamSetTypeItem[] vStreamSetTypeItemArray) {
+            final org.hbird.xtce.castor.StreamSetTypeItem[] vStreamSetTypeItemArray) {
         //-- copy array
         _items.clear();
 
@@ -259,12 +259,12 @@ public class StreamSetType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.StreamSetType
+     * org.hbird.xtce.castor.StreamSetType
      */
-    public static com.logica.hummingbird.xtce.castor.StreamSetType unmarshal(
+    public static org.hbird.xtce.castor.StreamSetType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.StreamSetType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.StreamSetType.class, reader);
+        return (org.hbird.xtce.castor.StreamSetType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.StreamSetType.class, reader);
     }
 
     /**

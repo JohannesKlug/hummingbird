@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.DataEncodingType;
+import org.hbird.xtce.castor.DataEncodingType;
 
 /**
  * Class DataEncodingTypeDescriptor.
@@ -69,7 +69,7 @@ public class DataEncodingTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
         //-- initialize attribute descriptors
 
         //-- _bitOrder
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.DataEncodingTypeBitOrderType.class, "_bitOrder", "bitOrder", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.DataEncodingTypeBitOrderType.class, "_bitOrder", "bitOrder", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -84,7 +84,7 @@ public class DataEncodingTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
             {
                 try {
                     DataEncodingType target = (DataEncodingType) object;
-                    target.setBitOrder( (com.logica.hummingbird.xtce.castor.types.DataEncodingTypeBitOrderType) value);
+                    target.setBitOrder( (org.hbird.xtce.castor.types.DataEncodingTypeBitOrderType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,7 +95,7 @@ public class DataEncodingTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.DataEncodingTypeBitOrderType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.DataEncodingTypeBitOrderType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("DataEncodingTypeBitOrderType");
         desc.setHandler(handler);
@@ -110,7 +110,7 @@ public class DataEncodingTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
         //-- initialize element descriptors
 
         //-- _errorDetectCorrect
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ErrorDetectCorrect.class, "_errorDetectCorrect", "ErrorDetectCorrect", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ErrorDetectCorrect.class, "_errorDetectCorrect", "ErrorDetectCorrect", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -125,7 +125,7 @@ public class DataEncodingTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
             {
                 try {
                     DataEncodingType target = (DataEncodingType) object;
-                    target.setErrorDetectCorrect( (com.logica.hummingbird.xtce.castor.ErrorDetectCorrect) value);
+                    target.setErrorDetectCorrect( (org.hbird.xtce.castor.ErrorDetectCorrect) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -133,10 +133,10 @@ public class DataEncodingTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ErrorDetectCorrect();
+                return new org.hbird.xtce.castor.ErrorDetectCorrect();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ErrorDetectCorrect");
+        desc.setSchemaType("org.hbird.xtce.castor.ErrorDetectCorrect");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -149,7 +149,7 @@ public class DataEncodingTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
         }
         desc.setValidator(fieldValidator);
         //-- _byteOrderList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ByteOrderList.class, "_byteOrderList", "ByteOrderList", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ByteOrderList.class, "_byteOrderList", "ByteOrderList", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -164,7 +164,7 @@ public class DataEncodingTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
             {
                 try {
                     DataEncodingType target = (DataEncodingType) object;
-                    target.setByteOrderList( (com.logica.hummingbird.xtce.castor.ByteOrderList) value);
+                    target.setByteOrderList( (org.hbird.xtce.castor.ByteOrderList) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -172,10 +172,10 @@ public class DataEncodingTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ByteOrderList();
+                return new org.hbird.xtce.castor.ByteOrderList();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ByteOrderList");
+        desc.setSchemaType("org.hbird.xtce.castor.ByteOrderList");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -225,7 +225,7 @@ public class DataEncodingTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.DataEncodingType.class;
+        return org.hbird.xtce.castor.DataEncodingType.class;
     }
 
     /**

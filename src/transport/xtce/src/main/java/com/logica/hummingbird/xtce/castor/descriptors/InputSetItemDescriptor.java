@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.InputSetItem;
+import org.hbird.xtce.castor.InputSetItem;
 
 /**
  * Class InputSetItemDescriptor.
@@ -71,7 +71,7 @@ public class InputSetItemDescriptor extends org.exolab.castor.xml.util.XMLClassD
         //-- initialize element descriptors
 
         //-- _parameterInstanceRef
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.InputAlgorithmTypeInputSetParameterInstanceRef.class, "_parameterInstanceRef", "ParameterInstanceRef", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.InputAlgorithmTypeInputSetParameterInstanceRef.class, "_parameterInstanceRef", "ParameterInstanceRef", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class InputSetItemDescriptor extends org.exolab.castor.xml.util.XMLClassD
             {
                 try {
                     InputSetItem target = (InputSetItem) object;
-                    target.setParameterInstanceRef( (com.logica.hummingbird.xtce.castor.InputAlgorithmTypeInputSetParameterInstanceRef) value);
+                    target.setParameterInstanceRef( (org.hbird.xtce.castor.InputAlgorithmTypeInputSetParameterInstanceRef) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class InputSetItemDescriptor extends org.exolab.castor.xml.util.XMLClassD
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.InputAlgorithmTypeInputSetParameterInstanceRef();
+                return new org.hbird.xtce.castor.InputAlgorithmTypeInputSetParameterInstanceRef();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.InputAlgorithmTypeInputSetParameterInstanceRef");
+        desc.setSchemaType("org.hbird.xtce.castor.InputAlgorithmTypeInputSetParameterInstanceRef");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -112,7 +112,7 @@ public class InputSetItemDescriptor extends org.exolab.castor.xml.util.XMLClassD
         }
         desc.setValidator(fieldValidator);
         //-- _constant
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Constant.class, "_constant", "Constant", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Constant.class, "_constant", "Constant", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -127,7 +127,7 @@ public class InputSetItemDescriptor extends org.exolab.castor.xml.util.XMLClassD
             {
                 try {
                     InputSetItem target = (InputSetItem) object;
-                    target.setConstant( (com.logica.hummingbird.xtce.castor.Constant) value);
+                    target.setConstant( (org.hbird.xtce.castor.Constant) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -135,10 +135,10 @@ public class InputSetItemDescriptor extends org.exolab.castor.xml.util.XMLClassD
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Constant();
+                return new org.hbird.xtce.castor.Constant();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.Constant");
+        desc.setSchemaType("org.hbird.xtce.castor.Constant");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -188,7 +188,7 @@ public class InputSetItemDescriptor extends org.exolab.castor.xml.util.XMLClassD
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.InputSetItem.class;
+        return org.hbird.xtce.castor.InputSetItem.class;
     }
 
     /**

@@ -1,6 +1,6 @@
-package com.logica.hummingbird.tasks.checks;
+package org.hbird.tasks.checks;
 
-import com.logica.hummingbird.buffers.ObjectBuffer;
+import org.hbird.buffers.ObjectBuffer;
 
 public class DynamicParameterBasedValue extends ConfigurableValue {
 

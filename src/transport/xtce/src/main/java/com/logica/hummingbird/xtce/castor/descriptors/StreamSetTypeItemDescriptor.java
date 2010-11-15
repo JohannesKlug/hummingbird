@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.StreamSetTypeItem;
+import org.hbird.xtce.castor.StreamSetTypeItem;
 
 /**
  * Class StreamSetTypeItemDescriptor.
@@ -71,7 +71,7 @@ public class StreamSetTypeItemDescriptor extends org.exolab.castor.xml.util.XMLC
         //-- initialize element descriptors
 
         //-- _fixedFrameStream
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.FixedFrameStream.class, "_fixedFrameStream", "FixedFrameStream", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.FixedFrameStream.class, "_fixedFrameStream", "FixedFrameStream", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class StreamSetTypeItemDescriptor extends org.exolab.castor.xml.util.XMLC
             {
                 try {
                     StreamSetTypeItem target = (StreamSetTypeItem) object;
-                    target.setFixedFrameStream( (com.logica.hummingbird.xtce.castor.FixedFrameStream) value);
+                    target.setFixedFrameStream( (org.hbird.xtce.castor.FixedFrameStream) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class StreamSetTypeItemDescriptor extends org.exolab.castor.xml.util.XMLC
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.FixedFrameStream();
+                return new org.hbird.xtce.castor.FixedFrameStream();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.FixedFrameStream");
+        desc.setSchemaType("org.hbird.xtce.castor.FixedFrameStream");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -112,7 +112,7 @@ public class StreamSetTypeItemDescriptor extends org.exolab.castor.xml.util.XMLC
         }
         desc.setValidator(fieldValidator);
         //-- _variableFrameStream
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.VariableFrameStream.class, "_variableFrameStream", "VariableFrameStream", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.VariableFrameStream.class, "_variableFrameStream", "VariableFrameStream", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -127,7 +127,7 @@ public class StreamSetTypeItemDescriptor extends org.exolab.castor.xml.util.XMLC
             {
                 try {
                     StreamSetTypeItem target = (StreamSetTypeItem) object;
-                    target.setVariableFrameStream( (com.logica.hummingbird.xtce.castor.VariableFrameStream) value);
+                    target.setVariableFrameStream( (org.hbird.xtce.castor.VariableFrameStream) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -135,10 +135,10 @@ public class StreamSetTypeItemDescriptor extends org.exolab.castor.xml.util.XMLC
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.VariableFrameStream();
+                return new org.hbird.xtce.castor.VariableFrameStream();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.VariableFrameStream");
+        desc.setSchemaType("org.hbird.xtce.castor.VariableFrameStream");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -153,7 +153,7 @@ public class StreamSetTypeItemDescriptor extends org.exolab.castor.xml.util.XMLC
         }
         desc.setValidator(fieldValidator);
         //-- _customStream
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.CustomStream.class, "_customStream", "CustomStream", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.CustomStream.class, "_customStream", "CustomStream", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -168,7 +168,7 @@ public class StreamSetTypeItemDescriptor extends org.exolab.castor.xml.util.XMLC
             {
                 try {
                     StreamSetTypeItem target = (StreamSetTypeItem) object;
-                    target.setCustomStream( (com.logica.hummingbird.xtce.castor.CustomStream) value);
+                    target.setCustomStream( (org.hbird.xtce.castor.CustomStream) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -176,10 +176,10 @@ public class StreamSetTypeItemDescriptor extends org.exolab.castor.xml.util.XMLC
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.CustomStream();
+                return new org.hbird.xtce.castor.CustomStream();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.CustomStream");
+        desc.setSchemaType("org.hbird.xtce.castor.CustomStream");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -231,7 +231,7 @@ public class StreamSetTypeItemDescriptor extends org.exolab.castor.xml.util.XMLC
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.StreamSetTypeItem.class;
+        return org.hbird.xtce.castor.StreamSetTypeItem.class;
     }
 
     /**

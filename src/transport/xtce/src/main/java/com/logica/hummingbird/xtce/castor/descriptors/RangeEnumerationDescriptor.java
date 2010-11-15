@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.RangeEnumeration;
+import org.hbird.xtce.castor.RangeEnumeration;
 
 /**
  * Class RangeEnumerationDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class RangeEnumerationDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor {
+public class RangeEnumerationDescriptor extends org.hbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class RangeEnumerationDescriptor extends com.logica.hummingbird.xtce.cast
 
     public RangeEnumerationDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "RangeEnumeration";
         _elementDefinition = true;
@@ -153,7 +153,7 @@ public class RangeEnumerationDescriptor extends com.logica.hummingbird.xtce.cast
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.RangeEnumeration.class;
+        return org.hbird.xtce.castor.RangeEnumeration.class;
     }
 
     /**

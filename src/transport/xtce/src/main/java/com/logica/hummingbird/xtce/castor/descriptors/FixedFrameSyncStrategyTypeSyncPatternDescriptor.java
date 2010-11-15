@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern;
+import org.hbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern;
 
 /**
  * Class FixedFrameSyncStrategyTypeSyncPatternDescriptor.
@@ -321,7 +321,7 @@ public class FixedFrameSyncStrategyTypeSyncPatternDescriptor extends org.exolab.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern.class;
+        return org.hbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern.class;
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.logica.hummingbird.buffers;
+package org.hbird.buffers;
 
 
 /**

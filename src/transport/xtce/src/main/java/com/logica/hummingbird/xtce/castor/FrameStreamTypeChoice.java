@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class FrameStreamTypeChoice.
@@ -26,12 +26,12 @@ public class FrameStreamTypeChoice implements java.io.Serializable {
      * generalcontainer type from which many specific containers
      * are inherited.
      */
-    private com.logica.hummingbird.xtce.castor.ContainerRef _containerRef;
+    private org.hbird.xtce.castor.ContainerRef _containerRef;
 
     /**
      * Field _serviceRef.
      */
-    private com.logica.hummingbird.xtce.castor.ServiceRef _serviceRef;
+    private org.hbird.xtce.castor.ServiceRef _serviceRef;
 
 
       //----------------/
@@ -56,7 +56,7 @@ public class FrameStreamTypeChoice implements java.io.Serializable {
      * 
      * @return the value of field 'ContainerRef'.
      */
-    public com.logica.hummingbird.xtce.castor.ContainerRef getContainerRef(
+    public org.hbird.xtce.castor.ContainerRef getContainerRef(
     ) {
         return this._containerRef;
     }
@@ -66,7 +66,7 @@ public class FrameStreamTypeChoice implements java.io.Serializable {
      * 
      * @return the value of field 'ServiceRef'.
      */
-    public com.logica.hummingbird.xtce.castor.ServiceRef getServiceRef(
+    public org.hbird.xtce.castor.ServiceRef getServiceRef(
     ) {
         return this._serviceRef;
     }
@@ -128,7 +128,7 @@ public class FrameStreamTypeChoice implements java.io.Serializable {
      * @param containerRef the value of field 'containerRef'.
      */
     public void setContainerRef(
-            final com.logica.hummingbird.xtce.castor.ContainerRef containerRef) {
+            final org.hbird.xtce.castor.ContainerRef containerRef) {
         this._containerRef = containerRef;
     }
 
@@ -138,7 +138,7 @@ public class FrameStreamTypeChoice implements java.io.Serializable {
      * @param serviceRef the value of field 'serviceRef'.
      */
     public void setServiceRef(
-            final com.logica.hummingbird.xtce.castor.ServiceRef serviceRef) {
+            final org.hbird.xtce.castor.ServiceRef serviceRef) {
         this._serviceRef = serviceRef;
     }
 
@@ -151,12 +151,12 @@ public class FrameStreamTypeChoice implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.FrameStreamTypeChoice
+     * org.hbird.xtce.castor.FrameStreamTypeChoice
      */
-    public static com.logica.hummingbird.xtce.castor.FrameStreamTypeChoice unmarshal(
+    public static org.hbird.xtce.castor.FrameStreamTypeChoice unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.FrameStreamTypeChoice) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.FrameStreamTypeChoice.class, reader);
+        return (org.hbird.xtce.castor.FrameStreamTypeChoice) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.FrameStreamTypeChoice.class, reader);
     }
 
     /**

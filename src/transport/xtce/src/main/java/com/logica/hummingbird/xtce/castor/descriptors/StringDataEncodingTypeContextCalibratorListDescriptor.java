@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.StringDataEncodingTypeContextCalibratorList;
+import org.hbird.xtce.castor.StringDataEncodingTypeContextCalibratorList;
 
 /**
  * Class StringDataEncodingTypeContextCalibratorListDescriptor.
@@ -71,7 +71,7 @@ public class StringDataEncodingTypeContextCalibratorListDescriptor extends org.e
         //-- initialize element descriptors
 
         //-- _contextCalibratorList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.StringDataEncodingTypeContextCalibratorListContextCalibrator.class, "_contextCalibratorList", "ContextCalibrator", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.StringDataEncodingTypeContextCalibratorListContextCalibrator.class, "_contextCalibratorList", "ContextCalibrator", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class StringDataEncodingTypeContextCalibratorListDescriptor extends org.e
             {
                 try {
                     StringDataEncodingTypeContextCalibratorList target = (StringDataEncodingTypeContextCalibratorList) object;
-                    target.addContextCalibrator( (com.logica.hummingbird.xtce.castor.StringDataEncodingTypeContextCalibratorListContextCalibrator) value);
+                    target.addContextCalibrator( (org.hbird.xtce.castor.StringDataEncodingTypeContextCalibratorListContextCalibrator) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -102,11 +102,11 @@ public class StringDataEncodingTypeContextCalibratorListDescriptor extends org.e
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.StringDataEncodingTypeContextCalibratorListContextCalibrator();
+                return new org.hbird.xtce.castor.StringDataEncodingTypeContextCalibratorListContextCalibrator();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.StringDataEncodingTypeContextCalibratorListContextCalibrator");
+        desc.setComponentType("org.hbird.xtce.castor.StringDataEncodingTypeContextCalibratorListContextCalibrator");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -158,7 +158,7 @@ public class StringDataEncodingTypeContextCalibratorListDescriptor extends org.e
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.StringDataEncodingTypeContextCalibratorList.class;
+        return org.hbird.xtce.castor.StringDataEncodingTypeContextCalibratorList.class;
     }
 
     /**

@@ -1,10 +1,10 @@
-package com.logica.hummingbird.simpleparametersimulator;
+package org.hbird.simpleparametersimulator;
 
 import java.util.Date;
 
 import org.apache.camel.Exchange;
 
-import com.logica.hummingbird.formatter.ExchangeFormatter;
+import org.hbird.formatter.ExchangeFormatter;
 
 public class TimeParameter extends BaseParameter {
 

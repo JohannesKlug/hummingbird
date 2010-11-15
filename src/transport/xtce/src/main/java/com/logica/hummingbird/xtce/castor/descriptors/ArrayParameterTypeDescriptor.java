@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ArrayParameterType;
+import org.hbird.xtce.castor.ArrayParameterType;
 
 /**
  * Class ArrayParameterTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ArrayParameterTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
+public class ArrayParameterTypeDescriptor extends org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ArrayParameterTypeDescriptor extends com.logica.hummingbird.xtce.ca
 
     public ArrayParameterTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ArrayParameterType";
         _elementDefinition = true;
@@ -200,7 +200,7 @@ public class ArrayParameterTypeDescriptor extends com.logica.hummingbird.xtce.ca
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ArrayParameterType.class;
+        return org.hbird.xtce.castor.ArrayParameterType.class;
     }
 
     /**

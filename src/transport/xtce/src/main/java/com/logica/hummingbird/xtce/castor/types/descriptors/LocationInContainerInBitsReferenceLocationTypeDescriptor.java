@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types.descriptors;
+package org.hbird.xtce.castor.types.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType;
+import org.hbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType;
 
 /**
  * Class LocationInContainerInBitsReferenceLocationTypeDescriptor.
@@ -98,7 +98,7 @@ public class LocationInContainerInBitsReferenceLocationTypeDescriptor extends or
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType.class;
+        return org.hbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType.class;
     }
 
     /**

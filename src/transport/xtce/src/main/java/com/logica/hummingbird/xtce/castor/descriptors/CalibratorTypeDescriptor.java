@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.CalibratorType;
+import org.hbird.xtce.castor.CalibratorType;
 
 /**
  * Class CalibratorTypeDescriptor.
@@ -113,7 +113,7 @@ public class CalibratorTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
         //-- initialize element descriptors
 
         //-- _splineCalibrator
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.SplineCalibrator.class, "_splineCalibrator", "SplineCalibrator", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.SplineCalibrator.class, "_splineCalibrator", "SplineCalibrator", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -128,7 +128,7 @@ public class CalibratorTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
             {
                 try {
                     CalibratorType target = (CalibratorType) object;
-                    target.setSplineCalibrator( (com.logica.hummingbird.xtce.castor.SplineCalibrator) value);
+                    target.setSplineCalibrator( (org.hbird.xtce.castor.SplineCalibrator) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -136,10 +136,10 @@ public class CalibratorTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.SplineCalibrator();
+                return new org.hbird.xtce.castor.SplineCalibrator();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.SplineCalibrator");
+        desc.setSchemaType("org.hbird.xtce.castor.SplineCalibrator");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -154,7 +154,7 @@ public class CalibratorTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
         }
         desc.setValidator(fieldValidator);
         //-- _polynomialCalibrator
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.PolynomialCalibrator.class, "_polynomialCalibrator", "PolynomialCalibrator", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.PolynomialCalibrator.class, "_polynomialCalibrator", "PolynomialCalibrator", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -169,7 +169,7 @@ public class CalibratorTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
             {
                 try {
                     CalibratorType target = (CalibratorType) object;
-                    target.setPolynomialCalibrator( (com.logica.hummingbird.xtce.castor.PolynomialCalibrator) value);
+                    target.setPolynomialCalibrator( (org.hbird.xtce.castor.PolynomialCalibrator) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -177,10 +177,10 @@ public class CalibratorTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.PolynomialCalibrator();
+                return new org.hbird.xtce.castor.PolynomialCalibrator();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.PolynomialCalibrator");
+        desc.setSchemaType("org.hbird.xtce.castor.PolynomialCalibrator");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -232,7 +232,7 @@ public class CalibratorTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.CalibratorType.class;
+        return org.hbird.xtce.castor.CalibratorType.class;
     }
 
     /**

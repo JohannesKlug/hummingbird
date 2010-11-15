@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A wrapper for those properties that are unique to telemetry
@@ -29,7 +29,7 @@ public class ParameterPropertiesType implements java.io.Serializable {
      * local Parameter is one that is used purely on the ground
      * (e.g. a ground command counter).
      */
-    private com.logica.hummingbird.xtce.castor.types.ParameterPropertiesTypeDataSourceType _dataSource;
+    private org.hbird.xtce.castor.types.ParameterPropertiesTypeDataSourceType _dataSource;
 
     /**
      * A Parameter marked as 'readOnly' true is constant and
@@ -52,19 +52,19 @@ public class ParameterPropertiesType implements java.io.Serializable {
      * Optional condition that must be true for this Parameter to
      * be valid
      */
-    private com.logica.hummingbird.xtce.castor.ValidityCondition _validityCondition;
+    private org.hbird.xtce.castor.ValidityCondition _validityCondition;
 
     /**
      * One or more physical addresses may be associated with each
      * Parameter. Examples of phyical addresses include a location
      * on the spacecraft or a location on a data collection bus. 
      */
-    private com.logica.hummingbird.xtce.castor.PhysicalAddressSet _physicalAddressSet;
+    private org.hbird.xtce.castor.PhysicalAddressSet _physicalAddressSet;
 
     /**
      * This time will overide any Default value for TimeAssociation.
      */
-    private com.logica.hummingbird.xtce.castor.TimeAssociation _timeAssociation;
+    private org.hbird.xtce.castor.TimeAssociation _timeAssociation;
 
 
       //----------------/
@@ -99,7 +99,7 @@ public class ParameterPropertiesType implements java.io.Serializable {
      * 
      * @return the value of field 'DataSource'.
      */
-    public com.logica.hummingbird.xtce.castor.types.ParameterPropertiesTypeDataSourceType getDataSource(
+    public org.hbird.xtce.castor.types.ParameterPropertiesTypeDataSourceType getDataSource(
     ) {
         return this._dataSource;
     }
@@ -113,7 +113,7 @@ public class ParameterPropertiesType implements java.io.Serializable {
      * 
      * @return the value of field 'PhysicalAddressSet'.
      */
-    public com.logica.hummingbird.xtce.castor.PhysicalAddressSet getPhysicalAddressSet(
+    public org.hbird.xtce.castor.PhysicalAddressSet getPhysicalAddressSet(
     ) {
         return this._physicalAddressSet;
     }
@@ -150,7 +150,7 @@ public class ParameterPropertiesType implements java.io.Serializable {
      * 
      * @return the value of field 'TimeAssociation'.
      */
-    public com.logica.hummingbird.xtce.castor.TimeAssociation getTimeAssociation(
+    public org.hbird.xtce.castor.TimeAssociation getTimeAssociation(
     ) {
         return this._timeAssociation;
     }
@@ -162,7 +162,7 @@ public class ParameterPropertiesType implements java.io.Serializable {
      * 
      * @return the value of field 'ValidityCondition'.
      */
-    public com.logica.hummingbird.xtce.castor.ValidityCondition getValidityCondition(
+    public org.hbird.xtce.castor.ValidityCondition getValidityCondition(
     ) {
         return this._validityCondition;
     }
@@ -248,7 +248,7 @@ public class ParameterPropertiesType implements java.io.Serializable {
      * @param dataSource the value of field 'dataSource'.
      */
     public void setDataSource(
-            final com.logica.hummingbird.xtce.castor.types.ParameterPropertiesTypeDataSourceType dataSource) {
+            final org.hbird.xtce.castor.types.ParameterPropertiesTypeDataSourceType dataSource) {
         this._dataSource = dataSource;
     }
 
@@ -263,7 +263,7 @@ public class ParameterPropertiesType implements java.io.Serializable {
      * 'physicalAddressSet'.
      */
     public void setPhysicalAddressSet(
-            final com.logica.hummingbird.xtce.castor.PhysicalAddressSet physicalAddressSet) {
+            final org.hbird.xtce.castor.PhysicalAddressSet physicalAddressSet) {
         this._physicalAddressSet = physicalAddressSet;
     }
 
@@ -300,7 +300,7 @@ public class ParameterPropertiesType implements java.io.Serializable {
      * @param timeAssociation the value of field 'timeAssociation'.
      */
     public void setTimeAssociation(
-            final com.logica.hummingbird.xtce.castor.TimeAssociation timeAssociation) {
+            final org.hbird.xtce.castor.TimeAssociation timeAssociation) {
         this._timeAssociation = timeAssociation;
     }
 
@@ -313,7 +313,7 @@ public class ParameterPropertiesType implements java.io.Serializable {
      * 'validityCondition'.
      */
     public void setValidityCondition(
-            final com.logica.hummingbird.xtce.castor.ValidityCondition validityCondition) {
+            final org.hbird.xtce.castor.ValidityCondition validityCondition) {
         this._validityCondition = validityCondition;
     }
 
@@ -326,12 +326,12 @@ public class ParameterPropertiesType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ParameterPropertiesType
+     * org.hbird.xtce.castor.ParameterPropertiesType
      */
-    public static com.logica.hummingbird.xtce.castor.ParameterPropertiesType unmarshal(
+    public static org.hbird.xtce.castor.ParameterPropertiesType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ParameterPropertiesType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ParameterPropertiesType.class, reader);
+        return (org.hbird.xtce.castor.ParameterPropertiesType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ParameterPropertiesType.class, reader);
     }
 
     /**

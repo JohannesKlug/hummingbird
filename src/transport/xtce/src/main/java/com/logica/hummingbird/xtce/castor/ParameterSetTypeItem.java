@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class ParameterSetTypeItem.
@@ -28,13 +28,13 @@ public class ParameterSetTypeItem implements java.io.Serializable {
     /**
      * Field _parameter.
      */
-    private com.logica.hummingbird.xtce.castor.Parameter _parameter;
+    private org.hbird.xtce.castor.Parameter _parameter;
 
     /**
      * Used to include a Parameter defined in another sub-system in
      * this sub-system.
      */
-    private com.logica.hummingbird.xtce.castor.ParameterRef _parameterRef;
+    private org.hbird.xtce.castor.ParameterRef _parameterRef;
 
 
       //----------------/
@@ -67,7 +67,7 @@ public class ParameterSetTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'Parameter'.
      */
-    public com.logica.hummingbird.xtce.castor.Parameter getParameter(
+    public org.hbird.xtce.castor.Parameter getParameter(
     ) {
         return this._parameter;
     }
@@ -80,7 +80,7 @@ public class ParameterSetTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'ParameterRef'.
      */
-    public com.logica.hummingbird.xtce.castor.ParameterRef getParameterRef(
+    public org.hbird.xtce.castor.ParameterRef getParameterRef(
     ) {
         return this._parameterRef;
     }
@@ -91,7 +91,7 @@ public class ParameterSetTypeItem implements java.io.Serializable {
      * @param parameter the value of field 'parameter'.
      */
     public void setParameter(
-            final com.logica.hummingbird.xtce.castor.Parameter parameter) {
+            final org.hbird.xtce.castor.Parameter parameter) {
         this._parameter = parameter;
         this._choiceValue = parameter;
     }
@@ -105,7 +105,7 @@ public class ParameterSetTypeItem implements java.io.Serializable {
      * @param parameterRef the value of field 'parameterRef'.
      */
     public void setParameterRef(
-            final com.logica.hummingbird.xtce.castor.ParameterRef parameterRef) {
+            final org.hbird.xtce.castor.ParameterRef parameterRef) {
         this._parameterRef = parameterRef;
         this._choiceValue = parameterRef;
     }

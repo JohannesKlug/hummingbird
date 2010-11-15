@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ParameterToSet;
+import org.hbird.xtce.castor.ParameterToSet;
 
 /**
  * Class ParameterToSetDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ParameterToSetDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ParameterToSetTypeDescriptor {
+public class ParameterToSetDescriptor extends org.hbird.xtce.castor.descriptors.ParameterToSetTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ParameterToSetDescriptor extends com.logica.hummingbird.xtce.castor
 
     public ParameterToSetDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ParameterToSetTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ParameterToSetTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ParameterToSet";
         _elementDefinition = true;
@@ -67,7 +67,7 @@ public class ParameterToSetDescriptor extends com.logica.hummingbird.xtce.castor
         //-- initialize attribute descriptors
 
         //-- _verifierToTriggerOn
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.ParameterToSetTypeVerifierToTriggerOnType.class, "_verifierToTriggerOn", "verifierToTriggerOn", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.ParameterToSetTypeVerifierToTriggerOnType.class, "_verifierToTriggerOn", "verifierToTriggerOn", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -82,7 +82,7 @@ public class ParameterToSetDescriptor extends com.logica.hummingbird.xtce.castor
             {
                 try {
                     ParameterToSet target = (ParameterToSet) object;
-                    target.setVerifierToTriggerOn( (com.logica.hummingbird.xtce.castor.types.ParameterToSetTypeVerifierToTriggerOnType) value);
+                    target.setVerifierToTriggerOn( (org.hbird.xtce.castor.types.ParameterToSetTypeVerifierToTriggerOnType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -93,7 +93,7 @@ public class ParameterToSetDescriptor extends com.logica.hummingbird.xtce.castor
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.ParameterToSetTypeVerifierToTriggerOnType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.ParameterToSetTypeVerifierToTriggerOnType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("ParameterToSetTypeVerifierToTriggerOnType");
         desc.setHandler(handler);
@@ -148,7 +148,7 @@ public class ParameterToSetDescriptor extends com.logica.hummingbird.xtce.castor
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ParameterToSet.class;
+        return org.hbird.xtce.castor.ParameterToSet.class;
     }
 
     /**

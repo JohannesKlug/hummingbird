@@ -1,4 +1,4 @@
-package com.logica.hummingbird.command.generator;
+package org.hbird.command.generator;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -15,12 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
-import com.logica.hummingbird.buffers.CommandBuffer;
-import com.logica.hummingbird.formatter.HeaderFields;
-import com.logica.hummingbird.tasks.checks.Range;
-import com.logica.hummingbird.tasks.checks.StaticValue;
-import com.logica.hummingbird.type.Argument;
-import com.logica.hummingbird.type.CommandDefinition;
+import org.hbird.buffers.CommandBuffer;
+import org.hbird.formatter.HeaderFields;
+import org.hbird.tasks.checks.Range;
+import org.hbird.tasks.checks.StaticValue;
+import org.hbird.type.Argument;
+import org.hbird.type.CommandDefinition;
 
 @ContextConfiguration (locations={"/JettyCommandTransformerTest-context.xml"})
 public class JettyCommandTransformerTest extends AbstractJUnit38SpringContextTests  {

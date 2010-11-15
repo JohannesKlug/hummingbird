@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Enumeration;
+import org.hbird.xtce.castor.Enumeration;
 
 /**
  * Class EnumerationDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class EnumerationDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ValueEnumerationTypeDescriptor {
+public class EnumerationDescriptor extends org.hbird.xtce.castor.descriptors.ValueEnumerationTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class EnumerationDescriptor extends com.logica.hummingbird.xtce.castor.de
 
     public EnumerationDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ValueEnumerationTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ValueEnumerationTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "Enumeration";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class EnumerationDescriptor extends com.logica.hummingbird.xtce.castor.de
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Enumeration.class;
+        return org.hbird.xtce.castor.Enumeration.class;
     }
 
     /**

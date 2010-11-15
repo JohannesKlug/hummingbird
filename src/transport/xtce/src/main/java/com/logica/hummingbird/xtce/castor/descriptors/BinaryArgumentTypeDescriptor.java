@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.BinaryArgumentType;
+import org.hbird.xtce.castor.BinaryArgumentType;
 
 /**
  * Class BinaryArgumentTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class BinaryArgumentTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.BinaryDataTypeDescriptor {
+public class BinaryArgumentTypeDescriptor extends org.hbird.xtce.castor.descriptors.BinaryDataTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class BinaryArgumentTypeDescriptor extends com.logica.hummingbird.xtce.ca
 
     public BinaryArgumentTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.BinaryDataTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.BinaryDataTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "BinaryArgumentType";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class BinaryArgumentTypeDescriptor extends com.logica.hummingbird.xtce.ca
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.BinaryArgumentType.class;
+        return org.hbird.xtce.castor.BinaryArgumentType.class;
     }
 
     /**

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.logica.hummingbird.command.generator;
+package org.hbird.command.generator;
 
 import java.util.Date;
 
@@ -25,11 +25,11 @@ import org.apache.camel.impl.DefaultExchange;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.logica.hummingbird.buffers.CommandBuffer;
-import com.logica.hummingbird.formatter.ExchangeFormatter;
-import com.logica.hummingbird.formatter.HeaderFields;
-import com.logica.hummingbird.type.Argument;
-import com.logica.hummingbird.type.CommandDefinition;
+import org.hbird.buffers.CommandBuffer;
+import org.hbird.formatter.ExchangeFormatter;
+import org.hbird.formatter.HeaderFields;
+import org.hbird.type.Argument;
+import org.hbird.type.CommandDefinition;
 
 /**
  * @TITLE Command Generator Design

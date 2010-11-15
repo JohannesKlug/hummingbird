@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A PCM Stream Type is the high level definition for all Pulse
@@ -14,7 +14,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public abstract class PCMStreamType extends com.logica.hummingbird.xtce.castor.NameDescriptionType 
+public abstract class PCMStreamType extends org.hbird.xtce.castor.NameDescriptionType 
 implements java.io.Serializable
 {
 
@@ -36,7 +36,7 @@ implements java.io.Serializable
     /**
      * Field _pcmType.
      */
-    private com.logica.hummingbird.xtce.castor.types.PCMStreamTypePcmTypeType _pcmType = com.logica.hummingbird.xtce.castor.types.PCMStreamTypePcmTypeType.fromValue("NRZL");
+    private org.hbird.xtce.castor.types.PCMStreamTypePcmTypeType _pcmType = org.hbird.xtce.castor.types.PCMStreamTypePcmTypeType.fromValue("NRZL");
 
     /**
      * Field _inverted.
@@ -55,7 +55,7 @@ implements java.io.Serializable
 
     public PCMStreamType() {
         super();
-        setPcmType(com.logica.hummingbird.xtce.castor.types.PCMStreamTypePcmTypeType.fromValue("NRZL"));
+        setPcmType(org.hbird.xtce.castor.types.PCMStreamTypePcmTypeType.fromValue("NRZL"));
     }
 
 
@@ -102,7 +102,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'PcmType'.
      */
-    public com.logica.hummingbird.xtce.castor.types.PCMStreamTypePcmTypeType getPcmType(
+    public org.hbird.xtce.castor.types.PCMStreamTypePcmTypeType getPcmType(
     ) {
         return this._pcmType;
     }
@@ -180,7 +180,7 @@ implements java.io.Serializable
      * @param pcmType the value of field 'pcmType'.
      */
     public void setPcmType(
-            final com.logica.hummingbird.xtce.castor.types.PCMStreamTypePcmTypeType pcmType) {
+            final org.hbird.xtce.castor.types.PCMStreamTypePcmTypeType pcmType) {
         this._pcmType = pcmType;
     }
 

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Contains an unordered collection of Alias's
@@ -30,7 +30,7 @@ public class AliasSetType implements java.io.Serializable {
      * case or integral id's only); their alias's provide a means
      * of capturing each name in a "nameSpace".
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.Alias> _aliasList;
+    private java.util.List<org.hbird.xtce.castor.Alias> _aliasList;
 
 
       //----------------/
@@ -39,7 +39,7 @@ public class AliasSetType implements java.io.Serializable {
 
     public AliasSetType() {
         super();
-        this._aliasList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.Alias>();
+        this._aliasList = new java.util.ArrayList<org.hbird.xtce.castor.Alias>();
     }
 
 
@@ -55,7 +55,7 @@ public class AliasSetType implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addAlias(
-            final com.logica.hummingbird.xtce.castor.Alias vAlias)
+            final org.hbird.xtce.castor.Alias vAlias)
     throws java.lang.IndexOutOfBoundsException {
         this._aliasList.add(vAlias);
     }
@@ -70,7 +70,7 @@ public class AliasSetType implements java.io.Serializable {
      */
     public void addAlias(
             final int index,
-            final com.logica.hummingbird.xtce.castor.Alias vAlias)
+            final org.hbird.xtce.castor.Alias vAlias)
     throws java.lang.IndexOutOfBoundsException {
         this._aliasList.add(index, vAlias);
     }
@@ -81,7 +81,7 @@ public class AliasSetType implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.Alias> enumerateAlias(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.Alias> enumerateAlias(
     ) {
         return java.util.Collections.enumeration(this._aliasList);
     }
@@ -93,9 +93,9 @@ public class AliasSetType implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.Alias at the given index
+     * org.hbird.xtce.castor.Alias at the given index
      */
-    public com.logica.hummingbird.xtce.castor.Alias getAlias(
+    public org.hbird.xtce.castor.Alias getAlias(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -103,7 +103,7 @@ public class AliasSetType implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getAlias: Index value '" + index + "' not in range [0.." + (this._aliasList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.Alias) _aliasList.get(index);
+        return (org.hbird.xtce.castor.Alias) _aliasList.get(index);
     }
 
     /**
@@ -115,10 +115,10 @@ public class AliasSetType implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.Alias[] getAlias(
+    public org.hbird.xtce.castor.Alias[] getAlias(
     ) {
-        com.logica.hummingbird.xtce.castor.Alias[] array = new com.logica.hummingbird.xtce.castor.Alias[0];
-        return (com.logica.hummingbird.xtce.castor.Alias[]) this._aliasList.toArray(array);
+        org.hbird.xtce.castor.Alias[] array = new org.hbird.xtce.castor.Alias[0];
+        return (org.hbird.xtce.castor.Alias[]) this._aliasList.toArray(array);
     }
 
     /**
@@ -152,7 +152,7 @@ public class AliasSetType implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.Alias> iterateAlias(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.Alias> iterateAlias(
     ) {
         return this._aliasList.iterator();
     }
@@ -196,7 +196,7 @@ public class AliasSetType implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeAlias(
-            final com.logica.hummingbird.xtce.castor.Alias vAlias) {
+            final org.hbird.xtce.castor.Alias vAlias) {
         boolean removed = _aliasList.remove(vAlias);
         return removed;
     }
@@ -207,10 +207,10 @@ public class AliasSetType implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.Alias removeAliasAt(
+    public org.hbird.xtce.castor.Alias removeAliasAt(
             final int index) {
         java.lang.Object obj = this._aliasList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.Alias) obj;
+        return (org.hbird.xtce.castor.Alias) obj;
     }
 
     /**
@@ -230,7 +230,7 @@ public class AliasSetType implements java.io.Serializable {
      */
     public void setAlias(
             final int index,
-            final com.logica.hummingbird.xtce.castor.Alias vAlias)
+            final org.hbird.xtce.castor.Alias vAlias)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._aliasList.size()) {
@@ -246,7 +246,7 @@ public class AliasSetType implements java.io.Serializable {
      * @param vAliasArray
      */
     public void setAlias(
-            final com.logica.hummingbird.xtce.castor.Alias[] vAliasArray) {
+            final org.hbird.xtce.castor.Alias[] vAliasArray) {
         //-- copy array
         _aliasList.clear();
 
@@ -264,12 +264,12 @@ public class AliasSetType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.AliasSetType
+     * org.hbird.xtce.castor.AliasSetType
      */
-    public static com.logica.hummingbird.xtce.castor.AliasSetType unmarshal(
+    public static org.hbird.xtce.castor.AliasSetType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.AliasSetType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.AliasSetType.class, reader);
+        return (org.hbird.xtce.castor.AliasSetType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.AliasSetType.class, reader);
     }
 
     /**

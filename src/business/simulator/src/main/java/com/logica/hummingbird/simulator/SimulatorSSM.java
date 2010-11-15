@@ -1,16 +1,16 @@
-package com.logica.hummingbird.simulator;
+package org.hbird.simulator;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import com.logica.hummingbird.spacesystemmodel.Container;
-import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.spacesystemmodel.parameters.Parameter;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.xtce.XtceModelFactory;
-import com.logica.hummingbird.xtce.exceptions.InvalidXtceFileException;
+import org.hbird.spacesystemmodel.Container;
+import org.hbird.spacesystemmodel.ContainerFactory;
+import org.hbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.spacesystemmodel.parameters.Parameter;
+import org.hbird.spacesystemmodel.parameters.ParameterContainer;
+import org.hbird.xtce.XtceModelFactory;
+import org.hbird.xtce.exceptions.InvalidXtceFileException;
 
 /**
  * CCSDS Space System model defined telemetry simulator. Acronyms used: SSM = Space System Model

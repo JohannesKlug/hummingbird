@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Algorithm outputs may be used to set decoding quality
@@ -88,12 +88,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.DecodingAlgorithm
+     * org.hbird.xtce.castor.DecodingAlgorithm
      */
-    public static com.logica.hummingbird.xtce.castor.DecodingAlgorithm unmarshal(
+    public static org.hbird.xtce.castor.DecodingAlgorithm unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.DecodingAlgorithm) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.DecodingAlgorithm.class, reader);
+        return (org.hbird.xtce.castor.DecodingAlgorithm) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.DecodingAlgorithm.class, reader);
     }
 
     /**

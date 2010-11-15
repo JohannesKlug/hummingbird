@@ -1,4 +1,4 @@
-package com.logica.hummingbird.buffers;
+package org.hbird.buffers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class ObjectBuffer  {
 	
 	
 	/* (non-Javadoc)
-	 * @see com.logica.hummingbird.jmshelper.IJmsBuffer#addEntry(org.apache.camel.Exchange)
+	 * @see org.hbird.jmshelper.IJmsBuffer#addEntry(org.apache.camel.Exchange)
 	 */
 	public void addEntry(Exchange arg0) {
 		buffer.put((String) arg0.getIn().getHeader("Name"), arg0.getIn().getBody());

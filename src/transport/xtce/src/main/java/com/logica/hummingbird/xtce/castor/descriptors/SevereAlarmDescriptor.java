@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.SevereAlarm;
+import org.hbird.xtce.castor.SevereAlarm;
 
 /**
  * Class SevereAlarmDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class SevereAlarmDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor {
+public class SevereAlarmDescriptor extends org.hbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class SevereAlarmDescriptor extends com.logica.hummingbird.xtce.castor.de
 
     public SevereAlarmDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.MatchCriteriaTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "SevereAlarm";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class SevereAlarmDescriptor extends com.logica.hummingbird.xtce.castor.de
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.SevereAlarm.class;
+        return org.hbird.xtce.castor.SevereAlarm.class;
     }
 
     /**

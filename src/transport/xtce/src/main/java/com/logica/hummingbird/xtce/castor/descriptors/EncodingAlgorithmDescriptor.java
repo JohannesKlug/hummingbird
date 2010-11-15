@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.EncodingAlgorithm;
+import org.hbird.xtce.castor.EncodingAlgorithm;
 
 /**
  * Class EncodingAlgorithmDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class EncodingAlgorithmDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor {
+public class EncodingAlgorithmDescriptor extends org.hbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class EncodingAlgorithmDescriptor extends com.logica.hummingbird.xtce.cas
 
     public EncodingAlgorithmDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.InputAlgorithmTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "EncodingAlgorithm";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class EncodingAlgorithmDescriptor extends com.logica.hummingbird.xtce.cas
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.EncodingAlgorithm.class;
+        return org.hbird.xtce.castor.EncodingAlgorithm.class;
     }
 
     /**

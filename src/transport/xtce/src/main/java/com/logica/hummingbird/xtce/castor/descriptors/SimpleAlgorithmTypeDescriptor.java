@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.SimpleAlgorithmType;
+import org.hbird.xtce.castor.SimpleAlgorithmType;
 
 /**
  * Class SimpleAlgorithmTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class SimpleAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
+public class SimpleAlgorithmTypeDescriptor extends org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class SimpleAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.c
 
     public SimpleAlgorithmTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "SimpleAlgorithmType";
         _elementDefinition = false;
@@ -72,7 +72,7 @@ public class SimpleAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.c
         //-- initialize element descriptors
 
         //-- _algorithmText
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.AlgorithmText.class, "_algorithmText", "AlgorithmText", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.AlgorithmText.class, "_algorithmText", "AlgorithmText", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class SimpleAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.c
             {
                 try {
                     SimpleAlgorithmType target = (SimpleAlgorithmType) object;
-                    target.setAlgorithmText( (com.logica.hummingbird.xtce.castor.AlgorithmText) value);
+                    target.setAlgorithmText( (org.hbird.xtce.castor.AlgorithmText) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,10 +95,10 @@ public class SimpleAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.c
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.AlgorithmText();
+                return new org.hbird.xtce.castor.AlgorithmText();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.AlgorithmText");
+        desc.setSchemaType("org.hbird.xtce.castor.AlgorithmText");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -111,7 +111,7 @@ public class SimpleAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.c
         }
         desc.setValidator(fieldValidator);
         //-- _externalAlgorithmSet
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ExternalAlgorithmSet.class, "_externalAlgorithmSet", "ExternalAlgorithmSet", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ExternalAlgorithmSet.class, "_externalAlgorithmSet", "ExternalAlgorithmSet", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -126,7 +126,7 @@ public class SimpleAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.c
             {
                 try {
                     SimpleAlgorithmType target = (SimpleAlgorithmType) object;
-                    target.setExternalAlgorithmSet( (com.logica.hummingbird.xtce.castor.ExternalAlgorithmSet) value);
+                    target.setExternalAlgorithmSet( (org.hbird.xtce.castor.ExternalAlgorithmSet) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -134,10 +134,10 @@ public class SimpleAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.c
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ExternalAlgorithmSet();
+                return new org.hbird.xtce.castor.ExternalAlgorithmSet();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ExternalAlgorithmSet");
+        desc.setSchemaType("org.hbird.xtce.castor.ExternalAlgorithmSet");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -190,7 +190,7 @@ public class SimpleAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.c
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.SimpleAlgorithmType.class;
+        return org.hbird.xtce.castor.SimpleAlgorithmType.class;
     }
 
     /**

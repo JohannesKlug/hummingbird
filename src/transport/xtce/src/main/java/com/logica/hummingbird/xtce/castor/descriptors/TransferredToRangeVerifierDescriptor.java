@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.TransferredToRangeVerifier;
+import org.hbird.xtce.castor.TransferredToRangeVerifier;
 
 /**
  * Class TransferredToRangeVerifierDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class TransferredToRangeVerifierDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor {
+public class TransferredToRangeVerifierDescriptor extends org.hbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class TransferredToRangeVerifierDescriptor extends com.logica.hummingbird
 
     public TransferredToRangeVerifierDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "TransferredToRangeVerifier";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class TransferredToRangeVerifierDescriptor extends com.logica.hummingbird
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.TransferredToRangeVerifier.class;
+        return org.hbird.xtce.castor.TransferredToRangeVerifier.class;
     }
 
     /**

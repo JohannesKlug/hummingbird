@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types;
+package org.hbird.xtce.castor.types;
 
 /**
  * Enumeration CRCReferenceType.
@@ -58,7 +58,7 @@ public enum CRCReferenceType implements java.io.Serializable {
      * @param value
      * @return the constant for this value
      */
-    public static com.logica.hummingbird.xtce.castor.types.CRCReferenceType fromValue(
+    public static org.hbird.xtce.castor.types.CRCReferenceType fromValue(
             final java.lang.String value) {
         for (CRCReferenceType c: CRCReferenceType.values()) {
             if (c.value.equals(value)) {

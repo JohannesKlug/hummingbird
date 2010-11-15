@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.FixedFrameSyncStrategyType;
+import org.hbird.xtce.castor.FixedFrameSyncStrategyType;
 
 /**
  * Class FixedFrameSyncStrategyTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class FixedFrameSyncStrategyTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.SyncStrategyTypeDescriptor {
+public class FixedFrameSyncStrategyTypeDescriptor extends org.hbird.xtce.castor.descriptors.SyncStrategyTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class FixedFrameSyncStrategyTypeDescriptor extends com.logica.hummingbird
 
     public FixedFrameSyncStrategyTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.SyncStrategyTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.SyncStrategyTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "FixedFrameSyncStrategyType";
         _elementDefinition = false;
@@ -72,7 +72,7 @@ public class FixedFrameSyncStrategyTypeDescriptor extends com.logica.hummingbird
         //-- initialize element descriptors
 
         //-- _syncPattern
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern.class, "_syncPattern", "SyncPattern", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern.class, "_syncPattern", "SyncPattern", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class FixedFrameSyncStrategyTypeDescriptor extends com.logica.hummingbird
             {
                 try {
                     FixedFrameSyncStrategyType target = (FixedFrameSyncStrategyType) object;
-                    target.setSyncPattern( (com.logica.hummingbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern) value);
+                    target.setSyncPattern( (org.hbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,10 +95,10 @@ public class FixedFrameSyncStrategyTypeDescriptor extends com.logica.hummingbird
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern();
+                return new org.hbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern");
+        desc.setSchemaType("org.hbird.xtce.castor.FixedFrameSyncStrategyTypeSyncPattern");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -153,7 +153,7 @@ public class FixedFrameSyncStrategyTypeDescriptor extends com.logica.hummingbird
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.FixedFrameSyncStrategyType.class;
+        return org.hbird.xtce.castor.FixedFrameSyncStrategyType.class;
     }
 
     /**

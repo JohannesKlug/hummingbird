@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Schema for a Header record. A header contains general
@@ -44,22 +44,22 @@ public class HeaderType implements java.io.Serializable {
     /**
      * Field _validationStatus.
      */
-    private com.logica.hummingbird.xtce.castor.types.HeaderTypeValidationStatusType _validationStatus;
+    private org.hbird.xtce.castor.types.HeaderTypeValidationStatusType _validationStatus;
 
     /**
      * Field _authorSet.
      */
-    private com.logica.hummingbird.xtce.castor.AuthorSet _authorSet;
+    private org.hbird.xtce.castor.AuthorSet _authorSet;
 
     /**
      * Field _noteSet.
      */
-    private com.logica.hummingbird.xtce.castor.NoteSet _noteSet;
+    private org.hbird.xtce.castor.NoteSet _noteSet;
 
     /**
      * Field _historySet.
      */
-    private com.logica.hummingbird.xtce.castor.HistorySet _historySet;
+    private org.hbird.xtce.castor.HistorySet _historySet;
 
 
       //----------------/
@@ -81,7 +81,7 @@ public class HeaderType implements java.io.Serializable {
      * 
      * @return the value of field 'AuthorSet'.
      */
-    public com.logica.hummingbird.xtce.castor.AuthorSet getAuthorSet(
+    public org.hbird.xtce.castor.AuthorSet getAuthorSet(
     ) {
         return this._authorSet;
     }
@@ -121,7 +121,7 @@ public class HeaderType implements java.io.Serializable {
      * 
      * @return the value of field 'HistorySet'.
      */
-    public com.logica.hummingbird.xtce.castor.HistorySet getHistorySet(
+    public org.hbird.xtce.castor.HistorySet getHistorySet(
     ) {
         return this._historySet;
     }
@@ -131,7 +131,7 @@ public class HeaderType implements java.io.Serializable {
      * 
      * @return the value of field 'NoteSet'.
      */
-    public com.logica.hummingbird.xtce.castor.NoteSet getNoteSet(
+    public org.hbird.xtce.castor.NoteSet getNoteSet(
     ) {
         return this._noteSet;
     }
@@ -141,7 +141,7 @@ public class HeaderType implements java.io.Serializable {
      * 
      * @return the value of field 'ValidationStatus'.
      */
-    public com.logica.hummingbird.xtce.castor.types.HeaderTypeValidationStatusType getValidationStatus(
+    public org.hbird.xtce.castor.types.HeaderTypeValidationStatusType getValidationStatus(
     ) {
         return this._validationStatus;
     }
@@ -209,7 +209,7 @@ public class HeaderType implements java.io.Serializable {
      * @param authorSet the value of field 'authorSet'.
      */
     public void setAuthorSet(
-            final com.logica.hummingbird.xtce.castor.AuthorSet authorSet) {
+            final org.hbird.xtce.castor.AuthorSet authorSet) {
         this._authorSet = authorSet;
     }
 
@@ -250,7 +250,7 @@ public class HeaderType implements java.io.Serializable {
      * @param historySet the value of field 'historySet'.
      */
     public void setHistorySet(
-            final com.logica.hummingbird.xtce.castor.HistorySet historySet) {
+            final org.hbird.xtce.castor.HistorySet historySet) {
         this._historySet = historySet;
     }
 
@@ -260,7 +260,7 @@ public class HeaderType implements java.io.Serializable {
      * @param noteSet the value of field 'noteSet'.
      */
     public void setNoteSet(
-            final com.logica.hummingbird.xtce.castor.NoteSet noteSet) {
+            final org.hbird.xtce.castor.NoteSet noteSet) {
         this._noteSet = noteSet;
     }
 
@@ -270,7 +270,7 @@ public class HeaderType implements java.io.Serializable {
      * @param validationStatus the value of field 'validationStatus'
      */
     public void setValidationStatus(
-            final com.logica.hummingbird.xtce.castor.types.HeaderTypeValidationStatusType validationStatus) {
+            final org.hbird.xtce.castor.types.HeaderTypeValidationStatusType validationStatus) {
         this._validationStatus = validationStatus;
     }
 
@@ -293,12 +293,12 @@ public class HeaderType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.HeaderType
+     * org.hbird.xtce.castor.HeaderType
      */
-    public static com.logica.hummingbird.xtce.castor.HeaderType unmarshal(
+    public static org.hbird.xtce.castor.HeaderType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.HeaderType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.HeaderType.class, reader);
+        return (org.hbird.xtce.castor.HeaderType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.HeaderType.class, reader);
     }
 
     /**

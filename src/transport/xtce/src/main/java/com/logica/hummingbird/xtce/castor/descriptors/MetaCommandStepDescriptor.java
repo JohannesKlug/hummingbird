@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.MetaCommandStep;
+import org.hbird.xtce.castor.MetaCommandStep;
 
 /**
  * Class MetaCommandStepDescriptor.
@@ -115,7 +115,7 @@ public class MetaCommandStepDescriptor extends org.exolab.castor.xml.util.XMLCla
         //-- initialize element descriptors
 
         //-- _argumentList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList.class, "_argumentList", "ArgumentList", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList.class, "_argumentList", "ArgumentList", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -130,7 +130,7 @@ public class MetaCommandStepDescriptor extends org.exolab.castor.xml.util.XMLCla
             {
                 try {
                     MetaCommandStep target = (MetaCommandStep) object;
-                    target.setArgumentList( (com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList) value);
+                    target.setArgumentList( (org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -138,10 +138,10 @@ public class MetaCommandStepDescriptor extends org.exolab.castor.xml.util.XMLCla
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList();
+                return new org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList");
+        desc.setSchemaType("org.hbird.xtce.castor.CommandMetaDataTypeMetaCommandSetBlockMetaCommandMetaCommandStepListMetaCommandStepArgumentList");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -191,7 +191,7 @@ public class MetaCommandStepDescriptor extends org.exolab.castor.xml.util.XMLCla
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.MetaCommandStep.class;
+        return org.hbird.xtce.castor.MetaCommandStep.class;
     }
 
     /**

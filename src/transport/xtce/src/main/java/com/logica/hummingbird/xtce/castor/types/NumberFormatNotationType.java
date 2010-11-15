@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types;
+package org.hbird.xtce.castor.types;
 
 /**
  * Enumeration NumberFormatNotationType.
@@ -62,7 +62,7 @@ public enum NumberFormatNotationType implements java.io.Serializable {
      * @param value
      * @return the constant for this value
      */
-    public static com.logica.hummingbird.xtce.castor.types.NumberFormatNotationType fromValue(
+    public static org.hbird.xtce.castor.types.NumberFormatNotationType fromValue(
             final java.lang.String value) {
         for (NumberFormatNotationType c: NumberFormatNotationType.values()) {
             if (c.value.equals(value)) {

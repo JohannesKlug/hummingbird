@@ -1,4 +1,4 @@
-package com.logica.hummingbird.xtce.exceptions;
+package org.hbird.xtce.exceptions;
 
 public class InvalidXtceFileException extends Exception {
 	private static final long serialVersionUID = -2295129185773361054L;

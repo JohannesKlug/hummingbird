@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * All the data about telemetry is contained in TelemetryMetaData
@@ -23,12 +23,12 @@ public class TelemetryMetaDataType implements java.io.Serializable {
     /**
      * A list of parameter types
      */
-    private com.logica.hummingbird.xtce.castor.ParameterTypeSet _parameterTypeSet;
+    private org.hbird.xtce.castor.ParameterTypeSet _parameterTypeSet;
 
     /**
      * A list of Parameters for this Space System. 
      */
-    private com.logica.hummingbird.xtce.castor.ParameterSet _parameterSet;
+    private org.hbird.xtce.castor.ParameterSet _parameterSet;
 
     /**
      * Holds the list of all potential container definitions for
@@ -38,7 +38,7 @@ public class TelemetryMetaDataType implements java.io.Serializable {
      * the pieces may defined once here, and then assembled as
      * needed into larger structures, also here.
      */
-    private com.logica.hummingbird.xtce.castor.ContainerSet _containerSet;
+    private org.hbird.xtce.castor.ContainerSet _containerSet;
 
     /**
      * Messages are an alternative method of uniquely identifying
@@ -48,17 +48,17 @@ public class TelemetryMetaDataType implements java.io.Serializable {
      * 21st minorframe container. The collection of messages to
      * search thru will be bound by a Service.
      */
-    private com.logica.hummingbird.xtce.castor.MessageSet _messageSet;
+    private org.hbird.xtce.castor.MessageSet _messageSet;
 
     /**
      * Field _streamSet.
      */
-    private com.logica.hummingbird.xtce.castor.StreamSet _streamSet;
+    private org.hbird.xtce.castor.StreamSet _streamSet;
 
     /**
      * Field _algorithmSet.
      */
-    private com.logica.hummingbird.xtce.castor.AlgorithmSet _algorithmSet;
+    private org.hbird.xtce.castor.AlgorithmSet _algorithmSet;
 
 
       //----------------/
@@ -79,7 +79,7 @@ public class TelemetryMetaDataType implements java.io.Serializable {
      * 
      * @return the value of field 'AlgorithmSet'.
      */
-    public com.logica.hummingbird.xtce.castor.AlgorithmSet getAlgorithmSet(
+    public org.hbird.xtce.castor.AlgorithmSet getAlgorithmSet(
     ) {
         return this._algorithmSet;
     }
@@ -96,7 +96,7 @@ public class TelemetryMetaDataType implements java.io.Serializable {
      * 
      * @return the value of field 'ContainerSet'.
      */
-    public com.logica.hummingbird.xtce.castor.ContainerSet getContainerSet(
+    public org.hbird.xtce.castor.ContainerSet getContainerSet(
     ) {
         return this._containerSet;
     }
@@ -113,7 +113,7 @@ public class TelemetryMetaDataType implements java.io.Serializable {
      * 
      * @return the value of field 'MessageSet'.
      */
-    public com.logica.hummingbird.xtce.castor.MessageSet getMessageSet(
+    public org.hbird.xtce.castor.MessageSet getMessageSet(
     ) {
         return this._messageSet;
     }
@@ -125,7 +125,7 @@ public class TelemetryMetaDataType implements java.io.Serializable {
      * 
      * @return the value of field 'ParameterSet'.
      */
-    public com.logica.hummingbird.xtce.castor.ParameterSet getParameterSet(
+    public org.hbird.xtce.castor.ParameterSet getParameterSet(
     ) {
         return this._parameterSet;
     }
@@ -137,7 +137,7 @@ public class TelemetryMetaDataType implements java.io.Serializable {
      * 
      * @return the value of field 'ParameterTypeSet'.
      */
-    public com.logica.hummingbird.xtce.castor.ParameterTypeSet getParameterTypeSet(
+    public org.hbird.xtce.castor.ParameterTypeSet getParameterTypeSet(
     ) {
         return this._parameterTypeSet;
     }
@@ -147,7 +147,7 @@ public class TelemetryMetaDataType implements java.io.Serializable {
      * 
      * @return the value of field 'StreamSet'.
      */
-    public com.logica.hummingbird.xtce.castor.StreamSet getStreamSet(
+    public org.hbird.xtce.castor.StreamSet getStreamSet(
     ) {
         return this._streamSet;
     }
@@ -205,7 +205,7 @@ public class TelemetryMetaDataType implements java.io.Serializable {
      * @param algorithmSet the value of field 'algorithmSet'.
      */
     public void setAlgorithmSet(
-            final com.logica.hummingbird.xtce.castor.AlgorithmSet algorithmSet) {
+            final org.hbird.xtce.castor.AlgorithmSet algorithmSet) {
         this._algorithmSet = algorithmSet;
     }
 
@@ -222,7 +222,7 @@ public class TelemetryMetaDataType implements java.io.Serializable {
      * @param containerSet the value of field 'containerSet'.
      */
     public void setContainerSet(
-            final com.logica.hummingbird.xtce.castor.ContainerSet containerSet) {
+            final org.hbird.xtce.castor.ContainerSet containerSet) {
         this._containerSet = containerSet;
     }
 
@@ -239,7 +239,7 @@ public class TelemetryMetaDataType implements java.io.Serializable {
      * @param messageSet the value of field 'messageSet'.
      */
     public void setMessageSet(
-            final com.logica.hummingbird.xtce.castor.MessageSet messageSet) {
+            final org.hbird.xtce.castor.MessageSet messageSet) {
         this._messageSet = messageSet;
     }
 
@@ -251,7 +251,7 @@ public class TelemetryMetaDataType implements java.io.Serializable {
      * @param parameterSet the value of field 'parameterSet'.
      */
     public void setParameterSet(
-            final com.logica.hummingbird.xtce.castor.ParameterSet parameterSet) {
+            final org.hbird.xtce.castor.ParameterSet parameterSet) {
         this._parameterSet = parameterSet;
     }
 
@@ -263,7 +263,7 @@ public class TelemetryMetaDataType implements java.io.Serializable {
      * @param parameterTypeSet the value of field 'parameterTypeSet'
      */
     public void setParameterTypeSet(
-            final com.logica.hummingbird.xtce.castor.ParameterTypeSet parameterTypeSet) {
+            final org.hbird.xtce.castor.ParameterTypeSet parameterTypeSet) {
         this._parameterTypeSet = parameterTypeSet;
     }
 
@@ -273,7 +273,7 @@ public class TelemetryMetaDataType implements java.io.Serializable {
      * @param streamSet the value of field 'streamSet'.
      */
     public void setStreamSet(
-            final com.logica.hummingbird.xtce.castor.StreamSet streamSet) {
+            final org.hbird.xtce.castor.StreamSet streamSet) {
         this._streamSet = streamSet;
     }
 
@@ -286,12 +286,12 @@ public class TelemetryMetaDataType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.TelemetryMetaDataType
+     * org.hbird.xtce.castor.TelemetryMetaDataType
      */
-    public static com.logica.hummingbird.xtce.castor.TelemetryMetaDataType unmarshal(
+    public static org.hbird.xtce.castor.TelemetryMetaDataType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.TelemetryMetaDataType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.TelemetryMetaDataType.class, reader);
+        return (org.hbird.xtce.castor.TelemetryMetaDataType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.TelemetryMetaDataType.class, reader);
     }
 
     /**

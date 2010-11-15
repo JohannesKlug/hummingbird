@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types;
+package org.hbird.xtce.castor.types;
 
 /**
  * Enumeration ParameterToSetTypeVerifierToTriggerOnType.
@@ -86,7 +86,7 @@ public enum ParameterToSetTypeVerifierToTriggerOnType implements java.io.Seriali
      * @param value
      * @return the constant for this value
      */
-    public static com.logica.hummingbird.xtce.castor.types.ParameterToSetTypeVerifierToTriggerOnType fromValue(
+    public static org.hbird.xtce.castor.types.ParameterToSetTypeVerifierToTriggerOnType fromValue(
             final java.lang.String value) {
         for (ParameterToSetTypeVerifierToTriggerOnType c: ParameterToSetTypeVerifierToTriggerOnType.values()) {
             if (c.value.equals(value)) {

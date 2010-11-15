@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * When true, indicates that the command failed. timeToWait is how
@@ -88,12 +88,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.FailedVerifier
+     * org.hbird.xtce.castor.FailedVerifier
      */
-    public static com.logica.hummingbird.xtce.castor.FailedVerifier unmarshal(
+    public static org.hbird.xtce.castor.FailedVerifier unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.FailedVerifier) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.FailedVerifier.class, reader);
+        return (org.hbird.xtce.castor.FailedVerifier) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.FailedVerifier.class, reader);
     }
 
     /**

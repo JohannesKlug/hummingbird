@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ComparisonType;
+import org.hbird.xtce.castor.ComparisonType;
 
 /**
  * Class ComparisonTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ComparisonTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ParameterInstanceRefTypeDescriptor {
+public class ComparisonTypeDescriptor extends org.hbird.xtce.castor.descriptors.ParameterInstanceRefTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ComparisonTypeDescriptor extends com.logica.hummingbird.xtce.castor
 
     public ComparisonTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ParameterInstanceRefTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ParameterInstanceRefTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ComparisonType";
         _elementDefinition = false;
@@ -108,7 +108,7 @@ public class ComparisonTypeDescriptor extends com.logica.hummingbird.xtce.castor
         //-- initialize attribute descriptors
 
         //-- _comparisonOperator
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.ComparisonOperatorsType.class, "_comparisonOperator", "comparisonOperator", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.ComparisonOperatorsType.class, "_comparisonOperator", "comparisonOperator", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -123,7 +123,7 @@ public class ComparisonTypeDescriptor extends com.logica.hummingbird.xtce.castor
             {
                 try {
                     ComparisonType target = (ComparisonType) object;
-                    target.setComparisonOperator( (com.logica.hummingbird.xtce.castor.types.ComparisonOperatorsType) value);
+                    target.setComparisonOperator( (org.hbird.xtce.castor.types.ComparisonOperatorsType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -134,7 +134,7 @@ public class ComparisonTypeDescriptor extends com.logica.hummingbird.xtce.castor
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.ComparisonOperatorsType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.ComparisonOperatorsType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("ComparisonOperatorsType");
         desc.setHandler(handler);
@@ -233,7 +233,7 @@ public class ComparisonTypeDescriptor extends com.logica.hummingbird.xtce.castor
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ComparisonType.class;
+        return org.hbird.xtce.castor.ComparisonType.class;
     }
 
     /**

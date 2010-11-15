@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Describes how a particular piece of data is sent or received
@@ -24,12 +24,12 @@ public class DataEncodingType implements java.io.Serializable {
     /**
      * Field _bitOrder.
      */
-    private com.logica.hummingbird.xtce.castor.types.DataEncodingTypeBitOrderType _bitOrder = com.logica.hummingbird.xtce.castor.types.DataEncodingTypeBitOrderType.fromValue("mostSignificantBitFirst");
+    private org.hbird.xtce.castor.types.DataEncodingTypeBitOrderType _bitOrder = org.hbird.xtce.castor.types.DataEncodingTypeBitOrderType.fromValue("mostSignificantBitFirst");
 
     /**
      * Field _errorDetectCorrect.
      */
-    private com.logica.hummingbird.xtce.castor.ErrorDetectCorrect _errorDetectCorrect;
+    private org.hbird.xtce.castor.ErrorDetectCorrect _errorDetectCorrect;
 
     /**
      * Used to describe an arbitrary byte order in multibyte
@@ -38,7 +38,7 @@ public class DataEncodingType implements java.io.Serializable {
      * bytes. If not included, it is assumed that the most
      * significant byte is first, least significant byte last.
      */
-    private com.logica.hummingbird.xtce.castor.ByteOrderList _byteOrderList;
+    private org.hbird.xtce.castor.ByteOrderList _byteOrderList;
 
 
       //----------------/
@@ -47,7 +47,7 @@ public class DataEncodingType implements java.io.Serializable {
 
     public DataEncodingType() {
         super();
-        setBitOrder(com.logica.hummingbird.xtce.castor.types.DataEncodingTypeBitOrderType.fromValue("mostSignificantBitFirst"));
+        setBitOrder(org.hbird.xtce.castor.types.DataEncodingTypeBitOrderType.fromValue("mostSignificantBitFirst"));
     }
 
 
@@ -60,7 +60,7 @@ public class DataEncodingType implements java.io.Serializable {
      * 
      * @return the value of field 'BitOrder'.
      */
-    public com.logica.hummingbird.xtce.castor.types.DataEncodingTypeBitOrderType getBitOrder(
+    public org.hbird.xtce.castor.types.DataEncodingTypeBitOrderType getBitOrder(
     ) {
         return this._bitOrder;
     }
@@ -76,7 +76,7 @@ public class DataEncodingType implements java.io.Serializable {
      * 
      * @return the value of field 'ByteOrderList'.
      */
-    public com.logica.hummingbird.xtce.castor.ByteOrderList getByteOrderList(
+    public org.hbird.xtce.castor.ByteOrderList getByteOrderList(
     ) {
         return this._byteOrderList;
     }
@@ -86,7 +86,7 @@ public class DataEncodingType implements java.io.Serializable {
      * 
      * @return the value of field 'ErrorDetectCorrect'.
      */
-    public com.logica.hummingbird.xtce.castor.ErrorDetectCorrect getErrorDetectCorrect(
+    public org.hbird.xtce.castor.ErrorDetectCorrect getErrorDetectCorrect(
     ) {
         return this._errorDetectCorrect;
     }
@@ -144,7 +144,7 @@ public class DataEncodingType implements java.io.Serializable {
      * @param bitOrder the value of field 'bitOrder'.
      */
     public void setBitOrder(
-            final com.logica.hummingbird.xtce.castor.types.DataEncodingTypeBitOrderType bitOrder) {
+            final org.hbird.xtce.castor.types.DataEncodingTypeBitOrderType bitOrder) {
         this._bitOrder = bitOrder;
     }
 
@@ -160,7 +160,7 @@ public class DataEncodingType implements java.io.Serializable {
      * @param byteOrderList the value of field 'byteOrderList'.
      */
     public void setByteOrderList(
-            final com.logica.hummingbird.xtce.castor.ByteOrderList byteOrderList) {
+            final org.hbird.xtce.castor.ByteOrderList byteOrderList) {
         this._byteOrderList = byteOrderList;
     }
 
@@ -171,7 +171,7 @@ public class DataEncodingType implements java.io.Serializable {
      * 'errorDetectCorrect'.
      */
     public void setErrorDetectCorrect(
-            final com.logica.hummingbird.xtce.castor.ErrorDetectCorrect errorDetectCorrect) {
+            final org.hbird.xtce.castor.ErrorDetectCorrect errorDetectCorrect) {
         this._errorDetectCorrect = errorDetectCorrect;
     }
 
@@ -184,12 +184,12 @@ public class DataEncodingType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.DataEncodingType
+     * org.hbird.xtce.castor.DataEncodingType
      */
-    public static com.logica.hummingbird.xtce.castor.DataEncodingType unmarshal(
+    public static org.hbird.xtce.castor.DataEncodingType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.DataEncodingType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.DataEncodingType.class, reader);
+        return (org.hbird.xtce.castor.DataEncodingType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.DataEncodingType.class, reader);
     }
 
     /**

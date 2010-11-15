@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.AliasSetType;
+import org.hbird.xtce.castor.AliasSetType;
 
 /**
  * Class AliasSetTypeDescriptor.
@@ -71,7 +71,7 @@ public class AliasSetTypeDescriptor extends org.exolab.castor.xml.util.XMLClassD
         //-- initialize element descriptors
 
         //-- _aliasList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Alias.class, "_aliasList", "Alias", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Alias.class, "_aliasList", "Alias", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class AliasSetTypeDescriptor extends org.exolab.castor.xml.util.XMLClassD
             {
                 try {
                     AliasSetType target = (AliasSetType) object;
-                    target.addAlias( (com.logica.hummingbird.xtce.castor.Alias) value);
+                    target.addAlias( (org.hbird.xtce.castor.Alias) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -102,11 +102,11 @@ public class AliasSetTypeDescriptor extends org.exolab.castor.xml.util.XMLClassD
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Alias();
+                return new org.hbird.xtce.castor.Alias();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.Alias");
+        desc.setComponentType("org.hbird.xtce.castor.Alias");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -158,7 +158,7 @@ public class AliasSetTypeDescriptor extends org.exolab.castor.xml.util.XMLClassD
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.AliasSetType.class;
+        return org.hbird.xtce.castor.AliasSetType.class;
     }
 
     /**

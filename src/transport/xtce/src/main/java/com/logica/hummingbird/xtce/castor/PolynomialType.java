@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A polynomial expression. For example: 3 + 2x
@@ -23,7 +23,7 @@ public class PolynomialType implements java.io.Serializable {
     /**
      * A term in a polynomial expresssion. 
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.Term> _termList;
+    private java.util.List<org.hbird.xtce.castor.Term> _termList;
 
 
       //----------------/
@@ -32,7 +32,7 @@ public class PolynomialType implements java.io.Serializable {
 
     public PolynomialType() {
         super();
-        this._termList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.Term>();
+        this._termList = new java.util.ArrayList<org.hbird.xtce.castor.Term>();
     }
 
 
@@ -48,7 +48,7 @@ public class PolynomialType implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addTerm(
-            final com.logica.hummingbird.xtce.castor.Term vTerm)
+            final org.hbird.xtce.castor.Term vTerm)
     throws java.lang.IndexOutOfBoundsException {
         this._termList.add(vTerm);
     }
@@ -63,7 +63,7 @@ public class PolynomialType implements java.io.Serializable {
      */
     public void addTerm(
             final int index,
-            final com.logica.hummingbird.xtce.castor.Term vTerm)
+            final org.hbird.xtce.castor.Term vTerm)
     throws java.lang.IndexOutOfBoundsException {
         this._termList.add(index, vTerm);
     }
@@ -74,7 +74,7 @@ public class PolynomialType implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.Term> enumerateTerm(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.Term> enumerateTerm(
     ) {
         return java.util.Collections.enumeration(this._termList);
     }
@@ -86,9 +86,9 @@ public class PolynomialType implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.Term at the given index
+     * org.hbird.xtce.castor.Term at the given index
      */
-    public com.logica.hummingbird.xtce.castor.Term getTerm(
+    public org.hbird.xtce.castor.Term getTerm(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -96,7 +96,7 @@ public class PolynomialType implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getTerm: Index value '" + index + "' not in range [0.." + (this._termList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.Term) _termList.get(index);
+        return (org.hbird.xtce.castor.Term) _termList.get(index);
     }
 
     /**
@@ -108,10 +108,10 @@ public class PolynomialType implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.Term[] getTerm(
+    public org.hbird.xtce.castor.Term[] getTerm(
     ) {
-        com.logica.hummingbird.xtce.castor.Term[] array = new com.logica.hummingbird.xtce.castor.Term[0];
-        return (com.logica.hummingbird.xtce.castor.Term[]) this._termList.toArray(array);
+        org.hbird.xtce.castor.Term[] array = new org.hbird.xtce.castor.Term[0];
+        return (org.hbird.xtce.castor.Term[]) this._termList.toArray(array);
     }
 
     /**
@@ -145,7 +145,7 @@ public class PolynomialType implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.Term> iterateTerm(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.Term> iterateTerm(
     ) {
         return this._termList.iterator();
     }
@@ -196,7 +196,7 @@ public class PolynomialType implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeTerm(
-            final com.logica.hummingbird.xtce.castor.Term vTerm) {
+            final org.hbird.xtce.castor.Term vTerm) {
         boolean removed = _termList.remove(vTerm);
         return removed;
     }
@@ -207,10 +207,10 @@ public class PolynomialType implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.Term removeTermAt(
+    public org.hbird.xtce.castor.Term removeTermAt(
             final int index) {
         java.lang.Object obj = this._termList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.Term) obj;
+        return (org.hbird.xtce.castor.Term) obj;
     }
 
     /**
@@ -223,7 +223,7 @@ public class PolynomialType implements java.io.Serializable {
      */
     public void setTerm(
             final int index,
-            final com.logica.hummingbird.xtce.castor.Term vTerm)
+            final org.hbird.xtce.castor.Term vTerm)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._termList.size()) {
@@ -239,7 +239,7 @@ public class PolynomialType implements java.io.Serializable {
      * @param vTermArray
      */
     public void setTerm(
-            final com.logica.hummingbird.xtce.castor.Term[] vTermArray) {
+            final org.hbird.xtce.castor.Term[] vTermArray) {
         //-- copy array
         _termList.clear();
 
@@ -257,12 +257,12 @@ public class PolynomialType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.PolynomialType
+     * org.hbird.xtce.castor.PolynomialType
      */
-    public static com.logica.hummingbird.xtce.castor.PolynomialType unmarshal(
+    public static org.hbird.xtce.castor.PolynomialType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.PolynomialType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.PolynomialType.class, reader);
+        return (org.hbird.xtce.castor.PolynomialType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.PolynomialType.class, reader);
     }
 
     /**

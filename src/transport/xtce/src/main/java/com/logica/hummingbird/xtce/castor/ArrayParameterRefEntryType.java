@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * An entry that is an array parameter. This entry is somewhat
@@ -16,7 +16,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class ArrayParameterRefEntryType extends com.logica.hummingbird.xtce.castor.SequenceEntryType 
+public class ArrayParameterRefEntryType extends org.hbird.xtce.castor.SequenceEntryType 
 implements java.io.Serializable
 {
 
@@ -48,7 +48,7 @@ implements java.io.Serializable
      * dimension changes. The order MUST ascend or the array will
      * need to be broken out entry by entry. 
      */
-    private com.logica.hummingbird.xtce.castor.DimensionList _dimensionList;
+    private org.hbird.xtce.castor.DimensionList _dimensionList;
 
 
       //----------------/
@@ -83,7 +83,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'DimensionList'.
      */
-    public com.logica.hummingbird.xtce.castor.DimensionList getDimensionList(
+    public org.hbird.xtce.castor.DimensionList getDimensionList(
     ) {
         return this._dimensionList;
     }
@@ -189,7 +189,7 @@ implements java.io.Serializable
      * @param dimensionList the value of field 'dimensionList'.
      */
     public void setDimensionList(
-            final com.logica.hummingbird.xtce.castor.DimensionList dimensionList) {
+            final org.hbird.xtce.castor.DimensionList dimensionList) {
         this._dimensionList = dimensionList;
     }
 
@@ -224,12 +224,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ArrayParameterRefEntryType
+     * org.hbird.xtce.castor.ArrayParameterRefEntryType
      */
-    public static com.logica.hummingbird.xtce.castor.ArrayParameterRefEntryType unmarshal(
+    public static org.hbird.xtce.castor.ArrayParameterRefEntryType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ArrayParameterRefEntryType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ArrayParameterRefEntryType.class, reader);
+        return (org.hbird.xtce.castor.ArrayParameterRefEntryType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ArrayParameterRefEntryType.class, reader);
     }
 
     /**

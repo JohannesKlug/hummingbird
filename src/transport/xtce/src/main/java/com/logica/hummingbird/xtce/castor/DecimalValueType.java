@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Contains an Numeric value; value may be provided directly or via
@@ -37,7 +37,7 @@ public class DecimalValueType implements java.io.Serializable {
      * of boolean expressions to lookup the value. Anything more
      * complex and a DynamicValue with a CustomAlgorithm may be used
      */
-    private com.logica.hummingbird.xtce.castor.DecimalValueTypeDynamicValue _dynamicValue;
+    private org.hbird.xtce.castor.DecimalValueTypeDynamicValue _dynamicValue;
 
 
       //----------------/
@@ -76,7 +76,7 @@ public class DecimalValueType implements java.io.Serializable {
      * 
      * @return the value of field 'DynamicValue'.
      */
-    public com.logica.hummingbird.xtce.castor.DecimalValueTypeDynamicValue getDynamicValue(
+    public org.hbird.xtce.castor.DecimalValueTypeDynamicValue getDynamicValue(
     ) {
         return this._dynamicValue;
     }
@@ -150,7 +150,7 @@ public class DecimalValueType implements java.io.Serializable {
      * @param dynamicValue the value of field 'dynamicValue'.
      */
     public void setDynamicValue(
-            final com.logica.hummingbird.xtce.castor.DecimalValueTypeDynamicValue dynamicValue) {
+            final org.hbird.xtce.castor.DecimalValueTypeDynamicValue dynamicValue) {
         this._dynamicValue = dynamicValue;
         this._choiceValue = dynamicValue;
     }
@@ -175,12 +175,12 @@ public class DecimalValueType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.DecimalValueType
+     * org.hbird.xtce.castor.DecimalValueType
      */
-    public static com.logica.hummingbird.xtce.castor.DecimalValueType unmarshal(
+    public static org.hbird.xtce.castor.DecimalValueType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.DecimalValueType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.DecimalValueType.class, reader);
+        return (org.hbird.xtce.castor.DecimalValueType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.DecimalValueType.class, reader);
     }
 
     /**

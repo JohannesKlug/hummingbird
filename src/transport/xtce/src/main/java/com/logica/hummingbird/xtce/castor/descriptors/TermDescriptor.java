@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Term;
+import org.hbird.xtce.castor.Term;
 
 /**
  * Class TermDescriptor.
@@ -201,7 +201,7 @@ public class TermDescriptor extends org.exolab.castor.xml.util.XMLClassDescripto
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Term.class;
+        return org.hbird.xtce.castor.Term.class;
     }
 
     /**

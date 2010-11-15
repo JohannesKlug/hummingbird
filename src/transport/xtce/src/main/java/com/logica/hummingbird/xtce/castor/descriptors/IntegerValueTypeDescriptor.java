@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.IntegerValueType;
+import org.hbird.xtce.castor.IntegerValueType;
 
 /**
  * Class IntegerValueTypeDescriptor.
@@ -117,7 +117,7 @@ public class IntegerValueTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
         }
         desc.setValidator(fieldValidator);
         //-- _dynamicValue
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.DynamicValue.class, "_dynamicValue", "DynamicValue", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.DynamicValue.class, "_dynamicValue", "DynamicValue", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -132,7 +132,7 @@ public class IntegerValueTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
             {
                 try {
                     IntegerValueType target = (IntegerValueType) object;
-                    target.setDynamicValue( (com.logica.hummingbird.xtce.castor.DynamicValue) value);
+                    target.setDynamicValue( (org.hbird.xtce.castor.DynamicValue) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -140,10 +140,10 @@ public class IntegerValueTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.DynamicValue();
+                return new org.hbird.xtce.castor.DynamicValue();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.DynamicValue");
+        desc.setSchemaType("org.hbird.xtce.castor.DynamicValue");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -158,7 +158,7 @@ public class IntegerValueTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
         }
         desc.setValidator(fieldValidator);
         //-- _discreteLookupList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.DiscreteLookupList.class, "_discreteLookupList", "DiscreteLookupList", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.DiscreteLookupList.class, "_discreteLookupList", "DiscreteLookupList", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -173,7 +173,7 @@ public class IntegerValueTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
             {
                 try {
                     IntegerValueType target = (IntegerValueType) object;
-                    target.setDiscreteLookupList( (com.logica.hummingbird.xtce.castor.DiscreteLookupList) value);
+                    target.setDiscreteLookupList( (org.hbird.xtce.castor.DiscreteLookupList) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -181,10 +181,10 @@ public class IntegerValueTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.DiscreteLookupList();
+                return new org.hbird.xtce.castor.DiscreteLookupList();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.DiscreteLookupList");
+        desc.setSchemaType("org.hbird.xtce.castor.DiscreteLookupList");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -236,7 +236,7 @@ public class IntegerValueTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.IntegerValueType.class;
+        return org.hbird.xtce.castor.IntegerValueType.class;
     }
 
     /**

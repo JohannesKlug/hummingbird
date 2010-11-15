@@ -1,4 +1,4 @@
-package com.logica.hummingbird.type;
+package org.hbird.type;
 
 import java.io.Serializable;
 

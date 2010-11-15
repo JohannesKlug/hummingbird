@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ParameterSegmentRefEntryType;
+import org.hbird.xtce.castor.ParameterSegmentRefEntryType;
 
 /**
  * Class ParameterSegmentRefEntryTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ParameterSegmentRefEntryTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor {
+public class ParameterSegmentRefEntryTypeDescriptor extends org.hbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ParameterSegmentRefEntryTypeDescriptor extends com.logica.hummingbi
 
     public ParameterSegmentRefEntryTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ParameterSegmentRefEntryType";
         _elementDefinition = false;
@@ -247,7 +247,7 @@ public class ParameterSegmentRefEntryTypeDescriptor extends com.logica.hummingbi
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ParameterSegmentRefEntryType.class;
+        return org.hbird.xtce.castor.ParameterSegmentRefEntryType.class;
     }
 
     /**

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Some Command and Control Systems may require special user access
@@ -89,12 +89,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.DefaultSignificance
+     * org.hbird.xtce.castor.DefaultSignificance
      */
-    public static com.logica.hummingbird.xtce.castor.DefaultSignificance unmarshal(
+    public static org.hbird.xtce.castor.DefaultSignificance unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.DefaultSignificance) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.DefaultSignificance.class, reader);
+        return (org.hbird.xtce.castor.DefaultSignificance) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.DefaultSignificance.class, reader);
     }
 
     /**

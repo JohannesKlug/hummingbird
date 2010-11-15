@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Service;
+import org.hbird.xtce.castor.Service;
 
 /**
  * Class ServiceDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ServiceDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ServiceTypeDescriptor {
+public class ServiceDescriptor extends org.hbird.xtce.castor.descriptors.ServiceTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ServiceDescriptor extends com.logica.hummingbird.xtce.castor.descri
 
     public ServiceDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ServiceTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ServiceTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "Service";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class ServiceDescriptor extends com.logica.hummingbird.xtce.castor.descri
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Service.class;
+        return org.hbird.xtce.castor.Service.class;
     }
 
     /**

@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.SequenceContainer;
+import org.hbird.xtce.castor.SequenceContainer;
 
 /**
  * Class SequenceContainerDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class SequenceContainerDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.SequenceContainerTypeDescriptor {
+public class SequenceContainerDescriptor extends org.hbird.xtce.castor.descriptors.SequenceContainerTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class SequenceContainerDescriptor extends com.logica.hummingbird.xtce.cas
 
     public SequenceContainerDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.SequenceContainerTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.SequenceContainerTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "SequenceContainer";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class SequenceContainerDescriptor extends com.logica.hummingbird.xtce.cas
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.SequenceContainer.class;
+        return org.hbird.xtce.castor.SequenceContainer.class;
     }
 
     /**

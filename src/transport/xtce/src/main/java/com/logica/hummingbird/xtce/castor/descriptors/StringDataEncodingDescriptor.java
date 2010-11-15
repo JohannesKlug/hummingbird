@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.StringDataEncoding;
+import org.hbird.xtce.castor.StringDataEncoding;
 
 /**
  * Class StringDataEncodingDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class StringDataEncodingDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.StringDataEncodingTypeDescriptor {
+public class StringDataEncodingDescriptor extends org.hbird.xtce.castor.descriptors.StringDataEncodingTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class StringDataEncodingDescriptor extends com.logica.hummingbird.xtce.ca
 
     public StringDataEncodingDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.StringDataEncodingTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.StringDataEncodingTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "StringDataEncoding";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class StringDataEncodingDescriptor extends com.logica.hummingbird.xtce.ca
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.StringDataEncoding.class;
+        return org.hbird.xtce.castor.StringDataEncoding.class;
     }
 
     /**

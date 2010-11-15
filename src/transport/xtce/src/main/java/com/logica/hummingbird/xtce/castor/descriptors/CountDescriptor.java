@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Count;
+import org.hbird.xtce.castor.Count;
 
 /**
  * Class CountDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class CountDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.IntegerValueTypeDescriptor {
+public class CountDescriptor extends org.hbird.xtce.castor.descriptors.IntegerValueTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class CountDescriptor extends com.logica.hummingbird.xtce.castor.descript
 
     public CountDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.IntegerValueTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.IntegerValueTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "Count";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class CountDescriptor extends com.logica.hummingbird.xtce.castor.descript
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Count.class;
+        return org.hbird.xtce.castor.Count.class;
     }
 
     /**

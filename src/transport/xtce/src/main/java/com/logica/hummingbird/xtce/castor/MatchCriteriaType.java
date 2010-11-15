@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Contains either a simple Comparison, a ComparisonList, an
@@ -30,22 +30,22 @@ public class MatchCriteriaType implements java.io.Serializable {
     /**
      * A simple comparison check
      */
-    private com.logica.hummingbird.xtce.castor.Comparison _comparison;
+    private org.hbird.xtce.castor.Comparison _comparison;
 
     /**
      * All comparisons must be true
      */
-    private com.logica.hummingbird.xtce.castor.ComparisonList _comparisonList;
+    private org.hbird.xtce.castor.ComparisonList _comparisonList;
 
     /**
      * An arbitrarily complex boolean expression
      */
-    private com.logica.hummingbird.xtce.castor.BooleanExpression _booleanExpression;
+    private org.hbird.xtce.castor.BooleanExpression _booleanExpression;
 
     /**
      * An escape to an externally defined algorithm
      */
-    private com.logica.hummingbird.xtce.castor.CustomAlgorithm _customAlgorithm;
+    private org.hbird.xtce.castor.CustomAlgorithm _customAlgorithm;
 
 
       //----------------/
@@ -68,7 +68,7 @@ public class MatchCriteriaType implements java.io.Serializable {
      * 
      * @return the value of field 'BooleanExpression'.
      */
-    public com.logica.hummingbird.xtce.castor.BooleanExpression getBooleanExpression(
+    public org.hbird.xtce.castor.BooleanExpression getBooleanExpression(
     ) {
         return this._booleanExpression;
     }
@@ -92,7 +92,7 @@ public class MatchCriteriaType implements java.io.Serializable {
      * 
      * @return the value of field 'Comparison'.
      */
-    public com.logica.hummingbird.xtce.castor.Comparison getComparison(
+    public org.hbird.xtce.castor.Comparison getComparison(
     ) {
         return this._comparison;
     }
@@ -104,7 +104,7 @@ public class MatchCriteriaType implements java.io.Serializable {
      * 
      * @return the value of field 'ComparisonList'.
      */
-    public com.logica.hummingbird.xtce.castor.ComparisonList getComparisonList(
+    public org.hbird.xtce.castor.ComparisonList getComparisonList(
     ) {
         return this._comparisonList;
     }
@@ -116,7 +116,7 @@ public class MatchCriteriaType implements java.io.Serializable {
      * 
      * @return the value of field 'CustomAlgorithm'.
      */
-    public com.logica.hummingbird.xtce.castor.CustomAlgorithm getCustomAlgorithm(
+    public org.hbird.xtce.castor.CustomAlgorithm getCustomAlgorithm(
     ) {
         return this._customAlgorithm;
     }
@@ -177,7 +177,7 @@ public class MatchCriteriaType implements java.io.Serializable {
      * 'booleanExpression'.
      */
     public void setBooleanExpression(
-            final com.logica.hummingbird.xtce.castor.BooleanExpression booleanExpression) {
+            final org.hbird.xtce.castor.BooleanExpression booleanExpression) {
         this._booleanExpression = booleanExpression;
         this._choiceValue = booleanExpression;
     }
@@ -189,7 +189,7 @@ public class MatchCriteriaType implements java.io.Serializable {
      * @param comparison the value of field 'comparison'.
      */
     public void setComparison(
-            final com.logica.hummingbird.xtce.castor.Comparison comparison) {
+            final org.hbird.xtce.castor.Comparison comparison) {
         this._comparison = comparison;
         this._choiceValue = comparison;
     }
@@ -202,7 +202,7 @@ public class MatchCriteriaType implements java.io.Serializable {
      * @param comparisonList the value of field 'comparisonList'.
      */
     public void setComparisonList(
-            final com.logica.hummingbird.xtce.castor.ComparisonList comparisonList) {
+            final org.hbird.xtce.castor.ComparisonList comparisonList) {
         this._comparisonList = comparisonList;
         this._choiceValue = comparisonList;
     }
@@ -215,7 +215,7 @@ public class MatchCriteriaType implements java.io.Serializable {
      * @param customAlgorithm the value of field 'customAlgorithm'.
      */
     public void setCustomAlgorithm(
-            final com.logica.hummingbird.xtce.castor.CustomAlgorithm customAlgorithm) {
+            final org.hbird.xtce.castor.CustomAlgorithm customAlgorithm) {
         this._customAlgorithm = customAlgorithm;
         this._choiceValue = customAlgorithm;
     }
@@ -229,12 +229,12 @@ public class MatchCriteriaType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.MatchCriteriaType
+     * org.hbird.xtce.castor.MatchCriteriaType
      */
-    public static com.logica.hummingbird.xtce.castor.MatchCriteriaType unmarshal(
+    public static org.hbird.xtce.castor.MatchCriteriaType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.MatchCriteriaType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.MatchCriteriaType.class, reader);
+        return (org.hbird.xtce.castor.MatchCriteriaType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.MatchCriteriaType.class, reader);
     }
 
     /**

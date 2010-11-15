@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Interlock;
+import org.hbird.xtce.castor.Interlock;
 
 /**
  * Class InterlockDescriptor.
@@ -108,7 +108,7 @@ public class InterlockDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
         }
         desc.setValidator(fieldValidator);
         //-- _verificationToWaitFor
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.InterlockVerificationToWaitForType.class, "_verificationToWaitFor", "verificationToWaitFor", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.InterlockVerificationToWaitForType.class, "_verificationToWaitFor", "verificationToWaitFor", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -123,7 +123,7 @@ public class InterlockDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             {
                 try {
                     Interlock target = (Interlock) object;
-                    target.setVerificationToWaitFor( (com.logica.hummingbird.xtce.castor.types.InterlockVerificationToWaitForType) value);
+                    target.setVerificationToWaitFor( (org.hbird.xtce.castor.types.InterlockVerificationToWaitForType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -134,7 +134,7 @@ public class InterlockDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.InterlockVerificationToWaitForType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.InterlockVerificationToWaitForType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("InterlockVerificationToWaitForType");
         desc.setHandler(handler);
@@ -273,7 +273,7 @@ public class InterlockDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Interlock.class;
+        return org.hbird.xtce.castor.Interlock.class;
     }
 
     /**

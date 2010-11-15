@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class ContextCalibratorList.
@@ -23,7 +23,7 @@ public class NumericDataTypeContextCalibratorList implements java.io.Serializabl
     /**
      * Field _contextCalibratorList.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.ContextCalibrator> _contextCalibratorList;
+    private java.util.List<org.hbird.xtce.castor.ContextCalibrator> _contextCalibratorList;
 
 
       //----------------/
@@ -32,7 +32,7 @@ public class NumericDataTypeContextCalibratorList implements java.io.Serializabl
 
     public NumericDataTypeContextCalibratorList() {
         super();
-        this._contextCalibratorList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.ContextCalibrator>();
+        this._contextCalibratorList = new java.util.ArrayList<org.hbird.xtce.castor.ContextCalibrator>();
     }
 
 
@@ -48,7 +48,7 @@ public class NumericDataTypeContextCalibratorList implements java.io.Serializabl
      * given is outside the bounds of the collection
      */
     public void addContextCalibrator(
-            final com.logica.hummingbird.xtce.castor.ContextCalibrator vContextCalibrator)
+            final org.hbird.xtce.castor.ContextCalibrator vContextCalibrator)
     throws java.lang.IndexOutOfBoundsException {
         this._contextCalibratorList.add(vContextCalibrator);
     }
@@ -63,7 +63,7 @@ public class NumericDataTypeContextCalibratorList implements java.io.Serializabl
      */
     public void addContextCalibrator(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ContextCalibrator vContextCalibrator)
+            final org.hbird.xtce.castor.ContextCalibrator vContextCalibrator)
     throws java.lang.IndexOutOfBoundsException {
         this._contextCalibratorList.add(index, vContextCalibrator);
     }
@@ -74,7 +74,7 @@ public class NumericDataTypeContextCalibratorList implements java.io.Serializabl
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.ContextCalibrator> enumerateContextCalibrator(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.ContextCalibrator> enumerateContextCalibrator(
     ) {
         return java.util.Collections.enumeration(this._contextCalibratorList);
     }
@@ -86,10 +86,10 @@ public class NumericDataTypeContextCalibratorList implements java.io.Serializabl
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.ContextCalibrator at the
+     * org.hbird.xtce.castor.ContextCalibrator at the
      * given index
      */
-    public com.logica.hummingbird.xtce.castor.ContextCalibrator getContextCalibrator(
+    public org.hbird.xtce.castor.ContextCalibrator getContextCalibrator(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -97,7 +97,7 @@ public class NumericDataTypeContextCalibratorList implements java.io.Serializabl
             throw new IndexOutOfBoundsException("getContextCalibrator: Index value '" + index + "' not in range [0.." + (this._contextCalibratorList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.ContextCalibrator) _contextCalibratorList.get(index);
+        return (org.hbird.xtce.castor.ContextCalibrator) _contextCalibratorList.get(index);
     }
 
     /**
@@ -110,10 +110,10 @@ public class NumericDataTypeContextCalibratorList implements java.io.Serializabl
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.ContextCalibrator[] getContextCalibrator(
+    public org.hbird.xtce.castor.ContextCalibrator[] getContextCalibrator(
     ) {
-        com.logica.hummingbird.xtce.castor.ContextCalibrator[] array = new com.logica.hummingbird.xtce.castor.ContextCalibrator[0];
-        return (com.logica.hummingbird.xtce.castor.ContextCalibrator[]) this._contextCalibratorList.toArray(array);
+        org.hbird.xtce.castor.ContextCalibrator[] array = new org.hbird.xtce.castor.ContextCalibrator[0];
+        return (org.hbird.xtce.castor.ContextCalibrator[]) this._contextCalibratorList.toArray(array);
     }
 
     /**
@@ -147,7 +147,7 @@ public class NumericDataTypeContextCalibratorList implements java.io.Serializabl
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.ContextCalibrator> iterateContextCalibrator(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.ContextCalibrator> iterateContextCalibrator(
     ) {
         return this._contextCalibratorList.iterator();
     }
@@ -198,7 +198,7 @@ public class NumericDataTypeContextCalibratorList implements java.io.Serializabl
      * @return true if the object was removed from the collection.
      */
     public boolean removeContextCalibrator(
-            final com.logica.hummingbird.xtce.castor.ContextCalibrator vContextCalibrator) {
+            final org.hbird.xtce.castor.ContextCalibrator vContextCalibrator) {
         boolean removed = _contextCalibratorList.remove(vContextCalibrator);
         return removed;
     }
@@ -209,10 +209,10 @@ public class NumericDataTypeContextCalibratorList implements java.io.Serializabl
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.ContextCalibrator removeContextCalibratorAt(
+    public org.hbird.xtce.castor.ContextCalibrator removeContextCalibratorAt(
             final int index) {
         java.lang.Object obj = this._contextCalibratorList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.ContextCalibrator) obj;
+        return (org.hbird.xtce.castor.ContextCalibrator) obj;
     }
 
     /**
@@ -225,7 +225,7 @@ public class NumericDataTypeContextCalibratorList implements java.io.Serializabl
      */
     public void setContextCalibrator(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ContextCalibrator vContextCalibrator)
+            final org.hbird.xtce.castor.ContextCalibrator vContextCalibrator)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._contextCalibratorList.size()) {
@@ -241,7 +241,7 @@ public class NumericDataTypeContextCalibratorList implements java.io.Serializabl
      * @param vContextCalibratorArray
      */
     public void setContextCalibrator(
-            final com.logica.hummingbird.xtce.castor.ContextCalibrator[] vContextCalibratorArray) {
+            final org.hbird.xtce.castor.ContextCalibrator[] vContextCalibratorArray) {
         //-- copy array
         _contextCalibratorList.clear();
 
@@ -259,12 +259,12 @@ public class NumericDataTypeContextCalibratorList implements java.io.Serializabl
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.NumericDataTypeContextCalibratorList
+     * org.hbird.xtce.castor.NumericDataTypeContextCalibratorList
      */
-    public static com.logica.hummingbird.xtce.castor.NumericDataTypeContextCalibratorList unmarshal(
+    public static org.hbird.xtce.castor.NumericDataTypeContextCalibratorList unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.NumericDataTypeContextCalibratorList) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.NumericDataTypeContextCalibratorList.class, reader);
+        return (org.hbird.xtce.castor.NumericDataTypeContextCalibratorList) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.NumericDataTypeContextCalibratorList.class, reader);
     }
 
     /**

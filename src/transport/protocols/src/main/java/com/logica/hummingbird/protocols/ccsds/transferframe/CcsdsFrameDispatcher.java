@@ -1,4 +1,4 @@
-package com.logica.hummingbird.protocols.ccsds.transferframe;
+package org.hbird.protocols.ccsds.transferframe;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -7,8 +7,8 @@ import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.protocols.ccsds.transferframe.exceptions.FrameFailedCrcCheckException;
-import com.logica.hummingbird.protocols.ccsds.transferframe.exceptions.InvalidFrameLengthException;
+import org.hbird.protocols.ccsds.transferframe.exceptions.FrameFailedCrcCheckException;
+import org.hbird.protocols.ccsds.transferframe.exceptions.InvalidFrameLengthException;
 
 public class CcsdsFrameDispatcher extends Observable implements Observer {
 	private final static Logger LOG = LoggerFactory.getLogger(CcsdsFrameDispatcher.class);

@@ -17,4 +17,4 @@
  * In Eclipse, right click on the ibatorConfig.xml file and select 
  *  
  */
-package com.logica.hummingbird.packetarchive;
+package org.hbird.packetarchive;

@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.TriggerSet;
+import org.hbird.xtce.castor.TriggerSet;
 
 /**
  * Class TriggerSetDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class TriggerSetDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.TriggerTypeDescriptor {
+public class TriggerSetDescriptor extends org.hbird.xtce.castor.descriptors.TriggerTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class TriggerSetDescriptor extends com.logica.hummingbird.xtce.castor.des
 
     public TriggerSetDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.TriggerTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.TriggerTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "TriggerSet";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class TriggerSetDescriptor extends com.logica.hummingbird.xtce.castor.des
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.TriggerSet.class;
+        return org.hbird.xtce.castor.TriggerSet.class;
     }
 
     /**

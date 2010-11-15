@@ -1,10 +1,10 @@
-package com.logica.hummingbird.interfaces;
+package org.hbird.interfaces;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Message;
 import org.apache.camel.ProducerTemplate;
 
-import com.logica.hummingbird.buffers.ObjectBuffer;
+import org.hbird.buffers.ObjectBuffer;
 
 public interface ITask {
 

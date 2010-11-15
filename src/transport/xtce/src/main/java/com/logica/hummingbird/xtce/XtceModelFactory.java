@@ -1,4 +1,4 @@
-package com.logica.hummingbird.xtce;
+package org.hbird.xtce;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,30 +15,30 @@ import org.exolab.castor.xml.XMLContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.generatedcode.xtce.Comparison;
-import com.logica.hummingbird.generatedcode.xtce.ParameterSetTypeItem;
-import com.logica.hummingbird.generatedcode.xtce.ParameterTypeSetTypeItem;
-import com.logica.hummingbird.generatedcode.xtce.SequenceContainer;
-import com.logica.hummingbird.generatedcode.xtce.SpaceSystem;
-import com.logica.hummingbird.spacesystemmodel.Container;
-import com.logica.hummingbird.spacesystemmodel.ContainerFactory;
-import com.logica.hummingbird.spacesystemmodel.ContainerImpl;
-import com.logica.hummingbird.spacesystemmodel.Unit;
-import com.logica.hummingbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
-import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.spacesystemmodel.parameters.FloatParameter;
-import com.logica.hummingbird.spacesystemmodel.parameters.IntegerParameter;
-import com.logica.hummingbird.spacesystemmodel.parameters.Parameter;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.AbstractFloatBehaviour;
-import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.AbstractIntegerBehaviour;
-import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float32Behaviour;
-import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.Float64Behaviour;
-import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
-import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.LongSignedBehaviour;
-import com.logica.hummingbird.spacesystemmodel.parameters.behaviours.NumberParameterTypeBehaviour;
-import com.logica.hummingbird.spacesystemmodel.parameters.types.NumberParameterType;
-import com.logica.hummingbird.xtce.exceptions.InvalidXtceFileException;
+import org.hbird.generatedcode.xtce.Comparison;
+import org.hbird.generatedcode.xtce.ParameterSetTypeItem;
+import org.hbird.generatedcode.xtce.ParameterTypeSetTypeItem;
+import org.hbird.generatedcode.xtce.SequenceContainer;
+import org.hbird.generatedcode.xtce.SpaceSystem;
+import org.hbird.spacesystemmodel.Container;
+import org.hbird.spacesystemmodel.ContainerFactory;
+import org.hbird.spacesystemmodel.ContainerImpl;
+import org.hbird.spacesystemmodel.Unit;
+import org.hbird.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import org.hbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.spacesystemmodel.parameters.FloatParameter;
+import org.hbird.spacesystemmodel.parameters.IntegerParameter;
+import org.hbird.spacesystemmodel.parameters.Parameter;
+import org.hbird.spacesystemmodel.parameters.ParameterContainer;
+import org.hbird.spacesystemmodel.parameters.behaviours.AbstractFloatBehaviour;
+import org.hbird.spacesystemmodel.parameters.behaviours.AbstractIntegerBehaviour;
+import org.hbird.spacesystemmodel.parameters.behaviours.Float32Behaviour;
+import org.hbird.spacesystemmodel.parameters.behaviours.Float64Behaviour;
+import org.hbird.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
+import org.hbird.spacesystemmodel.parameters.behaviours.LongSignedBehaviour;
+import org.hbird.spacesystemmodel.parameters.behaviours.NumberParameterTypeBehaviour;
+import org.hbird.spacesystemmodel.parameters.types.NumberParameterType;
+import org.hbird.xtce.exceptions.InvalidXtceFileException;
 
 /**
  * 

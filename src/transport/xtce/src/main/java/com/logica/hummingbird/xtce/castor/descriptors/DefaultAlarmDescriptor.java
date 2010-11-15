@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.DefaultAlarm;
+import org.hbird.xtce.castor.DefaultAlarm;
 
 /**
  * Class DefaultAlarmDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class DefaultAlarmDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.NumericAlarmConditionTypeDescriptor {
+public class DefaultAlarmDescriptor extends org.hbird.xtce.castor.descriptors.NumericAlarmConditionTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class DefaultAlarmDescriptor extends com.logica.hummingbird.xtce.castor.d
 
     public DefaultAlarmDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.NumericAlarmConditionTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.NumericAlarmConditionTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "DefaultAlarm";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class DefaultAlarmDescriptor extends com.logica.hummingbird.xtce.castor.d
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.DefaultAlarm.class;
+        return org.hbird.xtce.castor.DefaultAlarm.class;
     }
 
     /**

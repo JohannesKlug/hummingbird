@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class ArgumementArrayType.
@@ -164,12 +164,12 @@ public class ArgumementArrayType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ArgumementArrayType
+     * org.hbird.xtce.castor.ArgumementArrayType
      */
-    public static com.logica.hummingbird.xtce.castor.ArgumementArrayType unmarshal(
+    public static org.hbird.xtce.castor.ArgumementArrayType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ArgumementArrayType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ArgumementArrayType.class, reader);
+        return (org.hbird.xtce.castor.ArgumementArrayType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ArgumementArrayType.class, reader);
     }
 
     /**

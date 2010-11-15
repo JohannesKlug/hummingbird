@@ -1,4 +1,4 @@
-package com.logica.hummingbird.spacesystemmodel;
+package org.hbird.spacesystemmodel;
 
 import static org.junit.Assert.assertEquals;
 

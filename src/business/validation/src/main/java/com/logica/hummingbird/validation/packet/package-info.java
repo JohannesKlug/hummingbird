@@ -24,5 +24,5 @@
  * 
  * */
 
-package com.logica.hummingbird.validation.packet;
+package org.hbird.validation.packet;
 

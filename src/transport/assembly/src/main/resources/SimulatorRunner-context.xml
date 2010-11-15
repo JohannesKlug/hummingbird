@@ -9,13 +9,13 @@
        http://camel.apache.org/schema/spring 
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-	<bean id="waweForm" class="com.logica.hummingbird.simulator.waveforms.LinearWaveform">
+	<bean id="waweForm" class="org.hbird.simulator.waveforms.LinearWaveform">
 		<constructor-arg index="0" value="101"/>
 		<constructor-arg index="1" value="0d"/>
 		<constructor-arg index="2" value="1d"/>
 	</bean>
 
-	<bean id="simulator" class="com.logica.hummingbird.simulator.Simulator">
+	<bean id="simulator" class="org.hbird.simulator.Simulator">
 		<constructor-arg index="0" ref="context"/>
 		<constructor-arg index="1" ref="producer"/>
 		<constructor-arg index="2"><null/></constructor-arg>

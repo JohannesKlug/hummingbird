@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.logica.hummingbird.buffers;
+package org.hbird.buffers;
 
-import com.logica.hummingbird.type.CommandDefinition;
+import org.hbird.type.CommandDefinition;
 
 /**
  * Class for buffering command definitions. The last of all command definitions,

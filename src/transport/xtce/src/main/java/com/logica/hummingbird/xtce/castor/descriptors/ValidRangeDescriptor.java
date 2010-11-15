@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ValidRange;
+import org.hbird.xtce.castor.ValidRange;
 
 /**
  * Class ValidRangeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ValidRangeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor {
+public class ValidRangeDescriptor extends org.hbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ValidRangeDescriptor extends com.logica.hummingbird.xtce.castor.des
 
     public ValidRangeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.DecimalRangeTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ValidRange";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class ValidRangeDescriptor extends com.logica.hummingbird.xtce.castor.des
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ValidRange.class;
+        return org.hbird.xtce.castor.ValidRange.class;
     }
 
     /**

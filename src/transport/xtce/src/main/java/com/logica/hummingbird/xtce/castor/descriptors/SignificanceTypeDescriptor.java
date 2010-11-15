@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.SignificanceType;
+import org.hbird.xtce.castor.SignificanceType;
 
 /**
  * Class SignificanceTypeDescriptor.
@@ -150,7 +150,7 @@ public class SignificanceTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
         }
         desc.setValidator(fieldValidator);
         //-- _consequenceLevel
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.SignificanceTypeConsequenceLevelType.class, "_consequenceLevel", "consequenceLevel", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.SignificanceTypeConsequenceLevelType.class, "_consequenceLevel", "consequenceLevel", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -165,7 +165,7 @@ public class SignificanceTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
             {
                 try {
                     SignificanceType target = (SignificanceType) object;
-                    target.setConsequenceLevel( (com.logica.hummingbird.xtce.castor.types.SignificanceTypeConsequenceLevelType) value);
+                    target.setConsequenceLevel( (org.hbird.xtce.castor.types.SignificanceTypeConsequenceLevelType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -176,7 +176,7 @@ public class SignificanceTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.SignificanceTypeConsequenceLevelType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.SignificanceTypeConsequenceLevelType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("SignificanceTypeConsequenceLevelType");
         desc.setHandler(handler);
@@ -228,7 +228,7 @@ public class SignificanceTypeDescriptor extends org.exolab.castor.xml.util.XMLCl
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.SignificanceType.class;
+        return org.hbird.xtce.castor.SignificanceType.class;
     }
 
     /**

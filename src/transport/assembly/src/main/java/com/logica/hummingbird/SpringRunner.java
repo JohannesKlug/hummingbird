@@ -1,4 +1,4 @@
-package com.logica.hummingbird;
+package org.hbird;
 
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 

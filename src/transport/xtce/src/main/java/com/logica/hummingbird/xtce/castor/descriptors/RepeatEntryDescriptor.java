@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.RepeatEntry;
+import org.hbird.xtce.castor.RepeatEntry;
 
 /**
  * Class RepeatEntryDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class RepeatEntryDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.RepeatTypeDescriptor {
+public class RepeatEntryDescriptor extends org.hbird.xtce.castor.descriptors.RepeatTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class RepeatEntryDescriptor extends com.logica.hummingbird.xtce.castor.de
 
     public RepeatEntryDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.RepeatTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.RepeatTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "RepeatEntry";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class RepeatEntryDescriptor extends com.logica.hummingbird.xtce.castor.de
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.RepeatEntry.class;
+        return org.hbird.xtce.castor.RepeatEntry.class;
     }
 
     /**

@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.EnumeratedArgumentType;
+import org.hbird.xtce.castor.EnumeratedArgumentType;
 
 /**
  * Class EnumeratedArgumentTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class EnumeratedArgumentTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.EnumeratedDataTypeDescriptor {
+public class EnumeratedArgumentTypeDescriptor extends org.hbird.xtce.castor.descriptors.EnumeratedDataTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class EnumeratedArgumentTypeDescriptor extends com.logica.hummingbird.xtc
 
     public EnumeratedArgumentTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.EnumeratedDataTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.EnumeratedDataTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "EnumeratedArgumentType";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class EnumeratedArgumentTypeDescriptor extends com.logica.hummingbird.xtc
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.EnumeratedArgumentType.class;
+        return org.hbird.xtce.castor.EnumeratedArgumentType.class;
     }
 
     /**

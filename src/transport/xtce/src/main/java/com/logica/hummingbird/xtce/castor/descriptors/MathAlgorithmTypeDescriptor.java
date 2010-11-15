@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.MathAlgorithmType;
+import org.hbird.xtce.castor.MathAlgorithmType;
 
 /**
  * Class MathAlgorithmTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class MathAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
+public class MathAlgorithmTypeDescriptor extends org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class MathAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.cas
 
     public MathAlgorithmTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.NameDescriptionTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "MathAlgorithmType";
         _elementDefinition = false;
@@ -72,7 +72,7 @@ public class MathAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.cas
         //-- initialize element descriptors
 
         //-- _mathOperation
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.MathOperation.class, "_mathOperation", "MathOperation", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.MathOperation.class, "_mathOperation", "MathOperation", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class MathAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.cas
             {
                 try {
                     MathAlgorithmType target = (MathAlgorithmType) object;
-                    target.setMathOperation( (com.logica.hummingbird.xtce.castor.MathOperation) value);
+                    target.setMathOperation( (org.hbird.xtce.castor.MathOperation) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,10 +95,10 @@ public class MathAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.cas
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.MathOperation();
+                return new org.hbird.xtce.castor.MathOperation();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.MathOperation");
+        desc.setSchemaType("org.hbird.xtce.castor.MathOperation");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -153,7 +153,7 @@ public class MathAlgorithmTypeDescriptor extends com.logica.hummingbird.xtce.cas
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.MathAlgorithmType.class;
+        return org.hbird.xtce.castor.MathAlgorithmType.class;
     }
 
     /**

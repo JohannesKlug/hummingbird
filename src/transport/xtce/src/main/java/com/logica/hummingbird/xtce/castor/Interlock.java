@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * An Interlock is a type of Constraint, but not on Command
@@ -34,7 +34,7 @@ public class Interlock implements java.io.Serializable {
     /**
      * Field _verificationToWaitFor.
      */
-    private com.logica.hummingbird.xtce.castor.types.InterlockVerificationToWaitForType _verificationToWaitFor = com.logica.hummingbird.xtce.castor.types.InterlockVerificationToWaitForType.fromValue("complete");
+    private org.hbird.xtce.castor.types.InterlockVerificationToWaitForType _verificationToWaitFor = org.hbird.xtce.castor.types.InterlockVerificationToWaitForType.fromValue("complete");
 
     /**
      * Only applies when the verificationToWaitFor attribute is
@@ -60,7 +60,7 @@ public class Interlock implements java.io.Serializable {
 
     public Interlock() {
         super();
-        setVerificationToWaitFor(com.logica.hummingbird.xtce.castor.types.InterlockVerificationToWaitForType.fromValue("complete"));
+        setVerificationToWaitFor(org.hbird.xtce.castor.types.InterlockVerificationToWaitForType.fromValue("complete"));
     }
 
 
@@ -120,7 +120,7 @@ public class Interlock implements java.io.Serializable {
      * 
      * @return the value of field 'VerificationToWaitFor'.
      */
-    public com.logica.hummingbird.xtce.castor.types.InterlockVerificationToWaitForType getVerificationToWaitFor(
+    public org.hbird.xtce.castor.types.InterlockVerificationToWaitForType getVerificationToWaitFor(
     ) {
         return this._verificationToWaitFor;
     }
@@ -245,7 +245,7 @@ public class Interlock implements java.io.Serializable {
      * 'verificationToWaitFor'.
      */
     public void setVerificationToWaitFor(
-            final com.logica.hummingbird.xtce.castor.types.InterlockVerificationToWaitForType verificationToWaitFor) {
+            final org.hbird.xtce.castor.types.InterlockVerificationToWaitForType verificationToWaitFor) {
         this._verificationToWaitFor = verificationToWaitFor;
     }
 
@@ -258,12 +258,12 @@ public class Interlock implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.Interlock
+     * org.hbird.xtce.castor.Interlock
      */
-    public static com.logica.hummingbird.xtce.castor.Interlock unmarshal(
+    public static org.hbird.xtce.castor.Interlock unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.Interlock) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.Interlock.class, reader);
+        return (org.hbird.xtce.castor.Interlock) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.Interlock.class, reader);
     }
 
     /**

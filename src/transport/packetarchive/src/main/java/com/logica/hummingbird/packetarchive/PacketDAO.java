@@ -1,11 +1,11 @@
-package com.logica.hummingbird.packetarchive;
+package org.hbird.packetarchive;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import com.logica.hummingbird.packetarchive.Packet;
-import com.logica.hummingbird.packetarchive.PacketExample;
-import com.logica.hummingbird.packetarchive.PacketKey;
+import org.hbird.packetarchive.Packet;
+import org.hbird.packetarchive.PacketExample;
+import org.hbird.packetarchive.PacketKey;
 
 public interface PacketDAO {
     /**

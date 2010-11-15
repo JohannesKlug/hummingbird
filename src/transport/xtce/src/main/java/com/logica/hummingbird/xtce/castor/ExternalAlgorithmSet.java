@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class ExternalAlgorithmSet.
@@ -25,7 +25,7 @@ public class ExternalAlgorithmSet implements java.io.Serializable {
      * provided so that the same database may be used for multiple
      * implementation s
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.ExternalAlgorithm> _externalAlgorithmList;
+    private java.util.List<org.hbird.xtce.castor.ExternalAlgorithm> _externalAlgorithmList;
 
 
       //----------------/
@@ -34,7 +34,7 @@ public class ExternalAlgorithmSet implements java.io.Serializable {
 
     public ExternalAlgorithmSet() {
         super();
-        this._externalAlgorithmList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.ExternalAlgorithm>();
+        this._externalAlgorithmList = new java.util.ArrayList<org.hbird.xtce.castor.ExternalAlgorithm>();
     }
 
 
@@ -50,7 +50,7 @@ public class ExternalAlgorithmSet implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addExternalAlgorithm(
-            final com.logica.hummingbird.xtce.castor.ExternalAlgorithm vExternalAlgorithm)
+            final org.hbird.xtce.castor.ExternalAlgorithm vExternalAlgorithm)
     throws java.lang.IndexOutOfBoundsException {
         this._externalAlgorithmList.add(vExternalAlgorithm);
     }
@@ -65,7 +65,7 @@ public class ExternalAlgorithmSet implements java.io.Serializable {
      */
     public void addExternalAlgorithm(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ExternalAlgorithm vExternalAlgorithm)
+            final org.hbird.xtce.castor.ExternalAlgorithm vExternalAlgorithm)
     throws java.lang.IndexOutOfBoundsException {
         this._externalAlgorithmList.add(index, vExternalAlgorithm);
     }
@@ -76,7 +76,7 @@ public class ExternalAlgorithmSet implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.ExternalAlgorithm> enumerateExternalAlgorithm(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.ExternalAlgorithm> enumerateExternalAlgorithm(
     ) {
         return java.util.Collections.enumeration(this._externalAlgorithmList);
     }
@@ -88,10 +88,10 @@ public class ExternalAlgorithmSet implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.ExternalAlgorithm at the
+     * org.hbird.xtce.castor.ExternalAlgorithm at the
      * given index
      */
-    public com.logica.hummingbird.xtce.castor.ExternalAlgorithm getExternalAlgorithm(
+    public org.hbird.xtce.castor.ExternalAlgorithm getExternalAlgorithm(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -99,7 +99,7 @@ public class ExternalAlgorithmSet implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getExternalAlgorithm: Index value '" + index + "' not in range [0.." + (this._externalAlgorithmList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.ExternalAlgorithm) _externalAlgorithmList.get(index);
+        return (org.hbird.xtce.castor.ExternalAlgorithm) _externalAlgorithmList.get(index);
     }
 
     /**
@@ -112,10 +112,10 @@ public class ExternalAlgorithmSet implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.ExternalAlgorithm[] getExternalAlgorithm(
+    public org.hbird.xtce.castor.ExternalAlgorithm[] getExternalAlgorithm(
     ) {
-        com.logica.hummingbird.xtce.castor.ExternalAlgorithm[] array = new com.logica.hummingbird.xtce.castor.ExternalAlgorithm[0];
-        return (com.logica.hummingbird.xtce.castor.ExternalAlgorithm[]) this._externalAlgorithmList.toArray(array);
+        org.hbird.xtce.castor.ExternalAlgorithm[] array = new org.hbird.xtce.castor.ExternalAlgorithm[0];
+        return (org.hbird.xtce.castor.ExternalAlgorithm[]) this._externalAlgorithmList.toArray(array);
     }
 
     /**
@@ -149,7 +149,7 @@ public class ExternalAlgorithmSet implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.ExternalAlgorithm> iterateExternalAlgorithm(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.ExternalAlgorithm> iterateExternalAlgorithm(
     ) {
         return this._externalAlgorithmList.iterator();
     }
@@ -200,7 +200,7 @@ public class ExternalAlgorithmSet implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeExternalAlgorithm(
-            final com.logica.hummingbird.xtce.castor.ExternalAlgorithm vExternalAlgorithm) {
+            final org.hbird.xtce.castor.ExternalAlgorithm vExternalAlgorithm) {
         boolean removed = _externalAlgorithmList.remove(vExternalAlgorithm);
         return removed;
     }
@@ -211,10 +211,10 @@ public class ExternalAlgorithmSet implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.ExternalAlgorithm removeExternalAlgorithmAt(
+    public org.hbird.xtce.castor.ExternalAlgorithm removeExternalAlgorithmAt(
             final int index) {
         java.lang.Object obj = this._externalAlgorithmList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.ExternalAlgorithm) obj;
+        return (org.hbird.xtce.castor.ExternalAlgorithm) obj;
     }
 
     /**
@@ -227,7 +227,7 @@ public class ExternalAlgorithmSet implements java.io.Serializable {
      */
     public void setExternalAlgorithm(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ExternalAlgorithm vExternalAlgorithm)
+            final org.hbird.xtce.castor.ExternalAlgorithm vExternalAlgorithm)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._externalAlgorithmList.size()) {
@@ -243,7 +243,7 @@ public class ExternalAlgorithmSet implements java.io.Serializable {
      * @param vExternalAlgorithmArray
      */
     public void setExternalAlgorithm(
-            final com.logica.hummingbird.xtce.castor.ExternalAlgorithm[] vExternalAlgorithmArray) {
+            final org.hbird.xtce.castor.ExternalAlgorithm[] vExternalAlgorithmArray) {
         //-- copy array
         _externalAlgorithmList.clear();
 
@@ -261,12 +261,12 @@ public class ExternalAlgorithmSet implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ExternalAlgorithmSet
+     * org.hbird.xtce.castor.ExternalAlgorithmSet
      */
-    public static com.logica.hummingbird.xtce.castor.ExternalAlgorithmSet unmarshal(
+    public static org.hbird.xtce.castor.ExternalAlgorithmSet unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ExternalAlgorithmSet) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ExternalAlgorithmSet.class, reader);
+        return (org.hbird.xtce.castor.ExternalAlgorithmSet) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ExternalAlgorithmSet.class, reader);
     }
 
     /**

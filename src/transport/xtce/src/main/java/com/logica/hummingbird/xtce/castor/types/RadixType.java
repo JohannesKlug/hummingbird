@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types;
+package org.hbird.xtce.castor.types;
 
 /**
  * Specifies the number base
@@ -66,7 +66,7 @@ public enum RadixType implements java.io.Serializable {
      * @param value
      * @return the constant for this value
      */
-    public static com.logica.hummingbird.xtce.castor.types.RadixType fromValue(
+    public static org.hbird.xtce.castor.types.RadixType fromValue(
             final java.lang.String value) {
         for (RadixType c: RadixType.values()) {
             if (c.value.equals(value)) {

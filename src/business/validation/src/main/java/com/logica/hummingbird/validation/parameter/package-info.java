@@ -32,7 +32,7 @@
  * To limit check parameter 'myParameter' against a lower level of '10', and issue the resulting state as 
  * parameter 'myParameterLowerLimitState' make the following route in the Spring XML bean file;
  * 
- * bq. < bean id="limit" class="com.logica.hummingbird.validation.parameter.LowerLimit" >  
+ * bq. < bean id="limit" class="org.hbird.validation.parameter.LowerLimit" >  
  *		< constructor-arg index="0" value="myParameterLowerLimitState"/ >
  *		< constructor-arg index="1" value="10"/ >
  *	< /bean >
@@ -80,11 +80,11 @@
  * limit to change state. If a trigger limit is '3', then only after 3 violations in succession will
  * the limit change state to 'false'.
  * 
- * bq. < bean id="limit" class="com.logica.hummingbird.validation.parameter.LowerLimit" >  
+ * bq. < bean id="limit" class="org.hbird.validation.parameter.LowerLimit" >  
  *		< constructor-arg index="0" value="myParameterLowerLimitState"/ >
  *		< constructor-arg index="1" value="10"/ >
  *	< /bean >
- *  < bean id="triggerLimit" class="com.logica.hummingbird.validation.base.ViolationCountFilter" >
+ *  < bean id="triggerLimit" class="org.hbird.validation.base.ViolationCountFilter" >
  *		< constructor-arg index="0" value="3"/ >
  *  < /bean >
  * 	< camelContext xmlns="http://camel.apache.org/schema/spring" >
@@ -118,12 +118,12 @@
  * The limit will issue a state parameter each time an update is received, no matter whether the state is actually changed or not. To only
  * receive changes, configure a 'OnlyChangeFilter' as part of the route.
  * 		
- * bq. < bean id="limit" class="com.logica.hummingbird.validation.parameter.LowerLimit" >  
+ * bq. < bean id="limit" class="org.hbird.validation.parameter.LowerLimit" >  
  *		< constructor-arg index="0" value="myParameterLowerLimitState"/ >
  *		< constructor-arg index="1" value="10"/ >
  *	< /bean >
- *  < bean id="triggerLimit" class="com.logica.hummingbird.validation.base.ViolationCountFilter" />
- *  < bean id="onlyChange" class="com.logica.hummingbird.validation.base.OnlyChangeFilter" />
+ *  < bean id="triggerLimit" class="org.hbird.validation.base.ViolationCountFilter" />
+ *  < bean id="onlyChange" class="org.hbird.validation.base.OnlyChangeFilter" />
  * 	< camelContext xmlns="http://camel.apache.org/schema/spring" >
  * 		< route >
  *			< from uri="activemq:topic:Parameter?selector=name='myParameter'" / >
@@ -156,5 +156,5 @@
  * @END
  * 
  * */
-package com.logica.hummingbird.validation.parameter;
+package org.hbird.validation.parameter;
 

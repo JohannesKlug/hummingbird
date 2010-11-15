@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Like PASCAL strings, the size of the string is given as an
@@ -142,12 +142,12 @@ public class LeadingSize implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.LeadingSize
+     * org.hbird.xtce.castor.LeadingSize
      */
-    public static com.logica.hummingbird.xtce.castor.LeadingSize unmarshal(
+    public static org.hbird.xtce.castor.LeadingSize unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.LeadingSize) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.LeadingSize.class, reader);
+        return (org.hbird.xtce.castor.LeadingSize) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.LeadingSize.class, reader);
     }
 
     /**

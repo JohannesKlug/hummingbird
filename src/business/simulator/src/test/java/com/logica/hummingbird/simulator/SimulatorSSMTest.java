@@ -1,4 +1,4 @@
-package com.logica.hummingbird.simulator;
+package org.hbird.simulator;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,12 +12,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.logica.hummingbird.spacesystemmodel.Container;
-import com.logica.hummingbird.spacesystemmodel.exceptions.UnknownContainerNameException;
-import com.logica.hummingbird.spacesystemmodel.parameters.Parameter;
-import com.logica.hummingbird.spacesystemmodel.parameters.ParameterContainer;
-import com.logica.hummingbird.spacesystemmodel.testsupport.MockParameterContainerModel;
-import com.logica.hummingbird.xtce.exceptions.InvalidXtceFileException;
+import org.hbird.spacesystemmodel.Container;
+import org.hbird.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.spacesystemmodel.parameters.Parameter;
+import org.hbird.spacesystemmodel.parameters.ParameterContainer;
+import org.hbird.spacesystemmodel.testsupport.MockParameterContainerModel;
+import org.hbird.xtce.exceptions.InvalidXtceFileException;
 
 /**
  * FIXME A lot of these aren't tests they are just drivers for me to test functionality.  Asserts need to 

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types;
+package org.hbird.xtce.castor.types;
 
 /**
  * Enumeration InterlockVerificationToWaitForType.
@@ -78,7 +78,7 @@ public enum InterlockVerificationToWaitForType implements java.io.Serializable {
      * @param value
      * @return the constant for this value
      */
-    public static com.logica.hummingbird.xtce.castor.types.InterlockVerificationToWaitForType fromValue(
+    public static org.hbird.xtce.castor.types.InterlockVerificationToWaitForType fromValue(
             final java.lang.String value) {
         for (InterlockVerificationToWaitForType c: InterlockVerificationToWaitForType.values()) {
             if (c.value.equals(value)) {

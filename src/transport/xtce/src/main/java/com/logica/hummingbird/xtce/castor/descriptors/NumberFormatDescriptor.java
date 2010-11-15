@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.NumberFormat;
+import org.hbird.xtce.castor.NumberFormat;
 
 /**
  * Class NumberFormatDescriptor.
@@ -66,7 +66,7 @@ public class NumberFormatDescriptor extends org.exolab.castor.xml.util.XMLClassD
         //-- initialize attribute descriptors
 
         //-- _numberBase
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.RadixType.class, "_numberBase", "numberBase", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.RadixType.class, "_numberBase", "numberBase", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -81,7 +81,7 @@ public class NumberFormatDescriptor extends org.exolab.castor.xml.util.XMLClassD
             {
                 try {
                     NumberFormat target = (NumberFormat) object;
-                    target.setNumberBase( (com.logica.hummingbird.xtce.castor.types.RadixType) value);
+                    target.setNumberBase( (org.hbird.xtce.castor.types.RadixType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -92,7 +92,7 @@ public class NumberFormatDescriptor extends org.exolab.castor.xml.util.XMLClassD
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.RadixType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.RadixType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("RadixType");
         desc.setHandler(handler);
@@ -507,7 +507,7 @@ public class NumberFormatDescriptor extends org.exolab.castor.xml.util.XMLClassD
         }
         desc.setValidator(fieldValidator);
         //-- _notation
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.types.NumberFormatNotationType.class, "_notation", "notation", org.exolab.castor.xml.NodeType.Attribute);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.types.NumberFormatNotationType.class, "_notation", "notation", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -522,7 +522,7 @@ public class NumberFormatDescriptor extends org.exolab.castor.xml.util.XMLClassD
             {
                 try {
                     NumberFormat target = (NumberFormat) object;
-                    target.setNotation( (com.logica.hummingbird.xtce.castor.types.NumberFormatNotationType) value);
+                    target.setNotation( (org.hbird.xtce.castor.types.NumberFormatNotationType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -533,7 +533,7 @@ public class NumberFormatDescriptor extends org.exolab.castor.xml.util.XMLClassD
                 return null;
             }
         };
-        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(com.logica.hummingbird.xtce.castor.types.NumberFormatNotationType.class, handler);
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(org.hbird.xtce.castor.types.NumberFormatNotationType.class, handler);
         desc.setImmutable(true);
         desc.setSchemaType("NumberFormatNotationType");
         desc.setHandler(handler);
@@ -585,7 +585,7 @@ public class NumberFormatDescriptor extends org.exolab.castor.xml.util.XMLClassD
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.NumberFormat.class;
+        return org.hbird.xtce.castor.NumberFormat.class;
     }
 
     /**

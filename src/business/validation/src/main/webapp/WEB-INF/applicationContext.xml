@@ -30,13 +30,13 @@
 		<property name="configuration" ref="jmsConfig" />
 	</bean>
 
-	<bean id="batteryWarning" class="com.logica.hummingbird.validation.parameter.LowerLimit">
+	<bean id="batteryWarning" class="org.hbird.validation.parameter.LowerLimit">
 		<constructor-arg index="0" value="battery"/>
 		<constructor-arg index="1" value="batteryWithinWarningLimit"/>
 		<constructor-arg index="2" value="20"/>
 	</bean>
 
-	<bean id="batteryError" class="com.logica.hummingbird.validation.parameter.LowerLimit">
+	<bean id="batteryError" class="org.hbird.validation.parameter.LowerLimit">
 		<constructor-arg index="0" value="battery"/>
 		<constructor-arg index="1" value="batteryWithinErrorLimit"/>
 		<constructor-arg index="2" value="10"/>

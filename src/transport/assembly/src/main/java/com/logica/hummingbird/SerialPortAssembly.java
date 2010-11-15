@@ -1,4 +1,4 @@
-package com.logica.hummingbird;
+package org.hbird;
 
 import gnu.io.NoSuchPortException;
 import gnu.io.PortInUseException;
@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-import com.logica.hummingbird.protocols.hardware.SerialPortDriver;
-import com.logica.hummingbird.protocols.slip.Slip;
+import org.hbird.protocols.hardware.SerialPortDriver;
+import org.hbird.protocols.slip.Slip;
 
 public class SerialPortAssembly implements Observer {
 

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * An entry whose name is given by the value of a
@@ -18,7 +18,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class IndirectParameterRefEntryType extends com.logica.hummingbird.xtce.castor.SequenceEntryType 
+public class IndirectParameterRefEntryType extends org.hbird.xtce.castor.SequenceEntryType 
 implements java.io.Serializable
 {
 
@@ -35,7 +35,7 @@ implements java.io.Serializable
     /**
      * Field _parameterInstance.
      */
-    private com.logica.hummingbird.xtce.castor.ParameterInstance _parameterInstance;
+    private org.hbird.xtce.castor.ParameterInstance _parameterInstance;
 
 
       //----------------/
@@ -66,7 +66,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'ParameterInstance'.
      */
-    public com.logica.hummingbird.xtce.castor.ParameterInstance getParameterInstance(
+    public org.hbird.xtce.castor.ParameterInstance getParameterInstance(
     ) {
         return this._parameterInstance;
     }
@@ -135,7 +135,7 @@ implements java.io.Serializable
      * 'parameterInstance'.
      */
     public void setParameterInstance(
-            final com.logica.hummingbird.xtce.castor.ParameterInstance parameterInstance) {
+            final org.hbird.xtce.castor.ParameterInstance parameterInstance) {
         this._parameterInstance = parameterInstance;
     }
 
@@ -148,12 +148,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.IndirectParameterRefEntryType
+     * org.hbird.xtce.castor.IndirectParameterRefEntryType
      */
-    public static com.logica.hummingbird.xtce.castor.IndirectParameterRefEntryType unmarshal(
+    public static org.hbird.xtce.castor.IndirectParameterRefEntryType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.IndirectParameterRefEntryType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.IndirectParameterRefEntryType.class, reader);
+        return (org.hbird.xtce.castor.IndirectParameterRefEntryType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.IndirectParameterRefEntryType.class, reader);
     }
 
     /**

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A Command Verifier is a conditional check on the telemetry from
@@ -30,7 +30,7 @@ public class Verifiers implements java.io.Serializable {
      * spacecraft. Obviously, this verifier must come from
      * something other than the spacecraft. 
      */
-    private com.logica.hummingbird.xtce.castor.TransferredToRangeVerifier _transferredToRangeVerifier;
+    private org.hbird.xtce.castor.TransferredToRangeVerifier _transferredToRangeVerifier;
 
     /**
      * Sent from range means the command has been transmitted to
@@ -38,24 +38,24 @@ public class Verifiers implements java.io.Serializable {
      * system to the spacecraft. Obviously, this verifier must come
      * from something other than the spacecraft. 
      */
-    private com.logica.hummingbird.xtce.castor.SentFromRangeVerifier _sentFromRangeVerifier;
+    private org.hbird.xtce.castor.SentFromRangeVerifier _sentFromRangeVerifier;
 
     /**
      * A verifier that simply means the SpaceSystem has received
      * the command.
      */
-    private com.logica.hummingbird.xtce.castor.ReceivedVerifier _receivedVerifier;
+    private org.hbird.xtce.castor.ReceivedVerifier _receivedVerifier;
 
     /**
      * A verifier that means the SpaceSystem has accepted the comman
      */
-    private com.logica.hummingbird.xtce.castor.AcceptedVerifier _acceptedVerifier;
+    private org.hbird.xtce.castor.AcceptedVerifier _acceptedVerifier;
 
     /**
      * A verifyer that means the command is scheduled for execution
      * by the SpaceSystem.
      */
-    private com.logica.hummingbird.xtce.castor.QueuedVerifier _queuedVerifier;
+    private org.hbird.xtce.castor.QueuedVerifier _queuedVerifier;
 
     /**
      * A verifier that indicates that the command is being
@@ -63,19 +63,19 @@ public class Verifiers implements java.io.Serializable {
      * command has progressed either as a fixed value or an
      * (possibly scaled) ParameterInstance value.
      */
-    private com.logica.hummingbird.xtce.castor.ExecutionVerifier _executionVerifier;
+    private org.hbird.xtce.castor.ExecutionVerifier _executionVerifier;
 
     /**
      * A possible set of verifiers that all must be true for the
      * command be considered completed. 
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.CompleteVerifier> _completeVerifierList;
+    private java.util.List<org.hbird.xtce.castor.CompleteVerifier> _completeVerifierList;
 
     /**
      * When true, indicates that the command failed. timeToWait is
      * how long to wait for the FailedVerifier to test true.
      */
-    private com.logica.hummingbird.xtce.castor.FailedVerifier _failedVerifier;
+    private org.hbird.xtce.castor.FailedVerifier _failedVerifier;
 
 
       //----------------/
@@ -84,7 +84,7 @@ public class Verifiers implements java.io.Serializable {
 
     public Verifiers() {
         super();
-        this._completeVerifierList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.CompleteVerifier>();
+        this._completeVerifierList = new java.util.ArrayList<org.hbird.xtce.castor.CompleteVerifier>();
     }
 
 
@@ -100,7 +100,7 @@ public class Verifiers implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addCompleteVerifier(
-            final com.logica.hummingbird.xtce.castor.CompleteVerifier vCompleteVerifier)
+            final org.hbird.xtce.castor.CompleteVerifier vCompleteVerifier)
     throws java.lang.IndexOutOfBoundsException {
         this._completeVerifierList.add(vCompleteVerifier);
     }
@@ -115,7 +115,7 @@ public class Verifiers implements java.io.Serializable {
      */
     public void addCompleteVerifier(
             final int index,
-            final com.logica.hummingbird.xtce.castor.CompleteVerifier vCompleteVerifier)
+            final org.hbird.xtce.castor.CompleteVerifier vCompleteVerifier)
     throws java.lang.IndexOutOfBoundsException {
         this._completeVerifierList.add(index, vCompleteVerifier);
     }
@@ -126,7 +126,7 @@ public class Verifiers implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.CompleteVerifier> enumerateCompleteVerifier(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.CompleteVerifier> enumerateCompleteVerifier(
     ) {
         return java.util.Collections.enumeration(this._completeVerifierList);
     }
@@ -138,7 +138,7 @@ public class Verifiers implements java.io.Serializable {
      * 
      * @return the value of field 'AcceptedVerifier'.
      */
-    public com.logica.hummingbird.xtce.castor.AcceptedVerifier getAcceptedVerifier(
+    public org.hbird.xtce.castor.AcceptedVerifier getAcceptedVerifier(
     ) {
         return this._acceptedVerifier;
     }
@@ -150,10 +150,10 @@ public class Verifiers implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.CompleteVerifier at the
+     * org.hbird.xtce.castor.CompleteVerifier at the
      * given index
      */
-    public com.logica.hummingbird.xtce.castor.CompleteVerifier getCompleteVerifier(
+    public org.hbird.xtce.castor.CompleteVerifier getCompleteVerifier(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -161,7 +161,7 @@ public class Verifiers implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getCompleteVerifier: Index value '" + index + "' not in range [0.." + (this._completeVerifierList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.CompleteVerifier) _completeVerifierList.get(index);
+        return (org.hbird.xtce.castor.CompleteVerifier) _completeVerifierList.get(index);
     }
 
     /**
@@ -174,10 +174,10 @@ public class Verifiers implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.CompleteVerifier[] getCompleteVerifier(
+    public org.hbird.xtce.castor.CompleteVerifier[] getCompleteVerifier(
     ) {
-        com.logica.hummingbird.xtce.castor.CompleteVerifier[] array = new com.logica.hummingbird.xtce.castor.CompleteVerifier[0];
-        return (com.logica.hummingbird.xtce.castor.CompleteVerifier[]) this._completeVerifierList.toArray(array);
+        org.hbird.xtce.castor.CompleteVerifier[] array = new org.hbird.xtce.castor.CompleteVerifier[0];
+        return (org.hbird.xtce.castor.CompleteVerifier[]) this._completeVerifierList.toArray(array);
     }
 
     /**
@@ -200,7 +200,7 @@ public class Verifiers implements java.io.Serializable {
      * 
      * @return the value of field 'ExecutionVerifier'.
      */
-    public com.logica.hummingbird.xtce.castor.ExecutionVerifier getExecutionVerifier(
+    public org.hbird.xtce.castor.ExecutionVerifier getExecutionVerifier(
     ) {
         return this._executionVerifier;
     }
@@ -213,7 +213,7 @@ public class Verifiers implements java.io.Serializable {
      * 
      * @return the value of field 'FailedVerifier'.
      */
-    public com.logica.hummingbird.xtce.castor.FailedVerifier getFailedVerifier(
+    public org.hbird.xtce.castor.FailedVerifier getFailedVerifier(
     ) {
         return this._failedVerifier;
     }
@@ -226,7 +226,7 @@ public class Verifiers implements java.io.Serializable {
      * 
      * @return the value of field 'QueuedVerifier'.
      */
-    public com.logica.hummingbird.xtce.castor.QueuedVerifier getQueuedVerifier(
+    public org.hbird.xtce.castor.QueuedVerifier getQueuedVerifier(
     ) {
         return this._queuedVerifier;
     }
@@ -238,7 +238,7 @@ public class Verifiers implements java.io.Serializable {
      * 
      * @return the value of field 'ReceivedVerifier'.
      */
-    public com.logica.hummingbird.xtce.castor.ReceivedVerifier getReceivedVerifier(
+    public org.hbird.xtce.castor.ReceivedVerifier getReceivedVerifier(
     ) {
         return this._receivedVerifier;
     }
@@ -253,7 +253,7 @@ public class Verifiers implements java.io.Serializable {
      * 
      * @return the value of field 'SentFromRangeVerifier'.
      */
-    public com.logica.hummingbird.xtce.castor.SentFromRangeVerifier getSentFromRangeVerifier(
+    public org.hbird.xtce.castor.SentFromRangeVerifier getSentFromRangeVerifier(
     ) {
         return this._sentFromRangeVerifier;
     }
@@ -268,7 +268,7 @@ public class Verifiers implements java.io.Serializable {
      * 
      * @return the value of field 'TransferredToRangeVerifier'.
      */
-    public com.logica.hummingbird.xtce.castor.TransferredToRangeVerifier getTransferredToRangeVerifier(
+    public org.hbird.xtce.castor.TransferredToRangeVerifier getTransferredToRangeVerifier(
     ) {
         return this._transferredToRangeVerifier;
     }
@@ -294,7 +294,7 @@ public class Verifiers implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.CompleteVerifier> iterateCompleteVerifier(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.CompleteVerifier> iterateCompleteVerifier(
     ) {
         return this._completeVerifierList.iterator();
     }
@@ -345,7 +345,7 @@ public class Verifiers implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeCompleteVerifier(
-            final com.logica.hummingbird.xtce.castor.CompleteVerifier vCompleteVerifier) {
+            final org.hbird.xtce.castor.CompleteVerifier vCompleteVerifier) {
         boolean removed = _completeVerifierList.remove(vCompleteVerifier);
         return removed;
     }
@@ -356,10 +356,10 @@ public class Verifiers implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.CompleteVerifier removeCompleteVerifierAt(
+    public org.hbird.xtce.castor.CompleteVerifier removeCompleteVerifierAt(
             final int index) {
         java.lang.Object obj = this._completeVerifierList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.CompleteVerifier) obj;
+        return (org.hbird.xtce.castor.CompleteVerifier) obj;
     }
 
     /**
@@ -370,7 +370,7 @@ public class Verifiers implements java.io.Serializable {
      * @param acceptedVerifier the value of field 'acceptedVerifier'
      */
     public void setAcceptedVerifier(
-            final com.logica.hummingbird.xtce.castor.AcceptedVerifier acceptedVerifier) {
+            final org.hbird.xtce.castor.AcceptedVerifier acceptedVerifier) {
         this._acceptedVerifier = acceptedVerifier;
     }
 
@@ -384,7 +384,7 @@ public class Verifiers implements java.io.Serializable {
      */
     public void setCompleteVerifier(
             final int index,
-            final com.logica.hummingbird.xtce.castor.CompleteVerifier vCompleteVerifier)
+            final org.hbird.xtce.castor.CompleteVerifier vCompleteVerifier)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._completeVerifierList.size()) {
@@ -400,7 +400,7 @@ public class Verifiers implements java.io.Serializable {
      * @param vCompleteVerifierArray
      */
     public void setCompleteVerifier(
-            final com.logica.hummingbird.xtce.castor.CompleteVerifier[] vCompleteVerifierArray) {
+            final org.hbird.xtce.castor.CompleteVerifier[] vCompleteVerifierArray) {
         //-- copy array
         _completeVerifierList.clear();
 
@@ -421,7 +421,7 @@ public class Verifiers implements java.io.Serializable {
      * 'executionVerifier'.
      */
     public void setExecutionVerifier(
-            final com.logica.hummingbird.xtce.castor.ExecutionVerifier executionVerifier) {
+            final org.hbird.xtce.castor.ExecutionVerifier executionVerifier) {
         this._executionVerifier = executionVerifier;
     }
 
@@ -434,7 +434,7 @@ public class Verifiers implements java.io.Serializable {
      * @param failedVerifier the value of field 'failedVerifier'.
      */
     public void setFailedVerifier(
-            final com.logica.hummingbird.xtce.castor.FailedVerifier failedVerifier) {
+            final org.hbird.xtce.castor.FailedVerifier failedVerifier) {
         this._failedVerifier = failedVerifier;
     }
 
@@ -447,7 +447,7 @@ public class Verifiers implements java.io.Serializable {
      * @param queuedVerifier the value of field 'queuedVerifier'.
      */
     public void setQueuedVerifier(
-            final com.logica.hummingbird.xtce.castor.QueuedVerifier queuedVerifier) {
+            final org.hbird.xtce.castor.QueuedVerifier queuedVerifier) {
         this._queuedVerifier = queuedVerifier;
     }
 
@@ -459,7 +459,7 @@ public class Verifiers implements java.io.Serializable {
      * @param receivedVerifier the value of field 'receivedVerifier'
      */
     public void setReceivedVerifier(
-            final com.logica.hummingbird.xtce.castor.ReceivedVerifier receivedVerifier) {
+            final org.hbird.xtce.castor.ReceivedVerifier receivedVerifier) {
         this._receivedVerifier = receivedVerifier;
     }
 
@@ -475,7 +475,7 @@ public class Verifiers implements java.io.Serializable {
      * 'sentFromRangeVerifier'.
      */
     public void setSentFromRangeVerifier(
-            final com.logica.hummingbird.xtce.castor.SentFromRangeVerifier sentFromRangeVerifier) {
+            final org.hbird.xtce.castor.SentFromRangeVerifier sentFromRangeVerifier) {
         this._sentFromRangeVerifier = sentFromRangeVerifier;
     }
 
@@ -491,7 +491,7 @@ public class Verifiers implements java.io.Serializable {
      * 'transferredToRangeVerifier'.
      */
     public void setTransferredToRangeVerifier(
-            final com.logica.hummingbird.xtce.castor.TransferredToRangeVerifier transferredToRangeVerifier) {
+            final org.hbird.xtce.castor.TransferredToRangeVerifier transferredToRangeVerifier) {
         this._transferredToRangeVerifier = transferredToRangeVerifier;
     }
 
@@ -504,12 +504,12 @@ public class Verifiers implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.Verifiers
+     * org.hbird.xtce.castor.Verifiers
      */
-    public static com.logica.hummingbird.xtce.castor.Verifiers unmarshal(
+    public static org.hbird.xtce.castor.Verifiers unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.Verifiers) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.Verifiers.class, reader);
+        return (org.hbird.xtce.castor.Verifiers) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.Verifiers.class, reader);
     }
 
     /**

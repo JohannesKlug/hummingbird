@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.SequenceEntryType;
+import org.hbird.xtce.castor.SequenceEntryType;
 
 /**
  * Class SequenceEntryTypeDescriptor.
@@ -71,7 +71,7 @@ public class SequenceEntryTypeDescriptor extends org.exolab.castor.xml.util.XMLC
         //-- initialize element descriptors
 
         //-- _locationInContainerInBits
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.LocationInContainerInBits.class, "_locationInContainerInBits", "LocationInContainerInBits", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.LocationInContainerInBits.class, "_locationInContainerInBits", "LocationInContainerInBits", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class SequenceEntryTypeDescriptor extends org.exolab.castor.xml.util.XMLC
             {
                 try {
                     SequenceEntryType target = (SequenceEntryType) object;
-                    target.setLocationInContainerInBits( (com.logica.hummingbird.xtce.castor.LocationInContainerInBits) value);
+                    target.setLocationInContainerInBits( (org.hbird.xtce.castor.LocationInContainerInBits) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -94,10 +94,10 @@ public class SequenceEntryTypeDescriptor extends org.exolab.castor.xml.util.XMLC
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.LocationInContainerInBits();
+                return new org.hbird.xtce.castor.LocationInContainerInBits();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.LocationInContainerInBits");
+        desc.setSchemaType("org.hbird.xtce.castor.LocationInContainerInBits");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -110,7 +110,7 @@ public class SequenceEntryTypeDescriptor extends org.exolab.castor.xml.util.XMLC
         }
         desc.setValidator(fieldValidator);
         //-- _repeatEntry
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.RepeatEntry.class, "_repeatEntry", "RepeatEntry", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.RepeatEntry.class, "_repeatEntry", "RepeatEntry", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -125,7 +125,7 @@ public class SequenceEntryTypeDescriptor extends org.exolab.castor.xml.util.XMLC
             {
                 try {
                     SequenceEntryType target = (SequenceEntryType) object;
-                    target.setRepeatEntry( (com.logica.hummingbird.xtce.castor.RepeatEntry) value);
+                    target.setRepeatEntry( (org.hbird.xtce.castor.RepeatEntry) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -133,10 +133,10 @@ public class SequenceEntryTypeDescriptor extends org.exolab.castor.xml.util.XMLC
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.RepeatEntry();
+                return new org.hbird.xtce.castor.RepeatEntry();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.RepeatEntry");
+        desc.setSchemaType("org.hbird.xtce.castor.RepeatEntry");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -149,7 +149,7 @@ public class SequenceEntryTypeDescriptor extends org.exolab.castor.xml.util.XMLC
         }
         desc.setValidator(fieldValidator);
         //-- _includeCondition
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.IncludeCondition.class, "_includeCondition", "IncludeCondition", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.IncludeCondition.class, "_includeCondition", "IncludeCondition", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -164,7 +164,7 @@ public class SequenceEntryTypeDescriptor extends org.exolab.castor.xml.util.XMLC
             {
                 try {
                     SequenceEntryType target = (SequenceEntryType) object;
-                    target.setIncludeCondition( (com.logica.hummingbird.xtce.castor.IncludeCondition) value);
+                    target.setIncludeCondition( (org.hbird.xtce.castor.IncludeCondition) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -172,10 +172,10 @@ public class SequenceEntryTypeDescriptor extends org.exolab.castor.xml.util.XMLC
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.IncludeCondition();
+                return new org.hbird.xtce.castor.IncludeCondition();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.IncludeCondition");
+        desc.setSchemaType("org.hbird.xtce.castor.IncludeCondition");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -225,7 +225,7 @@ public class SequenceEntryTypeDescriptor extends org.exolab.castor.xml.util.XMLC
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.SequenceEntryType.class;
+        return org.hbird.xtce.castor.SequenceEntryType.class;
     }
 
     /**

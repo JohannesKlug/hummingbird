@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types;
+package org.hbird.xtce.castor.types;
 
 /**
  * Enumeration LocationInContainerInBitsReferenceLocationType.
@@ -66,7 +66,7 @@ public enum LocationInContainerInBitsReferenceLocationType implements java.io.Se
      * @param value
      * @return the constant for this value
      */
-    public static com.logica.hummingbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType fromValue(
+    public static org.hbird.xtce.castor.types.LocationInContainerInBitsReferenceLocationType fromValue(
             final java.lang.String value) {
         for (LocationInContainerInBitsReferenceLocationType c: LocationInContainerInBitsReferenceLocationType.values()) {
             if (c.value.equals(value)) {

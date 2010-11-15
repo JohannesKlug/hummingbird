@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A simple mathematical operation
@@ -13,7 +13,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public class MathAlgorithmType extends com.logica.hummingbird.xtce.castor.NameDescriptionType 
+public class MathAlgorithmType extends org.hbird.xtce.castor.NameDescriptionType 
 implements java.io.Serializable
 {
 
@@ -25,7 +25,7 @@ implements java.io.Serializable
     /**
      * Field _mathOperation.
      */
-    private com.logica.hummingbird.xtce.castor.MathOperation _mathOperation;
+    private org.hbird.xtce.castor.MathOperation _mathOperation;
 
 
       //----------------/
@@ -46,7 +46,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'MathOperation'.
      */
-    public com.logica.hummingbird.xtce.castor.MathOperation getMathOperation(
+    public org.hbird.xtce.castor.MathOperation getMathOperation(
     ) {
         return this._mathOperation;
     }
@@ -104,7 +104,7 @@ implements java.io.Serializable
      * @param mathOperation the value of field 'mathOperation'.
      */
     public void setMathOperation(
-            final com.logica.hummingbird.xtce.castor.MathOperation mathOperation) {
+            final org.hbird.xtce.castor.MathOperation mathOperation) {
         this._mathOperation = mathOperation;
     }
 
@@ -117,12 +117,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.MathAlgorithmType
+     * org.hbird.xtce.castor.MathAlgorithmType
      */
-    public static com.logica.hummingbird.xtce.castor.MathAlgorithmType unmarshal(
+    public static org.hbird.xtce.castor.MathAlgorithmType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.MathAlgorithmType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.MathAlgorithmType.class, reader);
+        return (org.hbird.xtce.castor.MathAlgorithmType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.MathAlgorithmType.class, reader);
     }
 
     /**

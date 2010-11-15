@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Lookup a value using the lookup list supplied. Use the first
@@ -24,7 +24,7 @@ public class DiscreteLookupList implements java.io.Serializable {
     /**
      * Field _discreteLookupList.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.DiscreteLookup> _discreteLookupList;
+    private java.util.List<org.hbird.xtce.castor.DiscreteLookup> _discreteLookupList;
 
 
       //----------------/
@@ -33,7 +33,7 @@ public class DiscreteLookupList implements java.io.Serializable {
 
     public DiscreteLookupList() {
         super();
-        this._discreteLookupList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.DiscreteLookup>();
+        this._discreteLookupList = new java.util.ArrayList<org.hbird.xtce.castor.DiscreteLookup>();
     }
 
 
@@ -49,7 +49,7 @@ public class DiscreteLookupList implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addDiscreteLookup(
-            final com.logica.hummingbird.xtce.castor.DiscreteLookup vDiscreteLookup)
+            final org.hbird.xtce.castor.DiscreteLookup vDiscreteLookup)
     throws java.lang.IndexOutOfBoundsException {
         this._discreteLookupList.add(vDiscreteLookup);
     }
@@ -64,7 +64,7 @@ public class DiscreteLookupList implements java.io.Serializable {
      */
     public void addDiscreteLookup(
             final int index,
-            final com.logica.hummingbird.xtce.castor.DiscreteLookup vDiscreteLookup)
+            final org.hbird.xtce.castor.DiscreteLookup vDiscreteLookup)
     throws java.lang.IndexOutOfBoundsException {
         this._discreteLookupList.add(index, vDiscreteLookup);
     }
@@ -75,7 +75,7 @@ public class DiscreteLookupList implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.DiscreteLookup> enumerateDiscreteLookup(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.DiscreteLookup> enumerateDiscreteLookup(
     ) {
         return java.util.Collections.enumeration(this._discreteLookupList);
     }
@@ -87,10 +87,10 @@ public class DiscreteLookupList implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.DiscreteLookup at the
+     * org.hbird.xtce.castor.DiscreteLookup at the
      * given index
      */
-    public com.logica.hummingbird.xtce.castor.DiscreteLookup getDiscreteLookup(
+    public org.hbird.xtce.castor.DiscreteLookup getDiscreteLookup(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -98,7 +98,7 @@ public class DiscreteLookupList implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getDiscreteLookup: Index value '" + index + "' not in range [0.." + (this._discreteLookupList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.DiscreteLookup) _discreteLookupList.get(index);
+        return (org.hbird.xtce.castor.DiscreteLookup) _discreteLookupList.get(index);
     }
 
     /**
@@ -111,10 +111,10 @@ public class DiscreteLookupList implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.DiscreteLookup[] getDiscreteLookup(
+    public org.hbird.xtce.castor.DiscreteLookup[] getDiscreteLookup(
     ) {
-        com.logica.hummingbird.xtce.castor.DiscreteLookup[] array = new com.logica.hummingbird.xtce.castor.DiscreteLookup[0];
-        return (com.logica.hummingbird.xtce.castor.DiscreteLookup[]) this._discreteLookupList.toArray(array);
+        org.hbird.xtce.castor.DiscreteLookup[] array = new org.hbird.xtce.castor.DiscreteLookup[0];
+        return (org.hbird.xtce.castor.DiscreteLookup[]) this._discreteLookupList.toArray(array);
     }
 
     /**
@@ -148,7 +148,7 @@ public class DiscreteLookupList implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.DiscreteLookup> iterateDiscreteLookup(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.DiscreteLookup> iterateDiscreteLookup(
     ) {
         return this._discreteLookupList.iterator();
     }
@@ -199,7 +199,7 @@ public class DiscreteLookupList implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeDiscreteLookup(
-            final com.logica.hummingbird.xtce.castor.DiscreteLookup vDiscreteLookup) {
+            final org.hbird.xtce.castor.DiscreteLookup vDiscreteLookup) {
         boolean removed = _discreteLookupList.remove(vDiscreteLookup);
         return removed;
     }
@@ -210,10 +210,10 @@ public class DiscreteLookupList implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.DiscreteLookup removeDiscreteLookupAt(
+    public org.hbird.xtce.castor.DiscreteLookup removeDiscreteLookupAt(
             final int index) {
         java.lang.Object obj = this._discreteLookupList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.DiscreteLookup) obj;
+        return (org.hbird.xtce.castor.DiscreteLookup) obj;
     }
 
     /**
@@ -226,7 +226,7 @@ public class DiscreteLookupList implements java.io.Serializable {
      */
     public void setDiscreteLookup(
             final int index,
-            final com.logica.hummingbird.xtce.castor.DiscreteLookup vDiscreteLookup)
+            final org.hbird.xtce.castor.DiscreteLookup vDiscreteLookup)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._discreteLookupList.size()) {
@@ -242,7 +242,7 @@ public class DiscreteLookupList implements java.io.Serializable {
      * @param vDiscreteLookupArray
      */
     public void setDiscreteLookup(
-            final com.logica.hummingbird.xtce.castor.DiscreteLookup[] vDiscreteLookupArray) {
+            final org.hbird.xtce.castor.DiscreteLookup[] vDiscreteLookupArray) {
         //-- copy array
         _discreteLookupList.clear();
 
@@ -260,12 +260,12 @@ public class DiscreteLookupList implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.DiscreteLookupList
+     * org.hbird.xtce.castor.DiscreteLookupList
      */
-    public static com.logica.hummingbird.xtce.castor.DiscreteLookupList unmarshal(
+    public static org.hbird.xtce.castor.DiscreteLookupList unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.DiscreteLookupList) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.DiscreteLookupList.class, reader);
+        return (org.hbird.xtce.castor.DiscreteLookupList) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.DiscreteLookupList.class, reader);
     }
 
     /**

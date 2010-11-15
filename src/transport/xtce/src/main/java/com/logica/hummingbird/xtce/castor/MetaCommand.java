@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * All commands to be sent on this mission are listed here. In
@@ -88,12 +88,12 @@ implements java.io.Serializable
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.MetaCommand
+     * org.hbird.xtce.castor.MetaCommand
      */
-    public static com.logica.hummingbird.xtce.castor.MetaCommand unmarshal(
+    public static org.hbird.xtce.castor.MetaCommand unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.MetaCommand) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.MetaCommand.class, reader);
+        return (org.hbird.xtce.castor.MetaCommand) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.MetaCommand.class, reader);
     }
 
     /**

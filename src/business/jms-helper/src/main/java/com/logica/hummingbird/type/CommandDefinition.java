@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.logica.hummingbird.type;
+package org.hbird.type;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.logica.hummingbird.interfaces.ITask;
+import org.hbird.interfaces.ITask;
 
 /**
  * @TITLE Command Definition

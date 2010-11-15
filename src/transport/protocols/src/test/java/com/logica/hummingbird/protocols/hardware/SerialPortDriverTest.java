@@ -1,4 +1,4 @@
-package com.logica.hummingbird.protocols.hardware;
+package org.hbird.protocols.hardware;
 
 import static org.junit.Assert.*;
 import gnu.io.NoSuchPortException;

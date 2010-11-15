@@ -1,4 +1,4 @@
-package com.logica.hummingbird.simulator;
+package org.hbird.simulator;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -15,9 +15,9 @@ import org.apache.camel.impl.DefaultMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.logica.hummingbird.simulator.ccsds.SpacePacketGenerator;
-import com.logica.hummingbird.simulator.graphics.URLReader;
-import com.logica.hummingbird.simulator.waveforms.Waveform;
+import org.hbird.simulator.ccsds.SpacePacketGenerator;
+import org.hbird.simulator.graphics.URLReader;
+import org.hbird.simulator.waveforms.Waveform;
 
 public class Simulator implements Runnable {
 

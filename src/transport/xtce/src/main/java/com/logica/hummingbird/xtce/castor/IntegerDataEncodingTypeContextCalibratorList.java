@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Use when different calibrations must be used on the Parameter in
@@ -24,7 +24,7 @@ public class IntegerDataEncodingTypeContextCalibratorList implements java.io.Ser
     /**
      * Field _contextCalibratorList.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator> _contextCalibratorList;
+    private java.util.List<org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator> _contextCalibratorList;
 
 
       //----------------/
@@ -33,7 +33,7 @@ public class IntegerDataEncodingTypeContextCalibratorList implements java.io.Ser
 
     public IntegerDataEncodingTypeContextCalibratorList() {
         super();
-        this._contextCalibratorList = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator>();
+        this._contextCalibratorList = new java.util.ArrayList<org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator>();
     }
 
 
@@ -49,7 +49,7 @@ public class IntegerDataEncodingTypeContextCalibratorList implements java.io.Ser
      * given is outside the bounds of the collection
      */
     public void addContextCalibrator(
-            final com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator vContextCalibrator)
+            final org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator vContextCalibrator)
     throws java.lang.IndexOutOfBoundsException {
         this._contextCalibratorList.add(vContextCalibrator);
     }
@@ -64,7 +64,7 @@ public class IntegerDataEncodingTypeContextCalibratorList implements java.io.Ser
      */
     public void addContextCalibrator(
             final int index,
-            final com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator vContextCalibrator)
+            final org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator vContextCalibrator)
     throws java.lang.IndexOutOfBoundsException {
         this._contextCalibratorList.add(index, vContextCalibrator);
     }
@@ -75,7 +75,7 @@ public class IntegerDataEncodingTypeContextCalibratorList implements java.io.Ser
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator> enumerateContextCalibrator(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator> enumerateContextCalibrator(
     ) {
         return java.util.Collections.enumeration(this._contextCalibratorList);
     }
@@ -87,10 +87,10 @@ public class IntegerDataEncodingTypeContextCalibratorList implements java.io.Ser
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator
+     * org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator
      * at the given index
      */
-    public com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator getContextCalibrator(
+    public org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator getContextCalibrator(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -98,7 +98,7 @@ public class IntegerDataEncodingTypeContextCalibratorList implements java.io.Ser
             throw new IndexOutOfBoundsException("getContextCalibrator: Index value '" + index + "' not in range [0.." + (this._contextCalibratorList.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator) _contextCalibratorList.get(index);
+        return (org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator) _contextCalibratorList.get(index);
     }
 
     /**
@@ -111,10 +111,10 @@ public class IntegerDataEncodingTypeContextCalibratorList implements java.io.Ser
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator[] getContextCalibrator(
+    public org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator[] getContextCalibrator(
     ) {
-        com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator[] array = new com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator[0];
-        return (com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator[]) this._contextCalibratorList.toArray(array);
+        org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator[] array = new org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator[0];
+        return (org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator[]) this._contextCalibratorList.toArray(array);
     }
 
     /**
@@ -148,7 +148,7 @@ public class IntegerDataEncodingTypeContextCalibratorList implements java.io.Ser
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator> iterateContextCalibrator(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator> iterateContextCalibrator(
     ) {
         return this._contextCalibratorList.iterator();
     }
@@ -199,7 +199,7 @@ public class IntegerDataEncodingTypeContextCalibratorList implements java.io.Ser
      * @return true if the object was removed from the collection.
      */
     public boolean removeContextCalibrator(
-            final com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator vContextCalibrator) {
+            final org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator vContextCalibrator) {
         boolean removed = _contextCalibratorList.remove(vContextCalibrator);
         return removed;
     }
@@ -210,10 +210,10 @@ public class IntegerDataEncodingTypeContextCalibratorList implements java.io.Ser
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator removeContextCalibratorAt(
+    public org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator removeContextCalibratorAt(
             final int index) {
         java.lang.Object obj = this._contextCalibratorList.remove(index);
-        return (com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator) obj;
+        return (org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator) obj;
     }
 
     /**
@@ -226,7 +226,7 @@ public class IntegerDataEncodingTypeContextCalibratorList implements java.io.Ser
      */
     public void setContextCalibrator(
             final int index,
-            final com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator vContextCalibrator)
+            final org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator vContextCalibrator)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._contextCalibratorList.size()) {
@@ -242,7 +242,7 @@ public class IntegerDataEncodingTypeContextCalibratorList implements java.io.Ser
      * @param vContextCalibratorArray
      */
     public void setContextCalibrator(
-            final com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator[] vContextCalibratorArray) {
+            final org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorListContextCalibrator[] vContextCalibratorArray) {
         //-- copy array
         _contextCalibratorList.clear();
 
@@ -260,12 +260,12 @@ public class IntegerDataEncodingTypeContextCalibratorList implements java.io.Ser
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorList
+     * org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorList
      */
-    public static com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorList unmarshal(
+    public static org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorList unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorList) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorList.class, reader);
+        return (org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorList) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.IntegerDataEncodingTypeContextCalibratorList.class, reader);
     }
 
     /**

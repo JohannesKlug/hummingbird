@@ -1,4 +1,4 @@
-package com.logica.hummingbird.integrationtests;
+package org.hbird.integrationtests;
 
 import java.util.BitSet;
 
@@ -10,11 +10,11 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
-import com.logica.hummingbird.MessageType;
-import com.logica.hummingbird.packetbroker.HummingbirdCamelPacketBroker;
-import com.logica.hummingbird.telemetry.HummingbirdPacket;
-import com.logica.hummingbird.telemetry.HummingbirdParameter;
-import com.logica.hummingbird.xtce.XtceModelFactory;
+import org.hbird.MessageType;
+import org.hbird.packetbroker.HummingbirdCamelPacketBroker;
+import org.hbird.telemetry.HummingbirdPacket;
+import org.hbird.telemetry.HummingbirdParameter;
+import org.hbird.xtce.XtceModelFactory;
 
 public class RouterTest extends CamelTestSupport {
 

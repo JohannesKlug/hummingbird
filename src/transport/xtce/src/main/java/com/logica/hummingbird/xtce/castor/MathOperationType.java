@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * A simple math operation
@@ -23,12 +23,12 @@ public class MathOperationType implements java.io.Serializable {
     /**
      * Field _mathOperationTypeChoice.
      */
-    private com.logica.hummingbird.xtce.castor.MathOperationTypeChoice _mathOperationTypeChoice;
+    private org.hbird.xtce.castor.MathOperationTypeChoice _mathOperationTypeChoice;
 
     /**
      * Field _mathOperationTypeSequence.
      */
-    private com.logica.hummingbird.xtce.castor.MathOperationTypeSequence _mathOperationTypeSequence;
+    private org.hbird.xtce.castor.MathOperationTypeSequence _mathOperationTypeSequence;
 
 
       //----------------/
@@ -49,7 +49,7 @@ public class MathOperationType implements java.io.Serializable {
      * 
      * @return the value of field 'MathOperationTypeChoice'.
      */
-    public com.logica.hummingbird.xtce.castor.MathOperationTypeChoice getMathOperationTypeChoice(
+    public org.hbird.xtce.castor.MathOperationTypeChoice getMathOperationTypeChoice(
     ) {
         return this._mathOperationTypeChoice;
     }
@@ -59,7 +59,7 @@ public class MathOperationType implements java.io.Serializable {
      * 
      * @return the value of field 'MathOperationTypeSequence'.
      */
-    public com.logica.hummingbird.xtce.castor.MathOperationTypeSequence getMathOperationTypeSequence(
+    public org.hbird.xtce.castor.MathOperationTypeSequence getMathOperationTypeSequence(
     ) {
         return this._mathOperationTypeSequence;
     }
@@ -118,7 +118,7 @@ public class MathOperationType implements java.io.Serializable {
      * 'mathOperationTypeChoice'.
      */
     public void setMathOperationTypeChoice(
-            final com.logica.hummingbird.xtce.castor.MathOperationTypeChoice mathOperationTypeChoice) {
+            final org.hbird.xtce.castor.MathOperationTypeChoice mathOperationTypeChoice) {
         this._mathOperationTypeChoice = mathOperationTypeChoice;
     }
 
@@ -129,7 +129,7 @@ public class MathOperationType implements java.io.Serializable {
      * 'mathOperationTypeSequence'.
      */
     public void setMathOperationTypeSequence(
-            final com.logica.hummingbird.xtce.castor.MathOperationTypeSequence mathOperationTypeSequence) {
+            final org.hbird.xtce.castor.MathOperationTypeSequence mathOperationTypeSequence) {
         this._mathOperationTypeSequence = mathOperationTypeSequence;
     }
 
@@ -142,12 +142,12 @@ public class MathOperationType implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.MathOperationType
+     * org.hbird.xtce.castor.MathOperationType
      */
-    public static com.logica.hummingbird.xtce.castor.MathOperationType unmarshal(
+    public static org.hbird.xtce.castor.MathOperationType unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.MathOperationType) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.MathOperationType.class, reader);
+        return (org.hbird.xtce.castor.MathOperationType) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.MathOperationType.class, reader);
     }
 
     /**

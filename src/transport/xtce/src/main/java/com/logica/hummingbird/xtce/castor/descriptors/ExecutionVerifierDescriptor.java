@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ExecutionVerifier;
+import org.hbird.xtce.castor.ExecutionVerifier;
 
 /**
  * Class ExecutionVerifierDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ExecutionVerifierDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor {
+public class ExecutionVerifierDescriptor extends org.hbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ExecutionVerifierDescriptor extends com.logica.hummingbird.xtce.cas
 
     public ExecutionVerifierDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.CommandVerifierTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ExecutionVerifier";
         _elementDefinition = true;
@@ -72,7 +72,7 @@ public class ExecutionVerifierDescriptor extends com.logica.hummingbird.xtce.cas
         //-- initialize element descriptors
 
         //-- _percentComplete
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.PercentComplete.class, "_percentComplete", "PercentComplete", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.PercentComplete.class, "_percentComplete", "PercentComplete", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -87,7 +87,7 @@ public class ExecutionVerifierDescriptor extends com.logica.hummingbird.xtce.cas
             {
                 try {
                     ExecutionVerifier target = (ExecutionVerifier) object;
-                    target.setPercentComplete( (com.logica.hummingbird.xtce.castor.PercentComplete) value);
+                    target.setPercentComplete( (org.hbird.xtce.castor.PercentComplete) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -95,10 +95,10 @@ public class ExecutionVerifierDescriptor extends com.logica.hummingbird.xtce.cas
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.PercentComplete();
+                return new org.hbird.xtce.castor.PercentComplete();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.PercentComplete");
+        desc.setSchemaType("org.hbird.xtce.castor.PercentComplete");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setMultivalued(false);
@@ -151,7 +151,7 @@ public class ExecutionVerifierDescriptor extends com.logica.hummingbird.xtce.cas
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ExecutionVerifier.class;
+        return org.hbird.xtce.castor.ExecutionVerifier.class;
     }
 
     /**

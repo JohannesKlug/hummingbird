@@ -1,4 +1,4 @@
-package com.logica.hummingbird.tasks.tasks;
+package org.hbird.tasks.tasks;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
@@ -14,16 +14,16 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
-import com.logica.hummingbird.buffers.ObjectBuffer;
-import com.logica.hummingbird.formatter.ExchangeFormatter;
-import com.logica.hummingbird.formatter.HeaderFields;
-import com.logica.hummingbird.tasks.actions.SetParameter;
-import com.logica.hummingbird.tasks.actions.SetStateParameter;
-import com.logica.hummingbird.tasks.checks.ConfigurableValue;
-import com.logica.hummingbird.tasks.checks.DynamicHeaderBasedValue;
-import com.logica.hummingbird.tasks.checks.DynamicParameterBasedValue;
-import com.logica.hummingbird.tasks.checks.Range;
-import com.logica.hummingbird.tasks.checks.StaticValue;
+import org.hbird.buffers.ObjectBuffer;
+import org.hbird.formatter.ExchangeFormatter;
+import org.hbird.formatter.HeaderFields;
+import org.hbird.tasks.actions.SetParameter;
+import org.hbird.tasks.actions.SetStateParameter;
+import org.hbird.tasks.checks.ConfigurableValue;
+import org.hbird.tasks.checks.DynamicHeaderBasedValue;
+import org.hbird.tasks.checks.DynamicParameterBasedValue;
+import org.hbird.tasks.checks.Range;
+import org.hbird.tasks.checks.StaticValue;
 
 @ContextConfiguration (locations={"/TasksTest-context.xml"})
 public class TasksTest extends AbstractJUnit38SpringContextTests  {

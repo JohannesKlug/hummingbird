@@ -5,10 +5,10 @@
 						http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi-1.2.xsd 
 						http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-	<!-- <bean id="packetDispatcher" class="com.logica.hummingbird.framebroker.CamelPacketDispatcher">
+	<!-- <bean id="packetDispatcher" class="org.hbird.framebroker.CamelPacketDispatcher">
 	</bean> -->
 	
-	<bean id="packetViewer" class="com.logica.hummingbird.PacketViewer">
+	<bean id="packetViewer" class="org.hbird.PacketViewer">
 	</bean>
 	
 

@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class BaseContainer.
@@ -32,7 +32,7 @@ public class CommandContainerTypeBaseContainer implements java.io.Serializable {
      * simple Comparison List, a Boolean Expression, and/or in a
      * Graph of containers established by the NextContainer
      */
-    private com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria _restrictionCriteria;
+    private org.hbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria _restrictionCriteria;
 
 
       //----------------/
@@ -69,7 +69,7 @@ public class CommandContainerTypeBaseContainer implements java.io.Serializable {
      * 
      * @return the value of field 'RestrictionCriteria'.
      */
-    public com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria getRestrictionCriteria(
+    public org.hbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria getRestrictionCriteria(
     ) {
         return this._restrictionCriteria;
     }
@@ -144,7 +144,7 @@ public class CommandContainerTypeBaseContainer implements java.io.Serializable {
      * 'restrictionCriteria'.
      */
     public void setRestrictionCriteria(
-            final com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria restrictionCriteria) {
+            final org.hbird.xtce.castor.CommandContainerTypeBaseContainerRestrictionCriteria restrictionCriteria) {
         this._restrictionCriteria = restrictionCriteria;
     }
 
@@ -157,12 +157,12 @@ public class CommandContainerTypeBaseContainer implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainer
+     * org.hbird.xtce.castor.CommandContainerTypeBaseContainer
      */
-    public static com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainer unmarshal(
+    public static org.hbird.xtce.castor.CommandContainerTypeBaseContainer unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainer) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.CommandContainerTypeBaseContainer.class, reader);
+        return (org.hbird.xtce.castor.CommandContainerTypeBaseContainer) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.CommandContainerTypeBaseContainer.class, reader);
     }
 
     /**

@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.CommandMetaData;
+import org.hbird.xtce.castor.CommandMetaData;
 
 /**
  * Class CommandMetaDataDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class CommandMetaDataDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.CommandMetaDataTypeDescriptor {
+public class CommandMetaDataDescriptor extends org.hbird.xtce.castor.descriptors.CommandMetaDataTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class CommandMetaDataDescriptor extends com.logica.hummingbird.xtce.casto
 
     public CommandMetaDataDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.CommandMetaDataTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.CommandMetaDataTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "CommandMetaData";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class CommandMetaDataDescriptor extends com.logica.hummingbird.xtce.casto
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.CommandMetaData.class;
+        return org.hbird.xtce.castor.CommandMetaData.class;
     }
 
     /**

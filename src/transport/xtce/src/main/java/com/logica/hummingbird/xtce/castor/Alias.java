@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Used to contain an alias (alternate) name or ID for the the
@@ -147,12 +147,12 @@ public class Alias implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.Alias
+     * org.hbird.xtce.castor.Alias
      */
-    public static com.logica.hummingbird.xtce.castor.Alias unmarshal(
+    public static org.hbird.xtce.castor.Alias unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.Alias) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.Alias.class, reader);
+        return (org.hbird.xtce.castor.Alias) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.Alias.class, reader);
     }
 
     /**

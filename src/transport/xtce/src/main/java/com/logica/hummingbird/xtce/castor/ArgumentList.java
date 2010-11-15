@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Many commands have one or more options. These are called command
@@ -25,7 +25,7 @@ public class ArgumentList implements java.io.Serializable {
     /**
      * Field _items.
      */
-    private java.util.List<com.logica.hummingbird.xtce.castor.ArgumentListItem> _items;
+    private java.util.List<org.hbird.xtce.castor.ArgumentListItem> _items;
 
 
       //----------------/
@@ -34,7 +34,7 @@ public class ArgumentList implements java.io.Serializable {
 
     public ArgumentList() {
         super();
-        this._items = new java.util.ArrayList<com.logica.hummingbird.xtce.castor.ArgumentListItem>();
+        this._items = new java.util.ArrayList<org.hbird.xtce.castor.ArgumentListItem>();
     }
 
 
@@ -50,7 +50,7 @@ public class ArgumentList implements java.io.Serializable {
      * given is outside the bounds of the collection
      */
     public void addArgumentListItem(
-            final com.logica.hummingbird.xtce.castor.ArgumentListItem vArgumentListItem)
+            final org.hbird.xtce.castor.ArgumentListItem vArgumentListItem)
     throws java.lang.IndexOutOfBoundsException {
         this._items.add(vArgumentListItem);
     }
@@ -65,7 +65,7 @@ public class ArgumentList implements java.io.Serializable {
      */
     public void addArgumentListItem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ArgumentListItem vArgumentListItem)
+            final org.hbird.xtce.castor.ArgumentListItem vArgumentListItem)
     throws java.lang.IndexOutOfBoundsException {
         this._items.add(index, vArgumentListItem);
     }
@@ -76,7 +76,7 @@ public class ArgumentList implements java.io.Serializable {
      * @return an Enumeration over all possible elements of this
      * collection
      */
-    public java.util.Enumeration<? extends com.logica.hummingbird.xtce.castor.ArgumentListItem> enumerateArgumentListItem(
+    public java.util.Enumeration<? extends org.hbird.xtce.castor.ArgumentListItem> enumerateArgumentListItem(
     ) {
         return java.util.Collections.enumeration(this._items);
     }
@@ -88,10 +88,10 @@ public class ArgumentList implements java.io.Serializable {
      * @throws java.lang.IndexOutOfBoundsException if the index
      * given is outside the bounds of the collection
      * @return the value of the
-     * com.logica.hummingbird.xtce.castor.ArgumentListItem at the
+     * org.hbird.xtce.castor.ArgumentListItem at the
      * given index
      */
-    public com.logica.hummingbird.xtce.castor.ArgumentListItem getArgumentListItem(
+    public org.hbird.xtce.castor.ArgumentListItem getArgumentListItem(
             final int index)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
@@ -99,7 +99,7 @@ public class ArgumentList implements java.io.Serializable {
             throw new IndexOutOfBoundsException("getArgumentListItem: Index value '" + index + "' not in range [0.." + (this._items.size() - 1) + "]");
         }
 
-        return (com.logica.hummingbird.xtce.castor.ArgumentListItem) _items.get(index);
+        return (org.hbird.xtce.castor.ArgumentListItem) _items.get(index);
     }
 
     /**
@@ -112,10 +112,10 @@ public class ArgumentList implements java.io.Serializable {
      * 
      * @return this collection as an Array
      */
-    public com.logica.hummingbird.xtce.castor.ArgumentListItem[] getArgumentListItem(
+    public org.hbird.xtce.castor.ArgumentListItem[] getArgumentListItem(
     ) {
-        com.logica.hummingbird.xtce.castor.ArgumentListItem[] array = new com.logica.hummingbird.xtce.castor.ArgumentListItem[0];
-        return (com.logica.hummingbird.xtce.castor.ArgumentListItem[]) this._items.toArray(array);
+        org.hbird.xtce.castor.ArgumentListItem[] array = new org.hbird.xtce.castor.ArgumentListItem[0];
+        return (org.hbird.xtce.castor.ArgumentListItem[]) this._items.toArray(array);
     }
 
     /**
@@ -149,7 +149,7 @@ public class ArgumentList implements java.io.Serializable {
      * @return an Iterator over all possible elements in this
      * collection
      */
-    public java.util.Iterator<? extends com.logica.hummingbird.xtce.castor.ArgumentListItem> iterateArgumentListItem(
+    public java.util.Iterator<? extends org.hbird.xtce.castor.ArgumentListItem> iterateArgumentListItem(
     ) {
         return this._items.iterator();
     }
@@ -200,7 +200,7 @@ public class ArgumentList implements java.io.Serializable {
      * @return true if the object was removed from the collection.
      */
     public boolean removeArgumentListItem(
-            final com.logica.hummingbird.xtce.castor.ArgumentListItem vArgumentListItem) {
+            final org.hbird.xtce.castor.ArgumentListItem vArgumentListItem) {
         boolean removed = _items.remove(vArgumentListItem);
         return removed;
     }
@@ -211,10 +211,10 @@ public class ArgumentList implements java.io.Serializable {
      * @param index
      * @return the element removed from the collection
      */
-    public com.logica.hummingbird.xtce.castor.ArgumentListItem removeArgumentListItemAt(
+    public org.hbird.xtce.castor.ArgumentListItem removeArgumentListItemAt(
             final int index) {
         java.lang.Object obj = this._items.remove(index);
-        return (com.logica.hummingbird.xtce.castor.ArgumentListItem) obj;
+        return (org.hbird.xtce.castor.ArgumentListItem) obj;
     }
 
     /**
@@ -227,7 +227,7 @@ public class ArgumentList implements java.io.Serializable {
      */
     public void setArgumentListItem(
             final int index,
-            final com.logica.hummingbird.xtce.castor.ArgumentListItem vArgumentListItem)
+            final org.hbird.xtce.castor.ArgumentListItem vArgumentListItem)
     throws java.lang.IndexOutOfBoundsException {
         // check bounds for index
         if (index < 0 || index >= this._items.size()) {
@@ -243,7 +243,7 @@ public class ArgumentList implements java.io.Serializable {
      * @param vArgumentListItemArray
      */
     public void setArgumentListItem(
-            final com.logica.hummingbird.xtce.castor.ArgumentListItem[] vArgumentListItemArray) {
+            final org.hbird.xtce.castor.ArgumentListItem[] vArgumentListItemArray) {
         //-- copy array
         _items.clear();
 
@@ -261,12 +261,12 @@ public class ArgumentList implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * com.logica.hummingbird.xtce.castor.ArgumentList
+     * org.hbird.xtce.castor.ArgumentList
      */
-    public static com.logica.hummingbird.xtce.castor.ArgumentList unmarshal(
+    public static org.hbird.xtce.castor.ArgumentList unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (com.logica.hummingbird.xtce.castor.ArgumentList) org.exolab.castor.xml.Unmarshaller.unmarshal(com.logica.hummingbird.xtce.castor.ArgumentList.class, reader);
+        return (org.hbird.xtce.castor.ArgumentList) org.exolab.castor.xml.Unmarshaller.unmarshal(org.hbird.xtce.castor.ArgumentList.class, reader);
     }
 
     /**

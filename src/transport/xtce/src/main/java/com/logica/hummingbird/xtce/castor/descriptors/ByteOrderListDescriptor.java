@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.ByteOrderList;
+import org.hbird.xtce.castor.ByteOrderList;
 
 /**
  * Class ByteOrderListDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class ByteOrderListDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.ByteOrderTypeDescriptor {
+public class ByteOrderListDescriptor extends org.hbird.xtce.castor.descriptors.ByteOrderTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class ByteOrderListDescriptor extends com.logica.hummingbird.xtce.castor.
 
     public ByteOrderListDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.ByteOrderTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.ByteOrderTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "ByteOrderList";
         _elementDefinition = true;
@@ -102,7 +102,7 @@ public class ByteOrderListDescriptor extends com.logica.hummingbird.xtce.castor.
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.ByteOrderList.class;
+        return org.hbird.xtce.castor.ByteOrderList.class;
     }
 
     /**

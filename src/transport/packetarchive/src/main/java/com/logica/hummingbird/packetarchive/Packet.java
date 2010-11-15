@@ -1,4 +1,4 @@
-package com.logica.hummingbird.packetarchive;
+package org.hbird.packetarchive;
 
 public class Packet extends PacketKey {
     /**

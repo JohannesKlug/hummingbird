@@ -5,20 +5,20 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.IndirectParameterRefEntryType;
+import org.hbird.xtce.castor.IndirectParameterRefEntryType;
 
 /**
  * Class IndirectParameterRefEntryTypeDescriptor.
  * 
  * @version $Revision$ $Date$
  */
-public class IndirectParameterRefEntryTypeDescriptor extends com.logica.hummingbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor {
+public class IndirectParameterRefEntryTypeDescriptor extends org.hbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor {
 
 
       //--------------------------/
@@ -57,7 +57,7 @@ public class IndirectParameterRefEntryTypeDescriptor extends com.logica.hummingb
 
     public IndirectParameterRefEntryTypeDescriptor() {
         super();
-        setExtendsWithoutFlatten(new com.logica.hummingbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor());
+        setExtendsWithoutFlatten(new org.hbird.xtce.castor.descriptors.SequenceEntryTypeDescriptor());
         _nsURI = "http://www.omg.org/space/xtce";
         _xmlName = "IndirectParameterRefEntryType";
         _elementDefinition = false;
@@ -114,7 +114,7 @@ public class IndirectParameterRefEntryTypeDescriptor extends com.logica.hummingb
         //-- initialize element descriptors
 
         //-- _parameterInstance
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.ParameterInstance.class, "_parameterInstance", "ParameterInstance", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.ParameterInstance.class, "_parameterInstance", "ParameterInstance", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -129,7 +129,7 @@ public class IndirectParameterRefEntryTypeDescriptor extends com.logica.hummingb
             {
                 try {
                     IndirectParameterRefEntryType target = (IndirectParameterRefEntryType) object;
-                    target.setParameterInstance( (com.logica.hummingbird.xtce.castor.ParameterInstance) value);
+                    target.setParameterInstance( (org.hbird.xtce.castor.ParameterInstance) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -137,10 +137,10 @@ public class IndirectParameterRefEntryTypeDescriptor extends com.logica.hummingb
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.ParameterInstance();
+                return new org.hbird.xtce.castor.ParameterInstance();
             }
         };
-        desc.setSchemaType("com.logica.hummingbird.xtce.castor.ParameterInstance");
+        desc.setSchemaType("org.hbird.xtce.castor.ParameterInstance");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -195,7 +195,7 @@ public class IndirectParameterRefEntryTypeDescriptor extends com.logica.hummingb
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.IndirectParameterRefEntryType.class;
+        return org.hbird.xtce.castor.IndirectParameterRefEntryType.class;
     }
 
     /**

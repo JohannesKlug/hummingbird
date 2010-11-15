@@ -1,4 +1,4 @@
-package com.logica.hummingbird.protocols.slip;
+package org.hbird.protocols.slip;
 
 import static org.junit.Assert.assertEquals;
 

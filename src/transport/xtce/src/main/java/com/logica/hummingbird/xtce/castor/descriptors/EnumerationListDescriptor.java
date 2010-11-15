@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.EnumerationList;
+import org.hbird.xtce.castor.EnumerationList;
 
 /**
  * Class EnumerationListDescriptor.
@@ -71,7 +71,7 @@ public class EnumerationListDescriptor extends org.exolab.castor.xml.util.XMLCla
         //-- initialize element descriptors
 
         //-- _enumerationList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(com.logica.hummingbird.xtce.castor.Enumeration.class, "_enumerationList", "Enumeration", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(org.hbird.xtce.castor.Enumeration.class, "_enumerationList", "Enumeration", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -86,7 +86,7 @@ public class EnumerationListDescriptor extends org.exolab.castor.xml.util.XMLCla
             {
                 try {
                     EnumerationList target = (EnumerationList) object;
-                    target.addEnumeration( (com.logica.hummingbird.xtce.castor.Enumeration) value);
+                    target.addEnumeration( (org.hbird.xtce.castor.Enumeration) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -102,11 +102,11 @@ public class EnumerationListDescriptor extends org.exolab.castor.xml.util.XMLCla
             @Override
             @SuppressWarnings("unused")
             public java.lang.Object newInstance(java.lang.Object parent) {
-                return new com.logica.hummingbird.xtce.castor.Enumeration();
+                return new org.hbird.xtce.castor.Enumeration();
             }
         };
         desc.setSchemaType("list");
-        desc.setComponentType("com.logica.hummingbird.xtce.castor.Enumeration");
+        desc.setComponentType("org.hbird.xtce.castor.Enumeration");
         desc.setHandler(handler);
         desc.setNameSpaceURI("http://www.omg.org/space/xtce");
         desc.setRequired(true);
@@ -158,7 +158,7 @@ public class EnumerationListDescriptor extends org.exolab.castor.xml.util.XMLCla
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.EnumerationList.class;
+        return org.hbird.xtce.castor.EnumerationList.class;
     }
 
     /**

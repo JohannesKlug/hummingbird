@@ -1,4 +1,4 @@
-package com.logica.hummingbird;
+package org.hbird;
 
 /** TODO Put in the transport.core */
 public enum MessageType {

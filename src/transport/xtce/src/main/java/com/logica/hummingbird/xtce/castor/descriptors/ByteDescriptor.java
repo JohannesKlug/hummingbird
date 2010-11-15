@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.descriptors;
+package org.hbird.xtce.castor.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.Byte;
+import org.hbird.xtce.castor.Byte;
 
 /**
  * Class ByteDescriptor.
@@ -152,7 +152,7 @@ public class ByteDescriptor extends org.exolab.castor.xml.util.XMLClassDescripto
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.Byte.class;
+        return org.hbird.xtce.castor.Byte.class;
     }
 
     /**

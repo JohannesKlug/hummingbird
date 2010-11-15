@@ -5,13 +5,13 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor.types.descriptors;
+package org.hbird.xtce.castor.types.descriptors;
 
   //---------------------------------/
  //- Imported classes and packages -/
 //---------------------------------/
 
-import com.logica.hummingbird.xtce.castor.types.MathOperatorsType;
+import org.hbird.xtce.castor.types.MathOperatorsType;
 
 /**
  * Class MathOperatorsTypeDescriptor.
@@ -98,7 +98,7 @@ public class MathOperatorsTypeDescriptor extends org.exolab.castor.xml.util.XMLC
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return com.logica.hummingbird.xtce.castor.types.MathOperatorsType.class;
+        return org.hbird.xtce.castor.types.MathOperatorsType.class;
     }
 
     /**

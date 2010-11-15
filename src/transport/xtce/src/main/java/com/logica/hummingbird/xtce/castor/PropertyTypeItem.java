@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * Class PropertyTypeItem.
@@ -23,7 +23,7 @@ public class PropertyTypeItem implements java.io.Serializable {
     /**
      * Field _property.
      */
-    private com.logica.hummingbird.xtce.castor.Property _property;
+    private org.hbird.xtce.castor.Property _property;
 
 
       //----------------/
@@ -44,7 +44,7 @@ public class PropertyTypeItem implements java.io.Serializable {
      * 
      * @return the value of field 'Property'.
      */
-    public com.logica.hummingbird.xtce.castor.Property getProperty(
+    public org.hbird.xtce.castor.Property getProperty(
     ) {
         return this._property;
     }
@@ -55,7 +55,7 @@ public class PropertyTypeItem implements java.io.Serializable {
      * @param property the value of field 'property'.
      */
     public void setProperty(
-            final com.logica.hummingbird.xtce.castor.Property property) {
+            final org.hbird.xtce.castor.Property property) {
         this._property = property;
     }
 

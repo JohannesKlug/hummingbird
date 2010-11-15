@@ -5,7 +5,7 @@
  * $Id$
  */
 
-package com.logica.hummingbird.xtce.castor;
+package org.hbird.xtce.castor;
 
 /**
  * An abstract type used by within the schema to describe derive
@@ -14,7 +14,7 @@ package com.logica.hummingbird.xtce.castor;
  * @version $Revision$ $Date$
  */
 @SuppressWarnings("serial")
-public abstract class BaseTimeDataType extends com.logica.hummingbird.xtce.castor.NameDescriptionType 
+public abstract class BaseTimeDataType extends org.hbird.xtce.castor.NameDescriptionType 
 implements java.io.Serializable
 {
 
@@ -26,12 +26,12 @@ implements java.io.Serializable
     /**
      * Field _baseTimeDataTypeSequence.
      */
-    private com.logica.hummingbird.xtce.castor.BaseTimeDataTypeSequence _baseTimeDataTypeSequence;
+    private org.hbird.xtce.castor.BaseTimeDataTypeSequence _baseTimeDataTypeSequence;
 
     /**
      * Field _baseTimeDataTypeSequence2.
      */
-    private com.logica.hummingbird.xtce.castor.BaseTimeDataTypeSequence2 _baseTimeDataTypeSequence2;
+    private org.hbird.xtce.castor.BaseTimeDataTypeSequence2 _baseTimeDataTypeSequence2;
 
 
       //----------------/
@@ -52,7 +52,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'BaseTimeDataTypeSequence'.
      */
-    public com.logica.hummingbird.xtce.castor.BaseTimeDataTypeSequence getBaseTimeDataTypeSequence(
+    public org.hbird.xtce.castor.BaseTimeDataTypeSequence getBaseTimeDataTypeSequence(
     ) {
         return this._baseTimeDataTypeSequence;
     }
@@ -62,7 +62,7 @@ implements java.io.Serializable
      * 
      * @return the value of field 'BaseTimeDataTypeSequence2'.
      */
-    public com.logica.hummingbird.xtce.castor.BaseTimeDataTypeSequence2 getBaseTimeDataTypeSequence2(
+    public org.hbird.xtce.castor.BaseTimeDataTypeSequence2 getBaseTimeDataTypeSequence2(
     ) {
         return this._baseTimeDataTypeSequence2;
     }
@@ -89,7 +89,7 @@ implements java.io.Serializable
      * 'baseTimeDataTypeSequence'.
      */
     public void setBaseTimeDataTypeSequence(
-            final com.logica.hummingbird.xtce.castor.BaseTimeDataTypeSequence baseTimeDataTypeSequence) {
+            final org.hbird.xtce.castor.BaseTimeDataTypeSequence baseTimeDataTypeSequence) {
         this._baseTimeDataTypeSequence = baseTimeDataTypeSequence;
     }
 
@@ -100,7 +100,7 @@ implements java.io.Serializable
      * 'baseTimeDataTypeSequence2'.
      */
     public void setBaseTimeDataTypeSequence2(
-            final com.logica.hummingbird.xtce.castor.BaseTimeDataTypeSequence2 baseTimeDataTypeSequence2) {
+            final org.hbird.xtce.castor.BaseTimeDataTypeSequence2 baseTimeDataTypeSequence2) {
         this._baseTimeDataTypeSequence2 = baseTimeDataTypeSequence2;
     }
 
