@@ -28,6 +28,8 @@ public class HumsatGmapTest extends CamelTestSupport {
 
 	public void testEjectionMessage() throws Exception {
 		
+		// FIXME fails on Hudson
+		fail("Fails on Hudson. FIXME!");		
 		logger.info("Testing gmap.");
 	
 		/** TODO */
