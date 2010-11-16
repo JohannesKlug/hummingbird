@@ -15,6 +15,8 @@ import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.impl.JndiRegistry;
 import org.apache.camel.test.CamelTestSupport;
 import org.apache.log4j.Logger;
+import org.junit.Ignore;
+import org.junit.Test;
 
 public class HumsatGmapTest extends CamelTestSupport {
 
@@ -26,6 +28,7 @@ public class HumsatGmapTest extends CamelTestSupport {
 	@EndpointInject(uri = "mock:result")
 	protected MockEndpoint resultEndpoint;
 
+	@Test
 	public void testEjectionMessage() throws Exception {
 		
 		// FIXME fails on Hudson
@@ -37,7 +40,7 @@ public class HumsatGmapTest extends CamelTestSupport {
 //			Thread.sleep(1000);
 //		}
 	}
-
+/*
 	protected CamelContext createCamelContext() throws Exception {
 		return new DefaultCamelContext(createRegistry());
 	}
@@ -83,5 +86,5 @@ public class HumsatGmapTest extends CamelTestSupport {
 			}
 		};
 	}
-
+*/
 }
