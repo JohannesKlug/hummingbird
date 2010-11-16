@@ -31,7 +31,7 @@ h3. Getting the source code from within the Logica corporate network
 
 Those of you operating within the Logica network normally can't access Github using ssh directly. There are two possibilities here:
  * Tunneling ssh through a host on the Logica DMZ (see this description on the "internal wiki":http://10.48.29.100/wiki/index.php5/Git#Setting_up_remote_git_access.
- * Using Logica's own git repository on open.logicaspace.com. Email the developers mailing list (hummingbird-dev@googlegroups.com) to grant you access. Attach your public key to that email!
+ * Using Logica's own git repository on open.logicaspace.com. Email the developers mailing list (hummingbird-dev@googlegroups.com) to grant you access. Attach your public key to that email! Once you're set up, clone from this repository: git@open.logicaspace.com:hummingbird.git
  
 
 h2. Building Hummingbird
@@ -40,7 +40,9 @@ The Hummingbird Core is defined as a Maven project, so you will need Maven to bu
 
 h3. Prerequisite: Configure Maven to use Logica's Artifactory
 
-You need an Artifactory account. Send an email to the developers mailing list (hummingbird-dev@googlegroups.com), and we will provide you with one.
+You need an Artifactory account. Send an email to the developers mailing list (hummingbird-dev@googlegroups.com), and we will provide you with one. Once we have created an account for you, change your password!
+
+Next, you need your password in encrypted form. Have a look here to learn how to get this: http://open.logicaspace.com:8080/content/how-obtain-your-encrypted-artifactory-password
 
 Add Logica's Artifactory server to your ~/.m2/settings.xml. The address is http://open.logicaspace.com:8080/artifactory/. A sample settings.xml file is supplied in the "Documentation" subdirectory of the Hummingbird source tree.
 
