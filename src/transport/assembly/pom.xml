@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<artifactId>hummingbird</artifactId>
+		<artifactId>hummingbird-transport</artifactId>
 		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<groupId>org.hbird</groupId>
+	<groupId>org.hbird.transport</groupId>
 	<artifactId>assembly</artifactId>
 	<name>Assembly</name>
 	<version>0.0.1-SNAPSHOT</version>
@@ -16,23 +16,13 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.hbird</groupId>
+			<groupId>org.hbird.transport</groupId>
 			<artifactId>xtce</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-test</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.hbird</groupId>
-			<artifactId>example-endpoint</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hbird</groupId>
-			<artifactId>simulator</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
@@ -54,32 +44,26 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.hbird</groupId>
+			<groupId>org.hbird.transport</groupId>
 			<artifactId>commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>org.hbird</groupId>
+			<groupId>org.hbird.transport</groupId>
 			<artifactId>space-system-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.hbird</groupId>
+			<groupId>org.hbird.transport</groupId>
 			<artifactId>packet-broker</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hbird</groupId>
-			<artifactId>validation</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>org.hbird</groupId>
+			<groupId>org.hbird.transport</groupId>
 			<artifactId>protocols</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>

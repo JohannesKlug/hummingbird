@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
-		<artifactId>hummingbird</artifactId>
+		<artifactId>hummingbird-transport</artifactId>
 		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.hummingbird.transport</groupId>
+	<groupId>org.hbird.transport</groupId>
 	<artifactId>commons</artifactId>
 	<name>commons</name>
 	<version>0.0.1-SNAPSHOT</version>

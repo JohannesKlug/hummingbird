@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<artifactId>hummingbird</artifactId>
+		<artifactId>hummingbird-business</artifactId>
 		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<groupId>org.hbird</groupId>
+	<groupId>org.hbird.business</groupId>
 	<artifactId>simulator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
@@ -92,25 +92,25 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.hbird</groupId>
+			<groupId>org.hbird.transport</groupId>
 			<artifactId>commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.hbird</groupId>
+			<groupId>org.hbird.transport</groupId>
 			<artifactId>space-system-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.hbird</groupId>
+			<groupId>org.hbird.transport</groupId>
 			<artifactId>xtce</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.hbird</groupId>
+			<groupId>org.hbird.transport</groupId>
 			<artifactId>tele</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>

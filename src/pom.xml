@@ -85,29 +85,8 @@
 	<url/>
 
 	<modules>
-		<module>commons</module>
-		<module>protocols</module>
-		<module>tele</module>
-		<module>ccsds</module>
-		<module>space-system-model</module>
-		<module>xtce</module>
-		<module>packetarchive</module>
-		<module>parameterarchive</module>
-		<module>help</module>
-		<module>assembly</module>
-		<module>simulator</module>
-		<module>test-support</module>
-		<module>packet-broker</module>
-		
-		<module>jms-helper</module>
-		<module>calibration</module>
-		<module>validation</module>
-		<module>simple-parameter-simulator</module>
-		<module>hummingbird-archetype-parameter</module>
-
-		<module>command-chain</module>
-		<module>gui-cometd-commanding</module>
-		<module>core</module>
+		<module>transport</module>
+		<module>business</module>
 	</modules>
 
 	<licenses>
@@ -260,13 +239,7 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.hbird</groupId>
-			<artifactId>hummingbird-archetype-parameter</artifactId>
-			<version>0.0.2</version>
-			<type>jar</type>
-		</dependency>
-		
+	
 	</dependencies>
 
 	<dependencyManagement>

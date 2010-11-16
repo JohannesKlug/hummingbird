@@ -14,7 +14,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
-		<artifactId>hummingbird</artifactId>
+		<artifactId>hummingbird-transport</artifactId>
 		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
@@ -22,7 +22,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.hbird</groupId>
+	<groupId>org.hbird.transport</groupId>
 	<artifactId>parameter-archiver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
@@ -123,13 +123,13 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.hbird</groupId>
+			<groupId>org.hbird.transport</groupId>
 			<artifactId>commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.hbird</groupId>
+			<groupId>org.hbird.transport</groupId>
 			<artifactId>space-system-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>

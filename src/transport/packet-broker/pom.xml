@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<artifactId>hummingbird</artifactId>
+		<artifactId>hummingbird-transport</artifactId>
 		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<groupId>org.hbird</groupId>
+	<groupId>org.hbird.transport</groupId>
 	<artifactId>packet-broker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>packet-broker</name>
@@ -35,7 +35,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.hbird</groupId>
+			<groupId>org.hbird.transport</groupId>
 			<artifactId>space-system-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>
@@ -47,7 +47,7 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.hbird</groupId>
+			<groupId>org.hbird.transport</groupId>
 			<artifactId>tele</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>

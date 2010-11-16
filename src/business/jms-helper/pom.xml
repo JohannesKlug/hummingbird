@@ -3,13 +3,13 @@
 
 
 	<parent>
-		<artifactId>hummingbird</artifactId>
+		<artifactId>hummingbird-business</artifactId>
 		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.hbird</groupId>
+	<groupId>org.hbird.business</groupId>
 	<artifactId>jms-helper</artifactId>
 	<name>JMS Helper</name>
 	<version>0.0.2-SNAPSHOT</version>

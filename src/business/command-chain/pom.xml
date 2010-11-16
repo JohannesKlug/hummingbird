@@ -2,12 +2,12 @@
   <modelVersion>4.0.0</modelVersion>
   
   	<parent>
-		<artifactId>hummingbird</artifactId>
+		<artifactId>hummingbird-business</artifactId>
 		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<groupId>org.hbird</groupId>	
+	<groupId>org.hbird.business</groupId>	
 	<artifactId>command-chain</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -73,7 +73,7 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>org.hbird</groupId>
+			<groupId>org.hbird.business</groupId>
 			<artifactId>jms-helper</artifactId>
 			<version>0.0.2-SNAPSHOT</version>
 		</dependency>

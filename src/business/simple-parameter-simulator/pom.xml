@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<artifactId>hummingbird</artifactId>
+		<artifactId>hummingbird-business</artifactId>
 		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<groupId>org.hbird</groupId>
+	<groupId>org.hbird.business</groupId>
 	<artifactId>simple-parameter-simulator</artifactId>
 	<version>0.0.3-SNAPSHOT</version>
 	
@@ -69,7 +69,7 @@
 <!--		</dependency>-->
 
 		<dependency>
-			<groupId>org.hbird</groupId>
+			<groupId>org.hbird.business</groupId>
 			<artifactId>jms-helper</artifactId>
 			<version>0.0.2-SNAPSHOT</version>
 		</dependency>

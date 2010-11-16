@@ -73,7 +73,7 @@
 	<dependencies>
 	
 		<dependency>
-			<groupId>org.hbird</groupId>
+			<groupId>org.hbird.transport</groupId>
 			<artifactId>tele</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
@@ -126,7 +126,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.hbird</groupId>
+			<groupId>org.hbird.business</groupId>
 			<artifactId>jms-helper</artifactId>
 			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
