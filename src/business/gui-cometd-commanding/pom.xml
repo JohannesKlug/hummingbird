@@ -8,7 +8,7 @@
   <groupId>org.hbird.business</groupId>
   <artifactId>gui-cometd-commanding</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
+  <name>Cometd Commanding GUI</name> 
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
