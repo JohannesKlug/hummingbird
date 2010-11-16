@@ -48,7 +48,7 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							org.hbird.telemetry*						
+							org.hbird.transport.telemetry*						
 						</Export-Package>
 					</instructions>
 				</configuration>
