@@ -65,11 +65,11 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							org.hbird.xtce,
-							org.hbird.xtce.exceptions,
+							org.hbird.transport.xtce,
+							org.hbird.transport.xtce.exceptions,
 						</Export-Package>
 						<Private-Package>
-							org.hbird.generatedcode*
+							org.hbird.transport.generatedcode*
 						</Private-Package>
 					</instructions>
 				</configuration>

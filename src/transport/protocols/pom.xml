@@ -29,11 +29,11 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							org.hbird.framebroker,
-							org.hbird.framebroker.exceptions							
+							org.hbird.transport.framebroker,
+							org.hbird.transport.framebroker.exceptions							
 						</Export-Package>
 						<Private-Package>
-							org.hbird,
+							org.hbird.transport,
 							org.slf4j.*
 						</Private-Package>
 					</instructions>

@@ -32,9 +32,9 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							org.hbird*,
-							org.hbird.util*,
-							org.hbird.util.exceptions*	
+							org.hbird.transport.*,
+							org.hbird.transport.util*,
+							org.hbird.transport.util.exceptions*	
 						</Export-Package>
 					</instructions>
 				</configuration>

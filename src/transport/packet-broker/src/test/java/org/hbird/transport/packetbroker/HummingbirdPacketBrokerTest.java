@@ -19,7 +19,6 @@ import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.packetbroker.HummingbirdPacketBroker;
 import org.hbird.transport.packetbroker.PacketBroker;
-import org.hbird.transport.spacesystemmodel.Container;
 import org.hbird.transport.spacesystemmodel.ContainerFactory;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownContainerNameException;
 import org.hbird.transport.spacesystemmodel.testsupport.MockParameterContainerModel;
