@@ -25,9 +25,9 @@
     	<constructor-arg value="-web,-webPort,11111" />
 	</bean> -->
     
-    <bean id="parameterArchiver" class="org.hbird.parameterArchiver.ParameterArchiver">
+    <bean id="parameterArchiver" class="org.hbird.transport.parameterArchiver.ParameterArchiver">
     	<constructor-arg>
-    		<bean class="org.hbird.spacesystemmodel.testsupport.MockContainerModelFactory"></bean>
+    		<bean class="org.hbird.transport.spacesystemmodel.testsupport.MockContainerModelFactory"></bean>
     	</constructor-arg>
     	<constructor-arg ref="dataSource"/>
     </bean>
