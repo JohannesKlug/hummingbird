@@ -45,18 +45,6 @@
 <!--				</configuration>-->
 <!--			</plugin>-->
 
-			<plugin>
-				<groupId>com.clearstream.build</groupId>
-				<artifactId>maven-inlinedoc-plugin</artifactId>
-				<configuration>
-					<input>${project.loc}</input>
-					<publishers>
-						<publisher implementation="com.clearstream.build.inlinedoc.GithubPublisher">
-							<project>JohannesKlug/Hummingbird</project>
-						</publisher>
-					</publishers>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 
@@ -100,10 +88,6 @@
 			<artifactId>camel-jms</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>com.clearstream.build</groupId>
-			<artifactId>maven-inlinedoc-plugin</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
