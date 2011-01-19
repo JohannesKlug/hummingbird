@@ -14,21 +14,21 @@
 	</bean>
 
 
-	<bean id="setParameterTask" class="org.hbird.tasks.actions.SetParameter">
+	<bean id="setParameterTask" class="org.hbird.business.tasks.actions.SetParameter">
 		<constructor-arg index="0" value="0"/>
 		<constructor-arg index="1" value="TestParameter"/>
 		<constructor-arg index="2" ref="dValue"/>
 		<constructor-arg index="3" value="Double"/>
 	</bean>
 
-	<bean id="setSateParameterTask" class="org.hbird.tasks.actions.SetStateParameter">
+	<bean id="setSateParameterTask" class="org.hbird.business.tasks.actions.SetStateParameter">
 		<constructor-arg index="0" value="0"/>
 		<constructor-arg index="1" value="TestStateParameter"/>
 		<constructor-arg index="2" value="TestParameter"/>
 		<constructor-arg index="3" value="false"/>
 	</bean>
 
-	<bean id="parameterBuffer" class="org.hbird.buffers.ObjectBuffer"/>
+	<bean id="parameterBuffer" class="org.hbird.business.buffers.ObjectBuffer"/>
 
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>
