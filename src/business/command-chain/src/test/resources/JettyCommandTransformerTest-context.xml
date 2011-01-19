@@ -9,14 +9,14 @@
        http://camel.apache.org/schema/spring 
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-	<bean id="definition" class="org.hbird.type.CommandDefinition">
+	<bean id="definition" class="org.hbird.business.type.CommandDefinition">
 		<constructor-arg index="0" value="TestCommand4"/>
 		<constructor-arg index="1" value="A test command."/>
 	</bean>
 
-	<bean id="commandgenerator" class="org.hbird.command.generator.JettyCommandTransformer"/>
+	<bean id="commandgenerator" class="org.hbird.business.command.generator.JettyCommandTransformer"/>
 
-	<bean id="buffer" class="org.hbird.buffers.CommandBuffer"/>
+	<bean id="buffer" class="org.hbird.business.buffers.CommandBuffer"/>
 
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>
