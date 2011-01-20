@@ -20,7 +20,7 @@
 		<module>calibration</module>
 		<module>command-chain</module>
 		<module>gui-cometd-commanding</module>
-		<module>gui-cometd-gmap</module>
+		<!-- <module>gui-cometd-gmap</module> -->
 		<module>jms-helper</module>
 		<module>simple-parameter-simulator</module>
 		<module>simulator</module>
