@@ -13,5 +13,12 @@ public class FramePayload {
 		this.payload = ArrayUtils.clone(payload);
 		this.isNextFrame = isNextFrame;
 	}
+	
+	public String toString() {
+		return "Spacecraft ID: " + spacecraftId
+		+ ", virtual channel: " + vcId 
+		+ ", payload" + ArrayUtils.toString(payload)
+		+ ", isNextFrame: " + isNextFrame;
+	}
 
 }
