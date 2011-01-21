@@ -143,7 +143,7 @@ public class CcsdsFrameDispatcherTest implements Observer {
 			if (arg instanceof FramePayload) {
 				FramePayload framePayload = (FramePayload) arg;
 				receivedFramePayloads.add(framePayload);
-				packetDispatcher.process(framePayload.payload, framePayload.isNextFrame);
+				packetDispatcher.process(new FramePayload(framePayload.payload, framePayload.isNextFrame));
 			}
 			
 		} else if (o == packetDispatcher) {

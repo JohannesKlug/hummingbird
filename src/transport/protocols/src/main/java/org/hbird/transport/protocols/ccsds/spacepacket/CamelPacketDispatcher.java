@@ -6,6 +6,7 @@ import java.util.Observer;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
+import org.hbird.transport.protocols.ccsds.transferframe.FramePayload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +28,7 @@ public class CamelPacketDispatcher implements Observer {
 	
 	public Message process(Exchange exchange) {
 		
-		packetDispatcher.process((byte[]) exchange.getIn().getBody(), true);
+		packetDispatcher.process(new FramePayload((byte[]) exchange.getIn().getBody(), true));
 		Message message = new DefaultMessage();
 		
 		if (returnedObject instanceof PacketPayload) {

@@ -3,6 +3,7 @@ package org.hbird.transport.protocols.ccsds.spacepacket;
 import java.util.Observable;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.hbird.transport.protocols.ccsds.transferframe.FramePayload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +13,10 @@ public class CcsdsPacketDispatcher extends Observable{
 	
 	private byte[] packetBuffer = ArrayUtils.EMPTY_BYTE_ARRAY;
 
-	public void process(byte[] packet, boolean isNextPacket) {
+	public void process(FramePayload framePayload) {
+		
+		byte[] packet = ArrayUtils.clone(framePayload.payload);
+		boolean isNextPacket = framePayload.isNextFrame;
 		
 		if (!isNextPacket) {
 			// this is not the next packet in sequence
@@ -93,7 +97,7 @@ public class CcsdsPacketDispatcher extends Observable{
 
 		// pass an empty byte array to ourself.
 		// Recursion, yeah!
-		this.process(ArrayUtils.EMPTY_BYTE_ARRAY, true);
+		this.process(new FramePayload(ArrayUtils.EMPTY_BYTE_ARRAY, true));
 		
 		
 		
