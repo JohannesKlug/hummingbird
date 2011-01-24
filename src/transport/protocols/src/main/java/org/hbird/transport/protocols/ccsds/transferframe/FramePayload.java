@@ -11,11 +11,4 @@ public class FramePayload {
 		this.isNextFrame = isNextFrame;
 	}
 	
-	public String toString() {
-		return "Spacecraft ID: " + spacecraftId
-		+ ", virtual channel: " + vcId 
-		+ ", payload" + ArrayUtils.toString(payload)
-		+ ", isNextFrame: " + isNextFrame;
-	}
-
 }

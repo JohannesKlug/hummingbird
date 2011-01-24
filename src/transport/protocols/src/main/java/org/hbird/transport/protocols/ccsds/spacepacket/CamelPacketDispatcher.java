@@ -43,11 +43,7 @@ public class CamelPacketDispatcher implements Observer {
 			
 			FramePayload payload = (FramePayload) message.getBody();
 			
-			LOG.info("Processing frame from spacecraft " + payload.spacecraftId 
-					+ " on virtual channel " + payload.vcId 
-					+ ". This is the next frame: " + payload.isNextFrame);
-
-			packetDispatcher.process(payload.payload, payload.isNextFrame);
+			packetDispatcher.process(new FramePayload(payload.payload, payload.isNextFrame));
 			
 		} else {
 			LOG.error("I was given an object that is not a FramePayload");

@@ -40,7 +40,7 @@ public class VirtualChannel extends Observable {
 		LOG.debug("Passing payload of length " + goodPayload.length);
 		
 		this.setChanged();
-		notifyObservers(new CcsdsFramePayload(id, goodPayload, isNext));
+		notifyObservers(new FramePayload(goodPayload, isNext));
 		
 		
 	}
