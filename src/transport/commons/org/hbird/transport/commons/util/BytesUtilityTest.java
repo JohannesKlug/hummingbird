@@ -1,4 +1,4 @@
-package org.hbird.util;
+package org.hbird.transport.commons.util;
 
 import static org.junit.Assert.assertEquals;
 
