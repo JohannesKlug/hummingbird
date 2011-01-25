@@ -113,7 +113,7 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 
 		byte[] payload = ArrayUtils.subarray(frame, payloadOffset, PAYLOAD_END);
 
-		virtualChannel[virtualChannelId].addPayload(payload, virtualChannelFrameCount, firstHeaderPointer);
+		virtualChannel[virtualChannelId].addPayload(spacecraftId, payload, virtualChannelFrameCount, firstHeaderPointer);
 		
 		
 		byte[] operationalControlField = ArrayUtils.subarray(frame, PAYLOAD_END, PAYLOAD_END + 4);

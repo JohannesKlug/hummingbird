@@ -16,7 +16,7 @@ public class VirtualChannel extends Observable {
 		this.id = id;
 	}
 	
-	public void addPayload(byte[] payload, int frameCount, int firstHeaderPointer) {
+	public void addPayload(int spacecraftId, byte[] payload, int frameCount, int firstHeaderPointer) {
 		
 		if (this.countObservers() < 1) {
 			LOG.error("VirtualChannel " + id + " has no observers! This is an error.");
@@ -40,11 +40,7 @@ public class VirtualChannel extends Observable {
 		LOG.debug("Passing payload of length " + goodPayload.length);
 		
 		this.setChanged();
-		CcsdsFramePayload returnedFrame = new CcsdsFramePayload(goodPayload, isNext);
-		returnedFrame.virtualChannelId = id;
-		notifyObservers(returnedFrame);
-		
-		
+		notifyObservers(new CcsdsFramePayload(spacecraftId, id, goodPayload, isNext));
 	}
 	
 	public int getId() {

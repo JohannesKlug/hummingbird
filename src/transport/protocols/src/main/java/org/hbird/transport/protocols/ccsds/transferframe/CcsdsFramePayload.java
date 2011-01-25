@@ -5,12 +5,10 @@ public class CcsdsFramePayload extends FramePayload {
 	public int spacecraftId;
 	public int virtualChannelId;
 
-	public CcsdsFramePayload(byte[] payload, boolean isNextFrame) {
+	public CcsdsFramePayload(int spacecraftId, int virtualChannelId, byte[] payload, boolean isNextFrame) {
 		super(payload, isNextFrame);
-		/*
 		this.spacecraftId = spacecraftId;
 		this.virtualChannelId = virtualChannelId;
-		*/
 	}
 
 }
