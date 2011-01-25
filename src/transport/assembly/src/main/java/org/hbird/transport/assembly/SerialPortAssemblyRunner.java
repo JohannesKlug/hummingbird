@@ -10,7 +10,7 @@ public class SerialPortAssemblyRunner {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		SerialPortAssembly serialPortAssembly = new SerialPortAssembly(args[0]);
+		SerialPortAssemblyWithProtocols serialPortAssembly = new SerialPortAssemblyWithProtocols(args[0]);
 		InputStreamReader isr = new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(isr);
 		System.out.println("Press [ENTER] to quit.");
