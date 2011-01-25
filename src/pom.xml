@@ -129,6 +129,7 @@
 
 		<releases.url>http://open.logicaspace.com:8080/artifactory/libs-releases-local</releases.url>
 		<snapshots.url>http://open.logicaspace.com:8080/artifactory/libs-snapshots-local</snapshots.url>
+		<surefire-plugin.version>2.7.1</surefire-plugin.version>
 	</properties>
 
 	<ciManagement>
