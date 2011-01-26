@@ -37,6 +37,8 @@ public class SerialPortAssemblyWithProtocols implements Observer {
 	private byte[] receivedBytes;
 
 	public SerialPortAssemblyWithProtocols(String commPortId) {
+		frameDispatcher.addObserver(this);
+		packetDispatcher.addObserver(this);
 		try {
 			driver = new SerialPortDriver(commPortId);
 			slip = new Slip(END, ESC, ESCEND, ESCESC);
