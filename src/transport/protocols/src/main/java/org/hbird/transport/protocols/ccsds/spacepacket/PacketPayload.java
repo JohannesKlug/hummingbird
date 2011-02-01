@@ -10,5 +10,9 @@ public class PacketPayload {
 		this.apid = apid;
 		this.payload = ArrayUtils.clone(payload);
 	}
+	
+	public String toString() {
+		return "packet apId: " + apid + ", payload: " + new String(payload);
+	}
 
 }
