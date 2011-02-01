@@ -4,18 +4,18 @@
 	<servers>
 		<server>
 			<id>artifactory.openspace.logica.com</id>
-			<username>klugj</username>
-			<password>Your password</password>
+			<username>guest</username>
+			<password>\{DESede\}SmTtGJKvxME=</password>
 		</server>
 		<server>
 			<id>snapshots</id>
-			<username>klugj</username>
-			<password>Your password</password>
+			<username>guest</username>
+			<password>\{DESede\}SmTtGJKvxME=</password>
 		</server>
 		<server>
 			<id>central</id>
-			<username>klugj</username>
-			<password>Your password</password>
+			<username>guest</username>
+			<password>\{DESede\}SmTtGJKvxME=</password>
 		</server>
 	</servers>
 
