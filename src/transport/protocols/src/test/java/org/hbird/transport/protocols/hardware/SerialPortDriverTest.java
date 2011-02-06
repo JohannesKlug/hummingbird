@@ -1,28 +1,27 @@
 package org.hbird.transport.protocols.hardware;
 
-import static org.junit.Assert.*;
 import gnu.io.NoSuchPortException;
 
-import org.hbird.transport.protocols.hardware.SerialPortDriver;
 import org.junit.Before;
 import org.junit.Test;
 
 public class SerialPortDriverTest {
-	
+
 	private SerialPortDriver driver;
 
 	@Before
 	public void setUp() throws Exception {
 		try {
 			driver = new SerialPortDriver("/dev/ttyUSB0");
-		} catch (NoSuchPortException ex) {
+		}
+		catch (NoSuchPortException ex) {
 			ex.printStackTrace();
 		}
 	}
 
 	@Test
 	public void testSerialPortDriver() {
-//		fail("Not yet implemented");
+		// fail("Not yet implemented");
 	}
 
 }

@@ -30,19 +30,19 @@
 		<level value="WARN" />
 	</logger>
 	
-	<logger name="org.hbird.packetbroker">
+	<logger name="org.hbird.transport.packetbroker">
 		<level value="DEBUG"></level>
 	</logger>
 	
-	<logger name="org.hbird.spacesystemmodel">
+	<logger name="org.hbird.transport.spacesystemmodel">
 		<level value="DEBUG"></level>
 	</logger>
 	
-	<logger name="org.hbird.tele">
+	<logger name="org.hbird.transport.tele">
 		<level value="DEBUG"></level>
 	</logger>
 	
-	<logger name="org.hbird.util">
+	<logger name="org.hbird.transport.commons.util">
 		<level value="DEBUG"></level>
 	</logger>
 	
