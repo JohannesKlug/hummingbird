@@ -7,37 +7,4 @@
 	<version>0.0.3</version>
 
 	<description>A Hummingbird archetype, defining the structure of a typical project for processing parameters.</description>
-	<build>
-		<plugins>
-
-			<plugin>
-				<groupId>com.clearstream.build</groupId>
-				<artifactId>maven-inlinedoc-plugin</artifactId>
-				<version>0.0.14</version>
-				<configuration>
-					<input>./</input>
-					<publishers>
-						<publisher implementation="com.clearstream.build.inlinedoc.GithubPublisher">
-							<username>gert.villemos@logica.com</username>
-							<userpassword>path2000</userpassword>
-							<project>
-								JohannesKlug/Hummingbird
-							</project>
-							<proxyEnabled>false</proxyEnabled>
-							<proxyProtocol>http</proxyProtocol>
-							<proxyServer>10.48.187.80</proxyServer>
-							<proxyPort>8080</proxyPort>
-							<format>textile</format>
-						</publisher>
-					</publishers>
-
-					<parsers>
-						<parser implementation="com.clearstream.build.inlinedoc.BasicParser"></parser>
-					</parsers>
-				</configuration>
-			</plugin>
-
-		</plugins>
-
-	</build>
 </project>

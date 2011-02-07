@@ -11,17 +11,13 @@ public class SerialPortDriverTest {
 
 	@Before
 	public void setUp() throws Exception {
-		try {
-			driver = new SerialPortDriver("/dev/ttyUSB0");
-		}
-		catch (NoSuchPortException ex) {
-			ex.printStackTrace();
-		}
+		//driver = new SerialPortDriver("/dev/ttyUSB0");
 	}
 
 	@Test
 	public void testSerialPortDriver() {
 		// fail("Not yet implemented");
+		// FIXME this is no test.
 	}
 
 }
