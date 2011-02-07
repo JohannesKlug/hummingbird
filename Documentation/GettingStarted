@@ -38,10 +38,6 @@ h2. Building Hummingbird
 
 The Hummingbird Core is defined as a Maven project, so you will need Maven to build the software conveniently. 
 
-h3. Prerequisite: Configure Maven to use Logica's Artifactory
-
-Add Logica's Artifactory server to your ~/.m2/settings.xml. The address is http://open.logicaspace.com:8080/artifactory/. A sample settings.xml file is supplied in the "Documentation" subdirectory of the Hummingbird source tree, pre-configured for guest access (read-only).
-
 h3. Triggering the build
 
 On the command line, you can do so with _mvn install_ or _mvn.bat install_ on Windows.
