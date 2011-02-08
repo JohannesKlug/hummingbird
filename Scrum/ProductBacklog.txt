@@ -1,3 +1,8 @@
+Ideas:
+http://stackoverflow.com/questions/3939595/making-javadocs-available-with-github-sonatype-maven-repo
+http://pages.github.com/
+https://github.com/JohannesKlug/hummingbird/wiki/_access
+
 Ability to send telecommands
 Display parameters in the GUI
 XTCE designer
