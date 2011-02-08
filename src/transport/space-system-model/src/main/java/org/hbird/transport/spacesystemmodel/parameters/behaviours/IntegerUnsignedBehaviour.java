@@ -11,6 +11,10 @@ import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeExcep
 
 //TODO javadoc
 //TODO 32 bit sized int test.  will need to convert to use a long otherwise the sign bit will be set in java int.
+/**
+ * @author Mark Doyle
+ * @author Johannes Klug (John Clever)
+ */
 public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 	private static final Logger LOG = LoggerFactory.getLogger(IntegerUnsignedBehaviour.class);
 
