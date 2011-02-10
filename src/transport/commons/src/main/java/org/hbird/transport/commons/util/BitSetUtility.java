@@ -138,7 +138,8 @@ public class BitSetUtility {
 		int crement = 1;
 
 		if (isBigEndian) {
-			count = result.size() - 1;
+//			count = result.size() - 1;
+			count = str.length() - 1;
 			crement = -1;
 		}
 
@@ -206,6 +207,12 @@ public class BitSetUtility {
 		return binaryString.toString();
 	}
 
+	/**
+	 * FIXME Javadoc
+	 * @param data
+	 * @param length
+	 * @return
+	 */
 	public static String bitSetToBinaryString(BitSet data, int length) {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("I was passed: " + BitSetUtility.binDump(data));
@@ -242,6 +249,9 @@ public class BitSetUtility {
 
 		newString += string;
 
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Padded string is now " + newString);
+		}
 		return newString;
 	}
 
