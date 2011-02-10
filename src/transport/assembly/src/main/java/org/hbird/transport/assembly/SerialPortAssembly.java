@@ -8,11 +8,16 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
+import org.apache.camel.EndpointInject;
+import org.apache.camel.ProducerTemplate;
 import org.hbird.transport.protocols.hardware.SerialPortDriver;
 import org.hbird.transport.protocols.slip.Slip;
 
 public class SerialPortAssembly implements Observer {
 
+	@EndpointInject(uri="activemq:slipstream")
+	ProducerTemplate producer;
+	
 	private static final int END = (0xC0 & 0xFF), 
 							ESC = (0xDB & 0xFF), 
 							ESCEND = (0xDC & 0xFF), 
@@ -75,6 +80,7 @@ public class SerialPortAssembly implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		receivedBytes = (byte[]) arg;
+		producer.sendBody(receivedBytes);
 		System.out.println("Received " + receivedBytes.length + " bytes:");
 		System.out.println(new String(receivedBytes));
 		System.out.println("---------------------------------------------");
