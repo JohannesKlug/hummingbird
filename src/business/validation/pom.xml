@@ -42,31 +42,6 @@
 					</instructions>
 				</configuration>
 			</plugin>
-
-			<plugin>
-				<groupId>com.clearstream.build</groupId>
-				<artifactId>maven-inlinedoc-plugin</artifactId>
-				<version>0.0.9</version>
-				<configuration>
-					<input>./</input>
-					<publishers>
-						<publisher implementation="com.clearstream.build.inlinedoc.GithubPublisher">
-							<username>gert.villemos@logica.com</username>
-							<userpassword>path2000</userpassword>						
-							<project>JohannesKlug/Hummingbird</project>
-							<proxyEnabled>false</proxyEnabled>
-							<proxyProtocol>http</proxyProtocol>
-							<proxyServer>10.48.187.80</proxyServer>
-							<proxyPort>8080</proxyPort>
-							<format>textile</format>
-						</publisher>						
-					</publishers>
-					
-					<parsers>
-						<parser implementation="com.clearstream.build.inlinedoc.BasicParser"></parser>
-					</parsers>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 
@@ -102,12 +77,6 @@
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-jms</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.clearstream.build</groupId>
-			<artifactId>maven-inlinedoc-plugin</artifactId>
-			<version>0.0.9</version>
 		</dependency>
 
 		<dependency>

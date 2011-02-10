@@ -27,20 +27,9 @@ After signing up, you can check out the code by using this git URL: git@github.c
 
 On the command line, that would be accomplished using "git clone _url_".
 
-h3. Getting the source code from within the Logica corporate network
-
-Those of you operating within the Logica network normally can't access Github using ssh directly. There are two possibilities here:
- * Tunneling ssh through a host on the Logica DMZ (see this description on the "internal wiki":http://10.48.29.100/wiki/index.php5/Git#Setting_up_remote_git_access.
- * Using Logica's own git repository on open.logicaspace.com. Email the developers mailing list (hummingbird-dev@googlegroups.com) to grant you access. Attach your public key to that email! Once you're set up, clone from this repository: git@open.logicaspace.com:hummingbird.git
- 
-
 h2. Building Hummingbird
 
 The Hummingbird Core is defined as a Maven project, so you will need Maven to build the software conveniently. 
-
-h3. Prerequisite: Configure Maven to use Logica's Artifactory
-
-Add Logica's Artifactory server to your ~/.m2/settings.xml. The address is http://open.logicaspace.com:8080/artifactory/. A sample settings.xml file is supplied in the "Documentation" subdirectory of the Hummingbird source tree, pre-configured for guest access (read-only).
 
 h3. Triggering the build
 

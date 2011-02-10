@@ -1,79 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<profiles>
-	  <profile>
-	    <id>win32</id>
-	    <activation>
-	      <os>
-	        <!-- <name>Windows XP</name> -->
-	        <family>Windows</family>
-	        <arch>x86</arch>
-	        <!-- <version>5.1.2600</version> -->
-	      </os>
-	    </activation>
-	    <properties>
-		  <build.type>win32</build.type>
-		</properties>
-	  </profile>
-	  <profile>
-	    <id>win64</id>
-	    <activation>
-	      <os>
-	        <!-- <name>Windows XP</name> -->
-	        <family>Windows</family>
-	        <arch>amd64</arch>
-	        <!-- <version>5.1.2600</version> -->
-	      </os>
-	    </activation>
-	    <properties>
-		  <build.type>win64</build.type>
-		</properties>
-	  </profile>
-	  <profile>
-	    <id>mac</id>
-	    <activation>
-	      <os>
-	        <!-- <name>mac os x</name> -->
-	        <family>mac</family>
-	        <arch>x86_64</arch>
-	        <!-- <version>10.6.4</version> -->
-	      </os>
-	    </activation>
-	    <properties>
-		  <build.type>mac</build.type>
-		</properties>
-	  </profile>
-	  <profile>
-	    <id>linux32</id>
-	    <activation>
-	      <os>
-	        <name>linux</name>
-	        <!-- <family>mac</family> -->
-	        <arch>i386</arch>
-	        <!-- <version>10.6.4</version> -->
-	      </os>
-	    </activation>
-	    <properties>
-		  <build.type>linux32</build.type>
-		</properties>
-	  </profile>
-	  <profile>
-	    <id>linux64</id>
-	    <activation>
-	      <os>
-	        <name>linux</name>
-	        <!-- <family>mac</family> -->
-	        <arch>amd64</arch>
-	        <!-- <version>10.6.4</version> -->
-	      </os>
-	    </activation>
-	    <properties>
-		  <build.type>linux64</build.type>
-		</properties>
-	  </profile>
-	</profiles>
-
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.hbird</groupId>
 	<artifactId>hummingbird</artifactId>
@@ -385,13 +312,6 @@
 				<artifactId>commons-logging</artifactId>
 				<version>${commonslogging.version}</version>
 			</dependency>
-
-			<dependency>
-				<groupId>com.clearstream.build</groupId>
-				<artifactId>maven-inlinedoc-plugin</artifactId>
-				<version>${docgenerator.version}</version>
-			</dependency>
-
 
 		</dependencies>
 	</dependencyManagement>

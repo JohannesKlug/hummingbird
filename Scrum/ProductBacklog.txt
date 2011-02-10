@@ -1,3 +1,8 @@
+Ideas:
+http://stackoverflow.com/questions/3939595/making-javadocs-available-with-github-sonatype-maven-repo
+http://pages.github.com/
+https://github.com/JohannesKlug/hummingbird/wiki/_access
+
 Ability to send telecommands
 Display parameters in the GUI
 XTCE designer
@@ -6,3 +11,37 @@ Submodule documentation
 Radio interface to the rocket
 Simulator capable of generating and sending both binary data and hummingbird tm/tc objects over camel.
 
+User Story – Processing of Frames:
+For a mission, CCSDS compliant telemetry frames are received from the ground station. The system
+1. Receives the CCSDS frames.
+2. Extract the PUS packets inside.
+3. Store the packets and distribute the packets in near real time to registered consumers, including GUIs.
+4. Extract the parameters from the packets, calibrate and validate them.
+5. Store the parameters and distribute them in near real time to registered consumers, including GUIs.
+
+User Story – Improving Performance:
+The already configured, operational system receives packets at a rate of 1.000 packets a second. The mission expects an increase in the rate of the packets with a factor 10, to 10.000 packets a second.
+Without stopping the running system, additional parallel processing chains are deployed and the system configuration updated. The stream of data is split so that part of the load is routed through the new chains. For the external systems injecting data and the end consumer nothing changes.
+
+User Story – Installing a new Customer:
+The system needs to be installed by a new customer.
+The user organisation provides a CCSDS XTCE based database schema definition. The system process the file and configure itself accordingly.
+The user organisation provides an interface through which the frames are received. The system thereafter opens the connection to receive frames and starts the processing.
+The user can monitor the system through standard browsers, i.e. the customer displays are provided using web technologies supporting the most commonly used GUI(s) (IExplorer, Chrome, Firefox).
+
+User Story – Changing Database COTS:
+A customer has special needs; he would like to use Oracle specific features to access the parameter archive and performed advanced processing. The system is reconfigured to access the new COTS; no source code is updated, to replace the current database with Oracle.
+
+User Story – Demonstrating the System:
+A customer is interested in the system, and would like to see it running to evaluate the performance, responsiveness and play a bit with the GUIs. In other words he would simply like to play around with it a bid, see the way data is routed through the system and the performance figures (which he doesn’t believe).
+He download the standard binary demo assembly of the system and unpackages on his local machine. He runs the system ‘in-a-box’, i.e. on a single machine. Test data is part of the demo system.
+The user can open the GUI and will see data flowing through the system.
+
+User Story – Monitoring the System:
+To better understand the flow of data through the system, a user opens the administration GUI. He views the ‘system’ overview and gets a graphical representation of the system. The view shows the components of the system, their state as colour indication, and the main performance figures such as number of Frames processes. Buffer sizes and trends (whether they are growing or not) is shown. Average latency time (time from injection to a given point in the chain) is shown.
+Validation is done on the numbers, i.e. are the sum of frames processed by the system the same as the frames injected?
+
+User Story – Developing:
+A logica developer comes of projects for a short period of time (a week). He is assigned to Hummingbird.
+He access the share / site and download the development environment. He thereafter installs the security keys needed to access the source code repository. He access the project documentation, to get a high level overview of the key concepts behind the system. Finally he access the task tracking system to see what is pending.
+Within the task tracking system open features are maintained. A ROM estimate of the expected effort has been assigned and a priority. The developer finds a feature he would like to do, which has the right timeframe and is of priority. The project methodology defines how he thereafter assign this task to himself and how his progress is monitored and the end deliverables validated and merged into the main trunk without invalidating the existing system.
