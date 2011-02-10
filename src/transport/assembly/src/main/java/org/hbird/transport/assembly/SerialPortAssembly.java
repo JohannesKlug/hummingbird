@@ -22,6 +22,10 @@ public class SerialPortAssembly implements Observer {
 	private Slip slip;
 
 	private byte[] receivedBytes;
+	
+	public SerialPortAssembly() {
+		this("/dev/ttyUSB0");
+	}
 
 	public SerialPortAssembly(String commPortId) {
 		try {
