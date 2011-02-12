@@ -21,6 +21,7 @@ import org.hbird.transport.protocols.ccsds.transferframe.CcsdsFrameDispatcher;
 import org.hbird.transport.protocols.ccsds.transferframe.FramePayload;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.FrameFailedCrcCheckException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidFrameLengthException;
+import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidVirtualChannelIdException;
 
 public class CcsdsFrameDispatcherTest implements Observer {
 
@@ -80,13 +81,13 @@ public class CcsdsFrameDispatcherTest implements Observer {
 	}
 	
 	@Test(expected=InvalidFrameLengthException.class)
-	public void testInvalidFrameLength() throws InvalidFrameLengthException, FrameFailedCrcCheckException {
+	public void testInvalidFrameLength() throws InvalidFrameLengthException, FrameFailedCrcCheckException, InvalidVirtualChannelIdException {
 		CcsdsFrameDispatcher dispatcher = new CcsdsFrameDispatcher();
 		dispatcher.process(new byte[2047]);
 	}
 	
 	@Test
-	public void injectFrame() throws InvalidFrameLengthException, FrameFailedCrcCheckException, InterruptedException {
+	public void injectFrame() throws InvalidFrameLengthException, FrameFailedCrcCheckException, InterruptedException, InvalidVirtualChannelIdException {
 		frameDispatcher.addObserver(this);
 		packetDispatcher.addObserver(this);
 //		List<byte[]> manyFrames = frames.
