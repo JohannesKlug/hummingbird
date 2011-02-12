@@ -38,7 +38,15 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 	 * @throws UnknownContainerNameException
 	 */
 	public final List<Message> split(Exchange camelExchange) throws UnknownContainerNameException {
-		this.unmarshall("TMPacket", (BitSet) camelExchange.getIn().getBody());
+		// Clear the previous packet
+		packetProducer.clearPacket();
+
+		Object msgBody = camelExchange.getIn().getBody();
+		if (msgBody == null) {
+			LOG.warn("message body is null");
+			return null;
+		}
+		this.unmarshall("TMPacket", (BitSet) msgBody);
 
 		HummingbirdPacket packet = packetProducer.getPacket();
 
@@ -50,7 +58,11 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 		packetMessage.setBody(packet);
 		messages.add(packetMessage);
 
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("packet contains " + packet.getParameters().size());
+		}
 		for (HummingbirdParameter parameter : packet.getParameters()) {
+
 			messages.add(createCamelMessage(parameter));
 		}
 

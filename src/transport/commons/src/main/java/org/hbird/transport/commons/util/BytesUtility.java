@@ -4,6 +4,12 @@ package org.hbird.transport.commons.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 
+ * @author Johannes Klug (John Clever, lol)
+ * @author Mark Doyle
+ *
+ */
 public class BytesUtility {
 
 	private static final Logger LOG = LoggerFactory.getLogger(BytesUtility.class);
@@ -19,7 +25,6 @@ public class BytesUtility {
 		for (int i = 0; i < b.length; ++i) {
 			int index;
 			index = b.length - 1 - i;
-			System.out.println("index = " + index);
 			// TODO Should really comment this.
 			value |= (long)(b[index] & 0xff) << (i << 3);
 		}

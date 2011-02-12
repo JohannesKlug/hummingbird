@@ -28,9 +28,6 @@ package org.hbird.transport.packetbroker;
 
 import java.util.BitSet;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.packetbroker.producers.AbstractProducer;
 import org.hbird.transport.packetbroker.producers.HummingbirdPacketProducer;
@@ -39,13 +36,13 @@ import org.hbird.transport.spacesystemmodel.Container;
 import org.hbird.transport.spacesystemmodel.ContainerFactory;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownContainerNameException;
 import org.hbird.transport.telemetry.HummingbirdPacket;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * TODO Improve comment.
- * The notification model for observers could have been implemented in two ways;
- * Firstly we could notify the observer when it changes. This is architecturally
- * pleasing as there is a direct coupling between the 2. Notify the observers
- * when the complete container has been unmarshalled.
+ * TODO Improve comment. The notification model for observers could have been implemented in two ways; Firstly we could
+ * notify the observer when it changes. This is architecturally pleasing as there is a direct coupling between the 2.
+ * Notify the observers when the complete container has been unmarshalled.
  */
 public class HummingbirdPacketBroker implements PacketBroker {
 	private static final Logger LOG = LoggerFactory.getLogger(HummingbirdPacketBroker.class);
@@ -72,7 +69,7 @@ public class HummingbirdPacketBroker implements PacketBroker {
 
 	@Override
 	public final void unmarshall(String packetname, BitSet packet) throws UnknownContainerNameException {
-		if(LOG.isDebugEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Unmarshalling container " + packetname + " with BitSet " + packet);
 		}
 		factory.getContainer(packetname).unmarshall(packet);
@@ -80,7 +77,7 @@ public class HummingbirdPacketBroker implements PacketBroker {
 
 	@Override
 	public final void marshall(String packetname, BitSet packet) throws UnknownContainerNameException, BitSetOperationException {
-		if(LOG.isDebugEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Unmarshalling container " + packetname + " with BitSet " + packet + " at offset 0");
 		}
 		factory.getContainer(packetname).marshall(packet, 0);

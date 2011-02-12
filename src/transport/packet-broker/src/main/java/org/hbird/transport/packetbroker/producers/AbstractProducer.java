@@ -7,11 +7,11 @@ import org.hbird.transport.telemetry.HummingbirdPacket;
 public abstract class AbstractProducer {
 
 	/**
-	 * This is a CCSDS TmFrame model which is populated each time the spacesystemmodel
-	 * is updated.
+	 * TODO Comment? What the hell is it? haha This is a Space system model instantiation which is populated each time
+	 * the spacesystemmodel is updated.
 	 */
 	private ContainerFactory containerFactory;
-	
+
 	protected HummingbirdPacket packet = new DefaultSpacePacket();
 
 	public AbstractProducer(ContainerFactory containerFactory) {
@@ -28,5 +28,9 @@ public abstract class AbstractProducer {
 
 	public HummingbirdPacket getPacket() {
 		return packet;
+	}
+
+	public void clearPacket() {
+		packet = new DefaultSpacePacket();
 	}
 }
