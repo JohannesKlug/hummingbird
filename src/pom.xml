@@ -146,13 +146,6 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${log4j.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
 		
 		<!-- For creating OSGi bundles -->
 		<!-- COMMENT: The bundle version is very old. Camel uses 4.1.0 and I some problems due to this.  -->
