@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.FrameFailedCrcCheckException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidFrameLengthException;
+import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidVirtualChannelIdException;
 
 public class CcsdsFrameDispatcher extends Observable implements Observer {
 	private final static Logger LOG = LoggerFactory.getLogger(CcsdsFrameDispatcher.class);
@@ -39,7 +40,7 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 	}
 	
 	
-	public void process(byte[] frame) throws InvalidFrameLengthException, FrameFailedCrcCheckException {
+	public void process(byte[] frame) throws InvalidFrameLengthException, FrameFailedCrcCheckException, InvalidVirtualChannelIdException {
 		
 		/*
 		 * Check for Frame Length
@@ -70,6 +71,9 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 		LOG.debug("Spacecraft ID: " + spacecraftId);
 		
 		int virtualChannelId = (0x0E & primaryHeader[1]) >> 1;
+		if (virtualChannelId < 0 || virtualChannelId > 7) {
+			throw new InvalidVirtualChannelIdException("Virtual Channel Id must be [0..7]. The one found in the current frame is: " + virtualChannelId);
+		}
 		LOG.debug("Virtual Channel Id: " + virtualChannelId);
 
 		dataFieldStatus = ArrayUtils.subarray(frame, 4, 6);

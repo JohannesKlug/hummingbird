@@ -16,6 +16,7 @@ import org.hbird.transport.protocols.ccsds.transferframe.CcsdsFrameDispatcher;
 import org.hbird.transport.protocols.ccsds.transferframe.CcsdsFramePayload;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.FrameFailedCrcCheckException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidFrameLengthException;
+import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidVirtualChannelIdException;
 import org.hbird.transport.protocols.hardware.SerialPortDriver;
 import org.hbird.transport.protocols.slip.Slip;
 
@@ -97,6 +98,9 @@ public class SerialPortAssemblyWithProtocols implements Observer {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (FrameFailedCrcCheckException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InvalidVirtualChannelIdException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
