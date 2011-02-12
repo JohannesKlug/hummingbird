@@ -2,20 +2,24 @@ package org.hbird.transport.packetbroker;
 
 import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
-
 import org.hbird.transport.commons.MessageType;
 import org.hbird.transport.spacesystemmodel.ContainerFactory;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownContainerNameException;
 import org.hbird.transport.telemetry.HummingbirdPacket;
 import org.hbird.transport.telemetry.HummingbirdParameter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /** TODO Remove hardcoded 'strings', put them in the HeaderFields class. */
 public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
+	private final static Logger LOG = LoggerFactory.getLogger(HummingbirdCamelPacketBroker.class);
 
 	public HummingbirdCamelPacketBroker(ContainerFactory factory) {
 		super(factory);
@@ -23,10 +27,10 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 
 	/**
 	 * Split takes a Packet and calls unmarshall. The messages produced by the various producers listening to the
-	 * unmarshalling are then returned to the caller. Since this ContainerProcessor contains a packetProducer and 
-	 * parameterProducer, which all register themselves are listeners, it will return a list of
-	 * messages identified by their headers for each type. Note, the individual producers set the header to the required
-	 * type for the messages they create.
+	 * unmarshalling are then returned to the caller. Since this ContainerProcessor contains a packetProducer and
+	 * parameterProducer, which all register themselves are listeners, it will return a list of messages identified by
+	 * their headers for each type. Note, the individual producers set the header to the required type for the messages
+	 * they create.
 	 * 
 	 * @param camelExchange
 	 *            the camel exchange container
@@ -37,23 +41,66 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 		this.unmarshall("TMPacket", (BitSet) camelExchange.getIn().getBody());
 
 		HummingbirdPacket packet = packetProducer.getPacket();
-		
+
 		List<Message> messages = new ArrayList<Message>();
 
 		Message packetMessage = new DefaultMessage();
 		packetMessage.setHeader("Type", MessageType.TMPacket);
-		
+
 		packetMessage.setBody(packet);
 		messages.add(packetMessage);
 
 		for (HummingbirdParameter parameter : packet.getParameters()) {
-			Message parameterMessage = new DefaultMessage();
-			parameterMessage.setHeader("Type", MessageType.TMParameter);
-			parameterMessage.setBody(parameter);
-			messages.add(parameterMessage);
+			messages.add(createCamelMessage(parameter));
 		}
 
 		return messages;
 	}
 
+	/**
+	 * TODO finish is necessary. What do we want from the packet? We could create a few types of output.
+	 * 
+	 * @param packet
+	 * @return
+	 */
+	private Message createCamelMessage(HummingbirdPacket packet) {
+		Message msg = new DefaultMessage();
+
+		// Create a map containing all the message header information
+		Map<String, Object> headers = new HashMap<String, Object>();
+		headers.put("PacketName", packet.getName());
+		headers.put("NumOfParameters", packet.getParameters().size());
+		// set message headers
+		msg.setHeaders(headers);
+
+		return msg;
+	}
+
+	/**
+	 * Creates a Camel {@link DefaultMessage} of the parameter. This message can then be routed by Camel to any
+	 * endpoint. The actual created of the endpoint specific message , e.g. jms message, file, or an email, is handled
+	 * by Camel.
+	 * 
+	 * The header holds all the properties of the message and the body holds the actual value.
+	 * 
+	 * @param parameter
+	 * @return
+	 */
+	private Message createCamelMessage(HummingbirdParameter parameter) {
+		Message msg = new DefaultMessage();
+
+		Map<String, Object> headers = new HashMap<String, Object>();
+		headers.put("Type", MessageType.TMParameter);
+		headers.put("ParameterName", parameter.getName());
+		headers.put("ParameterShortDescription", parameter.getShortDescription());
+		headers.put("ParameterLongDescription", parameter.getLongDescription());
+
+		msg.setBody(parameter.getValue());
+
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Created camel message: " + msg);
+		}
+
+		return msg;
+	}
 }
