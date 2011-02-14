@@ -24,7 +24,7 @@
 	<camelContext id="simulatorContext" xmlns="http://camel.apache.org/schema/spring">
 		<route>
 			<from uri="bean:simulator" />
-			<to uri="activemq:parameters" pattern="InOnly"/>
+			<to uri="activemq:parameters?jmsMessageType=Text" pattern="InOnly"/>
 		</route>
 	</camelContext>
 
