@@ -106,6 +106,7 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 		headers.put("ParameterName", parameter.getName());
 		headers.put("ParameterShortDescription", parameter.getShortDescription());
 		headers.put("ParameterLongDescription", parameter.getLongDescription());
+		headers.put("ValueType", parameter.getClassType());
 
 		msg.setHeaders(headers);
 		msg.setBody(parameter.getValue());
