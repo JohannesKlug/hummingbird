@@ -60,7 +60,7 @@ public class BusinessSimulator {
 		
 		Double value = waveforms.get(currentWaveform).nextValue();
 		
-		Message message = new DefaultMessage();
+		Message message = exchange.getIn();
 		message.setHeader("Source", "Hummingbird Simulator");
 		message.setHeader("Name", parameterName);
 		message.setHeader("Description", parameterDescription);
@@ -71,8 +71,10 @@ public class BusinessSimulator {
 		
 		message.setHeader("Value", value);
 		
-		message.setBody(value);
-		
+		message.setBody(value.toString());
+
+		LOG.info("Sending message with value: " + value);
+		exchange.setIn(message);	
 		return message;
 		
 	}
