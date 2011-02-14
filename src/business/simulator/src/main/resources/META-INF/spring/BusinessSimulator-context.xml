@@ -15,12 +15,16 @@
 		<property name="waveforms" ref="waveform" />
 	</bean>
 
+	<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+		<property name="brokerURL" value="tcp://127.0.0.1:61616"/>
+	</bean>
+
 
 
 	<camelContext id="simulatorContext" xmlns="http://camel.apache.org/schema/spring">
 		<route>
 			<from uri="bean:simulator" />
-			<to uri="stream:out"/>
+			<to uri="activemq:parameters"/>
 		</route>
 	</camelContext>
 
