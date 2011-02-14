@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
+import org.apache.camel.InOnly;
 import org.hbird.business.simulator.waveforms.Waveform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,7 @@ public class BusinessSimulator {
 		this.waveforms = waveforms;
 	}
 
-	
+	@InOnly	
 	public Message getNextValue(Exchange exchange) throws InterruptedException {
 		
 		Thread.sleep(messageInterval);
@@ -70,7 +71,7 @@ public class BusinessSimulator {
 		
 		message.setHeader("Value", value);
 		
-		message.setBody(value.toString());
+		message.setBody(value);
 		
 		return message;
 		
