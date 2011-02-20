@@ -4,10 +4,9 @@ package org.hbird.transport.commons.util;
 import java.util.BitSet;
 
 import org.apache.commons.lang.StringUtils;
+import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
 
 /**
  * The bitset utilities class helps the encoding / decoding of simple java types such as integer and float to a bitset.
@@ -138,7 +137,7 @@ public class BitSetUtility {
 		int crement = 1;
 
 		if (isBigEndian) {
-//			count = result.size() - 1;
+			// count = result.size() - 1;
 			count = str.length() - 1;
 			crement = -1;
 		}
@@ -209,6 +208,7 @@ public class BitSetUtility {
 
 	/**
 	 * FIXME Javadoc
+	 * 
 	 * @param data
 	 * @param length
 	 * @return
@@ -296,7 +296,7 @@ public class BitSetUtility {
 		longFromBitset += (long) (bytes[4] & 0xFF) << 24;
 		longFromBitset += (long) (bytes[5] & 0xFF) << 16;
 		longFromBitset += (long) (bytes[6] & 0xFF) << 8;
-		longFromBitset += (long) (bytes[7] & 0xFF);
+		longFromBitset += (bytes[7] & 0xFF);
 
 		return longFromBitset;
 	}
@@ -309,6 +309,8 @@ public class BitSetUtility {
 			numberOfBytes++;
 		}
 		byte[] bytes = new byte[numberOfBytes];
+
+		LOG.debug("Number of bytes required = " + numberOfBytes);
 
 		int bitSetPosition = 0;
 		for (int byteNo = 0; byteNo < numberOfBytes; byteNo++) {
@@ -330,7 +332,7 @@ public class BitSetUtility {
 		LOG.debug("Reversing: " + BitSetUtility.binDump(bitset));
 
 		int reversedIndex = 0;
-		for (int i = sizeInBits-1; i >= 0; i--) {
+		for (int i = sizeInBits - 1; i >= 0; i--) {
 			if (bitset.get(i)) {
 				reversed.set(reversedIndex);
 			}
