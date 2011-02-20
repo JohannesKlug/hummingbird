@@ -13,6 +13,7 @@ import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.xml.ValidationException;
 import org.exolab.castor.xml.XMLContext;
 import org.hbird.transport.generatedcode.xtce.Comparison;
+import org.hbird.transport.generatedcode.xtce.IntegerParameterType;
 import org.hbird.transport.generatedcode.xtce.ParameterSetTypeItem;
 import org.hbird.transport.generatedcode.xtce.ParameterTypeSetTypeItem;
 import org.hbird.transport.generatedcode.xtce.SequenceContainer;
@@ -31,6 +32,7 @@ import org.hbird.transport.spacesystemmodel.parameters.behaviours.AbstractFloatB
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.AbstractIntegerBehaviour;
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.Float32Behaviour;
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.Float64Behaviour;
+import org.hbird.transport.spacesystemmodel.parameters.behaviours.IntegerSignedBehaviour;
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.LongSignedBehaviour;
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.NumberParameterTypeBehaviour;
@@ -83,8 +85,8 @@ public class XtceModelFactory implements ContainerFactory {
 		final Container container = containers.get(name);
 
 		if (container == null) {
-			throw new UnknownContainerNameException(containers,
-					"Your container lookup for '" + name + "' did not return any containers. Check your SpaceSystem configuration.");
+			throw new UnknownContainerNameException(containers, "Your container lookup for '" + name
+					+ "' did not return any containers. Check your SpaceSystem configuration.");
 		}
 
 		return container;
@@ -94,32 +96,11 @@ public class XtceModelFactory implements ContainerFactory {
 		// Create the space system
 		spaceSystem = getSpaceSystem();
 
-		// Create all parameter types and store them in the types field
+		// Create all parameter types and store them in the types field.
 		createAllParameterTypes();
 
-		/** Create all parameters. */
-		for (int parameterIndex = 0; parameterIndex < spaceSystem.getTelemetryMetaData().getParameterSet().getParameterSetTypeItemCount(); ++parameterIndex) {
-			final ParameterSetTypeItem item = spaceSystem.getTelemetryMetaData().getParameterSet().getParameterSetTypeItem(parameterIndex);
-
-			LOG.debug(item.getParameter().getName());
-
-			ParameterContainer model = null;
-			final NumberParameterType type = types.get(item.getParameter().getParameterTypeRef());
-
-			if (type != null) {
-				if (type.getNumberBehaviour() instanceof AbstractIntegerBehaviour) {
-					model = new IntegerParameter(item.getParameter().getName(), item.getParameter().getShortDescription(), item.getParameter()
-							.getLongDescription(), type, (int) type.getInitialValue());
-				}
-				else if (type.getNumberBehaviour() instanceof AbstractFloatBehaviour) {
-					model = new FloatParameter(item.getParameter().getName(), item.getParameter().getShortDescription(), item.getParameter()
-							.getLongDescription(), type, (int) type.getInitialValue());
-				}
-			}
-
-			parameters.put(model.getName(), model);
-			containers.put(model.getName(), model);
-		}
+		// Create all parameters.
+		createAllParameters();
 
 		/**
 		 * Create all containers. In this iteration we create the container models, but do not create the references
@@ -130,7 +111,7 @@ public class XtceModelFactory implements ContainerFactory {
 
 		for (int containerIndex = 0; containerIndex < containerSetTypeItemCount; ++containerIndex) {
 			final SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex)
-			.getSequenceContainer();
+					.getSequenceContainer();
 
 			LOG.debug("Creating container " + xtceContainer.getName());
 			final ContainerImpl container = new ContainerImpl(xtceContainer.getName(), xtceContainer.getShortDescription(), xtceContainer.getLongDescription());
@@ -143,7 +124,7 @@ public class XtceModelFactory implements ContainerFactory {
 		 */
 		for (int containerIndex = 0; containerIndex < containerSetTypeItemCount; ++containerIndex) {
 			final SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex)
-			.getSequenceContainer();
+					.getSequenceContainer();
 
 			// Get the container
 			final Container thisContainer = containers.get(xtceContainer.getName());
@@ -186,6 +167,45 @@ public class XtceModelFactory implements ContainerFactory {
 	}
 
 	/**
+	 * 
+	 * @throws InvalidParameterTypeException
+	 */
+	private void createAllParameters() throws InvalidParameterTypeException {
+		for (int parameterIndex = 0; parameterIndex < spaceSystem.getTelemetryMetaData().getParameterSet().getParameterSetTypeItemCount(); ++parameterIndex) {
+			final ParameterSetTypeItem item = spaceSystem.getTelemetryMetaData().getParameterSet().getParameterSetTypeItem(parameterIndex);
+
+			LOG.debug(item.getParameter().getName());
+
+			ParameterContainer parameterContainer = null;
+			final NumberParameterType type = types.get(item.getParameter().getParameterTypeRef());
+
+			// @formatter:off
+			if (type != null) {
+				if (type.getNumberBehaviour() instanceof AbstractIntegerBehaviour) {
+					parameterContainer = new IntegerParameter(
+											item.getParameter().getName(), 
+											item.getParameter().getShortDescription(), 
+											item.getParameter().getLongDescription(), 
+											type, 
+											(int) type.getInitialValue());
+				}
+				else if (type.getNumberBehaviour() instanceof AbstractFloatBehaviour) {
+					parameterContainer = new FloatParameter(
+											item.getParameter().getName(), 
+											item.getParameter().getShortDescription(), 
+											item.getParameter().getLongDescription(), 
+											type, 
+											(int) type.getInitialValue());
+				}
+			}
+			// @formatter:on
+
+			parameters.put(parameterContainer.getName(), parameterContainer);
+			containers.put(parameterContainer.getName(), parameterContainer);
+		}
+	}
+
+	/**
 	 * @throws InvalidParameterTypeException
 	 * @throws InvalidXtceFileException
 	 */
@@ -194,29 +214,35 @@ public class XtceModelFactory implements ContainerFactory {
 			final ParameterTypeSetTypeItem item = spaceSystem.getTelemetryMetaData().getParameterTypeSet().getParameterTypeSetTypeItem(parameterTypeIndex);
 
 			// If it's an integer parameter..
-			if (item.getIntegerParameterType() != null) {
+			IntegerParameterType integerParameterType = item.getIntegerParameterType();
+			if (integerParameterType != null) {
 				Unit unit = null;
 
 				// Read in the unit of the parameter type.
-				if (item.getIntegerParameterType().getUnitSet() != null) {
-					for (int unitTypeIndex = 0; unitTypeIndex < item.getIntegerParameterType().getUnitSet().getUnitCount(); ++unitTypeIndex) {
-						unit = units.get(item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getContent());
+				//@formatter:off
+				if (integerParameterType.getUnitSet() != null) {
+					for (int unitTypeIndex = 0; unitTypeIndex < integerParameterType.getUnitSet().getUnitCount(); ++unitTypeIndex) {
+						org.hbird.transport.generatedcode.xtce.Unit parameterTypeUnit = integerParameterType.getUnitSet().getUnit(unitTypeIndex);
+						unit = units.get(parameterTypeUnit.getContent());
 						if (unit == null) {
-							unit = new Unit(item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(), item.getIntegerParameterType()
-									.getUnitSet().getUnit(unitTypeIndex).getDescription(), item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex)
-									.getDescription(), item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getPower(), item
-									.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getFactor());
+							unit = new Unit(
+									parameterTypeUnit.getContent(), 
+									parameterTypeUnit.getDescription(), 
+									parameterTypeUnit.getDescription(), 
+									parameterTypeUnit.getPower(), 
+									parameterTypeUnit.getFactor());
 
-							units.put(item.getIntegerParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(), unit);
+							units.put(parameterTypeUnit.getContent(), unit);
 						}
 					}
 				}
+				//@formatter:on
 
 				/*
 				 * TITLE XTCE Empty (null) Initial Value If the XTCE definition doesn't contain a default value, then
 				 * the parameter gets the initial value of '0'. CATEGORY XTCE FAQ
 				 */
-				final String initialValueAsString = item.getIntegerParameterType().getInitialValue();
+				final String initialValueAsString = integerParameterType.getInitialValue();
 
 				long initialValue = 0;
 
@@ -228,17 +254,26 @@ public class XtceModelFactory implements ContainerFactory {
 
 				// FIXME Add more logic to cater for multiple integer behaviours.
 				NumberParameterTypeBehaviour numberTypeBehaviour = null;
-				if (!item.getIntegerParameterType().getSigned()) {
-					numberTypeBehaviour = new IntegerUnsignedBehaviour((int) item.getIntegerParameterType().getSizeInBits(), true);
+
+				// If parameter is less than 64 (i.e. an integers type...
+				if (integerParameterType.getSizeInBits() < 64) {
+					if (!integerParameterType.getSigned()) {
+						numberTypeBehaviour = new IntegerUnsignedBehaviour((int) integerParameterType.getSizeInBits(), true);
+					}
+					else {
+						numberTypeBehaviour = new IntegerSignedBehaviour((int) integerParameterType.getSizeInBits(), true);
+					}
 				}
+				// else we are dealing with a long
 				else {
-					numberTypeBehaviour = new LongSignedBehaviour((int) item.getIntegerParameterType().getSizeInBits(), true);
+					numberTypeBehaviour = new LongSignedBehaviour((int) integerParameterType.getSizeInBits(), true);
 				}
+
 				// else {
 				// LOG.error("Not enough information to construct the behaviour type");
 				// }
-				final NumberParameterType type = new NumberParameterType(item.getIntegerParameterType().getName(), item.getIntegerParameterType()
-						.getShortDescription(), item.getIntegerParameterType().getLongDescription(), numberTypeBehaviour, initialValue);
+				final NumberParameterType type = new NumberParameterType(integerParameterType.getName(), integerParameterType.getShortDescription(),
+						integerParameterType.getLongDescription(), numberTypeBehaviour, initialValue);
 
 				types.put(type.getName(), type);
 			}
