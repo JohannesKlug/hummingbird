@@ -32,6 +32,11 @@ public class BytesUtilityTest {
 	private static BitSet TEST_BITSET_VALUE_BE_19BIT;
 	private static byte[] BYTES_19BIT;
 
+	private final static String TEST_STR_VALUE_BE_UNSIGNED_CHAR_154 = "10011010";
+	private final static int TEST_VALUE_LENGTH_BE_UNSIGNED_CHAR_154 = 8;
+	private static BitSet TEST_BITSET_VALUE_BE_UNSIGNED_CHAR_154;
+	private static byte[] BYTES_UNSIGNED_CHAR_154;
+
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -63,31 +68,43 @@ public class BytesUtilityTest {
 		BYTES_19BIT = BitSetUtility.toByteArray(TEST_BITSET_VALUE_BE_19BIT, TEST_VALUE_LENGTH_BE_19BIT);
 		LOG.debug(BytesUtility.decimalDump(BYTES_19BIT));
 
+		LOG.debug("########### Creating 154 Unsigned char ##########");
+		TEST_BITSET_VALUE_BE_UNSIGNED_CHAR_154 = new BitSet(TEST_VALUE_LENGTH_BE_UNSIGNED_CHAR_154);
+		TEST_BITSET_VALUE_BE_UNSIGNED_CHAR_154 = BitSetUtility.stringToBitSet(TEST_STR_VALUE_BE_UNSIGNED_CHAR_154, true, true);
+		assertEquals(TEST_STR_VALUE_BE_UNSIGNED_CHAR_154,
+				BitSetUtility.bitSetToBinaryString(TEST_BITSET_VALUE_BE_UNSIGNED_CHAR_154, TEST_VALUE_LENGTH_BE_UNSIGNED_CHAR_154));
+		BYTES_UNSIGNED_CHAR_154 = BitSetUtility.toByteArray(TEST_BITSET_VALUE_BE_UNSIGNED_CHAR_154, TEST_VALUE_LENGTH_BE_UNSIGNED_CHAR_154);
+		LOG.debug(BytesUtility.decimalDump(BYTES_UNSIGNED_CHAR_154));
 	}
 
 	@Test
 	public void testCombine16() {
 		Number result = BytesUtility.combine(BYTES_180NEG_16BIT, TEST_VALUE_LENGTH_BE_180NEG_16BIT, true);
 		assertEquals(-180, result.intValue());
+		assertEquals(-180, result.longValue());
 	}
 
 	@Test
 	public void testCombine32() {
 		Number result = BytesUtility.combine(BYTES_180NEG_32BIT, TEST_VALUE_LENGTH_BE_180NEG_32BIT, true);
 		assertEquals(-180, result.intValue());
+		assertEquals(-180, result.longValue());
 	}
 
 
 	@Test
 	public void testCombine8() {
 		Number result = BytesUtility.combine(BYTES_64NEG_8BIT, TEST_VALUE_LENGTH_BE_64NEG_8BIT, true);
+		assertEquals(-64, result.shortValue());
 		assertEquals(-64, result.intValue());
+		assertEquals(-64, result.longValue());
 	}
 
 	@Test
 	public void testCombinePositive() {
 		Number result = BytesUtility.combine(BYTES_19BIT, TEST_VALUE_LENGTH_BE_19BIT, true);
 		assertEquals(246120, result.intValue());
+		assertEquals(246120, result.longValue());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -96,5 +113,12 @@ public class BytesUtilityTest {
 		BytesUtility.combine(bytes, 80, true);
 	}
 
+	@Test
+	public void testCombineUChar() {
+		Number result = BytesUtility.combine(BYTES_UNSIGNED_CHAR_154, TEST_VALUE_LENGTH_BE_UNSIGNED_CHAR_154, false);
+		assertEquals(154, result.shortValue());
+		assertEquals(154, result.intValue());
+		assertEquals(154, result.longValue());
+	}
 
 }
