@@ -4,13 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Various byte utility methods used across the Hummingbird transport layer
+ * Various byte utility methods used across the Hummingbird transport layer.
  * 
  * @author Johannes Klug (John Clever, lol)
  * @author Mark Doyle
  * 
  */
-public class BytesUtility {
+public abstract class BytesUtility {
 
 	private static final Logger LOG = LoggerFactory.getLogger(BytesUtility.class);
 

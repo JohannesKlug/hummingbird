@@ -17,10 +17,10 @@ import org.slf4j.LoggerFactory;
  * @author Mark Doyle
  * @author Johannes Klug
  */
-public class BitSetUtility {
+public abstract class BitSetUtility {
 	private static final Logger LOG = LoggerFactory.getLogger(BitSetUtility.class);
 
-	public enum FloatSizeInBits {
+	public static enum FloatSizeInBits {
 		THIRTY_TWO(32), SIXTY_FOUR(64);
 
 		private final int size;

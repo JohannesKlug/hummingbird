@@ -90,5 +90,11 @@ public class BytesUtilityTest {
 		assertEquals(246120, result.intValue());
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testTooLargeNumber() {
+		byte[] bytes = new byte[10];
+		BytesUtility.combine(bytes, 80, true);
+	}
+
 
 }

@@ -85,16 +85,40 @@ public class BitSetUtilityTest {
 
 	@Test
 	public final void testStringToBitSetBE999() throws BitSetOperationException {
-		LOG.info("############ Starting test #################");
+		LOG.debug("############ Starting test #################");
 		BitSet actual = BitSetUtility.stringToBitSet(BIT_STR_BE_999, true, true);
 		assertEquals(BITSET_BE_999, actual);
 	}
 
 	@Test
 	public final void testStringToBitSetLE999() throws BitSetOperationException {
-		LOG.info("############ Starting test #################");
+		LOG.debug("############ Starting test #################");
 		BitSet actual = BitSetUtility.stringToBitSet(BIT_STR_LE_999, false, false);
 		assertEquals(BITSET_LE_999, actual);
+	}
+
+	@Test
+	public final void testBitSetToBinaryStringFixedSize() {
+		LOG.debug("############ Starting test #################");
+		String actual = BitSetUtility.bitSetToBinaryString(BITSET_BE_123, 1);
+		assertEquals(BIT_STR_BE_123.subSequence(0, 1), actual);
+
+		actual = BitSetUtility.bitSetToBinaryString(BITSET_BE_123, 5);
+		assertEquals(BIT_STR_BE_123.subSequence(0, 5), actual);
+
+		actual = BitSetUtility.bitSetToBinaryString(BITSET_BE_123, 7);
+		assertEquals(BIT_STR_BE_123, actual);
+	}
+
+	@Test
+	public final void testPadStringFromTheBack() {
+		LOG.debug("############ Starting test #################");
+		String actual = BitSetUtility.padStringFromTheBack(BIT_STR_BE_123, 25);
+		assertEquals(25, actual.length());
+		StringBuilder expected = new StringBuilder();
+		expected.append(BIT_STR_BE_123);
+		expected.append("000000000000000000");
+		assertEquals(expected.toString(), actual);
 	}
 
 }
