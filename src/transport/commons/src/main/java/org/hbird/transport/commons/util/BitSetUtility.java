@@ -17,7 +17,10 @@ import org.slf4j.LoggerFactory;
  * @author Mark Doyle
  * @author Johannes Klug
  */
-public abstract class BitSetUtility {
+public class BitSetUtility {
+	private static final int WORD_LENGTH = 64;
+	private static final int BIN_DUMP_LINE_SIZE = 64;
+	private static final int OCTET_SIZE = 8;
 	private static final Logger LOG = LoggerFactory.getLogger(BitSetUtility.class);
 
 	public static enum FloatSizeInBits {
@@ -25,13 +28,20 @@ public abstract class BitSetUtility {
 
 		private final int size;
 
-		FloatSizeInBits(int size) {
+		FloatSizeInBits(final int size) {
 			this.size = size;
 		}
 
 		public int getSize() {
 			return size;
 		}
+	}
+
+	/**
+	 * This is a Utility class containing only static methods. It cannot and should not be instantiated.
+	 */
+	private BitSetUtility() {
+		// Utility class
 	}
 
 	/**
@@ -53,9 +63,9 @@ public abstract class BitSetUtility {
 	 * @return A string representing the bitset in binary format.
 	 * 
 	 */
-	public static String binDump(BitSet data) {
+	public static String binDump(final BitSet data) {
 		String dump = "";
-		String[] bits = data.toString().replaceAll("\\{", "").replaceAll("\\}", "").split(", ");
+		final String[] bits = data.toString().replaceAll("\\{", "").replaceAll("\\}", "").split(", ");
 
 		int totalIndex = 0;
 		int lineIndex = 0;
@@ -75,12 +85,12 @@ public abstract class BitSetUtility {
 			++lineIndex;
 			++octetIndex;
 
-			if (octetIndex == 8) {
+			if (octetIndex == OCTET_SIZE) {
 				dump += " ";
 				octetIndex = 0;
 			}
 
-			if (lineIndex == 64) {
+			if (lineIndex == BIN_DUMP_LINE_SIZE) {
 				dump += System.getProperty("line.separator");
 				lineIndex = 0;
 			}
@@ -105,12 +115,13 @@ public abstract class BitSetUtility {
 	 * @throws BitSetOperationException
 	 *             if the input string contains invalid characters, that is, not equal to 1 or 0
 	 */
-	public static BitSet stringToBitSet(String str, boolean isBigEndian, boolean bigEndianOut) throws BitSetOperationException {
+	public static BitSet stringToBitSet(final String binaryString, final boolean isBigEndian, final boolean bigEndianOut) throws BitSetOperationException {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("I was passed: " + str);
+			LOG.debug("I was passed: " + binaryString);
 		}
 
-		str = str.trim();
+		String str = binaryString;
+		str = binaryString.trim();
 
 		// If little endian
 		if (!isBigEndian) {
@@ -123,15 +134,15 @@ public abstract class BitSetUtility {
 		else {
 			// ...and we want little endian
 			if (!bigEndianOut) {
-				str = padStringFromTheFront(str, 64);
+				str = padStringFromTheFront(str, WORD_LENGTH);
 			}
 			else {
 				str = StringUtils.reverse(str);
-				str = padStringFromTheFront(str, 64);
+				str = padStringFromTheFront(str, WORD_LENGTH);
 			}
 		}
 
-		BitSet result = new BitSet(str.length());
+		final BitSet result = new BitSet(str.length());
 
 		int count = 0;
 		int crement = 1;
@@ -142,7 +153,7 @@ public abstract class BitSetUtility {
 			crement = -1;
 		}
 
-		for (byte c : str.getBytes()) {
+		for (final byte c : str.getBytes()) {
 			// If character '1' flip the bit to "on"
 			if (c == '1') {
 				result.flip(count);
@@ -177,7 +188,7 @@ public abstract class BitSetUtility {
 	 * @param useLogicalSize
 	 * @return
 	 */
-	public static String bitSetToBinaryString(BitSet data, boolean useLogicalSize) {
+	public static String bitSetToBinaryString(final BitSet data, final boolean useLogicalSize) {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("I was passed: " + BitSetUtility.binDump(data));
 		}
@@ -189,7 +200,7 @@ public abstract class BitSetUtility {
 			bitSetSize = data.size();
 		}
 
-		StringBuilder binaryString = new StringBuilder(bitSetSize);
+		final StringBuilder binaryString = new StringBuilder(bitSetSize);
 		for (int i = 0; i < bitSetSize; i++) {
 			if (data.get(i)) {
 				binaryString.append('1');
@@ -213,13 +224,13 @@ public abstract class BitSetUtility {
 	 * @param length
 	 * @return
 	 */
-	public static String bitSetToBinaryString(BitSet data, int length) {
+	public static String bitSetToBinaryString(final BitSet data, final int length) {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("I was passed: " + BitSetUtility.binDump(data));
 		}
-		int bitSetSize = length;
+		final int bitSetSize = length;
 
-		StringBuilder binaryString = new StringBuilder(bitSetSize);
+		final StringBuilder binaryString = new StringBuilder(bitSetSize);
 		for (int i = 0; i < bitSetSize; i++) {
 			if (data.get(i)) {
 				binaryString.append('1');
@@ -236,10 +247,10 @@ public abstract class BitSetUtility {
 		return binaryString.toString();
 	}
 
-	public static String padStringFromTheFront(String string, int finalLength) {
-		int zeroesToAdd = finalLength - string.length();
+	public static String padStringFromTheFront(final String binaryString, final int finalLength) {
+		final int zeroesToAdd = finalLength - binaryString.length();
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("Padding " + zeroesToAdd + " zero(s) to the front of the binary string " + string);
+			LOG.debug("Padding " + zeroesToAdd + " zero(s) to the front of the binary string " + binaryString);
 		}
 
 		String newString = "";
@@ -247,7 +258,7 @@ public abstract class BitSetUtility {
 			newString += '0';
 		}
 
-		newString += string;
+		newString += binaryString;
 
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Padded string is now " + newString);
@@ -255,24 +266,24 @@ public abstract class BitSetUtility {
 		return newString;
 	}
 
-	public static String padStringFromTheBack(String string, int finalLength) {
-		int zeroesToAdd = finalLength - string.length();
+	public static String padStringFromTheBack(final String string, final int finalLength) {
+		final int zeroesToAdd = finalLength - string.length();
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Padding " + zeroesToAdd + " zero(s) to the back of the binary string " + string);
 		}
 
-		String newString = "";
+		final StringBuilder newBinaryString = new StringBuilder(string.length() + zeroesToAdd);
+		newBinaryString.append(string);
+
 		for (int i = 0; i < zeroesToAdd; i++) {
-			newString += '0';
+			newBinaryString.append('0');
 		}
 
-		string += newString;
-
-		return string;
+		return newBinaryString.toString();
 	}
 
-	public static int toInt(BitSet bits) {
-		byte[] bytes = toByteArray(bits, 32);
+	public static int toInt(final BitSet bits) {
+		final byte[] bytes = toByteArray(bits, 32);
 
 		int intFromBitset = 0;
 
@@ -284,8 +295,8 @@ public abstract class BitSetUtility {
 		return intFromBitset;
 	}
 
-	public static long toLong(BitSet bits) {
-		byte[] bytes = toByteArray(bits, 64);
+	public static long toLong(final BitSet bits) {
+		final byte[] bytes = toByteArray(bits, 64);
 
 		long longFromBitset = 0;
 
@@ -301,21 +312,21 @@ public abstract class BitSetUtility {
 		return longFromBitset;
 	}
 
-	public static byte[] toByteArray(BitSet bitset, int sizeInBits) {
+	public static byte[] toByteArray(final BitSet bitset, final int sizeInBits) {
 		// Split into Bytes.
-		int numberOfBytes = sizeInBits / 8;
+		int numberOfBytes = sizeInBits / Byte.SIZE;
 		// Any remaining bits require an extra Byte
-		if (sizeInBits % 8 != 0) {
+		if (sizeInBits % Byte.SIZE != 0) {
 			numberOfBytes++;
 		}
-		byte[] bytes = new byte[numberOfBytes];
+		final byte[] bytes = new byte[numberOfBytes];
 
 		LOG.debug("Number of bytes required = " + numberOfBytes);
 
 		int bitSetPosition = 0;
 		for (int byteNo = 0; byteNo < numberOfBytes; byteNo++) {
 			bytes[byteNo] = 0;
-			for (int i = 8; i >= 1; i--) {
+			for (int i = Byte.SIZE; i >= 1; i--) {
 				if (bitset.get(bitSetPosition)) {
 					bytes[byteNo] += Math.pow(2, i - 1);
 				}
@@ -326,8 +337,8 @@ public abstract class BitSetUtility {
 		return bytes;
 	}
 
-	public static BitSet reverse(BitSet bitset, int sizeInBits) {
-		BitSet reversed = new BitSet();
+	public static BitSet reverse(final BitSet bitset, final int sizeInBits) {
+		final BitSet reversed = new BitSet();
 
 		LOG.debug("Reversing: " + BitSetUtility.binDump(bitset));
 
