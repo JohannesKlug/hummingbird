@@ -2,11 +2,10 @@ package org.hbird.transport.spacesystemmodel.parameters.behaviours;
 
 import java.util.BitSet;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Parameter behaviour for an IEEE 754 32-bit precision Float.
@@ -23,23 +22,23 @@ public class Float32Behaviour extends AbstractFloatBehaviour {
 	}
 
 	@Override
-	public Float valueFromBitSet(BitSet packet) {
-		int offset = 0;
+	public Float valueFromBitSet(final BitSet packet) {
+		final int offset = 0;
 
-		BitSet actualBitSet = packet.get(offset, offset + (int) getSizeInBits());
+		final BitSet actualBitSet = packet.get(offset, offset + getSizeInBits());
 
 		LOG.debug("Float Parameter BitSet taken from bitset in = " + BitSetUtility.binDump(actualBitSet));
 
-		return Float.intBitsToFloat(BitSetUtility.toInt(actualBitSet));
+		return BitSetUtility.toFloat(actualBitSet);
 	}
 
 	@Override
-	public BitSet insertIntoBitSet(Number number, BitSet bitSetTarget, int offset) throws BitSetOperationException {
-		float value = number.floatValue();
+	public BitSet insertIntoBitSet(final Number number, final BitSet bitSetTarget, final int offset) throws BitSetOperationException {
+		final float value = number.floatValue();
 
 		// Convert the value to a bitset
 		// Parse as IEEE-754 Single Precision (32-bit) (Java Integer)
-		int intBits = Float.floatToIntBits(value);
+		final int intBits = Float.floatToIntBits(value);
 
 		String binaryString = Integer.toBinaryString(intBits);
 		LOG.debug("Float32 insertIntoBitSet - Binary string = " + binaryString);

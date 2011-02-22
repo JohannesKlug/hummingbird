@@ -282,7 +282,7 @@ public class BitSetUtility {
 		return newBinaryString.toString();
 	}
 
-	public static int toInt(final BitSet bits) {
+	public static float toFloat(final BitSet bits) {
 		final byte[] bytes = toByteArray(bits, 32);
 
 		int intFromBitset = 0;
@@ -292,10 +292,10 @@ public class BitSetUtility {
 		intFromBitset += (bytes[2] & 0xFF) << 8;
 		intFromBitset += (bytes[3] & 0xFF);
 
-		return intFromBitset;
+		return Float.intBitsToFloat(intFromBitset);
 	}
 
-	public static long toLong(final BitSet bits) {
+	public static double toDouble(final BitSet bits) {
 		final byte[] bytes = toByteArray(bits, 64);
 
 		long longFromBitset = 0;
@@ -309,7 +309,7 @@ public class BitSetUtility {
 		longFromBitset += (long) (bytes[6] & 0xFF) << 8;
 		longFromBitset += (bytes[7] & 0xFF);
 
-		return longFromBitset;
+		return Double.longBitsToDouble(longFromBitset);
 	}
 
 	public static byte[] toByteArray(final BitSet bitset, final int sizeInBits) {
