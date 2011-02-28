@@ -81,7 +81,7 @@ public class CcsdsPacketDispatcher extends Observable{
 		
 		int payloadEnd = payloadOffset + packetDataLength;
 		
-		if (packetBuffer.length < (6 + payloadEnd)) {
+		if (packetBuffer.length < (payloadEnd)) {
 			// Not enough bytes in packetBuffer, return and wait for more data
 			return;
 		}
