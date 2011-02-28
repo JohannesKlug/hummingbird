@@ -37,7 +37,7 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 	 * @return a list of camel messages
 	 * @throws UnknownContainerNameException
 	 */
-	public final List<Message> split(final Exchange camelExchange) throws UnknownContainerNameException {
+	public final synchronized List<Message> split(final Exchange camelExchange) throws UnknownContainerNameException {
 		// Clear the previous packet
 		packetProducer.clearPacket();
 
@@ -61,8 +61,8 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("packet contains " + packet.getParameters().size());
 		}
-		for (final HummingbirdParameter parameter : packet.getParameters()) {
 
+		for (final HummingbirdParameter parameter : packet.getParameters()) {
 			messages.add(createCamelMessage(parameter));
 		}
 
@@ -106,6 +106,7 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 		headers.put("ParameterName", parameter.getName());
 		headers.put("ParameterShortDescription", parameter.getShortDescription());
 		headers.put("ParameterLongDescription", parameter.getLongDescription());
+		headers.put("ValueType", parameter.getClassType());
 
 		msg.setHeaders(headers);
 		msg.setBody(parameter.getValue());

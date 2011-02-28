@@ -9,3 +9,6 @@ hummingbird/xtce/src/main/java/com/logica/hummingbird/xtce/castor/
 *.iml
 .DS_Store
 *.log
+
+src/business/simple-parameter-simulator/simple-parameter-simulator.log.11-02-20
+*.log*

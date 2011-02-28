@@ -14,13 +14,13 @@ import org.slf4j.LoggerFactory;
  * @author Mark Doyle
  * @author Johannes Klug (John Clever)
  */
-public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
-	private static final Logger LOG = LoggerFactory.getLogger(IntegerUnsignedBehaviour.class);
+public class IntegerSignedBehaviour extends AbstractIntegerBehaviour {
+	private static final Logger LOG = LoggerFactory.getLogger(IntegerSignedBehaviour.class);
 
-	public IntegerUnsignedBehaviour(int sizeInBits, boolean isBigEndian) throws InvalidParameterTypeException {
+	public IntegerSignedBehaviour(int sizeInBits, boolean isBigEndian) throws InvalidParameterTypeException {
 		super(sizeInBits, isBigEndian);
 		if (sizeInBits > 32) {
-			throw new InvalidParameterTypeException("Integer unsigned cannot be greater than 32-bits in size.");
+			throw new InvalidParameterTypeException("Signed Integers must be 32-bits or less in size.");
 		}
 	}
 
@@ -35,10 +35,11 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 		if (!isBigEndian) {
 			actualParameter = BitSetUtility.reverse(actualParameter, this.SIZE_IN_BITS);
 		}
+
 		byte[] byteArray = BitSetUtility.toByteArray(actualParameter, this.SIZE_IN_BITS);
 		LOG.debug("Byte array = " + BytesUtility.decimalDump(byteArray));
 
-		long output = BytesUtility.combine(byteArray, this.SIZE_IN_BITS, false).longValue();
+		int output = BytesUtility.combine(byteArray, this.SIZE_IN_BITS, true).intValue();
 		LOG.debug("Testing combine.  Output(bin) = " + Long.toBinaryString(output));
 		LOG.debug("Testing combine.  Output(dec) = " + output);
 
@@ -84,7 +85,7 @@ public class IntegerUnsignedBehaviour extends AbstractIntegerBehaviour {
 
 	@Override
 	public String getTypeName() {
-		return getSizeInBits() + "bit Unsigned integer";
+		return getSizeInBits() + "bit signed integer";
 	}
 
 }
