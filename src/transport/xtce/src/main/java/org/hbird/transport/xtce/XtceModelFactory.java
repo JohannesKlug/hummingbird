@@ -18,6 +18,7 @@ import org.hbird.transport.generatedcode.xtce.ParameterSetTypeItem;
 import org.hbird.transport.generatedcode.xtce.ParameterTypeSetTypeItem;
 import org.hbird.transport.generatedcode.xtce.SequenceContainer;
 import org.hbird.transport.generatedcode.xtce.SpaceSystem;
+import org.hbird.transport.generatedcode.xtce.types.DataEncodingTypeBitOrderType;
 import org.hbird.transport.spacesystemmodel.Container;
 import org.hbird.transport.spacesystemmodel.ContainerFactory;
 import org.hbird.transport.spacesystemmodel.ContainerImpl;
@@ -111,7 +112,7 @@ public class XtceModelFactory implements ContainerFactory {
 
 		for (int containerIndex = 0; containerIndex < containerSetTypeItemCount; ++containerIndex) {
 			final SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex)
-					.getSequenceContainer();
+			.getSequenceContainer();
 
 			LOG.debug("Creating container " + xtceContainer.getName());
 			final ContainerImpl container = new ContainerImpl(xtceContainer.getName(), xtceContainer.getShortDescription(), xtceContainer.getLongDescription());
@@ -124,7 +125,7 @@ public class XtceModelFactory implements ContainerFactory {
 		 */
 		for (int containerIndex = 0; containerIndex < containerSetTypeItemCount; ++containerIndex) {
 			final SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex)
-					.getSequenceContainer();
+			.getSequenceContainer();
 
 			// Get the container
 			final Container thisContainer = containers.get(xtceContainer.getName());
@@ -183,19 +184,19 @@ public class XtceModelFactory implements ContainerFactory {
 			if (type != null) {
 				if (type.getNumberBehaviour() instanceof AbstractIntegerBehaviour) {
 					parameterContainer = new IntegerParameter(
-											item.getParameter().getName(), 
-											item.getParameter().getShortDescription(), 
-											item.getParameter().getLongDescription(), 
-											type, 
-											(int) type.getInitialValue());
+							item.getParameter().getName(),
+							item.getParameter().getShortDescription(),
+							item.getParameter().getLongDescription(),
+							type,
+							(int) type.getInitialValue());
 				}
 				else if (type.getNumberBehaviour() instanceof AbstractFloatBehaviour) {
 					parameterContainer = new FloatParameter(
-											item.getParameter().getName(), 
-											item.getParameter().getShortDescription(), 
-											item.getParameter().getLongDescription(), 
-											type, 
-											(int) type.getInitialValue());
+							item.getParameter().getName(),
+							item.getParameter().getShortDescription(),
+							item.getParameter().getLongDescription(),
+							type,
+							(int) type.getInitialValue());
 				}
 			}
 			// @formatter:on
@@ -214,7 +215,7 @@ public class XtceModelFactory implements ContainerFactory {
 			final ParameterTypeSetTypeItem item = spaceSystem.getTelemetryMetaData().getParameterTypeSet().getParameterTypeSetTypeItem(parameterTypeIndex);
 
 			// If it's an integer parameter..
-			IntegerParameterType integerParameterType = item.getIntegerParameterType();
+			final IntegerParameterType integerParameterType = item.getIntegerParameterType();
 			if (integerParameterType != null) {
 				Unit unit = null;
 
@@ -222,19 +223,36 @@ public class XtceModelFactory implements ContainerFactory {
 				//@formatter:off
 				if (integerParameterType.getUnitSet() != null) {
 					for (int unitTypeIndex = 0; unitTypeIndex < integerParameterType.getUnitSet().getUnitCount(); ++unitTypeIndex) {
-						org.hbird.transport.generatedcode.xtce.Unit parameterTypeUnit = integerParameterType.getUnitSet().getUnit(unitTypeIndex);
+						final org.hbird.transport.generatedcode.xtce.Unit parameterTypeUnit = integerParameterType.getUnitSet().getUnit(unitTypeIndex);
 						unit = units.get(parameterTypeUnit.getContent());
 						if (unit == null) {
 							unit = new Unit(
-									parameterTypeUnit.getContent(), 
-									parameterTypeUnit.getDescription(), 
-									parameterTypeUnit.getDescription(), 
-									parameterTypeUnit.getPower(), 
+									parameterTypeUnit.getContent(),
+									parameterTypeUnit.getDescription(),
+									parameterTypeUnit.getDescription(),
+									parameterTypeUnit.getPower(),
 									parameterTypeUnit.getFactor());
 
 							units.put(parameterTypeUnit.getContent(), unit);
 						}
 					}
+				}
+
+
+				boolean bigEndian;
+				final DataEncodingTypeBitOrderType bitOrder = integerParameterType.getBaseDataTypeChoice().getBinaryDataEncoding().getBitOrder();
+				if (bitOrder == DataEncodingTypeBitOrderType.MOSTSIGNIFICANTBITFIRST) {
+					bigEndian = true;
+				}
+				else if (bitOrder == DataEncodingTypeBitOrderType.LEASTSIGNIFICANTBITFIRST) {
+					bigEndian = false;
+				}
+				else {
+					throw new InvalidXtceFileException(integerParameterType.getName() +
+							" is has an undefined bit order. ParameterType's BinaryDataEncoding " +
+							"bitOrder must be either " +
+							DataEncodingTypeBitOrderType.MOSTSIGNIFICANTBITFIRST +
+							" or " + DataEncodingTypeBitOrderType.LEASTSIGNIFICANTBITFIRST);
 				}
 				//@formatter:on
 
@@ -258,15 +276,15 @@ public class XtceModelFactory implements ContainerFactory {
 				// If parameter is less than 64 (i.e. an integers type...
 				if (integerParameterType.getSizeInBits() < 64) {
 					if (!integerParameterType.getSigned()) {
-						numberTypeBehaviour = new IntegerUnsignedBehaviour((int) integerParameterType.getSizeInBits(), true);
+						numberTypeBehaviour = new IntegerUnsignedBehaviour((int) integerParameterType.getSizeInBits(), bigEndian);
 					}
 					else {
-						numberTypeBehaviour = new IntegerSignedBehaviour((int) integerParameterType.getSizeInBits(), true);
+						numberTypeBehaviour = new IntegerSignedBehaviour((int) integerParameterType.getSizeInBits(), bigEndian);
 					}
 				}
 				// else we are dealing with a long
 				else {
-					numberTypeBehaviour = new LongSignedBehaviour((int) integerParameterType.getSizeInBits(), true);
+					numberTypeBehaviour = new LongSignedBehaviour((int) integerParameterType.getSizeInBits(), bigEndian);
 				}
 
 				// else {
@@ -308,7 +326,8 @@ public class XtceModelFactory implements ContainerFactory {
 							.getFloatParameterType().getLongDescription(), new Float64Behaviour(), (long) item.getFloatParameterType().getInitialValue());
 				}
 				else {
-					throw new InvalidXtceFileException("Invalid float type Parameter definition.  Hummingbird only supports size 32 or 64 bit floats");
+					throw new InvalidXtceFileException(
+							"Invalid float type Parameter definition.  Hummingbird only supports size 32 or 64 bit big endian floats");
 				}
 
 				types.put(type.getName(), type);
