@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.hbird.transport.spacesystemmodel.Container;
-import org.hbird.transport.spacesystemmodel.ContainerImpl;
 
 /**
  * This is a checked exception class which will allow the client to take steps to 
