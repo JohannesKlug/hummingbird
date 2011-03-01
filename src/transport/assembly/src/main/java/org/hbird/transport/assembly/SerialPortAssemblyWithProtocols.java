@@ -32,7 +32,7 @@ public class SerialPortAssemblyWithProtocols implements Observer {
 	
 	private List<byte[]> frames = new ArrayList<byte[]>();
 	
-	private CcsdsFrameDispatcher frameDispatcher = new CcsdsFrameDispatcher();
+	private CcsdsFrameDispatcher frameDispatcher = new CcsdsFrameDispatcher(13, false, false);
 	private CcsdsPacketDispatcher packetDispatcher = new CcsdsPacketDispatcher();
 
 	private byte[] receivedBytes;
