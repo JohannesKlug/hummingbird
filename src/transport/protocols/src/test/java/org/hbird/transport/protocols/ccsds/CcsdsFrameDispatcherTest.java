@@ -25,9 +25,11 @@ import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidVirtu
 
 public class CcsdsFrameDispatcherTest implements Observer {
 
+	private static final int FRAME_LENGTH = 1115;
+
 	private List<byte[]> frames = new ArrayList<byte[]>();
 	
-	private CcsdsFrameDispatcher frameDispatcher = new CcsdsFrameDispatcher();
+	private CcsdsFrameDispatcher frameDispatcher = new CcsdsFrameDispatcher(1115, true, true);
 	private CcsdsPacketDispatcher packetDispatcher = new CcsdsPacketDispatcher();
 
 	List<FramePayload> receivedFramePayloads = new ArrayList<FramePayload>();
@@ -36,7 +38,7 @@ public class CcsdsFrameDispatcherTest implements Observer {
 	@Before
 	public void setUp() throws Exception {
 		FileInputStream in = null;
-		ByteArrayOutputStream out = new ByteArrayOutputStream(1135);
+		ByteArrayOutputStream out = new ByteArrayOutputStream(FRAME_LENGTH);
 		try {
 			in = new FileInputStream("src/test/resources/pus_displays_pml.raw");
 			int c;
@@ -52,7 +54,7 @@ public class CcsdsFrameDispatcherTest implements Observer {
 				
 				step++;
 				
-				if (step == 1135) {
+				if (step == FRAME_LENGTH+20) {
 					step = 0;
 					frames.add(out.toByteArray());
 					out.reset();
@@ -82,7 +84,7 @@ public class CcsdsFrameDispatcherTest implements Observer {
 	
 	@Test(expected=InvalidFrameLengthException.class)
 	public void testInvalidFrameLength() throws InvalidFrameLengthException, FrameFailedCrcCheckException, InvalidVirtualChannelIdException {
-		CcsdsFrameDispatcher dispatcher = new CcsdsFrameDispatcher();
+		CcsdsFrameDispatcher dispatcher = new CcsdsFrameDispatcher(2046, false, false);
 		dispatcher.process(new byte[2047]);
 	}
 	
