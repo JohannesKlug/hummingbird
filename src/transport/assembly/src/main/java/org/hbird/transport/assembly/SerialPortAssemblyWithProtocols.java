@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import org.hbird.transport.protocols.ccsds.spacepacket.CcsdsPacketDispatcher;
+import org.hbird.transport.protocols.ccsds.spacepacket.CcsdsPacketDecoder;
 import org.hbird.transport.protocols.ccsds.spacepacket.PacketPayload;
-import org.hbird.transport.protocols.ccsds.transferframe.CcsdsFrameDispatcher;
+import org.hbird.transport.protocols.ccsds.transferframe.CcsdsFrameDecoder;
 import org.hbird.transport.protocols.ccsds.transferframe.CcsdsFramePayload;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.FrameFailedCrcCheckException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidFrameLengthException;
@@ -32,8 +32,8 @@ public class SerialPortAssemblyWithProtocols implements Observer {
 	
 	private List<byte[]> frames = new ArrayList<byte[]>();
 	
-	private CcsdsFrameDispatcher frameDispatcher = new CcsdsFrameDispatcher(13, false, false);
-	private CcsdsPacketDispatcher packetDispatcher = new CcsdsPacketDispatcher();
+	private CcsdsFrameDecoder frameDispatcher = new CcsdsFrameDecoder(13, false, false);
+	private CcsdsPacketDecoder packetDispatcher = new CcsdsPacketDecoder();
 
 	private byte[] receivedBytes;
 

@@ -7,9 +7,9 @@ import org.hbird.transport.protocols.ccsds.transferframe.FramePayload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CcsdsPacketDispatcher extends Observable{
+public class CcsdsPacketDecoder extends Observable{
 	
-	private final static Logger LOG = LoggerFactory.getLogger(CcsdsPacketDispatcher.class);
+	private final static Logger LOG = LoggerFactory.getLogger(CcsdsPacketDecoder.class);
 	
 	private byte[] packetBuffer = ArrayUtils.EMPTY_BYTE_ARRAY;
 

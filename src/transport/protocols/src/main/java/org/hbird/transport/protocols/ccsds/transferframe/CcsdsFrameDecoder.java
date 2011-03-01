@@ -11,8 +11,8 @@ import org.hbird.transport.protocols.ccsds.transferframe.exceptions.FrameFailedC
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidFrameLengthException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidVirtualChannelIdException;
 
-public class CcsdsFrameDispatcher extends Observable implements Observer {
-	private final static Logger LOG = LoggerFactory.getLogger(CcsdsFrameDispatcher.class);
+public class CcsdsFrameDecoder extends Observable implements Observer {
+	private final static Logger LOG = LoggerFactory.getLogger(CcsdsFrameDecoder.class);
 	
 	public static int FRAME_LENGTH_IN_OCTETS;
 
@@ -41,7 +41,7 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 
 	private VirtualChannel[] virtualChannel = new VirtualChannel[8];
 	
-	public CcsdsFrameDispatcher(int frameLength, boolean ocfPresent, boolean ecfPresent) {
+	public CcsdsFrameDecoder(int frameLength, boolean ocfPresent, boolean ecfPresent) {
 		
 		FRAME_LENGTH_IN_OCTETS = frameLength;
 		OCF_PRESENT = ocfPresent;

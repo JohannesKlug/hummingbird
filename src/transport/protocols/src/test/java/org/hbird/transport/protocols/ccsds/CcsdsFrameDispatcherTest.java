@@ -15,9 +15,9 @@ import java.util.Observer;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.hbird.transport.protocols.ccsds.spacepacket.CcsdsPacketDispatcher;
+import org.hbird.transport.protocols.ccsds.spacepacket.CcsdsPacketDecoder;
 import org.hbird.transport.protocols.ccsds.spacepacket.PacketPayload;
-import org.hbird.transport.protocols.ccsds.transferframe.CcsdsFrameDispatcher;
+import org.hbird.transport.protocols.ccsds.transferframe.CcsdsFrameDecoder;
 import org.hbird.transport.protocols.ccsds.transferframe.FramePayload;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.FrameFailedCrcCheckException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidFrameLengthException;
@@ -29,8 +29,8 @@ public class CcsdsFrameDispatcherTest implements Observer {
 
 	private List<byte[]> frames = new ArrayList<byte[]>();
 	
-	private CcsdsFrameDispatcher frameDispatcher = new CcsdsFrameDispatcher(1115, true, true);
-	private CcsdsPacketDispatcher packetDispatcher = new CcsdsPacketDispatcher();
+	private CcsdsFrameDecoder frameDispatcher = new CcsdsFrameDecoder(1115, true, true);
+	private CcsdsPacketDecoder packetDispatcher = new CcsdsPacketDecoder();
 
 	List<FramePayload> receivedFramePayloads = new ArrayList<FramePayload>();
 	List<PacketPayload> receivedPacketPayloads = new ArrayList<PacketPayload>();
@@ -84,7 +84,7 @@ public class CcsdsFrameDispatcherTest implements Observer {
 	
 	@Test(expected=InvalidFrameLengthException.class)
 	public void testInvalidFrameLength() throws InvalidFrameLengthException, FrameFailedCrcCheckException, InvalidVirtualChannelIdException {
-		CcsdsFrameDispatcher dispatcher = new CcsdsFrameDispatcher(2046, false, false);
+		CcsdsFrameDecoder dispatcher = new CcsdsFrameDecoder(2046, false, false);
 		dispatcher.process(new byte[2047]);
 	}
 	
@@ -133,10 +133,10 @@ public class CcsdsFrameDispatcherTest implements Observer {
 	
 	@Test
 	public void testIsNextFrame() {
-		assertTrue(CcsdsFrameDispatcher.isNextFrame(0, 1));
-		assertFalse(CcsdsFrameDispatcher.isNextFrame(1, 0));
-		assertTrue(CcsdsFrameDispatcher.isNextFrame(255, 0));
-		assertFalse(CcsdsFrameDispatcher.isNextFrame(123, 125));
+		assertTrue(CcsdsFrameDecoder.isNextFrame(0, 1));
+		assertFalse(CcsdsFrameDecoder.isNextFrame(1, 0));
+		assertTrue(CcsdsFrameDecoder.isNextFrame(255, 0));
+		assertFalse(CcsdsFrameDecoder.isNextFrame(123, 125));
 	}
 
 	@Override

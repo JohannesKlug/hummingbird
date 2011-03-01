@@ -25,7 +25,7 @@ public class VirtualChannel extends Observable {
 		int payloadOffset = 0;
 		boolean isNext;
 		
-		if (CcsdsFrameDispatcher.isNextFrame(lastFrameCount, frameCount)) {
+		if (CcsdsFrameDecoder.isNextFrame(lastFrameCount, frameCount)) {
 			isNext = true;
 		} else {
 			// we received frames out of order
