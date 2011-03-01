@@ -23,13 +23,13 @@ import org.hbird.transport.protocols.ccsds.transferframe.exceptions.FrameFailedC
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidFrameLengthException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidVirtualChannelIdException;
 
-public class CcsdsFrameDispatcherTest implements Observer {
+public class RocketFrameDispatcherTest implements Observer {
 
-	private static final int FRAME_LENGTH = 1115;
+	private static final int FRAME_LENGTH = 13;
 
 	private List<byte[]> frames = new ArrayList<byte[]>();
 	
-	private CcsdsFrameDispatcher frameDispatcher = new CcsdsFrameDispatcher(1115, true, true);
+	private CcsdsFrameDispatcher frameDispatcher = new CcsdsFrameDispatcher(FRAME_LENGTH, false, false);
 	private CcsdsPacketDispatcher packetDispatcher = new CcsdsPacketDispatcher();
 
 	List<FramePayload> receivedFramePayloads = new ArrayList<FramePayload>();
@@ -38,23 +38,20 @@ public class CcsdsFrameDispatcherTest implements Observer {
 	@Before
 	public void setUp() throws Exception {
 		FileInputStream in = null;
-		ByteArrayOutputStream out = new ByteArrayOutputStream(FRAME_LENGTH);
+		ByteArrayOutputStream out = new ByteArrayOutputStream(1135);
 		try {
-			in = new FileInputStream("src/test/resources/pus_displays_pml.raw");
+			in = new FileInputStream("src/test/resources/ID-Thunderbird-EGSE-39547-1298901661910-0-0-1-1-2");
 			int c;
 
 			int step = 0;
 			
 			while ((c = in.read()) != -1) {
-				
-				// skip the first 20 bytes
-				if (step >= 20) {
-					out.write(c);
-				}
+
+				out.write(c);
 				
 				step++;
 				
-				if (step == FRAME_LENGTH+20) {
+				if (step == FRAME_LENGTH) {
 					step = 0;
 					frames.add(out.toByteArray());
 					out.reset();
@@ -77,15 +74,7 @@ public class CcsdsFrameDispatcherTest implements Observer {
 	@Test
 	public void testReadFrame() {
 		System.out.println("Loaded " + frames.size() + " frames from file.");
-		assertEquals(0x20, frames.get(0)[0]);
-		assertEquals(0x11, frames.get(0)[1]);
-		assertEquals(1115, frames.get(0).length);
-	}
-	
-	@Test(expected=InvalidFrameLengthException.class)
-	public void testInvalidFrameLength() throws InvalidFrameLengthException, FrameFailedCrcCheckException, InvalidVirtualChannelIdException {
-		CcsdsFrameDispatcher dispatcher = new CcsdsFrameDispatcher(2046, false, false);
-		dispatcher.process(new byte[2047]);
+		assertEquals(FRAME_LENGTH, frames.get(0).length);
 	}
 	
 	@Test
@@ -107,28 +96,12 @@ public class CcsdsFrameDispatcherTest implements Observer {
 		System.out.println("Ran " + runningTime + "ms.");
 		System.out.println("Processed " + receivedFramePayloads.size() + " frames (" + (float)receivedFramePayloads.size()/runningTime*1000 + " frames/sec)");
 		System.out.println("Processed " + receivedPacketPayloads.size() + " packets (" + (float)receivedPacketPayloads.size()/runningTime*1000 + " packets/sec)");
-		assertEquals(52 * multiplier, receivedFramePayloads.size());
-		assertEquals(318 * multiplier, receivedPacketPayloads.size());
+		assertEquals(1 * multiplier, receivedFramePayloads.size());
+		assertEquals(1 * multiplier, receivedPacketPayloads.size());
 		
 //		for (PacketPayload packetPayload : receivedPacketPayloads) {
 //			System.out.println("Packet with apid " + packetPayload.apid + " has length " + packetPayload.payload.length + " bytes.");
 //		}
-	}
-	
-	@Test
-	public void testBitMask() {
-  	  assertEquals(0x80, 0x80 & 0xFF);
-  	  assertEquals(0x80, 0x80 & 0x80);
-  	  assertEquals(0x80, 0x80 & 0xF0);
-  	  
-  	  int highByte = 0xFF;
-  	  int lowByte = 0xFF;
-  	  
-  	  assertEquals(255, highByte);
-  	  
-  	  highByte <<= 8;
-  	  int total = highByte + lowByte;
-  	  assertEquals(65535, total);
 	}
 	
 	@Test
@@ -153,6 +126,10 @@ public class CcsdsFrameDispatcherTest implements Observer {
 			if (arg instanceof PacketPayload) {
 				PacketPayload packetPayload = (PacketPayload) arg;
 				receivedPacketPayloads.add(packetPayload);
+				for (byte currentByte : packetPayload.payload) {
+					System.out.println(Integer.toHexString(currentByte));
+					assertEquals(0x1e, currentByte);
+				}
 			}
 			
 		}
