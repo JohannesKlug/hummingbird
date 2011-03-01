@@ -80,9 +80,19 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 			throw new InvalidFrameLengthException("Expected Frame length in bytes: " + FRAME_LENGTH_IN_OCTETS + ", actual frame length: " + frame.length);
 		}
 
-		// Check for CRC erros
-		if (crcValid(frame) == false) {
-			throw new FrameFailedCrcCheckException();
+		// FIXME Handle OCF and ECF
+		// FIXME add a test for OCF and ECF
+		if (OCF_PRESENT) {
+			byte[] operationalControlField = ArrayUtils.subarray(frame, OCF_START, OCF_START + OCF_LENGTH);
+		}
+		
+		if (ECF_PRESENT) {
+			byte[] errorControlField = ArrayUtils.subarray(frame, ECF_START, ECF_START + ECF_LENGTH);
+			
+			// Check for CRC erros
+			if (crcValid(frame) == false) {
+				throw new FrameFailedCrcCheckException();
+			}
 		}
 
 		// Transfer Frame Primary Header = 6 octets (mandatory) Transfer Frame Data Field Status = 2 octets (mandatory)
@@ -149,11 +159,6 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 		byte[] payload = ArrayUtils.subarray(frame, payloadOffset, PAYLOAD_END);
 
 		virtualChannel[virtualChannelId].addPayload(spacecraftId, payload, virtualChannelFrameCount, firstHeaderPointer);
-		
-		// FIXME add a test for OCF and ECF
-		byte[] operationalControlField = ArrayUtils.subarray(frame, OCF_START, OCF_START + OCF_LENGTH);
-		byte[] errorControlField = ArrayUtils.subarray(frame, ECF_START, ECF_START + ECF_LENGTH);
-
 	}
 
 	private boolean crcValid(byte[] frame) {
