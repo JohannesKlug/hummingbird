@@ -12,6 +12,7 @@ import org.exolab.castor.xml.MarshalException;
 import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.xml.ValidationException;
 import org.exolab.castor.xml.XMLContext;
+import org.hbird.transport.generatedcode.xtce.BaseDataTypeChoice;
 import org.hbird.transport.generatedcode.xtce.Comparison;
 import org.hbird.transport.generatedcode.xtce.IntegerParameterType;
 import org.hbird.transport.generatedcode.xtce.ParameterSetTypeItem;
@@ -240,19 +241,25 @@ public class XtceModelFactory implements ContainerFactory {
 
 
 				boolean bigEndian;
-				final DataEncodingTypeBitOrderType bitOrder = integerParameterType.getBaseDataTypeChoice().getBinaryDataEncoding().getBitOrder();
-				if (bitOrder == DataEncodingTypeBitOrderType.MOSTSIGNIFICANTBITFIRST) {
+				final BaseDataTypeChoice baseDataTypeChoice = integerParameterType.getBaseDataTypeChoice();
+				if(baseDataTypeChoice == null) {
 					bigEndian = true;
 				}
-				else if (bitOrder == DataEncodingTypeBitOrderType.LEASTSIGNIFICANTBITFIRST) {
-					bigEndian = false;
-				}
 				else {
-					throw new InvalidXtceFileException(integerParameterType.getName() +
-							" is has an undefined bit order. ParameterType's BinaryDataEncoding " +
-							"bitOrder must be either " +
-							DataEncodingTypeBitOrderType.MOSTSIGNIFICANTBITFIRST +
-							" or " + DataEncodingTypeBitOrderType.LEASTSIGNIFICANTBITFIRST);
+					final DataEncodingTypeBitOrderType bitOrder = baseDataTypeChoice.getBinaryDataEncoding().getBitOrder();
+					if (bitOrder == DataEncodingTypeBitOrderType.MOSTSIGNIFICANTBITFIRST) {
+						bigEndian = true;
+					}
+					else if (bitOrder == DataEncodingTypeBitOrderType.LEASTSIGNIFICANTBITFIRST) {
+						bigEndian = false;
+					}
+					else {
+						throw new InvalidXtceFileException(integerParameterType.getName() +
+								" is has an undefined bit order. ParameterType's BinaryDataEncoding " +
+								"bitOrder must be either " +
+								DataEncodingTypeBitOrderType.MOSTSIGNIFICANTBITFIRST +
+								" or " + DataEncodingTypeBitOrderType.LEASTSIGNIFICANTBITFIRST);
+					}
 				}
 				//@formatter:on
 
@@ -327,7 +334,7 @@ public class XtceModelFactory implements ContainerFactory {
 				}
 				else {
 					throw new InvalidXtceFileException(
-							"Invalid float type Parameter definition.  Hummingbird only supports size 32 or 64 bit big endian floats");
+					"Invalid float type Parameter definition.  Hummingbird only supports size 32 or 64 bit big endian floats");
 				}
 
 				types.put(type.getName(), type);
