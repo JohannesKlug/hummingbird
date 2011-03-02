@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  * @author Mark Doyle
  * @author Johannes Klug
  */
-public class BitSetUtility {
+public final class BitSetUtility {
 	private static final int WORD_LENGTH = 64;
 	private static final int BIN_DUMP_LINE_SIZE = 64;
 	private static final int OCTET_SIZE = 8;
@@ -282,6 +282,12 @@ public class BitSetUtility {
 		return newBinaryString.toString();
 	}
 
+	/**
+	 * TODO Can we remove the magic numbers?
+	 * 
+	 * @param bits
+	 * @return
+	 */
 	public static float toFloat(final BitSet bits) {
 		final byte[] bytes = toByteArray(bits, 32);
 
@@ -295,6 +301,12 @@ public class BitSetUtility {
 		return Float.intBitsToFloat(intFromBitset);
 	}
 
+	/**
+	 * TODO Can we remove the magic numbers?
+	 * 
+	 * @param bits
+	 * @return
+	 */
 	public static double toDouble(final BitSet bits) {
 		final byte[] bytes = toByteArray(bits, 64);
 
@@ -312,7 +324,14 @@ public class BitSetUtility {
 		return Double.longBitsToDouble(longFromBitset);
 	}
 
-	public static byte[] toByteArray(final BitSet bitset, final int sizeInBits) {
+	/**
+	 * FIXME javadoc
+	 * 
+	 * @param bitset
+	 * @param sizeInBits
+	 * @return
+	 */
+	public static final byte[] toByteArray(final BitSet bitset, final int sizeInBits) {
 		// Split into Bytes.
 		int numberOfBytes = sizeInBits / Byte.SIZE;
 		// Any remaining bits require an extra Byte
@@ -320,8 +339,6 @@ public class BitSetUtility {
 			numberOfBytes++;
 		}
 		final byte[] bytes = new byte[numberOfBytes];
-
-		LOG.debug("Number of bytes required = " + numberOfBytes);
 
 		int bitSetPosition = 0;
 		for (int byteNo = 0; byteNo < numberOfBytes; byteNo++) {
@@ -333,14 +350,37 @@ public class BitSetUtility {
 				bitSetPosition++;
 			}
 		}
-
 		return bytes;
+	}
+
+	/**
+	 * Takes a byte array and returns a BitSet of the same value.
+	 * 
+	 * @param bytes
+	 * @return
+	 */
+	public static final BitSet fromByteArray(final byte[] bytes) {
+		final int bitsToSet = bytes.length * Byte.SIZE;
+		final BitSet result = new BitSet(bitsToSet);
+
+		// Loop over the number of bits we must set in the BitSet to convert this byte array.
+		for (int i = 0; i < bitsToSet; i++) {
+			// calculate which byte in the array covers this bit index
+			final int byteIndex = bytes.length - i / Byte.SIZE - 1;
+
+			// Mask the byte with a mask which contains a 1 set in the current position we are checking.
+			// We mask the byte moving a 1 from left to right
+			if ((bytes[byteIndex] & (128 >>> (i % 8))) > 0) {
+				// if the results is > 0 i.e. the bit at position i is set to 1 in the byte
+				// then set the same position in the BitSet
+				result.set(i);
+			}
+		}
+		return result;
 	}
 
 	public static BitSet reverse(final BitSet bitset, final int sizeInBits) {
 		final BitSet reversed = new BitSet();
-
-		LOG.debug("Reversing: " + BitSetUtility.binDump(bitset));
 
 		int reversedIndex = 0;
 		for (int i = sizeInBits - 1; i >= 0; i--) {
@@ -350,8 +390,6 @@ public class BitSetUtility {
 			reversedIndex++;
 
 		}
-
-		LOG.debug("Reversed BitSet: " + BitSetUtility.binDump(reversed));
 		return reversed;
 	}
 
