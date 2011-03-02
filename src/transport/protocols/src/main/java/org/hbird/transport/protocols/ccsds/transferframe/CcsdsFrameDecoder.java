@@ -112,7 +112,7 @@ public class CcsdsFrameDecoder extends Observable {
 		
 		int virtualChannelId = (0x0E & primaryHeader[1]) >> 1;
 		if (virtualChannelId < 0 || virtualChannelId > 7) {
-			throw new InvalidVirtualChannelIdException("Virtual Channel Id must be [0..7]. The one found in the current frame is: " + virtualChannelId);
+			throw new InvalidVirtualChannelIdException(virtualChannelId);
 		}
 		LOG.debug("Virtual Channel Id: " + virtualChannelId);
 

@@ -10,16 +10,10 @@ public class InvalidVirtualChannelIdException extends Exception {
 	public InvalidVirtualChannelIdException() {
 	}
 
-	public InvalidVirtualChannelIdException(String message) {
-		super(message);
-	}
-
-	public InvalidVirtualChannelIdException(Throwable cause) {
-		super(cause);
-	}
-
-	public InvalidVirtualChannelIdException(String message, Throwable cause) {
-		super(message, cause);
+	public InvalidVirtualChannelIdException(int erroneousId) {
+		super("An invalid Virtual Channel ID was encountered. " +
+				"It must be in the range [0,7] (3 bits). Passed id was: " + 
+				erroneousId);
 	}
 
 }
