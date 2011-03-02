@@ -88,7 +88,9 @@ public class RocketFrameDispatcherTest implements Observer {
 		long start = System.currentTimeMillis();
 		for (int i=0; i<multiplier; i++) {
 			for (byte[] frame : frames) {
-				frameDispatcher.process(frame);
+				FramePayload framePayload = frameDispatcher.process(frame);
+				receivedFramePayloads.add(framePayload);
+				packetDispatcher.process(new FramePayload(framePayload.payload, framePayload.isNextFrame));
 			}
 		}
 		
@@ -114,15 +116,7 @@ public class RocketFrameDispatcherTest implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-//		System.out.println("Called from: " + o + " with object: " + arg);
-		if (o == frameDispatcher) {
-			if (arg instanceof FramePayload) {
-				FramePayload framePayload = (FramePayload) arg;
-				receivedFramePayloads.add(framePayload);
-				packetDispatcher.process(new FramePayload(framePayload.payload, framePayload.isNextFrame));
-			}
-			
-		} else if (o == packetDispatcher) {
+		if (o == packetDispatcher) {
 			if (arg instanceof PacketPayload) {
 				PacketPayload packetPayload = (PacketPayload) arg;
 				receivedPacketPayloads.add(packetPayload);
@@ -131,10 +125,7 @@ public class RocketFrameDispatcherTest implements Observer {
 					assertEquals(0x1e, currentByte);
 				}
 			}
-			
 		}
-		
-		
 	}
 	
 	@Test
