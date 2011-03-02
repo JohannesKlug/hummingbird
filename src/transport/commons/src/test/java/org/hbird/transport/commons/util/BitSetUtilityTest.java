@@ -1,7 +1,9 @@
 package org.hbird.transport.commons.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
 import java.util.BitSet;
 
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
@@ -16,6 +18,8 @@ public class BitSetUtilityTest {
 
 	private static final String BIT_STR_BE_123 = "1111011";
 	private static BitSet BITSET_BE_123;
+	private static final int BITSET_BE_123_DEC_BYTE_REP = -10;
+	private static final byte[] BYTES_BE_123 = new byte[] { -10 };
 
 	private static final String BIT_STR_LE_123 = "1101111";
 	private static BitSet BITSET_LE_123;
@@ -33,6 +37,7 @@ public class BitSetUtilityTest {
 	private static BitSet BITSET_FLOAT32_NEG1658_035;
 
 	private static final String BIT_STR_FLOAT64_89433_23532268 = "0100000011110101110101011001001111000011111000011011011011101010";
+
 	private static BitSet BITSET_FLOAT64_89433_23532268;
 
 	@BeforeClass
@@ -176,6 +181,29 @@ public class BitSetUtilityTest {
 		final double actual = BitSetUtility.toDouble(BITSET_FLOAT64_89433_23532268);
 		// TODO Does anybody know what an appropriate delta is?
 		assertEquals(89433.23532268d, actual, 0.000000000000000001);
+	}
+
+	@Test
+	public final void toByteArraySingleByteRequired() {
+		LOG.debug("############ Starting test #################");
+		final byte[] actual = BitSetUtility.toByteArray(BITSET_BE_123, 7);
+		final byte[] expected = new byte[] { BITSET_BE_123_DEC_BYTE_REP };
+		assertTrue("Byte arrays should be equal", Arrays.equals(actual, expected));
+	}
+
+	@Test
+	public final void toByteArrayTwoBytesRequired() {
+		LOG.debug("############ Starting test #################");
+		final byte[] actual = BitSetUtility.toByteArray(BITSET_BE_999, 11);
+		final byte[] expected = new byte[] { 124, -32 };
+		assertTrue("Byte arrays should be equal", Arrays.equals(actual, expected));
+	}
+
+	@Test
+	public final void fromByteArray() {
+		LOG.debug("############ Starting test #################");
+		final BitSet actual = BitSetUtility.fromByteArray(BYTES_BE_123);
+		assertEquals(BITSET_BE_123, actual);
 	}
 
 }

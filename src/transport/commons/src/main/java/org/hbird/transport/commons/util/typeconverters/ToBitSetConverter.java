@@ -7,15 +7,15 @@ import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
 
 @Converter
-public class StringToBitSetConverter {
-	
+public class ToBitSetConverter {
+
 	@Converter
-	public static BitSet toBitSet(String binaryString) throws BitSetOperationException {
+	public static BitSet toBitSet(final String binaryString) throws BitSetOperationException {
 		return BitSetUtility.stringToBitSet(binaryString, true, true);
 	}
-	
+
 	@Converter
-	public static BitSet toBitSet(String binaryString, boolean bigEndian) throws BitSetOperationException {
-		return BitSetUtility.stringToBitSet(binaryString, bigEndian, bigEndian);
+	public static BitSet toBitSet(final byte[] bytes) throws BitSetOperationException {
+		return BitSetUtility.fromByteArray(bytes);
 	}
 }
