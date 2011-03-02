@@ -14,7 +14,7 @@ public class CamelPacketDispatcher implements Observer {
 	
 	private final static Logger LOG = LoggerFactory.getLogger(CamelPacketDispatcher.class);
 	
-	private CcsdsPacketDispatcher packetDispatcher = new CcsdsPacketDispatcher();
+	private CcsdsPacketDecoder packetDispatcher = new CcsdsPacketDecoder();
 	
 	// FIXME: inject a Camel thingy here.
 	Endpoint endpoint;

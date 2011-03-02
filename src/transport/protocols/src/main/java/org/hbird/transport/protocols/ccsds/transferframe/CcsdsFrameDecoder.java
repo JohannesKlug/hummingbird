@@ -1,18 +1,18 @@
 package org.hbird.transport.protocols.ccsds.transferframe;
 
 import java.util.Observable;
-import java.util.Observer;
 
+import org.apache.camel.Message;
+import org.apache.camel.impl.DefaultMessage;
 import org.apache.commons.lang.ArrayUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.FrameFailedCrcCheckException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidFrameLengthException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidVirtualChannelIdException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class CcsdsFrameDispatcher extends Observable implements Observer {
-	private final static Logger LOG = LoggerFactory.getLogger(CcsdsFrameDispatcher.class);
+public class CcsdsFrameDecoder extends Observable {
+	private final static Logger LOG = LoggerFactory.getLogger(CcsdsFrameDecoder.class);
 	
 	public static int FRAME_LENGTH_IN_OCTETS;
 
@@ -41,7 +41,7 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 
 	private VirtualChannel[] virtualChannel = new VirtualChannel[8];
 	
-	public CcsdsFrameDispatcher(int frameLength, boolean ocfPresent, boolean ecfPresent) {
+	public CcsdsFrameDecoder(int frameLength, boolean ocfPresent, boolean ecfPresent) {
 		
 		FRAME_LENGTH_IN_OCTETS = frameLength;
 		OCF_PRESENT = ocfPresent;
@@ -65,13 +65,12 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 		 */
 		for (int i=0; i<8; i++) {
 			virtualChannel[i] = new VirtualChannel(i);
-			virtualChannel[i].addObserver(this);
 		}
 		
 	}
 	
 	
-	public void process(byte[] frame) throws InvalidFrameLengthException, FrameFailedCrcCheckException, InvalidVirtualChannelIdException {
+	public CcsdsFramePayload process(byte[] frame) throws InvalidFrameLengthException, FrameFailedCrcCheckException, InvalidVirtualChannelIdException {
 		
 		/*
 		 * Check for Frame Length
@@ -158,7 +157,7 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 
 		byte[] payload = ArrayUtils.subarray(frame, payloadOffset, PAYLOAD_END);
 
-		virtualChannel[virtualChannelId].addPayload(spacecraftId, payload, virtualChannelFrameCount, firstHeaderPointer);
+		return virtualChannel[virtualChannelId].processPayload(spacecraftId, payload, virtualChannelFrameCount, firstHeaderPointer);
 	}
 
 	private boolean crcValid(byte[] frame) {
@@ -173,13 +172,29 @@ public class CcsdsFrameDispatcher extends Observable implements Observer {
 			return false;
 		}
 	}
-
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// we received a FramePayload from one of our virtual channels - pass this on to our observers.
-		this.setChanged();
-		notifyObservers(arg);
+	
+	/**
+	 * 
+	 * @param An incoming message carrying a frame as a byte array in its body
+	 * @return A CcsdsFramePayload in the body.
+	 * @throws InvalidVirtualChannelIdException 
+	 * @throws FrameFailedCrcCheckException 
+	 * @throws InvalidFrameLengthException 
+	 */
+	public Message processMessage(Message message) throws InvalidFrameLengthException, FrameFailedCrcCheckException, InvalidVirtualChannelIdException {
+		Message outMessage = new DefaultMessage();
+		
+		byte[] frame;
+		if (message.getBody() instanceof byte[]) {
+			frame = (byte[]) message.getBody();
+			CcsdsFramePayload processedPayload = this.process(frame);
+			outMessage.setHeader("VirtualChannelId", processedPayload.virtualChannelId);
+			outMessage.setHeader("SpacecraftId", processedPayload.spacecraftId);
+			outMessage.setHeader("IsNextFrame", processedPayload.isNextFrame);
+			outMessage.setBody(processedPayload);
+		}
+		
+		return outMessage;
 	}
 
 }

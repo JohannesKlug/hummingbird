@@ -1,12 +1,10 @@
 package org.hbird.transport.protocols.ccsds.transferframe;
 
-import java.util.Observable;
-
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class VirtualChannel extends Observable {
+public class VirtualChannel {
 	private final static Logger LOG = LoggerFactory.getLogger(VirtualChannel.class);
 	
 	private int lastFrameCount = -1;
@@ -16,16 +14,12 @@ public class VirtualChannel extends Observable {
 		this.id = id;
 	}
 	
-	public void addPayload(int spacecraftId, byte[] payload, int frameCount, int firstHeaderPointer) {
-		
-		if (this.countObservers() < 1) {
-			LOG.error("VirtualChannel " + id + " has no observers! This is an error.");
-		}
+	public CcsdsFramePayload processPayload(int spacecraftId, byte[] payload, int frameCount, int firstHeaderPointer) {
 		
 		int payloadOffset = 0;
 		boolean isNext;
 		
-		if (CcsdsFrameDispatcher.isNextFrame(lastFrameCount, frameCount)) {
+		if (CcsdsFrameDecoder.isNextFrame(lastFrameCount, frameCount)) {
 			isNext = true;
 		} else {
 			// we received frames out of order
@@ -39,8 +33,7 @@ public class VirtualChannel extends Observable {
 		byte[] goodPayload = ArrayUtils.subarray(payload, payloadOffset, payload.length);
 		LOG.debug("Passing payload of length " + goodPayload.length);
 		
-		this.setChanged();
-		notifyObservers(new CcsdsFramePayload(spacecraftId, id, goodPayload, isNext));
+		return new CcsdsFramePayload(spacecraftId, id, goodPayload, isNext);
 	}
 	
 	public int getId() {
