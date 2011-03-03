@@ -43,7 +43,6 @@
 						</Export-Package>
 						<Private-Package>
 							org.hbird,
-							org.slf4j.*,
 							org.hbird.transport.spacesystemmodel.testsupport,
 						</Private-Package>
 					</instructions>
