@@ -25,7 +25,6 @@
 		<module>packet-broker</module>
 		<module>parameter-archiver</module>
 		<module>xtce</module>
-		<module>assembly</module>
 	</modules>
 
 	
