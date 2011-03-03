@@ -2,6 +2,8 @@ package org.hbird.transport.protocols.ccsds.transferframe;
 
 import java.util.Observable;
 
+import org.apache.camel.Exchange;
+import org.apache.camel.InOut;
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
 import org.apache.commons.lang.ArrayUtils;
@@ -181,19 +183,20 @@ public class CcsdsFrameDecoder extends Observable {
 	 * @throws FrameFailedCrcCheckException 
 	 * @throws InvalidFrameLengthException 
 	 */
-	public Message processMessage(Message message) throws InvalidFrameLengthException, FrameFailedCrcCheckException, InvalidVirtualChannelIdException {
-		Message outMessage = new DefaultMessage();
+	@InOut
+	public Message processMessage(Exchange exchange) throws InvalidFrameLengthException, FrameFailedCrcCheckException, InvalidVirtualChannelIdException {
+		Message inMessage = exchange.getIn();
+		Message outMessage = exchange.getOut();
 		
 		byte[] frame;
-		if (message.getBody() instanceof byte[]) {
-			frame = (byte[]) message.getBody();
+		if (inMessage.getBody() instanceof byte[]) {
+			frame = (byte[]) inMessage.getBody();
 			CcsdsFramePayload processedPayload = this.process(frame);
 			outMessage.setHeader("VirtualChannelId", processedPayload.virtualChannelId);
 			outMessage.setHeader("SpacecraftId", processedPayload.spacecraftId);
 			outMessage.setHeader("IsNextFrame", processedPayload.isNextFrame);
 			outMessage.setBody(processedPayload);
 		}
-		
 		return outMessage;
 	}
 
