@@ -195,7 +195,7 @@ public class CcsdsFrameDecoder extends Observable {
 			outMessage.setHeader("VirtualChannelId", processedPayload.virtualChannelId);
 			outMessage.setHeader("SpacecraftId", processedPayload.spacecraftId);
 			outMessage.setHeader("IsNextFrame", processedPayload.isNextFrame);
-			outMessage.setBody(processedPayload);
+			outMessage.setBody(processedPayload.payload);
 		}
 		return outMessage;
 	}
