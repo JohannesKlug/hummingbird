@@ -10,17 +10,6 @@
 		</layout>
 	</appender>
 
-	<appender name="LOGFILE" class="org.apache.log4j.RollingFileAppender">
-		<param name="maxFileSize" value="10MB" />
-		<param name="maxBackupIndex" value="5" />
-		<param name="file" value="logs/huginnWebApp.log" />
-		<param name="append" value="true" />
-		<param name="encoding" value="UTF-8" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d{EEE, d MMM yyyy HH:mm:ss} - %p %C{1}.%M(%L) --- %m%n" />
-		</layout>
-	</appender>	
-	
 	<!--	LOGGERS-->
 	<logger name="org.apache">
 		<level value="WARN" />
@@ -30,14 +19,14 @@
 		<level value="WARN" />
 	</logger>
 	
-	<logger name="org.hbird.framebroker">
+	<logger name="org.hbird">
 		<level value="DEBUG"></level>
 	</logger>
 	
 	
 	<!--	ROOT LOGGER-->
 	<root>
-		<level value="ERROR" />
+		<level value="DEBUG" />
 		<appender-ref ref="CONSOLE" />
 	</root>
 
