@@ -57,6 +57,8 @@ public class Slip extends Observable {
 		}
 		
 		output = ArrayUtils.add(output, end);
+		// Add a second end to conform to the dutch implementation
+		output = ArrayUtils.add(output, end);
 		
 	
 		
@@ -67,6 +69,7 @@ public class Slip extends Observable {
 		
 		int[] receivedData = ArrayUtils.EMPTY_INT_ARRAY;
 		int b;
+		boolean endEncountered = false;
 		
 		try {
 			while ((b = is.read()) != -1 ) {
@@ -91,18 +94,28 @@ public class Slip extends Observable {
 						receivedData = ArrayUtils.add(receivedData, esc);
 					} else {
 						if (b == end) {
-							this.setChanged();
-							notifyObservers(convertToByteArray(receivedData));
-							receivedData = ArrayUtils.EMPTY_INT_ARRAY;
+							if (endEncountered == false) {
+								endEncountered = true;
+							} else {
+								endEncountered = false;
+								this.setChanged();
+								notifyObservers(convertToByteArray(receivedData));
+								receivedData = ArrayUtils.EMPTY_INT_ARRAY;
+							}
 						}
 						// not an escaped esc, adding 'escEsc' and the current byte
 						receivedData = ArrayUtils.add(receivedData, escEsc);
 						receivedData = ArrayUtils.add(receivedData, (byte) b);
 					}
 				} else if (b == end) {
-					this.setChanged();
-					notifyObservers(convertToByteArray(receivedData));
-					receivedData = ArrayUtils.EMPTY_INT_ARRAY;
+					if (endEncountered == false) {
+						endEncountered = true;
+					} else {
+						endEncountered = false;
+						this.setChanged();
+						notifyObservers(convertToByteArray(receivedData));
+						receivedData = ArrayUtils.EMPTY_INT_ARRAY;
+					}
 				} else {
 					receivedData = ArrayUtils.add(receivedData, (byte) b);
 				}
