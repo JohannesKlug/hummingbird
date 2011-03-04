@@ -40,6 +40,10 @@ public class BitSetUtilityTest {
 
 	private static BitSet BITSET_FLOAT64_89433_23532268;
 
+	private final static String MULTI_BYTE_STRING = "00000000000100000000000000000000000000000000000000000000000000011110011101110100000000000000000000011110";
+	private final static byte[] MULTI_BYTE_ARRAY = new byte[] { 0, 16, 0, 0, 0, 0, 0, 1, -25, 116, 0, 0, 30 };
+	private static BitSet MULTI_BYTE_BITSET;
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		LOG.info("############ Setting up before all tests #################");
@@ -75,6 +79,10 @@ public class BitSetUtilityTest {
 		BITSET_FLOAT64_89433_23532268 = new BitSet(BIT_STR_FLOAT64_89433_23532268.length());
 		BITSET_FLOAT64_89433_23532268 = BitSetUtility.stringToBitSet(BIT_STR_FLOAT64_89433_23532268, true, true);
 		assertEquals(BIT_STR_FLOAT64_89433_23532268, BitSetUtility.bitSetToBinaryString(BITSET_FLOAT64_89433_23532268, Double.SIZE));
+
+		MULTI_BYTE_BITSET = new BitSet(MULTI_BYTE_STRING.length());
+		MULTI_BYTE_BITSET = BitSetUtility.stringToBitSet(MULTI_BYTE_STRING, true, true);
+		assertEquals(MULTI_BYTE_STRING, BitSetUtility.bitSetToBinaryString(MULTI_BYTE_BITSET, MULTI_BYTE_STRING.length()));
 	}
 
 	@Before
@@ -204,6 +212,14 @@ public class BitSetUtilityTest {
 		LOG.debug("############ Starting test #################");
 		final BitSet actual = BitSetUtility.fromByteArray(BYTES_BE_123);
 		assertEquals(BITSET_BE_123, actual);
+	}
+
+	@Test
+	public final void fromByteArrayMultiByte() {
+		LOG.debug("############ Starting test #################");
+		final BitSet actual = BitSetUtility.fromByteArray(MULTI_BYTE_ARRAY);
+		LOG.debug(BitSetUtility.binDump(actual));
+		assertEquals(MULTI_BYTE_BITSET, actual);
 	}
 
 }

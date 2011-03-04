@@ -366,11 +366,12 @@ public final class BitSetUtility {
 		// Loop over the number of bits we must set in the BitSet to convert this byte array.
 		for (int i = 0; i < bitsToSet; i++) {
 			// calculate which byte in the array covers this bit index
-			final int byteIndex = bytes.length - i / Byte.SIZE - 1;
-
-			// Mask the byte with a mask which contains a 1 set in the current position we are checking.
+			final int byteIndex = i / Byte.SIZE;
+			// Mask the byte with a mask which contains a 1 set in the current bit index we are working on.
 			// We mask the byte moving a 1 from left to right
-			if ((bytes[byteIndex] & (128 >>> (i % 8))) > 0) {
+			final int maskShift = i % 8;
+
+			if ((bytes[byteIndex] & (128 >>> maskShift)) > 0) {
 				// if the results is > 0 i.e. the bit at position i is set to 1 in the byte
 				// then set the same position in the BitSet
 				result.set(i);
