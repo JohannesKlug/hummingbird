@@ -37,6 +37,7 @@ public class SlipTest implements Observer {
 		
 		byte[] outputEmpty = slip.convertToSlip(ArrayUtils.EMPTY_BYTE_ARRAY);
 		assertEquals((byte) (END & 0xFF), outputEmpty[0]);
+		assertEquals((byte) (END & 0xFF), outputEmpty[1]);
 		
 		byte[] oneByteArray = new byte[1];
 		oneByteArray[0] = -127;
@@ -44,18 +45,21 @@ public class SlipTest implements Observer {
 		
 		assertEquals(oneByteArray[0], outputOneByte[0]);
 		assertEquals(END, (int) (outputOneByte[1] & 0xFF));
+		assertEquals(END, (int) (outputOneByte[2] & 0xFF));
 		
 		oneByteArray[0] = (byte) (END & 0xFF);
 		outputOneByte = slip.convertToSlip(oneByteArray);
 		assertEquals(ESCEND, (int) (outputOneByte[0] & 0xFF)) ;
 		assertEquals(END, (int) (outputOneByte[1] & 0xFF));
 		assertEquals(END, (int) (outputOneByte[2] & 0xFF));
+		assertEquals(END, (int) (outputOneByte[3] & 0xFF));
 		
 		oneByteArray[0] = (byte) (ESC & 0xFF);
 		outputOneByte = slip.convertToSlip(oneByteArray);
 		assertEquals(ESCESC, (int) (outputOneByte[0] & 0xFF));
 		assertEquals(ESC, (int) (outputOneByte[1] & 0xFF));
 		assertEquals(END, (int) (outputOneByte[2] & 0xFF));
+		assertEquals(END, (int) (outputOneByte[3] & 0xFF));
 		
 	}
 	
@@ -77,6 +81,7 @@ public class SlipTest implements Observer {
 		receiver.start();
 		
 		os.write(END & 0xFF);
+		os.write(END);
 		
 		Thread.sleep(2000);
 		assertEquals(0, receivedBytes.length);
@@ -86,6 +91,7 @@ public class SlipTest implements Observer {
 		os.write(1);
 		os.write(255);
 		os.write(END);
+		os.write(END & 0xFF);
 		
 		Thread.sleep(2000);
 		assertEquals(3, receivedBytes.length);
@@ -118,6 +124,7 @@ public class SlipTest implements Observer {
 		os.write(257);
 		os.write(-1);
 		os.write(-2);
+		os.write(END);
 		os.write(END);
 		
 		Thread.sleep(2000);
@@ -157,6 +164,7 @@ public class SlipTest implements Observer {
 		
 		// We should receive a single byte (END) with this sequence
 		os.write(ESCEND);
+		os.write(END);
 		os.write(END);
 		os.write(END);
 		
