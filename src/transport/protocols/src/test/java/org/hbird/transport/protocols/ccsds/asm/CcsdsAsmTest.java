@@ -10,6 +10,7 @@ import java.io.PipedOutputStream;
 import java.util.Observable;
 import java.util.Observer;
 
+import org.hbird.transport.protocols.sync.asm.CcsdsAsm;
 import org.junit.Before;
 import org.junit.Test;
 

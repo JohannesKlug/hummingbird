@@ -10,38 +10,41 @@ import java.util.Observer;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
-import org.hbird.transport.protocols.slip.Slip;
+import org.hbird.transport.protocols.sync.FrameSynchroniser;
+import org.hbird.transport.protocols.sync.ObservableFrameSynchroniser;
+import org.hbird.transport.protocols.sync.asm.CcsdsAsm;
+import org.hbird.transport.protocols.sync.slip.Slip;
 
 public class SerialPortAssembly implements Observer {
 
 	@EndpointInject(uri="activemq:slipstream")
 	ProducerTemplate producer;
 	
+	// FIXME These should be removed and put into the default constructor for SLIP
 	private static final int END = (0xC0 & 0xFF), 
 							ESC = (0xDB & 0xFF), 
 							ESCEND = (0xDC & 0xFF), 
 							ESCESC = (0xDD & 0xFF);
 
 	private SerialPortDriver driver;
-	private Slip slip;
 
 	private byte[] receivedBytes;
 	
+	// Default: use /dev/ttyUSB0 and CCSDS ASM for frame sync
 	public SerialPortAssembly() {
-		this("/dev/ttyUSB0");
+		this("/dev/ttyUSB0", new CcsdsAsm());
 	}
 
-	public SerialPortAssembly(String commPortId) {
+	public SerialPortAssembly(String commPortId, final ObservableFrameSynchroniser sync) {
 		try {
 			driver = new SerialPortDriver(commPortId);
-			slip = new Slip(END, ESC, ESCEND, ESCESC);
-			slip.addObserver(this);
+			sync.addObserver(this);
 			
 			Thread receiver = new Thread(
 					new Runnable(){
 						public void run() {
 							try {
-								slip.readFromStream(driver.getInputStream());
+								sync.readFromStream(driver.getInputStream());
 							}
 							catch (IOException e) {
 								// TODO Auto-generated catch block
