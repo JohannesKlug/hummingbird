@@ -1,12 +1,12 @@
-package org.hbird.transport.protocols.ccsds.asm;
+package org.hbird.transport.protocols.sync.asm;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Observable;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.hbird.transport.protocols.sync.ObservableFrameSynchroniser;
 
-public class CcsdsAsm extends Observable {
+public class CcsdsAsm extends ObservableFrameSynchroniser {
 	
 	private byte[] ASM;
 	private int currentByte = 0;

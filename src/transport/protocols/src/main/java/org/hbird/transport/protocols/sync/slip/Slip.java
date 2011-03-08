@@ -1,10 +1,10 @@
-package org.hbird.transport.protocols.slip;
+package org.hbird.transport.protocols.sync.slip;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Observable;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.hbird.transport.protocols.sync.ObservableFrameSynchroniser;
 
 /**
  * This is an implementation of a SLIP-inspired synchronisation mechanism.
@@ -16,7 +16,7 @@ import org.apache.commons.lang.ArrayUtils;
  * data between two markers.
  * 
  */
-public class Slip extends Observable {
+public class Slip extends ObservableFrameSynchroniser {
 	
 	private int end, esc, escEnd, escEsc;
 	

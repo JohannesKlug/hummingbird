@@ -14,6 +14,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.hbird.transport.protocols.sync.slip.Slip;
 import org.junit.Before;
 import org.junit.Test;
 
