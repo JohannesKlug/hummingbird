@@ -127,6 +127,7 @@ public class Slip extends Observable {
 		}
 	}
 	
+	// FIXME This method should be put into commons.
 	private byte[] convertToByteArray(int[] input) {
 		byte[] outputBytes = ArrayUtils.EMPTY_BYTE_ARRAY;
 		
