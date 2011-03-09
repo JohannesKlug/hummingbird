@@ -17,15 +17,15 @@ import org.slf4j.LoggerFactory;
 public class IntegerSignedBehaviour extends AbstractIntegerBehaviour {
 	private static final Logger LOG = LoggerFactory.getLogger(IntegerSignedBehaviour.class);
 
-	public IntegerSignedBehaviour(int sizeInBits, boolean isBigEndian) throws InvalidParameterTypeException {
+	public IntegerSignedBehaviour(final int sizeInBits, final boolean isBigEndian) throws InvalidParameterTypeException {
 		super(sizeInBits, isBigEndian);
-		if (sizeInBits > 32) {
+		if (sizeInBits > Integer.SIZE) {
 			throw new InvalidParameterTypeException("Signed Integers must be 32-bits or less in size.");
 		}
 	}
 
 	@Override
-	public Number valueFromBitSet(BitSet packet) {
+	public Number valueFromBitSet(final BitSet packet) {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Extracting " + this.SIZE_IN_BITS + " bit int value from " + BitSetUtility.binDump(packet));
 		}
@@ -36,10 +36,10 @@ public class IntegerSignedBehaviour extends AbstractIntegerBehaviour {
 			actualParameter = BitSetUtility.reverse(actualParameter, this.SIZE_IN_BITS);
 		}
 
-		byte[] byteArray = BitSetUtility.toByteArray(actualParameter, this.SIZE_IN_BITS);
+		final byte[] byteArray = BitSetUtility.toByteArray(actualParameter, this.SIZE_IN_BITS);
 		LOG.debug("Byte array = " + BytesUtility.decimalDump(byteArray));
 
-		int output = BytesUtility.combine(byteArray, this.SIZE_IN_BITS, true).intValue();
+		final int output = BytesUtility.combine(byteArray, this.SIZE_IN_BITS, true).intValue();
 		LOG.debug("Testing combine.  Output(bin) = " + Long.toBinaryString(output));
 		LOG.debug("Testing combine.  Output(dec) = " + output);
 
@@ -47,12 +47,12 @@ public class IntegerSignedBehaviour extends AbstractIntegerBehaviour {
 	}
 
 	@Override
-	public BitSet insertIntoBitSet(Number number, BitSet bitSetTarget, int offset) {
+	public BitSet insertIntoBitSet(final Number number, final BitSet bitSetTarget, int offset) {
 
-		long unsignedInt = number.longValue();
+		final long unsignedInt = number.longValue();
 
 		// checking whether the value fits into the bit string of length - 1
-		long absValue = Math.abs(unsignedInt);
+		final long absValue = Math.abs(unsignedInt);
 		if (absValue > Math.pow(2.0, SIZE_IN_BITS) - 1 || unsignedInt == Long.MIN_VALUE) {
 			throw new RuntimeException("The value of " + unsignedInt + " does not fit into a bit string of " + (SIZE_IN_BITS - 1) + " bits.");
 		}
