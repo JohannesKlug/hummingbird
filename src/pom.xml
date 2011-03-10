@@ -340,7 +340,14 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<excludes>org.hbird.transport.xtce.castor/**/*</excludes>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
