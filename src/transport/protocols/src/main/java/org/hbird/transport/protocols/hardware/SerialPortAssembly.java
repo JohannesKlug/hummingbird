@@ -84,7 +84,11 @@ public class SerialPortAssembly implements Observer {
 		receivedBytes = (byte[]) arg;
 		producer.sendBody(receivedBytes);
 		System.out.println("Received " + receivedBytes.length + " bytes:");
-		System.out.println(new String(receivedBytes));
+		String receivedBytesInHex = "";
+		for (byte b : receivedBytes) {
+			receivedBytesInHex += Integer.toHexString(b & 0xFF) + " ";
+		}
+		System.out.println(receivedBytesInHex);
 		System.out.println("---------------------------------------------");
 		
 	}
