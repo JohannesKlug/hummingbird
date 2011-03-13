@@ -21,9 +21,7 @@
 		<module>tele</module>
 		<module>protocols</module>
 		<module>space-system-model</module>
-		<module>packet-archiver</module>
 		<module>packet-broker</module>
-		<module>parameter-archiver</module>
 		<module>xtce</module>
 	</modules>
 
