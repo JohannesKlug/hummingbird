@@ -8,10 +8,13 @@ public class CcsdsFrameEncoder {
 	private static int FRAME_LENGTH;
 	
 	private int masterChannelFrameCount = 0;
-	private int virtualChannelFrameCount = 0;
+	private int[] virtualChannelFrameCount = new int[8];
 
 	public CcsdsFrameEncoder(int frameLength) {
 		this.FRAME_LENGTH = frameLength;
+		for (int vcfc : virtualChannelFrameCount) {
+			vcfc = 0;
+		}
 	}
 
 	/**
@@ -37,6 +40,7 @@ public class CcsdsFrameEncoder {
 	 * @throws InvalidSpacecraftIdException 
 	 */
 	public byte[] encodeFrame(int spacecraftId, int virtualChannelId, boolean ocfPresent, byte[] payload) throws InvalidVirtualChannelIdException, InvalidSpacecraftIdException {
+		//FIXME make this function synchronised. Really important :-D
 		
 		// perform input sanity checks
 		if (virtualChannelId < 0 || virtualChannelId > 7) {
@@ -45,6 +49,7 @@ public class CcsdsFrameEncoder {
 		if (spacecraftId < 0 || spacecraftId > 1023) {
 			throw new InvalidSpacecraftIdException(spacecraftId);
 		}
+		
 		
 		byte[] frame = new byte[FRAME_LENGTH];
 		
@@ -65,6 +70,14 @@ public class CcsdsFrameEncoder {
 		} else {
 			frame[1] = (byte) (0 ^ frame[1]);
 		}
+		
+		// set frame counters
+		frame[2] = (byte) (masterChannelFrameCount & 0xFF);
+		frame[3] = (byte) (virtualChannelFrameCount[virtualChannelId] & 0xFF);
+		
+		// increment frame counters
+		masterChannelFrameCount = (masterChannelFrameCount +1) % 256;
+		virtualChannelFrameCount[virtualChannelId] = (virtualChannelFrameCount[virtualChannelId] +1) % 256;
 		
 		return frame;
 	}
