@@ -36,7 +36,7 @@ public class CcsdsFrameEncoder {
 	 * @throws InvalidVirtualChannelIdException 
 	 * @throws InvalidSpacecraftIdException 
 	 */
-	public byte[] encodeFrame(int spacecraftId, int virtualChannelId, byte[] payload) throws InvalidVirtualChannelIdException, InvalidSpacecraftIdException {
+	public byte[] encodeFrame(int spacecraftId, int virtualChannelId, boolean ocfPresent, byte[] payload) throws InvalidVirtualChannelIdException, InvalidSpacecraftIdException {
 		
 		// perform input sanity checks
 		if (virtualChannelId < 0 || virtualChannelId > 7) {
@@ -52,11 +52,19 @@ public class CcsdsFrameEncoder {
 		byte spacecraftIdHighByte = (byte) ((spacecraftId & 0x3f0) >> 4);
 		byte spacecraftIdLowByte = (byte) ((spacecraftId & 0xF) << 4);
 		
+		// set Spacecraft ID
 		frame[0] = spacecraftIdHighByte;
 		frame[1] = spacecraftIdLowByte;
 		
 		// set Virtual Channel ID
 		frame[1] = (byte) (((virtualChannelId & 0x7) << 1) ^ frame[1]);
+		
+		// set Operational Control Field flag
+		if (ocfPresent) {
+			frame[1] = (byte) (1 ^ frame[1]);
+		} else {
+			frame[1] = (byte) (0 ^ frame[1]);
+		}
 		
 		return frame;
 	}
