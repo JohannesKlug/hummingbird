@@ -3,6 +3,7 @@ package org.hbird.transport.protocols.ccsds.transferframe.encoder;
 
 import static org.junit.Assert.*;
 
+import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidOperationalControlFieldException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidSpacecraftIdException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidVirtualChannelIdException;
 import org.junit.Before;
@@ -94,6 +95,16 @@ public class CcsdsFrameEncoderTest {
 		
 		// last bit is set (ocf == true)
 		assertEquals(0x1, actual[1] & 0x1);
+	}
+	
+	@Test (expected=InvalidOperationalControlFieldException.class)
+	public void ocfTooSmall() throws Exception {
+		actual = encoder.encodeFrame(0, 0, new byte[1], new byte[1]);
+	}
+	
+	@Test (expected=InvalidOperationalControlFieldException.class)
+	public void ocfTooLarge() throws Exception {
+		actual = encoder.encodeFrame(0, 0, new byte[5], new byte[1]);
 	}
 	
 	@Test
