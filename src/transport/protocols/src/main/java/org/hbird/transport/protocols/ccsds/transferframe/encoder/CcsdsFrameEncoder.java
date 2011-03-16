@@ -1,5 +1,6 @@
 package org.hbird.transport.protocols.ccsds.transferframe.encoder;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidSpacecraftIdException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidVirtualChannelIdException;
 
@@ -21,7 +22,7 @@ public class CcsdsFrameEncoder {
 	 * Given a number of Transfer Frame constituents, this function encodes a
 	 * valid CCSDS Transfer Frame.
 	 * 
-	 * Unsupported constituents of the Tranfer Frame: 
+	 * Unsupported constituents of the Transfer Frame: 
 	 * * Transfer Frame Version Number (2 bits) shall be 00 according to spec. 
 	 * * OCF flag 
 	 * * OCF 
@@ -39,7 +40,11 @@ public class CcsdsFrameEncoder {
 	 * @throws InvalidVirtualChannelIdException 
 	 * @throws InvalidSpacecraftIdException 
 	 */
-	public byte[] encodeFrame(int spacecraftId, int virtualChannelId, boolean ocfPresent, byte[] payload) throws InvalidVirtualChannelIdException, InvalidSpacecraftIdException {
+	public byte[] encodeFrame(	int spacecraftId, 
+								int virtualChannelId, 
+								byte[] operationalControlField, 
+								byte[] payload
+							) throws InvalidVirtualChannelIdException, InvalidSpacecraftIdException {
 		//FIXME make this function synchronised. Really important :-D
 		
 		// perform input sanity checks
@@ -65,7 +70,8 @@ public class CcsdsFrameEncoder {
 		frame[1] = (byte) (((virtualChannelId & 0x7) << 1) ^ frame[1]);
 		
 		// set Operational Control Field flag
-		if (ocfPresent) {
+		// FIXME will this handle null?
+		if (ArrayUtils.isNotEmpty(operationalControlField)) {
 			frame[1] = (byte) (1 ^ frame[1]);
 		} else {
 			frame[1] = (byte) (0 ^ frame[1]);
@@ -75,11 +81,24 @@ public class CcsdsFrameEncoder {
 		frame[2] = (byte) (masterChannelFrameCount & 0xFF);
 		frame[3] = (byte) (virtualChannelFrameCount[virtualChannelId] & 0xFF);
 		
+		// Transfer Frame Data Field Status
+		/*
+		 * 1 bit Secondary Header Flag
+		 * 1 bit Synch Flag
+		 * 1 bit Packet Order Flag
+		 * 2 bit Segment Length ID
+		 * 11 bits First Header Pointer
+		 */
+		
 		// increment frame counters
 		masterChannelFrameCount = (masterChannelFrameCount +1) % 256;
 		virtualChannelFrameCount[virtualChannelId] = (virtualChannelFrameCount[virtualChannelId] +1) % 256;
 		
 		return frame;
+	}
+	
+	public byte[] encodeFrame(int spacecraftId, int virtualChannelId, byte[] payload) throws InvalidVirtualChannelIdException, InvalidSpacecraftIdException {
+		return encodeFrame(spacecraftId, virtualChannelId, null, payload);
 	}
 
 }
