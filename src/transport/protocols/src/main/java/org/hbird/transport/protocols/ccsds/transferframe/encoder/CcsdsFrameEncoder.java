@@ -1,6 +1,7 @@
 package org.hbird.transport.protocols.ccsds.transferframe.encoder;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidOperationalControlFieldException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidSpacecraftIdException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidVirtualChannelIdException;
 
@@ -39,21 +40,39 @@ public class CcsdsFrameEncoder {
 	 * @return a valid CCSDS Transfer Frame
 	 * @throws InvalidVirtualChannelIdException 
 	 * @throws InvalidSpacecraftIdException 
+	 * @throws InvalidOperationalControlFieldException 
 	 */
 	public byte[] encodeFrame(	int spacecraftId, 
 								int virtualChannelId, 
 								byte[] operationalControlField, 
 								byte[] payload
-							) throws InvalidVirtualChannelIdException, InvalidSpacecraftIdException {
+							) throws InvalidVirtualChannelIdException, InvalidSpacecraftIdException, InvalidOperationalControlFieldException {
 		//FIXME make this function synchronised. Really important :-D
 		
 		// perform input sanity checks
+		
 		if (virtualChannelId < 0 || virtualChannelId > 7) {
 			throw new InvalidVirtualChannelIdException(virtualChannelId);
 		}
+		
 		if (spacecraftId < 0 || spacecraftId > 1023) {
 			throw new InvalidSpacecraftIdException(spacecraftId);
 		}
+		
+		boolean ocfPresent;
+		if (operationalControlField == null || operationalControlField.length == 0) {
+			//OCF not present
+			
+		} else if (operationalControlField.length == 4) {
+			// OCF present and of correct size
+
+			
+		} else {
+			// OCF present but of wrong size (MUST be 4 bytes as per the spec.
+			throw new InvalidOperationalControlFieldException(operationalControlField.length);
+		}
+		
+		// end input sanity checks
 		
 		
 		byte[] frame = new byte[FRAME_LENGTH];
@@ -97,7 +116,7 @@ public class CcsdsFrameEncoder {
 		return frame;
 	}
 	
-	public byte[] encodeFrame(int spacecraftId, int virtualChannelId, byte[] payload) throws InvalidVirtualChannelIdException, InvalidSpacecraftIdException {
+	public byte[] encodeFrame(int spacecraftId, int virtualChannelId, byte[] payload) throws InvalidVirtualChannelIdException, InvalidSpacecraftIdException, InvalidOperationalControlFieldException {
 		return encodeFrame(spacecraftId, virtualChannelId, null, payload);
 	}
 

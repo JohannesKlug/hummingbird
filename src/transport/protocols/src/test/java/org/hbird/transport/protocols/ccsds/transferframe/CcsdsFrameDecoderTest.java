@@ -9,6 +9,7 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.hbird.transport.protocols.ccsds.transferframe.CcsdsFrameDecoder;
 import org.hbird.transport.protocols.ccsds.transferframe.encoder.CcsdsFrameEncoder;
+import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidOperationalControlFieldException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidSpacecraftIdException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidVirtualChannelIdException;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class CcsdsFrameDecoderTest extends CamelTestSupport {
 	
 
 	@Test
-	public void camelMessageProcessing() throws InterruptedException {
+	public void camelMessageProcessing() throws InterruptedException, Exception {
 		
 		assertNotNull(template);
 		assertNotNull(resultEndpoint);
