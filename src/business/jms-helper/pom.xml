@@ -9,12 +9,12 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.hbird.business</groupId>
-	<artifactId>jms-helper</artifactId>
-	<name>JMS Helper</name>
-	<version>0.0.2-SNAPSHOT</version>
+	<groupId>org.hbird.exchange</groupId>
+	<artifactId>data</artifactId>
+	<name>Exchange tier - Data Module</name>
+	<version>0.0.1-SNAPSHOT</version>
 
-	<description>Library for formatting. reading and writing JMS messages, including headers and bodies.</description>
+	<description>The exchange tier contains the data exchanged between the different tiers, as well as the types used to format and manage this data. The exchange tier is thsu used by all other tiers, i.e. transport, business and graphical.</description>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
