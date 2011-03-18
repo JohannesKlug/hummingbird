@@ -18,6 +18,7 @@
 
 	<modules>
 		<module>commons</module>
+		<module>tele</module>
 		<module>protocols</module>
 		<module>space-system-model</module>
 		<module>packet-broker</module>
