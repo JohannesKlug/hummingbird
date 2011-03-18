@@ -9,7 +9,7 @@
 
 	<name>Hummingbird Root Project</name>
 	<description>The Hummingbird root project is a container for all Hummingbird components, each created in a separate maven module. By building this project, the complete system can be built.</description>
-	<url/>
+	<url>http://hbird.org/</url>
 
 	<modules>
 		<module>transport</module>
