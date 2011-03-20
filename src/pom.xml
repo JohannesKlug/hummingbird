@@ -11,6 +11,13 @@
 	<description>The Hummingbird root project is a container for all Hummingbird components, each created in a separate maven module. By building this project, the complete system can be built.</description>
 	<url>http://hbird.org/</url>
 
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+
+
 	<modules>
 		<module>transport</module>
 		<module>business</module>
@@ -319,7 +326,19 @@
 				<artifactId>maven-source-plugin</artifactId>
 				<version>2.1.2</version>
 			</plugin>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+<!--				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions> -->
+			</plugin>
 		</plugins>
 	</build>
 
