@@ -16,12 +16,16 @@
  */
 package org.hbird.business.validation.parameter;
 
-import org.hbird.transport.telemetry.NotComparableTypeException;
+import org.hbird.exchange.type.Comperator;
+import org.hbird.exchange.type.Parameter;
 
 /**
  * Limit class for checking whether a lower end limit has been violated.
  */
 public class UpperLimit extends BaseLimit {
+
+	/***/
+	private static final long serialVersionUID = -6367547285976628021L;
 
 	/**
 	 * Constructor with no initial limit value. The limit will NOT start processing
@@ -29,8 +33,8 @@ public class UpperLimit extends BaseLimit {
 	 * 
 	 * @param stateName Name of the state parameter that will be issued.
 	 */
-	public UpperLimit(String stateName) {
-		super(stateName);
+	public UpperLimit(String name, String description) {
+		super(name, description);
 	}
 	
 	/**
@@ -40,15 +44,15 @@ public class UpperLimit extends BaseLimit {
 	 * @param stateName Name of the state parameter that will be issued.
 	 * @param limit Initial limit value.
 	 */
-	public UpperLimit(String stateName, double value) {
-		super(stateName);
-		limit = value;
+	public UpperLimit(String name, String description, double limit) {
+		super(name, description);
+		this.limit = new Parameter("Upper Limit", "", limit, "");
 	}
 
 	/* (non-Javadoc)
 	 * @see org.hbird.validation.parameter.BaseLimit#checkLimit()
 	 */
-	protected boolean checkLimit() throws NotComparableTypeException {
-		return (Double) parameter <= limit;
+	protected boolean checkLimit() {
+		return Comperator.compare(parameter.getValue(), limit.getValue()) <= 0;
 	}	
 }

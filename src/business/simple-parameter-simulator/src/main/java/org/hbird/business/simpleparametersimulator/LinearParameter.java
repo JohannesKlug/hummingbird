@@ -21,10 +21,6 @@ import java.util.Date;
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 
-import org.hbird.business.formatter.ExchangeFormatter;
-
-
-
 /**
  * A linearly changing parameter. The value is calculated as
  *   f(time) = intercept + deltaFrequency * (time - startTime) % modolus
@@ -33,6 +29,9 @@ import org.hbird.business.formatter.ExchangeFormatter;
  *   f(time) == f(time + N*modolus), where N = {0, 1, 2, ...} 
  */
 public class LinearParameter extends BaseParameter {
+
+	/***/
+	private static final long serialVersionUID = -8104788051138461757L;
 
 	/** The class logger. */
 	protected static Logger logger = Logger.getLogger(LinearParameter.class);
@@ -47,8 +46,7 @@ public class LinearParameter extends BaseParameter {
 	protected long modolus = 60000;
 
 	/** The time at which the parameter was first created. */
-	protected Date startTime = new Date();
-
+	protected Date startTime = null;
 
 	/**
 	 * Constructor setting all variables needed for the linear graph.
@@ -58,21 +56,25 @@ public class LinearParameter extends BaseParameter {
 	 * @param modolus The delta time at which the value resets.
 	 * @param name The name of the parameter to be generated.
 	 */
-	public LinearParameter(double intercept, double deltaFrequency, long modolus, String name) {
-		super(name);
+	public LinearParameter(String name, String description, String unit, double intercept, double deltaFrequency, long modolus) {
+		super(name, description);
 		this.intercept = intercept;
 		this.deltaFrequency = deltaFrequency;	
 		this.modolus = modolus;
+		
+		this.startTime = new Date();
+		this.value = new Double(intercept + deltaFrequency * (((new Date()).getTime() - startTime.getTime()) % modolus));
+		this.unit  = unit;
 	}
 
 	/* (non-Javadoc)
 	 * @see org.hbird.simpleparametersimulator.BaseParameter#process(org.apache.camel.Exchange)
 	 */
-	public void process(Exchange arg0) {
+	public void process(Exchange exchange) {
 		try {
 			logger.debug("Sending new linear value with name '" + name + "'.");
-			Double value = intercept + deltaFrequency * (((new Date()).getTime() - startTime.getTime()) % modolus);
-			arg0.setIn(ExchangeFormatter.createParameterMessage(name, Double.class.toString(), value));
+			this.value = new Double(intercept + deltaFrequency * (((new Date()).getTime() - startTime.getTime()) % modolus));
+			exchange.getIn().setBody(this);
 		} 
 		catch (Exception e) {
 			logger.error("Courght exception " + e);

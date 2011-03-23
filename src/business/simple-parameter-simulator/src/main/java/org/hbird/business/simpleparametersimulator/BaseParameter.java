@@ -17,26 +17,38 @@
 package org.hbird.business.simpleparametersimulator;
 
 import org.apache.camel.Exchange;
+import org.hbird.exchange.type.Parameter;
 
 /**
  * Base type for all simulated parameters. Holds the name and implements the Camel
  * callback method. 
  *
  */
-public abstract class BaseParameter {
+public abstract class BaseParameter extends Parameter {
 
-	/** The name of the parameter being generated. */
-	protected String name = "";
-		
-	/**
-	 * Basic constructor, taking the name of the parameter to be generated as an argument.
-	 * 
-	 * @param name The name of the parameter to be created.
-	 */
-	public BaseParameter(String name) {
-		this.name = name;
-	}
+	/***/
+	private static final long serialVersionUID = 2253062760976782486L;
+
 	
+	/**
+	 * @param name
+	 * @param description
+	 */
+	public BaseParameter(String name, String description) {
+		super(name, description, null, "");
+	}
+
+	
+	/**
+	 * @param name
+	 * @param description
+	 * @param value
+	 * @param unit
+	 */
+	public BaseParameter(String name, String description, Object value, String unit) {
+		super(name, description, value, unit);
+	}
+
 	/**
 	 * Method to be implemented by specific base classes. Creates the actual parameter
 	 * and sets it in the Exchange as the 'in -> body'

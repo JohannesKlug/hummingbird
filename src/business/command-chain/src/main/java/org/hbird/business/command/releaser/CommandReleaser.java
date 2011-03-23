@@ -16,8 +16,6 @@
  */
 package org.hbird.business.command.releaser;
 
-import java.util.Date;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
@@ -25,41 +23,46 @@ import org.apache.camel.impl.DefaultExchange;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.hbird.business.buffers.StateBuffer;
-import org.hbird.business.formatter.ExchangeFormatter;
-import org.hbird.business.formatter.HeaderFields;
-import org.hbird.business.interfaces.ITask;
-import org.hbird.business.type.CommandDefinition;
+import org.hbird.exchange.dataprovider.IDataProvider;
+import org.hbird.exchange.tasks.ITask;
+import org.hbird.exchange.type.Command;
+import org.hbird.exchange.type.StateParameter;
 
 /**
- * @TITLE Command Releaser Design
  * The command releaser reads commands from the 'Command' queue, validate that they 
  * can be released, schedule the tasks to be done in the system as a result of the command
  * and then release the command.
  * 
- * h2. Command Execution Time
+ * The command releaser do not use the 'releaseTime' scheduling for command release. This
+ * is expected done prior to reception by this bean. A command received by this class will
+ * thus be processed immediately.
  * 
- * The header of the command message contains the execution time of the command. The releaser will
- * wait until then to actually process the command.
- * 
- * h2. Release Validation
- * 
- * A [[Command Definition]] can contains any number of 'lock states', being state parameters
+ * A Command can contains any number of 'lock states', being state parameters
  * (true / false). In case any of these are false at the time of execution, the command wont
- * be released. 
- * 
- * h2. Schedule Tasks
+ * be released, i.e. the route will be stopped. 
  * 
  * A command will affect the satellite in some way. Thats means that the ground system(s) most likely
  * also have to be reconfigured; limits may need to be disabled, changed and at some point enabled again and
- * specific checks may need to be done to validate that the command was send, executed and succeeded.   
+ * specific checks may need to be done to validate that the command was send, executed and succeeded. To
+ * release tasks, the command releaser uses the route entry point 'begin:Tasks'. This must be available
+ * in the route configuration.
  * 
+ * The command releaser thereafter parses the command on in the route.
  * 
- * @CATEGORY Component Design
- * @END
+ * Example of Usage:
+ * 
+ * <bean id="commandReleaser" class="org.hbird.business.command.releaser.CommandReleaser"/>
+ * 
+ * <route>
+ *   <from uri="activemq:queue:Commands"/>
+ *   <to uri="bean:commandReleaser"/>
+ *   <to uri="activemq:queue:ReleasedCommands"/>
+ * </route>
+ * 
  */
 public class CommandReleaser {
 
+	/** The object logger. */
 	protected static Logger logger = Logger.getLogger(CommandReleaser.class);
 	
 	/** Queue for the task schedule. */
@@ -70,51 +73,41 @@ public class CommandReleaser {
 	@Autowired
 	protected CamelContext context = null;
 
-	/** Provider of state parameters*/
+	/** A provider of data. Is used to retrieve parameter state information. */
 	@Autowired
-	protected StateBuffer stateBuffer = null;
-
+	protected IDataProvider provider = null;
+	
 	/**
 	 * Processor for the scheduling of validation task for a command as well as the
 	 * release of the command.
 	 * 
-	 * @param arg0
+	 * @param exchange
 	 * @throws InterruptedException 
 	 */
-	public void process(Exchange arg0) throws InterruptedException {
+	public void process(Exchange exchange) throws InterruptedException {
 
-		logger.info("Processing command '" + ExchangeFormatter.getName(arg0) + "' with ID " + ExchangeFormatter.getMessageId(arg0) + "'.");
-		
 		/** Get the command definition. */
-		CommandDefinition definition = (CommandDefinition) arg0.getIn().getBody();
-
-		/** Wait until the execution time. */
-		Date now = new Date();
-		long releaseTime = (Long) arg0.getIn().getHeader(HeaderFields.RELEASETIME);
-
-		if (releaseTime > now.getTime()) {
-			logger.info("Delaying command for " + (releaseTime - now.getTime())/1000 + " seconds.");
-			Thread.sleep(releaseTime - now.getTime());
-		} 
-
+		Command definition = (Command) exchange.getIn().getBody();
+		logger.info("Processing command '" + definition.getName() + "' with ID " + definition.getObjectid() + "'.");
+		
 		/** Validate the lock state(s). */
 		for (String state : definition.getLockStates()) {
-			if (stateBuffer.getState(state) == false) {				
+			StateParameter parameter = (StateParameter) provider.getParameter("name=" + state);
+			if ((Boolean) parameter.getValue() == false) {				
 				/** Stop the release of the command. */
-				arg0.setProperty(Exchange.ROUTE_STOP, true);
+				exchange.setProperty(Exchange.ROUTE_STOP, true);
 				return;
 			}
 		}
 
 		/** Schedule all tasks. */
 		for (ITask task : definition.getTasks()) {
-			task.configure(arg0.getIn());
+			Exchange taskExchange = new DefaultExchange(context);
+			taskExchange.getIn().setBody(task);
+			taskExchange.getIn().setHeader("AMQ_SCHEDULED_DELAY", task.getExecutionTime());
+			producer.send("direct:Tasks", taskExchange);
 			
-			Exchange exchange = new DefaultExchange(context);
-			exchange.setIn(ExchangeFormatter.createTask("Task", (Long) arg0.getIn().getHeader(HeaderFields.RELEASETIME) + task.deltaTime(), (String) arg0.getIn().getHeader(HeaderFields.NAME), task));
-			producer.send("direct:tasks", exchange);
-			
-			logger.info("Scheduling task '" + task.getClass().toString() + "' with ID " + ExchangeFormatter.getMessageId(exchange) + "'.");
+			logger.info("Scheduling task '" + task.getClass().toString() + "' with ID " + task.getObjectid() + "'.");
 		}
 
 		/** Command is forwarded in the route, i.e. released. */

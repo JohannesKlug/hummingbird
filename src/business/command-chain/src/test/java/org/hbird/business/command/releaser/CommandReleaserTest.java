@@ -1,7 +1,23 @@
+/**
+ * Licensed to the Hummingbird Foundation (HF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The HF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.hbird.business.command.releaser;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.camel.CamelContext;
@@ -11,14 +27,14 @@ import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.impl.DefaultExchange;
-import org.hbird.business.buffers.StateBuffer;
 import org.hbird.business.command.task.DummyTask;
-import org.hbird.business.formatter.HeaderFields;
-import org.hbird.business.interfaces.ITask;
-import org.hbird.business.tasks.checks.Range;
-import org.hbird.business.tasks.checks.StaticValue;
-import org.hbird.business.type.Argument;
-import org.hbird.business.type.CommandDefinition;
+import org.hbird.exchange.dataprovider.SimpleDataBuffer;
+import org.hbird.exchange.tasks.ITask;
+import org.hbird.exchange.tasks.checks.RangeCheck;
+import org.hbird.exchange.type.Argument;
+import org.hbird.exchange.type.Command;
+import org.hbird.exchange.type.Parameter;
+import org.hbird.exchange.type.StateParameter;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
@@ -41,38 +57,42 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
     protected CamelContext context;
 
 	@Autowired
-	protected StateBuffer stateConnector;
+	protected SimpleDataBuffer stateConnector;
+
+	protected Command createCommand() {
+		List<String> lockStates = Arrays.asList(new String[] {"STATE1", "STATE2", "STATE3"});
+		List<ITask> tasks = Arrays.asList(new ITask[] {new DummyTask(), new DummyTask()});
+		List<Argument> arguments = new ArrayList<Argument>(); 
+			
+		Command definition = new Command("TestCommand", "Test description", arguments, lockStates, tasks, 0, 0);
+		RangeCheck range = new RangeCheck("TestStateParameter", "TestParameter", 0, new StateParameter("", "", definition, new Boolean(true)), new Parameter("", "", new Double(0d), ""), new Parameter("", "", new Double(10d), ""));
+		
+		arguments.add(new Argument("TestArgument1", "Test description", new Long(64l), "", range));
+		arguments.add(new Argument("TestArgument2", "Test description", new Long(64l), "", range));
+		arguments.add(new Argument("TestArgument3", "Test description", new Long(64l), "", range));
+		
+		return definition;
+	}
 	
 	@DirtiesContext
 	@Test
 	public void testFailingRelease() {
-		
-		stateConnector.addEntry(createExchange("STATE1", true));
-		stateConnector.addEntry(createExchange("STATE2", true));
-		stateConnector.addEntry(createExchange("STATE3", false));
-		
-		List<String> lockStates = Arrays.asList(new String[] {"STATE1", "STATE2", "STATE3"});
-		
-		List<ITask> tasks = Arrays.asList(new ITask[] {new DummyTask(), new DummyTask()});
+		Command command = createCommand();
 
-		Range range = new Range(0, "TestStateParameter", "TestParameter", new StaticValue(0d), new StaticValue(10d)); 
-		List<Argument> arguments = Arrays.asList(new Argument[]{new Argument("TestArgument1", "Test description", Long.class.toString(), 64l, "m/s", range), new Argument("TestArgument2", "Test description", Long.class.toString(), 64l, "m/s", range), new Argument("TestArgument3", "Test description", Long.class.toString(), 64l, "m/s", range)});
-		
-		CommandDefinition definition = new CommandDefinition("TestCommand", "Test description", arguments, lockStates, tasks);
-		
+		stateConnector.addParameter(new StateParameter("STATE1", "", command, true));
+		stateConnector.addParameter(new StateParameter("STATE2", "", command, true));
+		stateConnector.addParameter(new StateParameter("STATE3", "", command, false));
+
 		/** Release command with states that will fail, i.e. locked. */
 		Exchange exchange = new DefaultExchange(context);
-		exchange.getIn().setBody(definition);
-		exchange.getIn().setHeader(HeaderFields.RELEASETIME, ((new Date()).getTime() + 1000));
-		exchange.getIn().setHeader(HeaderFields.NAME, "TestCommand");
-
+		exchange.getIn().setBody(command);
 		template.send(exchange);
 		
 		/** Lock state is false, so exchange should be stopped. */
 		assertTrue(releasedCommands.getReceivedCounter() == 0);
 		assertTrue(scheduledTasks.getReceivedCounter() == 0);
 
-		for (ITask task : tasks) {
+		for (ITask task : command.getTasks()) {
 			assertTrue(((DummyTask) task).executeCalled == false);
 		}
 	}
@@ -81,24 +101,15 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 	@Test
 	public void testSuccessfulRelease() {
 
-		stateConnector.addEntry(createExchange("STATE1", true));
-		stateConnector.addEntry(createExchange("STATE2", true));
-		stateConnector.addEntry(createExchange("STATE3", true));
-		
-		List<String> lockStates = Arrays.asList(new String[] {"STATE1", "STATE2", "STATE3"});
-		
-		List<ITask> tasks = Arrays.asList(new ITask[] {new DummyTask(), new DummyTask()});
+		Command command = createCommand();
 
-		Range range = new Range(0, "TestStateParameter", "TestParameter", new StaticValue(0d), new StaticValue(10d)); 
-		List<Argument> arguments = Arrays.asList(new Argument[]{new Argument("TestArgument1", "Test description", Long.class.toString(), 64l, "m/s", range), new Argument("TestArgument2", "Test description", Long.class.toString(), 64l, "m/s", range), new Argument("TestArgument3", "Test description", Long.class.toString(), 64l, "m/s", range)});
-		
-		CommandDefinition definition = new CommandDefinition("TestCommand", "Test description", arguments, lockStates, tasks);
+		stateConnector.addParameter(new StateParameter("STATE1", "", command, true));
+		stateConnector.addParameter(new StateParameter("STATE2", "", command, true));
+		stateConnector.addParameter(new StateParameter("STATE3", "", command, true));
 		
 		/** Release command with states that will fail, i.e. locked. */
 		Exchange exchange = new DefaultExchange(context);
-		exchange.getIn().setBody(definition);
-		exchange.getIn().setHeader(HeaderFields.RELEASETIME, ((new Date()).getTime() + 1000));
-		exchange.getIn().setHeader(HeaderFields.NAME, "TestCommand");
+		exchange.getIn().setBody(command);
 
 		template.send(exchange);
 		
@@ -106,58 +117,8 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 		assertTrue(releasedCommands.getReceivedCounter() == 1);
 		assertTrue(scheduledTasks.getReceivedCounter() == 2);
 		
-		for (ITask task : tasks) {
+		for (ITask task : command.getTasks()) {
 			assertTrue(((DummyTask) task).executeCalled == false);
 		}
-	}
-
-	@DirtiesContext
-	@Test
-	public void testImmediateRelease() {
-
-		
-		stateConnector.addEntry(createExchange("STATE1", true));
-		stateConnector.addEntry(createExchange("STATE2", true));
-		stateConnector.addEntry(createExchange("STATE3", true));
-		
-		List<String> lockStates = Arrays.asList(new String[] {"STATE1", "STATE2", "STATE3"});
-		
-		List<ITask> tasks = Arrays.asList(new ITask[] {new DummyTask(), new DummyTask()});
-
-		Range range = new Range(0, "TestStateParameter", "TestParameter", new StaticValue(0d), new StaticValue(10d)); 
-		List<Argument> arguments = Arrays.asList(new Argument[]{new Argument("TestArgument1", "Test description", Long.class.toString(), 64l, "m/s", range), new Argument("TestArgument2", "Test description", Long.class.toString(), 64l, "m/s", range), new Argument("TestArgument3", "Test description", Long.class.toString(), 64l, "m/s", range)});
-		
-		CommandDefinition definition = new CommandDefinition("TestCommand", "Test description", arguments, lockStates, tasks);
-		
-		/** Release command with states that will fail, i.e. locked. */
-		Exchange exchange = new DefaultExchange(context);
-		exchange.getIn().setBody(definition);
-		exchange.getIn().setHeader(HeaderFields.RELEASETIME, 0l);
-		exchange.getIn().setHeader(HeaderFields.NAME, "TestCommand");
-		
-		exchange.getIn().setHeader("TestArgument1", "Arg1");
-		exchange.getIn().setHeader("TestArgument2", "Arg2");
-		exchange.getIn().setHeader("TestArgument3", "Arg3");
-
-		template.send(exchange);
-		
-		/** Lock state is true, so exchange should be stopped. */
-		assertTrue(releasedCommands.getReceivedCounter() == 1);
-		assertTrue(scheduledTasks.getReceivedCounter() == 2);
-		
-		for (ITask task : tasks) {
-			assertTrue(((DummyTask) task).executeCalled == false);
-		}
-
-		for (Argument argument : ((CommandDefinition) releasedCommands.getExchanges().get(0).getIn().getBody()).getArguments()) {
-			assertTrue(releasedCommands.getExchanges().get(0).getIn().getHeader(argument.getName()) != null);
-		}
-	}
-
-	protected Exchange createExchange(String name, boolean value) {
-		Exchange exchange = new DefaultExchange(context);
-		exchange.getIn().setHeader(HeaderFields.NAME, name);
-		exchange.getIn().setBody(value);
-		return exchange;
 	}
 }

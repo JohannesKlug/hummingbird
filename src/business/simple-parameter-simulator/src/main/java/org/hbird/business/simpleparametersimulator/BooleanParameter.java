@@ -19,21 +19,20 @@ package org.hbird.business.simpleparametersimulator;
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 
-import org.hbird.business.formatter.ExchangeFormatter;
-
-
 /**
  * Class simulating a boolean parameter. The parameter flips each time the process
  * method is called, i.e. value = !value.
  */
 public class BooleanParameter extends BaseParameter {
 
+	/***/
+	private static final long serialVersionUID = -5694636851932750007L;
+
 	/** The class logger. */
 	protected static Logger logger = Logger.getLogger(BooleanParameter.class);
 
 	/** The boolean value of the last send parameter.*/
 	protected Boolean value = true;
-
 
 	/**
 	 * Basic constructor, setting the initial value and the name of the boolean
@@ -42,18 +41,18 @@ public class BooleanParameter extends BaseParameter {
 	 * @param value The initial value of the parameter.
 	 * @param name The name of the parameter to be generated.
 	 */
-	public BooleanParameter(boolean value, String name) {
-		super(name);
-		this.value = value;
+	public BooleanParameter(String name, String description, Boolean value, String unit) {
+		super(name, description, value, unit);
 	}
 
 	/* (non-Javadoc)
 	 * @see org.hbird.simpleparametersimulator.BaseParameter#process(org.apache.camel.Exchange)
 	 */
-	public void process(Exchange arg0) {
+	public void process(Exchange exchange) {
 		try {
 			logger.debug("Sending new boolean value with name '" + name + "'.");
-			arg0.setIn(ExchangeFormatter.createParameterMessage(name, Boolean.class.toString(), value = !value));
+			this.value = new Boolean(!new Boolean(value));
+			exchange.getIn().setBody(this);
 		} 
 		catch (Exception e) {
 			logger.error("Courght exception " + e);
