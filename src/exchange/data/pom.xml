@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <parent>
+    <artifactId>hummingbird-business</artifactId>
+    <groupId>org.hbird</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.hbird.exchange</groupId>
+  <artifactId>data</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Exchange - Data Module</name>  
+  <description>The exchange tier contains the data exchanged between the different tiers, as well as the types used to format and manage this data. The exchange tier is thsu used by all other tiers, i.e. transport, business and graphical.</description>
+  
+  <url>https://github.com/JohannesKlug/hummingbird/wiki</url>  
+  
+  <dependencies>
+
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+		
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-core</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+    </dependency>
+		
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+		
+  </dependencies>
+
+</project>

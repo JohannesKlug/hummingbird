@@ -1,88 +1,89 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
   
-  	<parent>
-		<artifactId>hummingbird-business</artifactId>
-		<groupId>org.hbird</groupId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
+  <parent>
+    <artifactId>hummingbird-business</artifactId>
+    <groupId>org.hbird</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
 
-	<groupId>org.hbird.business</groupId>	
-	<artifactId>command-chain</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.hbird.business</groupId>	
+  <artifactId>command-chain</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>Business - Command Module</name>  	
+  <description>The full commanding chain of the Hummingbird mission control system.</description>
+
+  <url>https://github.com/JohannesKlug/hummingbird/wiki</url>
 	
-	<name>Command Chain</name>  	
-	<description>The full commanding chain of the Hummingbird mission control system.</description>
+<!--	<build>-->
+<!--		<plugins>-->
+<!--			<plugin>-->
+<!--				<groupId>org.apache.felix</groupId>-->
+<!--				<artifactId>maven-bundle-plugin</artifactId>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>bundle-manifest</id>-->
+<!--						<phase>process-classes</phase>-->
+<!--						<goals>-->
+<!--							<goal>manifest</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--				<configuration>-->
+<!--					<instructions>-->
+<!--						<Export-Package>-->
+<!--							org.hbird.validation							-->
+<!--						</Export-Package>-->
+<!--						<Private-Package>-->
+<!--							org.hbird,-->
+<!--							org.slf4j.*-->
+<!--						</Private-Package>-->
+<!--					</instructions>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
+<!--		</plugins>-->
+<!--	</build>-->
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.hbird.exchange</groupId>
+      <artifactId>data</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
 	
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>bundle-manifest</id>
-						<phase>process-classes</phase>
-						<goals>
-							<goal>manifest</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<instructions>
-						<Export-Package>
-							org.hbird.validation							
-						</Export-Package>
-						<Private-Package>
-							org.hbird,
-							org.slf4j.*
-						</Private-Package>
-					</instructions>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-test</artifactId>
+    </dependency>
 
-	<dependencies>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-jms</artifactId>
+    </dependency>
 
-		<dependency>
-			<groupId>org.hbird.business</groupId>
-			<artifactId>jms-helper</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
-		</dependency>
-	
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-test</artifactId>
-		</dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-http</artifactId>
+    </dependency>
 
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jms</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-http</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-		</dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+    </dependency>
 		
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+    </dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<scope>test</scope>
-			<version>2.5</version>
-		</dependency>
-	</dependencies>
-
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <scope>test</scope>
+<!--      <version>2.5</version>-->
+    </dependency>
+    
+  </dependencies>
 </project>

@@ -18,9 +18,8 @@ package org.hbird.business.validation.parameter;
 
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
-
-import org.hbird.business.formatter.ExchangeFormatter;
-import org.hbird.transport.telemetry.NotComparableTypeException;
+import org.hbird.exchange.type.Parameter;
+import org.hbird.exchange.type.StateParameter;
 
 /** 
  * The baselimit is an abstract base class for all limit check types. It
@@ -44,37 +43,32 @@ import org.hbird.transport.telemetry.NotComparableTypeException;
  * - processEnabled. Process a camel Exchange enabling / disabling this limit.
  *
  */
-public abstract class BaseLimit {
+public abstract class BaseLimit extends StateParameter {
+
+	/***/
+	private static final long serialVersionUID = -4213060932052205606L;
 
 	/** The class logger. */
 	private static org.apache.log4j.Logger logger = Logger.getLogger(BaseLimit.class);
 	
-	/** The name of the state parameter that the limit will issue. */
-	String stateName = "";
-	
 	/** Flag indicating whether the limit is enabled or not. If set to 'null' or 'false' then
 	 * the limit will stop any camel route into the bean, i.e. not issue any state parameters. */
-	protected Boolean enabled = null;
+	protected Parameter enabled = null;
 	
 	/** The limit value to be checked against. */
-	protected Double limit = null;
+	protected Parameter limit = null;
 	
 	/** The last received parameter value. Is stored locally so that updates to the limit value and / or
 	 * enabling of the limit can immediately lead to a limit check and issue of a state value. */
-	protected Object parameter = null;
-	
-	/** The name of the parameter that the limit is applicable to. Set automatically based on the 
-	 * parameter routed to the limit. */
-	protected String parameterName = "";
+	protected Parameter parameter = null;
 	
 	/**
 	 * Constructor.
 	 * 
 	 * @param stateName The name of the state parameter to be created.
 	 */
-	public BaseLimit(String stateName) {
-		super();
-		this.stateName = stateName;
+	public BaseLimit(String name, String description) {
+		super(name, description, null, true);
 	}
 
 	
@@ -86,11 +80,15 @@ public abstract class BaseLimit {
 	 * @param arg0 A camel exchange carrying a parameter instance.
 	 * @throws Exception
 	 */
-	public void processParameter(Exchange arg0) throws Exception {
-		logger.debug("Limit state '" + stateName + "' received parameter value for validation.");
-		parameter = arg0.getIn().getHeader("Value");
-		parameterName = (String) arg0.getIn().getHeader("Name");
-		doProcess(arg0);	
+	public void processParameter(Exchange arg0) {
+		try {
+		logger.debug("Limit state '" + name + "' with ID '" + objectid + "' received parameter value for validation.");
+		parameter = (Parameter) arg0.getIn().getBody();
+		doProcess(arg0);
+		} 
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -101,10 +99,15 @@ public abstract class BaseLimit {
 	 * @param arg0 A camel exchange carrying a Double instance expressing the size of the limit.
 	 * @throws Exception
 	 */
-	public void processLimit(Exchange arg0) throws Exception {
-		limit = (Double) arg0.getIn().getHeader("Value");
-		logger.info("Limit '" + stateName + "' set to '" + limit + "'.");
-		doProcess(arg0);	
+	public void processLimit(Exchange arg0) {
+		try {
+		limit = (Parameter) arg0.getIn().getBody();
+		logger.info("Limit '" + name + "' with ID '" + objectid + "' set to '" + limit + "'.");
+		doProcess(arg0);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -116,8 +119,8 @@ public abstract class BaseLimit {
 	 * @throws Exception
 	 */
 	public void processEnabled(Exchange arg0) throws Exception {
-		enabled = (Boolean) arg0.getIn().getHeader("Value");
-		logger.info("Limit '" + stateName + "' switches to '" + enabled + "'.");
+		enabled = (Parameter) arg0.getIn().getBody();
+		logger.info("Limit '" + name + "' with ID '" + objectid + "' switches to ENABLED state '" + enabled + "'.");
 		doProcess(arg0);
 	}
 	
@@ -133,20 +136,27 @@ public abstract class BaseLimit {
 	 * @param arg0 A camel exchange carrying a Boolean instance switching the limit on or off.
 	 * @throws NotComparableTypeException
 	 */
-	protected void doProcess(Exchange arg0) throws NotComparableTypeException {
+	protected void doProcess(Exchange arg0) {
+		try {
 		logger.info("Do limit check.");
 		if (isEnabled() == true && isReady()) {
-			logger.debug(stateName + " creating state variable.");
-			boolean state = checkLimit();
-			arg0.setIn(ExchangeFormatter.createStateParameterMessage(stateName, parameterName, state));
-			if (state == false) {
-				logger.error("Parameter " + parameterName + " out of limit.");
+			logger.debug(name + " creating state variable.");
+			
+			this.newInstance();
+			this.value = checkLimit();
+			arg0.getIn().setBody(this);
+			if ((Boolean) this.value == false) {
+				logger.error("Parameter '" + parameter.getName() + "' with ID '" + parameter.getObjectid()+ "' is out of limit.");
 			}
 		}
 		else {
-			logger.debug(stateName + " is not enabled and / or ready. Route terminated.");
+			logger.debug(name + " is not enabled and / or ready. Route terminated.");
 			arg0.setProperty(Exchange.ROUTE_STOP, true);
-		}		
+		}	
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -158,7 +168,7 @@ public abstract class BaseLimit {
 	 * @return Flag that will be true of the limit is enabled. Else false.
 	 */
 	protected boolean isEnabled() {
-		return enabled == null || enabled == true;
+		return enabled == null || (Boolean) enabled.getValue() == true;
 	}
 
 	/**
@@ -181,5 +191,5 @@ public abstract class BaseLimit {
 	 * @return boolean which is true if the parameter is within the limit, else false.
 	 * @throws NotComparableTypeException
 	 */
-	protected abstract boolean checkLimit() throws NotComparableTypeException;
+	protected abstract boolean checkLimit();
 }

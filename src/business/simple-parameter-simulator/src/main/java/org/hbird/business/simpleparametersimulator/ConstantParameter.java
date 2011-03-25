@@ -19,15 +19,14 @@ package org.hbird.business.simpleparametersimulator;
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 
-import org.hbird.business.formatter.ExchangeFormatter;
-
-
-
 /**
  * A constant parameter. Every time process is called, a new instance of the
  * parameter is send.
  */
 public class ConstantParameter extends BaseParameter {
+
+	/***/
+	private static final long serialVersionUID = 1L;
 
 	/** The class logger. */
 	protected static Logger logger = Logger.getLogger(ConstantParameter.class);
@@ -35,25 +34,17 @@ public class ConstantParameter extends BaseParameter {
 	/** The value of the constant. */
 	protected Double value = 0d;	
 
-	/**
-	 * Simple constructor, setting the constant value to be send and the name of the parameter.
-	 * 
-	 * @param value The value of the constant
-	 * @param name The name of the parameter
-	 */
-	public ConstantParameter(double value, String name) {
-		super(name);
-		this.value = value;
+	public ConstantParameter(String name, String description, Double value, String unit) {
+		super(name, description, value, unit);
 	}
-
 
 	/* (non-Javadoc)
 	 * @see org.hbird.simpleparametersimulator.BaseParameter#process(org.apache.camel.Exchange)
 	 */
-	public void process(Exchange arg0) {
+	public void process(Exchange exchange) {
 		try {
 			logger.debug("Sending new constant value with name '" + name + "'.");
-			arg0.setIn(ExchangeFormatter.createParameterMessage(name, Double.class.toString(), value));
+			exchange.getIn().setBody(this);
 		} 
 		catch (Exception e) {
 			logger.error("Courght exception " + e);
@@ -69,7 +60,5 @@ public class ConstantParameter extends BaseParameter {
 
 	public void setValue(Double value) {
 		this.value = value;
-	}
-	
-	
+	}	
 }

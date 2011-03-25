@@ -1,20 +1,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
-	
-  	<parent>
-		<artifactId>hummingbird-business</artifactId>
-		<groupId>org.hbird</groupId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
+  <parent>
+    <artifactId>hummingbird-business</artifactId>
+    <groupId>org.hbird</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
 
-	<groupId>org.hbird</groupId>	
-	<artifactId>validation</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.hbird.business</groupId>	
+  <artifactId>validation</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>Business - Validation Module</name>  	
+  <description>Library containing the logic for validation parameters.</description>
 	
-	<name>Validation Component</name>  	
-	<description>Library containing the logic for validation parameters.</description>
 	
 	<build>
 		<plugins>
@@ -45,60 +44,51 @@
 		</plugins>
 	</build>
 
-	<dependencies>
+  <dependencies>
 	
-		<dependency>
-			<groupId>org.hbird.transport</groupId>
-			<artifactId>tele</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-	
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-test</artifactId>
-		</dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-test</artifactId>
+      <scope>test</scope>
+    </dependency>
 
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-pool</artifactId>
-		</dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <scope>test</scope>
+    </dependency>
 
-		<dependency>
-		    <groupId>commons-pool</groupId>
-		    <artifactId>commons-pool</artifactId>
-		    <version>1.4</version>
-		</dependency>
+    <dependency>
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-pool</artifactId>
+    </dependency>
 
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-camel</artifactId>
-		</dependency>
+    <dependency>
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-camel</artifactId>
+    </dependency>
 
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jms</artifactId>
-		</dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+    </dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-		</dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-core</artifactId>
+      <scope>compile</scope>
+    </dependency>
 
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+    </dependency>
 
-		<dependency>
-			<groupId>org.hbird.business</groupId>
-			<artifactId>jms-helper</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
-	
+    <dependency>
+      <groupId>org.hbird.exchange</groupId>
+      <artifactId>data</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    
+  </dependencies>
 </project>
