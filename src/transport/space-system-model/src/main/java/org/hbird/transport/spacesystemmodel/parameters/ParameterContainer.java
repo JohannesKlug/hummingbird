@@ -26,9 +26,6 @@
  */
 package org.hbird.transport.spacesystemmodel.parameters;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.hbird.transport.spacesystemmodel.ContainerImpl;
 import org.hbird.transport.spacesystemmodel.parameters.types.NumberParameterType;
 
@@ -44,7 +41,7 @@ import org.hbird.transport.spacesystemmodel.parameters.types.NumberParameterType
  * @author Johannes Klug
  */
 public abstract class ParameterContainer extends ContainerImpl implements Parameter {
-	private static final Logger LOG = LoggerFactory.getLogger(ParameterContainer.class);
+//	private static final Logger LOG = LoggerFactory.getLogger(ParameterContainer.class);
 
 	/** The NumberParameterType of the parameter. */
 	protected NumberParameterType type = null;
