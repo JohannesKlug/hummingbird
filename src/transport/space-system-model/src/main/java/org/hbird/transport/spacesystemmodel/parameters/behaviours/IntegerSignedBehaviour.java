@@ -37,11 +37,7 @@ public class IntegerSignedBehaviour extends AbstractIntegerBehaviour {
 		}
 
 		final byte[] byteArray = BitSetUtility.toByteArray(actualParameter, this.SIZE_IN_BITS);
-		LOG.debug("Byte array = " + BytesUtility.decimalDump(byteArray));
-
 		final int output = BytesUtility.combine(byteArray, this.SIZE_IN_BITS, true).intValue();
-		LOG.debug("Testing combine.  Output(bin) = " + Long.toBinaryString(output));
-		LOG.debug("Testing combine.  Output(dec) = " + output);
 
 		return output;
 	}

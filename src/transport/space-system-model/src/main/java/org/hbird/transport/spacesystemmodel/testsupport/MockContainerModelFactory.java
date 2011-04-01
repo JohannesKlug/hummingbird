@@ -27,6 +27,8 @@ import org.slf4j.LoggerFactory;
  * the CCSDS standards and therefore uses the TMFrame, TMFrameHeader, TMPacket, and a TMFrameTail concepts. They can go
  * by any name since they are accessed using the constants X_ALIAS defined in the class.
  * 
+ * FIXME Should be in it's own project. It's an implementation of the container model just for testing.
+ * 
  * @author Mark Doyle <markjohndoyle@googlemail.com>, <mark.doyle@logica.com>
  * @since Hummingbird 0.0.1
  */
@@ -82,8 +84,8 @@ public class MockContainerModelFactory implements ContainerFactory {
 
 	public static final String VALIDITY_FLAG_ALIAS = "ValidityFlag";
 
-	private Map<String, Container> containers = new HashMap<String, Container>();
-	private Map<String, ParameterContainer> parameters = new HashMap<String, ParameterContainer>();
+	private final Map<String, Container> containers = new HashMap<String, Container>();
+	private final Map<String, ParameterContainer> parameters = new HashMap<String, ParameterContainer>();
 
 	public MockContainerModelFactory() throws InvalidParameterTypeException {
 		initialise();
@@ -114,11 +116,8 @@ public class MockContainerModelFactory implements ContainerFactory {
 		// Add the header, packet and tail to the frame container.
 		final ArrayList<Container> containersToAdd = new ArrayList<Container>();
 
-		final NumberParameterType paramType1bitInt = new NumberParameterType("1bitInt",
-				"1bit integer type",
-				"Parameter type for 1bit integers",
-				new IntegerUnsignedBehaviour(1, false),
-				0);
+		final NumberParameterType paramType1bitInt = new NumberParameterType("1bitInt", "1bit integer type", "Parameter type for 1bit integers",
+				new IntegerUnsignedBehaviour(1, false), 0);
 
 		// Add a flag to the Frame Header
 
@@ -146,22 +145,16 @@ public class MockContainerModelFactory implements ContainerFactory {
 		this.addToContainers(tmPacketHeader);
 
 		// Create the apid (ID) parameter type and add it to the packet header and the parameters collection.
-		final NumberParameterType paramType11bitInt = new NumberParameterType("11bitInt",
-				"11bit integer type",
-				"Parameter type for 11bit integers",
-				new IntegerUnsignedBehaviour(11, false),
-				0);
+		final NumberParameterType paramType11bitInt = new NumberParameterType("11bitInt", "11bit integer type", "Parameter type for 11bit integers",
+				new IntegerUnsignedBehaviour(11, false), 0);
 		final IntegerParameter packetIdParameter = new IntegerParameter(PACKET_ID_ALIAS, "Test Apid", "Test Application Id", paramType11bitInt, 0);
 		this.addToParameters(packetIdParameter);
 		this.addToContainers(packetIdParameter);
 		tmPacketHeader.addContainer(packetIdParameter);
 
 		// Create the payload length parameter type and add it to the packet header and the parameters collection.
-		final NumberParameterType paramType16bitInt = new NumberParameterType("16bitInt",
-				"16bit integer type",
-				"Parameter type for 16bit integers",
-				new IntegerUnsignedBehaviour(16, false),
-				0);
+		final NumberParameterType paramType16bitInt = new NumberParameterType("16bitInt", "16bit integer type", "Parameter type for 16bit integers",
+				new IntegerUnsignedBehaviour(16, false), 0);
 		final IntegerParameter payloadLengthParameter = new IntegerParameter(PAYLOAD_LENGTH_PARAM_ALIAS, "Payload length", "Payload lenght parameter",
 				paramType16bitInt, 0);
 		this.addToContainers(payloadLengthParameter);
@@ -181,11 +174,8 @@ public class MockContainerModelFactory implements ContainerFactory {
 
 		// Create a parameter for packetTypeA and add it to the packet type and
 		// the container collection
-		final NumberParameterType test32bitInt = new NumberParameterType("test32bitInt",
-				"test param",
-				"32 bit int test param",
-				new IntegerUnsignedBehaviour(32, false),
-				0);
+		final NumberParameterType test32bitInt = new NumberParameterType("test32bitInt", "test param", "32 bit int test param", new IntegerUnsignedBehaviour(
+				32, false), 0);
 		final IntegerParameter testParameterA = new IntegerParameter(TEST_PARAM_A, "test param", "test param holding an int value", test32bitInt, 0);
 		packetTypeA.addContainer(testParameterA);
 		this.addToParameters(testParameterA);
@@ -200,11 +190,7 @@ public class MockContainerModelFactory implements ContainerFactory {
 
 		// Create a parameter for packetTypeB and add it to the packet type and
 		// the container collection
-		final NumberParameterType test64bitFloat = new NumberParameterType("test64bitFloat",
-				"test param",
-				"64 float test param",
-				new Float64Behaviour(),
-				0);
+		final NumberParameterType test64bitFloat = new NumberParameterType("test64bitFloat", "test param", "64 float test param", new Float64Behaviour(), 0);
 		final FloatParameter testParameterB = new FloatParameter(TEST_PARAM_B, "test param", "test param holding a float value", test64bitFloat, 0.0);
 		packetTypeB.addContainer(testParameterB);
 		this.addToParameters(testParameterB);

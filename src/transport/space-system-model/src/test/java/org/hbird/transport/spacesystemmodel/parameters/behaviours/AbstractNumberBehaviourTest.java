@@ -67,7 +67,7 @@ public class AbstractNumberBehaviourTest {
 	 */
 	@Test
 	public void testGetRawParameter() {
-		BitSet actual = float64Behaviour.getRawParameterBinary(ZERO);
+		BitSet actual = float64Behaviour.getRawParameterBitSet(ZERO);
 		LOG.debug("ZERO = " + BitSetUtility.binDump(ZERO));
 		LOG.debug("actual = " + BitSetUtility.binDump(actual));
 		assertEquals(float64Behaviour.getSizeInBits(), actual.size());
@@ -76,7 +76,7 @@ public class AbstractNumberBehaviourTest {
 		
 		actual.clear();
 		
-		actual = float64Behaviour.getRawParameterBinary(ONE);
+		actual = float64Behaviour.getRawParameterBitSet(ONE);
 		LOG.debug("ONE = " + BitSetUtility.binDump(ONE));
 		LOG.debug("actual = " + BitSetUtility.binDump(actual));
 		assertEquals(float64Behaviour.getSizeInBits(), actual.length());

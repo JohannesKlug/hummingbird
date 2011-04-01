@@ -26,7 +26,7 @@ public abstract class AbstractNumberBehaviour implements NumberParameterTypeBeha
 	}
 
 	@Override
-	public BitSet getRawParameterBinary(BitSet packet) {
+	public BitSet getRawParameterBitSet(BitSet packet) {
 		int offset = 0;
 		return packet.get(offset, offset + getSizeInBits());
 	}

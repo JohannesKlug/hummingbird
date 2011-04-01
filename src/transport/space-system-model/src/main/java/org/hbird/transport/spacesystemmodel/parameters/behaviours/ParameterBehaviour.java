@@ -15,7 +15,7 @@ public interface ParameterBehaviour {
 	 * 		  at offset 0 i.e. the start of the BitSet 
 	 * @return a BitSet of the raw binary data
 	 */
-	public BitSet getRawParameterBinary(BitSet packet);
+	public BitSet getRawParameterBitSet(BitSet packet);
 
 	/**
 	 * Inserts the Number into the bitSetTarget at position offset.
