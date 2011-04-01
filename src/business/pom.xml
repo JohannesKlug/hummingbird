@@ -22,6 +22,7 @@
     <module>validation</module>
     <module>calibration</module>
     <module>simple-parameter-simulator</module>
+    <module>time-correlation</module>
   </modules>
 
 </project>
