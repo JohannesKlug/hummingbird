@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public interface TimeCorrelator {
 
-	Date convertToSpacecraftTime(Date groundtime);
+	long convertToSpacecraftTime(Date groundtime);
 
-	Date convertToGroundTime(Date spacecraftTime);
+	Date convertToGroundTime(long spacecraftTime);
 }
