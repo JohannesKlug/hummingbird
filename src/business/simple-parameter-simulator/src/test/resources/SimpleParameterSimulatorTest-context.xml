@@ -43,8 +43,8 @@
 	<bean id="Parameter4" class="org.hbird.business.simpleparametersimulator.ConstantParameter">
 		<constructor-arg index="0" value="Parameter4"/>
 		<constructor-arg index="1" value="Test parameter 4"/>
-		<constructor-arg index="2" value="1"/>
-		<constructor-arg index="3" value=""/>
+		<constructor-arg index="2" value=""/>		
+		<constructor-arg index="3" value="1"/>
 	</bean>
 
 	<bean id="commandHandler" class="org.hbird.business.simpleparametersimulator.CommandReader"/>

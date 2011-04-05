@@ -34,7 +34,7 @@ import org.apache.log4j.spi.LoggingEvent;
 public class ActivemqAppender extends AppenderSkeleton {
 
 	/** The route entry point to which the exchanges will be injected. */
-	protected String from = "direct:Logging";
+	protected String from = "activemq:topic:Logs";
 
 	/** The Camel context to be used to send the exchanges. */
 	protected CamelContext context;
@@ -74,4 +74,12 @@ public class ActivemqAppender extends AppenderSkeleton {
 	public boolean requiresLayout() {
 		return false;
 	}
+
+	public String getFrom() {
+		return from;
+	}
+
+	public void setFrom(String from) {
+		this.from = from;
+	}	
 }

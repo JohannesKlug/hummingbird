@@ -17,10 +17,12 @@
 package org.hbird.exchange.orbital;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import org.hbird.exchange.type.D3Vector;
 import org.hbird.exchange.type.Location;
+import org.hbird.exchange.type.Satellite;
 
 /** 
  * Request for orbit predictions. The prediction will result in a stream of 'OrbitalState'
@@ -49,11 +51,21 @@ public class OrbitPredictionRequest implements Serializable {
 	 * @param starttime The start time at which the prediction should start. This must correspond to the time of the position and velocity.
 	 * @param locations A list of locations, to which orbital events (establishment / loss of contact, etc) should be calculated and issued.
 	 */
-	public OrbitPredictionRequest(Satellite satellite, D3Vector position, D3Vector velocity, Long starttime, List<Location> locations) {
+	public OrbitPredictionRequest(String name, Satellite satellite, D3Vector position, D3Vector velocity, Long starttime, List<Location> locations) {
+		this.name = name;
 		this.satelitte = satellite;
 		this.position = position;
 		this.velocity = velocity;
 		this.starttime = starttime;
+		this.locations = locations;
+	}
+
+	public OrbitPredictionRequest(String name, Satellite satellite, OrbitalState state, List<Location> locations) {
+		this.name = name;
+		this.satelitte = satellite;
+		this.position = state.position;
+		this.velocity = state.velocity;
+		this.starttime = (new Date()).getTime();
 		this.locations = locations;
 	}
 	
@@ -76,8 +88,8 @@ public class OrbitPredictionRequest implements Serializable {
 	 *  provider shall take the current time. */
 	public Long starttime = null;
 	
-	/** The time interval (s) from the starttime that the orbit shall be propagated. Default is 1 day. */
-	public double deltaPropagation = 86400.;
+	/** The time interval (s) from the starttime that the orbit shall be propagated. Default is 2 hours. */
+	public double deltaPropagation = 2 * 60 * 60 * 1000;
 	
 	/** The time (s) between each orbital state. The number of orbital state objects created will
 	 * thus be N=deltaPropagation / stepSize.  */
@@ -88,4 +100,8 @@ public class OrbitPredictionRequest implements Serializable {
 	 * The locations may be null, in which case the provider shall use the configured locations of
 	 * the system. */
 	public List<Location> locations = null;
+	
+	/** The name of the request. Will also be propagated to all orbital states resulting
+	 * from this request. */
+	public String name;
 }

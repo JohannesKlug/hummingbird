@@ -9,7 +9,6 @@
        http://camel.apache.org/schema/spring 
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-
 	<bean id="processor" class="org.hbird.exchange.jms.SelectedFields">
 		<property name="fields">
 			<list>

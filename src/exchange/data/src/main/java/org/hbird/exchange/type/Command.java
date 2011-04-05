@@ -16,7 +16,6 @@
  */
 package org.hbird.exchange.type;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +57,7 @@ import org.hbird.exchange.tasks.ITask;
  * @CATEGORY Information Type
  * @END
  */
-public class Command extends Named implements Serializable {
+public class Command extends Named {
 	
 	/**
 	 * 

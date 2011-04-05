@@ -32,7 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class OrbitPredictor {
 
-	/** TODO I dont what this does buts OREKIT needs it...*/
+	/** FIXME I dont what this does but OREKIT needs it...*/
 	protected double maxcheck  = 1.;
 
 	/** gravitation coefficient */
@@ -51,11 +51,16 @@ public class OrbitPredictor {
 	@Autowired
 	protected ProducerTemplate producer = null;
 	
+	public OrbitPredictor() {
+		System.setProperty("orekit.data.path", "src/main/resources");		
+	}	
+	
+	public OrbitPredictor(String datapath) {
+		System.setProperty("orekit.data.path", datapath);		
+	}
+	
 	/** The exchange must contain a OrbitalState object as the in-body. */
 	public void process(Exchange exchange) {
-
-		System.setProperty("orekit.data.path", "D:/Benutzer-Profile/villemosg/hummingbird/src/business/navigation/src/main/resources");
-		
 		OrbitPredictionRequest request = (OrbitPredictionRequest) exchange.getIn().getBody();
 
 		try {
@@ -64,8 +69,9 @@ public class OrbitPredictor {
 			Vector3D velocity  = new Vector3D((Double) request.velocity.p1.getValue(), (Double) request.velocity.p2.getValue(), (Double) request.velocity.p3.getValue());
 			PVCoordinates pvCoordinates = new PVCoordinates(position, velocity);
 
-			Date now = new Date(request.starttime);
-			AbsoluteDate initialDate = new AbsoluteDate(now.getYear() + 1900, now.getMonth() + 1, now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds(), TimeScalesFactory.getUTC());
+			AbsoluteDate initialDate = new AbsoluteDate(new Date(request.starttime), TimeScalesFactory.getUTC());
+			long test = initialDate.toDate(TimeScalesFactory.getUTC()).getTime();
+			
 			Frame inertialFrame = FramesFactory.getEME2000();
 			
 			// Initial date
@@ -90,7 +96,7 @@ public class OrbitPredictor {
 				}
 			}
 
-			OrbitalStateInjector injector = new OrbitalStateInjector(datasetidentifier, context, producer);
+			OrbitalStateInjector injector = new OrbitalStateInjector(request.name, datasetidentifier, context, producer);
 			propagator.setMasterMode(request.stepSize, injector);			
 			propagator.propagate(new AbsoluteDate(initialDate, request.deltaPropagation));
 		}

@@ -25,8 +25,8 @@ public class TimeParameter extends BaseParameter {
 	/***/
 	private static final long serialVersionUID = 3583468275604010575L;
 
-	public TimeParameter(String name, String description) {
-		super(name, description);
+	public TimeParameter(String name, String description, String unit) {
+		super(name, description, 0d, unit);
 	}
 
 	@Override

@@ -22,8 +22,8 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.hbird.exchange.dataprovider.IDataProvider;
 import org.hbird.exchange.tasks.ITask;;
-
 
 /**
  * The executor performs the tasks scheduled for a task. A task may have an
@@ -57,6 +57,8 @@ public class TaskExecutor {
 	@Autowired
 	protected CamelContext context = null;
 
+	protected IDataProvider provider = null;
+	
 	/** 
 	 * Method for actually executing the task. The task will be extracted from the
 	 * exchange body, which is expected to contain a task object.
@@ -71,6 +73,6 @@ public class TaskExecutor {
 
 		/** Execute the task. The exchange is parsed, because the specific task */
 		/** TODO Does the tasks return Parameters in the exchange? */
-		task.execute(exchange);
+		task.execute(exchange, provider);
 	}
 }

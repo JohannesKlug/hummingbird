@@ -45,7 +45,7 @@ public class SelectedFields extends AllFields {
 	 * 
 	 * @param exchange The exchange carrying the message to be mapped.
 	 */
-	public void process(Exchange exchange) {
+	public synchronized void process(Exchange exchange) {
 		
 		/** Use reflection to map all object fields to JMS header fields. */
 		Object pojo = exchange.getIn().getBody();

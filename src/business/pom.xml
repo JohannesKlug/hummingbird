@@ -21,6 +21,7 @@
     <module>command-chain</module>
     <module>validation</module>
     <module>calibration</module>
+    <module>navigation</module>
     <module>simple-parameter-simulator</module>
   </modules>
 

@@ -19,9 +19,8 @@ package org.hbird.exchange.dataprovider;
 import org.hbird.exchange.type.Command;
 import org.hbird.exchange.type.Parameter;
 
-
 /**
- * The IDataProvider interface defines methods for accesing Parameters.
+ * The IDataProvider interface defines methods for accessing Data.
  *
  */
 public interface IDataProvider {

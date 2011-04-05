@@ -91,10 +91,12 @@ public class CommandReleaser {
 		logger.info("Processing command '" + definition.getName() + "' with ID " + definition.getObjectid() + "'.");
 		
 		/** Validate the lock state(s). */
+		/** TODO Make this much more generic; let the conditions be any logical expression, using any type of parameter. */
 		for (String state : definition.getLockStates()) {
 			StateParameter parameter = (StateParameter) provider.getParameter("name=" + state);
 			if ((Boolean) parameter.getValue() == false) {				
 				/** Stop the release of the command. */
+				/** FIXME Failed commands should be send to a special queue. */
 				exchange.setProperty(Exchange.ROUTE_STOP, true);
 				return;
 			}
@@ -102,9 +104,13 @@ public class CommandReleaser {
 
 		/** Schedule all tasks. */
 		for (ITask task : definition.getTasks()) {
+			
+			/** Specialized sub classes of the 'ITask' may depend on the command to configure themselves, for
+			 * example the ReflectiveSetParameter' will have a value reflected from a command argument. This
+			 * call ensures that the configuration can occur. */
+			task.configure(definition);
 			Exchange taskExchange = new DefaultExchange(context);
-			taskExchange.getIn().setBody(task);
-			taskExchange.getIn().setHeader("AMQ_SCHEDULED_DELAY", task.getExecutionTime());
+			taskExchange.getIn().setBody(task);			
 			producer.send("direct:Tasks", taskExchange);
 			
 			logger.info("Scheduling task '" + task.getClass().toString() + "' with ID " + task.getObjectid() + "'.");

@@ -20,7 +20,6 @@ import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 import org.hbird.exchange.type.StateParameter;
 
-
 /**
  * Handler which only triggers the next downstream handler if a specific number
  * of violations have occurred.

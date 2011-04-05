@@ -18,7 +18,6 @@ package org.hbird.exchange.type;
 
 import org.hbird.exchange.tasks.checks.RangeCheck;
 
-
 /**
  * A command argument definition. The value itself is maintained some where else,
  * most likely in the header of an exchange.

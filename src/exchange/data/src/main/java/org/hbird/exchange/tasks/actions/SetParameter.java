@@ -19,6 +19,7 @@ package org.hbird.exchange.tasks.actions;
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 
+import org.hbird.exchange.dataprovider.IDataProvider;
 import org.hbird.exchange.tasks.AbstractTask;
 import org.hbird.exchange.type.Parameter;
 
@@ -61,7 +62,7 @@ public class SetParameter extends AbstractTask {
 	 * 
 	 * @param arg0 The exchange to be send.
 	 */
-	public void execute(Exchange exchange) {
+	public void execute(Exchange exchange, IDataProvider provider) {
 		logger.info("Setting parameter '" + parameter.getName() + "' to value '" + parameter.getValue().toString() + "'.");
 		
 		/** Send the preconfigured parameter. */

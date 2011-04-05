@@ -9,8 +9,13 @@
        http://camel.apache.org/schema/spring 
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-
-	<bean id="commandReleaseScheduler" class="org.hbird.business.command.releaser.CommandReleaseScheduler"/>
+	<bean id="commandReleaseScheduler" class="org.hbird.exchange.jms.MessageReleaseScheduler">
+		<property name="fields">
+			<list>
+				<value>releaseTime</value>
+			</list>
+		</property>
+	</bean>
 
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>

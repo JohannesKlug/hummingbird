@@ -11,7 +11,6 @@ import org.orekit.errors.PropagationException;
 import org.orekit.propagation.SpacecraftState;
 import org.orekit.propagation.sampling.OrekitFixedStepHandler;
 import org.orekit.time.TimeScalesFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 
 /**
@@ -37,11 +36,14 @@ public class OrbitalStateInjector implements OrekitFixedStepHandler {
 	 *  it with new series when available. */
 	protected long datasetidentifier = 0;
 
-	public OrbitalStateInjector(long datasetidentifier, CamelContext context, ProducerTemplate producer) {
+	/** The name to be used for each orbital state. Should be used to destinquish between for example 
+	 * predicted and actual orbital states. */
+	protected String name = "Measured";
+	
+	public OrbitalStateInjector(String name, long datasetidentifier, CamelContext context, ProducerTemplate producer) {
 		this.datasetidentifier = datasetidentifier;
 		this.context = context;
 		this.producer = producer;
-
 	}
 	
 	/* (non-Javadoc)
@@ -61,7 +63,7 @@ public class OrbitalStateInjector implements OrekitFixedStepHandler {
 
 		try {
 			/** Create orbital state. */
-			OrbitalState state = new OrbitalState("Orbital State", "",  currentState.getDate().toDate(TimeScalesFactory.getUTC()).getTime(), datasetidentifier, position, velocity);
+			OrbitalState state = new OrbitalState(name, "",  currentState.getDate().toDate(TimeScalesFactory.getUTC()).getTime(), datasetidentifier, position, velocity);
 
 			/** Send the orbital state on the response stream. */
 			Exchange exchange = new DefaultExchange(context);

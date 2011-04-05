@@ -6,7 +6,7 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultExchange;
 import org.hbird.exchange.type.Location;
 import org.hbird.exchange.orbital.LocationContactEvent;
-import org.hbird.exchange.orbital.Satellite;
+import org.hbird.exchange.type.Satellite;
 import org.orekit.errors.OrekitException;
 import org.orekit.frames.TopocentricFrame;
 import org.orekit.propagation.SpacecraftState;

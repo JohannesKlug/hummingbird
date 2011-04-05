@@ -13,7 +13,7 @@ import org.hbird.exchange.type.Named;
  * used to create the script execution engine and run the script.
  *
  */
-public class CalibrationRequest extends Named {
+public class ScriptExecutionRequest extends Named {
 
 	/** The unique UID */
 	private static final long serialVersionUID = 1638200113394259171L;
@@ -27,7 +27,7 @@ public class CalibrationRequest extends Named {
 	 * @param script The actual script.
 	 * @param format The name of the script format, such as 'JavaScript'
 	 */
-	public CalibrationRequest(String name, String description, String script, String format) {
+	public ScriptExecutionRequest(String name, String description, String script, String format) {
 		super(name, description);
 		this.script = script;
 		this.format = format;
@@ -40,7 +40,7 @@ public class CalibrationRequest extends Named {
 	 * @param description A description of the script.
 	 * @param script The 'JavaScript' script.
 	 */
-	public CalibrationRequest(String name, String description, String script) {
+	public ScriptExecutionRequest(String name, String description, String script) {
 		super(name, description);
 		this.script = script;
 	}	

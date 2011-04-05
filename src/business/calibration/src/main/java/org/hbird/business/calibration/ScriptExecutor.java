@@ -16,13 +16,10 @@
  */
 package org.hbird.business.calibration;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.script.*;
 
 import org.apache.camel.Exchange;
-import org.hbird.exchange.calibration.CalibrationRequest;
+import org.hbird.exchange.calibration.ScriptExecutionRequest;
 import org.hbird.exchange.type.StateParameter;
 
 /** 
@@ -41,7 +38,7 @@ public class ScriptExecutor {
 	public void process(Exchange exchange) {
 
 		/** Get the request. */
-		CalibrationRequest request = (CalibrationRequest) exchange.getIn().getBody();
+		ScriptExecutionRequest request = (ScriptExecutionRequest) exchange.getIn().getBody();
 
 		/** Create a script engine and run it on the script. */
 		try {

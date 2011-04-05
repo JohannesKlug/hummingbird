@@ -23,7 +23,7 @@ import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.impl.DefaultExchange;
-import org.hbird.exchange.calibration.CalibrationRequest;
+import org.hbird.exchange.calibration.ScriptExecutionRequest;
 import org.hbird.exchange.type.StateParameter;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class ScriptExecutorTest extends AbstractJUnit38SpringContextTests  {
 	
 	@Test
 	public void testScriptExecution() {
-		CalibrationRequest request = new CalibrationRequest("Test Calibration", 
+		ScriptExecutionRequest request = new ScriptExecutionRequest("Test Calibration", 
 				                                            "Script used for test calibrations",
 				                                            script);
 		

@@ -34,7 +34,7 @@ public class ConstantParameter extends BaseParameter {
 	/** The value of the constant. */
 	protected Double value = 0d;	
 
-	public ConstantParameter(String name, String description, Double value, String unit) {
+	public ConstantParameter(String name, String description, String unit, Double value) {
 		super(name, description, value, unit);
 	}
 

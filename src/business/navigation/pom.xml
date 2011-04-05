@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.hbird.business.</groupId>
   <artifactId>navigation-orekit</artifactId>
-  <name>Navigation Orekit</name>
+  <name>Business - Navigation Orekit</name>
   <version>0.0.1-SNAPSHOT</version>
   
   <description>This module is an implementation of a Hummingbird navigation module based on the OREKIT open source library.</description>
@@ -12,6 +12,26 @@
 		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+  
+  
+  <build>
+  	<plugins>
+  	
+  	<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-source-plugin</artifactId>
+  <executions>
+    <execution>
+      <id>attach-sources</id>
+      <goals>
+        <goal>jar</goal>
+      </goals>
+    </execution>
+  </executions>
+</plugin>
+  	</plugins>
+  
+  </build>
   
   
   <properties>
