@@ -45,10 +45,12 @@ public class CcsdsAsmTest implements Observer {
 		os.write(0xCF);
 		os.write(0xFC);
 		os.write(0x1D);
+		os.flush();
 		
-		Thread.sleep(2000);
-		assertEquals(0, receivedBytes.length);
-	
+		// Wait until receivedBytes is initialized. Otherwise the array's length can not be queried.
+		for(int i = 10; receivedBytes == null && i <= 2550; i *= 2) {
+			Thread.sleep( i );
+		}	
 		
 		os.write(0);
 		os.write(1);
@@ -57,8 +59,13 @@ public class CcsdsAsmTest implements Observer {
 		os.write(0xCF);
 		os.write(0xFC);
 		os.write(0x1D);
+		os.flush();
 		
-		Thread.sleep(2000);
+		// Wait until 3 bytes are received, but max 10ms + 20ms + 40ms + 80ms + 160ms + 320ms + 640ms + 1280ms = 2550ms.
+		for(int i = 10; receivedBytes.length != 3 && i <= 2550; i *= 2) {
+			Thread.sleep( i );
+		}	
+		
 		assertEquals(3, receivedBytes.length);
 		assertEquals(0, receivedBytes[0] & 0xFF);
 		assertEquals(1, receivedBytes[1] & 0xFF);
@@ -86,16 +93,27 @@ public class CcsdsAsmTest implements Observer {
 		os.write(0xFC);
 		os.write(0);
 		os.write(0x1D);
+		os.flush();
 		
-		Thread.sleep(2000);
 		assertNull(receivedBytes);
 		
 		os.write(0x1A);
 		os.write(0xCF);
 		os.write(0xFC);
 		os.write(0x1D);
+		os.flush();
 		
-		Thread.sleep(2000);
+		// Wait until receivedBytes is initialized. Otherwise the array's length can not be queried.
+		for(int i = 10; receivedBytes == null && i <= 2550; i *= 2) {
+			Thread.sleep( i );
+		}	
+		
+		// Wait until 5 bytes are received, but max 10ms + 20ms + 40ms + 80ms + 160ms + 320ms + 640ms + 1280ms = 2550ms.
+		for(int i = 10; receivedBytes.length != 5 && i <= 2550; i *= 2) {
+			System.out.println(i);
+			Thread.sleep( i );
+		}	
+
 		assertEquals(5, receivedBytes.length);
 		assertEquals(0x1A, receivedBytes[0] & 0xFF);
 		assertEquals(0xCF, receivedBytes[1] & 0xFF);

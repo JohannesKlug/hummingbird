@@ -57,7 +57,10 @@ public class ScriptExecutorTest extends AbstractJUnit38SpringContextTests  {
 		
 		while (releaseQueue.getExchanges().size() == 0) {
 			try {
-				Thread.sleep(1000);
+				// Wait until 1 exchange is received, but max 10ms + 20ms + 40ms + 80ms + 160ms + 320ms + 640ms + 1280ms = 2550ms.
+				for(int i = 10; releaseQueue.getExchanges().size() == 1 && i <= 2550; i *= 2) {
+					Thread.sleep( i );
+				}	
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
