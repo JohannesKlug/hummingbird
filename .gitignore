@@ -12,3 +12,4 @@ hummingbird/xtce/src/main/java/com/logica/hummingbird/xtce/castor/
 
 src/business/simple-parameter-simulator/simple-parameter-simulator.log.11-02-20
 *.log*
+src/business/time-correlation/.pydevproject
