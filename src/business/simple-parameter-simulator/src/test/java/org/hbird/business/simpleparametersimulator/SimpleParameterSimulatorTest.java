@@ -67,6 +67,6 @@ public class SimpleParameterSimulatorTest extends AbstractJUnit38SpringContextTe
 		
 		template.send(exchange);
 		
-		assertTrue( ((BooleanParameter) context.getRegistry().lookup("Parameter1")).getValue() == false);
+		assertFalse( (Boolean) ((BooleanParameter) context.getRegistry().lookup("Parameter1")).getValue());
 	}
 }

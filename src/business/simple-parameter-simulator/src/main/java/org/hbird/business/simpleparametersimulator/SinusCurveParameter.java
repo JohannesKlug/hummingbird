@@ -96,6 +96,7 @@ public class SinusCurveParameter extends BaseParameter {
 	public void process(Exchange exchange) {
 		try {
 			logger.debug("Sending new sinus value with name '" + name + "'.");
+			newInstance();
 			this.value = new Double(amplitude * Math.sin(angularFrequency * ((((new Date()).getTime() - startTime.getTime()))%modolus) + phase) + intercept);
 			exchange.getIn().setBody(this);
 		} 

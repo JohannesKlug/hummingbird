@@ -6,9 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.hbird.transport.spacesystemmodel.Container;
 import org.hbird.transport.spacesystemmodel.ContainerFactory;
 import org.hbird.transport.spacesystemmodel.ContainerImpl;
@@ -21,12 +18,16 @@ import org.hbird.transport.spacesystemmodel.parameters.ParameterContainer;
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.Float64Behaviour;
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
 import org.hbird.transport.spacesystemmodel.parameters.types.NumberParameterType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is used for testing the Container model and anything that uses the SpaceSystemModel. It is a simple
  * Container model representing a space system which can be populated with values by tests. The container model follows
- * the CCSDS standards and therefore uses the TMFrame, TMFrameHeader, TMPacket, and a TMFrameTail concepts. 
- * They will be read by CCSDS packet 
+ * the CCSDS standards and therefore uses the TMFrame, TMFrameHeader, TMPacket, and a TMFrameTail concepts. They will be
+ * read by CCSDS packet
+ * 
+ * FIXME Should be in it's own project. It's an implementation of the container model just for testing.
  * 
  * @author Mark Doyle <markjohndoyle@googlemail.com>, <mark.doyle@logica.com>
  * @author Johannes Klug
@@ -73,10 +74,10 @@ public class MockParameterContainerModel implements ContainerFactory {
 
 	public static final String PAYLOAD_LENGTH_PARAM_ALIAS = "PayloadLength";
 
-	private Map<String, Container> containers = new HashMap<String, Container>();
-	private Map<String, ParameterContainer> parameters = new HashMap<String, ParameterContainer>();
+	private final Map<String, Container> containers = new HashMap<String, Container>();
+	private final Map<String, ParameterContainer> parameters = new HashMap<String, ParameterContainer>();
 
-	private Map<Parameter, List<String>> restrictions = new HashMap<Parameter, List<String>>();
+	private final Map<Parameter, List<String>> restrictions = new HashMap<Parameter, List<String>>();
 
 	public MockParameterContainerModel() throws InvalidParameterTypeException {
 		initialiseModel();
@@ -116,7 +117,7 @@ public class MockParameterContainerModel implements ContainerFactory {
 
 		tmPacket.addContainer(tmPacketHeader);
 		tmPacket.addContainer(tmPacketPayload);
-		
+
 		// Create the APID parameter and add it to the packet header.
 		IntegerParameter apidParameter = new IntegerParameter(PAYLOAD_APID_ALIAS, "Test Apid", "Test Application Id", paramType11bitInt, 0);
 		this.addToParameters(apidParameter);
@@ -155,7 +156,8 @@ public class MockParameterContainerModel implements ContainerFactory {
 		this.addToParameters(flightHoursParameter);
 		this.addToContainers(flightHoursParameter);
 
-		FloatParameter laserTemperatureParameter = new FloatParameter(LASER_TEMP_PARAM_ALIAS, "test param", "test param holding a float value", test64bitFloat, 0.0);
+		FloatParameter laserTemperatureParameter = new FloatParameter(LASER_TEMP_PARAM_ALIAS, "test param", "test param holding a float value", test64bitFloat,
+				0.0);
 		laserDataPayload.addContainer(laserTemperatureParameter);
 		this.addToParameters(laserTemperatureParameter);
 		this.addToContainers(laserTemperatureParameter);
@@ -174,8 +176,8 @@ public class MockParameterContainerModel implements ContainerFactory {
 		Container container = containers.get(name);
 
 		if (container == null) {
-			throw new UnknownContainerNameException(containers,
-					"Your container lookup for '" + name + "' did not return any containers. Check your SpaceSystem configuration.");
+			throw new UnknownContainerNameException(containers, "Your container lookup for '" + name
+					+ "' did not return any containers. Check your SpaceSystem configuration.");
 		}
 
 		return container;
@@ -190,12 +192,12 @@ public class MockParameterContainerModel implements ContainerFactory {
 	public ParameterContainer getParameter(String name) {
 		return parameters.get(name);
 	}
-	
+
 	private void addRestrictionToGlobalMap(ParameterContainer paramContainer, String comparisonValue) {
 		List<String> pList;
-		if(restrictions.containsKey(paramContainer)) {
+		if (restrictions.containsKey(paramContainer)) {
 			pList = restrictions.get(paramContainer);
-			pList.add(comparisonValue);						
+			pList.add(comparisonValue);
 		}
 		else {
 			pList = new ArrayList<String>();

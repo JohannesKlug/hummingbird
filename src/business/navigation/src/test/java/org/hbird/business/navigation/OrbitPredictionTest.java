@@ -17,6 +17,7 @@
 package org.hbird.business.navigation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.camel.CamelContext;
@@ -36,8 +37,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
-
-import edu.emory.mathcs.backport.java.util.Collections;
 
 @ContextConfiguration (locations={"/OrbitPredictionTest-context.xml"})
 public class OrbitPredictionTest extends AbstractJUnit38SpringContextTests  {

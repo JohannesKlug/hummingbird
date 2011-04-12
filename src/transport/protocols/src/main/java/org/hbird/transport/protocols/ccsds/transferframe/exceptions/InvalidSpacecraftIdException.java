@@ -5,7 +5,7 @@ public class InvalidSpacecraftIdException extends Exception {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1087362588889501333L;
+	private static final long serialVersionUID = -2727615613955734535L;
 
 	public InvalidSpacecraftIdException() {
 	}

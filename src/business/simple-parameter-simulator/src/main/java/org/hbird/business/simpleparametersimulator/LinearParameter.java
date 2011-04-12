@@ -72,6 +72,7 @@ public class LinearParameter extends BaseParameter {
 	 */
 	public void process(Exchange exchange) {
 			logger.debug("Sending new linear value with name '" + name + "'.");
+			newInstance();
 			this.value = new Double(intercept + deltaFrequency * (((new Date()).getTime() - startTime.getTime()) % modolus));
 			exchange.getIn().setBody(this);
 	}

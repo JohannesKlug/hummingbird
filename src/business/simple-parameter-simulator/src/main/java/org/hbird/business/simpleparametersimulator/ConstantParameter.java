@@ -44,6 +44,7 @@ public class ConstantParameter extends BaseParameter {
 	public void process(Exchange exchange) {
 		try {
 			logger.debug("Sending new constant value with name '" + name + "'.");
+			newInstance();
 			exchange.getIn().setBody(this);
 		} 
 		catch (Exception e) {

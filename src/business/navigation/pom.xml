@@ -40,10 +40,9 @@
   
   <dependencies>
  	<dependency>
- 	<groupId>org.apache.camel</groupId>
-	<artifactId>camel-activemq</artifactId>
-	<version>1.1.0</version>
-  </dependency>
+ 	  <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-camel</artifactId>
+   </dependency>
 
   <dependency>
     <groupId>org.apache.camel</groupId>

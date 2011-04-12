@@ -18,7 +18,7 @@ public class Float32Behaviour extends AbstractFloatBehaviour {
 	private final static Logger LOG = LoggerFactory.getLogger(Float32Behaviour.class);
 
 	public Float32Behaviour() {
-		super(32);
+		super(Float.SIZE);
 	}
 
 	@Override
@@ -54,11 +54,11 @@ public class Float32Behaviour extends AbstractFloatBehaviour {
 		// If the floats has leading zeros the int conversion above will truncate them. This is expected as
 		// the leading zeros are surplus for a Java big endian int. They are however vital to an IEEE-754 float
 		// since they contain the sign, exponent and mantissa. We must repair the bitset in this case.
-		if (valueBitSet.length() < 32) {
+		if (valueBitSet.length() < Float.SIZE) {
 			// int truncation = 32 - valueBitSet.length();
 			String bitsetString = BitSetUtility.bitSetToBinaryString(valueBitSet, true);
 			LOG.debug("Truncated bitset = " + bitsetString);
-			bitsetString = BitSetUtility.padStringFromTheFront(bitsetString, 32);
+			bitsetString = BitSetUtility.padStringFromTheFront(bitsetString, Float.SIZE);
 			LOG.debug("Repaired bitset = " + bitsetString);
 			valueBitSet = BitSetUtility.stringToBitSet(bitsetString, true, true);
 		}

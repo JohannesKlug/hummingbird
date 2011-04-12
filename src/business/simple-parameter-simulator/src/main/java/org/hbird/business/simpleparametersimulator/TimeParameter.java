@@ -31,6 +31,7 @@ public class TimeParameter extends BaseParameter {
 
 	@Override
 	protected void process(Exchange exchange) {
+		newInstance();
 		exchange.getIn().setBody((new Date()).getTime());		
 	}
 }

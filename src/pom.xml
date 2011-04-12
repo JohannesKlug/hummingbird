@@ -9,7 +9,14 @@
 
 	<name>Hummingbird Root Project</name>
 	<description>The Hummingbird root project is a container for all Hummingbird components, each created in a separate maven module. By building this project, the complete system can be built.</description>
-	<url/>
+	<url>http://hbird.org/</url>
+
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+
 
 	<modules>
 		<module>transport</module>
@@ -26,27 +33,14 @@
 		</license>
 	</licenses>
 
-	<distributionManagement>
-		<repository>
-			<id>artifactory.openspace.logica.com</id>
-			<name>Logica Artifactory releases</name>
-			<url>${releases.url}</url>
-		</repository>
-		<snapshotRepository>
-			<id>artifactory.openspace.logica.com</id>
-			<name>Logica Artifactory snapshots</name>
-			<url>${snapshots.url}</url>
-		</snapshotRepository>
-	</distributionManagement>
-
 	<properties>
 		<rxtx.version>2.1.7</rxtx.version>
 		<log4j.version>1.2.16</log4j.version>
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<junit.version>4.8.2</junit.version>
 		<castor.version>1.3.1</castor.version>
-		<camel.version>2.6.0</camel.version>
-		<activemq.version>5.3.2</activemq.version>
+		<camel.version>2.7.0</camel.version>
+		<activemq.version>5.4.2</activemq.version>
 		<mysqlconnector.version>5.1.10</mysqlconnector.version>
 		<jencks.version>2.2</jencks.version>
 		<commonslogging.version>1.1.1</commonslogging.version>
@@ -56,21 +50,15 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<releases.url>http://open.logicaspace.com:8080/artifactory/libs-releases-local</releases.url>
-		<snapshots.url>http://open.logicaspace.com:8080/artifactory/libs-snapshots-local</snapshots.url>
 		<surefire-plugin.version>2.7.1</surefire-plugin.version>
 		<commons-io.version>2.0.1</commons-io.version>
 	</properties>
 
-	<ciManagement>
-		<system>Hudson</system>
-		<url>http:/open.logicaspace.com:8080/hudson</url>
-	</ciManagement>
-
-	<organization>
-		<name>Logica</name>
-		<url>http://www.logica.com</url>
-	</organization>
+	<scm>
+		<connection>scm:git:git@github.com:JohannesKlug/hummingbird.git</connection>
+		<developerConnection>scm:git:git@github.com:JohannesKlug/hummingbird.git</developerConnection>
+		<url>git@github.com:JohannesKlug/hummingbird.git</url>
+	</scm>
 
 	<issueManagement>
 		<system/>
@@ -80,54 +68,34 @@
 	<developers>
 		<developer>
 			<id>0</id>
-			<organization>Logica</organization>
 			<name>Johannes Klug</name>
 			<email>johannes.klug@logica.com</email>
 			<roles>
-				<role>scrum master</role>
-				<role>project manager</role>
-				<role>architect</role>
-				<role>developer</role>
-			</roles>
-			<timezone>0</timezone>
-		</developer>
-
-		<developer>
-			<id>1</id>
-			<organization>Logica</organization>
-			<name>Gert Villemos</name>
-			<email>gert.villemos@logica.com</email>
-			<roles>
-				<role>product owner</role>
-				<role>architect</role>
-				<role>developer</role>
-			</roles>
-			<timezone>0</timezone>
-		</developer>
-
-		<developer>
-			<id>2</id>
-			<organization>Logica</organization>
-			<name>Mark Doyle</name>
-			<email>mark.doyle@logica.com</email>
-			<roles>
-				<role>architect</role>
-				<role>developer</role>
-				<role>Imperator</role>
+				<role>Team member</role>
+				<role>Superior of the Inquisition</role>
 			</roles>
 			<timezone>+1</timezone>
 		</developer>
 
 		<developer>
-			<id>3</id>
-			<organization>Logica</organization>
-			<name>Steven James</name>
-			<email>steven.james@logica.com</email>
+			<id>1</id>
+			<name>Gert Villemos</name>
+			<email>gert.villemos@logica.com</email>
 			<roles>
-				<role>architect</role>
-				<role>developer</role>
+				<role>Team member</role>
 			</roles>
-			<timezone>0</timezone>
+			<timezone>+1</timezone>
+		</developer>
+
+		<developer>
+			<id>2</id>
+			<name>Mark Doyle</name>
+			<email>mark.doyle@logica.com</email>
+			<roles>
+				<role>Team member</role>
+				<role>Imperator</role>
+			</roles>
+			<timezone>+1</timezone>
 		</developer>
 
 	</developers>
@@ -355,7 +323,38 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<excludes>org.hbird.transport.xtce.castor/**/*</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.7</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.1</version>
+<!--				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions> -->
+			</plugin>
 		</plugins>
 	</build>
 

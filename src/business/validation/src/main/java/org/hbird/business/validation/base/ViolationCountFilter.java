@@ -53,6 +53,13 @@ public class ViolationCountFilter {
 	}
 	
 	/**
+	 * Default Constructor
+	 */
+	public ViolationCountFilter() {
+		
+	}
+	
+	/**
 	 * Method to process a state. The method will count the number of violations. 
 	 * 
 	 * @param exchange The exchange carrying the state.
