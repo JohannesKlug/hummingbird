@@ -1,44 +1,0 @@
-9
-
-dir
-0
-https://svn.apache.org/repos/asf/activemq/camel/trunk/components/camel-cometd/src/test/resources/webapp/dojo/dojo
-https://svn.apache.org/repos/asf
-add
-
-
-
-
-
-
-
-svn:special svn:externals svn:needs-lock
-
-dojo.xd.js
-file
-
-
-
-add
-
-dojo.xd.js.uncompressed.js
-file
-
-
-
-add
-
-dojo.js
-file
-
-
-
-add
-
-dojo.js.uncompressed.js
-file
-
-
-
-add
-
