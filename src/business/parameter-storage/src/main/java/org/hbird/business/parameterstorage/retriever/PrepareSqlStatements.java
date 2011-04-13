@@ -33,7 +33,7 @@ public class PrepareSqlStatements {
 		String[] command;
 		String[] statement = new String[2];
 
-		//Splits the body into 2 or 4 singel Strings
+		//Splits the body into 3 single Strings if necessary
 		command = exchange.getIn().getBody(String.class).split(";");
 
 		switch (command.length) {
