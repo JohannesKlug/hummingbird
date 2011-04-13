@@ -37,13 +37,10 @@ public abstract class AbstractCheck extends AbstractTask {
 	/** The state that shall be set. */
 	protected StateParameter stateParameter = null;
 
-	/** The provider to be used to retrieve the current value of the parameter than needs to be checked. */
-	protected IDataProvider provider;
-	
 	/** The selector that will be parsed to the provider to perform the retrieval of the parameter. */
 	protected String selector;
 	
-	public void execute(Exchange exchange) {
+	public void execute(Exchange exchange, IDataProvider provider) {
 		
 		/** Get the parameter to be checked. */
 		Parameter parameter = provider.getParameter(selector);

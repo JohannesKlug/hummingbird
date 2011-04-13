@@ -31,9 +31,6 @@ public class BooleanParameter extends BaseParameter {
 	/** The class logger. */
 	protected static Logger logger = Logger.getLogger(BooleanParameter.class);
 
-	/** The boolean value of the last send parameter.*/
-	protected Boolean value = true;
-
 	/**
 	 * Basic constructor, setting the initial value and the name of the boolean
 	 * parameter.  
@@ -51,20 +48,13 @@ public class BooleanParameter extends BaseParameter {
 	public void process(Exchange exchange) {
 		try {
 			logger.debug("Sending new boolean value with name '" + name + "'.");
-			this.value = new Boolean(!new Boolean(value));
+			newInstance();
+			this.value = new Boolean(!(Boolean)value);
 			exchange.getIn().setBody(this);
 		} 
 		catch (Exception e) {
 			logger.error("Courght exception " + e);
 			e.printStackTrace();
 		}
-	}
-
-	public void setValue(Boolean value) {
-		this.value = value;
-	}
-
-	public Boolean getValue() {
-		return value;
 	}
 }

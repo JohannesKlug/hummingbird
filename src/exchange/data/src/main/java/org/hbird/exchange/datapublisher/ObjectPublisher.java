@@ -50,8 +50,16 @@ public class ObjectPublisher {
 	protected CamelContext context = null;
 
 	/** The name of the file to be loaded. The file may be changed on disk. */
-	@Autowired
 	protected String filename;
+	
+	/**
+	 * Constructor.
+	 * 
+	 * @param filename Name of the file to be read at intervals.
+	 */
+	public ObjectPublisher(String filename) {
+		this.filename = filename;
+	}
 	
 	/**
 	 * Method to split the message. The returned message list is actually loaded
@@ -79,4 +87,6 @@ public class ObjectPublisher {
 		
 		return messages;
 	}
+	
+	
 }

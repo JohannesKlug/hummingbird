@@ -9,18 +9,22 @@
        http://camel.apache.org/schema/spring 
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-	<bean id="converter" class="org.hbird.webgui.CometdLogger"/>
+	<bean id="commandReleaseScheduler" class="org.hbird.exchange.jms.MessageReleaseScheduler">
+		<property name="fields">
+			<list>
+				<value>releaseTime</value>
+			</list>
+		</property>
+	</bean>
 
-	<camelContext id="commandingContext" xmlns="http://camel.apache.org/schema/spring">
+	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
+		<template id="producer"/>
 
-		<template id="template"/>
+		<route>
+			<from uri="direct:Commands" />
+			<to uri="bean:commandReleaseScheduler" />
+			<to uri="mock:ReleasedCommands" />
+		</route>
 		
-<!--		<route>-->
-<!--			<from uri="activemq:topic:Logging" />-->
-<!--			<to uri="bean:converter"/>-->
-<!--			<to uri="cometd://localhost:8081/gui-cometd-commanding-0.0.1-SNAPSHOT/logging?baseResource=classpath:webapp" />-->
-<!--		</route>-->
-
 	</camelContext>
-	
 </beans>

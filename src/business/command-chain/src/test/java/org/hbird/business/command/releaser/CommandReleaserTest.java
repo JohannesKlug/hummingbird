@@ -27,8 +27,8 @@ import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.impl.DefaultExchange;
-import org.hbird.business.command.task.DummyTask;
 import org.hbird.exchange.dataprovider.SimpleDataBuffer;
+import org.hbird.exchange.tasks.DummyTask;
 import org.hbird.exchange.tasks.ITask;
 import org.hbird.exchange.tasks.checks.RangeCheck;
 import org.hbird.exchange.type.Argument;
@@ -55,6 +55,7 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 	
 	@Autowired
     protected CamelContext context;
+
 
 	@Autowired
 	protected SimpleDataBuffer stateConnector;

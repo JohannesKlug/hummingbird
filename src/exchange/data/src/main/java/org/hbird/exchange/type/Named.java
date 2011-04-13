@@ -49,10 +49,10 @@ public abstract class Named implements Serializable, Comparable<Named> {
 	 *  time of creation. */
 	protected long timestamp = (new Date()).getTime();
 	
-	/** The name of the type.*/
+	/** The name of the object.*/
 	protected String name;
 
-	/** A description of the object type. */
+	/** A description of the object. */
 	protected String description;
 	
 	/** A unique identifier of a set of data. All elements of the data set should be
@@ -185,5 +185,9 @@ public abstract class Named implements Serializable, Comparable<Named> {
 	public void newInstance() {
 		objectid = UUID.randomUUID().toString();		
 		timestamp = (new Date()).getTime();		
+	}
+
+	public long getTimestamp() {
+		return timestamp;
 	}
 }

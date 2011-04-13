@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.hbird.business.command.releaser;
+package org.hbird.exchange.jms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +28,7 @@ import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.impl.DefaultExchange;
-import org.hbird.business.command.task.DummyTask;
+import org.hbird.exchange.tasks.DummyTask;
 import org.hbird.exchange.tasks.ITask;
 import org.hbird.exchange.tasks.checks.RangeCheck;
 import org.hbird.exchange.type.Argument;
@@ -81,6 +81,8 @@ public class CommandReleaseSchedulerTest extends AbstractJUnit38SpringContextTes
 		
 		/** Lock state is false, so exchange should be stopped. */
 		assertTrue(releasedCommands.getReceivedCounter() == 1);
+		assertTrue( (Long) releasedCommands.getExchanges().get(0).getIn().getHeader("AMQ_SCHEDULED_DELAY") != null);
+
 		assertTrue( (Long) releasedCommands.getExchanges().get(0).getIn().getHeader("AMQ_SCHEDULED_DELAY") > 0);
 	}
 }

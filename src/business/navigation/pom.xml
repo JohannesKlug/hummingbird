@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.hbird.business.</groupId>
   <artifactId>navigation-orekit</artifactId>
-  <name>Navigation Orekit</name>
+  <name>Business - Navigation Orekit</name>
   <version>0.0.1-SNAPSHOT</version>
   
   <description>This module is an implementation of a Hummingbird navigation module based on the OREKIT open source library.</description>
@@ -14,16 +14,35 @@
 	</parent>
   
   
+  <build>
+  	<plugins>
+  	
+  	<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-source-plugin</artifactId>
+  <executions>
+    <execution>
+      <id>attach-sources</id>
+      <goals>
+        <goal>jar</goal>
+      </goals>
+    </execution>
+  </executions>
+</plugin>
+  	</plugins>
+  
+  </build>
+  
+  
   <properties>
-  	<orekit.version>5.0</orekit.version>
+  	<orekit.version>5.1-SNAPSHOT</orekit.version>
   </properties>
   
   <dependencies>
  	<dependency>
- 	<groupId>org.apache.camel</groupId>
-	<artifactId>camel-activemq</artifactId>
-	<version>1.1.0</version>
-  </dependency>
+ 	  <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-camel</artifactId>
+   </dependency>
 
   <dependency>
     <groupId>org.apache.camel</groupId>
@@ -35,6 +54,7 @@
   	<groupId>org.orekit</groupId>
   	<artifactId>orekit</artifactId>
   	<version>${orekit.version}</version>
+  	
   </dependency>
   
   <dependency>

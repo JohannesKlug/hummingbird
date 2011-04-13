@@ -14,37 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.hbird.business.command.task;
-
-import org.apache.camel.Exchange;
-import org.hbird.exchange.tasks.ITask;
+package org.hbird.exchange.type;
 
 
-/**
- * An implementation of the ITask for test purposes. Do nothing, besides
- * recording which methods have been called.
- *
- */
-public class DummyTask implements ITask {
+public class Satellite extends Named {
 
-	public long deltaTime = 0;
-	
-	public boolean executeCalled = false;
-	
-	public String objectid;
-		
-	@Override
-	public long getExecutionTime() {
-		return deltaTime;
-	}
+	/***/
+	private static final long serialVersionUID = 6169559659135516782L;
 
-	@Override
-	public void execute(Exchange exchange) {
-		executeCalled = true;	
-	}
-
-	@Override
-	public String getObjectid() {
-		return objectid;
+	public Satellite(String name, String description) {
+		super(name, description);
 	}
 }

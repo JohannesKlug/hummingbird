@@ -16,7 +16,6 @@
  */
 package org.hbird.exchange.type;
 
-
 /**
  * A parameter. The parameter type is at the core of the information model. It 
  * is used to describe a name-value pair, attaching the meta-data for description 

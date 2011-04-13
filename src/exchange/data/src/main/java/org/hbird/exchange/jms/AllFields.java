@@ -32,7 +32,7 @@ import org.apache.camel.Exchange;
  *  useful for filtering in for example routes using ActiveMQ, where only
  *  the header fields can be used for filtering / routing.*/
 public class AllFields {
-	
+
 	/**
 	 * The method will access the IN message of the exchange, and read the
 	 * body. The body will typically contain a POJO to be transfered in the
@@ -44,26 +44,32 @@ public class AllFields {
 	 * 
 	 * @param exchange The exchange carrying the message to be mapped.
 	 */
-	public void process(Exchange exchange) {
-		
+	public synchronized void process(Exchange exchange) {
+
 		/** Use reflection to map all object fields to JMS header fields. */
 		Object pojo = exchange.getIn().getBody();
 		if (pojo != null) { 
-			
+
 			/** Find all fields of this class as well as all super classes. */
 			Map<String, Field> fields = new HashMap<String, Field>();
 			recursiveGet(pojo.getClass(), fields);
-			
+
 			/** Iterate through all fields, and map them to header fields. */
 			Iterator<Entry<String, Field>> it = fields.entrySet().iterator();
 			while (it.hasNext()) {
 				Entry<String, Field> entry = it.next();
-				
+
 				try {
-					/** Set the header field name to the name of the field and the 
-					 * value to the value of the field. */
+					/** Ensure that the field is accessible, i.e. if its protected or private we
+					 * could else not be able to read the value. */
 					entry.getValue().setAccessible(true);
-					exchange.getIn().setHeader(entry.getKey(), entry.getValue().get(pojo).toString());
+					
+					/** If the value is null, then we dont map. */
+					if (entry.getValue().get(pojo) != null) {
+						/** Set the header field name to the name of the field and the 
+						 * value to the value of the field. */		
+						exchange.getIn().setHeader(entry.getKey(), entry.getValue().get(pojo).toString());
+					}
 				} catch (IllegalArgumentException e) {
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
@@ -72,8 +78,8 @@ public class AllFields {
 			}
 		}		
 	}
-	
-	
+
+
 	/**
 	 * Method to list all fields of the 'clazz', including all inherited fields of all
 	 * super classes, private as well as protected.
@@ -83,7 +89,7 @@ public class AllFields {
 	 * The map is keyed on the field name, and the value is the field.
 	 */
 	protected void recursiveGet(Class<?> clazz, Map<String, Field> fields) {
-		
+
 		for (Field field : clazz.getDeclaredFields()) {
 			fields.put(field.getName(), field);
 		}

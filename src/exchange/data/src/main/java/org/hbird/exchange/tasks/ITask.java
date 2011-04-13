@@ -16,7 +16,11 @@
  */
 package org.hbird.exchange.tasks;
 
+import java.io.Serializable;
+
 import org.apache.camel.Exchange;
+import org.hbird.exchange.dataprovider.IDataProvider;
+import org.hbird.exchange.type.Command;
 
 /** A task is a timed activity to be performed, something that can be executed in isolation.
  * 
@@ -28,7 +32,7 @@ import org.apache.camel.Exchange;
  *  This means the task cant depend on local attributes, such as the local camel context. 
  *  
  *  */
-public interface ITask {
+public interface ITask extends Serializable {
 
 	/** The scheduled execution time of the task.
 	 *  
@@ -42,7 +46,22 @@ public interface ITask {
 	 * @param context The camel context within which the task must be executed. The context contains the 
 	 * routes that are used, and manages the exchange and producer template.
 	 */
-	public void execute(Exchange exchange);
+	public void execute(Exchange exchange, IDataProvider provider);
 	
+	
+	/**
+	 * Method used to configure the task based on a command. Is used by for example the
+	 * 'reflectiveSetParameter'.
+	 * 
+	 * @param command The command triggering the task configuration.
+	 */
+	public void configure(Command command);
+	
+	
+	/**
+	 * Returns the unique object ID of the task.
+	 * 
+	 * @return The unique object ID of this task instance.
+	 */
 	public String getObjectid();
 }

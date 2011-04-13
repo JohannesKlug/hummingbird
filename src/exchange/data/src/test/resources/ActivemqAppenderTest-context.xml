@@ -9,7 +9,6 @@
        http://camel.apache.org/schema/spring 
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-
 	<bean id="appender" class="org.hbird.exchange.logger.ActivemqAppender"/>
 
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">

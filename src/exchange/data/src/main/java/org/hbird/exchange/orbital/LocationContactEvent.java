@@ -18,6 +18,7 @@ package org.hbird.exchange.orbital;
 
 import org.hbird.exchange.type.Location;
 import org.hbird.exchange.type.Named;
+import org.hbird.exchange.type.Satellite;
 
 
 /**

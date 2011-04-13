@@ -71,15 +71,10 @@ public class LinearParameter extends BaseParameter {
 	 * @see org.hbird.simpleparametersimulator.BaseParameter#process(org.apache.camel.Exchange)
 	 */
 	public void process(Exchange exchange) {
-		try {
 			logger.debug("Sending new linear value with name '" + name + "'.");
+			newInstance();
 			this.value = new Double(intercept + deltaFrequency * (((new Date()).getTime() - startTime.getTime()) % modolus));
 			exchange.getIn().setBody(this);
-		} 
-		catch (Exception e) {
-			logger.error("Courght exception " + e);
-			e.printStackTrace();
-		}
 	}
 
 	public double getIntercept() {

@@ -35,9 +35,14 @@
 	
 	<bean id="UpperLimitChangeFilter" class="org.hbird.business.validation.base.OnlyChangeFilter"/>
 	
-	<bean id="LowerLimitCountFilter" class="org.hbird.business.validation.base.ViolationCountFilter"/>
+	<bean id="LowerLimitCountFilter" class="org.hbird.business.validation.base.ViolationCountFilter">
+        <constructor-arg index="0" value="2"/>
+	</bean>
 	
-	<bean id="UpperLimitCountFilter" class="org.hbird.business.validation.base.ViolationCountFilter"/>
+	<bean id="UpperLimitCountFilter" class="org.hbird.business.validation.base.ViolationCountFilter">
+	    <constructor-arg index="0" value="2"/>
+	</bean>
+	
 	
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>

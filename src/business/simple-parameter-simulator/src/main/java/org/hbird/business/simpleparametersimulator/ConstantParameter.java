@@ -34,7 +34,7 @@ public class ConstantParameter extends BaseParameter {
 	/** The value of the constant. */
 	protected Double value = 0d;	
 
-	public ConstantParameter(String name, String description, Double value, String unit) {
+	public ConstantParameter(String name, String description, String unit, Double value) {
 		super(name, description, value, unit);
 	}
 
@@ -44,6 +44,7 @@ public class ConstantParameter extends BaseParameter {
 	public void process(Exchange exchange) {
 		try {
 			logger.debug("Sending new constant value with name '" + name + "'.");
+			newInstance();
 			exchange.getIn().setBody(this);
 		} 
 		catch (Exception e) {

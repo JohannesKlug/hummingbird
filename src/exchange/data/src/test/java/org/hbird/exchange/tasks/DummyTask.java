@@ -16,30 +16,43 @@
  */
 package org.hbird.exchange.tasks;
 
+import org.apache.camel.Exchange;
+import org.hbird.exchange.dataprovider.IDataProvider;
+import org.hbird.exchange.tasks.ITask;
 import org.hbird.exchange.type.Command;
-import org.hbird.exchange.type.Named;
+
 
 /**
- * An abstract implementation of a task. Contains only the execution time.
+ * An implementation of the ITask for test purposes. Do nothing, besides
+ * recording which methods have been called.
+ *
  */
-public abstract class AbstractTask extends Named implements ITask {
+public class DummyTask implements ITask {
 
-	/** The unique UID */
-	private static final long serialVersionUID = 6287812296391672915L;
+	public long deltaTime = 0;
 	
-	/** The execution time of the task. */
-	protected long executionTime = 0;
+	public boolean executeCalled = false;
+	public boolean setValueCalled = false;
 	
-	public AbstractTask(String name, String description, long executionTime) {
-		super(name, description);
-		this.executionTime = executionTime;
-	}
-
+	public String objectid;
+		
+	@Override
 	public long getExecutionTime() {
-		return executionTime;
+		return deltaTime;
 	}
-	
+
+	@Override
+	public void execute(Exchange exchange, IDataProvider provider) {
+		executeCalled = true;	
+	}
+
+	@Override
+	public String getObjectid() {
+		return objectid;
+	}
+
+	@Override
 	public void configure(Command command) {
-		/** DO NULL. */
+		setValueCalled = true;		
 	}
 }
