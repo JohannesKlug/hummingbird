@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class FetchStoredParameters {
 	private Connection connection;
+	private String destination;
 
 	@Autowired
 	protected ProducerTemplate producer = null;
@@ -38,14 +39,20 @@ public class FetchStoredParameters {
 	 * Constructor. Extracts the connection to the database from
 	 * the DataSource.
 	 * 
-	 * IN-param:  DataSource
+	 * IN-param:
+	 *   DataSource		dataSource
+	 *   	The database to retrieve the parameters from.
+	 *   String 		destination
+	 *   	Name of the destination to send the retrieved parameters to, 
+	 * 		e.g. 'activemq:queue:replay'.
 	 */
-	public FetchStoredParameters(DataSource dataSource) {
+	public FetchStoredParameters(DataSource dataSource, String destination) {
 		try {
 			connection = dataSource.getConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		this.destination = destination;
 	}
 
 	/*
@@ -57,15 +64,8 @@ public class FetchStoredParameters {
 	 * 			Array with 2 SQL Queries, e.g. 
 	 * 			'select * from ... where timestamp > t1 and timestamp <= t2-1000;
 	 * 			 select * from ... where timestamp > t2-1000 and timestamp <= t2;' 
-	 * 		String		parameterName 	(Is automatically extracted from header)
-	 * 			Name of the parameter, e.g. 'Elevation'.
-	 * 		String		destinationName	(Is automatically extracted from header)
-	 * 			Name of the destination to send the retrieved datasets to, 
-	 * 			e.g. 'activemq:queue:replay'.
 	 */
-	public void fetchParameters(@Body String[] sqlQuery,
-			@Header("Name") String parameterName,
-			@Header("DestinationName") String destinationName) {
+	public void fetchParameters(@Body String[] sqlQuery) {
 		try {
 			//Run statements, save results in a ResultSet and call 'createExchangesFromResultset 
 			//to process it.
@@ -74,10 +74,10 @@ public class FetchStoredParameters {
 			Statement statement = connection.createStatement();
 
 			rs = statement.executeQuery(sqlQuery[0]);
-			sendParameters(rs, parameterName, destinationName);
+			sendParameters(rs);
 
 			rs = statement.executeQuery(sqlQuery[1]);
-			sendParameters(rs, parameterName, destinationName);
+			sendParameters(rs);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -90,29 +90,21 @@ public class FetchStoredParameters {
 	 * 		ResultSet	rs
 	 * 			The resultsets that contains all the stored parameters that now 
 	 * 			shall be restored and send to a queue/topic.
-	 * 		String 		parameterName
-	 * 			The name of the restored parameters. Will be put in the 
-	 * 			exchanges' header field, e.g. 'Elevation'.
-	 *  	String 		queueName
-	 *  		Name of the destination to send the restored parameters to, 
-	 * 			e.g. 'activemq:queue:elevationReplay'.
 	 */ 
-	private void sendParameters(ResultSet rs,
-			String parameterName, String destinationName) {
-
+	private void sendParameters(ResultSet rs) {
 		Exchange exchange;
 
 		try {
 			//As long as datasets exist in the ResultSet, create a new exchange
 			while (rs.next()) {
 				exchange = new DefaultExchange(retrieverContext);
-				exchange.getIn().setHeader("Value", rs.getString(2));
-				exchange.getIn().setHeader("Name", parameterName);
-				exchange.getIn().setHeader("Timestamp", rs.getString(1));
+//				exchange.getIn().setHeader("Value", rs.getString(2));
+//				exchange.getIn().setHeader("Name", parameterName);
+//				exchange.getIn().setHeader("Timestamp", rs.getString(1));
 				exchange.getIn().setBody(rs.getString(4));
 				
 				//Send the created exchange
-				producer.send(destinationName, exchange);
+				producer.send(destination, exchange);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

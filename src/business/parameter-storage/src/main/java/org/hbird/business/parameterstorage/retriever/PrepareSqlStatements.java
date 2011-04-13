@@ -22,15 +22,14 @@ public class PrepareSqlStatements {
 	 * 		Exchange		exchange
 	 * 		The exchange only needs to have a String in the body. There are two possibilities 
 	 * 		how the String could look like: with the 
-	 * 		1. 'start_timestamp;end_timestamp;parameter_name;destination_name' (will restore the 
+	 * 		1. 'start_timestamp;end_timestamp;parameter_name' (will restore the 
 	 *		named parameters which have a timestamp between 'start_timestamp' and 'end_timestamp'
-	 * 		2. 'parameter_name;destination_name' (will restore all parameters with the given name)
+	 * 		2. 'parameter_name' (will restore all parameters with the given name)
 	 */
 	public void createQuery(Exchange exchange) {
 		long startTimeStamp = 0;
 		long endTimeStamp = 0;
 		String parameterName = "";
-		String destinationName = "";
 		String[] command;
 		String[] statement = new String[2];
 
@@ -38,17 +37,15 @@ public class PrepareSqlStatements {
 		command = exchange.getIn().getBody(String.class).split(";");
 
 		switch (command.length) {
-		case 2:
+		case 1:
 			startTimeStamp = 0;
 			endTimeStamp = System.currentTimeMillis();
 			parameterName = command[0];
-			destinationName = command[1];
 			break;
-		case 4:
+		case 3:
 			startTimeStamp = Long.parseLong(command[0]);
 			endTimeStamp = Long.parseLong(command[1]);
 			parameterName = command[2];
-			destinationName = command[3];
 			break;
 		default:
 			try {
@@ -72,8 +69,5 @@ public class PrepareSqlStatements {
 				+ ";";
 
 		exchange.getIn().setBody(statement);
-		
-		exchange.getIn().setHeader("Name", parameterName);
-		exchange.getIn().setHeader("DestinationName", destinationName);
 	}
 }
