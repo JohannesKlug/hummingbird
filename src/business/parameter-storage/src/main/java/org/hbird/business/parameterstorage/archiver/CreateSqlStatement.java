@@ -37,32 +37,32 @@ public class CreateSqlStatement {
 	 * 			Either one sql statement (insert into...) 
 	 * 			or two (create table...; insert into...).
 	 */
-	public String toSql(@Header("Name") String parameterName,
-			@Header("Value") String parameterValue,
-			@Header("Timestamp") String parameterTimestamp,
-			@Header("Value Type") String parameterValueType,
+	public String toSql(@Header("name") String parameterName,
+			@Header("value") String parameterValue,
+			@Header("timestamp") String parameterTimestamp,
+			@Header("clazz") String parameterValueType,
 			@Body String parameterBody) {
-
+	
 		parameterName = parameterName.replace(" ", "_");
 		StringBuilder sb = new StringBuilder();
 
 		if (!tableExists.contains(parameterName)) {
 			// Statement to create table
-			sb.append("CREATE TABLE IF NOT EXISTS ").append(parameterName)
-					.append(" (timestamp BIGINT, ");
+			sb.append("CREATE TABLE IF NOT EXISTS ").append(parameterName);
+			sb.append(" (timestamp BIGINT, ");
+//	TODO parameterValueType is not used
+//			if (parameterValueType.equals("class java.lang.Long"))
+//				sb.append("value BIGINT, ");
+//			else if (parameterValueType.equals("class java.lang.Double"))
+//				sb.append("value DOUBLE, ");
+//			else if (parameterValueType.equals("class java.lang.Boolean"))
+//				sb.append("value BIT, ");
+//			else if (parameterValueType.equals("class java.lang.Integer"))
+//				sb.append("value INT, ");
+//			else
+			sb.append("value VARCHAR(40), ");
 
-			if (parameterValueType.equals("class java.lang.Long"))
-				sb.append("value BIGINT, ");
-			else if (parameterValueType.equals("class java.lang.Double"))
-				sb.append("value DOUBLE, ");
-			else if (parameterValueType.equals("class java.lang.Boolean"))
-				sb.append("value BIT, ");
-			else if (parameterValueType.equals("class java.lang.Integer"))
-				sb.append("value INT, ");
-			else
-				sb.append("value VARCHAR(40)");
-
-			sb.append("local_timestamp BIGINT, Body varchar(500), PRIMARY KEY (timestamp));\n");
+			sb.append("local_timestamp BIGINT, Body varchar(1500), PRIMARY KEY (timestamp));\n");
 			tableExists.add(parameterName);
 		}
 

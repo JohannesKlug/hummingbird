@@ -32,9 +32,9 @@ public class CreateSqlStatementTest extends AbstractJUnit4SpringContextTests {
 	protected MockEndpoint result = null;
 
 	@Autowired
-	protected CamelContext createSqlStatement = null;
+	protected CamelContext createSqlStatementContext = null;
 
-	protected CreateSqlStatement convertBodytoSql = new CreateSqlStatement();
+	protected CreateSqlStatement createSqlStatement = new CreateSqlStatement();
 
 	protected String parameterName = "Elevation";
 	protected String parameterValue = "987654.3210987654";
@@ -50,7 +50,7 @@ public class CreateSqlStatementTest extends AbstractJUnit4SpringContextTests {
 	 */
 	@Test
 	public void testToSql() {
-		String createdStatement = convertBodytoSql.toSql(parameterName,
+		String createdStatement = createSqlStatement.toSql(parameterName,
 				parameterValue, parameterTimestamp, parameterValueType,
 				parameterBody);
 
@@ -64,7 +64,7 @@ public class CreateSqlStatementTest extends AbstractJUnit4SpringContextTests {
 	@Test
 	public void testRoutes() {
 		// Prepare exchange. All necessary headers and the body are set.
-		Exchange exchange = new DefaultExchange(createSqlStatement);
+		Exchange exchange = new DefaultExchange(createSqlStatementContext);
 		exchange.getIn().setHeader("Name", parameterName);
 		exchange.getIn().setHeader("Value", parameterValue);
 		exchange.getIn().setHeader("Timestamp", parameterTimestamp);

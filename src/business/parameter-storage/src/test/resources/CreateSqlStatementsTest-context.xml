@@ -14,7 +14,7 @@
 
 	<bean id="createSqlStatement" class="org.hbird.business.parameterstorage.archiver.CreateSqlStatement" />
 
-	<camelContext id="createSqlStatementcontext" xmlns="http://camel.apache.org/schema/spring">
+	<camelContext id="createSqlStatementContext" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer" />
 
 		<route>
