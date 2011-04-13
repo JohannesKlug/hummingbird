@@ -41,7 +41,7 @@ public class CreateSqlStatementTest extends AbstractJUnit4SpringContextTests {
 	protected String parameterTimestamp = "1301234567890";
 	protected String parameterValueType = "class java.lang.Double";
 	protected String parameterBody = "<double>987654.3210987654</double>";
-	protected String correctStatementFirstPart = "CREATE TABLE IF NOT EXISTS Elevation (timestamp BIGINT, value DOUBLE, local_timestamp BIGINT, Body varchar(500), PRIMARY KEY (timestamp));\n"
+	protected String correctStatementFirstPart = "CREATE TABLE IF NOT EXISTS Elevation (timestamp BIGINT, value VARCHAR(40), local_timestamp BIGINT, Body varchar(1500), PRIMARY KEY (timestamp));\n"
 			+ "INSERT INTO Elevation (timestamp, value, local_timestamp, body) values ('1301234567890', '987654.3210987654', '1";
 	protected String correctStatementSecondPart = "', '<double>987654.3210987654</double>');";
 

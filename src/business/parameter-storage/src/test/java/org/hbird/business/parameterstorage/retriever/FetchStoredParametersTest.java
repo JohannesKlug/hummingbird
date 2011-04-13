@@ -105,8 +105,6 @@ public class FetchStoredParametersTest extends AbstractJUnit4SpringContextTests 
 
 		// Prepare exchange (set Body and Headers) and send it.
 		Exchange exchange = new DefaultExchange(fetchStoredParametersContext);
-		exchange.getIn().setHeader("Name", "test_parameter");
-		exchange.getIn().setHeader("DestinationName", "mock:Result");
 		exchange.getIn().setBody(sqlQuery);
 
 		producer.send("direct:Parameter", exchange);
@@ -124,9 +122,6 @@ public class FetchStoredParametersTest extends AbstractJUnit4SpringContextTests 
 
 		Message firstMessage = result.getExchanges().get(0).getIn();
 		Message secondMessage = result.getExchanges().get(1).getIn();
-
-		assertEquals("test_parameter", firstMessage.getHeader("Name"));
-		assertEquals("test_parameter", secondMessage.getHeader("Name"));
 
 		assertEquals("<long>11111</long>", firstMessage.getBody(String.class));
 		assertEquals("<long>22222</long>", secondMessage.getBody(String.class));

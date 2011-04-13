@@ -54,7 +54,7 @@ public class PrepareSqlStatementsTest extends AbstractJUnit4SpringContextTests {
 
 		exchange = new DefaultExchange(createSqlQueryContext);
 		exchange.getIn().setBody(
-				"1301910000000;1301910010000;Elevation;seda:TEST");
+				"1301910000000;1301910010000;Elevation");
 	}
 
 	/*
@@ -82,7 +82,7 @@ public class PrepareSqlStatementsTest extends AbstractJUnit4SpringContextTests {
 	}
 	
 	/*
-	 * Tests the 'PrepareSqlStatements' Method.
+	 * Tests the 'createQuery' Method.
 	 */
 	@Test
 	public void testCreateQuery() {
