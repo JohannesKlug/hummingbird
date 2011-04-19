@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
+import org.hbird.exchange.type.Parameter;
 import org.hbird.exchange.type.StateParameter;
 
 @ContextConfiguration (locations={"/AllFieldsTest-context.xml"})
@@ -43,7 +44,25 @@ public class AllFieldsTest extends AbstractJUnit38SpringContextTests  {
     protected CamelContext context;
 	
 	@Test
+	public void testAllFieldsWithParameter() {
+		
+		Exchange exchange = new DefaultExchange(context);
+		exchange = new DefaultExchange(context);
+		exchange.getIn().setBody(new Parameter("parameter1", "test description", "parameter2", "unit"));
+		
+		template.send(exchange);
+		
+		assertTrue(releaseQueue.getReceivedCounter() == 1);
+		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("name")).equals("parameter1"));
+		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("description")).equals("test description"));
+		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("clazz")).equals("java.lang.String"));
+		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("value")).equals("parameter2"));
+	}	
+	
+	@Test
 	public void testAllFields() {
+		
+		releaseQueue.reset();
 		
 		Exchange exchange = new DefaultExchange(context);
 		exchange = new DefaultExchange(context);
@@ -57,5 +76,6 @@ public class AllFieldsTest extends AbstractJUnit38SpringContextTests  {
 		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("isStateOff")).equals("parameter2"));
 		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("clazz")).equals("java.lang.Boolean"));
 		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("value")).equals("true"));
-	}	
+	}
+	
 }
