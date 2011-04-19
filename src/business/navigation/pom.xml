@@ -35,7 +35,7 @@
   
   
   <properties>
-  	<orekit.version>5.1-SNAPSHOT</orekit.version>
+  	<orekit.version>5.0.1</orekit.version>
   </properties>
   
   <dependencies>
