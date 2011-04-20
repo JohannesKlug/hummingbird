@@ -12,14 +12,14 @@
 
 	<context:annotation-config />
 
-	<bean id="convertBodyToOrFromXml" class="org.hbird.business.parameterstorage.ConvertBodyToOrFromXml" />
+	<bean id="addTimestampToBody" class="org.hbird.business.parameterstorage.simple.AddTimestampToBody" />
 
-	<camelContext id="convertBodyToOrFromXmlContext" xmlns="http://camel.apache.org/schema/spring">
+	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer" />
 
 		<route>
 			<from uri="direct:Parameter" />
-			<to uri="bean:convertBodyToOrFromXml" />
+			<to uri="bean:addTimestampToBody" />
 			<to uri="mock:Result" />
 		</route>
 

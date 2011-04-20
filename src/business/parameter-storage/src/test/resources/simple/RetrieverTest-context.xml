@@ -12,17 +12,26 @@
 
 	<context:annotation-config />
 
-	<bean id="prepareSqlStatements" class="org.hbird.business.parameterstorage.retriever.PrepareSqlStatements" />
+	<bean id="retriever" class="org.hbird.business.parameterstorage.simple.Retriever">
+		<constructor-arg index="0" ref="database" />
+		<constructor-arg index="1" value="mock:Result" />
+	</bean>
 
-	<camelContext id="prepareSqlStatementsContext" xmlns="http://camel.apache.org/schema/spring">
+	<bean id="database" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="org.h2.Driver" />
+		<property name="url" value="jdbc:h2:/tmp/hbird-unittests" />
+		<property name="username" value="hbird" />
+		<property name="password" value="" />
+	</bean>
+
+	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer" />
 
 		<route>
 			<from uri="direct:Parameter" />
-			<to uri="bean:prepareSqlStatements" />
-			<to uri="mock:Result" />
+			<to uri="bean:retriever" />
 		</route>
-
 	</camelContext>
 </beans>
 

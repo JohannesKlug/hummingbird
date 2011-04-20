@@ -3,7 +3,7 @@
  * the License at http://www.apache.org/licenses/LICENSE-2.0 or at this project's root.
  */
 
-package org.hbird.business.parameterstorage.archiver;
+package org.hbird.business.parameterstorage.simple;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -19,14 +19,13 @@ public class AddTimestampToBody implements Processor {
 	 * Alters the exchange's IN-Message by adding a timestamp.
 	 * 
 	 * IN-Param: 
-	 * 		Exchange	exchange 
-	 * 			Body may contain any string value, e.g. 'test'.
+	 *   exchange -> Body may contain any string value, e.g. 'test'.
 	 */
 	public void process(Exchange exchange) throws Exception {
 		String originalBody = exchange.getIn().getBody(String.class);
 		String timeStamp = exchange.getIn()
 				.getHeader("Timestamp", String.class);
 
-		exchange.getIn().setBody(timeStamp + ";" + originalBody);
+		exchange.getIn().setBody("\n" + timeStamp + ";" + originalBody);
 	}
 }

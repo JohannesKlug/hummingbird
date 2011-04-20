@@ -3,7 +3,7 @@
  * the License at http://www.apache.org/licenses/LICENSE-2.0 or at this project's root.
  */
 
-package org.hbird.business.parameterstorage.retriever;
+package org.hbird.business.parameterstorage.simple;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -31,8 +31,8 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 /*
  * Tests Hummingbird's 'FetchStoredParameters' Bean
  */
-@ContextConfiguration(locations = { "/FetchStoredParametersTest-context.xml" })
-public class FetchStoredParametersTest extends AbstractJUnit4SpringContextTests {
+@ContextConfiguration(locations = { "/simple/RetrieverTest-context.xml" })
+public class RetrieverTest extends AbstractJUnit4SpringContextTests {
 	@Produce(uri = "direct:Parameter")
 	protected ProducerTemplate producer = null;
 
@@ -40,7 +40,7 @@ public class FetchStoredParametersTest extends AbstractJUnit4SpringContextTests 
 	protected MockEndpoint result = null;
 
 	@Autowired
-	protected CamelContext fetchStoredParametersContext = null;
+	protected CamelContext context = null;
 
 	@Autowired
 	protected DataSource database = null;
@@ -99,12 +99,10 @@ public class FetchStoredParametersTest extends AbstractJUnit4SpringContextTests 
 	@Test
 	public void testRoutes() {
 		// Prepare statements
-		String[] sqlQuery = new String[2];
-		sqlQuery[0] = "select * from test_parameter where TIMESTAMP > 1300000000500 and TIMESTAMP <= 1300000002500;";
-		sqlQuery[1] = "select * from test_parameter where TIMESTAMP > 1300000002500 and TIMESTAMP <= 1300000003500;";
+		String sqlQuery = "test_parameter;1300000000500;1300000003500";
 
 		// Prepare exchange (set Body and Headers) and send it.
-		Exchange exchange = new DefaultExchange(fetchStoredParametersContext);
+		Exchange exchange = new DefaultExchange(context);
 		exchange.getIn().setBody(sqlQuery);
 
 		producer.send("direct:Parameter", exchange);
