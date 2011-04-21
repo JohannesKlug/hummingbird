@@ -35,7 +35,7 @@ public class Archiver {
 	 *   name          -> (Is automatically extracted from header)
 	 * 		              Name of the parameter, e.g. 'Elevation'. 
 	 *   timestamp     -> (Is automatically extracted from header) 
-	 *                    Timestamp set by thn the satellite, e.g. '1302558974895'.
+	 *                    Timestamp set by the satellite, e.g. '1302558974895'.
 	 *   parameterBody -> (Is automatically extracted from Body) 
 	 *    	              Value of the parameter, e.g. an XML string. 
 	 */
