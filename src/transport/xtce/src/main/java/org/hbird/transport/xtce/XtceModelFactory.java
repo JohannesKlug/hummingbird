@@ -46,24 +46,26 @@ import org.slf4j.LoggerFactory;
 /**
  * 
  * @author Gert Villemos
+ * @author Mark Doyle
+ * @author Johannes Klug
  * 
  */
 public class XtceModelFactory implements ContainerFactory {
 
 	private static final Logger LOG = LoggerFactory.getLogger(XtceModelFactory.class);
 
-	protected Map<String, Unit> units = new HashMap<String, Unit>();
-	protected Map<String, NumberParameterType> types = new HashMap<String, NumberParameterType>();
-	protected Map<String, Container> containers = new HashMap<String, Container>();
-	protected Map<String, ParameterContainer> parameters = new HashMap<String, ParameterContainer>();
-	protected Map<Parameter, List<String>> restrictions = new HashMap<Parameter, List<String>>();
+	private final Map<String, Unit> units = new HashMap<String, Unit>();
+	private final Map<String, NumberParameterType> types = new HashMap<String, NumberParameterType>();
+	private final Map<String, Container> containers = new HashMap<String, Container>();
+	private final Map<String, ParameterContainer> parameters = new HashMap<String, ParameterContainer>();
+	private final Map<Parameter, List<String>> restrictions = new HashMap<Parameter, List<String>>();
 
-	protected SpaceSystem spaceSystem = null;
+	private SpaceSystem spaceSystem = null;
 
-	protected String packetBaseReference = "TMPacket";
-	protected String frameBaseReference = "TMFrame";
+	private String packetBaseReference = "TMPacket";
+	private String frameBaseReference = "TMFrame";
 
-	protected String spacesystemmodelFilename;
+	private String spacesystemmodelFilename;
 
 	public XtceModelFactory(final String spacesystemmodelFilename) throws InvalidXtceFileException {
 		this.spacesystemmodelFilename = spacesystemmodelFilename;
@@ -113,7 +115,7 @@ public class XtceModelFactory implements ContainerFactory {
 
 		for (int containerIndex = 0; containerIndex < containerSetTypeItemCount; ++containerIndex) {
 			final SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex)
-			.getSequenceContainer();
+					.getSequenceContainer();
 
 			LOG.debug("Creating container " + xtceContainer.getName());
 			final ContainerImpl container = new ContainerImpl(xtceContainer.getName(), xtceContainer.getShortDescription(), xtceContainer.getLongDescription());
@@ -126,7 +128,7 @@ public class XtceModelFactory implements ContainerFactory {
 		 */
 		for (int containerIndex = 0; containerIndex < containerSetTypeItemCount; ++containerIndex) {
 			final SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex)
-			.getSequenceContainer();
+					.getSequenceContainer();
 
 			// Get the container
 			final Container thisContainer = containers.get(xtceContainer.getName());
@@ -334,7 +336,7 @@ public class XtceModelFactory implements ContainerFactory {
 				}
 				else {
 					throw new InvalidXtceFileException(
-					"Invalid float type Parameter definition.  Hummingbird only supports size 32 or 64 bit big endian floats");
+							"Invalid float type Parameter definition.  Hummingbird only supports size 32 or 64 bit big endian floats");
 				}
 
 				types.put(type.getName(), type);
@@ -365,14 +367,7 @@ public class XtceModelFactory implements ContainerFactory {
 		if (spaceSystem == null) {
 
 			try {
-				// Load Mapping
-				// Mapping mapping = new Mapping();
-
-				// mapping.loadMapping(mappingFilename);
-				// initialize and configure XMLContext
-
 				final XMLContext context = new XMLContext();
-				// context.addMapping(mapping);
 
 				// Create a new Unmarshaller
 				final Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -382,16 +377,13 @@ public class XtceModelFactory implements ContainerFactory {
 				spaceSystem = (SpaceSystem) unmarshaller.unmarshal(new FileReader(spacesystemmodelFilename));
 			}
 			catch (final IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOG.error(e.toString());
 			}
 			catch (final MarshalException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOG.error(e.toString());
 			}
 			catch (final ValidationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOG.error(e.toString());
 			}
 		}
 
