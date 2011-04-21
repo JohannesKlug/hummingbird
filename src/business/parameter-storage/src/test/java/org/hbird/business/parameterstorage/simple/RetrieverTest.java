@@ -59,20 +59,19 @@ public class RetrieverTest extends AbstractJUnit4SpringContextTests {
 							+ "local_timestamp BIGINT, Body varchar(500), PRIMARY KEY (timestamp));");
 			statement
 					.execute("INSERT INTO test_parameter (timestamp, value, local_timestamp, body) "
-							+ "values ('1300000001000', '11111', '1301910090000', '<long>"
+							+ "values ('1300000001000', '11111', '1301910090001', '<long>"
 							+ "11111</long>');");
 			statement
 					.execute("INSERT INTO test_parameter (timestamp, value, local_timestamp, body) "
-							+ "values ('1300000003000', '22222', '1301910090001', '<long>"
+							+ "values ('1300000002000', '22222', '1301910090002', '<long>"
 							+ "22222</long>');");
-
 			statement
 					.execute("INSERT INTO test_parameter (timestamp, value, local_timestamp, body) "
-							+ "values ('1300000000500', '00000', '1301910090002', '<long>"
-							+ "00000</long>');");
+							+ "values ('1300000003000', '33333', '1301910090003', '<long>"
+							+ "33333</long>');");
 			statement
 					.execute("INSERT INTO test_parameter (timestamp, value, local_timestamp, body) "
-							+ "values ('1300000004000', '44444', '1301910090003', '<long>"
+							+ "values ('1300000004000', '44444', '1301910090004', '<long>"
 							+ "44444</long>');");
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -99,7 +98,7 @@ public class RetrieverTest extends AbstractJUnit4SpringContextTests {
 	@Test
 	public void testRoutes() {
 		// Prepare statements
-		String sqlQuery = "test_parameter;1300000000500;1300000003500";
+		String sqlQuery = "test_parameter;1300000001500;1300000003500";
 
 		// Prepare exchange (set Body and Headers) and send it.
 		Exchange exchange = new DefaultExchange(context);
@@ -121,7 +120,7 @@ public class RetrieverTest extends AbstractJUnit4SpringContextTests {
 		Message firstMessage = result.getExchanges().get(0).getIn();
 		Message secondMessage = result.getExchanges().get(1).getIn();
 
-		assertEquals("<long>11111</long>", firstMessage.getBody(String.class));
-		assertEquals("<long>22222</long>", secondMessage.getBody(String.class));
+		assertEquals("<long>22222</long>", firstMessage.getBody(String.class));
+		assertEquals("<long>33333</long>", secondMessage.getBody(String.class));
 	}
 }
