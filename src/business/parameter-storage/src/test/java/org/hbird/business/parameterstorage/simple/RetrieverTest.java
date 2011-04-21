@@ -3,7 +3,7 @@
  * the License at http://www.apache.org/licenses/LICENSE-2.0 or at this project's root.
  */
 
-package org.hbird.business.parameterstorage.retriever;
+package org.hbird.business.parameterstorage.simple;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -31,8 +31,8 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 /*
  * Tests Hummingbird's 'FetchStoredParameters' Bean
  */
-@ContextConfiguration(locations = { "/FetchStoredParametersTest-context.xml" })
-public class FetchStoredParametersTest extends AbstractJUnit4SpringContextTests {
+@ContextConfiguration(locations = { "/simple/RetrieverTest-context.xml" })
+public class RetrieverTest extends AbstractJUnit4SpringContextTests {
 	@Produce(uri = "direct:Parameter")
 	protected ProducerTemplate producer = null;
 
@@ -40,7 +40,7 @@ public class FetchStoredParametersTest extends AbstractJUnit4SpringContextTests 
 	protected MockEndpoint result = null;
 
 	@Autowired
-	protected CamelContext fetchStoredParametersContext = null;
+	protected CamelContext context = null;
 
 	@Autowired
 	protected DataSource database = null;
@@ -59,20 +59,19 @@ public class FetchStoredParametersTest extends AbstractJUnit4SpringContextTests 
 							+ "local_timestamp BIGINT, Body varchar(500), PRIMARY KEY (timestamp));");
 			statement
 					.execute("INSERT INTO test_parameter (timestamp, value, local_timestamp, body) "
-							+ "values ('1300000001000', '11111', '1301910090000', '<long>"
+							+ "values ('1300000001000', '11111', '1301910090001', '<long>"
 							+ "11111</long>');");
 			statement
 					.execute("INSERT INTO test_parameter (timestamp, value, local_timestamp, body) "
-							+ "values ('1300000003000', '22222', '1301910090001', '<long>"
+							+ "values ('1300000002000', '22222', '1301910090002', '<long>"
 							+ "22222</long>');");
-
 			statement
 					.execute("INSERT INTO test_parameter (timestamp, value, local_timestamp, body) "
-							+ "values ('1300000000500', '00000', '1301910090002', '<long>"
-							+ "00000</long>');");
+							+ "values ('1300000003000', '33333', '1301910090003', '<long>"
+							+ "33333</long>');");
 			statement
 					.execute("INSERT INTO test_parameter (timestamp, value, local_timestamp, body) "
-							+ "values ('1300000004000', '44444', '1301910090003', '<long>"
+							+ "values ('1300000004000', '44444', '1301910090004', '<long>"
 							+ "44444</long>');");
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -99,12 +98,10 @@ public class FetchStoredParametersTest extends AbstractJUnit4SpringContextTests 
 	@Test
 	public void testRoutes() {
 		// Prepare statements
-		String[] sqlQuery = new String[2];
-		sqlQuery[0] = "select * from test_parameter where TIMESTAMP > 1300000000500 and TIMESTAMP <= 1300000002500;";
-		sqlQuery[1] = "select * from test_parameter where TIMESTAMP > 1300000002500 and TIMESTAMP <= 1300000003500;";
+		String sqlQuery = "test_parameter;1300000001500;1300000003500";
 
 		// Prepare exchange (set Body and Headers) and send it.
-		Exchange exchange = new DefaultExchange(fetchStoredParametersContext);
+		Exchange exchange = new DefaultExchange(context);
 		exchange.getIn().setBody(sqlQuery);
 
 		producer.send("direct:Parameter", exchange);
@@ -123,7 +120,7 @@ public class FetchStoredParametersTest extends AbstractJUnit4SpringContextTests 
 		Message firstMessage = result.getExchanges().get(0).getIn();
 		Message secondMessage = result.getExchanges().get(1).getIn();
 
-		assertEquals("<long>11111</long>", firstMessage.getBody(String.class));
-		assertEquals("<long>22222</long>", secondMessage.getBody(String.class));
+		assertEquals("<long>22222</long>", firstMessage.getBody(String.class));
+		assertEquals("<long>33333</long>", secondMessage.getBody(String.class));
 	}
 }

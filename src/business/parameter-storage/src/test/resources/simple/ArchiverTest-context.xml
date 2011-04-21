@@ -12,15 +12,23 @@
 
 	<context:annotation-config />
 
-	<bean id="addTimestampToBody" class="org.hbird.business.parameterstorage.archiver.AddTimestampToBody" />
-
-	<camelContext id="addTimestampToBodyContext" xmlns="http://camel.apache.org/schema/spring">
+	<bean id="database" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="org.h2.Driver" />
+		<property name="url" value="jdbc:h2:/tmp/hbird-unittests-databasearchiver" />
+		<property name="username" value="hbird" />
+		<property name="password" value="hbird" />
+	</bean>
+	
+	<bean id="databaseArchiver" class="org.hbird.business.parameterstorage.simple.Archiver" >
+		<constructor-arg index="0" ref="database" />
+		</bean>
+		
+	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer" />
 
 		<route>
 			<from uri="direct:Parameter" />
-			<to uri="bean:addTimestampToBody" />
-			<to uri="mock:Result" />
+			<to uri="bean:databaseArchiver" />
 		</route>
 
 	</camelContext>

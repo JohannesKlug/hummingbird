@@ -3,7 +3,7 @@
  * the License at http://www.apache.org/licenses/LICENSE-2.0 or at this project's root.
  */
 
-package org.hbird.business.parameterstorage.archiver;
+package org.hbird.business.parameterstorage.simple;
 
 import static org.junit.Assert.*;
 
@@ -22,7 +22,7 @@ import org.springframework.test.context.ContextConfiguration;
 /*
  * Tests Hummingbird's 'AddTimestampToBody' Processor.
  */
-@ContextConfiguration(locations = { "/AddTimestampToBodyTest-context.xml" })
+@ContextConfiguration(locations = { "/simple/AddTimestampToBodyTest-context.xml" })
 public class AddTimestampToBodyTest extends AbstractJUnit4SpringContextTests {
 
 	@Produce(uri = "direct:Parameter")
@@ -32,11 +32,11 @@ public class AddTimestampToBodyTest extends AbstractJUnit4SpringContextTests {
 	protected MockEndpoint result = null;
 
 	@Autowired
-	protected CamelContext parameterFileArchiverProcessorContext = null;
+	protected CamelContext context = null;
 
 	protected long testTimestamp = 123456789;
 	protected String testPayload = "Test_Payload";
-	protected String newPayload = testTimestamp + ";" + testPayload;
+	protected String newPayload = "\n" + testTimestamp + ";" + testPayload;
 
 	/*
 	 * Tests the processor in a camel route.
@@ -45,7 +45,7 @@ public class AddTimestampToBodyTest extends AbstractJUnit4SpringContextTests {
 	public void testRoute() {
 		// Prepare Exchange
 		Exchange exchange = new DefaultExchange(
-				parameterFileArchiverProcessorContext);
+				context);
 		exchange.getIn().setHeader("Timestamp", testTimestamp);
 		exchange.getIn().setBody(testPayload);
 

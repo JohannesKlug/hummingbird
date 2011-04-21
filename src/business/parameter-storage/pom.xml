@@ -3,9 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.hbird.business</groupId>
 	<artifactId>parameter-storage</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>Business - Parameter Storage</name>
-	<description>This module can store Parameters in a database or in a file and retrieve the files stored in the database.</description>
+	<description>This module can store/retrieve Parameters in/from a database and has a component to make storage in a file easier.</description>
 
 	<parent>
 		<artifactId>hummingbird-business</artifactId>
@@ -24,18 +24,18 @@
 	</build>
 
 	<dependencies>
-
+	
+		<dependency>
+  			<groupId>org.apache.camel</groupId>
+  			<artifactId>camel-xstream</artifactId>
+  			<version>${camel.version}</version>
+		</dependency>
+			
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>${h2.version}</version>
 		</dependency>
-
-		<!-- <dependency> -->
-		<!-- <groupId>mysql</groupId> -->
-		<!-- <artifactId>mysql-connector-java</artifactId> -->
-		<!-- <version>5.1.14</version> -->
-		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -91,12 +91,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<version>${xstream.version}</version>
 		</dependency>
 	</dependencies>
 </project>
