@@ -44,7 +44,8 @@ public class AllFieldsTest extends AbstractJUnit38SpringContextTests  {
     protected CamelContext context;
 	
 	@Test
-	public void testAllFieldsWithParameter() {
+	public void testAllFieldsWithParameter() throws InterruptedException {
+		releaseQueue.reset();
 		
 		Exchange exchange = new DefaultExchange(context);
 		exchange = new DefaultExchange(context);
@@ -52,7 +53,9 @@ public class AllFieldsTest extends AbstractJUnit38SpringContextTests  {
 		
 		template.send(exchange);
 		
-		assertTrue(releaseQueue.getReceivedCounter() == 1);
+		releaseQueue.setExpectedMessageCount(1);
+		releaseQueue.assertIsSatisfied();
+		
 		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("name")).equals("parameter1"));
 		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("description")).equals("test description"));
 		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("clazz")).equals("java.lang.String"));
@@ -60,8 +63,7 @@ public class AllFieldsTest extends AbstractJUnit38SpringContextTests  {
 	}	
 	
 	@Test
-	public void testAllFields() {
-		
+	public void testAllFields() throws InterruptedException {
 		releaseQueue.reset();
 		
 		Exchange exchange = new DefaultExchange(context);
@@ -70,7 +72,9 @@ public class AllFieldsTest extends AbstractJUnit38SpringContextTests  {
 				
 		template.send(exchange);
 		
-		assertTrue(releaseQueue.getReceivedCounter() == 1);
+		releaseQueue.setExpectedMessageCount(1);
+		releaseQueue.assertIsSatisfied();
+		
 		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("name")).equals("parameter1"));
 		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("description")).equals("test description"));
 		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("isStateOff")).equals("parameter2"));
