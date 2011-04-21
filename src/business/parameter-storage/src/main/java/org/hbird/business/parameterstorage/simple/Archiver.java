@@ -24,12 +24,18 @@ public class Archiver {
 	
 	protected JdbcTemplate template = null;
 
+	/*
+	 * The Constructor
+	 * 
+	 * IN-param: 
+	 *   database -> The database to store the parameters in.
+	 */
 	public Archiver(DataSource database) {
 		template = new JdbcTemplate(database);
 	}
 
 	/*
-	 * Creates the SQL Statement(s).
+	 * Stores the submitted parameter in the database. 
 	 * 
 	 * IN-param: 
 	 *   name          -> (Is automatically extracted from header)
