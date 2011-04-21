@@ -36,7 +36,7 @@ public class AddTimestampToBodyTest extends AbstractJUnit4SpringContextTests {
 
 	protected long testTimestamp = 123456789;
 	protected String testPayload = "Test_Payload";
-	protected String newPayload = "\n" + testTimestamp + ";" + testPayload;
+	protected String newPayload = testTimestamp + ";" + testPayload + "\n";
 
 	/*
 	 * Tests the processor in a camel route.
