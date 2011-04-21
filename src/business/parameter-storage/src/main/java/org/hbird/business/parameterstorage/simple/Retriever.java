@@ -95,16 +95,16 @@ public class Retriever {
 		List<Map<String, Object>> result;
 
 		//First statement: timestamp between 'start' and 'end - 1000ms'
-		sqlSelect = "select * from " + parameterName + " where TIMESTAMP > "
-		+ startTimeStamp + " and TIMESTAMP <= " + (endTimeStamp - 1000)
+		sqlSelect = "select * from " + parameterName + " where TIMESTAMP >= "
+		+ startTimeStamp + " and TIMESTAMP < " + (endTimeStamp - 1000)
 		+ ";";
 		
 		result = template.queryForList(sqlSelect);
 		processResults(result);
 
 		//Second statement: timestamp between 'end - 1000ms' and 'end'
-		sqlSelect = "select * from " + parameterName + " where TIMESTAMP > "
-		+ (endTimeStamp - 1000) + " and TIMESTAMP <= " + endTimeStamp
+		sqlSelect = "select * from " + parameterName + " where TIMESTAMP >= "
+		+ (endTimeStamp - 1000) + " and TIMESTAMP < " + endTimeStamp
 		+ ";";
 		
 		result = template.queryForList(sqlSelect);

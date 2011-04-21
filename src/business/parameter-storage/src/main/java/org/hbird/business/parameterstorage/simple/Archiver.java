@@ -65,7 +65,7 @@ public class Archiver {
 						+ " (timestamp BIGINT, "
 						//+ "value VARCHAR(40), "
 						+ "local_timestamp BIGINT, body varchar(1500), "
-						+ "PRIMARY KEY (local_timestamp));\n";
+						+ "PRIMARY KEY (timestamp));\n";
 				template.execute(createTableStatement);
 			}
 
