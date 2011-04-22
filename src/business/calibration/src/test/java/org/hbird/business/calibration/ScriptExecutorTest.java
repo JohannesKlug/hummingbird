@@ -23,7 +23,7 @@ import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.impl.DefaultExchange;
-import org.hbird.exchange.calibration.ScriptExecutionRequest;
+import org.hbird.exchange.scripting.ScriptExecutionRequest;
 import org.hbird.exchange.type.StateParameter;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

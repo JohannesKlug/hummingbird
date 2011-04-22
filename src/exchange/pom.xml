@@ -26,6 +26,9 @@
 
   <modules>
     <module>data</module>
+    <module>navigation</module>
+    <module>commanding</module>
+    <module>scripting</module>
   </modules>
 	
 </project>

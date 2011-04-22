@@ -43,6 +43,7 @@ import org.hbird.exchange.type.Named;
  */
 public class ObjectPublisher {
 	
+	/** The class logger. */
 	protected static Logger logger = Logger.getLogger(ObjectPublisher.class);
 	
 	/** The context in which the component is running. */
@@ -87,6 +88,4 @@ public class ObjectPublisher {
 		
 		return messages;
 	}
-	
-	
 }

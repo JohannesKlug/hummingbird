@@ -12,8 +12,6 @@
 
 	<bean id="commandreleaser" class="org.hbird.business.command.releaser.CommandReleaser"/>
 
-	<bean id="stateConnector" class="org.hbird.exchange.dataprovider.SimpleDataBuffer"/>
-
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>
 

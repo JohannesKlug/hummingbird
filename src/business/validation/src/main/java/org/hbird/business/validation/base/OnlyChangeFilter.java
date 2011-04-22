@@ -19,6 +19,7 @@ package org.hbird.business.validation.base;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.camel.Body;
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 import org.hbird.exchange.type.StateParameter;
@@ -39,13 +40,9 @@ public class OnlyChangeFilter {
 	 * Method to detect whether a change has occurred. If no change has occurred, then
 	 * the route is stopped.
 	 * 
-	 * @param exchange The exchange containing the new state.
-	 */
-	public void process(Exchange exchange) throws Exception {
-		
-		/** Get the (maybe) new state. */
-		StateParameter state = (StateParameter) exchange.getIn().getBody();
-
+	 * @param exchange The exchange containing the new state. */
+	 public void process(Exchange exchange, @Body StateParameter state) throws Exception {
+				 
 		/** If we know this state already... */
 		if (currentState.containsKey(state.getName()) == true) {
 			

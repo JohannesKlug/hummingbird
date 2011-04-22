@@ -4,7 +4,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultExchange;
-import org.hbird.exchange.orbital.OrbitalState;
+import org.hbird.exchange.navigation.OrbitalState;
 import org.hbird.exchange.type.D3Vector;
 import org.orekit.errors.OrekitException;
 import org.orekit.errors.PropagationException;

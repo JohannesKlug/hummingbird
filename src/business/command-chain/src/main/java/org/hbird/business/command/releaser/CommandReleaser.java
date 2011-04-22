@@ -16,16 +16,17 @@
  */
 package org.hbird.business.command.releaser;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
-import org.apache.camel.ProducerTemplate;
-import org.apache.camel.impl.DefaultExchange;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-import org.hbird.exchange.dataprovider.IDataProvider;
-import org.hbird.exchange.tasks.ITask;
-import org.hbird.exchange.type.Command;
+import org.apache.camel.Body;
+import org.apache.camel.Handler;
+import org.apache.camel.Headers;
+import org.apache.log4j.Logger;
+
+import org.hbird.exchange.commanding.Command;
+import org.hbird.exchange.commanding.ITask;
 import org.hbird.exchange.type.StateParameter;
 
 /**
@@ -65,18 +66,6 @@ public class CommandReleaser {
 	/** The object logger. */
 	protected static Logger logger = Logger.getLogger(CommandReleaser.class);
 	
-	/** Queue for the task schedule. */
-	@Autowired
-	protected ProducerTemplate producer = null;
-
-	/** The context in which the component is running. */
-	@Autowired
-	protected CamelContext context = null;
-
-	/** A provider of data. Is used to retrieve parameter state information. */
-	@Autowired
-	protected IDataProvider provider = null;
-	
 	/**
 	 * Processor for the scheduling of validation task for a command as well as the
 	 * release of the command.
@@ -84,21 +73,23 @@ public class CommandReleaser {
 	 * @param exchange
 	 * @throws InterruptedException 
 	 */
-	public void process(Exchange exchange) throws InterruptedException {
+	@Handler
+	public List<Object> process(@Body Command definition, @Headers Map<String, Object> headers) throws InterruptedException {
 
 		/** Get the command definition. */
-		Command definition = (Command) exchange.getIn().getBody();
 		logger.info("Processing command '" + definition.getName() + "' with ID " + definition.getObjectid() + "'.");
 		
+		List<Object> messages = new ArrayList<Object>();
+		
 		/** Validate the lock state(s). */
-		/** TODO Make this much more generic; let the conditions be any logical expression, using any type of parameter. */
 		for (String state : definition.getLockStates()) {
-			StateParameter parameter = (StateParameter) provider.getParameter("name=" + state);
+			/** TODO Get the parameter using the Camel request-response pattern. */
+			StateParameter parameter = null;
 			if ((Boolean) parameter.getValue() == false) {				
 				/** Stop the release of the command. */
-				/** FIXME Failed commands should be send to a special queue. */
-				exchange.setProperty(Exchange.ROUTE_STOP, true);
-				return;
+				logger.error("Failed release of command with ID '" + definition.getObjectid() + "'. Lock state '" + parameter.getName() + "' has state 'false'.");
+				headers.put("FailedRelease", true);
+				return messages;
 			}
 		}
 
@@ -108,14 +99,10 @@ public class CommandReleaser {
 			/** Specialized sub classes of the 'ITask' may depend on the command to configure themselves, for
 			 * example the ReflectiveSetParameter' will have a value reflected from a command argument. This
 			 * call ensures that the configuration can occur. */
-			task.configure(definition);
-			Exchange taskExchange = new DefaultExchange(context);
-			taskExchange.getIn().setBody(task);			
-			producer.send("direct:Tasks", taskExchange);
-			
+			messages.add(task);
 			logger.info("Scheduling task '" + task.getClass().toString() + "' with ID " + task.getObjectid() + "'.");
 		}
 
-		/** Command is forwarded in the route, i.e. released. */
+		return messages;
 	}
 }

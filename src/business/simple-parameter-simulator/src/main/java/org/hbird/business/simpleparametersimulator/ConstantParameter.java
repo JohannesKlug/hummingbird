@@ -32,7 +32,7 @@ public class ConstantParameter extends BaseParameter {
 	protected static Logger logger = Logger.getLogger(ConstantParameter.class);
 
 	/** The value of the constant. */
-	protected Double value = 0d;	
+	protected Double constantValue = 0d;	
 
 	public ConstantParameter(String name, String description, String unit, Double value) {
 		super(name, description, value, unit);
@@ -53,13 +53,13 @@ public class ConstantParameter extends BaseParameter {
 		}
 	}
 
-
-	public Double getValue() {
-		return value;
+	public Double getConstantValue() {
+		return constantValue;
 	}
 
-
-	public void setValue(Double value) {
-		this.value = value;
-	}	
+	public void setConstantValue(Double constantValue) {
+		this.constantValue = constantValue;
+	}
+	
+	
 }

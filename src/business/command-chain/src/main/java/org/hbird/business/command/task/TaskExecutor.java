@@ -16,14 +16,12 @@
  */
 package org.hbird.business.command.task;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
-import org.apache.camel.ProducerTemplate;
+import org.apache.camel.Body;
+import org.apache.camel.Handler;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import org.hbird.exchange.dataprovider.IDataProvider;
-import org.hbird.exchange.tasks.ITask;;
+import org.hbird.exchange.commanding.ITask;
+
 
 /**
  * The executor performs the tasks scheduled for a task. A task may have an
@@ -47,17 +45,8 @@ import org.hbird.exchange.tasks.ITask;;
  */
 public class TaskExecutor {
 
+	/** The class logger. */
 	protected static Logger logger = Logger.getLogger(TaskExecutor.class);
-	
-	/** Queue for the task schedule. */
-	@Autowired
-	protected ProducerTemplate producer = null;
-
-	/** The context in which the component is running. */
-	@Autowired
-	protected CamelContext context = null;
-
-	protected IDataProvider provider = null;
 	
 	/** 
 	 * Method for actually executing the task. The task will be extracted from the
@@ -66,13 +55,10 @@ public class TaskExecutor {
 	 * @param arg0 The exchange carrying a task as its body.
 	 * @throws InterruptedException 
 	 */
-	public void receive(Exchange exchange) throws InterruptedException {
+	@Handler
+	public void receive(@Body Object body) throws InterruptedException {
 
-		/** Get the task. */
-		ITask task = (ITask) exchange.getIn().getBody();
-
-		/** Execute the task. The exchange is parsed, because the specific task */
-		/** TODO Does the tasks return Parameters in the exchange? */
-		task.execute(exchange, provider);
+		/** Execute the task. The task may return a new object which is the body of the exchange. */
+		body = ((ITask) body).execute();
 	}
 }

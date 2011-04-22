@@ -2,15 +2,17 @@ package org.hbird.business.navigation;
 
 import java.util.Date;
 
+import org.apache.camel.Body;
 import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
+import org.apache.camel.Handler;
 import org.apache.camel.ProducerTemplate;
 import org.apache.commons.math.geometry.Vector3D;
 import org.hbird.exchange.type.Location;
-import org.hbird.exchange.orbital.OrbitPredictionRequest;
+import org.hbird.exchange.navigation.OrbitPredictionRequest;
 import org.orekit.bodies.BodyShape;
 import org.orekit.bodies.GeodeticPoint;
 import org.orekit.bodies.OneAxisEllipsoid;
+import org.orekit.errors.OrekitException;
 import org.orekit.frames.Frame;
 import org.orekit.frames.FramesFactory;
 import org.orekit.frames.TopocentricFrame;
@@ -59,18 +61,16 @@ public class OrbitPredictor {
 		System.setProperty("orekit.data.path", datapath);		
 	}
 	
-	/** The exchange must contain a OrbitalState object as the in-body. */
-	public void process(Exchange exchange) {
-		OrbitPredictionRequest request = (OrbitPredictionRequest) exchange.getIn().getBody();
-
-		try {
+	/** The exchange must contain a OrbitalState object as the in-body. 
+	 * @throws OrekitException */
+	@Handler
+	public void process(@Body OrbitPredictionRequest request) throws OrekitException {
 			// Inertial frame			
 			Vector3D position  = new Vector3D((Double) request.position.p1.getValue(), (Double) request.position.p2.getValue(), (Double) request.position.p3.getValue());
 			Vector3D velocity  = new Vector3D((Double) request.velocity.p1.getValue(), (Double) request.velocity.p2.getValue(), (Double) request.velocity.p3.getValue());
 			PVCoordinates pvCoordinates = new PVCoordinates(position, velocity);
 
 			AbsoluteDate initialDate = new AbsoluteDate(new Date(request.starttime), TimeScalesFactory.getUTC());
-			long test = initialDate.toDate(TimeScalesFactory.getUTC()).getTime();
 			
 			Frame inertialFrame = FramesFactory.getEME2000();
 			
@@ -99,9 +99,5 @@ public class OrbitPredictor {
 			OrbitalStateInjector injector = new OrbitalStateInjector(request.name, datasetidentifier, context, producer);
 			propagator.setMasterMode(request.stepSize, injector);			
 			propagator.propagate(new AbsoluteDate(initialDate, request.deltaPropagation));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 }

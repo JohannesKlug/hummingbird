@@ -16,12 +16,21 @@
  */
 package org.hbird.exchange.type;
 
-
+/**
+ * Class representing a satellite. 
+ *
+ */
 public class Satellite extends Named {
 
-	/***/
+	/** The unique UUID. */
 	private static final long serialVersionUID = 6169559659135516782L;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param name The name of the satellite.
+	 * @param description The description of the satellite.
+	 */
 	public Satellite(String name, String description) {
 		super(name, description);
 	}

@@ -16,7 +16,6 @@
  */
 package org.hbird.exchange.type;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /** 
@@ -28,7 +27,6 @@ import java.lang.reflect.Method;
  * and (attempting) to invoke a 'compareTo' method if available.
  */
 public class Comperator {
-
 
 	/**
 	 * The comparison will return
@@ -58,51 +56,44 @@ public class Comperator {
 		int returnValue = 0;
 
 		if (lhs == null && rhs == null) {
-			return 0;
+			returnValue = 0;
 		}
 		else if (lhs == null) {
-			return -1;
+			returnValue = -1;
 		}
 		else if (rhs == null) {
-			return 1;
+			returnValue = 1;
 		}
+		else {
+			/** Take the left hand side, and see if we can find a 'compareTo' function that
+			 *  we can use to compare to the rhs. */
+			try {
+				for (Method candidateMethod : lhs.getClass().getMethods()) {
+					if (candidateMethod.getName().equals("compareTo")) {
 
-		/** Take the left hand side, and see if we can find a 'compareTo' function that
-		 *  we can use to compare to the rhs. */
-		try {
-			Method method = null;
-			for (Method candidateMethod : lhs.getClass().getMethods()) {
-				if (candidateMethod.getName().equals("compareTo")) {
-					method = candidateMethod;
-					break;
-				}
-			}
+						Class<?> partypes[] = new Class[1];
+						partypes[0] = lhs.getClass();
 
-			if (method != null) {
-				Class<?> partypes[] = new Class[1];
-				partypes[0] = lhs.getClass();
+						/** If the rhs is not the same as the lhs, then try to cast it. */
+						if (lhs.getClass() != rhs.getClass()) {
 
-				/** If the rhs is not the same as the lhs, then try to cast it. */
-				if (lhs.getClass() != rhs.getClass()) {
-
-					/** If this is a Number, then we can convert. */
-					if (lhs instanceof Number && lhs instanceof Number) {
-						/** We use the Float comparison. */
-						return (new Float(((Number) lhs).floatValue()).compareTo(((Number) rhs).floatValue()));
+							/** If this is a Number, then we can convert. */
+							if (lhs instanceof Number && lhs instanceof Number) {
+								/** We use the Float comparison. */
+								returnValue = (new Float(((Number) lhs).floatValue()).compareTo(((Number) rhs).floatValue()));
+							}
+						}
+						else {
+							Object arglist[] = {rhs};
+							returnValue = (Integer) candidateMethod.invoke(lhs, arglist);
+						}
+						break;
 					}
 				}
-			}
 
-			Object arglist[] = {rhs};
-			returnValue = (Integer) method.invoke(lhs, arglist);
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		return returnValue;

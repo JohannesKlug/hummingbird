@@ -49,6 +49,7 @@
 
 	<bean id="commandHandler" class="org.hbird.business.simpleparametersimulator.CommandReader"/>
 
+
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>
 

@@ -27,12 +27,11 @@ import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.impl.DefaultExchange;
-import org.hbird.exchange.dataprovider.SimpleDataBuffer;
+import org.hbird.exchange.commanding.Argument;
+import org.hbird.exchange.commanding.Command;
+import org.hbird.exchange.commanding.ITask;
+import org.hbird.exchange.commanding.checks.RangeCheck;
 import org.hbird.exchange.tasks.DummyTask;
-import org.hbird.exchange.tasks.ITask;
-import org.hbird.exchange.tasks.checks.RangeCheck;
-import org.hbird.exchange.type.Argument;
-import org.hbird.exchange.type.Command;
 import org.hbird.exchange.type.Parameter;
 import org.hbird.exchange.type.StateParameter;
 import org.junit.Test;
@@ -56,10 +55,6 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 	@Autowired
     protected CamelContext context;
 
-
-	@Autowired
-	protected SimpleDataBuffer stateConnector;
-
 	protected Command createCommand() {
 		List<String> lockStates = Arrays.asList(new String[] {"STATE1", "STATE2", "STATE3"});
 		List<ITask> tasks = Arrays.asList(new ITask[] {new DummyTask(), new DummyTask()});
@@ -79,10 +74,6 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 	@Test
 	public void testFailingRelease() {
 		Command command = createCommand();
-
-		stateConnector.addParameter(new StateParameter("STATE1", "", command, true));
-		stateConnector.addParameter(new StateParameter("STATE2", "", command, true));
-		stateConnector.addParameter(new StateParameter("STATE3", "", command, false));
 
 		/** Release command with states that will fail, i.e. locked. */
 		Exchange exchange = new DefaultExchange(context);
@@ -104,10 +95,6 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 
 		Command command = createCommand();
 
-		stateConnector.addParameter(new StateParameter("STATE1", "", command, true));
-		stateConnector.addParameter(new StateParameter("STATE2", "", command, true));
-		stateConnector.addParameter(new StateParameter("STATE3", "", command, true));
-		
 		/** Release command with states that will fail, i.e. locked. */
 		Exchange exchange = new DefaultExchange(context);
 		exchange.getIn().setBody(command);

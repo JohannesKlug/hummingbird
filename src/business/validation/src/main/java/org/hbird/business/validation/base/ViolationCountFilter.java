@@ -16,6 +16,7 @@
  */
 package org.hbird.business.validation.base;
 
+import org.apache.camel.Body;
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 import org.hbird.exchange.type.StateParameter;
@@ -64,9 +65,7 @@ public class ViolationCountFilter {
 	 * 
 	 * @param exchange The exchange carrying the state.
 	 */
-	public void process(Exchange exchange) {
-		StateParameter state = (StateParameter) exchange.getIn().getBody();
-
+	public void process(Exchange exchange, @Body StateParameter state) {
 		if ((Boolean) state.getValue() == false) {
 			violations++;
 
