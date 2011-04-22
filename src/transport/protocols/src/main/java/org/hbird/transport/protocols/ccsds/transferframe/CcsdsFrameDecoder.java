@@ -47,12 +47,7 @@ public class CcsdsFrameDecoder extends Observable {
 	private static boolean ECF_PRESENT;
 
 	public static boolean isNextFrame(final int lastFrameCount, final int frameCount) {
-		if (((frameCount - lastFrameCount + 256) % 256) == 1) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return (((frameCount - lastFrameCount + 256) % 256) == 1);
 	}
 
 	private final VirtualChannel[] virtualChannel = new VirtualChannel[8];
