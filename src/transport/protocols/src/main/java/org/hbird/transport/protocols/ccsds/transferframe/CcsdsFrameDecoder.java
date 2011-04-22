@@ -1,10 +1,10 @@
 package org.hbird.transport.protocols.ccsds.transferframe;
 
+import java.util.Map;
 import java.util.Observable;
 
-import org.apache.camel.Exchange;
-import org.apache.camel.InOut;
-import org.apache.camel.Message;
+import org.apache.camel.Body;
+import org.apache.camel.Headers;
 import org.apache.commons.lang.ArrayUtils;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.FrameFailedCrcCheckException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidFrameLengthException;
@@ -13,16 +13,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CcsdsFrameDecoder extends Observable {
+	public static final String IS_NEXT_FRAME = "IsNextFrame";
+
+	public static final String SPACECRAFT_ID = "SpacecraftId";
+
+	public static final String VIRTUAL_CHANNEL_ID = "VirtualChannelId";
+
 	private final static Logger LOG = LoggerFactory.getLogger(CcsdsFrameDecoder.class);
 
 	public static int frameLengthInOctets;
 
-	/**
+	/*
 	 * Byte position at which the frame payload ends. This depends on whether OCF and/or ECF are present.
 	 */
 	private static int payloadEnd;
 
-	/**
+	/*
 	 * Signifies whether the Operational Control Field (4 octets) is present
 	 */
 	private static boolean OCF_PRESENT;
@@ -35,7 +41,7 @@ public class CcsdsFrameDecoder extends Observable {
 
 	private static final int ECF_LENGTH = 2;
 
-	/**
+	/*
 	 * Signifies whether the Error Control Field (2 octets) is present
 	 */
 	private static boolean ECF_PRESENT;
@@ -173,32 +179,15 @@ public class CcsdsFrameDecoder extends Observable {
 		byte[] payload = ArrayUtils.subarray(frame, payloadOffset, payloadEnd);
 
 		return virtualChannel[virtualChannelId].processPayload(spacecraftId, payload, virtualChannelFrameCount, firstHeaderPointer);
+		
 	}
-
-	/**
-	 * 
-	 * @param An
-	 *            incoming message carrying a frame as a byte array in its body
-	 * @return A CcsdsFramePayload in the body.
-	 * @throws InvalidVirtualChannelIdException
-	 * @throws FrameFailedCrcCheckException
-	 * @throws InvalidFrameLengthException
-	 */
-	@InOut
-	public Message processMessage(final Exchange exchange) throws InvalidFrameLengthException, FrameFailedCrcCheckException, InvalidVirtualChannelIdException {
-		Message inMessage = exchange.getIn();
-		Message outMessage = exchange.getOut();
-
-		byte[] frame;
-		if (inMessage.getBody() instanceof byte[]) {
-			frame = (byte[]) inMessage.getBody();
-			CcsdsFramePayload processedPayload = this.process(frame);
-			outMessage.setHeader("VirtualChannelId", processedPayload.virtualChannelId);
-			outMessage.setHeader("SpacecraftId", processedPayload.spacecraftId);
-			outMessage.setHeader("IsNextFrame", processedPayload.isNextFrame);
-			outMessage.setBody(processedPayload.payload);
-		}
-		return outMessage;
+	
+	public byte[] process(@Body final byte[] frame, @Headers Map<String,Object> headers) throws InvalidFrameLengthException, FrameFailedCrcCheckException, InvalidVirtualChannelIdException {
+		CcsdsFramePayload returnPayload  = process(frame);
+		headers.put(VIRTUAL_CHANNEL_ID, returnPayload.virtualChannelId);
+		headers.put(SPACECRAFT_ID, returnPayload.spacecraftId);
+		headers.put(IS_NEXT_FRAME, returnPayload.isNextFrame);
+		return returnPayload.payload;
 	}
 
 }
