@@ -17,12 +17,25 @@ import org.hbird.transport.telemetry.HummingbirdParameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** TODO Remove hardcoded 'strings', put them in the HeaderFields class. */
+/**
+ * 
+ * @author Mark Doyle
+ * @author Johannes Klug
+ * 
+ */
 public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 	private final static Logger LOG = LoggerFactory.getLogger(HummingbirdCamelPacketBroker.class);
 
+	private String packetContainerName;
+
+	public HummingbirdCamelPacketBroker(final ContainerFactory factory, String packetContainerName) {
+		super(factory);
+		this.setPacketContainerName(packetContainerName);
+	}
+
 	public HummingbirdCamelPacketBroker(final ContainerFactory factory) {
 		super(factory);
+		packetContainerName = "TMPacket";
 	}
 
 	/**
@@ -46,7 +59,7 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 			LOG.warn("message body is null");
 			return null;
 		}
-		this.unmarshall("TMPacket", (BitSet) msgBody);
+		this.unmarshall(this.packetContainerName, (BitSet) msgBody);
 
 		final HummingbirdPacket packet = packetProducer.getPacket();
 
@@ -116,5 +129,13 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 		}
 
 		return msg;
+	}
+
+	public void setPacketContainerName(String packetContainerName) {
+		this.packetContainerName = packetContainerName;
+	}
+
+	public String getPacketContainerName() {
+		return packetContainerName;
 	}
 }

@@ -62,8 +62,13 @@ public class SlipStressTest implements Observer {
 		for (int i=0; i<10000; i++) {
 			os.write(bytesToSend);
 		}
+		os.flush();
 		
-		Thread.sleep(2000);
+		// Wait until 10000 bytes are received, but max 10ms + 20ms + 40ms + 80ms + 160ms + 320ms + 640ms + 1280ms = 2550ms.
+		for(int i = 10; receivedBytes.size() != 10000 && i <= 2550; i *= 2) {
+			Thread.sleep( i );
+		}	
+		
 		assertEquals(10000, receivedBytes.size());
 		for (byte[] bytes : receivedBytes) {
 			assertTrue(Arrays.equals(originalBytes, bytes));

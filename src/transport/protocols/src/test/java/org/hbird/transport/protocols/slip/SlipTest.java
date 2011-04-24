@@ -82,18 +82,32 @@ public class SlipTest implements Observer {
 		
 		os.write(END & 0xFF);
 		os.write(END);
+		os.flush();
 		
-		Thread.sleep(2000);
-		assertEquals(0, receivedBytes.length);
+		// Wait until receivedBytes is initialized. Otherwise the array's length can not be queried.
+		for(int i = 10; receivedBytes == null && i <= 2550; i *= 2) {
+			Thread.sleep( i );
+		}	
+		
+		// Wait until os is empty, but max 10ms + 20ms + 40ms + 80ms + 160ms + 320ms + 640ms + 1280ms = 2550ms.
+		for(int i = 10; receivedBytes.length != 0 && i <= 2550; i *= 2) {
+			Thread.sleep( i );
+		}	
 	
-		
+		assertEquals(0, receivedBytes.length);
+			
 		os.write(0);
 		os.write(1);
 		os.write(255);
 		os.write(END);
 		os.write(END & 0xFF);
+		os.flush();
 		
-		Thread.sleep(2000);
+		// Wait until 3 bytes are received, but max 10ms + 20ms + 40ms + 80ms + 160ms + 320ms + 640ms + 1280ms = 2550ms.
+		for(int i = 10; receivedBytes.length != 3 && i <= 2550; i *= 2) {
+			Thread.sleep( i );
+		}	
+		
 		assertEquals(3, receivedBytes.length);
 		assertEquals(0, receivedBytes[0] & 0xFF);
 		assertEquals(1, receivedBytes[1] & 0xFF);
@@ -126,8 +140,18 @@ public class SlipTest implements Observer {
 		os.write(-2);
 		os.write(END);
 		os.write(END);
+		os.flush();
 		
-		Thread.sleep(2000);
+		// Wait until receivedBytes is initialized. Otherwise the array's length can not be queried.
+		for(int i = 10; receivedBytes == null && i <= 2550; i *= 2) {
+			Thread.sleep( i );
+		}	
+		
+		// Wait until 4 bytes are received, but max 10ms + 20ms + 40ms + 80ms + 160ms + 320ms + 640ms + 1280ms = 2550ms.
+		for(int i = 10; receivedBytes.length != 4 && i <= 2550; i *= 2) {
+			Thread.sleep( i );
+		}	
+		
 		// 256 rolls over and is 0
 		assertEquals(0, receivedBytes[0] & 0xFF);
 
@@ -161,14 +185,24 @@ public class SlipTest implements Observer {
 	
 		
 		// Testing escapes
-		
+
 		// We should receive a single byte (END) with this sequence
 		os.write(ESCEND);
 		os.write(END);
 		os.write(END);
 		os.write(END);
+		os.flush();
 		
-		Thread.sleep(2000);
+		// Wait until receivedBytes is initialized. Otherwise the array's length can not be checked.
+		for(int i = 10; receivedBytes == null && i <= 2550; i *= 2) {
+			Thread.sleep( i );
+		}	
+				
+		// Wait until 1 byte is received, but max 10ms + 20ms + 40ms + 80ms + 160ms + 320ms + 640ms + 1280ms = 2550ms.
+		for(int i = 10; receivedBytes.length != 1 && i <= 2550; i *= 2) {
+			Thread.sleep( i );
+		}	
+
 		assertEquals(1, receivedBytes.length);
 		assertEquals(END, receivedBytes[0] & 0xFF);
 

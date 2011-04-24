@@ -105,7 +105,7 @@ public class OrbitPredictionTest extends AbstractJUnit38SpringContextTests  {
 				locationContactEvents.add((LocationContactEvent) out.getIn().getBody());
 			}
 			else {
-				assertTrue("Unknown body type." , false);
+				fail("Unknown body type.");
 			}
 		}
 

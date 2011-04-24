@@ -29,6 +29,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
 import org.hbird.exchange.type.Parameter;
+import org.hbird.exchange.type.StateParameter;
 
 @ContextConfiguration (locations={"/BodyBasedRoutingTest-context.xml"})
 public class BodyBasedRoutingTest extends AbstractJUnit38SpringContextTests  {
@@ -47,18 +48,46 @@ public class BodyBasedRoutingTest extends AbstractJUnit38SpringContextTests  {
 	
 	
 	@Test
-	public void testAllFields() {
+	public void testAllFieldsWithParameter() throws InterruptedException {
+		releaseQueue.reset();
+		
+		Exchange exchange = new DefaultExchange(context);
+		exchange = new DefaultExchange(context);
+		exchange.getIn().setBody(new Parameter("parameter1", "test description", "parameter2", "unit"));
+		
+		template.send(exchange);
+		
+		releaseQueue.setExpectedMessageCount(1);
+		releaseQueue.assertIsSatisfied();
+		
+		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("name")).equals("parameter1"));
+		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("description")).equals("test description"));
+		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("clazz")).equals("java.lang.String"));
+		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("value")).equals("parameter2"));
+	}	
+	
+	@Test
+	public void testAllFields() throws InterruptedException {
+		releaseQueue.reset();
 		
 		Exchange exchange = new DefaultExchange(context);
 		exchange = new DefaultExchange(context);
 		Parameter parameter = new Parameter("parameter1", "test description", new Double(2), "TestUnit");
 		exchange.getIn().setBody(parameter);
 		
-		System.out.println("Class == " + parameter.getClass().getName());
+		releaseQueue.setExpectedMessageCount(1);
+		releaseQueue.assertIsSatisfied();
 		
 		template.send(exchange);
 		
-		assertTrue(parameterQueue.getReceivedCounter() == 1);
-		assertTrue(otherQueue.getReceivedCounter() == 0);
-	}	
+		releaseQueue.setExpectedMessageCount(1);
+		releaseQueue.assertIsSatisfied();
+		
+		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("name")).equals("parameter1"));
+		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("description")).equals("test description"));
+		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("isStateOff")).equals("parameter2"));
+		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("clazz")).equals("java.lang.Boolean"));
+		assertTrue(((String) releaseQueue.getReceivedExchanges().get(0).getIn().getHeader("value")).equals("true"));
+	}
+	
 }

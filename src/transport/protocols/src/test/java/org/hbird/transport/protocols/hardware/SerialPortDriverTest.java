@@ -3,6 +3,7 @@ package org.hbird.transport.protocols.hardware;
 import gnu.io.NoSuchPortException;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class SerialPortDriverTest {
@@ -15,9 +16,10 @@ public class SerialPortDriverTest {
 	}
 
 	@Test
+	@Ignore
 	public void testSerialPortDriver() {
 		// fail("Not yet implemented");
-		// FIXME this is no test.
+		// FIXME How to test without a serial port library? How could we mock it?
 	}
 
 }

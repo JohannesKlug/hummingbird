@@ -12,9 +12,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import org.hbird.transport.protocols.ccsds.spacepacket.CcsdsPacketDecoder;
 import org.hbird.transport.protocols.ccsds.spacepacket.PacketPayload;
 import org.hbird.transport.protocols.ccsds.transferframe.CcsdsFrameDecoder;
@@ -22,6 +19,8 @@ import org.hbird.transport.protocols.ccsds.transferframe.FramePayload;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.FrameFailedCrcCheckException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidFrameLengthException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidVirtualChannelIdException;
+import org.junit.Before;
+import org.junit.Test;
 
 public class CcsdsFrameDispatcherTest implements Observer {
 

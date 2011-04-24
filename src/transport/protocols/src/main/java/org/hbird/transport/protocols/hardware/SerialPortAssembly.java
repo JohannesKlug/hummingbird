@@ -10,26 +10,24 @@ import java.util.Observer;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
-import org.hbird.transport.protocols.sync.FrameSynchroniser;
 import org.hbird.transport.protocols.sync.ObservableFrameSynchroniser;
 import org.hbird.transport.protocols.sync.asm.CcsdsAsm;
-import org.hbird.transport.protocols.sync.slip.Slip;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SerialPortAssembly implements Observer {
+	private final static Logger LOG = LoggerFactory.getLogger(SerialPortAssembly.class);
 
-	@EndpointInject(uri="activemq:slipstream")
+	@EndpointInject(uri = "activemq:slipstream")
 	ProducerTemplate producer;
-	
+
 	// FIXME These should be removed and put into the default constructor for SLIP
-	private static final int END = (0xC0 & 0xFF), 
-							ESC = (0xDB & 0xFF), 
-							ESCEND = (0xDC & 0xFF), 
-							ESCESC = (0xDD & 0xFF);
+	private static final int END = (0xC0 & 0xFF), ESC = (0xDB & 0xFF), ESCEND = (0xDC & 0xFF), ESCESC = (0xDD & 0xFF);
 
 	private SerialPortDriver driver;
 
 	private byte[] receivedBytes;
-	
+
 	// Default: use /dev/ttyUSB0 and CCSDS ASM for frame sync
 	public SerialPortAssembly() {
 		this("/dev/ttyUSB0", new CcsdsAsm());
@@ -39,42 +37,35 @@ public class SerialPortAssembly implements Observer {
 		try {
 			driver = new SerialPortDriver(commPortId);
 			sync.addObserver(this);
-			
-			Thread receiver = new Thread(
-					new Runnable(){
-						public void run() {
-							try {
-								sync.readFromStream(driver.getInputStream());
-							}
-							catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
+
+			Thread receiver = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						sync.readFromStream(driver.getInputStream());
 					}
-			);
+					catch (IOException e) {
+						LOG.error(e.toString());
+					}
+				}
+			});
 			receiver.start();
-			
-			
-			
+
+
 		}
 		catch (NoSuchPortException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.error(e.toString());
 		}
 		catch (PortInUseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.error(e.toString());
 		}
 		catch (UnsupportedCommOperationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.error(e.toString());
 		}
-
 
 
 	}
-	
+
 	public void closePort() {
 		driver.closePort();
 	}
@@ -83,14 +74,14 @@ public class SerialPortAssembly implements Observer {
 	public void update(Observable o, Object arg) {
 		receivedBytes = (byte[]) arg;
 		producer.sendBody(receivedBytes);
-		System.out.println("Received " + receivedBytes.length + " bytes:");
+		LOG.debug("Received " + receivedBytes.length + " bytes:");
 		String receivedBytesInHex = "";
 		for (byte b : receivedBytes) {
 			receivedBytesInHex += Integer.toHexString(b & 0xFF) + " ";
 		}
-		System.out.println(receivedBytesInHex);
-		System.out.println("---------------------------------------------");
-		
+		LOG.debug(receivedBytesInHex);
+		LOG.debug("---------------------------------------------");
+
 	}
 
 }

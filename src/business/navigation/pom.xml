@@ -35,7 +35,7 @@
   
   
   <properties>
-  	<orekit.version>5.0</orekit.version>
+  	<orekit.version>5.0.1</orekit.version>
   </properties>
   
   <dependencies>
@@ -54,6 +54,7 @@
   	<groupId>org.orekit</groupId>
   	<artifactId>orekit</artifactId>
   	<version>${orekit.version}</version>
+  	
   </dependency>
   
   <dependency>
