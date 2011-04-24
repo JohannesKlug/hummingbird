@@ -91,22 +91,23 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 	
 	@DirtiesContext
 	@Test
-	public void testSuccessfulRelease() {
+	public void testSuccessfulRelease() throws InterruptedException {
 
 		Command command = createCommand();
 
 		/** Release command with states that will fail, i.e. locked. */
-		Exchange exchange = new DefaultExchange(context);
-		exchange.getIn().setBody(command);
 
-		template.send(exchange);
+		template.sendBody(command);
 		
 		/** Lock state is true, so exchange should be stopped. */
-		assertTrue(releasedCommands.getReceivedCounter() == 1);
-		assertTrue(scheduledTasks.getReceivedCounter() == 2);
+		releasedCommands.setExpectedMessageCount(1);
+		scheduledTasks.setExpectedMessageCount(2);
+		
+		releasedCommands.assertIsSatisfied();
+		scheduledTasks.assertIsSatisfied();
 		
 		for (ITask task : command.getTasks()) {
-			assertTrue(((DummyTask) task).executeCalled == false);
+			assertFalse(((DummyTask) task).executeCalled);
 		}
 	}
 }
