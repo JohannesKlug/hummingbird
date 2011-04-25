@@ -1,19 +1,3 @@
-/**
- * Licensed to the Hummingbird Foundation (HF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The HF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.hbird.business.command.releaser;
 
 import java.util.ArrayList;
@@ -24,7 +8,7 @@ import org.apache.camel.Body;
 import org.apache.camel.Handler;
 import org.apache.camel.Headers;
 import org.apache.log4j.Logger;
-
+import org.hbird.business.parameterstorage.ParameterBuffer;
 import org.hbird.exchange.commanding.Command;
 import org.hbird.exchange.commanding.ITask;
 import org.hbird.exchange.type.StateParameter;
@@ -66,6 +50,12 @@ public class CommandReleaser {
 	/** The object logger. */
 	protected static Logger logger = Logger.getLogger(CommandReleaser.class);
 	
+	private ParameterBuffer parameterBuffer;
+	
+	public CommandReleaser(ParameterBuffer buffer) {
+		this.parameterBuffer = buffer;
+	}
+	
 	/**
 	 * Processor for the scheduling of validation task for a command as well as the
 	 * release of the command.
@@ -84,10 +74,10 @@ public class CommandReleaser {
 		/** Validate the lock state(s). */
 		for (String state : definition.getLockStates()) {
 			/** TODO Get the parameter using the Camel request-response pattern. */
-			StateParameter parameter = null;
-			if ((Boolean) parameter.getValue() == false) {				
+			Boolean parameter = (Boolean) parameterBuffer.getParameterByName(state);
+			if (parameter == null || parameter == false) {				
 				/** Stop the release of the command. */
-				logger.error("Failed release of command with ID '" + definition.getObjectid() + "'. Lock state '" + parameter.getName() + "' has state 'false'.");
+				logger.error("Failed release of command with ID '" + definition.getObjectid() + "'. Lock state '" + state + "' has state 'false'.");
 				headers.put("FailedRelease", true);
 				return messages;
 			}

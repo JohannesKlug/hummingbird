@@ -10,7 +10,10 @@
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
 
-	<bean id="commandreleaser" class="org.hbird.business.command.releaser.CommandReleaser"/>
+	<bean id="parameterBuffer" class="org.hbird.business.parameterstorage.InMemoryParameterBuffer"/>
+	<bean id="commandreleaser" class="org.hbird.business.command.releaser.CommandReleaser">
+		<constructor-arg><ref bean="parameterBuffer"/></constructor-arg>
+	</bean>
 
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>
@@ -24,6 +27,11 @@
 		<route>
 			<from uri="direct:Tasks" />
 			<to uri="mock:Tasks" />
+		</route>
+		
+		<route>
+			<from uri="direct:Parameters" />
+			<to uri="bean:parameterBuffer" />
 		</route>
 	
 	</camelContext>
