@@ -28,7 +28,7 @@
 	                <to uri="mock:ReleasedCommands" />
 	            </when>
 				<when>
-	                <simple>${body} is org.hbird.exchange.tasks.DummyTask</simple>                
+	                <simple>${body} is org.hbird.exchange.commanding.Task</simple>                
 	                <to uri="mock:Tasks" />
 	            </when>
 			</choice>
