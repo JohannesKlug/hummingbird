@@ -21,8 +21,20 @@ package org.hbird.exchange.type;
 /** A 3D vector, i.e. three values describing a spartial property such as position, velocity or acceleration. */
 public class D3Vector extends Named {
 
+	/** The unique UUID. */
 	private static final long serialVersionUID = 1878961587496053034L;
 
+	/**
+	 * Constructor based on values of the vector elements. For each vector
+	 * element a Parameter instance will be created, with default name and
+	 * description, and an empty unit.
+	 * 
+	 * @param name The name of the vector
+	 * @param description A description of the vector.
+	 * @param p1 The value of the first element of the vector.
+	 * @param p2 The value of the second element of the vector.
+	 * @param p3 The value of the third element of the vector.
+	 */
 	public D3Vector(String name, String description, double p1, double p2, double p3) {
 		super(name, description);
 		this.p1 = new Parameter("p1", "Dimension 1 of vector.", p1, "");
@@ -30,6 +42,16 @@ public class D3Vector extends Named {
 		this.p3 = new Parameter("p3", "Dimension 3 of vector.", p3, "");
 	}
 
+	
+	/**
+	 * Constructor allowing the specific configuration of the vector elements. 
+	 * 
+	 * @param name The name of the vector.
+	 * @param description The description of the vector.
+	 * @param p1 The first element. The parameter instance can describe the element in detail.
+	 * @param p2 The second element. The parameter instance can describe the element in detail.
+	 * @param p3 The third element. The parameter instance can describe the element in detail.
+	 */
 	public D3Vector(String name, String description, Parameter p1, Parameter p2, Parameter p3) {
 		super(name, description);
 		this.p1 = p1;

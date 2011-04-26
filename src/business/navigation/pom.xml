@@ -64,7 +64,7 @@
   
   <dependency>
   <groupId>org.hbird.exchange</groupId>
-  <artifactId>data</artifactId>
+  <artifactId>navigation</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   </dependency>
   

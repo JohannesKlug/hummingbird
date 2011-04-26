@@ -29,12 +29,9 @@ public class Parameter extends Named {
 
 	/** The unique UID. */
 	private static final long serialVersionUID = 889400984561961325L;
-
+	
 	/** The value of the parameter. May be any type. */
 	protected Object value;
-
-	/** The java name of the parameter type. */
-	protected String clazz;
 
 	/** The unit of the argument. */
 	protected String unit;
@@ -51,9 +48,6 @@ public class Parameter extends Named {
 		super(name, description);
 		this.unit = unit;
 		this.value = value;
-		if (value != null) {
-			this.clazz = value.getClass().getName();
-		}
 	}
 
 	/**
@@ -69,9 +63,6 @@ public class Parameter extends Named {
 		super(name, description, timestamp);
 		this.unit = unit;
 		this.value = value;
-		if (value != null) {
-			this.clazz = value.getClass().getName();
-		}
 	}
 	
 	/**
@@ -86,7 +77,7 @@ public class Parameter extends Named {
 	}
 	
 	/**
-	 * 
+	 * Returns the value of the Parameter as an Object. 
 	 * 
 	 * @return An Object holding the value. The class type can of cause be found using 
 	 * reflection, or through the 'clazz' attribute.
@@ -103,18 +94,14 @@ public class Parameter extends Named {
 	 */
 	public void setValue(Object value) {
 		this.value = value;
-		if (value == null) {
-			this.clazz = "";
-		}
-		else {
-			this.clazz = value.getClass().getName();
-		}
 	}
 	
 	/**
-	 * @return The Java name of the class of the value object. 
+	 * Returns the string representing the unit of this parameter.
+	 * 
+	 * @return STring representing the unit.
 	 */
-	public String getClazz() {
-		return clazz;
+	public String getUnit() {
+		return unit;
 	}
 }

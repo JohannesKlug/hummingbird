@@ -19,7 +19,7 @@ package org.hbird.business.calibration;
 import javax.script.*;
 
 import org.apache.camel.Exchange;
-import org.hbird.exchange.calibration.ScriptExecutionRequest;
+import org.hbird.exchange.scripting.ScriptExecutionRequest;
 import org.hbird.exchange.type.StateParameter;
 
 /** 
@@ -45,11 +45,11 @@ public class ScriptExecutor {
 			/** Make the request available to the script. For example in JavaScript, this
 			 *  will create a global variable 'request' where the methods are available
 			 *  through the syntax 'request.getName()'*/
-			ScriptEngine engine = factory.getEngineByName(request.getFormat()); 
+			ScriptEngine engine = factory.getEngineByName(request.format); 
 			engine.put("request", request);
 			
 			/** Execute the script. */
-			engine.eval(request.getScript());			
+			engine.eval(request.script);			
 
 			StateParameter state = new StateParameter("Script Execution State", "", request, (Boolean) engine.get("result"));
 			exchange.getIn().setBody(state);

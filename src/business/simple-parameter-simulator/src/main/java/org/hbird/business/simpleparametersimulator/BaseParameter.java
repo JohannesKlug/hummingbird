@@ -56,5 +56,5 @@ public abstract class BaseParameter extends Parameter {
 	 * @param arg0 The exchange into which the parameter should be inserted. To insert a 
 	 * parameter into the exchange, use the ExchangeFormatter class.
 	 */
-	protected abstract void process(Exchange arg0);
+	protected abstract void process(Exchange arg0);	
 }

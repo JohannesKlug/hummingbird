@@ -1,32 +1,16 @@
-/**
- * Licensed to the Hummingbird Foundation (HF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The HF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.hbird.business.command.releaser;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
-import org.apache.camel.ProducerTemplate;
-import org.apache.camel.impl.DefaultExchange;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-import org.hbird.exchange.dataprovider.IDataProvider;
-import org.hbird.exchange.tasks.ITask;
-import org.hbird.exchange.type.Command;
-import org.hbird.exchange.type.StateParameter;
+import org.apache.camel.Body;
+import org.apache.camel.Handler;
+import org.apache.camel.Headers;
+import org.apache.log4j.Logger;
+import org.hbird.business.parameterstorage.ParameterBuffer;
+import org.hbird.exchange.commanding.Command;
+import org.hbird.exchange.commanding.Task;
 
 /**
  * The command releaser reads commands from the 'Command' queue, validate that they 
@@ -62,60 +46,53 @@ import org.hbird.exchange.type.StateParameter;
  */
 public class CommandReleaser {
 
-	/** The object logger. */
-	protected static Logger logger = Logger.getLogger(CommandReleaser.class);
+	/** The object logger */
+	private static final Logger LOGGER = Logger.getLogger(CommandReleaser.class);
 	
-	/** Queue for the task schedule. */
-	@Autowired
-	protected ProducerTemplate producer = null;
-
-	/** The context in which the component is running. */
-	@Autowired
-	protected CamelContext context = null;
-
-	/** A provider of data. Is used to retrieve parameter state information. */
-	@Autowired
-	protected IDataProvider provider = null;
+	private ParameterBuffer parameterBuffer;
+	
+	public CommandReleaser(ParameterBuffer buffer) {
+		this.parameterBuffer = buffer;
+	}
 	
 	/**
 	 * Processor for the scheduling of validation task for a command as well as the
 	 * release of the command.
 	 * 
-	 * @param exchange
-	 * @throws InterruptedException 
 	 */
-	public void process(Exchange exchange) throws InterruptedException {
+	@Handler
+	public List<Object> process(@Body Command definition, @Headers Map<String, Object> headers) {
 
-		/** Get the command definition. */
-		Command definition = (Command) exchange.getIn().getBody();
-		logger.info("Processing command '" + definition.getName() + "' with ID " + definition.getObjectid() + "'.");
+		/* Get the command definition. */
+		LOGGER.info("Processing command '" + definition.getName() + "' with ID " + definition.getObjectid() + "'.");
 		
-		/** Validate the lock state(s). */
-		/** TODO Make this much more generic; let the conditions be any logical expression, using any type of parameter. */
+		List<Object> out = new ArrayList<Object>();
+		
+		/* Validate the lock state(s). */
 		for (String state : definition.getLockStates()) {
-			StateParameter parameter = (StateParameter) provider.getParameter("name=" + state);
-			if ((Boolean) parameter.getValue() == false) {				
-				/** Stop the release of the command. */
-				/** FIXME Failed commands should be send to a special queue. */
-				exchange.setProperty(Exchange.ROUTE_STOP, true);
-				return;
+			/* TODO Get the parameter using the Camel request-response pattern. */
+			Boolean parameter = (Boolean) parameterBuffer.getParameterByName(state);
+			LOGGER.info("Lock state for parameter " + state + " is " + parameter);
+			if (parameter == null || parameter == false) {				
+				/* Stop the release of the command. */
+				LOGGER.error("Failed release of command with ID '" + definition.getObjectid() + "'. Lock state '" + state + "' has state 'false'.");
+				headers.put("FailedRelease", true);
+				return out;
 			}
 		}
+		
+		out.add(definition);
 
-		/** Schedule all tasks. */
-		for (ITask task : definition.getTasks()) {
+		/* Schedule all tasks. */
+		for (Task task : definition.getTasks()) {
 			
-			/** Specialized sub classes of the 'ITask' may depend on the command to configure themselves, for
+			/* Specialized sub classes of the 'Task' may depend on the command to configure themselves, for
 			 * example the ReflectiveSetParameter' will have a value reflected from a command argument. This
 			 * call ensures that the configuration can occur. */
-			task.configure(definition);
-			Exchange taskExchange = new DefaultExchange(context);
-			taskExchange.getIn().setBody(task);			
-			producer.send("direct:Tasks", taskExchange);
-			
-			logger.info("Scheduling task '" + task.getClass().toString() + "' with ID " + task.getObjectid() + "'.");
+			out.add(task);
+			LOGGER.info("Scheduling task '" + task.getClass().toString() + "' with ID " + task.getObjectid() + "'.");
 		}
-
-		/** Command is forwarded in the route, i.e. released. */
+		
+		return out;
 	}
 }

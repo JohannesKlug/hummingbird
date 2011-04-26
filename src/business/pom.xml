@@ -25,6 +25,7 @@
     <module>simple-parameter-simulator</module>
     <module>parameter-storage</module>
     <module>time-correlation</module>
+    <module>system-monitoring</module>
   </modules>
 
 </project>

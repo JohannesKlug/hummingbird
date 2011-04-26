@@ -8,7 +8,7 @@
 	  
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.hbird.business</groupId>
-  <artifactId>calibration</artifactId>
+  <artifactId>scripting</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>Business - Calibration Module</name>
   <description>Component for calculating derived parameters, based on scripts.</description>
@@ -19,7 +19,7 @@
   
     <dependency>
       <groupId>org.hbird.exchange</groupId>
-      <artifactId>data</artifactId>
+      <artifactId>scripting</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
 

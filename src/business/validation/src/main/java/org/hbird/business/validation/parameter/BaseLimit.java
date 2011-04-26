@@ -16,6 +16,7 @@
  */
 package org.hbird.business.validation.parameter;
 
+import org.apache.camel.Body;
 import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 import org.hbird.exchange.type.Parameter;
@@ -80,15 +81,10 @@ public abstract class BaseLimit extends StateParameter {
 	 * @param arg0 A camel exchange carrying a parameter instance.
 	 * @throws Exception
 	 */
-	public void processParameter(Exchange arg0) {
-		try {
+	public void processParameter(Exchange arg0, @Body Parameter newParameter) {
 		logger.debug("Limit state '" + name + "' with ID '" + objectid + "' received parameter value for validation.");
-		parameter = (Parameter) arg0.getIn().getBody();
+		parameter = newParameter;
 		doProcess(arg0);
-		} 
-		catch(Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -99,15 +95,10 @@ public abstract class BaseLimit extends StateParameter {
 	 * @param arg0 A camel exchange carrying a Double instance expressing the size of the limit.
 	 * @throws Exception
 	 */
-	public void processLimit(Exchange arg0) {
-		try {
-		limit = (Parameter) arg0.getIn().getBody();
+	public void processLimit(Exchange arg0, @Body Parameter newLimit) {
+		limit = newLimit;
 		logger.info("Limit '" + name + "' with ID '" + objectid + "' set to '" + limit + "'.");
 		doProcess(arg0);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -118,8 +109,8 @@ public abstract class BaseLimit extends StateParameter {
 	 * @param arg0 A camel exchange carrying a Boolean instance switching the limit on or off.
 	 * @throws Exception
 	 */
-	public void processEnabled(Exchange arg0) throws Exception {
-		enabled = (Parameter) arg0.getIn().getBody();
+	public void processEnabled(Exchange arg0, @Body Parameter newEnabled) throws Exception {
+		enabled = newEnabled;
 		logger.info("Limit '" + name + "' with ID '" + objectid + "' switches to ENABLED state '" + enabled + "'.");
 		doProcess(arg0);
 	}

@@ -69,9 +69,18 @@
 
     <dependency>
       <groupId>org.hbird.exchange</groupId>
-      <artifactId>data</artifactId>
+      <artifactId>commanding</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.hbird.exchange</groupId>
+      <artifactId>commanding</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+      <classifier>tests</classifier>
+      <scope>test</scope>
+    </dependency>
+
 	
     <dependency>
       <groupId>org.hbird.exchange</groupId>
@@ -113,5 +122,11 @@
 <!--      <version>2.5</version>-->
     </dependency>
     
+    <dependency>
+    	<groupId>org.hbird.business</groupId>
+    	<artifactId>parameter-storage</artifactId>
+    	<version>0.0.2-SNAPSHOT</version>
+    	<scope>compile</scope>
+    </dependency>
   </dependencies>
 </project>
