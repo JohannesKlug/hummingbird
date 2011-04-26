@@ -65,27 +65,27 @@ public class CommandReleaser {
 	@Handler
 	public List<Object> process(@Body Command definition, @Headers Map<String, Object> headers) throws InterruptedException {
 
-		/** Get the command definition. */
+		/* Get the command definition. */
 		logger.info("Processing command '" + definition.getName() + "' with ID " + definition.getObjectid() + "'.");
 		
 		List<Object> messages = new ArrayList<Object>();
 		
-		/** Validate the lock state(s). */
+		/* Validate the lock state(s). */
 		for (String state : definition.getLockStates()) {
-			/** TODO Get the parameter using the Camel request-response pattern. */
+			/* TODO Get the parameter using the Camel request-response pattern. */
 			Boolean parameter = (Boolean) parameterBuffer.getParameterByName(state);
 			if (parameter == null || parameter == false) {				
-				/** Stop the release of the command. */
+				/* Stop the release of the command. */
 				logger.error("Failed release of command with ID '" + definition.getObjectid() + "'. Lock state '" + state + "' has state 'false'.");
 				headers.put("FailedRelease", true);
 				return messages;
 			}
 		}
 
-		/** Schedule all tasks. */
+		/* Schedule all tasks. */
 		for (ITask task : definition.getTasks()) {
 			
-			/** Specialized sub classes of the 'ITask' may depend on the command to configure themselves, for
+			/* Specialized sub classes of the 'ITask' may depend on the command to configure themselves, for
 			 * example the ReflectiveSetParameter' will have a value reflected from a command argument. This
 			 * call ensures that the configuration can occur. */
 			messages.add(task);
