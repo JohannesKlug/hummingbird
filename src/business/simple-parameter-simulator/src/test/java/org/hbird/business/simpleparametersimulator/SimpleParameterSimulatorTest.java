@@ -1,13 +1,13 @@
 package org.hbird.business.simpleparametersimulator;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
-import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.apache.camel.impl.DefaultExchange;
-import org.hbird.business.simpleparametersimulator.BooleanParameter;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
@@ -30,14 +30,15 @@ public class SimpleParameterSimulatorTest extends AbstractJUnit38SpringContextTe
 	@Test
 	public void testCommanding() throws Exception {
 	
-		Exchange exchange = new DefaultExchange(context);
+		Map<String,Object> headers = new HashMap<String, Object>();
+		headers.put("Bean", "Parameter1");
+		headers.put("Attribute", "Value");
 		
-		exchange.getIn().setHeader("Bean", "Parameter1");
-		exchange.getIn().setHeader("Attribute", "Value");
-		exchange.getIn().setHeader("Value", false);
-		
-		template.send(exchange);
-		
+		template.sendBodyAndHeaders(false, headers);
 		assertFalse( (Boolean) ((BooleanParameter) context.getRegistry().lookup("Parameter1")).getValue());
+		
+		template.sendBodyAndHeaders(true, headers);
+		assertTrue( (Boolean) ((BooleanParameter) context.getRegistry().lookup("Parameter1")).getValue());
 	}
+	
 }
