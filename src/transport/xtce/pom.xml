@@ -1,6 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<description>An implementation of the IModelFactory used by the marshaller, based on XTCE. The component at build time uses 'castor' to generate POJO's from the CCSDS XTCE XSD schema. At runtime the component uses 'castor' to parse a specific telemetry and command definition in XTCE format and create the corresponding marshaller object model.</description>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<description></description>
 
 	<parent>
 		<artifactId>hummingbird-transport</artifactId>
@@ -13,7 +15,6 @@
 	<artifactId>xtce</artifactId>
 	<packaging>bundle</packaging>
 	<name>XTCE</name>
-	<version>0.0.1-SNAPSHOT</version>
 
 	<build>
 		<resources>
@@ -36,11 +37,14 @@
 				<version>2.0</version>
 				<executions>
 					<execution>
+						<id>Add generated sources to source path</id>
+						<phase>validate</phase>
 						<goals>
 							<goal>generate</goal>
 						</goals>
+						<inherited>false</inherited>
 						<configuration>
-							<schemaDirectory>${basedir}/src/main/resources/schemas</schemaDirectory>
+						<schemaDirectory>${basedir}/src/main/resources/schemas</schemaDirectory>
 							<packaging>org.hbird.transport.generatedcode.xtce</packaging>
 							<properties>${basedir}/src/main/castor/castorbuilder.properties</properties>
 							<verbose>true</verbose>
@@ -48,7 +52,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>

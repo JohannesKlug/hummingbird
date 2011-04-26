@@ -1,21 +1,23 @@
 package org.hbird.transport.telemetry;
 
+import javax.annotation.Generated;
+
 public class DefaultSpaceParameter implements HummingbirdParameter {
 
-	private String name;
-	private Class<?> clazz;
-	private Object value;
+	private final String name;
+	private final Class<?> clazz;
+	private final Object value;
 	private String shortDescription = null;
 	private String longDescription = null;
 
-	public DefaultSpaceParameter(String name, Class<?> clazz, Object value) {
+	public DefaultSpaceParameter(final String name, final Class<?> clazz, final Object value) {
 		super();
 		this.name = name;
 		this.clazz = clazz;
 		this.value = value;
 	}
 
-	public DefaultSpaceParameter(String name, Class<?> clazz, Object value, String shortDescription, String longDescription) {
+	public DefaultSpaceParameter(final String name, final Class<?> clazz, final Object value, final String shortDescription, final String longDescription) {
 		super();
 		this.name = name;
 		this.clazz = clazz;
@@ -25,45 +27,13 @@ public class DefaultSpaceParameter implements HummingbirdParameter {
 	}
 
 	@Override
-	public Class<?> getClassType() {
-		return clazz;
+	public boolean asBoolean() {
+		return (Boolean) value;
 	}
 
 	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public Object getValue() {
-		return value;
-	}
-
-	@Override
-	public String getShortDescription() {
-		return this.shortDescription;
-	}
-
-	@Override
-	public String getLongDescription() {
-		return this.longDescription;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Parameter [clazz=");
-		builder.append(clazz);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", value=");
-		builder.append(value);
-		builder.append("]");
-		return builder.toString();
-	}
-
-	@Override
-	public int compareTo(HummingbirdParameter rightHandSide) throws NotComparableTypeException {
+	@Generated(value = { "Eclipse IDE" })
+	public int compareTo(final HummingbirdParameter rightHandSide) throws NotComparableTypeException {
 		int returnValue = 0;
 
 		if (this.clazz == Double.class && rightHandSide.getValue().getClass() == Double.class) {
@@ -152,8 +122,42 @@ public class DefaultSpaceParameter implements HummingbirdParameter {
 
 		return returnValue;
 	}
-	
-	public boolean asBoolean() {
-		return (Boolean) value;
+
+	@Override
+	public Class<?> getClassType() {
+		return clazz;
+	}
+
+	@Override
+	public String getLongDescription() {
+		return this.longDescription;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public String getShortDescription() {
+		return this.shortDescription;
+	}
+
+	@Override
+	public Object getValue() {
+		return value;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Parameter [clazz=");
+		builder.append(clazz);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", value=");
+		builder.append(value);
+		builder.append("]");
+		return builder.toString();
 	}
 }
