@@ -10,7 +10,7 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.hbird.exchange.commanding.Argument;
 import org.hbird.exchange.commanding.Command;
-import org.hbird.exchange.commanding.ITask;
+import org.hbird.exchange.commanding.Task;
 import org.hbird.exchange.commanding.checks.RangeCheck;
 import org.hbird.exchange.tasks.DummyTask;
 import org.hbird.exchange.type.Parameter;
@@ -37,7 +37,7 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 
 	protected Command createCommand() {
 		List<String> lockStates = Arrays.asList(new String[] {"STATE1", "STATE2", "STATE3"});
-		List<ITask> tasks = Arrays.asList(new ITask[] {new DummyTask(), new DummyTask()});
+		List<Task> tasks = Arrays.asList(new Task[] {new DummyTask(), new DummyTask()});
 		List<Argument> arguments = new ArrayList<Argument>(); 
 			
 		Command definition = new Command("TestCommand", "Test description", arguments, lockStates, tasks, 0, 0);
@@ -67,7 +67,7 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 		releasedCommands.assertIsSatisfied();
 		scheduledTasks.assertIsSatisfied();
 
-		for (ITask task : command.getTasks()) {
+		for (Task task : command.getTasks()) {
 			assertTrue(((DummyTask) task).executeCalled == false);
 		}
 	}
@@ -95,7 +95,7 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 		releasedCommands.assertIsSatisfied();
 		scheduledTasks.assertIsSatisfied();
 		
-		for (ITask task : command.getTasks()) {
+		for (Task task : command.getTasks()) {
 			assertFalse(((DummyTask) task).executeCalled);
 		}
 	}

@@ -24,7 +24,7 @@ import org.hbird.exchange.type.Named;
 /**
  * An abstract implementation of a task. Contains only the execution time.
  */
-public abstract class AbstractTask extends Named implements ITask {
+public abstract class AbstractTask extends Named implements Task {
 
 	/** The unique UID */
 	private static final long serialVersionUID = 6287812296391672915L;
@@ -45,7 +45,7 @@ public abstract class AbstractTask extends Named implements ITask {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.hbird.exchange.commanding.ITask#getExecutionDelay()
+	 * @see org.hbird.exchange.commanding.Task#getExecutionDelay()
 	 */
 	public long getExecutionDelay() {
 		Date now = new Date();

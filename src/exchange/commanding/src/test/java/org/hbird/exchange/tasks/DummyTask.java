@@ -16,15 +16,15 @@
  */
 package org.hbird.exchange.tasks;
 
-import org.hbird.exchange.commanding.ITask;
+import org.hbird.exchange.commanding.Task;
 
 
 /**
- * An implementation of the ITask for test purposes. Do nothing, besides
+ * An implementation of the Task for test purposes. Do nothing, besides
  * recording which methods have been called.
  *
  */
-public class DummyTask implements ITask {
+public class DummyTask implements Task {
 
 	/**
 	 * 

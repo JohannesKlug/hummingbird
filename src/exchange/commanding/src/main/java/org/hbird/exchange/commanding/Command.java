@@ -56,7 +56,7 @@ public class Command extends Named {
 	protected List<String> lockStates = new ArrayList<String>();
 	
 	/** List of tasks to be performed after the release of the command. */
-	protected List<ITask> tasks = new ArrayList<ITask>();
+	protected List<Task> tasks = new ArrayList<Task>();
 
 	/** The time at which this command should be released for transfer to the satellite. A value of
 	 *  0 indicates immediate. */
@@ -79,7 +79,7 @@ public class Command extends Named {
 	 * @param releaseTime The time at which the command should be released by the MCS for transfer to the satellite.
 	 * @param executionTime The time at which the command should be executed onboard.
 	 */
-	public Command(String name, String description, List<Argument> arguments, List<String> lockStates, List<ITask> tasks, long releaseTime, long executionTime) {
+	public Command(String name, String description, List<Argument> arguments, List<String> lockStates, List<Task> tasks, long releaseTime, long executionTime) {
 		super(name, description);
 		this.arguments = arguments;
 		this.lockStates = lockStates;
@@ -113,7 +113,7 @@ public class Command extends Named {
 	 * 
 	 * @return List of tasks.
 	 */
-	public List<ITask> getTasks() {
+	public List<Task> getTasks() {
 		return tasks;
 	}
 	

@@ -20,7 +20,7 @@ import org.apache.camel.Body;
 import org.apache.camel.Handler;
 import org.apache.log4j.Logger;
 
-import org.hbird.exchange.commanding.ITask;
+import org.hbird.exchange.commanding.Task;
 
 
 /**
@@ -59,6 +59,6 @@ public class TaskExecutor {
 	public void receive(@Body Object body) throws InterruptedException {
 
 		/** Execute the task. The task may return a new object which is the body of the exchange. */
-		body = ((ITask) body).execute();
+		body = ((Task) body).execute();
 	}
 }

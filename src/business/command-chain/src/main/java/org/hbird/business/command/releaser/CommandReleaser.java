@@ -10,7 +10,7 @@ import org.apache.camel.Headers;
 import org.apache.log4j.Logger;
 import org.hbird.business.parameterstorage.ParameterBuffer;
 import org.hbird.exchange.commanding.Command;
-import org.hbird.exchange.commanding.ITask;
+import org.hbird.exchange.commanding.Task;
 
 /**
  * The command releaser reads commands from the 'Command' queue, validate that they 
@@ -46,8 +46,8 @@ import org.hbird.exchange.commanding.ITask;
  */
 public class CommandReleaser {
 
-	/** The object logger. */
-	protected static Logger logger = Logger.getLogger(CommandReleaser.class);
+	/** The object logger */
+	private static final Logger LOGGER = Logger.getLogger(CommandReleaser.class);
 	
 	private ParameterBuffer parameterBuffer;
 	
@@ -59,39 +59,40 @@ public class CommandReleaser {
 	 * Processor for the scheduling of validation task for a command as well as the
 	 * release of the command.
 	 * 
-	 * @param exchange
-	 * @throws InterruptedException 
 	 */
 	@Handler
-	public List<Object> process(@Body Command definition, @Headers Map<String, Object> headers) throws InterruptedException {
+	public List<Object> process(@Body Command definition, @Headers Map<String, Object> headers) {
 
 		/* Get the command definition. */
-		logger.info("Processing command '" + definition.getName() + "' with ID " + definition.getObjectid() + "'.");
+		LOGGER.info("Processing command '" + definition.getName() + "' with ID " + definition.getObjectid() + "'.");
 		
-		List<Object> messages = new ArrayList<Object>();
+		List<Object> out = new ArrayList<Object>();
 		
 		/* Validate the lock state(s). */
 		for (String state : definition.getLockStates()) {
 			/* TODO Get the parameter using the Camel request-response pattern. */
 			Boolean parameter = (Boolean) parameterBuffer.getParameterByName(state);
+			LOGGER.info("Lock state for parameter " + state + " is " + parameter);
 			if (parameter == null || parameter == false) {				
 				/* Stop the release of the command. */
-				logger.error("Failed release of command with ID '" + definition.getObjectid() + "'. Lock state '" + state + "' has state 'false'.");
+				LOGGER.error("Failed release of command with ID '" + definition.getObjectid() + "'. Lock state '" + state + "' has state 'false'.");
 				headers.put("FailedRelease", true);
-				return messages;
+				return out;
 			}
 		}
+		
+		out.add(definition);
 
 		/* Schedule all tasks. */
-		for (ITask task : definition.getTasks()) {
+		for (Task task : definition.getTasks()) {
 			
-			/* Specialized sub classes of the 'ITask' may depend on the command to configure themselves, for
+			/* Specialized sub classes of the 'Task' may depend on the command to configure themselves, for
 			 * example the ReflectiveSetParameter' will have a value reflected from a command argument. This
 			 * call ensures that the configuration can occur. */
-			messages.add(task);
-			logger.info("Scheduling task '" + task.getClass().toString() + "' with ID " + task.getObjectid() + "'.");
+			out.add(task);
+			LOGGER.info("Scheduling task '" + task.getClass().toString() + "' with ID " + task.getObjectid() + "'.");
 		}
 
-		return messages;
+		return out;
 	}
 }
