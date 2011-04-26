@@ -16,7 +16,7 @@
 			<from uri="direct:Start" />
 			<choice>
             <when>
-                <simple>${body} is org.hbird.exchange.type.Parameter'</simple>                
+                <simple>${body} is org.hbird.exchange.type.Parameter</simple>                
                 <to uri="mock:Parameter"/>
             </when>
             <otherwise>

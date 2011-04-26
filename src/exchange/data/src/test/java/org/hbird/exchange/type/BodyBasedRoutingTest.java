@@ -1,12 +1,10 @@
 package org.hbird.exchange.type;
 
-import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
@@ -21,10 +19,6 @@ public class BodyBasedRoutingTest extends AbstractJUnit38SpringContextTests  {
 
 	@EndpointInject(uri = "mock:Other")
 	protected MockEndpoint otherQueue;
-
-	@Autowired
-    protected CamelContext context;
-	
 	
 	@Test
 	public void testWithParameter() throws InterruptedException {
@@ -53,5 +47,20 @@ public class BodyBasedRoutingTest extends AbstractJUnit38SpringContextTests  {
 		otherQueue.setExpectedMessageCount(1);
 		otherQueue.assertIsSatisfied();
 	}
+	
+	@Test
+	public void testBoth() throws InterruptedException {
+		parameterQueue.reset();
+		otherQueue.reset();
+		
+		template.sendBody(new Parameter("parameter1", "test description", "parameter2", "unit"));
+		template.sendBody(new byte[1000]);
+		
+		parameterQueue.setExpectedMessageCount(1);
+		parameterQueue.assertIsSatisfied();
+		
+		otherQueue.setExpectedMessageCount(1);
+		otherQueue.assertIsSatisfied();
+	}	
 	
 }
