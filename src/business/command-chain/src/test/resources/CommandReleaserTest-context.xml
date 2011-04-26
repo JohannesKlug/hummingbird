@@ -20,24 +20,21 @@
 
 		<route>
 			<from uri="direct:Commands" />
-			<to uri="bean:commandreleaser" />
+			<split>
+			<method bean="commandreleaser"></method>
 			<choice>
 	            <when>
 	                <simple>${body} is org.hbird.exchange.commanding.Command</simple>                
 	                <to uri="mock:ReleasedCommands" />
 	            </when>
 				<when>
-	                <simple>${body} is org.hbird.exchange.commanding.Task</simple>                
-	                <to uri="direct:Tasks" />
+	                <simple>${body} is org.hbird.exchange.tasks.DummyTask</simple>                
+	                <to uri="mock:Tasks" />
 	            </when>
 			</choice>
+			</split>
 		</route>
-		
-		<route>
-			<from uri="direct:Tasks" />
-			<to uri="mock:Tasks" />
-		</route>
-		
+
 		<route>
 			<from uri="direct:Parameters" />
 			<to uri="bean:parameterBuffer" />

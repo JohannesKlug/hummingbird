@@ -24,11 +24,11 @@ import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTest
 public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 
 	@Produce(uri = "direct:Commands")
-    protected ProducerTemplate template;
+    protected ProducerTemplate toCommandsRoute;
 	
 	@Produce(uri = "direct:Parameters")
-	protected ProducerTemplate parameterTemplate;
-	
+	protected ProducerTemplate toParametersRoute;
+
 	@EndpointInject(uri = "mock:ReleasedCommands")
 	protected MockEndpoint releasedCommands;
 	
@@ -59,7 +59,7 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 		Command command = createCommand();
 
 		// Release command with states that will fail, i.e. locked.
-		template.sendBody(command);
+		toCommandsRoute.sendBody(command);
 		
 		// Lock state is false, so exchange should be stopped.
 		releasedCommands.setExpectedMessageCount(0);
@@ -83,11 +83,11 @@ public class CommandReleaserTest extends AbstractJUnit38SpringContextTests  {
 		// Send the lock states
 		for (String state : command.getLockStates()) {
 			// FIXME Externalise hard-coded ParameterName
-			parameterTemplate.sendBodyAndHeader(true, "HummingbirdParameterName", state);
+			toParametersRoute.sendBodyAndHeader(true, "HummingbirdParameterName", state);
 		}
 		
 		// Send the command
-		template.sendBody(command);
+		toCommandsRoute.sendBody(command);
 		
 		releasedCommands.setExpectedMessageCount(1);
 		scheduledTasks.setExpectedMessageCount(2);

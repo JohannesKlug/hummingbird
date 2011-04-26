@@ -92,7 +92,7 @@ public class CommandReleaser {
 			out.add(task);
 			LOGGER.info("Scheduling task '" + task.getClass().toString() + "' with ID " + task.getObjectid() + "'.");
 		}
-
+		
 		return out;
 	}
 }
