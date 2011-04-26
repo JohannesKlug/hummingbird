@@ -8,6 +8,7 @@ package org.hbird.business.parameterstorage.simple;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -29,7 +30,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 /*
- * Tests Hummingbird's 'FetchStoredParameters' Bean
+ * Tests Hummingbird's 'Retriever' Bean
  */
 @ContextConfiguration(locations = { "/simple/RetrieverTest-context.xml" })
 public class RetrieverTest extends AbstractJUnit4SpringContextTests {
@@ -90,14 +91,51 @@ public class RetrieverTest extends AbstractJUnit4SpringContextTests {
 	}
 
 	/*
-	 * Method to test FetchStoredParameter-Bean in an Camel route. Creates a
-	 * query to retrieve 2 of the 4 datasets stored in the test-database. Tests
-	 * if the correct datasets, with the correct headers and correct body are
-	 * retrieved.
+	 * Test-method: Creates a query to retrieve 2 of the 4 datasets 
+	 * stored in the test-database. Tests  if the correct datasets are retrieved.
 	 */
 	@Test
-	public void testRoutes() {
-		// Prepare statements
+	public void fetchAllParameters() {
+		result.reset();
+		// Prepare statement
+		String sqlQuery = "test_parameter";
+
+		// Prepare exchange (set Body and Headers) and send it.
+		Exchange exchange = new DefaultExchange(context);
+		exchange.getIn().setBody(sqlQuery);
+
+		producer.send("direct:Parameter", exchange);
+
+		try {
+			// Wait until there are 4 messages in 'result', but max 4ms + 8 + 16ms + 32ms + 64ms + 128ms = 252ms
+			for(int i = 4; result.getReceivedCounter() != 4 && i <= 128; i *= 2) {
+				Thread.sleep( i );
+			}
+		} catch (InterruptedException e) {
+		}
+
+		// Execute test
+		assertTrue(result.getReceivedCounter() == 4);
+
+		Message Message1 = result.getExchanges().get(0).getIn();
+		Message Message2 = result.getExchanges().get(1).getIn();
+		Message Message3 = result.getExchanges().get(2).getIn();
+		Message Message4 = result.getExchanges().get(3).getIn();
+
+		assertEquals("<long>11111</long>", Message1.getBody(String.class));
+		assertEquals("<long>22222</long>", Message2.getBody(String.class));
+		assertEquals("<long>33333</long>", Message3.getBody(String.class));
+		assertEquals("<long>44444</long>", Message4.getBody(String.class));
+	}
+	
+	/*
+	 * Test-method: Creates a query to retrieve all 4 datasets stored in the 
+	 * test-database. Tests if the correct datasets are retrieved.
+	 */
+	@Test
+	public void fetchTwoParameters() {
+		result.reset();
+		// Prepare statement
 		String sqlQuery = "test_parameter;1300000001500;1300000003500";
 
 		// Prepare exchange (set Body and Headers) and send it.
@@ -114,7 +152,7 @@ public class RetrieverTest extends AbstractJUnit4SpringContextTests {
 		} catch (InterruptedException e) {
 		}
 
-		// Execute tests
+		// Execute test
 		assertTrue(result.getReceivedCounter() == 2);
 
 		Message firstMessage = result.getExchanges().get(0).getIn();
@@ -122,5 +160,31 @@ public class RetrieverTest extends AbstractJUnit4SpringContextTests {
 
 		assertEquals("<long>22222</long>", firstMessage.getBody(String.class));
 		assertEquals("<long>33333</long>", secondMessage.getBody(String.class));
+	}
+	
+	/*
+	 * Test-method: Creates a query that should throw a IOException.
+	 */
+	@Test
+	public void fetchParametersInvalidInput() throws InterruptedException {
+		result.reset();
+		System.out.println("\n\n  Error (java.lang.IOException) is part of unittest...");
+		
+		// Prepare statement
+		String sqlQuery = "very;wrong";
+		
+		// Prepare exchange (set Body and Headers) and send it.
+		Exchange exchange = new DefaultExchange(context);
+		exchange.getIn().setBody(sqlQuery);
+
+		Exchange erroneousExchange = producer.send(exchange);
+		
+		Thread.sleep(100);
+		
+		System.out.println(erroneousExchange.isFailed());
+		
+		assertTrue("Should be failed", erroneousExchange.isFailed());
+		assertTrue("Should be IOException", erroneousExchange.getException() instanceof IOException);
+		
 	}
 }

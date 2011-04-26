@@ -5,6 +5,7 @@
 
 package org.hbird.business.parameterstorage.simple;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -23,15 +24,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
  * specified destination.
  */
 public class Retriever {
-	protected JdbcTemplate template = null;
+	private JdbcTemplate template = null;
 	
 	private String destination;
 
 	@Autowired
-	protected ProducerTemplate producer = null;
+	private ProducerTemplate producer = null;
 
 	@Autowired
-	protected CamelContext context = null;
+	private CamelContext context = null;
 
 	/*
 	 * Constructor. Extracts the connection to the database from
@@ -59,7 +60,8 @@ public class Retriever {
 	 *				 named parameters which have a timestamp between 'start_timestamp' and 'end_timestamp'
 	 * 				 2. 'parameter_name' (will restore all parameters with the given name)
 	 */
-	public void fetchParameters(@Body String retrieverCommand) {
+	final public void fetchParameters(@Body String retrieverCommand) throws IOException {
+		final int TIMESTAMP_OVERLAPPING = 1000;
 		long startTimeStamp = 0;
 		long endTimeStamp = 0;
 		String parameterName = "";
@@ -79,32 +81,29 @@ public class Retriever {
 			parameterName = command[0];
 			startTimeStamp = Long.parseLong(command[1]);
 			endTimeStamp = Long.parseLong(command[2]);
-			
 			break;
 		default:
-			try {throw new Exception(
-				"Input string to create sql query is faulty! Needs to be either\n"
-				+ "'parametername;queuename' (String;String) or \n"
-				+ "'starttime;endtime;parametername;queuename' (long;long;String;String)");
-			} catch (Exception e) {e.printStackTrace();}
-			;
+			throw new IOException(
+					"Input string to create sql query is faulty! Needs to be either\n"
+							+ "'parametername;queuename' (String;String) or \n"
+							+ "'starttime;endtime;parametername;queuename' (long;long;String;String)");
 		}
 		
 		// Ceate and run statements. Call 'processResults' to send the retrieved datasets.
 		String sqlSelect;
 		List<Map<String, Object>> result;
 
-		//First statement: timestamp between 'start' and 'end - 1000ms'
+		//First statement: timestamp between 'start' and 'end - TIMESTAMP_OVERLAPPING'
 		sqlSelect = "select * from " + parameterName + " where TIMESTAMP >= "
-		+ startTimeStamp + " and TIMESTAMP < " + (endTimeStamp - 1000)
+		+ startTimeStamp + " and TIMESTAMP < " + (endTimeStamp - TIMESTAMP_OVERLAPPING)
 		+ ";";
 		
 		result = template.queryForList(sqlSelect);
 		processResults(result);
 
-		//Second statement: timestamp between 'end - 1000ms' and 'end'
+		//Second statement: timestamp between 'end - TIMESTAMP_OVERLAPPING' and 'end'
 		sqlSelect = "select * from " + parameterName + " where TIMESTAMP >= "
-		+ (endTimeStamp - 1000) + " and TIMESTAMP < " + endTimeStamp
+		+ (endTimeStamp - TIMESTAMP_OVERLAPPING) + " and TIMESTAMP < " + endTimeStamp
 		+ ";";
 		
 		result = template.queryForList(sqlSelect);

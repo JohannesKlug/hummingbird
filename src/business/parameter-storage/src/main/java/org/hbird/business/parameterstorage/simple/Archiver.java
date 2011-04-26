@@ -6,6 +6,8 @@
 package org.hbird.business.parameterstorage.simple;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.TreeSet;
 
 import javax.sql.DataSource;
@@ -18,11 +20,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
  * Creates all tables necessary to store the received parameter in a database.
  */
 public class Archiver {
-	protected TreeSet<String> tableExists = new TreeSet<String>();
-	protected HashMap<String,String> sqlPreparedStatements = new HashMap<String,String>();
-	protected String[] sqlTableCount = {"SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '", "' OR TABLE_NAME = '", "';"};
+	//private TreeSet<String> tableExists = new TreeSet<String>();
+	private Set<String> tableExists = new TreeSet<String>();
+	private Map<String,String> sqlPreparedStatements = new HashMap<String,String>();
+	private String[] sqlTableCount = {"SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '", "' OR TABLE_NAME = '", "';"};
 	
-	protected JdbcTemplate template = null;
+	private JdbcTemplate template = null;
 
 	/*
 	 * The Constructor
@@ -50,9 +53,10 @@ public class Archiver {
 			//@XPath("*/value/@class") String type,
 			@Header("timestamp") Long timestamp,
 			@Body String body) {
-
-		name = name.toLowerCase();
-		name = name.replace(" ", "_");
+		
+		String nameLowerCase = name.toLowerCase();
+		
+		name = nameLowerCase.replace(" ", "_");
 
 		if (!tableExists.contains(name)) {
 			//If tableExists doesn't contain the name of the table, the table might not exists...
