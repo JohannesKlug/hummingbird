@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
 import org.hbird.business.parameterstorage.ParameterBuffer;
 import org.hbird.exchange.commanding.Command;
 import org.hbird.exchange.commanding.ITask;
-import org.hbird.exchange.type.StateParameter;
 
 /**
  * The command releaser reads commands from the 'Command' queue, validate that they 
