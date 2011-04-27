@@ -16,7 +16,8 @@
  */
 package org.hbird.exchange.tasks.checks;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.hbird.exchange.commanding.checks.RangeCheck;
 import org.hbird.exchange.type.Parameter;
@@ -28,56 +29,57 @@ public class RangeCheckTest {
 	@Test
 	public void testValidate() {
 		StateParameter state = new StateParameter("aTestState", "Test description of a test state", "aParameter", true);
-		
+
 		Parameter lower = new Parameter("lowerRange", "The lower range", null, "");
 		Parameter upper = new Parameter("upperRange", "The upper range", null, "");
-				
+
 		Parameter parameter = new Parameter("aParameter", "The parameter", new Double(5), "meter");
-		
+
 		RangeCheck check = new RangeCheck("TestRange", "A test range.", 0, state, lower, upper);
 
-		/** Both lower and upper are null, i.e. no lower or upper limit. Range should return
-		 * true. */
-		assertTrue(check.validate(parameter) == true);
-		
+		/**
+		 * Both lower and upper are null, i.e. no lower or upper limit. Range should return true.
+		 */
+		assertTrue(check.validate(parameter));
+
 		lower.setValue(new Integer(3));
-		assertTrue(check.validate(parameter) == true);
-		
+		assertTrue(check.validate(parameter));
+
 		lower.setValue(new Integer(5));
-		assertTrue(check.validate(parameter) == false);
-		
+		assertFalse(check.validate(parameter));
+
 		lower.setValue(new Integer(6));
-		assertTrue(check.validate(parameter) == false);
+		assertFalse(check.validate(parameter));
 
 		lower.setValue(null);
 		upper.setValue(new Integer(7));
-		assertTrue(check.validate(parameter) == true);
-		
+		assertTrue(check.validate(parameter));
+
 		upper.setValue(new Integer(5));
-		assertTrue(check.validate(parameter) == false);
-		
+		assertFalse(check.validate(parameter));
+
 		upper.setValue(new Integer(4));
-		assertTrue(check.validate(parameter) == false);
+		assertFalse(check.validate(parameter));
 
 		lower.setValue(new Integer(4));
 		upper.setValue(new Double(6));
-		assertTrue(check.validate(parameter) == true);
-		
+		assertTrue(check.validate(parameter));
+
 		lower.setValue(new Double(5));
 		upper.setValue(new Integer(6));
-		assertTrue(check.validate(parameter) == false);
-		
+		assertFalse(check.validate(parameter));
+
 		lower.setValue(new Integer(4));
 		upper.setValue(new Float(5));
-		assertTrue(check.validate(parameter) == false);
+		assertFalse(check.validate(parameter));
 
 		lower.setValue(new Integer(5));
 		upper.setValue(new Integer(5));
-		assertTrue(check.validate(parameter) == false);
+		assertFalse(check.validate(parameter));
 
 		lower.setValue(new Integer(6));
 		upper.setValue(new Integer(4));
-		assertTrue(check.validate(parameter) == false);
+		assertFalse(check.validate(parameter));
 	}
 
 }
