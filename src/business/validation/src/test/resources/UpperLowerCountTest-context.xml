@@ -19,27 +19,27 @@
 	<context:annotation-config />
 
 
-	<bean id="LowerLimit" class="org.hbird.business.validation.parameter.LowerLimit">
+	<bean id="lowerLimit" class="org.hbird.business.validation.parameter.LowerLimit">
 		<constructor-arg index="0" value="LowerLimitErrorState"/>
 		<constructor-arg index="1" value="Lower limit for parameter."/>
 		<constructor-arg index="2" value="-3"/>
 	</bean> 
 
-	<bean id="UpperLimit" class="org.hbird.business.validation.parameter.UpperLimit">
+	<bean id="upperLimit" class="org.hbird.business.validation.parameter.UpperLimit">
 		<constructor-arg index="0" value="UpperLimitErrorState"/>
 		<constructor-arg index="1" value="Upper limit for parameter."/>
 		<constructor-arg index="2" value="3"/>
 	</bean> 
 
-	<bean id="LowerLimitChangeFilter" class="org.hbird.business.validation.base.OnlyChangeFilter"/>
+	<bean id="lowerLimitChangeFilter" class="org.hbird.business.validation.base.OnlyChangeFilter"/>
 	
-	<bean id="UpperLimitChangeFilter" class="org.hbird.business.validation.base.OnlyChangeFilter"/>
+	<bean id="upperLimitChangeFilter" class="org.hbird.business.validation.base.OnlyChangeFilter"/>
 	
-	<bean id="LowerLimitCountFilter" class="org.hbird.business.validation.base.ViolationCountFilter">
+	<bean id="lowerLimitCountFilter" class="org.hbird.business.validation.base.ViolationCountFilter">
         <constructor-arg index="0" value="2"/>
 	</bean>
 	
-	<bean id="UpperLimitCountFilter" class="org.hbird.business.validation.base.ViolationCountFilter">
+	<bean id="upperLimitCountFilter" class="org.hbird.business.validation.base.ViolationCountFilter">
 	    <constructor-arg index="0" value="2"/>
 	</bean>
 	
@@ -59,7 +59,7 @@
 		<!-- Route to enable / disable the upper limit of Parameter 1.  -->
 		<route>
 			<from uri="direct:enabledUpperLimit"/>
-			<to uri="bean:UpperLimit?method=processEnabled"/>
+			<to uri="bean:upperLimit?method=processEnabled"/>
 			<to uri="direct:UpperLimitFilters"/>
 		</route>
 
@@ -74,14 +74,14 @@
 		<!-- Route to change the upper limit of Parameter 1.  -->
 		<route>
 			<from uri="direct:UpperLimitParameter"/>
-			<to uri="bean:UpperLimit?method=processLimit"/>
+			<to uri="bean:upperLimit?method=processLimit"/>
 			<to uri="direct:UpperLimitFilters"/>
 		</route>
 
 		<!-- Route to change the lower limit of Parameter 1.  -->
 		<route>
 			<from uri="direct:LowerLimitParameter"/>
-			<to uri="bean:LowerLimit?method=processLimit"/>
+			<to uri="bean:lowerLimit?method=processLimit"/>
 			<to uri="direct:LowerLimitFilters"/>
 		</route>
 
@@ -97,14 +97,14 @@
 		<!-- Route to calculate the upper limit of parameter 1 -->
 		<route>
 			<from uri="direct:StartParameterUpperLimit"/>
-			<to uri="bean:UpperLimit?method=processParameter"/>
+			<to uri="bean:upperLimit?method=processParameter"/>
 			<to uri="direct:UpperLimitFilters"/>
 		</route>
 
 		<!-- Route to calculate the lower limit of parameter 1 -->
 		<route>
 			<from uri="direct:StartParameterLowerLimit"/>
-			<to uri="bean:LowerLimit?method=processParameter"/>
+			<to uri="bean:lowerLimit?method=processParameter"/>
 			<to uri="direct:LowerLimitFilters"/>
 		</route>
 
@@ -112,15 +112,15 @@
 		<!-- Filters -->
 		<route>
 			<from uri="direct:UpperLimitFilters"/>
-			<to uri="bean:UpperLimitCountFilter"/>
-			<to uri="bean:UpperLimitChangeFilter"/>
+			<to uri="bean:upperLimitCountFilter"/>
+			<to uri="bean:upperLimitChangeFilter"/>
 			<to uri="mock:result"/>			
 		</route>
 		
 		<route>
 			<from uri="direct:LowerLimitFilters"/>
-			<to uri="bean:LowerLimitCountFilter"/>
-			<to uri="bean:LowerLimitChangeFilter"/>
+			<to uri="bean:lowerLimitCountFilter"/>
+			<to uri="bean:lowerLimitChangeFilter"/>
 			<to uri="mock:result"/>			
 		</route>
 				
