@@ -9,7 +9,6 @@ import java.util.Map;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
-import org.hbird.transport.commons.MessageType;
 import org.hbird.transport.spacesystemmodel.ContainerFactory;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownContainerNameException;
 import org.hbird.transport.telemetry.HummingbirdPacket;
@@ -66,7 +65,7 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 		final List<Message> messages = new ArrayList<Message>();
 
 		final Message packetMessage = new DefaultMessage();
-		packetMessage.setHeader("Type", MessageType.TMPacket);
+		packetMessage.setHeader("Type", "TMPacket");
 
 		packetMessage.setBody(packet);
 		messages.add(packetMessage);
@@ -115,7 +114,7 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 		final Message msg = new DefaultMessage();
 
 		final Map<String, Object> headers = new HashMap<String, Object>();
-		headers.put("Type", MessageType.TMParameter);
+		headers.put("Type", "TMParameter");
 		headers.put("ParameterName", parameter.getName());
 		headers.put("ParameterShortDescription", parameter.getShortDescription());
 		headers.put("ParameterLongDescription", parameter.getLongDescription());
