@@ -20,7 +20,7 @@
   <modules>
     <module>command-chain</module>
     <module>validation</module>
-    <module>calibration</module>
+    <module>scripting</module>
     <module>navigation</module>
     <module>simple-parameter-simulator</module>
     <module>parameter-storage</module>
