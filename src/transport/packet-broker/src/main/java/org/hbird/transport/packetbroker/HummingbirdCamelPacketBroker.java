@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
 import org.hbird.transport.spacesystemmodel.ContainerFactory;
@@ -27,7 +26,7 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 
 	private String packetContainerName;
 
-	public HummingbirdCamelPacketBroker(final ContainerFactory factory, String packetContainerName) {
+	public HummingbirdCamelPacketBroker(final ContainerFactory factory, final String packetContainerName) {
 		super(factory);
 		this.setPacketContainerName(packetContainerName);
 	}
@@ -49,16 +48,11 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 	 * @return a list of camel messages
 	 * @throws UnknownContainerNameException
 	 */
-	public final synchronized List<Message> split(final Exchange camelExchange) throws UnknownContainerNameException {
+	public final synchronized List<Message> decodeBinaryTelemetry(final BitSet telemetryBitSet) throws UnknownContainerNameException {
 		// Clear the previous packet
 		packetProducer.clearPacket();
 
-		final Object msgBody = camelExchange.getIn().getBody();
-		if (msgBody == null) {
-			LOG.warn("message body is null");
-			return null;
-		}
-		this.unmarshall(this.packetContainerName, (BitSet) msgBody);
+		this.unmarshall(this.packetContainerName, telemetryBitSet);
 
 		final HummingbirdPacket packet = packetProducer.getPacket();
 
@@ -87,18 +81,18 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 	 * @param packet
 	 * @return
 	 */
-	private Message createCamelMessage(final HummingbirdPacket packet) {
-		final Message msg = new DefaultMessage();
-
-		// Create a map containing all the message header information
-		final Map<String, Object> headers = new HashMap<String, Object>();
-		headers.put("PacketName", packet.getName());
-		headers.put("NumOfParameters", packet.getParameters().size());
-		// set message headers
-		msg.setHeaders(headers);
-
-		return msg;
-	}
+	// private Message createCamelMessage(final HummingbirdPacket packet) {
+	// final Message msg = new DefaultMessage();
+	//
+	// // Create a map containing all the message header information
+	// final Map<String, Object> headers = new HashMap<String, Object>();
+	// headers.put("PacketName", packet.getName());
+	// headers.put("NumOfParameters", packet.getParameters().size());
+	// // set message headers
+	// msg.setHeaders(headers);
+	//
+	// return msg;
+	// }
 
 	/**
 	 * Creates a Camel {@link DefaultMessage} of the parameter. This message can then be routed by Camel to any
@@ -130,7 +124,7 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 		return msg;
 	}
 
-	public void setPacketContainerName(String packetContainerName) {
+	public void setPacketContainerName(final String packetContainerName) {
 		this.packetContainerName = packetContainerName;
 	}
 
