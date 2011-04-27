@@ -6,8 +6,6 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.apache.camel.impl.DefaultExchange;
-
 import org.hbird.exchange.type.Parameter;
 import org.hbird.exchange.type.StateParameter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,9 +58,7 @@ public class UpperLowerCountTest extends AbstractJUnit38SpringContextTests {
 	protected Exchange exchange = null;
 	
 	protected void sendParameter(ProducerTemplate template, Parameter parameter) {
-		exchange = new DefaultExchange(context);
-		exchange.getIn().setBody(parameter);
-		template.send(exchange);		
+		template.sendBody(parameter);		
 	}
 	
 	public void testEjectionMessage() throws Exception {
