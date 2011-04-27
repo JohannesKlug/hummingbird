@@ -41,9 +41,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
-
-@ContextConfiguration (locations={"/CommandReleaseSchedulerTest-context.xml"})
-public class CommandReleaseSchedulerTest extends AbstractJUnit38SpringContextTests  {
+@ContextConfiguration(locations = { "/CommandReleaseSchedulerTest-context.xml" })
+public class CommandReleaseSchedulerTest extends AbstractJUnit38SpringContextTests {
 
 	@Produce(uri = "direct:Commands")
 	protected ProducerTemplate template;
@@ -55,17 +54,18 @@ public class CommandReleaseSchedulerTest extends AbstractJUnit38SpringContextTes
 	protected CamelContext context;
 
 	protected Command createCommand() {
-		List<String> lockStates = Arrays.asList(new String[] {"STATE1", "STATE2", "STATE3"});
-		List<Task> tasks = Arrays.asList(new Task[] {new DummyTask(), new DummyTask()});
-		List<Argument> arguments = new ArrayList<Argument>(); 
-			
+		List<String> lockStates = Arrays.asList(new String[] { "STATE1", "STATE2", "STATE3" });
+		List<Task> tasks = Arrays.asList(new Task[] { new DummyTask(), new DummyTask() });
+		List<Argument> arguments = new ArrayList<Argument>();
+
 		Command definition = new Command("TestCommand", "Test description", arguments, lockStates, tasks, (new Date()).getTime() + 5000, 0);
-		RangeCheck range = new RangeCheck("TestStateParameter", "TestParameter", 0, new StateParameter("", "", definition, new Boolean(true)), new Parameter("", "", new Double(0d), ""), new Parameter("", "", new Double(10d), ""));
-		
+		RangeCheck range = new RangeCheck("TestStateParameter", "TestParameter", 0, new StateParameter("", "", definition, new Boolean(true)), new Parameter(
+				"", "", new Double(0d), ""), new Parameter("", "", new Double(10d), ""));
+
 		arguments.add(new Argument("TestArgument1", "Test description", new Long(64l), "", range));
 		arguments.add(new Argument("TestArgument2", "Test description", new Long(64l), "", range));
 		arguments.add(new Argument("TestArgument3", "Test description", new Long(64l), "", range));
-		
+
 		return definition;
 	}
 
@@ -73,15 +73,15 @@ public class CommandReleaseSchedulerTest extends AbstractJUnit38SpringContextTes
 	@Test
 	public void testScheduleRelease() {
 		Command command = createCommand();
-		
+
 		/** Release command with states that will fail, i.e. locked. */
 		Exchange exchange = new DefaultExchange(context);
 		exchange.getIn().setBody(command);
 		template.send(exchange);
-		
+
 		/** Lock state is false, so exchange should be stopped. */
 		assertTrue(releasedCommands.getReceivedCounter() == 1);
-		assertTrue( (Long) releasedCommands.getExchanges().get(0).getIn().getHeader("AMQ_SCHEDULED_DELAY") != null);
-		assertTrue( (Long) releasedCommands.getExchanges().get(0).getIn().getHeader("AMQ_SCHEDULED_DELAY") > 0);
+		assertTrue((Long) releasedCommands.getExchanges().get(0).getIn().getHeader("AMQ_SCHEDULED_DELAY") != null);
+		assertTrue((Long) releasedCommands.getExchanges().get(0).getIn().getHeader("AMQ_SCHEDULED_DELAY") > 0);
 	}
 }
