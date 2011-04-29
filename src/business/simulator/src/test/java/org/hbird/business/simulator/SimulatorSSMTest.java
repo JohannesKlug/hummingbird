@@ -18,6 +18,7 @@ import org.hbird.transport.spacesystemmodel.exceptions.UnknownContainerNameExcep
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.parameters.ParameterContainer;
 import org.hbird.transport.spacesystemmodel.testsupport.MockParameterContainerModel;
+import org.hbird.transport.xtce.XtceModelFactory;
 import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
 
 /**
@@ -29,10 +30,13 @@ import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
  */
 public class SimulatorSSMTest {
 
+	private static final String TM_PACKET_ALIAS = "TMPacket";
 	SimulatorSSM sim;
+	private static XtceModelFactory xtce;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		xtce = new XtceModelFactory(SimulatorSSMTest.class.getResource("/spacesystemdefs/humsat.xml").getFile());
 	}
 
 	@Before
@@ -56,7 +60,7 @@ public class SimulatorSSMTest {
 		}
 		
 		System.out.println("###############################################");
-		sim = new SimulatorSSM(SimulatorSSMTest.class.getResource("/spacesystemdefs/simpleX-Wing.xml").getFile(), "TM_PACKET");
+		sim = new SimulatorSSM(xtce, TM_PACKET_ALIAS);
 		allParams = sim.getAllParameters();
 		System.out.println("Number params = " + allParams.size());
 
@@ -80,8 +84,8 @@ public class SimulatorSSMTest {
 		System.out.println("###############################################");
 
 		sections = new ArrayList<Container>();
-		sim = new SimulatorSSM(SimulatorSSMTest.class.getResource("/spacesystemdefs/simpleX-Wing.xml").getFile(), "TM_PACKET");
-		sections = sim.getAllPacketSections("TM_PACKET", sections);
+		sim = new SimulatorSSM(xtce, TM_PACKET_ALIAS);
+		sections = sim.getAllPacketSections(TM_PACKET_ALIAS, sections);
 		for (Container c : sections) {
 			for (Container p : c.getParents()) {
 				System.out.println(c.getName() + " has a parent called = " + p.getName());
@@ -91,8 +95,8 @@ public class SimulatorSSMTest {
 		System.out.println("###############################################");
 
 		sections = new ArrayList<Container>();
-		sim = new SimulatorSSM(SimulatorSSMTest.class.getResource("/spacesystemdefs/humsat.xml").getFile(), "TMPacket");
-		sections = sim.getAllPacketSections("TMPacket", sections);
+		sim = new SimulatorSSM(xtce, TM_PACKET_ALIAS);
+		sections = sim.getAllPacketSections(TM_PACKET_ALIAS, sections);
 		for (Container c : sections) {
 			for (Container p : c.getParents()) {
 				System.out.println(c.getName() + " has a parent called = " + p.getName());
