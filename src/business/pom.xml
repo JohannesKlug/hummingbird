@@ -23,6 +23,7 @@
     <module>scripting</module>
     <module>navigation</module>
     <module>simple-parameter-simulator</module>
+    <module>simulator</module>
     <module>parameter-storage</module>
     <module>time-correlation</module>
     <module>system-monitoring</module>
