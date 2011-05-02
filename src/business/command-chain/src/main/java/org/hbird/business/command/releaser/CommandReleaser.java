@@ -5,12 +5,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.camel.Body;
+import org.apache.camel.CamelContext;
+import org.apache.camel.Exchange;
+import org.apache.camel.ExchangePattern;
 import org.apache.camel.Handler;
 import org.apache.camel.Headers;
+import org.apache.camel.ProducerTemplate;
+import org.apache.camel.impl.DefaultExchange;
 import org.apache.log4j.Logger;
-import org.hbird.business.parameterstorage.ParameterBuffer;
 import org.hbird.exchange.commanding.Command;
-import org.hbird.exchange.commanding.Task;
+import org.hbird.exchange.type.StateParameter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * The command releaser reads commands from the 'Command' queue, validate that they 
@@ -49,11 +54,15 @@ public class CommandReleaser {
 	/** The object logger */
 	private static final Logger LOGGER = Logger.getLogger(CommandReleaser.class);
 	
-	private ParameterBuffer parameterBuffer;
+	@Autowired
+	protected CamelContext context = null;
 	
-	public CommandReleaser(ParameterBuffer buffer) {
-		this.parameterBuffer = buffer;
-	}
+	@Autowired
+	protected ProducerTemplate producer = null;
+	
+	/** Name of the Camel entry point that will lead to a parameter provider. The
+	 * assembly using the CommandReleaser must contain such a route. */
+	protected String parameterProvider = "direct:ParameterRequests";
 	
 	/**
 	 * Processor for the scheduling of validation task for a command as well as the
@@ -63,17 +72,23 @@ public class CommandReleaser {
 	@Handler
 	public List<Object> process(@Body Command definition, @Headers Map<String, Object> headers) {
 
-		/* Get the command definition. */
+		/* Log the release processing. */
 		LOGGER.info("Processing command '" + definition.getName() + "' with ID " + definition.getObjectid() + "'.");
 		
+		/* List of exchanges to be send. */
 		List<Object> out = new ArrayList<Object>();
 		
 		/* Validate the lock state(s). */
 		for (String state : definition.getLockStates()) {
-			/* TODO Get the parameter using the Camel request-response pattern. */
-			Boolean parameter = (Boolean) parameterBuffer.getParameterByName(state);
-			LOGGER.info("Lock state for parameter " + state + " is " + parameter);
-			if (parameter == null || parameter == false) {				
+			
+			/** Send the request. Respond is expected to be a single StateParameter. */
+			Exchange exchange = new DefaultExchange(context, ExchangePattern.InOut);
+			exchange.getIn().setBody(state);
+			producer.send(parameterProvider, exchange);
+
+			/** Check respond. */
+			if (exchange.getOut().getBody() == null || ((StateParameter) exchange.getOut().getBody()).getStateValue() == false) {				
+
 				/* Stop the release of the command. */
 				LOGGER.error("Failed release of command with ID '" + definition.getObjectid() + "'. Lock state '" + state + "' has state 'false'.");
 				headers.put("FailedRelease", true);
@@ -81,17 +96,11 @@ public class CommandReleaser {
 			}
 		}
 		
+		/* Add the command itself to the messages to be continued in the route. */
 		out.add(definition);
 
 		/* Schedule all tasks. */
-		for (Task task : definition.getTasks()) {
-			
-			/* Specialized sub classes of the 'Task' may depend on the command to configure themselves, for
-			 * example the ReflectiveSetParameter' will have a value reflected from a command argument. This
-			 * call ensures that the configuration can occur. */
-			out.add(task);
-			LOGGER.info("Scheduling task '" + task.getClass().toString() + "' with ID " + task.getObjectid() + "'.");
-		}
+		out.addAll(definition.getTasks());
 		
 		return out;
 	}
