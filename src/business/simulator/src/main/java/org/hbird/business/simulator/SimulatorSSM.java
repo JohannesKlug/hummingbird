@@ -9,8 +9,6 @@ import org.hbird.transport.spacesystemmodel.ContainerFactory;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownContainerNameException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.parameters.ParameterContainer;
-import org.hbird.transport.xtce.XtceModelFactory;
-import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
 
 /**
  * CCSDS Space System model defined telemetry simulator. Acronyms used: SSM = Space System Model
@@ -20,8 +18,10 @@ import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
  */
 public class SimulatorSSM implements Runnable {
 
+	/** Root packet {@link Container} name */
 	private static String packetHeaderAlias;
 
+	/** Factory producing the SSM */
 	ContainerFactory ssmFactory;
 	Container packetRoot;
 	Map<String, ParameterContainer> allParams;
@@ -29,13 +29,6 @@ public class SimulatorSSM implements Runnable {
 	public SimulatorSSM(ContainerFactory spaceSystemModelFactory, String packetRootName) throws UnknownContainerNameException {
 		this.ssmFactory = spaceSystemModelFactory;
 		this.packetRoot = ssmFactory.getContainer(packetRootName);
-		this.allParams = ssmFactory.getAllParameters();
-	}
-
-	public SimulatorSSM(String xtceSsmFilePath, String packetRootName) throws UnknownContainerNameException, InvalidXtceFileException {
-		this.ssmFactory = new XtceModelFactory(xtceSsmFilePath);
-		this.packetRoot = ssmFactory.getContainer(packetRootName);
-		System.out.println("packet root container = " + packetRoot.toString());
 		this.allParams = ssmFactory.getAllParameters();
 	}
 

@@ -1,26 +1,11 @@
-/**
- * Licensed to the Hummingbird Foundation (HF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The HF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.hbird.business.simpleparametersimulator;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.apache.camel.Body;
 import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
+import org.apache.camel.Header;
 import org.springframework.beans.factory.annotation.Autowired;
 
 // FIXME refactor hard-coded header fields
@@ -83,52 +68,21 @@ public class CommandReader {
 	 * Will retrieve the bean referenced in the exchange and set the value.
 	 * 
 	 * @param exchange
+	 * @throws NoSuchMethodException 
+	 * @throws SecurityException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalAccessException 
+	 * @throws IllegalArgumentException 
 	 */
-	public void process(Exchange exchange) {
-		
-		/** Read the parameters. */
-		
-		String bean = (String) exchange.getIn().getHeader("Bean");
-		String attribute = (String) exchange.getIn().getHeader("Attribute");
-		Object value = exchange.getIn().getHeader("Value");
+	public void process(@Body Object value, @Header("Bean") String bean, @Header("Attribute") String attribute) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 		
 		BaseParameter parameter = (BaseParameter) context.getRegistry().lookup(bean);
 		
-		Class argument = null;
-		if (value instanceof Integer) {
-			argument = Integer.class;
-		}
-		else if (value instanceof Double) {
-			argument = Double.class;
-		}
-		else if (value instanceof Long) {
-			argument = Long.class;
-		}
-		else if (value instanceof Boolean) {
-			argument = Boolean.class;
-		}
-		
 		Object[] argList = new Object[] {value};
 		
-		Class parTypes[] = new Class[] {argument};
-		try {
+		Class parTypes[] = new Class[] {Object.class};
+			// FIXME I don't like this - I think it is a code smell --Johannes, 2011-04-26
 			Method method = parameter.getClass().getMethod("set" + attribute, parTypes);
 			method.invoke(parameter, argList);
-		}
-		catch (SecurityException e) {
-			e.printStackTrace();
-		}
-		catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		}
-		catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		}
-		catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
 	}
 }
