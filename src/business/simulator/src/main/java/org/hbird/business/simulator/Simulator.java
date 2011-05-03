@@ -1,56 +1,26 @@
 package org.hbird.business.simulator;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
-import org.apache.camel.Message;
+import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
-import org.apache.camel.impl.DefaultExchange;
-import org.apache.camel.impl.DefaultMessage;
+import org.hbird.business.simulator.waveforms.Waveform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.hbird.business.simulator.ccsds.SpacePacketGenerator;
-import org.hbird.business.simulator.graphics.URLReader;
-import org.hbird.business.simulator.waveforms.Waveform;
 
 public class Simulator implements Runnable {
 
 	private final static Logger LOG = LoggerFactory.getLogger(Simulator.class);
 
-	private SpacePacketGenerator packetGenerator = new SpacePacketGenerator();
-
-	/** The context of the route, used to create exchanges. */
-	private CamelContext context;
-	
-	/** The producer sending the exchanges. */
-	private ProducerTemplate template;
+	@EndpointInject(uri="direct:simMessages")
+	ProducerTemplate template;
 	
 	private List<Waveform> waveforms = new ArrayList<Waveform>();
 
 	private boolean run;
 
 	private long messageInterval = 1000;
-
-	private String urlToPacketise;
-
-	/**
-	 * Basic constructor.
-	 * 
-	 * @param context The Camel context of the route.
-	 * @param template The exchange producer used to create new exchanges.
-	 * @param urlToPacketise The URL from which data will be read from the packetizer.
-	 */
-	public Simulator(CamelContext context, ProducerTemplate template, String urlToPacketise) {
-		this.context = context;
-		this.template = template;
-		this.urlToPacketise = urlToPacketise;
-	}
 
 	public void setMessageInterval(long messageInterval) {
 		this.messageInterval = messageInterval;
@@ -59,23 +29,13 @@ public class Simulator implements Runnable {
 	public void addWaveform(Waveform waveform) {
 		waveforms.add(waveform);
 	}
-
-	public Message nextMessage(Object value) {
-		Message message = new DefaultMessage();
-		message.setHeader("Source", "Hummingbird Simulator");
-		message.setBody(value, byte[].class);
-		return message;
-
-	}
-
-	public Exchange nextExchange(Object value) {
-		Exchange exchange = new DefaultExchange(context);
-		exchange.setIn(nextMessage(value));
-		return exchange;
+	
+	public void setWaveforms(List<Waveform> waveforms) {
+		this.waveforms = waveforms;
 	}
 
 	public void sendMessage(Object value) {
-		template.send("direct:sendMessage", nextExchange(value));
+		template.sendBodyAndHeader(value, "Source", "Hummingbird Simulator");
 	}
 
 	public void stopSimulator() {
@@ -99,57 +59,13 @@ public class Simulator implements Runnable {
 		// }
 
 		while (run) {
+			
+			LOG.info("Simulator started.");
 
 			for (Waveform waveform : waveforms) {
 				for (int i = 0; i < waveform.getReadings() && run == true; i++) {
 
-					// TODO Passing the value down to nextMessage() is ugly. Refactor?
-					// sendMessage(waveform.nextValue());
-
-					Double doubleValue = waveform.nextValue();
-
-					// Long value = Double.doubleToLongBits(doubleValue);
-					// Long byte0 = (value & 0xFF000000 ) >>> 24;
-					// Long byte1 = (value & 0x00FF0000 ) >>> 16;
-					// Long byte2 = (value & 0x0000FF00 ) >>> 8;
-					// Long byte3 = (value & 0x000000FF );
-					// System.out.println(doubleValue);
-					// byte[] payload = new byte[] {
-					// byte0.byteValue(),
-					// byte1.byteValue(),
-					// byte2.byteValue(),
-					// byte3.byteValue()
-					// };
-					// System.out.println();
-					// System.out.println(byte0.byteValue());
-					// System.out.println(byte1.byteValue());
-					// System.out.println(byte2.byteValue());
-					// System.out.println(byte3.byteValue());
-
-					ByteArrayOutputStream bos = new ByteArrayOutputStream();
-					DataOutputStream dos = new DataOutputStream(bos);
-					try {
-						dos.writeDouble(doubleValue);
-						dos.flush();
-					}
-					catch (IOException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					}
-					// etc.
-					byte[] payload = bos.toByteArray();
-
-					sendMessage(packetGenerator.generateSpacePacket(0, payload));
-
-					if (!(urlToPacketise == null)) {
-						try {
-							sendMessage(packetGenerator.generateSpacePacket(1, URLReader.readUrl(urlToPacketise)));
-						}
-						catch (Exception e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
+					sendMessage(waveform.nextValue());
 
 					try {
 						Thread.sleep(messageInterval);
@@ -164,7 +80,4 @@ public class Simulator implements Runnable {
 		}
 	}
 
-	public void setWaveforms(List<Waveform> waveforms) {
-		this.waveforms = waveforms;
-	}
 }

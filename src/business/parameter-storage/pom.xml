@@ -92,5 +92,12 @@
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		
+		  <dependency>
+			  <groupId>org.hbird.exchange</groupId>
+			  <artifactId>data</artifactId>
+			  <version>0.0.1-SNAPSHOT</version>
+		  </dependency>
+		
 	</dependencies>
 </project>

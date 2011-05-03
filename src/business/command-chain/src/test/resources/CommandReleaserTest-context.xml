@@ -10,10 +10,8 @@
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
 
-	<bean id="parameterBuffer" class="org.hbird.business.parameterstorage.InMemoryParameterBuffer"/>
-	<bean id="commandreleaser" class="org.hbird.business.command.releaser.CommandReleaser">
-		<constructor-arg><ref bean="parameterBuffer"/></constructor-arg>
-	</bean>
+	<bean id="provider" class="org.hbird.business.parameterstorage.InMemoryParameterBuffer"/>
+	<bean id="commandreleaser" class="org.hbird.business.command.releaser.CommandReleaser"/>
 
 	<camelContext id="context" xmlns="http://camel.apache.org/schema/spring">
 		<template id="producer"/>
@@ -36,9 +34,14 @@
 		</route>
 
 		<route>
-			<from uri="direct:Parameters" />
-			<to uri="bean:parameterBuffer" />
+			<from uri="direct:ParameterRequests" />
+			<to uri="bean:provider?method=getParameterByName"/>
 		</route>
+		
+		<route>
+			<from uri="direct:Parameters" />
+			<to uri="bean:provider?method=storeParameter"/>			
+		</route>		
 	
 	</camelContext>
 </beans>

@@ -4,27 +4,46 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.camel.Body;
-import org.apache.camel.Header;
+import org.hbird.exchange.type.Parameter;
 
-public class InMemoryParameterBuffer<T> implements ParameterBuffer {
+
+/**
+ * Very simple parameter storage. Will store only the last received value of 
+ * each parameter within a Map.
+ */
+public class InMemoryParameterBuffer {
 	
-	private Map<String, Object> latestParameterValue = new HashMap<String, Object>();
+	/* Map holding the buffered values. */
+	protected Map<String, Parameter> latestParameterValue = new HashMap<String, Parameter>();
 
-	@Override
-	public Object getParameterByName(String name) {
+	
+	/**
+	 * Method to retrieve a parameter value based on the parameter name.
+	 *  
+	 * @param name The name of the parameter to be retrieved.
+	 * @return The parameter object
+	 */
+	public Parameter getParameterByName(@Body String name) {
 		return latestParameterValue.get(name);
 	}
 	
-//	public Object getParameterByNameAndClass(String name, Class<T> clazz) {
-//		Object value = latestParameterValue.get(name);
-//		if (value instanceof clazz) {
-//			return value;
-//		} else return null;
-//	}
 	
-	// FIXME Externalise hard-coded ParameterName
-	public void storeParameter(@Body Object value, @Header("HummingbirdParameterName") String name) {
-		latestParameterValue.put(name, value);
+	/**
+	 * Method to store a parameter into the buffer.
+	 * 
+	 * @param parameter The parameter to be stored.
+	 */
+	public void storeParameter(@Body Parameter parameter) {
+		latestParameterValue.put(parameter.getName(), parameter);
 	}
 
+	
+	/**
+	 * Getter of the buffer.
+	 * 
+	 * @return The Map acting as a buffer.
+	 */
+	public Map<String, Parameter> getLatestParameterValue() {
+		return latestParameterValue;
+	}
 }
