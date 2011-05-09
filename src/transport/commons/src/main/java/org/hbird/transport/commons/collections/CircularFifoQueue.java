@@ -1,17 +1,22 @@
 package org.hbird.transport.commons.collections;
 
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 import com.google.common.util.concurrent.ForwardingBlockingQueue;
 
+/**
+ * 
+ * @author Mark Doyle
+ * 
+ * @param <T>
+ */
 public class CircularFifoQueue<T> extends ForwardingBlockingQueue<T> {
 
-	private final BlockingQueue<T> decoratedQueue;
-	private final long capacity;
+	private final ArrayBlockingQueue<T> decoratedQueue;
 
-	public CircularFifoQueue(final long capacity, final BlockingQueue<T> blockingQueue) {
+	public CircularFifoQueue(final ArrayBlockingQueue<T> blockingQueue) {
 		this.decoratedQueue = blockingQueue;
-		this.capacity = capacity;
 	}
 
 	@Override
@@ -19,12 +24,14 @@ public class CircularFifoQueue<T> extends ForwardingBlockingQueue<T> {
 		return decoratedQueue;
 	}
 
-
 	@Override
 	public synchronized void put(final T e) throws InterruptedException {
+		// if there is not enough room for the add..
 		if (decoratedQueue.remainingCapacity() <= 0) {
+			// ..remove the head element
 			decoratedQueue.remove();
 		}
+		// ..and carry out the add
 		decoratedQueue.put(e);
 	};
 
