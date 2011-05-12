@@ -10,12 +10,11 @@ import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.Handler;
 import org.apache.camel.Headers;
-import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultExchange;
+import org.apache.camel.impl.DefaultProducerTemplate;
 import org.apache.log4j.Logger;
 import org.hbird.exchange.commanding.Command;
 import org.hbird.exchange.type.StateParameter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * The command releaser reads commands from the 'Command' queue, validate that they 
@@ -54,12 +53,6 @@ public class CommandReleaser {
 	/** The object logger */
 	private static final Logger LOGGER = Logger.getLogger(CommandReleaser.class);
 	
-	@Autowired
-	protected CamelContext context = null;
-	
-	@Autowired
-	protected ProducerTemplate producer = null;
-	
 	/** Name of the Camel entry point that will lead to a parameter provider. The
 	 * assembly using the CommandReleaser must contain such a route. */
 	protected String parameterProvider = "direct:ParameterRequests";
@@ -70,21 +63,21 @@ public class CommandReleaser {
 	 * 
 	 */
 	@Handler
-	public List<Object> process(@Body Command definition, @Headers Map<String, Object> headers) {
+	public List<Object> process(@Body Command definition, @Headers Map<String, Object> headers, CamelContext context) {
 
 		/* Log the release processing. */
 		LOGGER.info("Processing command '" + definition.getName() + "' with ID " + definition.getObjectid() + "'.");
-		
+
 		/* List of exchanges to be send. */
 		List<Object> out = new ArrayList<Object>();
-		
+
 		/* Validate the lock state(s). */
 		for (String state : definition.getLockStates()) {
-			
+
 			/** Send the request. Respond is expected to be a single StateParameter. */
 			Exchange exchange = new DefaultExchange(context, ExchangePattern.InOut);
 			exchange.getIn().setBody(state);
-			producer.send(parameterProvider, exchange);
+			(new DefaultProducerTemplate(context)).send(parameterProvider, exchange);
 
 			/** Check respond. */
 			if (exchange.getOut().getBody() == null || ((StateParameter) exchange.getOut().getBody()).getStateValue() == false) {				
