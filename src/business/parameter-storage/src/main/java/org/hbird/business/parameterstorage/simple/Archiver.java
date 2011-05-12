@@ -1,5 +1,5 @@
 /**
- * Licensed under the to the Apache License, Version 2.0. You may obtain a copy of 
+ * Licensed under the Apache License, Version 2.0. You may obtain a copy of 
  * the License at http://www.apache.org/licenses/LICENSE-2.0 or at this project's root.
  */
 
@@ -53,7 +53,7 @@ public class Archiver {
 			//@XPath("*/value/@class") String type,
 			@Header("timestamp") Long timestamp,
 			@Body String body) {
-		
+			
 		String nameLowerCase = name.toLowerCase();
 		
 		name = nameLowerCase.replace(" ", "_");

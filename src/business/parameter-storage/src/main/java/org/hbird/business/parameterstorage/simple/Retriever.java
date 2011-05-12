@@ -1,5 +1,5 @@
 /**
- * Licensed under the to the Apache License, Version 2.0. You may obtain a copy of 
+ * Licensed under the Apache License, Version 2.0. You may obtain a copy of 
  * the License at http://www.apache.org/licenses/LICENSE-2.0 or at this project's root.
  */
 
@@ -24,6 +24,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
  * specified destination.
  */
 public class Retriever {
+	String errorMessageFaultyInputstring = 
+		"Input string to create sql query is faulty! Needs to be either\n"
+		+ "'parametername' (String;String) or \n"
+		+ "'parametername;starttime;endtime' (String;long;long)";
+	String errorMessageIncorrectTimestamps = 
+		"Input string to create sql query is faulty! The end-timestamp needs to be "
+		+ "AFTER the start-timestamp.";
+	
 	private JdbcTemplate template = null;
 	
 	private String destination;
@@ -66,9 +74,13 @@ public class Retriever {
 		long endTimeStamp = 0;
 		String parameterName = "";
 		String[] command;
-		
-		//Splits the body into 3 single Strings if necessary. If
-		//it only contains the name of the parameter, nothing happens
+
+		if (!retrieverCommand.matches("^[A-Za-z][0-9A-Za-z-_]*(;([0-9]{1,13});([0-9]{1,13}))?$")) {
+			throw new IOException(errorMessageFaultyInputstring + "\n###" + retrieverCommand);
+		}
+
+		// Splits the body into 3 single Strings if necessary. If
+		// it only contains the name of the parameter, nothing happens
 		command = retrieverCommand.split(";");
 
 		switch (command.length) {
@@ -82,11 +94,10 @@ public class Retriever {
 			startTimeStamp = Long.parseLong(command[1]);
 			endTimeStamp = Long.parseLong(command[2]);
 			break;
-		default:
-			throw new IOException(
-					"Input string to create sql query is faulty! Needs to be either\n"
-							+ "'parametername;queuename' (String;String) or \n"
-							+ "'starttime;endtime;parametername;queuename' (long;long;String;String)");
+		}
+		
+		if(startTimeStamp >= endTimeStamp) {
+			throw new IOException(errorMessageIncorrectTimestamps + "\n###" + retrieverCommand);			
 		}
 		
 		// Ceate and run statements. Call 'processResults' to send the retrieved datasets.
