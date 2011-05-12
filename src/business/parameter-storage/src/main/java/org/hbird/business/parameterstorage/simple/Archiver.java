@@ -53,7 +53,7 @@ public class Archiver {
 			//@XPath("*/value/@class") String type,
 			@Header("timestamp") Long timestamp,
 			@Body String body) {
-		
+			
 		String nameLowerCase = name.toLowerCase();
 		
 		name = nameLowerCase.replace(" ", "_");
