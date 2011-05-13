@@ -85,7 +85,7 @@ public class OrbitPredictionTest extends AbstractJUnit38SpringContextTests  {
 		}
 		
 		/** Assert the provided data. 40 visibility events. 1440 orbit events. */
-		assertEquals(1480, exconsumerQueue.getReceivedCounter());
+		assertEquals(1480, consumerQueue.getReceivedCounter());
 		
 		List<OrbitalState> orbitalStates = new ArrayList<OrbitalState>();
 		List<LocationContactEvent> locationContactEvents = new ArrayList<LocationContactEvent>();
