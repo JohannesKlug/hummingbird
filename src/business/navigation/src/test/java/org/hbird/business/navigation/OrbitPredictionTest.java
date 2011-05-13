@@ -77,21 +77,15 @@ public class OrbitPredictionTest extends AbstractJUnit38SpringContextTests  {
 				
 		template.send(exchange);
 		
-		/** Keep iterating as long as the module is injecting data. */
-		int count = -1;
-		int newCount = 0;
-		while (newCount > count) {
-			count = newCount;
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			newCount = consumerQueue.getReceivedCounter();
+		/** Wait until the expected number of messages is received, but max 10 seconds. */
+		for(int i = 10; i < 5120 && consumerQueue.getReceivedCounter() < 1480; i*=2)
+		{
+			try {Thread.sleep(i);}
+			catch (InterruptedException e) {e.printStackTrace();}
 		}
 		
 		/** Assert the provided data. 40 visibility events. 1440 orbit events. */
-		assertTrue(consumerQueue.getReceivedCounter() == 1480);
+		assertEquals(1480, exconsumerQueue.getReceivedCounter());
 		
 		List<OrbitalState> orbitalStates = new ArrayList<OrbitalState>();
 		List<LocationContactEvent> locationContactEvents = new ArrayList<LocationContactEvent>();
@@ -109,8 +103,8 @@ public class OrbitPredictionTest extends AbstractJUnit38SpringContextTests  {
 			}
 		}
 
-		assertTrue(orbitalStates.size() == 1440);
-		assertTrue(locationContactEvents.size() == 40);
+		assertEquals(1440, orbitalStates.size());
+		assertEquals(40, locationContactEvents.size());
 		
 		Collections.sort(orbitalStates);
 		Collections.sort(locationContactEvents);
