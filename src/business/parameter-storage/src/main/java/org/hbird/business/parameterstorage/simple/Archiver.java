@@ -20,7 +20,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
  * Creates all tables necessary to store the received parameter in a database.
  */
 public class Archiver {
-	//private TreeSet<String> tableExists = new TreeSet<String>();
 	private Set<String> tableExists = new TreeSet<String>();
 	private Map<String,String> sqlPreparedStatements = new HashMap<String,String>();
 	private String[] sqlTableCount = {"SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '", "' OR TABLE_NAME = '", "';"};
@@ -49,8 +48,6 @@ public class Archiver {
 	 *    	              Value of the parameter, e.g. an XML string. 
 	 */
 	public void store(@Header("name") String name,
-			//@Header("value") String value,
-			//@XPath("*/value/@class") String type,
 			@Header("timestamp") Long timestamp,
 			@Body String body) {
 			
@@ -64,7 +61,6 @@ public class Archiver {
 			//Anyways, the statement to insert data into this table will be created.
 			sqlPreparedStatements.put(name,
 					"INSERT INTO " + name + " (timestamp, local_timestamp, body) values (?, ?, ?);");
-					//"INSERT INTO " + name + " (timestamp, value, local_timestamp, body) values (?, ?, ?, ?);");
 
 			int numberOfTables = template.queryForInt(sqlTableCount[0] + name.toUpperCase() + sqlTableCount[1] + name.toLowerCase() + sqlTableCount[2]);
 								
@@ -73,7 +69,6 @@ public class Archiver {
 			
 				String createTableStatement = "CREATE TABLE " + name
 						+ " (timestamp BIGINT, "
-						//+ "value VARCHAR(40), "
 						+ "local_timestamp BIGINT, body varchar(1500), "
 						+ "PRIMARY KEY (timestamp));\n";
 				template.execute(createTableStatement);
@@ -84,7 +79,6 @@ public class Archiver {
 
 		// Insert data into database
 		template.update(sqlPreparedStatements.get(name), new Object[] { timestamp,
-				//value, 
 				System.currentTimeMillis(), body });
 	}
 }
