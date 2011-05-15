@@ -2,9 +2,14 @@ package org.hbird.business.simulator;
 
 import java.util.BitSet;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.camel.EndpointInject;
+import org.apache.camel.ProducerTemplate;
+import org.hbird.business.simulator.waveforms.Waveform;
+import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.spacesystemmodel.Container;
 import org.hbird.transport.spacesystemmodel.ContainerFactory;
@@ -21,6 +26,9 @@ import org.hbird.transport.spacesystemmodel.parameters.ParameterContainer;
  */
 public class SimulatorSSM implements Runnable {
 
+	@EndpointInject(uri="direct:simMessages")
+	ProducerTemplate template;
+	
 	/** Root packet {@link Container} name */
 	private static String packetHeaderAlias;
 
@@ -28,6 +36,18 @@ public class SimulatorSSM implements Runnable {
 	ContainerFactory ssmFactory;
 	Container packetRoot;
 	Map<String, ParameterContainer> allParams;
+	
+	private boolean run;
+	
+	private String packetName;
+	
+	private Map<String,Waveform> waveformMap;
+	
+	private long messageInterval = 1000;
+	
+	public void setMessageInterval(long messageInterval) {
+		this.messageInterval = messageInterval;
+	}
 
 	public SimulatorSSM(ContainerFactory spaceSystemModelFactory, String packetRootName) throws UnknownContainerNameException {
 		this.ssmFactory = spaceSystemModelFactory;
@@ -105,9 +125,42 @@ public class SimulatorSSM implements Runnable {
 		ssmFactory.getContainer(name).marshall(packet, 0);
 		return packet;
 	}
+	
+	public void stopSimulator() {
+		run = false;
+	}
 
 	public void run() {
-		System.out.println("Running sim - NOT YET IMPLEMENTED");
+		run = true;
+		
+		while (run) {
+			Map<String, Double> fields = new HashMap<String, Double>();
+			
+			for (Map.Entry<String, Waveform> entry : waveformMap.entrySet()) {
+				fields.put(entry.getKey(), entry.getValue().nextValue());
+			}
+			
+			BitSet encodedPacketAsBitset;
+			try {
+				encodedPacketAsBitset = encode(packetName, fields);
+				template.sendBody(BitSetUtility.toByteArray(encodedPacketAsBitset, encodedPacketAsBitset.length()));
+			} catch (BitSetOperationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnknownContainerNameException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+
+			try {
+				Thread.sleep(messageInterval);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
 	}
 
 }
