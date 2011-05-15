@@ -1,9 +1,11 @@
 package org.hbird.business.simulator;
 
+import java.util.BitSet;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.spacesystemmodel.Container;
 import org.hbird.transport.spacesystemmodel.ContainerFactory;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownContainerNameException;
@@ -14,6 +16,7 @@ import org.hbird.transport.spacesystemmodel.parameters.ParameterContainer;
  * CCSDS Space System model defined telemetry simulator. Acronyms used: SSM = Space System Model
  * 
  * @author Mark Doyle
+ * @author Johannes Klug
  * 
  */
 public class SimulatorSSM implements Runnable {
@@ -86,6 +89,21 @@ public class SimulatorSSM implements Runnable {
 				packetRoot.getSubContainers();
 			}
 		}
+	}
+	
+	public synchronized BitSet encode(String name, Map<String, Double> fields) throws BitSetOperationException, UnknownContainerNameException {
+		for (Map.Entry<String, Double> entry : fields.entrySet()) {
+			ParameterContainer parameter = ssmFactory.getParameter((String) entry.getKey());
+			if (parameter == null) {
+				throw new UnknownContainerNameException(entry.getKey());
+			} else {
+				parameter.setValue(entry.getValue());
+			}
+		}
+		
+		BitSet packet = new BitSet();
+		ssmFactory.getContainer(name).marshall(packet, 0);
+		return packet;
 	}
 
 	public void run() {
