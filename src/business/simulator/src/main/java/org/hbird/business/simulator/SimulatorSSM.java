@@ -45,6 +45,22 @@ public class SimulatorSSM implements Runnable {
 	
 	private long messageInterval = 1000;
 	
+	public String getPacketName() {
+		return packetName;
+	}
+
+	public void setPacketName(String packetName) {
+		this.packetName = packetName;
+	}
+
+	public Map<String, Waveform> getWaveformMap() {
+		return waveformMap;
+	}
+
+	public void setWaveformMap(Map<String, Waveform> waveformMap) {
+		this.waveformMap = waveformMap;
+	}
+
 	public void setMessageInterval(long messageInterval) {
 		this.messageInterval = messageInterval;
 	}
