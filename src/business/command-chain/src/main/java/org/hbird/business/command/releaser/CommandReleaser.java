@@ -10,6 +10,8 @@ import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.Handler;
 import org.apache.camel.Headers;
+import org.apache.camel.Produce;
+import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultExchange;
 import org.apache.camel.impl.DefaultProducerTemplate;
 import org.apache.log4j.Logger;
@@ -57,6 +59,9 @@ public class CommandReleaser {
 	 * assembly using the CommandReleaser must contain such a route. */
 	protected String parameterProvider = "direct:ParameterRequests";
 	
+	// @Produce(uri = "direct:ParameterRequests")
+	// protected ProducerTemplate parameterRequests = null;
+
 	/**
 	 * Processor for the scheduling of validation task for a command as well as the
 	 * release of the command.
@@ -77,7 +82,8 @@ public class CommandReleaser {
 			/** Send the request. Respond is expected to be a single StateParameter. */
 			Exchange exchange = new DefaultExchange(context, ExchangePattern.InOut);
 			exchange.getIn().setBody(state);
-			(new DefaultProducerTemplate(context)).send(parameterProvider, exchange);
+			
+			context.createProducerTemplate().send(parameterProvider, exchange);
 
 			/** Check respond. */
 			if (exchange.getOut().getBody() == null || ((StateParameter) exchange.getOut().getBody()).getStateValue() == false) {				
