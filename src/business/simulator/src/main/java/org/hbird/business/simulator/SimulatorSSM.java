@@ -24,7 +24,7 @@ import org.hbird.transport.spacesystemmodel.parameters.ParameterContainer;
  * @author Johannes Klug
  * 
  */
-public class SimulatorSSM implements Runnable {
+public class SimulatorSSM {
 
 	@EndpointInject(uri="direct:simMessages")
 	ProducerTemplate template;
@@ -36,8 +36,6 @@ public class SimulatorSSM implements Runnable {
 	ContainerFactory ssmFactory;
 	Container packetRoot;
 	Map<String, ParameterContainer> allParams;
-	
-	private boolean run;
 	
 	private String packetName;
 	
@@ -142,41 +140,25 @@ public class SimulatorSSM implements Runnable {
 		return packet;
 	}
 	
-	public void stopSimulator() {
-		run = false;
-	}
-
-	public void run() {
-		run = true;
+	public void generateMessage() {
+		Map<String, Double> fields = new HashMap<String, Double>();
 		
-		while (run) {
-			Map<String, Double> fields = new HashMap<String, Double>();
-			
-			for (Map.Entry<String, Waveform> entry : waveformMap.entrySet()) {
-				fields.put(entry.getKey(), entry.getValue().nextValue());
-			}
-			
-			BitSet encodedPacketAsBitset;
-			try {
-				encodedPacketAsBitset = encode(packetName, fields);
-				template.sendBody(BitSetUtility.toByteArray(encodedPacketAsBitset, encodedPacketAsBitset.length()));
-			} catch (BitSetOperationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (UnknownContainerNameException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-
-			try {
-				Thread.sleep(messageInterval);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+		for (Map.Entry<String, Waveform> entry : waveformMap.entrySet()) {
+			fields.put(entry.getKey(), entry.getValue().nextValue());
 		}
+		
+		BitSet encodedPacketAsBitset;
+		try {
+			encodedPacketAsBitset = encode(packetName, fields);
+			template.sendBody(BitSetUtility.toByteArray(encodedPacketAsBitset, encodedPacketAsBitset.length()));
+		} catch (BitSetOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnknownContainerNameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
 	}
 
 }
