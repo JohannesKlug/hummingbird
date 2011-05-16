@@ -76,7 +76,6 @@ public class CommandReleaser {
 			/** Send the request. Respond is expected to be a single StateParameter. */
 			Exchange exchange = new DefaultExchange(context, ExchangePattern.InOut);
 			exchange.getIn().setBody(state);
-			
 			context.createProducerTemplate().send(parameterProvider, exchange);
 
 			/** Check respond. */
