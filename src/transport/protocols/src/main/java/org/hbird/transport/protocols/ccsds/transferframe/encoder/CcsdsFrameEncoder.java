@@ -14,12 +14,19 @@ public class CcsdsFrameEncoder {
 
 	private int masterChannelFrameCount = 0;
 	private final int[] virtualChannelFrameCount = new int[8];
+	
+	private int defaultSpacecraftId = 0;
+	private int defaultVirtualChannelId = 0;
 
 	public CcsdsFrameEncoder(final int frameLength) {
-		this.frameLength = frameLength;
+		CcsdsFrameEncoder.frameLength = frameLength;
 		for (int vcfc : virtualChannelFrameCount) {
 			vcfc = 0;
 		}
+	}
+	
+	public byte[] encodeFrame(final byte[] payload) throws InvalidVirtualChannelIdException, InvalidSpacecraftIdException, InvalidOperationalControlFieldException {
+		return encodeFrame(defaultSpacecraftId, defaultVirtualChannelId, payload);
 	}
 
 	public byte[] encodeFrame(final int spacecraftId, final int virtualChannelId, final byte[] payload) throws InvalidVirtualChannelIdException,
