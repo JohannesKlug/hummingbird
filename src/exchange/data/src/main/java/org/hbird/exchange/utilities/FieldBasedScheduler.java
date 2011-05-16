@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.apache.camel.Body;
 import org.apache.camel.Headers;
-
+import org.apache.log4j.Logger;
 
 /**
  * Class to delay a message until a time is reached, based on a field in the object.
@@ -41,10 +41,14 @@ import org.apache.camel.Headers;
  */
 public class FieldBasedScheduler extends AllFields {
 
+	
+	/** The class logger. */
+	protected static Logger logger = Logger.getLogger(FieldBasedScheduler.class);
+
 	/**
 	 * The name of the field in the body object to be accessed as a time. 
 	 */
-	protected String objectFieldName = "timestamp";
+	protected String fieldName = "timestamp";
 
 
 	/**
@@ -71,21 +75,22 @@ public class FieldBasedScheduler extends AllFields {
 		Map<String, Field> fields = new HashMap<String, Field>();
 		recursiveGet(body.getClass(), fields);
 
-		fields.get(objectFieldName).setAccessible(true);
-		long time = (Long) body.getClass().getField(objectFieldName).get(body);
+		fields.get(fieldName).setAccessible(true);
+		long time = (Long) fields.get(fieldName).get(body);
 
 		/** If the message should be delayed...*/
 		if (now.getTime() < time) {
 			headers.put(headerField, time - now.getTime());
+			logger.debug("Setting header field '" + headerField + "' for message '" + body + "' to " + (time - now.getTime()) + " ms.");
 		}		
 	}
 
-	public String getObjectFieldName() {
-		return objectFieldName;
+	public String getFieldName() {
+		return fieldName;
 	}
 
-	public void setObjectFieldName(String objectFieldName) {
-		this.objectFieldName = objectFieldName;
+	public void setFieldName(String fieldName) {
+		this.fieldName = fieldName;
 	}
 
 	public String getHeaderField() {
@@ -95,4 +100,6 @@ public class FieldBasedScheduler extends AllFields {
 	public void setHeaderField(String headerField) {
 		this.headerField = headerField;
 	}	
+	
+	
 }
