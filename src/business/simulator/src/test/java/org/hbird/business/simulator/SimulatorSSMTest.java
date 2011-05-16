@@ -3,7 +3,9 @@ package org.hbird.business.simulator;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +15,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import org.hbird.business.simulator.SimulatorSSM;
+import org.hbird.transport.commons.util.BitSetUtility;
+import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.spacesystemmodel.Container;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownContainerNameException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
@@ -109,6 +113,28 @@ public class SimulatorSSMTest {
 		Map<Parameter, List<String>> restrictions = sim.getAllParameterRestrictions();
 		assertEquals(restrictions.size(), 1);
 		assertEquals(restrictions.get(sim.ssmFactory.getParameter(MockParameterContainerModel.PAYLOAD_APID_ALIAS)).size(), 3);
+	}
+	
+	@Test
+	public void encode() throws UnknownContainerNameException, BitSetOperationException {
+		// This test resembles the marshall() test for the Packet Broker.
+		Map<String, Double> fields = new HashMap<String, Double>();
+		
+		fields.put("ApId", (double) 555);
+		fields.put("PayloadLength", (double) 64);
+		fields.put("LaserTemp", 17959.25);
+		
+		BitSet result = sim.encode(TM_PACKET_ALIAS, fields);
+		
+		/* APID 555 LE unsigned */
+		final String LASER_DATA_APID = "11010100010";
+		final String PACKET_LENGTH_64 = "0000001000000000";
+		/* 17949.25 Laser temperature (64 bit signed float) */
+		final String LASER_TEMP_17959_25 = "0100000011010001100010011101000000000000000000000000000000000000";
+		
+		BitSet expected = BitSetUtility.stringToBitSet(LASER_DATA_APID + PACKET_LENGTH_64 + LASER_TEMP_17959_25, false, false);
+		
+		assertEquals(expected, result);
 	}
 
 	@Test

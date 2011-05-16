@@ -1,9 +1,16 @@
 package org.hbird.business.simulator;
 
+import java.util.BitSet;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.camel.EndpointInject;
+import org.apache.camel.ProducerTemplate;
+import org.hbird.business.simulator.waveforms.Waveform;
+import org.hbird.transport.commons.util.BitSetUtility;
+import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.spacesystemmodel.Container;
 import org.hbird.transport.spacesystemmodel.ContainerFactory;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownContainerNameException;
@@ -14,10 +21,14 @@ import org.hbird.transport.spacesystemmodel.parameters.ParameterContainer;
  * CCSDS Space System model defined telemetry simulator. Acronyms used: SSM = Space System Model
  * 
  * @author Mark Doyle
+ * @author Johannes Klug
  * 
  */
 public class SimulatorSSM implements Runnable {
 
+	@EndpointInject(uri="direct:simMessages")
+	ProducerTemplate template;
+	
 	/** Root packet {@link Container} name */
 	private static String packetHeaderAlias;
 
@@ -25,6 +36,34 @@ public class SimulatorSSM implements Runnable {
 	ContainerFactory ssmFactory;
 	Container packetRoot;
 	Map<String, ParameterContainer> allParams;
+	
+	private boolean run;
+	
+	private String packetName;
+	
+	private Map<String,Waveform> waveformMap;
+	
+	private long messageInterval = 1000;
+	
+	public String getPacketName() {
+		return packetName;
+	}
+
+	public void setPacketName(String packetName) {
+		this.packetName = packetName;
+	}
+
+	public Map<String, Waveform> getWaveformMap() {
+		return waveformMap;
+	}
+
+	public void setWaveformMap(Map<String, Waveform> waveformMap) {
+		this.waveformMap = waveformMap;
+	}
+
+	public void setMessageInterval(long messageInterval) {
+		this.messageInterval = messageInterval;
+	}
 
 	public SimulatorSSM(ContainerFactory spaceSystemModelFactory, String packetRootName) throws UnknownContainerNameException {
 		this.ssmFactory = spaceSystemModelFactory;
@@ -87,9 +126,57 @@ public class SimulatorSSM implements Runnable {
 			}
 		}
 	}
+	
+	public synchronized BitSet encode(String name, Map<String, Double> fields) throws BitSetOperationException, UnknownContainerNameException {
+		for (Map.Entry<String, Double> entry : fields.entrySet()) {
+			ParameterContainer parameter = ssmFactory.getParameter((String) entry.getKey());
+			if (parameter == null) {
+				throw new UnknownContainerNameException(entry.getKey());
+			} else {
+				parameter.setValue(entry.getValue());
+			}
+		}
+		
+		BitSet packet = new BitSet();
+		ssmFactory.getContainer(name).marshall(packet, 0);
+		return packet;
+	}
+	
+	public void stopSimulator() {
+		run = false;
+	}
 
 	public void run() {
-		System.out.println("Running sim - NOT YET IMPLEMENTED");
+		run = true;
+		
+		while (run) {
+			Map<String, Double> fields = new HashMap<String, Double>();
+			
+			for (Map.Entry<String, Waveform> entry : waveformMap.entrySet()) {
+				fields.put(entry.getKey(), entry.getValue().nextValue());
+			}
+			
+			BitSet encodedPacketAsBitset;
+			try {
+				encodedPacketAsBitset = encode(packetName, fields);
+				template.sendBody(BitSetUtility.toByteArray(encodedPacketAsBitset, encodedPacketAsBitset.length()));
+			} catch (BitSetOperationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnknownContainerNameException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+
+			try {
+				Thread.sleep(messageInterval);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
 	}
 
 }

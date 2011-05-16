@@ -14,6 +14,7 @@ import org.hbird.transport.spacesystemmodel.Container;
  * client to retrieve the available Container names.
  * 
  * @author Mark Doyle
+ * @author Johannes Klug
  */
 public class UnknownContainerNameException extends Exception {
 	private static final long serialVersionUID = 3499163979287233832L;
@@ -50,6 +51,10 @@ public class UnknownContainerNameException extends Exception {
 	public UnknownContainerNameException(Map<String, Container> containers, String message, Throwable cause) {
 		super(message, cause);
 		this.containers = containers;
+	}
+	
+	public UnknownContainerNameException(String name) {
+		super("Requested container not found in Space System Model. Offending contianer name: " + name);
 	}
 
 	public Set<String> getAvailableContainerNames() {
