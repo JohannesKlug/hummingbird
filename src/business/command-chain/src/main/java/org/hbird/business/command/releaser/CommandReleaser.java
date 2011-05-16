@@ -10,10 +10,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.Handler;
 import org.apache.camel.Headers;
-import org.apache.camel.Produce;
-import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultExchange;
-import org.apache.camel.impl.DefaultProducerTemplate;
 import org.apache.log4j.Logger;
 import org.hbird.exchange.commanding.Command;
 import org.hbird.exchange.type.StateParameter;
@@ -59,9 +56,6 @@ public class CommandReleaser {
 	 * assembly using the CommandReleaser must contain such a route. */
 	protected String parameterProvider = "direct:ParameterRequests";
 	
-	// @Produce(uri = "direct:ParameterRequests")
-	// protected ProducerTemplate parameterRequests = null;
-
 	/**
 	 * Processor for the scheduling of validation task for a command as well as the
 	 * release of the command.
@@ -72,13 +66,13 @@ public class CommandReleaser {
 
 		/* Log the release processing. */
 		LOGGER.info("Processing command '" + definition.getName() + "' with ID " + definition.getObjectid() + "'.");
-
+		
 		/* List of exchanges to be send. */
 		List<Object> out = new ArrayList<Object>();
-
+		
 		/* Validate the lock state(s). */
 		for (String state : definition.getLockStates()) {
-
+			
 			/** Send the request. Respond is expected to be a single StateParameter. */
 			Exchange exchange = new DefaultExchange(context, ExchangePattern.InOut);
 			exchange.getIn().setBody(state);
