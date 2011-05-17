@@ -14,9 +14,11 @@ public class CcsdsFrameEncoder {
 
 	private int masterChannelFrameCount = 0;
 	private final int[] virtualChannelFrameCount = new int[8];
-	
-	private int defaultSpacecraftId = 0;
-	private int defaultVirtualChannelId = 0;
+
+	private final int defaultSpacecraftId = 0;
+	private final int defaultVirtualChannelId = 0;
+
+	private byte[] frameBytes;
 
 	public CcsdsFrameEncoder(final int frameLength) {
 		CcsdsFrameEncoder.frameLength = frameLength;
@@ -24,8 +26,9 @@ public class CcsdsFrameEncoder {
 			vcfc = 0;
 		}
 	}
-	
-	public byte[] encodeFrame(final byte[] payload) throws InvalidVirtualChannelIdException, InvalidSpacecraftIdException, InvalidOperationalControlFieldException {
+
+	public byte[] encodeFrame(final byte[] payload) throws InvalidVirtualChannelIdException, InvalidSpacecraftIdException,
+			InvalidOperationalControlFieldException {
 		return encodeFrame(defaultSpacecraftId, defaultVirtualChannelId, payload);
 	}
 
@@ -50,9 +53,8 @@ public class CcsdsFrameEncoder {
 	 * @throws InvalidSpacecraftIdException
 	 * @throws InvalidOperationalControlFieldException
 	 */
-	public byte[] encodeFrame(final int spacecraftId, final int virtualChannelId, final byte[] operationalControlField, final byte[] payload)
+	public synchronized byte[] encodeFrame(final int spacecraftId, final int virtualChannelId, final byte[] operationalControlField, final byte[] payload)
 			throws InvalidVirtualChannelIdException, InvalidSpacecraftIdException, InvalidOperationalControlFieldException {
-		// FIXME make this function synchronised. Really important :-D
 
 		// perform input sanity checks
 
@@ -78,32 +80,30 @@ public class CcsdsFrameEncoder {
 
 		// end input sanity checks
 
-
-		byte[] frame = new byte[frameLength];
-
+		frameBytes = new byte[frameLength];
 
 		byte spacecraftIdHighByte = (byte) ((spacecraftId & 0x3f0) >> 4);
 		byte spacecraftIdLowByte = (byte) ((spacecraftId & 0xF) << 4);
 
 		// set Spacecraft ID
-		frame[0] = spacecraftIdHighByte;
-		frame[1] = spacecraftIdLowByte;
+		frameBytes[0] = spacecraftIdHighByte;
+		frameBytes[1] = spacecraftIdLowByte;
 
 		// set Virtual Channel ID
-		frame[1] = (byte) (((virtualChannelId & 0x7) << 1) ^ frame[1]);
+		frameBytes[1] = (byte) (((virtualChannelId & 0x7) << 1) ^ frameBytes[1]);
 
 		// set Operational Control Field flag
 		// FIXME will this handle null?
 		if (ArrayUtils.isNotEmpty(operationalControlField)) {
-			frame[1] = (byte) (1 ^ frame[1]);
+			frameBytes[1] = (byte) (1 ^ frameBytes[1]);
 		}
 		else {
-			frame[1] = (byte) (0 ^ frame[1]);
+			frameBytes[1] = (byte) (0 ^ frameBytes[1]);
 		}
 
 		// set frame counters
-		frame[2] = (byte) (masterChannelFrameCount & 0xFF);
-		frame[3] = (byte) (virtualChannelFrameCount[virtualChannelId] & 0xFF);
+		frameBytes[2] = (byte) (masterChannelFrameCount & 0xFF);
+		frameBytes[3] = (byte) (virtualChannelFrameCount[virtualChannelId] & 0xFF);
 
 		// Transfer Frame Data Field Status
 		/*
@@ -115,6 +115,26 @@ public class CcsdsFrameEncoder {
 		masterChannelFrameCount = (masterChannelFrameCount + 1) % 256;
 		virtualChannelFrameCount[virtualChannelId] = (virtualChannelFrameCount[virtualChannelId] + 1) % 256;
 
-		return frame;
+		// FIXME add Transfer Frame Data Status field (bytes 4 and 5)
+
+		// FIXME unit test this.
+		// This adds the frame payload
+
+		if (payload == null) {
+			addPayload(new byte[0]);
+		}
+		else {
+			addPayload(payload);
+		}
+
+		return frameBytes;
+	}
+
+	private void addPayload(final byte[] payload) {
+		int payloadPosition = 6;
+		for (byte b : payload) {
+			frameBytes[payloadPosition] = b;
+			payloadPosition++;
+		}
 	}
 }
