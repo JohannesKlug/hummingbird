@@ -37,19 +37,9 @@ public class SimulatorSSM {
 	Container packetRoot;
 	Map<String, ParameterContainer> allParams;
 
-	private String packetName;
-
 	private Map<String, Waveform> waveformMap;
 
 	private long messageInterval = 1000;
-
-	public String getPacketName() {
-		return packetName;
-	}
-
-	public void setPacketName(final String packetName) {
-		this.packetName = packetName;
-	}
 
 	public Map<String, Waveform> getWaveformMap() {
 		return waveformMap;
@@ -150,8 +140,8 @@ public class SimulatorSSM {
 
 		BitSet encodedPacketAsBitset;
 		try {
-			encodedPacketAsBitset = encode(packetName, fields);
-			template.sendBody(BitSetUtility.toByteArray(encodedPacketAsBitset, encodedPacketAsBitset.length()));
+			encodedPacketAsBitset = encode(packetRoot.getName(), fields);
+			template.sendBody(BitSetUtility.toByteArray(encodedPacketAsBitset, encodedPacketAsBitset.size()));
 		}
 		catch (BitSetOperationException e) {
 			// TODO Auto-generated catch block
