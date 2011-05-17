@@ -26,9 +26,9 @@ import org.hbird.transport.spacesystemmodel.parameters.ParameterContainer;
  */
 public class SimulatorSSM {
 
-	@EndpointInject(uri="direct:simMessages")
+	@EndpointInject(uri = "direct:simMessages")
 	ProducerTemplate template;
-	
+
 	/** Root packet {@link Container} name */
 	private static String packetHeaderAlias;
 
@@ -36,18 +36,18 @@ public class SimulatorSSM {
 	ContainerFactory ssmFactory;
 	Container packetRoot;
 	Map<String, ParameterContainer> allParams;
-	
+
 	private String packetName;
-	
-	private Map<String,Waveform> waveformMap;
-	
+
+	private Map<String, Waveform> waveformMap;
+
 	private long messageInterval = 1000;
-	
+
 	public String getPacketName() {
 		return packetName;
 	}
 
-	public void setPacketName(String packetName) {
+	public void setPacketName(final String packetName) {
 		this.packetName = packetName;
 	}
 
@@ -55,15 +55,15 @@ public class SimulatorSSM {
 		return waveformMap;
 	}
 
-	public void setWaveformMap(Map<String, Waveform> waveformMap) {
+	public void setWaveformMap(final Map<String, Waveform> waveformMap) {
 		this.waveformMap = waveformMap;
 	}
 
-	public void setMessageInterval(long messageInterval) {
+	public void setMessageInterval(final long messageInterval) {
 		this.messageInterval = messageInterval;
 	}
 
-	public SimulatorSSM(ContainerFactory spaceSystemModelFactory, String packetRootName) throws UnknownContainerNameException {
+	public SimulatorSSM(final ContainerFactory spaceSystemModelFactory, final String packetRootName) throws UnknownContainerNameException {
 		this.ssmFactory = spaceSystemModelFactory;
 		this.packetRoot = ssmFactory.getContainer(packetRootName);
 		this.allParams = ssmFactory.getAllParameters();
@@ -74,14 +74,14 @@ public class SimulatorSSM {
 	}
 
 	/**
-	 * Returns the Telemetry sections. These are the abstract containers that group related parameters together.
+	 * Returns the Telemetry container sets. These are the abstract containers that group related parameters together.
 	 * 
 	 * @param packetNode
 	 * @param sections
 	 * @return
 	 * @throws UnknownContainerNameException
 	 */
-	public final List<Container> getAllPacketSections(String packetNode, List<Container> sections) throws UnknownContainerNameException {
+	public final List<Container> getAllPacketSections(final String packetNode, final List<Container> sections) throws UnknownContainerNameException {
 		Container packetSection = this.ssmFactory.getContainer(packetNode);
 
 		if (!(packetSection instanceof ParameterContainer)) {
@@ -124,41 +124,44 @@ public class SimulatorSSM {
 			}
 		}
 	}
-	
-	public synchronized BitSet encode(String name, Map<String, Double> fields) throws BitSetOperationException, UnknownContainerNameException {
+
+	public synchronized BitSet encode(final String name, final Map<String, Double> fields) throws BitSetOperationException, UnknownContainerNameException {
 		for (Map.Entry<String, Double> entry : fields.entrySet()) {
-			ParameterContainer parameter = ssmFactory.getParameter((String) entry.getKey());
+			ParameterContainer parameter = ssmFactory.getParameter(entry.getKey());
 			if (parameter == null) {
 				throw new UnknownContainerNameException(entry.getKey());
-			} else {
+			}
+			else {
 				parameter.setValue(entry.getValue());
 			}
 		}
-		
+
 		BitSet packet = new BitSet();
 		ssmFactory.getContainer(name).marshall(packet, 0);
 		return packet;
 	}
-	
+
 	public void generateMessage() {
 		Map<String, Double> fields = new HashMap<String, Double>();
-		
+
 		for (Map.Entry<String, Waveform> entry : waveformMap.entrySet()) {
 			fields.put(entry.getKey(), entry.getValue().nextValue());
 		}
-		
+
 		BitSet encodedPacketAsBitset;
 		try {
 			encodedPacketAsBitset = encode(packetName, fields);
 			template.sendBody(BitSetUtility.toByteArray(encodedPacketAsBitset, encodedPacketAsBitset.length()));
-		} catch (BitSetOperationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnknownContainerNameException e) {
+		}
+		catch (BitSetOperationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			
+		catch (UnknownContainerNameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }
