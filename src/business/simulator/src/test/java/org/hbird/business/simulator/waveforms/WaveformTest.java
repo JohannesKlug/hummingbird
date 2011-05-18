@@ -38,4 +38,35 @@ public class WaveformTest {
 
 	}
 
+	@Test
+	public void sineWaveformTest() {
+		/*
+		 * Using values: A = 1, w = 0.5, p = 0
+		 * 
+		 * i.e. 1 * sin(x*0.5 + 0)
+		 */
+		Waveform sine = new SineWaveform(1, 0.5, 0);
+
+		double expected[] = { 0, 0.4794, 0.8415, 0.9975, 0.9093, 0.5985, 0.1411, -0.3508, -0.7568, -0.9775 };
+
+		for (int i = 0; i < 10; i++) {
+			assertEquals(expected[i], sine.nextValue(), 0.0001);
+		}
+
+	}
+
+	@Test
+	public void sineWaveformMoreExoticValuesTest() {
+		/*
+		 * Using values: A = 9, w = 0.0, p = 10
+		 * 
+		 * i.e. 9 * sin(x*0.1 + 10)
+		 */
+		Waveform sine = new SineWaveform(9, 0.1, 10);
+		double expected[] = { -4.8962, -5.6256, -6.2989, -6.9092, -7.4504, -7.9173, -8.305, -8.6097, -8.8284, -8.9589 };
+
+		for (int i = 0; i < 10; i++) {
+			assertEquals(expected[i], sine.nextValue(), 0.0001);
+		}
+	}
 }
