@@ -26,7 +26,7 @@ import org.hbird.transport.spacesystemmodel.parameters.ParameterContainer;
  */
 public class SimulatorSSM {
 
-	@EndpointInject(uri = "direct:simMessages")
+	@EndpointInject(uri = "seda:simMessages")
 	ProducerTemplate template;
 
 	/** Root packet {@link Container} name */
