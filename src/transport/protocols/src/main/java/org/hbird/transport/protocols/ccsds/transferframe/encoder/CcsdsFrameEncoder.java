@@ -115,6 +115,17 @@ public class CcsdsFrameEncoder {
 		masterChannelFrameCount = (masterChannelFrameCount + 1) % 256;
 		virtualChannelFrameCount[virtualChannelId] = (virtualChannelFrameCount[virtualChannelId] + 1) % 256;
 
+		// Transfer Frame Data Field Status (bytes 4 and 5)
+		// 1 bit Secondary Header Flag (0, not supported yet)
+		// 1 bit Synch Flag (0 for packet and idle data)
+		// 1 bit Packet Order Flag (0 for packet and idle data)
+		// 2 bit Segment Length Identifier (11 for packet and idle data)
+		// 11 bit First Header Pointer (0, larger payloads not yet supported.
+		
+		frameBytes[4] = (byte) (0x18 & 0xFF);
+		frameBytes[5] = (byte) 0;
+		
+		
 		// FIXME add Transfer Frame Data Status field (bytes 4 and 5)
 
 		// FIXME unit test this.

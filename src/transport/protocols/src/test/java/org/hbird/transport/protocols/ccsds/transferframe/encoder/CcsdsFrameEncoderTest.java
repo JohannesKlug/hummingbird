@@ -157,4 +157,9 @@ public class CcsdsFrameEncoderTest {
 		assertEquals(0, actual[3] & 0xFF);
 	}
 
+	@Test
+	public void segmentLengthIdentifier() throws Exception {
+		actual = encoder.encodeFrame(0, 0, null);
+		assertEquals(0x18, actual[4] & 0x18 & 0xFF);
+	}
 }
