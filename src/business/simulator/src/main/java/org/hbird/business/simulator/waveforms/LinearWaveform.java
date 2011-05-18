@@ -1,6 +1,6 @@
 package org.hbird.business.simulator.waveforms;
 
-public class LinearWaveform extends WaveformImpl {
+public class LinearWaveform extends AbstractWaveform {
 	
 	private Double fromValue = 0d;
 	private Double increment = 0d;

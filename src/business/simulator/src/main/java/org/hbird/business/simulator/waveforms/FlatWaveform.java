@@ -1,6 +1,6 @@
 package org.hbird.business.simulator.waveforms;
 
-public class FlatWaveform extends WaveformImpl {
+public class FlatWaveform extends AbstractWaveform {
 
 	private final double value;
 
