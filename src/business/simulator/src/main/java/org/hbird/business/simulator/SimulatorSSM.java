@@ -153,5 +153,9 @@ public class SimulatorSSM {
 		}
 
 	}
-
+	
+	//Setter is needed only for the Humsat-integrationtest of the Transport Tier.  
+	public void setTemplate(ProducerTemplate template) {
+		this.template = template;
+	}
 }
