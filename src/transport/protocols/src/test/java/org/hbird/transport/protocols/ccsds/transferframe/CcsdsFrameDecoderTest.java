@@ -34,7 +34,7 @@ public class CcsdsFrameDecoderTest extends CamelTestSupport {
 		assertNotNull(resultEndpoint);
 		byte[] encodedFrame = new byte[20];
 		try {
-			encodedFrame = frameEncoder.encodeFrame(1023, 7, new byte[0]);
+			encodedFrame = frameEncoder.encodeFrames(1023, 7, new byte[0]);
 		} catch (InvalidVirtualChannelIdException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
