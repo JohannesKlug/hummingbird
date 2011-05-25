@@ -18,9 +18,18 @@ public class SineWaveform extends AbstractWaveform {
 	double angularFrequency;
 	int phase;
 	long time = 0;
+	double yIntercept = 0;
 
 	double startValue = 0;
 
+	public SineWaveform(final long amplitude, final double angularFrequency, final int phase, final double yIntercept) {
+		super(1);
+		this.amplitude = amplitude;
+		this.angularFrequency = angularFrequency;
+		this.phase = phase;
+		this.yIntercept = yIntercept;
+	}
+	
 	public SineWaveform(final long amplitude, final double angularFrequency, final int phase) {
 		super(1);
 		this.amplitude = amplitude;
@@ -29,7 +38,7 @@ public class SineWaveform extends AbstractWaveform {
 	}
 
 	public double nextValue() {
-		double currentValue = amplitude * Math.sin(time * angularFrequency + phase);
+		double currentValue = amplitude * Math.sin(time * angularFrequency + phase) + yIntercept;
 		time++;
 		return currentValue;
 	}
