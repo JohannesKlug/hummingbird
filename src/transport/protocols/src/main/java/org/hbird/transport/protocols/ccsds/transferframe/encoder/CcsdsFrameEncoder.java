@@ -23,7 +23,7 @@ public class CcsdsFrameEncoder {
 
 	public CcsdsFrameEncoder(final int frameLength) {
 		this.frameLength = frameLength;
-		for (int vcfc : virtualChannelFrameCount) {
+		for (@SuppressWarnings("unused") int vcfc : virtualChannelFrameCount) {
 			vcfc = 0;
 		}
 	}

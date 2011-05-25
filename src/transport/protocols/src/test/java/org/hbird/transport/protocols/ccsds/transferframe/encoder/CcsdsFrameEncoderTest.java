@@ -166,8 +166,59 @@ public class CcsdsFrameEncoderTest {
 	}
 	
 	@Test
+	public void payloadNull() throws Exception {
+		actual = encoder.encodeFrames(null);
+		assertEquals(1, actual.size());
+	}
+	
+	@Test
+	public void payloadEmpty() throws Exception {
+		actual = encoder.encodeFrames(new byte[0]);
+		assertEquals(1, actual.size());
+	}
+	
+	@Test
+	public void payloadContentsSingleByte() throws Exception {
+		byte[] payload = new byte[1];
+		payload[0] = (byte) 0xFF;
+		
+		actual = encoder.encodeFrames(payload);
+		assertEquals(0xFF, actual.get(0)[6] & 0xFF);
+		assertEquals(0x00, actual.get(0)[7] & 0xFF);
+	}
+	
+	@Test
+	public void payloadContentsTwoBytes() throws Exception {
+		byte[] payload = new byte[2];
+		payload[0] = (byte) 0xFF;
+		payload[1] = (byte) 0xFF;
+		
+		actual = encoder.encodeFrames(payload);
+		assertEquals(0xFF, actual.get(0)[6] & 0xFF);
+		assertEquals(0xFF, actual.get(0)[7] & 0xFF);
+		assertEquals(0x00, actual.get(0)[8] & 0xFF);
+	}
+	
+	@Test
+	public void payloadContentsTwoBytesInTwoFrames() throws Exception {
+		byte[] payload = new byte[95];
+		payload[0] = (byte) 0xFF;
+		payload[94] = (byte) 0xFF;
+		
+		actual = encoder.encodeFrames(payload);
+		assertEquals(0xFF, actual.get(0)[6] & 0xFF);
+		assertEquals(0x00, actual.get(0)[7] & 0xFF);
+		
+		assertEquals(0xFF, actual.get(1)[6] & 0xFF);
+		assertEquals(0x00, actual.get(1)[7] & 0xFF);
+	}
+	
+	@Test
 	public void largePayload() throws Exception {
-		actual = encoder.encodeFrames(new byte[400]);
-		assertEquals(5, actual.size());
+		// This encodes 940000 bytes as the payload. 
+		// At a frame length of 100, there are 94 bytes payload capacity.
+		// Hence, there must be 10000 frames resulting from this input.
+		actual = encoder.encodeFrames(new byte[940000]);
+		assertEquals(10000, actual.size());
 	}
 }
