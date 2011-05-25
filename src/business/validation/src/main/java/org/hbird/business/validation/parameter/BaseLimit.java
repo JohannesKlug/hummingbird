@@ -59,8 +59,8 @@ public abstract class BaseLimit extends StateParameter {
 	/** The limit value to be checked against. */
 	protected Parameter limit = null;
 	
-	/** The last received parameter value. Is stored locally so that updates to the limit value and / or
-	 * enabling of the limit can immediately lead to a limit check and issue of a state value. */
+	/** The last received parameter value. It is stored locally so that updates to the limit value and/or
+	 * enabling the limit can immediately lead to a limit check and issue of a state value. */
 	protected Parameter parameter = null;
 	
 	/**

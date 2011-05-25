@@ -20,7 +20,7 @@ import org.hbird.exchange.type.Comperator;
 import org.hbird.exchange.type.Parameter;
 
 /**
- * Limit class for checking whether a lower end limit has been violated.
+ * Limit class for checking whether an upper end limit has been violated.
  */
 public class UpperLimit extends BaseLimit {
 
