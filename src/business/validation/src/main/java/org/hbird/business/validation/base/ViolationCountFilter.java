@@ -74,7 +74,7 @@ public class ViolationCountFilter {
 				/** Continue route... */
 			}
 			else {
-				logger.info("State change filtered out as number of violtions (" + violations + ") is below trigger limit (" + triggerLimit + ").");
+				logger.info("State change filtered out as number of violations (" + violations + ") is below trigger limit (" + triggerLimit + ").");
 				exchange.setProperty(Exchange.ROUTE_STOP, true);
 			}
 		}
