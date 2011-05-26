@@ -97,7 +97,7 @@ public class HummingbirdCamelPacketBrokerParameterOutput extends HummingbirdPack
 		final Map<String, Object> headers = new HashMap<String, Object>();
 		headers.put("type", "TMParameter");
 		headers.put("timestamp", System.currentTimeMillis());
-		headers.put("name", parameter.getName().toLowerCase().replace("_", " "));
+		headers.put("name", parameter.getName());
 		
 		Parameter newParameter = new Parameter(
 				parameter.getName(),
