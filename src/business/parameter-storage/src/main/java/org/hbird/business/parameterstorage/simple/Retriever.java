@@ -42,14 +42,15 @@ public class Retriever {
 	@Autowired
 	private CamelContext context = null;
 
-	/*
+	/**
 	 * Constructor. Extracts the connection to the database from
 	 * the DataSource.
 	 * 
-	 * IN-param:
-	 *   dataSource  -> The database to retrieve the parameters from.
-	 *   destination -> Name of the destination to send the retrieved 
-	 *   				parameters to, e.g. 'activemq:queue:replay'.
+	 * @param dataSource
+	 * 			The database to retrieve the parameters from.
+	 * @param destination
+	 * 			Name of the destination to send the retrieved 
+	 *   		parameters to, e.g. 'activemq:queue:replay'.
 	 */
 	public Retriever(DataSource dataSource, String destination) {
 		template = new JdbcTemplate(dataSource);
@@ -57,16 +58,16 @@ public class Retriever {
 		this.destination = destination;
 	}
 
-	/*
-	 * Method to fetch the parameters from the database and send them to a 
-	 * specified destination.
-	 * 
-	 * IN-param:  
-	 *	 sqlQuery -> (Is automatically extracted from body) 
-	 * 				 There are two possible input strings:
-	 * 				 1. 'parameter_name;start_timestamp;end_timestamp' (will restore the 
-	 *				 named parameters which have a timestamp between 'start_timestamp' and 'end_timestamp'
-	 * 				 2. 'parameter_name' (will restore all parameters with the given name)
+	/**
+	 * 	Method to fetch the parameters from the database and send them to a 
+	 *  specified destination.
+	 * @param retrieverCommand
+	 * 			(Is automatically extracted from body) 
+	 * 			There are two possible input strings:
+	 * 			1. 'parameter_name;start_timestamp;end_timestamp' (will restore the 
+	 *			named parameters which have a timestamp between 'start_timestamp' and 'end_timestamp'
+	 * 			2. 'parameter_name' (will restore all parameters with the given name)
+	 * @throws IOException
 	 */
 	final public void fetchParameters(@Body String retrieverCommand) throws IOException {
 		final int TIMESTAMP_OVERLAPPING = 1000;
@@ -121,13 +122,14 @@ public class Retriever {
 		processResults(result);
 	}
 
-	/*
+	/**
 	 * Runs through the results, and creates and sends a message
 	 * for every row in the dataset. 
-	 * IN-param
-	 *   result -> The List that contains all the stored parameters that
-	 * 			   are restored and shall be send to a queue/topic.
-	 */ 
+	 * 
+	 * @param result
+	 * 			The List that contains all the stored parameters that
+	 * 			are restored and shall be send to a queue/topic.
+	 */
 	private void processResults(List<Map<String,Object>> result) {
 		Exchange exchange;
 		

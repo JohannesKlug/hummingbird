@@ -26,26 +26,28 @@ public class Archiver {
 	
 	private JdbcTemplate template = null;
 
-	/*
+	/**
 	 * The Constructor
 	 * 
-	 * IN-param: 
-	 *   database -> The database to store the parameters in.
+	 * @param database
+	 * 			The database to store the parameters in.
 	 */
 	public Archiver(DataSource database) {
 		template = new JdbcTemplate(database);
 	}
 
-	/*
+	/**
 	 * Stores the submitted parameter in the database. 
 	 * 
-	 * IN-param: 
-	 *   name          -> (Is automatically extracted from header)
-	 * 		              Name of the parameter, e.g. 'Elevation'. 
-	 *   timestamp     -> (Is automatically extracted from header) 
-	 *                    Timestamp set by the satellite, e.g. '1302558974895'.
-	 *   parameterBody -> (Is automatically extracted from Body) 
-	 *    	              Value of the parameter, e.g. an XML string. 
+	 * @param name
+	 * 			(Is automatically extracted from header)
+	 *			Name of the parameter, e.g. 'Elevation'. 
+	 * @param timestamp
+	 * 			(Is automatically extracted from header) 
+	 *          Timestamp set by the satellite, e.g. '1302558974895'.
+	 * @param body
+	 * 			(Is automatically extracted from Body) 
+	 *    	    Value of the parameter, e.g. an XML string. 
 	 */
 	public void store(@Header("name") String name,
 			@Header("timestamp") Long timestamp,
