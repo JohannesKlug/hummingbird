@@ -17,7 +17,7 @@ import org.orekit.time.TimeScalesFactory;
  * Callback class of the orekit propagator. The propagator will call the 
  * 'handleStep' method on this object at intervals, providing the next orbital state.
  * This class transforms the orbital state provided by orekit into a generic
- * type, and parses it to the 'direct:OrbitPredictions' route. This route must be
+ * type, and parses it to the 'seda:OrbitPredictions' route. This route must be
  * configured as part of the system.
  */
 public class OrbitalStateInjector implements OrekitFixedStepHandler {
@@ -68,7 +68,7 @@ public class OrbitalStateInjector implements OrekitFixedStepHandler {
 			/** Send the orbital state on the response stream. */
 			Exchange exchange = new DefaultExchange(context);
 			exchange.getIn().setBody(state);
-			producer.send("direct:OrbitPredictions", exchange);
+			producer.send("seda:OrbitPredictions", exchange);
 
 		} catch (OrekitException e) {
 			e.printStackTrace();

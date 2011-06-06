@@ -66,7 +66,7 @@ public class LocationContactEventInjector extends ElevationDetector {
 		/** Create orbital event and send it on the response stream. */
 		Exchange exchange = new DefaultExchange(context);
 		exchange.getIn().setBody(new LocationContactEvent("Visibility", "", s.getDate().toDate(TimeScalesFactory.getUTC()).getTime(), datasetidentifier, location, satellite, increasing));
-		producer.send("direct:OrbitPredictions", exchange);		
+		producer.send("seda:OrbitPredictions", exchange);		
 
 		/** Continue listening for events. */
 		return CONTINUE;

@@ -22,7 +22,7 @@
 		</route>
 
 		<route>
-			<from uri="direct:OrbitPredictions" />
+			<from uri="seda:OrbitPredictions" />
 			<to uri="mock:End" />
 		</route>
 		
