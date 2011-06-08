@@ -43,7 +43,7 @@
 		<activemq.version>5.5.0</activemq.version>
 		<mysqlconnector.version>5.1.10</mysqlconnector.version>
 		<jencks.version>2.2</jencks.version>
-		<slf4j.version>1.6.1</slf4j.version>
+		<slf4j.version>1.5.11</slf4j.version> <!-- ActiveMQ 5.5.0 depends on SLF4J 1.5.11 - update our version number only when ActiveMQ update theirs! -->
 		<docgenerator.version>0.0.7</docgenerator.version>
 		<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
