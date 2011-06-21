@@ -27,6 +27,7 @@
     <module>parameter-storage</module>
     <module>time-correlation</module>
     <module>system-monitoring</module>
+    <module>analysis</module>
   </modules>
 
 </project>

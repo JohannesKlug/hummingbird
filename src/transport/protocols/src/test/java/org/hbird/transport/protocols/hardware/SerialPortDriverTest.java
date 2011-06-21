@@ -1,14 +1,12 @@
 package org.hbird.transport.protocols.hardware;
 
-import gnu.io.NoSuchPortException;
-
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 public class SerialPortDriverTest {
 
-	private SerialPortDriver driver;
+	//private SerialPortDriver driver;
 
 	@Before
 	public void setUp() throws Exception {

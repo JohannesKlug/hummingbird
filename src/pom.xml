@@ -39,12 +39,11 @@
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<junit.version>4.8.2</junit.version>
 		<castor.version>1.3.1</castor.version>
-		<camel.version>2.7.0</camel.version>
-		<activemq.version>5.4.2</activemq.version>
+		<camel.version>2.7.2</camel.version>
+		<activemq.version>5.5.0</activemq.version>
 		<mysqlconnector.version>5.1.10</mysqlconnector.version>
 		<jencks.version>2.2</jencks.version>
-		<commonslogging.version>1.1.1</commonslogging.version>
-		<slf4j.version>1.6.1</slf4j.version>
+		<slf4j.version>1.5.11</slf4j.version> <!-- ActiveMQ 5.5.0 depends on SLF4J 1.5.11 - update our version number only when ActiveMQ update theirs! -->
 		<docgenerator.version>0.0.7</docgenerator.version>
 		<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -279,12 +278,6 @@
 				<groupId>log4j</groupId>
 				<artifactId>log4j</artifactId>
 				<version>${log4j.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>commons-logging</groupId>
-				<artifactId>commons-logging</artifactId>
-				<version>${commonslogging.version}</version>
 			</dependency>
 
 		</dependencies>
