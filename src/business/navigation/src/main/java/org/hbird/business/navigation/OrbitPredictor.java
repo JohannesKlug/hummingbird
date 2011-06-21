@@ -34,8 +34,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class OrbitPredictor {
 
-	/** FIXME I dont what this does but OREKIT needs it...*/
-	protected double maxcheck  = 1.;
+	/** FIXME I don't know what this does but OREKIT needs it...*/
+	protected double maxcheck = 1.;
 
 	/** gravitation coefficient */
 	protected Double mu = 3.986004415e+14; 
@@ -66,8 +66,8 @@ public class OrbitPredictor {
 	@Handler
 	public void process(@Body OrbitPredictionRequest request) throws OrekitException {
 			// Inertial frame			
-			Vector3D position  = new Vector3D((Double) request.position.p1.getValue(), (Double) request.position.p2.getValue(), (Double) request.position.p3.getValue());
-			Vector3D velocity  = new Vector3D((Double) request.velocity.p1.getValue(), (Double) request.velocity.p2.getValue(), (Double) request.velocity.p3.getValue());
+			Vector3D position = new Vector3D((Double) request.position.p1.getValue(), (Double) request.position.p2.getValue(), (Double) request.position.p3.getValue());
+			Vector3D velocity = new Vector3D((Double) request.velocity.p1.getValue(), (Double) request.velocity.p2.getValue(), (Double) request.velocity.p3.getValue());
 			PVCoordinates pvCoordinates = new PVCoordinates(position, velocity);
 
 			AbsoluteDate initialDate = new AbsoluteDate(new Date(request.starttime), TimeScalesFactory.getUTC());
@@ -91,7 +91,7 @@ public class OrbitPredictor {
 					TopocentricFrame sta1Frame = new TopocentricFrame(earth, point, location.getName());
 
 					/** Register the injector that will send the detected events, for this location, to the propagator. */
-					EventDetector sta1Visi = new LocationContactEventInjector(maxcheck, location.getThresholdElevation(), sta1Frame, request.satelitte, location, datasetidentifier, context, producer);
+					EventDetector sta1Visi = new LocationContactEventInjector(maxcheck, location.getThresholdElevation(), sta1Frame, request.satellite, location, datasetidentifier, context, producer);
 					propagator.addEventDetector(sta1Visi);				
 				}
 			}

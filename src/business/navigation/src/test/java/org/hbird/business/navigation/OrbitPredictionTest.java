@@ -66,19 +66,17 @@ public class OrbitPredictionTest extends AbstractJUnit38SpringContextTests  {
 		/** Create request. Predicts for 1 hour at 60 seconds intervals.  */
 		OrbitPredictionRequest request = new OrbitPredictionRequest("Test", satellite, position, velocity, 1301584739097l /** 31.03.2011 17:19 */, locations);
 		
-		
 		/** Predict for 24 hours. */
 		request.deltaPropagation = 3600 * 24;
 
 		/** Create exchange and send it. */
 		Exchange exchange = new DefaultExchange(context);
-		exchange = new DefaultExchange(context);
 		exchange.getIn().setBody(request);
 				
 		template.send(exchange);
 		
-		/** Wait until the expected number of messages is received, but max 10 seconds. */
-		for(int i = 10; i < 5120 && consumerQueue.getReceivedCounter() < 1480; i*=2)
+		/** Wait until the expected number of messages is received, but max 8 seconds. */
+		for(int i = 8; i < 8192 && consumerQueue.getReceivedCounter() < 1480; i*=2)
 		{
 			try {Thread.sleep(i);}
 			catch (InterruptedException e) {e.printStackTrace();}
