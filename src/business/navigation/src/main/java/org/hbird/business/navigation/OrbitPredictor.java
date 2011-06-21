@@ -64,7 +64,7 @@ public class OrbitPredictor {
 	/** The exchange must contain a OrbitalState object as the in-body. 
 	 * @throws OrekitException */
 	@Handler
-	public void process(@Body OrbitPredictionRequest request) throws OrekitException {
+	public void predictOrbit(@Body OrbitPredictionRequest request) throws OrekitException {
 			// Inertial frame			
 			Vector3D position = new Vector3D((Double) request.position.p1.getValue(), (Double) request.position.p2.getValue(), (Double) request.position.p3.getValue());
 			Vector3D velocity = new Vector3D((Double) request.velocity.p1.getValue(), (Double) request.velocity.p2.getValue(), (Double) request.velocity.p3.getValue());
