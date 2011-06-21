@@ -53,7 +53,7 @@ public class OrbitPredictionRequest implements Serializable {
 	 */
 	public OrbitPredictionRequest(String name, Satellite satellite, D3Vector position, D3Vector velocity, Long starttime, List<Location> locations) {
 		this.name = name;
-		this.satelitte = satellite;
+		this.satellite = satellite;
 		this.position = position;
 		this.velocity = velocity;
 		this.starttime = starttime;
@@ -70,7 +70,7 @@ public class OrbitPredictionRequest implements Serializable {
 	 */
 	public OrbitPredictionRequest(String name, Satellite satellite, OrbitalState state, List<Location> locations) {
 		this.name = name;
-		this.satelitte = satellite;
+		this.satellite = satellite;
 		this.position = state.position;
 		this.velocity = state.velocity;
 		this.starttime = (new Date()).getTime();
@@ -80,7 +80,7 @@ public class OrbitPredictionRequest implements Serializable {
 	/**
 	 * The satellite for which the provider should provide predictions.  
 	 * */
-	public Satellite satelitte = null;
+	public Satellite satellite = null;
 	
 	/** The current position of the satellite, from which the orbit prediction shall be made. The
 	 *  location may be null, in which case the provider shall take the current position of the
@@ -96,7 +96,7 @@ public class OrbitPredictionRequest implements Serializable {
 	 *  provider shall take the current time. */
 	public Long starttime = null;
 	
-	/** The time interval (s) from the starttime that the orbit shall be propagated. Default is 2 hours. */
+	/** The time interval (s) from the start time that the orbit shall be propagated. Default is 2 hours. */
 	public double deltaPropagation = 2 * 60 * 60 * 1000;
 	
 	/** The time (s) between each orbital state. The number of orbital state objects created will
