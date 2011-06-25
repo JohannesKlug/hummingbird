@@ -8,9 +8,9 @@ package org.hbird.transport.packetbroker;
 import java.util.BitSet;
 
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
-import org.hbird.transport.spacesystemmodel.Container;
-import org.hbird.transport.spacesystemmodel.ContainerFactory;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.transport.spacesystemmodel.ParameterGroup;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.telemetry.HummingbirdPacket;
 
 /**
@@ -30,10 +30,10 @@ public interface PacketBroker {
 	 *            The name of the container as registered within the container factory.
 	 * @param data
 	 *            The data stream from which the data shall be extracted.
-	 * @throws UnknownContainerNameException
+	 * @throws UnknownParameterGroupException
 	 * 
 	 */
-	void unmarshall(String container, BitSet data) throws UnknownContainerNameException;
+	void unmarshall(String container, BitSet data) throws UnknownParameterGroupException;
 
 	/**
 	 * Marshalls the container identified through the container parameter name into the BitSet.
@@ -42,11 +42,11 @@ public interface PacketBroker {
 	 *            The name of the container as registered within the container factory.
 	 * @param data
 	 *            The data stream into which the data shall be marshalled.
-	 * @throws UnknownContainerNameException
+	 * @throws UnknownParameterGroupException
 	 * @throws BitSetOperationException
 	 * 
 	 */
-	void marshall(String container, BitSet data) throws UnknownContainerNameException, BitSetOperationException;
+	void marshall(String container, BitSet data) throws UnknownParameterGroupException, BitSetOperationException;
 
 	/**
 	 * Marshalls the container identified through the container parameter name into into the String using the container.
@@ -55,25 +55,25 @@ public interface PacketBroker {
 	 *            The name of the container as registered within the container factory.
 	 * @param String
 	 *            The data stream from which the data shall be extracted.
-	 * @throws UnknownContainerNameException
+	 * @throws UnknownParameterGroupException
 	 * 
 	 */
-	void marshall(String container, String data) throws UnknownContainerNameException;
+	void marshall(String container, String data) throws UnknownParameterGroupException;
 
 	/**
 	 * Returns a container reference.
 	 * 
 	 * @param container
 	 *            Identifier of the container.
-	 * @throws UnknownContainerNameException
+	 * @throws UnknownParameterGroupException
 	 * @throws Exception
 	 * 
 	 */
-	Container getContainer(String container) throws UnknownContainerNameException;
+	ParameterGroup getContainer(String container) throws UnknownParameterGroupException;
 
 	HummingbirdPacket getPacket();
 
-	ContainerFactory getFactory();
+	SpaceSystemModelFactory getFactory();
 
-	void setFactory(ContainerFactory factory);
+	void setFactory(SpaceSystemModelFactory factory);
 }

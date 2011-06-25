@@ -3,7 +3,7 @@
  * the License at http://www.apache.org/licenses/LICENSE-2.0 or at this project's root.
  */
 
-package org.hbird.transport.spacesystemmodel;
+package org.hbird.transport.spacesystemmodel.parameters;
 
 public interface ParameterObserver {
 	public void updated(String field, int value, String shortDescription, String longDescription);

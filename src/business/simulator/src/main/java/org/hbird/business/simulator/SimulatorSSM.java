@@ -11,11 +11,11 @@ import org.apache.camel.ProducerTemplate;
 import org.hbird.business.simulator.waveforms.Waveform;
 import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
-import org.hbird.transport.spacesystemmodel.Container;
-import org.hbird.transport.spacesystemmodel.ContainerFactory;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.transport.spacesystemmodel.ParameterGroup;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.parameters.ParameterContainer;
+import org.hbird.transport.spacesystemmodel.parameters.DefaultParameter;
 
 /**
  * CCSDS Space System model defined telemetry simulator. Acronyms used: SSM = Space System Model
@@ -29,13 +29,13 @@ public class SimulatorSSM {
 	@EndpointInject(uri = "seda:simMessages")
 	ProducerTemplate template;
 
-	/** Root packet {@link Container} name */
+	/** Root packet {@link ParameterGroup} name */
 	private static String packetHeaderAlias;
 
 	/** Factory producing the SSM */
-	ContainerFactory ssmFactory;
-	Container packetRoot;
-	Map<String, ParameterContainer> allParams;
+	SpaceSystemModelFactory ssmFactory;
+	ParameterGroup packetRoot;
+	Map<String, DefaultParameter> allParams;
 
 	private Map<String, Waveform> waveformMap;
 
@@ -53,13 +53,13 @@ public class SimulatorSSM {
 		this.messageInterval = messageInterval;
 	}
 
-	public SimulatorSSM(final ContainerFactory spaceSystemModelFactory, final String packetRootName) throws UnknownContainerNameException {
+	public SimulatorSSM(final SpaceSystemModelFactory spaceSystemModelFactory, final String packetRootName) throws UnknownParameterGroupException {
 		this.ssmFactory = spaceSystemModelFactory;
-		this.packetRoot = ssmFactory.getContainer(packetRootName);
+		this.packetRoot = ssmFactory.getParameterGroup(packetRootName);
 		this.allParams = ssmFactory.getAllParameters();
 	}
 
-	public final Collection<ParameterContainer> getAllParameters() {
+	public final Collection<DefaultParameter> getAllParameters() {
 		return this.ssmFactory.getAllParameters().values();
 	}
 
@@ -69,16 +69,16 @@ public class SimulatorSSM {
 	 * @param packetNode
 	 * @param sections
 	 * @return
-	 * @throws UnknownContainerNameException
+	 * @throws UnknownParameterGroupException
 	 */
-	public final List<Container> getAllPacketSections(final String packetNode, final List<Container> sections) throws UnknownContainerNameException {
-		Container packetSection = this.ssmFactory.getContainer(packetNode);
+	public final List<ParameterGroup> getAllPacketSections(final String packetNode, final List<ParameterGroup> sections) throws UnknownParameterGroupException {
+		ParameterGroup packetSection = this.ssmFactory.getParameterGroup(packetNode);
 
-		if (!(packetSection instanceof ParameterContainer)) {
+		if (!(packetSection instanceof DefaultParameter)) {
 			System.out.println("Adding section " + packetSection.getName());
 			sections.add(packetSection);
 
-			for (Container c : packetSection.getSubContainers()) {
+			for (ParameterGroup c : packetSection.getSubParameterGroups()) {
 				this.getAllPacketSections(c.getName(), sections);
 			}
 			System.out.println("Found " + sections.size() + " Packet sections");
@@ -87,8 +87,8 @@ public class SimulatorSSM {
 		return sections;
 	}
 
-	public final Collection<Container> getAllContainers() {
-		return this.ssmFactory.getAllContainers();
+	public final Collection<ParameterGroup> getAllContainers() {
+		return this.ssmFactory.getAllParameterGroups();
 	}
 
 	public final Map<Parameter, List<String>> getAllParameterRestrictions() {
@@ -109,17 +109,17 @@ public class SimulatorSSM {
 
 		for (Parameter p : restrictions.keySet()) {
 			for (String val : restrictions.get(p)) {
-				((ParameterContainer) p).setValue(Integer.parseInt(val));
-				packetRoot.getSubContainers();
+				((DefaultParameter) p).setValue(Integer.parseInt(val));
+				packetRoot.getSubParameterGroups();
 			}
 		}
 	}
 
-	public synchronized BitSet encode(final String name, final Map<String, Double> fields) throws BitSetOperationException, UnknownContainerNameException {
+	public synchronized BitSet encode(final String name, final Map<String, Double> fields) throws BitSetOperationException, UnknownParameterGroupException {
 		for (Map.Entry<String, Double> entry : fields.entrySet()) {
-			ParameterContainer parameter = ssmFactory.getParameter(entry.getKey());
+			DefaultParameter parameter = ssmFactory.getParameter(entry.getKey());
 			if (parameter == null) {
-				throw new UnknownContainerNameException(entry.getKey());
+				throw new UnknownParameterGroupException(entry.getKey());
 			}
 			else {
 				parameter.setValue(entry.getValue());
@@ -127,7 +127,7 @@ public class SimulatorSSM {
 		}
 
 		BitSet packet = new BitSet();
-		ssmFactory.getContainer(name).marshall(packet, 0);
+		ssmFactory.getParameterGroup(name).marshall(packet, 0);
 		return packet;
 	}
 
@@ -147,7 +147,7 @@ public class SimulatorSSM {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		catch (UnknownContainerNameException e) {
+		catch (UnknownParameterGroupException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

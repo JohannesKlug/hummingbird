@@ -5,12 +5,10 @@
 
 package org.hbird.transport.spacesystemmodel.parameters;
 
-import java.util.BitSet;
-
-import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
-import org.hbird.transport.spacesystemmodel.ParameterObserver;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.transport.spacesystemmodel.parameters.types.NumberParameterType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The float container encodes / decodes a float parameter from the data stream.
@@ -18,9 +16,9 @@ import org.hbird.transport.spacesystemmodel.parameters.types.NumberParameterType
  * @author Mark Doyle
  * @author Johannes Klug
  */
-public class FloatParameter extends ParameterContainer {
+public class FloatParameter extends DefaultParameter {
 	/** Logger for this class */
-//	private static final Logger LOG = LoggerFactory.getLogger(FloatParameter.class);
+	private static final Logger LOG = LoggerFactory.getLogger(FloatParameter.class);
 
 	/** The last extracted value of the container. */
 	protected Number value = 0;
@@ -46,32 +44,32 @@ public class FloatParameter extends ParameterContainer {
 	 *            The initial value.
 	 * @throws InvalidParameterTypeException
 	 */
-	public FloatParameter(String name, String shortDescription, String longDescription, NumberParameterType type, double value)
+	public FloatParameter(final String name, final String shortDescription, final String longDescription, final NumberParameterType type, final double value)
 			throws InvalidParameterTypeException {
 		super(name, shortDescription, longDescription, type);
 	}
 
-	@Override
-	public BitSet unmarshall(BitSet packet) {
-		value = this.getType().getNumberBehaviour().valueFromBitSet(packet);
+	// @Override
+	// public BitSet unmarshall(BitSet packet) {
+	// value = this.getType().getNumberBehaviour().valueFromBitSet(packet);
+	//
+	// for (ParameterObserver paramObserver : updatedParameterObservers) {
+	// paramObserver.updated(name, value.doubleValue(), shortDescription, longDescription);
+	// }
+	//
+	// return packet.get((int) type.getSizeInBits(), packet.length() + 1);
+	// }
 
-		for (ParameterObserver paramObserver : updatedParameterObservers) {
-			paramObserver.updated(name, value.doubleValue(), shortDescription, longDescription);
-		}
-
-		return packet.get((int) type.getSizeInBits(), packet.length() + 1);
-	}
-
-	@Override
-	public int marshall(BitSet packet, int offset) throws BitSetOperationException {
-		packet = this.getType().getNumberBehaviour().insertIntoBitSet(getValue(), packet, offset);
-
-		return offset + (int) type.getSizeInBits();
-	}
+	// @Override
+	// public int marshall(BitSet packet, int offset) throws BitSetOperationException {
+	// packet = this.getType().getNumberBehaviour().insertIntoBitSet(getValue(), packet, offset);
+	//
+	// return offset + (int) type.getSizeInBits();
+	// }
 
 	@Override
 	public String toString() {
-		return "[float (" + this.type.getSizeInBits() + ") " + this.name + "=" + this.value + "]";
+		return "[float (" + this.type.getSizeInBits() + ") " + this.getName() + "=" + this.value + "]";
 	}
 
 	@Override
@@ -80,12 +78,12 @@ public class FloatParameter extends ParameterContainer {
 	}
 
 	@Override
-	public void setValue(double value) {
+	public void setValue(final double value) {
 		this.value = value;
 	}
 
 	@Override
-	public boolean match(String value) {
+	public boolean match(final String value) {
 		return (this.value.doubleValue() == Double.parseDouble(value));
 	}
 

@@ -1,13 +1,8 @@
-/**
- * Licensed under the Apache License, Version 2.0. You may obtain a copy of 
- * the License at http://www.apache.org/licenses/LICENSE-2.0 or at this project's root.
- */
-
 package org.hbird.transport.spacesystemmodel.parameters.types;
 
 import java.util.List;
 
-import org.hbird.transport.spacesystemmodel.NamedElement;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModelItem;
 import org.hbird.transport.spacesystemmodel.Unit;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.NumberParameterTypeBehaviour;
@@ -16,7 +11,7 @@ import org.hbird.transport.spacesystemmodel.parameters.behaviours.NumberParamete
  * FIXME Javadoc
  * 
  */
-public class NumberParameterType extends NamedElement {
+public class NumberParameterType implements SpaceSystemModelItem {
 
 	private final NumberParameterTypeBehaviour numberBehaviour;
 
@@ -25,6 +20,12 @@ public class NumberParameterType extends NamedElement {
 
 	/** The unit of the parameter. */
 	protected List<Unit> unit = null;
+
+	private final String name;
+
+	private final String shortDescription;
+
+	private final String longDescription;
 
 	/**
 	 * Constructor of the ParameterType class.
@@ -46,10 +47,12 @@ public class NumberParameterType extends NamedElement {
 	 * @throws InvalidParameterTypeException
 	 * 
 	 */
-	public NumberParameterType(String name, String shortDescription, String longDescription, NumberParameterTypeBehaviour numberType, long initialValue)
-			throws InvalidParameterTypeException {
-		super(name, shortDescription, longDescription);
+	public NumberParameterType(final String name, final String shortDescription, final String longDescription, final NumberParameterTypeBehaviour numberType,
+			final long initialValue) throws InvalidParameterTypeException {
 
+		this.name = name;
+		this.shortDescription = shortDescription;
+		this.longDescription = longDescription;
 		this.numberBehaviour = numberType;
 		this.initialValue = initialValue;
 	}
@@ -92,7 +95,7 @@ public class NumberParameterType extends NamedElement {
 	 *            The units of the type.
 	 * 
 	 */
-	public void setUnit(List<Unit> unit) {
+	public void setUnit(final List<Unit> unit) {
 		this.unit = unit;
 	}
 
@@ -103,12 +106,27 @@ public class NumberParameterType extends NamedElement {
 	 *            The unit of the type.
 	 * 
 	 */
-	public void addUnit(Unit unit) {
+	public void addUnit(final Unit unit) {
 		this.unit.add(unit);
 	}
 
 
 	public NumberParameterTypeBehaviour getNumberBehaviour() {
 		return numberBehaviour;
+	}
+
+	@Override
+	public String getName() {
+		return this.name;
+	}
+
+	@Override
+	public String getShortDescription() {
+		return this.shortDescription;
+	}
+
+	@Override
+	public String getLongDescription() {
+		return this.longDescription;
 	}
 }

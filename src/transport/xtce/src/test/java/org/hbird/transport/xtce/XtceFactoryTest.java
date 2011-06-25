@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Map;
 
 import org.hbird.transport.generatedcode.xtce.SpaceSystem;
-import org.hbird.transport.spacesystemmodel.parameters.ParameterContainer;
+import org.hbird.transport.spacesystemmodel.parameters.DefaultParameter;
 import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -45,33 +45,33 @@ public class XtceFactoryTest {
 		SpaceSystem ss = factory.getSpaceSystem();
 		assertNotNull(ss);
 
-		assertEquals(NUM_OF_CONTAINERS, factory.getAllContainers().size());
+		assertEquals(NUM_OF_CONTAINERS, factory.getAllParameterGroups().size());
 
 
-		Map<String, ParameterContainer> allParameters = factory.getAllParameters();
+		Map<String, DefaultParameter> allParameters = factory.getAllParameters();
 		assertEquals(NUM_OF_PARAMETERS, allParameters.size());
 		assertTrue(allParameters.containsKey(XWING_APID_NAME));
 		assertTrue(allParameters.containsKey(XWING_PACKET_LENGTH_NAME));
 		assertTrue(allParameters.containsKey(XWING_FLIGHT_HOURS_NAME));
 		assertTrue(allParameters.containsKey(XWING_LASER_TEMP_NAME));
 
-		ParameterContainer param = null;
+		DefaultParameter param = null;
 		param = allParameters.get(XWING_APID_NAME);
 		assertNotNull(param);
-		assertEquals(XWING_APID_LENGTH, param.getLength());
+		assertEquals(XWING_APID_LENGTH, param.getSizeInBits());
 
 
 		param = allParameters.get(XWING_PACKET_LENGTH_NAME);
 		assertNotNull(param);
-		assertEquals(XWING_PACKET_LENGTH_LENGTH, param.getLength());
+		assertEquals(XWING_PACKET_LENGTH_LENGTH, param.getSizeInBits());
 
 		param = allParameters.get(XWING_FLIGHT_HOURS_NAME);
 		assertNotNull(param);
-		assertEquals(XWING_FLIGHT_HOURS_LENGTH, param.getLength());
+		assertEquals(XWING_FLIGHT_HOURS_LENGTH, param.getSizeInBits());
 
 		param = allParameters.get(XWING_LASER_TEMP_NAME);
 		assertNotNull(param);
-		assertEquals(XWING_LASER_TEMP_LENGTH, param.getLength());
+		assertEquals(XWING_LASER_TEMP_LENGTH, param.getSizeInBits());
 
 	}
 

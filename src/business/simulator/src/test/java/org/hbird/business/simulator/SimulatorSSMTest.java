@@ -17,10 +17,10 @@ import org.junit.Test;
 import org.hbird.business.simulator.SimulatorSSM;
 import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
-import org.hbird.transport.spacesystemmodel.Container;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.transport.spacesystemmodel.ParameterGroup;
+import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.parameters.ParameterContainer;
+import org.hbird.transport.spacesystemmodel.parameters.DefaultParameter;
 import org.hbird.transport.spacesystemmodel.testsupport.MockParameterContainerModel;
 import org.hbird.transport.xtce.XtceModelFactory;
 import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
@@ -53,12 +53,12 @@ public class SimulatorSSMTest {
 	}
 
 	@Test
-	public void testGetAllParameters() throws UnknownContainerNameException, InvalidXtceFileException {
-		Collection<ParameterContainer> allParams = sim.getAllParameters();
+	public void testGetAllParameters() throws UnknownParameterGroupException, InvalidXtceFileException {
+		Collection<DefaultParameter> allParams = sim.getAllParameters();
 		System.out.println("Number params = " + allParams.size());
 
-		for (Container c : allParams) {
-			for (Container p : c.getParents()) {
+		for (ParameterGroup c : allParams) {
+			for (ParameterGroup p : c.getParentParameterGroup()) {
 				System.out.println("Parameter " + c.getName() + " has a parent called = " + p.getName());
 			}
 		}
@@ -68,41 +68,41 @@ public class SimulatorSSMTest {
 		allParams = sim.getAllParameters();
 		System.out.println("Number params = " + allParams.size());
 
-		for (Container c : allParams) {
-			for (Container p : c.getParents()) {
+		for (ParameterGroup c : allParams) {
+			for (ParameterGroup p : c.getParentParameterGroup()) {
 				System.out.println("Parameter " + c.getName() + " has a parent called = " + p.getName());
 			}
 		}
 	}
 
 	@Test
-	public void testGetAllPacketSections() throws UnknownContainerNameException, InvalidXtceFileException {
-		List<Container> sections = new ArrayList<Container>();
+	public void testGetAllPacketSections() throws UnknownParameterGroupException, InvalidXtceFileException {
+		List<ParameterGroup> sections = new ArrayList<ParameterGroup>();
 		sections = sim.getAllPacketSections(MockParameterContainerModel.TM_PACKET_ALIAS, sections);
-		for (Container c : sections) {
-			for (Container p : c.getParents()) {
+		for (ParameterGroup c : sections) {
+			for (ParameterGroup p : c.getParentParameterGroup()) {
 				System.out.println(c.getName() + " has a parent called = " + p.getName());
 			}
 		}
 
 		System.out.println("###############################################");
 
-		sections = new ArrayList<Container>();
+		sections = new ArrayList<ParameterGroup>();
 		sim = new SimulatorSSM(xtce, TM_PACKET_ALIAS);
 		sections = sim.getAllPacketSections(TM_PACKET_ALIAS, sections);
-		for (Container c : sections) {
-			for (Container p : c.getParents()) {
+		for (ParameterGroup c : sections) {
+			for (ParameterGroup p : c.getParentParameterGroup()) {
 				System.out.println(c.getName() + " has a parent called = " + p.getName());
 			}
 		}
 
 		System.out.println("###############################################");
 
-		sections = new ArrayList<Container>();
+		sections = new ArrayList<ParameterGroup>();
 		sim = new SimulatorSSM(xtce, TM_PACKET_ALIAS);
 		sections = sim.getAllPacketSections(TM_PACKET_ALIAS, sections);
-		for (Container c : sections) {
-			for (Container p : c.getParents()) {
+		for (ParameterGroup c : sections) {
+			for (ParameterGroup p : c.getParentParameterGroup()) {
 				System.out.println(c.getName() + " has a parent called = " + p.getName());
 			}
 		}
@@ -116,7 +116,7 @@ public class SimulatorSSMTest {
 	}
 	
 	@Test
-	public void encode() throws UnknownContainerNameException, BitSetOperationException {
+	public void encode() throws UnknownParameterGroupException, BitSetOperationException {
 		// This test resembles the marshall() test for the Packet Broker.
 		Map<String, Double> fields = new HashMap<String, Double>();
 		

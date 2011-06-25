@@ -14,8 +14,8 @@ import java.util.Map;
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
 import org.hbird.exchange.type.Parameter;
-import org.hbird.transport.spacesystemmodel.ContainerFactory;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.telemetry.HummingbirdPacket;
 import org.hbird.transport.telemetry.HummingbirdParameter;
 import org.slf4j.Logger;
@@ -32,12 +32,12 @@ public class HummingbirdCamelPacketBrokerParameterOutput extends HummingbirdPack
 
 	private String packetContainerName;
 
-	public HummingbirdCamelPacketBrokerParameterOutput(final ContainerFactory factory, final String packetContainerName) {
+	public HummingbirdCamelPacketBrokerParameterOutput(final SpaceSystemModelFactory factory, final String packetContainerName) {
 		super(factory);
 		this.setPacketContainerName(packetContainerName);
 	}
 
-	public HummingbirdCamelPacketBrokerParameterOutput(final ContainerFactory factory) {
+	public HummingbirdCamelPacketBrokerParameterOutput(final SpaceSystemModelFactory factory) {
 		super(factory);
 		packetContainerName = "TMPacket";
 	}
@@ -52,9 +52,9 @@ public class HummingbirdCamelPacketBrokerParameterOutput extends HummingbirdPack
 	 * @param camelExchange
 	 *            the camel exchange container
 	 * @return a list of camel messages
-	 * @throws UnknownContainerNameException
+	 * @throws UnknownParameterGroupException
 	 */
-	public final synchronized List<Message> decodeBinaryTelemetry(final BitSet telemetryBitSet) throws UnknownContainerNameException {
+	public final synchronized List<Message> decodeBinaryTelemetry(final BitSet telemetryBitSet) throws UnknownParameterGroupException {
 		// Clear the previous packet
 		packetProducer.clearPacket();
 

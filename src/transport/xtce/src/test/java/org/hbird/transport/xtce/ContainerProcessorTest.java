@@ -8,17 +8,17 @@ import junit.framework.TestCase;
 import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.packetbroker.HummingbirdPacketBroker;
-import org.hbird.transport.spacesystemmodel.ContainerFactory;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.xtce.XtceModelFactory;
 import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
 
 // FIXME Not a unit test. This tests integration of separate components.  Needs moving.
 public class ContainerProcessorTest extends TestCase {
 
-	public void testMarshall() throws UnknownContainerNameException, InvalidXtceFileException, BitSetOperationException {
+	public void testMarshall() throws UnknownParameterGroupException, InvalidXtceFileException, BitSetOperationException {
 		URL spacesystemmodelFilename = this.getClass().getResource("/humsat.xml");
-		ContainerFactory factory = new XtceModelFactory(spacesystemmodelFilename.getPath());
+		SpaceSystemModelFactory factory = new XtceModelFactory(spacesystemmodelFilename.getPath());
 		
 		/** Build the frame. */
 		factory.getParameter("CCSDS_FVERSION").setValue(1);
@@ -57,14 +57,14 @@ public class ContainerProcessorTest extends TestCase {
 		System.out.println("Initial values:");
 		int length = 0;
 		try {
-			length = factory.getContainer("TMFrame").getLength();
+			length = factory.getParameterGroup("TMFrame").getSizeInBits();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		assertTrue(length == 175);
 		try {
-			System.out.println("Total length: " + factory.getContainer("TMFrame").getLength() + " bit(s).");
+			System.out.println("Total length: " + factory.getParameterGroup("TMFrame").getSizeInBits() + " bit(s).");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,7 +77,7 @@ public class ContainerProcessorTest extends TestCase {
 		
 		/** Test print the content as a string. */
 		try {
-			System.out.println(factory.getContainer("TMFrame").toString());
+			System.out.println(factory.getParameterGroup("TMFrame").toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -127,7 +127,7 @@ public class ContainerProcessorTest extends TestCase {
 		
 		/** Test print the content as a string. */
 		try {
-			System.out.println(factory.getContainer("TMFrame").toString());
+			System.out.println(factory.getParameterGroup("TMFrame").toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -147,7 +147,7 @@ public class ContainerProcessorTest extends TestCase {
 		
 		/** Test print the content as a string. */
 		try {
-			System.out.println(factory.getContainer("TMFrame").toString());
+			System.out.println(factory.getParameterGroup("TMFrame").toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

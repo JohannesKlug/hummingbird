@@ -6,15 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hbird.transport.spacesystemmodel.Container;
-import org.hbird.transport.spacesystemmodel.ContainerFactory;
-import org.hbird.transport.spacesystemmodel.ContainerImpl;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.transport.spacesystemmodel.DefaultParameterGroup;
+import org.hbird.transport.spacesystemmodel.ParameterGroup;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.FloatParameter;
 import org.hbird.transport.spacesystemmodel.parameters.IntegerParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.parameters.ParameterContainer;
+import org.hbird.transport.spacesystemmodel.parameters.DefaultParameter;
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.Float64Behaviour;
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
 import org.hbird.transport.spacesystemmodel.parameters.types.NumberParameterType;
@@ -22,10 +22,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This class is used for testing the Container model and anything that uses the SpaceSystemModel. It is a simple
- * Container model representing a space system which can be populated with values by tests. The container model follows
- * the CCSDS standards and therefore uses the TMFrame, TMFrameHeader, TMPacket, and a TMFrameTail concepts. They will be
- * read by CCSDS packet
+ * This class is used for testing the ParameterGroup model and anything that uses the SpaceSystemModel. It is a simple
+ * ParameterGroup model representing a space system which can be populated with values by tests. The container model
+ * follows the CCSDS standards and therefore uses the TMFrame, TMFrameHeader, TMPacket, and a TMFrameTail concepts. They
+ * will be read by CCSDS packet
  * 
  * FIXME Should be in it's own project. It's an implementation of the container model just for testing.
  * 
@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
  * @author Johannes Klug
  * @since Hummingbird 0.0.1
  */
-public class MockParameterContainerModel implements ContainerFactory {
+public class MockParameterContainerModel implements SpaceSystemModelFactory {
 	/**
 	 * Logger for this class
 	 */
@@ -74,8 +74,8 @@ public class MockParameterContainerModel implements ContainerFactory {
 
 	public static final String PAYLOAD_LENGTH_PARAM_ALIAS = "PayloadLength";
 
-	private final Map<String, Container> containers = new HashMap<String, Container>();
-	private final Map<String, ParameterContainer> parameters = new HashMap<String, ParameterContainer>();
+	private final Map<String, ParameterGroup> containers = new HashMap<String, ParameterGroup>();
+	private final Map<String, DefaultParameter> parameters = new HashMap<String, DefaultParameter>();
 
 	private final Map<Parameter, List<String>> restrictions = new HashMap<Parameter, List<String>>();
 
@@ -84,7 +84,7 @@ public class MockParameterContainerModel implements ContainerFactory {
 	}
 
 	/**
-	 * Creates an operational mock Container hierarchy which is used by the FrameBroker.
+	 * Creates an operational mock ParameterGroup hierarchy which is used by the FrameBroker.
 	 * 
 	 * @throws InvalidParameterTypeException
 	 * 
@@ -108,62 +108,66 @@ public class MockParameterContainerModel implements ContainerFactory {
 
 		/** Build the upper frame skeleton of the Model **/
 		// Create packet and add to the containers collection.
-		ContainerImpl tmPacket = new ContainerImpl(TM_PACKET_ALIAS, "X-Wing packet", "Test X-Wing packet for unit testing");
+		DefaultParameterGroup tmPacket = new DefaultParameterGroup(TM_PACKET_ALIAS, "X-Wing packet", "Test X-Wing packet for unit testing");
 		this.addToContainers(tmPacket);
-		ContainerImpl tmPacketHeader = new ContainerImpl(TM_PACKET_HEADER_ALIAS, "X-Wing packet header", "Test X-Wing packet header for unit testing");
+		DefaultParameterGroup tmPacketHeader = new DefaultParameterGroup(TM_PACKET_HEADER_ALIAS, "X-Wing packet header",
+				"Test X-Wing packet header for unit testing");
 		this.addToContainers(tmPacketHeader);
-		ContainerImpl tmPacketPayload = new ContainerImpl(TM_PACKET_PAYLOAD_ALIAS, "X-Wing packet payload", "Test X-Wing packet payload for unit testing");
+		DefaultParameterGroup tmPacketPayload = new DefaultParameterGroup(TM_PACKET_PAYLOAD_ALIAS, "X-Wing packet payload",
+				"Test X-Wing packet payload for unit testing");
 		this.addToContainers(tmPacketPayload);
 
-		tmPacket.addContainer(tmPacketHeader);
-		tmPacket.addContainer(tmPacketPayload);
+		tmPacket.addParameterGroup(tmPacketHeader);
+		tmPacket.addParameterGroup(tmPacketPayload);
 
 		// Create the APID parameter and add it to the packet header.
 		IntegerParameter apidParameter = new IntegerParameter(PAYLOAD_APID_ALIAS, "Test Apid", "Test Application Id", paramType11bitInt, 0);
 		this.addToParameters(apidParameter);
-		this.addToContainers(apidParameter);
-		tmPacketHeader.addContainer(apidParameter);
+		// this.addToContainers(apidParameter);
+		tmPacketHeader.addParameter(apidParameter);
 
 		// Create the payload length parameter type and add it to the packet header and the parameters collection.
 		IntegerParameter payloadLengthParameter = new IntegerParameter(PAYLOAD_LENGTH_PARAM_ALIAS, "Payload length", "Payload length parameter",
 				paramType16bitInt, 0);
-		this.addToContainers(payloadLengthParameter);
+		// this.addToContainers(payloadLengthParameter);
 		this.addToParameters(payloadLengthParameter);
-		tmPacketHeader.addContainer(payloadLengthParameter);
+		tmPacketHeader.addParameter(payloadLengthParameter);
 
 		// Create the Packet Payloads and add them to the payload container
-		ContainerImpl flightDataPayload = new ContainerImpl(TM_FLIGHT_DATA_PAYLOAD, "Flight hours payload", "Test TM packet payload containing flight data");
+		DefaultParameterGroup flightDataPayload = new DefaultParameterGroup(TM_FLIGHT_DATA_PAYLOAD, "Flight hours payload",
+				"Test TM packet payload containing flight data");
 		this.addRestrictionToGlobalMap(apidParameter, FLIGHT_DATA_PAYLOAD_APID);
 		flightDataPayload.addRestriction(apidParameter, FLIGHT_DATA_PAYLOAD_APID);
 		this.addToContainers(flightDataPayload);
-		tmPacketPayload.addContainer(flightDataPayload);
+		tmPacketPayload.addParameterGroup(flightDataPayload);
 
-		ContainerImpl laserDataPayload = new ContainerImpl(TM_LASER_DATA_PAYLOAD, "Laser temp payload", "Test TM packet payload containing laser data");
+		DefaultParameterGroup laserDataPayload = new DefaultParameterGroup(TM_LASER_DATA_PAYLOAD, "Laser temp payload",
+				"Test TM packet payload containing laser data");
 		this.addRestrictionToGlobalMap(apidParameter, LASER_DATA_PAYLOAD_APID);
 		laserDataPayload.addRestriction(apidParameter, LASER_DATA_PAYLOAD_APID);
 		this.addToContainers(laserDataPayload);
-		tmPacketPayload.addContainer(laserDataPayload);
+		tmPacketPayload.addParameterGroup(laserDataPayload);
 
-		ContainerImpl allSystemsPayload = new ContainerImpl(TM_ALL_SYS_PAYLOAD, "All systems payload", "Test TM packet payload containing all data");
+		DefaultParameterGroup allSystemsPayload = new DefaultParameterGroup(TM_ALL_SYS_PAYLOAD, "All systems payload", "Test TM packet payload containing all data");
 		this.addRestrictionToGlobalMap(apidParameter, ALL_SYS_PAYLOAD_APID);
 		allSystemsPayload.addRestriction(apidParameter, ALL_SYS_PAYLOAD_APID);
 		this.addToContainers(allSystemsPayload);
-		tmPacketPayload.addContainer(allSystemsPayload);
+		tmPacketPayload.addParameterGroup(allSystemsPayload);
 
 		IntegerParameter flightHoursParameter = new IntegerParameter(FLIGHT_HOURS_PARAM_ALIAS, "test param", "test param holding flight hours as an int value",
 				test32bitInt, 0);
-		flightDataPayload.addContainer(flightHoursParameter);
+		flightDataPayload.addParameter(flightHoursParameter);
 		this.addToParameters(flightHoursParameter);
-		this.addToContainers(flightHoursParameter);
+		// this.addToContainers(flightHoursParameter);
 
 		FloatParameter laserTemperatureParameter = new FloatParameter(LASER_TEMP_PARAM_ALIAS, "test param", "test param holding a float value", test64bitFloat,
 				0.0);
-		laserDataPayload.addContainer(laserTemperatureParameter);
+		laserDataPayload.addParameter(laserTemperatureParameter);
 		this.addToParameters(laserTemperatureParameter);
-		this.addToContainers(laserTemperatureParameter);
+		// this.addToContainers(laserTemperatureParameter);
 
-		allSystemsPayload.addContainer(flightHoursParameter);
-		allSystemsPayload.addContainer(laserTemperatureParameter);
+		allSystemsPayload.addParameter(flightHoursParameter);
+		allSystemsPayload.addParameter(laserTemperatureParameter);
 
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Completed mock container model initialisaion");
@@ -171,12 +175,12 @@ public class MockParameterContainerModel implements ContainerFactory {
 	}
 
 	@Override
-	public Container getContainer(String name) throws UnknownContainerNameException {
+	public ParameterGroup getParameterGroup(final String name) throws UnknownParameterGroupException {
 
-		Container container = containers.get(name);
+		ParameterGroup container = containers.get(name);
 
 		if (container == null) {
-			throw new UnknownContainerNameException(containers, "Your container lookup for '" + name
+			throw new UnknownParameterGroupException(containers, "Your container lookup for '" + name
 					+ "' did not return any containers. Check your SpaceSystem configuration.");
 		}
 
@@ -184,16 +188,16 @@ public class MockParameterContainerModel implements ContainerFactory {
 	}
 
 	@Override
-	public Map<String, ParameterContainer> getAllParameters() {
+	public Map<String, DefaultParameter> getAllParameters() {
 		return parameters;
 	}
 
 	@Override
-	public ParameterContainer getParameter(String name) {
+	public DefaultParameter getParameter(final String name) {
 		return parameters.get(name);
 	}
 
-	private void addRestrictionToGlobalMap(ParameterContainer paramContainer, String comparisonValue) {
+	private void addRestrictionToGlobalMap(final DefaultParameter paramContainer, final String comparisonValue) {
 		List<String> pList;
 		if (restrictions.containsKey(paramContainer)) {
 			pList = restrictions.get(paramContainer);
@@ -212,11 +216,11 @@ public class MockParameterContainerModel implements ContainerFactory {
 	 * 
 	 * @param container
 	 */
-	public void addToContainers(ContainerImpl container) {
+	public void addToContainers(final DefaultParameterGroup container) {
 		this.containers.put(container.getName(), container);
 	}
 
-	private void addToParameters(ParameterContainer parameter) {
+	private void addToParameters(final DefaultParameter parameter) {
 		this.parameters.put(parameter.getName(), parameter);
 	}
 
@@ -231,7 +235,7 @@ public class MockParameterContainerModel implements ContainerFactory {
 	}
 
 	@Override
-	public Collection<Container> getAllContainers() {
+	public Collection<ParameterGroup> getAllParameterGroups() {
 		return containers.values();
 	}
 

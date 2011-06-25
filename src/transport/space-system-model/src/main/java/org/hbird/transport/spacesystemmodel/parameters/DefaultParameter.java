@@ -5,8 +5,9 @@
 
 package org.hbird.transport.spacesystemmodel.parameters;
 
-import org.hbird.transport.spacesystemmodel.ContainerImpl;
 import org.hbird.transport.spacesystemmodel.parameters.types.NumberParameterType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The abstract base class for all parameter <b><i>containers</i></b>. The class is intended to be subtyped for each
@@ -19,8 +20,12 @@ import org.hbird.transport.spacesystemmodel.parameters.types.NumberParameterType
  * @author Mark Doyle
  * @author Johannes Klug
  */
-public abstract class ParameterContainer extends ContainerImpl implements Parameter {
-//	private static final Logger LOG = LoggerFactory.getLogger(ParameterContainer.class);
+public abstract class DefaultParameter implements Parameter {
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultParameter.class);
+
+	private final String name;
+	private final String shortDescription;
+	private final String longDescription;
 
 	/** The NumberParameterType of the parameter. */
 	protected NumberParameterType type = null;
@@ -38,9 +43,27 @@ public abstract class ParameterContainer extends ContainerImpl implements Parame
 	 *            The parameter type.
 	 * 
 	 */
-	public ParameterContainer(String name, String shortDescription, String longDescription, NumberParameterType type) {
-		super(name, shortDescription, longDescription);
+	public DefaultParameter(final String name, final String shortDescription, final String longDescription, final NumberParameterType type) {
+		this.name = name;
+		this.shortDescription = shortDescription;
+		this.longDescription = longDescription;
+
 		this.type = type;
+	}
+
+	@Override
+	public String getName() {
+		return this.name;
+	}
+
+	@Override
+	public String getShortDescription() {
+		return this.shortDescription;
+	}
+
+	@Override
+	public String getLongDescription() {
+		return this.longDescription;
 	}
 
 	/**
@@ -64,12 +87,12 @@ public abstract class ParameterContainer extends ContainerImpl implements Parame
 	 *            The type to be set.
 	 * 
 	 */
-	public void setType(NumberParameterType type) {
+	public void setType(final NumberParameterType type) {
 		this.type = type;
 	}
 
 	@Override
-	public int getLength() {
-		return length + (int) type.getSizeInBits();
+	public int getSizeInBits() {
+		return (int) type.getSizeInBits();
 	}
 }

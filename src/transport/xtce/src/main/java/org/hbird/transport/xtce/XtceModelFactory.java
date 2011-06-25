@@ -20,16 +20,16 @@ import org.hbird.transport.generatedcode.xtce.ParameterTypeSetTypeItem;
 import org.hbird.transport.generatedcode.xtce.SequenceContainer;
 import org.hbird.transport.generatedcode.xtce.SpaceSystem;
 import org.hbird.transport.generatedcode.xtce.types.DataEncodingTypeBitOrderType;
-import org.hbird.transport.spacesystemmodel.Container;
-import org.hbird.transport.spacesystemmodel.ContainerFactory;
-import org.hbird.transport.spacesystemmodel.ContainerImpl;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.transport.spacesystemmodel.DefaultParameterGroup;
+import org.hbird.transport.spacesystemmodel.ParameterGroup;
 import org.hbird.transport.spacesystemmodel.Unit;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.FloatParameter;
 import org.hbird.transport.spacesystemmodel.parameters.IntegerParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.parameters.ParameterContainer;
+import org.hbird.transport.spacesystemmodel.parameters.DefaultParameter;
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.AbstractFloatBehaviour;
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.AbstractIntegerBehaviour;
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.Float32Behaviour;
@@ -50,14 +50,14 @@ import org.slf4j.LoggerFactory;
  * @author Johannes Klug
  * 
  */
-public class XtceModelFactory implements ContainerFactory {
+public class XtceModelFactory implements SpaceSystemModelFactory {
 
 	private static final Logger LOG = LoggerFactory.getLogger(XtceModelFactory.class);
 
 	private final Map<String, Unit> units = new HashMap<String, Unit>();
 	private final Map<String, NumberParameterType> types = new HashMap<String, NumberParameterType>();
-	private final Map<String, Container> containers = new HashMap<String, Container>();
-	private final Map<String, ParameterContainer> parameters = new HashMap<String, ParameterContainer>();
+	private final Map<String, ParameterGroup> containers = new HashMap<String, ParameterGroup>();
+	private final Map<String, DefaultParameter> parameters = new HashMap<String, DefaultParameter>();
 	private final Map<Parameter, List<String>> restrictions = new HashMap<Parameter, List<String>>();
 
 	private SpaceSystem spaceSystem = null;
@@ -80,16 +80,16 @@ public class XtceModelFactory implements ContainerFactory {
 	}
 
 	@Override
-	public ParameterContainer getParameter(final String name) {
+	public DefaultParameter getParameter(final String name) {
 		return parameters.get(name);
 	}
 
 	@Override
-	public Container getContainer(final String name) throws UnknownContainerNameException {
-		final Container container = containers.get(name);
+	public ParameterGroup getParameterGroup(final String name) throws UnknownParameterGroupException {
+		final ParameterGroup container = containers.get(name);
 
 		if (container == null) {
-			throw new UnknownContainerNameException(containers, "Your container lookup for '" + name
+			throw new UnknownParameterGroupException(containers, "Your container lookup for '" + name
 					+ "' did not return any containers. Check your SpaceSystem configuration.");
 		}
 
@@ -118,7 +118,8 @@ public class XtceModelFactory implements ContainerFactory {
 					.getSequenceContainer();
 
 			LOG.debug("Creating container " + xtceContainer.getName());
-			final ContainerImpl container = new ContainerImpl(xtceContainer.getName(), xtceContainer.getShortDescription(), xtceContainer.getLongDescription());
+			final DefaultParameterGroup container = new DefaultParameterGroup(xtceContainer.getName(), xtceContainer.getShortDescription(),
+					xtceContainer.getLongDescription());
 			containers.put(container.getName(), container);
 		}
 
@@ -131,21 +132,21 @@ public class XtceModelFactory implements ContainerFactory {
 					.getSequenceContainer();
 
 			// Get the container
-			final Container thisContainer = containers.get(xtceContainer.getName());
+			final ParameterGroup thisContainer = containers.get(xtceContainer.getName());
 
 			// Register this container with the base container to make sure it gets processed.
 			if (xtceContainer.getBaseContainer() != null) {
 				for (final Comparison comparison : xtceContainer.getBaseContainer().getRestrictionCriteria().getComparisonList().getComparison()) {
-					final ParameterContainer paramContainer = (ParameterContainer) containers.get(comparison.getParameterRef());
+					final DefaultParameter paramContainer = (DefaultParameter) containers.get(comparison.getParameterRef());
 					final String comparisonValue = comparison.getValue();
 					addRestrictionToGlobalMap(paramContainer, comparisonValue);
 					thisContainer.addRestriction(paramContainer, comparisonValue);
 				}
 
 				final String containerParentRef = xtceContainer.getBaseContainer().getContainerRef();
-				final Container parentContainer = containers.get(containerParentRef);
-				parentContainer.addContainer(thisContainer);
-				thisContainer.addParent(parentContainer);
+				final ParameterGroup parentContainer = containers.get(containerParentRef);
+				parentContainer.addParameterGroup(thisContainer);
+				thisContainer.addParentParameterGroup(parentContainer);
 
 				LOG.debug("Added container " + thisContainer.getName() + " to parent (base) container " + containerParentRef);
 			}
@@ -160,10 +161,10 @@ public class XtceModelFactory implements ContainerFactory {
 					name = xtceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getContainerRefEntry().getContainerRef();
 				}
 
-				final Container subcontainer = containers.get(name);
+				final ParameterGroup subcontainer = containers.get(name);
 				if (subcontainer != null) {
-					thisContainer.addContainer(subcontainer);
-					subcontainer.addParent(thisContainer);
+					thisContainer.addParameterGroup(subcontainer);
+					subcontainer.addParentParameterGroup(thisContainer);
 					LOG.debug("Added subcontainer " + subcontainer + " to container " + thisContainer.getName());
 				}
 			}
@@ -180,7 +181,7 @@ public class XtceModelFactory implements ContainerFactory {
 
 			LOG.debug(item.getParameter().getName());
 
-			ParameterContainer parameterContainer = null;
+			DefaultParameter parameterContainer = null;
 			final NumberParameterType type = types.get(item.getParameter().getParameterTypeRef());
 
 			// @formatter:off
@@ -205,7 +206,7 @@ public class XtceModelFactory implements ContainerFactory {
 			// @formatter:on
 
 			parameters.put(parameterContainer.getName(), parameterContainer);
-			containers.put(parameterContainer.getName(), parameterContainer);
+			// containers.put(parameterContainer.getName(), parameterContainer);
 		}
 	}
 
@@ -344,7 +345,7 @@ public class XtceModelFactory implements ContainerFactory {
 		}
 	}
 
-	private void addRestrictionToGlobalMap(final ParameterContainer paramContainer, final String comparisonValue) {
+	private void addRestrictionToGlobalMap(final DefaultParameter paramContainer, final String comparisonValue) {
 		List<String> pList;
 		if (restrictions.containsKey(paramContainer)) {
 			pList = restrictions.get(paramContainer);
@@ -415,7 +416,7 @@ public class XtceModelFactory implements ContainerFactory {
 	}
 
 	@Override
-	public Map<String, ParameterContainer> getAllParameters() {
+	public Map<String, DefaultParameter> getAllParameters() {
 		return parameters;
 	}
 
@@ -430,7 +431,7 @@ public class XtceModelFactory implements ContainerFactory {
 	}
 
 	@Override
-	public Collection<Container> getAllContainers() {
+	public Collection<ParameterGroup> getAllParameterGroups() {
 		return containers.values();
 	}
 }

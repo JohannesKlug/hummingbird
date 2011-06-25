@@ -5,37 +5,45 @@
 
 package org.hbird.transport.spacesystemmodel.parameters;
 
+import org.hbird.transport.spacesystemmodel.SpaceSystemModelItem;
 import org.hbird.transport.spacesystemmodel.parameters.types.NumberParameterType;
 
 /**
- * Interface of a parameter container. */
-public interface Parameter {
+ * Interface of a parameter container.
+ */
+public interface Parameter extends SpaceSystemModelItem {
 	/**
 	 * Returns the type of the parameter.
 	 * 
 	 * @return ParameterType The type of the parameter.
-	 *
+	 * 
 	 */
 	NumberParameterType getType();
-	
-	
+
+
 	/**
 	 * Returns the value of the parameter.
 	 * 
-	 * @return float The value of the parameter. 
-	 *
+	 * @return float The value of the parameter.
+	 * 
 	 */
 	Number getValue();
-	
-	
+
 	/**
-	 * Converts the parsed value to the type of this parameter and compares the
-	 * value with the current value.
-	 *
-	 * @param value The value to be compared against. 
-	 *
+	 * Returns the size of the Parameter in bits.
+	 * 
+	 * @return int representing the size in bits of this {@link Parameter}
+	 */
+	int getSizeInBits();
+
+
+	/**
+	 * Converts the parsed value to the type of this parameter and compares the value with the current value.
+	 * 
+	 * @param value
+	 *            The value to be compared against.
+	 * 
 	 */
 	boolean match(String value);
-	
-	String getName();
+
 }

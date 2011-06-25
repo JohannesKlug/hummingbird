@@ -19,7 +19,14 @@ import java.math.BigDecimal;
  * means '1/meter^2'. The dimensions can be combined. Speed measures as meter/seconds is thus meter=1 and seconds=-1.
  * Acceleration measured in meter/seconds^2 is expressed as meter=1 and seconds=-2.
  */
-public class Unit extends NamedElement {
+public class Unit implements SpaceSystemModelItem {
+
+	private final String name;
+
+	private final String shortDescription;
+
+	private final String longDescription;
+
 	/** TODO */
 	private BigDecimal power;
 
@@ -63,8 +70,10 @@ public class Unit extends NamedElement {
 	 *            TODO
 	 * 
 	 */
-	public Unit(String name, String shortDescription, String longDescription, BigDecimal power, String factor) {
-		super(name, shortDescription, longDescription);
+	public Unit(final String name, final String shortDescription, final String longDescription, final BigDecimal power, final String factor) {
+		this.name = name;
+		this.shortDescription = shortDescription;
+		this.longDescription = longDescription;
 
 		this.power = power;
 		this.factor = factor;
@@ -74,7 +83,7 @@ public class Unit extends NamedElement {
 		return power;
 	}
 
-	public void setPower(BigDecimal power) {
+	public void setPower(final BigDecimal power) {
 		this.power = power;
 	}
 
@@ -82,7 +91,23 @@ public class Unit extends NamedElement {
 		return factor;
 	}
 
-	public void setFactor(String factor) {
+	public void setFactor(final String factor) {
 		this.factor = factor;
+	}
+
+
+	@Override
+	public String getName() {
+		return this.name;
+	}
+
+	@Override
+	public String getShortDescription() {
+		return this.shortDescription;
+	}
+
+	@Override
+	public String getLongDescription() {
+		return this.longDescription;
 	}
 }

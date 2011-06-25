@@ -21,8 +21,8 @@ import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.packetbroker.HummingbirdPacketBroker;
 import org.hbird.transport.packetbroker.PacketBroker;
-import org.hbird.transport.spacesystemmodel.ContainerFactory;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownContainerNameException;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.testsupport.MockParameterContainerModel;
 import org.hbird.transport.telemetry.HummingbirdPacket;
 import org.hbird.transport.telemetry.HummingbirdParameter;
@@ -66,7 +66,7 @@ public class HummingbirdPacketBrokerTest {
 
 
 	/**
-	 * Set up the Mock Container Factory and create the testFrame for use by the tests.
+	 * Set up the Mock ParameterGroup Factory and create the testFrame for use by the tests.
 	 */
 	@BeforeClass
 	public static void setupForAll() throws SecurityException, IllegalArgumentException, IllegalAccessException {
@@ -88,11 +88,11 @@ public class HummingbirdPacketBrokerTest {
 	 * Test method for
 	 * {@link org.hbird.framebroker.PacketBrokerImpl#unmarshall(java.lang.String, java.util.BitSet)}.
 	 * 
-	 * @throws UnknownContainerNameException
+	 * @throws UnknownParameterGroupException
 	 * @throws BitSetOperationException
 	 */
 	@Test
-	public final void testUnmarshallFlightDataPacket() throws UnknownContainerNameException, BitSetOperationException {
+	public final void testUnmarshallFlightDataPacket() throws UnknownParameterGroupException, BitSetOperationException {
 		LOG.info("---------- testUnmarshall -------------");
 		
 		BitSet mockPacket = BitSetUtility.stringToBitSet(FLIGHT_DATA_APID + PACKET_LENGTH_32 + FLIGHT_HOURS_1024, false, false);
@@ -117,7 +117,7 @@ public class HummingbirdPacketBrokerTest {
 	}
 	
 	@Test
-	public final void testUnmarshallLaserDataPacket() throws UnknownContainerNameException, BitSetOperationException {
+	public final void testUnmarshallLaserDataPacket() throws UnknownParameterGroupException, BitSetOperationException {
 		LOG.info("---------- testUnmarshall -------------");
 		
 		BitSet mockPacket = BitSetUtility.stringToBitSet(LASER_DATA_APID + PACKET_LENGTH_64 + LASER_TEMP_17959_25, false, false);
@@ -145,7 +145,7 @@ public class HummingbirdPacketBrokerTest {
 
 
 	@Test
-	public final void testMarshallBitSetFlightData() throws UnknownContainerNameException, BitSetOperationException {
+	public final void testMarshallBitSetFlightData() throws UnknownParameterGroupException, BitSetOperationException {
 		LOG.info("---------- testMarshall -------------");
 		
 		// Populate the space system model that we will marshall into binary.	
@@ -165,7 +165,7 @@ public class HummingbirdPacketBrokerTest {
 	}
 	
 	@Test
-	public final void testMarshallBitSetLaserTempData() throws UnknownContainerNameException, BitSetOperationException {
+	public final void testMarshallBitSetLaserTempData() throws UnknownParameterGroupException, BitSetOperationException {
 		LOG.info("---------- testMarshall -------------");
 		
 		// Populate the space system model that we will marshall into binary.	
@@ -186,7 +186,7 @@ public class HummingbirdPacketBrokerTest {
 
 	@Test
 	public final void testGetFactory() {
-		ContainerFactory actual = packetBroker.getFactory();
+		SpaceSystemModelFactory actual = packetBroker.getFactory();
 		assertEquals(mockSpaceSystemFactory, actual);
 	}
 

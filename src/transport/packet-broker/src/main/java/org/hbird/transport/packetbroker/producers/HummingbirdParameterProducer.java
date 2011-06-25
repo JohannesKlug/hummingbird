@@ -8,9 +8,9 @@ package org.hbird.transport.packetbroker.producers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.hbird.transport.spacesystemmodel.ContainerFactory;
-import org.hbird.transport.spacesystemmodel.ParameterObserver;
-import org.hbird.transport.spacesystemmodel.parameters.ParameterContainer;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.transport.spacesystemmodel.parameters.DefaultParameter;
+import org.hbird.transport.spacesystemmodel.parameters.ParameterObserver;
 import org.hbird.transport.telemetry.DefaultSpaceParameter;
 
 /**
@@ -21,13 +21,13 @@ public class HummingbirdParameterProducer extends AbstractProducer implements Pa
 
 	HummingbirdPacketProducer parent;
 
-	public HummingbirdParameterProducer(ContainerFactory containerFactory, HummingbirdPacketProducer parent) {
+	public HummingbirdParameterProducer(SpaceSystemModelFactory containerFactory, HummingbirdPacketProducer parent) {
 		super(containerFactory);
 
 		this.parent = parent;
 
 		// Register with all parameters corresponding to header fields.
-		for (ParameterContainer parameter : containerFactory.getAllParameters().values()) {
+		for (DefaultParameter parameter : containerFactory.getAllParameters().values()) {
 			parameter.addParameterUpdateObserver(this);
 		}
 	}
