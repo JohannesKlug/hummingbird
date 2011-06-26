@@ -1,4 +1,4 @@
-package org.hbird.transport.spacesystemmodel.parameters.behaviours;
+package org.hbird.transport.packetbroker.parameterbehaviours;
 
 public abstract class AbstractIntegerBehaviour extends AbstractNumberBehaviour {
 

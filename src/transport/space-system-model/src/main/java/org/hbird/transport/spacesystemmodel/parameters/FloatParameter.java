@@ -6,7 +6,7 @@
 package org.hbird.transport.spacesystemmodel.parameters;
 
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
-import org.hbird.transport.spacesystemmodel.parameters.types.NumberParameterType;
+import org.hbird.transport.spacesystemmodel.parameters.types.ParameterType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,7 +44,7 @@ public class FloatParameter extends DefaultParameter {
 	 *            The initial value.
 	 * @throws InvalidParameterTypeException
 	 */
-	public FloatParameter(final String name, final String shortDescription, final String longDescription, final NumberParameterType type, final double value)
+	public FloatParameter(final String name, final String shortDescription, final String longDescription, final ParameterType type, final double value)
 			throws InvalidParameterTypeException {
 		super(name, shortDescription, longDescription, type);
 	}
@@ -69,7 +69,7 @@ public class FloatParameter extends DefaultParameter {
 
 	@Override
 	public String toString() {
-		return "[float (" + this.type.getSizeInBits() + ") " + this.getName() + "=" + this.value + "]";
+		return "[float (" + this.getSizeInBits() + ") " + this.getName() + "=" + this.value + "]";
 	}
 
 	@Override

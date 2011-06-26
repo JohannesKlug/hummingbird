@@ -1,7 +1,4 @@
-/**
- * 
- */
-package org.hbird.transport.spacesystemmodel;
+package org.hbird.transport.packetbroker;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,6 +6,8 @@ import java.util.BitSet;
 
 import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
+import org.hbird.transport.spacesystemmodel.DefaultParameterGroup;
+import org.hbird.transport.spacesystemmodel.ParameterGroup;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.testsupport.MockContainerModelFactory;
@@ -51,9 +50,9 @@ import org.slf4j.LoggerFactory;
  * @author Mark Doyle
  * @author Johannes Klug
  */
-public class ContainerTest {
+public class ParameterGroupTest {
 	/** Logger for this class */
-	private static final Logger LOG = LoggerFactory.getLogger(ContainerTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ParameterGroupTest.class);
 
 	/** Mock Factory used in all the tests. */
 	private static MockContainerModelFactory mockContainerFactory;
@@ -71,7 +70,7 @@ public class ContainerTest {
 	 * Based upon the MockContainerFactory this Bit String encodes the Mock ParameterGroup model with values
 	 * representing a snapshot of telemetry.
 	 * 
-	 * See {@link ContainerTest} class javadoc for details
+	 * See {@link ParameterGroupTest} class javadoc for details
 	 */
 	private final static String TEST_BITSET_STRING_PKT_TYPE_A = "1110101000100000010000000000110111100000000000000000000000001";
 
@@ -102,7 +101,7 @@ public class ContainerTest {
 	 * Based upon the MockContainerFactory this Bit String encodes the Mock ParameterGroup model with values
 	 * representing a snapshot of telemetry.
 	 * 
-	 * See {@link ContainerTest} class javadoc for details
+	 * See {@link ParameterGroupTest} class javadoc for details
 	 */
 	private final static String TEST_BITSET_STRING_PKT_TYPE_B = "110110010100000000100000000001000000000010010010000111111011010100111100100011010100111100011";
 

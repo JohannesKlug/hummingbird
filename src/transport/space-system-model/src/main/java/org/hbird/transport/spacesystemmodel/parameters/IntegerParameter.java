@@ -5,7 +5,7 @@
 
 package org.hbird.transport.spacesystemmodel.parameters;
 
-import org.hbird.transport.spacesystemmodel.parameters.types.NumberParameterType;
+import org.hbird.transport.spacesystemmodel.parameters.types.ParameterType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +31,7 @@ public class IntegerParameter extends DefaultParameter {
 	 * @param value
 	 *            The initial value.
 	 */
-	public IntegerParameter(final String name, final String shortDescription, final String longDescription, final NumberParameterType type, final long value) {
+	public IntegerParameter(final String name, final String shortDescription, final String longDescription, final ParameterType type, final long value) {
 		super(name, shortDescription, longDescription, type);
 		this.value = value;
 	}
@@ -71,7 +71,7 @@ public class IntegerParameter extends DefaultParameter {
 
 	@Override
 	public String toString() {
-		return "[int (" + this.type.getSizeInBits() + ") " + this.getName() + "=" + this.value + "]";
+		return "[int (" + this.getSizeInBits() + ") " + this.getName() + "=" + this.value + "]";
 	}
 
 	@Override

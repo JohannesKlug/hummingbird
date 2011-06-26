@@ -6,7 +6,7 @@
 package org.hbird.transport.spacesystemmodel.parameters;
 
 import org.hbird.transport.spacesystemmodel.SpaceSystemModelItem;
-import org.hbird.transport.spacesystemmodel.parameters.types.NumberParameterType;
+import org.hbird.transport.spacesystemmodel.parameters.types.ParameterType;
 
 /**
  * Interface of a parameter container.
@@ -18,7 +18,7 @@ public interface Parameter extends SpaceSystemModelItem {
 	 * @return ParameterType The type of the parameter.
 	 * 
 	 */
-	NumberParameterType getType();
+	ParameterType getType();
 
 
 	/**

@@ -19,26 +19,22 @@ import org.hbird.transport.generatedcode.xtce.ParameterSetTypeItem;
 import org.hbird.transport.generatedcode.xtce.ParameterTypeSetTypeItem;
 import org.hbird.transport.generatedcode.xtce.SequenceContainer;
 import org.hbird.transport.generatedcode.xtce.SpaceSystem;
+import org.hbird.transport.generatedcode.xtce.Unit;
 import org.hbird.transport.generatedcode.xtce.types.DataEncodingTypeBitOrderType;
-import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.transport.packetbroker.parameterbehaviours.AbstractFloatBehaviour;
+import org.hbird.transport.packetbroker.parameterbehaviours.AbstractIntegerBehaviour;
+import org.hbird.transport.packetbroker.parameterbehaviours.Float32Behaviour;
+import org.hbird.transport.packetbroker.parameterbehaviours.Float64Behaviour;
 import org.hbird.transport.spacesystemmodel.DefaultParameterGroup;
 import org.hbird.transport.spacesystemmodel.ParameterGroup;
-import org.hbird.transport.spacesystemmodel.Unit;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
+import org.hbird.transport.spacesystemmodel.parameters.DefaultParameter;
 import org.hbird.transport.spacesystemmodel.parameters.FloatParameter;
 import org.hbird.transport.spacesystemmodel.parameters.IntegerParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.parameters.DefaultParameter;
-import org.hbird.transport.spacesystemmodel.parameters.behaviours.AbstractFloatBehaviour;
-import org.hbird.transport.spacesystemmodel.parameters.behaviours.AbstractIntegerBehaviour;
-import org.hbird.transport.spacesystemmodel.parameters.behaviours.Float32Behaviour;
-import org.hbird.transport.spacesystemmodel.parameters.behaviours.Float64Behaviour;
-import org.hbird.transport.spacesystemmodel.parameters.behaviours.IntegerSignedBehaviour;
-import org.hbird.transport.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
-import org.hbird.transport.spacesystemmodel.parameters.behaviours.LongSignedBehaviour;
-import org.hbird.transport.spacesystemmodel.parameters.behaviours.NumberParameterTypeBehaviour;
-import org.hbird.transport.spacesystemmodel.parameters.types.NumberParameterType;
+import org.hbird.transport.spacesystemmodel.parameters.types.ParameterType;
 import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,8 +50,8 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 
 	private static final Logger LOG = LoggerFactory.getLogger(XtceModelFactory.class);
 
-	private final Map<String, Unit> units = new HashMap<String, Unit>();
-	private final Map<String, NumberParameterType> types = new HashMap<String, NumberParameterType>();
+	// private final Map<String, Unit> units = new HashMap<String, Unit>();
+	private final Map<String, ParameterType> types = new HashMap<String, ParameterType>();
 	private final Map<String, ParameterGroup> containers = new HashMap<String, ParameterGroup>();
 	private final Map<String, DefaultParameter> parameters = new HashMap<String, DefaultParameter>();
 	private final Map<Parameter, List<String>> restrictions = new HashMap<Parameter, List<String>>();
@@ -225,22 +221,22 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 
 				// Read in the unit of the parameter type.
 				//@formatter:off
-				if (integerParameterType.getUnitSet() != null) {
-					for (int unitTypeIndex = 0; unitTypeIndex < integerParameterType.getUnitSet().getUnitCount(); ++unitTypeIndex) {
-						final org.hbird.transport.generatedcode.xtce.Unit parameterTypeUnit = integerParameterType.getUnitSet().getUnit(unitTypeIndex);
-						unit = units.get(parameterTypeUnit.getContent());
-						if (unit == null) {
-							unit = new Unit(
-									parameterTypeUnit.getContent(),
-									parameterTypeUnit.getDescription(),
-									parameterTypeUnit.getDescription(),
-									parameterTypeUnit.getPower(),
-									parameterTypeUnit.getFactor());
-
-							units.put(parameterTypeUnit.getContent(), unit);
-						}
-					}
-				}
+//				if (integerParameterType.getUnitSet() != null) {
+//					for (int unitTypeIndex = 0; unitTypeIndex < integerParameterType.getUnitSet().getUnitCount(); ++unitTypeIndex) {
+//						final org.hbird.transport.generatedcode.xtce.Unit parameterTypeUnit = integerParameterType.getUnitSet().getUnit(unitTypeIndex);
+//						unit = units.get(parameterTypeUnit.getContent());
+//						if (unit == null) {
+//							unit = new Unit(
+//									parameterTypeUnit.getContent(),
+//									parameterTypeUnit.getDescription(),
+//									parameterTypeUnit.getDescription(),
+//									parameterTypeUnit.getPower(),
+//									parameterTypeUnit.getFactor());
+//
+//							units.put(parameterTypeUnit.getContent(), unit);
+//						}
+//					}
+//				}
 
 
 				boolean bigEndian;
@@ -281,25 +277,27 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 				}
 
 				// FIXME Add more logic to cater for multiple integer behaviours.
-				NumberParameterTypeBehaviour numberTypeBehaviour = null;
+				ParameterType parameterType = null;
 
 				// If parameter is less than 64 (i.e. an integers type...
 				if (integerParameterType.getSizeInBits() < 64) {
 					if (!integerParameterType.getSigned()) {
-						numberTypeBehaviour = new IntegerUnsignedBehaviour((int) integerParameterType.getSizeInBits(), bigEndian);
+						parameterType = ParameterType.UInteger;
 					}
 					else {
-						numberTypeBehaviour = new IntegerSignedBehaviour((int) integerParameterType.getSizeInBits(), bigEndian);
+						parameterType = ParameterType.Integer;
 					}
 				}
 				// else we are dealing with a long
 				else {
-					numberTypeBehaviour = new LongSignedBehaviour((int) integerParameterType.getSizeInBits(), bigEndian);
+					if (!integerParameterType.getSigned()) {
+						parameterType = ParameterType.ULong;
+					}
+					else {
+						parameterType = ParameterType.Long;
+					}
 				}
 
-				// else {
-				// LOG.error("Not enough information to construct the behaviour type");
-				// }
 				final NumberParameterType type = new NumberParameterType(integerParameterType.getName(), integerParameterType.getShortDescription(),
 						integerParameterType.getLongDescription(), numberTypeBehaviour, initialValue);
 
@@ -311,19 +309,22 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 				Unit unit = null;
 
 				// Read in the unit of the parameter type
-				if (item.getFloatParameterType().getUnitSet() != null) {
-					for (int unitTypeIndex = 0; unitTypeIndex < item.getFloatParameterType().getUnitSet().getUnitCount(); ++unitTypeIndex) {
-						unit = units.get(item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getContent());
-						if (unit == null) {
-							unit = new Unit(item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(), item.getFloatParameterType()
-									.getUnitSet().getUnit(unitTypeIndex).getDescription(), item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex)
-									.getDescription(), item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getPower(), item
-									.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getFactor());
-
-							units.put(item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(), unit);
-						}
-					}
-				}
+				// if (item.getFloatParameterType().getUnitSet() != null) {
+				// for (int unitTypeIndex = 0; unitTypeIndex < item.getFloatParameterType().getUnitSet().getUnitCount();
+				// ++unitTypeIndex) {
+				// unit = units.get(item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getContent());
+				// if (unit == null) {
+				// unit = new Unit(item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(),
+				// item.getFloatParameterType()
+				// .getUnitSet().getUnit(unitTypeIndex).getDescription(),
+				// item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex)
+				// .getDescription(), item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getPower(), item
+				// .getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getFactor());
+				//
+				// units.put(item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(), unit);
+				// }
+				// }
+				// }
 
 				NumberParameterType type = null;
 				final long size = Long.parseLong(item.getFloatParameterType().getSizeInBits().value());

@@ -1,4 +1,4 @@
-package org.hbird.transport.spacesystemmodel.testsupport;
+package org.hbird.transport.packetbroker.testsupport;
 
 import java.util.ArrayList;
 import java.util.Collection;

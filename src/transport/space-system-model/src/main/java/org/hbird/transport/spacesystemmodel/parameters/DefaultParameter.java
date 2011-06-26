@@ -5,7 +5,7 @@
 
 package org.hbird.transport.spacesystemmodel.parameters;
 
-import org.hbird.transport.spacesystemmodel.parameters.types.NumberParameterType;
+import org.hbird.transport.spacesystemmodel.parameters.types.ParameterType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +28,7 @@ public abstract class DefaultParameter implements Parameter {
 	private final String longDescription;
 
 	/** The NumberParameterType of the parameter. */
-	protected NumberParameterType type = null;
+	protected ParameterType type = null;
 
 	/**
 	 * Constructor of the Parameter class.
@@ -43,7 +43,7 @@ public abstract class DefaultParameter implements Parameter {
 	 *            The parameter type.
 	 * 
 	 */
-	public DefaultParameter(final String name, final String shortDescription, final String longDescription, final NumberParameterType type) {
+	public DefaultParameter(final String name, final String shortDescription, final String longDescription, final ParameterType type) {
 		this.name = name;
 		this.shortDescription = shortDescription;
 		this.longDescription = longDescription;
@@ -76,7 +76,7 @@ public abstract class DefaultParameter implements Parameter {
 	abstract public void setValue(double value);
 
 	@Override
-	public NumberParameterType getType() {
+	public ParameterType getType() {
 		return type;
 	}
 
@@ -87,12 +87,12 @@ public abstract class DefaultParameter implements Parameter {
 	 *            The type to be set.
 	 * 
 	 */
-	public void setType(final NumberParameterType type) {
+	public void setType(final ParameterType type) {
 		this.type = type;
 	}
 
 	@Override
 	public int getSizeInBits() {
-		return (int) type.getSizeInBits();
+		return this.getSizeInBits();
 	}
 }

@@ -19,28 +19,30 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The container is the basic element in the Frame Broker's POJO hierarchy. A container is an ordered sequence of other
- * containers, of which some or all may be parameter.
+ * The ParameterGroup is the basic element in the Space System Model's POJO hierarchy. A ParameterGroup is an ordered
+ * sequence of other {@link ParameterGroup} and or {@link Parameter}s.
  * 
- * The container is responsible for managing the encoding/decoding of it's portion of the structured bit-set that
- * represents the encoded data. The container has a length, which is the sum of the length of its sub-containers. This
- * length may have a value when a structured bit-set has been processed by the Frame Broker.
+ * The ParameterGroup is responsible for managing the hierarchy of the binary data it models, for example, this could be
+ * a telemetry packet or a telecommand.
  * 
- * The container will only process the bit-set if all restrictions are met. This is used as a switch to turn certain
- * containers on or off as part of the Frame Broker's processing hierarchy. For example, when processing CCSDS space
- * packets, the packet header will define an Application ID (APID) which in turn defines what the structure of the data
- * part of the packet is. For each data structure a ParameterGroup will exist, i.e., per APID. The specific container
- * that processes the packet is configured by adding restrictions to each container. These restrictions dictate that the
- * APID parameter must have a specific value or be ignored by this container.
+ * The ParameterGroup also tracks the length of the collection of parameters it defines, which is the sum of the length
+ * of its Parameters (including those contains in sub-ParameterGroup).
+ * 
+ * ParameterGroup is part of a single Space System Model which models the hierarchy of all definitions of binary data in
+ * a system. This means certain ParameterGroups and Parameters are only valid in specific contexts. The Model uses a
+ * concept called restrictions to implement this. A ParameterGroup will return, as part of the interface, whether it is
+ * valid based upon n restrictions applied to it. For example, when processing CCSDS space packets, the packet header
+ * will define an Application ID (APID) which in turn defines what the structure of the data part of the packet is. For
+ * each data structure a ParameterGroup will exist, i.e., per APID. The specific container that processes the packet is
+ * configured by adding restrictions to each container. These restrictions dictate that the APID parameter must have a
+ * specific value or be ignored by this container.
  * 
  * @author Gert Villemos
  * @author Mark Doyle
  * @author Johannes Klug
  */
 public class DefaultParameterGroup implements ParameterGroup {
-	/**
-	 * Logger for this class
-	 */
+	/** Logger for this class */
 	private static final Logger LOG = LoggerFactory.getLogger(DefaultParameterGroup.class);
 
 	private final String name;
