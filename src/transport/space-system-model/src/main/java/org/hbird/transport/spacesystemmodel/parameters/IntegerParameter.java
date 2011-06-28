@@ -1,21 +1,8 @@
-/**
- * Licensed under the Apache License, Version 2.0. You may obtain a copy of 
- * the License at http://www.apache.org/licenses/LICENSE-2.0 or at this project's root.
- */
-
 package org.hbird.transport.spacesystemmodel.parameters;
 
 import org.hbird.transport.spacesystemmodel.parameters.types.ParameterType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class IntegerParameter extends DefaultParameter {
-	private static final Logger LOG = LoggerFactory.getLogger(IntegerParameter.class);
-
-	/**
-	 * The value of the integer. It must be of type Long, since Hummingbird supports 64bit Integers.
-	 * */
-	protected Number value = 0L;
+public class IntegerParameter extends DefaultParameter<Integer> {
 
 	/**
 	 * Constructor of the IntegerParameter class.
@@ -31,61 +18,49 @@ public class IntegerParameter extends DefaultParameter {
 	 * @param value
 	 *            The initial value.
 	 */
-	public IntegerParameter(final String name, final String shortDescription, final String longDescription, final ParameterType type, final long value) {
+	public IntegerParameter(final String name, final String shortDescription, final String longDescription, final ParameterType type, final int value) {
 		super(name, shortDescription, longDescription, type);
-		this.value = value;
-	}
-
-	// @Override
-	// public BitSet unmarshall(BitSet packet) {
-	// if (LOG.isDebugEnabled()) {
-	// LOG.debug("Unmarshalling " + this.name + " from packet : " + packet);
-	// }
-	//
-	// // Extract this Integer form the given binary bitset.
-	// value = this.type.getNumberBehaviour().valueFromBitSet(packet);
-	//
-	// // Notify all our observers that the value has changed.
-	// for (ParameterObserver paramObserver : updatedParameterObservers) {
-	// paramObserver.updated(name, value.intValue(), shortDescription, longDescription);
-	// }
-	//
-	// // Chop off this integer parameter because it has now been unmarshalled
-	// if (LOG.isDebugEnabled()) {
-	// LOG.debug("Bitset before post unmarshall chop = " + BitSetUtility.binDump(packet));
-	// }
-	// BitSet returnPacket = packet.get((int) type.getSizeInBits(), packet.length() + 1);
-	// if (LOG.isDebugEnabled()) {
-	// LOG.debug("Bitset after post unmarshall chop = " + BitSetUtility.binDump(returnPacket));
-	// }
-	// // Return the rest of the binary bitset to the calling container
-	// return returnPacket;
-	// }
-	//
-	// @Override
-	// public int marshall(BitSet packet, int offset) throws BitSetOperationException {
-	// packet = this.type.getNumberBehaviour().insertIntoBitSet(getValue(), packet, offset);
-	//
-	// return offset + (int) type.getSizeInBits();
-	// }
-
-	@Override
-	public String toString() {
-		return "[int (" + this.getSizeInBits() + ") " + this.getName() + "=" + this.value + "]";
-	}
-
-	@Override
-	public Number getValue() {
-		return value;
+		this.setValue(value);
 	}
 
 	@Override
 	public boolean match(final String value) {
-		return (this.value.intValue() == Integer.parseInt(value));
+		return (this.getValue().intValue() == Integer.parseInt(value));
 	}
 
-	@Override
-	public void setValue(final double value) {
-		this.value = (long) value;
-	}
+
 }
+
+
+// @Override
+// public BitSet unmarshall(BitSet packet) {
+// if (LOG.isDebugEnabled()) {
+// LOG.debug("Unmarshalling " + this.name + " from packet : " + packet);
+// }
+//
+// // Extract this Integer form the given binary bitset.
+// value = this.type.getNumberBehaviour().valueFromBitSet(packet);
+//
+// // Notify all our observers that the value has changed.
+// for (ParameterObserver paramObserver : updatedParameterObservers) {
+// paramObserver.updated(name, value.intValue(), shortDescription, longDescription);
+// }
+//
+// // Chop off this integer parameter because it has now been unmarshalled
+// if (LOG.isDebugEnabled()) {
+// LOG.debug("Bitset before post unmarshall chop = " + BitSetUtility.binDump(packet));
+// }
+// BitSet returnPacket = packet.get((int) type.getSizeInBits(), packet.length() + 1);
+// if (LOG.isDebugEnabled()) {
+// LOG.debug("Bitset after post unmarshall chop = " + BitSetUtility.binDump(returnPacket));
+// }
+// // Return the rest of the binary bitset to the calling container
+// return returnPacket;
+// }
+//
+// @Override
+// public int marshall(BitSet packet, int offset) throws BitSetOperationException {
+// packet = this.type.getNumberBehaviour().insertIntoBitSet(getValue(), packet, offset);
+//
+// return offset + (int) type.getSizeInBits();
+// }

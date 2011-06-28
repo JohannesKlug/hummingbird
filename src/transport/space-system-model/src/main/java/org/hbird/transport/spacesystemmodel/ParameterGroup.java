@@ -10,26 +10,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.parameters.ParameterObserver;
 
 
 /**
- * The standard interface of a marshaller container. The interface supports the unmarshalling and marshalling of
- * containers.
+ * TODO The standard interface of a ParameterGroup.
  */
 public interface ParameterGroup extends SpaceSystemModelItem {
-
-	/**
-	 * Encodes the container (and sub containers) into a string. The string is purely informative format, intended to
-	 * help debugging and visualisation.
-	 * 
-	 * @return String Encoded representation of the container.
-	 * 
-	 */
-	@Override
-	String toString();
-
-
 	/**
 	 * <p>
 	 * Returns the total length of the {@link ParameterGroup} based upon the length of the {@link Parameter}s in this
@@ -76,7 +62,7 @@ public interface ParameterGroup extends SpaceSystemModelItem {
 	 * 
 	 * @param parameter
 	 */
-	void addParameter(Parameter parameter);
+	void addParameter(Parameter<?> parameter);
 
 	/**
 	 * <p>
@@ -95,17 +81,17 @@ public interface ParameterGroup extends SpaceSystemModelItem {
 	 * <i>Remember, the SpaceSystemModel models the entire system, which means every possible definition of the binary
 	 * data. This is important when understanding restrictions.</i>
 	 * 
-	 * @param param
+	 * @param parameter
 	 * @param comparisonValue
 	 */
-	void addRestriction(Parameter param, String predicate);
+	void addRestriction(Parameter<?> parameter, String predicate);
 
 	/**
 	 * Return all restrictions set on this {@link ParameterGroup}
 	 * 
 	 * @return a Map of all restrictions set on this {@link ParameterGroup}
 	 */
-	Map<Parameter, String> getRestrictions();
+	Map<Parameter<?>, String> getRestrictions();
 
 	/**
 	 * Process the restrictions set on this ParameterGroup. This method decides whether this ParameterGroup is valid for
@@ -135,12 +121,5 @@ public interface ParameterGroup extends SpaceSystemModelItem {
 	 * @return List of this ParameterGroup's parents.
 	 */
 	List<ParameterGroup> getParentParameterGroup();
-
-
-	// FIXME remove - this was for support of clients who wished to be notified when a decode/encode was complete.
-	void addParameterUpdateObserver(ParameterObserver observer);
-
-	// FIXME remove - this was for support of clients who wished to be notified when a decode/encode was complete.
-	void addPacketObserver(ParameterGroupObserver observer);
 
 }

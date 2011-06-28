@@ -1,34 +1,28 @@
-/**
- * Licensed under the Apache License, Version 2.0. You may obtain a copy of 
- * the License at http://www.apache.org/licenses/LICENSE-2.0 or at this project's root.
- */
-
 package org.hbird.transport.spacesystemmodel.parameters;
 
 import org.hbird.transport.spacesystemmodel.parameters.types.ParameterType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- * The abstract base class for all parameter <b><i>containers</i></b>. The class is intended to be subtyped for each
- * simple Java type type.
+ * The abstract base class for all {@link Parameter}s. The class is intended to be subtyped for each concrete type.
  * 
- * A parameter is the leaf of the container tree. Each parameter has a type, which defines among others the length in
- * bits.
+ * A parameter is the leaf of the Space System Model tree.
+ * 
+ * Each parameter has a type, which defines among others the length in bits.
  * 
  * @author Gert Villemos
  * @author Mark Doyle
  * @author Johannes Klug
  */
-public abstract class DefaultParameter implements Parameter {
-	private static final Logger LOG = LoggerFactory.getLogger(DefaultParameter.class);
+public abstract class DefaultParameter<T> implements Parameter<T> {
 
 	private final String name;
 	private final String shortDescription;
 	private final String longDescription;
 
-	/** The NumberParameterType of the parameter. */
-	protected ParameterType type = null;
+	private T value;
+
+	/** The Type of the parameter. */
+	private ParameterType type = null;
 
 	/**
 	 * Constructor of the Parameter class.
@@ -47,7 +41,6 @@ public abstract class DefaultParameter implements Parameter {
 		this.name = name;
 		this.shortDescription = shortDescription;
 		this.longDescription = longDescription;
-
 		this.type = type;
 	}
 
@@ -65,15 +58,6 @@ public abstract class DefaultParameter implements Parameter {
 	public String getLongDescription() {
 		return this.longDescription;
 	}
-
-	/**
-	 * Sets the value of the parameter.
-	 * 
-	 * @param value
-	 *            The value to be set.
-	 * 
-	 */
-	abstract public void setValue(double value);
 
 	@Override
 	public ParameterType getType() {
@@ -95,4 +79,31 @@ public abstract class DefaultParameter implements Parameter {
 	public int getSizeInBits() {
 		return this.getSizeInBits();
 	}
+
+	@Override
+	public T getValue() {
+		return this.value;
+	}
+
+	@Override
+	public void setValue(final T value) {
+		this.value = value;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("DefaultParameter [name=");
+		builder.append(name);
+		builder.append(", type=");
+		builder.append(type);
+		builder.append(", value=");
+		builder.append(value);
+		builder.append(", shortDescription=");
+		builder.append(shortDescription);
+		builder.append("]");
+		return builder.toString();
+	};
+
+
 }

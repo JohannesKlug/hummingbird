@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.parameters.ParameterObserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,20 +54,17 @@ public class DefaultParameterGroup implements ParameterGroup {
 	 * parameter will convert the string based on its type and compare itself against the resulting value. If the string
 	 * is invalid then this will always count as a failed match.
 	 */
-	protected Map<Parameter, String> restrictions = new HashMap<Parameter, String>();
+	protected Map<Parameter<?>, String> restrictions = new HashMap<Parameter<?>, String>();
 
 	/** The ordered set of sub containers. */
 	private final List<ParameterGroup> subContainers = new ArrayList<ParameterGroup>();
-	private final List<Parameter> parameters = new ArrayList<Parameter>();
+	private final List<Parameter<?>> parameters = new ArrayList<Parameter<?>>();
 
 
 	/**
 	 * The length of this container in bits. The value will hold a BitSet of length >= length + 1.
 	 */
 	protected int length = 0;
-
-	protected List<ParameterGroupObserver> completionObservers = new ArrayList<ParameterGroupObserver>();
-	protected List<ParameterObserver> updatedParameterObservers = new ArrayList<ParameterObserver>();
 
 	protected List<ParameterGroup> parents = new ArrayList<ParameterGroup>();
 
@@ -106,10 +102,10 @@ public class DefaultParameterGroup implements ParameterGroup {
 		// which have been defined with the base container as a base. The sub containers themselves must decide whether
 		// they are relevant for the processing.
 		boolean match = true;
-		Iterator<Entry<Parameter, String>> it = restrictions.entrySet().iterator();
+		Iterator<Entry<Parameter<?>, String>> it = restrictions.entrySet().iterator();
 
 		while (it.hasNext() == true && match) {
-			Entry<Parameter, String> entry = it.next();
+			Entry<Parameter<?>, String> entry = it.next();
 
 			// The restriction is against a parameter value. The value may thus depend on a parameter which has already
 			// be extracted from the same data container. For example could the packet header have been processed by the
@@ -257,9 +253,9 @@ public class DefaultParameterGroup implements ParameterGroup {
 	 * 
 	 */
 	@Override
-	public void addRestriction(final Parameter model, final String value) {
-		if (model != null) {
-			restrictions.put(model, value);
+	public void addRestriction(final Parameter<?> parameter, final String value) {
+		if (parameter != null) {
+			restrictions.put(parameter, value);
 		}
 	}
 
@@ -267,7 +263,7 @@ public class DefaultParameterGroup implements ParameterGroup {
 	public int getSizeInBits() {
 		length = 0;
 		if (matchRestrictions()) {
-			for (Parameter parameter : parameters) {
+			for (Parameter<?> parameter : parameters) {
 				length += parameter.getSizeInBits();
 			}
 			// Iterate through all sub-containers and sum the size.
@@ -279,16 +275,6 @@ public class DefaultParameterGroup implements ParameterGroup {
 		return length;
 	}
 
-	@Override
-	public void addPacketObserver(final ParameterGroupObserver observer) {
-		this.completionObservers.add(observer);
-
-	}
-
-	@Override
-	public void addParameterUpdateObserver(final ParameterObserver observer) {
-		this.updatedParameterObservers.add(observer);
-	}
 
 	@Override
 	public List<ParameterGroup> getSubParameterGroups() {
@@ -296,7 +282,7 @@ public class DefaultParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public Map<Parameter, String> getRestrictions() {
+	public Map<Parameter<?>, String> getRestrictions() {
 		return restrictions;
 	}
 
@@ -318,7 +304,7 @@ public class DefaultParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public void addParameter(final Parameter parameter) {
+	public void addParameter(final Parameter<?> parameter) {
 		this.parameters.add(parameter);
 	}
 

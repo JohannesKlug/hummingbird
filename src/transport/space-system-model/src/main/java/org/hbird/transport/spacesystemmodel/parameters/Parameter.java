@@ -11,7 +11,7 @@ import org.hbird.transport.spacesystemmodel.parameters.types.ParameterType;
 /**
  * Interface of a parameter container.
  */
-public interface Parameter extends SpaceSystemModelItem {
+public interface Parameter<T> extends SpaceSystemModelItem {
 	/**
 	 * Returns the type of the parameter.
 	 * 
@@ -22,12 +22,20 @@ public interface Parameter extends SpaceSystemModelItem {
 
 
 	/**
-	 * Returns the value of the parameter.
+	 * Returns the value of this parameter.
 	 * 
-	 * @return float The value of the parameter.
+	 * @return The value of this parameter.
 	 * 
 	 */
-	Number getValue();
+	T getValue();
+
+	/**
+	 * Set the value of this Parameter.
+	 * 
+	 * @param value
+	 *            the value of this Parameter
+	 */
+	void setValue(T value);
 
 	/**
 	 * Returns the size of the Parameter in bits.

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
-import org.hbird.transport.spacesystemmodel.parameters.DefaultParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
 /**
@@ -45,23 +44,20 @@ public interface SpaceSystemModelFactory {
 	 * @return Parameter Returns the parameter container identified through the name, or null.
 	 * 
 	 */
-	DefaultParameter getParameter(String name);
+	Parameter<?> getParameter(String name);
 
 	/**
 	 * Get all {@link Parameter}s in the Space System Model
 	 * 
 	 * @return Map of all parameters
 	 */
-	Map<String, DefaultParameter> getAllParameters();
+	Map<String, Parameter<?>> getAllParameters();
 
 	/**
 	 * Get all restrictions in the Space System Model
 	 * 
 	 * @return map of all restrictions.
 	 */
-	Map<Parameter, List<String>> getAllParameterRestrictions();
-
-	// FIXME Remove this? ParameterGroup model does not necessarily have to have a corresponding file.
-	String getSpaceSystemModelFilePath();
+	Map<Parameter<?>, List<String>> getAllParameterRestrictions();
 
 }
