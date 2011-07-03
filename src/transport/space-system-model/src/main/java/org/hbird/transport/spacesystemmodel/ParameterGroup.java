@@ -91,7 +91,7 @@ public interface ParameterGroup extends SpaceSystemModelItem {
 	 * 
 	 * @return a Map of all restrictions set on this {@link ParameterGroup}
 	 */
-	Map<Parameter<?>, String> getRestrictions();
+	Map<Parameter<?>, Object> getRestrictions();
 
 	/**
 	 * Process the restrictions set on this ParameterGroup. This method decides whether this ParameterGroup is valid for

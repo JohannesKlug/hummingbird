@@ -1,15 +1,11 @@
 package org.hbird.transport.spacesystemmodel.parameters;
 
-import org.hbird.transport.spacesystemmodel.parameters.types.ParameterType;
 
 /**
  * The abstract base class for all {@link Parameter}s. The class is intended to be subtyped for each concrete type.
  * 
  * A parameter is the leaf of the Space System Model tree.
  * 
- * Each parameter has a type, which defines among others the length in bits.
- * 
- * @author Gert Villemos
  * @author Mark Doyle
  * @author Johannes Klug
  */
@@ -18,11 +14,10 @@ public abstract class DefaultParameter<T> implements Parameter<T> {
 	private final String name;
 	private final String shortDescription;
 	private final String longDescription;
-
+	private final long sizeInBits;
+	private final Endianness endianness;
 	private T value;
 
-	/** The Type of the parameter. */
-	private ParameterType type = null;
 
 	/**
 	 * Constructor of the Parameter class.
@@ -37,11 +32,12 @@ public abstract class DefaultParameter<T> implements Parameter<T> {
 	 *            The parameter type.
 	 * 
 	 */
-	public DefaultParameter(final String name, final String shortDescription, final String longDescription, final ParameterType type) {
+	public DefaultParameter(final String name, final String shortDescription, final String longDescription, final long sizeInBits, final Endianness endianness) {
 		this.name = name;
 		this.shortDescription = shortDescription;
 		this.longDescription = longDescription;
-		this.type = type;
+		this.sizeInBits = sizeInBits;
+		this.endianness = endianness;
 	}
 
 	@Override
@@ -60,24 +56,8 @@ public abstract class DefaultParameter<T> implements Parameter<T> {
 	}
 
 	@Override
-	public ParameterType getType() {
-		return type;
-	}
-
-	/**
-	 * Sets the type of the parameter.
-	 * 
-	 * @param type
-	 *            The type to be set.
-	 * 
-	 */
-	public void setType(final ParameterType type) {
-		this.type = type;
-	}
-
-	@Override
-	public int getSizeInBits() {
-		return this.getSizeInBits();
+	public long getSizeInBits() {
+		return this.sizeInBits;
 	}
 
 	@Override
@@ -95,15 +75,27 @@ public abstract class DefaultParameter<T> implements Parameter<T> {
 		StringBuilder builder = new StringBuilder();
 		builder.append("DefaultParameter [name=");
 		builder.append(name);
-		builder.append(", type=");
-		builder.append(type);
 		builder.append(", value=");
 		builder.append(value);
 		builder.append(", shortDescription=");
 		builder.append(shortDescription);
 		builder.append("]");
 		return builder.toString();
-	};
+	}
 
+	@Override
+	public boolean isValue(final Object obj) {
+		if (value.equals(obj)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public Endianness getEndianness() {
+		return this.endianness;
+	}
 
 }

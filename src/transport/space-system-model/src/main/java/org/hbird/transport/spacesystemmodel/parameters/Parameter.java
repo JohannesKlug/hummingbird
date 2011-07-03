@@ -1,24 +1,20 @@
-/**
- * Licensed under the Apache License, Version 2.0. You may obtain a copy of 
- * the License at http://www.apache.org/licenses/LICENSE-2.0 or at this project's root.
- */
-
 package org.hbird.transport.spacesystemmodel.parameters;
 
 import org.hbird.transport.spacesystemmodel.SpaceSystemModelItem;
-import org.hbird.transport.spacesystemmodel.parameters.types.ParameterType;
 
 /**
- * Interface of a parameter container.
+ * Parameter interface. <br>
+ * Paramters are typed in Hummingbird which means they can model a Parameter using any primitive or class.
  */
 public interface Parameter<T> extends SpaceSystemModelItem {
+
 	/**
-	 * Returns the type of the parameter.
-	 * 
-	 * @return ParameterType The type of the parameter.
-	 * 
+	 * The Endianness or byte order of the binary data this Parameter represents. This is part of the Parameter
+	 * interface as it will be required by clients of Parameter.
 	 */
-	ParameterType getType();
+	enum Endianness {
+		BIG, LITTLE
+	};
 
 
 	/**
@@ -42,16 +38,14 @@ public interface Parameter<T> extends SpaceSystemModelItem {
 	 * 
 	 * @return int representing the size in bits of this {@link Parameter}
 	 */
-	int getSizeInBits();
-
+	long getSizeInBits();
 
 	/**
-	 * Converts the parsed value to the type of this parameter and compares the value with the current value.
+	 * Returns the byte order of the binary data this Parameter represents.
 	 * 
-	 * @param value
-	 *            The value to be compared against.
-	 * 
+	 * @return endiannness of the binary data this Parameter represents.
 	 */
-	boolean match(String value);
+	Endianness getEndianness();
 
+	boolean isValue(Object obj);
 }

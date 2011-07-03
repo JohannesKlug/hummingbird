@@ -8,7 +8,6 @@ package org.hbird.transport.spacesystemmodel;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -54,7 +53,7 @@ public class DefaultParameterGroup implements ParameterGroup {
 	 * parameter will convert the string based on its type and compare itself against the resulting value. If the string
 	 * is invalid then this will always count as a failed match.
 	 */
-	protected Map<Parameter<?>, String> restrictions = new HashMap<Parameter<?>, String>();
+	protected Map<Parameter<?>, Object> restrictions = new HashMap<Parameter<?>, Object>();
 
 	/** The ordered set of sub containers. */
 	private final List<ParameterGroup> subContainers = new ArrayList<ParameterGroup>();
@@ -102,17 +101,30 @@ public class DefaultParameterGroup implements ParameterGroup {
 		// which have been defined with the base container as a base. The sub containers themselves must decide whether
 		// they are relevant for the processing.
 		boolean match = true;
-		Iterator<Entry<Parameter<?>, String>> it = restrictions.entrySet().iterator();
 
-		while (it.hasNext() == true && match) {
-			Entry<Parameter<?>, String> entry = it.next();
+		for (Entry<Parameter<?>, Object> restriction : restrictions.entrySet()) {
+			Parameter<?> restrictionLockParameter = restriction.getKey();
+			Object restrictionKey = restrictions.get(restrictionLockParameter);
 
-			// The restriction is against a parameter value. The value may thus depend on a parameter which has already
-			// be extracted from the same data container. For example could the packet header have been processed by the
-			// base container and the APID set to a value. The data is thereafter forwarded to containers who only
-			// process specific APIDs, based on a restriction on the APID.
-			match = entry.getKey().match(entry.getValue());
+			if (restrictionLockParameter.isValue(restrictionKey)) {
+				match = true;
+			}
+			else {
+				match = false;
+			}
 		}
+
+		// Iterator<Entry<Parameter<?>, String>> it = restrictions.entrySet().iterator();
+		//
+		// while (it.hasNext() == true && match) {
+		// Entry<Parameter<?>, String> entry = it.next();
+		//
+		// // The restriction is against a parameter value. The value may depend on a parameter which has already
+		// // been extracted from the same data container. For example, the packet header could have been processed by
+		// // the base container and the APID set to a value. The data is thereafter forwarded to containers who only
+		// // process specific APIDs, based on a restriction on the APID.
+		// match = entry.getKey().match(entry.getValue());
+		// }
 
 		return match;
 	}
@@ -282,7 +294,7 @@ public class DefaultParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public Map<Parameter<?>, String> getRestrictions() {
+	public Map<Parameter<?>, Object> getRestrictions() {
 		return restrictions;
 	}
 

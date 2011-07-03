@@ -58,6 +58,6 @@ public interface SpaceSystemModelFactory {
 	 * 
 	 * @return map of all restrictions.
 	 */
-	Map<Parameter<?>, List<String>> getAllParameterRestrictions();
+	Map<Parameter<?>, List<Object>> getAllParameterRestrictions();
 
 }
