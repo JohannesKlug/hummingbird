@@ -25,7 +25,7 @@ import org.hbird.transport.spacesystemmodel.ParameterGroup;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
-import org.hbird.transport.spacesystemmodel.parameters.DefaultParameter;
+import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter.Endianness;
 import org.hbird.transport.spacesystemmodel.parameters.types.ParameterType;
@@ -316,7 +316,7 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 				DataEncodingTypeBitOrderType byteOrder = type.getBaseDataTypeChoice().getIntegerDataEncoding().getBitOrder();
 				if(!doesIntRequireJavaLong(type)) {
 					if(byteOrder == DataEncodingTypeBitOrderType.MOSTSIGNIFICANTBITFIRST) {
-						parameter = new DefaultParameter<Integer>(xtceParameter.getParameter().getName(),
+						parameter = new HummingbirdParameter<Integer>(xtceParameter.getParameter().getName(),
 																  xtceParameter.getParameter().getShortDescription(),
 																  xtceParameter.getParameter().getLongDescription(),
 																  ParameterType.Integer,
@@ -324,7 +324,7 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 																  Endianness.BIG);						
 					}
 					else {
-						parameter = new DefaultParameter<Integer>(xtceParameter.getParameter().getName(),
+						parameter = new HummingbirdParameter<Integer>(xtceParameter.getParameter().getName(),
 																  xtceParameter.getParameter().getShortDescription(),
 																  xtceParameter.getParameter().getLongDescription(),
 																  ParameterType.Integer,
@@ -334,7 +334,7 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 				}
 				else {
 					if(byteOrder == DataEncodingTypeBitOrderType.MOSTSIGNIFICANTBITFIRST) {
-						parameter = new DefaultParameter<Long>(xtceParameter.getParameter().getName(),
+						parameter = new HummingbirdParameter<Long>(xtceParameter.getParameter().getName(),
 															   xtceParameter.getParameter().getShortDescription(),
 															   xtceParameter.getParameter().getLongDescription(),
 															   ParameterType.Integer,
@@ -342,7 +342,7 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 															   Endianness.BIG);						
 					}
 					else {
-						parameter = new DefaultParameter<Long>(xtceParameter.getParameter().getName(),
+						parameter = new HummingbirdParameter<Long>(xtceParameter.getParameter().getName(),
 															   xtceParameter.getParameter().getShortDescription(),
 															   xtceParameter.getParameter().getLongDescription(),
 															   ParameterType.Integer,
@@ -357,7 +357,7 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 				FloatParameterType type = xtceType.getFloatParameterType();
 				
 				if(!doesFloatRequireJavaDouble(type)) {
-					parameter = new DefaultParameter<Float>(xtceParameter.getParameter().getName(),
+					parameter = new HummingbirdParameter<Float>(xtceParameter.getParameter().getName(),
 							   								xtceParameter.getParameter().getShortDescription(),
 							   								xtceParameter.getParameter().getLongDescription(),
 							   								ParameterType.Integer,
@@ -405,7 +405,7 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 		return longRequired;
 	}
 
-	private void addRestrictionToGlobalMap(final DefaultParameter paramContainer, final String comparisonValue) {
+	private void addRestrictionToGlobalMap(final HummingbirdParameter paramContainer, final String comparisonValue) {
 		List<String> pList;
 		if (restrictions.containsKey(paramContainer)) {
 			pList = restrictions.get(paramContainer);

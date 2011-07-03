@@ -15,7 +15,7 @@ import org.hbird.transport.spacesystemmodel.ParameterGroup;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.parameters.DefaultParameter;
+import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 
 /**
  * CCSDS Space System model defined telemetry simulator. Acronyms used: SSM = Space System Model
@@ -35,7 +35,7 @@ public class SimulatorSSM {
 	/** Factory producing the SSM */
 	SpaceSystemModelFactory ssmFactory;
 	ParameterGroup packetRoot;
-	Map<String, DefaultParameter> allParams;
+	Map<String, HummingbirdParameter> allParams;
 
 	private Map<String, Waveform> waveformMap;
 
@@ -59,7 +59,7 @@ public class SimulatorSSM {
 		this.allParams = ssmFactory.getAllParameters();
 	}
 
-	public final Collection<DefaultParameter> getAllParameters() {
+	public final Collection<HummingbirdParameter> getAllParameters() {
 		return this.ssmFactory.getAllParameters().values();
 	}
 
@@ -74,7 +74,7 @@ public class SimulatorSSM {
 	public final List<ParameterGroup> getAllPacketSections(final String packetNode, final List<ParameterGroup> sections) throws UnknownParameterGroupException {
 		ParameterGroup packetSection = this.ssmFactory.getParameterGroup(packetNode);
 
-		if (!(packetSection instanceof DefaultParameter)) {
+		if (!(packetSection instanceof HummingbirdParameter)) {
 			System.out.println("Adding section " + packetSection.getName());
 			sections.add(packetSection);
 
@@ -109,7 +109,7 @@ public class SimulatorSSM {
 
 		for (Parameter p : restrictions.keySet()) {
 			for (String val : restrictions.get(p)) {
-				((DefaultParameter) p).setValue(Integer.parseInt(val));
+				((HummingbirdParameter) p).setValue(Integer.parseInt(val));
 				packetRoot.getSubParameterGroups();
 			}
 		}
@@ -117,7 +117,7 @@ public class SimulatorSSM {
 
 	public synchronized BitSet encode(final String name, final Map<String, Double> fields) throws BitSetOperationException, UnknownParameterGroupException {
 		for (Map.Entry<String, Double> entry : fields.entrySet()) {
-			DefaultParameter parameter = ssmFactory.getParameter(entry.getKey());
+			HummingbirdParameter parameter = ssmFactory.getParameter(entry.getKey());
 			if (parameter == null) {
 				throw new UnknownParameterGroupException(entry.getKey());
 			}

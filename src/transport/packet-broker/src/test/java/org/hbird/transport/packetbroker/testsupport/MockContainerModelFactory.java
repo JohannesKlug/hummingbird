@@ -14,7 +14,7 @@ import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupExce
 import org.hbird.transport.spacesystemmodel.parameters.FloatParameter;
 import org.hbird.transport.spacesystemmodel.parameters.IntegerParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.parameters.DefaultParameter;
+import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.Float64Behaviour;
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
 import org.hbird.transport.spacesystemmodel.parameters.types.NumberParameterType;
@@ -85,7 +85,7 @@ public class MockContainerModelFactory implements SpaceSystemModelFactory {
 	public static final String VALIDITY_FLAG_ALIAS = "ValidityFlag";
 
 	private final Map<String, ParameterGroup> containers = new HashMap<String, ParameterGroup>();
-	private final Map<String, DefaultParameter> parameters = new HashMap<String, DefaultParameter>();
+	private final Map<String, HummingbirdParameter> parameters = new HashMap<String, HummingbirdParameter>();
 
 	public MockContainerModelFactory() throws InvalidParameterTypeException {
 		initialise();
@@ -222,12 +222,12 @@ public class MockContainerModelFactory implements SpaceSystemModelFactory {
 	}
 
 	@Override
-	public Map<String, DefaultParameter> getAllParameters() {
+	public Map<String, HummingbirdParameter> getAllParameters() {
 		return parameters;
 	}
 
 	@Override
-	public DefaultParameter getParameter(final String name) {
+	public HummingbirdParameter getParameter(final String name) {
 		return parameters.get(name);
 	}
 
@@ -241,7 +241,7 @@ public class MockContainerModelFactory implements SpaceSystemModelFactory {
 		this.containers.put(container.getName(), container);
 	}
 
-	private void addToParameters(final DefaultParameter parameter) {
+	private void addToParameters(final HummingbirdParameter parameter) {
 		this.parameters.put(parameter.getName(), parameter);
 	}
 

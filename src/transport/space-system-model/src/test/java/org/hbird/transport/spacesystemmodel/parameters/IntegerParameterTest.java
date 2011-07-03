@@ -3,6 +3,7 @@ package org.hbird.transport.spacesystemmodel.parameters;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter.Endianness;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,13 +14,8 @@ public class IntegerParameterTest {
 
 	@Before
 	public void setUp() throws Exception {
-		//@formatter:off
-		intParam = new IntegerParameter("IntParam",
-	  			  						"Test Param <int>",
-	  			  						"Test parameter typed to an Integer", 
-	  			  						32,
-	  			  						Endianness.BIG);
-		//@formatter:on
+		intParam = new HummingbirdParameter<Integer>("IntParam", "Test Param <int>", "Test parameter typed to an Integer",
+				32, Endianness.BIG, Encoding.twosComplement);
 	}
 
 	@Test
@@ -27,13 +23,16 @@ public class IntegerParameterTest {
 		intParam.setValue(5478);
 
 		Integer intCompareValue = new Integer(5478);
-		assertTrue("isValue should be true since the parameter and the Object are the same", intParam.isValue(intCompareValue));
+		assertTrue("isValue should be true since the parameter and the Object are the same",
+				intParam.isValue(intCompareValue));
 
 		intCompareValue = new Integer(5479);
-		assertFalse("isValue should not be true since the parameter and the Object are different values", intParam.isValue(intCompareValue));
+		assertFalse("isValue should not be true since the parameter and the Object are different values",
+				intParam.isValue(intCompareValue));
 
 		String stringCompareValue = "5478";
-		assertFalse("isValue should not be true since the parameter and the Object are different types", intParam.isValue(stringCompareValue));
+		assertFalse("isValue should not be true since the parameter and the Object are different types",
+				intParam.isValue(stringCompareValue));
 	}
 
 }

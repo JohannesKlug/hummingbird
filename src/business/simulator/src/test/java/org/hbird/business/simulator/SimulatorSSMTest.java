@@ -20,7 +20,7 @@ import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.spacesystemmodel.ParameterGroup;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.parameters.DefaultParameter;
+import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.transport.spacesystemmodel.testsupport.MockParameterContainerModel;
 import org.hbird.transport.xtce.XtceModelFactory;
 import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
@@ -54,7 +54,7 @@ public class SimulatorSSMTest {
 
 	@Test
 	public void testGetAllParameters() throws UnknownParameterGroupException, InvalidXtceFileException {
-		Collection<DefaultParameter> allParams = sim.getAllParameters();
+		Collection<HummingbirdParameter> allParams = sim.getAllParameters();
 		System.out.println("Number params = " + allParams.size());
 
 		for (ParameterGroup c : allParams) {

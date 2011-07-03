@@ -14,7 +14,7 @@ import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupExce
 import org.hbird.transport.spacesystemmodel.parameters.FloatParameter;
 import org.hbird.transport.spacesystemmodel.parameters.IntegerParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.parameters.DefaultParameter;
+import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.Float64Behaviour;
 import org.hbird.transport.spacesystemmodel.parameters.behaviours.IntegerUnsignedBehaviour;
 import org.hbird.transport.spacesystemmodel.parameters.types.NumberParameterType;
@@ -75,7 +75,7 @@ public class MockParameterContainerModel implements SpaceSystemModelFactory {
 	public static final String PAYLOAD_LENGTH_PARAM_ALIAS = "PayloadLength";
 
 	private final Map<String, ParameterGroup> containers = new HashMap<String, ParameterGroup>();
-	private final Map<String, DefaultParameter> parameters = new HashMap<String, DefaultParameter>();
+	private final Map<String, HummingbirdParameter> parameters = new HashMap<String, HummingbirdParameter>();
 
 	private final Map<Parameter, List<String>> restrictions = new HashMap<Parameter, List<String>>();
 
@@ -188,16 +188,16 @@ public class MockParameterContainerModel implements SpaceSystemModelFactory {
 	}
 
 	@Override
-	public Map<String, DefaultParameter> getAllParameters() {
+	public Map<String, HummingbirdParameter> getAllParameters() {
 		return parameters;
 	}
 
 	@Override
-	public DefaultParameter getParameter(final String name) {
+	public HummingbirdParameter getParameter(final String name) {
 		return parameters.get(name);
 	}
 
-	private void addRestrictionToGlobalMap(final DefaultParameter paramContainer, final String comparisonValue) {
+	private void addRestrictionToGlobalMap(final HummingbirdParameter paramContainer, final String comparisonValue) {
 		List<String> pList;
 		if (restrictions.containsKey(paramContainer)) {
 			pList = restrictions.get(paramContainer);
@@ -220,7 +220,7 @@ public class MockParameterContainerModel implements SpaceSystemModelFactory {
 		this.containers.put(container.getName(), container);
 	}
 
-	private void addToParameters(final DefaultParameter parameter) {
+	private void addToParameters(final HummingbirdParameter parameter) {
 		this.parameters.put(parameter.getName(), parameter);
 	}
 
