@@ -2,6 +2,7 @@ package org.hbird.transport.xtce;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -12,14 +13,21 @@ import org.exolab.castor.xml.MarshalException;
 import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.xml.ValidationException;
 import org.exolab.castor.xml.XMLContext;
+import org.hbird.transport.generatedcode.xtce.BaseDataType;
+import org.hbird.transport.generatedcode.xtce.BaseDataTypeChoice;
 import org.hbird.transport.generatedcode.xtce.Comparison;
+import org.hbird.transport.generatedcode.xtce.DataEncodingType;
+import org.hbird.transport.generatedcode.xtce.FloatDataEncoding;
 import org.hbird.transport.generatedcode.xtce.FloatParameterType;
+import org.hbird.transport.generatedcode.xtce.IntegerDataEncoding;
 import org.hbird.transport.generatedcode.xtce.IntegerParameterType;
 import org.hbird.transport.generatedcode.xtce.ParameterSetTypeItem;
 import org.hbird.transport.generatedcode.xtce.ParameterTypeSetTypeItem;
 import org.hbird.transport.generatedcode.xtce.SequenceContainer;
 import org.hbird.transport.generatedcode.xtce.SpaceSystem;
 import org.hbird.transport.generatedcode.xtce.types.DataEncodingTypeBitOrderType;
+import org.hbird.transport.generatedcode.xtce.types.FloatDataEncodingTypeEncodingType;
+import org.hbird.transport.generatedcode.xtce.types.IntegerDataEncodingTypeEncodingType;
 import org.hbird.transport.spacesystemmodel.DefaultParameterGroup;
 import org.hbird.transport.spacesystemmodel.ParameterGroup;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
@@ -27,8 +35,8 @@ import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeExcep
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
+import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter.Endianness;
-import org.hbird.transport.spacesystemmodel.parameters.types.ParameterType;
 import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,16 +49,13 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public class XtceModelFactory implements SpaceSystemModelFactory {
-
 	private static final Logger LOG = LoggerFactory.getLogger(XtceModelFactory.class);
 
-	// private final Map<String, Unit> units = new HashMap<String, Unit>();
-	private final Map<String, ParameterType> types = new HashMap<String, ParameterType>();
-	private final Map<String, ParameterTypeSetTypeItem> xtceParameterTypes = new HashMap<String, ParameterTypeSetTypeItem>();
-
-	private final Map<String, ParameterGroup> containers = new HashMap<String, ParameterGroup>();
+	private final Map<String, ParameterGroup> parameterGroups = new HashMap<String, ParameterGroup>();
 	private final Map<String, Parameter<?>> parameters = new HashMap<String, Parameter<?>>();
 	private final Map<Parameter<?>, List<Object>> restrictions = new HashMap<Parameter<?>, List<Object>>();
+
+	private final Map<String, ParameterTypeSetTypeItem> xtceParameterTypes = new HashMap<String, ParameterTypeSetTypeItem>();
 
 	private SpaceSystem spaceSystem = null;
 
@@ -58,6 +63,8 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 	private String frameBaseReference = "TMFrame";
 
 	private String spacesystemmodelFilename;
+
+	private int numXtceModelContainers;
 
 	public XtceModelFactory(final String spacesystemmodelFilename) throws InvalidXtceFileException {
 		this.spacesystemmodelFilename = spacesystemmodelFilename;
@@ -78,10 +85,10 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 
 	@Override
 	public ParameterGroup getParameterGroup(final String name) throws UnknownParameterGroupException {
-		final ParameterGroup container = containers.get(name);
+		final ParameterGroup container = parameterGroups.get(name);
 
 		if (container == null) {
-			throw new UnknownParameterGroupException(containers, "Your container lookup for '" + name
+			throw new UnknownParameterGroupException(parameterGroups, "Your container lookup for '" + name
 					+ "' did not return any containers. Check your SpaceSystem configuration.");
 		}
 
@@ -92,51 +99,192 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 		// Create the space system
 		spaceSystem = getSpaceSystem();
 
+		numXtceModelContainers = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItemCount();
+
 		// Create all parameter types and store them in the types field.
 		createAllParameterTypes();
 
 		// Create all parameters.
 		createAllParameters();
+		
+		createAllParameterGroups();
 
-		/**
-		 * Create all containers. In this iteration we create the container models, but do not create the references
-		 * between them as the referenced objects do not yet exit. The creation of the references is done in the second
-		 * iteration below.
-		 */
-		final int containerSetTypeItemCount = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItemCount();
+		createModelConnections();
+	}
 
-		for (int containerIndex = 0; containerIndex < containerSetTypeItemCount; ++containerIndex) {
-			final SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex)
-					.getSequenceContainer();
+	/**
+	 * @throws InvalidParameterTypeException
+	 * @throws InvalidXtceFileException
+	 */
+	private void createAllParameterTypes() throws InvalidXtceFileException {
+		int numberOfParameterTypes = spaceSystem.getTelemetryMetaData().getParameterTypeSet().getParameterTypeSetTypeItemCount();
 
-			LOG.debug("Creating container " + xtceContainer.getName());
-			final DefaultParameterGroup container = new DefaultParameterGroup(xtceContainer.getName(), xtceContainer.getShortDescription(),
-					xtceContainer.getLongDescription());
-			containers.put(container.getName(), container);
+		for (int parameterTypeIndex = 0; parameterTypeIndex < numberOfParameterTypes; ++parameterTypeIndex) {
+			final ParameterTypeSetTypeItem item = spaceSystem.getTelemetryMetaData().getParameterTypeSet()
+					.getParameterTypeSetTypeItem(parameterTypeIndex);
+
+			// If it's an integer parameter..
+			final IntegerParameterType integerParameterType = item.getIntegerParameterType();
+			if (integerParameterType != null) {
+				xtceParameterTypes.put(integerParameterType.getName(), item);
+			}
+			// If it is a float parameter...
+			else if (item.getFloatParameterType() != null) {
+				xtceParameterTypes.put(item.getFloatParameterType().getName(), item);
+			}
+			// If it is a string parameter...
+			else if(item.getStringParameterType() != null) {
+				xtceParameterTypes.put(item.getStringParameterType().getName(), item);
+			}
+			// If it is a boolean parameter...
+			else if(item.getBooleanParameterType() != null) {
+				xtceParameterTypes.put(item.getBooleanParameterType().getName(), item);
+			}
+			else {
+				throw new InvalidXtceFileException("Unknown parameter type: " + item);
+			}
 		}
+	}
 
-		/**
-		 * Reiterate through the containers and set the references between the objects. Three types of references exist:
-		 * 1. Base. A container may have a base container. 2. Sub containers. 3. Restrictions.
-		 */
-		for (int containerIndex = 0; containerIndex < containerSetTypeItemCount; ++containerIndex) {
-			final SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex)
-					.getSequenceContainer();
+	/**
+	 * 
+	 * @throws InvalidParameterTypeException
+	 * @throws InvalidXtceFileException 
+	 * @throws NumberFormatException 
+	 */
+	private void createAllParameters() throws InvalidParameterTypeException, NumberFormatException, InvalidXtceFileException {
+		int numberOfParameters = spaceSystem.getTelemetryMetaData().getParameterSet().getParameterSetTypeItemCount();
+
+		// @formatter:off
+		for (int i = 0; i < numberOfParameters; ++i) {
+
+			final ParameterSetTypeItem xtceParameter = spaceSystem.getTelemetryMetaData().getParameterSet()
+					.getParameterSetTypeItem(i);
+
+			String parameterTypeRef = xtceParameter.getParameter().getParameterTypeRef();
+			ParameterTypeSetTypeItem xtceType = xtceParameterTypes.get(parameterTypeRef);
+
+			Parameter<?> parameter = null;
+			// If it's an integer type...
+			if (xtceType.getIntegerParameterType() != null) {
+				IntegerParameterType type = xtceType.getIntegerParameterType();
+				if (!doesIntRequireJavaLong(type)) {
+						parameter = new HummingbirdParameter<Integer>(
+								xtceParameter.getParameter().getName(),
+								xtceParameter.getParameter().getShortDescription(), 
+								xtceParameter.getParameter().getLongDescription(),
+								type.getSizeInBits(), 
+								getEndianness(type), 
+								getIntegerEncoding(type));
+				}
+				else {
+						parameter = new HummingbirdParameter<Long>(
+								xtceParameter.getParameter().getName(), 
+								xtceParameter.getParameter().getShortDescription(), 
+								xtceParameter.getParameter().getLongDescription(),
+								type.getSizeInBits(), 
+								getEndianness(type), 
+								getIntegerEncoding(type));
+				}
+			}
+
+			// If it's an float type...
+			else if (xtceType.getFloatParameterType() != null) {
+				FloatParameterType type = xtceType.getFloatParameterType();
+				switch(type.getSizeInBits()) {
+					case VALUE_32:
+						parameter = new HummingbirdParameter<Float>(
+								xtceParameter.getParameter().getName(), 
+								xtceParameter.getParameter().getShortDescription(), 
+								xtceParameter.getParameter().getLongDescription(),
+								Long.parseLong(type.getSizeInBits().value()), 
+								getEndianness(type),
+								getFloatEncoding(type));
+						break;
+					case VALUE_64:
+						parameter = new HummingbirdParameter<Double>(
+								xtceParameter.getParameter().getName(), 
+								xtceParameter.getParameter().getShortDescription(), 
+								xtceParameter.getParameter().getLongDescription(),
+								Long.parseLong(type.getSizeInBits().value()), 
+								getEndianness(type),
+								getFloatEncoding(type));
+						break;
+					case VALUE_128:
+						parameter = new HummingbirdParameter<BigDecimal>(
+								xtceParameter.getParameter().getName(), 
+								xtceParameter.getParameter().getShortDescription(), 
+								xtceParameter.getParameter().getLongDescription(),
+								Long.parseLong(type.getSizeInBits().value()),
+								getEndianness(type),
+								getFloatEncoding(type));
+						break;
+					default:
+						throw new InvalidXtceFileException("Invalid bit size for float type " + type.getName());
+				}
+			}
+			// @formatter:on
+
+			parameters.put(parameter.getName(), parameter);
+		}
+	}
+	
+	
+	/**
+	 * Create all ParameterGroups. In this iteration we create the parameter groups, but do not create the references
+	 * between them as the referenced objects do not yet exit.
+	 */
+	private final void createAllParameterGroups() {
+		for (int containerIndex = 0; containerIndex < numXtceModelContainers; ++containerIndex) {
+			final SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex).getSequenceContainer();
+
+			
+			final ParameterGroup parameterGroup = new DefaultParameterGroup(
+														xtceContainer.getName(),
+														xtceContainer.getShortDescription(), 
+														xtceContainer.getLongDescription());
+			
+			parameterGroups.put(parameterGroup.getName(), parameterGroup);
+			if(LOG.isDebugEnabled()){
+				LOG.debug("Created container " + xtceContainer.getName());
+			}
+		}
+	}
+	
+	/**
+	 * Reiterate through the parameterGroups and Parameters and set the connections between the objects. 
+	 * </br>
+	 * Three types of references exist:
+	 * <ol>
+	 * 	<li></li>
+	 * 	<li>Parent Child relationship - ParameterGroups can contain other ParameterGroups and/or Parameters.</li>
+	 * 	<li></li>
+	 * </ol>
+	 *  2. Sub containers. 3. Restrictions.
+	 */
+	private final void createModelConnections() {
+		for (int containerIndex = 0; containerIndex < numXtceModelContainers; ++containerIndex) {
+			final SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet()
+					.getContainerSetTypeItem(containerIndex).getSequenceContainer();
 
 			// Get the container
-			final ParameterGroup thisContainer = containers.get(xtceContainer.getName());
+			final ParameterGroup thisContainer = parameterGroups.get(xtceContainer.getName());
+			if(thisContainer == null) {
+				continue;
+			}
 
 			// Register this container with the base container to make sure it gets processed.
 			if (xtceContainer.getBaseContainer() != null) {
-				for (final Comparison comparison : xtceContainer.getBaseContainer().getRestrictionCriteria().getComparisonList().getComparison()) {
-					final Parameter<?> paramContainer = (Parameter<?>) containers.get(comparison.getParameterRef());
+				Comparison[] restrictionCriteria = xtceContainer.getBaseContainer().getRestrictionCriteria().getComparisonList().getComparison();
+				for (final Comparison comparison : restrictionCriteria) {
+					final Parameter<?> paramContainer = (Parameter<?>) parameterGroups.get(comparison.getParameterRef());
 					final String comparisonValue = comparison.getValue();
 					addRestrictionToGlobalMap(paramContainer, comparisonValue);
 					thisContainer.addRestriction(paramContainer, comparisonValue);
 				}
 
 				final String containerParentRef = xtceContainer.getBaseContainer().getContainerRef();
-				final ParameterGroup parentContainer = containers.get(containerParentRef);
+				final ParameterGroup parentContainer = parameterGroups.get(containerParentRef);
 				parentContainer.addParameterGroup(thisContainer);
 				thisContainer.addParentParameterGroup(parentContainer);
 
@@ -147,243 +295,21 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 			for (int subContainerIndex = 0; subContainerIndex < xtceContainer.getEntryList().getEntryListTypeItemCount(); ++subContainerIndex) {
 				String name = null;
 				if (xtceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getParameterRefEntry() != null) {
-					name = xtceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getParameterRefEntry().getParameterRef();
+					name = xtceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getParameterRefEntry()
+							.getParameterRef();
 				}
 				else if (xtceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getContainerRefEntry() != null) {
-					name = xtceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getContainerRefEntry().getContainerRef();
+					name = xtceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getContainerRefEntry()
+							.getContainerRef();
 				}
 
-				final ParameterGroup subcontainer = containers.get(name);
+				final ParameterGroup subcontainer = parameterGroups.get(name);
 				if (subcontainer != null) {
 					thisContainer.addParameterGroup(subcontainer);
 					subcontainer.addParentParameterGroup(thisContainer);
 					LOG.debug("Added subcontainer " + subcontainer + " to container " + thisContainer.getName());
 				}
 			}
-		}
-	}
-
-
-	/**
-	 * @throws InvalidParameterTypeException
-	 * @throws InvalidXtceFileException
-	 */
-	private void createAllParameterTypes() throws InvalidParameterTypeException, InvalidXtceFileException {
-		int numberOfParameterTypes = spaceSystem.getTelemetryMetaData().getParameterTypeSet().getParameterTypeSetTypeItemCount();
-
-		for (int parameterTypeIndex = 0; parameterTypeIndex < numberOfParameterTypes; ++parameterTypeIndex) {
-			final ParameterTypeSetTypeItem item = spaceSystem.getTelemetryMetaData().getParameterTypeSet().getParameterTypeSetTypeItem(parameterTypeIndex);
-
-			// If it's an integer parameter..
-			final IntegerParameterType integerParameterType = item.getIntegerParameterType();
-			if (integerParameterType != null) {
-
-				xtceParameterTypes.put(integerParameterType.getName(), item);
-
-				// Unit unit = null;
-				// boolean bigEndian;
-				// final BaseDataTypeChoice baseDataTypeChoice = integerParameterType.getBaseDataTypeChoice();
-				// if (baseDataTypeChoice == null) {
-				// bigEndian = true;
-				// }
-				// else {
-				// final DataEncodingTypeBitOrderType bitOrder =
-				// baseDataTypeChoice.getBinaryDataEncoding().getBitOrder();
-				// if (bitOrder == DataEncodingTypeBitOrderType.MOSTSIGNIFICANTBITFIRST) {
-				// bigEndian = true;
-				// }
-				// else if (bitOrder == DataEncodingTypeBitOrderType.LEASTSIGNIFICANTBITFIRST) {
-				// bigEndian = false;
-				// }
-				// else {
-				// throw new InvalidXtceFileException(integerParameterType.getName()
-				// + " is has an undefined bit order. ParameterType's BinaryDataEncoding bitOrder must be either "
-				// + DataEncodingTypeBitOrderType.MOSTSIGNIFICANTBITFIRST + " or " +
-				// DataEncodingTypeBitOrderType.LEASTSIGNIFICANTBITFIRST);
-				// }
-				// }
-				// // @formatter:on
-				//
-				// /*
-				// * TITLE XTCE Empty (null) Initial Value If the XTCE definition doesn't contain a default value, then
-				// * the parameter gets the initial value of '0'. CATEGORY XTCE FAQ
-				// */
-				// final String initialValueAsString = integerParameterType.getInitialValue();
-				//
-				// long initialValue = 0;
-				//
-				// if (initialValueAsString != null) {
-				// initialValue = Long.decode(initialValueAsString);
-				// // FIXME decode() will ONLY work with base10 and hex, NOT with octal (wrong representation) and not
-				// // with binary.
-				// }
-				//
-				// // FIXME Add more logic to cater for multiple integer behaviours.
-				// ParameterType parameterType = null;
-				//
-				// // If parameter is less than 64 i.e. an integer type...
-				// if (integerParameterType.getSizeInBits() < 64) {
-				// if (!integerParameterType.getSigned()) {
-				// parameterType = ParameterType.UInteger;
-				// }
-				// else {
-				// parameterType = ParameterType.Integer;
-				// }
-				// }
-				// // else we are dealing with a long
-				// else {
-				// if (!integerParameterType.getSigned()) {
-				// parameterType = ParameterType.ULong;
-				// }
-				// else {
-				// parameterType = ParameterType.Long;
-				// }
-				// }
-				//
-				// final NumberParameterType type = new NumberParameterType(integerParameterType.getName(),
-				// integerParameterType.getShortDescription(),
-				// integerParameterType.getLongDescription(), numberTypeBehaviour, initialValue);
-
-				// types.put(type.getName(), type);
-			}
-
-			// If it is a float parameter...
-			else if (item.getFloatParameterType() != null) {
-				// Unit unit = null;
-				// Read in the unit of the parameter type
-				// if (item.getFloatParameterType().getUnitSet() != null) {
-				// for (int unitTypeIndex = 0; unitTypeIndex < item.getFloatParameterType().getUnitSet().getUnitCount();
-				// ++unitTypeIndex) {
-				// unit = units.get(item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getContent());
-				// if (unit == null) {
-				// unit = new Unit(item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(),
-				// item.getFloatParameterType()
-				// .getUnitSet().getUnit(unitTypeIndex).getDescription(),
-				// item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex)
-				// .getDescription(), item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getPower(), item
-				// .getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getFactor());
-				//
-				// units.put(item.getFloatParameterType().getUnitSet().getUnit(unitTypeIndex).getContent(), unit);
-				// }
-				// }
-				// }
-
-				xtceParameterTypes.put(item.getFloatParameterType().getName(), item);
-
-				// NumberParameterType type = null;
-				// final long size = Long.parseLong(item.getFloatParameterType().getSizeInBits().value());
-				// if (size == 32) {
-				// type = new NumberParameterType(item.getFloatParameterType().getName(),
-				// item.getFloatParameterType().getShortDescription(), item
-				// .getFloatParameterType().getLongDescription(), new Float32Behaviour(), (long)
-				// item.getFloatParameterType().getInitialValue());
-				// }
-				// else if (size == 64) {
-				// type = new NumberParameterType(item.getFloatParameterType().getName(),
-				// item.getFloatParameterType().getShortDescription(), item
-				// .getFloatParameterType().getLongDescription(), new Float64Behaviour(), (long)
-				// item.getFloatParameterType().getInitialValue());
-				// }
-				// else {
-				// throw new InvalidXtceFileException(
-				// "Invalid float type Parameter definition.  Hummingbird only supports size 32 or 64 bit big endian floats");
-				// }
-
-				// types.put(type.getName(), type);
-			}
-		}
-	}
-
-	/**
-	 * 
-	 * @throws InvalidParameterTypeException
-	 */
-	private void createAllParameters() throws InvalidParameterTypeException {
-		int numberOfParameters = spaceSystem.getTelemetryMetaData().getParameterSet().getParameterSetTypeItemCount();
-
-		// @formatter:off
-		for (int i = 0; i < numberOfParameters; ++i) {
-			
-			final ParameterSetTypeItem xtceParameter = spaceSystem.getTelemetryMetaData().getParameterSet().getParameterSetTypeItem(i);
-
-			Parameter<?> parameter = null;
-
-			ParameterTypeSetTypeItem xtceType = xtceParameterTypes.get(xtceParameter);
-			
-			// If it's an integer type...
-			if(xtceType.getIntegerParameterType() != null) {
-				IntegerParameterType type = xtceType.getIntegerParameterType();
-				DataEncodingTypeBitOrderType byteOrder = type.getBaseDataTypeChoice().getIntegerDataEncoding().getBitOrder();
-				if(!doesIntRequireJavaLong(type)) {
-					if(byteOrder == DataEncodingTypeBitOrderType.MOSTSIGNIFICANTBITFIRST) {
-						parameter = new HummingbirdParameter<Integer>(xtceParameter.getParameter().getName(),
-																  xtceParameter.getParameter().getShortDescription(),
-																  xtceParameter.getParameter().getLongDescription(),
-																  ParameterType.Integer,
-																  type.getSizeInBits(),
-																  Endianness.BIG);						
-					}
-					else {
-						parameter = new HummingbirdParameter<Integer>(xtceParameter.getParameter().getName(),
-																  xtceParameter.getParameter().getShortDescription(),
-																  xtceParameter.getParameter().getLongDescription(),
-																  ParameterType.Integer,
-																  type.getSizeInBits(),
-																  Endianness.LITTLE);						
-					}
-				}
-				else {
-					if(byteOrder == DataEncodingTypeBitOrderType.MOSTSIGNIFICANTBITFIRST) {
-						parameter = new HummingbirdParameter<Long>(xtceParameter.getParameter().getName(),
-															   xtceParameter.getParameter().getShortDescription(),
-															   xtceParameter.getParameter().getLongDescription(),
-															   ParameterType.Integer,
-															   type.getSizeInBits(),
-															   Endianness.BIG);						
-					}
-					else {
-						parameter = new HummingbirdParameter<Long>(xtceParameter.getParameter().getName(),
-															   xtceParameter.getParameter().getShortDescription(),
-															   xtceParameter.getParameter().getLongDescription(),
-															   ParameterType.Integer,
-															   type.getSizeInBits(),
-															   Endianness.LITTLE);						
-					}
-				}
-			}
-			
-			// If it's an integer type...
-			else if(xtceType.getFloatParameterType() != null) {
-				FloatParameterType type = xtceType.getFloatParameterType();
-				
-				if(!doesFloatRequireJavaDouble(type)) {
-					parameter = new HummingbirdParameter<Float>(xtceParameter.getParameter().getName(),
-							   								xtceParameter.getParameter().getShortDescription(),
-							   								xtceParameter.getParameter().getLongDescription(),
-							   								ParameterType.Integer,
-							   								type.getSizeInBits(),
-							   								Endianness.LITTLE);	
-				}
-				else {
-					
-				}
-
-				
-//				if (type.getNumberBehaviour() instanceof AbstractIntegerBehaviour) {
-//				}
-//				else if (type.getNumberBehaviour() instanceof AbstractFloatBehaviour) {
-//					parameter = new DefaultParameter<Double>(
-//							item.getParameter().getName(),
-//							item.getParameter().getShortDescription(),
-//							item.getParameter().getLongDescription(),
-//							type,
-//							(int) type.getInitialValue());
-//				}
-			}
-			// @formatter:on
-
-			parameters.put(parameter.getName(), parameter);
-			// containers.put(parameterContainer.getName(), parameterContainer);
 		}
 	}
 
@@ -405,16 +331,16 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 		return longRequired;
 	}
 
-	private void addRestrictionToGlobalMap(final HummingbirdParameter paramContainer, final String comparisonValue) {
-		List<String> pList;
-		if (restrictions.containsKey(paramContainer)) {
-			pList = restrictions.get(paramContainer);
+	private void addRestrictionToGlobalMap(final Parameter<?> restrictionParameter, final String comparisonValue) {
+		List<Object> pList;
+		if (restrictions.containsKey(restrictionParameter)) {
+			pList = restrictions.get(restrictionParameter);
 			pList.add(comparisonValue);
 		}
 		else {
-			pList = new ArrayList<String>();
+			pList = new ArrayList<Object>();
 			pList.add(comparisonValue);
-			restrictions.put(paramContainer, pList);
+			restrictions.put(restrictionParameter, pList);
 		}
 	}
 
@@ -426,7 +352,6 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 	 */
 	public final SpaceSystem getSpaceSystem() {
 		if (spaceSystem == null) {
-
 			try {
 				final XMLContext context = new XMLContext();
 
@@ -449,6 +374,73 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 		}
 
 		return spaceSystem;
+	}
+
+	private Encoding getIntegerEncoding(IntegerParameterType intParamType) throws InvalidXtceFileException {
+		BaseDataTypeChoice baseDataTypeChoice = intParamType.getBaseDataTypeChoice();
+		if(baseDataTypeChoice == null) {
+			if(LOG.isDebugEnabled()) {
+				LOG.debug("Base data type does not have a base data type choice, assuming default of unsigned integer encoding");
+			}
+			return Encoding.unsigned;
+		}
+		IntegerDataEncodingTypeEncodingType xtceEncoding = baseDataTypeChoice.getIntegerDataEncoding()
+				.getEncoding();
+		switch (xtceEncoding) {
+			case UNSIGNED:
+				return Encoding.unsigned;
+			case TWOSCOMPLIMENT:
+				return Encoding.twosComplement;
+			case BCD:
+				return Encoding.binaryCodedDecimal;
+			case ONESCOMPLIMENT:
+				return Encoding.onesComplement;
+			case SIGNMAGNITUDE:
+				return Encoding.signMagnitude;
+			case PACKEDBCD:
+				return Encoding.packedBinaryCodedDecimal;
+			default:
+				throw new InvalidXtceFileException("Invalid integer encoding in type " + intParamType);
+		}
+	}
+	
+	private Encoding getFloatEncoding(FloatParameterType type) throws InvalidXtceFileException {
+		BaseDataTypeChoice baseDataTypeChoice = type.getBaseDataTypeChoice();
+		if(baseDataTypeChoice == null) {
+			if(LOG.isDebugEnabled()) {
+				LOG.debug("Base data type does not have a base data type choice, assuming default of IEEE754_1985 float encoding");
+			}
+			return Encoding.IEEE754_1985;
+		}
+		FloatDataEncodingTypeEncodingType xtceEncoding = baseDataTypeChoice.getFloatDataEncoding().getEncoding();
+		
+		switch (xtceEncoding) {
+			case IEEE754_1985:
+				return Encoding.IEEE754_1985;
+			case MILSTD_1750A:
+				return Encoding.MILSTD_1750A;
+			default:
+				throw new InvalidXtceFileException("Invalid float encoding in type " + type);
+		}
+	}
+
+	private Endianness getEndianness(BaseDataType type) throws InvalidXtceFileException {
+		BaseDataTypeChoice baseDataTypeChoice = type.getBaseDataTypeChoice();
+		if(baseDataTypeChoice == null) {
+			if(LOG.isDebugEnabled()) {
+				LOG.debug("Base data type does not have a base data type choice, assuming default of BIG endian");
+			}
+			return Endianness.BIG;
+		}
+		DataEncodingTypeBitOrderType byteOrder = baseDataTypeChoice.getIntegerDataEncoding().getBitOrder();
+		switch (byteOrder) {
+			case MOSTSIGNIFICANTBITFIRST:
+				return Endianness.BIG;
+			case LEASTSIGNIFICANTBITFIRST:
+				return Endianness.LITTLE;
+			default:
+				throw new InvalidXtceFileException("Invalid bit order in " + type);
+		}
 	}
 
 	public String getPacketBaseReference() {
@@ -491,7 +483,7 @@ public class XtceModelFactory implements SpaceSystemModelFactory {
 
 	@Override
 	public Collection<ParameterGroup> getAllParameterGroups() {
-		return containers.values();
+		return parameterGroups.values();
 	}
 
 }

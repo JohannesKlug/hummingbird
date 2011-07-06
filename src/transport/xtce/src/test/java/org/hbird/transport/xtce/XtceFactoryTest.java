@@ -4,10 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.net.URL;
 import java.util.Map;
 
 import org.hbird.transport.generatedcode.xtce.SpaceSystem;
-import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
+import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,7 +16,7 @@ import org.junit.Test;
 public class XtceFactoryTest {
 
 	private static final int NUM_OF_PARAMETERS = 4;
-	private static final int NUM_OF_CONTAINERS = 9;
+	private static final int NUM_OF_PARAMETER_GROUPS = 5;
 
 	private static final String XWING_APID_NAME = "XWING_APID";
 	private static final String XWING_APID_TYPE = "11bitInteger";
@@ -39,23 +40,24 @@ public class XtceFactoryTest {
 
 	@Test
 	public void testSpaceSystemCreation() throws InvalidXtceFileException {
-		XtceModelFactory factory = new XtceModelFactory("target/test-classes/simpleX-Wing.xml");
+		URL testFileUrl = XtceFactoryTest.class.getResource("simpleX-Wing.xml");
+		XtceModelFactory factory = new XtceModelFactory(testFileUrl.getPath());
 
 		// Get the space system. This will trigger the unmarshalling and creation of the Space System.
 		SpaceSystem ss = factory.getSpaceSystem();
 		assertNotNull(ss);
 
-		assertEquals(NUM_OF_CONTAINERS, factory.getAllParameterGroups().size());
+		assertEquals(NUM_OF_PARAMETER_GROUPS, factory.getAllParameterGroups().size());
 
 
-		Map<String, HummingbirdParameter> allParameters = factory.getAllParameters();
+		Map<String, Parameter<?>> allParameters = factory.getAllParameters();
 		assertEquals(NUM_OF_PARAMETERS, allParameters.size());
 		assertTrue(allParameters.containsKey(XWING_APID_NAME));
 		assertTrue(allParameters.containsKey(XWING_PACKET_LENGTH_NAME));
 		assertTrue(allParameters.containsKey(XWING_FLIGHT_HOURS_NAME));
 		assertTrue(allParameters.containsKey(XWING_LASER_TEMP_NAME));
 
-		HummingbirdParameter param = null;
+		Parameter<?> param = null;
 		param = allParameters.get(XWING_APID_NAME);
 		assertNotNull(param);
 		assertEquals(XWING_APID_LENGTH, param.getSizeInBits());

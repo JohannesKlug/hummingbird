@@ -14,8 +14,12 @@ public class IntegerParameterTest {
 
 	@Before
 	public void setUp() throws Exception {
-		intParam = new HummingbirdParameter<Integer>("IntParam", "Test Param <int>", "Test parameter typed to an Integer",
-				32, Endianness.BIG, Encoding.twosComplement);
+		intParam = new HummingbirdParameter<Integer>("IntParam", 
+													 "Test Param <int>", 
+													 "Test parameter typed to an Integer",
+													 32, 
+													 Endianness.BIG, 
+													 Encoding.twosComplement);
 	}
 
 	@Test

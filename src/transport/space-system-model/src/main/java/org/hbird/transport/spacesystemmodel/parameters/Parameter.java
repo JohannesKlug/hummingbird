@@ -4,7 +4,7 @@ import org.hbird.transport.spacesystemmodel.SpaceSystemModelItem;
 
 /**
  * Parameter interface. <br>
- * Paramters are typed in Hummingbird which means they can model a Parameter using any primitive or class.
+ * Parameters are typed in Hummingbird which means they can model a Parameter using any primitive or class.
  */
 public interface Parameter<T> extends SpaceSystemModelItem {
 
@@ -12,12 +12,12 @@ public interface Parameter<T> extends SpaceSystemModelItem {
 	 * The Endianness or byte order of the binary data this Parameter represents. This is part of the Parameter
 	 * interface as it will be required by clients of Parameter.
 	 */
-	enum Endianness {
+	public enum Endianness {
 		BIG, LITTLE
 	};
 	
-	enum Encoding {
-		unsigned, signMagnitude, twosComplement, onesComplement, binaryCodedDecimal, packedBinaryCodedDecimal
+	public enum Encoding {
+		unsigned, signMagnitude, twosComplement, onesComplement, binaryCodedDecimal, packedBinaryCodedDecimal, UTF8, UTF16, IEEE754_1985, MILSTD_1750A
 	}
 
 
@@ -53,5 +53,10 @@ public interface Parameter<T> extends SpaceSystemModelItem {
 	
 	Encoding getEncoding();
 
+	/**
+	 * Checks the incoming object for equality with this Parameters value. 
+	 * @param obj
+	 * @return
+	 */
 	boolean isValue(Object obj);
 }
