@@ -1,6 +1,6 @@
 package org.hbird.transport.packetbroker.producers;
 
-import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.telemetry.DefaultSpacePacket;
 import org.hbird.transport.telemetry.HummingbirdPacket;
 
@@ -10,19 +10,19 @@ public abstract class AbstractProducer {
 	 * TODO Comment? What the hell is it? haha This is a Space system model instantiation which is populated each time
 	 * the spacesystemmodel is updated.
 	 */
-	private SpaceSystemModelFactory containerFactory;
+	private SpaceSystemModel containerFactory;
 
 	protected HummingbirdPacket packet = new DefaultSpacePacket();
 
-	public AbstractProducer(SpaceSystemModelFactory containerFactory) {
+	public AbstractProducer(SpaceSystemModel containerFactory) {
 		this.setContainerFactory(containerFactory);
 	}
 
-	public void setContainerFactory(SpaceSystemModelFactory containerFactory) {
+	public void setContainerFactory(SpaceSystemModel containerFactory) {
 		this.containerFactory = containerFactory;
 	}
 
-	public SpaceSystemModelFactory getContainerFactory() {
+	public SpaceSystemModel getContainerFactory() {
 		return containerFactory;
 	}
 

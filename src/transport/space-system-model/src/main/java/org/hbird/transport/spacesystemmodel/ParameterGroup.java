@@ -56,6 +56,13 @@ public interface ParameterGroup extends SpaceSystemModelItem {
 	 * @return
 	 */
 	List<ParameterGroup> getSubParameterGroups();
+	
+	/**
+	 * Get all the Parameters that belong to this ParameterGroup
+	 * 
+	 * @return List of off Parameters belonging to this Group.
+	 */
+	List<Parameter<?>> getParameters();
 
 	/**
 	 * Add a {@link Parameter} to this {@link ParameterGroup}.

@@ -2,18 +2,18 @@ package org.hbird.transport.xtce;
 
 import java.net.URL;
 
-import org.hbird.transport.xtce.XtceModelFactory;
+import org.hbird.transport.xtce.XtceSpaceSystemModel;
 import org.junit.Before;
 import org.junit.Test;
 
 public class XtceTest {
 
-	private XtceModelFactory xtceFactory = null;
+	private XtceSpaceSystemModel xtceFactory = null;
 
 	@Before
 	public void setUp() throws Exception {
 		URL spacesystemmodelFilename = this.getClass().getResource("/humsat.xml");
-		xtceFactory = new XtceModelFactory(spacesystemmodelFilename.getPath());
+		xtceFactory = new XtceSpaceSystemModel(spacesystemmodelFilename.getPath());
 	}
 
 	@Test

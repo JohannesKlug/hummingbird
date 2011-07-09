@@ -12,7 +12,7 @@ import org.hbird.business.simulator.waveforms.Waveform;
 import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.spacesystemmodel.ParameterGroup;
-import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
@@ -33,9 +33,9 @@ public class SimulatorSSM {
 	private static String packetHeaderAlias;
 
 	/** Factory producing the SSM */
-	SpaceSystemModelFactory ssmFactory;
+	SpaceSystemModel ssmFactory;
 	ParameterGroup packetRoot;
-	Map<String, HummingbirdParameter> allParams;
+	Map<String, Parameter<?>> allParams;
 
 	private Map<String, Waveform> waveformMap;
 
@@ -53,13 +53,13 @@ public class SimulatorSSM {
 		this.messageInterval = messageInterval;
 	}
 
-	public SimulatorSSM(final SpaceSystemModelFactory spaceSystemModelFactory, final String packetRootName) throws UnknownParameterGroupException {
+	public SimulatorSSM(final SpaceSystemModel spaceSystemModelFactory, final String packetRootName) throws UnknownParameterGroupException {
 		this.ssmFactory = spaceSystemModelFactory;
 		this.packetRoot = ssmFactory.getParameterGroup(packetRootName);
 		this.allParams = ssmFactory.getAllParameters();
 	}
 
-	public final Collection<HummingbirdParameter> getAllParameters() {
+	public final Collection<Parameter<?>> getAllParameters() {
 		return this.ssmFactory.getAllParameters().values();
 	}
 
@@ -91,25 +91,24 @@ public class SimulatorSSM {
 		return this.ssmFactory.getAllParameterGroups();
 	}
 
-	public final Map<Parameter, List<String>> getAllParameterRestrictions() {
-		Map<Parameter, List<String>> restrictions = ssmFactory.getAllParameterRestrictions();
-		for (Parameter p : restrictions.keySet()) {
+	public final Map<Parameter<?>, List<Object>> getAllParameterRestrictions() {
+		Map<Parameter<?>, List<Object>> restrictions = ssmFactory.getAllParameterRestrictions();
+		for (Parameter<?> p : restrictions.keySet()) {
 			System.out.print("Possible " + p.getName() + " restrictions are: ");
-			for (String val : restrictions.get(p)) {
+			for (Object val : restrictions.get(p)) {
 				System.out.print(val + " ");
 			}
 			System.out.println();
 		}
-
 		return restrictions;
 	}
 
 	public final void getPackets() {
-		Map<Parameter, List<String>> restrictions = this.getAllParameterRestrictions();
+		Map<Parameter<?>, List<Object>> restrictions = this.getAllParameterRestrictions();
 
-		for (Parameter p : restrictions.keySet()) {
-			for (String val : restrictions.get(p)) {
-				((HummingbirdParameter) p).setValue(Integer.parseInt(val));
+		for (Parameter<?> p : restrictions.keySet()) {
+			for (Object val : restrictions.get(p)) {
+				((Parameter<?>) p).setValue(val);
 				packetRoot.getSubParameterGroups();
 			}
 		}
@@ -117,7 +116,7 @@ public class SimulatorSSM {
 
 	public synchronized BitSet encode(final String name, final Map<String, Double> fields) throws BitSetOperationException, UnknownParameterGroupException {
 		for (Map.Entry<String, Double> entry : fields.entrySet()) {
-			HummingbirdParameter parameter = ssmFactory.getParameter(entry.getKey());
+			Parameter<?> parameter = ssmFactory.getParameter(entry.getKey());
 			if (parameter == null) {
 				throw new UnknownParameterGroupException(entry.getKey());
 			}

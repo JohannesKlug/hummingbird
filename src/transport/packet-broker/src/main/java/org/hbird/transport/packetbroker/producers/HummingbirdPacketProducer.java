@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.hbird.transport.spacesystemmodel.ParameterGroup;
-import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.ParameterGroupObserver;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 
@@ -21,7 +21,7 @@ import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupExce
 public class HummingbirdPacketProducer extends AbstractProducer implements ParameterGroupObserver {
 	private final static Logger LOG = LoggerFactory.getLogger(HummingbirdPacketProducer.class);
 
-	public HummingbirdPacketProducer(SpaceSystemModelFactory containerFactory) {
+	public HummingbirdPacketProducer(SpaceSystemModel containerFactory) {
 		super(containerFactory);
 
 		/** The packet base container (should have the name TMPacket by convention) contains as sub containers;

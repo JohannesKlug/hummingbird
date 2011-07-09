@@ -41,7 +41,7 @@ public class XtceFactoryTest {
 	@Test
 	public void testSpaceSystemCreation() throws InvalidXtceFileException {
 		URL testFileUrl = XtceFactoryTest.class.getResource("simpleX-Wing.xml");
-		XtceModelFactory factory = new XtceModelFactory(testFileUrl.getPath());
+		XtceSpaceSystemModel factory = new XtceSpaceSystemModel(testFileUrl.getPath());
 
 		// Get the space system. This will trigger the unmarshalling and creation of the Space System.
 		SpaceSystem ss = factory.getSpaceSystem();

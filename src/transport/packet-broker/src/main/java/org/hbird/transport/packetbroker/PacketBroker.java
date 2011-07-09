@@ -9,7 +9,7 @@ import java.util.BitSet;
 
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.spacesystemmodel.ParameterGroup;
-import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.telemetry.HummingbirdPacket;
 
@@ -73,7 +73,7 @@ public interface PacketBroker {
 
 	HummingbirdPacket getPacket();
 
-	SpaceSystemModelFactory getFactory();
+	SpaceSystemModel getFactory();
 
-	void setFactory(SpaceSystemModelFactory factory);
+	void setFactory(SpaceSystemModel factory);
 }

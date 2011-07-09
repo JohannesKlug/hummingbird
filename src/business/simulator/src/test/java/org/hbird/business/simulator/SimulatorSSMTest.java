@@ -22,7 +22,7 @@ import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupExce
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.transport.spacesystemmodel.testsupport.MockParameterContainerModel;
-import org.hbird.transport.xtce.XtceModelFactory;
+import org.hbird.transport.xtce.XtceSpaceSystemModel;
 import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
 
 /**
@@ -36,11 +36,11 @@ public class SimulatorSSMTest {
 
 	private static final String TM_PACKET_ALIAS = "TMPacket";
 	SimulatorSSM sim;
-	private static XtceModelFactory xtce;
+	private static XtceSpaceSystemModel xtce;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		xtce = new XtceModelFactory(SimulatorSSMTest.class.getResource("/spacesystemdefs/humsat.xml").getFile());
+		xtce = new XtceSpaceSystemModel(SimulatorSSMTest.class.getResource("/spacesystemdefs/humsat.xml").getFile());
 	}
 
 	@Before

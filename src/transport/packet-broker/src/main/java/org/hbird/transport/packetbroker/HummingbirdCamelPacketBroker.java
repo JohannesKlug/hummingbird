@@ -13,7 +13,7 @@ import java.util.Map;
 
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultMessage;
-import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.telemetry.HummingbirdPacket;
 import org.hbird.transport.telemetry.HummingbirdParameter;
@@ -31,12 +31,12 @@ public class HummingbirdCamelPacketBroker extends HummingbirdPacketBroker {
 
 	private String packetContainerName;
 
-	public HummingbirdCamelPacketBroker(final SpaceSystemModelFactory factory, final String packetContainerName) {
+	public HummingbirdCamelPacketBroker(final SpaceSystemModel factory, final String packetContainerName) {
 		super(factory);
 		this.setPacketContainerName(packetContainerName);
 	}
 
-	public HummingbirdCamelPacketBroker(final SpaceSystemModelFactory factory) {
+	public HummingbirdCamelPacketBroker(final SpaceSystemModel factory) {
 		super(factory);
 		packetContainerName = "TMPacket";
 	}

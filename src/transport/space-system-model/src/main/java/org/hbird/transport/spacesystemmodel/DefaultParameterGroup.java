@@ -55,17 +55,18 @@ public class DefaultParameterGroup implements ParameterGroup {
 	 */
 	protected Map<Parameter<?>, Object> restrictions = new HashMap<Parameter<?>, Object>();
 
-	/** The ordered set of sub containers. */
-	private final List<ParameterGroup> subContainers = new ArrayList<ParameterGroup>();
+	/** The ordered set of sub ParameterGroups. */
+	private final List<ParameterGroup> subGroups = new ArrayList<ParameterGroup>();
+	
+	/** List of Parameters belonging to this Group */
 	private final List<Parameter<?>> parameters = new ArrayList<Parameter<?>>();
 
+	/** List of all ParameterGrou parents of this Group */
+	protected List<ParameterGroup> parents = new ArrayList<ParameterGroup>();
 
-	/**
-	 * The length of this container in bits. The value will hold a BitSet of length >= length + 1.
-	 */
+	/** The length of this container in bits. The value will hold a BitSet of length >= length + 1. */
 	protected int length = 0;
 
-	protected List<ParameterGroup> parents = new ArrayList<ParameterGroup>();
 
 
 	/**
@@ -211,7 +212,7 @@ public class DefaultParameterGroup implements ParameterGroup {
 		// If the packet should be processed by this container...
 		if (matchRestrictions()) {
 			str += getName() + "{";
-			for (ParameterGroup container : subContainers) {
+			for (ParameterGroup container : subGroups) {
 				str += container.toString();
 			}
 			str += "}";
@@ -231,7 +232,7 @@ public class DefaultParameterGroup implements ParameterGroup {
 	@Override
 	public void addParameterGroup(final ParameterGroup subParameterGroup) {
 		if (subParameterGroup != null) {
-			this.subContainers.add(subParameterGroup);
+			this.subGroups.add(subParameterGroup);
 			subParameterGroup.addParentParameterGroup(this);
 		}
 		else {
@@ -279,7 +280,7 @@ public class DefaultParameterGroup implements ParameterGroup {
 				length += parameter.getSizeInBits();
 			}
 			// Iterate through all sub-containers and sum the size.
-			for (ParameterGroup container : subContainers) {
+			for (ParameterGroup container : subGroups) {
 				length += container.getSizeInBits();
 			}
 		}
@@ -290,7 +291,7 @@ public class DefaultParameterGroup implements ParameterGroup {
 
 	@Override
 	public List<ParameterGroup> getSubParameterGroups() {
-		return subContainers;
+		return subGroups;
 	}
 
 	@Override
@@ -333,5 +334,10 @@ public class DefaultParameterGroup implements ParameterGroup {
 	@Override
 	public String getLongDescription() {
 		return this.longDescription;
+	}
+
+	@Override
+	public List<Parameter<?>> getParameters() {
+		return this.parameters;
 	}
 }

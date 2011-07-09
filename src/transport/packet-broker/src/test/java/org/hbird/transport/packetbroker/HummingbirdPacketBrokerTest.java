@@ -22,7 +22,7 @@ import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.packetbroker.HummingbirdPacketBroker;
 import org.hbird.transport.packetbroker.PacketBroker;
 import org.hbird.transport.packetbroker.testsupport.MockParameterContainerModel;
-import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.telemetry.HummingbirdPacket;
 import org.hbird.transport.telemetry.HummingbirdParameter;
@@ -186,7 +186,7 @@ public class HummingbirdPacketBrokerTest {
 
 	@Test
 	public final void testGetFactory() {
-		SpaceSystemModelFactory actual = packetBroker.getFactory();
+		SpaceSystemModel actual = packetBroker.getFactory();
 		assertEquals(mockSpaceSystemFactory, actual);
 	}
 

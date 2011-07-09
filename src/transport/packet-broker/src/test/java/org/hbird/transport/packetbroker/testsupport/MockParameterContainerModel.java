@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.DefaultParameterGroup;
 import org.hbird.transport.spacesystemmodel.ParameterGroup;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
  * @author Johannes Klug
  * @since Hummingbird 0.0.1
  */
-public class MockParameterContainerModel implements SpaceSystemModelFactory {
+public class MockParameterContainerModel implements SpaceSystemModel {
 	/**
 	 * Logger for this class
 	 */
