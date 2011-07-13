@@ -41,16 +41,18 @@ public class XtceFactoryTest {
 	@Test
 	public void testSpaceSystemCreation() throws InvalidXtceFileException {
 		URL testFileUrl = XtceFactoryTest.class.getResource("simpleX-Wing.xml");
-		XtceSpaceSystemModel factory = new XtceSpaceSystemModel(testFileUrl.getPath());
+		XtceSpaceSystemModel xtceSsm = new XtceSpaceSystemModel(testFileUrl.getPath());
 
-		// Get the space system. This will trigger the unmarshalling and creation of the Space System.
-		SpaceSystem ss = factory.getSpaceSystem();
+		// Get the space system. This will trigger the XML unmarshalling and creation of the Space System.
+		SpaceSystem ss = xtceSsm.getSpaceSystem();
+
+		// Assert it was created.
 		assertNotNull(ss);
 
-		assertEquals(NUM_OF_PARAMETER_GROUPS, factory.getAllParameterGroups().size());
+		assertEquals(NUM_OF_PARAMETER_GROUPS, xtceSsm.getAllParameterGroups().size());
 
 
-		Map<String, Parameter<?>> allParameters = factory.getAllParameters();
+		Map<String, Parameter<?>> allParameters = xtceSsm.getAllParameters();
 		assertEquals(NUM_OF_PARAMETERS, allParameters.size());
 		assertTrue(allParameters.containsKey(XWING_APID_NAME));
 		assertTrue(allParameters.containsKey(XWING_PACKET_LENGTH_NAME));

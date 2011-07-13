@@ -50,7 +50,8 @@ public class IntegerSignedBehaviour extends AbstractIntegerBehaviour {
 		// checking whether the value fits into the bit string of length - 1
 		final long absValue = Math.abs(unsignedInt);
 		if (absValue > Math.pow(2.0, SIZE_IN_BITS) - 1 || unsignedInt == Long.MIN_VALUE) {
-			throw new RuntimeException("The value of " + unsignedInt + " does not fit into a bit string of " + (SIZE_IN_BITS - 1) + " bits.");
+			throw new RuntimeException("The value of " + unsignedInt + " does not fit into a bit string of "
+					+ (SIZE_IN_BITS - 1) + " bits.");
 		}
 
 		// setting all bits to zero
@@ -79,9 +80,5 @@ public class IntegerSignedBehaviour extends AbstractIntegerBehaviour {
 		return bitSetTarget;
 	}
 
-	@Override
-	public String getTypeName() {
-		return getSizeInBits() + "bit signed integer";
-	}
 
 }

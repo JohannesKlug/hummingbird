@@ -6,11 +6,11 @@ import org.hbird.transport.spacesystemmodel.ParameterGroup;
 
 public interface SpaceSystemModelCodec {
 
-	public ParameterGroup decode(Byte[] inStream);
-	
-	public ParameterGroup decode(BitSet inStream);
-	
-	public Byte[] encodeToByteArray(ParameterGroup parameterGroup);
-	
-	public BitSet encodeToBitSet(ParameterGroup parameterGroup);
+	ParameterGroup decode(ParameterGroup parameterGroup, Byte[] inStream);
+
+	ParameterGroup decode(ParameterGroup parameterGroup, BitSet inStream);
+
+	Byte[] encodeToByteArray(ParameterGroup parameterGroup);
+
+	BitSet encodeToBitSet(ParameterGroup parameterGroup);
 }

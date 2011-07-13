@@ -30,12 +30,8 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	 *            The parameter type.
 	 * 
 	 */
-	public HummingbirdParameter(final String name,
-								final String shortDescription,
-								final String longDescription,
-								final long sizeInBits,
-								final Endianness endianness,
-								final Encoding encoding) {
+	public HummingbirdParameter(final String name, final String shortDescription, final String longDescription,
+			final long sizeInBits, final Endianness endianness, final Encoding encoding) {
 		this.name = name;
 		this.shortDescription = shortDescription;
 		this.longDescription = longDescription;
@@ -106,4 +102,6 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 		builder.append("]");
 		return builder.toString();
 	}
+
+
 }

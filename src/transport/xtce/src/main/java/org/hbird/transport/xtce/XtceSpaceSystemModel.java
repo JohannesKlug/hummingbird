@@ -61,7 +61,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	private String spacesystemmodelFilename;
 
-	private int numXtceModelContainers;
+	private int numParameterGroups;
 
 	public XtceSpaceSystemModel(final String spacesystemmodelFilename) throws InvalidXtceFileException {
 		this.spacesystemmodelFilename = spacesystemmodelFilename;
@@ -96,14 +96,14 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 		// Create the space system
 		spaceSystem = getSpaceSystem();
 
-		numXtceModelContainers = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItemCount();
+		numParameterGroups = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItemCount();
 
 		// Create all parameter types and store them in the types field.
 		createAllParameterTypes();
 
 		// Create all parameters.
 		createAllParameters();
-		
+
 		createAllParameterGroups();
 
 		createModelConnections();
@@ -113,8 +113,9 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	 * @throws InvalidParameterTypeException
 	 * @throws InvalidXtceFileException
 	 */
-	private void createAllParameterTypes() throws InvalidXtceFileException {
-		int numberOfParameterTypes = spaceSystem.getTelemetryMetaData().getParameterTypeSet().getParameterTypeSetTypeItemCount();
+	private final void createAllParameterTypes() throws InvalidXtceFileException {
+		int numberOfParameterTypes = spaceSystem.getTelemetryMetaData().getParameterTypeSet()
+				.getParameterTypeSetTypeItemCount();
 
 		for (int parameterTypeIndex = 0; parameterTypeIndex < numberOfParameterTypes; ++parameterTypeIndex) {
 			final ParameterTypeSetTypeItem item = spaceSystem.getTelemetryMetaData().getParameterTypeSet()
@@ -130,11 +131,11 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 				xtceParameterTypes.put(item.getFloatParameterType().getName(), item);
 			}
 			// If it is a string parameter...
-			else if(item.getStringParameterType() != null) {
+			else if (item.getStringParameterType() != null) {
 				xtceParameterTypes.put(item.getStringParameterType().getName(), item);
 			}
 			// If it is a boolean parameter...
-			else if(item.getBooleanParameterType() != null) {
+			else if (item.getBooleanParameterType() != null) {
 				xtceParameterTypes.put(item.getBooleanParameterType().getName(), item);
 			}
 			else {
@@ -146,10 +147,11 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	/**
 	 * 
 	 * @throws InvalidParameterTypeException
-	 * @throws InvalidXtceFileException 
-	 * @throws NumberFormatException 
+	 * @throws InvalidXtceFileException
+	 * @throws NumberFormatException
 	 */
-	private void createAllParameters() throws InvalidParameterTypeException, NumberFormatException, InvalidXtceFileException {
+	private final void createAllParameters() throws InvalidParameterTypeException, NumberFormatException,
+			InvalidXtceFileException {
 		int numberOfParameters = spaceSystem.getTelemetryMetaData().getParameterSet().getParameterSetTypeItemCount();
 
 		// @formatter:off
@@ -222,99 +224,99 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 			}
 			// @formatter:on
 
+			// FIXME Add support for other parameters and split off creation into a series of private methods.
 			parameters.put(parameter.getName(), parameter);
 		}
 	}
-	
-	
+
+
 	/**
 	 * Create all ParameterGroups. In this iteration we create the parameter groups, but do not create the references
 	 * between them as the referenced objects do not yet exit.
 	 */
 	private final void createAllParameterGroups() {
-		for (int containerIndex = 0; containerIndex < numXtceModelContainers; ++containerIndex) {
-			final SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex).getSequenceContainer();
+		for (int containerIndex = 0; containerIndex < numParameterGroups; ++containerIndex) {
+			final SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet()
+					.getContainerSetTypeItem(containerIndex).getSequenceContainer();
 
-			
-			final ParameterGroup parameterGroup = new DefaultParameterGroup(
-														xtceContainer.getName(),
-														xtceContainer.getShortDescription(), 
-														xtceContainer.getLongDescription());
-			
+
+			final ParameterGroup parameterGroup = new DefaultParameterGroup(xtceContainer.getName(),
+					xtceContainer.getShortDescription(), xtceContainer.getLongDescription());
+
 			parameterGroups.put(parameterGroup.getName(), parameterGroup);
-			if(LOG.isDebugEnabled()){
+			if (LOG.isDebugEnabled()) {
 				LOG.debug("Created container " + xtceContainer.getName());
 			}
 		}
 	}
-	
+
 	/**
-	 * Reiterate through the parameterGroups and Parameters and set the connections between the objects. 
-	 * </br>
-	 * Three types of references exist:
+	 * Reiterate through the parameterGroups and Parameters and set the connections between the objects. </br> Three
+	 * types of references exist:
 	 * <ol>
-	 * 	<li></li>
-	 * 	<li>Parent Child relationship - ParameterGroups can contain other ParameterGroups and/or Parameters.</li>
-	 * 	<li>Restrictions</li>
+	 * <li></li>
+	 * <li>Parent Child relationship - ParameterGroups can contain other ParameterGroups and/or Parameters.</li>
+	 * <li>Restrictions</li>
 	 * </ol>
 	 */
 	private final void createModelConnections() {
-		for (int containerIndex = 0; containerIndex < numXtceModelContainers; ++containerIndex) {
-			final SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet()
+		for (int containerIndex = 0; containerIndex < numParameterGroups; ++containerIndex) {
+
+			final SequenceContainer xtceSequenceContainer = spaceSystem.getTelemetryMetaData().getContainerSet()
 					.getContainerSetTypeItem(containerIndex).getSequenceContainer();
 
-			// Get the container
-			final ParameterGroup thisContainer = parameterGroups.get(xtceContainer.getName());
-			if(thisContainer == null) {
-				continue;
-			}
+			// Get the parameter group, in the space system model sequence containers are parameter groups
+			final ParameterGroup parameterGroup = parameterGroups.get(xtceSequenceContainer.getName());
 
 			// Register this container with the base container to make sure it gets processed.
-			if (xtceContainer.getBaseContainer() != null) {
-				Comparison[] restrictionCriteria = xtceContainer.getBaseContainer().getRestrictionCriteria().getComparisonList().getComparison();
+			if (xtceSequenceContainer.getBaseContainer() != null) {
+				Comparison[] restrictionCriteria = xtceSequenceContainer.getBaseContainer().getRestrictionCriteria()
+						.getComparisonList().getComparison();
 				for (final Comparison comparison : restrictionCriteria) {
 					final Parameter<?> paramContainer = (Parameter<?>) parameterGroups.get(comparison.getParameterRef());
 					final String comparisonValue = comparison.getValue();
 					addRestrictionToGlobalMap(paramContainer, comparisonValue);
-					thisContainer.addRestriction(paramContainer, comparisonValue);
+					parameterGroup.addRestriction(paramContainer, comparisonValue);
 				}
 
-				final String containerParentRef = xtceContainer.getBaseContainer().getContainerRef();
+				final String containerParentRef = xtceSequenceContainer.getBaseContainer().getContainerRef();
 				final ParameterGroup parentContainer = parameterGroups.get(containerParentRef);
-				parentContainer.addParameterGroup(thisContainer);
-				thisContainer.addParentParameterGroup(parentContainer);
+				parentContainer.addParameterGroup(parameterGroup);
+				parameterGroup.addParentParameterGroup(parentContainer);
 
-				if(LOG.isDebugEnabled()) {
-					LOG.debug("Added container " + thisContainer.getName() + " to parent (base) container " + containerParentRef);
+				if (LOG.isDebugEnabled()) {
+					LOG.debug("Added container " + parameterGroup.getName() + " to parent (base) container "
+							+ containerParentRef);
 				}
 			}
 
 			// Register all sub containers.
-			for (int subContainerIndex = 0; subContainerIndex < xtceContainer.getEntryList().getEntryListTypeItemCount(); ++subContainerIndex) {
+			for (int subContainerIndex = 0; subContainerIndex < xtceSequenceContainer.getEntryList()
+					.getEntryListTypeItemCount(); ++subContainerIndex) {
 				String name = null;
-				if (xtceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getParameterRefEntry() != null) {
-					name = xtceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getParameterRefEntry()
-							.getParameterRef();
+				if (xtceSequenceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getParameterRefEntry() != null) {
+					name = xtceSequenceContainer.getEntryList().getEntryListTypeItem(subContainerIndex)
+							.getParameterRefEntry().getParameterRef();
 				}
-				else if (xtceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getContainerRefEntry() != null) {
-					name = xtceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getContainerRefEntry()
-							.getContainerRef();
+				else if (xtceSequenceContainer.getEntryList().getEntryListTypeItem(subContainerIndex).getContainerRefEntry() != null) {
+					name = xtceSequenceContainer.getEntryList().getEntryListTypeItem(subContainerIndex)
+							.getContainerRefEntry().getContainerRef();
 				}
 
 				final ParameterGroup subcontainer = parameterGroups.get(name);
 				if (subcontainer != null) {
-					thisContainer.addParameterGroup(subcontainer);
-					subcontainer.addParentParameterGroup(thisContainer);
-					
-					if(LOG.isDebugEnabled()) {
-						LOG.debug("Added subcontainer " + subcontainer + " to container " + thisContainer.getName());
+					parameterGroup.addParameterGroup(subcontainer);
+					subcontainer.addParentParameterGroup(parameterGroup);
+
+					if (LOG.isDebugEnabled()) {
+						LOG.debug("Added subcontainer " + subcontainer + " to container " + parameterGroup.getName());
 					}
 				}
 			}
 		}
 	}
 
-	private boolean doesIntRequireJavaLong(final IntegerParameterType type) {
+	private final boolean doesIntRequireJavaLong(final IntegerParameterType type) {
 		boolean longRequired = false;
 		// If signed
 		if (type.getSigned()) {
@@ -377,16 +379,15 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 		return spaceSystem;
 	}
 
-	private Encoding getIntegerEncoding(IntegerParameterType intParamType) throws InvalidXtceFileException {
+	private final Encoding getIntegerEncoding(final IntegerParameterType intParamType) throws InvalidXtceFileException {
 		BaseDataTypeChoice baseDataTypeChoice = intParamType.getBaseDataTypeChoice();
-		if(baseDataTypeChoice == null) {
-			if(LOG.isDebugEnabled()) {
+		if (baseDataTypeChoice == null) {
+			if (LOG.isDebugEnabled()) {
 				LOG.debug("Base data type does not have a base data type choice, assuming default of unsigned integer encoding");
 			}
 			return Encoding.unsigned;
 		}
-		IntegerDataEncodingTypeEncodingType xtceEncoding = baseDataTypeChoice.getIntegerDataEncoding()
-				.getEncoding();
+		IntegerDataEncodingTypeEncodingType xtceEncoding = baseDataTypeChoice.getIntegerDataEncoding().getEncoding();
 		switch (xtceEncoding) {
 			case UNSIGNED:
 				return Encoding.unsigned;
@@ -404,17 +405,17 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 				throw new InvalidXtceFileException("Invalid integer encoding in type " + intParamType);
 		}
 	}
-	
-	private Encoding getFloatEncoding(FloatParameterType type) throws InvalidXtceFileException {
+
+	private final Encoding getFloatEncoding(final FloatParameterType type) throws InvalidXtceFileException {
 		BaseDataTypeChoice baseDataTypeChoice = type.getBaseDataTypeChoice();
-		if(baseDataTypeChoice == null) {
-			if(LOG.isDebugEnabled()) {
+		if (baseDataTypeChoice == null) {
+			if (LOG.isDebugEnabled()) {
 				LOG.debug("Base data type does not have a base data type choice, assuming default of IEEE754_1985 float encoding");
 			}
 			return Encoding.IEEE754_1985;
 		}
 		FloatDataEncodingTypeEncodingType xtceEncoding = baseDataTypeChoice.getFloatDataEncoding().getEncoding();
-		
+
 		switch (xtceEncoding) {
 			case IEEE754_1985:
 				return Encoding.IEEE754_1985;
@@ -425,10 +426,10 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 		}
 	}
 
-	private Endianness getEndianness(BaseDataType type) throws InvalidXtceFileException {
+	private final Endianness getEndianness(final BaseDataType type) throws InvalidXtceFileException {
 		BaseDataTypeChoice baseDataTypeChoice = type.getBaseDataTypeChoice();
-		if(baseDataTypeChoice == null) {
-			if(LOG.isDebugEnabled()) {
+		if (baseDataTypeChoice == null) {
+			if (LOG.isDebugEnabled()) {
 				LOG.debug("Base data type does not have a base data type choice, assuming default of BIG endian");
 			}
 			return Endianness.BIG;

@@ -3,19 +3,18 @@ package org.hbird.transport.packetbroker.parameterbehaviours;
 import java.util.BitSet;
 
 /**
- * Abstract class providing the get size in bits functionality which is common across all
- * NumberParameterTypeBehaviours.
+ * Abstract class providing the get size in bits functionality which is common across all NumberParameterTypeBehaviours.
  * 
- * @author Mark Doyle 
- *
+ * @author Mark Doyle
+ * 
  */
-public abstract class AbstractNumberBehaviour implements NumberParameterTypeBehaviour {
-	
+public abstract class AbstractNumberBehaviour implements ParameterBehaviour {
+
 	protected final int SIZE_IN_BITS;
-	
+
 	protected final boolean isBigEndian;
-	
-	public AbstractNumberBehaviour(int sizeInBits, boolean isBigEndian) {
+
+	public AbstractNumberBehaviour(final int sizeInBits, final boolean isBigEndian) {
 		this.SIZE_IN_BITS = sizeInBits;
 		this.isBigEndian = isBigEndian;
 	}
@@ -26,7 +25,7 @@ public abstract class AbstractNumberBehaviour implements NumberParameterTypeBeha
 	}
 
 	@Override
-	public BitSet getRawParameterBitSet(BitSet packet) {
+	public BitSet getRawParameterBitSet(final BitSet packet) {
 		int offset = 0;
 		return packet.get(offset, offset + getSizeInBits());
 	}

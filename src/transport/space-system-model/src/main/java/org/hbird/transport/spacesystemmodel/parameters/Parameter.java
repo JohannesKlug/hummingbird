@@ -15,7 +15,7 @@ public interface Parameter<T> extends SpaceSystemModelItem {
 	public enum Endianness {
 		BIG, LITTLE
 	};
-	
+
 	public enum Encoding {
 		unsigned, signMagnitude, twosComplement, onesComplement, binaryCodedDecimal, packedBinaryCodedDecimal, UTF8, UTF16, IEEE754_1985, MILSTD_1750A
 	}
@@ -50,11 +50,12 @@ public interface Parameter<T> extends SpaceSystemModelItem {
 	 * @return endiannness of the binary data this Parameter represents.
 	 */
 	Endianness getEndianness();
-	
+
 	Encoding getEncoding();
 
 	/**
-	 * Checks the incoming object for equality with this Parameters value. 
+	 * Checks the incoming object for equality with this Parameters value.
+	 * 
 	 * @param obj
 	 * @return
 	 */
