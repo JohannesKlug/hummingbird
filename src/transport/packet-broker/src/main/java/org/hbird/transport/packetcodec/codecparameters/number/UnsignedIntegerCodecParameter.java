@@ -21,28 +21,6 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 		super(hostParameter);
 	}
 
-
-	// @Override
-	// public Number valueFromBitSet(final BitSet packet) {
-	// if (LOG.isDebugEnabled()) {
-	// LOG.debug("Extracting " + this.getSIZE_IN_BITS() + " bit int value from " + BitSetUtility.binDump(packet));
-	// }
-	//
-	// BitSet actualParameter = packet.get(0, this.getSIZE_IN_BITS());
-	//
-	// if (!isBigEndian) {
-	// actualParameter = BitSetUtility.reverse(actualParameter, this.getSIZE_IN_BITS());
-	// }
-	// final byte[] byteArray = BitSetUtility.toByteArray(actualParameter, this.getSIZE_IN_BITS());
-	// LOG.debug("Byte array = " + BytesUtility.decimalDump(byteArray));
-	//
-	// final long output = BytesUtility.combine(byteArray, this.getSIZE_IN_BITS(), false).longValue();
-	// LOG.debug("Testing combine.  Output(bin) = " + Long.toBinaryString(output));
-	// LOG.debug("Testing combine.  Output(dec) = " + output);
-	//
-	// return output;
-	// }
-
 	// @Override
 	// public BitSet insertIntoBitSet(final Number number, final BitSet bitSetTarget, int offset) {
 	//
@@ -139,7 +117,6 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 
 	@Override
 	public Integer decode(final BitSet inBitset) {
-
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Extracting " + getSizeInBits() + " bit int value from " + BitSetUtility.binDump(inBitset));
 		}
