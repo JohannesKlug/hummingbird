@@ -18,7 +18,7 @@ import org.hbird.transport.spacesystemmodel.parameters.Parameter;
  * 
  */
 public interface SpaceSystemModel {
-	
+
 	/**
 	 * Retrieves a container.
 	 * 
@@ -56,10 +56,26 @@ public interface SpaceSystemModel {
 	Map<String, Parameter<?>> getAllParameters();
 
 	/**
+	 * Returns all integer based parameters.
+	 * 
+	 * @return List of all Integer based parameters.
+	 */
+	List<Parameter<Integer>> getIntegerParameters();
+
+
+	/**
+	 * Returns all long based parameters.
+	 * 
+	 * @return List of all Long based parameters.
+	 */
+	List<Parameter<Long>> getLongParameters();
+
+	/**
 	 * Get all restrictions in the Space System Model
 	 * 
 	 * @return map of all restrictions.
 	 */
 	Map<Parameter<?>, List<Object>> getAllParameterRestrictions();
+
 
 }

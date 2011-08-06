@@ -34,17 +34,17 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>castor-maven-plugin</artifactId>
-				<version>2.0</version>
+				<version>2.1</version>
 				<executions>
 					<execution>
 						<id>Add generated sources to source path</id>
-						<phase>validate</phase>
+						<phase>generate-sources</phase>
 						<goals>
 							<goal>generate</goal>
 						</goals>
 						<inherited>false</inherited>
 						<configuration>
-						<schemaDirectory>${basedir}/src/main/resources/schemas</schemaDirectory>
+							<schemaDirectory>${basedir}/src/main/resources/schemas</schemaDirectory>
 							<packaging>org.hbird.transport.generatedcode.xtce</packaging>
 							<properties>${basedir}/src/main/castor/castorbuilder.properties</properties>
 							<verbose>true</verbose>
@@ -79,6 +79,41 @@
 				</configuration>
 			</plugin>
 		</plugins>
+<!-- 		<pluginManagement> -->
+<!-- 			<plugins> -->
+<!-- 				This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
+<!-- 				<plugin> -->
+<!-- 					<groupId>org.eclipse.m2e</groupId> -->
+<!-- 					<artifactId>lifecycle-mapping</artifactId> -->
+<!-- 					<version>1.0.0</version> -->
+<!-- 					<configuration> -->
+<!-- 						<lifecycleMappingMetadata> -->
+<!-- 							<pluginExecutions> -->
+<!-- 								<pluginExecution> -->
+<!-- 									<pluginExecutionFilter> -->
+<!-- 										<groupId> -->
+<!-- 											org.codehaus.mojo -->
+<!-- 										</groupId> -->
+<!-- 										<artifactId> -->
+<!-- 											castor-maven-plugin -->
+<!-- 										</artifactId> -->
+<!-- 										<versionRange> -->
+<!-- 											[2.1,) -->
+<!-- 										</versionRange> -->
+<!-- 										<goals> -->
+<!-- 											<goal>generate</goal> -->
+<!-- 										</goals> -->
+<!-- 									</pluginExecutionFilter> -->
+<!-- 									<action> -->
+<!-- 										<ignore></ignore> -->
+<!-- 									</action> -->
+<!-- 								</pluginExecution> -->
+<!-- 							</pluginExecutions> -->
+<!-- 						</lifecycleMappingMetadata> -->
+<!-- 					</configuration> -->
+<!-- 				</plugin> -->
+<!-- 			</plugins> -->
+<!-- 		</pluginManagement> -->
 	</build>
 
 	<dependencies>
@@ -100,12 +135,6 @@
 			<artifactId>space-system-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hbird.transport</groupId>
-			<artifactId>packet-broker</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

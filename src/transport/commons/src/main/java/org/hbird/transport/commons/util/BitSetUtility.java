@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
  * 
  * TODO Make the class set the final bit + 1 in the set automatically.
  * 
- * @author Gert Villemos
  * @author Mark Doyle
  * @author Johannes Klug
  */
@@ -73,7 +72,8 @@ public final class BitSetUtility {
 		int bitIndex = 0;
 
 		while (totalIndex < data.size()) {
-			if (bitIndex < bits.length && bits[bitIndex].equals("") == false && totalIndex == Integer.parseInt(bits[bitIndex])) {
+			if (bitIndex < bits.length && bits[bitIndex].equals("") == false
+					&& totalIndex == Integer.parseInt(bits[bitIndex])) {
 				dump += "1";
 				++bitIndex;
 			}
@@ -115,7 +115,8 @@ public final class BitSetUtility {
 	 * @throws BitSetOperationException
 	 *             if the input string contains invalid characters, that is, not equal to 1 or 0
 	 */
-	public static BitSet stringToBitSet(final String binaryString, final boolean isBigEndian, final boolean bigEndianOut) throws BitSetOperationException {
+	public static BitSet stringToBitSet(final String binaryString, final boolean isBigEndian, final boolean bigEndianOut)
+			throws BitSetOperationException {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("I was passed: " + binaryString);
 		}

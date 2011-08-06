@@ -11,59 +11,21 @@
 	
 	<groupId>org.hbird.business</groupId>
 	<artifactId>simulator</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>Simulator</name>
 	
 	<description>A Simulator that produces telemetry according to its setup.</description>
 	<build>
 		<defaultGoal>install</defaultGoal>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<extensions>true</extensions>
-				<executions>
-					<execution>
-						<id>bundle-manifest</id>
-						<phase>process-classes</phase>
-						<goals>
-							<goal>manifest</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<instructions>
-						<Export-Package>
-							org.hbird.simulator*						
-						</Export-Package>
-					</instructions>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.camel</groupId>
-				<artifactId>camel-maven-plugin</artifactId>
-				<version>2.6.0</version>
-			</plugin>
-		</plugins>
 	</build>
 	
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-core</artifactId>
-			<version>${camel.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-test</artifactId>
-			<version>${camel.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -83,7 +45,6 @@
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-camel</artifactId>
-			<version>${activemq.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-pool</groupId>
@@ -93,7 +54,6 @@
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-jms</artifactId>
-			<version>${camel.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -130,7 +90,6 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
 		</dependency>
 		
 		<dependency>

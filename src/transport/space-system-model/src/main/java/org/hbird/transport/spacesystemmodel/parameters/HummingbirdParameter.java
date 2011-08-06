@@ -1,5 +1,6 @@
 package org.hbird.transport.spacesystemmodel.parameters;
 
+
 /**
  * The Hummingbird implementation of the {@link Parameter}.
  * 
@@ -12,26 +13,22 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	private final String name;
 	private final String shortDescription;
 	private final String longDescription;
-	private final long sizeInBits;
+	private final int sizeInBits;
 	private final Endianness endianness;
 	private final Encoding encoding;
 	private T value;
 
 	/**
-	 * Constructor of the Parameter class.
 	 * 
 	 * @param name
-	 *            The name of the container.
 	 * @param shortDescription
-	 *            A one line description of the container, used for tooltip type information.
 	 * @param longDescription
-	 *            A detailed description of the container.
-	 * @param type
-	 *            The parameter type.
-	 * 
+	 * @param sizeInBits
+	 * @param endianness
+	 * @param encoding
 	 */
 	public HummingbirdParameter(final String name, final String shortDescription, final String longDescription,
-			final long sizeInBits, final Endianness endianness, final Encoding encoding) {
+			final int sizeInBits, final Endianness endianness, final Encoding encoding) {
 		this.name = name;
 		this.shortDescription = shortDescription;
 		this.longDescription = longDescription;
@@ -56,7 +53,7 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	}
 
 	@Override
-	public long getSizeInBits() {
+	public int getSizeInBits() {
 		return this.sizeInBits;
 	}
 

@@ -12,6 +12,7 @@ public class IntegerParameterTest {
 
 	private Parameter<Integer> intParam;
 
+	// @formatter:off
 	@Before
 	public void setUp() throws Exception {
 		intParam = new HummingbirdParameter<Integer>("IntParam", 
@@ -21,6 +22,7 @@ public class IntegerParameterTest {
 													 Endianness.BIG, 
 													 Encoding.twosComplement);
 	}
+	// @formatter:on
 
 	@Test
 	public void testIsValue() {
@@ -38,5 +40,4 @@ public class IntegerParameterTest {
 		assertFalse("isValue should not be true since the parameter and the Object are different types",
 				intParam.isValue(stringCompareValue));
 	}
-
 }

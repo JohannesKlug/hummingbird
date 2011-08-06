@@ -30,7 +30,7 @@
 		<level value="WARN" />
 	</logger>
 	
-	<logger name="org.hbird.transport.packetbroker">
+	<logger name="org.hbird.transport.packetcodec">
 		<level value="WARN"></level>
 	</logger>
 	

@@ -25,7 +25,7 @@ import org.hbird.transport.generatedcode.xtce.SpaceSystem;
 import org.hbird.transport.generatedcode.xtce.types.DataEncodingTypeBitOrderType;
 import org.hbird.transport.generatedcode.xtce.types.FloatDataEncodingTypeEncodingType;
 import org.hbird.transport.generatedcode.xtce.types.IntegerDataEncodingTypeEncodingType;
-import org.hbird.transport.spacesystemmodel.DefaultParameterGroup;
+import org.hbird.transport.spacesystemmodel.HummingbirdParameterGroup;
 import org.hbird.transport.spacesystemmodel.ParameterGroup;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
@@ -50,6 +50,8 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	private final Map<String, ParameterGroup> parameterGroups = new HashMap<String, ParameterGroup>();
 	private final Map<String, Parameter<?>> parameters = new HashMap<String, Parameter<?>>();
+	private final List<Parameter<Integer>> integerParameters = new ArrayList<Parameter<Integer>>();
+	private final List<Parameter<Long>> longParameters = new ArrayList<Parameter<Long>>();
 	private final Map<Parameter<?>, List<Object>> restrictions = new HashMap<Parameter<?>, List<Object>>();
 
 	private final Map<String, ParameterTypeSetTypeItem> xtceParameterTypes = new HashMap<String, ParameterTypeSetTypeItem>();
@@ -62,6 +64,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	private String spacesystemmodelFilename;
 
 	private int numParameterGroups;
+
 
 	public XtceSpaceSystemModel(final String spacesystemmodelFilename) throws InvalidXtceFileException {
 		this.spacesystemmodelFilename = spacesystemmodelFilename;
@@ -163,27 +166,29 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 			String parameterTypeRef = xtceParameter.getParameter().getParameterTypeRef();
 			ParameterTypeSetTypeItem xtceType = xtceParameterTypes.get(parameterTypeRef);
 
-			Parameter<?> parameter = null;
 			// If it's an integer type...
 			if (xtceType.getIntegerParameterType() != null) {
 				IntegerParameterType type = xtceType.getIntegerParameterType();
 				if (!doesIntRequireJavaLong(type)) {
-						parameter = new HummingbirdParameter<Integer>(
+					Parameter<Integer> intParameter = new HummingbirdParameter<Integer>(
 								xtceParameter.getParameter().getName(),
 								xtceParameter.getParameter().getShortDescription(), 
 								xtceParameter.getParameter().getLongDescription(),
-								type.getSizeInBits(), 
+								(int) type.getSizeInBits(), 
 								getEndianness(type), 
 								getIntegerEncoding(type));
+					integerParameters.add(intParameter);
+					parameters.put(intParameter.getName(), intParameter);
 				}
 				else {
-						parameter = new HummingbirdParameter<Long>(
+					Parameter<Long> longParameter = new HummingbirdParameter<Long>(
 								xtceParameter.getParameter().getName(), 
 								xtceParameter.getParameter().getShortDescription(), 
 								xtceParameter.getParameter().getLongDescription(),
-								type.getSizeInBits(), 
+								(int) type.getSizeInBits(), 
 								getEndianness(type), 
 								getIntegerEncoding(type));
+					parameters.put(longParameter.getName(), longParameter);
 				}
 			}
 
@@ -192,40 +197,40 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 				FloatParameterType type = xtceType.getFloatParameterType();
 				switch(type.getSizeInBits()) {
 					case VALUE_32:
-						parameter = new HummingbirdParameter<Float>(
+						Parameter<Float> floatParameter = new HummingbirdParameter<Float>(
 								xtceParameter.getParameter().getName(), 
 								xtceParameter.getParameter().getShortDescription(), 
 								xtceParameter.getParameter().getLongDescription(),
-								Long.parseLong(type.getSizeInBits().value()), 
+								Integer.parseInt(type.getSizeInBits().value()), 
 								getEndianness(type),
 								getFloatEncoding(type));
+						parameters.put(floatParameter.getName(), floatParameter);
 						break;
 					case VALUE_64:
-						parameter = new HummingbirdParameter<Double>(
+						Parameter<Double> doubleParameter = new HummingbirdParameter<Double>(
 								xtceParameter.getParameter().getName(), 
 								xtceParameter.getParameter().getShortDescription(), 
 								xtceParameter.getParameter().getLongDescription(),
-								Long.parseLong(type.getSizeInBits().value()), 
+								Integer.parseInt(type.getSizeInBits().value()), 
 								getEndianness(type),
 								getFloatEncoding(type));
+						parameters.put(doubleParameter.getName(), doubleParameter);
 						break;
 					case VALUE_128:
-						parameter = new HummingbirdParameter<BigDecimal>(
+						Parameter<BigDecimal> bigDecimalParameter = new HummingbirdParameter<BigDecimal>(
 								xtceParameter.getParameter().getName(), 
 								xtceParameter.getParameter().getShortDescription(), 
 								xtceParameter.getParameter().getLongDescription(),
-								Long.parseLong(type.getSizeInBits().value()),
+								Integer.parseInt(type.getSizeInBits().value()),
 								getEndianness(type),
 								getFloatEncoding(type));
+						parameters.put(bigDecimalParameter.getName(), bigDecimalParameter);
 						break;
 					default:
 						throw new InvalidXtceFileException("Invalid bit size for float type " + type.getName());
 				}
 			}
 			// @formatter:on
-
-			// FIXME Add support for other parameters and split off creation into a series of private methods.
-			parameters.put(parameter.getName(), parameter);
 		}
 	}
 
@@ -240,7 +245,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 					.getContainerSetTypeItem(containerIndex).getSequenceContainer();
 
 
-			final ParameterGroup parameterGroup = new DefaultParameterGroup(xtceContainer.getName(),
+			final ParameterGroup parameterGroup = new HummingbirdParameterGroup(xtceContainer.getName(),
 					xtceContainer.getShortDescription(), xtceContainer.getLongDescription());
 
 			parameterGroups.put(parameterGroup.getName(), parameterGroup);
@@ -486,6 +491,16 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	@Override
 	public Collection<ParameterGroup> getAllParameterGroups() {
 		return parameterGroups.values();
+	}
+
+	@Override
+	public List<Parameter<Integer>> getIntegerParameters() {
+		return integerParameters;
+	}
+
+	@Override
+	public List<Parameter<Long>> getLongParameters() {
+		return longParameters;
 	}
 
 }

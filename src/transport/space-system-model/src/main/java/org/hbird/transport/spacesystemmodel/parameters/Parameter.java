@@ -42,7 +42,7 @@ public interface Parameter<T> extends SpaceSystemModelItem {
 	 * 
 	 * @return int representing the size in bits of this {@link Parameter}
 	 */
-	long getSizeInBits();
+	int getSizeInBits();
 
 	/**
 	 * Returns the byte order of the binary data this Parameter represents.
@@ -60,4 +60,5 @@ public interface Parameter<T> extends SpaceSystemModelItem {
 	 * @return
 	 */
 	boolean isValue(Object obj);
+
 }
