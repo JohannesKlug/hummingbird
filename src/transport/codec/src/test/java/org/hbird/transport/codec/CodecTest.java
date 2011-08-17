@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class CodecTest {
 	
-	private long performanceTestRuns = 2000000000;
+	private long performanceTestRuns = Integer.MAX_VALUE/10;
 	
 	@Test
 	public void intFromBytes() {
@@ -55,10 +55,12 @@ public class CodecTest {
 		int expected = 715827882;
 		
 		int result = 0;
-		
+		long startTime = System.currentTimeMillis();
 		for (long i=0; i<performanceTestRuns; i++) {
 			result = Codec.bigEndianIntFromBytes(anArray);
 		}
+		long time = System.currentTimeMillis() - startTime;
+		System.out.println("Specific function call decoded " + performanceTestRuns/time/1000 + " million ints per second");
 		
 		assertEquals(expected, result);
 	}
@@ -69,10 +71,12 @@ public class CodecTest {
 		int expected = 715827882;
 		
 		int result = 0;
-		
+		long startTime = System.currentTimeMillis();
 		for (long i=0; i<performanceTestRuns; i++) {
 			result = (Integer) Codec.anythingFromBytes(anArray, "INT");
 		}
+		long time = System.currentTimeMillis() - startTime;
+		System.out.println("Anything function call decoded " + performanceTestRuns/time/1000 + " million ints per second");
 		
 		assertEquals(expected, result);
 	}
