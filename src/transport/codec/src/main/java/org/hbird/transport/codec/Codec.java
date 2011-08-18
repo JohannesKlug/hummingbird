@@ -1,10 +1,13 @@
 package org.hbird.transport.codec;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+import org.apache.commons.lang3.ArrayUtils;
+
 public class Codec implements Runnable {
 	
-	public static String INT = "INT";
-	public static String STRING = "STRING";
-
     public void run() {
         for (long i=Long.MIN_VALUE; i<Long.MAX_VALUE; i++) {
         	long dummy = i;
@@ -39,14 +42,25 @@ public class Codec implements Runnable {
 		return new String(bytes);
 	}
 	
-	public static Object anythingFromBytes(byte[] bytes, String encoding) throws Exception {
-		if (encoding == INT) {
+	public static Object anythingFromBytes(byte[] bytes, Encoding encoding) throws Exception {
+		if (encoding == Encoding.INT) {
 			return bigEndianIntFromBytes(bytes);
-		} else if (encoding == STRING) {
+		} else if (encoding == Encoding.STRING) {
 			return stringFromBytes(bytes);
 		} else {
 			throw new Exception("Argh! I can't decode '" + encoding + "'.");
 		}
 		
+	}
+	
+	public static Map<String,Object> decodeMany(byte[] bytes, List<ParameterEncoding> parameters) throws Exception {
+		Map<String, Object> results = new HashMap<String, Object>();
+		
+		for (ParameterEncoding parameter : parameters) {
+			Object result = anythingFromBytes(ArrayUtils.subarray(bytes, parameter.offset, parameter.offset+parameter.length), parameter.encoding);
+			results.put(parameter.name, result);
+		}
+		
+		return results;
 	}
 }
