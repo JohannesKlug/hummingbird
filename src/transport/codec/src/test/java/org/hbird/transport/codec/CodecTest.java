@@ -109,5 +109,17 @@ public class CodecTest {
 		
 	}
 	
+	@Test
+	public void extractSubArrayTest() {
+		assertEquals(0,Codec.extractSubArray(new byte[0],0,0).length);
+		assertEquals(1,Codec.extractSubArray(new byte[0],0,1).length);
+		assertEquals(1,Codec.extractSubArray(new byte[0],0,8).length);
+		assertEquals(2,Codec.extractSubArray(new byte[0],0,9).length);
+		assertEquals(2,Codec.extractSubArray(new byte[0],0,16).length);
+		assertEquals(3,Codec.extractSubArray(new byte[0],0,17).length);
+		
+		assertEquals((byte)0xFF, Codec.extractSubArray(new byte[]{(byte)0xFF}, 0, 8)[0]);
+	}
+	
 
 }

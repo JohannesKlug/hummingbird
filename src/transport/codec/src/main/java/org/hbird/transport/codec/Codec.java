@@ -63,4 +63,14 @@ public class Codec implements Runnable {
 		
 		return results;
 	}
+	
+	public static byte[] extractSubArray(byte[] bytes, int bitOffset, int bitLength) {
+		byte[] result = new byte[(int)bitLength/8 + ((bitLength%8 == 0) ? 0 :1)];
+		// assuming Big Endian byte order
+		
+		// rightmost byte
+		int rightmostByteIndex = (bitOffset+bitLength)/8;
+		return result;
+		
+	}
 }
