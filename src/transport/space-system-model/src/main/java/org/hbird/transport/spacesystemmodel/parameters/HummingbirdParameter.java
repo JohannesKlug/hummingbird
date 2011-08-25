@@ -69,6 +69,9 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 
 	@Override
 	public boolean isValue(final Object obj) {
+		if (value == null) {
+			return false;
+		}
 		if (value.equals(obj)) {
 			return true;
 		}
