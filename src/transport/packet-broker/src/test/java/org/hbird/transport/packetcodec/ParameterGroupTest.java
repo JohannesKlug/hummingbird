@@ -10,6 +10,10 @@ import org.hbird.transport.packetcodec.testsupport.MockContainerModelFactory;
 import org.hbird.transport.spacesystemmodel.ParameterGroup;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
+import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
+import org.hbird.transport.spacesystemmodel.parameters.Parameter;
+import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
+import org.hbird.transport.spacesystemmodel.parameters.Parameter.Endianness;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -237,14 +241,26 @@ public class ParameterGroupTest {
 		// Using default values, i.e. everything 0 including packet type ID we should get the length
 		// of the model with NO parameters.
 		assertEquals("Comparing length of tmframe", DEFAULT_MODEL_FRAME_LENGTH, length);
-
-		mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS).setValue(
-				Integer.valueOf(MockContainerModelFactory.PACKET_TYPE_A_ID));
+		
+		String oldName = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS).getName();
+		String oldShortDescription = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS).getShortDescription();
+		String oldLongDescription = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS).getLongDescription();
+		int oldSizeInBits = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS).getSizeInBits();
+		Endianness oldEndianness = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS).getEndianness();
+		Encoding oldEncoding = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS).getEncoding();
+		
+		Parameter<Integer> p = new HummingbirdParameter<Integer>(oldName, oldShortDescription, oldLongDescription, oldSizeInBits, oldEndianness, oldEncoding);
+		p.setValue(Integer.valueOf(MockContainerModelFactory.PACKET_TYPE_A_ID));	
+		
+		mockContainerFactory.getAllParameters().put(MockContainerModelFactory.PACKET_ID_ALIAS, p);
+			
+		
 		length = tmframe.getSizeInBits();
 		assertEquals("Comparing length of tmframe", PKT_TYPE_A_MODEL_FRAME_LENGTH, length);
-
-		mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS).setValue(
-				Integer.valueOf(MockContainerModelFactory.PACKET_TYPE_B_ID));
+		
+		p.setValue(Integer.valueOf(MockContainerModelFactory.PACKET_TYPE_B_ID));
+		mockContainerFactory.getAllParameters().put(MockContainerModelFactory.PACKET_ID_ALIAS, p);
+		
 		length = tmframe.getSizeInBits();
 
 		assertEquals("Comparing length of tmframe", PKT_TYPE_B_MODEL_FRAME_LENGTH, length);
