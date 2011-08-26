@@ -38,8 +38,8 @@
 		<log4j.version>1.2.16</log4j.version>
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<junit.version>4.8.2</junit.version>
-		<castor.version>1.3.1</castor.version>
-		<camel.version>2.7.2</camel.version>
+		<castor.version>1.3.2</castor.version>
+		<camel.version>2.8.0</camel.version>
 		<activemq.version>5.5.0</activemq.version>
 		<mysqlconnector.version>5.1.10</mysqlconnector.version>
 		<jencks.version>2.2</jencks.version>
