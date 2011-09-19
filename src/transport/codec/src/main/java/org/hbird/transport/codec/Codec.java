@@ -64,12 +64,38 @@ public class Codec implements Runnable {
 		return results;
 	}
 	
-	public static byte[] extractSubArray(byte[] bytes, int bitOffset, int bitLength) {
+	public static byte[] extractSubArray(byte[] bytes, int bitOffset, int bitLength) throws Exception {
+		if ((bytes == null) || (bytes.length == 0)) {
+			throw new Exception("Canot work without an input byte array!");
+		}
+		if (((bitOffset+bitLength)) > bytes.length*8) {
+			throw new Exception("Cannot decode a parameter of length " + bitLength + " starting at position " + bitOffset + " when the input byte array is only " + bytes.length + " bytes in length." );
+		}
+		if (bitLength < 1) {
+			throw new Exception("Cannot extract a parameter of length" + bitLength + ", try a length of 1 or greater." );
+		}
 		byte[] result = new byte[(int)bitLength/8 + ((bitLength%8 == 0) ? 0 :1)];
 		// assuming Big Endian byte order
 		
 		// rightmost byte
-		int rightmostByteIndex = (bitOffset+bitLength)/8;
+		int rightmostByteIndex = (bitOffset+bitLength)/8 - ((bitLength%8 == 0) ? 1 :0);
+		
+		// amount of shifts
+		int shift = (8 -(bitOffset + bitLength) % 8) % 8;
+		System.out.println("shift: " + shift);
+		
+		// mask must set all bits to 1 which aren't shifted
+//		int mask = (0xFF >> shift) << shift;
+		int mask = 0xFF;
+		System.out.println("mask: " + mask);
+		
+		for (int i = result.length -1; i>=0; i--) {
+//			System.out.println("i: " + i);
+			int currentInputByte = rightmostByteIndex-result.length+i+1;
+//			System.out.println("currentInputByte: " + currentInputByte);
+			result[i] = (byte) ((bytes[currentInputByte] & mask) >> shift);
+		}
+		
 		return result;
 		
 	}

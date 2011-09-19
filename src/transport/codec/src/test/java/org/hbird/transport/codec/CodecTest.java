@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class CodecTest {
 	
-	private long performanceTestRuns = Integer.MAX_VALUE/10;
+	private long performanceTestRuns = Integer.MAX_VALUE/1000;
 	
 	@Test
 	public void intFromBytes() {
@@ -110,15 +110,51 @@ public class CodecTest {
 	}
 	
 	@Test
-	public void extractSubArrayTest() {
-		assertEquals(0,Codec.extractSubArray(new byte[0],0,0).length);
-		assertEquals(1,Codec.extractSubArray(new byte[0],0,1).length);
-		assertEquals(1,Codec.extractSubArray(new byte[0],0,8).length);
-		assertEquals(2,Codec.extractSubArray(new byte[0],0,9).length);
-		assertEquals(2,Codec.extractSubArray(new byte[0],0,16).length);
-		assertEquals(3,Codec.extractSubArray(new byte[0],0,17).length);
+	public void extractSubArrayTest() throws Exception {
+//		assertEquals(1,Codec.extractSubArray(new byte[1],0,1).length);
+//		assertEquals(1,Codec.extractSubArray(new byte[1],0,8).length);
+//		assertEquals(2,Codec.extractSubArray(new byte[2],0,9).length);
+//		assertEquals(2,Codec.extractSubArray(new byte[2],0,16).length);
+//		assertEquals(3,Codec.extractSubArray(new byte[3],0,17).length);
 		
-		assertEquals((byte)0xFF, Codec.extractSubArray(new byte[]{(byte)0xFF}, 0, 8)[0]);
+		byte[] singleFF = new byte[]{(byte)(0xFF)};
+		assertEquals(0xFF, Codec.extractSubArray(singleFF, 0, 8)[0] & 0xFF);
+		assertEquals(0x01, Codec.extractSubArray(singleFF, 0, 1)[0] & 0xFF);
+		assertEquals(0x01, Codec.extractSubArray(singleFF, 1, 1)[0] & 0xFF);
+		assertEquals(0x01, Codec.extractSubArray(singleFF, 2, 1)[0] & 0xFF);
+		assertEquals(0x01, Codec.extractSubArray(singleFF, 7, 1)[0] & 0xFF);
+	}
+	
+	@Test(expected=Exception.class)
+	public void testExtractEmptyBytes() throws Exception {
+		assertEquals(0,Codec.extractSubArray(new byte[0],0,0).length);
+	}
+	
+	@Test(expected=Exception.class)
+	public void testExtractNullBytes() throws Exception {
+		assertEquals(0,Codec.extractSubArray(null,0,0).length);
+	}
+	
+	@Test(expected=Exception.class)
+	public void testExtractLengthMismatch() throws Exception {
+		assertEquals(2,Codec.extractSubArray(new byte[1],0,9).length);
+		assertEquals(3,Codec.extractSubArray(new byte[2],0,17).length);
+		assertEquals(3,Codec.extractSubArray(new byte[4],31,2).length);
+	}
+	
+	@Test(expected=Exception.class)
+	public void testInvalidBitLengthZero() throws Exception {
+		assertEquals(0,Codec.extractSubArray(new byte[1],0,0).length);
+	}
+	
+	@Test(expected=Exception.class)
+	public void testInvalidBitLengthNegative() throws Exception {
+		assertEquals(0,Codec.extractSubArray(new byte[1],0,Integer.MIN_VALUE).length);
+	}
+	
+	@Test(expected=Exception.class)
+	public void testInvalidBitLengthPositive() throws Exception {
+		assertEquals(0,Codec.extractSubArray(new byte[1],0,Integer.MAX_VALUE).length);
 	}
 	
 
