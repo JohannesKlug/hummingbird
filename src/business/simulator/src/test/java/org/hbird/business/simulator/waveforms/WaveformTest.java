@@ -1,6 +1,6 @@
 package org.hbird.business.simulator.waveforms;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -24,6 +24,26 @@ public class WaveformTest {
 		assertEquals(120.0, lw.nextValue(), 0.001);
 		assertEquals(130.0, lw.nextValue(), 0.001);
 
+	}
+	
+	@Test
+	public void randomValue() {
+		RandomValue rv = new RandomValue(0, 10);
+		for (int i=0; i<10000; i++) {
+			double value = rv.nextValue();
+			assertTrue(value < 10);
+			assertTrue(value > 0);
+		}
+	}
+	
+	@Test
+	public void randomValueWithNegativeNumbers() {
+		RandomValue rv = new RandomValue(-100, -50);
+		for (int i=0; i<10000; i++) {
+			double value = rv.nextValue();
+			assertTrue(value > -100);
+			assertTrue(value < -50);
+		}
 	}
 
 	@Test
