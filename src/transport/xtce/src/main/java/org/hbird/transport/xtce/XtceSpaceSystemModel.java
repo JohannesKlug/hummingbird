@@ -2,6 +2,7 @@ package org.hbird.transport.xtce;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,9 +14,14 @@ import org.exolab.castor.xml.MarshalException;
 import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.xml.ValidationException;
 import org.exolab.castor.xml.XMLContext;
+import org.hbird.transport.generatedcode.xtce.AlgorithmSet;
+import org.hbird.transport.generatedcode.xtce.AlgorithmSetTypeCustomAlgorithm;
+import org.hbird.transport.generatedcode.xtce.AlgorithmSetTypeItem;
 import org.hbird.transport.generatedcode.xtce.BaseDataType;
 import org.hbird.transport.generatedcode.xtce.BaseDataTypeChoice;
 import org.hbird.transport.generatedcode.xtce.Comparison;
+import org.hbird.transport.generatedcode.xtce.ExternalAlgorithm;
+import org.hbird.transport.generatedcode.xtce.ExternalAlgorithmSet;
 import org.hbird.transport.generatedcode.xtce.FloatParameterType;
 import org.hbird.transport.generatedcode.xtce.IntegerParameterType;
 import org.hbird.transport.generatedcode.xtce.ParameterSetTypeItem;
@@ -53,6 +59,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	private final List<Parameter<Integer>> integerParameters = new ArrayList<Parameter<Integer>>();
 	private final List<Parameter<Long>> longParameters = new ArrayList<Parameter<Long>>();
 	private final Map<Parameter<?>, List<Object>> restrictions = new HashMap<Parameter<?>, List<Object>>();
+	private final Map<String, Annotation> algorithms = new HashMap<String, Annotation>();
 
 	private final Map<String, ParameterTypeSetTypeItem> xtceParameterTypes = new HashMap<String, ParameterTypeSetTypeItem>();
 
@@ -109,7 +116,42 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 		createAllParameterGroups();
 
+		createAllAlgorithms();
+
 		createModelConnections();
+	}
+
+	/**
+	 * We currently only support custom external algorithms with the implementation attribute describing a class name or
+	 * annotation.
+	 */
+	private void createAllAlgorithms() {
+		AlgorithmSet algorithms = spaceSystem.getTelemetryMetaData().getAlgorithmSet();
+		for (int i = 0; i < algorithms.getAlgorithmSetTypeItemCount(); i++) {
+			AlgorithmSetTypeItem algorithmType = algorithms.getAlgorithmSetTypeItem(i);
+			createCustomAlgorithms(algorithmType.getCustomAlgorithm());
+		}
+	}
+
+
+	/**
+	 * We currently only support external algorithms defined as a class name or annotation.
+	 * 
+	 * @param customAlgorithm
+	 */
+	private void createCustomAlgorithms(final AlgorithmSetTypeCustomAlgorithm customAlgorithm) {
+		ExternalAlgorithmSet externalAlgorithms = customAlgorithm.getExternalAlgorithmSet();
+		for (int i = 0; i < externalAlgorithms.getExternalAlgorithmCount(); i++) {
+			ExternalAlgorithm externalAlgorithm = externalAlgorithms.getExternalAlgorithm(i);
+			String name = externalAlgorithm.getImplementationName();
+			String location = externalAlgorithm.getAlgorithmLocation();
+			algorithms.put(name, searchForAlgorithmImplAsAnnotation(location));
+		}
+	}
+
+	private Annotation searchForAlgorithmImplAsAnnotation(final String location) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**

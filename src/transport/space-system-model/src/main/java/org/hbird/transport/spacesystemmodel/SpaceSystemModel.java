@@ -13,8 +13,8 @@ import org.hbird.transport.spacesystemmodel.parameters.Parameter;
  * 
  * The models are created based on an underlying space system model, defining the structure of the space system,
  * including the telemetry and command structures. The space system can be expressed in different ways, such as through
- * the OMG/CCSDS XTCE or the ESA MIB/PUS model. The model factory implementation will depend on a data structure in a
- * specific format, but hides this implementation to the monitoring component.
+ * the OMG/CCSDS XTCE, ESA MIB/PUS model, or any other DSL. The model factory implementation will depend on a data
+ * structure in a specific format, but hides this implementation to the monitoring component.
  * 
  */
 public interface SpaceSystemModel {
@@ -76,6 +76,5 @@ public interface SpaceSystemModel {
 	 * @return map of all restrictions.
 	 */
 	Map<Parameter<?>, List<Object>> getAllParameterRestrictions();
-
 
 }
