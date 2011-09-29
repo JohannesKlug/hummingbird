@@ -1,0 +1,15 @@
+target/
+.settings/
+hummingbird/xtce/src/main/java/com/logica/hummingbird/xtce/castor/
+.metadata/
+.project
+.classpath
+.springBeans
+.idea/
+*.iml
+.DS_Store
+*.log
+
+src/business/simple-parameter-simulator/simple-parameter-simulator.log.11-02-20
+*.log*
+src/business/time-correlation/.pydevproject

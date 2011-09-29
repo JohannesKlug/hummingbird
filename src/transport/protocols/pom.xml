@@ -1,0 +1,116 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<artifactId>hummingbird-transport</artifactId>
+		<groupId>org.hbird</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.hbird.transport</groupId>
+	<artifactId>protocols</artifactId>
+	<name>Protocols</name>
+
+	<version>0.0.1-SNAPSHOT</version>
+	<description>All data transmission protocol implementation are contained herein.</description>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<instructions>
+						<Export-Package>
+							org.hbird.transport.framebroker,
+							org.hbird.transport.framebroker.exceptions							
+						</Export-Package>
+						<Private-Package>
+							org.hbird.transport,
+							org.slf4j.*
+						</Private-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${surefire-plugin.version}</version>
+				<configuration>
+				<!-- 
+				
+				Setting system properties apparently does not work.
+				
+				This blog post says it should:
+				http://www.buildanddeploy.com/node/17
+				
+				This JIRA entry says it doesn't:
+				http://jira.codehaus.org/browse/SUREFIRE-634?page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel&focusedCommentId=231569#action_231569
+				
+				This is why I chose the argLine option (see below).
+				
+				2010-10-27 Johannes
+				
+					<systemProperties>
+						<property>
+							<name>java.library.path</name>
+							<value>${project.build.directory}/lib/</value>
+						</property>
+					</systemProperties> 
+					
+					-->
+					<argLine>-Djava.library.path=${project.build.directory}/lib/</argLine>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jms</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.rxtx</groupId>
+			<artifactId>rxtx</artifactId>
+			<version>2.1.7</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+                <dependency>
+                        <groupId>junit</groupId>
+                        <artifactId>junit</artifactId>
+                        <version>4.8.2</version>
+                        <type>jar</type>
+                        <scope>test</scope>
+                </dependency>
+	</dependencies>
+</project>
