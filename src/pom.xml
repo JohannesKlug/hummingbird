@@ -11,27 +11,12 @@
 	<description>The Hummingbird root project is a container for all Hummingbird components, each created in a separate maven module. By building this project, the complete system can be built.</description>
 	<url>http://hbird.org/</url>
 
-<!--	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
-	</parent>-->
-
 
 	<modules>
 		<module>transport</module>
 		<!--<module>business</module>-->
 		<!--<module>exchange</module>-->
 	</modules>
-
-	<licenses>
-		<!--<license>
-			<name>Apache V2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-			<distribution>manual</distribution>
-			<comments>(c) Hummingbird Community, all rights reserved.</comments>
-		</license>-->
-	</licenses>
 
 	<properties>
 		<rxtx.version>2.1.7</rxtx.version>
@@ -104,7 +89,7 @@
 
 	</developers>
 
-<!--	<dependencies>
+	<dependencies>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
@@ -119,7 +104,7 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
--->		
+		
 		<!-- For creating OSGi bundles -->
 		<!-- COMMENT: The bundle version is very old. Camel uses 4.1.0 and I some problems due to this.  -->
 <!--		<dependency>-->
@@ -127,7 +112,7 @@
 <!--			<artifactId>org.osgi.core</artifactId>-->
 <!--			<version>1.0.0</version>-->
 <!--		</dependency>-->
-<!--		<dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
@@ -281,7 +266,7 @@
 			</dependency>
 
 		</dependencies>
-	</dependencyManagement>-->
+	</dependencyManagement>
 
 	<build>
 		<pluginManagement>
