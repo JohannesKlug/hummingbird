@@ -4,22 +4,24 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.BitSet;
 
+import org.hbird.transport.commons.util.BitSetUtility;
+import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
+import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
+import org.hbird.transport.payloadcodec.codecparameters.number.TwosComplementLongCodecParameter;
+import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
+import org.hbird.transport.spacesystemmodel.parameters.Parameter;
+import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
+import org.hbird.transport.spacesystemmodel.parameters.Parameter.Endianness;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.hbird.transport.commons.util.BitSetUtility;
-import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
-import org.hbird.transport.payloadcodec.codecparameters.number.TwosComplementLongCodecParameter;
-import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
-import org.hbird.transport.spacesystemmodel.parameters.behaviours.LongSignedBehaviour;
-
-public class LongSignedBehaviourTest {
-	private final static Logger LOG = LoggerFactory.getLogger(LongSignedBehaviourTest.class);
+public class TwosComplementLongCodecParameterTest {
+	private final static Logger LOG = LoggerFactory.getLogger(TwosComplementLongCodecParameterTest.class);
 	
-	private static TwosComplementLongCodecParameter longSignedBehaviour;
+	private static CodecParameter<Long> codecParameter;
 	
 	private static final long TEST_LONG = 2305843397479642193l;
 	private static final String TEST_LONG_STR = "0010000000000000000000000101101001100110011101000011010001010001";
@@ -41,47 +43,35 @@ public class LongSignedBehaviourTest {
 
 	@Before
 	public void setUp() throws Exception {
-		longSignedBehaviour = new TwosComplementLongCodecParameter(64, true);
-	}
-
-	@Test(expected=InvalidParameterTypeException.class)
-	public final void testLongSignedBehaviourTooSmall() throws InvalidParameterTypeException {
-		new TwosComplementLongCodecParameter(12, true);
-	}
-	
-	@Test(expected=InvalidParameterTypeException.class)
-	public final void testLongSignedBehaviourTooBig() throws InvalidParameterTypeException {
-		new TwosComplementLongCodecParameter(74, true);
+		Parameter<Long> parameter = new HummingbirdParameter<Long>("", "", "", 64, Endianness.BIG, Encoding.twosComplement);
+		parameter.setValue(TEST_LONG);
+		codecParameter = new TwosComplementLongCodecParameter(parameter);
 	}
 
 	@Test
 	public final void testValueFromBitSet() {
-		long actual = longSignedBehaviour.valueFromBitSet(TEST_LONG_BITSET);
+		long actual = codecParameter.decode(TEST_LONG_BITSET);
 		assertEquals(TEST_LONG, actual);
 	}
 	
 	@Test
 	public final void testMaxValueFromBitSet() {
-		long actual = longSignedBehaviour.valueFromBitSet(TEST_MAX_LONG_BITSET);
+		long actual = codecParameter.decode(TEST_MAX_LONG_BITSET);
 		assertEquals(Long.MAX_VALUE, actual);
 	}
 	
 	@Test
 	public final void testMinValueFromBitSet() {
-		long actual = longSignedBehaviour.valueFromBitSet(TEST_MIN_LONG_BITSET);
+		long actual = codecParameter.decode(TEST_MIN_LONG_BITSET);
 		assertEquals(Long.MIN_VALUE, actual);
 	}
 
 	@Test
 	public final void testInsertIntoBitSet() throws BitSetOperationException {
+		codecParameter.setValue(TEST_LONG);
 		BitSet actual = new BitSet();
-		actual = longSignedBehaviour.insertIntoBitSet(TEST_LONG, actual, 0);
-		assertEquals(actual, TEST_LONG_BITSET);
-	}
-
-	@Test
-	public final void testGetTypeName() throws InvalidParameterTypeException {
-		assertEquals("Signed long", longSignedBehaviour.getTypeName());
+		actual = codecParameter.encodeToBitSet(actual, 0);
+		assertEquals(TEST_LONG_BITSET, actual);
 	}
 
 }

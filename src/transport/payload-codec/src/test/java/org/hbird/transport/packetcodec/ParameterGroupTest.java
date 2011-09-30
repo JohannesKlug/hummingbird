@@ -6,7 +6,6 @@ import java.util.BitSet;
 
 import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
-import org.hbird.transport.packetcodec.testsupport.MockContainerModelFactory;
 import org.hbird.transport.spacesystemmodel.ParameterGroup;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
@@ -56,9 +55,6 @@ import org.slf4j.LoggerFactory;
 public class ParameterGroupTest {
 	/** Logger for this class */
 	private static final Logger LOG = LoggerFactory.getLogger(ParameterGroupTest.class);
-
-	/** Mock Factory used in all the tests. */
-	private static MockContainerModelFactory mockContainerFactory;
 
 	/** The complete mock container model as a string using default values i.e. 0 */
 	private final static String EMPTY_CONTAINER_MODEL_BITSET_STRING = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
@@ -228,43 +224,6 @@ public class ParameterGroupTest {
 		LOG.debug("-----------------------------------------------------------------------------");
 	}
 
-	@Before
-	public void setUpPerTest() throws InvalidParameterTypeException {
-		mockContainerFactory = new MockContainerModelFactory();
-	}
-
-	@Test
-	public void testGetLength() throws UnknownParameterGroupException {
-		ParameterGroup tmframe = mockContainerFactory.getParameterGroup("TMFrame");
-
-		int length = tmframe.getSizeInBits();
-		// Using default values, i.e. everything 0 including packet type ID we should get the length
-		// of the model with NO parameters.
-		assertEquals("Comparing length of tmframe", DEFAULT_MODEL_FRAME_LENGTH, length);
-		
-		String oldName = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS).getName();
-		String oldShortDescription = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS).getShortDescription();
-		String oldLongDescription = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS).getLongDescription();
-		int oldSizeInBits = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS).getSizeInBits();
-		Endianness oldEndianness = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS).getEndianness();
-		Encoding oldEncoding = mockContainerFactory.getParameter(MockContainerModelFactory.PACKET_ID_ALIAS).getEncoding();
-		
-		Parameter<Integer> p = new HummingbirdParameter<Integer>(oldName, oldShortDescription, oldLongDescription, oldSizeInBits, oldEndianness, oldEncoding);
-		p.setValue(Integer.valueOf(MockContainerModelFactory.PACKET_TYPE_A_ID));	
-		
-		mockContainerFactory.getAllParameters().put(MockContainerModelFactory.PACKET_ID_ALIAS, p);
-			
-		
-		length = tmframe.getSizeInBits();
-		assertEquals("Comparing length of tmframe", PKT_TYPE_A_MODEL_FRAME_LENGTH, length);
-		
-		p.setValue(Integer.valueOf(MockContainerModelFactory.PACKET_TYPE_B_ID));
-		mockContainerFactory.getAllParameters().put(MockContainerModelFactory.PACKET_ID_ALIAS, p);
-		
-		length = tmframe.getSizeInBits();
-
-		assertEquals("Comparing length of tmframe", PKT_TYPE_B_MODEL_FRAME_LENGTH, length);
-	}
 
 	/**
 	 * Simply tests the container can marshal with the default empty parameters.
@@ -648,11 +607,6 @@ public class ParameterGroupTest {
 	//
 	// assertEquals("Flag should be on", FLAG_ON_BITSET, marshalledFlag);
 	// }
-
-	@Test(expected = UnknownParameterGroupException.class)
-	public void testGetInvalidContainerName() throws UnknownParameterGroupException {
-		mockContainerFactory.getParameterGroup("You're doing it wrong!");
-	}
 
 	private void logAssertValues(final String assertDescription, final BitSet expected, final BitSet marshalledFlag) {
 		LOG.debug("Debug for " + assertDescription);

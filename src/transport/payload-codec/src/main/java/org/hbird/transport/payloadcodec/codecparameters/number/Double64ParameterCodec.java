@@ -43,12 +43,6 @@ public class Double64ParameterCodec extends CodecParameter<Double> {
 		return null;
 	}
 
-
-	@Override
-	public BitSet encodeToBitSet(final Double value) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	// @Override
 	// public Double valueFromBitSet(final BitSet packet) {
 	// // The technique this method uses is to convert the bitset to a string and then parse it as a double
@@ -65,6 +59,13 @@ public class Double64ParameterCodec extends CodecParameter<Double> {
 	// // Float 64 so convert to a Double
 	// return BitSetUtility.toDouble(actualBitSet);
 	// }
+
+
+	@Override
+	public BitSet encodeToBitSet(BitSet out, int offset) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	// @Override
 	// public BitSet insertIntoBitSet(final Number number, final BitSet bitSetTarget, final int offset)

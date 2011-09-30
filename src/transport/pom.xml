@@ -17,7 +17,7 @@
 	<url/>
 
 	<modules>
-	<!--	<module>commons</module> -->
+		<module>commons</module>
 <!--		<module>tele</module> -->
 		<module>protocols</module>
 		<module>codec</module>

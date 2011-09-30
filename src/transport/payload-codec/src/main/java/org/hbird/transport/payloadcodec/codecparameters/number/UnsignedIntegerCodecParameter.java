@@ -102,13 +102,6 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 
 
 	@Override
-	public BitSet encodeToBitSet(final Integer value) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
 	public Integer decode(final Byte[] inBytes) {
 		// TODO Auto-generated method stub
 		return null;
@@ -134,5 +127,39 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 		LOG.debug("Testing combine.  Output(dec) = " + output);
 
 		return output;
+	}
+
+	@Override
+	public BitSet encodeToBitSet(BitSet out, int offset) {
+		final long unsignedInt = getValue();
+
+		// checking whether the value fits into the bit string of length - 1
+		final long absValue = Math.abs(unsignedInt);
+		if (absValue > Math.pow(2.0, getSizeInBits()) - 1
+				|| unsignedInt == Long.MIN_VALUE) {
+			throw new RuntimeException("The value of " + unsignedInt
+					+ " does not fit into a bit string of "
+					+ (getSizeInBits() - 1) + " bits.");
+		}
+
+		// setting all bits to zero
+		out.clear(offset, offset + getSizeInBits() - 1);
+
+		// setting up the number in reverse order
+		int mask = 1;
+		if (getEndianness() == Endianness.BIG) {
+			offset += getSizeInBits() - 1;
+		}
+
+		for (int i = 0; i < getSizeInBits(); i++, mask <<= 1) {
+			if ((mask & absValue) > 0) {
+				if (getEndianness() == Endianness.BIG) {
+					out.set(offset - i);
+				} else {
+					out.set(offset + i);
+				}
+			}
+		}
+		return out;
 	}
 }

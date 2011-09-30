@@ -42,7 +42,7 @@ public class Float32ParameterCodec extends CodecParameter<Float> {
 	}
 
 	@Override
-	public BitSet encodeToBitSet(final Float value) {
+	public BitSet encodeToBitSet(BitSet out, int offset) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -66,7 +66,7 @@ public class Codec implements Runnable {
 	
 	public static byte[] extractSubArray(byte[] bytes, int bitOffset, int bitLength) throws Exception {
 		if ((bytes == null) || (bytes.length == 0)) {
-			throw new Exception("Canot work without an input byte array!");
+			throw new Exception("Cannot work without an input byte array!");
 		}
 		if (((bitOffset+bitLength)) > bytes.length*8) {
 			throw new Exception("Cannot decode a parameter of length " + bitLength + " starting at position " + bitOffset + " when the input byte array is only " + bytes.length + " bytes in length." );
@@ -86,9 +86,11 @@ public class Codec implements Runnable {
 		
 		// mask must set all bits to 1 which aren't shifted
 //		int mask = (0xFF >> shift) << shift;
-		int mask = 0xFF;
-		System.out.println("mask: " + mask);
+		int mask = ((int)Math.pow(2, bitLength) - 1) << shift;
 		
+		
+		System.out.println("mask: " + mask);
+		System.out.println("result.length: " + result.length);
 		for (int i = result.length -1; i>=0; i--) {
 //			System.out.println("i: " + i);
 			int currentInputByte = rightmostByteIndex-result.length+i+1;

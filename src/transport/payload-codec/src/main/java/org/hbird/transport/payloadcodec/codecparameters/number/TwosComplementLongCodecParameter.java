@@ -65,36 +65,27 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 
 
 	@Override
-	public BitSet encodeToBitSet(final Long value) {
-		// TODO Auto-generated method stub
-		return null;
+	public BitSet encodeToBitSet(BitSet out, int offset) {
+		final long longValue = getValue();
+
+		// setting all bits to zero
+		out.clear(offset, offset + getSizeInBits() - 1);
+
+		// setting up the number in reverse order
+		long mask = 1;
+
+		offset += getSizeInBits() - 1;
+		for (int i = 0; i < getSizeInBits(); i++, mask <<= 1) {
+			if ((mask & longValue) > 0) {
+				out.set(offset - i);
+			}
+		}
+
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Calculated Bitset from value " + getValue() + " was: " + BitSetUtility.binDump(out));
+		}
+
+		return out;
 	}
-
-	// @Override
-	// public BitSet insertIntoBitSet(final Number number, final BitSet bitSetTarget, int offset)
-	// throws BitSetOperationException {
-	//
-	// final long longValue = number.longValue();
-	//
-	// // setting all bits to zero
-	// bitSetTarget.clear(offset, offset + getSIZE_IN_BITS() - 1);
-	//
-	// // setting up the number in reverse order
-	// long mask = 1;
-	//
-	// offset += getSIZE_IN_BITS() - 1;
-	// for (int i = 0; i < getSIZE_IN_BITS(); i++, mask <<= 1) {
-	// if ((mask & longValue) > 0) {
-	// bitSetTarget.set(offset - i);
-	// }
-	// }
-	//
-	// if (LOG.isDebugEnabled()) {
-	// LOG.debug("Calculated Bitset from value " + number.longValue() + " was: " + BitSetUtility.binDump(bitSetTarget));
-	// }
-	//
-	// return bitSetTarget;
-	// }
-
 
 }
