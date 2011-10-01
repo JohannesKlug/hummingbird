@@ -74,7 +74,7 @@ public class Codec implements Runnable {
 		if (bitLength < 1) {
 			throw new Exception("Cannot extract a parameter of length" + bitLength + ", try a length of 1 or greater." );
 		}
-		byte[] result = new byte[(int)bitLength/8 + ((bitLength%8 == 0) ? 0 :1)];
+		byte[] result = new byte[bitLength/8 + ((bitLength%8 == 0) ? 0 :1)];
 		// assuming Big Endian byte order
 		
 		// rightmost byte
