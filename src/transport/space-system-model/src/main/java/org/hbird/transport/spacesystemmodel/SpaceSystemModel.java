@@ -19,6 +19,8 @@ import org.hbird.transport.spacesystemmodel.parameters.Parameter;
  */
 public interface SpaceSystemModel {
 
+	String HUMMINGBIRD_PROCESSED_HEADER = "HEADER";
+
 	/**
 	 * Retrieves a container.
 	 * 

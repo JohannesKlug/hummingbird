@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SpaceSystem xmlns="http://www.omg.org/space/xtce" 
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns:xtce="http://www.omg.org/space/xtce"
+			 xsi:schemaLocation="http://www.omg.org/space/xtce SpaceSystemV1.0.xsd" name="TestSat-all-units">
+
+	<TelemetryMetaData>
+		<ParameterTypeSet>
+			<IntegerParameterType name="11bitInteger" sizeInBits="11" signed="false">
+				<UnitSet />
+			</IntegerParameterType>
+
+			<IntegerParameterType name="16bitInteger" sizeInBits="16" signed="false">
+				<UnitSet />
+			</IntegerParameterType>
+
+			<IntegerParameterType name="32bitInteger" sizeInBits="32" signed="false">
+				<UnitSet />
+			</IntegerParameterType>
+		</ParameterTypeSet>
+
+
+		<ParameterSet>
+			<Parameter parameterTypeRef="11bitInteger" name="LASER_TEMP" />
+			<Parameter parameterTypeRef="16bitInteger" name="FUEL" />
+			<Parameter parameterTypeRef="32bitInteger" name="FLIGHT_HOURS" />
+		</ParameterSet>
+
+
+		<ContainerSet>
+			<SequenceContainer name="FlightHours"
+				shortDescription="contains all telemetred data parameters for for flight hours">
+
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<xtce:Comparison value="333" />
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+				
+				<EntryList>
+					<ParameterRefEntry parameterRef="FLIGHT_HOURS" />
+				</EntryList>
+			</SequenceContainer>
+
+			<SequenceContainer name="LaserTemp"
+				shortDescription="contains all telemetred data parameters for laser temp">
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison value="555" />
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+				
+				<EntryList >
+					<ParameterRefEntry parameterRef="LASER_TEMP" />
+				</EntryList>
+			</SequenceContainer>
+			
+			<SequenceContainer name="FuelLoad"
+				shortDescription="contains all telemetred data parameters for laser temp">
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison value="888" />
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+				
+				<EntryList >
+					<ParameterRefEntry parameterRef="FUEL" />
+				</EntryList>
+			</SequenceContainer>
+
+			<SequenceContainer name="AllSystems"
+				shortDescription="contains all telemetred data parameters for X-Wing laser temp and flight hours">
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison value="1000" />
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+				
+				<EntryList>
+					<ParameterRefEntry parameterRef="LASER_TEMP" />
+					<ParameterRefEntry parameterRef="FLIGHT_HOURS" />
+					<ParameterRefEntry parameterRef="FUEL" />
+				</EntryList>
+			</SequenceContainer>
+
+		</ContainerSet>
+
+	</TelemetryMetaData>
+
+</SpaceSystem>
+
+

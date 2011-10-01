@@ -51,7 +51,6 @@
 
 
 		<ParameterSet>
-		
 			<Parameter parameterTypeRef="4ByteInteger" name="CCSDS_TF_OC"/>
 			<Parameter parameterTypeRef="2ByteInteger" name="CCSDS_TF_EC"/>
 			<Parameter parameterTypeRef="2BitInteger" name="CCSDS_FVERSION"/>
