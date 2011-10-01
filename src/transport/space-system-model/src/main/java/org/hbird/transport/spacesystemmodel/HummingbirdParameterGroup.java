@@ -7,17 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author Mark Doyle
  * @author Johannes Klug
  */
 public class HummingbirdParameterGroup implements ParameterGroup {
-	/** Logger for this class */
-	private static final Logger LOG = LoggerFactory.getLogger(HummingbirdParameterGroup.class);
-
 	private final String name;
 	private final String shortDescription;
 	private final String longDescription;
