@@ -11,7 +11,6 @@
 	<groupId>org.hbird.transport</groupId>
 	<artifactId>commons</artifactId>
 	<name>commons</name>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
 	<build>
