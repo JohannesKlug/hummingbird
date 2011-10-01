@@ -89,6 +89,7 @@ public class BitSetUtilityTest {
 	public void setUp() throws Exception {
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testStringToBitSetBE69BIT() throws BitSetOperationException {
 		LOG.info("############ Starting test #################");
@@ -96,12 +97,14 @@ public class BitSetUtilityTest {
 		assertEquals(BITSET_BE_69BIT, actual);
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testStringToBitSetBE123() throws BitSetOperationException {
 		final BitSet actual = BitSetUtility.stringToBitSet(BIT_STR_BE_123, true, true);
 		assertEquals(BITSET_BE_123, actual);
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testStringToBitSetLE123() throws BitSetOperationException {
 		final BitSet actual = BitSetUtility.stringToBitSet(BIT_STR_LE_123, false, false);
@@ -109,6 +112,7 @@ public class BitSetUtilityTest {
 	}
 
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testStringToBitSetBE999() throws BitSetOperationException {
 		LOG.debug("############ Starting test #################");
@@ -116,6 +120,7 @@ public class BitSetUtilityTest {
 		assertEquals(BITSET_BE_999, actual);
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testStringToBitSetLE999() throws BitSetOperationException {
 		LOG.debug("############ Starting test #################");
@@ -123,6 +128,7 @@ public class BitSetUtilityTest {
 		assertEquals(BITSET_LE_999, actual);
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testBitSetToBinaryStringFixedSize() {
 		LOG.debug("############ Starting test #################");
@@ -136,6 +142,7 @@ public class BitSetUtilityTest {
 		assertEquals(BIT_STR_BE_123, actual);
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testPadStringFromTheBack() {
 		LOG.debug("############ Starting test #################");
@@ -147,6 +154,7 @@ public class BitSetUtilityTest {
 		assertEquals(expected.toString(), actual);
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testStringLittleToBigEndian() throws BitSetOperationException {
 		LOG.debug("############ Starting test #################");
@@ -154,6 +162,7 @@ public class BitSetUtilityTest {
 		assertEquals(BITSET_BE_999, actual);
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testStringBigToLittleEndian() throws BitSetOperationException {
 		LOG.debug("############ Starting test #################");
@@ -161,12 +170,14 @@ public class BitSetUtilityTest {
 		assertEquals(BITSET_LE_999, actual);
 	}
 
+	@SuppressWarnings("static-method")
 	@Test(expected = BitSetOperationException.class)
 	public final void testInvalidBitString() throws BitSetOperationException {
 		LOG.debug("############ Starting test #################");
-		final BitSet actual = BitSetUtility.stringToBitSet("16783287467823", false, true);
+		BitSetUtility.stringToBitSet("16783287467823", false, true);
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testBitSetToBinaryStringNotLogicalSize() {
 		LOG.debug("############ Starting test #################");
@@ -175,6 +186,7 @@ public class BitSetUtilityTest {
 		assertEquals(expected, actual);
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void toFloat() {
 		LOG.debug("############ Starting test #################");
@@ -183,6 +195,7 @@ public class BitSetUtilityTest {
 		assertEquals(-1658.035f, actual, 0.000000000000000001);
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void toDouble() {
 		LOG.debug("############ Starting test #################");
@@ -191,6 +204,7 @@ public class BitSetUtilityTest {
 		assertEquals(89433.23532268d, actual, 0.000000000000000001);
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void toByteArraySingleByteRequired() {
 		LOG.debug("############ Starting test #################");
@@ -199,6 +213,7 @@ public class BitSetUtilityTest {
 		assertTrue("Byte arrays should be equal", Arrays.equals(actual, expected));
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void toByteArrayTwoBytesRequired() {
 		LOG.debug("############ Starting test #################");
@@ -207,6 +222,7 @@ public class BitSetUtilityTest {
 		assertTrue("Byte arrays should be equal", Arrays.equals(actual, expected));
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void fromByteArray() {
 		LOG.debug("############ Starting test #################");
@@ -214,6 +230,7 @@ public class BitSetUtilityTest {
 		assertEquals(BITSET_BE_123, actual);
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void fromByteArrayMultiByte() {
 		LOG.debug("############ Starting test #################");
