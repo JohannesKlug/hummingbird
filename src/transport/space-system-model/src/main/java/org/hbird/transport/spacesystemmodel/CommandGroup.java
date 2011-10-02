@@ -1,52 +1,40 @@
 package org.hbird.transport.spacesystemmodel;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
+public interface CommandGroup extends TmTcGroup {
 
-/**
- * TODO The standard interface of a ParameterGroup.
- */
-public interface ParameterGroup extends TmTcGroup {
-
-
-	/**
-	 * Get all the Parameters that belong to this ParameterGroup
-	 * 
-	 * @return List of off Parameters belonging to this Group.
-	 */
-	List<Parameter<?>> getAllParameters();
-
-	void addRestriction(Object payloadLayoutId);
-
-	Object getRestriction();
-
+	Set<Parameter<?>> getArguments();
+	
 	/**
 	 * Returns all integer based parameters.
 	 * 
 	 * @return List of all Integer based parameters.
 	 */
-	List<Parameter<Integer>> getIntegerParameters();
+	Set<Parameter<Integer>> getIntegerParameters();
 
 	/**
 	 * Returns all long based parameters.
 	 * 
 	 * @return List of all Long based parameters.
 	 */
-	List<Parameter<Long>> getLongParameters();
+	Set<Parameter<Long>> getLongParameters();
 
 
-	List<Parameter<BigDecimal>> getBigDecimalParameters();
+	Set<Parameter<BigDecimal>> getBigDecimalParameters();
 
-	List<Parameter<String>> getStringParameters();
+	Set<Parameter<String>> getStringParameters();
 
-	List<Parameter<Float>> getFloatParameters();
+	Set<Parameter<Float>> getFloatParameters();
 
-	List<Parameter<Double>> getDoubleParameters();
+	Set<Parameter<Double>> getDoubleParameters();
 
-	List<Parameter<Byte[]>> getRawParameters();
+	Set<Parameter<Byte[]>> getRawParameters();
+	
+	
 
 	void addIntegerParameter(Parameter<Integer> parameter);
 
@@ -61,6 +49,4 @@ public interface ParameterGroup extends TmTcGroup {
 	void addStringParameter(Parameter<String> parameter);
 
 	void addRawParameter(Parameter<Byte[]> parameter);
-	
-
 }

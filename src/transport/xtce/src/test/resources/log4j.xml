@@ -31,7 +31,7 @@
 	</logger>
 	
 	<logger name="org.hbird.transport.xtce">
-		<level value="DEBUG"></level>
+		<level value="TRACE"></level>
 	</logger>
 	
 	

@@ -24,7 +24,8 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	private List<Parameter<BigDecimal>> bigDecimalParameters;
 	private List<Parameter<String>> stringParameters;
 	private List<Parameter<Byte[]>> rawParameters;
-
+	
+	private ParameterGroupReport parameterReport = new ParameterGroupReport();
 
 	/**
 	 * The restrictions defining when this container should process. Each restriction is a parameter / string pair. The
@@ -53,20 +54,17 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		this.longDescription = longDescription;
 	}
 
-
 	@Override
 	public void addRestriction(final Object payloadLayoutId) {
 		// TODO Auto-generated method stub
 
 	}
 
-
 	@Override
 	public Object getRestriction() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	@Override
 	public int getSizeInBits() {
@@ -75,7 +73,6 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 
 		return length;
 	}
-
 
 	@Override
 	public String getName() {
@@ -93,7 +90,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public List<Parameter<?>> getParameters() {
+	public List<Parameter<?>> getAllParameters() {
 		return this.parameters;
 	}
 
@@ -132,15 +129,15 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		return rawParameters;
 	}
 
-
 	@Override
 	public void addIntegerParameter(final Parameter<Integer> parameter) {
 		if (this.integerParameters == null) {
 			this.integerParameters = new ArrayList<Parameter<Integer>>();
 		}
 		this.integerParameters.add(parameter);
+		this.parameters.add(parameter);
+		this.parameterReport.incrementIntCount();
 	}
-
 
 	@Override
 	public void addLongParameter(final Parameter<Long> parameter) {
@@ -148,42 +145,62 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 			this.longParameters = new ArrayList<Parameter<Long>>();
 		}
 		this.longParameters.add(parameter);
+		this.parameters.add(parameter);
+		this.parameterReport.incrementLongCount();
 	}
-
 
 	@Override
 	public void addBigDecimalParameter(final Parameter<BigDecimal> parameter) {
-		// TODO Auto-generated method stub
-
+		if(this.bigDecimalParameters == null) {
+			this.bigDecimalParameters = new ArrayList<Parameter<BigDecimal>>();
+		}
+		this.bigDecimalParameters.add(parameter);
+		this.parameters.add(parameter);
+		this.parameterReport.incrementBigDecimalCount();
 	}
-
 
 	@Override
 	public void addFloatParameter(final Parameter<Float> parameter) {
-		// TODO Auto-generated method stub
-
+		if(this.floatParameters == null) {
+			this.floatParameters = new ArrayList<Parameter<Float>>();
+		}
+		this.floatParameters.add(parameter);
+		this.parameters.add(parameter);
+		this.parameterReport.incrementFloatCount();
 	}
-
 
 	@Override
 	public void addDoubleParameter(final Parameter<Double> parameter) {
-		// TODO Auto-generated method stub
-
+		if(this.doubleParameters == null) {
+			this.doubleParameters = new ArrayList<Parameter<Double>>();
+		}
+		this.doubleParameters.add(parameter);
+		this.parameters.add(parameter);
+		this.parameterReport.incrementDoubleCount();
 	}
-
 
 	@Override
 	public void addStringParameter(final Parameter<String> parameter) {
-		// TODO Auto-generated method stub
-
+		if(this.stringParameters == null) {
+			this.stringParameters = new ArrayList<Parameter<String>>();
+		}
+		this.stringParameters.add(parameter);
+		this.parameters.add(parameter);
+		this.parameterReport.incrementStringCount();
 	}
-
 
 	@Override
 	public void addRawParameter(final Parameter<Byte[]> parameter) {
-		// TODO Auto-generated method stub
-
+		if(this.rawParameters == null) {
+			this.rawParameters = new ArrayList<Parameter<Byte[]>>();
+		}
+		this.rawParameters.add(parameter);
+		this.parameters.add(parameter);
+		this.parameterReport.incrementRawCount();
 	}
 
-
+	@Override
+	public ParameterGroupReport getParameterReport() {
+		return this.parameterReport;
+	}
 }
