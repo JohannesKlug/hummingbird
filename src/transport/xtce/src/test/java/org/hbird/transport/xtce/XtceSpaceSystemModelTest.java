@@ -132,7 +132,7 @@ public class XtceSpaceSystemModelTest {
 		ParameterGroup flightHoursPg = xtceSsm.getParameterGroup(PG_FLIGHT_HOURS_NAME);
 		assertEquals("There should be " + PG_FLIGHT_HOURS_NUM_PARAMETERS + " parameter groups", PG_FLIGHT_HOURS_NUM_PARAMETERS, flightHoursPg.getAllParameters().size());
 		assertEquals("There should be " + PG_FLIGHT_HOURS_NUM_LONG_PARAMETERS + " parameter groups", PG_FLIGHT_HOURS_NUM_LONG_PARAMETERS, flightHoursPg.getLongParameters().size());
-		assertNull("There should be no int typed parameters on this group", flightHoursPg.getIntegerParameters());
+		assertNull("There shouzld be no int typed parameters on this group", flightHoursPg.getIntegerParameters());
 		
 		ParameterGroup laserTempPg = xtceSsm.getParameterGroup(PG_LASER_TEMP_NAME);
 		assertEquals("There should be " + PG_LASER_TEMP_NUM_PARAMETERS + " parameter groups", PG_LASER_TEMP_NUM_PARAMETERS, laserTempPg.getAllParameters().size());

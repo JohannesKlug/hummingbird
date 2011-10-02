@@ -13,13 +13,13 @@ public class XtceToJavaMapping {
 		boolean longRequired = false;
 		// If signed
 		if (type.getSigned()) {
-			if (type.getSizeInBits() > 32) {
+			if (type.getSizeInBits() > 31) {
 				longRequired = true;
 			}
 		}
 		// else if unsigned
 		else {
-			if (type.getSizeInBits() > 31) {
+			if (type.getSizeInBits() > 32) {
 				longRequired = true;
 			}
 		}
