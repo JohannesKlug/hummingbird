@@ -11,7 +11,7 @@
 	
 	<groupId>org.hbird.transport</groupId>
 	<artifactId>payload-codec</artifactId>
-	<name>packet-broker</name>
+	<name>Generic Payload Codec</name>
 	<url>http://maven.apache.org</url>
 	
 	<properties>
