@@ -1,5 +1,6 @@
 package org.hbird.transport.spacesystemmodel;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,16 @@ public interface SpaceSystemModel {
 	 * 
 	 */
 	Parameter<?> getParameter(String name);
+	Parameter<Integer> getIntParameter(String name) throws UnknownParameterGroupException;
+	Parameter<Long> getLongParameter(String name) throws UnknownParameterGroupException;
+	
+	// FIXME Add support for other parameter types
+//	Parameter<BigDecimal> getBigDecimalParameter(String name);
+//	Parameter<String> getStringParameter(String name);
+//	Parameter<Float> getFloatParameter(String name);
+//	Parameter<Double> getDoubleParameter(String name);
+//	Parameter<Byte[]> getRawParameter(String name);
+	
 
 	/**
 	 * Get all {@link Parameter}s in the Space System Model
@@ -62,7 +73,7 @@ public interface SpaceSystemModel {
 	 * 
 	 * @return List of all Integer based parameters.
 	 */
-	List<Parameter<Integer>> getIntegerParameters();
+	Collection<Parameter<Integer>> getIntegerParameters();
 
 
 	/**
@@ -70,7 +81,7 @@ public interface SpaceSystemModel {
 	 * 
 	 * @return List of all Long based parameters.
 	 */
-	List<Parameter<Long>> getLongParameters();
+	Collection<Parameter<Long>> getLongParameters();
 
 	/**
 	 * Get all restrictions in the Space System Model

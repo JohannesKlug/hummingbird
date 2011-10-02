@@ -10,4 +10,15 @@ public class UnexpectedParameterTypeException extends Exception {
 	public UnexpectedParameterTypeException(final String msg) {
 		super(msg);
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("UnexpectedParameterTypeException [;");
+		builder.append(getMessage());
+		builder.append(" ])");
+		return builder.toString();
+	}
+	
+	
 }

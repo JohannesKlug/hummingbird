@@ -28,15 +28,15 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 
 
 	@Override
-	public Long decode(final Byte[] inBytes) {
+	public void decode(Byte[] inBytes) {
 		// TODO Auto-generated method stub
-		return null;
+		//
+		throw new UnsupportedOperationException();
 	}
-
 
 	// FIXME String implementation for decoding is nasty!
 	@Override
-	public Long decode(final BitSet inBitset) {
+	public void decode(final BitSet inBitset) {
 		long parameterValue = 0;
 
 		String binaryString = BitSetUtility.bitSetToBinaryString(inBitset, false);
@@ -53,7 +53,7 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 
 		parameterValue = Long.valueOf(binaryString, 2);
 
-		return parameterValue;
+		this.setValue(parameterValue);
 	}
 
 

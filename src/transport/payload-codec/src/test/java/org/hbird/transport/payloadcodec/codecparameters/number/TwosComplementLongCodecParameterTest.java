@@ -1,4 +1,4 @@
-package org.hbird.transport.packetcodec.codecparameters.number;
+package org.hbird.transport.payloadcodec.codecparameters.number;
 
 import static org.junit.Assert.assertEquals;
 
@@ -48,30 +48,34 @@ public class TwosComplementLongCodecParameterTest {
 		codecParameter = new TwosComplementLongCodecParameter(parameter);
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testValueFromBitSet() {
-		long actual = codecParameter.decode(TEST_LONG_BITSET);
-		assertEquals(TEST_LONG, actual);
+		codecParameter.decode(TEST_LONG_BITSET);
+		assertEquals(TEST_LONG, codecParameter.getValue().longValue());
 	}
 	
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testMaxValueFromBitSet() {
-		long actual = codecParameter.decode(TEST_MAX_LONG_BITSET);
-		assertEquals(Long.MAX_VALUE, actual);
+		codecParameter.decode(TEST_MAX_LONG_BITSET);
+		assertEquals(Long.MAX_VALUE, codecParameter.getValue().longValue());
 	}
 	
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testMinValueFromBitSet() {
-		long actual = codecParameter.decode(TEST_MIN_LONG_BITSET);
-		assertEquals(Long.MIN_VALUE, actual);
+		codecParameter.decode(TEST_MIN_LONG_BITSET);
+		assertEquals(Long.MIN_VALUE, codecParameter.getValue().longValue());
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testInsertIntoBitSet() throws BitSetOperationException {
 		codecParameter.setValue(TEST_LONG);
 		BitSet actual = new BitSet();
-		actual = codecParameter.encodeToBitSet(actual, 0);
-		assertEquals(TEST_LONG_BITSET, actual);
+		codecParameter.encodeToBitSet(actual, 0);
+		assertEquals(TEST_LONG_BITSET, codecParameter.getValue().longValue());
 	}
 
 }

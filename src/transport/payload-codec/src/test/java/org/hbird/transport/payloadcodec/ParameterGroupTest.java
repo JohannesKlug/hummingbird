@@ -1,19 +1,9 @@
-package org.hbird.transport.packetcodec;
-
-import static org.junit.Assert.assertEquals;
+package org.hbird.transport.payloadcodec;
 
 import java.util.BitSet;
 
 import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
-import org.hbird.transport.spacesystemmodel.ParameterGroup;
-import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
-import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter.Endianness;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -225,6 +215,11 @@ public class ParameterGroupTest {
 	}
 
 
+	@Test
+	public void placeholdersobuldruns() {
+		
+	}
+	
 	/**
 	 * Simply tests the container can marshal with the default empty parameters.
 	 * 
@@ -608,9 +603,9 @@ public class ParameterGroupTest {
 	// assertEquals("Flag should be on", FLAG_ON_BITSET, marshalledFlag);
 	// }
 
-	private void logAssertValues(final String assertDescription, final BitSet expected, final BitSet marshalledFlag) {
-		LOG.debug("Debug for " + assertDescription);
-		LOG.debug("Expected bitset = " + BitSetUtility.binDump(expected));
-		LOG.debug("Actual bitset = " + BitSetUtility.binDump(marshalledFlag));
-	}
+//	private void logAssertValues(final String assertDescription, final BitSet expected, final BitSet marshalledFlag) {
+//		LOG.debug("Debug for " + assertDescription);
+//		LOG.debug("Expected bitset = " + BitSetUtility.binDump(expected));
+//		LOG.debug("Actual bitset = " + BitSetUtility.binDump(marshalledFlag));
+//	}
 }

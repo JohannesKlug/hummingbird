@@ -23,16 +23,20 @@ public class Float32ParameterCodec extends CodecParameter<Float> {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public Float decode(final Byte[] inBytes) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
-	public Float decode(final BitSet inBitset) {
+	public void decode(BitSet inBitset) {
 		// TODO Auto-generated method stub
-		return null;
+		//
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
+	public void decode(Byte[] inBytes) {
+		// TODO Auto-generated method stub
+		//
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

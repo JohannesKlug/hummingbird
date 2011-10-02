@@ -3,8 +3,8 @@ package org.hbird.transport.payloadcodec.codecparameters;
 import org.hbird.transport.payloadcodec.codecparameters.number.TwosComplementIntegerCodecParameter;
 import org.hbird.transport.payloadcodec.codecparameters.number.UnsignedIntegerCodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
-import org.hbird.transport.payloadcodec.exceptions.UnknownParameterTypeException;
-import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterTypeException;
+import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
+import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
@@ -14,26 +14,27 @@ public class IntegerCodecFactory {
 	 * TODO update this doc
 	 * 
 	 * For example, the values for unsigned, signMagnitude, twosComplement, and onesComplement are all stored in the
-	 * Java Integer type. The codec deals with calculating the correct parameter value as Integer from the binary input
+	 * Java Integer type. The codec deals with calculating the correct parameter value as an Integer from the binary input
 	 * and also calculating the binary output version of the java Integer value. Obviously, for twos complement we can
 	 * simply use the toByteArray methods provided with the Java libs since Java Integers are stored as big endian twos
 	 * complement.
+	 * FIXME This is "javadocing" (too briefly) the entire process, not what this class does.
 	 * 
 	 * @author Mark Doyle
-	 * @throws UnknownParameterTypeException
+	 * @throws UnknownParameterEncodingException
 	 * @throws UnexpectedParameterTypeException
 	 * @throws InvalidParameterTypeException
 	 * 
 	 */
 	public static CodecParameter<Integer> decorateParameterWithCodec(final Parameter<Integer> parameter)
-			throws UnsupportedParameterTypeException, UnknownParameterTypeException, UnexpectedParameterTypeException {
+			throws UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException {
 
 		Encoding encoding = parameter.getEncoding();
 		int sizeInBits = parameter.getSizeInBits();
 
 		switch (encoding) {
 			case onesComplement:
-				throw new UnsupportedParameterTypeException("File a bug report :D");
+				throw new UnsupportedParameterEncodingException("File a bug report :D");
 			case twosComplement:
 				if (sizeInBits > 32) {
 					throw new UnexpectedParameterTypeException(
@@ -52,9 +53,9 @@ public class IntegerCodecFactory {
 					return new UnsignedIntegerCodecParameter(parameter);
 				}
 			case signMagnitude:
-				throw new UnsupportedParameterTypeException("File a bug report :D");
+				throw new UnsupportedParameterEncodingException("File a bug report :D", Encoding.signMagnitude);
 			default:
-				throw new UnknownParameterTypeException();
+				throw new UnknownParameterEncodingException(encoding.toString());
 		}
 
 	}

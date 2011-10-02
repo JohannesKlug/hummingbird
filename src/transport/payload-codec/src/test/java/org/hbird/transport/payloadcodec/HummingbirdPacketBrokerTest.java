@@ -3,7 +3,9 @@
  * the License at http://www.apache.org/licenses/LICENSE-2.0 or at this project's root.
  */
 
-package org.hbird.transport.packetcodec;
+package org.hbird.transport.payloadcodec;
+
+import org.junit.Test;
 
 
 /**
@@ -62,6 +64,13 @@ public class HummingbirdPacketBrokerTest {
 	// mockSpaceSystemFactory = new MockParameterContainerModel();
 	// packetBroker = new HummingbirdPacketBroker(mockSpaceSystemFactory);
 	// }
+	
+	
+	
+	@Test
+	public void placeholdersobuldruns() {
+		
+	}
 	//
 	// /**
 	// * Test method for {@link org.hbird.framebroker.PacketBrokerImpl#unmarshall(java.lang.String, java.util.BitSet)}.

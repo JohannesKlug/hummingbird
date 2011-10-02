@@ -15,7 +15,7 @@
 				<UnitSet />
 			</IntegerParameterType>
 
-			<IntegerParameterType name="32bitUInteger" sizeInBits="32" signed="false">
+			<IntegerParameterType name="32bitUInteger" sizeInBits="33" signed="false">
 				<UnitSet />
 			</IntegerParameterType>
 		</ParameterTypeSet>

@@ -7,5 +7,4 @@ public interface PayloadCodec {
 	ParameterGroup decode(Byte[] payload, Object payloadLayoutId);
 
 	Byte[] encodeToByteArray(ParameterGroup parameterGroup);
-
 }

@@ -19,14 +19,14 @@ public abstract class CodecParameter<T> implements Parameter<T> {
 		this.parameter = hostParameter;
 	}
 
-	public abstract T decode(Byte[] inBytes);
+	public abstract void decode(Byte[] inBytes);
 
-	public abstract T decode(BitSet inBitset);
+	public abstract void decode(BitSet inBitset);
 
 	public abstract Byte[] encodeToByteArray(T value);
 
 	public abstract BitSet encodeToBitSet(BitSet out, int offset);
-
+	
 
 	// Pass through methods which the Codec Parameter does not need to alter in it's decoration.
 	// ----------------------------------------------------------------------------------------

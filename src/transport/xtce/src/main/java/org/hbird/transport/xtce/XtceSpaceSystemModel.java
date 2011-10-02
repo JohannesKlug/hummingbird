@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +20,6 @@ import org.hbird.transport.generatedcode.xtce.BaseDataTypeChoice;
 import org.hbird.transport.generatedcode.xtce.Comparison;
 import org.hbird.transport.generatedcode.xtce.ComparisonList;
 import org.hbird.transport.generatedcode.xtce.ContainerSet;
-import org.hbird.transport.generatedcode.xtce.ContainerSetTypeItem;
 import org.hbird.transport.generatedcode.xtce.EntryList;
 import org.hbird.transport.generatedcode.xtce.FloatParameterType;
 import org.hbird.transport.generatedcode.xtce.IntegerParameterType;
@@ -64,8 +63,8 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	private final Map<String, Parameter<?>> parameters = new HashMap<String, Parameter<?>>();
 	
-	private final List<Parameter<Integer>> integerParameters = new LinkedList<Parameter<Integer>>();
-	private final List<Parameter<Long>> longParameters = new LinkedList<Parameter<Long>>();
+	private final Map<String, Parameter<Integer>> integerParameters = new LinkedHashMap<String, Parameter<Integer>>();
+	private final Map<String, Parameter<Long>> longParameters = new LinkedHashMap<String, Parameter<Long>>();
 	// TODO Finish unsupported parameter types
 	// private final List<Parameter<BigDecimal>> bigDecimalParameters = null;
 	// private final List<Parameter<Float>> floatParameters = null;
@@ -194,7 +193,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 					if(LOG.isDebugEnabled()) {
 						LOG.debug("Adding Integer parameter " + intParameter.getName());
 					}
-					integerParameters.add(intParameter);
+					integerParameters.put(intParameter.getName(), intParameter);
 					parameters.put(intParameter.getName(), intParameter);
 				}
 				else {
@@ -208,7 +207,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 					if(LOG.isDebugEnabled()) {
 						LOG.debug("Adding Long parameter " + longParameter.getName());
 					}
-					longParameters.add(longParameter);
+					longParameters.put(longParameter.getName(), longParameter);
 					parameters.put(longParameter.getName(), longParameter);
 				}
 			}
@@ -348,10 +347,10 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	@SuppressWarnings("unchecked") // parameter references are cross-referenced in a typed list so the casts are safe.
 	private void addParameterToGroup(ParameterGroup group, Parameter<?> parameter) throws InvalidXtceFileException {
-		if(integerParameters.contains(parameter)) {
+		if(integerParameters.containsValue(parameter)) {
 			group.addIntegerParameter((Parameter<Integer>) parameter);
 		}
-		else if(longParameters.contains(parameter)) {
+		else if(longParameters.containsValue(parameter)) {
 			group.addLongParameter((Parameter<Long>) parameter);
 		}
 		else {
@@ -503,13 +502,27 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public List<Parameter<Integer>> getIntegerParameters() {
-		return integerParameters;
+	public Collection<Parameter<Integer>> getIntegerParameters() {
+		return integerParameters.values();
 	}
 
 	@Override
-	public List<Parameter<Long>> getLongParameters() {
-		return longParameters;
+	public Collection<Parameter<Long>> getLongParameters() {
+		return longParameters.values();
+	}
+
+	@Override
+	public Parameter<Integer> getIntParameter(String name) {
+		// TODO Auto-generated method stub
+		//return null;
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<Long> getLongParameter(String name) {
+		// TODO Auto-generated method stub
+		//return null;
+		throw new UnsupportedOperationException();
 	}
 
 }

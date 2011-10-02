@@ -1,4 +1,4 @@
-package org.hbird.transport.packetcodec;
+package org.hbird.transport.payloadcodec;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,8 +10,8 @@ import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.codecparameters.IntegerCodecFactory;
 import org.hbird.transport.payloadcodec.codecparameters.LongCodecFactory;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
-import org.hbird.transport.payloadcodec.exceptions.UnknownParameterTypeException;
-import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterTypeException;
+import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
+import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
@@ -49,57 +49,55 @@ public class CodecFactoryTest {
 	}
 
 	@Test
-	public void testDecorateUint11() throws UnsupportedParameterTypeException, UnknownParameterTypeException,
+	public void testDecorateUint11() throws UnsupportedParameterEncodingException, UnknownParameterEncodingException,
 			UnexpectedParameterTypeException {
 		Parameter<Integer> parameterUint11 = new HummingbirdParameter<Integer>("TestUint11", "", "", BIT_SIZE_11,
 				Endianness.BIG, Encoding.unsigned);
 
 		CodecParameter<Integer> codecAwareParameterUint11 = IntegerCodecFactory.decorateParameterWithCodec(parameterUint11);
 
-		Integer result = codecAwareParameterUint11.decode(BITSET_11BIT_BE_133);
+		codecAwareParameterUint11.decode(BITSET_11BIT_BE_133);
 
-		assertEquals("Result should be equal to 133", 133, result.intValue());
+		assertEquals("Result should be equal to 133", new Integer(133), codecAwareParameterUint11.getValue());
 	}
 
 
 	@Test
-	public void testDecorateInt11() throws UnsupportedParameterTypeException, UnknownParameterTypeException,
+	public void testDecorateInt11() throws UnsupportedParameterEncodingException, UnknownParameterEncodingException,
 			UnexpectedParameterTypeException {
 		Parameter<Integer> parameterInt11 = new HummingbirdParameter<Integer>("TestInt11", "", "", BIT_SIZE_11,
 				Endianness.BIG, Encoding.twosComplement);
 
 		CodecParameter<Integer> codecAwareParameterInt11 = IntegerCodecFactory.decorateParameterWithCodec(parameterInt11);
 
-		Integer result = codecAwareParameterInt11.decode(BITSET_11BIT_BE_133);
+		codecAwareParameterInt11.decode(BITSET_11BIT_BE_133);
 
-		assertEquals("Result should be equal to 133", 133, result.intValue());
+		assertEquals("Result should be equal to 133", 133, codecAwareParameterInt11.getValue().intValue());
 	}
 
 	@Test
-	public void testDecorateNegativeInt11() throws UnsupportedParameterTypeException, UnknownParameterTypeException,
+	public void testDecorateNegativeInt11() throws UnsupportedParameterEncodingException, UnknownParameterEncodingException,
 			UnexpectedParameterTypeException {
 		Parameter<Integer> parameterInt11 = new HummingbirdParameter<Integer>("TestInt11", "", "", BIT_SIZE_11,
 				Endianness.BIG, Encoding.twosComplement);
 
 		CodecParameter<Integer> codecAwareParameterInt11 = IntegerCodecFactory.decorateParameterWithCodec(parameterInt11);
 
-		Integer result = codecAwareParameterInt11.decode(BITSET_11BIT_BE_NEG_891);
+		codecAwareParameterInt11.decode(BITSET_11BIT_BE_NEG_891);
 
-		assertEquals("Result should be equal to -891", -891, result.intValue());
+		assertEquals("Result should be equal to -891", -891, codecAwareParameterInt11.getValue().intValue());
 	}
 
-
 	@Test
-	public void testDecorateLong55() throws UnsupportedParameterTypeException, UnknownParameterTypeException,
+	public void testDecorateLong55() throws UnsupportedParameterEncodingException, UnknownParameterEncodingException,
 			UnexpectedParameterTypeException {
 		Parameter<Long> parameterUint11 = new HummingbirdParameter<Long>("TestLong55", "", "", 64, Endianness.BIG,
 				Encoding.twosComplement);
 
 		CodecParameter<Long> codecAwareParameterLong55 = LongCodecFactory.decorateParameterWithCodec(parameterUint11);
 
-		Long result = codecAwareParameterLong55.decode(TEST_LONG_BITSET);
+		codecAwareParameterLong55.decode(TEST_LONG_BITSET);
 
-		System.out.println(result);
-		assertEquals("Result should be equal to " + TEST_LONG, TEST_LONG, result.longValue());
+		assertEquals("Result should be equal to " + TEST_LONG, TEST_LONG, codecAwareParameterLong55.getValue().intValue());
 	}
 }

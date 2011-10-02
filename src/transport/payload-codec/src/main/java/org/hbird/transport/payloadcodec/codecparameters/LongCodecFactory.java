@@ -2,8 +2,8 @@ package org.hbird.transport.payloadcodec.codecparameters;
 
 import org.hbird.transport.payloadcodec.codecparameters.number.TwosComplementLongCodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
-import org.hbird.transport.payloadcodec.exceptions.UnknownParameterTypeException;
-import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterTypeException;
+import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
+import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
 
@@ -12,14 +12,14 @@ public class LongCodecFactory {
 	 * TODO update this doc
 	 */
 	public static CodecParameter<Long> decorateParameterWithCodec(final Parameter<Long> parameter)
-			throws UnsupportedParameterTypeException, UnknownParameterTypeException, UnexpectedParameterTypeException {
+			throws UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException {
 
 		Encoding encoding = parameter.getEncoding();
 		int sizeInBits = parameter.getSizeInBits();
 
 		switch (encoding) {
 			case onesComplement:
-				throw new UnsupportedParameterTypeException("File a bug report :D");
+				throw new UnsupportedParameterEncodingException("File a bug report :D");
 			case twosComplement:
 				if (sizeInBits > 64) {
 					throw new UnexpectedParameterTypeException(
@@ -35,12 +35,12 @@ public class LongCodecFactory {
 									+ sizeInBits);
 				}
 				else {
-					throw new UnsupportedParameterTypeException("File a bug report :D");
+					return new TwosComplementLongCodecParameter(parameter);
 				}
 			case signMagnitude:
-				throw new UnsupportedParameterTypeException("File a bug report :D");
+				throw new UnsupportedParameterEncodingException("File a bug report :D");
 			default:
-				throw new UnknownParameterTypeException();
+				throw new UnknownParameterEncodingException(encoding.toString());
 		}
 
 	}

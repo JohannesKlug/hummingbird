@@ -1,4 +1,4 @@
-package org.hbird.transport.packetcodec.codecparameters.number;
+package org.hbird.transport.payloadcodec.codecparameters.number;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,7 +6,6 @@ import java.util.BitSet;
 
 import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
-import org.hbird.transport.payloadcodec.codecparameters.number.UnsignedIntegerCodecParameter;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
@@ -96,8 +95,8 @@ public class UnsignedIntegerCodecParameterTest {
 		LOG.info("###################### Beginning test #######################");
 		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", TEST_VALUE_LENGTH_LE_555, Endianness.LITTLE, Encoding.unsigned);
 		UnsignedIntegerCodecParameter codec = new UnsignedIntegerCodecParameter(p);
-		Number actual = codec.decode(TEST_BITSET_VALUE_LE_555);
-		assertEquals(555, actual);
+		codec.decode(TEST_BITSET_VALUE_LE_555);
+		assertEquals(555, codec.getValue().intValue());
 	}
 
 	@Test
@@ -105,8 +104,8 @@ public class UnsignedIntegerCodecParameterTest {
 		LOG.info("###################### Beginning test #######################");
 		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", TEST_VALUE_LENGTH_BE_555, Endianness.BIG, Encoding.unsigned);
 		UnsignedIntegerCodecParameter codec = new UnsignedIntegerCodecParameter(p);
-		Number actual = codec.decode(TEST_BITSET_VALUE_BE_555);
-		assertEquals(555, actual);
+		codec.decode(TEST_BITSET_VALUE_BE_555);
+		assertEquals(555, codec.getValue().intValue());
 	}
 
 	@Test
@@ -114,8 +113,8 @@ public class UnsignedIntegerCodecParameterTest {
 		LOG.info("###################### Beginning test #######################");
 		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", TEST_VALUE_LENGTH_1024, Endianness.BIG, Encoding.unsigned);
 		UnsignedIntegerCodecParameter codec = new UnsignedIntegerCodecParameter(p);
-		Number actual = codec.decode(TEST_BITSET_VALUE_BE_1024);
-		assertEquals(1024, actual);
+		codec.decode(TEST_BITSET_VALUE_BE_1024);
+		assertEquals(1024, codec.getValue().intValue());
 	}
 
 	@Test
@@ -123,8 +122,8 @@ public class UnsignedIntegerCodecParameterTest {
 		LOG.info("###################### Beginning test #######################");
 		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", TEST_VALUE_LENGTH_1024, Endianness.LITTLE, Encoding.unsigned);
 		UnsignedIntegerCodecParameter codecParam = new UnsignedIntegerCodecParameter(p);
-		Number actual = codecParam.decode(TEST_BITSET_VALUE_LE_1024);
-		assertEquals(1024, actual);
+		codecParam.decode(TEST_BITSET_VALUE_LE_1024);
+		assertEquals(1024, codecParam.getValue().intValue());
 	}
 
 	@Test
@@ -132,19 +131,21 @@ public class UnsignedIntegerCodecParameterTest {
 		LOG.info("###################### Beginning test #######################");
 		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", TEST_VALUE_LENGTH_BE_123_32bit, Endianness.BIG, Encoding.unsigned);
 		UnsignedIntegerCodecParameter codecParam = new UnsignedIntegerCodecParameter(p);
-		Number actual = codecParam.decode(TEST_BITSET_VALUE_123_32bit);
-		assertEquals(123, actual);
+		codecParam.decode(TEST_BITSET_VALUE_123_32bit);
+		assertEquals(123, codecParam.getValue().intValue());
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testLeadingZeroBE999ValueFromBitSet() throws InvalidParameterTypeException {
 		LOG.info("###################### Beginning test #######################");
 		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", TEST_VALUE_LENGTH_BE_999, Endianness.BIG, Encoding.unsigned);
 		UnsignedIntegerCodecParameter behaviour = new UnsignedIntegerCodecParameter(p);
-		Number actual = behaviour.decode(TEST_BITSET_VALUE_BE_999);
-		assertEquals(999, actual);
+		behaviour.decode(TEST_BITSET_VALUE_BE_999);
+		assertEquals(999, behaviour.getValue().intValue());
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testInsertIntoBitSetLE555() {
 		LOG.info("###################### Beginning test #######################");
@@ -161,6 +162,7 @@ public class UnsignedIntegerCodecParameterTest {
 		System.out.println(BitSetUtility.binDump(actual));
 	}
 	
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testInsertIntoBitSetBE555() {
 		LOG.info("###################### Beginning test #######################");
@@ -177,6 +179,7 @@ public class UnsignedIntegerCodecParameterTest {
 		System.out.println(BitSetUtility.binDump(actual));
 	}
 	
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testInsertIntoBitSetLE555andBE555() throws BitSetOperationException {
 		LOG.info("###################### Beginning test #######################");
@@ -197,6 +200,7 @@ public class UnsignedIntegerCodecParameterTest {
 		assertEquals(actual, expected);
 	}
 	
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testInsertIntoBitSetLE1024andBE123() throws BitSetOperationException {
 		LOG.info("###################### Beginning test #######################");

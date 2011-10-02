@@ -21,13 +21,13 @@ public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer>
 	}
 
 	@Override
-	public Integer decode(final Byte[] inBytes) {
+	public void decode(Byte[] inBytes) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Integer decode(final BitSet inBitset) {
+	public void decode(final BitSet inBitset) {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Extracting " + getSizeInBits() + " bit int value from " + BitSetUtility.binDump(inBitset));
 		}
@@ -41,7 +41,7 @@ public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer>
 		final byte[] byteArray = BitSetUtility.toByteArray(actualParameter, getSizeInBits());
 		final Integer output = new Integer(BytesUtility.combine(byteArray, getSizeInBits(), true).intValue());
 
-		return output;
+		this.setValue(output);
 	}
 
 	@Override

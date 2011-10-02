@@ -17,25 +17,23 @@ import org.slf4j.LoggerFactory;
 public class Double64ParameterCodec extends CodecParameter<Double> {
 	private final static Logger LOG = LoggerFactory.getLogger(Double64ParameterCodec.class);
 
-
 	public Double64ParameterCodec(final Parameter<Double> hostParameter) {
 		super(hostParameter);
 	}
 
-
 	@Override
-	public Double decode(final Byte[] inBytes) {
+	public void decode(BitSet inBitset) {
 		// TODO Auto-generated method stub
-		return null;
+		//
+		throw new UnsupportedOperationException();
 	}
 
-
 	@Override
-	public Double decode(final BitSet inBitset) {
+	public void decode(Byte[] inBytes) {
 		// TODO Auto-generated method stub
-		return null;
+		//
+		throw new UnsupportedOperationException();
 	}
-
 
 	@Override
 	public Byte[] encodeToByteArray(final Double value) {
@@ -59,7 +57,6 @@ public class Double64ParameterCodec extends CodecParameter<Double> {
 	// // Float 64 so convert to a Double
 	// return BitSetUtility.toDouble(actualBitSet);
 	// }
-
 
 	@Override
 	public BitSet encodeToBitSet(BitSet out, int offset) {

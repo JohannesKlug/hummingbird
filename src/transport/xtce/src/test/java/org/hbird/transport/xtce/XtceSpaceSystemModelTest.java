@@ -28,7 +28,7 @@ public class XtceSpaceSystemModelTest {
 	private static final int NUM_OF_PARAMETER_GROUPS = 4;
 
 	private static final String P_FLIGHT_HOURS_NAME = "FLIGHT_HOURS";
-	private static final int LIGHT_HOURS_LENGTH = 32;
+	private static final int LIGHT_HOURS_LENGTH = 33;
 
 	private static final String P_LASER_TEMP_NAME = "LASER_TEMP";
 	private static final int LASER_TEMP_LENGTH = 11;
