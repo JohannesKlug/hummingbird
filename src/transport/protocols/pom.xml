@@ -10,7 +10,6 @@
 	<artifactId>protocols</artifactId>
 	<name>Protocols</name>
 
-	<version>0.0.1-SNAPSHOT</version>
 	<description>All data transmission protocol implementation are contained herein.</description>
 	<build>
 		<plugins>
@@ -81,8 +80,7 @@
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-spring</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
+			</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-jms</artifactId>
