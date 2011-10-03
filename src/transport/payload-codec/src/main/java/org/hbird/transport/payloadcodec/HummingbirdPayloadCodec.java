@@ -2,15 +2,14 @@ package org.hbird.transport.payloadcodec;
 
 import java.util.BitSet;
 import java.util.Collection;
-import java.util.List;
 
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
 import org.hbird.transport.spacesystemmodel.ParameterGroup;
-import org.hbird.transport.spacesystemmodel.ParameterGroupReport;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
+import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.slf4j.Logger;
@@ -44,10 +43,31 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 			LOG.error(e.getMessage());
 			e.printStackTrace();
 		}
+		catch (ParameterNotInGroupException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public ParameterGroup decode(final Byte[] payload, final Object payloadLayoutId) {
+	public ParameterGroup decode(final byte[] payload, final Object payloadLayoutId) {
+		if(payloadLayoutId == null) {
+			// no restrictions, decode all everything!
+			for(ParameterGroup pg : spaceSystemModel.getAllParameterGroups()) {
+				for(Parameter<?> p : pg.getAllParameters()) {
+					System.out.println(p.getName() + " : " + p.getValue());
+					((CodecParameter<?>)p).decode(payload);
+				}
+			}
+		}
+		else {
+			// decode only the relevant parametergroups
+		}
+		return null;
+	}
+
+	@Override
+	public ParameterGroup decode(final BitSet payload, final Object payloadLayoutId) {
 		if(payloadLayoutId == null) {
 			// no restrictions, decode all everything!
 			for(ParameterGroup pg : spaceSystemModel.getAllParameterGroups()) {
@@ -67,12 +87,12 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 	public Byte[] encodeToByteArray(final ParameterGroup parameterGroup) {
 		BitSet encoded = new BitSet();
 //		ParameterGroupReport groupDetailReport = parameterGroup.getParameterReport();
-		
-		List<Parameter<?>> parameters = parameterGroup.getAllParameters();
+
+		Collection<Parameter<?>> parameters = parameterGroup.getAllParameters();
 		int count = 0;
 		int offset = 0;
 		int previousSize = 0;;
-		for(Parameter<?> p : parameters ) {
+		for(Parameter<?> p : parameters) {
 			if(count != 0) {
 				offset += previousSize;
 			}

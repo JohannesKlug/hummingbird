@@ -21,7 +21,7 @@ public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer>
 	}
 
 	@Override
-	public void decode(Byte[] inBytes) {
+	public void decode(final byte[] inBytes) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}

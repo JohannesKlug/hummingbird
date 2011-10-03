@@ -12,10 +12,10 @@ import org.slf4j.LoggerFactory;
 /**
  * How do we handle unsigned longs in Java? Long is always signed. Perhaps some math package? Mark: Looks like we must
  * use {@link BigInteger}
- * 
+ *
  * @author Mark Doyle
  * @author Johannes Klug
- * 
+ *
  */
 public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 	/** Logger for this class */
@@ -28,7 +28,7 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 
 
 	@Override
-	public void decode(Byte[] inBytes) {
+	public void decode(final byte[] inBytes) {
 		// TODO Auto-generated method stub
 		//
 		throw new UnsupportedOperationException();
@@ -65,7 +65,7 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 
 
 	@Override
-	public BitSet encodeToBitSet(BitSet out, int offset) {
+	public BitSet encodeToBitSet(final BitSet out, int offset) {
 		final long longValue = getValue();
 
 		// setting all bits to zero

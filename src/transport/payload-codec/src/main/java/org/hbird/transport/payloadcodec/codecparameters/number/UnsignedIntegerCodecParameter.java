@@ -102,7 +102,7 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 
 
 	@Override
-	public void decode(Byte[] inBytes) {
+	public void decode(final byte[] inBytes) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
@@ -130,7 +130,7 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 	}
 
 	@Override
-	public BitSet encodeToBitSet(BitSet out, int offset) {
+	public BitSet encodeToBitSet(final BitSet out, int offset) {
 		final long unsignedInt = getValue();
 
 		// checking whether the value fits into the bit string of length - 1

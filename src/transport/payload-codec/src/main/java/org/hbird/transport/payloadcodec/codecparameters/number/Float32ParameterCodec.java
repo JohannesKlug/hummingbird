@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Parameter behaviour for an IEEE 754 32-bit precision Float.
- * 
+ *
  * @author Mark Doyle
  * @author Johannes Klug
- * 
+ *
  */
 public class Float32ParameterCodec extends CodecParameter<Float> {
 	private final static Logger LOG = LoggerFactory.getLogger(Float32ParameterCodec.class);
@@ -23,17 +23,17 @@ public class Float32ParameterCodec extends CodecParameter<Float> {
 		// TODO Auto-generated constructor stub
 	}
 
-	
+
 
 	@Override
-	public void decode(BitSet inBitset) {
+	public void decode(final BitSet inBitset) {
 		// TODO Auto-generated method stub
 		//
 		throw new UnsupportedOperationException();
 	}
-	
+
 	@Override
-	public void decode(Byte[] inBytes) {
+	public void decode(final byte[] inBytes) {
 		// TODO Auto-generated method stub
 		//
 		throw new UnsupportedOperationException();
@@ -46,7 +46,7 @@ public class Float32ParameterCodec extends CodecParameter<Float> {
 	}
 
 	@Override
-	public BitSet encodeToBitSet(BitSet out, int offset) {
+	public BitSet encodeToBitSet(final BitSet out, final int offset) {
 		// TODO Auto-generated method stub
 		return null;
 	}

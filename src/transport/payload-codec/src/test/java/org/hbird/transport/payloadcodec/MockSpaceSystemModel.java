@@ -40,12 +40,12 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 		ParameterGroup testGroup = new HummingbirdParameterGroup("Test group", "", "");
 		groups.put(testGroup.getName(), testGroup);
 
-		testGroup.addIntegerParameter(spacecraftId);
 		intParams.put(spacecraftId.getName(), spacecraftId);
-		testGroup.addIntegerParameter(fuelParam);
+		testGroup.addIntegerParameter(intParams.get(spacecraftId.getName()));
 		intParams.put(fuelParam.getName(), fuelParam);
-		testGroup.addLongParameter(laserTemp);
+		testGroup.addIntegerParameter(intParams.get(fuelParam.getName()));
 		longParams.put(laserTemp.getName(), laserTemp);
+		testGroup.addLongParameter(longParams.get(laserTemp.getName()));
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 		return p;
 	}
 
-	// Cast suppress reasoning:Parameter names must be unique so if a Param is found in a specific type collection
+	// Cast suppress reasoning: Parameter names must be unique so if a Param is found in a specific type collection
 	// it is safe to cast.
 	@Override
 	@SuppressWarnings("unchecked")

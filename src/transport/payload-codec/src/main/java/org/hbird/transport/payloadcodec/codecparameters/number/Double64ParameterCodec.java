@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Parameter behaviour for an IEEE 754 64-bit precision Float.
- * 
+ *
  * @author Mark Doyle
  * @author Johannes Klug
- * 
+ *
  */
 public class Double64ParameterCodec extends CodecParameter<Double> {
 	private final static Logger LOG = LoggerFactory.getLogger(Double64ParameterCodec.class);
@@ -22,14 +22,14 @@ public class Double64ParameterCodec extends CodecParameter<Double> {
 	}
 
 	@Override
-	public void decode(BitSet inBitset) {
+	public void decode(final BitSet inBitset) {
 		// TODO Auto-generated method stub
 		//
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void decode(Byte[] inBytes) {
+	public void decode(final byte[] inBytes) {
 		// TODO Auto-generated method stub
 		//
 		throw new UnsupportedOperationException();
@@ -59,7 +59,7 @@ public class Double64ParameterCodec extends CodecParameter<Double> {
 	// }
 
 	@Override
-	public BitSet encodeToBitSet(BitSet out, int offset) {
+	public BitSet encodeToBitSet(final BitSet out, final int offset) {
 		// TODO Auto-generated method stub
 		return null;
 	}

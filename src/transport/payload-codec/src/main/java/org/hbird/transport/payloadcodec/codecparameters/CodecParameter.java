@@ -1,21 +1,20 @@
 package org.hbird.transport.payloadcodec.codecparameters;
 
-import java.io.Serializable;
 import java.util.BitSet;
 
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
 /**
  * Parameter Decorator.
- * 
+ *
  * @author Mark Doyle
- * 
+ *
  * @param <T>
  */
 public abstract class CodecParameter<T> implements Parameter<T> {
 	private static final long serialVersionUID = 6597747873295079865L;
 
-	private String debug = "I'm a codec aware parameter!";
+	private final String debug = "I'm a codec aware parameter!";
 
 	protected Parameter<T> parameter;
 
@@ -23,14 +22,14 @@ public abstract class CodecParameter<T> implements Parameter<T> {
 		this.parameter = hostParameter;
 	}
 
-	public abstract void decode(Byte[] inBytes);
+	public abstract void decode(byte[] inBytes);
 
 	public abstract void decode(BitSet inBitset);
 
 	public abstract Byte[] encodeToByteArray(T value);
 
 	public abstract BitSet encodeToBitSet(BitSet out, int offset);
-	
+
 
 	// Pass through methods which the Codec Parameter does not need to alter in it's decoration.
 	// ----------------------------------------------------------------------------------------
@@ -96,6 +95,6 @@ public abstract class CodecParameter<T> implements Parameter<T> {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
+
+
 }
