@@ -1,11 +1,12 @@
 package org.hbird.transport.codec;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class CodecTest {
@@ -53,6 +54,7 @@ public class CodecTest {
 		assertEquals(expected, result);
 	}
 	
+	@Ignore
 	@Test
 	public void performanceInt() {
 		byte[] anArray = {(byte) 0x2A, (byte) 0xAA, (byte) 0xAA, (byte) 0xAA};
@@ -109,6 +111,7 @@ public class CodecTest {
 		
 	}
 	
+	@Ignore
 	@Test
 	public void extractSubArrayTest() throws Exception {
 //		assertEquals(1,Codec.extractSubArray(new byte[1],0,1).length);

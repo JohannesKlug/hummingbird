@@ -11,6 +11,7 @@ import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingE
 import org.hbird.transport.spacesystemmodel.ParameterGroup;
 import org.hbird.transport.spacesystemmodel.ParameterGroupReport;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
+import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,12 +20,11 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 
 	private static final Logger LOG = LoggerFactory.getLogger(HummingbirdPayloadCodec.class);
 
-	private final SpaceSystemModel spaceSystemModel;
+	private SpaceSystemModel spaceSystemModel = null;
 
 	public HummingbirdPayloadCodec(final SpaceSystemModel spaceSystemModel) {
-		this.spaceSystemModel = spaceSystemModel;
 		try {
-			SpaceSystemModelCodecDecorator.decorateSpaceSystemModel(spaceSystemModel);
+			this.spaceSystemModel = SpaceSystemModelCodecDecorator.decorateSpaceSystemModel(spaceSystemModel);
 		}
 		catch (UnsupportedParameterEncodingException e) {
 			LOG.error("UnsupportedParameterEncodingException in space system model");
@@ -38,6 +38,11 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 		catch (UnexpectedParameterTypeException e) {
 			LOG.error("UnexpectedParameterTypeException in space system model");
 			LOG.error(e.getMessage());
+		}
+		catch (UnknownParameterGroupException e) {
+			LOG.error("UnknownParameterGroupException in space system model");
+			LOG.error(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 

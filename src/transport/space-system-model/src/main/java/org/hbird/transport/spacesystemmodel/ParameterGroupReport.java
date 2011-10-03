@@ -1,14 +1,17 @@
 package org.hbird.transport.spacesystemmodel;
 
-public class ParameterGroupReport {
+import java.io.Serializable;
 
-	int intParameters = 0;
-	int longParameters = 0;
-	int bigDecimalParameters;
-	int floatParameters = 0;
-	int doubleParameters = 0;
-	int stringParameters = 0;
-	int rawParameters = 0;
+public class ParameterGroupReport implements Serializable {
+	private static final long serialVersionUID = -7299379403601149743L;
+	
+	private int intParameters = 0;
+	private int longParameters = 0;
+	private int bigDecimalParameters;
+	private int floatParameters = 0;
+	private int doubleParameters = 0;
+	private int stringParameters = 0;
+	private int rawParameters = 0;
 
 	public ParameterGroupReport(int numberIntParameters, int numberLongParameters, int numberBigDecimalParameters, int numberFloatParameters,
 			int numberDoubleParameters, int numberStringParameters, int numberRawParameters) {

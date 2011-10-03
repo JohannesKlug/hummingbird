@@ -9,7 +9,8 @@ package org.hbird.transport.spacesystemmodel.parameters;
  * @author Mark Doyle
  */
 public class HummingbirdParameter<T> implements Parameter<T> {
-
+	private static final long serialVersionUID = 4723421286629148964L;
+	
 	private final String name;
 	private final String shortDescription;
 	private final String longDescription;

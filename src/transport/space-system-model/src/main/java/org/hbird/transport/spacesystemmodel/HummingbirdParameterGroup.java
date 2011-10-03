@@ -13,6 +13,8 @@ import org.hbird.transport.spacesystemmodel.parameters.Parameter;
  * @author Johannes Klug
  */
 public class HummingbirdParameterGroup implements ParameterGroup {
+	private static final long serialVersionUID = 7810839127277387757L;
+
 	private final String name;
 	private final String shortDescription;
 	private final String longDescription;

@@ -1,5 +1,6 @@
 package org.hbird.transport.payloadcodec.codecparameters;
 
+import java.io.Serializable;
 import java.util.BitSet;
 
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
@@ -12,6 +13,9 @@ import org.hbird.transport.spacesystemmodel.parameters.Parameter;
  * @param <T>
  */
 public abstract class CodecParameter<T> implements Parameter<T> {
+	private static final long serialVersionUID = 6597747873295079865L;
+
+	private String debug = "I'm a codec aware parameter!";
 
 	protected Parameter<T> parameter;
 
@@ -81,4 +85,17 @@ public abstract class CodecParameter<T> implements Parameter<T> {
 	public void setValue(final T value) {
 		parameter.setValue(value);
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CodecParameter [debug=");
+		builder.append(debug);
+		builder.append(", parameter=");
+		builder.append(parameter);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
 }

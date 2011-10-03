@@ -1,5 +1,6 @@
 package org.hbird.transport.spacesystemmodel;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 /**
  * TODO The standard interface of a ParameterGroup.
  */
-public interface ParameterGroup extends TmTcGroup {
+public interface ParameterGroup extends TmTcGroup, Serializable {
 
 
 	/**
