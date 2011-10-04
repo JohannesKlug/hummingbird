@@ -125,27 +125,52 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 
 	@Override
 	public Collection<Parameter<Float>> getFloatParameters() {
-		return floatParameters.values();
+		if (floatParameters == null) {
+			return null;
+		}
+		else {
+			return floatParameters.values();
+		}
 	}
 
 	@Override
 	public Collection<Parameter<Double>> getDoubleParameters() {
-		return doubleParameters.values();
+		if (doubleParameters == null) {
+			return null;
+		}
+		else {
+			return doubleParameters.values();
+		}
 	}
 
 	@Override
 	public Collection<Parameter<BigDecimal>> getBigDecimalParameters() {
-		return bigDecimalParameters.values();
+		if (bigDecimalParameters == null) {
+			return null;
+		}
+		else {
+			return bigDecimalParameters.values();
+		}
 	}
 
 	@Override
 	public Collection<Parameter<String>> getStringParameters() {
-		return stringParameters.values();
+		if (stringParameters == null) {
+			return null;
+		}
+		else {
+			return stringParameters.values();
+		}
 	}
 
 	@Override
 	public Collection<Parameter<Byte[]>> getRawParameters() {
-		return rawParameters.values();
+		if (rawParameters == null) {
+			return null;
+		}
+		else {
+			return rawParameters.values();
+		}
 	}
 
 	@Override
