@@ -35,15 +35,12 @@
 	</logger>
 	
 	<logger name="org.hbird.transport.spacesystemmodel">
-		<level value="DEBUG"></level>
+		<level value="INFO"></level>
 	</logger>
 	
-	<logger name="org.hbird.transport.tele">
-		<level value="DEBUG"></level>
-	</logger>
 	
 	<logger name="org.hbird.transport.commons.util">
-		<level value="DEBUG"></level>
+		<level value="INFO"></level>
 	</logger>
 	
 	

@@ -14,6 +14,10 @@ import org.slf4j.LoggerFactory;
  * @author Johannes Klug (John Clever)
  */
 public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6820348312687042896L;
 	private static final Logger LOG = LoggerFactory.getLogger(UnsignedIntegerCodecParameter.class);
 
 
@@ -103,12 +107,13 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 
 	@Override
 	public void decode(final BitSet inBitset, int offset) {
+
+		BitSet actualParameter = inBitset.get(offset, offset + getSizeInBits());
+
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("Extracting " + getSizeInBits() + " bit int value from " + BitSetUtility.binDump(inBitset));
+			LOG.debug("Extracting " + getSizeInBits() + " bit int value from " + BitSetUtility.binDump(actualParameter));
 		}
-
-		BitSet actualParameter = inBitset.get(0, getSizeInBits());
-
+		
 		if (getEndianness() == Endianness.LITTLE) {
 			actualParameter = BitSetUtility.reverse(actualParameter, getSizeInBits());
 		}

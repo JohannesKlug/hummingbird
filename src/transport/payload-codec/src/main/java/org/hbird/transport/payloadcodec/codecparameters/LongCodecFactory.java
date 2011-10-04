@@ -35,7 +35,7 @@ public class LongCodecFactory {
 									+ sizeInBits);
 				}
 				else {
-					return new TwosComplementLongCodecParameter(parameter);
+					throw new UnsupportedParameterEncodingException("File a bug report :D");
 				}
 			case signMagnitude:
 				throw new UnsupportedParameterEncodingException("File a bug report :D");

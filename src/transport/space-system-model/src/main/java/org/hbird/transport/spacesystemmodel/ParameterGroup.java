@@ -3,8 +3,10 @@ package org.hbird.transport.spacesystemmodel;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Map;
 
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
+import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
 
@@ -19,7 +21,7 @@ public interface ParameterGroup extends TmTcGroup, Serializable {
 	 *
 	 * @return List of off Parameters belonging to this Group.
 	 */
-	Collection<Parameter<?>> getAllParameters();
+	Map<String, Parameter<?>> getAllParameters();
 
 	void addRestriction(Object payloadLayoutId);
 
@@ -49,6 +51,12 @@ public interface ParameterGroup extends TmTcGroup, Serializable {
 	Collection<Parameter<Double>> getDoubleParameters();
 
 	Collection<Parameter<Byte[]>> getRawParameters();
+	
+	Parameter<Integer> getIntegerParameter(String name) throws UnknownParameterGroupException;
+	
+	Parameter<Long> getLongParameter(String name) throws UnknownParameterGroupException;
+	
+	// TODO support others.
 
 	void addIntegerParameter(Parameter<Integer> parameter);
 
@@ -65,6 +73,7 @@ public interface ParameterGroup extends TmTcGroup, Serializable {
 	void addRawParameter(Parameter<Byte[]> parameter);
 
 	void replaceParameterInGroup(Parameter<?> parameter) throws ParameterNotInGroupException;
+
 
 
 }

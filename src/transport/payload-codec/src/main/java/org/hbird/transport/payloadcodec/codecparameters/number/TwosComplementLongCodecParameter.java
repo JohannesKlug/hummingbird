@@ -3,6 +3,7 @@ package org.hbird.transport.payloadcodec.codecparameters.number;
 import java.math.BigInteger;
 import java.util.BitSet;
 
+import org.apache.commons.lang.StringUtils;
 import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
@@ -18,6 +19,10 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6520952692018179861L;
 	/** Logger for this class */
 	private final static Logger LOG = LoggerFactory.getLogger(TwosComplementLongCodecParameter.class);
 
@@ -41,6 +46,12 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 		long parameterValue = 0;
 
 		String binaryString = BitSetUtility.bitSetToBinaryString(inBitset, false);
+		
+		binaryString = binaryString.substring(offset, offset + getSizeInBits());
+		
+		if (getEndianness() == Endianness.LITTLE ) {
+			binaryString = StringUtils.reverse(binaryString);
+		}
 
 		// If we are dealing with a negative number...
 		if (binaryString.startsWith("1")) {
@@ -51,7 +62,7 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("BitSet string = " + binaryString);
 		}
-
+		
 		parameterValue = Long.valueOf(binaryString, 2);
 
 		this.setValue(parameterValue);

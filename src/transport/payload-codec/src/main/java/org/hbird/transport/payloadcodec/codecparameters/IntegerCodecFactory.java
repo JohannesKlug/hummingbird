@@ -49,7 +49,6 @@ public class IntegerCodecFactory {
 							"Size of this parameter is > 32 which is too big to be an integer. Size = " + sizeInBits);
 				}
 				else {
-					// Cast can only be correct at this point but this does not smell good.
 					return new UnsignedIntegerCodecParameter(parameter);
 				}
 			case signMagnitude:

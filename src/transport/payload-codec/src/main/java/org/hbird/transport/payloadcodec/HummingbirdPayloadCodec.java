@@ -21,32 +21,8 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 
 	private SpaceSystemModel spaceSystemModel = null;
 
-	public HummingbirdPayloadCodec(final SpaceSystemModel spaceSystemModel) {
-		try {
-			this.spaceSystemModel = SpaceSystemModelCodecDecorator.decorateSpaceSystemModel(spaceSystemModel);
-		}
-		catch (UnsupportedParameterEncodingException e) {
-			LOG.error("UnsupportedParameterEncodingException in space system model");
-			LOG.equals(e.getMessage());
-			e.printStackTrace();
-		}
-		catch (UnknownParameterEncodingException e) {
-			LOG.error("UnknownParameterEncodingException in space system model");
-			LOG.error(e.getMessage());
-		}
-		catch (UnexpectedParameterTypeException e) {
-			LOG.error("UnexpectedParameterTypeException in space system model");
-			LOG.error(e.getMessage());
-		}
-		catch (UnknownParameterGroupException e) {
-			LOG.error("UnknownParameterGroupException in space system model");
-			LOG.error(e.getMessage());
-			e.printStackTrace();
-		}
-		catch (ParameterNotInGroupException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public HummingbirdPayloadCodec(final SpaceSystemModel spaceSystemModel) throws UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException, UnknownParameterGroupException, ParameterNotInGroupException {
+		this.spaceSystemModel = SpaceSystemModelCodecDecorator.decorateSpaceSystemModel(spaceSystemModel);
 	}
 
 	@Override
@@ -57,7 +33,7 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 			int previousSize = 0;
 			int count = 0;
 			for(ParameterGroup pg : spaceSystemModel.getAllParameterGroups()) {
-				for(Parameter<?> p : pg.getAllParameters()) {
+				for(Parameter<?> p : pg.getAllParameters().values()) {
 					if(count != 0) {
 						offset += previousSize;
 					}
@@ -82,7 +58,7 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 			int previousSize = 0;
 			int count = 0;
 			for(ParameterGroup pg : spaceSystemModel.getAllParameterGroups()) {
-				for(Parameter<?> p : pg.getAllParameters()) {
+				for(Parameter<?> p : pg.getAllParameters().values()) {
 					if(count != 0) {
 						offset += previousSize;
 					}
@@ -91,6 +67,7 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 					previousSize = p.getSizeInBits();
 					count++;
 				}
+				return pg; //FIXME dirty hack.
 			}
 		}
 		else {
@@ -104,7 +81,7 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 		BitSet encoded = new BitSet();
 //		ParameterGroupReport groupDetailReport = parameterGroup.getParameterReport();
 
-		Collection<Parameter<?>> parameters = parameterGroup.getAllParameters();
+		Collection<Parameter<?>> parameters = parameterGroup.getAllParameters().values();
 		int count = 0;
 		int offset = 0;
 		int previousSize = 0;

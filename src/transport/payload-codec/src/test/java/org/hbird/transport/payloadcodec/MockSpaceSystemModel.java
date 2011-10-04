@@ -34,7 +34,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 //		parameters.put(fuelParam.getName(), fuelParam);
 		Parameter<Integer> spacecraftId = new HummingbirdParameter<Integer>(SCID_PARAMETER_NAME, "", "", 32, Endianness.BIG, Encoding.unsigned);
 //		parameters.put(spacecraftId.getName(), spacecraftId);
-		Parameter<Long> laserTemp = new HummingbirdParameter<Long>(LASER_TEMP_PARAMETER_NAME, "", "", 40, Endianness.LITTLE, Encoding.unsigned);
+		Parameter<Long> laserTemp = new HummingbirdParameter<Long>(LASER_TEMP_PARAMETER_NAME, "", "", 40, Endianness.LITTLE, Encoding.twosComplement);
 //		parameters.put(laserTemp.getName(), laserTemp);
 
 		ParameterGroup testGroup = new HummingbirdParameterGroup("Test group", "", "");

@@ -3,12 +3,12 @@ package org.hbird.transport.spacesystemmodel;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
+import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
 /**
@@ -42,7 +42,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	protected List<Object> restrictions;
 
 	/** List of Parameters belonging to this Group */
-	// private final List<Parameter<?>> parameters = new ArrayList<Parameter<?>>();
+	private final Map<String, Parameter<?>> parameters = new LinkedHashMap<String, Parameter<?>>();
 
 	/**
 	 * Constructor of the ParameterGroup class.
@@ -99,30 +99,8 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public Collection<Parameter<?>> getAllParameters() {
-		HashMap<String, Parameter<?>> all = new HashMap<String, Parameter<?>>();
-		if (integerParameters != null) {
-			all.putAll(integerParameters);
-		}
-		if (longParameters != null) {
-			all.putAll(longParameters);
-		}
-		if (bigDecimalParameters != null) {
-			all.putAll(bigDecimalParameters);
-		}
-		if (floatParameters != null) {
-			all.putAll(floatParameters);
-		}
-		if (doubleParameters != null) {
-			all.putAll(doubleParameters);
-		}
-		if (stringParameters != null) {
-			all.putAll(stringParameters);
-		}
-		if (rawParameters != null) {
-			all.putAll(rawParameters);
-		}
-		return all.values();
+	public Map<String, Parameter<?>> getAllParameters() {
+		return parameters;
 	}
 
 	@Override
@@ -166,7 +144,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 			this.integerParameters = new LinkedHashMap<String, Parameter<Integer>>();
 		}
 		this.integerParameters.put(parameter.getName(), parameter);
-		// this.parameters.add(parameter);
+		this.parameters.put(parameter.getName(), parameter);
 		this.parameterReport.incrementIntCount();
 	}
 
@@ -176,7 +154,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 			this.longParameters = new LinkedHashMap<String, Parameter<Long>>();
 		}
 		this.longParameters.put(parameter.getName(), parameter);
-		// this.parameters.add(parameter);
+		this.parameters.put(parameter.getName(), parameter);
 		this.parameterReport.incrementLongCount();
 	}
 
@@ -186,7 +164,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 			this.bigDecimalParameters = new LinkedHashMap<String, Parameter<BigDecimal>>();
 		}
 		this.bigDecimalParameters.put(parameter.getName(), parameter);
-		// this.parameters.add(parameter);
+		this.parameters.put(parameter.getName(), parameter);
 		this.parameterReport.incrementBigDecimalCount();
 	}
 
@@ -196,7 +174,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 			this.floatParameters = new LinkedHashMap<String, Parameter<Float>>();
 		}
 		this.floatParameters.put(parameter.getName(), parameter);
-		// this.parameters.add(parameter);
+		this.parameters.put(parameter.getName(), parameter);
 		this.parameterReport.incrementFloatCount();
 	}
 
@@ -206,7 +184,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 			this.doubleParameters = new LinkedHashMap<String, Parameter<Double>>();
 		}
 		this.doubleParameters.put(parameter.getName(), parameter);
-		// this.parameters.add(parameter);
+		this.parameters.put(parameter.getName(), parameter);
 		this.parameterReport.incrementDoubleCount();
 	}
 
@@ -216,7 +194,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 			this.stringParameters = new LinkedHashMap<String, Parameter<String>>();
 		}
 		this.stringParameters.put(parameter.getName(), parameter);
-		// this.parameters.add(parameter);
+		this.parameters.put(parameter.getName(), parameter);
 		this.parameterReport.incrementStringCount();
 	}
 
@@ -226,7 +204,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 			this.rawParameters = new LinkedHashMap<String, Parameter<Byte[]>>();
 		}
 		this.rawParameters.put(parameter.getName(), parameter);
-		// this.parameters.add(parameter);
+		this.parameters.put(parameter.getName(), parameter);
 		this.parameterReport.incrementRawCount();
 	}
 
@@ -265,5 +243,27 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		else {
 			throw new ParameterNotInGroupException(parameter);
 		}
+		
+		if (parameters.containsKey(pname)) {
+			parameters.put(parameter.getName(), (Parameter<?>) parameter);
+		}
+	}
+
+	@Override
+	public Parameter<Integer> getIntegerParameter(String name) throws UnknownParameterGroupException {
+		Parameter<Integer> p = integerParameters.get(name);
+		if(p == null) {
+			throw new UnknownParameterGroupException(name);
+		}
+		return p;
+	}
+
+	@Override
+	public Parameter<Long> getLongParameter(String name) throws UnknownParameterGroupException {
+		Parameter<Long> p = longParameters.get(name);
+		if(p == null) {
+			throw new UnknownParameterGroupException(name);
+		}
+		return p;
 	}
 }
