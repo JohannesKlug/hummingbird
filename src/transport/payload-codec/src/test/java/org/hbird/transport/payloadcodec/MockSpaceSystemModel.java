@@ -127,7 +127,8 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 		}
 	}
 
-	public final static SpaceSystemModel deepClone(final SpaceSystemModel ssm) {
+	@Override
+	public final SpaceSystemModel deepClone(final SpaceSystemModel ssm) {
 		return (SpaceSystemModel) SerializationUtils.clone(ssm);
 	}
 

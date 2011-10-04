@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.SerializationUtils;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
@@ -91,5 +92,7 @@ public interface SpaceSystemModel extends Serializable {
 	Map<Parameter<?>, List<Object>> getAllParameterRestrictions();
 
 	void replaceParameterInModel(final Parameter<?> newParameter);
+	
+	SpaceSystemModel deepClone(final SpaceSystemModel ssm);
 
 }

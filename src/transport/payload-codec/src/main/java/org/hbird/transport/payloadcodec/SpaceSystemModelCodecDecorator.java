@@ -19,7 +19,7 @@ public class SpaceSystemModelCodecDecorator {
 
 	public static SpaceSystemModel decorateSpaceSystemModel(final SpaceSystemModel spaceSystemModel) throws UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException, UnknownParameterGroupException, ParameterNotInGroupException {
 
-		SpaceSystemModel newModel = MockSpaceSystemModel.deepClone(spaceSystemModel);
+		SpaceSystemModel newModel = spaceSystemModel.deepClone(spaceSystemModel);
 
 		// Decorate all integer parameters...
 		for (Parameter<Integer> parameter : newModel.getIntegerParameters()) {

@@ -531,7 +531,8 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 		throw new UnsupportedOperationException();
 	}
 
-	public final static SpaceSystemModel deepClone(final SpaceSystemModel ssm) {
+	@Override
+	public final SpaceSystemModel deepClone(final SpaceSystemModel ssm) {
 		return (SpaceSystemModel) SerializationUtils.clone(ssm);
 	}
 
