@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  */
 public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -6520952692018179861L;
 	/** Logger for this class */
@@ -33,22 +33,22 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 
 
 	@Override
-	public void decode(final byte[] inBytes, int offset) {
+	public void decode(final byte[] inBytes, final int offset) {
 		// TODO Auto-generated method stub
 		//
 		throw new UnsupportedOperationException();
 	}
-	
+
 
 	// FIXME String implementation for decoding is nasty!
 	@Override
-	public void decode(final BitSet inBitset,  int offset) {
+	public void decode(final BitSet inBitset,  final int offset) {
 		long parameterValue = 0;
 
 		String binaryString = BitSetUtility.bitSetToBinaryString(inBitset, false);
-		
+
 		binaryString = binaryString.substring(offset, offset + getSizeInBits());
-		
+
 		if (getEndianness() == Endianness.LITTLE ) {
 			binaryString = StringUtils.reverse(binaryString);
 		}
@@ -62,7 +62,7 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("BitSet string = " + binaryString);
 		}
-		
+
 		parameterValue = Long.valueOf(binaryString, 2);
 
 		this.setValue(parameterValue);
@@ -70,14 +70,18 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 
 
 	@Override
-	public Byte[] encodeToByteArray(Byte[] targetBytes, int offset) {
+	public Byte[] encodeToByteArray(final Byte[] targetBytes, final int offset) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public BitSet encodeToBitSet(final BitSet out, int offset) {
-		final long longValue = getValue();
+		long longValue = getValue();
+
+		if(getEndianness() == Endianness.LITTLE) {
+			longValue = swap(longValue);
+		}
 
 		// setting all bits to zero
 		out.clear(offset, offset + getSizeInBits() - 1);
@@ -93,10 +97,31 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 		}
 
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("Calculated Bitset from value " + getValue() + " was: " + BitSetUtility.binDump(out));
+			LOG.debug("Calculated Bitset from value " + longValue + " was: " + BitSetUtility.binDump(out));
 		}
 
 		return out;
 	}
+
+	 /**
+	   * Byte swap a single long value.
+	   *
+	   * @param value  Value to byte swap.
+	   * @return       Byte swapped representation.
+	   */
+	  public static long swap (final long value)
+	  {
+	    long b1 = (value >>  0) & 0xff;
+	    long b2 = (value >>  8) & 0xff;
+	    long b3 = (value >> 16) & 0xff;
+	    long b4 = (value >> 24) & 0xff;
+	    long b5 = (value >> 32) & 0xff;
+	    long b6 = (value >> 40) & 0xff;
+	    long b7 = (value >> 48) & 0xff;
+	    long b8 = (value >> 56) & 0xff;
+
+	    return b1 << 56 | b2 << 48 | b3 << 40 | b4 << 32 |
+	           b5 << 24 | b6 << 16 | b7 <<  8 | b8 <<  0;
+	  }
 
 }

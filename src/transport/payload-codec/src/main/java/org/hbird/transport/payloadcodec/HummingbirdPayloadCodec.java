@@ -67,7 +67,7 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 					previousSize = p.getSizeInBits();
 					count++;
 				}
-				return pg; //FIXME dirty hack.
+				return pg; //FIXME dirty hack. Warum dreckig?
 			}
 		}
 		else {
