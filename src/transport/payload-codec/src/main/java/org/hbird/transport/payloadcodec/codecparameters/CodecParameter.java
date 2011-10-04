@@ -22,13 +22,13 @@ public abstract class CodecParameter<T> implements Parameter<T> {
 		this.parameter = hostParameter;
 	}
 
-	public abstract void decode(byte[] inBytes);
+	public abstract void decode(byte[] inBytes, int offset);
 
-	public abstract void decode(BitSet inBitset);
+	public abstract void decode(BitSet inBitset, int offset);
 
-	public abstract Byte[] encodeToByteArray(T value);
+	public abstract Byte[] encodeToByteArray(Byte[] targetBytes, int offset);
 
-	public abstract BitSet encodeToBitSet(BitSet out, int offset);
+	public abstract BitSet encodeToBitSet(BitSet targetBitSet, int offset);
 
 
 	// Pass through methods which the Codec Parameter does not need to alter in it's decoration.

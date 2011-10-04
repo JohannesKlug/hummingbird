@@ -95,21 +95,14 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 
 
 	@Override
-	public Byte[] encodeToByteArray(final Integer value) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public void decode(final byte[] inBytes) {
+	public void decode(final byte[] inBytes, int offset) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
 
 
 	@Override
-	public void decode(final BitSet inBitset) {
+	public void decode(final BitSet inBitset, int offset) {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Extracting " + getSizeInBits() + " bit int value from " + BitSetUtility.binDump(inBitset));
 		}
@@ -130,7 +123,7 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 	}
 
 	@Override
-	public BitSet encodeToBitSet(final BitSet out, int offset) {
+	public BitSet encodeToBitSet(BitSet out, int offset) {
 		final long unsignedInt = getValue();
 
 		// checking whether the value fits into the bit string of length - 1
@@ -161,5 +154,10 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 			}
 		}
 		return out;
+	}
+	
+	@Override
+	public Byte[] encodeToByteArray(Byte[] targetBytes, int offset) {
+		throw new UnsupportedOperationException();
 	}
 }

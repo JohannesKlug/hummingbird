@@ -14,20 +14,24 @@ import org.slf4j.LoggerFactory;
  * @param <T>
  */
 public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer> {
+	private static final long serialVersionUID = 4601475539675898978L;
+
 	private static final Logger LOG = LoggerFactory.getLogger(TwosComplementIntegerCodecParameter.class);
 
 	public TwosComplementIntegerCodecParameter(final Parameter<Integer> hostParameter) {
 		super(hostParameter);
 	}
 
+	
 	@Override
-	public void decode(final byte[] inBytes) {
+	public void decode(byte[] inBytes, int offset) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		
 	}
-
+	
+	
 	@Override
-	public void decode(final BitSet inBitset) {
+	public void decode(final BitSet inBitset, int offset) {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Extracting " + getSizeInBits() + " bit int value from " + BitSetUtility.binDump(inBitset));
 		}
@@ -45,7 +49,7 @@ public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer>
 	}
 
 	@Override
-	public Byte[] encodeToByteArray(final Integer value) {
+	public Byte[] encodeToByteArray(Byte[] targetBytes, int offset) {
 		// TODO Auto-generated method stub
 		return null;
 	}

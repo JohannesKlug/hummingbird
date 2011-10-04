@@ -56,7 +56,7 @@ public class CodecFactoryTest {
 
 		CodecParameter<Integer> codecAwareParameterUint11 = IntegerCodecFactory.decorateParameterWithCodec(parameterUint11);
 
-		codecAwareParameterUint11.decode(BITSET_11BIT_BE_133);
+		codecAwareParameterUint11.decode(BITSET_11BIT_BE_133, 0);
 
 		assertEquals("Result should be equal to 133", new Integer(133), codecAwareParameterUint11.getValue());
 	}
@@ -70,7 +70,7 @@ public class CodecFactoryTest {
 
 		CodecParameter<Integer> codecAwareParameterInt11 = IntegerCodecFactory.decorateParameterWithCodec(parameterInt11);
 
-		codecAwareParameterInt11.decode(BITSET_11BIT_BE_133);
+		codecAwareParameterInt11.decode(BITSET_11BIT_BE_133, 0);
 
 		assertEquals("Result should be equal to 133", 133, codecAwareParameterInt11.getValue().intValue());
 	}
@@ -83,7 +83,7 @@ public class CodecFactoryTest {
 
 		CodecParameter<Integer> codecAwareParameterInt11 = IntegerCodecFactory.decorateParameterWithCodec(parameterInt11);
 
-		codecAwareParameterInt11.decode(BITSET_11BIT_BE_NEG_891);
+		codecAwareParameterInt11.decode(BITSET_11BIT_BE_NEG_891, 0);
 
 		assertEquals("Result should be equal to -891", -891, codecAwareParameterInt11.getValue().intValue());
 	}
@@ -96,7 +96,7 @@ public class CodecFactoryTest {
 
 		CodecParameter<Long> codecAwareParameterLong55 = LongCodecFactory.decorateParameterWithCodec(parameterUint11);
 
-		codecAwareParameterLong55.decode(TEST_LONG_BITSET);
+		codecAwareParameterLong55.decode(TEST_LONG_BITSET, 0);
 
 		assertEquals("Result should be equal to " + TEST_LONG, TEST_LONG, codecAwareParameterLong55.getValue().intValue());
 	}

@@ -95,7 +95,7 @@ public class UnsignedIntegerCodecParameterTest {
 		LOG.info("###################### Beginning test #######################");
 		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", TEST_VALUE_LENGTH_LE_555, Endianness.LITTLE, Encoding.unsigned);
 		UnsignedIntegerCodecParameter codec = new UnsignedIntegerCodecParameter(p);
-		codec.decode(TEST_BITSET_VALUE_LE_555);
+		codec.decode(TEST_BITSET_VALUE_LE_555, 0);
 		assertEquals(555, codec.getValue().intValue());
 	}
 
@@ -104,7 +104,7 @@ public class UnsignedIntegerCodecParameterTest {
 		LOG.info("###################### Beginning test #######################");
 		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", TEST_VALUE_LENGTH_BE_555, Endianness.BIG, Encoding.unsigned);
 		UnsignedIntegerCodecParameter codec = new UnsignedIntegerCodecParameter(p);
-		codec.decode(TEST_BITSET_VALUE_BE_555);
+		codec.decode(TEST_BITSET_VALUE_BE_555, 0);
 		assertEquals(555, codec.getValue().intValue());
 	}
 
@@ -113,7 +113,7 @@ public class UnsignedIntegerCodecParameterTest {
 		LOG.info("###################### Beginning test #######################");
 		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", TEST_VALUE_LENGTH_1024, Endianness.BIG, Encoding.unsigned);
 		UnsignedIntegerCodecParameter codec = new UnsignedIntegerCodecParameter(p);
-		codec.decode(TEST_BITSET_VALUE_BE_1024);
+		codec.decode(TEST_BITSET_VALUE_BE_1024, 0);
 		assertEquals(1024, codec.getValue().intValue());
 	}
 
@@ -122,7 +122,7 @@ public class UnsignedIntegerCodecParameterTest {
 		LOG.info("###################### Beginning test #######################");
 		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", TEST_VALUE_LENGTH_1024, Endianness.LITTLE, Encoding.unsigned);
 		UnsignedIntegerCodecParameter codecParam = new UnsignedIntegerCodecParameter(p);
-		codecParam.decode(TEST_BITSET_VALUE_LE_1024);
+		codecParam.decode(TEST_BITSET_VALUE_LE_1024, 0);
 		assertEquals(1024, codecParam.getValue().intValue());
 	}
 
@@ -131,7 +131,7 @@ public class UnsignedIntegerCodecParameterTest {
 		LOG.info("###################### Beginning test #######################");
 		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", TEST_VALUE_LENGTH_BE_123_32bit, Endianness.BIG, Encoding.unsigned);
 		UnsignedIntegerCodecParameter codecParam = new UnsignedIntegerCodecParameter(p);
-		codecParam.decode(TEST_BITSET_VALUE_123_32bit);
+		codecParam.decode(TEST_BITSET_VALUE_123_32bit, 0);
 		assertEquals(123, codecParam.getValue().intValue());
 	}
 
@@ -141,7 +141,7 @@ public class UnsignedIntegerCodecParameterTest {
 		LOG.info("###################### Beginning test #######################");
 		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", TEST_VALUE_LENGTH_BE_999, Endianness.BIG, Encoding.unsigned);
 		UnsignedIntegerCodecParameter behaviour = new UnsignedIntegerCodecParameter(p);
-		behaviour.decode(TEST_BITSET_VALUE_BE_999);
+		behaviour.decode(TEST_BITSET_VALUE_BE_999, 0);
 		assertEquals(999, behaviour.getValue().intValue());
 	}
 

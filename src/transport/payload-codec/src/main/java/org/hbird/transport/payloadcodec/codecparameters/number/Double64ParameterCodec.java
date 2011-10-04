@@ -22,21 +22,25 @@ public class Double64ParameterCodec extends CodecParameter<Double> {
 	}
 
 	@Override
-	public void decode(final BitSet inBitset) {
+	public void decode(byte[] inBytes, int offset) {
 		// TODO Auto-generated method stub
-		//
-		throw new UnsupportedOperationException();
+		
 	}
 
 	@Override
-	public void decode(final byte[] inBytes) {
+	public void decode(BitSet inBitset, int offset) {
 		// TODO Auto-generated method stub
-		//
-		throw new UnsupportedOperationException();
+		
 	}
 
 	@Override
-	public Byte[] encodeToByteArray(final Double value) {
+	public Byte[] encodeToByteArray(Byte[] targetBytes, int offset) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BitSet encodeToBitSet(BitSet targetBitSet, int offset) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -58,11 +62,7 @@ public class Double64ParameterCodec extends CodecParameter<Double> {
 	// return BitSetUtility.toDouble(actualBitSet);
 	// }
 
-	@Override
-	public BitSet encodeToBitSet(final BitSet out, final int offset) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	// @Override
 	// public BitSet insertIntoBitSet(final Number number, final BitSet bitSetTarget, final int offset)

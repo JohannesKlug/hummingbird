@@ -53,10 +53,18 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 	public ParameterGroup decode(final byte[] payload, final Object payloadLayoutId) {
 		if(payloadLayoutId == null) {
 			// no restrictions, decode all everything!
+			int offset = 0;
+			int previousSize = 0;
+			int count = 0;
 			for(ParameterGroup pg : spaceSystemModel.getAllParameterGroups()) {
 				for(Parameter<?> p : pg.getAllParameters()) {
+					if(count != 0) {
+						offset += previousSize;
+					}
 					System.out.println(p.getName() + " : " + p.getValue());
-					((CodecParameter<?>)p).decode(payload);
+					((CodecParameter<?>)p).decode(payload, offset);
+					previousSize = p.getSizeInBits();
+					count++;
 				}
 			}
 		}
@@ -70,10 +78,18 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 	public ParameterGroup decode(final BitSet payload, final Object payloadLayoutId) {
 		if(payloadLayoutId == null) {
 			// no restrictions, decode all everything!
+			int offset = 0;
+			int previousSize = 0;
+			int count = 0;
 			for(ParameterGroup pg : spaceSystemModel.getAllParameterGroups()) {
 				for(Parameter<?> p : pg.getAllParameters()) {
+					if(count != 0) {
+						offset += previousSize;
+					}
 					System.out.println(p.getName() + " : " + p.getValue());
-					((CodecParameter<?>)p).decode(payload);
+					((CodecParameter<?>)p).decode(payload, offset);
+					previousSize = p.getSizeInBits();
+					count++;
 				}
 			}
 		}
@@ -91,7 +107,7 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 		Collection<Parameter<?>> parameters = parameterGroup.getAllParameters();
 		int count = 0;
 		int offset = 0;
-		int previousSize = 0;;
+		int previousSize = 0;
 		for(Parameter<?> p : parameters) {
 			if(count != 0) {
 				offset += previousSize;

@@ -51,21 +51,21 @@ public class TwosComplementLongCodecParameterTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public final void testValueFromBitSet() {
-		codecParameter.decode(TEST_LONG_BITSET);
+		codecParameter.decode(TEST_LONG_BITSET, 0);
 		assertEquals(TEST_LONG, codecParameter.getValue().longValue());
 	}
 	
 	@SuppressWarnings("static-method")
 	@Test
 	public final void testMaxValueFromBitSet() {
-		codecParameter.decode(TEST_MAX_LONG_BITSET);
+		codecParameter.decode(TEST_MAX_LONG_BITSET, 0);
 		assertEquals(Long.MAX_VALUE, codecParameter.getValue().longValue());
 	}
 	
 	@SuppressWarnings("static-method")
 	@Test
 	public final void testMinValueFromBitSet() {
-		codecParameter.decode(TEST_MIN_LONG_BITSET);
+		codecParameter.decode(TEST_MIN_LONG_BITSET, 0);
 		assertEquals(Long.MIN_VALUE, codecParameter.getValue().longValue());
 	}
 
@@ -75,7 +75,7 @@ public class TwosComplementLongCodecParameterTest {
 		codecParameter.setValue(TEST_LONG);
 		BitSet actual = new BitSet();
 		codecParameter.encodeToBitSet(actual, 0);
-		assertEquals(TEST_LONG_BITSET, codecParameter.getValue().longValue());
+		assertEquals(TEST_LONG, codecParameter.getValue().longValue());
 	}
 
 }
