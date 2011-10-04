@@ -91,13 +91,13 @@ public class CodecFactoryTest {
 	@Test
 	public void testDecorateLong55() throws UnsupportedParameterEncodingException, UnknownParameterEncodingException,
 			UnexpectedParameterTypeException {
-		Parameter<Long> parameterUint11 = new HummingbirdParameter<Long>("TestLong55", "", "", 64, Endianness.BIG,
-				Encoding.twosComplement);
+		
+		Parameter<Long> parameterUint11 = new HummingbirdParameter<Long>("TestLong55", "", "", 64, Endianness.BIG, Encoding.twosComplement);
 
 		CodecParameter<Long> codecAwareParameterLong55 = LongCodecFactory.decorateParameterWithCodec(parameterUint11);
 
 		codecAwareParameterLong55.decode(TEST_LONG_BITSET, 0);
 
-		assertEquals("Result should be equal to " + TEST_LONG, TEST_LONG, codecAwareParameterLong55.getValue().intValue());
+		assertEquals("Result should be equal to " + TEST_LONG, TEST_LONG, codecAwareParameterLong55.getValue().longValue());
 	}
 }
