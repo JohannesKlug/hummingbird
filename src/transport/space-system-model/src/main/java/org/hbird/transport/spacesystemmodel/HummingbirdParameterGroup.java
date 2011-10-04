@@ -105,12 +105,22 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 
 	@Override
 	public Collection<Parameter<Integer>> getIntegerParameters() {
-		return integerParameters.values();
+		if (integerParameters == null) {
+			return null;
+		}
+		else {
+			return integerParameters.values();
+		}
 	}
 
 	@Override
 	public Collection<Parameter<Long>> getLongParameters() {
-		return longParameters.values();
+		if (longParameters == null) {
+			return null;
+		}
+		else {
+			return longParameters.values();
+		}
 	}
 
 	@Override
