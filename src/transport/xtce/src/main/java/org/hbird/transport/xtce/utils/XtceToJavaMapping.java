@@ -4,7 +4,7 @@ import org.hbird.transport.generatedcode.xtce.IntegerParameterType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XtceToJavaMapping {
+public final class XtceToJavaMapping {
 	private static final Logger LOG = LoggerFactory.getLogger(XtceToJavaMapping.class);
 
 	private XtceToJavaMapping() {
