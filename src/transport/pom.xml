@@ -20,7 +20,7 @@
 		<module>commons</module>
 <!--		<module>tele</module> -->
 		<module>protocols</module>
-		<module>codec</module>
+<!--		<module>codec</module> -->
 		<module>space-system-model</module>
 		<module>payload-codec</module>
 		<module>xtce</module>
