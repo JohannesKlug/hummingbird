@@ -39,7 +39,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	 * parameter will convert the string based on its type and compare itself against the resulting value. If the string
 	 * is invalid then this will always count as a failed match.
 	 */
-	protected List<Object> restrictions;
+	private List<Object> restrictions;
 
 	/** List of Parameters belonging to this Group */
 	private final Map<String, Parameter<?>> parameters = new LinkedHashMap<String, Parameter<?>>();

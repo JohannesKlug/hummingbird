@@ -5,17 +5,17 @@ import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
 
 public class UnsupportedParameterEncodingException extends Exception {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 5931397913867898970L;
-	
-	Encoding encoding;
+
+	private Encoding encoding;
 
 	public UnsupportedParameterEncodingException(final String msg) {
 		super(msg);
 	}
-	
-	public UnsupportedParameterEncodingException(final String msg, Encoding encoding) {
+
+	public UnsupportedParameterEncodingException(final String msg, final Encoding encoding) {
 		super(msg + " [ENCODING = " + encoding + "]");
 	}
 
@@ -27,7 +27,7 @@ public class UnsupportedParameterEncodingException extends Exception {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
+
+
 
 }
