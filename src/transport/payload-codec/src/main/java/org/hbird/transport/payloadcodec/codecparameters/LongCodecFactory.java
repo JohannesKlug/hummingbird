@@ -8,6 +8,10 @@ import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
 
 public class LongCodecFactory {
+
+	private LongCodecFactory() {
+		// Utility class
+	}
 	/**
 	 * TODO update this doc
 	 */
@@ -21,7 +25,7 @@ public class LongCodecFactory {
 			case onesComplement:
 				throw new UnsupportedParameterEncodingException("File a bug report :D");
 			case twosComplement:
-				if (sizeInBits > 64) {
+				if (sizeInBits > Long.SIZE) {
 					throw new UnexpectedParameterTypeException(
 							"Size of this parameter is > 32 which is too big to be a signed long. Size = " + sizeInBits);
 				}
@@ -29,7 +33,7 @@ public class LongCodecFactory {
 					return new TwosComplementLongCodecParameter(parameter);
 				}
 			case unsigned:
-				if (sizeInBits > 64) {
+				if (sizeInBits > Long.SIZE) {
 					throw new UnexpectedParameterTypeException(
 							"Size of this parameter is > 64 which is too big to be an unsigned integer. Size = "
 									+ sizeInBits);

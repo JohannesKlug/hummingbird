@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  */
 public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 6820348312687042896L;
 	private static final Logger LOG = LoggerFactory.getLogger(UnsignedIntegerCodecParameter.class);
@@ -96,13 +96,13 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 	// }
 
 	@Override
-	public void decode(final byte[] inBytes, int offset) {
+	public void decode(final byte[] inBytes, final int offset) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void decode(final BitSet inBitset, int offset) {
+	public void decode(final BitSet inBitset, final int offset) {
 
 		BitSet actualParameter = inBitset.get(offset, offset + getSizeInBits());
 
@@ -111,17 +111,21 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 		}
 
 		final byte[] byteArray = BitSetUtility.toByteArray(actualParameter, getSizeInBits());
-		LOG.debug("Byte array = " + BytesUtility.decimalDump(byteArray));
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Byte array = " + BytesUtility.decimalDump(byteArray));
+		}
 
 		final int output = BytesUtility.combine(byteArray, getSizeInBits(), false).intValue();
-		LOG.debug("Testing combine.  Output(bin) = " + Long.toBinaryString(output));
-		LOG.debug("Testing combine.  Output(dec) = " + output);
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Testing combine.  Output(bin) = " + Long.toBinaryString(output));
+			LOG.debug("Testing combine.  Output(dec) = " + output);
+		}
 
 		this.setValue(output);
 	}
 
 	@Override
-	public BitSet encodeToBitSet(BitSet out, int offset) {
+	public BitSet encodeToBitSet(final BitSet out, final int offset) {
 		final long unsignedInt = getValue();
 
 		// checking whether the value fits into the bit string of length - 1
@@ -136,14 +140,14 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 		// setting up the number in reverse order
 		int mask = 1;
 
-		offset += getSizeInBits() - 1;
+		int encodingOffset = offset + getSizeInBits() - 1;
 
 		for (int i = 0; i < getSizeInBits(); i++, mask <<= 1) {
 			if ((mask & absValue) > 0) {
-				out.set(offset - i);
+				out.set(encodingOffset - i);
 			}
 		}
-		
+
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Calculated encoded Bitset from value " + getValue() + " was: " + BitSetUtility.binDump(out));
 		}
@@ -152,7 +156,7 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 	}
 
 	@Override
-	public Byte[] encodeToByteArray(Byte[] targetBytes, int offset) {
+	public Byte[] encodeToByteArray(final Byte[] targetBytes, final int offset) {
 		throw new UnsupportedOperationException();
 	}
 }

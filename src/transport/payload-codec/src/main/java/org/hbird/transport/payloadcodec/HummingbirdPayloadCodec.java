@@ -61,7 +61,6 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 					if(count != 0) {
 						offset += previousSize;
 					}
-					System.out.println(p.getName() + " : " + p.getValue());
 					((CodecParameter<?>)p).decode(payload, offset);
 					previousSize = p.getSizeInBits();
 					count++;
@@ -144,25 +143,7 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 			count++;
 		}
 
-//		HummingbirdPayloadCodec.encode(decoratedGroup, encoded);
 		return encoded;
 	}
-
-//	private static void encode(final ParameterGroup group, final BitSet encoded) {
-//		int count = 0;
-//		int offset = 0;
-//		int previousSize = 0;
-//		for(Parameter<?> p : group.getAllParameters().values()) {
-//			LOG.debug("Encoding parameter " + p.getName());
-//			if(count != 0) {
-//				offset += previousSize;
-//			}
-//
-//			new Thread(new EncodeRunnable((CodecParameter<?>)p, offset, encoded)).start();
-//			previousSize = p.getSizeInBits();
-//			count++;
-//		}
-//	}
-
 
 }

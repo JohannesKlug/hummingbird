@@ -16,7 +16,6 @@ import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.xml.ValidationException;
 import org.exolab.castor.xml.XMLContext;
 import org.hbird.transport.generatedcode.xtce.BaseContainer;
-import org.hbird.transport.generatedcode.xtce.BaseDataType;
 import org.hbird.transport.generatedcode.xtce.BaseDataTypeChoice;
 import org.hbird.transport.generatedcode.xtce.Comparison;
 import org.hbird.transport.generatedcode.xtce.ComparisonList;
@@ -28,7 +27,6 @@ import org.hbird.transport.generatedcode.xtce.ParameterSetTypeItem;
 import org.hbird.transport.generatedcode.xtce.ParameterTypeSetTypeItem;
 import org.hbird.transport.generatedcode.xtce.SequenceContainer;
 import org.hbird.transport.generatedcode.xtce.SpaceSystem;
-import org.hbird.transport.generatedcode.xtce.types.DataEncodingTypeBitOrderType;
 import org.hbird.transport.generatedcode.xtce.types.FloatDataEncodingTypeEncodingType;
 import org.hbird.transport.generatedcode.xtce.types.IntegerDataEncodingTypeEncodingType;
 import org.hbird.transport.spacesystemmodel.HummingbirdParameterGroup;
@@ -68,9 +66,9 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	private final Map<String, Parameter<Integer>> integerParameters = new LinkedHashMap<String, Parameter<Integer>>();
 	private final Map<String, Parameter<Long>> longParameters = new LinkedHashMap<String, Parameter<Long>>();
 	// TODO Finish unsupported parameter types
-	// private final List<Parameter<BigDecimal>> bigDecimalParameters = null;
-	// private final List<Parameter<Float>> floatParameters = null;
-	// private final List<Parameter<Double>> doubleParameters = null;
+	 private final Map<String, Parameter<BigDecimal>> bigDecimalParameters = new LinkedHashMap<String, Parameter<BigDecimal>>();
+	 private final Map<String, Parameter<Float>> floatParameters = new LinkedHashMap<String, Parameter<Float>>();
+	 private final Map<String, Parameter<Double>> doubleParameters = new LinkedHashMap<String, Parameter<Double>>();
 	// private final List<Parameter<String>> stringParameters = null;
 	// private final List<Parameter<Byte[]>> rawParameters = null;
 
@@ -195,7 +193,6 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 						LOG.debug("Adding Integer parameter " + intParameter.getName());
 					}
 					integerParameters.put(intParameter.getName(), intParameter);
-//					parameters.put(intParameter.getName(), intParameter);
 				}
 				else {
 					Parameter<Long> longParameter = new HummingbirdParameter<Long>(
@@ -208,7 +205,6 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 						LOG.debug("Adding Long parameter " + longParameter.getName());
 					}
 					longParameters.put(longParameter.getName(), longParameter);
-//					parameters.put(longParameter.getName(), longParameter);
 				}
 			}
 
@@ -223,7 +219,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 								xtceParameter.getParameter().getLongDescription(),
 								Integer.parseInt(type.getSizeInBits().value()),
 								getFloatEncoding(type));
-//						parameters.put(floatParameter.getName(), floatParameter);
+						floatParameters.put(floatParameter.getName(), floatParameter);
 						break;
 					case VALUE_64:
 						Parameter<Double> doubleParameter = new HummingbirdParameter<Double>(
@@ -232,7 +228,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 								xtceParameter.getParameter().getLongDescription(),
 								Integer.parseInt(type.getSizeInBits().value()),
 								getFloatEncoding(type));
-//						parameters.put(doubleParameter.getName(), doubleParameter);
+						doubleParameters.put(doubleParameter.getName(), doubleParameter);
 						break;
 					case VALUE_128:
 						Parameter<BigDecimal> bigDecimalParameter = new HummingbirdParameter<BigDecimal>(
@@ -241,7 +237,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 								xtceParameter.getParameter().getLongDescription(),
 								Integer.parseInt(type.getSizeInBits().value()),
 								getFloatEncoding(type));
-//						parameters.put(bigDecimalParameter.getName(), bigDecimalParameter);
+						bigDecimalParameters.put(bigDecimalParameter.getName(), bigDecimalParameter);
 						break;
 					default:
 						throw new InvalidXtceFileException("Invalid bit size for float type " + type.getName());
@@ -494,16 +490,21 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Parameter<Integer> getIntParameter(final String name) {
-		// TODO Auto-generated method stub
-		// return null;
-		throw new UnsupportedOperationException();
+	public Parameter<Integer> getIntParameter(final String name) throws UnknownParameterGroupException {
+		Parameter<Integer> p = integerParameters.get(name);
+		if(p == null) {
+			throw new UnknownParameterGroupException(name);
+		}
+		return p;
 	}
 
 	@Override
-	public Parameter<Long> getLongParameter(final String name) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+	public Parameter<Long> getLongParameter(final String name) throws UnknownParameterGroupException {
+		Parameter<Long> p = longParameters.get(name);
+		if(p == null) {
+			throw new UnknownParameterGroupException(name);
+		}
+		return p;
 	}
 
 	@Override

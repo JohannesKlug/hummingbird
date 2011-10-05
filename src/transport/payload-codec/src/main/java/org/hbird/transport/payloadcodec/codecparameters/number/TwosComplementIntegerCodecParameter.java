@@ -22,16 +22,16 @@ public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer>
 		super(hostParameter);
 	}
 
-	
+
 	@Override
-	public void decode(byte[] inBytes, int offset) {
+	public void decode(final byte[] inBytes, final int offset) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	
+
+
 	@Override
-	public void decode(final BitSet inBitset, int offset) {
+	public void decode(final BitSet inBitset, final int offset) {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Extracting " + getSizeInBits() + " bit int value from " + BitSetUtility.binDump(inBitset));
 		}
@@ -39,13 +39,13 @@ public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer>
 		BitSet actualParameter = inBitset.get(0, getSizeInBits());
 
 		final byte[] byteArray = BitSetUtility.toByteArray(actualParameter, getSizeInBits());
-		final Integer output = new Integer(BytesUtility.combine(byteArray, getSizeInBits(), true).intValue());
+		final Integer output = Integer.valueOf(BytesUtility.combine(byteArray, getSizeInBits(), true).intValue());
 
 		this.setValue(output);
 	}
 
 	@Override
-	public Byte[] encodeToByteArray(Byte[] targetBytes, int offset) {
+	public Byte[] encodeToByteArray(final Byte[] targetBytes, final int offset) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -72,7 +72,7 @@ public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer>
 		// setting up the number in reverse order
 		int mask = 1;
 		offset += getSizeInBits() - 1;
-		
+
 		for (int i = 0; i < getSizeInBits(); i++, mask <<= 1) {
 			if ((mask & absValue) > 0) {
 				result.set(offset - i);

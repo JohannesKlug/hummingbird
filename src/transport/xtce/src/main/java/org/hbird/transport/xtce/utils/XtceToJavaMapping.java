@@ -7,8 +7,11 @@ import org.slf4j.LoggerFactory;
 public class XtceToJavaMapping {
 	private static final Logger LOG = LoggerFactory.getLogger(XtceToJavaMapping.class);
 
+	private XtceToJavaMapping() {
+		// Utility class
+	}
+
 	public final static boolean doesIntRequireJavaLong(final IntegerParameterType type) {
-		
 		boolean longRequired = false;
 		// If signed
 		if (type.getSigned()) {

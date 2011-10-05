@@ -5,23 +5,27 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Various byte utility methods used across the Hummingbird transport layer.
- * 
+ *
  * @author Johannes Klug (John Clever, lol)
  * @author Mark Doyle
- * 
+ *
  */
 public abstract class BytesUtility {
 
 	private static final Logger LOG = LoggerFactory.getLogger(BytesUtility.class);
 
+	private BytesUtility() {
+		// Utility class
+	}
+
 	/**
 	 * Here be magical byte work. Please don't mess it up :(
-	 * 
+	 *
 	 * <p>
-	 * 
+	 *
 	 * Combines a byte array representing a signed or unsigned number of size sizeInBits into a long value. This is
 	 * returned as a {@link Number} from which users can grab any primitive type value via the {@link Number} methods.
-	 * 
+	 *
 	 * @param b
 	 *            byte array that represents a number
 	 * @param sizeIntBits
@@ -30,7 +34,7 @@ public abstract class BytesUtility {
 	 *            whether the number the byte array represetns is signed or not.
 	 * @return Number value of the byte array combined into a long primitive.
 	 */
-	public static Number combine(byte[] b, int sizeIntBits, boolean signed) {
+	public static Number combine(final byte[] b, final int sizeIntBits, final boolean signed) {
 		// Defensive! We are combining into a primitive long so we are limited to 64 bits (8 bytes)
 		if (b.length > 8) {
 			throw new IllegalArgumentException("Cannot fit this Byte array into a long.  Max size is 8 elements.");
@@ -113,11 +117,11 @@ public abstract class BytesUtility {
 
 	/**
 	 * Dumps the byte array into a string as a series of 8bit decimal numbers
-	 * 
+	 *
 	 * @param bytes
 	 * @return
 	 */
-	public static String decimalDump(byte[] bytes) {
+	public static String decimalDump(final byte[] bytes) {
 		StringBuffer buffer = new StringBuffer();
 		for (byte b : bytes) {
 			buffer.append(Byte.toString(b));

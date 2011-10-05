@@ -10,9 +10,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The bitset utilities class helps the encoding / decoding of simple java types such as integer and float to a bitset.
- * 
+ *
  * TODO Make the class set the final bit + 1 in the set automatically.
- * 
+ *
  * @author Gert Villemos
  * @author Mark Doyle
  * @author Johannes Klug
@@ -46,22 +46,22 @@ public final class BitSetUtility {
 
 	/**
 	 * Encodes a bitset in binary format, i.e. a string in the format '01100101...'.
-	 * 
+	 *
 	 * The encoding always follows sequentially from the least significant bit to the most significant bit, i.e. the
 	 * value 1 encoded in a 8 bit field is '1000000' not '0000001' as people are used too.
-	 * 
+	 *
 	 * To simplify the reading, a space is inserted for each byte and only 8 bytes are displayed per line. The string is
 	 * thus formatted as; '00000000 00000000 10000000 10010111 11111111 00011101 11000100 11100000' '01100100 10111100
 	 * 10000000 10010111 11000001 10001101 00101100 10000011'
-	 * 
+	 *
 	 * Notice that the complete bitset is displayed. A bit set is always an equal number of words, i.e. encoding on bit
 	 * at the start of a bitset will create a 64 bit long BitSet with 1 bit set. This function will print '10000000
 	 * 00000000 00000000 00000000 00000000 00000000 00000000 00000000'
-	 * 
+	 *
 	 * @param BitSet
 	 *            The bitset to be converted to a string.
 	 * @return A string representing the bitset in binary format.
-	 * 
+	 *
 	 */
 	public static String binDump(final BitSet data) {
 		String dump = "";
@@ -105,7 +105,7 @@ public final class BitSetUtility {
 	/**
 	 * Creates a {@link BitSet} from a String. The String must represent bit states using a '0' or a '1' (ASCII values
 	 * 48 or 49). Invalid characters in the String will cause a BitSetOperationException to be thrown.
-	 * 
+	 *
 	 * @param str
 	 *            {@link String} encoding the required BitSet using 1's and 0's
 	 * @param isBigEndian
@@ -174,16 +174,16 @@ public final class BitSetUtility {
 
 	/**
 	 * Converts the passed BitSet into a binary string.
-	 * 
+	 *
 	 * A flag is used to determine whether you wish to convert the logical bitSet or the entire BitSet. If
 	 * useLogicalSize is set to false it will use the complete BitSet i.e. the size and <b><i>not</i></b> the length.
 	 * Note: BitSets always finish on 64 bit a boundary.
-	 * 
+	 *
 	 * If useLogicalSize is set to true it will use the logical BitSet, that is, only the relevant set bits
-	 * 
+	 *
 	 * Whichever one you choose the returned value will equate to the same, however, if you set useLogicalSize to false
 	 * you will get the complete 0 padded BitSet.
-	 * 
+	 *
 	 * @param data
 	 * @param useLogicalSize
 	 * @return
@@ -219,7 +219,7 @@ public final class BitSetUtility {
 
 	/**
 	 * FIXME Javadoc
-	 * 
+	 *
 	 * @param data
 	 * @param length
 	 * @return
@@ -272,7 +272,8 @@ public final class BitSetUtility {
 			LOG.debug("Padding " + zeroesToAdd + " zero(s) to the back of the binary string " + string);
 		}
 
-		final StringBuilder newBinaryString = new StringBuilder(string.length() + zeroesToAdd);
+		int capacity = string.length() + zeroesToAdd;
+		final StringBuilder newBinaryString = new StringBuilder(capacity);
 		newBinaryString.append(string);
 
 		for (int i = 0; i < zeroesToAdd; i++) {
@@ -284,7 +285,7 @@ public final class BitSetUtility {
 
 	/**
 	 * TODO Can we remove the magic numbers?
-	 * 
+	 *
 	 * @param bits
 	 * @return
 	 */
@@ -303,7 +304,7 @@ public final class BitSetUtility {
 
 	/**
 	 * TODO Can we remove the magic numbers?
-	 * 
+	 *
 	 * @param bits
 	 * @return
 	 */
@@ -326,7 +327,7 @@ public final class BitSetUtility {
 
 	/**
 	 * FIXME javadoc
-	 * 
+	 *
 	 * @param bitset
 	 * @param sizeInBits
 	 * @return
@@ -355,7 +356,7 @@ public final class BitSetUtility {
 
 	/**
 	 * Takes a byte array and returns a BitSet of the same value.
-	 * 
+	 *
 	 * @param bytes
 	 * @return
 	 */

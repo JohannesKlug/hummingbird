@@ -32,6 +32,8 @@ public class ParameterNotInGroupException extends Exception {
 		// TODO Auto-generated constructor stub
 	}
 
-
+	public Parameter<?> getParameter() {
+		return p;
+	}
 
 }

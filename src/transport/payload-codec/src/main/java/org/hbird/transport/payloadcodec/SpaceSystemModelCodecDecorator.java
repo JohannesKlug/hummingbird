@@ -11,7 +11,7 @@ import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupExcept
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
-public class SpaceSystemModelCodecDecorator {
+public final class SpaceSystemModelCodecDecorator {
 
 	private SpaceSystemModelCodecDecorator() {
 		// No need for public constructor.

@@ -3,14 +3,14 @@ package org.hbird.transport.spacesystemmodel.parameters;
 
 /**
  * The Hummingbird implementation of the {@link Parameter}.
- * 
+ *
  * This is a generic class that is able to represent a parameter of any primitive or class.
- * 
+ *
  * @author Mark Doyle
  */
 public class HummingbirdParameter<T> implements Parameter<T> {
 	private static final long serialVersionUID = 4723421286629148964L;
-	
+
 	private final String name;
 	private final String shortDescription;
 	private final String longDescription;
@@ -19,7 +19,7 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	private T value;
 
 	/**
-	 * 
+	 *
 	 * @param name
 	 * @param shortDescription
 	 * @param longDescription
@@ -71,12 +71,8 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 		if (value == null) {
 			return false;
 		}
-		if (value.equals(obj)) {
-			return true;
-		}
-		else {
-			return false;
-		}
+
+		return value.equals(obj);
 	}
 
 	@Override
