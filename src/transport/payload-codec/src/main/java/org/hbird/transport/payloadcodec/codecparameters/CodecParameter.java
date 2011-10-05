@@ -15,8 +15,6 @@ import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 public abstract class CodecParameter<T> implements Parameter<T> {
 	private static final long serialVersionUID = 6597747873295079865L;
 
-	private final String debug = "I'm a codec aware parameter!";
-
 	protected Parameter<T> parameter;
 
 	public CodecParameter(final Parameter<T> hostParameter) {
@@ -83,13 +81,10 @@ public abstract class CodecParameter<T> implements Parameter<T> {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CodecParameter [debug=");
-		builder.append(debug);
-		builder.append(", parameter=");
+		builder.append("CodecParameter [parameter=");
 		builder.append(parameter);
 		builder.append("]");
 		return builder.toString();
 	}
-
 
 }
