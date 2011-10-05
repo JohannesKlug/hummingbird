@@ -33,7 +33,7 @@ public class SpaceSystemModelCodecDecorator {
 			newModel.replaceParameterInModel(parameter);
 		}
 
-		// TODO BigDecimal, Float, Double, String, Binary
+		// FIXME BigDecimal, Float, Double, String, Binary
 
 
 
@@ -44,7 +44,6 @@ public class SpaceSystemModelCodecDecorator {
 			for (Parameter<Integer> parameter : pg.getIntegerParameters()) {
 				parameter = IntegerCodecFactory.decorateParameterWithCodec(parameter);
 				pg.replaceParameterInGroup(parameter);
-				System.out.println();
 			}
 
 			// Decorate all long parameters...
