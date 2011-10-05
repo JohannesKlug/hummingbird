@@ -7,7 +7,7 @@ import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingE
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
 
-public class LongCodecFactory {
+public final class LongCodecFactory {
 
 	private LongCodecFactory() {
 		// Utility class

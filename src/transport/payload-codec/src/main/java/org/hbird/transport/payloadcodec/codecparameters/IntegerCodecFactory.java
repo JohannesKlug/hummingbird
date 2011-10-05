@@ -9,7 +9,7 @@ import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeExcep
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
 
-public class IntegerCodecFactory {
+public final class IntegerCodecFactory {
 
 	private IntegerCodecFactory() {
 		// Utility class
