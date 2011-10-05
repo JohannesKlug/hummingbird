@@ -1,10 +1,8 @@
 package org.hbird.transport.payloadcodec;
 
 import java.util.BitSet;
-import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
-import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
@@ -22,9 +20,11 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 	private static final Logger LOG = LoggerFactory.getLogger(HummingbirdPayloadCodec.class);
 
 	private SpaceSystemModel spaceSystemModel = null;
+	private SpaceSystemModel codecAwareSpaceSystemModel = null;
 
 	public HummingbirdPayloadCodec(final SpaceSystemModel spaceSystemModel) throws UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException, UnknownParameterGroupException, ParameterNotInGroupException {
-		this.spaceSystemModel = SpaceSystemModelCodecDecorator.decorateSpaceSystemModel(spaceSystemModel);
+		this.spaceSystemModel = spaceSystemModel;
+		this.codecAwareSpaceSystemModel = SpaceSystemModelCodecDecorator.decorateSpaceSystemModel(spaceSystemModel);
 	}
 
 	@Override
@@ -34,32 +34,29 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 			int offset = 0;
 			int previousSize = 0;
 			int count = 0;
-			for(ParameterGroup pg : spaceSystemModel.getAllParameterGroups()) {
+			for(ParameterGroup pg : codecAwareSpaceSystemModel.getAllParameterGroups()) {
 				for(Parameter<?> p : pg.getAllParameters().values()) {
 					if(count != 0) {
 						offset += previousSize;
 					}
-					System.out.println(p.getName() + " : " + p.getValue());
 					((CodecParameter<?>)p).decode(payload, offset);
 					previousSize = p.getSizeInBits();
 					count++;
 				}
 			}
 		}
-		else {
-			// decode only the relevant parametergroups
-		}
+		// FIXME else only decode only the relevant parametergroups. That is, those restricted by a parameter e.g. APID
 		return null;
 	}
 
 	@Override
-	public ParameterGroup decode(final BitSet payload, final Object payloadLayoutId) {
+	public ParameterGroup decode(final BitSet payload, final Object payloadLayoutId) throws UnknownParameterGroupException {
 		if(payloadLayoutId == null) {
 			// no restrictions, decode all everything!
 			int offset = 0;
 			int previousSize = 0;
 			int count = 0;
-			for(ParameterGroup pg : spaceSystemModel.getAllParameterGroups()) {
+			for(ParameterGroup pg : codecAwareSpaceSystemModel.getAllParameterGroups()) {
 				for(Parameter<?> p : pg.getAllParameters().values()) {
 					if(count != 0) {
 						offset += previousSize;
@@ -69,33 +66,48 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 					previousSize = p.getSizeInBits();
 					count++;
 				}
-				return pg; //FIXME dirty hack. Warum dreckig?
+				return getUndecoratedVersion(pg);
 			}
 		}
-		else {
-			// decode only the relevant parametergroups
-		}
+		// FIXME else only decode only the relevant parametergroups. That is, those restricted by a parameter e.g. APID
 		return null;
 	}
-	
+
+	private ParameterGroup getUndecoratedVersion(final ParameterGroup pg) throws UnknownParameterGroupException {
+		// get the name of the pg
+		String name = pg.getName();
+		// find it in the undecorated version
+		ParameterGroup undecoratedGroup = null;
+		for(ParameterGroup group : spaceSystemModel.getAllParameterGroups()) {
+			if(StringUtils.equals(group.getName(), name)) {
+				// set the value of the parameters in the undecorated version
+				undecoratedGroup = group.copyAllParameterValues(pg);
+			}
+		}
+		// return the undecorated version
+		return undecoratedGroup;
+	}
+
+
+
 	@Override
-	public byte[] encodeToByteArray(ParameterGroup parameterGroup) {
+	public byte[] encodeToByteArray(final ParameterGroup parameterGroup) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public BitSet encodeToBitSet(ParameterGroup parameterGroup) {
+	public BitSet encodeToBitSet(final ParameterGroup parameterGroup) {
 		BitSet encoded = new BitSet();
 //		ParameterGroupReport groupDetailReport = parameterGroup.getParameterReport();
 
 		String undecoratedGroupName = parameterGroup.getName();
 		ParameterGroup decoratedGroup = null;
-		for(ParameterGroup pg : spaceSystemModel.getAllParameterGroups()) {
+		for(ParameterGroup pg : codecAwareSpaceSystemModel.getAllParameterGroups()) {
 			if(StringUtils.equals(pg.getName(), undecoratedGroupName)) {
 				decoratedGroup = pg;
 				// Set parameter values in decorated group to the same as those in the parameterGroup
-				
+
 				// Integers First
 				for(Parameter<Integer> undecoratedParameter : parameterGroup.getIntegerParameters()) {
 					for(Parameter<Integer> decoratedParameter : pg.getIntegerParameters()) {
@@ -104,7 +116,7 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 						}
 					}
 				}
-				
+
 				// Longs next
 				for(Parameter<Long> undecoratedParameter : parameterGroup.getLongParameters()) {
 					for(Parameter<Long> decoratedParameter : pg.getLongParameters()) {
@@ -113,12 +125,12 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 						}
 					}
 				}
-				
+
 				// FIXME Support for other types
 				break;
 			}
 		}
-		
+
 		int count = 0;
 		int offset = 0;
 		int previousSize = 0;
@@ -131,8 +143,26 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 			previousSize = p.getSizeInBits();
 			count++;
 		}
-		
+
+//		HummingbirdPayloadCodec.encode(decoratedGroup, encoded);
 		return encoded;
 	}
+
+//	private static void encode(final ParameterGroup group, final BitSet encoded) {
+//		int count = 0;
+//		int offset = 0;
+//		int previousSize = 0;
+//		for(Parameter<?> p : group.getAllParameters().values()) {
+//			LOG.debug("Encoding parameter " + p.getName());
+//			if(count != 0) {
+//				offset += previousSize;
+//			}
+//
+//			new Thread(new EncodeRunnable((CodecParameter<?>)p, offset, encoded)).start();
+//			previousSize = p.getSizeInBits();
+//			count++;
+//		}
+//	}
+
 
 }

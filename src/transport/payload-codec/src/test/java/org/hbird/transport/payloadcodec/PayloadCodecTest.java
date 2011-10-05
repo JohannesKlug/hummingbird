@@ -1,14 +1,15 @@
 package org.hbird.transport.payloadcodec;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.BitSet;
-import java.util.Date;
+import java.util.Collection;
 
-import org.apache.commons.lang.StringUtils;
 import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
+import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
@@ -16,6 +17,8 @@ import org.hbird.transport.spacesystemmodel.ParameterGroup;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
+import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
+import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -23,7 +26,7 @@ public class PayloadCodecTest {
 
 	private static PayloadCodec codec;
 	private static SpaceSystemModel ssm;
-	
+
 	private static long testsBurned = 0;
 
 	private static final int SCID_VALUE_1 = 1;
@@ -37,17 +40,31 @@ public class PayloadCodecTest {
 	private static final long LASER_TEMP_VALUE_94528016102 = 94528016102L;
 	private static final String LASER_TEMP_94528016102_AS_STRING = "0001011000000010010011110000111011100110";
 
-	// formatter:off
-	private static final int[] TEST_UINT_31_VALUES = { 0, 1, Integer.MAX_VALUE, (int) Math.pow(2, 29) + (int) Math.pow(2, 1), (int) Math.pow(2, 25),
-			(int) Math.pow(2, 18), (int) Math.pow(2, 10), (int) Math.pow(2, 8) };
+	// @formatter:off
+	private static final int[] TEST_UINT_31_VALUES = { 0,
+													   1,
+													   Integer.MAX_VALUE,
+													   (int) Math.pow(2, 29) + (int) Math.pow(2, 1),
+													   (int) Math.pow(2, 25),
+													   (int) Math.pow(2, 18),
+													   (int) Math.pow(2, 10),
+													   (int) Math.pow(2, 8)};
 
-	private static final int[] TEST_UINT_12_VALUES = { 0, 1, (int) Math.pow(2, 12) - 1, (int) Math.pow(2, 11) - 1 + (int) Math.pow(2, 1), (int) Math.pow(2, 3),
-			(int) Math.pow(2, 10) };
+	private static final int[] TEST_UINT_12_VALUES = { 0,
+													   1,
+													   (int) Math.pow(2, 12) - 1,
+													   (int) Math.pow(2, 11) - 1 + (int) Math.pow(2, 1),
+													   (int) Math.pow(2, 3),
+													   (int) Math.pow(2, 10)};
 
-	private static final long[] TEST_UINT_40_VALUES = { 0, 1, (long) Math.pow(2, 40) - 1, (long) Math.pow(2, 38) - 1 + (int) Math.pow(2, 1),
-			(long) Math.pow(2, 18), (long) Math.pow(2, 10) };
+	private static final long[] TEST_UINT_40_VALUES = { 0,
+														1,
+														(long) Math.pow(2, 40) - 1,
+														(long) Math.pow(2, 38) - 1 + (int) Math.pow(2, 1),
+														(long) Math.pow(2, 18),
+														(long) Math.pow(2, 10)};
 
-	// formatter:on
+	// @formatter:on
 
 	@BeforeClass
 	public static void setUp() throws BitSetOperationException, UnsupportedParameterEncodingException, UnknownParameterEncodingException,
@@ -57,12 +74,24 @@ public class PayloadCodecTest {
 	}
 
 	@Test
-	public void testParameterGroupFromBitSet() throws Exception {
+	public void testDecodeBitSet() throws Exception {
 		String bitSetString = SCID_VALUE_1_AS_STRING + FUEL_VALUE_3814_AS_STRING + LASER_TEMP_94528016102_AS_STRING;
 		BitSet rawIn = BitSetUtility.stringToBitSet(bitSetString, true, true);
 
 		ParameterGroup actual = codec.decode(rawIn, null);
 
+		// Check the return is a plain parameter, i.e., not a decorated CodecParameter but just the HummingbirdParameter
+		// used as an exchange type.
+		Collection<Parameter<?>> decodedParameters = actual.getAllParameters().values();
+		for (Parameter<?> p : decodedParameters) {
+			assertFalse("Return Parameter " + p.getName() + " should not be an instance of CodecParameter<?>, i.e., not decorated",
+					(p instanceof CodecParameter<?>));
+			assertTrue("Return Parameter " + p.getName()
+					+ " should be an instance of HummingbirdParameter<?> (for this test, i.e., using Hummingbird default implementations of Parameter<?>",
+					(p instanceof HummingbirdParameter<?>));
+		}
+
+		// Now check the values have been decoded.
 		Integer scid = actual.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_NAME).getValue();
 		Integer fuel = actual.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_NAME).getValue();
 		Long laserTemp = actual.getLongParameter(MockSpaceSystemModel.LASER_TEMP_PARAMETER_NAME).getValue();
@@ -70,18 +99,19 @@ public class PayloadCodecTest {
 		assertEquals("SCID should have been decoded and set to " + SCID_VALUE_1, SCID_VALUE_1, scid.intValue());
 		assertEquals("Fuel should have been decoded and set to " + FUEL_VALUE_3814, FUEL_VALUE_3814, fuel.intValue());
 		assertEquals("laser should have been decoded and set to " + LASER_TEMP_VALUE_94528016102, LASER_TEMP_VALUE_94528016102, laserTemp.longValue());
+
 	}
 
 	@Test
 	public void feelTheBurn() throws BitSetOperationException, UnknownParameterGroupException {
 		long start = System.currentTimeMillis();
-		int burnLevel = 10000;
+		int burnLevel = 500;
 		for (int i = 0; i < burnLevel; i++) {
 			testEncode();
 		}
 		long end = System.currentTimeMillis();
 		System.out.println("Completed " + testsBurned + " tests in " + (end - start) + " ms");
-		System.out.println(testsBurned/((end-start)/1000) + " payloads encoded per second");
+		System.out.println(testsBurned / ((end - start) / 1000) + " payloads encoded per second");
 	}
 
 	@Test
@@ -109,13 +139,13 @@ public class PayloadCodecTest {
 		}
 	}
 
-	private String padLeadingZeros(int lengthInBits, String binaryStringIn) {
+	private static String padLeadingZeros(final int lengthInBits, final String binaryStringIn) {
 		String binaryString = String.format("%" + lengthInBits + "s", binaryStringIn);
 		binaryString = binaryString.replace(' ', '0');
 		return binaryString;
 	}
 
-	private void encodeAndAssert(ParameterGroup testGroup, BitSet expected) {
+	private static void encodeAndAssert(final ParameterGroup testGroup, final BitSet expected) {
 		BitSet actual = codec.encodeToBitSet(testGroup);
 		assertEquals("Encoded BitSet should match " + expected, expected, actual);
 	}
@@ -134,7 +164,8 @@ public class PayloadCodecTest {
 		encodeAndAssert(testGroup, expected);
 	}
 
-	private ParameterGroup setTestGroupParameterValues(int scIdValue, int fuelValue, long laserValue) throws UnknownParameterGroupException {
+	private static ParameterGroup setTestGroupParameterValues(final int scIdValue, final int fuelValue, final long laserValue)
+			throws UnknownParameterGroupException {
 		ParameterGroup testGroup = ssm.getParameterGroup(MockSpaceSystemModel.TEST_GROUP_NAME);
 		testGroup.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_NAME).setValue(scIdValue);
 		testGroup.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_NAME).setValue(fuelValue);
