@@ -7,8 +7,8 @@ import org.junit.Test;
 
 public class XtceToJavaMappingTest {
 
-	private static final int MAX_BITS_FOR_JAVA_SIGNED_INTEGER = 31;
-	private static final int MAX_BITS_FOR_JAVA_SIGNED_UINTEGER = 32;
+	private static final int MAX_BITS_FOR_JAVA_SIGNED_INTEGER = 32;
+	private static final int MAX_BITS_FOR_JAVA_SIGNED_UINTEGER = 31;
 
 	@Test
 	public void testDoesIntRequireJavaLong() {
