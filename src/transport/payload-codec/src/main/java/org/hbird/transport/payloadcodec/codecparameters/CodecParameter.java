@@ -4,6 +4,7 @@ import java.util.BitSet;
 
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
+
 /**
  * Parameter Decorator.
  *

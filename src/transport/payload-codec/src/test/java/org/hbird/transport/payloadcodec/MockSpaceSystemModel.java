@@ -16,6 +16,7 @@ import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
 
 public class MockSpaceSystemModel implements SpaceSystemModel {
+
 	private static final long serialVersionUID = -345641886444350845L;
 
 	Map<String, ParameterGroup> groups = new HashMap<String, ParameterGroup>();
@@ -24,6 +25,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	Map<String, Parameter<Integer>> intParams = new LinkedHashMap<String, Parameter<Integer>>();
 	Map<String, Parameter<Long>> longParams = new LinkedHashMap<String, Parameter<Long>>();
 
+	public static final String TEST_GROUP_NAME = "Test group";
 	public static final String FUEL_PARAMETER_NAME = "Fuel";
 	public static final String SCID_PARAMETER_NAME = "SCID";
 	public static final String LASER_TEMP_PARAMETER_NAME = "Laser Temp";
@@ -36,7 +38,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 		Parameter<Long> laserTemp = new HummingbirdParameter<Long>(LASER_TEMP_PARAMETER_NAME, "", "", 40, Encoding.twosComplement);
 //		parameters.put(laserTemp.getName(), laserTemp);
 
-		ParameterGroup testGroup = new HummingbirdParameterGroup("Test group", "", "");
+		ParameterGroup testGroup = new HummingbirdParameterGroup(TEST_GROUP_NAME, "", "");
 		groups.put(testGroup.getName(), testGroup);
 
 		intParams.put(spacecraftId.getName(), spacecraftId);

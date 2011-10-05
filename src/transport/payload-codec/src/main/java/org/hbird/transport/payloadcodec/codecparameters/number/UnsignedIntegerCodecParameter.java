@@ -20,7 +20,6 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 	private static final long serialVersionUID = 6820348312687042896L;
 	private static final Logger LOG = LoggerFactory.getLogger(UnsignedIntegerCodecParameter.class);
 
-
 	public UnsignedIntegerCodecParameter(final Parameter<Integer> hostParameter) {
 		super(hostParameter);
 	}
@@ -63,7 +62,6 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 	// return bitSetTarget;
 	// }
 
-
 	// @Override
 	// public BitSet insertIntoBitSet(final Number number, final BitSet bitSetTarget, int offset) {
 	//
@@ -97,13 +95,11 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 	// }
 	// }
 
-
 	@Override
 	public void decode(final byte[] inBytes, int offset) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
-
 
 	@Override
 	public void decode(final BitSet inBitset, int offset) {
@@ -113,7 +109,7 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Extracting " + getSizeInBits() + " bit int value from " + BitSetUtility.binDump(actualParameter));
 		}
-		
+
 		final byte[] byteArray = BitSetUtility.toByteArray(actualParameter, getSizeInBits());
 		LOG.debug("Byte array = " + BytesUtility.decimalDump(byteArray));
 
@@ -130,11 +126,8 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 
 		// checking whether the value fits into the bit string of length - 1
 		final long absValue = Math.abs(unsignedInt);
-		if (absValue > Math.pow(2.0, getSizeInBits()) - 1
-				|| unsignedInt == Long.MIN_VALUE) {
-			throw new RuntimeException("The value of " + unsignedInt
-					+ " does not fit into a bit string of "
-					+ (getSizeInBits() - 1) + " bits.");
+		if (absValue > Math.pow(2.0, getSizeInBits()) - 1 || unsignedInt == Long.MIN_VALUE) {
+			throw new RuntimeException("The value of " + unsignedInt + " does not fit into a bit string of " + (getSizeInBits() - 1) + " bits.");
 		}
 
 		// setting all bits to zero
@@ -150,9 +143,14 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 				out.set(offset - i);
 			}
 		}
+		
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Calculated encoded Bitset from value " + getValue() + " was: " + BitSetUtility.binDump(out));
+		}
+
 		return out;
 	}
-	
+
 	@Override
 	public Byte[] encodeToByteArray(Byte[] targetBytes, int offset) {
 		throw new UnsupportedOperationException();

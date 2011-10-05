@@ -2,6 +2,7 @@ package org.hbird.transport.payloadcodec.exceptions;
 
 import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
 
+
 public class UnknownParameterEncodingException extends Exception {
 	/**
 	 * 

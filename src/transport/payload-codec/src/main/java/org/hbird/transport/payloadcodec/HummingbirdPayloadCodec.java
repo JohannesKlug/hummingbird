@@ -3,6 +3,8 @@ package org.hbird.transport.payloadcodec;
 import java.util.BitSet;
 import java.util.Collection;
 
+import org.apache.commons.lang.StringUtils;
+import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
@@ -75,17 +77,53 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 		}
 		return null;
 	}
+	
+	@Override
+	public byte[] encodeToByteArray(ParameterGroup parameterGroup) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
-	public Byte[] encodeToByteArray(final ParameterGroup parameterGroup) {
+	public BitSet encodeToBitSet(ParameterGroup parameterGroup) {
 		BitSet encoded = new BitSet();
 //		ParameterGroupReport groupDetailReport = parameterGroup.getParameterReport();
 
-		Collection<Parameter<?>> parameters = parameterGroup.getAllParameters().values();
+		String undecoratedGroupName = parameterGroup.getName();
+		ParameterGroup decoratedGroup = null;
+		for(ParameterGroup pg : spaceSystemModel.getAllParameterGroups()) {
+			if(StringUtils.equals(pg.getName(), undecoratedGroupName)) {
+				decoratedGroup = pg;
+				// Set parameter values in decorated group to the same as those in the parameterGroup
+				
+				// Integers First
+				for(Parameter<Integer> undecoratedParameter : parameterGroup.getIntegerParameters()) {
+					for(Parameter<Integer> decoratedParameter : pg.getIntegerParameters()) {
+						if(StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
+							decoratedParameter.setValue(undecoratedParameter.getValue());
+						}
+					}
+				}
+				
+				// Longs next
+				for(Parameter<Long> undecoratedParameter : parameterGroup.getLongParameters()) {
+					for(Parameter<Long> decoratedParameter : pg.getLongParameters()) {
+						if(StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
+							decoratedParameter.setValue(undecoratedParameter.getValue());
+						}
+					}
+				}
+				
+				// FIXME Support for other types
+				break;
+			}
+		}
+		
 		int count = 0;
 		int offset = 0;
 		int previousSize = 0;
-		for(Parameter<?> p : parameters) {
+		for(Parameter<?> p : decoratedGroup.getAllParameters().values()) {
+			LOG.debug("Encoding parameter " + p.getName());
 			if(count != 0) {
 				offset += previousSize;
 			}
@@ -93,7 +131,8 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 			previousSize = p.getSizeInBits();
 			count++;
 		}
-		return null;
+		
+		return encoded;
 	}
 
 }

@@ -16,10 +16,9 @@ import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
-public class PayloadCodecUnsignedOnlySpaceSystemModelTest {
+public class PayloadCodecTest {
 
 	private static PayloadCodec codec;
 	private static SpaceSystemModel ssm;
@@ -30,8 +29,8 @@ public class PayloadCodecUnsignedOnlySpaceSystemModelTest {
 	private static final int FUEL_VALUE_3814 = 3814;
 	private static final String FUEL_VALUE_3814_AS_STRING = "111011100110";
 
-	private static final long LASER_TEMP_VALUE_644283829990 = 94528016102L;
-	private static final String LASER_TEMP_644283829990_AS_STRING = "0001011000000010010011110000111011100110";
+	private static final long LASER_TEMP_VALUE_94528016102 = 94528016102L;
+	private static final String LASER_TEMP_94528016102_AS_STRING = "0001011000000010010011110000111011100110";
 
 	private static final String COMPLETE_ENCODED_PAYLOAD_AS_STRING = "000000000000000000000000000000011110111001100001011000000010010011110000111011100110";
 	private static final int COMPLETE_ENCODED_PAYLOAD_LENGTH = 84;
@@ -58,13 +57,26 @@ public class PayloadCodecUnsignedOnlySpaceSystemModelTest {
 
 		assertEquals("SCID should have been decoded and set to " + SCID_VALUE_1, SCID_VALUE_1, scid.intValue());
 		assertEquals("Fuel should have been decoded and set to " + FUEL_VALUE_3814, FUEL_VALUE_3814, fuel.intValue());
-		assertEquals("laser should have been decoded and set to " + LASER_TEMP_VALUE_644283829990, LASER_TEMP_VALUE_644283829990, laserTemp.longValue());
+		assertEquals("laser should have been decoded and set to " + LASER_TEMP_VALUE_94528016102, LASER_TEMP_VALUE_94528016102, laserTemp.longValue());
 	}
 
-	@Ignore
 	@Test
-	public void testEncodeParameterGroupBitSet() {
-
+	public void testEncodeParameterGroupBitSet() throws UnknownParameterGroupException {
+		ParameterGroup testGroup = ssm.getParameterGroup(MockSpaceSystemModel.TEST_GROUP_NAME);
+		
+		testGroup.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_NAME).setValue(SCID_VALUE_1);
+		testGroup.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_NAME).setValue(FUEL_VALUE_3814);
+		testGroup.getLongParameter(MockSpaceSystemModel.LASER_TEMP_PARAMETER_NAME).setValue(LASER_TEMP_VALUE_94528016102);
+		
+		BitSet actual = codec.encodeToBitSet(testGroup);
+		
+		System.out.println("===========================");
+		System.out.println(BitSetUtility.binDump(actual));
+		System.out.println();
+		System.out.println(BitSetUtility.binDump(completeEncodedPayloadBitset));
+		System.out.println("===========================");
+		
+		assertEquals("Encoded BitSet should match " + completeEncodedPayloadBitset, completeEncodedPayloadBitset, actual);
 	}
 
 }
