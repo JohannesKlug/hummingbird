@@ -145,7 +145,7 @@ public final class BitSetUtility {
 		final BitSet result = new BitSet(str.length());
 
 		int count = 0;
-		int crement = 1;
+		int crement = 1; // Haha, the CREMENT!
 
 		if (isBigEndian) {
 			// count = result.size() - 1;
