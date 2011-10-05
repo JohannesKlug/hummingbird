@@ -278,14 +278,14 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		else {
 			throw new ParameterNotInGroupException(parameter);
 		}
-		
+
 		if (parameters.containsKey(pname)) {
-			parameters.put(parameter.getName(), (Parameter<?>) parameter);
+			parameters.put(parameter.getName(), parameter);
 		}
 	}
 
 	@Override
-	public Parameter<Integer> getIntegerParameter(String name) throws UnknownParameterGroupException {
+	public Parameter<Integer> getIntegerParameter(final String name) throws UnknownParameterGroupException {
 		Parameter<Integer> p = integerParameters.get(name);
 		if(p == null) {
 			throw new UnknownParameterGroupException(name);
@@ -294,11 +294,26 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public Parameter<Long> getLongParameter(String name) throws UnknownParameterGroupException {
+	public Parameter<Long> getLongParameter(final String name) throws UnknownParameterGroupException {
 		Parameter<Long> p = longParameters.get(name);
 		if(p == null) {
 			throw new UnknownParameterGroupException(name);
 		}
 		return p;
+	}
+
+	@Override
+	public ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup) throws UnknownParameterGroupException {
+		// Ints
+		for(Parameter<Integer> p : getIntegerParameters()) {
+			p.setValue(sourceGroup.getIntegerParameter(p.getName()).getValue());
+		}
+		// longs
+		for(Parameter<Long> p : getLongParameters()) {
+			p.setValue(sourceGroup.getLongParameter(p.getName()).getValue());
+		}
+		// FIXME Add support for other types.
+
+		return this;
 	}
 }

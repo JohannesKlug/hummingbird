@@ -51,11 +51,11 @@ public interface ParameterGroup extends TmTcGroup, Serializable {
 	Collection<Parameter<Double>> getDoubleParameters();
 
 	Collection<Parameter<Byte[]>> getRawParameters();
-	
+
 	Parameter<Integer> getIntegerParameter(String name) throws UnknownParameterGroupException;
-	
+
 	Parameter<Long> getLongParameter(String name) throws UnknownParameterGroupException;
-	
+
 	// TODO support others.
 
 	void addIntegerParameter(Parameter<Integer> parameter);
@@ -75,5 +75,6 @@ public interface ParameterGroup extends TmTcGroup, Serializable {
 	void replaceParameterInGroup(Parameter<?> parameter) throws ParameterNotInGroupException;
 
 
+	ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup) throws UnknownParameterGroupException;
 
 }
