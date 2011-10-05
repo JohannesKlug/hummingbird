@@ -39,7 +39,6 @@ import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupExce
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter.Endianness;
 import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
 import org.hbird.transport.xtce.utils.XtceToJavaMapping;
 import org.slf4j.Logger;
@@ -191,7 +190,6 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 								xtceParameter.getParameter().getShortDescription(),
 								xtceParameter.getParameter().getLongDescription(),
 								(int) type.getSizeInBits(),
-								getEndianness(type),
 								getIntegerEncoding(type));
 					if(LOG.isDebugEnabled()) {
 						LOG.debug("Adding Integer parameter " + intParameter.getName());
@@ -205,7 +203,6 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 								xtceParameter.getParameter().getShortDescription(),
 								xtceParameter.getParameter().getLongDescription(),
 								(int) type.getSizeInBits(),
-								getEndianness(type),
 								getIntegerEncoding(type));
 					if(LOG.isDebugEnabled()) {
 						LOG.debug("Adding Long parameter " + longParameter.getName());
@@ -225,7 +222,6 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 								xtceParameter.getParameter().getShortDescription(),
 								xtceParameter.getParameter().getLongDescription(),
 								Integer.parseInt(type.getSizeInBits().value()),
-								getEndianness(type),
 								getFloatEncoding(type));
 //						parameters.put(floatParameter.getName(), floatParameter);
 						break;
@@ -235,7 +231,6 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 								xtceParameter.getParameter().getShortDescription(),
 								xtceParameter.getParameter().getLongDescription(),
 								Integer.parseInt(type.getSizeInBits().value()),
-								getEndianness(type),
 								getFloatEncoding(type));
 //						parameters.put(doubleParameter.getName(), doubleParameter);
 						break;
@@ -245,7 +240,6 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 								xtceParameter.getParameter().getShortDescription(),
 								xtceParameter.getParameter().getLongDescription(),
 								Integer.parseInt(type.getSizeInBits().value()),
-								getEndianness(type),
 								getFloatEncoding(type));
 //						parameters.put(bigDecimalParameter.getName(), bigDecimalParameter);
 						break;
@@ -456,25 +450,6 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 				return Encoding.MILSTD_1750A;
 			default:
 				throw new InvalidXtceFileException("Invalid float encoding in type " + type);
-		}
-	}
-
-	private final static Endianness getEndianness(final BaseDataType type) throws InvalidXtceFileException {
-		BaseDataTypeChoice baseDataTypeChoice = type.getBaseDataTypeChoice();
-		if (baseDataTypeChoice == null) {
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("Base data type does not have a base data type choice, assuming default of BIG endian");
-			}
-			return Endianness.BIG;
-		}
-		DataEncodingTypeBitOrderType byteOrder = baseDataTypeChoice.getIntegerDataEncoding().getBitOrder();
-		switch (byteOrder) {
-			case MOSTSIGNIFICANTBITFIRST:
-				return Endianness.BIG;
-			case LEASTSIGNIFICANTBITFIRST:
-				return Endianness.LITTLE;
-			default:
-				throw new InvalidXtceFileException("Invalid bit order in " + type);
 		}
 	}
 

@@ -38,10 +38,6 @@ public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer>
 
 		BitSet actualParameter = inBitset.get(0, getSizeInBits());
 
-		if (getEndianness() == Endianness.LITTLE) {
-			actualParameter = BitSetUtility.reverse(actualParameter, getSizeInBits());
-		}
-
 		final byte[] byteArray = BitSetUtility.toByteArray(actualParameter, getSizeInBits());
 		final Integer output = new Integer(BytesUtility.combine(byteArray, getSizeInBits(), true).intValue());
 
@@ -75,17 +71,11 @@ public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer>
 
 		// setting up the number in reverse order
 		int mask = 1;
-		if (this.getEndianness() == Endianness.BIG) {
-			offset += getSizeInBits() - 1;
-		}
+		offset += getSizeInBits() - 1;
+		
 		for (int i = 0; i < getSizeInBits(); i++, mask <<= 1) {
 			if ((mask & absValue) > 0) {
-				if (this.getEndianness() == Endianness.BIG) {
-					result.set(offset - i);
-				}
-				else {
-					result.set(offset + i);
-				}
+				result.set(offset - i);
 			}
 		}
 

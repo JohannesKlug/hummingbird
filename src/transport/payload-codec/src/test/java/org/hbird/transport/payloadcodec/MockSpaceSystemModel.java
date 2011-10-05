@@ -14,7 +14,6 @@ import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupExce
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter.Endianness;
 
 public class MockSpaceSystemModel implements SpaceSystemModel {
 	private static final long serialVersionUID = -345641886444350845L;
@@ -30,11 +29,11 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	public static final String LASER_TEMP_PARAMETER_NAME = "Laser Temp";
 
 	public MockSpaceSystemModel() {
-		Parameter<Integer> fuelParam = new HummingbirdParameter<Integer>(FUEL_PARAMETER_NAME, "", "", 12, Endianness.BIG, Encoding.unsigned);
+		Parameter<Integer> fuelParam = new HummingbirdParameter<Integer>(FUEL_PARAMETER_NAME, "", "", 12, Encoding.unsigned);
 //		parameters.put(fuelParam.getName(), fuelParam);
-		Parameter<Integer> spacecraftId = new HummingbirdParameter<Integer>(SCID_PARAMETER_NAME, "", "", 32, Endianness.BIG, Encoding.unsigned);
+		Parameter<Integer> spacecraftId = new HummingbirdParameter<Integer>(SCID_PARAMETER_NAME, "", "", 32, Encoding.unsigned);
 //		parameters.put(spacecraftId.getName(), spacecraftId);
-		Parameter<Long> laserTemp = new HummingbirdParameter<Long>(LASER_TEMP_PARAMETER_NAME, "", "", 40, Endianness.LITTLE, Encoding.twosComplement);
+		Parameter<Long> laserTemp = new HummingbirdParameter<Long>(LASER_TEMP_PARAMETER_NAME, "", "", 40, Encoding.twosComplement);
 //		parameters.put(laserTemp.getName(), laserTemp);
 
 		ParameterGroup testGroup = new HummingbirdParameterGroup("Test group", "", "");

@@ -41,12 +41,6 @@ public abstract class CodecParameter<T> implements Parameter<T> {
 
 
 	@Override
-	public Endianness getEndianness() {
-		return parameter.getEndianness();
-	}
-
-
-	@Override
 	public Encoding getEncoding() {
 		return parameter.getEncoding();
 	}

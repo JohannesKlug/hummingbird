@@ -49,10 +49,6 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 
 		binaryString = binaryString.substring(offset, offset + getSizeInBits());
 
-		if (getEndianness() == Endianness.LITTLE ) {
-			binaryString = StringUtils.reverse(binaryString);
-		}
-
 		// If we are dealing with a negative number...
 		if (binaryString.startsWith("1")) {
 			// We must prepend a minus sign for the valueOf method used later.
@@ -78,10 +74,6 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 	@Override
 	public BitSet encodeToBitSet(final BitSet out, int offset) {
 		long longValue = getValue();
-
-		if(getEndianness() == Endianness.LITTLE) {
-			longValue = swap(longValue);
-		}
 
 		// setting all bits to zero
 		out.clear(offset, offset + getSizeInBits() - 1);

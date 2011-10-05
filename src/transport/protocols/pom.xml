@@ -28,8 +28,7 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							org.hbird.transport.framebroker,
-							org.hbird.transport.framebroker.exceptions							
+							org.hbird.transport.protocols
 						</Export-Package>
 						<Private-Package>
 							org.hbird.transport,
@@ -111,4 +110,5 @@
                         <scope>test</scope>
                 </dependency>
 	</dependencies>
+	<packaging>bundle</packaging>
 </project>

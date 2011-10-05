@@ -4,7 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter.Endianness;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +18,6 @@ public class IntegerParameterTest {
 													 "Test Param <int>", 
 													 "Test parameter typed to an Integer",
 													 32, 
-													 Endianness.BIG, 
 													 Encoding.twosComplement);
 	}
 	// @formatter:on

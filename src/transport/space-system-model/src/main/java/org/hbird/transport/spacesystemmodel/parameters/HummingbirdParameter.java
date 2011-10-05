@@ -15,7 +15,6 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	private final String shortDescription;
 	private final String longDescription;
 	private final int sizeInBits;
-	private final Endianness endianness;
 	private final Encoding encoding;
 	private T value;
 
@@ -29,12 +28,11 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	 * @param encoding
 	 */
 	public HummingbirdParameter(final String name, final String shortDescription, final String longDescription,
-			final int sizeInBits, final Endianness endianness, final Encoding encoding) {
+			final int sizeInBits, final Encoding encoding) {
 		this.name = name;
 		this.shortDescription = shortDescription;
 		this.longDescription = longDescription;
 		this.sizeInBits = sizeInBits;
-		this.endianness = endianness;
 		this.encoding = encoding;
 	}
 
@@ -79,11 +77,6 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 		else {
 			return false;
 		}
-	}
-
-	@Override
-	public Endianness getEndianness() {
-		return this.endianness;
 	}
 
 	@Override

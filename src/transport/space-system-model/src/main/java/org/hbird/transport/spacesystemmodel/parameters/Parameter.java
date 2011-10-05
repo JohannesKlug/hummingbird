@@ -10,14 +10,6 @@ import org.hbird.transport.spacesystemmodel.SpaceSystemModelItem;
  */
 public interface Parameter<T> extends SpaceSystemModelItem, Serializable {
 
-	/**
-	 * The Endianness or byte order of the binary data this Parameter represents. This is part of the Parameter
-	 * interface as it will be required by clients of Parameter.
-	 */
-	public enum Endianness {
-		BIG, LITTLE
-	};
-
 	public enum Encoding {
 		unsigned, signMagnitude, twosComplement, onesComplement, binaryCodedDecimal, packedBinaryCodedDecimal, UTF8, UTF16, IEEE754_1985, MILSTD_1750A
 	}
@@ -45,13 +37,6 @@ public interface Parameter<T> extends SpaceSystemModelItem, Serializable {
 	 * @return int representing the size in bits of this {@link Parameter}
 	 */
 	int getSizeInBits();
-
-	/**
-	 * Returns the byte order of the binary data this Parameter represents.
-	 * 
-	 * @return endiannness of the binary data this Parameter represents.
-	 */
-	Endianness getEndianness();
 
 	Encoding getEncoding();
 

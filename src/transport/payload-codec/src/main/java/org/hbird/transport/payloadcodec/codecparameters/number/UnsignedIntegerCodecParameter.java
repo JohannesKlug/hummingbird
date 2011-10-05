@@ -114,9 +114,6 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 			LOG.debug("Extracting " + getSizeInBits() + " bit int value from " + BitSetUtility.binDump(actualParameter));
 		}
 		
-		if (getEndianness() == Endianness.LITTLE) {
-			actualParameter = BitSetUtility.reverse(actualParameter, getSizeInBits());
-		}
 		final byte[] byteArray = BitSetUtility.toByteArray(actualParameter, getSizeInBits());
 		LOG.debug("Byte array = " + BytesUtility.decimalDump(byteArray));
 
@@ -145,17 +142,12 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 
 		// setting up the number in reverse order
 		int mask = 1;
-		if (getEndianness() == Endianness.BIG) {
-			offset += getSizeInBits() - 1;
-		}
+
+		offset += getSizeInBits() - 1;
 
 		for (int i = 0; i < getSizeInBits(); i++, mask <<= 1) {
 			if ((mask & absValue) > 0) {
-				if (getEndianness() == Endianness.BIG) {
-					out.set(offset - i);
-				} else {
-					out.set(offset + i);
-				}
+				out.set(offset - i);
 			}
 		}
 		return out;
