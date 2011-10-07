@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
@@ -28,20 +29,20 @@ public interface SpaceSystemModel extends Serializable {
 	Collection<ParameterGroup> getAllParameterGroups();
 
 	// Parameter related
-	Parameter<?> getParameter(String name);
-	Parameter<Integer> getIntParameter(String name) throws UnknownParameterGroupException;
-	Parameter<Long> getLongParameter(String name) throws UnknownParameterGroupException;
-	Parameter<BigDecimal> getBigDecimalParameter(String name);
-	Parameter<String> getStringParameter(String name);
-	Parameter<Float> getFloatParameter(String name);
-	Parameter<Double> getDoubleParameter(String name);
-	Parameter<Byte[]> getRawParameter(String name);
-	Map<String, Parameter<?>> getAllParameters();
-	void replaceParameterInModel(final Parameter<?> newParameter);
+	Parameter<?> getParameter(String name) throws UnknownParameterException;
+	Parameter<Integer> getIntParameter(String name) throws UnknownParameterException;
+	Parameter<Long> getLongParameter(String name) throws UnknownParameterException;
+	Parameter<BigDecimal> getBigDecimalParameter(String name) throws UnknownParameterException;
+	Parameter<String> getStringParameter(String name) throws UnknownParameterException;
+	Parameter<Float> getFloatParameter(String name) throws UnknownParameterException;
+	Parameter<Double> getDoubleParameter(String name) throws UnknownParameterException;
+	Parameter<Byte[]> getRawParameter(String name) throws UnknownParameterException;
 
-	Collection<Parameter<Integer>> getIntegerParameters();
-	Collection<Parameter<Long>> getLongParameters();
+	Collection<Parameter<?>> getAllParameters();
+	Collection<Parameter<Integer>> getAllIntegerParameters();
+	Collection<Parameter<Long>> getAllLongParameters();
 
+	void replaceParameterInModel(final Parameter<?> newParameter) throws UnknownParameterException;
 
 	// Payload restriction related
 	Map<Long, List<Object>> getAllPayloadRestrictions();

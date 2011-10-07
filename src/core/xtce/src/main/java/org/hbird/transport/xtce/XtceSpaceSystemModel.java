@@ -1,14 +1,15 @@
 package org.hbird.transport.xtce;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.SerializationUtils;
+import org.apache.commons.lang.StringUtils;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
+import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
@@ -26,24 +27,14 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	private final Map<String, ParameterGroup> parameterGroups = new HashMap<>();
 
-	private final Map<String, Parameter<Integer>> integerParameters = new LinkedHashMap<>();
-	private final Map<String, Parameter<Long>> longParameters = new LinkedHashMap<>();
-	private final Map<String, Parameter<BigDecimal>> bigDecimalParameters = new LinkedHashMap<>();
-	private final Map<String, Parameter<Float>> floatParameters = new LinkedHashMap<>();
-	private final Map<String, Parameter<Double>> doubleParameters = new LinkedHashMap<>();
-	private final Map<String, Parameter<String>> stringParameters = new LinkedHashMap<>();
-	private final Map<String, Parameter<Byte[]>> rawParameters = new LinkedHashMap<>();
-
-	private final Map<Parameter<?>, List<Object>> restrictions = new HashMap<>();
-
+	private final Map<Long, List<Object>> restrictions = new HashMap<>();
 
 	public XtceSpaceSystemModel() {
 	}
 
-
 	@Override
-	public Parameter<?> getParameter(final String name) {
-		return getAllParameters().get(name);
+	public Collection<ParameterGroup> getAllParameterGroups() {
+		return parameterGroups.values();
 	}
 
 	@Override
@@ -58,66 +49,119 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 		return container;
 	}
 
-
+	/**
+	 * Iterates over all the parameter groups and creates a list of all their parameters.
+	 */
 	@Override
-	public Map<String, Parameter<?>> getAllParameters() {
-		HashMap<String, Parameter<?>> all = new HashMap<String, Parameter<?>>();
-		all.putAll(integerParameters);
-		all.putAll(longParameters);
-		return all;
+	public Collection<Parameter<?>> getAllParameters() {
+		List<Parameter<?>> allParameters = new ArrayList<>();
+		for (ParameterGroup pg : this.parameterGroups.values()) {
+			for (Parameter<?> p : pg.getAllParameters().values()) {
+				allParameters.add(p);
+			}
+		}
+		return allParameters;
 	}
 
-	public String getSpaceSystemModelFilePath() {
-		return this.spacesystemmodelFilename;
+	@Override
+	public Parameter<?> getParameter(final String name) throws UnknownParameterException {
+		for (ParameterGroup pg : this.parameterGroups.values()) {
+			for (Parameter<?> p : pg.getAllParameters().values()) {
+				if (StringUtils.equals(name, p.getName())) {
+					return p;
+				}
+			}
+		}
+		throw new UnknownParameterException(name);
 	}
 
 	@Override
-	public Map<Parameter<?>, List<Object>> getAllParameterRestrictions() {
+	public Parameter<Integer> getIntParameter(final String name) throws UnknownParameterException {
+		for (ParameterGroup pg : this.parameterGroups.values()) {
+			for (Parameter<Integer> p : pg.getIntegerParameters()) {
+				if (StringUtils.equals(name, p.getName())) {
+					return p;
+				}
+			}
+		}
+		throw new UnknownParameterException(name);
+	}
+
+	@Override
+	public Parameter<Long> getLongParameter(final String name) throws UnknownParameterException {
+		for (ParameterGroup pg : this.parameterGroups.values()) {
+			for (Parameter<Long> p : pg.getLongParameters()) {
+				if (StringUtils.equals(name, p.getName())) {
+					return p;
+				}
+			}
+		}
+		throw new UnknownParameterException(name);
+	}
+
+	@Override
+	public Map<Long, List<Object>> getAllPayloadRestrictions() {
 		return restrictions;
 	}
 
 	@Override
-	public Collection<ParameterGroup> getAllParameterGroups() {
-		return parameterGroups.values();
-	}
-
-	@Override
-	public Collection<Parameter<Integer>> getIntegerParameters() {
-		return integerParameters.values();
-	}
-
-	@Override
-	public Collection<Parameter<Long>> getLongParameters() {
-		return longParameters.values();
-	}
-
-	@Override
-	public Parameter<Integer> getIntParameter(final String name) throws UnknownParameterGroupException {
-		Parameter<Integer> p = integerParameters.get(name);
-		if(p == null) {
-			throw new UnknownParameterGroupException(name);
+	public void replaceParameterInModel(final Parameter<?> newParameter) throws UnknownParameterException {
+		for (ParameterGroup pg : this.parameterGroups.values()) {
+			for (Parameter<?> p : pg.getAllParameters().values()) {
+				if (StringUtils.equals(newParameter.getName(), p.getName())) {
+					p = newParameter;
+					return;
+				}
+			}
 		}
-		return p;
+		throw new UnknownParameterException(newParameter.getName());
 	}
 
 	@Override
-	public Parameter<Long> getLongParameter(final String name) throws UnknownParameterGroupException {
-		Parameter<Long> p = longParameters.get(name);
-		if(p == null) {
-			throw new UnknownParameterGroupException(name);
-		}
-		return p;
-	}
-
-	@Override
-	public final SpaceSystemModel deepClone(final SpaceSystemModel ssm) {
-		return (SpaceSystemModel) SerializationUtils.clone(ssm);
-	}
-
-	@Override
-	public void replaceParameterInModel(final Parameter<?> newParameter) {
-		// TODO Auto-generated method stub
+	public Parameter<BigDecimal> getBigDecimalParameter(final String name) throws UnknownParameterException {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<String> getStringParameter(final String name) throws UnknownParameterException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<Float> getFloatParameter(final String name) throws UnknownParameterException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<Double> getDoubleParameter(final String name) throws UnknownParameterException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<Byte[]> getRawParameter(final String name) throws UnknownParameterException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Collection<Parameter<Integer>> getAllIntegerParameters() {
+		List<Parameter<Integer>> parameters = new ArrayList<>();
+		for (ParameterGroup pg : this.parameterGroups.values()) {
+			for (Parameter<Integer> p : pg.getIntegerParameters()) {
+				parameters.add(p);
+			}
+		}
+		return parameters;
+	}
+
+	@Override
+	public Collection<Parameter<Long>> getAllLongParameters() {
+		List<Parameter<Long>> parameters = new ArrayList<>();
+		for (ParameterGroup pg : this.parameterGroups.values()) {
+			for (Parameter<Long> p : pg.getLongParameters()) {
+				parameters.add(p);
+			}
+		}
+		return parameters;
 	}
 
 }
