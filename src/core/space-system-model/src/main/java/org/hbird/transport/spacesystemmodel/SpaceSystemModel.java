@@ -25,24 +25,24 @@ public interface SpaceSystemModel extends Serializable {
 	String HUMMINGBIRD_PROCESSED_HEADER = "HEADER";
 
 	// Parameter Group related
-	ParameterGroup getParameterGroup(String name) throws UnknownParameterGroupException;
+	ParameterGroup getParameterGroup(long id) throws UnknownParameterGroupException;
 	Collection<ParameterGroup> getAllParameterGroups();
 
 	// Parameter related
-	Parameter<?> getParameter(String name) throws UnknownParameterException;
-	Parameter<Integer> getIntParameter(String name) throws UnknownParameterException;
-	Parameter<Long> getLongParameter(String name) throws UnknownParameterException;
-	Parameter<BigDecimal> getBigDecimalParameter(String name) throws UnknownParameterException;
-	Parameter<String> getStringParameter(String name) throws UnknownParameterException;
-	Parameter<Float> getFloatParameter(String name) throws UnknownParameterException;
-	Parameter<Double> getDoubleParameter(String name) throws UnknownParameterException;
-	Parameter<Byte[]> getRawParameter(String name) throws UnknownParameterException;
+	Parameter<?> getParameter(long id) throws UnknownParameterException;
+	Parameter<Integer> getIntParameter(long id) throws UnknownParameterException;
+	Parameter<Long> getLongParameter(long id) throws UnknownParameterException;
+	Parameter<BigDecimal> getBigDecimalParameter(long id) throws UnknownParameterException;
+	Parameter<String> getStringParameter(long id) throws UnknownParameterException;
+	Parameter<Float> getFloatParameter(long id) throws UnknownParameterException;
+	Parameter<Double> getDoubleParameter(long id) throws UnknownParameterException;
+	Parameter<Byte[]> getRawParameter(long id) throws UnknownParameterException;
 
 	Collection<Parameter<?>> getAllParameters();
 	Collection<Parameter<Integer>> getAllIntegerParameters();
 	Collection<Parameter<Long>> getAllLongParameters();
 
-	void replaceParameterInModel(final Parameter<?> newParameter) throws UnknownParameterException;
+	void replaceParameterInModel(long id, final Parameter<?> newParameter) throws UnknownParameterException;
 
 	// Payload restriction related
 	Map<Long, List<Object>> getAllPayloadRestrictions();

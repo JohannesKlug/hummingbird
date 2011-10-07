@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -31,7 +32,6 @@ import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
 import org.hbird.transport.spacesystemmodel.tmtcgroups.HummingbirdParameterGroup;
 import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
 import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
@@ -42,29 +42,33 @@ import org.slf4j.LoggerFactory;
 public final class XtceSpaceSystemModelFactory {
 	private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModelFactory.class);
 
+	private static long id = 0;
+
 	private SpaceSystem spaceSystem;
+
+	private SpaceSystemModel model;
 
 	private int numParameterGroups;
 
 	private final Map<String, ParameterTypeSetTypeItem> xtceParameterTypes = new LinkedHashMap<String, ParameterTypeSetTypeItem>();
 
-	private final Map<String, Parameter<Integer>> integerParameters = new LinkedHashMap<>();
+	private final Map<Long, Parameter<Integer>> integerParameters = new LinkedHashMap<>();
 
-	private final Map<String, Parameter<Long>> longParameters = new LinkedHashMap<>();
+	private final Map<Long, Parameter<Long>> longParameters = new LinkedHashMap<>();
 
-	private final Map<String, Parameter<Float>> floatParameters = new LinkedHashMap<>();
+	private final Map<Long, Parameter<Float>> floatParameters = new LinkedHashMap<>();
 
-	private final Map<String, Parameter<Double>> doubleParameters = new LinkedHashMap<>();
+	private final Map<Long, Parameter<Double>> doubleParameters = new LinkedHashMap<>();
 
-	private final Map<String, Parameter<BigDecimal>> bigDecimalParameters = new LinkedHashMap<>();
+	private final Map<Long, Parameter<BigDecimal>> bigDecimalParameters = new LinkedHashMap<>();
 
-	private final Map<String, Parameter<String>> stringParameters = new LinkedHashMap<>();
+	private final Map<Long, Parameter<String>> stringParameters = new LinkedHashMap<>();
 
-	private final Map<String, Parameter<Byte[]>> rawParameters = new LinkedHashMap<>();
+	private final Map<Long, Parameter<Byte[]>> rawParameters = new LinkedHashMap<>();
 
-	private final Map<String, ParameterGroup> parameterGroups = new HashMap<>();
+	private final Map<Long, ParameterGroup> parameterGroups = new HashMap<>();
 
-	private SpaceSystemModel model;
+	Map<Long, List<Object>> restrictions = new HashMap<>();
 
 	public XtceSpaceSystemModelFactory() {
 	}
@@ -99,29 +103,11 @@ public final class XtceSpaceSystemModelFactory {
 			field.setAccessible(true);
 			String name = field.getName();
 			switch (name) {
-				case "integerParameters":
-					field.set(model, integerParameters);
-					break;
-				case "longParameters":
-					field.set(model, longParameters);
-					break;
-				case "bigDecimalParameters":
-					field.set(model, bigDecimalParameters);
-					break;
-				case "floatParameters":
-					field.set(model, floatParameters);
-					break;
-				case "doubleParameters":
-					field.set(model, doubleParameters);
-					break;
-				case "stringParameters":
-					field.set(model, stringParameters);
-					break;
-				case "rawParameters":
-					field.set(model, rawParameters);
-					break;
 				case "parameterGroups":
 					field.set(model, parameterGroups);
+					break;
+				case "restrictions":
+					field.set(model, restrictions);
 					break;
 				default:
 					LOG.debug("Not interested in field : " + name);
@@ -166,9 +152,7 @@ public final class XtceSpaceSystemModelFactory {
 					Parameter<Integer> intParameter = new HummingbirdParameter<Integer>(
 								xtceParameter.getParameter().getName(),
 								xtceParameter.getParameter().getShortDescription(),
-								xtceParameter.getParameter().getLongDescription(),
-								(int) type.getSizeInBits(),
-								getIntegerEncoding(type));
+								xtceParameter.getParameter().getLongDescription());
 					if(LOG.isDebugEnabled()) {
 						LOG.debug("Adding Integer parameter " + intParameter.getName());
 					}
@@ -178,9 +162,7 @@ public final class XtceSpaceSystemModelFactory {
 					Parameter<Long> longParameter = new HummingbirdParameter<Long>(
 								xtceParameter.getParameter().getName(),
 								xtceParameter.getParameter().getShortDescription(),
-								xtceParameter.getParameter().getLongDescription(),
-								(int) type.getSizeInBits(),
-								getIntegerEncoding(type));
+								xtceParameter.getParameter().getLongDescription());
 					if(LOG.isDebugEnabled()) {
 						LOG.debug("Adding Long parameter " + longParameter.getName());
 					}
@@ -196,32 +178,29 @@ public final class XtceSpaceSystemModelFactory {
 						Parameter<Float> floatParameter = new HummingbirdParameter<Float>(
 								xtceParameter.getParameter().getName(),
 								xtceParameter.getParameter().getShortDescription(),
-								xtceParameter.getParameter().getLongDescription(),
-								Integer.parseInt(type.getSizeInBits().value()),
-								getFloatEncoding(type));
+								xtceParameter.getParameter().getLongDescription());
 						floatParameters.put(floatParameter.getName(), floatParameter);
 						break;
 					case VALUE_64:
 						Parameter<Double> doubleParameter = new HummingbirdParameter<Double>(
 								xtceParameter.getParameter().getName(),
 								xtceParameter.getParameter().getShortDescription(),
-								xtceParameter.getParameter().getLongDescription(),
-								Integer.parseInt(type.getSizeInBits().value()),
-								getFloatEncoding(type));
+								xtceParameter.getParameter().getLongDescription());
 						doubleParameters.put(doubleParameter.getName(), doubleParameter);
 						break;
 					case VALUE_128:
 						Parameter<BigDecimal> bigDecimalParameter = new HummingbirdParameter<BigDecimal>(
 								xtceParameter.getParameter().getName(),
 								xtceParameter.getParameter().getShortDescription(),
-								xtceParameter.getParameter().getLongDescription(),
-								Integer.parseInt(type.getSizeInBits().value()),
-								getFloatEncoding(type));
+								xtceParameter.getParameter().getLongDescription());
 						bigDecimalParameters.put(bigDecimalParameter.getName(), bigDecimalParameter);
 						break;
 					default:
 						throw new InvalidXtceFileException("Invalid bit size for float type " + type.getName());
 				}
+			}
+			else {
+				throw new InvalidXtceFileException("Unknown parameter type: " + parameterTypeRef + ". A parameter references an undeclared parameter type in the XTCE space system definition file.");
 			}
 			// @formatter:on
 		}

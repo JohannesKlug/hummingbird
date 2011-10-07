@@ -1,7 +1,6 @@
 package org.hbird.transport.spacesystemmodel.tmtcgroups;
 
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Map;
 
 import org.hbird.transport.spacesystemmodel.SpaceSystemModelItem;
@@ -11,37 +10,35 @@ import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
 public interface TmTcGroup extends SpaceSystemModelItem {
 
-	int getSizeInBits();
+	Map<Long, Parameter<?>> getAllParameters();
 
-	Map<String, Parameter<?>> getAllParameters();
-
-	Collection<Parameter<Integer>> getIntegerParameters();
-	Collection<Parameter<Long>> getLongParameters();
-	Collection<Parameter<BigDecimal>> getBigDecimalParameters();
-	Collection<Parameter<String>> getStringParameters();
-	Collection<Parameter<Float>> getFloatParameters();
-	Collection<Parameter<Double>> getDoubleParameters();
-	Collection<Parameter<Byte[]>> getRawParameters();
+	Map<Long, Parameter<Integer>> getIntegerParameters();
+	Map<Long, Parameter<Long>> getLongParameters();
+	Map<Long, Parameter<BigDecimal>> getBigDecimalParameters();
+	Map<Long, Parameter<String>> getStringParameters();
+	Map<Long, Parameter<Float>> getFloatParameters();
+	Map<Long, Parameter<Double>> getDoubleParameters();
+	Map<Long, Parameter<Byte[]>> getRawParameters();
 
 
-	Parameter<Integer> getIntegerParameter(String name) throws UnknownParameterGroupException;
-	Parameter<Long> getLongParameter(String name) throws UnknownParameterGroupException;
-	Parameter<Float> getFloatParameter(String name) throws UnknownParameterGroupException;
-	Parameter<Double> getDoubleParameter(String name) throws UnknownParameterGroupException;
-	Parameter<BigDecimal> getBigDecimalParameter(String name) throws UnknownParameterGroupException;
-	Parameter<String> getStringParameter(String name) throws UnknownParameterGroupException;
-	Parameter<Byte[]> getRawParameter(String name) throws UnknownParameterGroupException;
+	Parameter<Integer> getIntegerParameter(long id) throws UnknownParameterGroupException;
+	Parameter<Long> getLongParameter(long id) throws UnknownParameterGroupException;
+	Parameter<Float> getFloatParameter(long id) throws UnknownParameterGroupException;
+	Parameter<Double> getDoubleParameter(long id) throws UnknownParameterGroupException;
+	Parameter<BigDecimal> getBigDecimalParameter(long id) throws UnknownParameterGroupException;
+	Parameter<String> getStringParameter(long id) throws UnknownParameterGroupException;
+	Parameter<Byte[]> getRawParameter(long id) throws UnknownParameterGroupException;
 
 
-	void addIntegerParameter(Parameter<Integer> parameter);
-	void addLongParameter(Parameter<Long> parameter);
-	void addBigDecimalParameter(Parameter<BigDecimal> parameter);
-	void addFloatParameter(Parameter<Float> parameter);
-	void addDoubleParameter(Parameter<Double> parameter);
-	void addStringParameter(Parameter<String> parameter);
-	void addRawParameter(Parameter<Byte[]> parameter);
+	void addIntegerParameter(long id, Parameter<Integer> parameter);
+	void addLongParameter(long id, Parameter<Long> parameter);
+	void addBigDecimalParameter(long id, Parameter<BigDecimal> parameter);
+	void addFloatParameter(long id, Parameter<Float> parameter);
+	void addDoubleParameter(long id, Parameter<Double> parameter);
+	void addStringParameter(long id, Parameter<String> parameter);
+	void addRawParameter(long id, Parameter<Byte[]> parameter);
 
-	void replaceParameterInGroup(Parameter<?> parameter) throws ParameterNotInGroupException;
+	void replaceParameterInGroup(long id, Parameter<?> parameter) throws ParameterNotInGroupException;
 
 	ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup) throws UnknownParameterGroupException;
 

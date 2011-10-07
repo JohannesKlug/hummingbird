@@ -1,6 +1,5 @@
 package org.hbird.transport.xtce;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -23,9 +22,7 @@ import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
 public class XtceSpaceSystemModel implements SpaceSystemModel {
 	private static final long serialVersionUID = 2532805548202927668L;
 
-	private String spacesystemmodelFilename;
-
-	private final Map<String, ParameterGroup> parameterGroups = new HashMap<>();
+	private final Map<Long, ParameterGroup> parameterGroups = new HashMap<>();
 
 	private final Map<Long, List<Object>> restrictions = new HashMap<>();
 
@@ -38,7 +35,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public ParameterGroup getParameterGroup(final String name) throws UnknownParameterGroupException {
+	public ParameterGroup getParameterGroup(final long id) throws UnknownParameterGroupException {
 		final ParameterGroup container = parameterGroups.get(name);
 
 		if (container == null) {
@@ -64,7 +61,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Parameter<?> getParameter(final String name) throws UnknownParameterException {
+	public Parameter<?> getParameter(final long id) throws UnknownParameterException {
 		for (ParameterGroup pg : this.parameterGroups.values()) {
 			for (Parameter<?> p : pg.getAllParameters().values()) {
 				if (StringUtils.equals(name, p.getName())) {
@@ -76,7 +73,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Parameter<Integer> getIntParameter(final String name) throws UnknownParameterException {
+	public Parameter<Integer> getIntParameter(final long id) throws UnknownParameterException {
 		for (ParameterGroup pg : this.parameterGroups.values()) {
 			for (Parameter<Integer> p : pg.getIntegerParameters()) {
 				if (StringUtils.equals(name, p.getName())) {
@@ -88,15 +85,11 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Parameter<Long> getLongParameter(final String name) throws UnknownParameterException {
-		for (ParameterGroup pg : this.parameterGroups.values()) {
-			for (Parameter<Long> p : pg.getLongParameters()) {
-				if (StringUtils.equals(name, p.getName())) {
-					return p;
-				}
-			}
+	public Parameter<Long> getLongParameter(final long id) throws UnknownParameterException {
+		for(ParameterGroup pg: parameterGroups) {
+			if(pg.getL)
 		}
-		throw new UnknownParameterException(name);
+			return pg.getLongParameter(name);
 	}
 
 	@Override
@@ -117,30 +110,6 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 		throw new UnknownParameterException(newParameter.getName());
 	}
 
-	@Override
-	public Parameter<BigDecimal> getBigDecimalParameter(final String name) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Parameter<String> getStringParameter(final String name) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Parameter<Float> getFloatParameter(final String name) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Parameter<Double> getDoubleParameter(final String name) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Parameter<Byte[]> getRawParameter(final String name) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
-	}
 
 	@Override
 	public Collection<Parameter<Integer>> getAllIntegerParameters() {
