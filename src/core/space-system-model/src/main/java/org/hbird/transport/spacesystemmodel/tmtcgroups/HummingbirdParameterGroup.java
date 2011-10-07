@@ -276,6 +276,15 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public Parameter<?> getParameter(final long id) throws UnknownParameterException {
+		Parameter<?> p = parameters.get(id);
+		if (p == null) {
+			throw new UnknownParameterException(id);
+		}
+		return p;
+	}
+
 
 
 }

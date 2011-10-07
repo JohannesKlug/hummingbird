@@ -29,6 +29,7 @@ public interface TmTcGroup extends SpaceSystemModelItem {
 	Parameter<BigDecimal> getBigDecimalParameter(long id) throws UnknownParameterException;
 	Parameter<String> getStringParameter(long id) throws UnknownParameterException;
 	Parameter<Byte[]> getRawParameter(long id) throws UnknownParameterException;
+	Parameter<?> getParameter(long id) throws UnknownParameterException;
 
 
 	void addIntegerParameter(long id, Parameter<Integer> parameter);

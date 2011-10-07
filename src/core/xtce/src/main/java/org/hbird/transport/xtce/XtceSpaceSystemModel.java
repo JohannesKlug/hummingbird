@@ -63,13 +63,11 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	@Override
 	public Parameter<?> getParameter(final long id) throws UnknownParameterException {
 		for (ParameterGroup pg : this.parameterGroups.values()) {
-			for (Parameter<?> p : pg.getAllParameters().values()) {
-				if (StringUtils.equals(name, p.getName())) {
-					return p;
-				}
+			if(pg.getAllParameters().containsKey(id)) {
+				return pg.getParameter(id);
 			}
 		}
-		throw new UnknownParameterException(name);
+		throw new UnknownParameterException(id);
 	}
 
 	@Override
@@ -84,10 +82,12 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public Parameter<Long> getLongParameter(final long id) throws UnknownParameterException {
-		for(ParameterGroup pg: parameterGroups) {
-			if(pg.getL)
+		for (ParameterGroup pg : this.parameterGroups.values()) {
+			if(pg.getLongParameters().containsKey(id)) {
+				return pg.getLongParameter(id);
+			}
 		}
-			return pg.getLongParameter(name);
+		throw new UnknownParameterException(id);
 	}
 
 	@Override
