@@ -8,22 +8,18 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.hbird</groupId>
-	<artifactId>hummingbird-transport</artifactId>
+	<artifactId>hummingbird-core</artifactId>
 	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>Hummingbird Transport Layer</name>
-	<description>This module contains all transport modules</description>
+	<name>Hummingbird Core</name>
+	<description>This module contains the Hummingbird Core</description>
 	<url/>
 
 	<modules>
-<!--		<module>commons</module> -->
-<!--		<module>tele</module> -->
-		<module>protocols</module>
-<!--		<module>codec</module> -->
-<!--		<module>space-system-model</module> -->
-		<module>payload-codec</module>
-<!--		<module>xtce</module> -->
+		<module>commons</module>
+		<module>space-system-model</module>
+		<module>xtce</module>
 	</modules>
 
 	
