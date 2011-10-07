@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
+import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
@@ -218,25 +219,25 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public Parameter<Integer> getIntegerParameter(final long id) throws UnknownParameterGroupException {
-		Parameter<Integer> p = integerParameters.get(name);
+	public Parameter<Integer> getIntegerParameter(final long id) throws UnknownParameterException {
+		Parameter<Integer> p = integerParameters.get(id);
 		if (p == null) {
-			throw new UnknownParameterGroupException(name);
+			throw new UnknownParameterException(id);
 		}
 		return p;
 	}
 
 	@Override
-	public Parameter<Long> getLongParameter(final long id) throws UnknownParameterGroupException {
-		Parameter<Long> p = longParameters.get(name);
+	public Parameter<Long> getLongParameter(final long id) throws UnknownParameterException {
+		Parameter<Long> p = longParameters.get(id);
 		if (p == null) {
-			throw new UnknownParameterGroupException(name);
+			throw new UnknownParameterException(id);
 		}
 		return p;
 	}
 
 	@Override
-	public ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup) throws UnknownParameterGroupException {
+	public ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup) throws UnknownParameterGroupException, UnknownParameterException {
 		// Ints
 		for(long id : integerParameters.keySet()) {
 			getIntegerParameter(id).setValue(sourceGroup.getIntegerParameter(id).getValue());
@@ -251,28 +252,30 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public Parameter<Float> getFloatParameter(final long id) throws UnknownParameterGroupException {
+	public Parameter<Float> getFloatParameter(final long id) throws UnknownParameterException {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Parameter<Double> getDoubleParameter(final long id) throws UnknownParameterGroupException {
+	public Parameter<Double> getDoubleParameter(final long id) throws UnknownParameterException {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Parameter<BigDecimal> getBigDecimalParameter(final long id) throws UnknownParameterGroupException {
+	public Parameter<BigDecimal> getBigDecimalParameter(final long id) throws UnknownParameterException {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Parameter<String> getStringParameter(final long id) throws UnknownParameterGroupException {
+	public Parameter<String> getStringParameter(final long id) throws UnknownParameterException {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Parameter<Byte[]> getRawParameter(final long id) throws UnknownParameterGroupException {
+	public Parameter<Byte[]> getRawParameter(final long id) throws UnknownParameterException {
 		throw new UnsupportedOperationException();
 	}
+
+
 
 }

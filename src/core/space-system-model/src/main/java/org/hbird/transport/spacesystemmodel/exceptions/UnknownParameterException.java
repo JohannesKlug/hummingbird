@@ -7,4 +7,8 @@ public class UnknownParameterException extends Exception {
 		super(msg);
 	}
 
+	public UnknownParameterException(final long id) {
+		super("Parameter ID requested = " + id);
+	}
+
 }

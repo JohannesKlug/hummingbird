@@ -75,13 +75,11 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	@Override
 	public Parameter<Integer> getIntParameter(final long id) throws UnknownParameterException {
 		for (ParameterGroup pg : this.parameterGroups.values()) {
-			for (Parameter<Integer> p : pg.getIntegerParameters()) {
-				if (StringUtils.equals(name, p.getName())) {
-					return p;
-				}
+			if(pg.getIntegerParameters().containsKey(id)) {
+				return pg.getIntegerParameter(id);
 			}
 		}
-		throw new UnknownParameterException(name);
+		throw new UnknownParameterException(id);
 	}
 
 	@Override

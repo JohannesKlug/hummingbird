@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.hbird.transport.spacesystemmodel.SpaceSystemModelItem;
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
+import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
@@ -21,13 +22,13 @@ public interface TmTcGroup extends SpaceSystemModelItem {
 	Map<Long, Parameter<Byte[]>> getRawParameters();
 
 
-	Parameter<Integer> getIntegerParameter(long id) throws UnknownParameterGroupException;
-	Parameter<Long> getLongParameter(long id) throws UnknownParameterGroupException;
-	Parameter<Float> getFloatParameter(long id) throws UnknownParameterGroupException;
-	Parameter<Double> getDoubleParameter(long id) throws UnknownParameterGroupException;
-	Parameter<BigDecimal> getBigDecimalParameter(long id) throws UnknownParameterGroupException;
-	Parameter<String> getStringParameter(long id) throws UnknownParameterGroupException;
-	Parameter<Byte[]> getRawParameter(long id) throws UnknownParameterGroupException;
+	Parameter<Integer> getIntegerParameter(long id) throws UnknownParameterException;
+	Parameter<Long> getLongParameter(long id) throws UnknownParameterException;
+	Parameter<Float> getFloatParameter(long id) throws UnknownParameterException;
+	Parameter<Double> getDoubleParameter(long id) throws UnknownParameterException;
+	Parameter<BigDecimal> getBigDecimalParameter(long id) throws UnknownParameterException;
+	Parameter<String> getStringParameter(long id) throws UnknownParameterException;
+	Parameter<Byte[]> getRawParameter(long id) throws UnknownParameterException;
 
 
 	void addIntegerParameter(long id, Parameter<Integer> parameter);
@@ -40,7 +41,7 @@ public interface TmTcGroup extends SpaceSystemModelItem {
 
 	void replaceParameterInGroup(long id, Parameter<?> parameter) throws ParameterNotInGroupException;
 
-	ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup) throws UnknownParameterGroupException;
+	ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup) throws UnknownParameterGroupException, UnknownParameterException;
 
 	ParameterGroupReport getParameterReport();
 }
