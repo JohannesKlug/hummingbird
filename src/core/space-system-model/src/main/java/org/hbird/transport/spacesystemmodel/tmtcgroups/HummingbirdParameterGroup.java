@@ -1,10 +1,8 @@
-package org.hbird.transport.spacesystemmodel;
+package org.hbird.transport.spacesystemmodel.tmtcgroups;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
@@ -34,13 +32,6 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 
 	private final ParameterGroupReport parameterReport = new ParameterGroupReport();
 
-	/**
-	 * The restrictions defining when this container should process. Each restriction is a parameter / string pair. The
-	 * parameter will convert the string based on its type and compare itself against the resulting value. If the string
-	 * is invalid then this will always count as a failed match.
-	 */
-	private List<Object> restrictions;
-
 	/** List of Parameters belonging to this Group */
 	private final Map<String, Parameter<?>> parameters = new LinkedHashMap<String, Parameter<?>>();
 
@@ -59,21 +50,6 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		this.name = name;
 		this.shortDescription = shortDescription;
 		this.longDescription = longDescription;
-	}
-
-	@Override
-	public void addRestriction(final Object payloadLayoutId) {
-		if (this.restrictions == null) {
-			this.restrictions = new ArrayList<Object>();
-		}
-		this.restrictions.add(payloadLayoutId);
-	}
-
-	@Override
-	public Object getRestriction() {
-		// TODO Auto-generated method stub
-		// return null;
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -315,5 +291,30 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		// FIXME Add support for other types.
 
 		return this;
+	}
+
+	@Override
+	public Parameter<Float> getFloatParameter(final String name) throws UnknownParameterGroupException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<Double> getDoubleParameter(final String name) throws UnknownParameterGroupException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<BigDecimal> getBigDecimalParameter(final String name) throws UnknownParameterGroupException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<String> getStringParameter(final String name) throws UnknownParameterGroupException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<Byte[]> getRawParameter(final String name) throws UnknownParameterGroupException {
+		throw new UnsupportedOperationException();
 	}
 }

@@ -3,7 +3,6 @@ package org.hbird.transport.spacesystemmodel.parameters;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,11 +13,9 @@ public class IntegerParameterTest {
 	// @formatter:off
 	@Before
 	public void setUp() throws Exception {
-		intParam = new HummingbirdParameter<Integer>("IntParam", 
-													 "Test Param <int>", 
-													 "Test parameter typed to an Integer",
-													 32, 
-													 Encoding.twosComplement);
+		intParam = new HummingbirdParameter<Integer>("IntParam",
+													 "Test Param <int>",
+													 "Test parameter typed to an Integer");
 	}
 	// @formatter:on
 

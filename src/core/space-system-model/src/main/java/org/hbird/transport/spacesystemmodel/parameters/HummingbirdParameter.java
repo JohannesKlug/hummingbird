@@ -14,8 +14,6 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	private final String name;
 	private final String shortDescription;
 	private final String longDescription;
-	private final int sizeInBits;
-	private final Encoding encoding;
 	private T value;
 
 	/**
@@ -27,13 +25,10 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	 * @param endianness
 	 * @param encoding
 	 */
-	public HummingbirdParameter(final String name, final String shortDescription, final String longDescription,
-			final int sizeInBits, final Encoding encoding) {
+	public HummingbirdParameter(final String name, final String shortDescription, final String longDescription) {
 		this.name = name;
 		this.shortDescription = shortDescription;
 		this.longDescription = longDescription;
-		this.sizeInBits = sizeInBits;
-		this.encoding = encoding;
 	}
 
 	@Override
@@ -49,11 +44,6 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	@Override
 	public String getLongDescription() {
 		return this.longDescription;
-	}
-
-	@Override
-	public int getSizeInBits() {
-		return this.sizeInBits;
 	}
 
 	@Override
@@ -76,11 +66,6 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	}
 
 	@Override
-	public Encoding getEncoding() {
-		return this.encoding;
-	}
-
-	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("DefaultParameter [name=");
@@ -92,6 +77,4 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 		builder.append("]");
 		return builder.toString();
 	}
-
-
 }

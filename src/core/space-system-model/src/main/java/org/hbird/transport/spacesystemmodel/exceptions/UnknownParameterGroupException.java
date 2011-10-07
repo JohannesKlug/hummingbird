@@ -6,7 +6,7 @@ package org.hbird.transport.spacesystemmodel.exceptions;
 import java.util.Map;
 import java.util.Set;
 
-import org.hbird.transport.spacesystemmodel.ParameterGroup;
+import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
 
 /**
  * This is a checked exception class which will allow the client to take steps to

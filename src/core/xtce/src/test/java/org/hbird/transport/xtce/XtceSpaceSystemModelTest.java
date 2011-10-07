@@ -10,11 +10,11 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.hbird.transport.generatedcode.xtce.SpaceSystem;
-import org.hbird.transport.spacesystemmodel.ParameterGroup;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
+import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
 import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
 import org.junit.Before;
 import org.junit.BeforeClass;

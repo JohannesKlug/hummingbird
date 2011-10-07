@@ -10,39 +10,26 @@ import org.hbird.transport.spacesystemmodel.SpaceSystemModelItem;
  */
 public interface Parameter<T> extends SpaceSystemModelItem, Serializable {
 
-	public enum Encoding {
-		unsigned, signMagnitude, twosComplement, onesComplement, binaryCodedDecimal, packedBinaryCodedDecimal, UTF8, UTF16, IEEE754_1985, MILSTD_1750A
-	}
-
-
 	/**
 	 * Returns the value of this parameter.
-	 * 
+	 *
 	 * @return The value of this parameter.
-	 * 
+	 *
 	 */
 	T getValue();
 
 	/**
 	 * Set the value of this Parameter.
-	 * 
+	 *
 	 * @param value
 	 *            the value of this Parameter
 	 */
 	void setValue(T value);
 
 	/**
-	 * Returns the size of the Parameter in bits.
-	 * 
-	 * @return int representing the size in bits of this {@link Parameter}
-	 */
-	int getSizeInBits();
-
-	Encoding getEncoding();
-
-	/**
+	 * TODO can we implement comparable or equals/hash
 	 * Checks the incoming object for equality with this Parameters value.
-	 * 
+	 *
 	 * @param obj
 	 * @return
 	 */

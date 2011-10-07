@@ -1,4 +1,4 @@
-package org.hbird.transport.spacesystemmodel;
+package org.hbird.transport.spacesystemmodel.tmtcgroups;
 
 import java.math.BigDecimal;
 import java.util.Set;
