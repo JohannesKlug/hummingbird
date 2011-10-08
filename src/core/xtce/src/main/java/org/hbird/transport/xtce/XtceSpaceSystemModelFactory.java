@@ -31,6 +31,8 @@ import org.hbird.transport.generatedcode.xtce.TelemetryMetaData;
 import org.hbird.transport.generatedcode.xtce.types.FloatDataEncodingTypeEncodingType;
 import org.hbird.transport.generatedcode.xtce.types.IntegerDataEncodingTypeEncodingType;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
+import org.hbird.transport.spacesystemmodel.encoding.Encoding;
+import org.hbird.transport.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
@@ -70,6 +72,8 @@ public final class XtceSpaceSystemModelFactory {
 	private final Map<String, ParameterGroup> parameterGroups = new HashMap<>();
 
 	Map<String, List<Object>> restrictions = new HashMap<>();
+
+	Map<String, Encoding> encodings = new HashMap<>();
 
 	public XtceSpaceSystemModelFactory() {
 	}
@@ -160,6 +164,7 @@ public final class XtceSpaceSystemModelFactory {
 						LOG.debug("Adding Integer parameter " + intParameter.getName());
 					}
 					integerParameters.put(intParameter.getQualifiedName(), intParameter);
+					encodings.put(intParameter.getQualifiedName(), createXtceIntegerEncoding(type));
 				}
 				else {
 					Parameter<Long> longParameter = new HummingbirdParameter<Long>(
@@ -171,6 +176,7 @@ public final class XtceSpaceSystemModelFactory {
 						LOG.debug("Adding Long parameter " + longParameter.getName());
 					}
 					longParameters.put(longParameter.getQualifiedName(), longParameter);
+					encodings.put(longParameter.getQualifiedName(), createXtceIntegerEncoding(type));
 				}
 			}
 
@@ -212,6 +218,8 @@ public final class XtceSpaceSystemModelFactory {
 			// @formatter:on
 		}
 	}
+
+
 
 	/**
 	 * @return
@@ -390,6 +398,10 @@ public final class XtceSpaceSystemModelFactory {
 		}
 	}
 
+	private final void populateEncodings(final String qualifiedName, final SequenceContainer parameterGroupContainer) {
+
+	}
+
 	private void populateParameterGroups() throws InvalidXtceFileException {
 		String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
 		ContainerSet containers = spaceSystem.getTelemetryMetaData().getContainerSet();
@@ -406,51 +418,56 @@ public final class XtceSpaceSystemModelFactory {
 
 			for (int x = 0; x < parameterEntrys.getEntryListTypeItemCount(); x++) {
 				String parameterRef = parameterEntrys.getEntryListTypeItem(x).getParameterRefEntry().getParameterRef();
-				Parameter<?> parameter = findParameter(qualifiedNamePrefix + parameterRef);
-				if (parameter == null) {
-					throw new InvalidXtceFileException("Container " + sequenceContainer + " references unknown parameter " + parameterRef + " in it's EntryList");
-				}
-				addParameterToGroup(group, parameter);
+
+				addParameterToGroup(group, qualifiedNamePrefix + parameterRef);
+
 				if (LOG.isDebugEnabled()) {
-					LOG.debug("Added parameter " + parameter.getName() + " to group " + group.getName());
+					LOG.debug("Added parameter " + qualifiedNamePrefix + parameterRef + " to group " + group.getName());
 				}
 			}
 		}
 	}
 
-	private Parameter<?> findParameter(final String qualifiedName) {
-		if(integerParameters.containsKey(qualifiedName)) {
-			return integerParameters.get(qualifiedName);
-		}
-		if(longParameters.containsKey(qualifiedName)) {
-			return longParameters.get(qualifiedName);
-		}
-		if(floatParameters.containsKey(qualifiedName)) {
-			return floatParameters.get(qualifiedName);
-		}
-		if(doubleParameters.containsKey(qualifiedName)) {
-			return doubleParameters.get(qualifiedName);
-		}
-		if(bigDecimalParameters.containsKey(qualifiedName)) {
-			return bigDecimalParameters.get(qualifiedName);
-		}
-		if(stringParameters.containsKey(qualifiedName)) {
-			return stringParameters.get(qualifiedName);
-		}
-		if(rawParameters.containsKey(qualifiedName)) {
-			return rawParameters.get(qualifiedName);
-		}
-		return null;
-	}
+//	private Class findParameter(final String qualifiedName) {
+//		if(integerParameters.containsKey(qualifiedName)) {
+//			return Integer.class;
+////			return integerParameters.get(qualifiedName);
+//		}
+//		if(longParameters.containsKey(qualifiedName)) {
+//			return Long.class;
+////			return longParameters.get(qualifiedName);
+//		}
+//		if(floatParameters.containsKey(qualifiedName)) {
+//			return Float.class;
+////			return floatParameters.get(qualifiedName);
+//		}
+//		if(doubleParameters.containsKey(qualifiedName)) {
+//			return Double.class;
+////			return doubleParameters.get(qualifiedName);
+//		}
+//		if(bigDecimalParameters.containsKey(qualifiedName)) {
+//			return BigDecimal.class;
+////			return bigDecimalParameters.get(qualifiedName);
+//		}
+//		if(stringParameters.containsKey(qualifiedName)) {
+//			return String.class;
+////			return stringParameters.get(qualifiedName);
+//		}
+//		if(rawParameters.containsKey(qualifiedName)) {
+//			return Byte.class;
+////			return rawParameters.get(qualifiedName);
+//		}
+//		return null;
+//	}
 
-	@SuppressWarnings("unchecked")
-	// parameter references are cross-referenced in a typed list so the casts are safe.
-	private void addParameterToGroup(final ParameterGroup group, final Parameter<?> parameter) throws InvalidXtceFileException {
-		if (integerParameters.containsValue(parameter)) {
-			group.addIntegerParameter((Parameter<Integer>) parameter);
+
+
+	private void addParameterToGroup(final ParameterGroup group, final String qualifiedName) throws InvalidXtceFileException {
+		if (integerParameters.containsValue(qualifiedName)) {
+			group.addIntegerParameter(qualifiedName, integerParameters.get(qualifiedName));
 		}
-		else if (longParameters.containsValue(parameter)) {
-			group.addLongParameter((Parameter<Long>) parameter);
+		else if (longParameters.containsValue(qualifiedName)) {
+			group.addLongParameter(qualifiedName, longParameters.get(qualifiedName));
 		}
 		else {
 			// TODO Finish unsupported parameter types
@@ -458,51 +475,82 @@ public final class XtceSpaceSystemModelFactory {
 		}
 	}
 
-	private final static Encoding getIntegerEncoding(final IntegerParameterType intParamType) throws InvalidXtceFileException {
+
+	/**
+	 * Covers Java Integers and Longs
+	 * @param intParamType
+	 * @return
+	 * @throws InvalidXtceFileException
+	 */
+	private final static Encoding createXtceIntegerEncoding(final IntegerParameterType intParamType) throws InvalidXtceFileException {
+		Encoding encoding = new Encoding();
+		encoding.setSizeInBits(intParamType.getSizeInBits());
+
 		BaseDataTypeChoice baseDataTypeChoice = intParamType.getBaseDataTypeChoice();
 		if (baseDataTypeChoice == null) {
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("Base data type does not have a base data type choice, assuming default of unsigned integer encoding");
 			}
-			return Encoding.unsigned;
+			encoding.setBinaryRepresentation(BinaryRepresentation.unsigned);
 		}
 		IntegerDataEncodingTypeEncodingType xtceEncoding = baseDataTypeChoice.getIntegerDataEncoding().getEncoding();
 		switch (xtceEncoding) {
 			case UNSIGNED:
-				return Encoding.unsigned;
+				encoding.setBinaryRepresentation(BinaryRepresentation.unsigned);
+				break;
 			case TWOSCOMPLIMENT:
-				return Encoding.twosComplement;
+				encoding.setBinaryRepresentation(BinaryRepresentation.twosComplement);
+				break;
 			case BCD:
-				return Encoding.binaryCodedDecimal;
+				encoding.setBinaryRepresentation(BinaryRepresentation.binaryCodedDecimal);
+				break;
 			case ONESCOMPLIMENT:
-				return Encoding.onesComplement;
+				encoding.setBinaryRepresentation(BinaryRepresentation.onesComplement);
+				break;
 			case SIGNMAGNITUDE:
-				return Encoding.signMagnitude;
+				encoding.setBinaryRepresentation(BinaryRepresentation.signMagnitude);
+				break;
 			case PACKEDBCD:
-				return Encoding.packedBinaryCodedDecimal;
+				encoding.setBinaryRepresentation(BinaryRepresentation.packedBinaryCodedDecimal);
+				break;
 			default:
 				throw new InvalidXtceFileException("Invalid integer encoding in type " + intParamType);
 		}
+
+		return encoding;
 	}
 
+	/**
+	 * Covers Java Floats and Doubles.
+	 * @param type
+	 * @return
+	 * @throws InvalidXtceFileException
+	 */
 	private final static Encoding getFloatEncoding(final FloatParameterType type) throws InvalidXtceFileException {
 		BaseDataTypeChoice baseDataTypeChoice = type.getBaseDataTypeChoice();
+
+		Encoding encoding = new Encoding();
+		encoding.setSizeInBits(Long.parseLong(type.getSizeInBits().value()));
+
 		if (baseDataTypeChoice == null) {
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("Base data type does not have a base data type choice, assuming default of IEEE754_1985 float encoding");
 			}
-			return Encoding.IEEE754_1985;
+			encoding.setBinaryRepresentation(BinaryRepresentation.IEEE754_1985);
 		}
 		FloatDataEncodingTypeEncodingType xtceEncoding = baseDataTypeChoice.getFloatDataEncoding().getEncoding();
 
 		switch (xtceEncoding) {
 			case IEEE754_1985:
-				return Encoding.IEEE754_1985;
+				encoding.setBinaryRepresentation(BinaryRepresentation.IEEE754_1985);
+				break;
 			case MILSTD_1750A:
-				return Encoding.MILSTD_1750A;
+				encoding.setBinaryRepresentation(BinaryRepresentation.MILSTD_1750A);
+				break;
 			default:
 				throw new InvalidXtceFileException("Invalid float encoding in type " + type);
 		}
+		return encoding;
 	}
 
 }

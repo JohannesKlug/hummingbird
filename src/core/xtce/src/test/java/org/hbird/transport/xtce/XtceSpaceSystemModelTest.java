@@ -16,6 +16,7 @@ import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupExce
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
 import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
+import org.hbird.transport.xtce.exceptions.UnsupportedXtceConstructException;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -72,7 +73,7 @@ public class XtceSpaceSystemModelTest {
 
 
 	@Test
-	public void testSpaceSystemCreationAllUints() throws InvalidXtceFileException, InvalidParameterTypeException {
+	public void testSpaceSystemCreationAllUints() throws InvalidXtceFileException, InvalidParameterTypeException, NumberFormatException, UnsupportedXtceConstructException {
 		URL testFileUrl = XtceSpaceSystemModelTest.class.getResource("TestSat-all-uints.xml");
 		xtceSsm = factory.createSpaceSystemModel(testFileUrl.getPath());
 
