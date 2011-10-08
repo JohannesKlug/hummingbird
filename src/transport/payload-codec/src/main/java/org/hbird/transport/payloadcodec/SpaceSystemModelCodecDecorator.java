@@ -39,7 +39,7 @@ public final class SpaceSystemModelCodecDecorator {
 
 		// Decorate all parameter group parameters.
 		//FIXME Find a way to link the parameters and parameter group parameters in the space system model layer.
-		for(ParameterGroup pg : newModel.getAllParameterGroups()) {
+		for(ParameterGroup pg : newModel.getParameterGroupsCollection()) {
 			// Decorate all integer parameters...
 			for (Parameter<Integer> parameter : pg.getIntegerParameters()) {
 				parameter = IntegerCodecFactory.decorateParameterWithCodec(parameter);

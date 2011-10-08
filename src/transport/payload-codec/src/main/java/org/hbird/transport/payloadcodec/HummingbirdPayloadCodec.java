@@ -34,7 +34,7 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 			int offset = 0;
 			int previousSize = 0;
 			int count = 0;
-			for(ParameterGroup pg : codecAwareSpaceSystemModel.getAllParameterGroups()) {
+			for(ParameterGroup pg : codecAwareSpaceSystemModel.getParameterGroupsCollection()) {
 				for(Parameter<?> p : pg.getAllParameters().values()) {
 					if(count != 0) {
 						offset += previousSize;
@@ -56,7 +56,7 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 			int offset = 0;
 			int previousSize = 0;
 			int count = 0;
-			for(ParameterGroup pg : codecAwareSpaceSystemModel.getAllParameterGroups()) {
+			for(ParameterGroup pg : codecAwareSpaceSystemModel.getParameterGroupsCollection()) {
 				for(Parameter<?> p : pg.getAllParameters().values()) {
 					if(count != 0) {
 						offset += previousSize;
@@ -77,7 +77,7 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 		String name = pg.getName();
 		// find it in the undecorated version
 		ParameterGroup undecoratedGroup = null;
-		for(ParameterGroup group : spaceSystemModel.getAllParameterGroups()) {
+		for(ParameterGroup group : spaceSystemModel.getParameterGroupsCollection()) {
 			if(StringUtils.equals(group.getName(), name)) {
 				// set the value of the parameters in the undecorated version
 				undecoratedGroup = group.copyAllParameterValues(pg);
@@ -102,7 +102,7 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 
 		String undecoratedGroupName = parameterGroup.getName();
 		ParameterGroup decoratedGroup = null;
-		for(ParameterGroup pg : codecAwareSpaceSystemModel.getAllParameterGroups()) {
+		for(ParameterGroup pg : codecAwareSpaceSystemModel.getParameterGroupsCollection()) {
 			if(StringUtils.equals(pg.getName(), undecoratedGroupName)) {
 				decoratedGroup = pg;
 				// Set parameter values in decorated group to the same as those in the parameterGroup

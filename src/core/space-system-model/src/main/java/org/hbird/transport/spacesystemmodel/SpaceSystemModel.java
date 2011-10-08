@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
@@ -24,9 +25,12 @@ public interface SpaceSystemModel extends Serializable {
 
 	String HUMMINGBIRD_PROCESSED_HEADER = "HEADER";
 
+	String getName();
+
 	// Parameter Group related
 	ParameterGroup getParameterGroup(String qualifiedName) throws UnknownParameterGroupException;
-	Collection<ParameterGroup> getAllParameterGroups();
+	Map<String, ParameterGroup> getParameterGroups();
+	Collection<ParameterGroup> getParameterGroupsCollection();
 
 	// Parameter related
 	Parameter<?> getParameter(String qualifiedName) throws UnknownParameterException;
@@ -38,7 +42,7 @@ public interface SpaceSystemModel extends Serializable {
 	Parameter<Double> getDoubleParameter(String qualifiedName) throws UnknownParameterException;
 	Parameter<Byte[]> getRawParameter(String qualifiedName) throws UnknownParameterException;
 
-	Map<String, Parameter<?>> getAllParameters();
+	Map<String, Parameter<?>> getAllPayloadParameters();
 	Map<String, Parameter<Integer>> getAllIntegerParameters();
 	Map<String, Parameter<Long>> getAllLongParameters();
 	Map<String, Parameter<BigDecimal>> getAllBigDecimalParameters();
@@ -49,7 +53,8 @@ public interface SpaceSystemModel extends Serializable {
 
 	void replaceParameterInModel(String qualifiedName, final Parameter<?> newParameter) throws UnknownParameterException;
 
-	// Payload restriction related
 	Map<String, List<Object>> getAllPayloadRestrictions();
+	Map<String, List<Object>> getRestrictions();
+	Map<String, Encoding> getEncodings();
 
 }

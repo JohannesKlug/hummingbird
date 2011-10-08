@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
+import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
@@ -22,15 +23,19 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	private static final long serialVersionUID = 2532805548202927668L;
 //	private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModel.class);
 
+	private String name;
+
 	private final Map<String, ParameterGroup> parameterGroups = new HashMap<>();
 
 	private final Map<String, List<Object>> restrictions = new HashMap<>();
+
+	private final Map<String, Encoding> encodings = new HashMap<>();
 
 	public XtceSpaceSystemModel() {
 	}
 
 	@Override
-	public Collection<ParameterGroup> getAllParameterGroups() {
+	public Collection<ParameterGroup> getParameterGroupsCollection() {
 		return parameterGroups.values();
 	}
 
@@ -52,7 +57,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	 * @throws UnknownParameterException
 	 */
 	@Override
-	public Map<String, Parameter<?>> getAllParameters() {
+	public Map<String, Parameter<?>> getAllPayloadParameters() {
 		Map<String, Parameter<?>> allParameters = new HashMap<>();
 		for (ParameterGroup pg : this.parameterGroups.values()) {
 			for (String parameterId : pg.getAllParameters().keySet()) {
@@ -179,6 +184,26 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	@Override
 	public Parameter<Byte[]> getRawParameter(final String qualifiedName) throws UnknownParameterException {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Map<String, ParameterGroup> getParameterGroups() {
+		return parameterGroups;
+	}
+
+	@Override
+	public Map<String, List<Object>> getRestrictions() {
+		return restrictions;
+	}
+
+	@Override
+	public Map<String, Encoding> getEncodings() {
+		return encodings;
+	}
+
+	@Override
+	public String getName() {
+		return name;
 	}
 
 }

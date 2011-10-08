@@ -29,7 +29,7 @@ public class SpaceSystemModelCodecDecoratorTest {
 			assertNotNull(cp);
 		}
 
-		for(ParameterGroup pgs : codecModel.getAllParameterGroups()) {
+		for(ParameterGroup pgs : codecModel.getParameterGroupsCollection()) {
 			for(Parameter<Integer> p : pgs.getIntegerParameters()) {
 				if(!(p instanceof CodecParameter<?>)) {
 					fail("Parameter " + p.getName() + " was not decorated by the codec decorator");

@@ -59,7 +59,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Collection<ParameterGroup> getAllParameterGroups() {
+	public Collection<ParameterGroup> getParameterGroupsCollection() {
 		return groups.values();
 	}
 
@@ -72,7 +72,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	 * Order not guaranteed!
 	 */
 	@Override
-	public Map<String, Parameter<?>> getAllParameters() {
+	public Map<String, Parameter<?>> getAllPayloadParameters() {
 		HashMap<String, Parameter<?>> all = new HashMap<String, Parameter<?>>();
 		all.putAll(intParams);
 		all.putAll(longParams);

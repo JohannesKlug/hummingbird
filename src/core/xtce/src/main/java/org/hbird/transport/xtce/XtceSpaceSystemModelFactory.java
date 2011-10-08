@@ -51,6 +51,8 @@ public final class XtceSpaceSystemModelFactory {
 
 	private SpaceSystemModel model;
 
+	private String modelName;
+
 	private int numParameterGroups;
 
 	private final Map<String, ParameterTypeSetTypeItem> xtceParameterTypes = new LinkedHashMap<String, ParameterTypeSetTypeItem>();
@@ -78,13 +80,15 @@ public final class XtceSpaceSystemModelFactory {
 	public XtceSpaceSystemModelFactory() {
 	}
 
-	public final SpaceSystemModel createSpaceSystemModel(final String spaceSystemmodelFilename) throws InvalidXtceFileException, NumberFormatException,
+	public final SpaceSystemModel createSpaceSystemModel(final String spaceSystemmodelFilename) throws InvalidXtceFileException,
 			InvalidParameterTypeException, UnsupportedXtceConstructException {
 		model = new XtceSpaceSystemModel();
 
 		spaceSystem = unmarshallXtceXmlSpaceSystem(spaceSystemmodelFilename);
 
 		numParameterGroups = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItemCount();
+
+		modelName = spaceSystem.getName();
 
 		createTelemetryModel();
 
@@ -113,6 +117,12 @@ public final class XtceSpaceSystemModelFactory {
 					break;
 				case "restrictions":
 					field.set(model, restrictions);
+					break;
+				case "encodings":
+					field.set(model, encodings);
+					break;
+				case "name":
+					field.set(model, modelName);
 					break;
 				default:
 					LOG.debug("Not interested in field : " + name);
@@ -398,10 +408,6 @@ public final class XtceSpaceSystemModelFactory {
 		}
 	}
 
-	private final void populateEncodings(final String qualifiedName, final SequenceContainer parameterGroupContainer) {
-
-	}
-
 	private void populateParameterGroups() throws InvalidXtceFileException {
 		String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
 		ContainerSet containers = spaceSystem.getTelemetryMetaData().getContainerSet();
@@ -428,45 +434,16 @@ public final class XtceSpaceSystemModelFactory {
 		}
 	}
 
-//	private Class findParameter(final String qualifiedName) {
-//		if(integerParameters.containsKey(qualifiedName)) {
-//			return Integer.class;
-////			return integerParameters.get(qualifiedName);
-//		}
-//		if(longParameters.containsKey(qualifiedName)) {
-//			return Long.class;
-////			return longParameters.get(qualifiedName);
-//		}
-//		if(floatParameters.containsKey(qualifiedName)) {
-//			return Float.class;
-////			return floatParameters.get(qualifiedName);
-//		}
-//		if(doubleParameters.containsKey(qualifiedName)) {
-//			return Double.class;
-////			return doubleParameters.get(qualifiedName);
-//		}
-//		if(bigDecimalParameters.containsKey(qualifiedName)) {
-//			return BigDecimal.class;
-////			return bigDecimalParameters.get(qualifiedName);
-//		}
-//		if(stringParameters.containsKey(qualifiedName)) {
-//			return String.class;
-////			return stringParameters.get(qualifiedName);
-//		}
-//		if(rawParameters.containsKey(qualifiedName)) {
-//			return Byte.class;
-////			return rawParameters.get(qualifiedName);
-//		}
-//		return null;
-//	}
-
 
 
 	private void addParameterToGroup(final ParameterGroup group, final String qualifiedName) throws InvalidXtceFileException {
-		if (integerParameters.containsValue(qualifiedName)) {
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Adding " + qualifiedName + " to ParameterGroup " + group.getQualifiedName());
+		}
+		if (integerParameters.containsKey(qualifiedName)) {
 			group.addIntegerParameter(qualifiedName, integerParameters.get(qualifiedName));
 		}
-		else if (longParameters.containsValue(qualifiedName)) {
+		else if (longParameters.containsKey(qualifiedName)) {
 			group.addLongParameter(qualifiedName, longParameters.get(qualifiedName));
 		}
 		else {
@@ -492,7 +469,9 @@ public final class XtceSpaceSystemModelFactory {
 				LOG.debug("Base data type does not have a base data type choice, assuming default of unsigned integer encoding");
 			}
 			encoding.setBinaryRepresentation(BinaryRepresentation.unsigned);
+			return encoding;
 		}
+
 		IntegerDataEncodingTypeEncodingType xtceEncoding = baseDataTypeChoice.getIntegerDataEncoding().getEncoding();
 		switch (xtceEncoding) {
 			case UNSIGNED:
