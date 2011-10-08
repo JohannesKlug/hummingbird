@@ -29,14 +29,14 @@ public interface SpaceSystemModel extends Serializable {
 	Collection<ParameterGroup> getAllParameterGroups();
 
 	// Parameter related
-	Parameter<?> getParameter(long id) throws UnknownParameterException;
-	Parameter<Integer> getIntParameter(long id) throws UnknownParameterException;
-	Parameter<Long> getLongParameter(long id) throws UnknownParameterException;
-	Parameter<BigDecimal> getBigDecimalParameter(long id) throws UnknownParameterException;
-	Parameter<String> getStringParameter(long id) throws UnknownParameterException;
-	Parameter<Float> getFloatParameter(long id) throws UnknownParameterException;
-	Parameter<Double> getDoubleParameter(long id) throws UnknownParameterException;
-	Parameter<Byte[]> getRawParameter(long id) throws UnknownParameterException;
+	Parameter<?> getParameter(String qualifiedName) throws UnknownParameterException;
+	Parameter<Integer> getIntParameter(String qualifiedName) throws UnknownParameterException;
+	Parameter<Long> getLongParameter(String qualifiedName) throws UnknownParameterException;
+	Parameter<BigDecimal> getBigDecimalParameter(String qualifiedName) throws UnknownParameterException;
+	Parameter<String> getStringParameter(String qualifiedName) throws UnknownParameterException;
+	Parameter<Float> getFloatParameter(String qualifiedName) throws UnknownParameterException;
+	Parameter<Double> getDoubleParameter(String qualifiedName) throws UnknownParameterException;
+	Parameter<Byte[]> getRawParameter(String qualifiedName) throws UnknownParameterException;
 
 	Map<String, Parameter<?>> getAllParameters();
 	Map<String, Parameter<Integer>> getAllIntegerParameters();
