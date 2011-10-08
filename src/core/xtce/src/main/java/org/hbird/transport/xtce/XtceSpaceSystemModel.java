@@ -63,44 +63,44 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Parameter<?> getParameter(final long id) throws UnknownParameterException {
+	public Parameter<?> getParameter(final String qualifiedName) throws UnknownParameterException {
 		for (ParameterGroup pg : this.parameterGroups.values()) {
-			if (pg.getAllParameters().containsKey(id)) {
-				return pg.getParameter(id);
+			if (pg.getAllParameters().containsKey(qualifiedName)) {
+				return pg.getParameter(qualifiedName);
 			}
 		}
-		throw new UnknownParameterException(id);
+		throw new UnknownParameterException(qualifiedName);
 	}
 
 	@Override
-	public Parameter<Integer> getIntParameter(final long id) throws UnknownParameterException {
+	public Parameter<Integer> getIntParameter(final String qualifiedName) throws UnknownParameterException {
 		for (ParameterGroup pg : this.parameterGroups.values()) {
-			if (pg.getIntegerParameters().containsKey(id)) {
-				return pg.getIntegerParameter(id);
+			if (pg.getIntegerParameters().containsKey(qualifiedName)) {
+				return pg.getIntegerParameter(qualifiedName);
 			}
 		}
-		throw new UnknownParameterException(id);
+		throw new UnknownParameterException(qualifiedName);
 	}
 
 	@Override
-	public Parameter<Long> getLongParameter(final long id) throws UnknownParameterException {
+	public Parameter<Long> getLongParameter(final String qualifiedName) throws UnknownParameterException {
 		for (ParameterGroup pg : this.parameterGroups.values()) {
-			if (pg.getLongParameters().containsKey(id)) {
-				return pg.getLongParameter(id);
+			if (pg.getLongParameters().containsKey(qualifiedName)) {
+				return pg.getLongParameter(qualifiedName);
 			}
 		}
-		throw new UnknownParameterException(id);
+		throw new UnknownParameterException(qualifiedName);
 	}
 
 	@Override
-	public Map<Long, List<Object>> getAllPayloadRestrictions() {
+	public Map<String, List<Object>> getAllPayloadRestrictions() {
 		return restrictions;
 	}
 
 	@Override
-	public void replaceParameterInModel(final long id, final Parameter<?> newParameter) throws UnknownParameterException {
+	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws UnknownParameterException {
 		for (ParameterGroup pg : this.parameterGroups.values()) {
-			if(pg.getAllParameters().put(id, newParameter) != null) {
+			if(pg.getAllParameters().put(qualifiedName, newParameter) != null) {
 				// Parameter replaced, no need to iterate over the rest of the parameters.
 				break;
 			}
@@ -109,51 +109,27 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Map<Long, Parameter<Integer>> getAllIntegerParameters() {
-		Map<Long, Parameter<Integer>> allParameters = new HashMap<>();
+	public Map<String, Parameter<Integer>> getAllIntegerParameters() {
+		Map<String, Parameter<Integer>> allParameters = new HashMap<>();
 		for (ParameterGroup pg : this.parameterGroups.values()) {
-			for (Long parameterId : pg.getIntegerParameters().keySet()) {
-				allParameters.put(parameterId, pg.getIntegerParameters().get(parameterId));
+			for (String qualifiedName : pg.getIntegerParameters().keySet()) {
+				allParameters.put(qualifiedName, pg.getIntegerParameters().get(qualifiedName));
 			}
 		}
 		return allParameters;
 	}
 
 	@Override
-	public Map<Long, Parameter<Long>> getAllLongParameters() {
-		Map<Long, Parameter<Long>> allParameters = new HashMap<>();
+	public Map<String, Parameter<Long>> getAllLongParameters() {
+		Map<String, Parameter<Long>> allParameters = new HashMap<>();
 		for (ParameterGroup pg : this.parameterGroups.values()) {
-			for (Long parameterId : pg.getLongParameters().keySet()) {
-				allParameters.put(parameterId, pg.getLongParameters().get(parameterId));
+			for (String qualifiedName : pg.getLongParameters().keySet()) {
+				allParameters.put(qualifiedName, pg.getLongParameters().get(qualifiedName));
 			}
 		}
 		return allParameters;
 	}
 
-	@Override
-	public Parameter<BigDecimal> getBigDecimalParameter(final long id) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Parameter<String> getStringParameter(final long id) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Parameter<Float> getFloatParameter(final long id) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Parameter<Double> getDoubleParameter(final long id) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Parameter<Byte[]> getRawParameter(final long id) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
-	}
 
 	@Override
 	public Map<String, Parameter<BigDecimal>> getAllBigDecimalParameters() {
@@ -177,6 +153,31 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public Map<String, Parameter<Byte[]>> getAllRawParameters() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<BigDecimal> getBigDecimalParameter(final String qualifiedName) throws UnknownParameterException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<String> getStringParameter(final String qualifiedName) throws UnknownParameterException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<Float> getFloatParameter(final String qualifiedName) throws UnknownParameterException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<Double> getDoubleParameter(final String qualifiedName) throws UnknownParameterException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<Byte[]> getRawParameter(final String qualifiedName) throws UnknownParameterException {
 		throw new UnsupportedOperationException();
 	}
 
