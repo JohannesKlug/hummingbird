@@ -156,7 +156,7 @@ public final class XtceSpaceSystemModelFactory {
 					if(LOG.isDebugEnabled()) {
 						LOG.debug("Adding Integer parameter " + intParameter.getName());
 					}
-					integerParameters.put(intParameter.getName(), intParameter);
+					integerParameters.put(id++, intParameter);
 				}
 				else {
 					Parameter<Long> longParameter = new HummingbirdParameter<Long>(
@@ -166,7 +166,7 @@ public final class XtceSpaceSystemModelFactory {
 					if(LOG.isDebugEnabled()) {
 						LOG.debug("Adding Long parameter " + longParameter.getName());
 					}
-					longParameters.put(longParameter.getName(), longParameter);
+					longParameters.put(id++, longParameter);
 				}
 			}
 
@@ -179,21 +179,21 @@ public final class XtceSpaceSystemModelFactory {
 								xtceParameter.getParameter().getName(),
 								xtceParameter.getParameter().getShortDescription(),
 								xtceParameter.getParameter().getLongDescription());
-						floatParameters.put(floatParameter.getName(), floatParameter);
+						floatParameters.put(id++, floatParameter);
 						break;
 					case VALUE_64:
 						Parameter<Double> doubleParameter = new HummingbirdParameter<Double>(
 								xtceParameter.getParameter().getName(),
 								xtceParameter.getParameter().getShortDescription(),
 								xtceParameter.getParameter().getLongDescription());
-						doubleParameters.put(doubleParameter.getName(), doubleParameter);
+						doubleParameters.put(id++, doubleParameter);
 						break;
 					case VALUE_128:
 						Parameter<BigDecimal> bigDecimalParameter = new HummingbirdParameter<BigDecimal>(
 								xtceParameter.getParameter().getName(),
 								xtceParameter.getParameter().getShortDescription(),
 								xtceParameter.getParameter().getLongDescription());
-						bigDecimalParameters.put(bigDecimalParameter.getName(), bigDecimalParameter);
+						bigDecimalParameters.put(id++, bigDecimalParameter);
 						break;
 					default:
 						throw new InvalidXtceFileException("Invalid bit size for float type " + type.getName());
@@ -300,7 +300,7 @@ public final class XtceSpaceSystemModelFactory {
 
 			final ParameterGroup parameterGroup = new HummingbirdParameterGroup(xtceContainer.getName(), xtceContainer.getShortDescription(),
 					xtceContainer.getLongDescription());
-			parameterGroups.put(parameterGroup.getName(), parameterGroup);
+			parameterGroups.put(id++, parameterGroup);
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("Created ParameterGroup " + xtceContainer.getName());
 			}

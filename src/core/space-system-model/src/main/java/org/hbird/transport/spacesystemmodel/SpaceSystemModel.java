@@ -38,9 +38,14 @@ public interface SpaceSystemModel extends Serializable {
 	Parameter<Double> getDoubleParameter(long id) throws UnknownParameterException;
 	Parameter<Byte[]> getRawParameter(long id) throws UnknownParameterException;
 
-	Collection<Parameter<?>> getAllParameters();
-	Collection<Parameter<Integer>> getAllIntegerParameters();
-	Collection<Parameter<Long>> getAllLongParameters();
+	Map<Long, Parameter<?>> getAllParameters();
+	Map<Long, Parameter<Integer>> getAllIntegerParameters();
+	Map<Long, Parameter<Long>> getAllLongParameters();
+	Map<Long, Parameter<BigDecimal>> getAllBigDecimalParameters();
+	Map<Long, Parameter<Float>> getAllFloatParameters();
+	Map<Long, Parameter<Double>> getAllDoubleParameters();
+	Map<Long, Parameter<String>> getAllStringParameters();
+	Map<Long, Parameter<Byte[]>> getAllRawParameters();
 
 	void replaceParameterInModel(long id, final Parameter<?> newParameter) throws UnknownParameterException;
 

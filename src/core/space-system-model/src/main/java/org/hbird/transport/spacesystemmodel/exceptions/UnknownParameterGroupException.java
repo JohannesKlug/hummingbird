@@ -28,13 +28,6 @@ public class UnknownParameterGroupException extends Exception {
 		this.containers = containers;
 	}
 
-	/**
-	 * @param message
-	 */
-	public UnknownParameterGroupException(final Map<String, ParameterGroup> containers, final String message) {
-		super(message);
-		this.containers = containers;
-	}
 
 	/**
 	 * @param cause
@@ -55,6 +48,10 @@ public class UnknownParameterGroupException extends Exception {
 
 	public UnknownParameterGroupException(final String name) {
 		super("Requested container not found in Space System Model. Offending contianer name: " + name);
+	}
+
+	public UnknownParameterGroupException(final Map<Long, ParameterGroup> parameterGroups, final String string) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Set<String> getAvailableContainerNames() {
