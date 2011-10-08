@@ -11,6 +11,8 @@ import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
 public interface TmTcGroup extends SpaceSystemModelItem {
 
+	String getName();
+
 	Map<Long, Parameter<?>> getAllParameters();
 
 	Map<Long, Parameter<Integer>> getIntegerParameters();

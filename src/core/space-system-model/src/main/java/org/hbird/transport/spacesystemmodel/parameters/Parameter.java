@@ -10,6 +10,8 @@ import org.hbird.transport.spacesystemmodel.SpaceSystemModelItem;
  */
 public interface Parameter<T> extends SpaceSystemModelItem, Serializable {
 
+	String getName();
+
 	/**
 	 * Returns the value of this parameter.
 	 *

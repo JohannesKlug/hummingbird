@@ -18,6 +18,7 @@ import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 public class HummingbirdParameterGroup implements ParameterGroup {
 	private static final long serialVersionUID = 7810839127277387757L;
 
+	private final String qualifiedName;
 	private final String name;
 	private final String shortDescription;
 	private final String longDescription;
@@ -46,8 +47,9 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	 *            A detailed description of the container.
 	 *
 	 */
-	public HummingbirdParameterGroup(final String name, final String shortDescription, final String longDescription) {
+	public HummingbirdParameterGroup(final String qualifiedName, final String name, final String shortDescription, final String longDescription) {
 		this.name = name;
+		this.qualifiedName = qualifiedName;
 		this.shortDescription = shortDescription;
 		this.longDescription = longDescription;
 	}
@@ -283,6 +285,11 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 			throw new UnknownParameterException(id);
 		}
 		return p;
+	}
+
+	@Override
+	public String getQualifiedName() {
+		return this.qualifiedName;
 	}
 
 

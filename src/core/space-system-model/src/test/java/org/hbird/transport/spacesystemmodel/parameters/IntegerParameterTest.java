@@ -13,7 +13,8 @@ public class IntegerParameterTest {
 	// @formatter:off
 	@Before
 	public void setUp() throws Exception {
-		intParam = new HummingbirdParameter<Integer>("IntParam",
+		intParam = new HummingbirdParameter<Integer>("test/IntParam",
+													 "IntParam",
 													 "Test Param <int>",
 													 "Test parameter typed to an Integer");
 	}

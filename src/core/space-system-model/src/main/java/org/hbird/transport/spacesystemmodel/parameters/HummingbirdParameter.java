@@ -11,6 +11,7 @@ package org.hbird.transport.spacesystemmodel.parameters;
 public class HummingbirdParameter<T> implements Parameter<T> {
 	private static final long serialVersionUID = 4723421286629148964L;
 
+	private final String qualifiedName;
 	private final String name;
 	private final String shortDescription;
 	private final String longDescription;
@@ -25,8 +26,9 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	 * @param endianness
 	 * @param encoding
 	 */
-	public HummingbirdParameter(final String name, final String shortDescription, final String longDescription) {
+	public HummingbirdParameter(final String qualifiedName, final String name, final String shortDescription, final String longDescription) {
 		this.name = name;
+		this.qualifiedName = qualifiedName;
 		this.shortDescription = shortDescription;
 		this.longDescription = longDescription;
 	}
@@ -76,5 +78,10 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 		builder.append(shortDescription);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	@Override
+	public String getQualifiedName() {
+		return this.qualifiedName;
 	}
 }

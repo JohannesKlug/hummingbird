@@ -25,7 +25,7 @@ public interface SpaceSystemModel extends Serializable {
 	String HUMMINGBIRD_PROCESSED_HEADER = "HEADER";
 
 	// Parameter Group related
-	ParameterGroup getParameterGroup(long id) throws UnknownParameterGroupException;
+	ParameterGroup getParameterGroup(String qualifiedName) throws UnknownParameterGroupException;
 	Collection<ParameterGroup> getAllParameterGroups();
 
 	// Parameter related
@@ -38,21 +38,18 @@ public interface SpaceSystemModel extends Serializable {
 	Parameter<Double> getDoubleParameter(long id) throws UnknownParameterException;
 	Parameter<Byte[]> getRawParameter(long id) throws UnknownParameterException;
 
-	Map<Long, Parameter<?>> getAllParameters();
-	Map<Long, Parameter<Integer>> getAllIntegerParameters();
-	Map<Long, Parameter<Long>> getAllLongParameters();
-	Map<Long, Parameter<BigDecimal>> getAllBigDecimalParameters();
-	Map<Long, Parameter<Float>> getAllFloatParameters();
-	Map<Long, Parameter<Double>> getAllDoubleParameters();
-	Map<Long, Parameter<String>> getAllStringParameters();
-	Map<Long, Parameter<Byte[]>> getAllRawParameters();
+	Map<String, Parameter<?>> getAllParameters();
+	Map<String, Parameter<Integer>> getAllIntegerParameters();
+	Map<String, Parameter<Long>> getAllLongParameters();
+	Map<String, Parameter<BigDecimal>> getAllBigDecimalParameters();
+	Map<String, Parameter<Float>> getAllFloatParameters();
+	Map<String, Parameter<Double>> getAllDoubleParameters();
+	Map<String, Parameter<String>> getAllStringParameters();
+	Map<String, Parameter<Byte[]>> getAllRawParameters();
 
-	void replaceParameterInModel(long id, final Parameter<?> newParameter) throws UnknownParameterException;
+	void replaceParameterInModel(String qualifiedName, final Parameter<?> newParameter) throws UnknownParameterException;
 
 	// Payload restriction related
-	Map<Long, List<Object>> getAllPayloadRestrictions();
+	Map<String, List<Object>> getAllPayloadRestrictions();
 
-
-	// Utility
-//	SpaceSystemModel deepClone(final SpaceSystemModel ssm);
 }
