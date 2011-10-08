@@ -50,7 +50,7 @@ public class UnknownParameterGroupException extends Exception {
 		super("Requested container not found in Space System Model. Offending contianer name: " + name);
 	}
 
-	public UnknownParameterGroupException(final Map<Long, ParameterGroup> parameterGroups, final String string) {
+	public UnknownParameterGroupException(final Map<String, ParameterGroup> parameterGroups, final String string) {
 		// TODO Auto-generated constructor stub
 	}
 

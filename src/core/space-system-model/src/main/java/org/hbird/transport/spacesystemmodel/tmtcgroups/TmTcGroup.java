@@ -13,36 +13,36 @@ public interface TmTcGroup extends SpaceSystemModelItem {
 
 	String getName();
 
-	Map<Long, Parameter<?>> getAllParameters();
+	Map<String, Parameter<?>> getAllParameters();
 
-	Map<Long, Parameter<Integer>> getIntegerParameters();
-	Map<Long, Parameter<Long>> getLongParameters();
-	Map<Long, Parameter<BigDecimal>> getBigDecimalParameters();
-	Map<Long, Parameter<String>> getStringParameters();
-	Map<Long, Parameter<Float>> getFloatParameters();
-	Map<Long, Parameter<Double>> getDoubleParameters();
-	Map<Long, Parameter<Byte[]>> getRawParameters();
-
-
-	Parameter<Integer> getIntegerParameter(long id) throws UnknownParameterException;
-	Parameter<Long> getLongParameter(long id) throws UnknownParameterException;
-	Parameter<Float> getFloatParameter(long id) throws UnknownParameterException;
-	Parameter<Double> getDoubleParameter(long id) throws UnknownParameterException;
-	Parameter<BigDecimal> getBigDecimalParameter(long id) throws UnknownParameterException;
-	Parameter<String> getStringParameter(long id) throws UnknownParameterException;
-	Parameter<Byte[]> getRawParameter(long id) throws UnknownParameterException;
-	Parameter<?> getParameter(long id) throws UnknownParameterException;
+	Map<String, Parameter<Integer>> getIntegerParameters();
+	Map<String, Parameter<Long>> getLongParameters();
+	Map<String, Parameter<BigDecimal>> getBigDecimalParameters();
+	Map<String, Parameter<String>> getStringParameters();
+	Map<String, Parameter<Float>> getFloatParameters();
+	Map<String, Parameter<Double>> getDoubleParameters();
+	Map<String, Parameter<Byte[]>> getRawParameters();
 
 
-	void addIntegerParameter(long id, Parameter<Integer> parameter);
-	void addLongParameter(long id, Parameter<Long> parameter);
-	void addBigDecimalParameter(long id, Parameter<BigDecimal> parameter);
-	void addFloatParameter(long id, Parameter<Float> parameter);
-	void addDoubleParameter(long id, Parameter<Double> parameter);
-	void addStringParameter(long id, Parameter<String> parameter);
-	void addRawParameter(long id, Parameter<Byte[]> parameter);
+	Parameter<Integer> getIntegerParameter(String qualifiedName) throws UnknownParameterException;
+	Parameter<Long> getLongParameter(String qualifiedName) throws UnknownParameterException;
+	Parameter<Float> getFloatParameter(String qualifiedName) throws UnknownParameterException;
+	Parameter<Double> getDoubleParameter(String qualifiedName) throws UnknownParameterException;
+	Parameter<BigDecimal> getBigDecimalParameter(String qualifiedName) throws UnknownParameterException;
+	Parameter<String> getStringParameter(String qualifiedName) throws UnknownParameterException;
+	Parameter<Byte[]> getRawParameter(String qualifiedName) throws UnknownParameterException;
+	Parameter<?> getParameter(String qualifiedName) throws UnknownParameterException;
 
-	void replaceParameterInGroup(long id, Parameter<?> parameter) throws ParameterNotInGroupException;
+
+	void addIntegerParameter(String qualifiedName, Parameter<Integer> parameter);
+	void addLongParameter(String qualifiedName, Parameter<Long> parameter);
+	void addBigDecimalParameter(String qualifiedName, Parameter<BigDecimal> parameter);
+	void addFloatParameter(String qualifiedName, Parameter<Float> parameter);
+	void addDoubleParameter(String qualifiedName, Parameter<Double> parameter);
+	void addStringParameter(String qualifiedName, Parameter<String> parameter);
+	void addRawParameter(String qualifiedName, Parameter<Byte[]> parameter);
+
+	void replaceParameterInGroup(String qualifiedName, Parameter<?> parameter) throws ParameterNotInGroupException;
 
 	ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup) throws UnknownParameterGroupException, UnknownParameterException;
 

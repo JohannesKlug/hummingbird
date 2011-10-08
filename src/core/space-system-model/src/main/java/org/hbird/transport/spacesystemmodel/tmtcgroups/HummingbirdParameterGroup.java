@@ -23,18 +23,18 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	private final String shortDescription;
 	private final String longDescription;
 
-	private Map<Long, Parameter<Integer>> integerParameters;
-	private Map<Long, Parameter<Long>> longParameters;
-	private Map<Long, Parameter<Float>> floatParameters;
-	private Map<Long, Parameter<Double>> doubleParameters;
-	private Map<Long, Parameter<BigDecimal>> bigDecimalParameters;
-	private Map<Long, Parameter<String>> stringParameters;
-	private Map<Long, Parameter<Byte[]>> rawParameters;
+	private final Map<String, Parameter<?>> parameters = new LinkedHashMap<>();
+	private Map<String, Parameter<Integer>> integerParameters;
+	private Map<String, Parameter<Long>> longParameters;
+	private Map<String, Parameter<Float>> floatParameters;
+	private Map<String, Parameter<Double>> doubleParameters;
+	private Map<String, Parameter<BigDecimal>> bigDecimalParameters;
+	private Map<String, Parameter<String>> stringParameters;
+	private Map<String, Parameter<Byte[]>> rawParameters;
 
 	private final ParameterGroupReport parameterReport = new ParameterGroupReport();
 
 	/** List of Parameters belonging to this Group */
-	private final Map<Long, Parameter<?>> parameters = new LinkedHashMap<Long, Parameter<?>>();
 
 	/**
 	 * Constructor of the ParameterGroup class.
@@ -70,112 +70,112 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public Map<Long, Parameter<?>> getAllParameters() {
+	public Map<String, Parameter<?>> getAllParameters() {
 		return parameters;
 	}
 
 	@Override
-	public Map<Long, Parameter<Integer>> getIntegerParameters() {
+	public Map<String, Parameter<Integer>> getIntegerParameters() {
 		return integerParameters;
 	}
 
 	@Override
-	public Map<Long, Parameter<Long>> getLongParameters() {
+	public Map<String, Parameter<Long>> getLongParameters() {
 		return longParameters;
 	}
 
 	@Override
-	public Map<Long, Parameter<Float>> getFloatParameters() {
+	public Map<String, Parameter<Float>> getFloatParameters() {
 		return floatParameters;
 	}
 
 	@Override
-	public Map<Long, Parameter<Double>> getDoubleParameters() {
+	public Map<String, Parameter<Double>> getDoubleParameters() {
 		return doubleParameters;
 	}
 
 	@Override
-	public Map<Long, Parameter<BigDecimal>> getBigDecimalParameters() {
+	public Map<String, Parameter<BigDecimal>> getBigDecimalParameters() {
 		return bigDecimalParameters;
 	}
 
 	@Override
-	public Map<Long, Parameter<String>> getStringParameters() {
+	public Map<String, Parameter<String>> getStringParameters() {
 		return stringParameters;
 	}
 
 	@Override
-	public Map<Long, Parameter<Byte[]>> getRawParameters() {
+	public Map<String, Parameter<Byte[]>> getRawParameters() {
 		return rawParameters;
 	}
 
 	@Override
-	public void addIntegerParameter(final long id, final Parameter<Integer> parameter) {
+	public void addIntegerParameter(final String qualifiedName, final Parameter<Integer> parameter) {
 		if (this.integerParameters == null) {
-			this.integerParameters = new LinkedHashMap<Long, Parameter<Integer>>();
+			this.integerParameters = new LinkedHashMap<>();
 		}
-		this.integerParameters.put(id, parameter);
-		this.parameters.put(id, parameter);
+		this.integerParameters.put(qualifiedName, parameter);
+		this.parameters.put(qualifiedName, parameter);
 		this.parameterReport.incrementIntCount();
 	}
 
 	@Override
-	public void addLongParameter(final long id, final Parameter<Long> parameter) {
+	public void addLongParameter(final String qualifiedName, final Parameter<Long> parameter) {
 		if (this.longParameters == null) {
-			this.longParameters = new LinkedHashMap<Long, Parameter<Long>>();
+			this.longParameters = new LinkedHashMap<>();
 		}
-		this.longParameters.put(id, parameter);
-		this.parameters.put(id, parameter);
+		this.longParameters.put(qualifiedName, parameter);
+		this.parameters.put(qualifiedName, parameter);
 		this.parameterReport.incrementLongCount();
 	}
 
 	@Override
-	public void addBigDecimalParameter(final long id, final Parameter<BigDecimal> parameter) {
+	public void addBigDecimalParameter(final String qualifiedName, final Parameter<BigDecimal> parameter) {
 		if (this.bigDecimalParameters == null) {
-			this.bigDecimalParameters = new LinkedHashMap<Long, Parameter<BigDecimal>>();
+			this.bigDecimalParameters = new LinkedHashMap<>();
 		}
-		this.bigDecimalParameters.put(id, parameter);
-		this.parameters.put(id, parameter);
+		this.bigDecimalParameters.put(qualifiedName, parameter);
+		this.parameters.put(qualifiedName, parameter);
 		this.parameterReport.incrementBigDecimalCount();
 	}
 
 	@Override
-	public void addFloatParameter(final long id, final Parameter<Float> parameter) {
+	public void addFloatParameter(final String qualifiedName, final Parameter<Float> parameter) {
 		if (this.floatParameters == null) {
-			this.floatParameters = new LinkedHashMap<Long, Parameter<Float>>();
+			this.floatParameters = new LinkedHashMap<>();
 		}
-		this.floatParameters.put(id, parameter);
-		this.parameters.put(id, parameter);
+		this.floatParameters.put(qualifiedName, parameter);
+		this.parameters.put(qualifiedName, parameter);
 		this.parameterReport.incrementFloatCount();
 	}
 
 	@Override
-	public void addDoubleParameter(final long id, final Parameter<Double> parameter) {
+	public void addDoubleParameter(final String qualifiedName, final Parameter<Double> parameter) {
 		if (this.doubleParameters == null) {
-			this.doubleParameters = new LinkedHashMap<Long, Parameter<Double>>();
+			this.doubleParameters = new LinkedHashMap<>();
 		}
-		this.doubleParameters.put(id, parameter);
-		this.parameters.put(id, parameter);
+		this.doubleParameters.put(qualifiedName, parameter);
+		this.parameters.put(qualifiedName, parameter);
 		this.parameterReport.incrementDoubleCount();
 	}
 
 	@Override
-	public void addStringParameter(final long id, final Parameter<String> parameter) {
+	public void addStringParameter(final String qualifiedName, final Parameter<String> parameter) {
 		if (this.stringParameters == null) {
-			this.stringParameters = new LinkedHashMap<Long, Parameter<String>>();
+			this.stringParameters = new LinkedHashMap<>();
 		}
-		this.stringParameters.put(id, parameter);
-		this.parameters.put(id, parameter);
+		this.stringParameters.put(qualifiedName, parameter);
+		this.parameters.put(qualifiedName, parameter);
 		this.parameterReport.incrementStringCount();
 	}
 
 	@Override
-	public void addRawParameter(final long id, final Parameter<Byte[]> parameter) {
+	public void addRawParameter(final String qualifiedName, final Parameter<Byte[]> parameter) {
 		if (this.rawParameters == null) {
-			this.rawParameters = new LinkedHashMap<Long, Parameter<Byte[]>>();
+			this.rawParameters = new LinkedHashMap<>();
 		}
-		this.rawParameters.put(id, parameter);
-		this.parameters.put(id, parameter);
+		this.rawParameters.put(qualifiedName, parameter);
+		this.parameters.put(qualifiedName, parameter);
 		this.parameterReport.incrementRawCount();
 	}
 
@@ -188,52 +188,52 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	// it is safe to cast.
 	@SuppressWarnings("unchecked")
 	@Override
-	public void replaceParameterInGroup(final long id, final Parameter<?> parameter) throws ParameterNotInGroupException {
+	public void replaceParameterInGroup(final String qualifiedName, final Parameter<?> parameter) throws ParameterNotInGroupException {
 		String pname = parameter.getName();
 		if (integerParameters.containsKey(pname)) {
-			integerParameters.put(id, (Parameter<Integer>) parameter);
+			integerParameters.put(qualifiedName, (Parameter<Integer>) parameter);
 		}
 		else if (longParameters.containsKey(pname)) {
-			longParameters.put(id, (Parameter<Long>) parameter);
+			longParameters.put(qualifiedName, (Parameter<Long>) parameter);
 		}
 		else if (bigDecimalParameters.containsKey(pname)) {
-			bigDecimalParameters.put(id, (Parameter<BigDecimal>) parameter);
+			bigDecimalParameters.put(qualifiedName, (Parameter<BigDecimal>) parameter);
 		}
 		else if (floatParameters.containsKey(pname)) {
-			floatParameters.put(id, (Parameter<Float>) parameter);
+			floatParameters.put(qualifiedName, (Parameter<Float>) parameter);
 		}
 		else if (doubleParameters.containsKey(pname)) {
-			doubleParameters.put(id, (Parameter<Double>) parameter);
+			doubleParameters.put(qualifiedName, (Parameter<Double>) parameter);
 		}
 		else if (stringParameters.containsKey(pname)) {
-			stringParameters.put(id, (Parameter<String>) parameter);
+			stringParameters.put(qualifiedName, (Parameter<String>) parameter);
 		}
 		else if (rawParameters.containsKey(pname)) {
-			rawParameters.put(id, (Parameter<Byte[]>) parameter);
+			rawParameters.put(qualifiedName, (Parameter<Byte[]>) parameter);
 		}
 		else {
 			throw new ParameterNotInGroupException(parameter);
 		}
 
 		if (parameters.containsKey(pname)) {
-			parameters.put(id, parameter);
+			parameters.put(qualifiedName, parameter);
 		}
 	}
 
 	@Override
-	public Parameter<Integer> getIntegerParameter(final long id) throws UnknownParameterException {
-		Parameter<Integer> p = integerParameters.get(id);
+	public Parameter<Integer> getIntegerParameter(final String qualifiedName) throws UnknownParameterException {
+		Parameter<Integer> p = integerParameters.get(qualifiedName);
 		if (p == null) {
-			throw new UnknownParameterException(id);
+			throw new UnknownParameterException(qualifiedName);
 		}
 		return p;
 	}
 
 	@Override
-	public Parameter<Long> getLongParameter(final long id) throws UnknownParameterException {
-		Parameter<Long> p = longParameters.get(id);
+	public Parameter<Long> getLongParameter(final String qualifiedName) throws UnknownParameterException {
+		Parameter<Long> p = longParameters.get(qualifiedName);
 		if (p == null) {
-			throw new UnknownParameterException(id);
+			throw new UnknownParameterException(qualifiedName);
 		}
 		return p;
 	}
@@ -241,48 +241,24 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	@Override
 	public ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup) throws UnknownParameterGroupException, UnknownParameterException {
 		// Ints
-		for(long id : integerParameters.keySet()) {
-			getIntegerParameter(id).setValue(sourceGroup.getIntegerParameter(id).getValue());
+		for(String qualifiedName : integerParameters.keySet()) {
+			getIntegerParameter(qualifiedName).setValue(sourceGroup.getIntegerParameter(qualifiedName).getValue());
 		}
 
-		for(long id : longParameters.keySet()) {
-			getLongParameter(id).setValue(sourceGroup.getLongParameter(id).getValue());
+		for(String qualifiedName : longParameters.keySet()) {
+			getLongParameter(qualifiedName).setValue(sourceGroup.getLongParameter(qualifiedName).getValue());
 		}
 		// FIXME Add support for other types.
 
 		return this;
 	}
 
-	@Override
-	public Parameter<Float> getFloatParameter(final long id) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
-	}
 
 	@Override
-	public Parameter<Double> getDoubleParameter(final long id) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Parameter<BigDecimal> getBigDecimalParameter(final long id) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Parameter<String> getStringParameter(final long id) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Parameter<Byte[]> getRawParameter(final long id) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Parameter<?> getParameter(final long id) throws UnknownParameterException {
-		Parameter<?> p = parameters.get(id);
+	public Parameter<?> getParameter(final String qualifiedName) throws UnknownParameterException {
+		Parameter<?> p = parameters.get(qualifiedName);
 		if (p == null) {
-			throw new UnknownParameterException(id);
+			throw new UnknownParameterException(qualifiedName);
 		}
 		return p;
 	}
@@ -290,6 +266,31 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	@Override
 	public String getQualifiedName() {
 		return this.qualifiedName;
+	}
+
+	@Override
+	public Parameter<Float> getFloatParameter(final String qualifiedName) throws UnknownParameterException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<Double> getDoubleParameter(final String qualifiedName) throws UnknownParameterException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<BigDecimal> getBigDecimalParameter(final String qualifiedName) throws UnknownParameterException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<String> getStringParameter(final String qualifiedName) throws UnknownParameterException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Parameter<Byte[]> getRawParameter(final String qualifiedName) throws UnknownParameterException {
+		throw new UnsupportedOperationException();
 	}
 
 

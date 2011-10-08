@@ -22,9 +22,9 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	private static final long serialVersionUID = 2532805548202927668L;
 //	private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModel.class);
 
-	private final Map<Long, ParameterGroup> parameterGroups = new HashMap<>();
+	private final Map<String, ParameterGroup> parameterGroups = new HashMap<>();
 
-	private final Map<Long, List<Object>> restrictions = new HashMap<>();
+	private final Map<String, List<Object>> restrictions = new HashMap<>();
 
 	public XtceSpaceSystemModel() {
 	}
@@ -35,11 +35,11 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public ParameterGroup getParameterGroup(final long id) throws UnknownParameterGroupException {
-		final ParameterGroup container = parameterGroups.get(id);
+	public ParameterGroup getParameterGroup(final String qualifiedName) throws UnknownParameterGroupException {
+		final ParameterGroup container = parameterGroups.get(qualifiedName);
 
 		if (container == null) {
-			throw new UnknownParameterGroupException(parameterGroups, "Your container lookup for '" + id
+			throw new UnknownParameterGroupException(parameterGroups, "Your container lookup for '" + qualifiedName
 					+ "' did not return any containers. Check your SpaceSystem configuration.");
 		}
 
@@ -52,10 +52,10 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	 * @throws UnknownParameterException
 	 */
 	@Override
-	public Map<Long, Parameter<?>> getAllParameters() {
-		Map<Long, Parameter<?>> allParameters = new HashMap<>();
+	public Map<String, Parameter<?>> getAllParameters() {
+		Map<String, Parameter<?>> allParameters = new HashMap<>();
 		for (ParameterGroup pg : this.parameterGroups.values()) {
-			for (Long parameterId : pg.getAllParameters().keySet()) {
+			for (String parameterId : pg.getAllParameters().keySet()) {
 				allParameters.put(parameterId, pg.getAllParameters().get(parameterId));
 			}
 		}
@@ -156,27 +156,27 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Map<Long, Parameter<BigDecimal>> getAllBigDecimalParameters() {
+	public Map<String, Parameter<BigDecimal>> getAllBigDecimalParameters() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Map<Long, Parameter<Float>> getAllFloatParameters() {
+	public Map<String, Parameter<Float>> getAllFloatParameters() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Map<Long, Parameter<Double>> getAllDoubleParameters() {
+	public Map<String, Parameter<Double>> getAllDoubleParameters() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Map<Long, Parameter<String>> getAllStringParameters() {
+	public Map<String, Parameter<String>> getAllStringParameters() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Map<Long, Parameter<Byte[]>> getAllRawParameters() {
+	public Map<String, Parameter<Byte[]>> getAllRawParameters() {
 		throw new UnsupportedOperationException();
 	}
 
