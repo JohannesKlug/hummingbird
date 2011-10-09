@@ -44,6 +44,8 @@ import org.hbird.transport.xtce.utils.XtceToJavaMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.primitives.Ints;
+
 public final class XtceSpaceSystemModelFactory {
 	private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModelFactory.class);
 
@@ -461,7 +463,17 @@ public final class XtceSpaceSystemModelFactory {
 	 */
 	private final static Encoding createXtceIntegerEncoding(final IntegerParameterType intParamType) throws InvalidXtceFileException {
 		Encoding encoding = new Encoding();
-		encoding.setSizeInBits(intParamType.getSizeInBits());
+
+		int sizeInBits = 0;
+		try {
+			sizeInBits = Ints.checkedCast(intParamType.getSizeInBits());
+		}
+		catch (IllegalArgumentException e) {
+			throw new InvalidXtceFileException("Illegal value (" + intParamType.getSizeInBits() + ") defined as size in bits for parameter type " + intParamType.getName() +
+					  ". Hummingbird suppports sizes up to " + Integer.MAX_VALUE + ".");
+		}
+
+		encoding.setSizeInBits(sizeInBits);
 
 		BaseDataTypeChoice baseDataTypeChoice = intParamType.getBaseDataTypeChoice();
 		if (baseDataTypeChoice == null) {
@@ -509,7 +521,7 @@ public final class XtceSpaceSystemModelFactory {
 		BaseDataTypeChoice baseDataTypeChoice = type.getBaseDataTypeChoice();
 
 		Encoding encoding = new Encoding();
-		encoding.setSizeInBits(Long.parseLong(type.getSizeInBits().value()));
+		encoding.setSizeInBits(Integer.parseInt(type.getSizeInBits().value()));
 
 		if (baseDataTypeChoice == null) {
 			if (LOG.isDebugEnabled()) {

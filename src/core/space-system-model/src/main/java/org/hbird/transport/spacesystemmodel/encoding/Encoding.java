@@ -6,14 +6,14 @@ public class Encoding {
 		unsigned, signMagnitude, twosComplement, onesComplement, binaryCodedDecimal, packedBinaryCodedDecimal, UTF8, UTF16, IEEE754_1985, MILSTD_1750A
 	}
 
-	private long sizeInBits;
+	private int sizeInBits;
 	private BinaryRepresentation binaryRepresentation;
 
 
-	public long getSizeInBits() {
+	public int getSizeInBits() {
 		return sizeInBits;
 	}
-	public void setSizeInBits(final long sizeInBits) {
+	public void setSizeInBits(final int sizeInBits) {
 		this.sizeInBits = sizeInBits;
 	}
 	public BinaryRepresentation getBinaryRepresentation() {
