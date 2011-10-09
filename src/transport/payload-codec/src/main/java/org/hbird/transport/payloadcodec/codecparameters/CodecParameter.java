@@ -2,6 +2,7 @@ package org.hbird.transport.payloadcodec.codecparameters;
 
 import java.util.BitSet;
 
+import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
 
@@ -17,8 +18,11 @@ public abstract class CodecParameter<T> implements Parameter<T> {
 
 	protected Parameter<T> parameter;
 
-	public CodecParameter(final Parameter<T> hostParameter) {
+	protected Encoding encoding;
+
+	public CodecParameter(final Parameter<T> hostParameter, final Encoding encoding) {
 		this.parameter = hostParameter;
+		this.encoding = encoding;
 	}
 
 	public abstract void decode(byte[] inBytes, int offset);
@@ -34,16 +38,9 @@ public abstract class CodecParameter<T> implements Parameter<T> {
 	// ----------------------------------------------------------------------------------------
 
 	@Override
-	public int getSizeInBits() {
-		return parameter.getSizeInBits();
+	public String getQualifiedName() {
+		return parameter.getQualifiedName();
 	}
-
-
-	@Override
-	public Encoding getEncoding() {
-		return parameter.getEncoding();
-	}
-
 
 	@Override
 	public boolean isValue(final Object obj) {
@@ -85,6 +82,10 @@ public abstract class CodecParameter<T> implements Parameter<T> {
 		builder.append(parameter);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	public void setEncoding(final Encoding encoding) {
+		this.encoding = encoding;
 	}
 
 }
