@@ -5,6 +5,7 @@ import java.util.BitSet;
 import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.BytesUtility;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
+import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +21,8 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 	private static final long serialVersionUID = 6820348312687042896L;
 	private static final Logger LOG = LoggerFactory.getLogger(UnsignedIntegerCodecParameter.class);
 
-	public UnsignedIntegerCodecParameter(final Parameter<Integer> hostParameter) {
-		super(hostParameter);
+	public UnsignedIntegerCodecParameter(final Parameter<Integer> hostParameter, final Encoding encoding) {
+		super(hostParameter, encoding);
 	}
 
 	// @Override
@@ -103,19 +104,18 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 
 	@Override
 	public void decode(final BitSet inBitset, final int offset) {
-
-		BitSet actualParameter = inBitset.get(offset, offset + getSizeInBits());
+		BitSet actualParameter = inBitset.get(offset, offset + encoding.getSizeInBits());
 
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("Extracting " + getSizeInBits() + " bit int value from " + BitSetUtility.binDump(actualParameter));
+			LOG.debug("Extracting " + encoding.getSizeInBits() + " bit int value from " + BitSetUtility.binDump(actualParameter));
 		}
 
-		final byte[] byteArray = BitSetUtility.toByteArray(actualParameter, getSizeInBits());
+		final byte[] byteArray = BitSetUtility.toByteArray(actualParameter, encoding.getSizeInBits());
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Byte array = " + BytesUtility.decimalDump(byteArray));
 		}
 
-		final int output = BytesUtility.combine(byteArray, getSizeInBits(), false).intValue();
+		final int output = BytesUtility.combine(byteArray, encoding.getSizeInBits(), false).intValue();
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Testing combine.  Output(bin) = " + Long.toBinaryString(output));
 			LOG.debug("Testing combine.  Output(dec) = " + output);
@@ -130,19 +130,19 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 
 		// checking whether the value fits into the bit string of length - 1
 		final long absValue = Math.abs(unsignedInt);
-		if (absValue > Math.pow(2.0, getSizeInBits()) - 1 || unsignedInt == Long.MIN_VALUE) {
-			throw new RuntimeException("The value of " + unsignedInt + " does not fit into a bit string of " + (getSizeInBits() - 1) + " bits.");
+		if (absValue > Math.pow(2.0, encoding.getSizeInBits()) - 1 || unsignedInt == Long.MIN_VALUE) {
+			throw new RuntimeException("The value of " + unsignedInt + " does not fit into a bit string of " + (encoding.getSizeInBits() - 1) + " bits.");
 		}
 
 		// setting all bits to zero
-		out.clear(offset, offset + getSizeInBits() - 1);
+		out.clear(offset, offset + encoding.getSizeInBits() - 1);
 
 		// setting up the number in reverse order
 		int mask = 1;
 
-		int encodingOffset = offset + getSizeInBits() - 1;
+		int encodingOffset = offset + encoding.getSizeInBits() - 1;
 
-		for (int i = 0; i < getSizeInBits(); i++, mask <<= 1) {
+		for (int i = 0; i < encoding.getSizeInBits(); i++, mask <<= 1) {
 			if ((mask & absValue) > 0) {
 				out.set(encodingOffset - i);
 			}

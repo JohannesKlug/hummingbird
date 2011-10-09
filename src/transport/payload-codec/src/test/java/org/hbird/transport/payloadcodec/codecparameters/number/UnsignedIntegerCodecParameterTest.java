@@ -5,11 +5,11 @@ import static org.junit.Assert.assertEquals;
 import java.util.BitSet;
 
 import org.hbird.transport.commons.util.BitSetUtility;
-import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
+import org.hbird.transport.spacesystemmodel.encoding.Encoding;
+import org.hbird.transport.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,7 +22,7 @@ public class UnsignedIntegerCodecParameterTest {
 	private final static String TEST_STR_VALUE_BE_555 = "1000101011";
 	private final static int TEST_VALUE_LENGTH_BE_555 = 10;
 	private static BitSet TEST_BITSET_VALUE_BE_555;
-	
+
 	private final static String TEST_STR_VALUE_BE_1024 = "10000000000";
 	private final static int TEST_VALUE_LENGTH_1024 = 11;
 	private static BitSet TEST_BITSET_VALUE_BE_1024;
@@ -74,8 +74,9 @@ public class UnsignedIntegerCodecParameterTest {
 	@Test
 	public void testBigEndianValueFromBitSet() throws InvalidParameterTypeException {
 		LOG.info("###################### Beginning test #######################");
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", TEST_VALUE_LENGTH_BE_555, Encoding.unsigned);
-		UnsignedIntegerCodecParameter codec = new UnsignedIntegerCodecParameter(p);
+		Parameter<Integer> p = new HummingbirdParameter<Integer>("test.unit", "uint", "", "");
+		Encoding enc = new Encoding(TEST_VALUE_LENGTH_BE_555, BinaryRepresentation.unsigned);
+		UnsignedIntegerCodecParameter codec = new UnsignedIntegerCodecParameter(p, enc);
 		codec.decode(TEST_BITSET_VALUE_BE_555, 0);
 		assertEquals(555, codec.getValue().intValue());
 	}
@@ -83,8 +84,9 @@ public class UnsignedIntegerCodecParameterTest {
 	@Test
 	public void testBigEndianBoundaryValueFromBitSet() throws InvalidParameterTypeException {
 		LOG.info("###################### Beginning test #######################");
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", TEST_VALUE_LENGTH_1024, Encoding.unsigned);
-		UnsignedIntegerCodecParameter codec = new UnsignedIntegerCodecParameter(p);
+		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", "");
+		Encoding enc = new Encoding(TEST_VALUE_LENGTH_1024, BinaryRepresentation.unsigned);
+		UnsignedIntegerCodecParameter codec = new UnsignedIntegerCodecParameter(p, enc);
 		codec.decode(TEST_BITSET_VALUE_BE_1024, 0);
 		assertEquals(1024, codec.getValue().intValue());
 	}
@@ -93,8 +95,9 @@ public class UnsignedIntegerCodecParameterTest {
 	@Test
 	public void testZeroByteContainingValueFromBitSet() throws InvalidParameterTypeException {
 		LOG.info("###################### Beginning test #######################");
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", TEST_VALUE_LENGTH_BE_123_32bit, Encoding.unsigned);
-		UnsignedIntegerCodecParameter codecParam = new UnsignedIntegerCodecParameter(p);
+		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", "");
+		Encoding enc = new Encoding(TEST_VALUE_LENGTH_BE_123_32bit, BinaryRepresentation.unsigned);
+		UnsignedIntegerCodecParameter codecParam = new UnsignedIntegerCodecParameter(p, enc);
 		codecParam.decode(TEST_BITSET_VALUE_123_32bit, 0);
 		assertEquals(123, codecParam.getValue().intValue());
 	}
@@ -103,8 +106,9 @@ public class UnsignedIntegerCodecParameterTest {
 	@Test
 	public final void testLeadingZeroBE999ValueFromBitSet() throws InvalidParameterTypeException {
 		LOG.info("###################### Beginning test #######################");
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", TEST_VALUE_LENGTH_BE_999, Encoding.unsigned);
-		UnsignedIntegerCodecParameter behaviour = new UnsignedIntegerCodecParameter(p);
+		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", "");
+		Encoding enc = new Encoding(TEST_VALUE_LENGTH_BE_999, BinaryRepresentation.unsigned);
+		UnsignedIntegerCodecParameter behaviour = new UnsignedIntegerCodecParameter(p, enc);
 		behaviour.decode(TEST_BITSET_VALUE_BE_999, 0);
 		assertEquals(999, behaviour.getValue().intValue());
 	}
@@ -114,18 +118,19 @@ public class UnsignedIntegerCodecParameterTest {
 	public final void testInsertIntoBitSetBE555() {
 		LOG.info("###################### Beginning test #######################");
 		BitSet actual = new BitSet();
-		
-		Parameter<Integer> parameter = new HummingbirdParameter<Integer>("", "", "", TEST_VALUE_LENGTH_BE_555, Encoding.unsigned);
+
+		Parameter<Integer> parameter = new HummingbirdParameter<Integer>("", "", "", "");
 		parameter.setValue(555);
-		UnsignedIntegerCodecParameter codecParameter = new UnsignedIntegerCodecParameter(parameter);
-		
+		Encoding enc = new Encoding(TEST_VALUE_LENGTH_BE_555, BinaryRepresentation.unsigned);
+		UnsignedIntegerCodecParameter codecParameter = new UnsignedIntegerCodecParameter(parameter, enc);
+
 		actual = codecParameter.encodeToBitSet(actual, 0);
 		assertEquals(actual, TEST_BITSET_VALUE_BE_555);
-		
+
 		System.out.println(BitSetUtility.binDump(TEST_BITSET_VALUE_BE_555));
 		System.out.println(BitSetUtility.binDump(actual));
 	}
-	
+
 	//
 	// @Test
 	// public final void testInsertIntoBitSetLE555() throws
