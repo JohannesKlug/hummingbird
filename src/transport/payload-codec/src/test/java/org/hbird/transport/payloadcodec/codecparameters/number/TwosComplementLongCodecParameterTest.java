@@ -7,9 +7,10 @@ import java.util.BitSet;
 import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
+import org.hbird.transport.spacesystemmodel.encoding.Encoding;
+import org.hbird.transport.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -32,7 +33,7 @@ public class TwosComplementLongCodecParameterTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		LOG.info("--------- Setup stuff -------------------------");
+		LOG.info("--------- Setup -------------------------");
 		TEST_LONG_BITSET_BE = BitSetUtility.stringToBitSet(TEST_LONG_STR_BE, true, true);
 		System.out.println(BitSetUtility.binDump(TEST_LONG_BITSET_BE));
 		TEST_MAX_LONG_BITSET = BitSetUtility.stringToBitSet(TEST_MAX_LONG_STR, true, true);
@@ -42,9 +43,11 @@ public class TwosComplementLongCodecParameterTest {
 
 	@Before
 	public void setUp() throws Exception {
-		Parameter<Long> parameterBigEndian = new HummingbirdParameter<Long>("", "", "", 64, Encoding.twosComplement);
+		Parameter<Long> parameterBigEndian = new HummingbirdParameter<Long>("test.beLongParameter", "beLongParaemter", "", "");
+		Encoding enc = new Encoding(64, BinaryRepresentation.twosComplement);
+
 		parameterBigEndian.setValue(TEST_LONG);
-		codec = new TwosComplementLongCodecParameter(parameterBigEndian);
+		codec = new TwosComplementLongCodecParameter(parameterBigEndian, enc);
 	}
 
 	@SuppressWarnings("static-method")

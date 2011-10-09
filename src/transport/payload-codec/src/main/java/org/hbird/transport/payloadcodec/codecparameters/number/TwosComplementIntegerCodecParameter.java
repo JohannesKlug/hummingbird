@@ -5,6 +5,7 @@ import java.util.BitSet;
 import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.BytesUtility;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
+import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +19,9 @@ public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer>
 
 	private static final Logger LOG = LoggerFactory.getLogger(TwosComplementIntegerCodecParameter.class);
 
-	public TwosComplementIntegerCodecParameter(final Parameter<Integer> hostParameter) {
-		super(hostParameter);
+	public TwosComplementIntegerCodecParameter(final Parameter<Integer> hostParameter, final Encoding encoding) {
+		super(hostParameter, encoding);
 	}
-
 
 	@Override
 	public void decode(final byte[] inBytes, final int offset) {
@@ -29,17 +29,16 @@ public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer>
 
 	}
 
-
 	@Override
 	public void decode(final BitSet inBitset, final int offset) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("Extracting " + getSizeInBits() + " bit int value from " + BitSetUtility.binDump(inBitset));
+			LOG.debug("Extracting " + encoding.getSizeInBits() + " bit int value from " + BitSetUtility.binDump(inBitset));
 		}
 
-		BitSet actualParameter = inBitset.get(0, getSizeInBits());
+		BitSet actualParameter = inBitset.get(0, encoding.getSizeInBits());
 
-		final byte[] byteArray = BitSetUtility.toByteArray(actualParameter, getSizeInBits());
-		final Integer output = Integer.valueOf(BytesUtility.combine(byteArray, getSizeInBits(), true).intValue());
+		final byte[] byteArray = BitSetUtility.toByteArray(actualParameter, encoding.getSizeInBits());
+		final Integer output = Integer.valueOf(BytesUtility.combine(byteArray, encoding.getSizeInBits(), true).intValue());
 
 		this.setValue(output);
 	}
@@ -61,9 +60,9 @@ public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer>
 
 		// checking whether the value fits into the bit string of length - 1
 		final long absValue = Math.abs(unsignedInt);
-		if (absValue > Math.pow(2.0, getSizeInBits()) - 1 || unsignedInt == Long.MIN_VALUE) {
-			throw new RuntimeException("The value of " + unsignedInt + " does not fit into a bit string of "
-					+ (getSizeInBits() - 1) + " bits.");
+		if (absValue > Math.pow(2.0, encoding.getSizeInBits()) - 1 || unsignedInt == Long.MIN_VALUE) {
+			// TODO Could indicate a programming or configuration bug which is not recoverable. Maybe System.exit?
+			throw new IllegalArgumentException("The value of " + unsignedInt + " does not fit into a bit string of " + (encoding.getSizeInBits() - 1) + " bits.");
 		}
 
 		// setting all bits to zero
@@ -71,9 +70,9 @@ public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer>
 
 		// setting up the number in reverse order
 		int mask = 1;
-		offset += getSizeInBits() - 1;
+		offset += encoding.getSizeInBits() - 1;
 
-		for (int i = 0; i < getSizeInBits(); i++, mask <<= 1) {
+		for (int i = 0; i < encoding.getSizeInBits(); i++, mask <<= 1) {
 			if ((mask & absValue) > 0) {
 				result.set(offset - i);
 			}

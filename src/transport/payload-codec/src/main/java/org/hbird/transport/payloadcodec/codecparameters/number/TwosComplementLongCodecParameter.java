@@ -5,6 +5,7 @@ import java.util.BitSet;
 
 import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
+import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,23 +19,18 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = -6520952692018179861L;
 	/** Logger for this class */
-	private final static Logger LOG = LoggerFactory.getLogger(TwosComplementLongCodecParameter.class);
+	private static final Logger LOG = LoggerFactory.getLogger(TwosComplementLongCodecParameter.class);
 
 
-	public TwosComplementLongCodecParameter(final Parameter<Long> hostParameter) {
-		super(hostParameter);
+	public TwosComplementLongCodecParameter(final Parameter<Long> hostParameter, final Encoding encoding) {
+		super(hostParameter, encoding);
 	}
 
 
 	@Override
 	public void decode(final byte[] inBytes, final int offset) {
-		// TODO Auto-generated method stub
-		//
 		throw new UnsupportedOperationException();
 	}
 
@@ -46,7 +42,7 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 
 		String binaryString = BitSetUtility.bitSetToBinaryString(inBitset, false);
 
-		binaryString = binaryString.substring(offset, offset + getSizeInBits());
+		binaryString = binaryString.substring(offset, offset + encoding.getSizeInBits());
 
 		// If we are dealing with a negative number...
 		if (binaryString.startsWith("1")) {
@@ -66,14 +62,13 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 
 	@Override
 	public Byte[] encodeToByteArray(final Byte[] targetBytes, final int offset) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public BitSet encodeToBitSet(final BitSet out, final int offset) {
 		long longValue = getValue();
-		int endLocation = offset + getSizeInBits() - 1;
+		int endLocation = offset + encoding.getSizeInBits() - 1;
 
 		// setting all bits to zero
 		out.clear(offset, endLocation);
@@ -81,7 +76,7 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 		// setting up the number in reverse order
 		long mask = 1;
 
-		for (int i = 0; i < getSizeInBits(); i++, mask <<= 1) {
+		for (int i = 0; i < encoding.getSizeInBits(); i++, mask <<= 1) {
 			if ((mask & longValue) > 0) {
 				out.set(endLocation - i);
 			}
