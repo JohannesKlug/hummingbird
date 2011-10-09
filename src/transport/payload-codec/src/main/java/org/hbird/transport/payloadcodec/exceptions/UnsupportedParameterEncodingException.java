@@ -1,6 +1,7 @@
 package org.hbird.transport.payloadcodec.exceptions;
 
-import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
+import org.hbird.transport.spacesystemmodel.encoding.Encoding;
+
 
 
 public class UnsupportedParameterEncodingException extends Exception {
