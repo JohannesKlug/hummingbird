@@ -104,13 +104,17 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws UnknownParameterException {
+		boolean replaced = false;
 		for (ParameterGroup pg : this.parameterGroups.values()) {
 			if (pg.getAllParameters().put(qualifiedName, newParameter) != null) {
 				// Parameter replaced, no need to iterate over the rest of the parameters.
+				replaced = true;
 				break;
 			}
 		}
-		throw new UnknownParameterException(newParameter.getName());
+		if (!replaced) {
+			throw new UnknownParameterException(newParameter.getQualifiedName());
+		}
 	}
 
 	@Override
