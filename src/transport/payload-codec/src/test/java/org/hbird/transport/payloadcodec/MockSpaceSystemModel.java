@@ -34,22 +34,22 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	public static final String LASER_TEMP_PARAMETER_NAME = "Laser Temp";
 
 	public MockSpaceSystemModel() {
-		LOG.debug("Building parameter " + SCID_PARAMETER_NAME);
+		LOG.debug("Building parameter " + TEST_PREFIX + "." + SCID_PARAMETER_NAME);
 		Encoding uint31 = new Encoding(31, BinaryRepresentation.unsigned);
 		Parameter<Integer> spacecraftId = new HummingbirdParameter<Integer>(TEST_PREFIX + "." + SCID_PARAMETER_NAME, SCID_PARAMETER_NAME, "", "");
 		encodings.put(spacecraftId.getQualifiedName(), uint31);
 
-		LOG.debug("Building parameter " + FUEL_PARAMETER_NAME);
+		LOG.debug("Building parameter " + TEST_PREFIX + "." + FUEL_PARAMETER_NAME);
 		Encoding uint12 = new Encoding(12, BinaryRepresentation.unsigned);
 		Parameter<Integer> fuelParam = new HummingbirdParameter<Integer>(TEST_PREFIX + "." + FUEL_PARAMETER_NAME, FUEL_PARAMETER_NAME, "", "");
 		encodings.put(fuelParam.getQualifiedName(), uint12);
 
-		LOG.debug("Building parameter " + LASER_TEMP_PARAMETER_NAME);
+		LOG.debug("Building parameter " + TEST_PREFIX + "." + LASER_TEMP_PARAMETER_NAME);
 		Encoding twosInt31 = new Encoding(40, BinaryRepresentation.twosComplement);
 		Parameter<Long> laserTemp = new HummingbirdParameter<Long>(TEST_PREFIX + "." + LASER_TEMP_PARAMETER_NAME, LASER_TEMP_PARAMETER_NAME, "", "");
 		encodings.put(laserTemp.getQualifiedName(), twosInt31);
 
-		LOG.debug("Building parameter group " + TEST_GROUP_NAME);
+		LOG.debug("Building parameter group " + TEST_PREFIX + "." + TEST_GROUP_NAME);
 		ParameterGroup testGroup = new HummingbirdParameterGroup(TEST_PREFIX + "." + TEST_GROUP_NAME, TEST_GROUP_NAME, "", "");
 		groups.put(testGroup.getQualifiedName(), testGroup);
 		testGroup.addIntegerParameter(spacecraftId.getQualifiedName(), spacecraftId);
@@ -78,13 +78,17 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws UnknownParameterException {
+		boolean replaced = false;
 		for (ParameterGroup pg : this.groups.values()) {
 			if (pg.getAllParameters().put(qualifiedName, newParameter) != null) {
 				// Parameter replaced, no need to iterate over the rest of the parameters.
+				replaced = true;
 				break;
 			}
 		}
-		throw new UnknownParameterException(newParameter.getName());
+		if (!replaced) {
+			throw new UnknownParameterException(newParameter.getQualifiedName());
+		}
 	}
 
 	@Override

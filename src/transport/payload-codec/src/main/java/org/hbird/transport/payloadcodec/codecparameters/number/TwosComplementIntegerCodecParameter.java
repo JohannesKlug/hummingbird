@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
  */
 public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer> {
 	private static final long serialVersionUID = 4601475539675898978L;
-
 	private static final Logger LOG = LoggerFactory.getLogger(TwosComplementIntegerCodecParameter.class);
 
 	public TwosComplementIntegerCodecParameter(final Parameter<Integer> hostParameter, final Encoding encoding) {
