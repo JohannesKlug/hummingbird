@@ -3,6 +3,7 @@ package org.hbird.transport.payloadcodec.codecparameters.number;
 import java.util.BitSet;
 
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
+import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,32 +16,32 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class Double64ParameterCodec extends CodecParameter<Double> {
-	private final static Logger LOG = LoggerFactory.getLogger(Double64ParameterCodec.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Double64ParameterCodec.class);
 
-	public Double64ParameterCodec(final Parameter<Double> hostParameter) {
-		super(hostParameter);
+	public Double64ParameterCodec(final Parameter<Double> hostParameter, final Encoding encoding) {
+		super(hostParameter, encoding);
 	}
 
 	@Override
-	public void decode(byte[] inBytes, int offset) {
+	public void decode(final byte[] inBytes, final int offset) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void decode(BitSet inBitset, int offset) {
+	public void decode(final BitSet inBitset, final int offset) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public Byte[] encodeToByteArray(Byte[] targetBytes, int offset) {
+	public Byte[] encodeToByteArray(final Byte[] targetBytes, final int offset) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public BitSet encodeToBitSet(BitSet targetBitSet, int offset) {
+	public BitSet encodeToBitSet(final BitSet targetBitSet, final int offset) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -62,7 +63,7 @@ public class Double64ParameterCodec extends CodecParameter<Double> {
 	// return BitSetUtility.toDouble(actualBitSet);
 	// }
 
-	
+
 
 	// @Override
 	// public BitSet insertIntoBitSet(final Number number, final BitSet bitSetTarget, final int offset)

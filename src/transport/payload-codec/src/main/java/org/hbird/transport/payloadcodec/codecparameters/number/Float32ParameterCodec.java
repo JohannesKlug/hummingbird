@@ -3,6 +3,7 @@ package org.hbird.transport.payloadcodec.codecparameters.number;
 import java.util.BitSet;
 
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
+import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,31 +16,31 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class Float32ParameterCodec extends CodecParameter<Float> {
-	private final static Logger LOG = LoggerFactory.getLogger(Float32ParameterCodec.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Float32ParameterCodec.class);
 
 
-	public Float32ParameterCodec(final Parameter<Float> hostParameter) {
-		super(hostParameter);
+	public Float32ParameterCodec(final Parameter<Float> hostParameter, final Encoding encoding) {
+		super(hostParameter, encoding);
 		// TODO Auto-generated constructor stub
 	}
 
 
 
 	@Override
-	public void decode(BitSet inBitset, int offset) {
+	public void decode(final BitSet inBitset, final int offset) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void decode(byte[] inBytes, int offset) {
+	public void decode(final byte[] inBytes, final int offset) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 
 	@Override
-	public Byte[] encodeToByteArray(Byte[] targetBytes, int offset) {
+	public Byte[] encodeToByteArray(final Byte[] targetBytes, final int offset) {
 		// TODO Auto-generated method stub
 		return null;
 	}
