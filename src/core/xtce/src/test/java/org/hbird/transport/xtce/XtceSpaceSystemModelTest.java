@@ -39,7 +39,7 @@ public class XtceSpaceSystemModelTest {
 	private static final String P_FUEL_NAME = "FUEL";
 	private static final int FUEL_LENGTH = 16;
 
-	private static final int NUM_OF_INTEGER_TYPED_PARAMETERS = 3;
+	private static final int NUM_OF_INTEGER_TYPED_PARAMETERS = 2;
 	private static final int NUM_OF_LONG_TYPED_PARAMETERS = 1;
 
 	private static final String PG_FLIGHT_HOURS_NAME = "FlightHours";

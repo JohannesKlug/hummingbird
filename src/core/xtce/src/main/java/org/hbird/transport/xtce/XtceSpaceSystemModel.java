@@ -21,7 +21,7 @@ import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
  */
 public class XtceSpaceSystemModel implements SpaceSystemModel {
 	private static final long serialVersionUID = 2532805548202927668L;
-//	private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModel.class);
+	// private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModel.class);
 
 	private String name;
 
@@ -105,7 +105,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	@Override
 	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws UnknownParameterException {
 		for (ParameterGroup pg : this.parameterGroups.values()) {
-			if(pg.getAllParameters().put(qualifiedName, newParameter) != null) {
+			if (pg.getAllParameters().put(qualifiedName, newParameter) != null) {
 				// Parameter replaced, no need to iterate over the rest of the parameters.
 				break;
 			}
@@ -117,8 +117,11 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	public Map<String, Parameter<Integer>> getAllIntegerParameters() {
 		Map<String, Parameter<Integer>> allParameters = new HashMap<>();
 		for (ParameterGroup pg : this.parameterGroups.values()) {
-			for (String qualifiedName : pg.getIntegerParameters().keySet()) {
-				allParameters.put(qualifiedName, pg.getIntegerParameters().get(qualifiedName));
+			Map<String, Parameter<Integer>> integerParameters = pg.getIntegerParameters();
+			if (integerParameters != null) {
+				for (String qualifiedName : integerParameters.keySet()) {
+					allParameters.put(qualifiedName, integerParameters.get(qualifiedName));
+				}
 			}
 		}
 		return allParameters;
@@ -128,13 +131,15 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	public Map<String, Parameter<Long>> getAllLongParameters() {
 		Map<String, Parameter<Long>> allParameters = new HashMap<>();
 		for (ParameterGroup pg : this.parameterGroups.values()) {
-			for (String qualifiedName : pg.getLongParameters().keySet()) {
-				allParameters.put(qualifiedName, pg.getLongParameters().get(qualifiedName));
+			Map<String, Parameter<Long>> longParameters = pg.getLongParameters();
+			if (longParameters != null) {
+				for (String qualifiedName : longParameters.keySet()) {
+					allParameters.put(qualifiedName, longParameters.get(qualifiedName));
+				}
 			}
 		}
 		return allParameters;
 	}
-
 
 	@Override
 	public Map<String, Parameter<BigDecimal>> getAllBigDecimalParameters() {
