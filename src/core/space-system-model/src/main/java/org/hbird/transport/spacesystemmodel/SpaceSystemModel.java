@@ -54,7 +54,6 @@ public interface SpaceSystemModel extends Serializable {
 	void replaceParameterInModel(String qualifiedName, final Parameter<?> newParameter) throws UnknownParameterException;
 
 	Map<String, List<Object>> getAllPayloadRestrictions();
-	Map<String, List<Object>> getRestrictions();
 	Map<String, Encoding> getEncodings();
 
 }

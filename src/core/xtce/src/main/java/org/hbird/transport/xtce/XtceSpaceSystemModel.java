@@ -197,11 +197,6 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Map<String, List<Object>> getRestrictions() {
-		return restrictions;
-	}
-
-	@Override
 	public Map<String, Encoding> getEncodings() {
 		return encodings;
 	}
