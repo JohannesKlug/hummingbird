@@ -6,8 +6,9 @@ import java.util.Map;
 
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TELEMETRY
@@ -17,6 +18,7 @@ import org.hbird.transport.spacesystemmodel.parameters.Parameter;
  */
 public class HummingbirdParameterGroup implements ParameterGroup {
 	private static final long serialVersionUID = 7810839127277387757L;
+	private static final Logger LOG = LoggerFactory.getLogger(HummingbirdParameterGroup.class);
 
 	private final String qualifiedName;
 	private final String name;
@@ -239,20 +241,40 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup) throws UnknownParameterGroupException, UnknownParameterException {
-		// Ints
-		for(String qualifiedName : integerParameters.keySet()) {
-			getIntegerParameter(qualifiedName).setValue(sourceGroup.getIntegerParameter(qualifiedName).getValue());
+	public ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup) {
+		try {
+			// Ints
+			for (String qualifiedName : integerParameters.keySet()) {
+				getIntegerParameter(qualifiedName).setValue(sourceGroup.getIntegerParameter(qualifiedName).getValue());
+			}
+			for (String qualifiedName : longParameters.keySet()) {
+				getLongParameter(qualifiedName).setValue(sourceGroup.getLongParameter(qualifiedName).getValue());
+			}
+			for (String qualifiedName : floatParameters.keySet()) {
+				getFloatParameter(qualifiedName).setValue(sourceGroup.getFloatParameter(qualifiedName).getValue());
+			}
+			for (String qualifiedName : doubleParameters.keySet()) {
+				getDoubleParameter(qualifiedName).setValue(sourceGroup.getDoubleParameter(qualifiedName).getValue());
+			}
+			for (String qualifiedName : bigDecimalParameters.keySet()) {
+				getBigDecimalParameter(qualifiedName).setValue(sourceGroup.getBigDecimalParameter(qualifiedName).getValue());
+			}
+			for (String qualifiedName : stringParameters.keySet()) {
+				getStringParameter(qualifiedName).setValue(sourceGroup.getStringParameter(qualifiedName).getValue());
+			}
+			for (String qualifiedName : rawParameters.keySet()) {
+				getRawParameter(qualifiedName).setValue(sourceGroup.getRawParameter(qualifiedName).getValue());
+			}
 		}
-
-		for(String qualifiedName : longParameters.keySet()) {
-			getLongParameter(qualifiedName).setValue(sourceGroup.getLongParameter(qualifiedName).getValue());
+		catch (UnknownParameterException e) {
+			LOG.error("Unknown parameter when copying parameter values. This is is a serious internal error and must indicate a corruption " +
+					  "in memory, a system bug, or a seriosu misuse of the API (copying paraemters to a different space system" +
+					  "model which has a different structure.  The system must shut down as integrity cannot be guaranteed.");
+			System.exit(-1);
 		}
-		// FIXME Add support for other types.
 
 		return this;
 	}
-
 
 	@Override
 	public Parameter<?> getParameter(final String qualifiedName) throws UnknownParameterException {
@@ -292,7 +314,5 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	public Parameter<Byte[]> getRawParameter(final String qualifiedName) throws UnknownParameterException {
 		throw new UnsupportedOperationException();
 	}
-
-
 
 }
