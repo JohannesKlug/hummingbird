@@ -5,9 +5,9 @@ import org.hbird.transport.payloadcodec.codecparameters.number.UnsignedIntegerCo
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
+import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
 
 public final class IntegerCodecFactory {
 
@@ -32,36 +32,34 @@ public final class IntegerCodecFactory {
 	 * @throws InvalidParameterTypeException
 	 *
 	 */
-	public static CodecParameter<Integer> decorateParameterWithCodec(final Parameter<Integer> parameter)
+	public static CodecParameter<Integer> decorateParameterWithCodec(final Parameter<Integer> parameter, final Encoding enc)
 			throws UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException {
 
-		Encoding encoding = parameter.getEncoding();
-		int sizeInBits = parameter.getSizeInBits();
-
-		switch (encoding) {
+		switch (enc.getBinaryRepresentation()) {
 			case onesComplement:
 				throw new UnsupportedParameterEncodingException("File a bug report :D");
 			case twosComplement:
-				if (sizeInBits > Integer.SIZE) {
+				if (enc.getSizeInBits() > Integer.SIZE) {
 					throw new UnexpectedParameterTypeException(
-							"Size of this parameter is > " + Integer.SIZE + " which is too big to be an integer. Size = " + sizeInBits);
+							"Size of this parameter is > " + Integer.SIZE + " which is too big to be an integer. Size = " + enc.getSizeInBits());
 				}
 				else {
-					return new TwosComplementIntegerCodecParameter(parameter);
+					return new TwosComplementIntegerCodecParameter(parameter, enc);
 				}
 			case unsigned:
-				if (sizeInBits > Integer.SIZE) {
+				if (enc.getSizeInBits() > Integer.SIZE) {
 					throw new UnexpectedParameterTypeException(
-							"Size of this parameter is > " + Integer.SIZE + " 32 which is too big to be an integer. Size = " + sizeInBits);
+							"Size of this parameter is > " + Integer.SIZE + " 32 which is too big to be an integer. Size = " + enc.getSizeInBits());
 				}
 				else {
-					return new UnsignedIntegerCodecParameter(parameter);
+					return new UnsignedIntegerCodecParameter(parameter, enc);
 				}
 			case signMagnitude:
-				throw new UnsupportedParameterEncodingException("File a bug report :D", Encoding.signMagnitude);
+				throw new UnsupportedParameterEncodingException("File a bug report :D", enc.getBinaryRepresentation());
 			default:
-				throw new UnknownParameterEncodingException(encoding.toString());
+				throw new UnknownParameterEncodingException("Unknown binary representation", enc.getBinaryRepresentation());
 		}
 
 	}
+
 }

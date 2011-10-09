@@ -1,6 +1,7 @@
 package org.hbird.transport.payloadcodec.exceptions;
 
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
+import org.hbird.transport.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 
 
 
@@ -22,6 +23,12 @@ public class UnknownParameterEncodingException extends Exception {
 
 	public UnknownParameterEncodingException(final Encoding encoding) {
 		this.encoding = encoding;
+	}
+
+
+
+	public UnknownParameterEncodingException(final String msg, final BinaryRepresentation binRep) {
+		super(msg + ". [bin rep = " + binRep + "]");
 	}
 
 

@@ -9,10 +9,14 @@ public class Encoding {
 	private int sizeInBits;
 	private BinaryRepresentation binaryRepresentation;
 
+	public Encoding() {
+	}
+
 	public Encoding(final int sizeInBits, final BinaryRepresentation binaryRepresentation) {
 		this.sizeInBits = sizeInBits;
 		this.binaryRepresentation = binaryRepresentation;
 	}
+
 
 	public int getSizeInBits() {
 		return sizeInBits;

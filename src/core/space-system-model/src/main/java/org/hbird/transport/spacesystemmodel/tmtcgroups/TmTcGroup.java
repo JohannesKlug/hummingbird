@@ -6,7 +6,6 @@ import java.util.Map;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModelItem;
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
 public interface TmTcGroup extends SpaceSystemModelItem {
@@ -44,7 +43,7 @@ public interface TmTcGroup extends SpaceSystemModelItem {
 
 	void replaceParameterInGroup(String qualifiedName, Parameter<?> parameter) throws ParameterNotInGroupException;
 
-	ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup) throws UnknownParameterGroupException, UnknownParameterException;
+	ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup);
 
 	ParameterGroupReport getParameterReport();
 }
