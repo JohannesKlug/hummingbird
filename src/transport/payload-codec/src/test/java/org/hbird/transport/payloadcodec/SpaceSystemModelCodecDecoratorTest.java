@@ -4,11 +4,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
+import org.hbird.transport.payloadcodec.exceptions.NoEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
+import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
@@ -17,11 +19,12 @@ import org.junit.Test;
 public class SpaceSystemModelCodecDecoratorTest {
 
 	private final SpaceSystemModel ssm = new MockSpaceSystemModel();
+	SpaceSystemModelCodecDecorator decorator = new SpaceSystemModelCodecDecorator();
 
 	@Test
-	public void testDecorateSpaceSystemModel() throws UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException, UnknownParameterGroupException, ParameterNotInGroupException {
-		SpaceSystemModel codecModel = SpaceSystemModelCodecDecorator.decorateSpaceSystemModel(ssm);
-		for(Parameter<Integer> p : codecModel.getIntegerParameters()) {
+	public void testDecorateSpaceSystemModel() throws UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException, UnknownParameterGroupException, ParameterNotInGroupException, NoEncodingException, UnknownParameterException {
+		SpaceSystemModel codecModel = decorator.decorateSpaceSystemModel(ssm, ssm.getEncodings());
+		for(Parameter<Integer> p : codecModel.getAllIntegerParameters().values()) {
 			if(!(p instanceof CodecParameter<?>)) {
 				fail("Parameter " + p.getName() + " was not decorated by the codec decorator");
 			}
@@ -30,7 +33,7 @@ public class SpaceSystemModelCodecDecoratorTest {
 		}
 
 		for(ParameterGroup pgs : codecModel.getParameterGroupsCollection()) {
-			for(Parameter<Integer> p : pgs.getIntegerParameters()) {
+			for(Parameter<Integer> p : pgs.getIntegerParameters().values()) {
 				if(!(p instanceof CodecParameter<?>)) {
 					fail("Parameter " + p.getName() + " was not decorated by the codec decorator");
 				}
