@@ -55,5 +55,4 @@ public interface SpaceSystemModel extends Serializable {
 
 	Map<String, List<Object>> getAllPayloadRestrictions();
 	Map<String, Encoding> getEncodings();
-
 }

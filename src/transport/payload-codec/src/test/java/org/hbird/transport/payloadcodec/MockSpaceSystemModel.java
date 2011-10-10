@@ -28,7 +28,8 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	private final Map<String, List<Object>> restrictions = new HashMap<>();
 
 	public static final String TEST_PREFIX = "Test";
-	public static final String TEST_GROUP_NAME = "Test group";
+	public static final String TEST_GROUP_NAME = "TestGroup";
+	public static final String TEST_GROUP_QUALIFIED_NAME = TEST_PREFIX + ".TestGroup";
 	public static final String FUEL_PARAMETER_NAME = "Fuel";
 	public static final String SCID_PARAMETER_NAME = "SCID";
 	public static final String LASER_TEMP_PARAMETER_NAME = "Laser Temp";
@@ -49,8 +50,8 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 		Parameter<Long> laserTemp = new HummingbirdParameter<Long>(TEST_PREFIX + "." + LASER_TEMP_PARAMETER_NAME, LASER_TEMP_PARAMETER_NAME, "", "");
 		encodings.put(laserTemp.getQualifiedName(), twosInt31);
 
-		LOG.debug("Building parameter group " + TEST_PREFIX + "." + TEST_GROUP_NAME);
-		ParameterGroup testGroup = new HummingbirdParameterGroup(TEST_PREFIX + "." + TEST_GROUP_NAME, TEST_GROUP_NAME, "", "");
+		LOG.debug("Building parameter group " + TEST_GROUP_QUALIFIED_NAME);
+		ParameterGroup testGroup = new HummingbirdParameterGroup(TEST_GROUP_QUALIFIED_NAME, TEST_GROUP_NAME, "", "");
 		groups.put(testGroup.getQualifiedName(), testGroup);
 		testGroup.addIntegerParameter(spacecraftId.getQualifiedName(), spacecraftId);
 		testGroup.addIntegerParameter(fuelParam.getQualifiedName(), fuelParam);
@@ -72,8 +73,13 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Parameter<?> getParameter(final String name) {
-		throw new UnsupportedOperationException();
+	public Parameter<?> getParameter(final String qualifiedName) throws UnknownParameterException {
+		for (ParameterGroup pg : this.groups.values()) {
+			if (pg.getAllParameters().containsKey(qualifiedName)) {
+				return pg.getParameter(qualifiedName);
+			}
+		}
+		throw new UnknownParameterException(qualifiedName);
 	}
 
 	@Override

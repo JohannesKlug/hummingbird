@@ -244,32 +244,46 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	public ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup) {
 		try {
 			// Ints
-			for (String qualifiedName : integerParameters.keySet()) {
-				getIntegerParameter(qualifiedName).setValue(sourceGroup.getIntegerParameter(qualifiedName).getValue());
+			if (integerParameters != null) {
+				for (String qualifiedName : integerParameters.keySet()) {
+					getIntegerParameter(qualifiedName).setValue(sourceGroup.getIntegerParameter(qualifiedName).getValue());
+				}
 			}
-			for (String qualifiedName : longParameters.keySet()) {
-				getLongParameter(qualifiedName).setValue(sourceGroup.getLongParameter(qualifiedName).getValue());
+			if (longParameters != null) {
+				for (String qualifiedName : longParameters.keySet()) {
+					getLongParameter(qualifiedName).setValue(sourceGroup.getLongParameter(qualifiedName).getValue());
+				}
 			}
-			for (String qualifiedName : floatParameters.keySet()) {
-				getFloatParameter(qualifiedName).setValue(sourceGroup.getFloatParameter(qualifiedName).getValue());
+			if (floatParameters != null) {
+				for (String qualifiedName : floatParameters.keySet()) {
+					getFloatParameter(qualifiedName).setValue(sourceGroup.getFloatParameter(qualifiedName).getValue());
+				}
 			}
-			for (String qualifiedName : doubleParameters.keySet()) {
-				getDoubleParameter(qualifiedName).setValue(sourceGroup.getDoubleParameter(qualifiedName).getValue());
+			if (doubleParameters != null) {
+				for (String qualifiedName : doubleParameters.keySet()) {
+					getDoubleParameter(qualifiedName).setValue(sourceGroup.getDoubleParameter(qualifiedName).getValue());
+				}
 			}
-			for (String qualifiedName : bigDecimalParameters.keySet()) {
-				getBigDecimalParameter(qualifiedName).setValue(sourceGroup.getBigDecimalParameter(qualifiedName).getValue());
+			if (bigDecimalParameters != null) {
+				for (String qualifiedName : bigDecimalParameters.keySet()) {
+					getBigDecimalParameter(qualifiedName).setValue(sourceGroup.getBigDecimalParameter(qualifiedName).getValue());
+				}
 			}
-			for (String qualifiedName : stringParameters.keySet()) {
-				getStringParameter(qualifiedName).setValue(sourceGroup.getStringParameter(qualifiedName).getValue());
+			if (stringParameters != null) {
+				for (String qualifiedName : stringParameters.keySet()) {
+					getStringParameter(qualifiedName).setValue(sourceGroup.getStringParameter(qualifiedName).getValue());
+				}
 			}
-			for (String qualifiedName : rawParameters.keySet()) {
-				getRawParameter(qualifiedName).setValue(sourceGroup.getRawParameter(qualifiedName).getValue());
+			if (rawParameters != null) {
+				for (String qualifiedName : rawParameters.keySet()) {
+					getRawParameter(qualifiedName).setValue(sourceGroup.getRawParameter(qualifiedName).getValue());
+				}
 			}
 		}
 		catch (UnknownParameterException e) {
-			LOG.error("Unknown parameter when copying parameter values. This is is a serious internal error and must indicate a corruption " +
-					  "in memory, a system bug, or a seriosu misuse of the API (copying paraemters to a different space system" +
-					  "model which has a different structure.  The system must shut down as integrity cannot be guaranteed.");
+			LOG.error("Unknown parameter when copying parameter values. This is is a serious internal error and must indicate a corruption "
+					+ "in memory, a system bug, or a seriosu misuse of the API (copying paraemters to a different space system"
+					+ "model which has a different structure.  The system must shut down as integrity cannot be guaranteed.");
 			System.exit(-1);
 		}
 

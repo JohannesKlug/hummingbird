@@ -40,6 +40,7 @@
 		<surefire-plugin.version>2.7.1</surefire-plugin.version>
 		<commons-io.version>2.0.1</commons-io.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
+		<cloning.version>1.7.4</cloning.version>
 	</properties>
 
 	<scm>
@@ -274,6 +275,12 @@
 				<version>10.0-rc3</version>
 				<type>jar</type>
 				<scope>compile</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>uk.com.robust-it</groupId>
+				<artifactId>cloning</artifactId>
+				<version>${cloning.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

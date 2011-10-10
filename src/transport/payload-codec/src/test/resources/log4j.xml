@@ -31,17 +31,9 @@
 	</logger>
 	
 	<logger name="org.hbird.transport.payloadcodec">
-		<level value="ERROR"></level>
+		<level value="DEBUG"></level>
 	</logger>
 	
-	<logger name="org.hbird.transport.spacesystemmodel">
-		<level value="INFO"></level>
-	</logger>
-	
-	
-	<logger name="org.hbird.transport.commons.util">
-		<level value="INFO"></level>
-	</logger>
 	
 	
 	<!--	ROOT LOGGER-->

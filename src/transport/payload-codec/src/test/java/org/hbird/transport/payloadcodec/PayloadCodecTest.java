@@ -15,6 +15,7 @@ import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingExcep
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
+import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
@@ -70,7 +71,7 @@ public class PayloadCodecTest {
 	public static void setUp() throws BitSetOperationException, UnsupportedParameterEncodingException, UnknownParameterEncodingException,
 			UnexpectedParameterTypeException, UnknownParameterGroupException, ParameterNotInGroupException {
 		ssm = new MockSpaceSystemModel();
-		codec = new HummingbirdPayloadCodec(ssm);
+		codec = new HummingbirdPayloadCodec(ssm, ssm.getEncodings());
 	}
 
 	@Test
@@ -103,7 +104,7 @@ public class PayloadCodecTest {
 	}
 
 	@Test
-	public void feelTheBurn() throws BitSetOperationException, UnknownParameterGroupException {
+	public void feelTheBurn() throws BitSetOperationException, UnknownParameterGroupException, UnknownParameterException {
 		long start = System.currentTimeMillis();
 		int burnLevel = 500;
 		for (int i = 0; i < burnLevel; i++) {
@@ -115,7 +116,7 @@ public class PayloadCodecTest {
 	}
 
 	@Test
-	public void testEncode() throws BitSetOperationException, UnknownParameterGroupException {
+	public void testEncode() throws BitSetOperationException, UnknownParameterGroupException, UnknownParameterException {
 		for (int scIdValue : TEST_UINT_31_VALUES) {
 			for (int fuelValue : TEST_UINT_12_VALUES) {
 				for (long laserValue : TEST_UINT_40_VALUES) {
@@ -151,8 +152,8 @@ public class PayloadCodecTest {
 	}
 
 	@Test
-	public void testEncodeParameterGroupBitSet() throws UnknownParameterGroupException, BitSetOperationException {
-		ParameterGroup testGroup = ssm.getParameterGroup(MockSpaceSystemModel.TEST_GROUP_NAME);
+	public void testEncodeParameterGroupBitSet() throws UnknownParameterGroupException, UnknownParameterException, BitSetOperationException{
+		ParameterGroup testGroup = ssm.getParameterGroup(MockSpaceSystemModel.TEST_GROUP_QUALIFIED_NAME);
 
 		testGroup.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_NAME).setValue(SCID_VALUE_1);
 		testGroup.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_NAME).setValue(FUEL_VALUE_3814);
@@ -165,7 +166,7 @@ public class PayloadCodecTest {
 	}
 
 	private static ParameterGroup setTestGroupParameterValues(final int scIdValue, final int fuelValue, final long laserValue)
-			throws UnknownParameterGroupException {
+			throws UnknownParameterGroupException, UnknownParameterException {
 		ParameterGroup testGroup = ssm.getParameterGroup(MockSpaceSystemModel.TEST_GROUP_NAME);
 		testGroup.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_NAME).setValue(scIdValue);
 		testGroup.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_NAME).setValue(fuelValue);
@@ -174,7 +175,7 @@ public class PayloadCodecTest {
 	}
 
 	@Test
-	public void testEncodeParameterGroupBitSet2() throws UnknownParameterGroupException, BitSetOperationException {
+	public void testEncodeParameterGroupBitSet2() throws UnknownParameterGroupException, BitSetOperationException, UnknownParameterException {
 		ParameterGroup testGroup = ssm.getParameterGroup(MockSpaceSystemModel.TEST_GROUP_NAME);
 
 		testGroup.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_NAME).setValue(SCID_VALUE_1073807361);

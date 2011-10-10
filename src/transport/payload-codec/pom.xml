@@ -1,19 +1,20 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<artifactId>hummingbird-transport</artifactId>
 		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<groupId>org.hbird.transport</groupId>
 	<artifactId>payload-codec</artifactId>
 	<name>Generic Payload Codec</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -24,10 +25,15 @@
 				<groupId>org.maven.ide.eclipse</groupId>
 				<artifactId>lifecycle-mapping</artifactId>
 				<version>0.9.9-SNAPSHOT</version>
-				<configuration><mappingId>generic</mappingId><configurators></configurators><mojoExecutions></mojoExecutions></configuration>
+				<configuration>
+					<mappingId>generic</mappingId>
+					<configurators></configurators>
+					<mojoExecutions></mojoExecutions>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.hbird.transport</groupId>
@@ -36,10 +42,17 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-core</artifactId>
 			<scope>compile</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>uk.com.robust-it</groupId>
+			<artifactId>cloning</artifactId>
+		</dependency>
 	</dependencies>
+	
 </project>

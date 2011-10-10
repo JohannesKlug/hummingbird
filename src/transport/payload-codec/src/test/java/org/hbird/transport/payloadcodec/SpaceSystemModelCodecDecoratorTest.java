@@ -24,9 +24,10 @@ public class SpaceSystemModelCodecDecoratorTest {
 	@Test
 	public void testDecorateSpaceSystemModel() throws UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException, UnknownParameterGroupException, ParameterNotInGroupException, NoEncodingException, UnknownParameterException {
 		SpaceSystemModel codecModel = decorator.decorateSpaceSystemModel(ssm, ssm.getEncodings());
+
 		for(Parameter<Integer> p : codecModel.getAllIntegerParameters().values()) {
 			if(!(p instanceof CodecParameter<?>)) {
-				fail("Parameter " + p.getName() + " was not decorated by the codec decorator");
+				fail("Parameter " + p.getQualifiedName() + " was not decorated by the codec decorator");
 			}
 			CodecParameter<Integer> cp = (CodecParameter<Integer>)p;
 			assertNotNull(cp);
@@ -35,7 +36,7 @@ public class SpaceSystemModelCodecDecoratorTest {
 		for(ParameterGroup pgs : codecModel.getParameterGroupsCollection()) {
 			for(Parameter<Integer> p : pgs.getIntegerParameters().values()) {
 				if(!(p instanceof CodecParameter<?>)) {
-					fail("Parameter " + p.getName() + " was not decorated by the codec decorator");
+					fail("Parameter " + p.getQualifiedName() + " was not decorated by the codec decorator");
 				}
 				CodecParameter<Integer> cp = (CodecParameter<Integer>)p;
 				assertNotNull(cp);
