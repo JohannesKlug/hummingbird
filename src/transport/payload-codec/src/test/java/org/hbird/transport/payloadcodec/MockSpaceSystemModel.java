@@ -9,6 +9,7 @@ import java.util.Map;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
+import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
@@ -83,17 +84,9 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws UnknownParameterException {
-		boolean replaced = false;
+	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInGroupException {
 		for (ParameterGroup pg : this.groups.values()) {
-			if (pg.getAllParameters().put(qualifiedName, newParameter) != null) {
-				// Parameter replaced, no need to iterate over the rest of the parameters.
-				replaced = true;
-				break;
-			}
-		}
-		if (!replaced) {
-			throw new UnknownParameterException(newParameter.getQualifiedName());
+			pg.replaceParameterInGroup(qualifiedName, newParameter);
 		}
 	}
 

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
+import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
@@ -51,7 +52,7 @@ public interface SpaceSystemModel extends Serializable {
 	Map<String, Parameter<String>> getAllStringParameters();
 	Map<String, Parameter<Byte[]>> getAllRawParameters();
 
-	void replaceParameterInModel(String qualifiedName, final Parameter<?> newParameter) throws UnknownParameterException;
+	void replaceParameterInModel(String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInGroupException;
 
 	Map<String, List<Object>> getAllPayloadRestrictions();
 	Map<String, Encoding> getEncodings();

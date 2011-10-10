@@ -191,8 +191,15 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void replaceParameterInGroup(final String qualifiedName, final Parameter<?> parameter) throws ParameterNotInGroupException {
-		String pname = parameter.getName();
+		String pname = parameter.getQualifiedName();
+
+		if (parameters.containsKey(pname)) {
+			System.out.println("Replacing " + pname + " in parameters<?> lists");
+			parameters.put(qualifiedName, parameter);
+		}
+
 		if (integerParameters.containsKey(pname)) {
+			System.out.println("Replacing " + pname + " in parameters<Integer> lists");
 			integerParameters.put(qualifiedName, (Parameter<Integer>) parameter);
 		}
 		else if (longParameters.containsKey(pname)) {
@@ -217,9 +224,6 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 			throw new ParameterNotInGroupException(parameter);
 		}
 
-		if (parameters.containsKey(pname)) {
-			parameters.put(qualifiedName, parameter);
-		}
 	}
 
 	@Override
