@@ -5,7 +5,7 @@
 	<description>XTCE implementation of the Space System Model</description>
 
 	<parent>
-		<artifactId>hummingbird-transport</artifactId>
+		<artifactId>hummingbird-core</artifactId>
 		<groupId>org.hbird</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
