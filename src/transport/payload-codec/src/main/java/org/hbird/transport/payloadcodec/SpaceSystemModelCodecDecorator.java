@@ -38,12 +38,8 @@ public final class SpaceSystemModelCodecDecorator {
 			Encoding enc = findEncoding(parameter.getQualifiedName());
 			parameter = IntegerCodecFactory.decorateParameterWithCodec(parameter, enc);
 
-			// newModel.getAllIntegerParameters().put(parameter.getQualifiedName(), parameter);
-
+			// replace original parameter with decorated one in the new model
 			newModel.replaceParameterInModel(parameter.getQualifiedName(), parameter);
-
-			System.out.println("old ssm = " + spaceSystemModel.getParameter(parameter.getQualifiedName()).getClass().getName());
-			System.out.println("new ssm = " + newModel.getParameter(parameter.getQualifiedName()).getClass().getName());
 		}
 
 		// Decorate all long parameters...
@@ -54,22 +50,6 @@ public final class SpaceSystemModelCodecDecorator {
 		}
 
 		// FIXME BigDecimal, Float, Double, String, Binary
-
-		// Decorate all parameter group parameters.
-		// FIXME Find a way to link the parameters and parameter group parameters in the space system model layer. Done?
-		// for(ParameterGroup pg : newModel.getParameterGroupsCollection()) {
-		// // Decorate all integer parameters...
-		// for (Parameter<Integer> parameter : pg.getIntegerParameters()) {
-		// parameter = IntegerCodecFactory.decorateParameterWithCodec(parameter);
-		// pg.replaceParameterInGroup(parameter);
-		// }
-		//
-		// // Decorate all long parameters...
-		// for (Parameter<Long> parameter : pg.getLongParameters()) {
-		// parameter = LongCodecFactory.decorateParameterWithCodec(parameter);
-		// pg.replaceParameterInGroup(parameter);
-		// }
-		// }
 
 		return newModel;
 	}
