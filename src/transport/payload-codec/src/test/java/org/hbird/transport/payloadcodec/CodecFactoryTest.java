@@ -12,9 +12,10 @@ import org.hbird.transport.payloadcodec.codecparameters.LongCodecFactory;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
+import org.hbird.transport.spacesystemmodel.encoding.Encoding;
+import org.hbird.transport.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter.Encoding;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -48,9 +49,9 @@ public class CodecFactoryTest {
 
 	@Test
 	public void testDecorateUint11() throws UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException {
-		Parameter<Integer> parameterUint11 = new HummingbirdParameter<Integer>("TestUint11", "", "", BIT_SIZE_11, Encoding.unsigned);
-
-		CodecParameter<Integer> codecAwareParameterUint11 = IntegerCodecFactory.decorateParameterWithCodec(parameterUint11);
+		Parameter<Integer> parameterUint11 = new HummingbirdParameter<Integer>("TestUint11", "", "", "");
+		Encoding enc = new Encoding(BIT_SIZE_11, BinaryRepresentation.unsigned);
+		CodecParameter<Integer> codecAwareParameterUint11 = IntegerCodecFactory.decorateParameterWithCodec(parameterUint11, enc);
 
 		codecAwareParameterUint11.decode(BITSET_11BIT_BE_133, 0);
 
@@ -59,9 +60,9 @@ public class CodecFactoryTest {
 
 	@Test
 	public void testDecorateInt11() throws UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException {
-		Parameter<Integer> parameterInt11 = new HummingbirdParameter<Integer>("TestInt11", "", "", BIT_SIZE_11, Encoding.twosComplement);
-
-		CodecParameter<Integer> codecAwareParameterInt11 = IntegerCodecFactory.decorateParameterWithCodec(parameterInt11);
+		Parameter<Integer> parameterInt11 = new HummingbirdParameter<Integer>("", "TestInt11", "", "");
+		Encoding enc = new Encoding(BIT_SIZE_11, BinaryRepresentation.twosComplement);
+		CodecParameter<Integer> codecAwareParameterInt11 = IntegerCodecFactory.decorateParameterWithCodec(parameterInt11, enc);
 
 		codecAwareParameterInt11.decode(BITSET_11BIT_BE_133, 0);
 
@@ -70,9 +71,9 @@ public class CodecFactoryTest {
 
 	@Test
 	public void testDecorateNegativeInt11() throws UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException {
-		Parameter<Integer> parameterInt11 = new HummingbirdParameter<Integer>("TestInt11", "", "", BIT_SIZE_11, Encoding.twosComplement);
-
-		CodecParameter<Integer> codecAwareParameterInt11 = IntegerCodecFactory.decorateParameterWithCodec(parameterInt11);
+		Parameter<Integer> parameterInt11 = new HummingbirdParameter<Integer>("TestInt11", "", "", "");
+		Encoding enc = new Encoding(BIT_SIZE_11, BinaryRepresentation.twosComplement);
+		CodecParameter<Integer> codecAwareParameterInt11 = IntegerCodecFactory.decorateParameterWithCodec(parameterInt11, enc);
 
 		codecAwareParameterInt11.decode(BITSET_11BIT_BE_NEG_891, 0);
 
@@ -82,9 +83,9 @@ public class CodecFactoryTest {
 	@Test
 	public void testDecorateLong55() throws UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException {
 
-		Parameter<Long> parameterUint11 = new HummingbirdParameter<Long>("TestLong55", "", "", 64, Encoding.twosComplement);
-
-		CodecParameter<Long> codecAwareParameterLong55 = LongCodecFactory.decorateParameterWithCodec(parameterUint11);
+		Parameter<Long> parameterUint11 = new HummingbirdParameter<Long>("TestLong55", "", "", "");
+		Encoding enc = new Encoding(64, BinaryRepresentation.twosComplement);
+		CodecParameter<Long> codecAwareParameterLong55 = LongCodecFactory.decorateParameterWithCodec(parameterUint11, enc);
 
 		codecAwareParameterLong55.decode(TEST_LONG_BITSET, 0);
 
