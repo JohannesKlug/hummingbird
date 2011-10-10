@@ -13,6 +13,7 @@ import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
+import org.hbird.transport.payloadcodec.testsupport.MockSpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
@@ -93,9 +94,9 @@ public class PayloadCodecTest {
 		}
 
 		// Now check the values have been decoded.
-		Integer scid = actual.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_NAME).getValue();
-		Integer fuel = actual.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_NAME).getValue();
-		Long laserTemp = actual.getLongParameter(MockSpaceSystemModel.LASER_TEMP_PARAMETER_NAME).getValue();
+		Integer scid = actual.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_QUALIFIED_NAME).getValue();
+		Integer fuel = actual.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_QUALIFIED_NAME).getValue();
+		Long laserTemp = actual.getLongParameter(MockSpaceSystemModel.LASER_TEMP_PARAMETER_QUALIFIED_NAME).getValue();
 
 		assertEquals("SCID should have been decoded and set to " + SCID_VALUE_1, SCID_VALUE_1, scid.intValue());
 		assertEquals("Fuel should have been decoded and set to " + FUEL_VALUE_3814, FUEL_VALUE_3814, fuel.intValue());
@@ -155,9 +156,9 @@ public class PayloadCodecTest {
 	public void testEncodeParameterGroupBitSet() throws UnknownParameterGroupException, UnknownParameterException, BitSetOperationException{
 		ParameterGroup testGroup = ssm.getParameterGroup(MockSpaceSystemModel.TEST_GROUP_QUALIFIED_NAME);
 
-		testGroup.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_NAME).setValue(SCID_VALUE_1);
-		testGroup.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_NAME).setValue(FUEL_VALUE_3814);
-		testGroup.getLongParameter(MockSpaceSystemModel.LASER_TEMP_PARAMETER_NAME).setValue(LASER_TEMP_VALUE_94528016102);
+		testGroup.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_QUALIFIED_NAME).setValue(SCID_VALUE_1);
+		testGroup.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_QUALIFIED_NAME).setValue(FUEL_VALUE_3814);
+		testGroup.getLongParameter(MockSpaceSystemModel.LASER_TEMP_PARAMETER_QUALIFIED_NAME).setValue(LASER_TEMP_VALUE_94528016102);
 
 		String bitSetString = SCID_VALUE_1_AS_STRING + FUEL_VALUE_3814_AS_STRING + LASER_TEMP_94528016102_AS_STRING;
 		BitSet expected = BitSetUtility.stringToBitSet(bitSetString, true, true);
@@ -167,20 +168,20 @@ public class PayloadCodecTest {
 
 	private static ParameterGroup setTestGroupParameterValues(final int scIdValue, final int fuelValue, final long laserValue)
 			throws UnknownParameterGroupException, UnknownParameterException {
-		ParameterGroup testGroup = ssm.getParameterGroup(MockSpaceSystemModel.TEST_GROUP_NAME);
-		testGroup.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_NAME).setValue(scIdValue);
-		testGroup.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_NAME).setValue(fuelValue);
-		testGroup.getLongParameter(MockSpaceSystemModel.LASER_TEMP_PARAMETER_NAME).setValue(laserValue);
+		ParameterGroup testGroup = ssm.getParameterGroup(MockSpaceSystemModel.TEST_GROUP_QUALIFIED_NAME);
+		testGroup.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_QUALIFIED_NAME).setValue(scIdValue);
+		testGroup.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_QUALIFIED_NAME).setValue(fuelValue);
+		testGroup.getLongParameter(MockSpaceSystemModel.LASER_TEMP_PARAMETER_QUALIFIED_NAME).setValue(laserValue);
 		return testGroup;
 	}
 
 	@Test
 	public void testEncodeParameterGroupBitSet2() throws UnknownParameterGroupException, BitSetOperationException, UnknownParameterException {
-		ParameterGroup testGroup = ssm.getParameterGroup(MockSpaceSystemModel.TEST_GROUP_NAME);
+		ParameterGroup testGroup = ssm.getParameterGroup(MockSpaceSystemModel.TEST_GROUP_QUALIFIED_NAME);
 
-		testGroup.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_NAME).setValue(SCID_VALUE_1073807361);
-		testGroup.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_NAME).setValue(FUEL_VALUE_3814);
-		testGroup.getLongParameter(MockSpaceSystemModel.LASER_TEMP_PARAMETER_NAME).setValue(LASER_TEMP_VALUE_94528016102);
+		testGroup.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_QUALIFIED_NAME).setValue(SCID_VALUE_1073807361);
+		testGroup.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_QUALIFIED_NAME).setValue(FUEL_VALUE_3814);
+		testGroup.getLongParameter(MockSpaceSystemModel.LASER_TEMP_PARAMETER_QUALIFIED_NAME).setValue(LASER_TEMP_VALUE_94528016102);
 
 		String bitSetString = SCID_VALUE_1073807361_AS_STRING + FUEL_VALUE_3814_AS_STRING + LASER_TEMP_94528016102_AS_STRING;
 		BitSet expected = BitSetUtility.stringToBitSet(bitSetString, true, true);
