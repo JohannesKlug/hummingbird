@@ -11,13 +11,11 @@ import org.slf4j.LoggerFactory;
 /**
  * The bitset utilities class helps the encoding / decoding of simple java types such as integer and float to a bitset.
  *
- * TODO Make the class set the final bit + 1 in the set automatically.
- *
- * @author Gert Villemos
  * @author Mark Doyle
  * @author Johannes Klug
  */
 public final class BitSetUtility {
+	private static final int BYTE_TO_INT_MASK = 0xFF;
 	private static final int WORD_LENGTH = 64;
 	private static final int BIN_DUMP_LINE_SIZE = 64;
 	private static final int OCTET_SIZE = 8;
@@ -294,10 +292,19 @@ public final class BitSetUtility {
 
 		int intFromBitset = 0;
 
-		intFromBitset += (bytes[0] & 0xFF) << 24;
-		intFromBitset += (bytes[1] & 0xFF) << 16;
-		intFromBitset += (bytes[2] & 0xFF) << 8;
-		intFromBitset += (bytes[3] & 0xFF);
+//		int amountToShiftFirstByteofInt32 = 24;
+//		int amountToShiftSecondByteofInt32 = 16;
+//		int amountToShiftThirdByteofInt32 = 8;
+
+		int bytePosition = 3;
+		for(int i = 0; i < Integer.SIZE / 8; i++) {
+			intFromBitset += (bytes[i] & BYTE_TO_INT_MASK) << bytePosition * Byte.SIZE;
+			bytePosition--;
+		}
+//		intFromBitset += (bytes[0] & BYTE_TO_INT_MASK) << amountToShiftFirstByteofInt32;
+//		intFromBitset += (bytes[1] & BYTE_TO_INT_MASK) << amountToShiftSecondByteofInt32;
+//		intFromBitset += (bytes[2] & BYTE_TO_INT_MASK) << amountToShiftThirdByteofInt32;
+//		intFromBitset += (bytes[3] & BYTE_TO_INT_MASK);
 
 		return Float.intBitsToFloat(intFromBitset);
 	}
@@ -313,14 +320,14 @@ public final class BitSetUtility {
 
 		long longFromBitset = 0;
 
-		longFromBitset += (long) (bytes[0] & 0xFF) << 56;
-		longFromBitset += (long) (bytes[1] & 0xFF) << 48;
-		longFromBitset += (long) (bytes[2] & 0xFF) << 40;
-		longFromBitset += (long) (bytes[3] & 0xFF) << 32;
-		longFromBitset += (long) (bytes[4] & 0xFF) << 24;
-		longFromBitset += (long) (bytes[5] & 0xFF) << 16;
-		longFromBitset += (long) (bytes[6] & 0xFF) << 8;
-		longFromBitset += (bytes[7] & 0xFF);
+		longFromBitset += (long) (bytes[0] & BYTE_TO_INT_MASK) << 56;
+		longFromBitset += (long) (bytes[1] & BYTE_TO_INT_MASK) << 48;
+		longFromBitset += (long) (bytes[2] & BYTE_TO_INT_MASK) << 40;
+		longFromBitset += (long) (bytes[3] & BYTE_TO_INT_MASK) << 32;
+		longFromBitset += (long) (bytes[4] & BYTE_TO_INT_MASK) << 24;
+		longFromBitset += (long) (bytes[5] & BYTE_TO_INT_MASK) << 16;
+		longFromBitset += (long) (bytes[6] & BYTE_TO_INT_MASK) << 8;
+		longFromBitset += (bytes[7] & BYTE_TO_INT_MASK);
 
 		return Double.longBitsToDouble(longFromBitset);
 	}
