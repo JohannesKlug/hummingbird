@@ -45,7 +45,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 		final ParameterGroup container = parameterGroups.get(qualifiedName);
 
 		if (container == null) {
-			throw new UnknownParameterGroupException(parameterGroups, "Your container lookup for '" + qualifiedName
+			throw new UnknownParameterGroupException("Your container lookup for '" + qualifiedName
 					+ "' did not return any containers. Check your SpaceSystem configuration.");
 		}
 
