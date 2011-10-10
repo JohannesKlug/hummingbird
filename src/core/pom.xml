@@ -20,6 +20,7 @@
 		<module>commons</module>
 		<module>space-system-model</module>
 		<module>xtce</module>
+		<module>space-system-publisher</module>
 	</modules>
 
 	
