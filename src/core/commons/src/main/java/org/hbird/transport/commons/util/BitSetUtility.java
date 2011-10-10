@@ -291,20 +291,12 @@ public final class BitSetUtility {
 		final byte[] bytes = toByteArray(bits, 32);
 
 		int intFromBitset = 0;
-
-//		int amountToShiftFirstByteofInt32 = 24;
-//		int amountToShiftSecondByteofInt32 = 16;
-//		int amountToShiftThirdByteofInt32 = 8;
-
-		int bytePosition = 3;
+		int requiredByteShifts = 3;
+		int bytePosition = requiredByteShifts;
 		for(int i = 0; i < Integer.SIZE / 8; i++) {
 			intFromBitset += (bytes[i] & BYTE_TO_INT_MASK) << bytePosition * Byte.SIZE;
 			bytePosition--;
 		}
-//		intFromBitset += (bytes[0] & BYTE_TO_INT_MASK) << amountToShiftFirstByteofInt32;
-//		intFromBitset += (bytes[1] & BYTE_TO_INT_MASK) << amountToShiftSecondByteofInt32;
-//		intFromBitset += (bytes[2] & BYTE_TO_INT_MASK) << amountToShiftThirdByteofInt32;
-//		intFromBitset += (bytes[3] & BYTE_TO_INT_MASK);
 
 		return Float.intBitsToFloat(intFromBitset);
 	}
