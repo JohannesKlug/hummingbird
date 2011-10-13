@@ -17,6 +17,7 @@ import org.exolab.castor.xml.ValidationException;
 import org.exolab.castor.xml.XMLContext;
 import org.hbird.transport.generatedcode.xtce.BaseContainer;
 import org.hbird.transport.generatedcode.xtce.BaseDataTypeChoice;
+import org.hbird.transport.generatedcode.xtce.CommandMetaData;
 import org.hbird.transport.generatedcode.xtce.Comparison;
 import org.hbird.transport.generatedcode.xtce.ComparisonList;
 import org.hbird.transport.generatedcode.xtce.ContainerSet;
@@ -57,7 +58,8 @@ public final class XtceSpaceSystemModelFactory {
 
 	private int numParameterGroups;
 
-	private final Map<String, ParameterTypeSetTypeItem> xtceParameterTypes = new LinkedHashMap<String, ParameterTypeSetTypeItem>();
+	private final Map<String, ParameterTypeSetTypeItem> xtceTmParameterTypes = new LinkedHashMap<String, ParameterTypeSetTypeItem>();
+	private final Map<String, ParameterTypeSetTypeItem> xtceTcParameterTypes = new LinkedHashMap<String, ParameterTypeSetTypeItem>();
 
 	private final Map<String, Parameter<Integer>> integerParameters = new LinkedHashMap<>();
 
@@ -82,8 +84,8 @@ public final class XtceSpaceSystemModelFactory {
 	public XtceSpaceSystemModelFactory() {
 	}
 
-	public final SpaceSystemModel createSpaceSystemModel(final String spaceSystemmodelFilename) throws InvalidXtceFileException,
-			InvalidParameterTypeException, UnsupportedXtceConstructException {
+	public final SpaceSystemModel createSpaceSystemModel(final String spaceSystemmodelFilename) throws InvalidXtceFileException, InvalidParameterTypeException,
+			UnsupportedXtceConstructException {
 		model = new XtceSpaceSystemModel();
 
 		spaceSystem = unmarshallXtceXmlSpaceSystem(spaceSystemmodelFilename);
@@ -94,7 +96,7 @@ public final class XtceSpaceSystemModelFactory {
 
 		createTelemetryModel();
 
-		// createCommandModel();
+		createCommandModel();
 
 		try {
 			injectConstructsIntoModel();
@@ -132,18 +134,87 @@ public final class XtceSpaceSystemModelFactory {
 		}
 	}
 
-	private void createCommandModel() {
-		// TODO Auto-generated method stub
-		//
-		throw new UnsupportedOperationException();
+	private void createCommandModel() throws InvalidXtceFileException {
+		createAllParameterTypes(spaceSystem.getCommandMetaData());
 	}
 
 	private void createTelemetryModel() throws InvalidXtceFileException, NumberFormatException, InvalidParameterTypeException,
 			UnsupportedXtceConstructException {
-		createAllParameterTypes();
+		createAllParameterTypes(spaceSystem.getTelemetryMetaData());
 		createAllTelemetryParameters();
 		createAllTelemetryParameterGroups();
 		populateParameterGroups();
+	}
+
+	private final void createAllParameterTypes(final CommandMetaData commandMetaData) throws InvalidXtceFileException {
+		int numberOfParameterTypes = commandMetaData.getParameterTypeSet().getParameterTypeSetTypeItemCount();
+
+		for (int parameterTypeIndex = 0; parameterTypeIndex < numberOfParameterTypes; ++parameterTypeIndex) {
+			final ParameterTypeSetTypeItem item = commandMetaData.getParameterTypeSet().getParameterTypeSetTypeItem(parameterTypeIndex);
+			String name = checkParameterType(item);
+			xtceTcParameterTypes.put(name, item);
+		}
+	}
+
+	/**
+	 * @param telemetryMetaData
+	 * @return
+	 * @throws InvalidParameterTypeException
+	 * @throws InvalidXtceFileException
+	 */
+	private final void createAllParameterTypes(final TelemetryMetaData telemetryMetaData) throws InvalidXtceFileException {
+		int numberOfParameterTypes = telemetryMetaData.getParameterTypeSet().getParameterTypeSetTypeItemCount();
+
+		for (int parameterTypeIndex = 0; parameterTypeIndex < numberOfParameterTypes; ++parameterTypeIndex) {
+			final ParameterTypeSetTypeItem item = telemetryMetaData.getParameterTypeSet().getParameterTypeSetTypeItem(parameterTypeIndex);
+			String name = checkParameterType(item);
+			xtceTmParameterTypes.put(name, item);
+		}
+	}
+
+	/**
+	 * Checks the parameter and returns the name if valid.
+	 * @param item
+	 * @return
+	 * @throws InvalidXtceFileException
+	 */
+	private static String checkParameterType(final ParameterTypeSetTypeItem item) throws InvalidXtceFileException {
+		String name = null;
+
+		// If it's an integer parameter..
+		final IntegerParameterType integerParameterType = item.getIntegerParameterType();
+		if (integerParameterType != null) {
+			name = integerParameterType.getName();
+			if (name == null) {
+				throw new InvalidXtceFileException("IntegerParameter has a null name; cannot add to parameterTypes");
+			}
+		}
+		// If it is a float parameter...
+		else if (item.getFloatParameterType() != null) {
+			name = item.getFloatParameterType().getName();
+			if (name == null) {
+				throw new InvalidXtceFileException("FloatParameter has a null name; cannot add to parameterTypes");
+			}
+		}
+		// If it is a string parameter...
+		else if (item.getStringParameterType() != null) {
+			name = item.getStringParameterType().getName();
+			if (name == null) {
+				throw new InvalidXtceFileException("StringParameter has a null name; cannot add to parameterTypes");
+			}
+		}
+		// If it is a boolean parameter...
+		else if (item.getBooleanParameterType() != null) {
+			name = item.getBooleanParameterType().getName();
+			if (name == null) {
+				throw new InvalidXtceFileException("BooleanParameter has a null name; cannot add to parameterTypes");
+			}
+		}
+		else {
+			throw new InvalidXtceFileException("Unknown/unsupported parameter type: " + item);
+		}
+
+		return name;
 	}
 
 	private final void createAllTelemetryParameters() throws InvalidParameterTypeException, NumberFormatException, InvalidXtceFileException {
@@ -156,7 +227,7 @@ public final class XtceSpaceSystemModelFactory {
 			final ParameterSetTypeItem xtceParameter = categoryMetaData.getParameterSet().getParameterSetTypeItem(i);
 
 			String parameterTypeRef = xtceParameter.getParameter().getParameterTypeRef();
-			ParameterTypeSetTypeItem xtceType = xtceParameterTypes.get(parameterTypeRef);
+			ParameterTypeSetTypeItem xtceType = xtceTmParameterTypes.get(parameterTypeRef);
 
 			// If it's an integer type...
 			if(xtceType == null) {
@@ -228,66 +299,6 @@ public final class XtceSpaceSystemModelFactory {
 				throw new InvalidXtceFileException("Unknown parameter type: " + parameterTypeRef + ". A parameter references an undeclared parameter type in the XTCE space system definition file.");
 			}
 			// @formatter:on
-		}
-	}
-
-
-
-	/**
-	 * @return
-	 * @throws InvalidParameterTypeException
-	 * @throws InvalidXtceFileException
-	 */
-	private final void createAllParameterTypes() throws InvalidXtceFileException {
-		int numberOfParameterTypes = spaceSystem.getTelemetryMetaData().getParameterTypeSet().getParameterTypeSetTypeItemCount();
-
-		for (int parameterTypeIndex = 0; parameterTypeIndex < numberOfParameterTypes; ++parameterTypeIndex) {
-			final ParameterTypeSetTypeItem item = spaceSystem.getTelemetryMetaData().getParameterTypeSet().getParameterTypeSetTypeItem(parameterTypeIndex);
-
-			// If it's an integer parameter..
-			final IntegerParameterType integerParameterType = item.getIntegerParameterType();
-			if (integerParameterType != null) {
-				String name = integerParameterType.getName();
-				if (name != null) {
-					xtceParameterTypes.put(name, item);
-				}
-				else {
-					throw new InvalidXtceFileException("IntegerParameter has a null name; cannot add to parameterTypes");
-				}
-			}
-			// If it is a float parameter...
-			else if (item.getFloatParameterType() != null) {
-				String name = item.getFloatParameterType().getName();
-				if (name != null) {
-					xtceParameterTypes.put(name, item);
-				}
-				else {
-					throw new InvalidXtceFileException("FloatParameter has a null name; cannot add to parameterTypes");
-				}
-			}
-			// If it is a string parameter...
-			else if (item.getStringParameterType() != null) {
-				String name = item.getStringParameterType().getName();
-				if (name != null) {
-					xtceParameterTypes.put(name, item);
-				}
-				else {
-					throw new InvalidXtceFileException("StringParameter has a null name; cannot add to parameterTypes");
-				}
-			}
-			// If it is a boolean parameter...
-			else if (item.getBooleanParameterType() != null) {
-				String name = item.getBooleanParameterType().getName();
-				if (name != null) {
-					xtceParameterTypes.put(name, item);
-				}
-				else {
-					throw new InvalidXtceFileException("BooleanParameter has a null name; cannot add to parameterTypes");
-				}
-			}
-			else {
-				throw new InvalidXtceFileException("Unknown/unsupported parameter type: " + item);
-			}
 		}
 	}
 
@@ -436,10 +447,8 @@ public final class XtceSpaceSystemModelFactory {
 		}
 	}
 
-
-
 	private void addParameterToGroup(final ParameterGroup group, final String qualifiedName) throws InvalidXtceFileException {
-		if(LOG.isDebugEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Adding " + qualifiedName + " to ParameterGroup " + group.getQualifiedName());
 		}
 		if (integerParameters.containsKey(qualifiedName)) {
@@ -454,9 +463,9 @@ public final class XtceSpaceSystemModelFactory {
 		}
 	}
 
-
 	/**
 	 * Covers Java Integers and Longs
+	 *
 	 * @param intParamType
 	 * @return
 	 * @throws InvalidXtceFileException
@@ -469,8 +478,8 @@ public final class XtceSpaceSystemModelFactory {
 			sizeInBits = Ints.checkedCast(intParamType.getSizeInBits());
 		}
 		catch (IllegalArgumentException e) {
-			throw new InvalidXtceFileException("Illegal value (" + intParamType.getSizeInBits() + ") defined as size in bits for parameter type " + intParamType.getName() +
-					  ". Hummingbird suppports sizes up to " + Integer.MAX_VALUE + ".");
+			throw new InvalidXtceFileException("Illegal value (" + intParamType.getSizeInBits() + ") defined as size in bits for parameter type "
+					+ intParamType.getName() + ". Hummingbird suppports sizes up to " + Integer.MAX_VALUE + ".");
 		}
 
 		encoding.setSizeInBits(sizeInBits);
@@ -513,6 +522,7 @@ public final class XtceSpaceSystemModelFactory {
 
 	/**
 	 * Covers Java Floats and Doubles.
+	 *
 	 * @param type
 	 * @return
 	 * @throws InvalidXtceFileException
