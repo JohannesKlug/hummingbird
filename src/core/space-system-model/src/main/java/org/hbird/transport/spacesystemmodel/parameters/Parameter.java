@@ -27,14 +27,4 @@ public interface Parameter<T> extends SpaceSystemModelItem, Serializable {
 	 *            the value of this Parameter
 	 */
 	void setValue(T value);
-
-	/**
-	 * TODO can we implement comparable or equals/hash
-	 * Checks the incoming object for equality with this Parameters value.
-	 *
-	 * @param obj
-	 * @return
-	 */
-	boolean isValue(Object obj);
-
 }

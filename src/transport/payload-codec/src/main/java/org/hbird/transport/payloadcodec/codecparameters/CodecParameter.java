@@ -5,7 +5,6 @@ import java.util.BitSet;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
-
 /**
  * Parameter Decorator.
  *
@@ -33,7 +32,6 @@ public abstract class CodecParameter<T> implements Parameter<T> {
 
 	public abstract BitSet encodeToBitSet(BitSet targetBitSet, int offset);
 
-
 	// Pass through methods which the Codec Parameter does not need to alter in it's decoration.
 	// ----------------------------------------------------------------------------------------
 
@@ -43,22 +41,14 @@ public abstract class CodecParameter<T> implements Parameter<T> {
 	}
 
 	@Override
-	public boolean isValue(final Object obj) {
-		return parameter.isValue(obj);
-	}
-
-
-	@Override
 	public String getName() {
 		return parameter.getName();
 	}
-
 
 	@Override
 	public String getShortDescription() {
 		return parameter.getShortDescription();
 	}
-
 
 	@Override
 	public String getLongDescription() {

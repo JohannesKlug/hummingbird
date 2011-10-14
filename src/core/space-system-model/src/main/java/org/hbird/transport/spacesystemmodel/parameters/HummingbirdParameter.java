@@ -59,15 +59,6 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	}
 
 	@Override
-	public boolean isValue(final Object obj) {
-		if (value == null) {
-			return false;
-		}
-
-		return value.equals(obj);
-	}
-
-	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("DefaultParameter [name=");
