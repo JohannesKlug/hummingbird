@@ -27,7 +27,7 @@ public class XtceSpaceSystemModelTest {
 	private SpaceSystem spaceSystem;
 
 	private static final int NUM_OF_PARAMETERS_IN_PAYLOADS = 3;
-	private static final int NUM_OF_PARAMETER_ENCODINGS = 4;
+	private static final int NUM_OF_PARAMETER_ENCODINGS = 6;
 	private static final int NUM_OF_PARAMETER_GROUPS = 4;
 
 	private static final String P_FLIGHT_HOURS_NAME = "FLIGHT_HOURS";
