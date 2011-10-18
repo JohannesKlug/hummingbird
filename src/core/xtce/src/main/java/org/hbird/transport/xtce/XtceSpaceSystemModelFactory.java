@@ -32,7 +32,6 @@ import org.hbird.transport.generatedcode.xtce.TelemetryMetaData;
 import org.hbird.transport.generatedcode.xtce.types.FloatDataEncodingTypeEncodingType;
 import org.hbird.transport.generatedcode.xtce.types.IntegerDataEncodingTypeEncodingType;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
-import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
@@ -95,7 +94,7 @@ public final class XtceSpaceSystemModelFactory {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.hbird.transport.xtce.SpaceSystemModelFactory#createSpaceSystemModel(java.lang.String)
 	 */
 	public static final SpaceSystemModel createSpaceSystemModel(final String spaceSystemmodelFilename) throws InvalidSpaceSystemDefinitionException,
@@ -218,7 +217,7 @@ public final class XtceSpaceSystemModelFactory {
 			String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
 			if (xtceType.getIntegerParameterType() != null) {
 				IntegerParameterType type = xtceType.getIntegerParameterType();
-				if (!XtceToJavaMapping.doesIntRequireJavaLong(type)) {
+				if (!XtceToJavaMapping.doesXtceIntRequireJavaLong(type)) {
 					Parameter<Integer> intParameter = new HummingbirdParameter<Integer>(qualifiedNamePrefix + xtceParameter.getParameter().getName(),
 							xtceParameter.getParameter().getName(), xtceParameter.getParameter().getShortDescription(), xtceParameter.getParameter()
 									.getLongDescription());
@@ -293,7 +292,7 @@ public final class XtceSpaceSystemModelFactory {
 			String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
 			if (xtceType.getIntegerParameterType() != null) {
 				IntegerParameterType type = xtceType.getIntegerParameterType();
-				if (!XtceToJavaMapping.doesIntRequireJavaLong(type)) {
+				if (!XtceToJavaMapping.doesXtceIntRequireJavaLong(type)) {
 					Parameter<Integer> intParameter = new HummingbirdParameter<Integer>(qualifiedNamePrefix + xtceParameter.getParameter().getName(),
 							xtceParameter.getParameter().getName(), xtceParameter.getParameter().getShortDescription(), xtceParameter.getParameter()
 									.getLongDescription());
@@ -351,9 +350,9 @@ public final class XtceSpaceSystemModelFactory {
 	/**
 	 * Create all ParameterGroups. In this iteration we create the parameter groups, but do not create the references
 	 * between them as the referenced objects do not yet exit.
-	 * 
+	 *
 	 * @throws InvalidSpaceSystemDefinitionException
-	 * 
+	 *
 	 * @throws UnsupportedXtceConstructException
 	 */
 	private final static void createAllTelemetryGroups() throws InvalidSpaceSystemDefinitionException {
@@ -377,7 +376,7 @@ public final class XtceSpaceSystemModelFactory {
 	/**
 	 * @throws InvalidSpaceSystemDefinitionException
 	 * @throws UnsupportedXtceConstructException
-	 * 
+	 *
 	 */
 	private final static void populateParameterGroupRestrictions(final String qualifiedName, final SequenceContainer parameterGroupContainer)
 			throws InvalidSpaceSystemDefinitionException {
@@ -517,7 +516,7 @@ public final class XtceSpaceSystemModelFactory {
 
 	/**
 	 * Checks the parameter and returns the name if valid.
-	 * 
+	 *
 	 * @param item
 	 * @return
 	 * @throws InvalidSpaceSystemDefinitionException
@@ -563,7 +562,7 @@ public final class XtceSpaceSystemModelFactory {
 
 	/**
 	 * Covers Java Integers and Longs
-	 * 
+	 *
 	 * @param intParamType
 	 * @return
 	 * @throws InvalidSpaceSystemDefinitionException
@@ -620,7 +619,7 @@ public final class XtceSpaceSystemModelFactory {
 
 	/**
 	 * Covers Java Floats and Doubles.
-	 * 
+	 *
 	 * @param type
 	 * @return
 	 * @throws InvalidSpaceSystemDefinitionException

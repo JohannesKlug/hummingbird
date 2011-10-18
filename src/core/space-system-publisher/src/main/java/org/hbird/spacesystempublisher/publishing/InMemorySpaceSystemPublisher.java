@@ -19,12 +19,16 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 
 	public InMemorySpaceSystemPublisher() {
 	}
-	
-	public InMemorySpaceSystemPublisher(SpaceSystemModelFactory factory, String spaceSystemDefinitionFile) {
+
+	public InMemorySpaceSystemPublisher(final SpaceSystemModelFactory factory, final String spaceSystemDefinitionFile) {
 		try {
 			factory.createSpaceSystemModel(spaceSystemDefinitionFile);
 		}
-		catch (InvalidParameterTypeException | InvalidSpaceSystemDefinitionException e) {
+		catch (InvalidParameterTypeException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		catch (InvalidSpaceSystemDefinitionException e) {
 			e.printStackTrace();
 			System.exit(-1);
 		}
@@ -48,7 +52,7 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 		return spaceSystemFactory;
 	}
 
-	public void setSpaceSystemFactory(SpaceSystemModelFactory spaceSystemFactory) {
+	public void setSpaceSystemFactory(final SpaceSystemModelFactory spaceSystemFactory) {
 		this.spaceSystemFactory = spaceSystemFactory;
 	}
 
@@ -62,7 +66,7 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 	/**
 	 * @param model the model to set
 	 */
-	public void setModel(SpaceSystemModel model) {
+	public void setModel(final SpaceSystemModel model) {
 		this.model = model;
 	}
 
