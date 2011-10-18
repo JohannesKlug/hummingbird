@@ -15,7 +15,7 @@
 				<UnitSet />
 			</IntegerParameterType>
 
-			<IntegerParameterType name="32bitUInteger" sizeInBits="33" signed="false">
+			<IntegerParameterType name="33bitUInteger" sizeInBits="33" signed="false">
 				<UnitSet />
 			</IntegerParameterType>
 		</ParameterTypeSet>
@@ -24,7 +24,7 @@
 			<Parameter parameterTypeRef="11bitUInteger" name="CCSDS_APID"/>
 			<Parameter parameterTypeRef="11bitUInteger" name="LASER_TEMP" />
 			<Parameter parameterTypeRef="16bitUInteger" name="FUEL" />
-			<Parameter parameterTypeRef="32bitUInteger" name="FLIGHT_HOURS" />
+			<Parameter parameterTypeRef="33bitUInteger" name="FLIGHT_HOURS" />
 		</ParameterSet>
 
 		<ContainerSet>
