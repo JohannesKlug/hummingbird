@@ -485,6 +485,12 @@ public final class XtceSpaceSystemModelFactory {
 		}
 	}
 
+	/**
+	 * Injects the data into the model using reflection. This means we don't have to pollute the Space System Model interface
+	 * with lots of setters.
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 */
 	private static void injectConstructsIntoModel() throws IllegalArgumentException, IllegalAccessException {
 		Field[] fields = model.getClass().getDeclaredFields();
 		// TODO Switch on String when jdk 7 works with camel! Much nicer!
