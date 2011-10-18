@@ -58,6 +58,7 @@
 			<camel:from uri="activeMqRawPayloads"></camel:from>
 			<camel:convertBodyTo type="java.util.BitSet" />
 			<camel:to uri="bean:payload-codec"></camel:to>
+			<camel:to uri="activemq:decodedPayloads?jmsMessageType=Text"></camel:to>
 		</camel:route>
 	</camel:camelContext>
 

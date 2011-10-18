@@ -332,4 +332,34 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("HummingbirdParameterGroup [qualifiedName=");
+		builder.append(qualifiedName);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", shortDescription=");
+		builder.append(shortDescription);
+		builder.append(", longDescription=");
+		builder.append(longDescription);
+		builder.append(", integerParameters=");
+		builder.append(integerParameters);
+		builder.append(", longParameters=");
+		builder.append(longParameters);
+		builder.append(", floatParameters=");
+		builder.append(floatParameters);
+		builder.append(", doubleParameters=");
+		builder.append(doubleParameters);
+		builder.append(", bigDecimalParameters=");
+		builder.append(bigDecimalParameters);
+		builder.append(", stringParameters=");
+		builder.append(stringParameters);
+		builder.append(", rawParameters=");
+		builder.append(rawParameters);
+		builder.append("]");
+		return builder.toString();
+	}
+
+
 }
