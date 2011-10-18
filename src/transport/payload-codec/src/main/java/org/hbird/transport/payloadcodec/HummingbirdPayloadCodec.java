@@ -12,6 +12,7 @@ import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingE
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
+import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInModelException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
@@ -36,7 +37,7 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 			this.codecAwareSpaceSystemModel = decorator.decorateSpaceSystemModel(spaceSystemModel, this.encodings);
 		}
 		catch (UnsupportedParameterEncodingException | UnknownParameterEncodingException | UnexpectedParameterTypeException | UnknownParameterGroupException
-				| ParameterNotInGroupException | NoEncodingException | UnknownParameterException e) {
+				| ParameterNotInGroupException | NoEncodingException | UnknownParameterException | ParameterNotInModelException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.exit(-1);

@@ -10,6 +10,7 @@ import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
+import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInModelException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
@@ -87,9 +88,17 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInGroupException {
+	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInModelException {
+		boolean replaced = false;
 		for (ParameterGroup pg : this.groups.values()) {
-			pg.replaceParameterInGroup(qualifiedName, newParameter);
+			replaced = pg.replaceParameterInGroup(qualifiedName, newParameter);
+			if(replaced) {
+				break;
+			}
+		}
+		
+		if(!replaced) {
+			throw new ParameterNotInModelException(qualifiedName);
 		}
 	}
 

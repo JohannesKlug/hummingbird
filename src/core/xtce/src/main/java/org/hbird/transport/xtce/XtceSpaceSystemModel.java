@@ -8,11 +8,13 @@ import java.util.Map;
 
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
-import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
+import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInModelException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -22,7 +24,7 @@ import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
  */
 public class XtceSpaceSystemModel implements SpaceSystemModel {
 	private static final long serialVersionUID = 2532805548202927668L;
-	// private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModel.class);
+	 private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModel.class);
 
 	private String name;
 
@@ -104,9 +106,17 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInGroupException {
+	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInModelException {
+		boolean replaced = false;
 		for (ParameterGroup pg : this.parameterGroups.values()) {
-			pg.replaceParameterInGroup(qualifiedName, newParameter);
+			replaced =  pg.replaceParameterInGroup(qualifiedName, newParameter);
+			if(replaced) {
+				break;
+			}
+		}
+		
+		if(!replaced) {
+			throw new ParameterNotInModelException(qualifiedName);
 		}
 	}
 

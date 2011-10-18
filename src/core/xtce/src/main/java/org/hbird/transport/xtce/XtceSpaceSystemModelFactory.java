@@ -146,13 +146,19 @@ public final class XtceSpaceSystemModelFactory {
 			UnsupportedXtceConstructException {
 		createAllParameterTypes(spaceSystem.getTelemetryMetaData());
 		createAllTelemetryParameters();
-		createAllTelemetryParameterGroups();
+		createAllTelemetryGroups();
 		populateParameterGroups();
 	}
 
 	private void createCommandModel() throws InvalidXtceFileException {
 		createAllParameterTypes(spaceSystem.getCommandMetaData());
 		createAllCommandArguments();
+		createAllTelemetryCommandGroups();
+	}
+
+	private void createAllTelemetryCommandGroups() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private final void createAllParameterTypes(final CommandMetaData commandMetaData) throws InvalidXtceFileException {
@@ -355,7 +361,7 @@ public final class XtceSpaceSystemModelFactory {
 	 *
 	 * @throws UnsupportedXtceConstructException
 	 */
-	private final void createAllTelemetryParameterGroups() throws UnsupportedXtceConstructException {
+	private final void createAllTelemetryGroups() throws UnsupportedXtceConstructException {
 		String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
 		for (int containerIndex = 0; containerIndex < numParameterGroups; ++containerIndex) {
 			final SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex)
