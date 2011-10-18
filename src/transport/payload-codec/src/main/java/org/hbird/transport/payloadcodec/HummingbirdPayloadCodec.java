@@ -36,9 +36,34 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 		try {
 			this.codecAwareSpaceSystemModel = decorator.decorateSpaceSystemModel(spaceSystemModel, this.encodings);
 		}
-		catch (UnsupportedParameterEncodingException | UnknownParameterEncodingException | UnexpectedParameterTypeException | UnknownParameterGroupException
-				| ParameterNotInGroupException | NoEncodingException | UnknownParameterException | ParameterNotInModelException e) {
-			// TODO Auto-generated catch block
+		catch (UnsupportedParameterEncodingException e) {
+
+		}
+		catch (UnknownParameterEncodingException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		catch (UnexpectedParameterTypeException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		catch (UnknownParameterGroupException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		catch (ParameterNotInGroupException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		catch (NoEncodingException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		catch (UnknownParameterException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		catch (ParameterNotInModelException e) {
 			e.printStackTrace();
 			System.exit(-1);
 		}
@@ -46,17 +71,17 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 
 	@Override
 	public ParameterGroup decode(final byte[] payload, final Object payloadLayoutId) {
-		if(payloadLayoutId == null) {
+		if (payloadLayoutId == null) {
 			// no restrictions, decode all everything!
 			int offset = 0;
 			int previousSize = 0;
 			int count = 0;
-			for(ParameterGroup pg : codecAwareSpaceSystemModel.getParameterGroupsCollection()) {
-				for(Parameter<?> p : pg.getAllParameters().values()) {
-					if(count != 0) {
+			for (ParameterGroup pg : codecAwareSpaceSystemModel.getParameterGroupsCollection()) {
+				for (Parameter<?> p : pg.getAllParameters().values()) {
+					if (count != 0) {
 						offset += previousSize;
 					}
-					((CodecParameter<?>)p).decode(payload, offset);
+					((CodecParameter<?>) p).decode(payload, offset);
 					Encoding enc = spaceSystemModel.getEncodings().get(p.getQualifiedName());
 					previousSize = enc.getSizeInBits();
 					count++;
@@ -69,18 +94,18 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 
 	@Override
 	public ParameterGroup decode(final BitSet payload, final Object payloadLayoutId) {
-		if(payloadLayoutId == null) {
+		if (payloadLayoutId == null) {
 			// no restrictions, decode all everything!
 			int offset = 0;
 			int previousSize = 0;
 			int count = 0;
-			for(ParameterGroup pg : codecAwareSpaceSystemModel.getParameterGroupsCollection()) {
-				for(Parameter<?> p : pg.getAllParameters().values()) {
-					if(count != 0) {
+			for (ParameterGroup pg : codecAwareSpaceSystemModel.getParameterGroupsCollection()) {
+				for (Parameter<?> p : pg.getAllParameters().values()) {
+					if (count != 0) {
 						offset += previousSize;
 					}
 					Encoding enc = spaceSystemModel.getEncodings().get(p.getQualifiedName());
-					((CodecParameter<?>)p).decode(payload, offset);
+					((CodecParameter<?>) p).decode(payload, offset);
 					previousSize = enc.getSizeInBits();
 					count++;
 				}
@@ -96,8 +121,8 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 		String name = pg.getName();
 		// find it in the undecorated version
 		ParameterGroup undecoratedGroup = null;
-		for(ParameterGroup group : spaceSystemModel.getParameterGroupsCollection()) {
-			if(StringUtils.equals(group.getName(), name)) {
+		for (ParameterGroup group : spaceSystemModel.getParameterGroupsCollection()) {
+			if (StringUtils.equals(group.getName(), name)) {
 				// set the value of the parameters in the undecorated version
 				undecoratedGroup = group.copyAllParameterValues(pg);
 			}
@@ -105,8 +130,6 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 		// return the undecorated version
 		return undecoratedGroup;
 	}
-
-
 
 	@Override
 	public byte[] encodeToByteArray(final ParameterGroup parameterGroup) {
@@ -121,23 +144,23 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 		String undecoratedGroupName = parameterGroup.getName();
 		ParameterGroup decoratedGroup = null;
 		// for each parameter group in the decorated codec aware model
-		for(ParameterGroup pg : codecAwareSpaceSystemModel.getParameterGroupsCollection()) {
+		for (ParameterGroup pg : codecAwareSpaceSystemModel.getParameterGroupsCollection()) {
 			// if we find the equivalent group we must transfer the set values
-			if(StringUtils.equals(pg.getName(), undecoratedGroupName)) {
+			if (StringUtils.equals(pg.getName(), undecoratedGroupName)) {
 				decoratedGroup = pg;
 
 				// Integers
-				for(Parameter<Integer> undecoratedParameter : parameterGroup.getIntegerParameters().values()) {
-					for(Parameter<Integer> decoratedParameter : pg.getIntegerParameters().values()) {
-						if(StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
+				for (Parameter<Integer> undecoratedParameter : parameterGroup.getIntegerParameters().values()) {
+					for (Parameter<Integer> decoratedParameter : pg.getIntegerParameters().values()) {
+						if (StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
 							decoratedParameter.setValue(undecoratedParameter.getValue());
 						}
 					}
 				}
 				// Longs
-				for(Parameter<Long> undecoratedParameter : parameterGroup.getLongParameters().values()) {
-					for(Parameter<Long> decoratedParameter : pg.getLongParameters().values()) {
-						if(StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
+				for (Parameter<Long> undecoratedParameter : parameterGroup.getLongParameters().values()) {
+					for (Parameter<Long> decoratedParameter : pg.getLongParameters().values()) {
+						if (StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
 							decoratedParameter.setValue(undecoratedParameter.getValue());
 						}
 					}
@@ -154,13 +177,13 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 		int count = 0;
 		int offset = 0;
 		int previousSize = 0;
-		for(Parameter<?> p : decoratedGroup.getAllParameters().values()) {
+		for (Parameter<?> p : decoratedGroup.getAllParameters().values()) {
 			LOG.debug("Encoding parameter " + p.getName());
-			if(count != 0) {
+			if (count != 0) {
 				offset += previousSize;
 			}
 			Encoding enc = spaceSystemModel.getEncodings().get(p.getQualifiedName());
-			((CodecParameter<?>)p).encodeToBitSet(encoded, offset);
+			((CodecParameter<?>) p).encodeToBitSet(encoded, offset);
 			previousSize = enc.getSizeInBits();
 			count++;
 		}
@@ -168,8 +191,8 @@ public class HummingbirdPayloadCodec implements PayloadCodec {
 		return encoded;
 	}
 
-	private  Encoding findEncoding(final String qualifiedName) throws NoEncodingException {
-		if(encodings.containsKey(qualifiedName)) {
+	private Encoding findEncoding(final String qualifiedName) throws NoEncodingException {
+		if (encodings.containsKey(qualifiedName)) {
 			return encodings.get(qualifiedName);
 		}
 		else {

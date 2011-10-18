@@ -17,7 +17,7 @@
 	</bean>
 
 	<camel:camelContext xmlns="http://camel.apache.org/schema/spring">
-<!-- 		Runs routes defined in Java in this package -->
+		<!-- Runs routes defined in Java in this package -->
 		<camel:package>org.hbird.skunkbird</camel:package>
 
 		<camel:route id="factoryToPublisher" >

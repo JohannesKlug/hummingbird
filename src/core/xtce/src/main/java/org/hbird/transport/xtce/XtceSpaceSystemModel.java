@@ -28,11 +28,11 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	private String name;
 
-	private final Map<String, ParameterGroup> parameterGroups = new HashMap<>();
+	private final Map<String, ParameterGroup> parameterGroups = new HashMap<String, ParameterGroup>();
 
-	private final Map<String, List<Object>> restrictions = new HashMap<>();
+	private final Map<String, List<Object>> restrictions = new HashMap<String, List<Object>>();
 
-	private final Map<String, Encoding> encodings = new HashMap<>();
+	private final Map<String, Encoding> encodings = new HashMap<String, Encoding>();
 
 	public XtceSpaceSystemModel() {
 	}
@@ -61,7 +61,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	 */
 	@Override
 	public Map<String, Parameter<?>> getAllPayloadParameters() {
-		Map<String, Parameter<?>> allParameters = new HashMap<>();
+		Map<String, Parameter<?>> allParameters = new HashMap<String, Parameter<?>>();
 		for (ParameterGroup pg : this.parameterGroups.values()) {
 			for (String parameterId : pg.getAllParameters().keySet()) {
 				allParameters.put(parameterId, pg.getAllParameters().get(parameterId));
@@ -122,7 +122,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public Map<String, Parameter<Integer>> getAllIntegerParameters() {
-		Map<String, Parameter<Integer>> allParameters = new HashMap<>();
+		Map<String, Parameter<Integer>> allParameters = new HashMap<String, Parameter<Integer>>();
 		for (ParameterGroup pg : this.parameterGroups.values()) {
 			Map<String, Parameter<Integer>> integerParameters = pg.getIntegerParameters();
 			if (integerParameters != null) {
@@ -136,7 +136,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public Map<String, Parameter<Long>> getAllLongParameters() {
-		Map<String, Parameter<Long>> allParameters = new HashMap<>();
+		Map<String, Parameter<Long>> allParameters = new HashMap<String, Parameter<Long>>();
 		for (ParameterGroup pg : this.parameterGroups.values()) {
 			Map<String, Parameter<Long>> longParameters = pg.getLongParameters();
 			if (longParameters != null) {
