@@ -1,7 +1,7 @@
 package org.hbird.transport.xtce; // Hi Mark.
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -97,11 +97,14 @@ public final class XtceSpaceSystemModelFactory {
 	 *
 	 * @see org.hbird.transport.xtce.SpaceSystemModelFactory#createSpaceSystemModel(java.lang.String)
 	 */
-	public static final SpaceSystemModel createSpaceSystemModel(final String spaceSystemmodelFilename) throws InvalidSpaceSystemDefinitionException,
+	public static final SpaceSystemModel createSpaceSystemModel(final String spaceSystemModelFilename) throws InvalidSpaceSystemDefinitionException,
 			InvalidParameterTypeException {
+
+		LOG.debug("File = " + spaceSystemModelFilename);
+
 		model = new XtceSpaceSystemModel();
 
-		spaceSystem = unmarshallXtceXmlSpaceSystem(spaceSystemmodelFilename);
+		spaceSystem = unmarshallXtceXmlSpaceSystem(spaceSystemModelFilename);
 
 		numParameterGroups = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItemCount();
 
@@ -137,10 +140,10 @@ public final class XtceSpaceSystemModelFactory {
 			final Unmarshaller unmarshaller = context.createUnmarshaller();
 			unmarshaller.setClass(SpaceSystem.class);
 
-			// Unmarshal the space system object
+			// Unmarshall the space system object
 			spaceSystem = (SpaceSystem) unmarshaller.unmarshal(new FileReader(spacesystemmodelFilename));
 		}
-		catch (final IOException e) {
+		catch (FileNotFoundException e) {
 			LOG.error(e.toString());
 		}
 		catch (final MarshalException e) {
