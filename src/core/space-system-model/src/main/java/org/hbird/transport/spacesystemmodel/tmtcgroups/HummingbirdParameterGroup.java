@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.slf4j.Logger;
@@ -201,22 +200,22 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		if (integerParameters.containsKey(pname)) {
 			integerParameters.put(qualifiedName, (Parameter<Integer>) parameter);
 		}
-		else if (longParameters.containsKey(pname)) {
+		else if (longParameters != null && longParameters.containsKey(pname)) {
 			longParameters.put(qualifiedName, (Parameter<Long>) parameter);
 		}
-		else if (bigDecimalParameters.containsKey(pname)) {
+		else if (bigDecimalParameters != null && bigDecimalParameters.containsKey(pname)) {
 			bigDecimalParameters.put(qualifiedName, (Parameter<BigDecimal>) parameter);
 		}
-		else if (floatParameters.containsKey(pname)) {
+		else if (floatParameters != null && floatParameters.containsKey(pname)) {
 			floatParameters.put(qualifiedName, (Parameter<Float>) parameter);
 		}
-		else if (doubleParameters.containsKey(pname)) {
+		else if (doubleParameters != null && doubleParameters.containsKey(pname)) {
 			doubleParameters.put(qualifiedName, (Parameter<Double>) parameter);
 		}
-		else if (stringParameters.containsKey(pname)) {
+		else if (stringParameters != null && stringParameters.containsKey(pname)) {
 			stringParameters.put(qualifiedName, (Parameter<String>) parameter);
 		}
-		else if (rawParameters.containsKey(pname)) {
+		else if (rawParameters != null && rawParameters.containsKey(pname)) {
 			rawParameters.put(qualifiedName, (Parameter<Byte[]>) parameter);
 		}
 		else {
