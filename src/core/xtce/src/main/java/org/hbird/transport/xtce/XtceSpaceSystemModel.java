@@ -8,11 +8,13 @@ import java.util.Map;
 
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
-import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
+import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInModelException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -22,15 +24,15 @@ import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
  */
 public class XtceSpaceSystemModel implements SpaceSystemModel {
 	private static final long serialVersionUID = 2532805548202927668L;
-	// private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModel.class);
+	 private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModel.class);
 
 	private String name;
 
-	private final Map<String, ParameterGroup> parameterGroups = new HashMap<>();
+	private final Map<String, ParameterGroup> parameterGroups = new HashMap<String, ParameterGroup>();
 
-	private final Map<String, List<Object>> restrictions = new HashMap<>();
+	private final Map<String, List<Object>> restrictions = new HashMap<String, List<Object>>();
 
-	private final Map<String, Encoding> encodings = new HashMap<>();
+	private final Map<String, Encoding> encodings = new HashMap<String, Encoding>();
 
 	public XtceSpaceSystemModel() {
 	}
@@ -59,7 +61,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	 */
 	@Override
 	public Map<String, Parameter<?>> getAllPayloadParameters() {
-		Map<String, Parameter<?>> allParameters = new HashMap<>();
+		Map<String, Parameter<?>> allParameters = new HashMap<String, Parameter<?>>();
 		for (ParameterGroup pg : this.parameterGroups.values()) {
 			for (String parameterId : pg.getAllParameters().keySet()) {
 				allParameters.put(parameterId, pg.getAllParameters().get(parameterId));
@@ -104,15 +106,23 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInGroupException {
+	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInModelException {
+		boolean replaced = false;
 		for (ParameterGroup pg : this.parameterGroups.values()) {
-			pg.replaceParameterInGroup(qualifiedName, newParameter);
+			replaced =  pg.replaceParameterInGroup(qualifiedName, newParameter);
+			if(replaced) {
+				break;
+			}
+		}
+		
+		if(!replaced) {
+			throw new ParameterNotInModelException(qualifiedName);
 		}
 	}
 
 	@Override
 	public Map<String, Parameter<Integer>> getAllIntegerParameters() {
-		Map<String, Parameter<Integer>> allParameters = new HashMap<>();
+		Map<String, Parameter<Integer>> allParameters = new HashMap<String, Parameter<Integer>>();
 		for (ParameterGroup pg : this.parameterGroups.values()) {
 			Map<String, Parameter<Integer>> integerParameters = pg.getIntegerParameters();
 			if (integerParameters != null) {
@@ -126,7 +136,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public Map<String, Parameter<Long>> getAllLongParameters() {
-		Map<String, Parameter<Long>> allParameters = new HashMap<>();
+		Map<String, Parameter<Long>> allParameters = new HashMap<String, Parameter<Long>>();
 		for (ParameterGroup pg : this.parameterGroups.values()) {
 			Map<String, Parameter<Long>> longParameters = pg.getLongParameters();
 			if (longParameters != null) {

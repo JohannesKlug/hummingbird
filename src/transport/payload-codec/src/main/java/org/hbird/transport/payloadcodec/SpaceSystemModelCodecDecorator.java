@@ -11,6 +11,7 @@ import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingE
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
+import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInModelException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
@@ -26,7 +27,7 @@ public final class SpaceSystemModelCodecDecorator {
 
 	public SpaceSystemModel decorateSpaceSystemModel(final SpaceSystemModel spaceSystemModel, final Map<String, Encoding> encodings)
 			throws UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException, UnknownParameterGroupException,
-			ParameterNotInGroupException, NoEncodingException, UnknownParameterException {
+			ParameterNotInGroupException, NoEncodingException, UnknownParameterException, ParameterNotInModelException {
 		this.encodings = encodings;
 
 		Cloner cloner = new Cloner();

@@ -25,7 +25,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	private final String shortDescription;
 	private final String longDescription;
 
-	private final Map<String, Parameter<?>> parameters = new LinkedHashMap<>();
+	private final Map<String, Parameter<?>> parameters = new LinkedHashMap<String, Parameter<?>>();
 	private Map<String, Parameter<Integer>> integerParameters;
 	private Map<String, Parameter<Long>> longParameters;
 	private Map<String, Parameter<Float>> floatParameters;
@@ -114,7 +114,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	@Override
 	public void addIntegerParameter(final String qualifiedName, final Parameter<Integer> parameter) {
 		if (this.integerParameters == null) {
-			this.integerParameters = new LinkedHashMap<>();
+			this.integerParameters = new LinkedHashMap<String, Parameter<Integer>>();
 		}
 		this.integerParameters.put(qualifiedName, parameter);
 		this.parameters.put(qualifiedName, parameter);
@@ -124,7 +124,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	@Override
 	public void addLongParameter(final String qualifiedName, final Parameter<Long> parameter) {
 		if (this.longParameters == null) {
-			this.longParameters = new LinkedHashMap<>();
+			this.longParameters = new LinkedHashMap<String, Parameter<Long>>();
 		}
 		this.longParameters.put(qualifiedName, parameter);
 		this.parameters.put(qualifiedName, parameter);
@@ -134,7 +134,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	@Override
 	public void addBigDecimalParameter(final String qualifiedName, final Parameter<BigDecimal> parameter) {
 		if (this.bigDecimalParameters == null) {
-			this.bigDecimalParameters = new LinkedHashMap<>();
+			this.bigDecimalParameters = new LinkedHashMap<String, Parameter<BigDecimal>>();
 		}
 		this.bigDecimalParameters.put(qualifiedName, parameter);
 		this.parameters.put(qualifiedName, parameter);
@@ -144,7 +144,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	@Override
 	public void addFloatParameter(final String qualifiedName, final Parameter<Float> parameter) {
 		if (this.floatParameters == null) {
-			this.floatParameters = new LinkedHashMap<>();
+			this.floatParameters = new LinkedHashMap<String, Parameter<Float>>();
 		}
 		this.floatParameters.put(qualifiedName, parameter);
 		this.parameters.put(qualifiedName, parameter);
@@ -154,7 +154,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	@Override
 	public void addDoubleParameter(final String qualifiedName, final Parameter<Double> parameter) {
 		if (this.doubleParameters == null) {
-			this.doubleParameters = new LinkedHashMap<>();
+			this.doubleParameters = new LinkedHashMap<String, Parameter<Double>>();
 		}
 		this.doubleParameters.put(qualifiedName, parameter);
 		this.parameters.put(qualifiedName, parameter);
@@ -164,7 +164,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	@Override
 	public void addStringParameter(final String qualifiedName, final Parameter<String> parameter) {
 		if (this.stringParameters == null) {
-			this.stringParameters = new LinkedHashMap<>();
+			this.stringParameters = new LinkedHashMap<String, Parameter<String>>();
 		}
 		this.stringParameters.put(qualifiedName, parameter);
 		this.parameters.put(qualifiedName, parameter);
@@ -174,7 +174,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	@Override
 	public void addRawParameter(final String qualifiedName, final Parameter<Byte[]> parameter) {
 		if (this.rawParameters == null) {
-			this.rawParameters = new LinkedHashMap<>();
+			this.rawParameters = new LinkedHashMap<String, Parameter<Byte[]>>();
 		}
 		this.rawParameters.put(qualifiedName, parameter);
 		this.parameters.put(qualifiedName, parameter);
@@ -190,16 +190,15 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	// it is safe to cast.
 	@SuppressWarnings("unchecked")
 	@Override
-	public void replaceParameterInGroup(final String qualifiedName, final Parameter<?> parameter) throws ParameterNotInGroupException {
+	public boolean replaceParameterInGroup(final String qualifiedName, final Parameter<?> parameter) {
+		boolean replaced = true;
 		String pname = parameter.getQualifiedName();
 
 		if (parameters.containsKey(pname)) {
-			System.out.println("Replacing " + pname + " in parameters<?> lists");
 			parameters.put(qualifiedName, parameter);
 		}
 
 		if (integerParameters.containsKey(pname)) {
-			System.out.println("Replacing " + pname + " in parameters<Integer> lists");
 			integerParameters.put(qualifiedName, (Parameter<Integer>) parameter);
 		}
 		else if (longParameters.containsKey(pname)) {
@@ -221,9 +220,10 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 			rawParameters.put(qualifiedName, (Parameter<Byte[]>) parameter);
 		}
 		else {
-			throw new ParameterNotInGroupException(parameter);
+			replaced = false;
 		}
 
+		return replaced;
 	}
 
 	@Override

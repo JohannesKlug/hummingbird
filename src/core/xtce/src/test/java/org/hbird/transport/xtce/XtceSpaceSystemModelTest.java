@@ -11,12 +11,13 @@ import java.util.Map;
 
 import org.hbird.transport.generatedcode.xtce.SpaceSystem;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import org.hbird.transport.spacesystemmodel.exceptions.InvalidSpaceSystemDefinitionException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
-import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
 import org.hbird.transport.xtce.exceptions.UnsupportedXtceConstructException;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -27,7 +28,7 @@ public class XtceSpaceSystemModelTest {
 	private SpaceSystem spaceSystem;
 
 	private static final int NUM_OF_PARAMETERS_IN_PAYLOADS = 3;
-	private static final int NUM_OF_PARAMETER_ENCODINGS = 4;
+	private static final int NUM_OF_PARAMETER_ENCODINGS = 6;
 	private static final int NUM_OF_PARAMETER_GROUPS = 4;
 
 	private static final String P_FLIGHT_HOURS_NAME = "FLIGHT_HOURS";
@@ -61,11 +62,9 @@ public class XtceSpaceSystemModelTest {
 
 	private SpaceSystemModel xtceSsm;
 
-	private static XtceSpaceSystemModelFactory factory;
 
 	@BeforeClass
 	public static final void SetupOnce() {
-		factory = new XtceSpaceSystemModelFactory();
 	}
 
 	@Before
@@ -75,9 +74,9 @@ public class XtceSpaceSystemModelTest {
 
 
 	@Test
-	public void testSpaceSystemCreationAllUints() throws InvalidXtceFileException, InvalidParameterTypeException, NumberFormatException, UnsupportedXtceConstructException {
+	public void testSpaceSystemCreationAllUints() throws InvalidSpaceSystemDefinitionException, InvalidParameterTypeException, NumberFormatException, UnsupportedXtceConstructException {
 		URL testFileUrl = XtceSpaceSystemModelTest.class.getResource("TestSat-all-uints.xml");
-		xtceSsm = factory.createSpaceSystemModel(testFileUrl.getPath());
+		xtceSsm = XtceSpaceSystemModelFactory.createSpaceSystemModel(testFileUrl.getPath());
 
 		// Assert it was created.
 		assertNotNull(xtceSsm);
@@ -131,9 +130,9 @@ public class XtceSpaceSystemModelTest {
 
 
 	@Test
-	public void testParameterGroupsCreationAllUints() throws InvalidXtceFileException, InvalidParameterTypeException, UnknownParameterGroupException, UnsupportedXtceConstructException {
+	public void testParameterGroupsCreationAllUints() throws InvalidSpaceSystemDefinitionException, InvalidParameterTypeException, UnknownParameterGroupException, UnsupportedXtceConstructException {
 		URL testFileUrl = XtceSpaceSystemModelTest.class.getResource("TestSat-all-uints.xml");
-		xtceSsm = factory.createSpaceSystemModel(testFileUrl.getPath());
+		xtceSsm = XtceSpaceSystemModelFactory.createSpaceSystemModel(testFileUrl.getPath());
 		String tmPrefix = xtceSsm.getName() + ".tm.";
 
 		Collection<ParameterGroup> parameterGroups = xtceSsm.getParameterGroups().values();

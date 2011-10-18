@@ -32,14 +32,15 @@ import org.hbird.transport.generatedcode.xtce.TelemetryMetaData;
 import org.hbird.transport.generatedcode.xtce.types.FloatDataEncodingTypeEncodingType;
 import org.hbird.transport.generatedcode.xtce.types.IntegerDataEncodingTypeEncodingType;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
+import org.hbird.transport.spacesystemmodel.SpaceSystemModelFactory;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import org.hbird.transport.spacesystemmodel.exceptions.InvalidSpaceSystemDefinitionException;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.tmtcgroups.HummingbirdParameterGroup;
 import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
-import org.hbird.transport.xtce.exceptions.InvalidXtceFileException;
 import org.hbird.transport.xtce.exceptions.UnsupportedXtceConstructException;
 import org.hbird.transport.xtce.utils.XtceToJavaMapping;
 import org.slf4j.Logger;
@@ -47,45 +48,58 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.primitives.Ints;
 
+//public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 public final class XtceSpaceSystemModelFactory {
 	private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModelFactory.class);
 
-	private SpaceSystem spaceSystem;
+	private static SpaceSystem spaceSystem;
 
-	private SpaceSystemModel model;
+	private static SpaceSystemModel model;
 
-	private String modelName;
+	private static String modelName;
 
-	private int numParameterGroups;
+	private static int numParameterGroups;
 
-	private final Map<String, ParameterTypeSetTypeItem> xtceTmParameterTypes = new LinkedHashMap<String, ParameterTypeSetTypeItem>();
-	private final Map<String, ParameterTypeSetTypeItem> xtceTcParameterTypes = new LinkedHashMap<String, ParameterTypeSetTypeItem>();
+	private static final Map<String, ParameterTypeSetTypeItem> xtceTmParameterTypes = new LinkedHashMap<String, ParameterTypeSetTypeItem>();
+	private static final Map<String, ParameterTypeSetTypeItem> xtceTcParameterTypes = new LinkedHashMap<String, ParameterTypeSetTypeItem>();
 
-	private final Map<String, Parameter<Integer>> integerParameters = new LinkedHashMap<>();
+	private static final Map<String, Parameter<Integer>> integerParameters = new LinkedHashMap<String, Parameter<Integer>>();
+	private static final Map<String, Parameter<Integer>> integerArguments = new LinkedHashMap<String, Parameter<Integer>>();
 
-	private final Map<String, Parameter<Long>> longParameters = new LinkedHashMap<>();
+	private static final Map<String, Parameter<Long>> longParameters = new LinkedHashMap<String, Parameter<Long>>();
+	private static final Map<String, Parameter<Long>> longArguments = new LinkedHashMap<String, Parameter<Long>>();
 
-	private final Map<String, Parameter<Float>> floatParameters = new LinkedHashMap<>();
+	private static final Map<String, Parameter<Float>> floatParameters = new LinkedHashMap<String, Parameter<Float>>();
+	private static final Map<String, Parameter<Float>> floatArguments = new LinkedHashMap<String, Parameter<Float>>();
 
-	private final Map<String, Parameter<Double>> doubleParameters = new LinkedHashMap<>();
+	private static final Map<String, Parameter<Double>> doubleParameters = new LinkedHashMap<String, Parameter<Double>>();
+	private static final Map<String, Parameter<Double>> doubleArguments = new LinkedHashMap<String, Parameter<Double>>();
 
-	private final Map<String, Parameter<BigDecimal>> bigDecimalParameters = new LinkedHashMap<>();
+	private static final Map<String, Parameter<BigDecimal>> bigDecimalParameters = new LinkedHashMap<String, Parameter<BigDecimal>>();
+	private static final Map<String, Parameter<BigDecimal>> bigDecimalArguments = new LinkedHashMap<String, Parameter<BigDecimal>>();
 
-	private final Map<String, Parameter<String>> stringParameters = new LinkedHashMap<>();
+	private static final Map<String, Parameter<String>> stringParameters = new LinkedHashMap<String, Parameter<String>>();
+	private static final Map<String, Parameter<String>> stringArguments = new LinkedHashMap<String, Parameter<String>>();
 
-	private final Map<String, Parameter<Byte[]>> rawParameters = new LinkedHashMap<>();
+	private static final Map<String, Parameter<Byte[]>> rawParameters = new LinkedHashMap<String, Parameter<Byte[]>>();
+	private static final Map<String, Parameter<Byte[]>> rawArguments = new LinkedHashMap<String, Parameter<Byte[]>>();
 
-	private final Map<String, ParameterGroup> parameterGroups = new HashMap<>();
+	private static final Map<String, ParameterGroup> parameterGroups = new HashMap<String, ParameterGroup>();
 
-	Map<String, List<Object>> restrictions = new HashMap<>();
+	private static final Map<String, List<Object>> restrictions = new HashMap<String, List<Object>>();
 
-	Map<String, Encoding> encodings = new HashMap<>();
+	private static final Map<String, Encoding> encodings = new HashMap<String, Encoding>();
 
-	public XtceSpaceSystemModelFactory() {
+	private XtceSpaceSystemModelFactory() {
 	}
 
-	public final SpaceSystemModel createSpaceSystemModel(final String spaceSystemmodelFilename) throws InvalidXtceFileException, InvalidParameterTypeException,
-			UnsupportedXtceConstructException {
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.hbird.transport.xtce.SpaceSystemModelFactory#createSpaceSystemModel(java.lang.String)
+	 */
+	public static final SpaceSystemModel createSpaceSystemModel(final String spaceSystemmodelFilename) throws InvalidSpaceSystemDefinitionException,
+			InvalidParameterTypeException {
 		model = new XtceSpaceSystemModel();
 
 		spaceSystem = unmarshallXtceXmlSpaceSystem(spaceSystemmodelFilename);
@@ -101,205 +115,18 @@ public final class XtceSpaceSystemModelFactory {
 		try {
 			injectConstructsIntoModel();
 		}
-		catch (IllegalArgumentException | IllegalAccessException e) {
+		catch (IllegalArgumentException e) {
+			LOG.error("Critical Error creating XTCE based Space System Model");
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		catch (IllegalAccessException e) {
 			LOG.error("Critical Error creating XTCE based Space System Model");
 			e.printStackTrace();
 			System.exit(-1);
 		}
 
 		return model;
-	}
-
-	private void injectConstructsIntoModel() throws IllegalArgumentException, IllegalAccessException {
-		Field[] fields = model.getClass().getDeclaredFields();
-		for (Field field : fields) {
-			field.setAccessible(true);
-			String name = field.getName();
-			switch (name) {
-				case "parameterGroups":
-					field.set(model, parameterGroups);
-					break;
-				case "restrictions":
-					field.set(model, restrictions);
-					break;
-				case "encodings":
-					field.set(model, encodings);
-					break;
-				case "name":
-					field.set(model, modelName);
-					break;
-				default:
-					LOG.debug("Not interested in field : " + name);
-			}
-		}
-	}
-
-	private void createCommandModel() throws InvalidXtceFileException {
-		createAllParameterTypes(spaceSystem.getCommandMetaData());
-	}
-
-	private void createTelemetryModel() throws InvalidXtceFileException, NumberFormatException, InvalidParameterTypeException,
-			UnsupportedXtceConstructException {
-		createAllParameterTypes(spaceSystem.getTelemetryMetaData());
-		createAllTelemetryParameters();
-		createAllTelemetryParameterGroups();
-		populateParameterGroups();
-	}
-
-	private final void createAllParameterTypes(final CommandMetaData commandMetaData) throws InvalidXtceFileException {
-		int numberOfParameterTypes = commandMetaData.getParameterTypeSet().getParameterTypeSetTypeItemCount();
-
-		for (int parameterTypeIndex = 0; parameterTypeIndex < numberOfParameterTypes; ++parameterTypeIndex) {
-			final ParameterTypeSetTypeItem item = commandMetaData.getParameterTypeSet().getParameterTypeSetTypeItem(parameterTypeIndex);
-			String name = checkParameterType(item);
-			xtceTcParameterTypes.put(name, item);
-		}
-	}
-
-	/**
-	 * @param telemetryMetaData
-	 * @return
-	 * @throws InvalidParameterTypeException
-	 * @throws InvalidXtceFileException
-	 */
-	private final void createAllParameterTypes(final TelemetryMetaData telemetryMetaData) throws InvalidXtceFileException {
-		int numberOfParameterTypes = telemetryMetaData.getParameterTypeSet().getParameterTypeSetTypeItemCount();
-
-		for (int parameterTypeIndex = 0; parameterTypeIndex < numberOfParameterTypes; ++parameterTypeIndex) {
-			final ParameterTypeSetTypeItem item = telemetryMetaData.getParameterTypeSet().getParameterTypeSetTypeItem(parameterTypeIndex);
-			String name = checkParameterType(item);
-			xtceTmParameterTypes.put(name, item);
-		}
-	}
-
-	/**
-	 * Checks the parameter and returns the name if valid.
-	 * @param item
-	 * @return
-	 * @throws InvalidXtceFileException
-	 */
-	private static String checkParameterType(final ParameterTypeSetTypeItem item) throws InvalidXtceFileException {
-		String name = null;
-
-		// If it's an integer parameter..
-		final IntegerParameterType integerParameterType = item.getIntegerParameterType();
-		if (integerParameterType != null) {
-			name = integerParameterType.getName();
-			if (name == null) {
-				throw new InvalidXtceFileException("IntegerParameter has a null name; cannot add to parameterTypes");
-			}
-		}
-		// If it is a float parameter...
-		else if (item.getFloatParameterType() != null) {
-			name = item.getFloatParameterType().getName();
-			if (name == null) {
-				throw new InvalidXtceFileException("FloatParameter has a null name; cannot add to parameterTypes");
-			}
-		}
-		// If it is a string parameter...
-		else if (item.getStringParameterType() != null) {
-			name = item.getStringParameterType().getName();
-			if (name == null) {
-				throw new InvalidXtceFileException("StringParameter has a null name; cannot add to parameterTypes");
-			}
-		}
-		// If it is a boolean parameter...
-		else if (item.getBooleanParameterType() != null) {
-			name = item.getBooleanParameterType().getName();
-			if (name == null) {
-				throw new InvalidXtceFileException("BooleanParameter has a null name; cannot add to parameterTypes");
-			}
-		}
-		else {
-			throw new InvalidXtceFileException("Unknown/unsupported parameter type: " + item);
-		}
-
-		return name;
-	}
-
-	private final void createAllTelemetryParameters() throws InvalidParameterTypeException, NumberFormatException, InvalidXtceFileException {
-		TelemetryMetaData categoryMetaData = spaceSystem.getTelemetryMetaData();
-		int numberOfParameters = categoryMetaData.getParameterSet().getParameterSetTypeItemCount();
-
-		// @formatter:off
-		for (int i = 0; i < numberOfParameters; ++i) {
-
-			final ParameterSetTypeItem xtceParameter = categoryMetaData.getParameterSet().getParameterSetTypeItem(i);
-
-			String parameterTypeRef = xtceParameter.getParameter().getParameterTypeRef();
-			ParameterTypeSetTypeItem xtceType = xtceTmParameterTypes.get(parameterTypeRef);
-
-			// If it's an integer type...
-			if(xtceType == null) {
-				throw new InvalidXtceFileException("Unknown parameter type: " + parameterTypeRef + ". A parameter references an undeclared parameter type in the XTCE space system definition file.");
-			}
-
-			String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
-			if (xtceType.getIntegerParameterType() != null) {
-				IntegerParameterType type = xtceType.getIntegerParameterType();
-				if (!XtceToJavaMapping.doesIntRequireJavaLong(type)) {
-					Parameter<Integer> intParameter = new HummingbirdParameter<Integer>(
-								qualifiedNamePrefix + xtceParameter.getParameter().getName(),
-								xtceParameter.getParameter().getName(),
-								xtceParameter.getParameter().getShortDescription(),
-								xtceParameter.getParameter().getLongDescription());
-					if(LOG.isDebugEnabled()) {
-						LOG.debug("Adding Integer parameter " + intParameter.getName());
-					}
-					integerParameters.put(intParameter.getQualifiedName(), intParameter);
-					encodings.put(intParameter.getQualifiedName(), createXtceIntegerEncoding(type));
-				}
-				else {
-					Parameter<Long> longParameter = new HummingbirdParameter<Long>(
-								qualifiedNamePrefix + xtceParameter.getParameter().getName(),
-								xtceParameter.getParameter().getName(),
-								xtceParameter.getParameter().getShortDescription(),
-								xtceParameter.getParameter().getLongDescription());
-					if(LOG.isDebugEnabled()) {
-						LOG.debug("Adding Long parameter " + longParameter.getName());
-					}
-					longParameters.put(longParameter.getQualifiedName(), longParameter);
-					encodings.put(longParameter.getQualifiedName(), createXtceIntegerEncoding(type));
-				}
-			}
-
-			// If it's an float type...
-			else if (xtceType.getFloatParameterType() != null) {
-				FloatParameterType type = xtceType.getFloatParameterType();
-				switch(type.getSizeInBits()) {
-					case VALUE_32:
-						Parameter<Float> floatParameter = new HummingbirdParameter<Float>(
-								qualifiedNamePrefix + xtceParameter.getParameter().getName(),
-								xtceParameter.getParameter().getName(),
-								xtceParameter.getParameter().getShortDescription(),
-								xtceParameter.getParameter().getLongDescription());
-						floatParameters.put(floatParameter.getQualifiedName(), floatParameter);
-						break;
-					case VALUE_64:
-						Parameter<Double> doubleParameter = new HummingbirdParameter<Double>(
-								qualifiedNamePrefix + xtceParameter.getParameter().getName(),
-								xtceParameter.getParameter().getName(),
-								xtceParameter.getParameter().getShortDescription(),
-								xtceParameter.getParameter().getLongDescription());
-						doubleParameters.put(doubleParameter.getQualifiedName(), doubleParameter);
-						break;
-					case VALUE_128:
-						Parameter<BigDecimal> bigDecimalParameter = new HummingbirdParameter<BigDecimal>(
-								qualifiedNamePrefix + xtceParameter.getParameter().getName(),
-								xtceParameter.getParameter().getName(),
-								xtceParameter.getParameter().getShortDescription(),
-								xtceParameter.getParameter().getLongDescription());
-						bigDecimalParameters.put(bigDecimalParameter.getQualifiedName(), bigDecimalParameter);
-						break;
-					default:
-						throw new InvalidXtceFileException("Invalid bit size for float type " + type.getName());
-				}
-			}
-			else {
-				throw new InvalidXtceFileException("Unknown parameter type: " + parameterTypeRef + ". A parameter references an undeclared parameter type in the XTCE space system definition file.");
-			}
-			// @formatter:on
-		}
 	}
 
 	private final static SpaceSystem unmarshallXtceXmlSpaceSystem(final String spacesystemmodelFilename) {
@@ -327,23 +154,217 @@ public final class XtceSpaceSystemModelFactory {
 		return spaceSystem;
 	}
 
+	private static void createTelemetryModel() throws InvalidSpaceSystemDefinitionException, NumberFormatException, InvalidParameterTypeException {
+		createAllParameterTypes(spaceSystem.getTelemetryMetaData());
+		createAllTelemetryParameters();
+		createAllTelemetryGroups();
+		populateParameterGroups();
+	}
+
+	private static void createCommandModel() throws InvalidSpaceSystemDefinitionException {
+		createAllParameterTypes(spaceSystem.getCommandMetaData());
+		createAllCommandArguments();
+		createAllTelemetryCommandGroups();
+	}
+
+	private static void createAllTelemetryCommandGroups() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private final static void createAllParameterTypes(final CommandMetaData commandMetaData) throws InvalidSpaceSystemDefinitionException {
+		int numberOfParameterTypes = commandMetaData.getParameterTypeSet().getParameterTypeSetTypeItemCount();
+
+		for (int parameterTypeIndex = 0; parameterTypeIndex < numberOfParameterTypes; ++parameterTypeIndex) {
+			final ParameterTypeSetTypeItem item = commandMetaData.getParameterTypeSet().getParameterTypeSetTypeItem(parameterTypeIndex);
+			String name = checkParameterType(item);
+			xtceTcParameterTypes.put(name, item);
+		}
+	}
+
+	/**
+	 * @param telemetryMetaData
+	 * @return
+	 * @throws InvalidParameterTypeException
+	 * @throws InvalidSpaceSystemDefinitionException
+	 */
+	private final static void createAllParameterTypes(final TelemetryMetaData telemetryMetaData) throws InvalidSpaceSystemDefinitionException {
+		int numberOfParameterTypes = telemetryMetaData.getParameterTypeSet().getParameterTypeSetTypeItemCount();
+
+		for (int parameterTypeIndex = 0; parameterTypeIndex < numberOfParameterTypes; ++parameterTypeIndex) {
+			final ParameterTypeSetTypeItem item = telemetryMetaData.getParameterTypeSet().getParameterTypeSetTypeItem(parameterTypeIndex);
+			String name = checkParameterType(item);
+			xtceTmParameterTypes.put(name, item);
+		}
+	}
+
+	private final static void createAllTelemetryParameters() throws InvalidSpaceSystemDefinitionException {
+		TelemetryMetaData categoryMetaData = spaceSystem.getTelemetryMetaData();
+		int numberOfParameters = categoryMetaData.getParameterSet().getParameterSetTypeItemCount();
+
+		// @formatter:off
+		for (int i = 0; i < numberOfParameters; ++i) {
+			final ParameterSetTypeItem xtceParameter = categoryMetaData.getParameterSet().getParameterSetTypeItem(i);
+
+			String parameterTypeRef = xtceParameter.getParameter().getParameterTypeRef();
+			ParameterTypeSetTypeItem xtceType = xtceTmParameterTypes.get(parameterTypeRef);
+
+			// If it's an integer type...
+			if (xtceType == null) {
+				throw new InvalidSpaceSystemDefinitionException("Unknown parameter type: " + parameterTypeRef
+						+ ". A parameter references an undeclared parameter type in the XTCE space system definition file.");
+			}
+
+			String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
+			if (xtceType.getIntegerParameterType() != null) {
+				IntegerParameterType type = xtceType.getIntegerParameterType();
+				if (!XtceToJavaMapping.doesIntRequireJavaLong(type)) {
+					Parameter<Integer> intParameter = new HummingbirdParameter<Integer>(qualifiedNamePrefix + xtceParameter.getParameter().getName(),
+							xtceParameter.getParameter().getName(), xtceParameter.getParameter().getShortDescription(), xtceParameter.getParameter()
+									.getLongDescription());
+					if (LOG.isDebugEnabled()) {
+						LOG.debug("Adding Integer parameter " + intParameter.getName());
+					}
+					integerParameters.put(intParameter.getQualifiedName(), intParameter);
+					encodings.put(intParameter.getQualifiedName(), createXtceIntegerEncoding(type));
+				}
+				else {
+					Parameter<Long> longParameter = new HummingbirdParameter<Long>(qualifiedNamePrefix + xtceParameter.getParameter().getName(), xtceParameter
+							.getParameter().getName(), xtceParameter.getParameter().getShortDescription(), xtceParameter.getParameter().getLongDescription());
+					if (LOG.isDebugEnabled()) {
+						LOG.debug("Adding Long parameter " + longParameter.getName());
+					}
+					longParameters.put(longParameter.getQualifiedName(), longParameter);
+					encodings.put(longParameter.getQualifiedName(), createXtceIntegerEncoding(type));
+				}
+			}
+
+			// If it's an float type...
+			else if (xtceType.getFloatParameterType() != null) {
+				FloatParameterType type = xtceType.getFloatParameterType();
+				switch (type.getSizeInBits()) {
+					case VALUE_32:
+						Parameter<Float> floatParameter = new HummingbirdParameter<Float>(qualifiedNamePrefix + xtceParameter.getParameter().getName(),
+								xtceParameter.getParameter().getName(), xtceParameter.getParameter().getShortDescription(), xtceParameter.getParameter()
+										.getLongDescription());
+						floatParameters.put(floatParameter.getQualifiedName(), floatParameter);
+						break;
+					case VALUE_64:
+						Parameter<Double> doubleParameter = new HummingbirdParameter<Double>(qualifiedNamePrefix + xtceParameter.getParameter().getName(),
+								xtceParameter.getParameter().getName(), xtceParameter.getParameter().getShortDescription(), xtceParameter.getParameter()
+										.getLongDescription());
+						doubleParameters.put(doubleParameter.getQualifiedName(), doubleParameter);
+						break;
+					case VALUE_128:
+						Parameter<BigDecimal> bigDecimalParameter = new HummingbirdParameter<BigDecimal>(qualifiedNamePrefix
+								+ xtceParameter.getParameter().getName(), xtceParameter.getParameter().getName(), xtceParameter.getParameter()
+								.getShortDescription(), xtceParameter.getParameter().getLongDescription());
+						bigDecimalParameters.put(bigDecimalParameter.getQualifiedName(), bigDecimalParameter);
+						break;
+					default:
+						throw new InvalidSpaceSystemDefinitionException("Invalid bit size for float type " + type.getName());
+				}
+			}
+			else {
+				throw new InvalidSpaceSystemDefinitionException("Unknown or unsupported parameter type: " + parameterTypeRef
+						+ ". A parameter references an undeclared parameter type in the XTCE space system definition file.");
+			}
+			// @formatter:on
+		}
+	}
+
+	private final static void createAllCommandArguments() throws InvalidSpaceSystemDefinitionException {
+		CommandMetaData categoryMetaData = spaceSystem.getCommandMetaData();
+		int numberOfParameters = categoryMetaData.getParameterSet().getParameterSetTypeItemCount();
+
+		// @formatter:off
+		for (int i = 0; i < numberOfParameters; ++i) {
+			final ParameterSetTypeItem xtceParameter = categoryMetaData.getParameterSet().getParameterSetTypeItem(i);
+
+			String parameterTypeRef = xtceParameter.getParameter().getParameterTypeRef();
+			ParameterTypeSetTypeItem xtceType = xtceTcParameterTypes.get(parameterTypeRef);
+
+			// If it's an integer type...
+			if (xtceType == null) {
+				throw new InvalidSpaceSystemDefinitionException("Unknown parameter type: " + parameterTypeRef
+						+ ". A parameter references an undeclared parameter type in the XTCE space system definition file.");
+			}
+
+			String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
+			if (xtceType.getIntegerParameterType() != null) {
+				IntegerParameterType type = xtceType.getIntegerParameterType();
+				if (!XtceToJavaMapping.doesIntRequireJavaLong(type)) {
+					Parameter<Integer> intParameter = new HummingbirdParameter<Integer>(qualifiedNamePrefix + xtceParameter.getParameter().getName(),
+							xtceParameter.getParameter().getName(), xtceParameter.getParameter().getShortDescription(), xtceParameter.getParameter()
+									.getLongDescription());
+					if (LOG.isDebugEnabled()) {
+						LOG.debug("Adding Integer parameter " + intParameter.getName());
+					}
+					integerArguments.put(intParameter.getQualifiedName(), intParameter);
+					encodings.put(intParameter.getQualifiedName(), createXtceIntegerEncoding(type));
+				}
+				else {
+					Parameter<Long> longParameter = new HummingbirdParameter<Long>(qualifiedNamePrefix + xtceParameter.getParameter().getName(), xtceParameter
+							.getParameter().getName(), xtceParameter.getParameter().getShortDescription(), xtceParameter.getParameter().getLongDescription());
+					if (LOG.isDebugEnabled()) {
+						LOG.debug("Adding Long parameter " + longParameter.getName());
+					}
+					longArguments.put(longParameter.getQualifiedName(), longParameter);
+					encodings.put(longParameter.getQualifiedName(), createXtceIntegerEncoding(type));
+				}
+			}
+
+			// If it's an float type...
+			else if (xtceType.getFloatParameterType() != null) {
+				FloatParameterType type = xtceType.getFloatParameterType();
+				switch (type.getSizeInBits()) {
+					case VALUE_32:
+						Parameter<Float> floatParameter = new HummingbirdParameter<Float>(qualifiedNamePrefix + xtceParameter.getParameter().getName(),
+								xtceParameter.getParameter().getName(), xtceParameter.getParameter().getShortDescription(), xtceParameter.getParameter()
+										.getLongDescription());
+						floatArguments.put(floatParameter.getQualifiedName(), floatParameter);
+						break;
+					case VALUE_64:
+						Parameter<Double> doubleParameter = new HummingbirdParameter<Double>(qualifiedNamePrefix + xtceParameter.getParameter().getName(),
+								xtceParameter.getParameter().getName(), xtceParameter.getParameter().getShortDescription(), xtceParameter.getParameter()
+										.getLongDescription());
+						doubleArguments.put(doubleParameter.getQualifiedName(), doubleParameter);
+						break;
+					case VALUE_128:
+						Parameter<BigDecimal> bigDecimalParameter = new HummingbirdParameter<BigDecimal>(qualifiedNamePrefix
+								+ xtceParameter.getParameter().getName(), xtceParameter.getParameter().getName(), xtceParameter.getParameter()
+								.getShortDescription(), xtceParameter.getParameter().getLongDescription());
+						bigDecimalArguments.put(bigDecimalParameter.getQualifiedName(), bigDecimalParameter);
+						break;
+					default:
+						throw new InvalidSpaceSystemDefinitionException("Invalid bit size for float type " + type.getName());
+				}
+			}
+			else {
+				throw new InvalidSpaceSystemDefinitionException("Unknown or unsupported parameter type: " + parameterTypeRef
+						+ ". A parameter references an undeclared parameter type in the XTCE space system definition file.");
+			}
+			// @formatter:on
+		}
+	}
+
 	/**
 	 * Create all ParameterGroups. In this iteration we create the parameter groups, but do not create the references
 	 * between them as the referenced objects do not yet exit.
-	 *
+	 * 
+	 * @throws InvalidSpaceSystemDefinitionException
+	 * 
 	 * @throws UnsupportedXtceConstructException
 	 */
-	private final void createAllTelemetryParameterGroups() throws UnsupportedXtceConstructException {
+	private final static void createAllTelemetryGroups() throws InvalidSpaceSystemDefinitionException {
 		String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
 		for (int containerIndex = 0; containerIndex < numParameterGroups; ++containerIndex) {
 			final SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex)
 					.getSequenceContainer();
 
 			// @formatter:off
-			final ParameterGroup parameterGroup = new HummingbirdParameterGroup(qualifiedNamePrefix + xtceContainer.getName(),
-																				xtceContainer.getName(),
-																				xtceContainer.getShortDescription(),
-																				xtceContainer.getLongDescription());
+			final ParameterGroup parameterGroup = new HummingbirdParameterGroup(qualifiedNamePrefix + xtceContainer.getName(), xtceContainer.getName(),
+					xtceContainer.getShortDescription(), xtceContainer.getLongDescription());
 			// @formatter:on
 			parameterGroups.put(parameterGroup.getQualifiedName(), parameterGroup);
 			populateParameterGroupRestrictions(parameterGroup.getQualifiedName(), xtceContainer);
@@ -354,16 +375,17 @@ public final class XtceSpaceSystemModelFactory {
 	}
 
 	/**
+	 * @throws InvalidSpaceSystemDefinitionException
 	 * @throws UnsupportedXtceConstructException
-	 *
+	 * 
 	 */
-	private final void populateParameterGroupRestrictions(final String qualifiedName, final SequenceContainer parameterGroupContainer)
-			throws UnsupportedXtceConstructException {
+	private final static void populateParameterGroupRestrictions(final String qualifiedName, final SequenceContainer parameterGroupContainer)
+			throws InvalidSpaceSystemDefinitionException {
 		// If the group extends another, e.g. a payload that is linked to a header via a restriction
 		// we need to create the restrictions.
 		BaseContainer baseContainer = parameterGroupContainer.getBaseContainer();
 		if (baseContainer != null) {
-			List<Object> comparisons = new ArrayList<>();
+			List<Object> comparisons = new ArrayList<Object>();
 			// In Hummingbird we do not model from the packet level, only the payload. In light of this we stipulate
 			// that base containers representing parameter groups that are linked to another base container via a
 			// restriction
@@ -396,21 +418,21 @@ public final class XtceSpaceSystemModelFactory {
 				}
 
 				if (baseContainer.getRestrictionCriteria().getBooleanExpression() != null) {
-					throw new UnsupportedXtceConstructException(
+					throw new InvalidSpaceSystemDefinitionException(
 							"Hummingbird does not currently support Boolean Expression restrictions. Offending Container = "
 									+ parameterGroupContainer.getName());
 				}
 				else if (baseContainer.getRestrictionCriteria().getChoiceValue() != null) {
-					throw new UnsupportedXtceConstructException("Hummingbird does not currently support Choice Value restrictions. Offending Container = "
+					throw new InvalidSpaceSystemDefinitionException("Hummingbird does not currently support Choice Value restrictions. Offending Container = "
 							+ parameterGroupContainer.getName());
 				}
 				else if (baseContainer.getRestrictionCriteria().getCustomAlgorithm() != null) {
-					throw new UnsupportedXtceConstructException("Hummingbird does not currently support Custom Algorithm restrictions. Offending Container = "
-							+ parameterGroupContainer.getName());
+					throw new InvalidSpaceSystemDefinitionException(
+							"Hummingbird does not currently support Custom Algorithm restrictions. Offending Container = " + parameterGroupContainer.getName());
 				}
 				else if (baseContainer.getRestrictionCriteria().getNextContainer() != null) {
-					throw new UnsupportedXtceConstructException("Hummingbird does not currently support Next Container restrictions. Offending Container = "
-							+ parameterGroupContainer.getName());
+					throw new InvalidSpaceSystemDefinitionException(
+							"Hummingbird does not currently support Next Container restrictions. Offending Container = " + parameterGroupContainer.getName());
 				}
 			}
 			else {
@@ -421,7 +443,7 @@ public final class XtceSpaceSystemModelFactory {
 		}
 	}
 
-	private void populateParameterGroups() throws InvalidXtceFileException {
+	private static void populateParameterGroups() throws InvalidSpaceSystemDefinitionException {
 		String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
 		ContainerSet containers = spaceSystem.getTelemetryMetaData().getContainerSet();
 
@@ -430,7 +452,7 @@ public final class XtceSpaceSystemModelFactory {
 			SequenceContainer sequenceContainer = containers.getContainerSetTypeItem(i).getSequenceContainer();
 
 			// Get the ParameterGroup we have created that corresponds to this SequenceContainer
-			ParameterGroup group = this.parameterGroups.get(qualifiedNamePrefix + sequenceContainer.getName());
+			ParameterGroup group = parameterGroups.get(qualifiedNamePrefix + sequenceContainer.getName());
 
 			// grab it's entry list
 			EntryList parameterEntrys = sequenceContainer.getEntryList();
@@ -447,7 +469,7 @@ public final class XtceSpaceSystemModelFactory {
 		}
 	}
 
-	private void addParameterToGroup(final ParameterGroup group, final String qualifiedName) throws InvalidXtceFileException {
+	private static void addParameterToGroup(final ParameterGroup group, final String qualifiedName) throws InvalidSpaceSystemDefinitionException {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Adding " + qualifiedName + " to ParameterGroup " + group.getQualifiedName());
 		}
@@ -459,18 +481,94 @@ public final class XtceSpaceSystemModelFactory {
 		}
 		else {
 			// TODO Finish unsupported parameter types
-			throw new InvalidXtceFileException("Hummingbird currently only supports integer and long sized parameters");
+			throw new InvalidSpaceSystemDefinitionException("Hummingbird currently only supports integer and long sized parameters");
 		}
 	}
 
 	/**
+	 * Injects the data into the model using reflection. This means we don't have to pollute the Space System Model interface
+	 * with lots of setters.
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 */
+	private static void injectConstructsIntoModel() throws IllegalArgumentException, IllegalAccessException {
+		Field[] fields = model.getClass().getDeclaredFields();
+		// TODO Switch on String when jdk 7 works with camel! Much nicer!
+		for (Field field : fields) {
+			field.setAccessible(true);
+			String name = field.getName();
+			if (StringUtils.equals(name, "parameterGroups")) {
+				field.set(model, parameterGroups);
+			}
+			else if (StringUtils.equals(name, "restrictions")) {
+				field.set(model, restrictions);
+			}
+			else if (StringUtils.equals(name, "encodings")) {
+				field.set(model, encodings);
+			}
+			else if (StringUtils.equals(name, "name")) {
+				field.set(model, modelName);
+			}
+			else {
+				LOG.debug("Not interested in field : " + name);
+			}
+		}
+	}
+
+	/**
+	 * Checks the parameter and returns the name if valid.
+	 * 
+	 * @param item
+	 * @return
+	 * @throws InvalidSpaceSystemDefinitionException
+	 */
+	private static String checkParameterType(final ParameterTypeSetTypeItem item) throws InvalidSpaceSystemDefinitionException {
+		String name = null;
+
+		// If it's an integer parameter..
+		final IntegerParameterType integerParameterType = item.getIntegerParameterType();
+		if (integerParameterType != null) {
+			name = integerParameterType.getName();
+			if (name == null) {
+				throw new InvalidSpaceSystemDefinitionException("IntegerParameter has a null name; cannot add to parameterTypes");
+			}
+		}
+		// If it is a float parameter...
+		else if (item.getFloatParameterType() != null) {
+			name = item.getFloatParameterType().getName();
+			if (name == null) {
+				throw new InvalidSpaceSystemDefinitionException("FloatParameter has a null name; cannot add to parameterTypes");
+			}
+		}
+		// If it is a string parameter...
+		else if (item.getStringParameterType() != null) {
+			name = item.getStringParameterType().getName();
+			if (name == null) {
+				throw new InvalidSpaceSystemDefinitionException("StringParameter has a null name; cannot add to parameterTypes");
+			}
+		}
+		// If it is a boolean parameter...
+		else if (item.getBooleanParameterType() != null) {
+			name = item.getBooleanParameterType().getName();
+			if (name == null) {
+				throw new InvalidSpaceSystemDefinitionException("BooleanParameter has a null name; cannot add to parameterTypes");
+			}
+		}
+		else {
+			throw new InvalidSpaceSystemDefinitionException("Unknown/unsupported parameter type: " + item);
+		}
+
+		return name;
+	}
+
+	/**
 	 * Covers Java Integers and Longs
-	 *
+	 * 
 	 * @param intParamType
 	 * @return
-	 * @throws InvalidXtceFileException
+	 * @throws InvalidSpaceSystemDefinitionException
 	 */
-	private final static Encoding createXtceIntegerEncoding(final IntegerParameterType intParamType) throws InvalidXtceFileException {
+	private final static Encoding createXtceIntegerEncoding(final IntegerParameterType intParamType) throws InvalidSpaceSystemDefinitionException {
 		Encoding encoding = new Encoding();
 
 		int sizeInBits = 0;
@@ -478,7 +576,7 @@ public final class XtceSpaceSystemModelFactory {
 			sizeInBits = Ints.checkedCast(intParamType.getSizeInBits());
 		}
 		catch (IllegalArgumentException e) {
-			throw new InvalidXtceFileException("Illegal value (" + intParamType.getSizeInBits() + ") defined as size in bits for parameter type "
+			throw new InvalidSpaceSystemDefinitionException("Illegal value (" + intParamType.getSizeInBits() + ") defined as size in bits for parameter type "
 					+ intParamType.getName() + ". Hummingbird suppports sizes up to " + Integer.MAX_VALUE + ".");
 		}
 
@@ -514,7 +612,7 @@ public final class XtceSpaceSystemModelFactory {
 				encoding.setBinaryRepresentation(BinaryRepresentation.packedBinaryCodedDecimal);
 				break;
 			default:
-				throw new InvalidXtceFileException("Invalid integer encoding in type " + intParamType);
+				throw new InvalidSpaceSystemDefinitionException("Invalid integer encoding in type " + intParamType);
 		}
 
 		return encoding;
@@ -522,12 +620,12 @@ public final class XtceSpaceSystemModelFactory {
 
 	/**
 	 * Covers Java Floats and Doubles.
-	 *
+	 * 
 	 * @param type
 	 * @return
-	 * @throws InvalidXtceFileException
+	 * @throws InvalidSpaceSystemDefinitionException
 	 */
-	private final static Encoding getFloatEncoding(final FloatParameterType type) throws InvalidXtceFileException {
+	private final static Encoding getFloatEncoding(final FloatParameterType type) throws InvalidSpaceSystemDefinitionException {
 		BaseDataTypeChoice baseDataTypeChoice = type.getBaseDataTypeChoice();
 
 		Encoding encoding = new Encoding();
@@ -549,7 +647,7 @@ public final class XtceSpaceSystemModelFactory {
 				encoding.setBinaryRepresentation(BinaryRepresentation.MILSTD_1750A);
 				break;
 			default:
-				throw new InvalidXtceFileException("Invalid float encoding in type " + type);
+				throw new InvalidSpaceSystemDefinitionException("Invalid float encoding in type " + type);
 		}
 		return encoding;
 	}

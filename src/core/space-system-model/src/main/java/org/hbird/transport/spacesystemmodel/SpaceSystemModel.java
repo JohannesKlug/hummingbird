@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
-import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
+import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInModelException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
@@ -43,16 +43,26 @@ public interface SpaceSystemModel extends Serializable {
 	Parameter<Double> getDoubleParameter(String qualifiedName) throws UnknownParameterException;
 	Parameter<Byte[]> getRawParameter(String qualifiedName) throws UnknownParameterException;
 
+	/** Returns all parameters (unbound) from all payload groups in the model */
 	Map<String, Parameter<?>> getAllPayloadParameters();
+	/** Returns all Integer parameters from all payload groups in the model */
 	Map<String, Parameter<Integer>> getAllIntegerParameters();
+	/** Returns all Long parameters from all payload groups in the model */
 	Map<String, Parameter<Long>> getAllLongParameters();
+	/** Returns all BigDecimal parameters from all payload groups in the model */
 	Map<String, Parameter<BigDecimal>> getAllBigDecimalParameters();
+	/** Returns all Float parameters from all payload groups in the model */
 	Map<String, Parameter<Float>> getAllFloatParameters();
+	/** Returns all Double parameters from all payload groups in the model */
 	Map<String, Parameter<Double>> getAllDoubleParameters();
+	/** Returns all String parameters from all payload groups in the model */
 	Map<String, Parameter<String>> getAllStringParameters();
+	/** Returns all Raw parameters from all payload groups in the model */
 	Map<String, Parameter<Byte[]>> getAllRawParameters();
 
-	void replaceParameterInModel(String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInGroupException;
+	/** Finds and replaces a parameter keyed by qualified name in the the model 
+	 * @throws ParameterNotInModelException */
+	void replaceParameterInModel(String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInModelException;
 
 	Map<String, List<Object>> getAllPayloadRestrictions();
 	Map<String, Encoding> getEncodings();

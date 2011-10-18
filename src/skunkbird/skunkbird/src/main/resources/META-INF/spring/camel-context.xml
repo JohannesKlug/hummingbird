@@ -1,0 +1,29 @@
+<!-- SKUNKBIRD mission control system. -->
+<!-- Integration of Hummingbird components using Camel -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns:camel="http://camel.apache.org/schema/spring"
+	   xsi:schemaLocation="
+	   		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   		http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<bean id="ssmodel" class="org.hbird.transport.xtce.XtceSpaceSystemModelFactory" factory-method="createSpaceSystemModel">
+		<constructor-arg value="./TestSat-all-uints.xml"></constructor-arg>
+	</bean>
+
+	<bean id="publisher" class="org.hbird.spacesystempublisher.publishing.InMemorySpaceSystemPublisher">
+		<property name="model" ref="ssmodel"></property>
+	</bean>
+
+	<camel:camelContext xmlns="http://camel.apache.org/schema/spring">
+		<!-- Runs routes defined in Java in this package -->
+		<camel:package>org.hbird.skunkbird</camel:package>
+
+		<camel:route id="factoryToPublisher" >
+			<camel:from uri="bean:xtceFactory"></camel:from>
+			<camel:to uri="bean:publisher"></camel:to>
+		</camel:route>
+	</camel:camelContext>
+
+</beans>

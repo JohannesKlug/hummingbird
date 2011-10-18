@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SpaceSystem xmlns="http://www.omg.org/space/xtce"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			 xmlns:xtce="http://www.omg.org/space/xtce"
+			 xsi:schemaLocation="http://www.omg.org/space/xtce http://dl.dropbox.com/u/10007025/hbird/xtce/SpaceSystemV1.0.xsd"
+			 name="TestSat-all-units">
+
+	<TelemetryMetaData>
+		<ParameterTypeSet>
+			<IntegerParameterType name="11bitUInteger" sizeInBits="11" signed="false">
+				<UnitSet />
+			</IntegerParameterType>
+
+			<IntegerParameterType name="16bitUInteger" sizeInBits="16" signed="false">
+				<UnitSet />
+			</IntegerParameterType>
+
+			<IntegerParameterType name="32bitUInteger" sizeInBits="33" signed="false">
+				<UnitSet />
+			</IntegerParameterType>
+		</ParameterTypeSet>
+
+		<ParameterSet>
+			<Parameter parameterTypeRef="11bitUInteger" name="CCSDS_APID"/>
+			<Parameter parameterTypeRef="11bitUInteger" name="LASER_TEMP" />
+			<Parameter parameterTypeRef="16bitUInteger" name="FUEL" />
+			<Parameter parameterTypeRef="32bitUInteger" name="FLIGHT_HOURS" />
+		</ParameterSet>
+
+		<ContainerSet>
+			<SequenceContainer name="FlightHours"
+				shortDescription="contains all telemetred data parameters for for flight hours">
+				<EntryList>
+					<ParameterRefEntry parameterRef="FLIGHT_HOURS" />
+				</EntryList>
+
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<xtce:Comparison parameterRef="CCSDS_APID" value="333" />
+					</RestrictionCriteria>
+				</BaseContainer>
+
+			</SequenceContainer>
+
+			<SequenceContainer name="LaserTemp"
+				shortDescription="contains all telemetred data parameters for laser temp">
+				<EntryList>
+					<ParameterRefEntry parameterRef="LASER_TEMP" />
+				</EntryList>
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<Comparison parameterRef="CCSDS_APID" value="555" />
+					</RestrictionCriteria>
+				</BaseContainer>
+
+			</SequenceContainer>
+
+			<SequenceContainer name="FuelLoad"
+				shortDescription="contains all telemetred data parameters for laser temp">
+				<EntryList>
+					<ParameterRefEntry parameterRef="FUEL" />
+				</EntryList>
+				
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<Comparison parameterRef="CCSDS_APID" value="888" />
+					</RestrictionCriteria>
+				</BaseContainer>
+
+			</SequenceContainer>
+
+			<SequenceContainer name="AllSystems"
+				shortDescription="contains all telemetred data parameters for X-Wing laser temp and flight hours">
+				<EntryList>
+					<ParameterRefEntry parameterRef="LASER_TEMP" />
+					<ParameterRefEntry parameterRef="FLIGHT_HOURS" />
+					<ParameterRefEntry parameterRef="FUEL" />
+				</EntryList>
+				
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<Comparison parameterRef="CCSDS_APID" value="1000" />
+					</RestrictionCriteria>
+				</BaseContainer>
+			</SequenceContainer>
+			
+		</ContainerSet>
+	</TelemetryMetaData>
+
+	<xtce:CommandMetaData>
+		<xtce:ParameterTypeSet>
+			<xtce:IntegerParameterType name="1-bit-uint" initialValue="0" signed="false" sizeInBits="1">
+				<xtce:UnitSet />
+			</xtce:IntegerParameterType>
+			
+			<xtce:IntegerParameterType name="sc_id" initialValue="7" signed="false" sizeInBits="3">
+				<xtce:UnitSet />
+			</xtce:IntegerParameterType>
+		</xtce:ParameterTypeSet>
+		
+		<xtce:ParameterSet>
+			<xtce:Parameter parameterTypeRef="sc_id" name="SC_ID_CONSTANT">
+				<xtce:ParameterProperties readOnly="true" dataSource="constant" />
+			</xtce:Parameter>
+			<xtce:Parameter parameterTypeRef="1-bit-uint" name="DOOR_LATCH_FLAG"></xtce:Parameter>
+		</xtce:ParameterSet>
+
+
+		<xtce:MetaCommandSet>
+			<xtce:MetaCommand name="OPEN_LATCH">
+				<xtce:ArgumentList>
+					<xtce:Argument name="Space craft ID" argumentTypeRef="SC_ID_CONSTANT"></xtce:Argument>
+					<xtce:Argument name="Door latch state" argumentTypeRef="DOOR_LATCH_FLAG"></xtce:Argument>
+				</xtce:ArgumentList>
+			</xtce:MetaCommand>
+		</xtce:MetaCommandSet>		
+	</xtce:CommandMetaData>
+
+
+</SpaceSystem>
+
+
