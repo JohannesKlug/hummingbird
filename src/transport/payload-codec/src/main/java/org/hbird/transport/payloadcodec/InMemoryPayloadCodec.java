@@ -37,7 +37,8 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 			this.codecAwareSpaceSystemModel = decorator.decorateSpaceSystemModel(spaceSystemModel, this.encodings);
 		}
 		catch (UnsupportedParameterEncodingException e) {
-
+			e.printStackTrace();
+			System.exit(-1);
 		}
 		catch (UnknownParameterEncodingException e) {
 			e.printStackTrace();
@@ -99,6 +100,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 			int offset = 0;
 			int previousSize = 0;
 			int count = 0;
+			
 			for (ParameterGroup pg : codecAwareSpaceSystemModel.getParameterGroupsCollection()) {
 				for (Parameter<?> p : pg.getAllParameters().values()) {
 					if (count != 0) {
