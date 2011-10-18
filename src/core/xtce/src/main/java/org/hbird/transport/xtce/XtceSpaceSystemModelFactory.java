@@ -47,7 +47,6 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.primitives.Ints;
 
-//public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 public final class XtceSpaceSystemModelFactory {
 	private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModelFactory.class);
 

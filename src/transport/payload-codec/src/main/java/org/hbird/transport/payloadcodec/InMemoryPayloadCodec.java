@@ -20,15 +20,15 @@ import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HummingbirdPayloadCodec implements PayloadCodec {
+public class InMemoryPayloadCodec implements PayloadCodec {
 
-	private static final Logger LOG = LoggerFactory.getLogger(HummingbirdPayloadCodec.class);
+	private static final Logger LOG = LoggerFactory.getLogger(InMemoryPayloadCodec.class);
 
 	private SpaceSystemModel spaceSystemModel = null;
 	private SpaceSystemModel codecAwareSpaceSystemModel = null;
 	private final Map<String, Encoding> encodings;
 
-	public HummingbirdPayloadCodec(final SpaceSystemModel spaceSystemModel, final Map<String, Encoding> encodings) {
+	public InMemoryPayloadCodec(final SpaceSystemModel spaceSystemModel, final Map<String, Encoding> encodings) {
 		this.spaceSystemModel = spaceSystemModel;
 		this.encodings = encodings;
 

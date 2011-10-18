@@ -14,13 +14,19 @@
 	<bean id="publisher" class="org.hbird.spacesystempublisher.publishing.InMemorySpaceSystemPublisher">
 		<property name="model" ref="ssmodel"></property>
 	</bean>
+	
+	<bean id="encodings" factory-bean="publisher" factory-method="getEncodings"></bean>
+	
+	<bean id="payload-codec" class="org.hbird.transport.payloadcodec.InMemoryPayloadCodec">
+		<constructor-arg ref="ssmodel" ></constructor-arg>
+		<constructor-arg ref="encodings"></constructor-arg>
+	</bean>
 
 	<camel:camelContext xmlns="http://camel.apache.org/schema/spring">
 		<!-- Runs routes defined in Java in this package -->
 		<camel:package>org.hbird.skunkbird</camel:package>
 
 		<camel:route>
-			<camel:from uri="bean:publisher"></camel:from>
 		</camel:route>
 	</camel:camelContext>
 

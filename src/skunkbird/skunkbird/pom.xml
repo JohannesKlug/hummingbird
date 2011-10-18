@@ -63,6 +63,11 @@
     	<version>0.0.1-SNAPSHOT</version>
     	<scope>compile</scope>
     </dependency>
+    <dependency>
+    	<groupId>org.hbird.transport</groupId>
+    	<artifactId>payload-codec</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 
   <build>

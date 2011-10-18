@@ -72,7 +72,7 @@ public class PayloadCodecTest {
 	public static void setUp() throws BitSetOperationException, UnsupportedParameterEncodingException, UnknownParameterEncodingException,
 			UnexpectedParameterTypeException, UnknownParameterGroupException, ParameterNotInGroupException {
 		ssm = new MockSpaceSystemModel();
-		codec = new HummingbirdPayloadCodec(ssm, ssm.getEncodings());
+		codec = new InMemoryPayloadCodec(ssm, ssm.getEncodings());
 	}
 
 	@Test
