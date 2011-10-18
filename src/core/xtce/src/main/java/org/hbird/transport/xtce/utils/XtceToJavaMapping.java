@@ -11,7 +11,7 @@ public final class XtceToJavaMapping {
 		// Utility class
 	}
 
-	public final static boolean doesIntRequireJavaLong(final IntegerParameterType type) {
+	public final static boolean doesXtceIntRequireJavaLong(final IntegerParameterType type) {
 		boolean longRequired = false;
 		// If signed
 		if (type.getSigned()) {

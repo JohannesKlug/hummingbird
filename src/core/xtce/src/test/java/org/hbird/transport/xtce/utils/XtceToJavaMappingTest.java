@@ -18,12 +18,12 @@ public class XtceToJavaMappingTest {
 		type.setSizeInBits(MAX_BITS_FOR_JAVA_SIGNED_INTEGER + 1);
 		type.setSigned(true);
 		
-		boolean condition = XtceToJavaMapping.doesIntRequireJavaLong(type);
+		boolean condition = XtceToJavaMapping.doesXtceIntRequireJavaLong(type);
 		assertTrue("Type should required a java long", condition);
 		
 		type.setSizeInBits(MAX_BITS_FOR_JAVA_SIGNED_UINTEGER + 1);
 		type.setSigned(false);
-		condition = XtceToJavaMapping.doesIntRequireJavaLong(type);
+		condition = XtceToJavaMapping.doesXtceIntRequireJavaLong(type);
 		assertTrue("Type should required a java long", condition);
 	}
 
