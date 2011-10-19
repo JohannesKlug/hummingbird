@@ -1,19 +1,23 @@
 package org.hbird.transport.protocols.ccsds.spacepacket;
 
-import java.util.Observable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
-import org.hbird.transport.protocols.ccsds.transferframe.FramePayload;
+import org.hbird.transport.protocols.ccsds.spacepacket.data.PacketPayload;
+import org.hbird.transport.protocols.ccsds.transferframe.data.FramePayload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CcsdsPacketDecoder extends Observable {
+public class CcsdsPacketDecoder {
 
 	private final static Logger LOG = LoggerFactory.getLogger(CcsdsPacketDecoder.class);
 
 	private byte[] packetBuffer = ArrayUtils.EMPTY_BYTE_ARRAY;
+	List<PacketPayload> payloads = new ArrayList<PacketPayload>();
+	
 
-	public void process(final FramePayload framePayload) {
+	public synchronized List<PacketPayload> decode(final FramePayload framePayload) {
 
 		byte[] packet = ArrayUtils.clone(framePayload.payload);
 		boolean isNextPacket = framePayload.isNextFrame;
@@ -25,12 +29,13 @@ public class CcsdsPacketDecoder extends Observable {
 			// packetBuffer = new byte[0];
 		}
 
+		LOG.debug("Packet Buffer is now " + packetBuffer.length + " bytes long.");
 		packetBuffer = ArrayUtils.addAll(packetBuffer, packet);
 		LOG.debug("Packet Buffer is now " + packetBuffer.length + " bytes long.");
 
 		// the minimum defined length for a packet is 7 bytes (6 bytes in the header, 1 byte payload)
 		if (packetBuffer.length < 7) {
-			return;
+			return null;
 		}
 
 		byte[] primaryHeader = ArrayUtils.subarray(packetBuffer, 0, 6);
@@ -42,7 +47,7 @@ public class CcsdsPacketDecoder extends Observable {
 		if (packetVersionNumber != 0) {
 			LOG.error("Packet with invalid version number encountered. Version number was: " + packetVersionNumber);
 			packetBuffer = new byte[0];
-			return;
+			return null;
 		}
 
 		String packetType;
@@ -82,24 +87,26 @@ public class CcsdsPacketDecoder extends Observable {
 
 		int payloadEnd = payloadOffset + packetDataLength;
 
-		if (packetBuffer.length < (payloadEnd)) {
-			// Not enough bytes in packetBuffer, return and wait for more data
-			return;
-		}
 
 		byte[] packetPayload = ArrayUtils.subarray(packetBuffer, payloadOffset, payloadEnd);
-
-		// return the current payload
-		setChanged();
-		notifyObservers(new PacketPayload(apid, packetPayload));
-
-		// put the rest into the packet buffer and reprocess
-		packetBuffer = ArrayUtils.subarray(packetBuffer, payloadEnd, packetBuffer.length);
-
-		// pass an empty byte array to ourself.
-		// Recursion, yeah!
-		this.process(new FramePayload(ArrayUtils.EMPTY_BYTE_ARRAY, true));
-
-
+		
+		// add the current payload
+		payloads.add(new PacketPayload(apid, packetPayload));
+		
+		
+		if (packetBuffer.length >= (payloadEnd)) {
+			// Buffer is not empty yet, recurse!
+			
+			// put the rest into the packet buffer and reprocess
+			packetBuffer = ArrayUtils.subarray(packetBuffer, payloadEnd, packetBuffer.length);
+			
+			// pass an empty byte array to ourselves.
+			// Recursion, yeah!
+			List<PacketPayload> morePayloads = this.decode(new FramePayload(ArrayUtils.EMPTY_BYTE_ARRAY, true));
+			if (morePayloads != null) {
+				payloads.addAll(morePayloads);
+			}
+		}
+		return payloads;
 	}
 }

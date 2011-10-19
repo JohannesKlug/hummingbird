@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
+import org.hbird.transport.protocols.ccsds.transferframe.CcsdsFrameEncoder;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidOperationalControlFieldException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidSpacecraftIdException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidVirtualChannelIdException;

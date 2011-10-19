@@ -2,7 +2,9 @@ package org.hbird.transport.protocols.ccsds.spacepacket.encoder;
 
 import static org.junit.Assert.*;
 
-import org.hbird.transport.protocols.ccsds.spacepacket.PacketPayload;
+import org.hbird.transport.protocols.ccsds.spacepacket.CcsdsPacketEncoder;
+import org.hbird.transport.protocols.ccsds.spacepacket.data.CcsdsPacketType;
+import org.hbird.transport.protocols.ccsds.spacepacket.data.PacketPayload;
 import org.hbird.transport.protocols.ccsds.spacepacket.exceptions.InvalidApIdException;
 import org.hbird.transport.protocols.ccsds.spacepacket.exceptions.InvalidPayloadLengthExeption;
 import org.hbird.transport.protocols.ccsds.spacepacket.exceptions.PayloadNullException;

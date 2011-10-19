@@ -7,7 +7,6 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
-import org.hbird.transport.protocols.ccsds.transferframe.encoder.CcsdsFrameEncoder;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidSpacecraftIdException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidVirtualChannelIdException;
 import org.junit.Test;

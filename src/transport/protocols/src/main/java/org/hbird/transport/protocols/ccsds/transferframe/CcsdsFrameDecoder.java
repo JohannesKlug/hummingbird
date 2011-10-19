@@ -1,18 +1,15 @@
 package org.hbird.transport.protocols.ccsds.transferframe;
 
-import java.util.Map;
-import java.util.Observable;
-
-import org.apache.camel.Body;
-import org.apache.camel.Headers;
 import org.apache.commons.lang.ArrayUtils;
+import org.hbird.transport.protocols.ccsds.transferframe.data.CcsdsFramePayload;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.FrameFailedCrcCheckException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidFrameLengthException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidVirtualChannelIdException;
+import org.hbird.transport.protocols.ccsds.transferframe.internal.VirtualChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CcsdsFrameDecoder extends Observable {
+public class CcsdsFrameDecoder {
 	public static final String IS_NEXT_FRAME = "IsNextFrame";
 
 	public static final String SPACECRAFT_ID = "SpacecraftId";
@@ -177,12 +174,4 @@ public class CcsdsFrameDecoder extends Observable {
 		
 	}
 	
-	public byte[] process(@Body final byte[] frame, @Headers Map<String,Object> headers) throws InvalidFrameLengthException, FrameFailedCrcCheckException, InvalidVirtualChannelIdException {
-		CcsdsFramePayload returnPayload  = process(frame);
-		headers.put(VIRTUAL_CHANNEL_ID, returnPayload.virtualChannelId);
-		headers.put(SPACECRAFT_ID, returnPayload.spacecraftId);
-		headers.put(IS_NEXT_FRAME, returnPayload.isNextFrame);
-		return returnPayload.payload;
-	}
-
 }
