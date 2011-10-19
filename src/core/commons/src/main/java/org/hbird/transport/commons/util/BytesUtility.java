@@ -1,5 +1,6 @@
 package org.hbird.transport.commons.util;
 
+import org.hbird.transport.commons.util.exceptions.InvalidBinaryStringException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -129,5 +130,22 @@ public abstract class BytesUtility {
 		}
 
 		return buffer.toString();
+	}
+	
+	public static byte[] binaryStringToByteArray(String binaryString) throws InvalidBinaryStringException {
+		if ((binaryString.length()%8) != 0) {
+			throw new InvalidBinaryStringException(binaryString.length());
+		}
+		
+		int numberOfBytes = binaryString.length()/8;
+		byte[] result = new byte[numberOfBytes]; 
+		
+		for (int i=0; i<numberOfBytes; i++) {
+			String currentByteAsString = binaryString.substring(i*Byte.SIZE, (i+1)*Byte.SIZE);
+			int currentByteAsInt = Integer.parseInt(currentByteAsString, 2);
+			result[i] = (byte) (currentByteAsInt & 0xFF);
+		}
+		
+		return result;
 	}
 }
