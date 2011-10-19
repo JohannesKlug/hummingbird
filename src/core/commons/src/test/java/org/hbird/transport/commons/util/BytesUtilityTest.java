@@ -1,9 +1,11 @@
 package org.hbird.transport.commons.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.BitSet;
 
+import org.hbird.transport.commons.util.exceptions.InvalidBinaryStringException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -119,6 +121,24 @@ public class BytesUtilityTest {
 		assertEquals(154, result.shortValue());
 		assertEquals(154, result.intValue());
 		assertEquals(154, result.longValue());
+	}
+	
+	@Test
+	public void testByteFromBinaryString() throws InvalidBinaryStringException {
+		String zero = "00000000";
+		String ff = "11111111";
+		String zeroff = zero + ff;
+		
+		assertEquals((byte) 0x00, BytesUtility.binaryStringToByteArray(zero)[0]);
+		assertEquals((byte) 0xFF & 0xFF, BytesUtility.binaryStringToByteArray(ff)[0] & 0xFF);
+		assertEquals((byte) 0x00, BytesUtility.binaryStringToByteArray(zeroff)[0]);
+		assertEquals((byte) 0xFF & 0xFF, BytesUtility.binaryStringToByteArray(zeroff)[1] & 0xFF);
+	}
+	
+	@Test(expected = InvalidBinaryStringException.class)
+	public void testByteFromBinaryStringWithMalformedString() throws InvalidBinaryStringException {
+		BytesUtility.binaryStringToByteArray("0");
+		fail();
 	}
 
 }
