@@ -1,7 +1,9 @@
 package org.hbird.transport.payloadcodec;
 
 import java.util.BitSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
@@ -94,28 +96,44 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 	}
 
 	@Override
-	public ParameterGroup decode(final BitSet payload, final Object payloadLayoutId) {
+	public ParameterGroup decode(final BitSet payload, final Object payloadLayoutId) throws UnknownParameterGroupException {
+		
+	
 		if (payloadLayoutId == null) {
 			// no restrictions, decode all everything!
-			int offset = 0;
-			int previousSize = 0;
-			int count = 0;
 			
 			for (ParameterGroup pg : codecAwareSpaceSystemModel.getParameterGroupsCollection()) {
-				for (Parameter<?> p : pg.getAllParameters().values()) {
-					if (count != 0) {
-						offset += previousSize;
-					}
-					Encoding enc = spaceSystemModel.getEncodings().get(p.getQualifiedName());
-					((CodecParameter<?>) p).decode(payload, offset);
-					previousSize = enc.getSizeInBits();
-					count++;
-				}
-				return getUndecoratedVersion(pg);
+				return decodeParameterGroup(payload, pg);
 			}
+		} else {
+			for (Entry<String, List<Object>> restrictions : codecAwareSpaceSystemModel.getAllPayloadRestrictions().entrySet()) {
+				if (restrictions.getValue().contains(payloadLayoutId)) {
+					// we found the correct PG
+					String pgName = restrictions.getKey();
+					ParameterGroup pg = codecAwareSpaceSystemModel.getParameterGroup(pgName);
+					return decodeParameterGroup(payload, pg);
+				}
+			}
+			
 		}
-		// FIXME else only decode only the relevant parametergroups. That is, those restricted by a parameter e.g. APID
+		// FIXME this should fail gracefully.
 		return null;
+	}
+	
+	private ParameterGroup decodeParameterGroup(final BitSet payload, ParameterGroup pg) {
+		int offset = 0;
+		int previousSize = 0;
+		int count = 0;
+		for (Parameter<?> p : pg.getAllParameters().values()) {
+			if (count != 0) {
+				offset += previousSize;
+			}
+			Encoding enc = spaceSystemModel.getEncodings().get(p.getQualifiedName());
+			((CodecParameter<?>) p).decode(payload, offset);
+			previousSize = enc.getSizeInBits();
+			count++;
+		}
+		return getUndecoratedVersion(pg);
 	}
 
 	private ParameterGroup getUndecoratedVersion(final ParameterGroup pg) {
