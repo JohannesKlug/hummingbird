@@ -9,11 +9,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import org.hbird.transport.protocols.ccsds.spacepacket.CcsdsPacketDecoder;
 import org.hbird.transport.protocols.ccsds.spacepacket.data.PacketPayload;
@@ -22,8 +17,10 @@ import org.hbird.transport.protocols.ccsds.transferframe.data.FramePayload;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.FrameFailedCrcCheckException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidFrameLengthException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidVirtualChannelIdException;
+import org.junit.Before;
+import org.junit.Test;
 
-public class RocketFrameDispatcherTest implements Observer {
+public class RocketFrameDispatcherTest {
 
 	private static final int FRAME_LENGTH = 13;
 
@@ -32,9 +29,6 @@ public class RocketFrameDispatcherTest implements Observer {
 	private CcsdsFrameDecoder frameDispatcher = new CcsdsFrameDecoder(FRAME_LENGTH, false, false);
 	private CcsdsPacketDecoder packetDispatcher = new CcsdsPacketDecoder();
 
-	List<FramePayload> receivedFramePayloads = new ArrayList<FramePayload>();
-	List<PacketPayload> receivedPacketPayloads = new ArrayList<PacketPayload>();
-	
 	@Before
 	public void setUp() throws Exception {
 		FileInputStream in = null;
@@ -79,18 +73,22 @@ public class RocketFrameDispatcherTest implements Observer {
 	
 	@Test
 	public void injectFrame() throws InvalidFrameLengthException, FrameFailedCrcCheckException, InterruptedException, InvalidVirtualChannelIdException {
-		frameDispatcher.addObserver(this);
-		packetDispatcher.addObserver(this);
-//		List<byte[]> manyFrames = frames.
-		
+		List<FramePayload> receivedFramePayloads = new ArrayList<FramePayload>();
+		List<PacketPayload> receivedPacketPayloads = new ArrayList<PacketPayload>();
 		int multiplier = 1;
 		
 		long start = System.currentTimeMillis();
 		for (int i=0; i<multiplier; i++) {
 			for (byte[] frame : frames) {
-				FramePayload framePayload = frameDispatcher.process(frame);
+				FramePayload framePayload = frameDispatcher.decode(frame);
 				receivedFramePayloads.add(framePayload);
-				packetDispatcher.decode(new FramePayload(framePayload.payload, framePayload.isNextFrame));
+				List<PacketPayload> payloads = packetDispatcher.decode(new FramePayload(framePayload.payload, framePayload.isNextFrame));
+				
+				receivedPacketPayloads.addAll(payloads);
+				for (byte currentByte : payloads.get(0).payload) {
+					System.out.println(Integer.toHexString(currentByte));
+					assertEquals(0x1e, currentByte);
+				}
 			}
 		}
 		
@@ -114,20 +112,6 @@ public class RocketFrameDispatcherTest implements Observer {
 		assertFalse(CcsdsFrameDecoder.isNextFrame(123, 125));
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		if (o == packetDispatcher) {
-			if (arg instanceof PacketPayload) {
-				PacketPayload packetPayload = (PacketPayload) arg;
-				receivedPacketPayloads.add(packetPayload);
-				for (byte currentByte : packetPayload.payload) {
-					System.out.println(Integer.toHexString(currentByte));
-					assertEquals(0x1e, currentByte);
-				}
-			}
-		}
-	}
-	
 	@Test
 	public void testChain() {
 	}

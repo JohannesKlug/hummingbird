@@ -55,5 +55,22 @@ public class DecoderTest {
 		
 		assertEquals(2, decoder.decode(framePayload).size());
 	}
+	
+	@Test
+	public void decodeThreePackets() throws Exception {
+		
+		decoder = new CcsdsPacketDecoder();
+		
+		PacketPayload packetPayload = new PacketPayload(0, new byte[35]);
+		byte[] encodedPacket = encoder.encode(packetPayload);
+		
+		byte[] twoPackets = ArrayUtils.addAll(encodedPacket, encodedPacket);
+		
+		byte[] threePackets = ArrayUtils.addAll(twoPackets, encodedPacket);
+		
+		CcsdsFramePayload framePayload = new CcsdsFramePayload(0,0,threePackets, true);
+		
+		assertEquals(3, decoder.decode(framePayload).size());
+	}
 
 }

@@ -14,11 +14,11 @@ public class CcsdsPacketDecoder {
 	private final static Logger LOG = LoggerFactory.getLogger(CcsdsPacketDecoder.class);
 
 	private byte[] packetBuffer = ArrayUtils.EMPTY_BYTE_ARRAY;
-	List<PacketPayload> payloads = new ArrayList<PacketPayload>();
 	
 
 	public synchronized List<PacketPayload> decode(final FramePayload framePayload) {
 
+		List<PacketPayload> payloads = new ArrayList<PacketPayload>();
 		byte[] packet = ArrayUtils.clone(framePayload.payload);
 		boolean isNextPacket = framePayload.isNextFrame;
 

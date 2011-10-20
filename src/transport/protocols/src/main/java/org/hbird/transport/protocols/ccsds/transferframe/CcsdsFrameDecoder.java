@@ -83,7 +83,7 @@ public class CcsdsFrameDecoder {
 		return true;
 	}
 
-	public CcsdsFramePayload process(final byte[] frame) throws InvalidFrameLengthException, FrameFailedCrcCheckException, InvalidVirtualChannelIdException {
+	public CcsdsFramePayload decode(final byte[] frame) throws InvalidFrameLengthException, FrameFailedCrcCheckException, InvalidVirtualChannelIdException {
 
 		/*
 		 * Check for Frame Length

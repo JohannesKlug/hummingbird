@@ -9,8 +9,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import org.hbird.transport.protocols.ccsds.spacepacket.CcsdsPacketDecoder;
 import org.hbird.transport.protocols.ccsds.spacepacket.data.PacketPayload;
@@ -22,7 +20,7 @@ import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidVirtu
 import org.junit.Before;
 import org.junit.Test;
 
-public class CcsdsFrameDispatcherTest implements Observer {
+public class CcsdsFrameDispatcherTest {
 
 	private static final int FRAME_LENGTH = 1115;
 
@@ -30,9 +28,6 @@ public class CcsdsFrameDispatcherTest implements Observer {
 	
 	private CcsdsFrameDecoder frameDispatcher = new CcsdsFrameDecoder(1115, true, true);
 	private CcsdsPacketDecoder packetDispatcher = new CcsdsPacketDecoder();
-
-	List<FramePayload> receivedFramePayloads = new ArrayList<FramePayload>();
-	List<PacketPayload> receivedPacketPayloads = new ArrayList<PacketPayload>();
 	
 	@Before
 	public void setUp() throws Exception {
@@ -84,23 +79,21 @@ public class CcsdsFrameDispatcherTest implements Observer {
 	@Test(expected=InvalidFrameLengthException.class)
 	public void testInvalidFrameLength() throws InvalidFrameLengthException, FrameFailedCrcCheckException, InvalidVirtualChannelIdException {
 		CcsdsFrameDecoder dispatcher = new CcsdsFrameDecoder(2046, false, false);
-		dispatcher.process(new byte[2047]);
+		dispatcher.decode(new byte[2047]);
 	}
 	
 	@Test
 	public void injectFrame() throws InvalidFrameLengthException, FrameFailedCrcCheckException, InterruptedException, InvalidVirtualChannelIdException {
-		frameDispatcher.addObserver(this);
-		packetDispatcher.addObserver(this);
-//		List<byte[]> manyFrames = frames.
-		
-		int multiplier = 1;
+		List<FramePayload> receivedFramePayloads = new ArrayList<FramePayload>();
+		List<PacketPayload> receivedPacketPayloads = new ArrayList<PacketPayload>();
+		int multiplier = 0;
 		
 		long start = System.currentTimeMillis();
 		for (int i=0; i<multiplier; i++) {
 			for (byte[] frame : frames) {
-				FramePayload framePayload = frameDispatcher.process(frame);
+				FramePayload framePayload = frameDispatcher.decode(frame);
 				receivedFramePayloads.add(framePayload);
-				packetDispatcher.decode(new FramePayload(framePayload.payload, framePayload.isNextFrame));
+				receivedPacketPayloads.addAll(packetDispatcher.decode(new FramePayload(framePayload.payload, framePayload.isNextFrame)));
 			}
 		}
 		
@@ -140,17 +133,6 @@ public class CcsdsFrameDispatcherTest implements Observer {
 		assertFalse(CcsdsFrameDecoder.isNextFrame(123, 125));
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		if (o == packetDispatcher) {
-			if (arg instanceof PacketPayload) {
-				PacketPayload packetPayload = (PacketPayload) arg;
-				receivedPacketPayloads.add(packetPayload);
-			}
-			
-		}
-	}
-	
 	@Test
 	public void testChain() {
 	}
