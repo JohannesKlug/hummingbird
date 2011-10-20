@@ -75,7 +75,7 @@ public class RocketFrameDispatcherTest {
 	public void injectFrame() throws InvalidFrameLengthException, FrameFailedCrcCheckException, InterruptedException, InvalidVirtualChannelIdException {
 		List<FramePayload> receivedFramePayloads = new ArrayList<FramePayload>();
 		List<PacketPayload> receivedPacketPayloads = new ArrayList<PacketPayload>();
-		int multiplier = 1;
+		int multiplier = 10;
 		
 		long start = System.currentTimeMillis();
 		for (int i=0; i<multiplier; i++) {
@@ -86,7 +86,7 @@ public class RocketFrameDispatcherTest {
 				
 				receivedPacketPayloads.addAll(payloads);
 				for (byte currentByte : payloads.get(0).payload) {
-					System.out.println(Integer.toHexString(currentByte));
+//					System.out.println(Integer.toHexString(currentByte));
 					assertEquals(0x1e, currentByte);
 				}
 			}
