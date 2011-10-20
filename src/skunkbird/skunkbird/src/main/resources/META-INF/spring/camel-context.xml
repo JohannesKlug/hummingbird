@@ -10,6 +10,8 @@
 	<bean id="ssmodel" class="org.hbird.transport.xtce.XtceSpaceSystemModelFactory" factory-method="createSpaceSystemModel">
 		<constructor-arg value="TestSat-all-uints.xml"></constructor-arg>
 	</bean>
+	
+	<bean id="packetDecoder" class="org.hbird.transport.protocols.ccsds.spacepacket.CcsdsPacketDecoder" />
 
 	<bean id="publisher" class="org.hbird.spacesystempublisher.publishing.InMemorySpaceSystemPublisher">
 		<property name="model" ref="ssmodel"></property>
@@ -50,16 +52,24 @@
 		<camel:package>org.hbird.skunkbird</camel:package>
 
 		<camel:route>
-			<camel:from uri="stream:file?fileName=binTm.txt&amp;scanStream=true&amp;scanStreamDelay=10" />
-			<camel:to id="activeMqRawPayloads" uri="activemq:rawPayloads" />
+			<camel:from uri="stream:file?fileName=binPacketTm.txt&amp;scanStream=true&amp;scanStreamDelay=10" />
+<!-- 			<camel:to id="activeMqRawPayloads" uri="activemq:rawPayloads" /> -->
+				<camel:convertBodyTo type="org.hbird.transport.protocols.ccsds.transferframe.data.FramePayload" />
+				<camel:split><camel:method ref="packetDecoder" method="decode"/>
+				<camel:convertBodyTo type="org.hbird.transport.commons.data.GenericPayload" />
+				<camel:to uri="bean:payload-codec?method=decode" />
+				<camel:to uri="stream:out" />
+				</camel:split>
+<!-- 				<camel:to uri="bean:packetDecoder?method=decode" /> -->
 		</camel:route>
 		
-		<camel:route>
-			<camel:from uri="activeMqRawPayloads"></camel:from>
-			<camel:convertBodyTo type="java.util.BitSet" />
-			<camel:to uri="bean:payload-codec"></camel:to>
-			<camel:to uri="activemq:decodedPayloads?jmsMessageType=Text"></camel:to>
-		</camel:route>
+		
+<!-- 		<camel:route> -->
+<!-- 			<camel:from uri="activeMqRawPayloads"></camel:from> -->
+<!-- 			<camel:convertBodyTo type="java.util.BitSet" /> -->
+<!-- 			<camel:to uri="bean:payload-codec"></camel:to> -->
+<!-- 			<camel:to uri="activemq:decodedPayloads?jmsMessageType=Text"></camel:to> -->
+<!-- 		</camel:route> -->
 	</camel:camelContext>
 
 </beans>

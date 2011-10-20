@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
+import org.hbird.transport.commons.data.GenericPayload;
+import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.NoEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
@@ -73,31 +75,12 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 	}
 
 	@Override
-	public ParameterGroup decode(final byte[] payload, final Object payloadLayoutId) {
-		if (payloadLayoutId == null) {
-			// no restrictions, decode all everything!
-			int offset = 0;
-			int previousSize = 0;
-			int count = 0;
-			for (ParameterGroup pg : codecAwareSpaceSystemModel.getParameterGroupsCollection()) {
-				for (Parameter<?> p : pg.getAllParameters().values()) {
-					if (count != 0) {
-						offset += previousSize;
-					}
-					((CodecParameter<?>) p).decode(payload, offset);
-					Encoding enc = spaceSystemModel.getEncodings().get(p.getQualifiedName());
-					previousSize = enc.getSizeInBits();
-					count++;
-				}
-			}
-		}
-		// FIXME else only decode only the relevant parametergroups. That is, those restricted by a parameter e.g. APID
-		return null;
+	public ParameterGroup decode(final byte[] payload, final Object payloadLayoutId) throws UnknownParameterGroupException {
+		return decode(BitSetUtility.fromByteArray(payload), payloadLayoutId);
 	}
 
 	@Override
 	public ParameterGroup decode(final BitSet payload, final Object payloadLayoutId) throws UnknownParameterGroupException {
-		
 	
 		if (payloadLayoutId == null) {
 			// no restrictions, decode all everything!
@@ -218,6 +201,11 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		else {
 			throw new NoEncodingException(qualifiedName);
 		}
+	}
+
+	@Override
+	public ParameterGroup decode(GenericPayload payload) throws UnknownParameterGroupException {
+		return decode(payload.payload, payload.layoutIdentifier);
 	}
 
 }
