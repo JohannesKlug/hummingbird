@@ -27,7 +27,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	private final String name = "MockSpaceModel";
 	private final Map<String, ParameterGroup> groups = new HashMap<String, ParameterGroup>();
 	private final Map<String, Encoding> encodings = new HashMap<String, Encoding>();
-	private final Map<String, List<Object>> restrictions = new HashMap<String, List<Object>>();
+	private final Map<String, List<String>> restrictions = new HashMap<String, List<String>>();
 
 	public static final String TEST_PREFIX = "Test";
 	public static final String TEST_GROUP_NAME = "TestGroup";
@@ -36,8 +36,8 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	public static final String RESTRICTED_GROUP_QUALIFIED_NAME = TEST_PREFIX + "." + RESTRICTED_GROUP_NAME;
 	public static final String RESTRICTED_LASER_GROUP_NAME = "TestRestrictedLaserGroup";
 	public static final String RESTRICTED_LASER_GROUP_QUALIFIED_NAME = TEST_PREFIX + "." + RESTRICTED_LASER_GROUP_NAME;
-	public static final Integer INTEGER_RESTRICTION_ID = Integer.valueOf(1000);
-	public static final Integer INTEGER_LASER_RESTRICTION_ID = Integer.valueOf(12);
+	public static final String INTEGER_RESTRICTION_ID = "1000";
+	public static final String INTEGER_LASER_RESTRICTION_ID = "12";
 	public static final String FUEL_PARAMETER_QUALIFIED_NAME = TEST_PREFIX + ".Fuel";
 	public static final String SCID_PARAMETER_QUALIFIED_NAME = TEST_PREFIX + ".SCID";
 	public static final String LASER_TEMP_PARAMETER_QUALIFIED_NAME = TEST_PREFIX + ".Laser Temp";
@@ -71,7 +71,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 		LOG.debug("Building parameter group with restrictions" + RESTRICTED_GROUP_QUALIFIED_NAME);
 		ParameterGroup restrictedTestGroup = new HummingbirdParameterGroup(RESTRICTED_GROUP_QUALIFIED_NAME, RESTRICTED_GROUP_NAME, "", "");
 		groups.put(restrictedTestGroup.getQualifiedName(), restrictedTestGroup);
-		List<Object> testGroupRestrictions = new ArrayList<Object>();
+		List<String> testGroupRestrictions = new ArrayList<String>();
 		testGroupRestrictions.add(INTEGER_RESTRICTION_ID);
 		restrictions.put(restrictedTestGroup.getQualifiedName(), testGroupRestrictions);
 		restrictedTestGroup.addIntegerParameter(spacecraftId.getQualifiedName(), spacecraftId);
@@ -81,7 +81,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 		LOG.debug("Building parameter group with restrictions ans only laser temp" + RESTRICTED_LASER_GROUP_QUALIFIED_NAME);
 		ParameterGroup restrictedLaserTestGroup = new HummingbirdParameterGroup(RESTRICTED_LASER_GROUP_QUALIFIED_NAME, RESTRICTED_LASER_GROUP_NAME, "", "");
 		groups.put(restrictedLaserTestGroup.getQualifiedName(), restrictedLaserTestGroup);
-		List<Object> testLaserGroupRestrictions = new ArrayList<Object>();
+		List<String> testLaserGroupRestrictions = new ArrayList<String>();
 		testLaserGroupRestrictions.add(INTEGER_LASER_RESTRICTION_ID);
 		restrictions.put(restrictedLaserTestGroup.getQualifiedName(), testLaserGroupRestrictions);
 		restrictedLaserTestGroup.addLongParameter(laserTemp.getQualifiedName(), laserTemp);
@@ -240,7 +240,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Map<String, List<Object>> getAllPayloadRestrictions() {
+	public Map<String, List<String>> getAllPayloadRestrictions() {
 		return restrictions;
 	}
 

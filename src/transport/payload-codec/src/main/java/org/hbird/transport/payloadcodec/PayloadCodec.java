@@ -9,8 +9,8 @@ import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
 
 public interface PayloadCodec {
 
-	ParameterGroup decode(byte[] payload, Object payloadLayoutId) throws UnknownParameterGroupException;
-	ParameterGroup decode(BitSet payload, Object payloadLayoutId) throws UnknownParameterGroupException;
+	ParameterGroup decode(byte[] payload, String payloadLayoutId) throws UnknownParameterGroupException;
+	ParameterGroup decode(BitSet payload, String payloadLayoutId) throws UnknownParameterGroupException;
 	
 	ParameterGroup decode(GenericPayload payload) throws UnknownParameterGroupException;
 

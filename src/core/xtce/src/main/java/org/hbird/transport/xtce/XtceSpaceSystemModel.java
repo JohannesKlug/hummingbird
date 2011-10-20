@@ -30,7 +30,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	private final Map<String, ParameterGroup> parameterGroups = new HashMap<String, ParameterGroup>();
 
-	private final Map<String, List<Object>> restrictions = new HashMap<String, List<Object>>();
+	private final Map<String, List<String>> restrictions = new HashMap<String, List<String>>();
 
 	private final Map<String, Encoding> encodings = new HashMap<String, Encoding>();
 
@@ -101,7 +101,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Map<String, List<Object>> getAllPayloadRestrictions() {
+	public Map<String, List<String>> getAllPayloadRestrictions() {
 		return restrictions;
 	}
 

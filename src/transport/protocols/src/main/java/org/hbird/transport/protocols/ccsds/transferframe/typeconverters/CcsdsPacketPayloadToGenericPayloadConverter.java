@@ -9,7 +9,7 @@ public class CcsdsPacketPayloadToGenericPayloadConverter {
 	
 	@Converter
 	public static GenericPayload fromCcsdsPacketPayload(PacketPayload payload) {
-		return new GenericPayload(payload.payload, payload.apid);
+		return new GenericPayload(payload.payload, String.valueOf(payload.apid));
 	}
 
 }

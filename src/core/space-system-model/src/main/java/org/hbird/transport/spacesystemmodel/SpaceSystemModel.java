@@ -64,6 +64,6 @@ public interface SpaceSystemModel extends Serializable {
 	 * @throws ParameterNotInModelException */
 	void replaceParameterInModel(String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInModelException;
 
-	Map<String, List<Object>> getAllPayloadRestrictions();
+	Map<String, List<String>> getAllPayloadRestrictions();
 	Map<String, Encoding> getEncodings();
 }

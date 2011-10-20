@@ -75,12 +75,12 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 	}
 
 	@Override
-	public ParameterGroup decode(final byte[] payload, final Object payloadLayoutId) throws UnknownParameterGroupException {
+	public ParameterGroup decode(final byte[] payload, final String payloadLayoutId) throws UnknownParameterGroupException {
 		return decode(BitSetUtility.fromByteArray(payload), payloadLayoutId);
 	}
 
 	@Override
-	public ParameterGroup decode(final BitSet payload, final Object payloadLayoutId) throws UnknownParameterGroupException {
+	public ParameterGroup decode(final BitSet payload, final String payloadLayoutId) throws UnknownParameterGroupException {
 		if (payloadLayoutId == null) {
 			// no restrictions, decode all everything!
 			for (ParameterGroup pg : codecAwareSpaceSystemModel.getParameterGroupsCollection()) {
@@ -88,10 +88,14 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 			}
 		}
 		else {
-			for (Entry<String, List<Object>> restrictions : codecAwareSpaceSystemModel.getAllPayloadRestrictions().entrySet()) {
-				if (restrictions.getValue().contains(payloadLayoutId)) {
+			for (Entry<String, List<String>> restrictionEntry : codecAwareSpaceSystemModel.getAllPayloadRestrictions().entrySet()) {
+				System.out.println("Checking " + restrictionEntry.getKey());
+				System.out.println("List value = " + restrictionEntry.getValue() + " with payload id: " + payloadLayoutId);
+				
+				if (restrictionEntry.getValue().contains(payloadLayoutId)) {
+					System.out.println("Check passed!");
 					// we found the correct PG
-					String pgName = restrictions.getKey();
+					String pgName = restrictionEntry.getKey();
 					ParameterGroup pg = codecAwareSpaceSystemModel.getParameterGroup(pgName);
 					return decodeParameterGroup(payload, pg);
 				}
