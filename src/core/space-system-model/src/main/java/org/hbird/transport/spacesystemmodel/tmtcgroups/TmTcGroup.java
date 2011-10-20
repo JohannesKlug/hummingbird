@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 import org.hbird.transport.spacesystemmodel.SpaceSystemModelItem;
-import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
@@ -41,7 +40,7 @@ public interface TmTcGroup extends SpaceSystemModelItem {
 	void addStringParameter(String qualifiedName, Parameter<String> parameter);
 	void addRawParameter(String qualifiedName, Parameter<Byte[]> parameter);
 
-	boolean replaceParameterInGroup(String qualifiedName, Parameter<?> parameter);
+	void replaceParameterInGroup(String qualifiedName, Parameter<?> parameter);
 
 	ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup);
 

@@ -107,13 +107,8 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInModelException {
-		boolean replaced = false;
 		for (ParameterGroup pg : this.parameterGroups.values()) {
-			replaced =  pg.replaceParameterInGroup(qualifiedName, newParameter);
-		}
-		
-		if(!replaced) {
-			throw new ParameterNotInModelException(qualifiedName);
+			pg.replaceParameterInGroup(qualifiedName, newParameter);
 		}
 	}
 

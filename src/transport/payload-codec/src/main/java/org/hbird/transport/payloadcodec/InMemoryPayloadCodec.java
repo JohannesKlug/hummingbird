@@ -81,14 +81,13 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 
 	@Override
 	public ParameterGroup decode(final BitSet payload, final Object payloadLayoutId) throws UnknownParameterGroupException {
-	
 		if (payloadLayoutId == null) {
 			// no restrictions, decode all everything!
-			
 			for (ParameterGroup pg : codecAwareSpaceSystemModel.getParameterGroupsCollection()) {
 				return decodeParameterGroup(payload, pg);
 			}
-		} else {
+		}
+		else {
 			for (Entry<String, List<Object>> restrictions : codecAwareSpaceSystemModel.getAllPayloadRestrictions().entrySet()) {
 				if (restrictions.getValue().contains(payloadLayoutId)) {
 					// we found the correct PG
@@ -97,12 +96,10 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 					return decodeParameterGroup(payload, pg);
 				}
 			}
-			
 		}
-		// FIXME this should fail gracefully.
 		return null;
 	}
-	
+
 	private ParameterGroup decodeParameterGroup(final BitSet payload, ParameterGroup pg) {
 		int offset = 0;
 		int previousSize = 0;
@@ -171,7 +168,8 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 
 				// FIXME Support for other types
 
-				// We have transfered the values to the correct group so we can exit the loop
+				// We have transfered the values to the correct group so we can
+				// exit the loop
 				break;
 			}
 		}

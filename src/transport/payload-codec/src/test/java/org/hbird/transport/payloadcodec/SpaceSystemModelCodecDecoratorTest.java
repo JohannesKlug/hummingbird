@@ -36,12 +36,14 @@ public class SpaceSystemModelCodecDecoratorTest {
 		}
 
 		for(ParameterGroup pgs : codecModel.getParameterGroupsCollection()) {
-			for(Parameter<Integer> p : pgs.getIntegerParameters().values()) {
-				if(!(p instanceof CodecParameter<?>)) {
-					fail("Parameter " + p.getQualifiedName() + " was not decorated by the codec decorator");
+			if (pgs.getIntegerParameters() != null) {
+				for(Parameter<Integer> p : pgs.getIntegerParameters().values()) {
+					if(!(p instanceof CodecParameter<?>)) {
+						fail("Parameter " + p.getQualifiedName() + " was not decorated by the codec decorator");
+					}
+					CodecParameter<Integer> cp = (CodecParameter<Integer>)p;
+					assertNotNull(cp);
 				}
-				CodecParameter<Integer> cp = (CodecParameter<Integer>)p;
-				assertNotNull(cp);
 			}
 		}
 	}

@@ -34,7 +34,10 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	public static final String TEST_GROUP_QUALIFIED_NAME = TEST_PREFIX + "." + TEST_GROUP_NAME;
 	public static final String RESTRICTED_GROUP_NAME = "TestRestrictedGroup";
 	public static final String RESTRICTED_GROUP_QUALIFIED_NAME = TEST_PREFIX + "." + RESTRICTED_GROUP_NAME;
+	public static final String RESTRICTED_LASER_GROUP_NAME = "TestRestrictedLaserGroup";
+	public static final String RESTRICTED_LASER_GROUP_QUALIFIED_NAME = TEST_PREFIX + "." + RESTRICTED_LASER_GROUP_NAME;
 	public static final Integer INTEGER_RESTRICTION_ID = Integer.valueOf(1000);
+	public static final Integer INTEGER_LASER_RESTRICTION_ID = Integer.valueOf(12);
 	public static final String FUEL_PARAMETER_QUALIFIED_NAME = TEST_PREFIX + ".Fuel";
 	public static final String SCID_PARAMETER_QUALIFIED_NAME = TEST_PREFIX + ".SCID";
 	public static final String LASER_TEMP_PARAMETER_QUALIFIED_NAME = TEST_PREFIX + ".Laser Temp";
@@ -75,6 +78,14 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 		restrictedTestGroup.addIntegerParameter(fuelParam.getQualifiedName(), fuelParam);
 		restrictedTestGroup.addLongParameter(laserTemp.getQualifiedName(), laserTemp);
 		
+		LOG.debug("Building parameter group with restrictions ans only laser temp" + RESTRICTED_LASER_GROUP_QUALIFIED_NAME);
+		ParameterGroup restrictedLaserTestGroup = new HummingbirdParameterGroup(RESTRICTED_LASER_GROUP_QUALIFIED_NAME, RESTRICTED_LASER_GROUP_NAME, "", "");
+		groups.put(restrictedLaserTestGroup.getQualifiedName(), restrictedLaserTestGroup);
+		List<Object> testLaserGroupRestrictions = new ArrayList<Object>();
+		testLaserGroupRestrictions.add(INTEGER_LASER_RESTRICTION_ID);
+		restrictions.put(restrictedLaserTestGroup.getQualifiedName(), testLaserGroupRestrictions);
+		restrictedLaserTestGroup.addLongParameter(laserTemp.getQualifiedName(), laserTemp);
+		
 		
 	}
 
@@ -104,13 +115,8 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInModelException {
-		boolean replaced = false;
 		for (ParameterGroup pg : this.groups.values()) {
-			replaced = pg.replaceParameterInGroup(qualifiedName, newParameter);
-		}
-		
-		if(!replaced) {
-			throw new ParameterNotInModelException(qualifiedName);
+			pg.replaceParameterInGroup(qualifiedName, newParameter);
 		}
 	}
 

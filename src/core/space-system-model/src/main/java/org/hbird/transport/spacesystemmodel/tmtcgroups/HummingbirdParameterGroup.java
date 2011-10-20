@@ -189,15 +189,14 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	// it is safe to cast.
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean replaceParameterInGroup(final String qualifiedName, final Parameter<?> parameter) {
-		boolean replaced = true;
+	public void replaceParameterInGroup(final String qualifiedName, final Parameter<?> parameter) {
 		String pname = parameter.getQualifiedName();
 
 		if (parameters.containsKey(pname)) {
 			parameters.put(qualifiedName, parameter);
 		}
 
-		if (integerParameters.containsKey(pname)) {
+		if (integerParameters != null && integerParameters.containsKey(pname)) {
 			integerParameters.put(qualifiedName, (Parameter<Integer>) parameter);
 		}
 		else if (longParameters != null && longParameters.containsKey(pname)) {
@@ -218,11 +217,6 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		else if (rawParameters != null && rawParameters.containsKey(pname)) {
 			rawParameters.put(qualifiedName, (Parameter<Byte[]>) parameter);
 		}
-		else {
-			replaced = false;
-		}
-
-		return replaced;
 	}
 
 	@Override
