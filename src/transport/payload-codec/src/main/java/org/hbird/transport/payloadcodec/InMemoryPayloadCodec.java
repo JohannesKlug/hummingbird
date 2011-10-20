@@ -41,35 +41,35 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 			this.codecAwareSpaceSystemModel = decorator.decorateSpaceSystemModel(spaceSystemModel, this.encodings);
 		}
 		catch (UnsupportedParameterEncodingException e) {
-			e.printStackTrace();
+			LOG.error(e.toString());
 			System.exit(-1);
 		}
 		catch (UnknownParameterEncodingException e) {
-			e.printStackTrace();
+			LOG.error(e.toString());
 			System.exit(-1);
 		}
 		catch (UnexpectedParameterTypeException e) {
-			e.printStackTrace();
+			LOG.error(e.toString());
 			System.exit(-1);
 		}
 		catch (UnknownParameterGroupException e) {
-			e.printStackTrace();
+			LOG.error(e.toString());
 			System.exit(-1);
 		}
 		catch (ParameterNotInGroupException e) {
-			e.printStackTrace();
+			LOG.error(e.toString());
 			System.exit(-1);
 		}
 		catch (NoEncodingException e) {
-			e.printStackTrace();
+			LOG.error(e.toString());
 			System.exit(-1);
 		}
 		catch (UnknownParameterException e) {
-			e.printStackTrace();
+			LOG.error(e.toString());
 			System.exit(-1);
 		}
 		catch (ParameterNotInModelException e) {
-			e.printStackTrace();
+			LOG.error(e.toString());
 			System.exit(-1);
 		}
 	}
@@ -81,10 +81,11 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 
 	@Override
 	public ParameterGroup decode(final BitSet payload, final String payloadLayoutId) throws UnknownParameterGroupException {
+		ParameterGroup decodedGroup = null;
 		if (payloadLayoutId == null) {
 			// no restrictions, decode all everything!
 			for (ParameterGroup pg : codecAwareSpaceSystemModel.getParameterGroupsCollection()) {
-				return decodeParameterGroup(payload, pg);
+				decodedGroup = decodeParameterGroup(payload, pg);
 			}
 		}
 		else {
@@ -93,14 +94,14 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 					// we found the correct PG
 					String pgName = restrictionEntry.getKey();
 					ParameterGroup pg = codecAwareSpaceSystemModel.getParameterGroup(pgName);
-					return decodeParameterGroup(payload, pg);
+					decodedGroup = decodeParameterGroup(payload, pg);
 				}
 			}
 		}
-		return null;
+		return decodedGroup;
 	}
 
-	private ParameterGroup decodeParameterGroup(final BitSet payload, ParameterGroup pg) {
+	private ParameterGroup decodeParameterGroup(final BitSet payload, final ParameterGroup pg) {
 		int offset = 0;
 		int previousSize = 0;
 		int count = 0;
@@ -202,7 +203,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 	}
 
 	@Override
-	public ParameterGroup decode(GenericPayload payload) throws UnknownParameterGroupException {
+	public ParameterGroup decode(final GenericPayload payload) throws UnknownParameterGroupException {
 		return decode(payload.payload, payload.layoutIdentifier);
 	}
 
