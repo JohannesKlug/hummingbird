@@ -110,9 +110,6 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 		boolean replaced = false;
 		for (ParameterGroup pg : this.parameterGroups.values()) {
 			replaced =  pg.replaceParameterInGroup(qualifiedName, newParameter);
-			if(replaced) {
-				break;
-			}
 		}
 		
 		if(!replaced) {
@@ -121,7 +118,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Map<String, Parameter<Integer>> getAllIntegerParameters() {
+	public Map<String, Parameter<Integer>> getAllUniqueIntegerParameters() {
 		Map<String, Parameter<Integer>> allParameters = new HashMap<String, Parameter<Integer>>();
 		for (ParameterGroup pg : this.parameterGroups.values()) {
 			Map<String, Parameter<Integer>> integerParameters = pg.getIntegerParameters();
@@ -135,7 +132,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Map<String, Parameter<Long>> getAllLongParameters() {
+	public Map<String, Parameter<Long>> getAllUniqueLongParameters() {
 		Map<String, Parameter<Long>> allParameters = new HashMap<String, Parameter<Long>>();
 		for (ParameterGroup pg : this.parameterGroups.values()) {
 			Map<String, Parameter<Long>> longParameters = pg.getLongParameters();
@@ -149,27 +146,27 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Map<String, Parameter<BigDecimal>> getAllBigDecimalParameters() {
+	public Map<String, Parameter<BigDecimal>> getAllUniqueBigDecimalParameters() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Map<String, Parameter<Float>> getAllFloatParameters() {
+	public Map<String, Parameter<Float>> getAllUniqueFloatParameters() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Map<String, Parameter<Double>> getAllDoubleParameters() {
+	public Map<String, Parameter<Double>> getAllUniqueDoubleParameters() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Map<String, Parameter<String>> getAllStringParameters() {
+	public Map<String, Parameter<String>> getAllUniqueStringParameters() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Map<String, Parameter<Byte[]>> getAllRawParameters() {
+	public Map<String, Parameter<Byte[]>> getAllUniqueRawParameters() {
 		throw new UnsupportedOperationException();
 	}
 

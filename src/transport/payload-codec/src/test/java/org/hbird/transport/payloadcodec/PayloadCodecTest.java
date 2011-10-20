@@ -2,6 +2,7 @@ package org.hbird.transport.payloadcodec;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.BitSet;
@@ -187,6 +188,27 @@ public class PayloadCodecTest {
 		BitSet expected = BitSetUtility.stringToBitSet(bitSetString, true, true);
 
 		encodeAndAssert(testGroup, expected);
+	}
+	
+	@Test
+	public void testDecodeWithRestriction() throws BitSetOperationException, UnknownParameterGroupException, UnknownParameterException {
+		
+		String bitSetString = SCID_VALUE_1_AS_STRING + FUEL_VALUE_3814_AS_STRING + LASER_TEMP_94528016102_AS_STRING;
+		BitSet rawIn = BitSetUtility.stringToBitSet(bitSetString, true, true);
+
+		ParameterGroup actual = codec.decode(rawIn, MockSpaceSystemModel.INTEGER_RESTRICTION_ID);
+		
+		assertNotNull(actual);
+		
+		// Now check the values have been decoded.
+		Integer scid = actual.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_QUALIFIED_NAME).getValue();
+		Integer fuel = actual.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_QUALIFIED_NAME).getValue();
+		Long laserTemp = actual.getLongParameter(MockSpaceSystemModel.LASER_TEMP_PARAMETER_QUALIFIED_NAME).getValue();
+
+		assertEquals("SCID should have been decoded and set to " + SCID_VALUE_1, SCID_VALUE_1, scid.intValue());
+		assertEquals("Fuel should have been decoded and set to " + FUEL_VALUE_3814, FUEL_VALUE_3814, fuel.intValue());
+		assertEquals("laser should have been decoded and set to " + LASER_TEMP_VALUE_94528016102, LASER_TEMP_VALUE_94528016102, laserTemp.longValue());
+
 	}
 
 }

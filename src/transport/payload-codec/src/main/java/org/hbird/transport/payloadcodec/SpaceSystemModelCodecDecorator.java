@@ -34,7 +34,7 @@ public final class SpaceSystemModelCodecDecorator {
 		SpaceSystemModel newModel = cloner.deepClone(spaceSystemModel);
 
 		// Decorate all integer parameters...
-		for (Parameter<Integer> parameter : newModel.getAllIntegerParameters().values()) {
+		for (Parameter<Integer> parameter : newModel.getAllUniqueIntegerParameters().values()) {
 			// decorate it
 			Encoding enc = findEncoding(parameter.getQualifiedName());
 			parameter = IntegerCodecFactory.decorateParameterWithCodec(parameter, enc);
@@ -44,7 +44,7 @@ public final class SpaceSystemModelCodecDecorator {
 		}
 
 		// Decorate all long parameters...
-		for (Parameter<Long> parameter : newModel.getAllLongParameters().values()) {
+		for (Parameter<Long> parameter : newModel.getAllUniqueLongParameters().values()) {
 			Encoding enc = findEncoding(parameter.getQualifiedName());
 			parameter = LongCodecFactory.decorateParameterWithCodec(parameter, enc);
 			newModel.replaceParameterInModel(parameter.getQualifiedName(), parameter);

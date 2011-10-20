@@ -1,6 +1,7 @@
 package org.hbird.transport.payloadcodec.testsupport;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +10,6 @@ import java.util.Map;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
-import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInModelException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
@@ -31,7 +31,10 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 
 	public static final String TEST_PREFIX = "Test";
 	public static final String TEST_GROUP_NAME = "TestGroup";
-	public static final String TEST_GROUP_QUALIFIED_NAME = TEST_PREFIX + ".TestGroup";
+	public static final String TEST_GROUP_QUALIFIED_NAME = TEST_PREFIX + "." + TEST_GROUP_NAME;
+	public static final String RESTRICTED_GROUP_NAME = "TestRestrictedGroup";
+	public static final String RESTRICTED_GROUP_QUALIFIED_NAME = TEST_PREFIX + "." + RESTRICTED_GROUP_NAME;
+	public static final Integer INTEGER_RESTRICTION_ID = Integer.valueOf(1000);
 	public static final String FUEL_PARAMETER_QUALIFIED_NAME = TEST_PREFIX + ".Fuel";
 	public static final String SCID_PARAMETER_QUALIFIED_NAME = TEST_PREFIX + ".SCID";
 	public static final String LASER_TEMP_PARAMETER_QUALIFIED_NAME = TEST_PREFIX + ".Laser Temp";
@@ -61,6 +64,18 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 		testGroup.addIntegerParameter(spacecraftId.getQualifiedName(), spacecraftId);
 		testGroup.addIntegerParameter(fuelParam.getQualifiedName(), fuelParam);
 		testGroup.addLongParameter(laserTemp.getQualifiedName(), laserTemp);
+		
+		LOG.debug("Building parameter group with restrictions" + RESTRICTED_GROUP_QUALIFIED_NAME);
+		ParameterGroup restrictedTestGroup = new HummingbirdParameterGroup(RESTRICTED_GROUP_QUALIFIED_NAME, RESTRICTED_GROUP_NAME, "", "");
+		groups.put(restrictedTestGroup.getQualifiedName(), restrictedTestGroup);
+		List<Object> testGroupRestrictions = new ArrayList<Object>();
+		testGroupRestrictions.add(INTEGER_RESTRICTION_ID);
+		restrictions.put(restrictedTestGroup.getQualifiedName(), testGroupRestrictions);
+		restrictedTestGroup.addIntegerParameter(spacecraftId.getQualifiedName(), spacecraftId);
+		restrictedTestGroup.addIntegerParameter(fuelParam.getQualifiedName(), fuelParam);
+		restrictedTestGroup.addLongParameter(laserTemp.getQualifiedName(), laserTemp);
+		
+		
 	}
 
 	@Override
@@ -92,9 +107,6 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 		boolean replaced = false;
 		for (ParameterGroup pg : this.groups.values()) {
 			replaced = pg.replaceParameterInGroup(qualifiedName, newParameter);
-			if(replaced) {
-				break;
-			}
 		}
 		
 		if(!replaced) {
@@ -169,7 +181,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Map<String, Parameter<Integer>> getAllIntegerParameters() {
+	public Map<String, Parameter<Integer>> getAllUniqueIntegerParameters() {
 		Map<String, Parameter<Integer>> allParameters = new HashMap<String, Parameter<Integer>>();
 		for (ParameterGroup pg : this.groups.values()) {
 			Map<String, Parameter<Integer>> integerParameters = pg.getIntegerParameters();
@@ -183,7 +195,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Map<String, Parameter<Long>> getAllLongParameters() {
+	public Map<String, Parameter<Long>> getAllUniqueLongParameters() {
 		Map<String, Parameter<Long>> allParameters = new HashMap<String, Parameter<Long>>();
 		for (ParameterGroup pg : this.groups.values()) {
 			Map<String, Parameter<Long>> longParameters = pg.getLongParameters();
@@ -197,27 +209,27 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Map<String, Parameter<BigDecimal>> getAllBigDecimalParameters() {
+	public Map<String, Parameter<BigDecimal>> getAllUniqueBigDecimalParameters() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Map<String, Parameter<Float>> getAllFloatParameters() {
+	public Map<String, Parameter<Float>> getAllUniqueFloatParameters() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Map<String, Parameter<Double>> getAllDoubleParameters() {
+	public Map<String, Parameter<Double>> getAllUniqueDoubleParameters() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Map<String, Parameter<String>> getAllStringParameters() {
+	public Map<String, Parameter<String>> getAllUniqueStringParameters() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Map<String, Parameter<Byte[]>> getAllRawParameters() {
+	public Map<String, Parameter<Byte[]>> getAllUniqueRawParameters() {
 		throw new UnsupportedOperationException();
 	}
 

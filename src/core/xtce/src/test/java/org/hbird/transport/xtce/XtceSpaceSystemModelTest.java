@@ -124,8 +124,8 @@ public class XtceSpaceSystemModelTest {
 		encoding = encodings.get(param.getQualifiedName());
 		assertEquals(FUEL_LENGTH, encoding.getSizeInBits());
 
-		assertEquals("Should be " + NUM_OF_INTEGER_TYPED_PARAMETERS + " integer type parameters", NUM_OF_INTEGER_TYPED_PARAMETERS, xtceSsm.getAllIntegerParameters().size());
-		assertEquals("Should be " + NUM_OF_LONG_TYPED_PARAMETERS + " long type parameters", NUM_OF_LONG_TYPED_PARAMETERS, xtceSsm.getAllLongParameters().size());
+		assertEquals("Should be " + NUM_OF_INTEGER_TYPED_PARAMETERS + " integer type parameters", NUM_OF_INTEGER_TYPED_PARAMETERS, xtceSsm.getAllUniqueIntegerParameters().size());
+		assertEquals("Should be " + NUM_OF_LONG_TYPED_PARAMETERS + " long type parameters", NUM_OF_LONG_TYPED_PARAMETERS, xtceSsm.getAllUniqueLongParameters().size());
 	}
 
 

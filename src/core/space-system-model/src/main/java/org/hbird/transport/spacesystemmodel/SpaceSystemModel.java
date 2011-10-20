@@ -46,19 +46,19 @@ public interface SpaceSystemModel extends Serializable {
 	/** Returns all parameters (unbound) from all payload groups in the model */
 	Map<String, Parameter<?>> getAllPayloadParameters();
 	/** Returns all Integer parameters from all payload groups in the model */
-	Map<String, Parameter<Integer>> getAllIntegerParameters();
+	Map<String, Parameter<Integer>> getAllUniqueIntegerParameters();
 	/** Returns all Long parameters from all payload groups in the model */
-	Map<String, Parameter<Long>> getAllLongParameters();
+	Map<String, Parameter<Long>> getAllUniqueLongParameters();
 	/** Returns all BigDecimal parameters from all payload groups in the model */
-	Map<String, Parameter<BigDecimal>> getAllBigDecimalParameters();
+	Map<String, Parameter<BigDecimal>> getAllUniqueBigDecimalParameters();
 	/** Returns all Float parameters from all payload groups in the model */
-	Map<String, Parameter<Float>> getAllFloatParameters();
+	Map<String, Parameter<Float>> getAllUniqueFloatParameters();
 	/** Returns all Double parameters from all payload groups in the model */
-	Map<String, Parameter<Double>> getAllDoubleParameters();
+	Map<String, Parameter<Double>> getAllUniqueDoubleParameters();
 	/** Returns all String parameters from all payload groups in the model */
-	Map<String, Parameter<String>> getAllStringParameters();
+	Map<String, Parameter<String>> getAllUniqueStringParameters();
 	/** Returns all Raw parameters from all payload groups in the model */
-	Map<String, Parameter<Byte[]>> getAllRawParameters();
+	Map<String, Parameter<Byte[]>> getAllUniqueRawParameters();
 
 	/** Finds and replaces a parameter keyed by qualified name in the the model 
 	 * @throws ParameterNotInModelException */
