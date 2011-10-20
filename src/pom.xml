@@ -18,6 +18,7 @@
 		<module>transport</module>
 		<!--<module>business</module> -->
 		<!--<module>exchange</module> -->
+		<module>test</module>
 	</modules>
 
 	<properties>

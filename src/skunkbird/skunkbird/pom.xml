@@ -77,6 +77,11 @@
 			<artifactId>activemq-camel</artifactId>
 			<version>5.4.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hbird</groupId>
+			<artifactId>integration-testing</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<defaultGoal>install</defaultGoal>

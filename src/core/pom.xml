@@ -7,10 +7,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.hbird</groupId>
+	<groupId>org.hbird.core</groupId>
 	<artifactId>hummingbird-core</artifactId>
 	<packaging>pom</packaging>
-	<version>0.0.1-SNAPSHOT</version>
 
 	<name>Hummingbird Core</name>
 	<description>This module contains the Hummingbird Core</description>
