@@ -93,7 +93,7 @@ public class PayloadCodecTest {
 					+ " should be an instance of HummingbirdParameter<?> (for this test, i.e., using Hummingbird default implementations of Parameter<?>",
 					(p instanceof HummingbirdParameter<?>));
 		}
-
+		
 		// Now check the values have been decoded.
 		Integer scid = actual.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_QUALIFIED_NAME).getValue();
 		Integer fuel = actual.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_QUALIFIED_NAME).getValue();
