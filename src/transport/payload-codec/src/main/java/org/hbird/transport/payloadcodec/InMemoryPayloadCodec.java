@@ -89,11 +89,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		}
 		else {
 			for (Entry<String, List<String>> restrictionEntry : codecAwareSpaceSystemModel.getAllPayloadRestrictions().entrySet()) {
-				System.out.println("Checking " + restrictionEntry.getKey());
-				System.out.println("List value = " + restrictionEntry.getValue() + " with payload id: " + payloadLayoutId);
-				
 				if (restrictionEntry.getValue().contains(payloadLayoutId)) {
-					System.out.println("Check passed!");
 					// we found the correct PG
 					String pgName = restrictionEntry.getKey();
 					ParameterGroup pg = codecAwareSpaceSystemModel.getParameterGroup(pgName);
