@@ -48,7 +48,10 @@ public class CcsdsFrameDecoder {
 	}
 
 	private final VirtualChannel[] virtualChannel = new VirtualChannel[8];
-
+	
+	public CcsdsFrameDecoder(final int frameLength) {
+		this(frameLength, false, false);
+	}
 
 	public CcsdsFrameDecoder(final int frameLength, final boolean ocfPresent, final boolean ecfPresent) {
 

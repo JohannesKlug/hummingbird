@@ -48,6 +48,12 @@ public class CcsdsFrameDecoderTest extends CamelTestSupport {
 		assertEquals(1023, framePayload.spacecraftId);
 		
 	}
+	
+	@Test
+	public void simplifiedConstructorTest() {
+		CcsdsFrameDecoder mySimpleDecoder = new CcsdsFrameDecoder(40);
+		assertNotNull(mySimpleDecoder);
+	}
 
 	@Override
 	protected RouteBuilder createRouteBuilder() throws Exception {
