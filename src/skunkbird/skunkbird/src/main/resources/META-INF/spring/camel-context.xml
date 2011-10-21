@@ -58,7 +58,7 @@
 		<task:scheduled ref="tmGenerator" method="generateGroup" fixed-rate="10" />
 	</task:scheduled-tasks>
 
-	<task:scheduler id="simScheduler" pool-size="1" />
+	<task:scheduler id="simScheduler" pool-size="2" />
 	
 	
 	<!-- Packet Encoder -->
@@ -66,23 +66,23 @@
 	</bean>
 	
 	
-	<camel:camelContext xmlns="http://camel.apache.org/schema/spring">
+	<camel:camelContext>
 		<!-- Runs routes defined in Java in this package -->
 		<camel:package>org.hbird.skunkbird</camel:package>
 		
 		<camel:route>
 			<camel:from uri="seda:tmSource"/>
+<!-- 			<camel:from uri="bean:tmGenerator"/> -->
 			<camel:to uri="bean:payload-codec?method=encodeToGenericPayload" />
 			<camel:convertBodyTo type="org.hbird.transport.protocols.ccsds.spacepacket.data.PacketPayload" />
 			<camel:to uri="bean:packetEncoder" />
 			<camel:convertBodyTo type="org.hbird.transport.protocols.ccsds.transferframe.data.FramePayload" />
-<!-- 			<camel:to uri="bean:packetDecoder?method=decode" /> -->
-			
 			<camel:split>
 				<camel:method ref="packetDecoder" method="decode"/>
 				<camel:convertBodyTo type="org.hbird.transport.commons.data.GenericPayload" />
 				<camel:to uri="bean:payload-codec?method=decode" />
-				<camel:to uri="bean:parameterChecker" />
+				<camel:to uri="activemq:decodedTelemetryPayloads" />
+<!-- 				<camel:to uri="bean:parameterChecker" /> -->
 			</camel:split>
 		</camel:route>
 		
