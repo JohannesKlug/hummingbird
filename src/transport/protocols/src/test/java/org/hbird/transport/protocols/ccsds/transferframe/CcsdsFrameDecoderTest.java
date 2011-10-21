@@ -15,7 +15,7 @@ public class CcsdsFrameDecoderTest extends CamelTestSupport {
 	
 	CcsdsFrameEncoder frameEncoder = new CcsdsFrameEncoder(20);
 	
-	CcsdsFrameDecoder frameDecoder = new CcsdsFrameDecoder(20, false, false);
+	CcsdsFrameDecoder frameDecoder = new CcsdsFrameDecoder(20);
 
 	@Produce(uri = "direct:start")
 	protected ProducerTemplate template;
@@ -49,12 +49,6 @@ public class CcsdsFrameDecoderTest extends CamelTestSupport {
 		
 	}
 	
-	@Test
-	public void simplifiedConstructorTest() {
-		CcsdsFrameDecoder mySimpleDecoder = new CcsdsFrameDecoder(40);
-		assertNotNull(mySimpleDecoder);
-	}
-
 	@Override
 	protected RouteBuilder createRouteBuilder() throws Exception {
 		return new RouteBuilder() {
