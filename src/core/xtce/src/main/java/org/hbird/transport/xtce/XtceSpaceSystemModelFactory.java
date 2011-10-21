@@ -96,8 +96,7 @@ public final class XtceSpaceSystemModelFactory {
 	 *
 	 * @see org.hbird.transport.xtce.SpaceSystemModelFactory#createSpaceSystemModel(java.lang.String)
 	 */
-	public static final SpaceSystemModel createSpaceSystemModel(final String spaceSystemModelFilename) throws InvalidSpaceSystemDefinitionException,
-			InvalidParameterTypeException {
+	public static final SpaceSystemModel createSpaceSystemModel(final String spaceSystemModelFilename) {
 
 		LOG.debug("File = " + spaceSystemModelFilename);
 
@@ -109,9 +108,23 @@ public final class XtceSpaceSystemModelFactory {
 
 		modelName = spaceSystem.getName();
 
-		createTelemetryModel();
+		try {
+			createTelemetryModel();
+			createCommandModel();
+		}
+		catch (NumberFormatException e1) {
+			LOG.error(e1.toString());
+			System.exit(-1);
+		}
+		catch (InvalidSpaceSystemDefinitionException e1) {
+			LOG.error(e1.toString());
+			System.exit(-1);
+		}
+		catch (InvalidParameterTypeException e1) {
+			LOG.error(e1.toString());
+			System.exit(-1);
+		}
 
-		createCommandModel();
 
 		try {
 			injectConstructsIntoModel();
@@ -163,7 +176,12 @@ public final class XtceSpaceSystemModelFactory {
 	}
 
 	private static void createCommandModel() throws InvalidSpaceSystemDefinitionException {
-		createAllParameterTypes(spaceSystem.getCommandMetaData());
+		CommandMetaData commandMetaData = spaceSystem.getCommandMetaData();
+		if (commandMetaData == null) {
+			LOG.info("No command metadate defined");
+			return;
+		}
+		createAllParameterTypes(commandMetaData);
 		createAllCommandArguments();
 		createAllTelemetryCommandGroups();
 	}
