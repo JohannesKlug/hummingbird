@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SpaceSystem xmlns="http://www.omg.org/space/xtce"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.omg.org/space/xtce http://www.omg.org/space/xtce/SpaceSystemV1.0.xsd"
+	name="Thunderbird" shortDescription="MCS configuration for the Thunderbird rocket">
+
+
+	<Header validationStatus="Draft" date="2011-10-21" version="0.0.2-SNAPSHOT" classification="NotClassified">
+		<AuthorSet>
+			<Author>Mark Doyle - mark.doyle@logica.com</Author>
+			<Author>Johannes Klug - johannes.klug@logica.com</Author>
+		</AuthorSet>
+		<HistorySet>
+			<History>Version 0.1-SNAPSHOT</History>
+		</HistorySet>
+		<!-- <NoteSet> -->
+		<!-- <Note>XTCE definition for the Thunderbird rocket. This definition is work in progress.</Note> -->
+		<!-- </NoteSet> -->
+	</Header>
+
+
+	<!-- Telemetry definition -->
+	<TelemetryMetaData>
+
+		<ParameterTypeSet>
+			<IntegerParameterType name="1BitFlag"
+				sizeInBits="1" signed="false" shortDescription="1-bit Flag">
+				<UnitSet></UnitSet>
+				<!-- <BinaryDataEncoding bitOrder="mostSignificantBitFirst" /> -->
+			</IntegerParameterType>
+
+			<IntegerParameterType name="2BitUInteger"
+				sizeInBits="2" signed="false" shortDescription="2-bit unsigned integer">
+				<UnitSet></UnitSet>
+				<!-- <BinaryDataEncoding bitOrder="mostSignificantBitFirst" /> -->
+			</IntegerParameterType>
+
+			<IntegerParameterType name="3BitUInteger"
+				sizeInBits="3" signed="false" shortDescription="3-bit unsigned integer">
+				<UnitSet></UnitSet>
+				<!-- <BinaryDataEncoding bitOrder="mostSignificantBitFirst" /> -->
+			</IntegerParameterType>
+
+			<IntegerParameterType name="5BitUInteger"
+				sizeInBits="5" signed="false" shortDescription="5-bit unsigned integer">
+				<UnitSet></UnitSet>
+				<!-- <BinaryDataEncoding bitOrder="mostSignificantBitFirst" /> -->
+			</IntegerParameterType>
+
+			<IntegerParameterType name="6BitUInteger"
+				sizeInBits="6" signed="false" shortDescription="6-bit unsigned integer">
+				<UnitSet></UnitSet>
+				<!-- <BinaryDataEncoding bitOrder="mostSignificantBitFirst" /> -->
+			</IntegerParameterType>
+
+			<IntegerParameterType name="8BitUInteger"
+				sizeInBits="8" signed="false" shortDescription="8-bit unsigned integer">
+				<UnitSet></UnitSet>
+				<!-- <BinaryDataEncoding bitOrder="mostSignificantBitFirst" /> -->
+			</IntegerParameterType>
+
+			<IntegerParameterType name="9BitUInteger"
+				sizeInBits="9" signed="false" shortDescription="9-bit unsigned integer">
+				<UnitSet></UnitSet>
+				<!-- <BinaryDataEncoding bitOrder="mostSignificantBitFirst" /> -->
+			</IntegerParameterType>
+
+			<IntegerParameterType name="11BitUInteger"
+				sizeInBits="11" signed="false" shortDescription="11-bit unsigned integer">
+				<UnitSet></UnitSet>
+				<!-- <BinaryDataEncoding bitOrder="mostSignificantBitFirst" /> -->
+			</IntegerParameterType>
+
+			<IntegerParameterType name="12BitUInteger"
+				sizeInBits="12" signed="false" shortDescription="12-bit unsigned integer">
+				<UnitSet></UnitSet>
+				<!-- <BinaryDataEncoding bitOrder="mostSignificantBitFirst" /> -->
+			</IntegerParameterType>
+
+			<IntegerParameterType name="14BitUInteger"
+				sizeInBits="14" signed="false" shortDescription="14-bit unsigned integer">
+				<UnitSet></UnitSet>
+				<!-- <BinaryDataEncoding bitOrder="mostSignificantBitFirst" /> -->
+			</IntegerParameterType>
+
+			<IntegerParameterType name="16BitUInteger"
+				sizeInBits="16" signed="false" shortDescription="16-bit unsigned integer">
+				<UnitSet></UnitSet>
+				<!-- <BinaryDataEncoding bitOrder="mostSignificantBitFirst"> -->
+			</IntegerParameterType>
+
+			<IntegerParameterType name="32BitUInteger"
+				sizeInBits="32" signed="false" shortDescription="32-bit unsigned integer">
+				<UnitSet></UnitSet>
+				<!-- <BinaryDataEncoding bitOrder="mostSignificantBitFirst"> -->
+			</IntegerParameterType>
+
+		</ParameterTypeSet>
+
+		<ParameterSet>
+			<!-- Virtual Header Field -->
+			<Parameter parameterTypeRef="11bitUInteger" name="CCSDS_APID" />
+			<!-- Payload starts here -->
+			<Parameter parameterTypeRef="14BitUInteger" name="Air_Pressure_SCP1000" />
+			<Parameter parameterTypeRef="14BitUInteger" name="Air_Pressure_BMP" />
+			<Parameter parameterTypeRef="12BitUInteger" name="Z_Axis_Accelerometer" />
+			<Parameter parameterTypeRef="8BitUInteger"  name="Temperature_SCP1000" />
+			<Parameter parameterTypeRef="8BitUInteger"  name="Temperature_BMP" />
+			<Parameter parameterTypeRef="12BitUInteger" name="GPS_Altitude" />
+			<Parameter parameterTypeRef="2BitUInteger"  name="GPS_Latitude_Degrees" />
+			<Parameter parameterTypeRef="6BitUInteger"  name="GPS_Latitude_Minutes" />
+			<Parameter parameterTypeRef="14BitUInteger" name="GPS_Latitude_Minutes_decimals" />
+			<Parameter parameterTypeRef="2BitUInteger"  name="GPS_Longitude_Degrees" />
+			<Parameter parameterTypeRef="6BitUInteger"  name="GPS_Longitude_Minutes" />
+			<Parameter parameterTypeRef="14BitUInteger"	name="GPS_Longitude_Minutes_decimals" />
+			<Parameter parameterTypeRef="1BitFlag"      name="GPS_Lock" />
+			<Parameter parameterTypeRef="5BitUInteger"  name="GPS_Number_of_Sats" />
+			<Parameter parameterTypeRef="9BitUInteger"  name="IMU_Roll" />
+			<Parameter parameterTypeRef="8BitUInteger"  name="IMU_Pitch" />
+			<Parameter parameterTypeRef="9BitUInteger"  name="IMU_Heading" />
+		</ParameterSet>
+
+		<ContainerSet>
+
+			<SequenceContainer name="RocketPayload"
+				shortDescription="">
+				<EntryList>
+					<ParameterRefEntry parameterRef="Air_Pressure_SCP1000" />
+					<ParameterRefEntry parameterRef="Air_Pressure_BMP" />
+					<ParameterRefEntry parameterRef="Z_Axis_Accelerometer" />
+					<ParameterRefEntry parameterRef="Temperature_SCP1000" />
+					<ParameterRefEntry parameterRef="Temperature_BMP" />
+					<ParameterRefEntry parameterRef="GPS_Altitude" />
+					<ParameterRefEntry parameterRef="GPS_Latitude_Degrees" />
+					<ParameterRefEntry parameterRef="GPS_Latitude_Minutes" />
+					<ParameterRefEntry parameterRef="GPS_Latitude_Minutes_decimals" />
+					<ParameterRefEntry parameterRef="GPS_Longitude_Degrees" />
+					<ParameterRefEntry parameterRef="GPS_Longitude_Minutes" />
+					<ParameterRefEntry parameterRef="GPS_Longitude_Minutes_decimals" />
+					<ParameterRefEntry parameterRef="GPS_Lock" />
+					<ParameterRefEntry parameterRef="GPS_Number_of_Sats" />
+					<ParameterRefEntry parameterRef="IMU_Roll" />
+					<ParameterRefEntry parameterRef="IMU_Pitch" />
+					<ParameterRefEntry parameterRef="IMU_Heading" />
+				</EntryList>
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison parameterRef="CCSDS_APID" value="1" />
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+
+			</SequenceContainer>
+
+		</ContainerSet>
+
+	</TelemetryMetaData>
+
+</SpaceSystem>
