@@ -6,6 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ParameterGroupChecker {
+	
+	private static long numberOfReceivedParameterGroups = 0;
+	private static long startTime = System.currentTimeMillis(); 
 
 	private static final Logger LOG = LoggerFactory.getLogger(ParameterGroupChecker.class);
 	public static void checkParameterGroup(ParameterGroup pg) {
@@ -13,8 +16,14 @@ public class ParameterGroupChecker {
 			LOG.error("Received a null pg.");
 			System.exit(1);
 		}
+		numberOfReceivedParameterGroups++;
 		for (Parameter<?> parameter : pg.getAllParameters().values()) {
 			LOG.debug(parameter.getName() + ": " + parameter.getValue());
+		}
+		if (numberOfReceivedParameterGroups%1000 == 0) {
+			long timeDifference = System.currentTimeMillis() - startTime;
+			double perSecond = (double) numberOfReceivedParameterGroups / timeDifference * 1000;
+			LOG.info("Received " + numberOfReceivedParameterGroups + " parameter groups → " + perSecond + " pg/second.");
 		}
 		
 	}

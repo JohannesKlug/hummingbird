@@ -6,6 +6,8 @@ import org.hbird.transport.protocols.ccsds.spacepacket.data.PacketPayload;
 import org.hbird.transport.protocols.ccsds.spacepacket.exceptions.InvalidApIdException;
 import org.hbird.transport.protocols.ccsds.spacepacket.exceptions.InvalidPayloadLengthExeption;
 import org.hbird.transport.protocols.ccsds.spacepacket.exceptions.PayloadNullException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Currently not supported:
@@ -18,6 +20,8 @@ import org.hbird.transport.protocols.ccsds.spacepacket.exceptions.PayloadNullExc
  * 
  */
 public class CcsdsPacketEncoder {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(CcsdsPacketEncoder.class);
 
 	// 3 bits
 	private int packetVersionNumber = 0;
@@ -61,11 +65,13 @@ public class CcsdsPacketEncoder {
 	 * @throws PayloadNullException
 	 * @throws InvalidApIdException 
 	 */
-	public synchronized byte[] encode(PacketPayload payload)	throws InvalidPayloadLengthExeption, PayloadNullException, InvalidApIdException {
+	public synchronized byte[] encode(PacketPayload payload) throws InvalidPayloadLengthExeption, PayloadNullException, InvalidApIdException {
 		
 		if ((payload == null) || (payload.payload == null)) {
 			throw new PayloadNullException();
 		}
+		
+		LOG.debug("Encoding payload: " + payload);
 		
 		if ((payload.apid < 0) || (payload.apid >= 2048)) {
 			throw new InvalidApIdException(payload.apid);
@@ -107,6 +113,8 @@ public class CcsdsPacketEncoder {
 			sequenceCount = 0;
 		}
 
+		LOG.debug("Finished encoding, returning packet: " + new String(packet));
+		
 		return packet;
 	}
 

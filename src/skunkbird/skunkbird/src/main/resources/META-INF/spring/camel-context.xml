@@ -3,12 +3,14 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	   xmlns:camel="http://camel.apache.org/schema/spring"
+	   xmlns:task="http://www.springframework.org/schema/task"
 	   xsi:schemaLocation="
 	   		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
 	   		http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
 	<bean id="ssmodel" class="org.hbird.transport.xtce.XtceSpaceSystemModelFactory" factory-method="createSpaceSystemModel">
-		<constructor-arg value="TestSat-all-uints.xml"></constructor-arg>
+		<constructor-arg value="Thunderbird.xml"></constructor-arg>
 	</bean>
 	
 	<bean id="packetDecoder" class="org.hbird.transport.protocols.ccsds.spacepacket.CcsdsPacketDecoder" />
@@ -47,12 +49,44 @@
 		<property name="configuration" ref="jmsConfig" />
 	</bean>
 	
+	<bean id="tmGenerator" class="org.hbird.test.integration.TmTcGenerator">
+		<constructor-arg ref="ssmodel" ></constructor-arg>
+	</bean>
+	
+	
+	<task:scheduled-tasks scheduler="simScheduler">
+		<task:scheduled ref="tmGenerator" method="generateGroup" fixed-rate="10" />
+	</task:scheduled-tasks>
+
+	<task:scheduler id="simScheduler" pool-size="1" />
+	
+	
+	<!-- Packet Encoder -->
+	<bean id="packetEncoder" class="org.hbird.transport.protocols.ccsds.spacepacket.CcsdsPacketEncoder">
+	</bean>
+	
 	
 	<camel:camelContext xmlns="http://camel.apache.org/schema/spring">
 		<!-- Runs routes defined in Java in this package -->
 		<camel:package>org.hbird.skunkbird</camel:package>
-
+		
 		<camel:route>
+			<camel:from uri="seda:tmSource"/>
+			<camel:to uri="bean:payload-codec?method=encodeToGenericPayload" />
+			<camel:convertBodyTo type="org.hbird.transport.protocols.ccsds.spacepacket.data.PacketPayload" />
+			<camel:to uri="bean:packetEncoder" />
+			<camel:convertBodyTo type="org.hbird.transport.protocols.ccsds.transferframe.data.FramePayload" />
+<!-- 			<camel:to uri="bean:packetDecoder?method=decode" /> -->
+			
+			<camel:split>
+				<camel:method ref="packetDecoder" method="decode"/>
+				<camel:convertBodyTo type="org.hbird.transport.commons.data.GenericPayload" />
+				<camel:to uri="bean:payload-codec?method=decode" />
+				<camel:to uri="bean:parameterChecker" />
+			</camel:split>
+		</camel:route>
+		
+		<camel:route autoStartup="false">
 			<camel:from uri="stream:file?fileName=binPacketTm.txt&amp;scanStream=true&amp;scanStreamDelay=10" />
 <!-- 			<camel:to id="activeMqRawPayloads" uri="activemq:rawPayloads" /> -->
 				<camel:convertBodyTo type="org.hbird.transport.protocols.ccsds.transferframe.data.FramePayload" />

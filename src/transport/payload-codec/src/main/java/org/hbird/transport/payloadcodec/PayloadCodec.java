@@ -15,5 +15,5 @@ public interface PayloadCodec {
 	ParameterGroup decode(GenericPayload payload) throws UnknownParameterGroupException;
 
 	byte[] encodeToByteArray(ParameterGroup parameterGroup);
-	BitSet encodeToBitSet(ParameterGroup parameterGroup);
+	GenericPayload encodeToGenericPayload(ParameterGroup parameterGroup);
 }

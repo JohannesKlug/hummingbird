@@ -8,32 +8,32 @@ import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
 public class PolynomialCalibrator {
 	
-	private Map<String, List<Integer>> calibrationsMap;
+	private Map<String, List<Double>> calibrationsMap;
 
-	public PolynomialCalibrator(Map<String, List<Integer>> calibrationsMap) {
+	public PolynomialCalibrator(Map<String, List<Double>> calibrationsMap) {
 		this.calibrationsMap = calibrationsMap;
 	}
 	
-	public Parameter<?> calibrateParameter(Parameter<?> parameterIn) {
-		List<Integer> calibrationPolynomial = calibrationsMap.get(parameterIn.getQualifiedName());
+	public Parameter<Double> calibrateParameter(Parameter<?> parameterIn) {
+		List<Double> calibrationPolynomial = calibrationsMap.get(parameterIn.getQualifiedName());
 		
-		if (calibrationPolynomial != null) {
+//		if (calibrationPolynomial != null) {
 			// calibration polynomial found
 			
-			double value = (Double) parameterIn.getValue();
-			
+			double value = Double.parseDouble(parameterIn.getValue().toString());
+
 			double outValue = 0;
 			int term = 0;
-			for (Integer currentPolynomial : calibrationPolynomial) {
+			for (Double currentPolynomial : calibrationPolynomial) {
 				outValue += currentPolynomial * Math.pow(value, term);
 				term++;
 			}
 			Parameter<Double> parameter = new HummingbirdParameter<Double>("", "", "", "");
 			parameter.setValue(outValue);
-			parameterIn = parameter;
-		}
-		// Is return this a problem?
-		return parameterIn;
+			return parameter;
+//			parameterIn = parameter;
+//		}
+//		return (Parameter<Double>) parameterIn;
 	}
 
 }

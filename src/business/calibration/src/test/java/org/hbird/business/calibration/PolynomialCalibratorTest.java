@@ -15,23 +15,23 @@ public class PolynomialCalibratorTest {
 	
 	@Test
 	public void testCalibration() {
-		Map<String, List<Integer>> calibrationsMap = new HashMap<String, List<Integer>>();
+		Map<String, List<Double>> calibrationsMap = new HashMap<String, List<Double>>();
 		
-		List<Integer> polynomials = new ArrayList<Integer>();
+		List<Double> polynomials = new ArrayList<Double>();
 		// y = +9 +3x +2x^2 +1x^3
-		polynomials.add(9);
-		polynomials.add(3);
-		polynomials.add(2);
-		polynomials.add(1);
+		polynomials.add(9d);
+		polynomials.add(3d);
+		polynomials.add(2d);
+		polynomials.add(1d);
 		
 		calibrationsMap.put("Test.TestParam", polynomials);
 		
 		PolynomialCalibrator calibrator = new PolynomialCalibrator(calibrationsMap);
 		
-		Parameter testParam = new HummingbirdParameter<Integer>("Test.TestParam", "TestParam", "", "");
+		Parameter<Integer> testParam = new HummingbirdParameter<Integer>("Test.TestParam", "TestParam", "", "");
 		testParam.setValue(3);
 		
-		Parameter calibratedParameter = calibrator.calibrateParameter(testParam);
+		Parameter<Double> calibratedParameter = calibrator.calibrateParameter(testParam);
 		
 		// y = +9 +3x +2x^2 +1x^3
 		// x = 3

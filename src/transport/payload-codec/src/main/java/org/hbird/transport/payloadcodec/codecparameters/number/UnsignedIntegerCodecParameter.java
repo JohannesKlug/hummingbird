@@ -131,7 +131,7 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 		// checking whether the value fits into the bit string of length - 1
 		final long absValue = Math.abs(unsignedInt);
 		if (absValue > Math.pow(2.0, encoding.getSizeInBits()) - 1 || unsignedInt == Long.MIN_VALUE) {
-			throw new RuntimeException("The value of " + unsignedInt + " does not fit into a bit string of " + (encoding.getSizeInBits() - 1) + " bits.");
+			throw new RuntimeException("The value of " + unsignedInt + " does not fit into a bit string of " + encoding.getSizeInBits() + " bits.");
 		}
 
 		// setting all bits to zero

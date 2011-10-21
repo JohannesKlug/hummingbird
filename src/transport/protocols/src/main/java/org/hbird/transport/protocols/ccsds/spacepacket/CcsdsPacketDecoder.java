@@ -17,7 +17,11 @@ public class CcsdsPacketDecoder {
 	
 
 	public synchronized List<PacketPayload> decode(final FramePayload framePayload) {
+		
+		LOG.debug("Decoding");
 
+		// FIXME check for null framePayload
+		
 		List<PacketPayload> payloads = new ArrayList<PacketPayload>();
 		byte[] packet = ArrayUtils.clone(framePayload.payload);
 		boolean isNextPacket = framePayload.isNextFrame;

@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.BitSet;
 import java.util.Collection;
 
+import org.hbird.transport.commons.data.GenericPayload;
 import org.hbird.transport.commons.util.BitSetUtility;
 import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
@@ -81,7 +82,7 @@ public class PayloadCodecTest {
 		String bitSetString = SCID_VALUE_1_AS_STRING + FUEL_VALUE_3814_AS_STRING + LASER_TEMP_94528016102_AS_STRING;
 		BitSet rawIn = BitSetUtility.stringToBitSet(bitSetString, true, true);
 
-		ParameterGroup actual = codec.decode(rawIn, null);
+		ParameterGroup actual = codec.decode(rawIn, MockSpaceSystemModel.INTEGER_RESTRICTION_ID);
 
 		// Check the return is a plain parameter, i.e., not a decorated CodecParameter but just the HummingbirdParameter
 		// used as an exchange type.
@@ -149,7 +150,8 @@ public class PayloadCodecTest {
 	}
 
 	private static void encodeAndAssert(final ParameterGroup testGroup, final BitSet expected) {
-		BitSet actual = codec.encodeToBitSet(testGroup);
+		GenericPayload actualGenericPayload = codec.encodeToGenericPayload(testGroup);
+		BitSet actual = BitSetUtility.fromByteArray(actualGenericPayload.payload);
 		assertEquals("Encoded BitSet should match " + expected, expected, actual);
 	}
 

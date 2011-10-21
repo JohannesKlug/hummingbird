@@ -99,7 +99,7 @@
 
 		<ParameterSet>
 			<!-- Virtual Header Field -->
-			<Parameter parameterTypeRef="11bitUInteger" name="CCSDS_APID" />
+			<Parameter parameterTypeRef="11BitUInteger" name="CCSDS_APID" />
 			<!-- Payload starts here -->
 			<Parameter parameterTypeRef="14BitUInteger" name="Air_Pressure_SCP1000" />
 			<Parameter parameterTypeRef="14BitUInteger" name="Air_Pressure_BMP" />

@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import org.apache.commons.lang.StringUtils;
 import org.hbird.transport.commons.data.GenericPayload;
 import org.hbird.transport.commons.util.BitSetUtility;
+import org.hbird.transport.commons.util.BytesUtility;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.NoEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
@@ -31,10 +32,13 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 	private SpaceSystemModel spaceSystemModel = null;
 	private SpaceSystemModel codecAwareSpaceSystemModel = null;
 	private final Map<String, Encoding> encodings;
+	private final Map<String, List<String>> restrictions;
 
+	// FIXME change to accept list of parameter groups instead of entire space szstem model.
 	public InMemoryPayloadCodec(final SpaceSystemModel spaceSystemModel, final Map<String, Encoding> encodings) {
 		this.spaceSystemModel = spaceSystemModel;
 		this.encodings = encodings;
+		this.restrictions = spaceSystemModel.getAllPayloadRestrictions();
 
 		SpaceSystemModelCodecDecorator decorator = new SpaceSystemModelCodecDecorator();
 		try {
@@ -139,7 +143,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 	}
 
 	@Override
-	public BitSet encodeToBitSet(final ParameterGroup parameterGroup) {
+	public GenericPayload encodeToGenericPayload(final ParameterGroup parameterGroup) {
 		BitSet encoded = new BitSet();
 
 		String undecoratedGroupName = parameterGroup.getName();
@@ -151,18 +155,25 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 				decoratedGroup = pg;
 
 				// Integers
-				for (Parameter<Integer> undecoratedParameter : parameterGroup.getIntegerParameters().values()) {
-					for (Parameter<Integer> decoratedParameter : pg.getIntegerParameters().values()) {
-						if (StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
-							decoratedParameter.setValue(undecoratedParameter.getValue());
+				Map<String, Parameter<Integer>> integerParameters = parameterGroup.getIntegerParameters();
+				if (integerParameters != null) {
+					for (Parameter<Integer> undecoratedParameter : integerParameters.values()) {
+						for (Parameter<Integer> decoratedParameter : pg.getIntegerParameters().values()) {
+							if (StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
+								decoratedParameter.setValue(undecoratedParameter.getValue());
+							}
 						}
 					}
 				}
+				
 				// Longs
-				for (Parameter<Long> undecoratedParameter : parameterGroup.getLongParameters().values()) {
-					for (Parameter<Long> decoratedParameter : pg.getLongParameters().values()) {
-						if (StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
-							decoratedParameter.setValue(undecoratedParameter.getValue());
+				Map<String, Parameter<Long>> longParameters = parameterGroup.getLongParameters();
+				if (longParameters != null) {
+					for (Parameter<Long> undecoratedParameter : longParameters.values()) {
+						for (Parameter<Long> decoratedParameter : pg.getLongParameters().values()) {
+							if (StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
+								decoratedParameter.setValue(undecoratedParameter.getValue());
+							}
 						}
 					}
 				}
@@ -179,6 +190,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		int count = 0;
 		int offset = 0;
 		int previousSize = 0;
+		int totalSize = 0;
 		for (Parameter<?> p : decoratedGroup.getAllParameters().values()) {
 			LOG.debug("Encoding parameter " + p.getName());
 			if (count != 0) {
@@ -187,10 +199,22 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 			Encoding enc = spaceSystemModel.getEncodings().get(p.getQualifiedName());
 			((CodecParameter<?>) p).encodeToBitSet(encoded, offset);
 			previousSize = enc.getSizeInBits();
+			totalSize += enc.getSizeInBits();
 			count++;
 		}
 
-		return encoded;
+		byte[] encodedBytes = BitSetUtility.toByteArray(encoded, totalSize);
+		List<String> layoutIdList = restrictions.get(parameterGroup.getQualifiedName());
+		String layoutId = "";
+		if (layoutIdList != null) {
+			layoutId = layoutIdList.get(0);
+		}
+		if (encodedBytes == null) {
+			LOG.error("byte array is null!");
+		}
+		
+		GenericPayload encodedGroup = new GenericPayload(encodedBytes, layoutId); // FIXME this is crap, says Mark.
+		return encodedGroup;
 	}
 
 	private Encoding findEncoding(final String qualifiedName) throws NoEncodingException {
