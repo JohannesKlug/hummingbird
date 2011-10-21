@@ -9,6 +9,10 @@ public class ParameterGroupChecker {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ParameterGroupChecker.class);
 	public static void checkParameterGroup(ParameterGroup pg) {
+		if (pg == null) {
+			LOG.error("Received a null pg.");
+			System.exit(1);
+		}
 		for (Parameter<?> parameter : pg.getAllParameters().values()) {
 			LOG.debug(parameter.getName() + ": " + parameter.getValue());
 		}
