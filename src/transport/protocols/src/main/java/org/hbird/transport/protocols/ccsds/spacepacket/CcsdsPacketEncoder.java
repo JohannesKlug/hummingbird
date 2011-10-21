@@ -40,6 +40,9 @@ public class CcsdsPacketEncoder {
 	// 16 bits
 	// packet data length - calculated in the encode() function
 	
+	public CcsdsPacketEncoder() {
+		this(CcsdsPacketType.TM);
+	}
 	
 	public CcsdsPacketEncoder(CcsdsPacketType type) {
 		if (type == CcsdsPacketType.TM) {
