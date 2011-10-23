@@ -61,7 +61,7 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("DefaultParameter [name=");
+		builder.append("HummingbirdParameter [name=");
 		builder.append(name);
 		builder.append(", value=");
 		builder.append(value);

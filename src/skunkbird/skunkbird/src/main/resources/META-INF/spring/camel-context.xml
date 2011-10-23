@@ -15,10 +15,13 @@
 	
 	<bean id="packetDecoder" class="org.hbird.transport.protocols.ccsds.spacepacket.CcsdsPacketDecoder" />
 	
-	<bean id="frameDecoder" class="org.hbird.transport.protocols.ccsds.transferframe.CcsdsFrameDecoder">
-		<constructor-arg><value>30</value></constructor-arg>
+	<!-- Packet Encoder -->
+	<bean id="packetEncoder" class="org.hbird.transport.protocols.ccsds.spacepacket.CcsdsPacketEncoder">
 	</bean>
 	
+	<bean id="frameDecoder" class="org.hbird.transport.protocols.ccsds.transferframe.CcsdsFrameDecoder">
+		<constructor-arg value="30"></constructor-arg>
+	</bean>
 
 	<bean id="publisher" class="org.hbird.spacesystempublisher.publishing.InMemorySpaceSystemPublisher">
 		<property name="model" ref="ssmodel"></property>
@@ -147,6 +150,20 @@
 				</camel:split>
 			</camel:route>
 			
+		
+		<camel:route id="Thunderbird-recorded-tm">
+			<camel:from uri="file:C:/Users/mark/Rocket/flight-1?moveFailed=./badFrames/${file:name.noext}&amp;sortBy=${file:name}"></camel:from>
+			<camel:to uri="bean:frameDecoder?method=decode"></camel:to>
+			<camel:split>
+				<camel:method ref="packetDecoder" method="decode"/>
+				<camel:convertBodyTo type="org.hbird.transport.commons.data.GenericPayload" />
+				<camel:to uri="bean:payload-codec?method=decode" />
+				<camel:split>
+					<camel:simple>${body.getAllParameters().values()}</camel:simple>
+					<camel:to uri="activemq:decodedTelemetryPayloads?jmsMessageType=Object" />
+				</camel:split>
+			</camel:split>
+		</camel:route>
 		
 	</camel:camelContext>
 

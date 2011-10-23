@@ -13,6 +13,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.hbird.transport</groupId>
 	<artifactId>xtce</artifactId>
+	<packaging>bundle</packaging>
 	<name>XTCE</name>
 
 	<build>
