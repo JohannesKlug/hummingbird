@@ -67,11 +67,7 @@
 <!-- 	</task:scheduled-tasks> -->
 
 <!-- 	<task:scheduler id="simScheduler" pool-size="2" /> -->
-	
-	
-	<!-- Packet Encoder -->
-	<bean id="packetEncoder" class="org.hbird.transport.protocols.ccsds.spacepacket.CcsdsPacketEncoder">
-	</bean>
+
 	
 	<!-- Calibrator -->
 	<bean id="calibrator" class="org.hbird.business.calibration.PolynomialCalibrator" />
@@ -140,15 +136,15 @@
 <!-- 		</camel:route> -->
 
 
-			<camel:route>
-				<camel:from uri="file:/tmp/rocket/1.decode/30/?noop=true"/>
-				<camel:to uri="bean:frameDecoder?method=decode" />
-				<camel:split><camel:method ref="packetDecoder" method="decode"/>
-					<camel:convertBodyTo type="org.hbird.transport.commons.data.GenericPayload" />
-					<camel:to uri="bean:payload-codec?method=decode" />
-					<camel:to uri="bean:parameterChecker" />
-				</camel:split>
-			</camel:route>
+<!-- 			<camel:route> -->
+<!-- 				<camel:from uri="file:/tmp/rocket/1.decode/30/?noop=true"/> -->
+<!-- 				<camel:to uri="bean:frameDecoder?method=decode" /> -->
+<!-- 				<camel:split><camel:method ref="packetDecoder" method="decode"/> -->
+<!-- 					<camel:convertBodyTo type="org.hbird.transport.commons.data.GenericPayload" /> -->
+<!-- 					<camel:to uri="bean:payload-codec?method=decode" /> -->
+<!-- 					<camel:to uri="bean:parameterChecker" /> -->
+<!-- 				</camel:split> -->
+<!-- 			</camel:route> -->
 			
 		
 		<camel:route id="Thunderbird-recorded-tm">
