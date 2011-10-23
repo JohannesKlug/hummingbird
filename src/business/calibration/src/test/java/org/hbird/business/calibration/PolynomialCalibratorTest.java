@@ -37,9 +37,32 @@ public class PolynomialCalibratorTest {
 		// x = 3
 		// y = 63
 		
-		double expected = (Double) calibratedParameter.getValue();
+		double actual = (Double) calibratedParameter.getValue();
 		
-		assertEquals(63d, expected, 0.00001d);
+		assertEquals(63d, actual, 0.00001d);
+		
+	}
+	
+	public void testDivideByTen() {
+		Map<String, List<Double>> calibrationsMap = new HashMap<String, List<Double>>();
+		
+		List<Double> polynomials = new ArrayList<Double>();
+		// y = +0 +0.1x
+		polynomials.add(0d);
+		polynomials.add(0.1d);
+		
+		calibrationsMap.put("Test.TestParam", polynomials);
+		
+		PolynomialCalibrator calibrator = new PolynomialCalibrator(calibrationsMap);
+		
+		Parameter<Integer> testParam = new HummingbirdParameter<Integer>("Test.TestParam", "TestParam", "", "");
+		testParam.setValue(3);
+		
+		Parameter<Double> calibratedParameter = calibrator.calibrateParameter(testParam);
+		
+		double actual = (Double) calibratedParameter.getValue();
+		
+		assertEquals(0.3d, actual, 0.00001d);
 		
 	}
 
