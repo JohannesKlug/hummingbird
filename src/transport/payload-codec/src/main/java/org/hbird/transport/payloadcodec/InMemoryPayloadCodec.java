@@ -165,7 +165,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 						}
 					}
 				}
-				
+
 				// Longs
 				Map<String, Parameter<Long>> longParameters = parameterGroup.getLongParameters();
 				if (longParameters != null) {
@@ -212,7 +212,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		if (encodedBytes == null) {
 			LOG.error("byte array is null!");
 		}
-		
+
 		GenericPayload encodedGroup = new GenericPayload(encodedBytes, layoutId); // FIXME this is crap, says Mark.
 		return encodedGroup;
 	}
@@ -228,6 +228,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 
 	@Override
 	public ParameterGroup decode(final GenericPayload payload) throws UnknownParameterGroupException {
+		LOG.debug("Decoding: " + BytesUtility.decimalDump(payload.payload) + " with payload ID " + payload.layoutIdentifier);
 		return decode(payload.payload, payload.layoutIdentifier);
 	}
 

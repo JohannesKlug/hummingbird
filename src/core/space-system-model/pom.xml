@@ -11,6 +11,7 @@
 
 	<groupId>org.hbird.transport</groupId>
 	<artifactId>space-system-model</artifactId>
+	<packaging>bundle</packaging>
 	<name>space-system-model</name>
 	<url>http://maven.apache.org</url>
 
@@ -35,14 +36,8 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							org.hbird.transport.spacesystemmodel*,
-							org.hbird.transport.parameters*,
-							org.hbird.transport.exceptions*
+							org.hbird.transport.spacesystemmodel.*,
 						</Export-Package>
-						<Private-Package>
-							org.hbird,
-							org.hbird.transport.spacesystemmodel.testsupport,
-						</Private-Package>
 					</instructions>
 				</configuration>
 			</plugin>

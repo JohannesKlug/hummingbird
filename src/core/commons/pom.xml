@@ -10,6 +10,7 @@
 
 	<groupId>org.hbird.transport</groupId>
 	<artifactId>commons</artifactId>
+	<packaging>bundle</packaging>
 	<name>commons</name>
 
 	<build>
@@ -31,8 +32,6 @@
 					<instructions>
 						<Export-Package>
 							org.hbird.transport.*,
-							org.hbird.transport.util*,
-							org.hbird.transport.util.exceptions*
 						</Export-Package>
 					</instructions>
 				</configuration>

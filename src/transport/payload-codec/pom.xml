@@ -12,6 +12,7 @@
 
 	<groupId>org.hbird.transport</groupId>
 	<artifactId>payload-codec</artifactId>
+	<packaging>bundle</packaging>
 	<name>Generic Payload Codec</name>
 	<url>http://maven.apache.org</url>
 
@@ -29,6 +30,27 @@
 					<mappingId>generic</mappingId>
 					<configurators></configurators>
 					<mojoExecutions></mojoExecutions>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<instructions>
+						<Export-Package>
+							org.hbird.transport.payloadcodec.*,
+						</Export-Package>
+					</instructions>
 				</configuration>
 			</plugin>
 		</plugins>
