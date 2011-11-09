@@ -5,7 +5,7 @@
 
 	<parent>
 		<artifactId>hummingbird-core</artifactId>
-		<groupId>org.hbird</groupId>
+		<groupId>org.hbird.core</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
