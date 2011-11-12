@@ -82,7 +82,7 @@ public class RocketFrameDispatcherTest {
 			for (byte[] frame : frames) {
 				FramePayload framePayload = frameDispatcher.decode(frame);
 				receivedFramePayloads.add(framePayload);
-				List<PacketPayload> payloads = packetDispatcher.decode(new FramePayload(framePayload.payload, framePayload.isNextFrame));
+				List<PacketPayload> payloads = packetDispatcher.decode(new FramePayload(framePayload.payload, framePayload.isNextFrame, 0));
 				
 				receivedPacketPayloads.addAll(payloads);
 				for (byte currentByte : payloads.get(0).payload) {

@@ -106,7 +106,7 @@ public class CcsdsPacketDecoder {
 			
 			// pass an empty byte array to ourselves.
 			// Recursion, yeah!
-			List<PacketPayload> morePayloads = this.decode(new FramePayload(ArrayUtils.EMPTY_BYTE_ARRAY, true));
+			List<PacketPayload> morePayloads = this.decode(new FramePayload(ArrayUtils.EMPTY_BYTE_ARRAY, true, System.currentTimeMillis()));
 			if (morePayloads != null) {
 				payloads.addAll(morePayloads);
 			}

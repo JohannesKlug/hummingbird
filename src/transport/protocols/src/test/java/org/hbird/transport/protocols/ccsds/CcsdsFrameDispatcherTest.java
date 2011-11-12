@@ -93,7 +93,7 @@ public class CcsdsFrameDispatcherTest {
 			for (byte[] frame : frames) {
 				FramePayload framePayload = frameDispatcher.decode(frame);
 				receivedFramePayloads.add(framePayload);
-				receivedPacketPayloads.addAll(packetDispatcher.decode(new FramePayload(framePayload.payload, framePayload.isNextFrame)));
+				receivedPacketPayloads.addAll(packetDispatcher.decode(new FramePayload(framePayload.payload, framePayload.isNextFrame, 0)));
 			}
 		}
 		

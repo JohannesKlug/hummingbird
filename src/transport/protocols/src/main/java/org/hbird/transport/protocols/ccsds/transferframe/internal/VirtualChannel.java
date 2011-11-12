@@ -35,7 +35,7 @@ public class VirtualChannel {
 		byte[] goodPayload = ArrayUtils.subarray(payload, payloadOffset, payload.length);
 		LOG.debug("Passing payload of length " + goodPayload.length);
 		
-		return new CcsdsFramePayload(spacecraftId, id, goodPayload, isNext);
+		return new CcsdsFramePayload(spacecraftId, id, goodPayload, isNext, System.currentTimeMillis());
 	}
 	
 	public int getId() {

@@ -24,7 +24,7 @@ public class DecoderTest {
 		PacketPayload packetPayload = new PacketPayload(dummyApid, new byte[dummyPayloadLength]);
 		byte[] encodedPacket = encoder.encode(packetPayload); 
 		
-		CcsdsFramePayload framePayload = new CcsdsFramePayload(0,0,encodedPacket, true);
+		CcsdsFramePayload framePayload = new CcsdsFramePayload(0,0,encodedPacket, true, 0);
 		
 		List<PacketPayload> decodedPayloads = decoder.decode(framePayload);
 		
@@ -36,7 +36,7 @@ public class DecoderTest {
 	@Test
 	public void decodezeroPackets() throws Exception {
 		
-		CcsdsFramePayload framePayload = new CcsdsFramePayload(0,0,new byte[0], true);
+		CcsdsFramePayload framePayload = new CcsdsFramePayload(0,0,new byte[0], true, 0);
 		
 		assertNull(decoder.decode(framePayload));
 	}
@@ -51,7 +51,7 @@ public class DecoderTest {
 		
 		byte[] twoPackets = ArrayUtils.addAll(encodedPacket, encodedPacket);
 		
-		CcsdsFramePayload framePayload = new CcsdsFramePayload(0,0,twoPackets, true);
+		CcsdsFramePayload framePayload = new CcsdsFramePayload(0,0,twoPackets, true, 0);
 		
 		assertEquals(2, decoder.decode(framePayload).size());
 	}
@@ -68,7 +68,7 @@ public class DecoderTest {
 		
 		byte[] threePackets = ArrayUtils.addAll(twoPackets, encodedPacket);
 		
-		CcsdsFramePayload framePayload = new CcsdsFramePayload(0,0,threePackets, true);
+		CcsdsFramePayload framePayload = new CcsdsFramePayload(0,0,threePackets, true, 0);
 		
 		assertEquals(3, decoder.decode(framePayload).size());
 	}

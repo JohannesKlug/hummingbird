@@ -11,12 +11,12 @@ public class ToFramePayloadConverter {
 	@Converter
 	public static FramePayload convertToFramePayload(String binaryString) throws InvalidBinaryStringException {
 		byte[] payload = BytesUtility.binaryStringToByteArray(binaryString);
-		FramePayload framePayload = new FramePayload(payload, false);
+		FramePayload framePayload = new FramePayload(payload, false, 0); // TODO add a converter that handles timestamps!
 		return framePayload;
 	}
 	
 	@Converter
 	public static FramePayload convertFromByteArray(byte[] payload) {
-		return new FramePayload(payload, false);
+		return new FramePayload(payload, false, 0); // TODO add a converter that handles timestamps!
 	}
 }
