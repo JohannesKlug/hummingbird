@@ -82,7 +82,7 @@ public class PayloadCodecTest {
 		String bitSetString = SCID_VALUE_1_AS_STRING + FUEL_VALUE_3814_AS_STRING + LASER_TEMP_94528016102_AS_STRING;
 		BitSet rawIn = BitSetUtility.stringToBitSet(bitSetString, true, true);
 
-		ParameterGroup actual = codec.decode(rawIn, MockSpaceSystemModel.INTEGER_RESTRICTION_ID);
+		ParameterGroup actual = codec.decode(rawIn, MockSpaceSystemModel.INTEGER_RESTRICTION_ID, 0);
 
 		// Check the return is a plain parameter, i.e., not a decorated CodecParameter but just the HummingbirdParameter
 		// used as an exchange type.
@@ -198,7 +198,7 @@ public class PayloadCodecTest {
 		String bitSetString = SCID_VALUE_1_AS_STRING + FUEL_VALUE_3814_AS_STRING + LASER_TEMP_94528016102_AS_STRING;
 		BitSet rawIn = BitSetUtility.stringToBitSet(bitSetString, true, true);
 
-		ParameterGroup actual = codec.decode(rawIn, MockSpaceSystemModel.INTEGER_RESTRICTION_ID);
+		ParameterGroup actual = codec.decode(rawIn, MockSpaceSystemModel.INTEGER_RESTRICTION_ID, 0);
 		
 		assertNotNull(actual);
 		

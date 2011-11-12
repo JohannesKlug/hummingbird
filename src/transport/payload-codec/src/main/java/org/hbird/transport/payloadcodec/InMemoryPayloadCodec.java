@@ -79,12 +79,12 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 	}
 
 	@Override
-	public ParameterGroup decode(final byte[] payload, final String payloadLayoutId) throws UnknownParameterGroupException {
-		return decode(BitSetUtility.fromByteArray(payload), payloadLayoutId);
+	public ParameterGroup decode(final byte[] payload, final String payloadLayoutId, long timeStamp) throws UnknownParameterGroupException {
+		return decode(BitSetUtility.fromByteArray(payload), payloadLayoutId, timeStamp);
 	}
 
 	@Override
-	public ParameterGroup decode(final BitSet payload, final String payloadLayoutId) throws UnknownParameterGroupException {
+	public ParameterGroup decode(final BitSet payload, final String payloadLayoutId, long timeStamp) throws UnknownParameterGroupException {
 		ParameterGroup decodedGroup = null;
 		if (payloadLayoutId == null) {
 			// no restrictions, decode all everything!
@@ -230,7 +230,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 	@Override
 	public ParameterGroup decode(final GenericPayload payload) throws UnknownParameterGroupException {
 		LOG.debug("Decoding: " + BytesUtility.decimalDump(payload.payload) + " with payload ID " + payload.layoutIdentifier);
-		return decode(payload.payload, payload.layoutIdentifier);
+		return decode(payload.payload, payload.layoutIdentifier, payload.timeStamp);
 	}
 
 }

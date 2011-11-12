@@ -10,6 +10,8 @@ import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 public interface TmTcGroup extends SpaceSystemModelItem {
 
 	String getName();
+	
+	long getTimeStamp();
 
 	Map<String, Parameter<?>> getAllParameters();
 

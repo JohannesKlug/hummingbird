@@ -23,6 +23,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	private final String name;
 	private final String shortDescription;
 	private final String longDescription;
+	private long timeStamp = 0;
 
 	private final Map<String, Parameter<?>> parameters = new LinkedHashMap<String, Parameter<?>>();
 	private Map<String, Parameter<Integer>> integerParameters;
@@ -68,6 +69,15 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	@Override
 	public String getLongDescription() {
 		return this.longDescription;
+	}
+	
+	public void setTimeStamp(long timeStamp) {
+		this.timeStamp = timeStamp;
+	}
+	
+	@Override
+	public long getTimeStamp() {
+		return this.timeStamp;
 	}
 
 	@Override
