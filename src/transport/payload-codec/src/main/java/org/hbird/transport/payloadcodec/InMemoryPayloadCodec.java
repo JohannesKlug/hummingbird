@@ -102,6 +102,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 				}
 			}
 		}
+		decodedGroup.setTimeStamp(timeStamp);
 		return decodedGroup;
 	}
 

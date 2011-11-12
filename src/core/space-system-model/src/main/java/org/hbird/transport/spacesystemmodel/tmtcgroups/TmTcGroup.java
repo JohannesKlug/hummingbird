@@ -12,6 +12,7 @@ public interface TmTcGroup extends SpaceSystemModelItem {
 	String getName();
 	
 	long getTimeStamp();
+	void setTimeStamp(long timeStamp);
 
 	Map<String, Parameter<?>> getAllParameters();
 
