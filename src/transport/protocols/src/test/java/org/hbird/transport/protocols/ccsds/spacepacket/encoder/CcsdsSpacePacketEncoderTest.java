@@ -16,7 +16,7 @@ public class CcsdsSpacePacketEncoderTest {
 	
 	@Test
 	public void testPacketLength() throws Exception {
-		PacketPayload payload  = new PacketPayload(0, new byte[5]);
+		PacketPayload payload  = new PacketPayload(0, new byte[5], 0);
 		byte[] actual = encoder.encode(payload);
 		assertEquals(5+6,actual.length);
 	}
@@ -24,28 +24,28 @@ public class CcsdsSpacePacketEncoderTest {
 	
 	@Test(expected=InvalidPayloadLengthExeption.class)
 	public void testPacketLength0() throws Exception {
-		PacketPayload payload  = new PacketPayload(0, new byte[0]);
+		PacketPayload payload  = new PacketPayload(0, new byte[0], 0);
 		encoder.encode(payload);
 		fail();
 	}
 	
 	@Test
 	public void testPacketLength65536() throws Exception {
-		PacketPayload payload  = new PacketPayload(0, new byte[65536]);
+		PacketPayload payload  = new PacketPayload(0, new byte[65536], 0);
 		byte[] actual = encoder.encode(payload);
 		assertEquals(65536+6,actual.length);
 	}
 	
 	@Test(expected=InvalidPayloadLengthExeption.class)
 	public void testPacketLength65537() throws Exception {
-		PacketPayload payload  = new PacketPayload(0, new byte[65537]);
+		PacketPayload payload  = new PacketPayload(0, new byte[65537], 0);
 		encoder.encode(payload);
 		fail();
 	}
 	
 	@Test(expected=PayloadNullException.class)
 	public void testPacketPayloadPayloadNull() throws Exception {
-		PacketPayload payload  = new PacketPayload(0, null);
+		PacketPayload payload  = new PacketPayload(0, null, 0);
 		encoder.encode(payload);
 		fail();
 	}
@@ -60,7 +60,7 @@ public class CcsdsSpacePacketEncoderTest {
 	@Test
 	public void typeFieldTestTM() throws Exception {
 		CcsdsPacketEncoder encoder = new CcsdsPacketEncoder(CcsdsPacketType.TM);
-		PacketPayload payload  = new PacketPayload(0, new byte[5]);
+		PacketPayload payload  = new PacketPayload(0, new byte[5], 0);
 		byte[] result = encoder.encode(payload);
 		assertEquals(0x00,result[0]&0x10);
 	}
@@ -68,21 +68,21 @@ public class CcsdsSpacePacketEncoderTest {
 	@Test
 	public void typeFieldTestTC() throws Exception {
 		CcsdsPacketEncoder encoder = new CcsdsPacketEncoder(CcsdsPacketType.TC);
-		PacketPayload payload  = new PacketPayload(0, new byte[5]);
+		PacketPayload payload  = new PacketPayload(0, new byte[5], 0);
 		byte[] result = encoder.encode(payload);
 		assertEquals(0x10,result[0]&0x10);
 	}
 	
 	@Test(expected=InvalidApIdException.class)
 	public void apidTestMinus1() throws Exception {
-		PacketPayload payload  = new PacketPayload(-1, new byte[5]);
+		PacketPayload payload  = new PacketPayload(-1, new byte[5], 0);
 		encoder.encode(payload);
 		fail();
 	}
 	
 	@Test
 	public void apidTest0() throws Exception {
-		PacketPayload payload  = new PacketPayload(0, new byte[5]);
+		PacketPayload payload  = new PacketPayload(0, new byte[5], 0);
 		byte[] result = encoder.encode(payload);
 		
 		assertEquals(0x00,result[0]&0x07);
@@ -91,7 +91,7 @@ public class CcsdsSpacePacketEncoderTest {
 	
 	@Test
 	public void apidTest1025() throws Exception {
-		PacketPayload payload  = new PacketPayload(1025, new byte[5]);
+		PacketPayload payload  = new PacketPayload(1025, new byte[5], 0);
 		byte[] result = encoder.encode(payload);
 		
 		assertEquals(0x04,result[0]&0x07);
@@ -100,7 +100,7 @@ public class CcsdsSpacePacketEncoderTest {
 	
 	@Test
 	public void apidTest2047() throws Exception {
-		PacketPayload payload  = new PacketPayload(2047, new byte[5]);
+		PacketPayload payload  = new PacketPayload(2047, new byte[5], 0);
 		byte[] result = encoder.encode(payload);
 		
 		assertEquals(0x07,result[0]&0x07);
@@ -109,14 +109,14 @@ public class CcsdsSpacePacketEncoderTest {
 	
 	@Test(expected=InvalidApIdException.class)
 	public void apidTest2048() throws Exception {
-		PacketPayload payload  = new PacketPayload(2048, new byte[5]);
+		PacketPayload payload  = new PacketPayload(2048, new byte[5], 0);
 		encoder.encode(payload);
 		fail();
 	}
 	
 	@Test
 	public void packetDataLength1() throws Exception {
-		PacketPayload payload  = new PacketPayload(0, new byte[1]);
+		PacketPayload payload  = new PacketPayload(0, new byte[1], 0);
 		
 		byte[] result = encoder.encode(payload);
 		
@@ -126,7 +126,7 @@ public class CcsdsSpacePacketEncoderTest {
 	
 	@Test
 	public void packetDataLength65536() throws Exception {
-		PacketPayload payload  = new PacketPayload(0, new byte[65536]);
+		PacketPayload payload  = new PacketPayload(0, new byte[65536], 0);
 		
 		byte[] result = encoder.encode(payload);
 		
@@ -136,7 +136,7 @@ public class CcsdsSpacePacketEncoderTest {
 	
 	@Test
 	public void packetDataLength32770() throws Exception {
-		PacketPayload payload  = new PacketPayload(0, new byte[32770]);
+		PacketPayload payload  = new PacketPayload(0, new byte[32770], 0);
 		
 		byte[] result = encoder.encode(payload);
 		

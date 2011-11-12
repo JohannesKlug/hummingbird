@@ -95,7 +95,7 @@ public class CcsdsPacketDecoder {
 		byte[] packetPayload = ArrayUtils.subarray(packetBuffer, payloadOffset, payloadEnd);
 		
 		// add the current payload
-		payloads.add(new PacketPayload(apid, packetPayload));
+		payloads.add(new PacketPayload(apid, packetPayload, framePayload.timeStamp));
 		
 		
 		if (packetBuffer.length >= (payloadEnd)) {

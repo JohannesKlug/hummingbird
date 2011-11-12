@@ -21,7 +21,7 @@ public class DecoderTest {
 		int dummyApid = 123;
 		int dummyPayloadLength = 35;
 		
-		PacketPayload packetPayload = new PacketPayload(dummyApid, new byte[dummyPayloadLength]);
+		PacketPayload packetPayload = new PacketPayload(dummyApid, new byte[dummyPayloadLength], 0);
 		byte[] encodedPacket = encoder.encode(packetPayload); 
 		
 		CcsdsFramePayload framePayload = new CcsdsFramePayload(0,0,encodedPacket, true, 0);
@@ -46,7 +46,7 @@ public class DecoderTest {
 		
 		decoder = new CcsdsPacketDecoder();
 		
-		PacketPayload packetPayload = new PacketPayload(0, new byte[35]);
+		PacketPayload packetPayload = new PacketPayload(0, new byte[35], 0);
 		byte[] encodedPacket = encoder.encode(packetPayload);
 		
 		byte[] twoPackets = ArrayUtils.addAll(encodedPacket, encodedPacket);
@@ -61,7 +61,7 @@ public class DecoderTest {
 		
 		decoder = new CcsdsPacketDecoder();
 		
-		PacketPayload packetPayload = new PacketPayload(0, new byte[35]);
+		PacketPayload packetPayload = new PacketPayload(0, new byte[35], 0);
 		byte[] encodedPacket = encoder.encode(packetPayload);
 		
 		byte[] twoPackets = ArrayUtils.addAll(encodedPacket, encodedPacket);

@@ -9,7 +9,7 @@ public class ToGenericPayloadConverter {
 	
 	@Converter
 	public static GenericPayload fromCcsdsPacketPayload(PacketPayload payload) {
-		return new GenericPayload(payload.payload, String.valueOf(payload.apid));
+		return new GenericPayload(payload.payload, String.valueOf(payload.apid), payload.timeStamp);
 	}
 	
 	@Converter
@@ -22,7 +22,7 @@ public class ToGenericPayloadConverter {
 			catch (NumberFormatException e) {
 				return null;
 			}
-			return new PacketPayload(apid, payload.payload);
+			return new PacketPayload(apid, payload.payload, payload.timeStamp);
 		}
 		return null; 
 	}

@@ -213,7 +213,8 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 			LOG.error("byte array is null!");
 		}
 
-		GenericPayload encodedGroup = new GenericPayload(encodedBytes, layoutId); // FIXME this is crap, says Mark.
+		// GenericPayload encodedGroup = new GenericPayload(encodedBytes, layoutId); // FIXME this is crap, says Mark.
+		GenericPayload encodedGroup = new GenericPayload(encodedBytes, layoutId, System.currentTimeMillis()); // FIXME this is crap, says Mark. JK 2011-11-12: added timeStamp. Can't remember why this is crap?
 		return encodedGroup;
 	}
 
