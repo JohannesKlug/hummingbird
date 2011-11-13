@@ -70,6 +70,7 @@
 					<instructions>
 						<Export-Package>
 							org.hbird.transport.xtce,
+							org.hbird.transport.xtce.utils,
 							org.hbird.transport.xtce.exceptions
 						</Export-Package>
 						<Private-Package>
