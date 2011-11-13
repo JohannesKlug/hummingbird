@@ -61,7 +61,6 @@
 		<constructor-arg ref="ssmodel" ></constructor-arg>
 	</bean>
 	
-	
 <!-- 	<task:scheduled-tasks scheduler="simScheduler"> -->
 <!-- 		<task:scheduled ref="tmGenerator" method="generateGroup" fixed-rate="10" /> -->
 <!-- 	</task:scheduled-tasks> -->
@@ -71,6 +70,10 @@
 	
 	<!-- Calibrator -->
 	<bean id="calibrator" class="org.hbird.business.calibration.PolynomialCalibrator" />
+	
+	<bean id="aggregatorStrategy" class="org.apache.camel.processor.aggregate.GroupedExchangeAggregationStrategy"/>
+	
+	<bean id="multiListTypeConverter" class="org.hbird.transport.spacesystemmodel.typeconverters.ParameterGroupListToMultiList"/>
 	
 	<camel:camelContext>
 		<!-- Runs routes defined in Java in this package -->
@@ -148,16 +151,20 @@
 			
 		
 		<camel:route id="Thunderbird-recorded-tm">
-			<camel:from uri="file:C:/Users/mark/Rocket/flight-1?moveFailed=./badFrames/${file:name.noext}&amp;sortBy=${file:name}"></camel:from>
+			<camel:from uri="file:/tmp/flight-1-rename/?moveFailed=./badFrames/${file:name.noext}&amp;sortBy=${file:name};noop=true"></camel:from>
 			<camel:to uri="bean:frameDecoder?method=decode"></camel:to>
 			<camel:split>
 				<camel:method ref="packetDecoder" method="decode"/>
 				<camel:convertBodyTo type="org.hbird.transport.commons.data.GenericPayload" />
 				<camel:to uri="bean:payload-codec?method=decode" />
-				<camel:split>
-					<camel:simple>${body.getAllParameters().values()}</camel:simple>
-					<camel:to uri="activemq:decodedTelemetryPayloads?jmsMessageType=Object" />
-				</camel:split>
+				<camel:aggregate strategyRef="aggregatorStrategy" completionTimeout="10000">
+				 	<camel:correlationExpression>
+                		<camel:simple>${body} != null</camel:simple>
+            		</camel:correlationExpression>
+            		<camel:to uri="bean:multiListTypeConverter" />
+            		<camel:marshal><camel:csv/></camel:marshal>
+            		<camel:to uri="file:/tmp/thunderbird-tm.csv" />
+				</camel:aggregate>
 			</camel:split>
 		</camel:route>
 		
