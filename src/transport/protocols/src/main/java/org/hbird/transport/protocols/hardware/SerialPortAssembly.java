@@ -30,10 +30,10 @@ public class SerialPortAssembly implements Observer {
 
 	// Default: use /dev/ttyUSB0 and CCSDS ASM for frame sync
 	public SerialPortAssembly() {
-		this("/dev/ttyUSB0", new CcsdsAsm());
+		this("COM5", new CcsdsAsm());
 	}
 
-	public SerialPortAssembly(String commPortId, final ObservableFrameSynchroniser sync) {
+	public SerialPortAssembly(final String commPortId, final ObservableFrameSynchroniser sync) {
 		try {
 			driver = new SerialPortDriver(commPortId);
 			sync.addObserver(this);
@@ -71,7 +71,7 @@ public class SerialPortAssembly implements Observer {
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(final Observable o, final Object arg) {
 		receivedBytes = (byte[]) arg;
 		producer.sendBody(receivedBytes);
 		LOG.debug("Received " + receivedBytes.length + " bytes:");

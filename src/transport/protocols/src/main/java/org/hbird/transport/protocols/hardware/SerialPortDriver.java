@@ -8,13 +8,14 @@ import gnu.io.UnsupportedCommOperationException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Enumeration;
 
 public class SerialPortDriver {
-	
-	private SerialPort serialPort;
 
-	public SerialPortDriver(String portIdentifier) throws NoSuchPortException, PortInUseException, UnsupportedCommOperationException {
+	private final SerialPort serialPort;
+
+	public SerialPortDriver(final String portIdentifier) throws NoSuchPortException, PortInUseException, UnsupportedCommOperationException {
 
 		Enumeration<?> pList = CommPortIdentifier.getPortIdentifiers();
 
@@ -37,20 +38,27 @@ public class SerialPortDriver {
 		cpi = CommPortIdentifier.getPortIdentifier(portIdentifier);
 
 		serialPort = (SerialPort) cpi.open("Hummingbird", 2000);
-		serialPort.setSerialPortParams(57600, 
-			       SerialPort.DATABITS_8, 
-			       SerialPort.STOPBITS_1, 
-			       SerialPort.PARITY_NONE);
-
-
+		serialPort.setSerialPortParams(57600,
+			       					   SerialPort.DATABITS_8,
+			       					   SerialPort.STOPBITS_1,
+			       					   SerialPort.PARITY_NONE);
+		System.out.println(serialPort.getName() + " is open");
 	}
 
 	public InputStream getInputStream() throws IOException {
 		return serialPort.getInputStream();
 	}
-	
+
+	public OutputStream getOutputStream() throws IOException {
+		return serialPort.getOutputStream();
+	}
+
 	public void closePort() {
 		serialPort.close();
+	}
+
+	public SerialPort getSerialPort() {
+		return serialPort;
 	}
 
 }

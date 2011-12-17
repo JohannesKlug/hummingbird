@@ -23,7 +23,8 @@ public class VirtualChannel {
 		
 		if (CcsdsFrameDecoder.isNextFrame(lastFrameCount, frameCount)) {
 			isNext = true;
-		} else {
+		} 
+		else {
 			// we received frames out of order
 			// payload before firstHeaderPointer must be thrown away.
 			payloadOffset = firstHeaderPointer;
