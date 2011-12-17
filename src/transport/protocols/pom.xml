@@ -9,7 +9,6 @@
 	<groupId>org.hbird.transport</groupId>
 	<artifactId>protocols</artifactId>
 	<name>Protocols</name>
-
 	<description>All data transmission protocol implementation are contained herein.</description>
 	<build>
 		<plugins>
@@ -27,12 +26,9 @@
 				</executions>
 				<configuration>
 					<instructions>
-						<Export-Package>
-							org.hbird.transport.protocols
+						<Export-Package> org.hbird.transport.protocols 
 						</Export-Package>
-						<Private-Package>
-							org.hbird.transport,
-							org.slf4j.*
+						<Private-Package> org.hbird.transport, org.slf4j.* 
 						</Private-Package>
 					</instructions>
 				</configuration>
@@ -42,34 +38,15 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${surefire-plugin.version}</version>
 				<configuration>
-				<!-- 
-				
-				Setting system properties apparently does not work.
-				
-				This blog post says it should:
-				http://www.buildanddeploy.com/node/17
-				
-				This JIRA entry says it doesn't:
-				http://jira.codehaus.org/browse/SUREFIRE-634?page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel&focusedCommentId=231569#action_231569
-				
-				This is why I chose the argLine option (see below).
-				
-				2010-10-27 Johannes
-				
-					<systemProperties>
-						<property>
-							<name>java.library.path</name>
-							<value>${project.build.directory}/lib/</value>
-						</property>
-					</systemProperties> 
-					
-					-->
-					<argLine>-Djava.library.path=${project.build.directory}/lib/</argLine>
+					<!-- Setting system properties apparently does not work. This blog post says it should: http://www.buildanddeploy.com/node/17 
+						This JIRA entry says it doesn't: http://jira.codehaus.org/browse/SUREFIRE-634?page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel&focusedCommentId=231569#action_231569 
+						This is why I chose the argLine option (see below). 2010-10-27 Johannes <systemProperties> <property> <name>java.library.path</name> 
+						<value>${project.build.directory}/lib/</value> </property> </systemProperties> -->
+					<argLine>-Djava.library.path=${project.build.directory}/rxtx-libs/win-x64/</argLine>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
@@ -78,7 +55,7 @@
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-spring</artifactId>
-			</dependency>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-jms</artifactId>
@@ -96,20 +73,22 @@
 			<groupId>org.rxtx</groupId>
 			<artifactId>rxtx</artifactId>
 			<version>2.1.7</version>
-			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
-                <dependency>
-                        <groupId>junit</groupId>
-                        <artifactId>junit</artifactId>
-                        <version>4.8.2</version>
-                        <type>jar</type>
-                        <scope>test</scope>
-                </dependency>
-                <dependency>
-                	<groupId>org.hbird.transport</groupId>
-                	<artifactId>commons</artifactId>
-                	<version>0.0.1-SNAPSHOT</version>
-                </dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hbird.transport</groupId>
+			<artifactId>commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-mina</artifactId>
+			<version>2.8.1</version>
+		</dependency>
 	</dependencies>
 </project>
