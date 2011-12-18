@@ -1,5 +1,6 @@
 package org.hbird.spacesystempublisher.publishing;
 
+import java.util.List;
 import java.util.Map;
 
 import org.hbird.spacesystempublisher.interfaces.SpaceSystemModelUpdate;
@@ -13,24 +14,9 @@ import org.springframework.stereotype.Service;
 public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 
 	private SpaceSystemModel model;
-//	private SpaceSystemModelFactory spaceSystemFactory;
 
 	public InMemorySpaceSystemPublisher() {
 	}
-
-//	public InMemorySpaceSystemPublisher(final SpaceSystemModelFactory factory, final String spaceSystemDefinitionFile) {
-//		try {
-//			factory.createSpaceSystemModel(spaceSystemDefinitionFile);
-//		}
-//		catch (InvalidParameterTypeException e) {
-//			e.printStackTrace();
-//			System.exit(-1);
-//		}
-//		catch (InvalidSpaceSystemDefinitionException e) {
-//			e.printStackTrace();
-//			System.exit(-1);
-//		}
-//	}
 
 	public InMemorySpaceSystemPublisher(final SpaceSystemModel model) {
 		this.model = model;
@@ -45,14 +31,6 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 	public Map<String, Encoding> getEncodings() {
 		return model.getEncodings();
 	}
-//
-//	public SpaceSystemModelFactory getSpaceSystemFactory() {
-//		return spaceSystemFactory;
-//	}
-//
-//	public void setSpaceSystemFactory(final SpaceSystemModelFactory spaceSystemFactory) {
-//		this.spaceSystemFactory = spaceSystemFactory;
-//	}
 
 	/**
 	 * @return the model
@@ -66,6 +44,11 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 	 */
 	public void setModel(final SpaceSystemModel model) {
 		this.model = model;
+	}
+
+	@Override
+	public Map<String, List<String>> getRestrictions() {
+		return this.model.getAllPayloadRestrictions();
 	}
 
 	@Override
