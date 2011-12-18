@@ -88,7 +88,7 @@
 <!-- 			<camel:convertBodyTo type="org.hbird.transport.protocols.ccsds.transferframe.data.FramePayload" /> -->
 <!-- 			<camel:split> -->
 <!-- 				<camel:method ref="packetDecoder" method="decode"/> -->
-<!-- 				<camel:convertBodyTo type="org.hbird.transport.commons.data.GenericPayload" /> -->
+<!-- 				<camel:convertBodyTo type="org.hbird.core.commons.data.GenericPayload" /> -->
 <!-- 				<camel:to uri="bean:payload-codec?method=decode" /> -->
 <!-- 				<camel:to uri="activemq:decodedTelemetryPayloads" /> -->
 <!-- 				<camel:to uri="bean:calibrator" /> -->
@@ -101,7 +101,7 @@
 <!-- 			<camel:to id="activeMqRawPayloads" uri="activemq:rawPayloads" /> -->
 <!-- 				<camel:convertBodyTo type="org.hbird.transport.protocols.ccsds.transferframe.data.FramePayload" /> -->
 <!-- 				<camel:split><camel:method ref="packetDecoder" method="decode"/> -->
-<!-- 					<camel:convertBodyTo type="org.hbird.transport.commons.data.GenericPayload" /> -->
+<!-- 					<camel:convertBodyTo type="org.hbird.core.commons.data.GenericPayload" /> -->
 <!-- 					<camel:to uri="bean:payload-codec?method=decode" /> -->
 <!-- 					<camel:to uri="bean:parameterChecker" /> -->
 <!-- 				</camel:split> -->
@@ -119,7 +119,7 @@
 <!-- 			<camel:from uri="direct:rawFrames" /> -->
 <!-- 			<camel:to uri="bean:frameDecoder?method=decode" /> -->
 <!-- 			<camel:split><camel:method ref="packetDecoder" method="decode"/> -->
-<!-- 					<camel:convertBodyTo type="org.hbird.transport.commons.data.GenericPayload" /> -->
+<!-- 					<camel:convertBodyTo type="org.hbird.core.commons.data.GenericPayload" /> -->
 <!-- 					<camel:to uri="bean:payload-codec?method=decode" /> -->
 <!-- 					<camel:to uri="activemq:topic:decodedPayload" /> -->
 <!-- 			</camel:split> -->
@@ -143,7 +143,7 @@
 <!-- 				<camel:from uri="file:/tmp/rocket/1.decode/30/?noop=true"/> -->
 <!-- 				<camel:to uri="bean:frameDecoder?method=decode" /> -->
 <!-- 				<camel:split><camel:method ref="packetDecoder" method="decode"/> -->
-<!-- 					<camel:convertBodyTo type="org.hbird.transport.commons.data.GenericPayload" /> -->
+<!-- 					<camel:convertBodyTo type="org.hbird.core.commons.data.GenericPayload" /> -->
 <!-- 					<camel:to uri="bean:payload-codec?method=decode" /> -->
 <!-- 					<camel:to uri="bean:parameterChecker" /> -->
 <!-- 				</camel:split> -->
@@ -155,7 +155,7 @@
 			<camel:to uri="bean:frameDecoder?method=decode"></camel:to>
 			<camel:split>
 				<camel:method ref="packetDecoder" method="decode"/>
-				<camel:convertBodyTo type="org.hbird.transport.commons.data.GenericPayload" />
+				<camel:convertBodyTo type="org.hbird.core.commons.data.GenericPayload" />
 				<camel:to uri="bean:payload-codec?method=decode" />
 				<camel:aggregate strategyRef="aggregatorStrategy" completionTimeout="10000">
 				 	<camel:correlationExpression>

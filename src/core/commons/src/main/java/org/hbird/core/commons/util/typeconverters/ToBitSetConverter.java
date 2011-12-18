@@ -1,10 +1,10 @@
-package org.hbird.transport.commons.util.typeconverters;
+package org.hbird.core.commons.util.typeconverters;
 
 import java.util.BitSet;
 
 import org.apache.camel.Converter;
-import org.hbird.transport.commons.util.BitSetUtility;
-import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
+import org.hbird.core.commons.util.BitSetUtility;
+import org.hbird.core.commons.util.exceptions.BitSetOperationException;
 
 @Converter
 public class ToBitSetConverter {

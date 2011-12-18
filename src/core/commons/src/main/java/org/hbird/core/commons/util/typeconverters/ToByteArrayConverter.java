@@ -1,8 +1,8 @@
-package org.hbird.transport.commons.util.typeconverters;
+package org.hbird.core.commons.util.typeconverters;
 
 import org.apache.camel.Converter;
-import org.hbird.transport.commons.util.BytesUtility;
-import org.hbird.transport.commons.util.exceptions.InvalidBinaryStringException;
+import org.hbird.core.commons.util.BytesUtility;
+import org.hbird.core.commons.util.exceptions.InvalidBinaryStringException;
 
 @Converter
 public class ToByteArrayConverter {

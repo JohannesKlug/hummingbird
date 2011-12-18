@@ -8,9 +8,9 @@ import static org.junit.Assert.assertTrue;
 import java.util.BitSet;
 import java.util.Collection;
 
-import org.hbird.transport.commons.data.GenericPayload;
-import org.hbird.transport.commons.util.BitSetUtility;
-import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
+import org.hbird.core.commons.data.GenericPayload;
+import org.hbird.core.commons.util.BitSetUtility;
+import org.hbird.core.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;

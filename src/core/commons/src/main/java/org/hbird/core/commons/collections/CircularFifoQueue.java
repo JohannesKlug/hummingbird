@@ -1,4 +1,4 @@
-package org.hbird.transport.commons.collections;
+package org.hbird.core.commons.collections;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;

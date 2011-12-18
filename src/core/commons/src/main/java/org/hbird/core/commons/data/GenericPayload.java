@@ -1,4 +1,4 @@
-package org.hbird.transport.commons.data;
+package org.hbird.core.commons.data;
 
 import org.apache.commons.lang.ArrayUtils;
 

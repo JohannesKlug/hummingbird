@@ -1,6 +1,6 @@
-package org.hbird.transport.commons.util;
+package org.hbird.core.commons.util;
 
-import org.hbird.transport.commons.util.exceptions.InvalidBinaryStringException;
+import org.hbird.core.commons.util.exceptions.InvalidBinaryStringException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

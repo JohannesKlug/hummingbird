@@ -7,7 +7,7 @@ import org.apache.mina.filter.codec.ProtocolDecoder;
 import org.apache.mina.filter.codec.ProtocolDecoderOutput;
 import org.apache.mina.filter.codec.ProtocolEncoder;
 import org.apache.mina.filter.codec.ProtocolEncoderOutput;
-import org.hbird.transport.commons.util.BytesUtility;
+import org.hbird.core.commons.util.BytesUtility;
 import org.hbird.transport.protocols.ip.udp.exceptions.InvalidMiniUdpException;
 
 public class MinaUdpRawProtocolEncoderFactory implements ProtocolCodecFactory {

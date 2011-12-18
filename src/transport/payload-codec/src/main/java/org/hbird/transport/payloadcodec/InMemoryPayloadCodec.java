@@ -6,9 +6,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
-import org.hbird.transport.commons.data.GenericPayload;
-import org.hbird.transport.commons.util.BitSetUtility;
-import org.hbird.transport.commons.util.BytesUtility;
+import org.hbird.core.commons.data.GenericPayload;
+import org.hbird.core.commons.util.BitSetUtility;
+import org.hbird.core.commons.util.BytesUtility;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.codecparameters.ParameterGroupCodecDecorator;
 import org.hbird.transport.payloadcodec.exceptions.NoEncodingException;

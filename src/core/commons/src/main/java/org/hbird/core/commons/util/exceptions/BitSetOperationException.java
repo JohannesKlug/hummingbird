@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.hbird.transport.commons.util.exceptions;
+package org.hbird.core.commons.util.exceptions;
 
 
 /** TODO Put in the transport.common */

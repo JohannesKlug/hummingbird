@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.BitSet;
 
-import org.hbird.transport.commons.util.BitSetUtility;
+import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;

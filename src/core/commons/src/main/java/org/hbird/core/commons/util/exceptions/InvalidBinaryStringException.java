@@ -1,4 +1,4 @@
-package org.hbird.transport.commons.util.exceptions;
+package org.hbird.core.commons.util.exceptions;
 
 public class InvalidBinaryStringException extends Exception {
 

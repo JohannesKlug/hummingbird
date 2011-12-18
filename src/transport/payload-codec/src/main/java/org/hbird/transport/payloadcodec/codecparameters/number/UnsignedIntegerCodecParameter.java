@@ -2,8 +2,8 @@ package org.hbird.transport.payloadcodec.codecparameters.number;
 
 import java.util.BitSet;
 
-import org.hbird.transport.commons.util.BitSetUtility;
-import org.hbird.transport.commons.util.BytesUtility;
+import org.hbird.core.commons.util.BitSetUtility;
+import org.hbird.core.commons.util.BytesUtility;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.parameters.Parameter;

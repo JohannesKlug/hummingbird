@@ -5,7 +5,9 @@ import static org.junit.Assert.fail;
 
 import java.util.BitSet;
 
-import org.hbird.transport.commons.util.exceptions.InvalidBinaryStringException;
+import org.hbird.core.commons.util.BitSetUtility;
+import org.hbird.core.commons.util.BytesUtility;
+import org.hbird.core.commons.util.exceptions.InvalidBinaryStringException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;

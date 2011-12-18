@@ -1,10 +1,10 @@
-package org.hbird.transport.commons.util;
+package org.hbird.core.commons.util;
 
 /** TODO Put in the transport.common */
 import java.util.BitSet;
 
 import org.apache.commons.lang.StringUtils;
-import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
+import org.hbird.core.commons.util.exceptions.BitSetOperationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

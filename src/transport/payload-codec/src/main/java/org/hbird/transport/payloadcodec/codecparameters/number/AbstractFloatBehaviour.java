@@ -3,7 +3,7 @@ package org.hbird.transport.payloadcodec.codecparameters.number;
 //
 //import java.util.BitSet;
 //
-//import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
+//import org.hbird.core.commons.util.exceptions.BitSetOperationException;
 //
 //public abstract class AbstractFloatBehaviour {
 //

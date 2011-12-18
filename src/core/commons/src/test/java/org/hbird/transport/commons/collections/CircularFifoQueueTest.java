@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
+import org.hbird.core.commons.collections.CircularFifoQueue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

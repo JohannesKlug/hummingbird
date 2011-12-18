@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.BitSet;
 
-import org.hbird.transport.commons.util.BitSetUtility;
-import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
+import org.hbird.core.commons.util.BitSetUtility;
+import org.hbird.core.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.codecparameters.IntegerCodecFactory;
 import org.hbird.transport.payloadcodec.codecparameters.LongCodecFactory;
