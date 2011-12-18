@@ -16,8 +16,7 @@
 	<modules>
 		<module>core</module>
 		<module>transport</module>
-		<module>business</module>
-		<!--<module>exchange</module> -->
+		<module>application</module>
 		<module>test</module>
 	</modules>
 

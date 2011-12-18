@@ -7,9 +7,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>business</artifactId>
+	<artifactId>application</artifactId>
 	<packaging>pom</packaging>
-	<name>Hummingbird business logic</name>
+	<name>Hummingbird applications</name>
 	<description></description>
 	
 	<modules>
