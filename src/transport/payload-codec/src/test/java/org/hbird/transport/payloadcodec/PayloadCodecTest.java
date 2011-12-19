@@ -9,6 +9,9 @@ import java.util.BitSet;
 import java.util.Collection;
 
 import org.hbird.core.commons.data.GenericPayload;
+import org.hbird.core.commons.tmtc.Parameter;
+import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
@@ -18,11 +21,8 @@ import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingE
 import org.hbird.transport.payloadcodec.testsupport.MockSpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

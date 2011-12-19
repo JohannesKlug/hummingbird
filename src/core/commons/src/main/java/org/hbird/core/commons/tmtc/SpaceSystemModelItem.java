@@ -1,4 +1,4 @@
-package org.hbird.transport.spacesystemmodel;
+package org.hbird.core.commons.tmtc;
 
 /**
  * TODO Describe this better!

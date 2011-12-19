@@ -1,16 +1,14 @@
-package org.hbird.transport.spacesystemmodel.tmtcgroups;
+package org.hbird.core.commons.tmtc;
 
 import java.math.BigDecimal;
 import java.util.Map;
 
-import org.hbird.transport.spacesystemmodel.SpaceSystemModelItem;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter;
+import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 
 public interface TmTcGroup extends SpaceSystemModelItem {
 
 	String getName();
-	
+
 	long getTimeStamp();
 	void setTimeStamp(long timeStamp);
 

@@ -7,6 +7,8 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 import org.hbird.core.commons.data.GenericPayload;
+import org.hbird.core.commons.tmtc.Parameter;
+import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.commons.util.BytesUtility;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
@@ -17,8 +19,6 @@ import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingExcep
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,5 +1,7 @@
 package org.hbird.transport.spacesystemmodel.parameters;
 
+import org.hbird.core.commons.tmtc.Parameter;
+
 
 /**
  * The Hummingbird implementation of the {@link Parameter}.

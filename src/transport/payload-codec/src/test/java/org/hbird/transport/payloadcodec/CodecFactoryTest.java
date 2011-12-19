@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.BitSet;
 
+import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
@@ -15,7 +16,6 @@ import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingE
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

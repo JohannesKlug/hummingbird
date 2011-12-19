@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.junit.Test;
 
 public class PolynomialCalibratorTest {

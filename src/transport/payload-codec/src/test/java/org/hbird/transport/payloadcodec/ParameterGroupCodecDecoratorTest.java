@@ -5,6 +5,9 @@ import static org.junit.Assert.fail;
 
 import java.util.Map;
 
+import org.hbird.core.commons.tmtc.Parameter;
+import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.codecparameters.ParameterGroupCodecDecorator;
 import org.hbird.transport.payloadcodec.exceptions.NoEncodingException;
@@ -15,10 +18,7 @@ import org.hbird.transport.payloadcodec.testsupport.MockSpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInModelException;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
 import org.junit.Test;
 
 public class ParameterGroupCodecDecoratorTest {

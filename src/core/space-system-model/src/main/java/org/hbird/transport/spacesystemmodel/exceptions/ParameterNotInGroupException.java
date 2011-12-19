@@ -1,6 +1,6 @@
 package org.hbird.transport.spacesystemmodel.exceptions;
 
-import org.hbird.transport.spacesystemmodel.parameters.Parameter;
+import org.hbird.core.commons.tmtc.Parameter;
 
 public class ParameterNotInGroupException extends Exception {
 	private static final long serialVersionUID = -8596416130459378174L;

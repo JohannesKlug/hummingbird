@@ -4,8 +4,10 @@ import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter;
+import org.hbird.core.commons.tmtc.Parameter;
+import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.commons.tmtc.ParameterGroupReport;
+import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

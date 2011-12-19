@@ -1,8 +1,7 @@
-package org.hbird.transport.spacesystemmodel.parameters;
+package org.hbird.core.commons.tmtc;
 
 import java.io.Serializable;
 
-import org.hbird.transport.spacesystemmodel.SpaceSystemModelItem;
 
 /**
  * Parameter interface. <br>

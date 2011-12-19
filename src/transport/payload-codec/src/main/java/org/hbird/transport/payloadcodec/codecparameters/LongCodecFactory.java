@@ -1,11 +1,11 @@
 package org.hbird.transport.payloadcodec.codecparameters;
 
+import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.transport.payloadcodec.codecparameters.number.TwosComplementLongCodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
 public final class LongCodecFactory {
 

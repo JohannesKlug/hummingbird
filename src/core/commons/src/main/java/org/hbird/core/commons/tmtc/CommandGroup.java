@@ -1,4 +1,4 @@
-package org.hbird.transport.spacesystemmodel.tmtcgroups;
+package org.hbird.core.commons.tmtc;
 
 import java.io.Serializable;
 
