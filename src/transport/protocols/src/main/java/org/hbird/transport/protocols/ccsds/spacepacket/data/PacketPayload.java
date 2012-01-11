@@ -9,18 +9,18 @@ public class PacketPayload implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -1837235324860411156L;
-	public int apid;
+	public int payloadIdentifier;
 	public byte[] payload;
 	public long timeStamp;
 	
-	public PacketPayload(int apid, byte[] payload, long timeStamp) {
-		this.apid = apid;
+	public PacketPayload(int payloadIdentifier, byte[] payload, long timeStamp) {
+		this.payloadIdentifier = payloadIdentifier;
 		this.payload = ArrayUtils.clone(payload);
 		this.timeStamp = timeStamp;
 	}
 	
 	public String toString() {
-		return "packet apId: " + apid + ", payload: " + new String(payload) + ", timeStamp: " + timeStamp;
+		return "packet apId: " + payloadIdentifier + ", payload: " + new String(payload) + ", timeStamp: " + timeStamp;
 	}
 
 }

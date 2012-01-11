@@ -73,8 +73,8 @@ public class CcsdsPacketEncoder {
 		
 		LOG.debug("Encoding payload: " + payload);
 		
-		if ((payload.apid < 0) || (payload.apid >= 2048)) {
-			throw new InvalidApIdException(payload.apid);
+		if ((payload.payloadIdentifier < 0) || (payload.payloadIdentifier >= 2048)) {
+			throw new InvalidApIdException(payload.payloadIdentifier);
 		}
 		
 		if ((payload.payload.length == 0) || (payload.payload.length > 65536)) {
@@ -88,8 +88,8 @@ public class CcsdsPacketEncoder {
 		header[0] = (packetVersionNumber & 0x7) << 5;
 		header[0] = ((packetType & 0x01) << 4) | header[0];
 		
-		header[0] = ((payload.apid & 0x700) >>> 8) | header[0];
-		header[1] = (payload.apid & 0xFF);
+		header[0] = ((payload.payloadIdentifier & 0x700) >>> 8) | header[0];
+		header[1] = (payload.payloadIdentifier & 0xFF);
 		
 		header[2] = (sequenceFlags & 0x3) << 6;
 		

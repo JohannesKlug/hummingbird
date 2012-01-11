@@ -29,7 +29,7 @@ public class DecoderTest {
 		List<PacketPayload> decodedPayloads = decoder.decode(framePayload);
 		
 		assertEquals(1, decodedPayloads.size());
-		assertEquals(dummyApid, decodedPayloads.get(0).apid);
+		assertEquals(dummyApid, decodedPayloads.get(0).payloadIdentifier);
 		assertEquals(dummyPayloadLength, decodedPayloads.get(0).payload.length);
 	}
 	
