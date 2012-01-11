@@ -6,7 +6,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
 import java.util.BitSet;
 
-import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
+import org.hbird.core.commons.util.BitSetUtility;
+import org.hbird.core.commons.util.exceptions.BitSetOperationException;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

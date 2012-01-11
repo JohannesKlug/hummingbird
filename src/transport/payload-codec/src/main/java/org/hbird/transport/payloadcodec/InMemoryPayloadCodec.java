@@ -6,22 +6,19 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
-import org.hbird.transport.commons.data.GenericPayload;
-import org.hbird.transport.commons.util.BitSetUtility;
-import org.hbird.transport.commons.util.BytesUtility;
+import org.hbird.core.commons.data.GenericPayload;
+import org.hbird.core.commons.tmtc.Parameter;
+import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.commons.util.BitSetUtility;
+import org.hbird.core.commons.util.BytesUtility;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
+import org.hbird.transport.payloadcodec.codecparameters.ParameterGroupCodecDecorator;
 import org.hbird.transport.payloadcodec.exceptions.NoEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
-import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
-import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
-import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInModelException;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,75 +26,62 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 
 	private static final Logger LOG = LoggerFactory.getLogger(InMemoryPayloadCodec.class);
 
-	private SpaceSystemModel spaceSystemModel = null;
-	private SpaceSystemModel codecAwareSpaceSystemModel = null;
+	private Map<String, ParameterGroup> parameterGroups = null;
+	private Map<String, ParameterGroup> codecAwareParameterGroups = null;
 	private final Map<String, Encoding> encodings;
 	private final Map<String, List<String>> restrictions;
 
-	// FIXME change to accept list of parameter groups instead of entire space szstem model.
-	public InMemoryPayloadCodec(final SpaceSystemModel spaceSystemModel, final Map<String, Encoding> encodings) {
-		this.spaceSystemModel = spaceSystemModel;
-		this.encodings = encodings;
-		this.restrictions = spaceSystemModel.getAllPayloadRestrictions();
 
-		SpaceSystemModelCodecDecorator decorator = new SpaceSystemModelCodecDecorator();
+	public InMemoryPayloadCodec(final Map<String, ParameterGroup> parameterGroups, final Map<String, Encoding> encodings, final Map<String, List<String>> restrictions) {
+		this.parameterGroups = parameterGroups;
+		this.encodings = encodings;
+		this.restrictions = restrictions;
+
+		ParameterGroupCodecDecorator decorator = new ParameterGroupCodecDecorator(this.encodings);
+
 		try {
-			this.codecAwareSpaceSystemModel = decorator.decorateSpaceSystemModel(spaceSystemModel, this.encodings);
-		}
-		catch (UnsupportedParameterEncodingException e) {
-			LOG.error(e.toString());
-			System.exit(-1);
-		}
-		catch (UnknownParameterEncodingException e) {
-			LOG.error(e.toString());
-			System.exit(-1);
-		}
-		catch (UnexpectedParameterTypeException e) {
-			LOG.error(e.toString());
-			System.exit(-1);
-		}
-		catch (UnknownParameterGroupException e) {
-			LOG.error(e.toString());
-			System.exit(-1);
-		}
-		catch (ParameterNotInGroupException e) {
-			LOG.error(e.toString());
-			System.exit(-1);
+			this.codecAwareParameterGroups = decorator.decorateParameterGroups(parameterGroups);
+			System.out.println("Decorated");
 		}
 		catch (NoEncodingException e) {
-			LOG.error(e.toString());
-			System.exit(-1);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		catch (UnknownParameterException e) {
-			LOG.error(e.toString());
-			System.exit(-1);
+		catch (UnsupportedParameterEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		catch (ParameterNotInModelException e) {
-			LOG.error(e.toString());
-			System.exit(-1);
+		catch (UnknownParameterEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (UnexpectedParameterTypeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
+
 	@Override
-	public ParameterGroup decode(final byte[] payload, final String payloadLayoutId, long timeStamp) throws UnknownParameterGroupException {
+	public ParameterGroup decode(final byte[] payload, final String payloadLayoutId, final long timeStamp) throws UnknownParameterGroupException {
 		return decode(BitSetUtility.fromByteArray(payload), payloadLayoutId, timeStamp);
 	}
 
 	@Override
-	public ParameterGroup decode(final BitSet payload, final String payloadLayoutId, long timeStamp) throws UnknownParameterGroupException {
+	public ParameterGroup decode(final BitSet payload, final String payloadLayoutId, final long timeStamp) throws UnknownParameterGroupException {
 		ParameterGroup decodedGroup = null;
 		if (payloadLayoutId == null) {
 			// no restrictions, decode all everything!
-			for (ParameterGroup pg : codecAwareSpaceSystemModel.getParameterGroupsCollection()) {
+			for (ParameterGroup pg : codecAwareParameterGroups.values()) {
 				decodedGroup = decodeParameterGroup(payload, pg);
 			}
 		}
 		else {
-			for (Entry<String, List<String>> restrictionEntry : codecAwareSpaceSystemModel.getAllPayloadRestrictions().entrySet()) {
+			for (Entry<String, List<String>> restrictionEntry : restrictions.entrySet()) {
 				if (restrictionEntry.getValue().contains(payloadLayoutId)) {
 					// we found the correct PG
 					String pgName = restrictionEntry.getKey();
-					ParameterGroup pg = codecAwareSpaceSystemModel.getParameterGroup(pgName);
+					ParameterGroup pg = codecAwareParameterGroups.get(pgName);
 					decodedGroup = decodeParameterGroup(payload, pg);
 				}
 			}
@@ -116,11 +100,12 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 			if (count != 0) {
 				offset += previousSize;
 			}
-			Encoding enc = spaceSystemModel.getEncodings().get(p.getQualifiedName());
+			Encoding enc = this.encodings.get(p.getQualifiedName());
 			((CodecParameter<?>) p).decode(payload, offset);
 			previousSize = enc.getSizeInBits();
 			count++;
 		}
+
 		return getUndecoratedVersion(pg);
 	}
 
@@ -129,7 +114,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		String name = pg.getName();
 		// find it in the undecorated version
 		ParameterGroup undecoratedGroup = null;
-		for (ParameterGroup group : spaceSystemModel.getParameterGroupsCollection()) {
+		for (ParameterGroup group : parameterGroups.values()) {
 			if (StringUtils.equals(group.getName(), name)) {
 				// set the value of the parameters in the undecorated version
 				undecoratedGroup = group.copyAllParameterValues(pg);
@@ -151,8 +136,8 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 
 		String undecoratedGroupName = parameterGroup.getName();
 		ParameterGroup decoratedGroup = null;
-		// for each parameter group in the decorated codec aware model
-		for (ParameterGroup pg : codecAwareSpaceSystemModel.getParameterGroupsCollection()) {
+		// for each parameter group in the decorated parameter groups...
+		for (ParameterGroup pg : codecAwareParameterGroups.values()) {
 			// if we find the equivalent group we must transfer the set values
 			if (StringUtils.equals(pg.getName(), undecoratedGroupName)) {
 				decoratedGroup = pg;
@@ -199,7 +184,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 			if (count != 0) {
 				offset += previousSize;
 			}
-			Encoding enc = spaceSystemModel.getEncodings().get(p.getQualifiedName());
+			Encoding enc = this.encodings.get(p.getQualifiedName());
 			((CodecParameter<?>) p).encodeToBitSet(encoded, offset);
 			previousSize = enc.getSizeInBits();
 			totalSize += enc.getSizeInBits();

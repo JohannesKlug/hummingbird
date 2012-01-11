@@ -30,7 +30,7 @@
 		<level value="WARN" />
 	</logger>
 	
-	<logger name="org.hbird.transport.commons">
+	<logger name="org.hbird.core.commons">
 		<level value="DEBUG"></level>
 	</logger>
 	

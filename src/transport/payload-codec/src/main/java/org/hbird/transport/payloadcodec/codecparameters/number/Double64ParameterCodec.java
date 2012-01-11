@@ -2,9 +2,9 @@ package org.hbird.transport.payloadcodec.codecparameters.number;
 
 import java.util.BitSet;
 
+import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

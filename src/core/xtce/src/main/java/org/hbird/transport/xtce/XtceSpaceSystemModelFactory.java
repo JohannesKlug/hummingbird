@@ -15,6 +15,8 @@ import org.exolab.castor.xml.MarshalException;
 import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.xml.ValidationException;
 import org.exolab.castor.xml.XMLContext;
+import org.hbird.core.commons.tmtc.Parameter;
+import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.transport.generatedcode.xtce.BaseContainer;
 import org.hbird.transport.generatedcode.xtce.BaseDataTypeChoice;
 import org.hbird.transport.generatedcode.xtce.CommandMetaData;
@@ -37,9 +39,7 @@ import org.hbird.transport.spacesystemmodel.encoding.Encoding.BinaryRepresentati
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidSpaceSystemDefinitionException;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 import org.hbird.transport.spacesystemmodel.tmtcgroups.HummingbirdParameterGroup;
-import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
 import org.hbird.transport.xtce.exceptions.UnsupportedXtceConstructException;
 import org.hbird.transport.xtce.utils.XtceToJavaMapping;
 import org.slf4j.Logger;

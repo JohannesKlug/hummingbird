@@ -4,10 +4,10 @@ import java.util.Random;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
+import org.hbird.core.commons.tmtc.Parameter;
+import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

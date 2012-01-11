@@ -1,5 +1,6 @@
 package org.hbird.transport.payloadcodec.codecparameters;
 
+import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.transport.payloadcodec.codecparameters.number.TwosComplementIntegerCodecParameter;
 import org.hbird.transport.payloadcodec.codecparameters.number.UnsignedIntegerCodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
@@ -7,7 +8,6 @@ import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingExcep
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
 import org.hbird.transport.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.spacesystemmodel.exceptions.InvalidParameterTypeException;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter;
 
 public final class IntegerCodecFactory {
 

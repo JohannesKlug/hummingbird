@@ -8,7 +8,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.hbird.transport</groupId>
+	<groupId>org.hbird.core</groupId>
 	<artifactId>commons</artifactId>
 	<packaging>bundle</packaging>
 	<name>commons</name>
@@ -31,7 +31,7 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							org.hbird.transport.*,
+							org.hbird.core.*,
 						</Export-Package>
 					</instructions>
 				</configuration>

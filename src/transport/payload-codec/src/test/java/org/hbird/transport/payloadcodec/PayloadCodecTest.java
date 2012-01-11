@@ -8,9 +8,12 @@ import static org.junit.Assert.assertTrue;
 import java.util.BitSet;
 import java.util.Collection;
 
-import org.hbird.transport.commons.data.GenericPayload;
-import org.hbird.transport.commons.util.BitSetUtility;
-import org.hbird.transport.commons.util.exceptions.BitSetOperationException;
+import org.hbird.core.commons.data.GenericPayload;
+import org.hbird.core.commons.tmtc.Parameter;
+import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
+import org.hbird.core.commons.util.BitSetUtility;
+import org.hbird.core.commons.util.exceptions.BitSetOperationException;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
@@ -18,11 +21,8 @@ import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingE
 import org.hbird.transport.payloadcodec.testsupport.MockSpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
 import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterException;
 import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
-import org.hbird.transport.spacesystemmodel.parameters.Parameter;
-import org.hbird.transport.spacesystemmodel.tmtcgroups.ParameterGroup;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -74,7 +74,7 @@ public class PayloadCodecTest {
 	public static void setUp() throws BitSetOperationException, UnsupportedParameterEncodingException, UnknownParameterEncodingException,
 			UnexpectedParameterTypeException, UnknownParameterGroupException, ParameterNotInGroupException {
 		ssm = new MockSpaceSystemModel();
-		codec = new InMemoryPayloadCodec(ssm, ssm.getEncodings());
+		codec = new InMemoryPayloadCodec(ssm.getParameterGroups(), ssm.getEncodings(), ssm.getAllPayloadRestrictions());
 	}
 
 	@Test
@@ -94,7 +94,7 @@ public class PayloadCodecTest {
 					+ " should be an instance of HummingbirdParameter<?> (for this test, i.e., using Hummingbird default implementations of Parameter<?>",
 					(p instanceof HummingbirdParameter<?>));
 		}
-		
+
 		// Now check the values have been decoded.
 		Integer scid = actual.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_QUALIFIED_NAME).getValue();
 		Integer fuel = actual.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_QUALIFIED_NAME).getValue();
@@ -191,17 +191,17 @@ public class PayloadCodecTest {
 
 		encodeAndAssert(testGroup, expected);
 	}
-	
+
 	@Test
 	public void testDecodeWithRestriction() throws BitSetOperationException, UnknownParameterGroupException, UnknownParameterException {
-		
+
 		String bitSetString = SCID_VALUE_1_AS_STRING + FUEL_VALUE_3814_AS_STRING + LASER_TEMP_94528016102_AS_STRING;
 		BitSet rawIn = BitSetUtility.stringToBitSet(bitSetString, true, true);
 
 		ParameterGroup actual = codec.decode(rawIn, MockSpaceSystemModel.INTEGER_RESTRICTION_ID, 0);
-		
+
 		assertNotNull(actual);
-		
+
 		// Now check the values have been decoded.
 		Integer scid = actual.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_QUALIFIED_NAME).getValue();
 		Integer fuel = actual.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_QUALIFIED_NAME).getValue();
