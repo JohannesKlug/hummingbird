@@ -22,7 +22,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.hbird.transport</groupId>
+			<groupId>org.hbird.core</groupId>
 			<artifactId>space-system-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
@@ -35,10 +35,9 @@
 			<artifactId>camel-spring</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.hbird.transport</groupId>
+			<groupId>org.hbird.core</groupId>
 			<artifactId>xtce</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 
