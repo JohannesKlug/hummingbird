@@ -11,7 +11,7 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.hbird.transport</groupId>
+	<groupId>org.hbird.core</groupId>
 	<artifactId>xtce</artifactId>
 	<packaging>bundle</packaging>
 	<name>XTCE</name>
@@ -45,7 +45,7 @@
 						<inherited>false</inherited>
 						<configuration>
 							<schemaDirectory>${basedir}/src/main/resources/schemas</schemaDirectory>
-							<packaging>org.hbird.transport.generatedcode.xtce</packaging>
+							<packaging>org.hbird.core.generatedcode.xtce</packaging>
 							<properties>${basedir}/src/main/castor/castorbuilder.properties</properties>
 							<verbose>true</verbose>
 						</configuration>
@@ -69,12 +69,12 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							org.hbird.transport.xtce,
-							org.hbird.transport.xtce.utils,
-							org.hbird.transport.xtce.exceptions
+							org.hbird.core.xtce,
+							org.hbird.core.xtce.utils,
+							org.hbird.core.xtce.exceptions
 						</Export-Package>
 						<Private-Package>
-							org.hbird.transport.generatedcode*
+							org.hbird.core.generatedcode*
 						</Private-Package>
 					</instructions>
 				</configuration>
@@ -162,12 +162,12 @@
 			<artifactId>castor-xml</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.hbird.transport</groupId>
+			<groupId>org.hbird.core</groupId>
 			<artifactId>commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>org.hbird.transport</groupId>
+			<groupId>org.hbird.core</groupId>
 			<artifactId>space-system-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
