@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hbird.core.commons.tmtc.ParameterGroup;
-import org.hbird.transport.spacesystemmodel.encoding.Encoding;
+import org.hbird.core.spacesystemmodel.encoding.Encoding;
 
 
 public interface SpaceSystemPublisher {

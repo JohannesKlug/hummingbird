@@ -6,8 +6,8 @@ import java.util.Map;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemModelUpdate;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
-import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
-import org.hbird.transport.spacesystemmodel.encoding.Encoding;
+import org.hbird.core.spacesystemmodel.SpaceSystemModel;
+import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.springframework.stereotype.Service;
 
 @Service(value = "SpaceSystemPublisher")
