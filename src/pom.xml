@@ -26,7 +26,7 @@
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<junit.version>4.8.2</junit.version>
 		<castor.version>1.3.2</castor.version>
-		<camel.version>2.8.0</camel.version>
+		<camel.version>2.9.0</camel.version>
 		<activemq.version>5.5.0</activemq.version>
 		<mysqlconnector.version>5.1.10</mysqlconnector.version>
 		<jencks.version>2.2</jencks.version>
@@ -40,7 +40,7 @@
 		<commons-io.version>2.0.1</commons-io.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<cloning.version>1.7.4</cloning.version>
-		<guava.version>10.0-rc3</guava.version>
+		<guava.version>11.0</guava.version>
 	</properties>
 
 	<scm>
