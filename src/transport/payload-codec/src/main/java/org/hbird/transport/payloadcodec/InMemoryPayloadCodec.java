@@ -17,8 +17,8 @@ import org.hbird.transport.payloadcodec.exceptions.NoEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
-import org.hbird.transport.spacesystemmodel.encoding.Encoding;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
+import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

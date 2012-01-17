@@ -1,6 +1,6 @@
 package org.hbird.transport.payloadcodec.exceptions;
 
-import org.hbird.transport.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
+import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 
 public class UnsupportedParameterEncodingException extends Exception {
 	private static final long serialVersionUID = 5931397913867898970L;

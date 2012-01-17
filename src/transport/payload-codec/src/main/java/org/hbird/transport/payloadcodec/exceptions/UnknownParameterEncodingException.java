@@ -1,7 +1,7 @@
 package org.hbird.transport.payloadcodec.exceptions;
 
-import org.hbird.transport.spacesystemmodel.encoding.Encoding;
-import org.hbird.transport.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
+import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 
 
 

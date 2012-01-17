@@ -19,10 +19,10 @@ import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeExcept
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
 import org.hbird.transport.payloadcodec.testsupport.MockSpaceSystemModel;
-import org.hbird.transport.spacesystemmodel.SpaceSystemModel;
-import org.hbird.transport.spacesystemmodel.exceptions.ParameterNotInGroupException;
-import org.hbird.transport.spacesystemmodel.exceptions.UnknownParameterGroupException;
-import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
+import org.hbird.core.spacesystemmodel.SpaceSystemModel;
+import org.hbird.core.spacesystemmodel.exceptions.ParameterNotInGroupException;
+import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
+import org.hbird.core.spacesystemmodel.parameters.HummingbirdParameter;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

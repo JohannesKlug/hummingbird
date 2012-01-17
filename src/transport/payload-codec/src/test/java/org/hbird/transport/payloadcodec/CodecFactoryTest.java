@@ -13,9 +13,9 @@ import org.hbird.transport.payloadcodec.codecparameters.LongCodecFactory;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
-import org.hbird.transport.spacesystemmodel.encoding.Encoding;
-import org.hbird.transport.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
-import org.hbird.transport.spacesystemmodel.parameters.HummingbirdParameter;
+import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
+import org.hbird.core.spacesystemmodel.parameters.HummingbirdParameter;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

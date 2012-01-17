@@ -10,7 +10,7 @@ import org.hbird.transport.payloadcodec.exceptions.NoEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
-import org.hbird.transport.spacesystemmodel.encoding.Encoding;
+import org.hbird.core.spacesystemmodel.encoding.Encoding;
 
 import com.rits.cloning.Cloner;
 
