@@ -26,8 +26,8 @@
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<junit.version>4.8.2</junit.version>
 		<castor.version>1.3.2</castor.version>
-		<camel.version>2.9.0</camel.version>
-		<activemq.version>5.5.0</activemq.version>
+		<camel.version>2.8.0</camel.version>
+		<activemq.version>5.5.1</activemq.version>
 		<mysqlconnector.version>5.1.10</mysqlconnector.version>
 		<jencks.version>2.2</jencks.version>
 		<slf4j.version>1.5.11</slf4j.version>
@@ -296,7 +296,7 @@
 				<plugin>
 					<groupId>org.apache.felix</groupId>
 					<artifactId>maven-bundle-plugin</artifactId>
-					<version>2.3.5</version>
+					<version>2.3.6</version>
 					<extensions>true</extensions>
 				</plugin>
 				<plugin>
