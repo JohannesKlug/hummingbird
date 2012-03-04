@@ -72,12 +72,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	public String getLongDescription() {
 		return this.longDescription;
 	}
-	
-	@Override
-	public void setTimeStamp(long timeStamp) {
-		this.timeStamp = timeStamp;
-	}
-	
+
 	@Override
 	public long getTimeStamp() {
 		return this.timeStamp;
@@ -257,36 +252,43 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 			if (integerParameters != null) {
 				for (String qualifiedName : integerParameters.keySet()) {
 					getIntegerParameter(qualifiedName).setValue(sourceGroup.getIntegerParameter(qualifiedName).getValue());
+					getIntegerParameter(qualifiedName).setReceivedTime(sourceGroup.getIntegerParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (longParameters != null) {
 				for (String qualifiedName : longParameters.keySet()) {
 					getLongParameter(qualifiedName).setValue(sourceGroup.getLongParameter(qualifiedName).getValue());
+					getLongParameter(qualifiedName).setReceivedTime(sourceGroup.getLongParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (floatParameters != null) {
 				for (String qualifiedName : floatParameters.keySet()) {
 					getFloatParameter(qualifiedName).setValue(sourceGroup.getFloatParameter(qualifiedName).getValue());
+					getFloatParameter(qualifiedName).setReceivedTime(sourceGroup.getFloatParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (doubleParameters != null) {
 				for (String qualifiedName : doubleParameters.keySet()) {
 					getDoubleParameter(qualifiedName).setValue(sourceGroup.getDoubleParameter(qualifiedName).getValue());
+					getDoubleParameter(qualifiedName).setReceivedTime(sourceGroup.getDoubleParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (bigDecimalParameters != null) {
 				for (String qualifiedName : bigDecimalParameters.keySet()) {
 					getBigDecimalParameter(qualifiedName).setValue(sourceGroup.getBigDecimalParameter(qualifiedName).getValue());
+					getBigDecimalParameter(qualifiedName).setReceivedTime(sourceGroup.getBigDecimalParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (stringParameters != null) {
 				for (String qualifiedName : stringParameters.keySet()) {
 					getStringParameter(qualifiedName).setValue(sourceGroup.getStringParameter(qualifiedName).getValue());
+					getStringParameter(qualifiedName).setReceivedTime(sourceGroup.getStringParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (rawParameters != null) {
 				for (String qualifiedName : rawParameters.keySet()) {
 					getRawParameter(qualifiedName).setValue(sourceGroup.getRawParameter(qualifiedName).getValue());
+					getRawParameter(qualifiedName).setReceivedTime(sourceGroup.getRawParameter(qualifiedName).getReceivedTime());
 				}
 			}
 		}
@@ -341,32 +343,13 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("HummingbirdParameterGroup [qualifiedName=");
-		builder.append(qualifiedName);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", shortDescription=");
-		builder.append(shortDescription);
-		builder.append(", longDescription=");
-		builder.append(longDescription);
-		builder.append(", integerParameters=");
-		builder.append(integerParameters);
-		builder.append(", longParameters=");
-		builder.append(longParameters);
-		builder.append(", floatParameters=");
-		builder.append(floatParameters);
-		builder.append(", doubleParameters=");
-		builder.append(doubleParameters);
-		builder.append(", bigDecimalParameters=");
-		builder.append(bigDecimalParameters);
-		builder.append(", stringParameters=");
-		builder.append(stringParameters);
-		builder.append(", rawParameters=");
-		builder.append(rawParameters);
-		builder.append("]");
-		return builder.toString();
+		return "HummingbirdParameterGroup [qualifiedName=" + qualifiedName + ", name=" + name + ", shortDescription=" + shortDescription + ", longDescription="
+				+ longDescription + ", timeStamp=" + timeStamp + ", parameters=" + parameters + "]";
 	}
 
+	@Override
+	public void setTimeStamp(final long timeStamp) {
+		this.timeStamp = timeStamp;
+	}
 
 }

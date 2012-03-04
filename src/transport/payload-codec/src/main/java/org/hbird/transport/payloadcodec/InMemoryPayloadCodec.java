@@ -11,14 +11,14 @@ import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.commons.util.BytesUtility;
+import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.codecparameters.ParameterGroupCodecDecorator;
 import org.hbird.transport.payloadcodec.exceptions.NoEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
-import org.hbird.core.spacesystemmodel.encoding.Encoding;
-import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -71,9 +71,9 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 	public ParameterGroup decode(final BitSet payload, final String payloadLayoutId, final long timeStamp) throws UnknownParameterGroupException {
 		ParameterGroup decodedGroup = null;
 		if (payloadLayoutId == null) {
-			// no restrictions, decode all everything!
+			// no restrictions, decode everything!
 			for (ParameterGroup pg : codecAwareParameterGroups.values()) {
-				decodedGroup = decodeParameterGroup(payload, pg);
+				decodedGroup = decodeParameterGroup(payload, pg, timeStamp);
 			}
 		}
 		else {
@@ -82,17 +82,16 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 					// we found the correct PG
 					String pgName = restrictionEntry.getKey();
 					ParameterGroup pg = codecAwareParameterGroups.get(pgName);
-					decodedGroup = decodeParameterGroup(payload, pg);
+					decodedGroup = decodeParameterGroup(payload, pg, timeStamp);
 				}
 			}
 		}
-		if (decodedGroup != null) {
-			decodedGroup.setTimeStamp(timeStamp);
-		}
+
 		return decodedGroup;
 	}
 
-	private ParameterGroup decodeParameterGroup(final BitSet payload, final ParameterGroup pg) {
+	// TODO javadoc
+	private ParameterGroup decodeParameterGroup(final BitSet payload, final ParameterGroup pg, final long timestamp) {
 		int offset = 0;
 		int previousSize = 0;
 		int count = 0;
@@ -102,6 +101,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 			}
 			Encoding enc = this.encodings.get(p.getQualifiedName());
 			((CodecParameter<?>) p).decode(payload, offset);
+			p.setReceivedTime(timestamp);
 			previousSize = enc.getSizeInBits();
 			count++;
 		}

@@ -78,4 +78,14 @@ public abstract class CodecParameter<T> implements Parameter<T> {
 		this.encoding = encoding;
 	}
 
+	@Override
+	public long getReceivedTime() {
+		return this.parameter.getReceivedTime();
+	}
+
+	@Override
+	public void setReceivedTime(final long timestamp) {
+		this.parameter.setReceivedTime(timestamp);
+	}
+
 }
