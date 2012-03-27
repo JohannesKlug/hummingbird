@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SpaceSystem xmlns="http://www.omg.org/space/xtce" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.omg.org/space/xtce ../SpaceSystemV1.0.xsd" name="WeatherStation">
+	<TelemetryMetaData>
+		<ParameterTypeSet>
+		
+			<!-- FloatParameterType not supported -->		
+			<!-- AbsoluteDateParameterType not supported -->		
+			<IntegerParameterType name="Int">
+				<UnitSet/>
+			</IntegerParameterType>
+			<IntegerParameterType name="Long" sizeInBits="64">
+				<UnitSet/>
+			</IntegerParameterType>
+			<StringParameterType name="String"/>
+		
+		</ParameterTypeSet>
+
+
+		<ParameterSet>
+			<Parameter parameterTypeRef="Int" name="Temperature"/>
+			<Parameter parameterTypeRef="Int" name="WindSpeed"/>
+			<Parameter parameterTypeRef="Int" name="WindDirection"/>
+			<Parameter parameterTypeRef="String" name="StationName"/>
+			<Parameter parameterTypeRef="Long" name="Timestamp"/>
+<!-- 			<Parameter parameterTypeRef="Date" name="Timestamp"/> -->
+		</ParameterSet>
+		
+		
+		<ContainerSet>
+		
+			<SequenceContainer name="WeatherReport" shortDescription="Weather report">
+				<EntryList>
+					<ParameterRefEntry parameterRef="Temperature"/>
+					<ParameterRefEntry parameterRef="WindSpeed"/>
+					<ParameterRefEntry parameterRef="WindDirection"/>
+					<ParameterRefEntry parameterRef="StationName"/>
+ 					<ParameterRefEntry parameterRef="Timestamp"/>
+				</EntryList>
+			</SequenceContainer>
+		
+		</ContainerSet>
+		
+	</TelemetryMetaData>
+	
+</SpaceSystem>
+
+
