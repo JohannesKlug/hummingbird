@@ -18,7 +18,9 @@ import org.slf4j.LoggerFactory;
  * @author Johannes Klug
  */
 public class HummingbirdParameterGroup implements ParameterGroup {
-	private static final long serialVersionUID = 7810839127277387757L;
+	
+	private static final long serialVersionUID = -6877917071118156741L;
+
 	private static final Logger LOG = LoggerFactory.getLogger(HummingbirdParameterGroup.class);
 
 	private final String qualifiedName;
@@ -234,19 +236,15 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 
 	@Override
 	public Parameter<Integer> getIntegerParameter(final String qualifiedName) throws UnknownParameterException {
-		Parameter<Integer> p = integerParameters.get(qualifiedName);
-		if (p == null) {
-			throw new UnknownParameterException(qualifiedName);
-		}
+		Parameter<Integer> p = integerParameters == null ? null : integerParameters.get(qualifiedName);
+		validateParameterNotNull(p, qualifiedName);
 		return p;
 	}
 
 	@Override
 	public Parameter<Long> getLongParameter(final String qualifiedName) throws UnknownParameterException {
-		Parameter<Long> p = longParameters.get(qualifiedName);
-		if (p == null) {
-			throw new UnknownParameterException(qualifiedName);
-		}
+		Parameter<Long> p = longParameters == null ? null : longParameters.get(qualifiedName);
+		validateParameterNotNull(p, qualifiedName);
 		return p;
 	}
 
@@ -292,7 +290,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		}
 		catch (UnknownParameterException e) {
 			LOG.error("Unknown parameter when copying parameter values. This is is a serious internal error and must indicate a corruption "
-					+ "in memory, a system bug, or a seriosu misuse of the API (copying paraemters to a different space system"
+					+ "in memory, a system bug, or a seriosu misuse of the API (copying parameters to a different space system"
 					+ "model which has a different structure.  The system must shut down as integrity cannot be guaranteed.");
 			System.exit(-1);
 		}
@@ -331,7 +329,15 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 
 	@Override
 	public Parameter<String> getStringParameter(final String qualifiedName) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
+		Parameter<String> p = stringParameters == null ? null : stringParameters.get(qualifiedName);
+		validateParameterNotNull(p, qualifiedName);
+		return p;
+	}
+	
+	void validateParameterNotNull(Parameter<?> p, String qualifiedName) throws UnknownParameterException {
+		if (p == null) {
+			throw new UnknownParameterException(qualifiedName);
+		}
 	}
 
 	@Override

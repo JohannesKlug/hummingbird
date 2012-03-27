@@ -41,6 +41,7 @@
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<cloning.version>1.7.4</cloning.version>
 		<guava.version>11.0</guava.version>
+		<mockito.version>1.9.0</mockito.version>
 	</properties>
 
 	<scm>
@@ -277,6 +278,13 @@
 				<groupId>uk.com.robust-it</groupId>
 				<artifactId>cloning</artifactId>
 				<version>${cloning.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>${mockito.version}</version>
+				<type>jar</type>
+				<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
