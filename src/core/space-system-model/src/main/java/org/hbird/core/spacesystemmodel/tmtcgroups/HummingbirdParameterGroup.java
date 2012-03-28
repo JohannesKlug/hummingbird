@@ -8,8 +8,6 @@ import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.commons.tmtc.ParameterGroupReport;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * TELEMETRY
@@ -20,8 +18,6 @@ import org.slf4j.LoggerFactory;
 public class HummingbirdParameterGroup implements ParameterGroup {
 	
 	private static final long serialVersionUID = -6877917071118156741L;
-
-	private static final Logger LOG = LoggerFactory.getLogger(HummingbirdParameterGroup.class);
 
 	private final String qualifiedName;
 	private final String name;
@@ -200,40 +196,6 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		return this.parameterReport;
 	}
 
-	// Cast suppress reasoning: Parameter names must be unique so if a Param is found in a specific type collection
-	// it is safe to cast.
-	@SuppressWarnings("unchecked")
-	@Override
-	public void replaceParameterInGroup(final String qualifiedName, final Parameter<?> parameter) {
-		String pname = parameter.getQualifiedName();
-
-		if (parameters.containsKey(pname)) {
-			parameters.put(qualifiedName, parameter);
-		}
-
-		if (integerParameters != null && integerParameters.containsKey(pname)) {
-			integerParameters.put(qualifiedName, (Parameter<Integer>) parameter);
-		}
-		else if (longParameters != null && longParameters.containsKey(pname)) {
-			longParameters.put(qualifiedName, (Parameter<Long>) parameter);
-		}
-		else if (bigDecimalParameters != null && bigDecimalParameters.containsKey(pname)) {
-			bigDecimalParameters.put(qualifiedName, (Parameter<BigDecimal>) parameter);
-		}
-		else if (floatParameters != null && floatParameters.containsKey(pname)) {
-			floatParameters.put(qualifiedName, (Parameter<Float>) parameter);
-		}
-		else if (doubleParameters != null && doubleParameters.containsKey(pname)) {
-			doubleParameters.put(qualifiedName, (Parameter<Double>) parameter);
-		}
-		else if (stringParameters != null && stringParameters.containsKey(pname)) {
-			stringParameters.put(qualifiedName, (Parameter<String>) parameter);
-		}
-		else if (rawParameters != null && rawParameters.containsKey(pname)) {
-			rawParameters.put(qualifiedName, (Parameter<Byte[]>) parameter);
-		}
-	}
-
 	@Override
 	public Parameter<Integer> getIntegerParameter(final String qualifiedName) throws UnknownParameterException {
 		Parameter<Integer> p = integerParameters == null ? null : integerParameters.get(qualifiedName);
@@ -246,56 +208,6 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		Parameter<Long> p = longParameters == null ? null : longParameters.get(qualifiedName);
 		validateParameterNotNull(p, qualifiedName);
 		return p;
-	}
-
-	@Override
-	public ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup) {
-		try {
-			// Ints
-			if (integerParameters != null) {
-				for (String qualifiedName : integerParameters.keySet()) {
-					getIntegerParameter(qualifiedName).setValue(sourceGroup.getIntegerParameter(qualifiedName).getValue());
-				}
-			}
-			if (longParameters != null) {
-				for (String qualifiedName : longParameters.keySet()) {
-					getLongParameter(qualifiedName).setValue(sourceGroup.getLongParameter(qualifiedName).getValue());
-				}
-			}
-			if (floatParameters != null) {
-				for (String qualifiedName : floatParameters.keySet()) {
-					getFloatParameter(qualifiedName).setValue(sourceGroup.getFloatParameter(qualifiedName).getValue());
-				}
-			}
-			if (doubleParameters != null) {
-				for (String qualifiedName : doubleParameters.keySet()) {
-					getDoubleParameter(qualifiedName).setValue(sourceGroup.getDoubleParameter(qualifiedName).getValue());
-				}
-			}
-			if (bigDecimalParameters != null) {
-				for (String qualifiedName : bigDecimalParameters.keySet()) {
-					getBigDecimalParameter(qualifiedName).setValue(sourceGroup.getBigDecimalParameter(qualifiedName).getValue());
-				}
-			}
-			if (stringParameters != null) {
-				for (String qualifiedName : stringParameters.keySet()) {
-					getStringParameter(qualifiedName).setValue(sourceGroup.getStringParameter(qualifiedName).getValue());
-				}
-			}
-			if (rawParameters != null) {
-				for (String qualifiedName : rawParameters.keySet()) {
-					getRawParameter(qualifiedName).setValue(sourceGroup.getRawParameter(qualifiedName).getValue());
-				}
-			}
-		}
-		catch (UnknownParameterException e) {
-			LOG.error("Unknown parameter when copying parameter values. This is is a serious internal error and must indicate a corruption "
-					+ "in memory, a system bug, or a seriosu misuse of the API (copying parameters to a different space system"
-					+ "model which has a different structure.  The system must shut down as integrity cannot be guaranteed.");
-			System.exit(-1);
-		}
-
-		return this;
 	}
 
 	@Override
@@ -373,6 +285,4 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		builder.append("]");
 		return builder.toString();
 	}
-
-
 }

@@ -19,6 +19,7 @@ import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingExcep
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
+import org.hbird.core.spacesystemmodel.tmtcgroups.TmTcGroups;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -117,7 +118,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		for (ParameterGroup group : parameterGroups.values()) {
 			if (StringUtils.equals(group.getName(), name)) {
 				// set the value of the parameters in the undecorated version
-				undecoratedGroup = group.copyAllParameterValues(pg);
+				undecoratedGroup = (ParameterGroup) TmTcGroups.copyAllParameterValues(pg, group);
 			}
 		}
 		// return the undecorated version

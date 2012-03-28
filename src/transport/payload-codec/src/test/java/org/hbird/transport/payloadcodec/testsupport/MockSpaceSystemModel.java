@@ -17,6 +17,7 @@ import org.hbird.core.spacesystemmodel.exceptions.ParameterNotInModelException;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.core.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.core.spacesystemmodel.tmtcgroups.HummingbirdParameterGroup;
+import org.hbird.core.spacesystemmodel.tmtcgroups.TmTcGroups;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -116,7 +117,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	@Override
 	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInModelException {
 		for (ParameterGroup pg : this.groups.values()) {
-			pg.replaceParameterInGroup(qualifiedName, newParameter);
+			TmTcGroups.replaceParameterInGroup(pg, qualifiedName, newParameter);
 		}
 	}
 

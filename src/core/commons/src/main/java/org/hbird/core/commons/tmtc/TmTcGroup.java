@@ -41,9 +41,5 @@ public interface TmTcGroup extends SpaceSystemModelItem {
 	void addStringParameter(String qualifiedName, Parameter<String> parameter);
 	void addRawParameter(String qualifiedName, Parameter<Byte[]> parameter);
 
-	void replaceParameterInGroup(String qualifiedName, Parameter<?> parameter);
-
-	ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup);
-
 	ParameterGroupReport getParameterReport();
 }
