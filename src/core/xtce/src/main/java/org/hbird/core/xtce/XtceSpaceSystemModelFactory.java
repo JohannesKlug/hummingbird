@@ -511,13 +511,13 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 			LOG.debug("Adding " + qualifiedName + " to ParameterGroup " + group.getQualifiedName());
 		}
 		if (integerParameters.containsKey(qualifiedName)) {
-			group.addIntegerParameter(qualifiedName, integerParameters.get(qualifiedName));
+			group.addIntegerParameter(integerParameters.get(qualifiedName));
 		}
 		else if (longParameters.containsKey(qualifiedName)) {
-			group.addLongParameter(qualifiedName, longParameters.get(qualifiedName));
+			group.addLongParameter(longParameters.get(qualifiedName));
 		}
 		else if (stringParameters.containsKey(qualifiedName)) {
-			group.addStringParameter(qualifiedName, stringParameters.get(qualifiedName));
+			group.addStringParameter(stringParameters.get(qualifiedName));
 		}
 		else {
 			// TODO Finish unsupported parameter types

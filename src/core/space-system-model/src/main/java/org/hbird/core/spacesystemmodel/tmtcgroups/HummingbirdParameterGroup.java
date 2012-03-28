@@ -122,7 +122,9 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public void addIntegerParameter(final String qualifiedName, final Parameter<Integer> parameter) {
+	public void addIntegerParameter(final Parameter<Integer> parameter) {
+		String qualifiedName = parameter.getQualifiedName();
+		validateQualifiedName(qualifiedName);
 		if (this.integerParameters == null) {
 			this.integerParameters = new LinkedHashMap<String, Parameter<Integer>>();
 		}
@@ -132,7 +134,9 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public void addLongParameter(final String qualifiedName, final Parameter<Long> parameter) {
+	public void addLongParameter(final Parameter<Long> parameter) {
+		String qualifiedName = parameter.getQualifiedName();
+		validateQualifiedName(qualifiedName);
 		if (this.longParameters == null) {
 			this.longParameters = new LinkedHashMap<String, Parameter<Long>>();
 		}
@@ -142,7 +146,9 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public void addBigDecimalParameter(final String qualifiedName, final Parameter<BigDecimal> parameter) {
+	public void addBigDecimalParameter(final Parameter<BigDecimal> parameter) {
+		String qualifiedName = parameter.getQualifiedName();
+		validateQualifiedName(qualifiedName);
 		if (this.bigDecimalParameters == null) {
 			this.bigDecimalParameters = new LinkedHashMap<String, Parameter<BigDecimal>>();
 		}
@@ -152,7 +158,9 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public void addFloatParameter(final String qualifiedName, final Parameter<Float> parameter) {
+	public void addFloatParameter(final Parameter<Float> parameter) {
+		String qualifiedName = parameter.getQualifiedName();
+		validateQualifiedName(qualifiedName);
 		if (this.floatParameters == null) {
 			this.floatParameters = new LinkedHashMap<String, Parameter<Float>>();
 		}
@@ -162,7 +170,9 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public void addDoubleParameter(final String qualifiedName, final Parameter<Double> parameter) {
+	public void addDoubleParameter(final Parameter<Double> parameter) {
+		String qualifiedName = parameter.getQualifiedName();
+		validateQualifiedName(qualifiedName);
 		if (this.doubleParameters == null) {
 			this.doubleParameters = new LinkedHashMap<String, Parameter<Double>>();
 		}
@@ -172,7 +182,9 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public void addStringParameter(final String qualifiedName, final Parameter<String> parameter) {
+	public void addStringParameter(final Parameter<String> parameter) {
+		String qualifiedName = parameter.getQualifiedName();
+		validateQualifiedName(qualifiedName);
 		if (this.stringParameters == null) {
 			this.stringParameters = new LinkedHashMap<String, Parameter<String>>();
 		}
@@ -182,7 +194,9 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public void addRawParameter(final String qualifiedName, final Parameter<Byte[]> parameter) {
+	public void addRawParameter(final Parameter<Byte[]> parameter) {
+		String qualifiedName = parameter.getQualifiedName();
+		validateQualifiedName(qualifiedName);
 		if (this.rawParameters == null) {
 			this.rawParameters = new LinkedHashMap<String, Parameter<Byte[]>>();
 		}
@@ -244,6 +258,12 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		Parameter<String> p = stringParameters == null ? null : stringParameters.get(qualifiedName);
 		validateParameterNotNull(p, qualifiedName);
 		return p;
+	}
+	
+	void validateQualifiedName(String qualifiedName) throws NullPointerException {
+		if (qualifiedName == null) {
+			throw new NullPointerException("Parameter qualifed name is null");
+		}
 	}
 	
 	void validateParameterNotNull(Parameter<?> p, String qualifiedName) throws UnknownParameterException {

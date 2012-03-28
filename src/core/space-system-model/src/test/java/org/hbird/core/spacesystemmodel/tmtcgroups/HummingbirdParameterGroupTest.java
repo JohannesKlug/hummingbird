@@ -57,6 +57,13 @@ public class HummingbirdParameterGroupTest {
 	public void setUp() {
 		group = new HummingbirdParameterGroup(QN, NAME, DESCRIPTION_SHORT, DESCRIPTION_LONG);
 		inOrder = inOrder(intParameter, longParameter, floatParameter, doubleParameter, bigDecimalParameter, stringParameter, rawParameter);
+		when(intParameter.getQualifiedName()).thenReturn("int");
+		when(longParameter.getQualifiedName()).thenReturn("long");
+		when(floatParameter.getQualifiedName()).thenReturn("float");
+		when(doubleParameter.getQualifiedName()).thenReturn("double");
+		when(bigDecimalParameter.getQualifiedName()).thenReturn("bigDecimal");
+		when(stringParameter.getQualifiedName()).thenReturn("string");
+		when(rawParameter.getQualifiedName()).thenReturn("raw");
 	}
 	
 	public void tearDown() {
@@ -125,7 +132,7 @@ public class HummingbirdParameterGroupTest {
 		Map<String, Parameter<?>> params = group.getAllParameters();
 		assertNotNull(params);
 		assertEquals(0, params.size());
-		group.addIntegerParameter("int", intParameter);
+		group.addIntegerParameter(intParameter);
 		params = group.getAllParameters();
 		assertNotNull(params);
 		assertEquals(1, params.size());
@@ -197,7 +204,7 @@ public class HummingbirdParameterGroupTest {
 		String name = "int";
 		Map<String, Parameter<Integer>> params = group.getIntegerParameters();
 		assertNull(params);
-		group.addIntegerParameter(name, intParameter);
+		group.addIntegerParameter(intParameter);
 		params = group.getIntegerParameters();
 		assertNotNull(params);
 		assertTrue(params.containsKey(name));
@@ -217,7 +224,7 @@ public class HummingbirdParameterGroupTest {
 		String name = "long";
 		Map<String, Parameter<Long>> params = group.getLongParameters();
 		assertNull(params);
-		group.addLongParameter(name, longParameter);
+		group.addLongParameter(longParameter);
 		params = group.getLongParameters();
 		assertNotNull(params);
 		assertTrue(params.containsKey(name));
@@ -234,10 +241,10 @@ public class HummingbirdParameterGroupTest {
 	 */
 	@Test
 	public void testAddBigDecimalParameter() {
-		String name = "BiggestDecimalEver";
+		String name = "bigDecimal";
 		Map<String, Parameter<BigDecimal>> params = group.getBigDecimalParameters();
 		assertNull(params);
-		group.addBigDecimalParameter(name, bigDecimalParameter);
+		group.addBigDecimalParameter(bigDecimalParameter);
 		params = group.getBigDecimalParameters();
 		assertNotNull(params);
 		assertTrue(params.containsKey(name));
@@ -257,7 +264,7 @@ public class HummingbirdParameterGroupTest {
 		String name = "float";
 		Map<String, Parameter<Float>> params = group.getFloatParameters();
 		assertNull(params);
-		group.addFloatParameter(name, floatParameter);
+		group.addFloatParameter(floatParameter);
 		params = group.getFloatParameters();
 		assertNotNull(params);
 		assertTrue(params.containsKey(name));
@@ -277,7 +284,7 @@ public class HummingbirdParameterGroupTest {
 		String name = "double";
 		Map<String, Parameter<Double>> params = group.getDoubleParameters();
 		assertNull(params);
-		group.addDoubleParameter(name, doubleParameter);
+		group.addDoubleParameter(doubleParameter);
 		params = group.getDoubleParameters();
 		assertNotNull(params);
 		assertTrue(params.containsKey(name));
@@ -297,7 +304,7 @@ public class HummingbirdParameterGroupTest {
 		String name = "string";
 		Map<String, Parameter<String>> params = group.getStringParameters();
 		assertNull(params);
-		group.addStringParameter(name, stringParameter);
+		group.addStringParameter(stringParameter);
 		params = group.getStringParameters();
 		assertNotNull(params);
 		assertTrue(params.containsKey(name));
@@ -317,7 +324,7 @@ public class HummingbirdParameterGroupTest {
 		String name = "raw";
 		Map<String, Parameter<Byte[]>> params = group.getRawParameters();
 		assertNull(params);
-		group.addRawParameter(name, rawParameter);
+		group.addRawParameter(rawParameter);
 		params = group.getRawParameters();
 		assertNotNull(params);
 		assertTrue(params.containsKey(name));
@@ -344,8 +351,8 @@ public class HummingbirdParameterGroupTest {
 		assertEquals(0, report.getNumberRawParameters());
 		assertEquals(0, report.getNumberStringParameters());
 		
-		group.addBigDecimalParameter("bigDecimal", bigDecimalParameter);
-		group.addLongParameter("long", longParameter);
+		group.addBigDecimalParameter(bigDecimalParameter);
+		group.addLongParameter(longParameter);
 		report = group.getParameterReport();
 		assertNotNull(report);
 		assertEquals(1, report.getNumberBigDecimalParameters());
@@ -374,7 +381,7 @@ public class HummingbirdParameterGroupTest {
 	 */
 	@Test
 	public void testGetIntegerParameter() throws Exception {
-		group.addIntegerParameter("int", intParameter);
+		group.addIntegerParameter(intParameter);
 		assertEquals(intParameter, group.getIntegerParameter("int"));
 	}
 
@@ -393,7 +400,7 @@ public class HummingbirdParameterGroupTest {
 	 */
 	@Test
 	public void testGetLongParameter() throws UnknownParameterException {
-		group.addLongParameter("long", longParameter);
+		group.addLongParameter(longParameter);
 		assertEquals(longParameter, group.getLongParameter("long"));
 	}
 
@@ -412,7 +419,7 @@ public class HummingbirdParameterGroupTest {
 	 */
 	@Test
 	public void testGetParameter() throws UnknownParameterException {
-		group.addIntegerParameter("int", intParameter);
+		group.addIntegerParameter(intParameter);
 		assertEquals(intParameter, group.getParameter("int"));
 	}
 
@@ -466,7 +473,7 @@ public class HummingbirdParameterGroupTest {
 	 */
 	@Test
 	public void testGetStringParameter() throws UnknownParameterException {
-		group.addStringParameter("string", stringParameter);
+		group.addStringParameter(stringParameter);
 		assertEquals(stringParameter, group.getStringParameter("string"));
 	}
 
@@ -503,5 +510,27 @@ public class HummingbirdParameterGroupTest {
 	@Test
 	public void testToString() {
 		assertNotNull(group.toString());
+	}
+	
+	/**
+	 * Test method for {@link org.hbird.core.spacesystemmodel.tmtcgroups.HummingbirdParameterGroup#validateQualifiedName(String)}.
+	 * @throws UnknownParameterException 
+	 */
+	@Test
+	public void testValidateQualifiedName() throws UnknownParameterException {
+		group.validateQualifiedName("int");
+		group.validateQualifiedName("");
+		group.validateQualifiedName(" ");
+		group.validateQualifiedName("\n");
+		group.validateQualifiedName(" int ");
+	}
+
+	/**
+	 * Test method for {@link org.hbird.core.spacesystemmodel.tmtcgroups.HummingbirdParameterGroup#validateQualifiedName(String)}.
+	 * @throws UnknownParameterException 
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testValidateQualifiedNameNull() throws UnknownParameterException {
+		group.validateQualifiedName(null);
 	}
 }

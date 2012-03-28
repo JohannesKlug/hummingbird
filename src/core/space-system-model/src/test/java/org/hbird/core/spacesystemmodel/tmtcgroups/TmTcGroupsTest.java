@@ -72,14 +72,14 @@ public class TmTcGroupsTest {
 	 */
 	@Test
 	public void testCopyAllParameterValues() throws Exception {
-		target.addIntegerParameter("int", new HummingbirdParameter<Integer>("int", "", "", ""));
-		target.addLongParameter("long", new HummingbirdParameter<Long>("long", "", "", ""));
+		target.addIntegerParameter(new HummingbirdParameter<Integer>("int", "", "", ""));
+		target.addLongParameter(new HummingbirdParameter<Long>("long", "", "", ""));
 		// TODO - 27.03.2012 kimmell - not implemented
-//		target.addFloatParameter("float", new HummingbirdParameter<Float>("float", "", "", ""));
-//		target.addDoubleParameter("double", new HummingbirdParameter<Double>("double", "", "", ""));
-//		target.addBigDecimalParameter("bigDecimal", new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
-		target.addStringParameter("string", new HummingbirdParameter<String>("string", "", "", ""));
-//		target.addRawParameter("raw", new HummingbirdParameter<Byte[]>("raw", "", "", ""));
+//		target.addFloatParameter(new HummingbirdParameter<Float>("float", "", "", ""));
+//		target.addDoubleParameter(new HummingbirdParameter<Double>("double", "", "", ""));
+//		target.addBigDecimalParameter(new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
+		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
+//		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
 		
 
 		int intVal = 100;
@@ -90,13 +90,13 @@ public class TmTcGroupsTest {
 		String stringVal = "value";
 		Byte[] rawVal = new Byte[] { 0xD, 0xE, 0xA, 0xD, 0xC, 0x0, 0xD, 0xE };
 		
-		source.addIntegerParameter("int", intParameter);
-		source.addLongParameter("long", longParameter);
-		source.addFloatParameter("float", floatParameter);
-		source.addDoubleParameter("double", doubleParameter);
-		source.addBigDecimalParameter("bigDecimal", bigDecimalParameter);
-		source.addStringParameter("string", stringParameter);
-		source.addRawParameter("raw", rawParameter);
+		when(intParameter.getQualifiedName()).thenReturn("int");
+		when(longParameter.getQualifiedName()).thenReturn("long");
+		when(floatParameter.getQualifiedName()).thenReturn("float");
+		when(doubleParameter.getQualifiedName()).thenReturn("double");
+		when(bigDecimalParameter.getQualifiedName()).thenReturn("bigDecimal");
+		when(stringParameter.getQualifiedName()).thenReturn("string");
+		when(rawParameter.getQualifiedName()).thenReturn("raw");
 		
 		when(intParameter.getValue()).thenReturn(intVal);
 		when(longParameter.getValue()).thenReturn(longVal);
@@ -105,6 +105,15 @@ public class TmTcGroupsTest {
 		when(bigDecimalParameter.getValue()).thenReturn(bigDecimalVal);
 		when(stringParameter.getValue()).thenReturn(stringVal);
 		when(rawParameter.getValue()).thenReturn(rawVal);
+		
+		source.addIntegerParameter(intParameter);
+		source.addLongParameter(longParameter);
+		source.addFloatParameter(floatParameter);
+		source.addDoubleParameter(doubleParameter);
+		source.addBigDecimalParameter(bigDecimalParameter);
+		source.addStringParameter(stringParameter);
+		source.addRawParameter(rawParameter);
+		
 
 		assertNull(target.getParameter("int").getValue());
 		assertNull(target.getParameter("long").getValue());
@@ -133,7 +142,7 @@ public class TmTcGroupsTest {
 	 */
 	@Test(expected = RuntimeException.class)
 	public void testCopyAllParameterValuesWithException() throws Exception {
-		target.addIntegerParameter("int", intParameter);
+		target.addIntegerParameter(intParameter);
 		TmTcGroups.copyAllParameterValues(source, target);
 	}
 	
@@ -143,13 +152,13 @@ public class TmTcGroupsTest {
 	 */
 	@Test
 	public void testReplaceParameterInGroupInt() throws Exception {
-		target.addIntegerParameter("int", new HummingbirdParameter<Integer>("int", "", "", ""));
-		target.addLongParameter("long", new HummingbirdParameter<Long>("long", "", "", ""));
-		target.addFloatParameter("float", new HummingbirdParameter<Float>("float", "", "", ""));
-		target.addDoubleParameter("double", new HummingbirdParameter<Double>("double", "", "", ""));
-		target.addBigDecimalParameter("bigDecimal", new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
-		target.addStringParameter("string", new HummingbirdParameter<String>("string", "", "", ""));
-		target.addRawParameter("raw", new HummingbirdParameter<Byte[]>("raw", "", "", ""));
+		target.addIntegerParameter(new HummingbirdParameter<Integer>("int", "", "", ""));
+		target.addLongParameter(new HummingbirdParameter<Long>("long", "", "", ""));
+		target.addFloatParameter(new HummingbirdParameter<Float>("float", "", "", ""));
+		target.addDoubleParameter(new HummingbirdParameter<Double>("double", "", "", ""));
+		target.addBigDecimalParameter(new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
+		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
+		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
 		
 		assertNotSame(intParameter, target.getIntegerParameter("int"));
 		assertNotSame(intParameter, target.getParameter("int"));
@@ -167,13 +176,13 @@ public class TmTcGroupsTest {
 	 */
 	@Test
 	public void testReplaceParameterInGroupLong() throws Exception {
-		target.addIntegerParameter("int", new HummingbirdParameter<Integer>("int", "", "", ""));
-		target.addLongParameter("long", new HummingbirdParameter<Long>("long", "", "", ""));
-		target.addFloatParameter("float", new HummingbirdParameter<Float>("float", "", "", ""));
-		target.addDoubleParameter("double", new HummingbirdParameter<Double>("double", "", "", ""));
-		target.addBigDecimalParameter("bigDecimal", new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
-		target.addStringParameter("string", new HummingbirdParameter<String>("string", "", "", ""));
-		target.addRawParameter("raw", new HummingbirdParameter<Byte[]>("raw", "", "", ""));
+		target.addIntegerParameter(new HummingbirdParameter<Integer>("int", "", "", ""));
+		target.addLongParameter(new HummingbirdParameter<Long>("long", "", "", ""));
+		target.addFloatParameter(new HummingbirdParameter<Float>("float", "", "", ""));
+		target.addDoubleParameter(new HummingbirdParameter<Double>("double", "", "", ""));
+		target.addBigDecimalParameter(new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
+		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
+		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
 		
 		assertNotSame(longParameter, target.getLongParameter("long"));
 		assertNotSame(longParameter, target.getParameter("long"));
@@ -191,13 +200,13 @@ public class TmTcGroupsTest {
 	 */
 	@Test
 	public void testReplaceParameterInGroupFloat() throws Exception {
-		target.addIntegerParameter("int", new HummingbirdParameter<Integer>("int", "", "", ""));
-		target.addLongParameter("long", new HummingbirdParameter<Long>("long", "", "", ""));
-		target.addFloatParameter("float", new HummingbirdParameter<Float>("float", "", "", ""));
-		target.addDoubleParameter("double", new HummingbirdParameter<Double>("double", "", "", ""));
-		target.addBigDecimalParameter("bigDecimal", new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
-		target.addStringParameter("string", new HummingbirdParameter<String>("string", "", "", ""));
-		target.addRawParameter("raw", new HummingbirdParameter<Byte[]>("raw", "", "", ""));
+		target.addIntegerParameter(new HummingbirdParameter<Integer>("int", "", "", ""));
+		target.addLongParameter(new HummingbirdParameter<Long>("long", "", "", ""));
+		target.addFloatParameter(new HummingbirdParameter<Float>("float", "", "", ""));
+		target.addDoubleParameter(new HummingbirdParameter<Double>("double", "", "", ""));
+		target.addBigDecimalParameter(new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
+		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
+		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
 		// TODO - 27.03.2012 kimmell - not implemented
 //		assertNotSame(floatParameter, target.getFloatParameter("float"));
 		assertNotSame(floatParameter, target.getParameter("float"));
@@ -216,13 +225,13 @@ public class TmTcGroupsTest {
 	 */
 	@Test
 	public void testReplaceParameterInGroupDouble() throws Exception {
-		target.addIntegerParameter("int", new HummingbirdParameter<Integer>("int", "", "", ""));
-		target.addLongParameter("long", new HummingbirdParameter<Long>("long", "", "", ""));
-		target.addFloatParameter("float", new HummingbirdParameter<Float>("float", "", "", ""));
-		target.addDoubleParameter("double", new HummingbirdParameter<Double>("double", "", "", ""));
-		target.addBigDecimalParameter("bigDecimal", new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
-		target.addStringParameter("string", new HummingbirdParameter<String>("string", "", "", ""));
-		target.addRawParameter("raw", new HummingbirdParameter<Byte[]>("raw", "", "", ""));
+		target.addIntegerParameter(new HummingbirdParameter<Integer>("int", "", "", ""));
+		target.addLongParameter(new HummingbirdParameter<Long>("long", "", "", ""));
+		target.addFloatParameter(new HummingbirdParameter<Float>("float", "", "", ""));
+		target.addDoubleParameter(new HummingbirdParameter<Double>("double", "", "", ""));
+		target.addBigDecimalParameter(new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
+		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
+		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
 		
 		// TODO - 27.03.2012 kimmell - not implemented
 //		assertNotSame(doubleParameter, target.getDoubleParameter("double"));
@@ -242,13 +251,13 @@ public class TmTcGroupsTest {
 	 */
 	@Test
 	public void testReplaceParameterInGroupBigDecimal() throws Exception {
-		target.addIntegerParameter("int", new HummingbirdParameter<Integer>("int", "", "", ""));
-		target.addLongParameter("long", new HummingbirdParameter<Long>("long", "", "", ""));
-		target.addFloatParameter("float", new HummingbirdParameter<Float>("float", "", "", ""));
-		target.addDoubleParameter("double", new HummingbirdParameter<Double>("double", "", "", ""));
-		target.addBigDecimalParameter("bigDecimal", new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
-		target.addStringParameter("string", new HummingbirdParameter<String>("string", "", "", ""));
-		target.addRawParameter("raw", new HummingbirdParameter<Byte[]>("raw", "", "", ""));
+		target.addIntegerParameter(new HummingbirdParameter<Integer>("int", "", "", ""));
+		target.addLongParameter(new HummingbirdParameter<Long>("long", "", "", ""));
+		target.addFloatParameter(new HummingbirdParameter<Float>("float", "", "", ""));
+		target.addDoubleParameter(new HummingbirdParameter<Double>("double", "", "", ""));
+		target.addBigDecimalParameter(new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
+		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
+		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
 		
 		// TODO - 27.03.2012 kimmell - not implemented
 //		assertNotSame(bigDecimalParameter, target.getBigDecimalParameter("bigDecimal"));
@@ -268,13 +277,13 @@ public class TmTcGroupsTest {
 	 */
 	@Test
 	public void testReplaceParameterInGroupString() throws Exception {
-		target.addIntegerParameter("int", new HummingbirdParameter<Integer>("int", "", "", ""));
-		target.addLongParameter("long", new HummingbirdParameter<Long>("long", "", "", ""));
-		target.addFloatParameter("float", new HummingbirdParameter<Float>("float", "", "", ""));
-		target.addDoubleParameter("double", new HummingbirdParameter<Double>("double", "", "", ""));
-		target.addBigDecimalParameter("bigDecimal", new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
-		target.addStringParameter("string", new HummingbirdParameter<String>("string", "", "", ""));
-		target.addRawParameter("raw", new HummingbirdParameter<Byte[]>("raw", "", "", ""));
+		target.addIntegerParameter(new HummingbirdParameter<Integer>("int", "", "", ""));
+		target.addLongParameter(new HummingbirdParameter<Long>("long", "", "", ""));
+		target.addFloatParameter(new HummingbirdParameter<Float>("float", "", "", ""));
+		target.addDoubleParameter(new HummingbirdParameter<Double>("double", "", "", ""));
+		target.addBigDecimalParameter(new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
+		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
+		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
 		
 		assertNotSame(stringParameter, target.getStringParameter("string"));
 		assertNotSame(stringParameter, target.getParameter("string"));
@@ -292,13 +301,13 @@ public class TmTcGroupsTest {
 	 */
 	@Test
 	public void testReplaceParameterInGroupRaw() throws Exception {
-		target.addIntegerParameter("int", new HummingbirdParameter<Integer>("int", "", "", ""));
-		target.addLongParameter("long", new HummingbirdParameter<Long>("long", "", "", ""));
-		target.addFloatParameter("float", new HummingbirdParameter<Float>("float", "", "", ""));
-		target.addDoubleParameter("double", new HummingbirdParameter<Double>("double", "", "", ""));
-		target.addBigDecimalParameter("bigDecimal", new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
-		target.addStringParameter("string", new HummingbirdParameter<String>("string", "", "", ""));
-		target.addRawParameter("raw", new HummingbirdParameter<Byte[]>("raw", "", "", ""));
+		target.addIntegerParameter(new HummingbirdParameter<Integer>("int", "", "", ""));
+		target.addLongParameter(new HummingbirdParameter<Long>("long", "", "", ""));
+		target.addFloatParameter(new HummingbirdParameter<Float>("float", "", "", ""));
+		target.addDoubleParameter(new HummingbirdParameter<Double>("double", "", "", ""));
+		target.addBigDecimalParameter(new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
+		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
+		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
 		
 		// TODO - 27.03.2012 kimmell - not implemented
 //		assertNotSame(rawParameter, target.getRawParameter("raw"));

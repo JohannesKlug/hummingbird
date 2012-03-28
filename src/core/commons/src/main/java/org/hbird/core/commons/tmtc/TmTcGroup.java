@@ -33,13 +33,13 @@ public interface TmTcGroup extends SpaceSystemModelItem {
 	Parameter<?> getParameter(String qualifiedName) throws UnknownParameterException;
 
 
-	void addIntegerParameter(String qualifiedName, Parameter<Integer> parameter);
-	void addLongParameter(String qualifiedName, Parameter<Long> parameter);
-	void addBigDecimalParameter(String qualifiedName, Parameter<BigDecimal> parameter);
-	void addFloatParameter(String qualifiedName, Parameter<Float> parameter);
-	void addDoubleParameter(String qualifiedName, Parameter<Double> parameter);
-	void addStringParameter(String qualifiedName, Parameter<String> parameter);
-	void addRawParameter(String qualifiedName, Parameter<Byte[]> parameter);
+	void addIntegerParameter(Parameter<Integer> parameter);
+	void addLongParameter(Parameter<Long> parameter);
+	void addBigDecimalParameter(Parameter<BigDecimal> parameter);
+	void addFloatParameter(Parameter<Float> parameter);
+	void addDoubleParameter(Parameter<Double> parameter);
+	void addStringParameter(Parameter<String> parameter);
+	void addRawParameter(Parameter<Byte[]> parameter);
 
 	ParameterGroupReport getParameterReport();
 }

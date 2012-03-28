@@ -68,7 +68,7 @@ public class PolynomialCalibrator {
 				}
 				
 				
-				calibratedParametersGroup.addDoubleParameter(calibratedParameter.getQualifiedName(), calibratedParameter);
+				calibratedParametersGroup.addDoubleParameter(calibratedParameter);
 			}
 			
 			
@@ -84,7 +84,7 @@ public class PolynomialCalibrator {
 		Parameter<Double> latParam = new HummingbirdParameter<Double>("LATITUDE", "LATITUDE", "synthetic", "");
 		latParam.setValue(latInDegrees);
 		
-		calibratedParametersGroup.addDoubleParameter("LATITUTE", latParam);
+		calibratedParametersGroup.addDoubleParameter(latParam);
 		
 		return calibratedParametersGroup;
 	}
