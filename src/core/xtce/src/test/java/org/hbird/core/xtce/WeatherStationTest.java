@@ -41,7 +41,7 @@ public class WeatherStationTest {
 	 * 
 	 */
 	private void verifyParameters(Map<String, Parameter<?>> params) {
-		assertEquals(5, params.size());
+		assertEquals(6, params.size());
 		Parameter<?> temperature = params.get("WeatherStation.tm.Temperature");
 		assertNotNull(temperature);
 		assertNull(temperature.getValue());
@@ -81,10 +81,18 @@ public class WeatherStationTest {
 		assertNull(timestamp.getLongDescription());
 		assertEquals("WeatherStation.tm.Timestamp", timestamp.getQualifiedName());
 		assertEquals("Timestamp", timestamp.getName());
-	}
+
+		Parameter<?> image = params.get("WeatherStation.tm.Image");
+		assertNotNull(image);
+		assertNull(image.getValue());
+		assertNull(image.getShortDescription());
+		assertNull(image.getLongDescription());
+		assertEquals("WeatherStation.tm.Image", image.getQualifiedName());
+		assertEquals("Image", image.getName());
+}
 	
 	private void verifyEncodings(Map<String, Encoding> encodings) {
-		assertEquals(5, encodings.size());
+		assertEquals(6, encodings.size());
 		
 		Encoding temperatureEncoding = encodings.get("WeatherStation.tm.Temperature");
 		assertNotNull(temperatureEncoding);
@@ -110,5 +118,10 @@ public class WeatherStationTest {
 		assertNotNull(timestampEncoding);
 		assertEquals(64, timestampEncoding.getSizeInBits());
 		assertEquals(BinaryRepresentation.unsigned, timestampEncoding.getBinaryRepresentation());
+		
+		Encoding imageEncoding = encodings.get("WeatherStation.tm.Image");
+		assertNotNull(imageEncoding);
+		assertNull(imageEncoding.getBinaryRepresentation());
+		assertEquals(0, imageEncoding.getSizeInBits());
 	}
 }

@@ -12,6 +12,7 @@
 				<UnitSet/>
 			</IntegerParameterType>
 			<StringParameterType name="String"/>
+			<BinaryParameterType name="Bytes"/>
 		
 		</ParameterTypeSet>
 
@@ -22,6 +23,7 @@
 			<Parameter parameterTypeRef="Int" name="WindDirection"/>
 			<Parameter parameterTypeRef="String" name="StationName"/>
 			<Parameter parameterTypeRef="Long" name="Timestamp"/>
+			<Parameter parameterTypeRef="Bytes" name="Image"/>
 <!-- 			<Parameter parameterTypeRef="Date" name="Timestamp"/> -->
 		</ParameterSet>
 		
@@ -35,6 +37,7 @@
 					<ParameterRefEntry parameterRef="WindDirection"/>
 					<ParameterRefEntry parameterRef="StationName"/>
  					<ParameterRefEntry parameterRef="Timestamp"/>
+ 					<ParameterRefEntry parameterRef="Image"/>
 				</EntryList>
 			</SequenceContainer>
 		

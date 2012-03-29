@@ -499,9 +499,19 @@ public class HummingbirdParameterGroupTest {
 	 * Test method for {@link org.hbird.core.spacesystemmodel.tmtcgroups.HummingbirdParameterGroup#getRawParameter(java.lang.String)}.
 	 * @throws UnknownParameterException 
 	 */
-	@Test(expected = UnsupportedOperationException.class)
-	public void testGetRawParameter() throws UnknownParameterException {
+	@Test(expected = UnknownParameterException.class)
+	public void testGetRawParameterNotSet() throws UnknownParameterException {
 		group.getRawParameter("raw");
+	}
+	
+	/**
+	 * Test method for {@link org.hbird.core.spacesystemmodel.tmtcgroups.HummingbirdParameterGroup#getRawParameter(java.lang.String)}.
+	 * @throws UnknownParameterException 
+	 */
+	@Test
+	public void testGetRawParameter() throws UnknownParameterException {
+		group.addRawParameter(rawParameter);
+		assertEquals(rawParameter, group.getRawParameter("raw"));
 	}
 
 	/**

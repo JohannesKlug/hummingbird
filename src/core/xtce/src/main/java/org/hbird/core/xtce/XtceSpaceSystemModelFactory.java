@@ -19,6 +19,7 @@ import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.generatedcode.xtce.BaseContainer;
 import org.hbird.core.generatedcode.xtce.BaseDataTypeChoice;
+import org.hbird.core.generatedcode.xtce.BinaryParameterType;
 import org.hbird.core.generatedcode.xtce.CommandMetaData;
 import org.hbird.core.generatedcode.xtce.Comparison;
 import org.hbird.core.generatedcode.xtce.ComparisonList;
@@ -302,6 +303,15 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 				encodings.put(stringParameter.getQualifiedName(), createXtceStringEncoding(type));
 			} 
 			
+			// If it's binary type ...
+			else if (xtceType.getBinaryParameterType() != null) {
+				BinaryParameterType type = xtceType.getBinaryParameterType();
+				Parameter<Byte[]> rawParameter = new HummingbirdParameter<Byte[]>(qualifiedName, name, shortDescription, longDescription);
+				LOG.debug("Adding raw parameter {}", rawParameter.getQualifiedName());
+				rawParameters.put(rawParameter.getQualifiedName(), rawParameter);
+				encodings.put(rawParameter.getQualifiedName(), createXtceBinaryEncoding(type));
+			}
+			
 			else {
 				throw new InvalidSpaceSystemDefinitionException("Unknown or unsupported parameter type: " + parameterTypeRef
 						+ ". A parameter references an undeclared parameter type in the XTCE space system definition file.");
@@ -519,9 +529,12 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 		else if (stringParameters.containsKey(qualifiedName)) {
 			group.addStringParameter(stringParameters.get(qualifiedName));
 		}
+		else if (rawParameters.containsKey(qualifiedName)) {
+			group.addRawParameter(rawParameters.get(qualifiedName));
+		}
 		else {
 			// TODO Finish unsupported parameter types
-			throw new InvalidSpaceSystemDefinitionException("Hummingbird currently only supports integer, long & string parameters");
+			throw new InvalidSpaceSystemDefinitionException("Hummingbird currently only supports integer, long string & binary parameters");
 		}
 	}
 
@@ -592,6 +605,13 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 			name = item.getBooleanParameterType().getName();
 			if (name == null) {
 				throw new InvalidSpaceSystemDefinitionException("BooleanParameter has a null name; cannot add to parameterTypes");
+			}
+		}
+		// If it is a binary parameter...
+		else if (item.getBinaryParameterType() != null) {
+			name = item.getBinaryParameterType().getName();
+			if (name == null) {
+				throw new InvalidSpaceSystemDefinitionException("BinaryParameter has a null name; cannot add to parameterTypes");
 			}
 		}
 		else {
@@ -716,4 +736,9 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 		return encoding;
 	}
 
+	final static Encoding createXtceBinaryEncoding(final BinaryParameterType type) throws InvalidSpaceSystemDefinitionException {
+		Encoding encoding = new Encoding();
+		// TODO - 29.03.2012 kimmell - implement
+		return encoding;
+	}
 }

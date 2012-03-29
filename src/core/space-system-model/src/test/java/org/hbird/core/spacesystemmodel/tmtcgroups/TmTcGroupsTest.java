@@ -79,7 +79,7 @@ public class TmTcGroupsTest {
 //		target.addDoubleParameter(new HummingbirdParameter<Double>("double", "", "", ""));
 //		target.addBigDecimalParameter(new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
 		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
-//		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
+		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
 		
 
 		int intVal = 100;
@@ -122,7 +122,7 @@ public class TmTcGroupsTest {
 //		assertNull(target.getParameter("double").getValue());
 //		assertNull(target.getParameter("bigDecimal").getValue());
 		assertNull(target.getParameter("string").getValue());
-//		assertNull(target.getParameter("raw").getValue());
+		assertNull(target.getParameter("raw").getValue());
 		
 		
 		TmTcGroups.copyAllParameterValues(source, target);
@@ -133,7 +133,7 @@ public class TmTcGroupsTest {
 //		assertEquals(doubleVal, target.getParameter("float").getValue());
 //		assertEquals(bigDecimalVal, target.getParameter("bigDecimal").getValue());
 		assertEquals(stringVal, target.getParameter("string").getValue());
-//		assertEquals(rawVal, target.getParameter("raw").getValue());
+		assertEquals(rawVal, target.getParameter("raw").getValue());
 	}
 	
 	/**
@@ -309,14 +309,12 @@ public class TmTcGroupsTest {
 		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
 		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
 		
-		// TODO - 27.03.2012 kimmell - not implemented
-//		assertNotSame(rawParameter, target.getRawParameter("raw"));
+		assertNotSame(rawParameter, target.getRawParameter("raw"));
 		assertNotSame(rawParameter, target.getParameter("raw"));
 		
 		when(rawParameter.getQualifiedName()).thenReturn("raw");
 		TmTcGroups.replaceParameterInGroup(target, "raw", rawParameter);
-		// TODO - 27.03.2012 kimmell - not implemented
-//		assertEquals(rawParameter, target.getRawParameter("raw"));
+		assertEquals(rawParameter, target.getRawParameter("raw"));
 		assertEquals(rawParameter, target.getParameter("raw"));
 		inOrder.verify(rawParameter, times(1)).getQualifiedName();
 	}

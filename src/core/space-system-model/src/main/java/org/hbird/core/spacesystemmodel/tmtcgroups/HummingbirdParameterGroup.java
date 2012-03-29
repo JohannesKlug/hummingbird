@@ -227,9 +227,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	@Override
 	public Parameter<?> getParameter(final String qualifiedName) throws UnknownParameterException {
 		Parameter<?> p = parameters.get(qualifiedName);
-		if (p == null) {
-			throw new UnknownParameterException(qualifiedName);
-		}
+		validateParameterNotNull(p, qualifiedName);
 		return p;
 	}
 
@@ -274,7 +272,9 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 
 	@Override
 	public Parameter<Byte[]> getRawParameter(final String qualifiedName) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
+		Parameter<Byte[]> p = rawParameters == null ? null : rawParameters.get(qualifiedName);
+		validateParameterNotNull(p, qualifiedName);
+		return p;
 	}
 
 	@Override
