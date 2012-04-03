@@ -294,7 +294,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		}
 		catch (UnknownParameterException e) {
 			LOG.error("Unknown parameter when copying parameter values. This is is a serious internal error and must indicate a corruption "
-					+ "in memory, a system bug, or a seriosu misuse of the API (copying paraemters to a different space system"
+					+ "in memory, a system bug, or a serious misuse of the API (copying paraemters to a different space system"
 					+ "model which has a different structure.  The system must shut down as integrity cannot be guaranteed.");
 			System.exit(-1);
 		}
