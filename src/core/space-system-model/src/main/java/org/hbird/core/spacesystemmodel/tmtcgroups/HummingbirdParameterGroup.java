@@ -16,7 +16,7 @@ import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
  * @author Johannes Klug
  */
 public class HummingbirdParameterGroup implements ParameterGroup {
-	
+
 	private static final long serialVersionUID = -6877917071118156741L;
 
 	private final String qualifiedName;
@@ -220,13 +220,6 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-					getIntegerParameter(qualifiedName).setReceivedTime(sourceGroup.getIntegerParameter(qualifiedName).getReceivedTime());
-					getLongParameter(qualifiedName).setReceivedTime(sourceGroup.getLongParameter(qualifiedName).getReceivedTime());
-					getFloatParameter(qualifiedName).setReceivedTime(sourceGroup.getFloatParameter(qualifiedName).getReceivedTime());
-					getDoubleParameter(qualifiedName).setReceivedTime(sourceGroup.getDoubleParameter(qualifiedName).getReceivedTime());
-					getBigDecimalParameter(qualifiedName).setReceivedTime(sourceGroup.getBigDecimalParameter(qualifiedName).getReceivedTime());
-					getStringParameter(qualifiedName).setReceivedTime(sourceGroup.getStringParameter(qualifiedName).getReceivedTime());
-					getRawParameter(qualifiedName).setReceivedTime(sourceGroup.getRawParameter(qualifiedName).getReceivedTime());
 	public Parameter<?> getParameter(final String qualifiedName) throws UnknownParameterException {
 		Parameter<?> p = parameters.get(qualifiedName);
 		validateParameterNotNull(p, qualifiedName);
@@ -259,14 +252,14 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		validateParameterNotNull(p, qualifiedName);
 		return p;
 	}
-	
-	void validateQualifiedName(String qualifiedName) throws NullPointerException {
+
+	void validateQualifiedName(final String qualifiedName) throws NullPointerException {
 		if (qualifiedName == null) {
 			throw new NullPointerException("Parameter qualifed name is null");
 		}
 	}
-	
-	void validateParameterNotNull(Parameter<?> p, String qualifiedName) throws UnknownParameterException {
+
+	void validateParameterNotNull(final Parameter<?> p, final String qualifiedName) throws UnknownParameterException {
 		if (p == null) {
 			throw new UnknownParameterException(qualifiedName);
 		}
@@ -281,8 +274,6 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 
 	@Override
 	public String toString() {
-		return "HummingbirdParameterGroup [qualifiedName=" + qualifiedName + ", name=" + name + ", shortDescription=" + shortDescription + ", longDescription="
-				+ longDescription + ", timeStamp=" + timeStamp + ", parameters=" + parameters + "]";
 		StringBuilder builder = new StringBuilder();
 		builder.append("HummingbirdParameterGroup [qualifiedName=");
 		builder.append(qualifiedName);
