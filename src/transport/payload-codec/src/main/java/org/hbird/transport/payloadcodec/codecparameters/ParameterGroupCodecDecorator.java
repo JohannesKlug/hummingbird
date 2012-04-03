@@ -11,6 +11,7 @@ import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeExcept
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.core.spacesystemmodel.tmtcgroups.TmTcGroups;
 
 import com.rits.cloning.Cloner;
 
@@ -44,7 +45,7 @@ public final class ParameterGroupCodecDecorator {
 
 					Encoding enc = findEncoding(entry.getValue().getQualifiedName());
 					Parameter<Integer> codecAwareIntParameter = IntegerCodecFactory.decorateParameterWithCodec(entry.getValue(), enc);
-					pg.replaceParameterInGroup(codecAwareIntParameter.getQualifiedName(), codecAwareIntParameter);
+					TmTcGroups.replaceParameterInGroup(pg, codecAwareIntParameter.getQualifiedName(), codecAwareIntParameter);
 				}
 			}
 
@@ -57,7 +58,7 @@ public final class ParameterGroupCodecDecorator {
 
 					Encoding enc = findEncoding(entry.getValue().getQualifiedName());
 					Parameter<Long> codecAwareLongParameter = LongCodecFactory.decorateParameterWithCodec(entry.getValue(), enc);
-					pg.replaceParameterInGroup(codecAwareLongParameter.getQualifiedName(), codecAwareLongParameter);
+					TmTcGroups.replaceParameterInGroup(pg, codecAwareLongParameter.getQualifiedName(), codecAwareLongParameter);
 				}
 			}
 

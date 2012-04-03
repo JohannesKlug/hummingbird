@@ -8,8 +8,6 @@ import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.commons.tmtc.ParameterGroupReport;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * TELEMETRY
@@ -18,8 +16,8 @@ import org.slf4j.LoggerFactory;
  * @author Johannes Klug
  */
 public class HummingbirdParameterGroup implements ParameterGroup {
-	private static final long serialVersionUID = 7810839127277387757L;
-	private static final Logger LOG = LoggerFactory.getLogger(HummingbirdParameterGroup.class);
+	
+	private static final long serialVersionUID = -6877917071118156741L;
 
 	private final String qualifiedName;
 	private final String name;
@@ -119,7 +117,9 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public void addIntegerParameter(final String qualifiedName, final Parameter<Integer> parameter) {
+	public void addIntegerParameter(final Parameter<Integer> parameter) {
+		String qualifiedName = parameter.getQualifiedName();
+		validateQualifiedName(qualifiedName);
 		if (this.integerParameters == null) {
 			this.integerParameters = new LinkedHashMap<String, Parameter<Integer>>();
 		}
@@ -129,7 +129,9 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public void addLongParameter(final String qualifiedName, final Parameter<Long> parameter) {
+	public void addLongParameter(final Parameter<Long> parameter) {
+		String qualifiedName = parameter.getQualifiedName();
+		validateQualifiedName(qualifiedName);
 		if (this.longParameters == null) {
 			this.longParameters = new LinkedHashMap<String, Parameter<Long>>();
 		}
@@ -139,7 +141,9 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public void addBigDecimalParameter(final String qualifiedName, final Parameter<BigDecimal> parameter) {
+	public void addBigDecimalParameter(final Parameter<BigDecimal> parameter) {
+		String qualifiedName = parameter.getQualifiedName();
+		validateQualifiedName(qualifiedName);
 		if (this.bigDecimalParameters == null) {
 			this.bigDecimalParameters = new LinkedHashMap<String, Parameter<BigDecimal>>();
 		}
@@ -149,7 +153,9 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public void addFloatParameter(final String qualifiedName, final Parameter<Float> parameter) {
+	public void addFloatParameter(final Parameter<Float> parameter) {
+		String qualifiedName = parameter.getQualifiedName();
+		validateQualifiedName(qualifiedName);
 		if (this.floatParameters == null) {
 			this.floatParameters = new LinkedHashMap<String, Parameter<Float>>();
 		}
@@ -159,7 +165,9 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public void addDoubleParameter(final String qualifiedName, final Parameter<Double> parameter) {
+	public void addDoubleParameter(final Parameter<Double> parameter) {
+		String qualifiedName = parameter.getQualifiedName();
+		validateQualifiedName(qualifiedName);
 		if (this.doubleParameters == null) {
 			this.doubleParameters = new LinkedHashMap<String, Parameter<Double>>();
 		}
@@ -169,7 +177,9 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public void addStringParameter(final String qualifiedName, final Parameter<String> parameter) {
+	public void addStringParameter(final Parameter<String> parameter) {
+		String qualifiedName = parameter.getQualifiedName();
+		validateQualifiedName(qualifiedName);
 		if (this.stringParameters == null) {
 			this.stringParameters = new LinkedHashMap<String, Parameter<String>>();
 		}
@@ -179,7 +189,9 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	}
 
 	@Override
-	public void addRawParameter(final String qualifiedName, final Parameter<Byte[]> parameter) {
+	public void addRawParameter(final Parameter<Byte[]> parameter) {
+		String qualifiedName = parameter.getQualifiedName();
+		validateQualifiedName(qualifiedName);
 		if (this.rawParameters == null) {
 			this.rawParameters = new LinkedHashMap<String, Parameter<Byte[]>>();
 		}
@@ -193,121 +205,31 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		return this.parameterReport;
 	}
 
-	// Cast suppress reasoning: Parameter names must be unique so if a Param is found in a specific type collection
-	// it is safe to cast.
-	@SuppressWarnings("unchecked")
-	@Override
-	public void replaceParameterInGroup(final String qualifiedName, final Parameter<?> parameter) {
-		String pname = parameter.getQualifiedName();
-
-		if (parameters.containsKey(pname)) {
-			parameters.put(qualifiedName, parameter);
-		}
-
-		if (integerParameters != null && integerParameters.containsKey(pname)) {
-			integerParameters.put(qualifiedName, (Parameter<Integer>) parameter);
-		}
-		else if (longParameters != null && longParameters.containsKey(pname)) {
-			longParameters.put(qualifiedName, (Parameter<Long>) parameter);
-		}
-		else if (bigDecimalParameters != null && bigDecimalParameters.containsKey(pname)) {
-			bigDecimalParameters.put(qualifiedName, (Parameter<BigDecimal>) parameter);
-		}
-		else if (floatParameters != null && floatParameters.containsKey(pname)) {
-			floatParameters.put(qualifiedName, (Parameter<Float>) parameter);
-		}
-		else if (doubleParameters != null && doubleParameters.containsKey(pname)) {
-			doubleParameters.put(qualifiedName, (Parameter<Double>) parameter);
-		}
-		else if (stringParameters != null && stringParameters.containsKey(pname)) {
-			stringParameters.put(qualifiedName, (Parameter<String>) parameter);
-		}
-		else if (rawParameters != null && rawParameters.containsKey(pname)) {
-			rawParameters.put(qualifiedName, (Parameter<Byte[]>) parameter);
-		}
-	}
-
 	@Override
 	public Parameter<Integer> getIntegerParameter(final String qualifiedName) throws UnknownParameterException {
-		Parameter<Integer> p = integerParameters.get(qualifiedName);
-		if (p == null) {
-			throw new UnknownParameterException(qualifiedName);
-		}
+		Parameter<Integer> p = integerParameters == null ? null : integerParameters.get(qualifiedName);
+		validateParameterNotNull(p, qualifiedName);
 		return p;
 	}
 
 	@Override
 	public Parameter<Long> getLongParameter(final String qualifiedName) throws UnknownParameterException {
-		Parameter<Long> p = longParameters.get(qualifiedName);
-		if (p == null) {
-			throw new UnknownParameterException(qualifiedName);
-		}
+		Parameter<Long> p = longParameters == null ? null : longParameters.get(qualifiedName);
+		validateParameterNotNull(p, qualifiedName);
 		return p;
 	}
 
 	@Override
-	public ParameterGroup copyAllParameterValues(final ParameterGroup sourceGroup) {
-		try {
-			// Ints
-			if (integerParameters != null) {
-				for (String qualifiedName : integerParameters.keySet()) {
-					getIntegerParameter(qualifiedName).setValue(sourceGroup.getIntegerParameter(qualifiedName).getValue());
 					getIntegerParameter(qualifiedName).setReceivedTime(sourceGroup.getIntegerParameter(qualifiedName).getReceivedTime());
-				}
-			}
-			if (longParameters != null) {
-				for (String qualifiedName : longParameters.keySet()) {
-					getLongParameter(qualifiedName).setValue(sourceGroup.getLongParameter(qualifiedName).getValue());
 					getLongParameter(qualifiedName).setReceivedTime(sourceGroup.getLongParameter(qualifiedName).getReceivedTime());
-				}
-			}
-			if (floatParameters != null) {
-				for (String qualifiedName : floatParameters.keySet()) {
-					getFloatParameter(qualifiedName).setValue(sourceGroup.getFloatParameter(qualifiedName).getValue());
 					getFloatParameter(qualifiedName).setReceivedTime(sourceGroup.getFloatParameter(qualifiedName).getReceivedTime());
-				}
-			}
-			if (doubleParameters != null) {
-				for (String qualifiedName : doubleParameters.keySet()) {
-					getDoubleParameter(qualifiedName).setValue(sourceGroup.getDoubleParameter(qualifiedName).getValue());
 					getDoubleParameter(qualifiedName).setReceivedTime(sourceGroup.getDoubleParameter(qualifiedName).getReceivedTime());
-				}
-			}
-			if (bigDecimalParameters != null) {
-				for (String qualifiedName : bigDecimalParameters.keySet()) {
-					getBigDecimalParameter(qualifiedName).setValue(sourceGroup.getBigDecimalParameter(qualifiedName).getValue());
 					getBigDecimalParameter(qualifiedName).setReceivedTime(sourceGroup.getBigDecimalParameter(qualifiedName).getReceivedTime());
-				}
-			}
-			if (stringParameters != null) {
-				for (String qualifiedName : stringParameters.keySet()) {
-					getStringParameter(qualifiedName).setValue(sourceGroup.getStringParameter(qualifiedName).getValue());
 					getStringParameter(qualifiedName).setReceivedTime(sourceGroup.getStringParameter(qualifiedName).getReceivedTime());
-				}
-			}
-			if (rawParameters != null) {
-				for (String qualifiedName : rawParameters.keySet()) {
-					getRawParameter(qualifiedName).setValue(sourceGroup.getRawParameter(qualifiedName).getValue());
 					getRawParameter(qualifiedName).setReceivedTime(sourceGroup.getRawParameter(qualifiedName).getReceivedTime());
-				}
-			}
-		}
-		catch (UnknownParameterException e) {
-			LOG.error("Unknown parameter when copying parameter values. This is is a serious internal error and must indicate a corruption "
-					+ "in memory, a system bug, or a serious misuse of the API (copying paraemters to a different space system"
-					+ "model which has a different structure.  The system must shut down as integrity cannot be guaranteed.");
-			System.exit(-1);
-		}
-
-		return this;
-	}
-
-	@Override
 	public Parameter<?> getParameter(final String qualifiedName) throws UnknownParameterException {
 		Parameter<?> p = parameters.get(qualifiedName);
-		if (p == null) {
-			throw new UnknownParameterException(qualifiedName);
-		}
+		validateParameterNotNull(p, qualifiedName);
 		return p;
 	}
 
@@ -333,23 +255,62 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 
 	@Override
 	public Parameter<String> getStringParameter(final String qualifiedName) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
+		Parameter<String> p = stringParameters == null ? null : stringParameters.get(qualifiedName);
+		validateParameterNotNull(p, qualifiedName);
+		return p;
+	}
+	
+	void validateQualifiedName(String qualifiedName) throws NullPointerException {
+		if (qualifiedName == null) {
+			throw new NullPointerException("Parameter qualifed name is null");
+		}
+	}
+	
+	void validateParameterNotNull(Parameter<?> p, String qualifiedName) throws UnknownParameterException {
+		if (p == null) {
+			throw new UnknownParameterException(qualifiedName);
+		}
 	}
 
 	@Override
 	public Parameter<Byte[]> getRawParameter(final String qualifiedName) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
+		Parameter<Byte[]> p = rawParameters == null ? null : rawParameters.get(qualifiedName);
+		validateParameterNotNull(p, qualifiedName);
+		return p;
 	}
 
 	@Override
 	public String toString() {
 		return "HummingbirdParameterGroup [qualifiedName=" + qualifiedName + ", name=" + name + ", shortDescription=" + shortDescription + ", longDescription="
 				+ longDescription + ", timeStamp=" + timeStamp + ", parameters=" + parameters + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("HummingbirdParameterGroup [qualifiedName=");
+		builder.append(qualifiedName);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", shortDescription=");
+		builder.append(shortDescription);
+		builder.append(", longDescription=");
+		builder.append(longDescription);
+		builder.append(", integerParameters=");
+		builder.append(integerParameters);
+		builder.append(", longParameters=");
+		builder.append(longParameters);
+		builder.append(", floatParameters=");
+		builder.append(floatParameters);
+		builder.append(", doubleParameters=");
+		builder.append(doubleParameters);
+		builder.append(", bigDecimalParameters=");
+		builder.append(bigDecimalParameters);
+		builder.append(", stringParameters=");
+		builder.append(stringParameters);
+		builder.append(", rawParameters=");
+		builder.append(rawParameters);
+		builder.append("]");
+		return builder.toString();
 	}
-
 	@Override
 	public void setTimeStamp(final long timeStamp) {
 		this.timeStamp = timeStamp;
 	}
-
 }
