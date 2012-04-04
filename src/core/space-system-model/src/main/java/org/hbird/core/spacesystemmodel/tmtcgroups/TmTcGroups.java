@@ -9,14 +9,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Various ParameterGroup utility methods.
+ *
+ * TODO Still not sure where these belong. They are used by the payload codec but that doesn't mean it
+ * won't be required elsewhere as changing and copying parameters is a pretty generic task.
+ *
+ * @author Mark Doyle
  * @author kimmell
  *
  */
-// TODO - 27.03.2012 kimmell - move it to core module?
 public class TmTcGroups {
 
 	private static final Logger LOG = LoggerFactory.getLogger(TmTcGroups.class);
-	
+
 	// Cast suppress reasoning: Parameter names must be unique so if a Param is found in a specific type collection
 	// it is safe to cast.
 	@SuppressWarnings("unchecked")
@@ -49,43 +54,50 @@ public class TmTcGroups {
 			group.getRawParameters().put(qualifiedName, (Parameter<Byte[]>) parameter);
 		}
 	}
-	
+
 	public static TmTcGroup copyAllParameterValues(final TmTcGroup sourceGroup, final TmTcGroup targetGroup) {
 		try {
 			// Ints
 			if (targetGroup.getIntegerParameters() != null) {
 				for (String qualifiedName : targetGroup.getIntegerParameters().keySet()) {
 					targetGroup.getIntegerParameter(qualifiedName).setValue(sourceGroup.getIntegerParameter(qualifiedName).getValue());
+					targetGroup.getIntegerParameter(qualifiedName).setReceivedTime(sourceGroup.getIntegerParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (targetGroup.getLongParameters() != null) {
 				for (String qualifiedName : targetGroup.getLongParameters().keySet()) {
 					targetGroup.getLongParameter(qualifiedName).setValue(sourceGroup.getLongParameter(qualifiedName).getValue());
+					targetGroup.getLongParameter(qualifiedName).setReceivedTime(sourceGroup.getLongParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (targetGroup.getFloatParameters() != null) {
 				for (String qualifiedName : targetGroup.getFloatParameters().keySet()) {
 					targetGroup.getFloatParameter(qualifiedName).setValue(sourceGroup.getFloatParameter(qualifiedName).getValue());
+					targetGroup.getFloatParameter(qualifiedName).setReceivedTime(sourceGroup.getFloatParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (targetGroup.getDoubleParameters() != null) {
 				for (String qualifiedName : targetGroup.getDoubleParameters().keySet()) {
 					targetGroup.getDoubleParameter(qualifiedName).setValue(sourceGroup.getDoubleParameter(qualifiedName).getValue());
+					targetGroup.getDoubleParameter(qualifiedName).setReceivedTime(sourceGroup.getDoubleParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (targetGroup.getBigDecimalParameters() != null) {
 				for (String qualifiedName : targetGroup.getBigDecimalParameters().keySet()) {
 					targetGroup.getBigDecimalParameter(qualifiedName).setValue(sourceGroup.getBigDecimalParameter(qualifiedName).getValue());
+					targetGroup.getBigDecimalParameter(qualifiedName).setReceivedTime(sourceGroup.getBigDecimalParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (targetGroup.getStringParameters() != null) {
 				for (String qualifiedName : targetGroup.getStringParameters().keySet()) {
 					targetGroup.getStringParameter(qualifiedName).setValue(sourceGroup.getStringParameter(qualifiedName).getValue());
+					targetGroup.getStringParameter(qualifiedName).setReceivedTime(sourceGroup.getStringParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (targetGroup.getRawParameters() != null) {
 				for (String qualifiedName : targetGroup.getRawParameters().keySet()) {
 					targetGroup.getRawParameter(qualifiedName).setValue(sourceGroup.getRawParameter(qualifiedName).getValue());
+					targetGroup.getRawParameter(qualifiedName).setReceivedTime(sourceGroup.getRawParameter(qualifiedName).getReceivedTime());
 				}
 			}
 		}

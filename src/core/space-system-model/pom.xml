@@ -9,7 +9,6 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<groupId>org.hbird.core</groupId>
 	<artifactId>space-system-model</artifactId>
 	<packaging>bundle</packaging>
 	<name>space-system-model</name>
@@ -36,7 +35,7 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							org.hbird.transport.spacesystemmodel.*,
+							org.hbird.core.spacesystemmodel.*,
 						</Export-Package>
 					</instructions>
 				</configuration>

@@ -9,4 +9,5 @@ import java.io.Serializable;
  */
 public interface ParameterGroup extends TmTcGroup, Serializable {
 
+	void setTimeStamp(long timeStamp);
 }

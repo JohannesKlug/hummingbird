@@ -26,4 +26,8 @@ public interface Parameter<T> extends SpaceSystemModelItem, Serializable {
 	 *            the value of this Parameter
 	 */
 	void setValue(T value);
+
+	long getReceivedTime();
+
+	void setReceivedTime(long timestamp);
 }

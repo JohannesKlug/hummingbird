@@ -10,6 +10,7 @@
 	<artifactId>protocols</artifactId>
 	<name>Protocols</name>
 	<description>All data transmission protocol implementation are contained herein.</description>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -33,6 +34,7 @@
 					</instructions>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -47,6 +49,8 @@
 			</plugin>
 		</plugins>
 	</build>
+
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.camel</groupId>

@@ -8,7 +8,6 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.hbird.core</groupId>
 	<artifactId>commons</artifactId>
 	<packaging>bundle</packaging>
 	<name>commons</name>

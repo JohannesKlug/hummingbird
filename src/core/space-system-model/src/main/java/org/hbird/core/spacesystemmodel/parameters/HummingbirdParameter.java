@@ -17,6 +17,7 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	private final String name;
 	private final String shortDescription;
 	private final String longDescription;
+	private long receivedTime;
 	private T value;
 
 	/**
@@ -76,5 +77,15 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	@Override
 	public String getQualifiedName() {
 		return this.qualifiedName;
+	}
+
+	@Override
+	public long getReceivedTime() {
+		return receivedTime;
+	}
+
+	@Override
+	public void setReceivedTime(final long timestamp) {
+		this.receivedTime = timestamp;
 	}
 }

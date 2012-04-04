@@ -16,7 +16,7 @@ import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
  * @author Johannes Klug
  */
 public class HummingbirdParameterGroup implements ParameterGroup {
-	
+
 	private static final long serialVersionUID = -6877917071118156741L;
 
 	private final String qualifiedName;
@@ -70,12 +70,7 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	public String getLongDescription() {
 		return this.longDescription;
 	}
-	
-	@Override
-	public void setTimeStamp(long timeStamp) {
-		this.timeStamp = timeStamp;
-	}
-	
+
 	@Override
 	public long getTimeStamp() {
 		return this.timeStamp;
@@ -257,14 +252,14 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		validateParameterNotNull(p, qualifiedName);
 		return p;
 	}
-	
-	void validateQualifiedName(String qualifiedName) throws NullPointerException {
+
+	void validateQualifiedName(final String qualifiedName) throws NullPointerException {
 		if (qualifiedName == null) {
 			throw new NullPointerException("Parameter qualifed name is null");
 		}
 	}
-	
-	void validateParameterNotNull(Parameter<?> p, String qualifiedName) throws UnknownParameterException {
+
+	void validateParameterNotNull(final Parameter<?> p, final String qualifiedName) throws UnknownParameterException {
 		if (p == null) {
 			throw new UnknownParameterException(qualifiedName);
 		}
@@ -304,5 +299,9 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 		builder.append(rawParameters);
 		builder.append("]");
 		return builder.toString();
+	}
+	@Override
+	public void setTimeStamp(final long timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 }
