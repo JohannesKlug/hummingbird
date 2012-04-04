@@ -1,4 +1,4 @@
-package org.hbird.business.calibration;
+package org.hbird.application.calibration;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hbird.application.calibration.PolynomialCalibrator;
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.parameters.HummingbirdParameter;
 import org.junit.Test;
