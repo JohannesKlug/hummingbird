@@ -6,7 +6,7 @@
 		<artifactId>application</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>web</artifactId>
+	<artifactId>web-backend</artifactId>
 	<groupId>org.hbird.application</groupId>
 	<packaging>bundle</packaging>
 
@@ -38,7 +38,7 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							org.hbird.application.web.*,
+							org.hbird.application.web.backend.*,
 						</Export-Package>
 					</instructions>
 				</configuration>
@@ -68,6 +68,16 @@ org.glassfish.jersey.core:jersey-client -->
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-client</artifactId>
 			<version>2.0-m02</version>
+		</dependency>
+				<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-grizzly2-http</artifactId>
+			<version>2.0-m02</version>
+		</dependency>
+		<dependency>
+			<groupId>org.msgpack</groupId>
+			<artifactId>msgpack</artifactId>
+			<version>0.6.5</version>
 		</dependency>
 	</dependencies>
 
