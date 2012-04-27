@@ -8,6 +8,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.hbird.transport</groupId>
 	<artifactId>protocols</artifactId>
+	<packaging>bundle</packaging>
 	<name>Protocols</name>
 	<description>All data transmission protocol implementation are contained herein.</description>
 
@@ -27,10 +28,10 @@
 				</executions>
 				<configuration>
 					<instructions>
-						<Export-Package> org.hbird.transport.protocols 
+						<Export-Package> org.hbird.transport.protocols.* 
 						</Export-Package>
-						<Private-Package> org.hbird.transport, org.slf4j.* 
-						</Private-Package>
+						<!-- <Private-Package>org.slf4j.* 
+						</Private-Package> -->
 					</instructions>
 				</configuration>
 			</plugin>

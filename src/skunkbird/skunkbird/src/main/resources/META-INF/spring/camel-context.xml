@@ -23,15 +23,13 @@
 		<constructor-arg value="30"></constructor-arg>
 	</bean>
 
-	<bean id="publisher" class="org.hbird.spacesystempublisher.publishing.InMemorySpaceSystemPublisher">
+	<bean id="publisher" class="org.hbird.core.spacesystempublisher.publishing.InMemorySpaceSystemPublisher">
 		<property name="model" ref="ssmodel"></property>
 	</bean>
 	
 	<bean id="encodings" factory-bean="publisher" factory-method="getEncodings"></bean>
 	
 	<bean id="payload-codec" class="org.hbird.transport.payloadcodec.InMemoryPayloadCodec">
-		<constructor-arg ref="ssmodel" ></constructor-arg>
-		<constructor-arg ref="encodings"></constructor-arg>
 	</bean>
 	
 	<bean id="parameterChecker" class="org.hbird.test.integration.ParameterGroupChecker" />

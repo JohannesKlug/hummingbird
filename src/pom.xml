@@ -12,6 +12,11 @@
 	<description>The Hummingbird root project is a container for all Hummingbird components, each created in a separate maven module. By building this project, the complete system can be built.</description>
 	<url>http://hbird.org/</url>
 
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 
 	<modules>
 		<module>core</module>
@@ -41,12 +46,13 @@
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<cloning.version>1.7.4</cloning.version>
 		<guava.version>11.0</guava.version>
+		<mockito.version>1.9.0</mockito.version>
 	</properties>
 
 	<scm>
-		<!-- <connection>scm:git:git@github.com:JohannesKlug/hummingbird.git</connection> 
-			<developerConnection>scm:git:git@github.com:JohannesKlug/hummingbird.git</developerConnection> 
-			<url>git@github.com:JohannesKlug/hummingbird.git</url> -->
+		<connection>scm:git:git@github.com:JohannesKlug/hbird.git</connection> 
+			<developerConnection>scm:git:git@github.com:JohannesKlug/hbird.git</developerConnection> 
+			<url>git@github.com:JohannesKlug/hbird.git</url>
 	</scm>
 
 	<issueManagement>
@@ -277,6 +283,13 @@
 				<groupId>uk.com.robust-it</groupId>
 				<artifactId>cloning</artifactId>
 				<version>${cloning.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>${mockito.version}</version>
+				<type>jar</type>
+				<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

@@ -17,6 +17,7 @@ import org.hbird.core.spacesystemmodel.exceptions.ParameterNotInModelException;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.core.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.core.spacesystemmodel.tmtcgroups.HummingbirdParameterGroup;
+import org.hbird.core.spacesystemmodel.tmtcgroups.TmTcGroups;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,9 +65,9 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 		LOG.debug("Building parameter group " + TEST_GROUP_QUALIFIED_NAME);
 		ParameterGroup testGroup = new HummingbirdParameterGroup(TEST_GROUP_QUALIFIED_NAME, TEST_GROUP_NAME, "", "");
 		groups.put(testGroup.getQualifiedName(), testGroup);
-		testGroup.addIntegerParameter(spacecraftId.getQualifiedName(), spacecraftId);
-		testGroup.addIntegerParameter(fuelParam.getQualifiedName(), fuelParam);
-		testGroup.addLongParameter(laserTemp.getQualifiedName(), laserTemp);
+		testGroup.addIntegerParameter(spacecraftId);
+		testGroup.addIntegerParameter(fuelParam);
+		testGroup.addLongParameter(laserTemp);
 		
 		LOG.debug("Building parameter group with restrictions" + RESTRICTED_GROUP_QUALIFIED_NAME);
 		ParameterGroup restrictedTestGroup = new HummingbirdParameterGroup(RESTRICTED_GROUP_QUALIFIED_NAME, RESTRICTED_GROUP_NAME, "", "");
@@ -74,9 +75,9 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 		List<String> testGroupRestrictions = new ArrayList<String>();
 		testGroupRestrictions.add(INTEGER_RESTRICTION_ID);
 		restrictions.put(restrictedTestGroup.getQualifiedName(), testGroupRestrictions);
-		restrictedTestGroup.addIntegerParameter(spacecraftId.getQualifiedName(), spacecraftId);
-		restrictedTestGroup.addIntegerParameter(fuelParam.getQualifiedName(), fuelParam);
-		restrictedTestGroup.addLongParameter(laserTemp.getQualifiedName(), laserTemp);
+		restrictedTestGroup.addIntegerParameter(spacecraftId);
+		restrictedTestGroup.addIntegerParameter(fuelParam);
+		restrictedTestGroup.addLongParameter(laserTemp);
 		
 		LOG.debug("Building parameter group with restrictions ans only laser temp" + RESTRICTED_LASER_GROUP_QUALIFIED_NAME);
 		ParameterGroup restrictedLaserTestGroup = new HummingbirdParameterGroup(RESTRICTED_LASER_GROUP_QUALIFIED_NAME, RESTRICTED_LASER_GROUP_NAME, "", "");
@@ -84,9 +85,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 		List<String> testLaserGroupRestrictions = new ArrayList<String>();
 		testLaserGroupRestrictions.add(INTEGER_LASER_RESTRICTION_ID);
 		restrictions.put(restrictedLaserTestGroup.getQualifiedName(), testLaserGroupRestrictions);
-		restrictedLaserTestGroup.addLongParameter(laserTemp.getQualifiedName(), laserTemp);
-		
-		
+		restrictedLaserTestGroup.addLongParameter(laserTemp);
 	}
 
 	@Override
@@ -116,7 +115,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	@Override
 	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInModelException {
 		for (ParameterGroup pg : this.groups.values()) {
-			pg.replaceParameterInGroup(qualifiedName, newParameter);
+			TmTcGroups.replaceParameterInGroup(pg, qualifiedName, newParameter);
 		}
 	}
 
