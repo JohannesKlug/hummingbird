@@ -1,23 +1,19 @@
 <?xml version="1.0"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-
+	
 	<parent>
 		<artifactId>hummingbird-core</artifactId>
 		<groupId>org.hbird.core</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-
-	<packaging>bundle</packaging>
 	
-	<artifactId>space-system-publisher</artifactId>
 	<packaging>bundle</packaging>
+	<artifactId>space-system-publisher</artifactId>
 	<name>space-system-publisher</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -38,54 +34,46 @@
 				</executions>
 				<configuration>
 					<instructions>
-						<Export-Package>
-							org.hbird.core.spacesystempublisher,
-							org.hbird.core.spacesystempublisher.publishing,
-							org.hbird.core.spacesystempublisher.interfaces
+						<Export-Package> org.hbird.core.spacesystempublisher, org.hbird.core.spacesystempublisher.publishing,
+							org.hbird.core.spacesystempublisher.interfaces 
+						</Export-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.maven.ide.eclipse</groupId>
+				<artifactId>lifecycle-mapping</artifactId>
+				<version>0.9.9-SNAPSHOT</version>
+				<configuration>
+					<mappingId>generic</mappingId>
+					<configurators></configurators>
+					<mojoExecutions></mojoExecutions>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<instructions>
+						<Export-Package> org.hbird.core.spacesystempublisher.*, 
 						</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
-        <build>
-                <plugins>
-                        <plugin>
-                                <groupId>org.maven.ide.eclipse</groupId>
-                                <artifactId>lifecycle-mapping</artifactId>
-                                <version>0.9.9-SNAPSHOT</version>
-                                <configuration>
-                                        <mappingId>generic</mappingId>
-                                        <configurators></configurators>
-                                        <mojoExecutions></mojoExecutions>
-                                </configuration>
-                        </plugin>
-
-                        <plugin>
-                                <groupId>org.apache.felix</groupId>
-                                <artifactId>maven-bundle-plugin</artifactId>
-                                <executions>
-                                        <execution>
-                                                <id>bundle-manifest</id>
-                                                <phase>process-classes</phase>
-                                                <goals>
-                                                        <goal>manifest</goal>
-                                                </goals>
-                                        </execution>
-                                </executions>
-                                <configuration>
-                                        <instructions>
-                                                <Export-Package>
-                                                        org.hbird.core.spacesystempublisher.*,
-                                                </Export-Package>
-                                        </instructions>
-                                </configuration>
-                        </plugin>
-                </plugins>
-        </build>
-
-
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.hbird.core</groupId>
@@ -106,6 +94,5 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
-
-	<version>0.0.1</version>
+	
 </project>
