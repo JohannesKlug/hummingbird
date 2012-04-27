@@ -14,5 +14,6 @@
 	
 	<modules>
 		<module>calibration</module>
+		<module>web-backend</module>
 	</modules>
 </project>
