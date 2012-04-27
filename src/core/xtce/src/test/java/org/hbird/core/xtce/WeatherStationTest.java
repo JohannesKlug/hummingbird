@@ -1,5 +1,9 @@
 package org.hbird.core.xtce;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 import java.net.URL;
 import java.util.Map;
 
@@ -10,8 +14,6 @@ import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * @author kimmell
  *
@@ -19,28 +21,28 @@ import static org.junit.Assert.*;
 public class WeatherStationTest {
 
 	private static final String SSM_URL = "WeatherStation.xml";
-	
+
 	private SpaceSystemModel ssm;
 
 	@Before
 	public void setUp() {
 		URL url = WeatherStationTest.class.getResource(SSM_URL);
-		ssm = new XtceSpaceSystemModelFactory().createSpaceSystemModel(url.getPath());
+		ssm = new XtceSpaceSystemModelFactory(url.getPath()).createSpaceSystemModel();
 		assertNotNull(ssm);
 	}
-	
+
 	@Test
 	public void testSpaceModel() {
 		assertEquals("WeatherStation", ssm.getName());
-		
+
 		verifyParameters(ssm.getAllPayloadParameters());
 		verifyEncodings(ssm.getEncodings());
 	}
 
 	/**
-	 * 
+	 *
 	 */
-	private void verifyParameters(Map<String, Parameter<?>> params) {
+	private void verifyParameters(final Map<String, Parameter<?>> params) {
 		assertEquals(6, params.size());
 		Parameter<?> temperature = params.get("WeatherStation.tm.Temperature");
 		assertNotNull(temperature);
@@ -49,7 +51,7 @@ public class WeatherStationTest {
 		assertNull(temperature.getLongDescription());
 		assertEquals("WeatherStation.tm.Temperature", temperature.getQualifiedName());
 		assertEquals("Temperature", temperature.getName());
-		
+
 		Parameter<?> windSpeed = params.get("WeatherStation.tm.WindSpeed");
 		assertNotNull(windSpeed);
 		assertNull(windSpeed.getValue());
@@ -65,7 +67,7 @@ public class WeatherStationTest {
 		assertNull(windDirection.getLongDescription());
 		assertEquals("WeatherStation.tm.WindDirection", windDirection.getQualifiedName());
 		assertEquals("WindDirection", windDirection.getName());
-		
+
 		Parameter<?> stationName = params.get("WeatherStation.tm.StationName");
 		assertNotNull(stationName);
 		assertNull(stationName.getValue());
@@ -73,7 +75,7 @@ public class WeatherStationTest {
 		assertNull(stationName.getLongDescription());
 		assertEquals("WeatherStation.tm.StationName", stationName.getQualifiedName());
 		assertEquals("StationName", stationName.getName());
-		
+
 		Parameter<?> timestamp = params.get("WeatherStation.tm.Timestamp");
 		assertNotNull(timestamp);
 		assertNull(timestamp.getValue());
@@ -90,35 +92,35 @@ public class WeatherStationTest {
 		assertEquals("WeatherStation.tm.Image", image.getQualifiedName());
 		assertEquals("Image", image.getName());
 }
-	
-	private void verifyEncodings(Map<String, Encoding> encodings) {
+
+	private void verifyEncodings(final Map<String, Encoding> encodings) {
 		assertEquals(6, encodings.size());
-		
+
 		Encoding temperatureEncoding = encodings.get("WeatherStation.tm.Temperature");
 		assertNotNull(temperatureEncoding);
 		assertEquals(32, temperatureEncoding.getSizeInBits());
 		assertEquals(BinaryRepresentation.unsigned, temperatureEncoding.getBinaryRepresentation());
-		
+
 		Encoding windSpeedEncoding = encodings.get("WeatherStation.tm.WindSpeed");
 		assertNotNull(windSpeedEncoding);
 		assertEquals(32, windSpeedEncoding.getSizeInBits());
 		assertEquals(BinaryRepresentation.unsigned, windSpeedEncoding.getBinaryRepresentation());
-		
+
 		Encoding windDirectionEncoding = encodings.get("WeatherStation.tm.WindDirection");
 		assertNotNull(windDirectionEncoding);
 		assertEquals(32, windDirectionEncoding.getSizeInBits());
 		assertEquals(BinaryRepresentation.unsigned, windDirectionEncoding.getBinaryRepresentation());
-		
+
 		Encoding stationNameEncoding = encodings.get("WeatherStation.tm.StationName");
 		assertNotNull(stationNameEncoding);
 		assertEquals(0, stationNameEncoding.getSizeInBits());
 		assertEquals(BinaryRepresentation.UTF8, stationNameEncoding.getBinaryRepresentation());
-		
+
 		Encoding timestampEncoding = encodings.get("WeatherStation.tm.Timestamp");
 		assertNotNull(timestampEncoding);
 		assertEquals(64, timestampEncoding.getSizeInBits());
 		assertEquals(BinaryRepresentation.unsigned, timestampEncoding.getBinaryRepresentation());
-		
+
 		Encoding imageEncoding = encodings.get("WeatherStation.tm.Image");
 		assertNotNull(imageEncoding);
 		assertNull(imageEncoding.getBinaryRepresentation());

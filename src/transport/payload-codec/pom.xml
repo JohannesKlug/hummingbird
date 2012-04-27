@@ -50,6 +50,9 @@
 						<Export-Package>
 							org.hbird.transport.payloadcodec.*,
 						</Export-Package>
+						<Embed-Dependency>
+							cloning
+						</Embed-Dependency>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -61,16 +64,12 @@
 			<groupId>org.hbird.core</groupId>
 			<artifactId>space-system-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-core</artifactId>
-			<scope>compile</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>uk.com.robust-it</groupId>
 			<artifactId>cloning</artifactId>

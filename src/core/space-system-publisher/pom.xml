@@ -11,6 +11,8 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
+	<packaging>bundle</packaging>
+	
 	<artifactId>space-system-publisher</artifactId>
 	<name>space-system-publisher</name>
 	<url>http://maven.apache.org</url>
@@ -18,6 +20,33 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<instructions>
+						<Export-Package>
+							org.hbird.core.spacesystempublisher,
+							org.hbird.core.spacesystempublisher.publishing,
+							org.hbird.core.spacesystempublisher.interfaces
+						</Export-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 	<dependencies>
 		<dependency>
@@ -40,4 +69,5 @@
 		</dependency>
 	</dependencies>
 
+	<version>0.0.1</version>
 </project>

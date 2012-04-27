@@ -51,10 +51,12 @@ import org.slf4j.LoggerFactory;
 import com.google.common.primitives.Ints;
 
 public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
-	
+
 	public static final BinaryRepresentation DEFAULT_STRING_ENCODING = BinaryRepresentation.UTF8;
-	
+
 	private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModelFactory.class);
+
+	private final String spaceSystemModelFilename;
 
 	private SpaceSystem spaceSystem;
 
@@ -94,7 +96,8 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 
 	private final Map<String, Encoding> encodings = new HashMap<String, Encoding>();
 
-	public XtceSpaceSystemModelFactory() {
+	public XtceSpaceSystemModelFactory(final String spaceSystemModelFilename) {
+		this.spaceSystemModelFilename = spaceSystemModelFilename;
 	}
 
 	/*
@@ -102,7 +105,8 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	 *
 	 * @see org.hbird.core.xtce.SpaceSystemModelFactory#createSpaceSystemModel(java.lang.String)
 	 */
-	public final SpaceSystemModel createSpaceSystemModel(final String spaceSystemModelFilename) {
+	@Override
+	public final SpaceSystemModel createSpaceSystemModel() {
 
 		LOG.debug("File = " + spaceSystemModelFilename);
 
@@ -249,7 +253,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 			String qualifiedName = qualifiedNamePrefix + name;
 			String shortDescription = xtceParameter.getParameter().getShortDescription();
 			String longDescription = xtceParameter.getParameter().getLongDescription();
-			
+
 			// If it's an integer type ...
 			if (xtceType.getIntegerParameterType() != null) {
 				IntegerParameterType type = xtceType.getIntegerParameterType();
@@ -293,7 +297,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 						throw new InvalidSpaceSystemDefinitionException("Invalid bit size for float type " + type.getName());
 				}
 			}
-		
+
 			// If it's a string type ...
 			else if (xtceType.getStringParameterType() != null) {
 				StringParameterType type = xtceType.getStringParameterType();
@@ -301,8 +305,8 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 				LOG.debug("Adding String parameter {}", stringParameter.getQualifiedName());
 				stringParameters.put(stringParameter.getQualifiedName(), stringParameter);
 				encodings.put(stringParameter.getQualifiedName(), createXtceStringEncoding(type));
-			} 
-			
+			}
+
 			// If it's binary type ...
 			else if (xtceType.getBinaryParameterType() != null) {
 				BinaryParameterType type = xtceType.getBinaryParameterType();
@@ -311,7 +315,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 				rawParameters.put(rawParameter.getQualifiedName(), rawParameter);
 				encodings.put(rawParameter.getQualifiedName(), createXtceBinaryEncoding(type));
 			}
-			
+
 			else {
 				throw new InvalidSpaceSystemDefinitionException("Unknown or unsupported parameter type: " + parameterTypeRef
 						+ ". A parameter references an undeclared parameter type in the XTCE space system definition file.");
@@ -711,7 +715,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 		}
 		return encoding;
 	}
-	
+
 	final static Encoding createXtceStringEncoding(final StringParameterType type) throws InvalidSpaceSystemDefinitionException {
 		Encoding encoding = new Encoding();
 		if (type.getCharacterWidth() == null) {
@@ -732,7 +736,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 			    	throw new InvalidSpaceSystemDefinitionException("Invalid string encoding type " + type);
 			}
 		}
-		
+
 		return encoding;
 	}
 

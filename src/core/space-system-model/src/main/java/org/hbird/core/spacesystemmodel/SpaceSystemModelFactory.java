@@ -5,6 +5,6 @@ import org.hbird.core.spacesystemmodel.exceptions.InvalidSpaceSystemDefinitionEx
 
 public interface SpaceSystemModelFactory {
 
-	SpaceSystemModel createSpaceSystemModel(final String spaceSystemmodelFilename) throws InvalidParameterTypeException, InvalidSpaceSystemDefinitionException;
+	SpaceSystemModel createSpaceSystemModel() throws InvalidParameterTypeException, InvalidSpaceSystemDefinitionException;
 
 }

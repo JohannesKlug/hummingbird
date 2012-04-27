@@ -11,14 +11,13 @@ import java.util.Map;
 
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
-import org.hbird.core.xtce.XtceSpaceSystemModelFactory;
-import org.hbird.core.xtce.exceptions.UnsupportedXtceConstructException;
 import org.hbird.core.generatedcode.xtce.SpaceSystem;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidSpaceSystemDefinitionException;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
+import org.hbird.core.xtce.exceptions.UnsupportedXtceConstructException;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -76,7 +75,7 @@ public class XtceSpaceSystemModelTest {
 	@Test
 	public void testSpaceSystemCreationAllUints() throws InvalidSpaceSystemDefinitionException, InvalidParameterTypeException, NumberFormatException, UnsupportedXtceConstructException {
 		URL testFileUrl = XtceSpaceSystemModelTest.class.getResource("TestSat-all-uints.xml");
-		xtceSsm = new XtceSpaceSystemModelFactory().createSpaceSystemModel(testFileUrl.getPath());
+		xtceSsm = new XtceSpaceSystemModelFactory(testFileUrl.getPath()).createSpaceSystemModel();
 
 		// Assert it was created.
 		assertNotNull(xtceSsm);
@@ -132,7 +131,7 @@ public class XtceSpaceSystemModelTest {
 	@Test
 	public void testParameterGroupsCreationAllUints() throws InvalidSpaceSystemDefinitionException, InvalidParameterTypeException, UnknownParameterGroupException, UnsupportedXtceConstructException {
 		URL testFileUrl = XtceSpaceSystemModelTest.class.getResource("TestSat-all-uints.xml");
-		xtceSsm = new XtceSpaceSystemModelFactory().createSpaceSystemModel(testFileUrl.getPath());
+		xtceSsm = new XtceSpaceSystemModelFactory(testFileUrl.getPath()).createSpaceSystemModel();
 		String tmPrefix = xtceSsm.getName() + ".tm.";
 
 		Collection<ParameterGroup> parameterGroups = xtceSsm.getParameterGroups().values();

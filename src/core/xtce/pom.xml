@@ -74,6 +74,9 @@
 						<Private-Package>
 							org.hbird.core.generatedcode*
 						</Private-Package>
+						<Embed-Dependency>
+							castor-core,castor-xml
+						</Embed-Dependency>
 					</instructions>
 				</configuration>
 			</plugin>
