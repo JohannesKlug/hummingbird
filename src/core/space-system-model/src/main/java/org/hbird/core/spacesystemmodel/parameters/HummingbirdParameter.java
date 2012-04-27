@@ -6,7 +6,7 @@ import org.hbird.core.commons.tmtc.Parameter;
 /**
  * The Hummingbird implementation of the {@link Parameter}.
  *
- * This is a generic class that is able to represent a parameter of any primitive or class.
+ * This is a generic class that is able to represent a parameter of any class.
  *
  * @author Mark Doyle
  */
