@@ -29,7 +29,7 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 
 	@Override
 	public Map<String, ParameterGroup> getCommands() {
-		throw new UnsupportedOperationException("Not yet implemented - raise a bug ;)");
+		return model.getCommands();
 	}
 
 	@Override
