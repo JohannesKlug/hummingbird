@@ -6,11 +6,10 @@
 
 	<parent>
 		<artifactId>hummingbird-transport</artifactId>
-		<groupId>org.hbird</groupId>
+		<groupId>org.hbird.transport</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<groupId>org.hbird.transport</groupId>
 	<artifactId>payload-codec</artifactId>
 	<packaging>bundle</packaging>
 	<name>Generic Payload Codec</name>

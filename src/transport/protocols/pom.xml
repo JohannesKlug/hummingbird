@@ -2,12 +2,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<artifactId>hummingbird-transport</artifactId>
-		<groupId>org.hbird</groupId>
+		<groupId>org.hbird.transport</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.hbird.transport</groupId>
+	
 	<artifactId>protocols</artifactId>
+	
 	<packaging>bundle</packaging>
 	<name>Protocols</name>
 	<description>All data transmission protocol implementation are contained herein.</description>

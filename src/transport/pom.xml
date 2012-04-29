@@ -14,14 +14,10 @@
 	<url/>
 
 	<modules>
-<!--		<module>commons</module> -->
-<!--		<module>tele</module> -->
 		<module>protocols</module>
-<!--		<module>codec</module> -->
-<!--		<module>space-system-model</module> -->
 		<module>payload-codec</module>
-<!--		<module>xtce</module> -->
 	</modules>
 
 	
+	<groupId>org.hbird.transport</groupId>
 </project>
