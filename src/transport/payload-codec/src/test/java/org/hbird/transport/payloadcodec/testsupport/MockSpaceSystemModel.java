@@ -48,41 +48,41 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 
 	public MockSpaceSystemModel() {
 		LOG.debug("Building parameter " + SCID_PARAMETER_QUALIFIED_NAME);
-		Encoding uint31 = new Encoding(31, BinaryRepresentation.unsigned);
-		Parameter<Integer> spacecraftId = new HummingbirdParameter<Integer>(SCID_PARAMETER_QUALIFIED_NAME, SCID_PARAMETER_NAME, "", "");
+		final Encoding uint31 = new Encoding(31, BinaryRepresentation.unsigned);
+		final Parameter<Integer> spacecraftId = new HummingbirdParameter<Integer>(SCID_PARAMETER_QUALIFIED_NAME, SCID_PARAMETER_NAME, "", "");
 		encodings.put(spacecraftId.getQualifiedName(), uint31);
 
 		LOG.debug("Building parameter " + FUEL_PARAMETER_QUALIFIED_NAME);
-		Encoding uint12 = new Encoding(12, BinaryRepresentation.unsigned);
-		Parameter<Integer> fuelParam = new HummingbirdParameter<Integer>(FUEL_PARAMETER_QUALIFIED_NAME, FUEL_PARAMETER_NAME, "", "");
+		final Encoding uint12 = new Encoding(12, BinaryRepresentation.unsigned);
+		final Parameter<Integer> fuelParam = new HummingbirdParameter<Integer>(FUEL_PARAMETER_QUALIFIED_NAME, FUEL_PARAMETER_NAME, "", "");
 		encodings.put(fuelParam.getQualifiedName(), uint12);
 
 		LOG.debug("Building parameter " + LASER_TEMP_PARAMETER_QUALIFIED_NAME);
-		Encoding twosInt31 = new Encoding(40, BinaryRepresentation.twosComplement);
-		Parameter<Long> laserTemp = new HummingbirdParameter<Long>(LASER_TEMP_PARAMETER_QUALIFIED_NAME, LASER_TEMP_PARAMETER_NAME, "", "");
+		final Encoding twosInt31 = new Encoding(40, BinaryRepresentation.twosComplement);
+		final Parameter<Long> laserTemp = new HummingbirdParameter<Long>(LASER_TEMP_PARAMETER_QUALIFIED_NAME, LASER_TEMP_PARAMETER_NAME, "", "");
 		encodings.put(laserTemp.getQualifiedName(), twosInt31);
 
 		LOG.debug("Building parameter group " + TEST_GROUP_QUALIFIED_NAME);
-		ParameterGroup testGroup = new HummingbirdParameterGroup(TEST_GROUP_QUALIFIED_NAME, TEST_GROUP_NAME, "", "");
+		final ParameterGroup testGroup = new HummingbirdParameterGroup(TEST_GROUP_QUALIFIED_NAME, TEST_GROUP_NAME, "", "");
 		groups.put(testGroup.getQualifiedName(), testGroup);
 		testGroup.addIntegerParameter(spacecraftId);
 		testGroup.addIntegerParameter(fuelParam);
 		testGroup.addLongParameter(laserTemp);
-		
+
 		LOG.debug("Building parameter group with restrictions" + RESTRICTED_GROUP_QUALIFIED_NAME);
-		ParameterGroup restrictedTestGroup = new HummingbirdParameterGroup(RESTRICTED_GROUP_QUALIFIED_NAME, RESTRICTED_GROUP_NAME, "", "");
+		final ParameterGroup restrictedTestGroup = new HummingbirdParameterGroup(RESTRICTED_GROUP_QUALIFIED_NAME, RESTRICTED_GROUP_NAME, "", "");
 		groups.put(restrictedTestGroup.getQualifiedName(), restrictedTestGroup);
-		List<String> testGroupRestrictions = new ArrayList<String>();
+		final List<String> testGroupRestrictions = new ArrayList<String>();
 		testGroupRestrictions.add(INTEGER_RESTRICTION_ID);
 		restrictions.put(restrictedTestGroup.getQualifiedName(), testGroupRestrictions);
 		restrictedTestGroup.addIntegerParameter(spacecraftId);
 		restrictedTestGroup.addIntegerParameter(fuelParam);
 		restrictedTestGroup.addLongParameter(laserTemp);
-		
+
 		LOG.debug("Building parameter group with restrictions ans only laser temp" + RESTRICTED_LASER_GROUP_QUALIFIED_NAME);
-		ParameterGroup restrictedLaserTestGroup = new HummingbirdParameterGroup(RESTRICTED_LASER_GROUP_QUALIFIED_NAME, RESTRICTED_LASER_GROUP_NAME, "", "");
+		final ParameterGroup restrictedLaserTestGroup = new HummingbirdParameterGroup(RESTRICTED_LASER_GROUP_QUALIFIED_NAME, RESTRICTED_LASER_GROUP_NAME, "", "");
 		groups.put(restrictedLaserTestGroup.getQualifiedName(), restrictedLaserTestGroup);
-		List<String> testLaserGroupRestrictions = new ArrayList<String>();
+		final List<String> testLaserGroupRestrictions = new ArrayList<String>();
 		testLaserGroupRestrictions.add(INTEGER_LASER_RESTRICTION_ID);
 		restrictions.put(restrictedLaserTestGroup.getQualifiedName(), testLaserGroupRestrictions);
 		restrictedLaserTestGroup.addLongParameter(laserTemp);
@@ -90,7 +90,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public ParameterGroup getParameterGroup(final String name) throws UnknownParameterGroupException {
-		ParameterGroup group = groups.get(name);
+		final ParameterGroup group = groups.get(name);
 		if (group == null) {
 			throw new UnknownParameterGroupException(name);
 		}
@@ -104,7 +104,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public Parameter<?> getParameter(final String qualifiedName) throws UnknownParameterException {
-		for (ParameterGroup pg : this.groups.values()) {
+		for (final ParameterGroup pg : this.groups.values()) {
 			if (pg.getAllParameters().containsKey(qualifiedName)) {
 				return pg.getParameter(qualifiedName);
 			}
@@ -114,7 +114,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInModelException {
-		for (ParameterGroup pg : this.groups.values()) {
+		for (final ParameterGroup pg : this.groups.values()) {
 			TmTcGroups.replaceParameterInGroup(pg, qualifiedName, newParameter);
 		}
 	}
@@ -131,7 +131,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public Parameter<Integer> getIntParameter(final String qualifiedName) throws UnknownParameterException {
-		for (ParameterGroup pg : this.groups.values()) {
+		for (final ParameterGroup pg : this.groups.values()) {
 			if (pg.getIntegerParameters().containsKey(qualifiedName)) {
 				return pg.getIntegerParameter(qualifiedName);
 			}
@@ -141,7 +141,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public Parameter<Long> getLongParameter(final String qualifiedName) throws UnknownParameterException {
-		for (ParameterGroup pg : this.groups.values()) {
+		for (final ParameterGroup pg : this.groups.values()) {
 			if (pg.getLongParameters().containsKey(qualifiedName)) {
 				return pg.getLongParameter(qualifiedName);
 			}
@@ -176,9 +176,9 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public Map<String, Parameter<?>> getAllPayloadParameters() {
-		Map<String, Parameter<?>> allParameters = new HashMap<String, Parameter<?>>();
-		for (ParameterGroup pg : this.groups.values()) {
-			for (String parameterId : pg.getAllParameters().keySet()) {
+		final Map<String, Parameter<?>> allParameters = new HashMap<String, Parameter<?>>();
+		for (final ParameterGroup pg : this.groups.values()) {
+			for (final String parameterId : pg.getAllParameters().keySet()) {
 				allParameters.put(parameterId, pg.getAllParameters().get(parameterId));
 			}
 		}
@@ -187,11 +187,11 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public Map<String, Parameter<Integer>> getAllUniqueIntegerParameters() {
-		Map<String, Parameter<Integer>> allParameters = new HashMap<String, Parameter<Integer>>();
-		for (ParameterGroup pg : this.groups.values()) {
-			Map<String, Parameter<Integer>> integerParameters = pg.getIntegerParameters();
+		final Map<String, Parameter<Integer>> allParameters = new HashMap<String, Parameter<Integer>>();
+		for (final ParameterGroup pg : this.groups.values()) {
+			final Map<String, Parameter<Integer>> integerParameters = pg.getIntegerParameters();
 			if (integerParameters != null) {
-				for (String qualifiedName : integerParameters.keySet()) {
+				for (final String qualifiedName : integerParameters.keySet()) {
 					allParameters.put(qualifiedName, integerParameters.get(qualifiedName));
 				}
 			}
@@ -201,11 +201,11 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public Map<String, Parameter<Long>> getAllUniqueLongParameters() {
-		Map<String, Parameter<Long>> allParameters = new HashMap<String, Parameter<Long>>();
-		for (ParameterGroup pg : this.groups.values()) {
-			Map<String, Parameter<Long>> longParameters = pg.getLongParameters();
+		final Map<String, Parameter<Long>> allParameters = new HashMap<String, Parameter<Long>>();
+		for (final ParameterGroup pg : this.groups.values()) {
+			final Map<String, Parameter<Long>> longParameters = pg.getLongParameters();
 			if (longParameters != null) {
-				for (String qualifiedName : longParameters.keySet()) {
+				for (final String qualifiedName : longParameters.keySet()) {
 					allParameters.put(qualifiedName, longParameters.get(qualifiedName));
 				}
 			}
@@ -246,6 +246,12 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	@Override
 	public Map<String, Encoding> getEncodings() {
 		return this.encodings;
+	}
+
+	@Override
+	public Map<String, ParameterGroup> getCommands() {
+		// Not used in the mock...not yet anyway!
+		throw new UnsupportedOperationException();
 	}
 
 }

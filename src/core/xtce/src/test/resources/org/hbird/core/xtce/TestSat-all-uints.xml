@@ -3,7 +3,7 @@
 			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			 xmlns:xtce="http://www.omg.org/space/xtce"
 			 xsi:schemaLocation="http://www.omg.org/space/xtce http://dl.dropbox.com/u/10007025/hbird/xtce/SpaceSystemV1.0.xsd"
-			 name="TestSat-all-units">
+			 name="TestSat-all-uints">
 
 	<TelemetryMetaData>
 		<ParameterTypeSet>
@@ -105,7 +105,6 @@
 			<xtce:Parameter parameterTypeRef="1-bit-uint" name="DOOR_LATCH_FLAG"></xtce:Parameter>
 		</xtce:ParameterSet>
 
-
 		<xtce:MetaCommandSet>
 			<xtce:MetaCommand name="OPEN_LATCH">
 				<xtce:ArgumentList>
@@ -113,7 +112,8 @@
 					<xtce:Argument name="Door latch state" argumentTypeRef="DOOR_LATCH_FLAG"></xtce:Argument>
 				</xtce:ArgumentList>
 			</xtce:MetaCommand>
-		</xtce:MetaCommandSet>		
+		</xtce:MetaCommandSet>
+
 	</xtce:CommandMetaData>
 
 

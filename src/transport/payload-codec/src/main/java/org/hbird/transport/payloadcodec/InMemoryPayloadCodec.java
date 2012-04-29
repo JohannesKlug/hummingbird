@@ -13,13 +13,13 @@ import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.commons.util.BytesUtility;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
+import org.hbird.core.spacesystemmodel.tmtcgroups.TmTcGroups;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.codecparameters.ParameterGroupCodecDecorator;
 import org.hbird.transport.payloadcodec.exceptions.NoEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
-import org.hbird.core.spacesystemmodel.tmtcgroups.TmTcGroups;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,25 +38,25 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		this.encodings = encodings;
 		this.restrictions = restrictions;
 
-		ParameterGroupCodecDecorator decorator = new ParameterGroupCodecDecorator(this.encodings);
+		final ParameterGroupCodecDecorator decorator = new ParameterGroupCodecDecorator(this.encodings);
 
 		try {
 			this.codecAwareParameterGroups = decorator.decorateParameterGroups(parameterGroups);
 			System.out.println("Decorated");
 		}
-		catch (NoEncodingException e) {
+		catch (final NoEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		catch (UnsupportedParameterEncodingException e) {
+		catch (final UnsupportedParameterEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		catch (UnknownParameterEncodingException e) {
+		catch (final UnknownParameterEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		catch (UnexpectedParameterTypeException e) {
+		catch (final UnexpectedParameterTypeException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -73,16 +73,16 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		ParameterGroup decodedGroup = null;
 		if (payloadLayoutId == null) {
 			// no restrictions, decode everything!
-			for (ParameterGroup pg : codecAwareParameterGroups.values()) {
+			for (final ParameterGroup pg : codecAwareParameterGroups.values()) {
 				decodedGroup = decodeParameterGroup(payload, pg, timeStamp);
 			}
 		}
 		else {
-			for (Entry<String, List<String>> restrictionEntry : restrictions.entrySet()) {
+			for (final Entry<String, List<String>> restrictionEntry : restrictions.entrySet()) {
 				if (restrictionEntry.getValue().contains(payloadLayoutId)) {
 					// we found the correct PG
-					String pgName = restrictionEntry.getKey();
-					ParameterGroup pg = codecAwareParameterGroups.get(pgName);
+					final String pgName = restrictionEntry.getKey();
+					final ParameterGroup pg = codecAwareParameterGroups.get(pgName);
 					decodedGroup = decodeParameterGroup(payload, pg, timeStamp);
 				}
 			}
@@ -96,11 +96,11 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		int offset = 0;
 		int previousSize = 0;
 		int count = 0;
-		for (Parameter<?> p : pg.getAllParameters().values()) {
+		for (final Parameter<?> p : pg.getAllParameters().values()) {
 			if (count != 0) {
 				offset += previousSize;
 			}
-			Encoding enc = this.encodings.get(p.getQualifiedName());
+			final Encoding enc = this.encodings.get(p.getQualifiedName());
 			((CodecParameter<?>) p).decode(payload, offset);
 			p.setReceivedTime(timestamp);
 			previousSize = enc.getSizeInBits();
@@ -112,10 +112,10 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 
 	private ParameterGroup getUndecoratedVersion(final ParameterGroup pg) {
 		// get the name of the pg
-		String name = pg.getName();
+		final String name = pg.getName();
 		// find it in the undecorated version
 		ParameterGroup undecoratedGroup = null;
-		for (ParameterGroup group : parameterGroups.values()) {
+		for (final ParameterGroup group : parameterGroups.values()) {
 			if (StringUtils.equals(group.getName(), name)) {
 				// set the value of the parameters in the undecorated version
 				undecoratedGroup = (ParameterGroup) TmTcGroups.copyAllParameterValues(pg, group);
@@ -133,21 +133,21 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 
 	@Override
 	public GenericPayload encodeToGenericPayload(final ParameterGroup parameterGroup) {
-		BitSet encoded = new BitSet();
+		final BitSet encoded = new BitSet();
 
-		String undecoratedGroupName = parameterGroup.getName();
+		final String undecoratedGroupName = parameterGroup.getName();
 		ParameterGroup decoratedGroup = null;
 		// for each parameter group in the decorated parameter groups...
-		for (ParameterGroup pg : codecAwareParameterGroups.values()) {
+		for (final ParameterGroup pg : codecAwareParameterGroups.values()) {
 			// if we find the equivalent group we must transfer the set values
 			if (StringUtils.equals(pg.getName(), undecoratedGroupName)) {
 				decoratedGroup = pg;
 
 				// Integers
-				Map<String, Parameter<Integer>> integerParameters = parameterGroup.getIntegerParameters();
+				final Map<String, Parameter<Integer>> integerParameters = parameterGroup.getIntegerParameters();
 				if (integerParameters != null) {
-					for (Parameter<Integer> undecoratedParameter : integerParameters.values()) {
-						for (Parameter<Integer> decoratedParameter : pg.getIntegerParameters().values()) {
+					for (final Parameter<Integer> undecoratedParameter : integerParameters.values()) {
+						for (final Parameter<Integer> decoratedParameter : pg.getIntegerParameters().values()) {
 							if (StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
 								decoratedParameter.setValue(undecoratedParameter.getValue());
 							}
@@ -156,10 +156,10 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 				}
 
 				// Longs
-				Map<String, Parameter<Long>> longParameters = parameterGroup.getLongParameters();
+				final Map<String, Parameter<Long>> longParameters = parameterGroup.getLongParameters();
 				if (longParameters != null) {
-					for (Parameter<Long> undecoratedParameter : longParameters.values()) {
-						for (Parameter<Long> decoratedParameter : pg.getLongParameters().values()) {
+					for (final Parameter<Long> undecoratedParameter : longParameters.values()) {
+						for (final Parameter<Long> decoratedParameter : pg.getLongParameters().values()) {
 							if (StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
 								decoratedParameter.setValue(undecoratedParameter.getValue());
 							}
@@ -180,20 +180,20 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		int offset = 0;
 		int previousSize = 0;
 		int totalSize = 0;
-		for (Parameter<?> p : decoratedGroup.getAllParameters().values()) {
+		for (final Parameter<?> p : decoratedGroup.getAllParameters().values()) {
 			LOG.debug("Encoding parameter " + p.getName());
 			if (count != 0) {
 				offset += previousSize;
 			}
-			Encoding enc = this.encodings.get(p.getQualifiedName());
+			final Encoding enc = this.encodings.get(p.getQualifiedName());
 			((CodecParameter<?>) p).encodeToBitSet(encoded, offset);
 			previousSize = enc.getSizeInBits();
 			totalSize += enc.getSizeInBits();
 			count++;
 		}
 
-		byte[] encodedBytes = BitSetUtility.toByteArray(encoded, totalSize);
-		List<String> layoutIdList = restrictions.get(parameterGroup.getQualifiedName());
+		final byte[] encodedBytes = BitSetUtility.toByteArray(encoded, totalSize);
+		final List<String> layoutIdList = restrictions.get(parameterGroup.getQualifiedName());
 		String layoutId = "";
 		if (layoutIdList != null) {
 			layoutId = layoutIdList.get(0);
@@ -203,17 +203,8 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		}
 
 		// GenericPayload encodedGroup = new GenericPayload(encodedBytes, layoutId); // FIXME this is crap, says Mark.
-		GenericPayload encodedGroup = new GenericPayload(encodedBytes, layoutId, System.currentTimeMillis()); // FIXME this is crap, says Mark. JK 2011-11-12: added timeStamp. Can't remember why this is crap?
+		final GenericPayload encodedGroup = new GenericPayload(encodedBytes, layoutId, System.currentTimeMillis()); // FIXME this is crap, says Mark. JK 2011-11-12: added timeStamp. Can't remember why this is crap?
 		return encodedGroup;
-	}
-
-	private Encoding findEncoding(final String qualifiedName) throws NoEncodingException {
-		if (encodings.containsKey(qualifiedName)) {
-			return encodings.get(qualifiedName);
-		}
-		else {
-			throw new NoEncodingException(qualifiedName);
-		}
 	}
 
 	@Override

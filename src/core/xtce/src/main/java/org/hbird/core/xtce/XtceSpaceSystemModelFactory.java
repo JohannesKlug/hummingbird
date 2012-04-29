@@ -17,6 +17,9 @@ import org.exolab.castor.xml.ValidationException;
 import org.exolab.castor.xml.XMLContext;
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.generatedcode.xtce.Argument;
+import org.hbird.core.generatedcode.xtce.ArgumentListItem;
+import org.hbird.core.generatedcode.xtce.ArgumentTypeSetItem;
 import org.hbird.core.generatedcode.xtce.BaseContainer;
 import org.hbird.core.generatedcode.xtce.BaseDataTypeChoice;
 import org.hbird.core.generatedcode.xtce.BinaryParameterType;
@@ -26,7 +29,10 @@ import org.hbird.core.generatedcode.xtce.ComparisonList;
 import org.hbird.core.generatedcode.xtce.ContainerSet;
 import org.hbird.core.generatedcode.xtce.EntryList;
 import org.hbird.core.generatedcode.xtce.FloatParameterType;
+import org.hbird.core.generatedcode.xtce.IntegerArgumentType;
 import org.hbird.core.generatedcode.xtce.IntegerParameterType;
+import org.hbird.core.generatedcode.xtce.MetaCommand;
+import org.hbird.core.generatedcode.xtce.MetaCommandSet;
 import org.hbird.core.generatedcode.xtce.ParameterSetTypeItem;
 import org.hbird.core.generatedcode.xtce.ParameterTypeSetTypeItem;
 import org.hbird.core.generatedcode.xtce.SequenceContainer;
@@ -64,8 +70,6 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 
 	private String modelName;
 
-	private int numParameterGroups;
-
 	private final Map<String, ParameterTypeSetTypeItem> xtceTmParameterTypes = new LinkedHashMap<String, ParameterTypeSetTypeItem>();
 	private final Map<String, ParameterTypeSetTypeItem> xtceTcParameterTypes = new LinkedHashMap<String, ParameterTypeSetTypeItem>();
 
@@ -90,7 +94,12 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	private final Map<String, Parameter<Byte[]>> rawParameters = new LinkedHashMap<String, Parameter<Byte[]>>();
 	private final Map<String, Parameter<Byte[]>> rawArguments = new LinkedHashMap<String, Parameter<Byte[]>>();
 
-	private final Map<String, ParameterGroup> parameterGroups = new HashMap<String, ParameterGroup>();
+	/**
+	 * This contains all the parameter groups (layouts if you like) defined in XTCE. It's contents are injected into the model
+	 * this factory creates.
+	 */
+	private final Map<String, ParameterGroup> tmParameterGroups = new HashMap<String, ParameterGroup>();
+	private final Map<String, ParameterGroup> tcParameterGroups = new HashMap<String, ParameterGroup>();
 
 	private final Map<String, List<Object>> restrictions = new HashMap<String, List<Object>>();
 
@@ -106,7 +115,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	 * @see org.hbird.core.xtce.SpaceSystemModelFactory#createSpaceSystemModel(java.lang.String)
 	 */
 	@Override
-	public final SpaceSystemModel createSpaceSystemModel() {
+	public final SpaceSystemModel createSpaceSystemModel() throws InvalidSpaceSystemDefinitionException {
 
 		LOG.debug("File = " + spaceSystemModelFilename);
 
@@ -114,41 +123,34 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 
 		spaceSystem = unmarshallXtceXmlSpaceSystem(spaceSystemModelFilename);
 
-		numParameterGroups = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItemCount();
-
 		modelName = spaceSystem.getName();
 
 		try {
 			createTelemetryModel();
 			createCommandModel();
 		}
-		catch (NumberFormatException e1) {
+		catch (final NumberFormatException e1) {
 			LOG.error(e1.toString());
 			// TODO - 27.03.2012 kimmell - replace with appropriate exception
-			System.exit(-1);
+			//			System.exit(-1);
 		}
-		catch (InvalidSpaceSystemDefinitionException e1) {
+		catch (final InvalidParameterTypeException e1) {
 			LOG.error(e1.toString());
 			// TODO - 27.03.2012 kimmell - replace with appropriate exception
-			System.exit(-1);
-		}
-		catch (InvalidParameterTypeException e1) {
-			LOG.error(e1.toString());
-			// TODO - 27.03.2012 kimmell - replace with appropriate exception
-			System.exit(-1);
+			//			System.exit(-1);
 		}
 
 
 		try {
 			injectConstructsIntoModel();
 		}
-		catch (IllegalArgumentException e) {
+		catch (final IllegalArgumentException e) {
 			LOG.error("Critical Error creating XTCE based Space System Model");
 			e.printStackTrace();
 			// TODO - 27.03.2012 kimmell - replace with appropriate exception
 			System.exit(-1);
 		}
-		catch (IllegalAccessException e) {
+		catch (final IllegalAccessException e) {
 			LOG.error("Critical Error creating XTCE based Space System Model");
 			e.printStackTrace();
 			// TODO - 27.03.2012 kimmell - replace with appropriate exception
@@ -158,6 +160,11 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 		return model;
 	}
 
+	/**
+	 * Creates the generated class model from the XML file.
+	 * @param spacesystemmodelFilename
+	 * @return
+	 */
 	private final static SpaceSystem unmarshallXtceXmlSpaceSystem(final String spacesystemmodelFilename) {
 		SpaceSystem spaceSystem = null;
 		try {
@@ -170,7 +177,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 			// Unmarshall the space system object
 			spaceSystem = (SpaceSystem) unmarshaller.unmarshal(new FileReader(spacesystemmodelFilename));
 		}
-		catch (FileNotFoundException e) {
+		catch (final FileNotFoundException e) {
 			LOG.error(e.toString());
 		}
 		catch (final MarshalException e) {
@@ -184,34 +191,37 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	}
 
 	private void createTelemetryModel() throws InvalidSpaceSystemDefinitionException, NumberFormatException, InvalidParameterTypeException {
-		createAllParameterTypes(spaceSystem.getTelemetryMetaData());
-		createAllTelemetryParameters();
-		createAllTelemetryGroups();
+		createAllTmParameterTypes(spaceSystem.getTelemetryMetaData());
+		createAllTmParameters();
+		createAllParameterGroups();
 		populateParameterGroups();
 	}
 
 	private void createCommandModel() throws InvalidSpaceSystemDefinitionException {
-		CommandMetaData commandMetaData = spaceSystem.getCommandMetaData();
+		final CommandMetaData commandMetaData = spaceSystem.getCommandMetaData();
 		if (commandMetaData == null) {
 			LOG.info("No command metadate defined");
 			return;
 		}
-		createAllParameterTypes(commandMetaData);
-		createAllCommandArguments();
-		createAllTelemetryCommandGroups();
+		createAllTcArgumentTypes(commandMetaData);
+		createAllTcArguments();
+		createAllCommandGroups();
+		populateCommandGroups();
 	}
 
-	private void createAllTelemetryCommandGroups() {
-		// TODO Auto-generated method stub
 
-	}
-
-	private final void createAllParameterTypes(final CommandMetaData commandMetaData) throws InvalidSpaceSystemDefinitionException {
-		int numberOfParameterTypes = commandMetaData.getParameterTypeSet().getParameterTypeSetTypeItemCount();
+	/**
+	 * Bit nasty we have another method but we are working with XML. The generated code creates two separate classes
+	 * TelemetryMetaData and CommandMetaData.
+	 * @param commandMetaData
+	 * @throws InvalidSpaceSystemDefinitionException
+	 */
+	private final void createAllTcArgumentTypes(final CommandMetaData commandMetaData) throws InvalidSpaceSystemDefinitionException {
+		final int numberOfParameterTypes = commandMetaData.getParameterTypeSet().getParameterTypeSetTypeItemCount();
 
 		for (int parameterTypeIndex = 0; parameterTypeIndex < numberOfParameterTypes; ++parameterTypeIndex) {
 			final ParameterTypeSetTypeItem item = commandMetaData.getParameterTypeSet().getParameterTypeSetTypeItem(parameterTypeIndex);
-			String name = checkParameterType(item);
+			final String name = checkParameterType(item);
 			xtceTcParameterTypes.put(name, item);
 		}
 	}
@@ -222,49 +232,48 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	 * @throws InvalidParameterTypeException
 	 * @throws InvalidSpaceSystemDefinitionException
 	 */
-	private final void createAllParameterTypes(final TelemetryMetaData telemetryMetaData) throws InvalidSpaceSystemDefinitionException {
-		int numberOfParameterTypes = telemetryMetaData.getParameterTypeSet().getParameterTypeSetTypeItemCount();
+	private final void createAllTmParameterTypes(final TelemetryMetaData telemetryMetaData) throws InvalidSpaceSystemDefinitionException {
+		final int numberOfParameterTypes = telemetryMetaData.getParameterTypeSet().getParameterTypeSetTypeItemCount();
 
 		for (int parameterTypeIndex = 0; parameterTypeIndex < numberOfParameterTypes; ++parameterTypeIndex) {
 			final ParameterTypeSetTypeItem item = telemetryMetaData.getParameterTypeSet().getParameterTypeSetTypeItem(parameterTypeIndex);
-			String name = checkParameterType(item);
+			final String name = checkParameterType(item);
 			xtceTmParameterTypes.put(name, item);
 		}
 	}
 
-	private final void createAllTelemetryParameters() throws InvalidSpaceSystemDefinitionException {
-		TelemetryMetaData categoryMetaData = spaceSystem.getTelemetryMetaData();
-		int numberOfParameters = categoryMetaData.getParameterSet().getParameterSetTypeItemCount();
+	private final void createAllTmParameters() throws InvalidSpaceSystemDefinitionException {
+		final TelemetryMetaData categoryMetaData = spaceSystem.getTelemetryMetaData();
+		final int numberOfParameters = categoryMetaData.getParameterSet().getParameterSetTypeItemCount();
 
 		// @formatter:off
 		for (int i = 0; i < numberOfParameters; ++i) {
 			final ParameterSetTypeItem xtceParameter = categoryMetaData.getParameterSet().getParameterSetTypeItem(i);
-
-			String parameterTypeRef = xtceParameter.getParameter().getParameterTypeRef();
-			ParameterTypeSetTypeItem xtceType = xtceTmParameterTypes.get(parameterTypeRef);
+			final String parameterTypeRef = xtceParameter.getParameter().getParameterTypeRef();
+			final ParameterTypeSetTypeItem xtceType = xtceTmParameterTypes.get(parameterTypeRef);
 
 			if (xtceType == null) {
-				throw new InvalidSpaceSystemDefinitionException("Unknown parameter type: " + parameterTypeRef
-						+ ". A parameter references an undeclared parameter type in the XTCE space system definition file.");
+				throw new InvalidSpaceSystemDefinitionException("Unknown TM parameter type: " + parameterTypeRef
+						+ ". A parameter references an undeclared TM parameter type in the XTCE space system definition file.");
 			}
 
-			String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
-			String name = xtceParameter.getParameter().getName();
-			String qualifiedName = qualifiedNamePrefix + name;
-			String shortDescription = xtceParameter.getParameter().getShortDescription();
-			String longDescription = xtceParameter.getParameter().getLongDescription();
+			final String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
+			final String name = xtceParameter.getParameter().getName();
+			final String qualifiedName = qualifiedNamePrefix + name;
+			final String shortDescription = xtceParameter.getParameter().getShortDescription();
+			final String longDescription = xtceParameter.getParameter().getLongDescription();
 
 			// If it's an integer type ...
 			if (xtceType.getIntegerParameterType() != null) {
-				IntegerParameterType type = xtceType.getIntegerParameterType();
+				final IntegerParameterType type = xtceType.getIntegerParameterType();
 				if (!XtceToJavaMapping.doesXtceIntRequireJavaLong(type)) {
-					Parameter<Integer> intParameter = new HummingbirdParameter<Integer>(qualifiedName, name, shortDescription, longDescription);
+					final Parameter<Integer> intParameter = new HummingbirdParameter<Integer>(qualifiedName, name, shortDescription, longDescription);
 					LOG.debug("Adding Integer parameter {}", intParameter.getQualifiedName());
 					integerParameters.put(intParameter.getQualifiedName(), intParameter);
 					encodings.put(intParameter.getQualifiedName(), createXtceIntegerEncoding(type));
 				}
 				else {
-					Parameter<Long> longParameter = new HummingbirdParameter<Long>(qualifiedName, name, shortDescription, longDescription);
+					final Parameter<Long> longParameter = new HummingbirdParameter<Long>(qualifiedName, name, shortDescription, longDescription);
 					LOG.debug("Adding Long parameter {}", longParameter.getQualifiedName());
 					longParameters.put(longParameter.getQualifiedName(), longParameter);
 					encodings.put(longParameter.getQualifiedName(), createXtceIntegerEncoding(type));
@@ -273,22 +282,22 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 
 			// If it's a float type ...
 			else if (xtceType.getFloatParameterType() != null) {
-				FloatParameterType type = xtceType.getFloatParameterType();
+				final FloatParameterType type = xtceType.getFloatParameterType();
 				switch (type.getSizeInBits()) {
 					case VALUE_32:
-						Parameter<Float> floatParameter = new HummingbirdParameter<Float>(qualifiedName, name, shortDescription, longDescription);
+						final Parameter<Float> floatParameter = new HummingbirdParameter<Float>(qualifiedName, name, shortDescription, longDescription);
 						LOG.debug("Adding Float parameter {}", floatParameter.getQualifiedName());
 						floatParameters.put(floatParameter.getQualifiedName(), floatParameter);
 						// TODO - 27.03.2012 kimmell - add encoding
 						break;
 					case VALUE_64:
-						Parameter<Double> doubleParameter = new HummingbirdParameter<Double>(qualifiedName, name, shortDescription, longDescription);
+						final Parameter<Double> doubleParameter = new HummingbirdParameter<Double>(qualifiedName, name, shortDescription, longDescription);
 						LOG.debug("Adding Double parameter {}", doubleParameter.getQualifiedName());
 						doubleParameters.put(doubleParameter.getQualifiedName(), doubleParameter);
 						// TODO - 27.03.2012 kimmell - add encoding
 						break;
 					case VALUE_128:
-						Parameter<BigDecimal> bigDecimalParameter = new HummingbirdParameter<BigDecimal>(qualifiedName, name, shortDescription, longDescription);
+						final Parameter<BigDecimal> bigDecimalParameter = new HummingbirdParameter<BigDecimal>(qualifiedName, name, shortDescription, longDescription);
 						LOG.debug("Adding BigDecimal parameter {}", bigDecimalParameter.getQualifiedName());
 						bigDecimalParameters.put(bigDecimalParameter.getQualifiedName(), bigDecimalParameter);
 						// TODO - 27.03.2012 kimmell - add encoding
@@ -300,8 +309,8 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 
 			// If it's a string type ...
 			else if (xtceType.getStringParameterType() != null) {
-				StringParameterType type = xtceType.getStringParameterType();
-				Parameter<String> stringParameter = new HummingbirdParameter<String>(qualifiedName, name, shortDescription, longDescription);
+				final StringParameterType type = xtceType.getStringParameterType();
+				final Parameter<String> stringParameter = new HummingbirdParameter<String>(qualifiedName, name, shortDescription, longDescription);
 				LOG.debug("Adding String parameter {}", stringParameter.getQualifiedName());
 				stringParameters.put(stringParameter.getQualifiedName(), stringParameter);
 				encodings.put(stringParameter.getQualifiedName(), createXtceStringEncoding(type));
@@ -309,8 +318,8 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 
 			// If it's binary type ...
 			else if (xtceType.getBinaryParameterType() != null) {
-				BinaryParameterType type = xtceType.getBinaryParameterType();
-				Parameter<Byte[]> rawParameter = new HummingbirdParameter<Byte[]>(qualifiedName, name, shortDescription, longDescription);
+				final BinaryParameterType type = xtceType.getBinaryParameterType();
+				final Parameter<Byte[]> rawParameter = new HummingbirdParameter<Byte[]>(qualifiedName, name, shortDescription, longDescription);
 				LOG.debug("Adding raw parameter {}", rawParameter.getQualifiedName());
 				rawParameters.put(rawParameter.getQualifiedName(), rawParameter);
 				encodings.put(rawParameter.getQualifiedName(), createXtceBinaryEncoding(type));
@@ -318,47 +327,51 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 
 			else {
 				throw new InvalidSpaceSystemDefinitionException("Unknown or unsupported parameter type: " + parameterTypeRef
-						+ ". A parameter references an undeclared parameter type in the XTCE space system definition file.");
+						+ ". A parameter references an undeclared TM parameter type in the XTCE space system definition file.");
 			}
 			// @formatter:on
 		}
 	}
 
-	private final void createAllCommandArguments() throws InvalidSpaceSystemDefinitionException {
-		CommandMetaData categoryMetaData = spaceSystem.getCommandMetaData();
-		int numberOfParameters = categoryMetaData.getParameterSet().getParameterSetTypeItemCount();
+	/**
+	 * @throws InvalidSpaceSystemDefinitionException
+	 */
+	private final void createAllTcArguments() throws InvalidSpaceSystemDefinitionException {
+		final CommandMetaData commandMetaData = spaceSystem.getCommandMetaData();
+		final int numberOfTcArguments = commandMetaData.getParameterTypeSet().getParameterTypeSetTypeItemCount();
 
 		// @formatter:off
-		for (int i = 0; i < numberOfParameters; ++i) {
-			final ParameterSetTypeItem xtceParameter = categoryMetaData.getParameterSet().getParameterSetTypeItem(i);
-
-			String parameterTypeRef = xtceParameter.getParameter().getParameterTypeRef();
-			ParameterTypeSetTypeItem xtceType = xtceTcParameterTypes.get(parameterTypeRef);
+		for (int i = 0; i < numberOfTcArguments; ++i) {
+			final ParameterSetTypeItem xtceArgument = commandMetaData.getParameterSet().getParameterSetTypeItem(i);
+			final String parameterTypeRef = xtceArgument.getParameter().getParameterTypeRef();
+			final ParameterTypeSetTypeItem xtceType = xtceTcParameterTypes.get(parameterTypeRef);
 
 			// If it's an integer type...
 			if (xtceType == null) {
-				throw new InvalidSpaceSystemDefinitionException("Unknown parameter type: " + parameterTypeRef
-						+ ". A parameter references an undeclared parameter type in the XTCE space system definition file.");
+				throw new InvalidSpaceSystemDefinitionException("Unknown TC argument (parameter) type: " + parameterTypeRef
+						+ ". A parameter references an undeclared TC argument (parameter) type in the XTCE space system definition file.");
 			}
 
-			String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
+			final String qualifiedNamePrefix = spaceSystem.getName() + ".tc.";
+			final String name = xtceArgument.getParameter().getName();
+			final String qualifiedName = qualifiedNamePrefix + name;
+			final String shortDescription = xtceArgument.getParameter().getShortDescription();
+			final String longDescription = xtceArgument.getParameter().getLongDescription();
+
 			if (xtceType.getIntegerParameterType() != null) {
-				IntegerParameterType type = xtceType.getIntegerParameterType();
+				final IntegerParameterType type = xtceType.getIntegerParameterType();
 				if (!XtceToJavaMapping.doesXtceIntRequireJavaLong(type)) {
-					Parameter<Integer> intParameter = new HummingbirdParameter<Integer>(qualifiedNamePrefix + xtceParameter.getParameter().getName(),
-							xtceParameter.getParameter().getName(), xtceParameter.getParameter().getShortDescription(), xtceParameter.getParameter()
-									.getLongDescription());
+					final Parameter<Integer> intParameter = new HummingbirdParameter<Integer>(qualifiedName, name, shortDescription, longDescription);
 					if (LOG.isDebugEnabled()) {
-						LOG.debug("Adding Integer parameter " + intParameter.getName());
+						LOG.debug("Adding Integer argument " + intParameter.getName());
 					}
 					integerArguments.put(intParameter.getQualifiedName(), intParameter);
 					encodings.put(intParameter.getQualifiedName(), createXtceIntegerEncoding(type));
 				}
 				else {
-					Parameter<Long> longParameter = new HummingbirdParameter<Long>(qualifiedNamePrefix + xtceParameter.getParameter().getName(), xtceParameter
-							.getParameter().getName(), xtceParameter.getParameter().getShortDescription(), xtceParameter.getParameter().getLongDescription());
+					final Parameter<Long> longParameter = new HummingbirdParameter<Long>(qualifiedName, name, shortDescription, longDescription);
 					if (LOG.isDebugEnabled()) {
-						LOG.debug("Adding Long parameter " + longParameter.getName());
+						LOG.debug("Adding Long argument " + longParameter.getName());
 					}
 					longArguments.put(longParameter.getQualifiedName(), longParameter);
 					encodings.put(longParameter.getQualifiedName(), createXtceIntegerEncoding(type));
@@ -367,33 +380,36 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 
 			// If it's an float type...
 			else if (xtceType.getFloatParameterType() != null) {
-				FloatParameterType type = xtceType.getFloatParameterType();
+				final FloatParameterType type = xtceType.getFloatParameterType();
 				switch (type.getSizeInBits()) {
 					case VALUE_32:
-						Parameter<Float> floatParameter = new HummingbirdParameter<Float>(qualifiedNamePrefix + xtceParameter.getParameter().getName(),
-								xtceParameter.getParameter().getName(), xtceParameter.getParameter().getShortDescription(), xtceParameter.getParameter()
-										.getLongDescription());
+						final Parameter<Float> floatParameter = new HummingbirdParameter<Float>(qualifiedName, name, shortDescription, longDescription);
 						floatArguments.put(floatParameter.getQualifiedName(), floatParameter);
+						if (LOG.isDebugEnabled()) {
+							LOG.debug("Adding Float argument " + floatParameter.getName());
+						}
 						break;
 					case VALUE_64:
-						Parameter<Double> doubleParameter = new HummingbirdParameter<Double>(qualifiedNamePrefix + xtceParameter.getParameter().getName(),
-								xtceParameter.getParameter().getName(), xtceParameter.getParameter().getShortDescription(), xtceParameter.getParameter()
-										.getLongDescription());
+						final Parameter<Double> doubleParameter = new HummingbirdParameter<Double>(qualifiedName, name, shortDescription, longDescription);
 						doubleArguments.put(doubleParameter.getQualifiedName(), doubleParameter);
+						if (LOG.isDebugEnabled()) {
+							LOG.debug("Adding Double argument " + doubleParameter.getName());
+						}
 						break;
 					case VALUE_128:
-						Parameter<BigDecimal> bigDecimalParameter = new HummingbirdParameter<BigDecimal>(qualifiedNamePrefix
-								+ xtceParameter.getParameter().getName(), xtceParameter.getParameter().getName(), xtceParameter.getParameter()
-								.getShortDescription(), xtceParameter.getParameter().getLongDescription());
+						final Parameter<BigDecimal> bigDecimalParameter = new HummingbirdParameter<BigDecimal>(qualifiedName, name, shortDescription, longDescription);
 						bigDecimalArguments.put(bigDecimalParameter.getQualifiedName(), bigDecimalParameter);
+						if (LOG.isDebugEnabled()) {
+							LOG.debug("Adding BigDecimal argument " + bigDecimalParameter.getName());
+						}
 						break;
 					default:
-						throw new InvalidSpaceSystemDefinitionException("Invalid bit size for float type " + type.getName());
+						throw new InvalidSpaceSystemDefinitionException("Could not add command argument " + type.getName() + " because it has an invalid bit size for float type.");
 				}
 			}
 			else {
-				throw new InvalidSpaceSystemDefinitionException("Unknown or unsupported parameter type: " + parameterTypeRef
-						+ ". A parameter references an undeclared parameter type in the XTCE space system definition file.");
+				throw new InvalidSpaceSystemDefinitionException("Unknown or unsupported TC argument (parameter) type: " + parameterTypeRef
+						+ ". A parameter references an undeclared TC argument (parameter) type in the XTCE space system definition file.");
 			}
 			// @formatter:on
 		}
@@ -407,23 +423,57 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	 *
 	 * @throws UnsupportedXtceConstructException
 	 */
-	private final void createAllTelemetryGroups() throws InvalidSpaceSystemDefinitionException {
-		String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
-		for (int containerIndex = 0; containerIndex < numParameterGroups; ++containerIndex) {
+	private final void createAllParameterGroups() throws InvalidSpaceSystemDefinitionException {
+		final String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
+		final int numTmParameterGroups = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItemCount();
+		for (int containerIndex = 0; containerIndex < numTmParameterGroups; ++containerIndex) {
 			final SequenceContainer xtceContainer = spaceSystem.getTelemetryMetaData().getContainerSet().getContainerSetTypeItem(containerIndex)
 					.getSequenceContainer();
 
 			// @formatter:off
-			final ParameterGroup parameterGroup = new HummingbirdParameterGroup(qualifiedNamePrefix + xtceContainer.getName(), xtceContainer.getName(),
-					xtceContainer.getShortDescription(), xtceContainer.getLongDescription());
+			final ParameterGroup parameterGroup =
+					new HummingbirdParameterGroup(qualifiedNamePrefix + xtceContainer.getName(), xtceContainer.getName(),
+							xtceContainer.getShortDescription(), xtceContainer.getLongDescription());
 			// @formatter:on
-			parameterGroups.put(parameterGroup.getQualifiedName(), parameterGroup);
+
+			tmParameterGroups.put(parameterGroup.getQualifiedName(), parameterGroup);
 			populateParameterGroupRestrictions(parameterGroup.getQualifiedName(), xtceContainer);
+
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("Created ParameterGroup " + xtceContainer.getName());
 			}
 		}
 	}
+
+	/**
+	 * Create all ParameterGroups. In this iteration we create the parameter groups, but do not create the references
+	 * between them as the referenced objects do not yet exit.
+	 *
+	 * @throws InvalidSpaceSystemDefinitionException
+	 *
+	 * @throws UnsupportedXtceConstructException
+	 */
+	private final void createAllCommandGroups() throws InvalidSpaceSystemDefinitionException {
+		final String qualifiedNamePrefix = spaceSystem.getName() + ".tc.";
+		final int numTcParameterGroups = spaceSystem.getCommandMetaData().getMetaCommandSet().getMetaCommandSetItemCount();
+		for (int containerIndex = 0; containerIndex < numTcParameterGroups; ++containerIndex) {
+			final MetaCommand xtceContainer = spaceSystem.getCommandMetaData().getMetaCommandSet().getMetaCommandSetItem(containerIndex)
+					.getMetaCommand();
+
+			// @formatter:off
+			final ParameterGroup parameterGroup =
+					new HummingbirdParameterGroup(qualifiedNamePrefix + xtceContainer.getName(), xtceContainer.getName(),
+							xtceContainer.getShortDescription(), xtceContainer.getLongDescription());
+			// @formatter:on
+
+			tcParameterGroups.put(parameterGroup.getQualifiedName(), parameterGroup);
+
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("Created TC ParameterGroup " + xtceContainer.getName());
+			}
+		}
+	}
+
 
 	/**
 	 * @throws InvalidSpaceSystemDefinitionException
@@ -434,9 +484,9 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 			throws InvalidSpaceSystemDefinitionException {
 		// If the group extends another, e.g. a payload that is linked to a header via a restriction
 		// we need to create the restrictions.
-		BaseContainer baseContainer = parameterGroupContainer.getBaseContainer();
+		final BaseContainer baseContainer = parameterGroupContainer.getBaseContainer();
 		if (baseContainer != null) {
-			List<Object> comparisons = new ArrayList<Object>();
+			final List<Object> comparisons = new ArrayList<Object>();
 			// In Hummingbird we do not model from the packet level, only the payload. In light of this we stipulate
 			// that base containers representing parameter groups that are linked to another base container via a
 			// restriction
@@ -445,9 +495,9 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 			// constant
 			if (StringUtils.equalsIgnoreCase(baseContainer.getContainerRef(), SpaceSystemModel.HUMMINGBIRD_PROCESSED_HEADER)) {
 				// Check for lists of comparisons
-				ComparisonList comparisonList = baseContainer.getRestrictionCriteria().getComparisonList();
+				final ComparisonList comparisonList = baseContainer.getRestrictionCriteria().getComparisonList();
 				if (comparisonList != null) {
-					Comparison[] restrictionCriteria = comparisonList.getComparison();
+					final Comparison[] restrictionCriteria = comparisonList.getComparison();
 					for (final Comparison comparison : restrictionCriteria) {
 						final String comparisonValue = comparison.getValue();
 						comparisons.add(comparisonValue);
@@ -458,9 +508,9 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 					restrictions.put(qualifiedName, comparisons);
 				}
 				// Check for a single comparison
-				Comparison singleComparison = baseContainer.getRestrictionCriteria().getComparison();
+				final Comparison singleComparison = baseContainer.getRestrictionCriteria().getComparison();
 				if (singleComparison != null) {
-					String comparisonValue = singleComparison.getValue();
+					final String comparisonValue = singleComparison.getValue();
 					comparisons.add(comparisonValue);
 					restrictions.put(qualifiedName, comparisons);
 					if (LOG.isDebugEnabled()) {
@@ -495,26 +545,53 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	}
 
 	private void populateParameterGroups() throws InvalidSpaceSystemDefinitionException {
-		String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
-		ContainerSet containers = spaceSystem.getTelemetryMetaData().getContainerSet();
+		final String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
+		final ContainerSet containers = spaceSystem.getTelemetryMetaData().getContainerSet();
 
 		// For every defined container
 		for (int i = 0; i < containers.getContainerSetTypeItemCount(); i++) {
-			SequenceContainer sequenceContainer = containers.getContainerSetTypeItem(i).getSequenceContainer();
+			final SequenceContainer sequenceContainer = containers.getContainerSetTypeItem(i).getSequenceContainer();
 
 			// Get the ParameterGroup we have created that corresponds to this SequenceContainer
-			ParameterGroup group = parameterGroups.get(qualifiedNamePrefix + sequenceContainer.getName());
+			final ParameterGroup group = tmParameterGroups.get(qualifiedNamePrefix + sequenceContainer.getName());
 
 			// grab it's entry list
-			EntryList parameterEntrys = sequenceContainer.getEntryList();
+			final EntryList parameterEntrys = sequenceContainer.getEntryList();
 
 			for (int x = 0; x < parameterEntrys.getEntryListTypeItemCount(); x++) {
-				String parameterRef = parameterEntrys.getEntryListTypeItem(x).getParameterRefEntry().getParameterRef();
+				final String parameterRef = parameterEntrys.getEntryListTypeItem(x).getParameterRefEntry().getParameterRef();
 
 				addParameterToGroup(group, qualifiedNamePrefix + parameterRef);
 
 				if (LOG.isDebugEnabled()) {
 					LOG.debug("Added parameter " + qualifiedNamePrefix + parameterRef + " to group " + group.getName());
+				}
+			}
+		}
+	}
+
+	private void populateCommandGroups() throws InvalidSpaceSystemDefinitionException {
+		final String qualifiedNamePrefix = spaceSystem.getName() + ".tc.";
+		final MetaCommandSet commands = spaceSystem.getCommandMetaData().getMetaCommandSet();
+
+		// For every defined command
+		for (int i = 0; i < commands.getMetaCommandSetItemCount(); i++) {
+			final MetaCommand command = commands.getMetaCommandSetItem(i).getMetaCommand();
+			final ParameterGroup commandGroup = tcParameterGroups.get(qualifiedNamePrefix + command.getName());
+
+			final ArgumentListItem[] parameterEntrys = command.getArgumentList().getArgumentListItem();
+			for (int x = 0; x < parameterEntrys.length; x++) {
+				final ArgumentListItem argumentListEntry = parameterEntrys[x];
+				final Argument[] arguments = argumentListEntry.getArgument();
+				for(int y = 0; y < arguments.length; y++) {
+					final Argument argument = arguments[y];
+					final String argumentTypeRef = argument.getArgumentTypeRef();
+
+					addArgumentParameterToGroup(commandGroup, qualifiedNamePrefix + argumentTypeRef);
+
+					if (LOG.isDebugEnabled()) {
+						LOG.debug("Added TC argument " + qualifiedNamePrefix + argumentTypeRef + " to command group " + commandGroup.getName());
+					}
 				}
 			}
 		}
@@ -542,6 +619,28 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 		}
 	}
 
+	private void addArgumentParameterToGroup(final ParameterGroup group, final String qualifiedName) throws InvalidSpaceSystemDefinitionException {
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Adding " + qualifiedName + " to ParameterGroup " + group.getQualifiedName());
+		}
+		if (integerArguments.containsKey(qualifiedName)) {
+			group.addIntegerParameter(integerArguments.get(qualifiedName));
+		}
+		else if (longArguments.containsKey(qualifiedName)) {
+			group.addLongParameter(longArguments.get(qualifiedName));
+		}
+		else if (stringArguments.containsKey(qualifiedName)) {
+			group.addStringParameter(stringArguments.get(qualifiedName));
+		}
+		else if (rawArguments.containsKey(qualifiedName)) {
+			group.addRawParameter(rawArguments.get(qualifiedName));
+		}
+		else {
+			// TODO Finish unsupported parameter types
+			throw new InvalidSpaceSystemDefinitionException("Hummingbird currently only supports integer, long string & binary parameters");
+		}
+	}
+
 	/**
 	 * Injects the data into the model using reflection. This means we don't have to pollute the Space System Model interface
 	 * with lots of setters.
@@ -549,13 +648,16 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	 * @throws IllegalAccessException
 	 */
 	private void injectConstructsIntoModel() throws IllegalArgumentException, IllegalAccessException {
-		Field[] fields = model.getClass().getDeclaredFields();
+		final Field[] fields = model.getClass().getDeclaredFields();
 		// TODO Switch on String when jdk 7 works with camel! Much nicer!
-		for (Field field : fields) {
+		for (final Field field : fields) {
 			field.setAccessible(true);
-			String name = field.getName();
+			final String name = field.getName();
 			if (StringUtils.equals(name, "parameterGroups")) {
-				field.set(model, parameterGroups);
+				field.set(model, tmParameterGroups);
+			}
+			else  if(StringUtils.equals(name, "commands")) {
+				field.set(model, tcParameterGroups);
 			}
 			else if (StringUtils.equals(name, "restrictions")) {
 				field.set(model, restrictions);
@@ -571,6 +673,59 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 			}
 		}
 	}
+	/**
+	 * Checks the parameter and returns the name if valid.
+	 *
+	 * @param item
+	 * @return
+	 * @throws InvalidSpaceSystemDefinitionException
+	 */
+	private static String checkArgumentType(final ArgumentTypeSetItem item) throws InvalidSpaceSystemDefinitionException {
+		String name = null;
+
+		// If it's an integer parameter..
+		final IntegerArgumentType integerArgumentType = item.getIntegerArgumentType();
+		if (integerArgumentType != null) {
+			name = integerArgumentType.getName();
+			if (name == null) {
+				throw new InvalidSpaceSystemDefinitionException("IntegerParameter has a null name; cannot add to parameterTypes");
+			}
+		}
+		// If it is a float parameter...
+		else if (item.getFloatArgumentType() != null) {
+			name = item.getFloatArgumentType().getName();
+			if (name == null) {
+				throw new InvalidSpaceSystemDefinitionException("FloatParameter has a null name; cannot add to parameterTypes");
+			}
+		}
+		// If it is a string parameter...
+		else if (item.getStringArgumentType() != null) {
+			name = item.getStringArgumentType().getName();
+			if (name == null) {
+				throw new InvalidSpaceSystemDefinitionException("StringParameter has a null name; cannot add to parameterTypes");
+			}
+		}
+		// If it is a boolean parameter...
+		else if (item.getBooleanArgumentType() != null) {
+			name = item.getBooleanArgumentType().getName();
+			if (name == null) {
+				throw new InvalidSpaceSystemDefinitionException("BooleanParameter has a null name; cannot add to parameterTypes");
+			}
+		}
+		// If it is a binary parameter...
+		else if (item.getBinaryArgumentType() != null) {
+			name = item.getBinaryArgumentType().getName();
+			if (name == null) {
+				throw new InvalidSpaceSystemDefinitionException("BinaryParameter has a null name; cannot add to parameterTypes");
+			}
+		}
+		else {
+			throw new InvalidSpaceSystemDefinitionException("Unknown/unsupported parameter type: " + item);
+		}
+
+		return name;
+	}
+
 
 	/**
 	 * Checks the parameter and returns the name if valid.
@@ -633,20 +788,20 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	 * @throws InvalidSpaceSystemDefinitionException
 	 */
 	private static final Encoding createXtceIntegerEncoding(final IntegerParameterType intParamType) throws InvalidSpaceSystemDefinitionException {
-		Encoding encoding = new Encoding();
+		final Encoding encoding = new Encoding();
 
 		int sizeInBits = 0;
 		try {
 			sizeInBits = Ints.checkedCast(intParamType.getSizeInBits());
 		}
-		catch (IllegalArgumentException e) {
+		catch (final IllegalArgumentException e) {
 			throw new InvalidSpaceSystemDefinitionException("Illegal value (" + intParamType.getSizeInBits() + ") defined as size in bits for parameter type "
 					+ intParamType.getName() + ". Hummingbird suppports sizes up to " + Integer.MAX_VALUE + ".");
 		}
 
 		encoding.setSizeInBits(sizeInBits);
 
-		BaseDataTypeChoice baseDataTypeChoice = intParamType.getBaseDataTypeChoice();
+		final BaseDataTypeChoice baseDataTypeChoice = intParamType.getBaseDataTypeChoice();
 		if (baseDataTypeChoice == null) {
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("Base data type does not have a base data type choice, assuming default of unsigned integer encoding");
@@ -655,7 +810,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 			return encoding;
 		}
 
-		IntegerDataEncodingTypeEncodingType xtceEncoding = baseDataTypeChoice.getIntegerDataEncoding().getEncoding();
+		final IntegerDataEncodingTypeEncodingType xtceEncoding = baseDataTypeChoice.getIntegerDataEncoding().getEncoding();
 		switch (xtceEncoding) {
 			case UNSIGNED:
 				encoding.setBinaryRepresentation(BinaryRepresentation.unsigned);
@@ -690,9 +845,9 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	 * @throws InvalidSpaceSystemDefinitionException
 	 */
 	private final static Encoding getFloatEncoding(final FloatParameterType type) throws InvalidSpaceSystemDefinitionException {
-		BaseDataTypeChoice baseDataTypeChoice = type.getBaseDataTypeChoice();
+		final BaseDataTypeChoice baseDataTypeChoice = type.getBaseDataTypeChoice();
 
-		Encoding encoding = new Encoding();
+		final Encoding encoding = new Encoding();
 		encoding.setSizeInBits(Integer.parseInt(type.getSizeInBits().value()));
 
 		if (baseDataTypeChoice == null) {
@@ -701,7 +856,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 			}
 			encoding.setBinaryRepresentation(BinaryRepresentation.IEEE754_1985);
 		}
-		FloatDataEncodingTypeEncodingType xtceEncoding = baseDataTypeChoice.getFloatDataEncoding().getEncoding();
+		final FloatDataEncodingTypeEncodingType xtceEncoding = baseDataTypeChoice.getFloatDataEncoding().getEncoding();
 
 		switch (xtceEncoding) {
 			case IEEE754_1985:
@@ -717,7 +872,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	}
 
 	final static Encoding createXtceStringEncoding(final StringParameterType type) throws InvalidSpaceSystemDefinitionException {
-		Encoding encoding = new Encoding();
+		final Encoding encoding = new Encoding();
 		if (type.getCharacterWidth() == null) {
 			// fall back to default encoding
 			encoding.setBinaryRepresentation(DEFAULT_STRING_ENCODING);
@@ -726,14 +881,15 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 			switch (type.getCharacterWidth()) {
 				case VALUE_8:
 					encoding.setBinaryRepresentation(BinaryRepresentation.UTF8);
-					// TODO - 27.03.2012 kimmell - encoding.setSizeInBits(); - one to four bytes - what's the correct value in here?
+					// TODO - 27.03.2012 kimmell - encoding.setSizeInBits(); - one to four bytes - what's the correct
+					// value in here?
 					break;
 				case VALUE_16:
 					encoding.setBinaryRepresentation(BinaryRepresentation.UTF16);
 					// TODO - 27.03.2012 kimmell - encoding.setSizeInBits(); - what's the correct value in here?
 					break;
-			    default:
-			    	throw new InvalidSpaceSystemDefinitionException("Invalid string encoding type " + type);
+				default:
+					throw new InvalidSpaceSystemDefinitionException("Invalid string encoding type " + type);
 			}
 		}
 
@@ -741,7 +897,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	}
 
 	final static Encoding createXtceBinaryEncoding(final BinaryParameterType type) throws InvalidSpaceSystemDefinitionException {
-		Encoding encoding = new Encoding();
+		final Encoding encoding = new Encoding();
 		// TODO - 29.03.2012 kimmell - implement
 		return encoding;
 	}

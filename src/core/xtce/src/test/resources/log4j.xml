@@ -30,7 +30,7 @@
 		<level value="WARN" />
 	</logger>
 	
-	<logger name="org.hbird.transport.xtce">
+	<logger name="org.hbird.core.xtce">
 		<level value="TRACE"></level>
 	</logger>
 	

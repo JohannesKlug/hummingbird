@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.hbird.core.commons.tmtc.ParameterGroup;
-import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemModelUpdate;
-import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemModelUpdate;
+import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.springframework.stereotype.Service;
 
 @Service(value = "SpaceSystemPublisher")
@@ -25,6 +25,11 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 	@Override
 	public Map<String, ParameterGroup> getParameterGroups() {
 		return model.getParameterGroups();
+	}
+
+	@Override
+	public Map<String, ParameterGroup> getCommands() {
+		throw new UnsupportedOperationException("Not yet implemented - raise a bug ;)");
 	}
 
 	@Override

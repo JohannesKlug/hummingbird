@@ -33,6 +33,7 @@ public interface SpaceSystemModel extends Serializable {
 	ParameterGroup getParameterGroup(String qualifiedName) throws UnknownParameterGroupException;
 
 	Map<String, ParameterGroup> getParameterGroups();
+	Map<String, ParameterGroup> getCommands();
 
 	Collection<ParameterGroup> getParameterGroupsCollection();
 
