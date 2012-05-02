@@ -1,5 +1,7 @@
 package org.hbird.core.commons.tmtc;
 
+import java.io.Serializable;
+
 /**
  * TODO Describe this better!
  *
@@ -8,7 +10,7 @@ package org.hbird.core.commons.tmtc;
  * @author Mark Doyle
  *
  */
-public interface SpaceSystemModelItem {
+public interface SpaceSystemModelItem extends Serializable {
 
 	String getQualifiedName();
 

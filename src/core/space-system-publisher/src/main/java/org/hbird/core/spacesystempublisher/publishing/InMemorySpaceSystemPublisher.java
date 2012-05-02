@@ -1,5 +1,6 @@
 package org.hbird.core.spacesystempublisher.publishing;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,9 +9,7 @@ import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemModelUpdate;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
-import org.springframework.stereotype.Service;
 
-@Service(value = "SpaceSystemPublisher")
 public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 
 	private SpaceSystemModel model;
@@ -24,12 +23,17 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 
 	@Override
 	public Map<String, ParameterGroup> getParameterGroups() {
+		System.out.println("Request received!!!!");
 		return model.getParameterGroups();
 	}
 
 	@Override
 	public Map<String, ParameterGroup> getCommands() {
 		return model.getCommands();
+		}
+	public List<ParameterGroup> getParameterGroupList() {
+		System.out.println("Request received for parameter group list");
+		return new ArrayList<ParameterGroup>(model.getParameterGroupsCollection());
 	}
 
 	@Override

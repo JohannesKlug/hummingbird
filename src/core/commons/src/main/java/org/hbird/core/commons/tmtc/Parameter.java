@@ -1,13 +1,12 @@
 package org.hbird.core.commons.tmtc;
 
-import java.io.Serializable;
 
 
 /**
  * Parameter interface. <br>
  * Parameters are typed in Hummingbird which means they can model a Parameter using any primitive or class.
  */
-public interface Parameter<T> extends SpaceSystemModelItem, Serializable {
+public interface Parameter<T> extends SpaceSystemModelItem {
 
 	String getName();
 
