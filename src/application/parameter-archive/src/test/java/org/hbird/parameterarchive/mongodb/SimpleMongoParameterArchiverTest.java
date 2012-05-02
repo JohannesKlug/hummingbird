@@ -4,6 +4,7 @@ import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.parameters.HummingbirdParameter;
 import org.hbird.parameterarchive.interfaces.ParameterArchiver;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,13 @@ public class SimpleMongoParameterArchiverTest {
 	@Before
 	public final void beforeAllTestsSetup() {
 		testParameter = new HummingbirdParameter<Integer>("Test.Parameter",
-				 										  "testparam",
-				 										  "Quick test int parameter",
-				 										  "Integer parameter for mongo db testing");
+				"testparam",
+				"Quick test int parameter",
+				"Integer parameter for mongo db testing");
 	}
 
 	@Test
+	@Ignore // no current embedded mode for mongo db means it has to be running. Solutions are appearing...
 	public void test() {
 		parameterArchiver.archiveParameter(testParameter);
 	}
