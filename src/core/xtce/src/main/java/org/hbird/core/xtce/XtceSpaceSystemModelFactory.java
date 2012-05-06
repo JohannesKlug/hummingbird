@@ -338,7 +338,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	 */
 	private final void createAllTcArguments() throws InvalidSpaceSystemDefinitionException {
 		final CommandMetaData commandMetaData = spaceSystem.getCommandMetaData();
-		final int numberOfTcArguments = commandMetaData.getParameterTypeSet().getParameterTypeSetTypeItemCount();
+		final int numberOfTcArguments = commandMetaData.getParameterSet().getParameterSetTypeItemCount();
 
 		// @formatter:off
 		for (int i = 0; i < numberOfTcArguments; ++i) {
