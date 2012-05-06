@@ -26,8 +26,8 @@ public final class XtceToJavaMapping {
 			}
 		}
 
-		if(LOG.isTraceEnabled()) {
-			LOG.trace("Type " + type.getName() + " returns " + longRequired + " for long requried");
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Type " + type.getName() + " returns " + longRequired + " for long requried");
 		}
 		return longRequired;
 	}
