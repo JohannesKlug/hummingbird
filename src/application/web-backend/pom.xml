@@ -9,7 +9,6 @@
 	</parent>
 	
 	<artifactId>web-backend</artifactId>
-	<packaging>bundle</packaging>
 
 	<build>
 		<plugins>
@@ -82,4 +81,5 @@ org.glassfish.jersey.core:jersey-client -->
 		</dependency>
 	</dependencies>
 
+	<packaging>bundle</packaging>
 </project>

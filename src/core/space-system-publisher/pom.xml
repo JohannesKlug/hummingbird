@@ -9,7 +9,6 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<packaging>bundle</packaging>
 	<artifactId>space-system-publisher</artifactId>
 	<name>space-system-publisher</name>
 	<url>http://maven.apache.org</url>
@@ -75,4 +74,5 @@
 		</dependency>
 	</dependencies>
 	
+	<packaging>bundle</packaging>
 </project>

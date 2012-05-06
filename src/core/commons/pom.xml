@@ -9,7 +9,6 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>commons</artifactId>
-	<packaging>bundle</packaging>
 	<name>commons</name>
 
 	<build>
@@ -54,4 +53,5 @@
 		</dependency>
 	</dependencies>
 
+	<packaging>bundle</packaging>
 </project>

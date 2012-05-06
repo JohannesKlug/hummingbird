@@ -7,7 +7,6 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>calibration</artifactId>
-	<packaging>bundle</packaging>
 
         <build>
                 <plugins>
@@ -52,4 +51,5 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
+	<packaging>bundle</packaging>
 </project>

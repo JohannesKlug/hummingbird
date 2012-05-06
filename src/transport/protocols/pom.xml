@@ -1,19 +1,50 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
 	<parent>
 		<artifactId>hummingbird-transport</artifactId>
 		<groupId>org.hbird.transport</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+	
 	<modelVersion>4.0.0</modelVersion>
-	
 	<artifactId>protocols</artifactId>
-	
-	<packaging>bundle</packaging>
 	<name>Protocols</name>
 	<description>All data transmission protocol implementation are contained herein.</description>
-
+	
+	<packaging>bundle</packaging>
+	
 	<build>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.felix</groupId>
+										<artifactId>maven-bundle-plugin</artifactId>
+										<versionRange>[2.1.0,)</versionRange>
+										<goals>
+											<goal>manifest</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		
 		<plugins>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
@@ -31,12 +62,11 @@
 					<instructions>
 						<Export-Package> org.hbird.transport.protocols.* 
 						</Export-Package>
-						<!-- <Private-Package>org.slf4j.* 
-						</Private-Package> -->
+						<Private-Package>org.slf4j.* </Private-Package>
 					</instructions>
 				</configuration>
 			</plugin>
-
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -51,8 +81,7 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
@@ -96,4 +125,5 @@
 			<artifactId>camel-mina</artifactId>
 		</dependency>
 	</dependencies>
+	
 </project>

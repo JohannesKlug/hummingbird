@@ -10,7 +10,6 @@
 	</parent>
 
 	<artifactId>space-system-model</artifactId>
-	<packaging>bundle</packaging>
 	<name>space-system-model</name>
 	<url>http://maven.apache.org</url>
 
@@ -61,4 +60,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<packaging>bundle</packaging>
 </project>

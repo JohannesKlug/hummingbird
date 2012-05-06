@@ -1,19 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
 	<name>XTCE</name>
 	<description>XTCE implementation of the Space System Model</description>
-
 	<parent>
 		<artifactId>hummingbird-core</artifactId>
 		<groupId>org.hbird.core</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>xtce</artifactId>
-	<packaging>bundle</packaging>
-
 	<build>
 		<resources>
 			<resource>
@@ -27,8 +22,27 @@
 				</excludes>
 			</resource>
 		</resources>
-
+		
 		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-castor-generated-sources</id>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/generated-sources/castor</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>castor-maven-plugin</artifactId>
@@ -50,7 +64,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
@@ -66,53 +79,46 @@
 				</executions>
 				<configuration>
 					<instructions>
-						<Export-Package>
-							org.hbird.core.xtce,
-							org.hbird.core.xtce.utils,
-							org.hbird.core.xtce.exceptions
+						<Export-Package> org.hbird.core.xtce, org.hbird.core.xtce.utils, org.hbird.core.xtce.exceptions 
 						</Export-Package>
-						<Private-Package>
-							org.hbird.core.generatedcode*
+						<Private-Package> org.hbird.core.generatedcode* 
 						</Private-Package>
-						<Embed-Dependency>
-							castor-core,castor-xml
+						<Embed-Dependency> castor-core,castor-xml 
 						</Embed-Dependency>
 					</instructions>
 				</configuration>
 			</plugin>
 		</plugins>
-
 		<pluginManagement>
-		<plugins>
-			<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-			<plugin>
-				<groupId>org.eclipse.m2e</groupId>
-				<artifactId>lifecycle-mapping</artifactId>
-				<version>1.0.0</version>
-				<configuration>
-					<lifecycleMappingMetadata>
-						<pluginExecutions>
-							<pluginExecution>
-								<pluginExecutionFilter>
-									<groupId>org.codehaus.mojo</groupId>
-									<artifactId>castor-maven-plugin</artifactId>
-									<versionRange>[2.1,)</versionRange>
-									<goals>
-										<goal>generate</goal>
-									</goals>
-								</pluginExecutionFilter>
-								<action>
-									<ignore></ignore>
-								</action>
-							</pluginExecution>
-						</pluginExecutions>
-					</lifecycleMappingMetadata>
-				</configuration>
-			</plugin>
-		</plugins>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.mojo</groupId>
+										<artifactId>castor-maven-plugin</artifactId>
+										<versionRange>[2.1,)</versionRange>
+										<goals>
+											<goal>generate</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
 		</pluginManagement>
 	</build>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.codehaus.castor</groupId>
@@ -137,5 +143,4 @@
 			<artifactId>guava</artifactId>
 		</dependency>
 	</dependencies>
-
 </project>
