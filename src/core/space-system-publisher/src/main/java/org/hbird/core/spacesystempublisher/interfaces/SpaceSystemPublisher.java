@@ -11,6 +11,7 @@ public interface SpaceSystemPublisher {
 	Map<String, ParameterGroup> getParameterGroups();
 	Map<String, ParameterGroup> getCommands();
 	List<ParameterGroup> getParameterGroupList();
+	List<ParameterGroup> getCommandList();
 	Map<String, Encoding> getEncodings();
 	Map<String, List<String>> getRestrictions();
 

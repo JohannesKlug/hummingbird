@@ -28,12 +28,19 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 	}
 
 	@Override
-	public Map<String, ParameterGroup> getCommands() {
-		return model.getCommands();
-		}
 	public List<ParameterGroup> getParameterGroupList() {
 		System.out.println("Request received for parameter group list");
 		return new ArrayList<ParameterGroup>(model.getParameterGroupsCollection());
+	}
+
+	@Override
+	public Map<String, ParameterGroup> getCommands() {
+		return model.getCommands();
+	}
+
+	@Override
+	public List<ParameterGroup> getCommandList() {
+		return new ArrayList<ParameterGroup>(model.getCommands().values());
 	}
 
 	@Override
