@@ -23,10 +23,6 @@
 		<property name="collection" value="Parameters"></property>
 	</bean>
 	
-	<bean id="parameterRetriever" class="org.hbird.parameterarchive.mongodb.SimpleMongoParameterRetriever">
-		<property name="collection" value="Parameters"></property>
-	</bean>
-	
 	<!-- To translate any MongoExceptions thrown in @Repository annotated classes -->
 	<context:annotation-config />
 	
