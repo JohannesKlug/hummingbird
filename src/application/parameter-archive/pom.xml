@@ -20,6 +20,8 @@
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.3.4</version>
+				<extensions>true</extensions>
 				<executions>
 					<execution>
 						<id>bundle-manifest</id>
@@ -37,6 +39,13 @@
 					</instructions>
 				</configuration>
 			</plugin>
+			
+			<!-- allows the route to be ran via 'mvn camel:run' -->
+      		<plugin>
+        		<groupId>org.apache.camel</groupId>
+        		<artifactId>camel-maven-plugin</artifactId>
+        		<version>2.9.2</version>
+      		</plugin>
 		</plugins>
 	</build>
 	
@@ -77,6 +86,10 @@
 		<!-- <artifactId>camel-mongodb</artifactId> -->
 		<!-- <version>2.10</version> -->
 		<!-- </dependency> -->
+		<dependency>
+      		<groupId>org.apache.camel</groupId>
+      		<artifactId>camel-spring</artifactId>
+      	</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
