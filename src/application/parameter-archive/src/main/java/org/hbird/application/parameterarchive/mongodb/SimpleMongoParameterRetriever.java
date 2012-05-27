@@ -21,15 +21,15 @@ public class SimpleMongoParameterRetriever implements ParameterRetriever {
 
 	@Override
 	public List<Parameter> findParamerers(final String QualifiedName) {
-		Query query = new Query(Criteria.where(""));
-		List<Parameter> foundParameters = mongo.find(query, Parameter.class, collection);
+		final Query query = new Query(Criteria.where(""));
+		final List<Parameter> foundParameters = mongo.find(query, Parameter.class, collection);
 		return foundParameters;
 	}
 
 	@Override
 	public List<Parameter> findParameters(final Date startDate, final Date endDate) {
-		Query query = new Query(Criteria.where("receivedTime").gte(startDate.getTime()).lte(endDate.getTime()));
-		List<Parameter> foundParameters = mongo.find(query, Parameter.class, collection);
+		final Query query = new Query(Criteria.where("receivedTime").gte(startDate.getTime()).lte(endDate.getTime()));
+		final List<Parameter> foundParameters = mongo.find(query, Parameter.class, collection);
 		return foundParameters;
 	}
 
