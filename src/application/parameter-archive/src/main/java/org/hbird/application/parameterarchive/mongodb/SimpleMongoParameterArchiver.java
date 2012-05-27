@@ -1,7 +1,7 @@
-package org.hbird.parameterarchive.mongodb;
+package org.hbird.application.parameterarchive.mongodb;
 
+import org.hbird.application.parameterarchive.interfaces.ParameterArchiver;
 import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.parameterarchive.interfaces.ParameterArchiver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;

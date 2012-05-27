@@ -14,7 +14,7 @@
 		<property name="location" value="classpath:config/configuration.properties"></property>
 	</bean>
 
-	<context:component-scan base-package="org.hbird.parameterarchive.mongodb" />
+	<context:component-scan base-package="org.hbird.application.parameterarchive.mongodb" />
 
 	<mongo:mongo host="localhost" port="27017" />
 
@@ -23,7 +23,7 @@
 		<constructor-arg name="databaseName" value="mandolaypigeon" />
 	</bean>
 
-	<bean id="parameterArchiver" class="org.hbird.parameterarchive.mongodb.SimpleMongoParameterArchiver">
+	<bean id="parameterArchiver" class="org.hbird.application.parameterarchive.mongodb.SimpleMongoParameterArchiver">
 		<property name="collection" value="Parameters"></property>
 	</bean>
 	

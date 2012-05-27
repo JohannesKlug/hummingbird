@@ -1,12 +1,12 @@
 package org.hbird.parameterarchive.mongodb;
 
 import static org.junit.Assert.assertEquals;
+import org.hbird.application.parameterarchive.interfaces.ParameterRetriever;
 
 import java.util.List;
 
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.parameters.HummingbirdParameter;
-import org.hbird.parameterarchive.interfaces.ParameterRetriever;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Ignore;

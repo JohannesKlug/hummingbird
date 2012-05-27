@@ -1,10 +1,10 @@
-package org.hbird.parameterarchive.mongodb;
+package org.hbird.application.parameterarchive.mongodb;
 
 import java.util.Date;
 import java.util.List;
 
+import org.hbird.application.parameterarchive.interfaces.ParameterRetriever;
 import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.parameterarchive.interfaces.ParameterRetriever;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
