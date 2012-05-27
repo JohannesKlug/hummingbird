@@ -1,4 +1,4 @@
-package org.hbird.parameterarchive.interfaces;
+package org.hbird.application.parameterarchive.interfaces;
 
 import org.hbird.core.commons.tmtc.Parameter;
 

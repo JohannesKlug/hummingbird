@@ -31,7 +31,8 @@
 				</executions>
 				<configuration>
 					<instructions>
-						<Export-Package> org.hbird.application.calibration.*, 
+						<Export-Package> org.hbird.application.parameterarchive.interfaces.*,
+										 org.hbird.application.parameterarchive.mongodb.*,
 						</Export-Package>
 					</instructions>
 				</configuration>

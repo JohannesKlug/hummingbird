@@ -10,7 +10,7 @@
 							http://www.springframework.org/schema/data/mongo 
 							http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
 
-	<context:component-scan base-package="org.hbird.parameterarchive.mongodb" />
+	<context:component-scan base-package="org.hbird.application.parameterarchive.mongodb" />
 
 	<mongo:mongo host="localhost" port="27017" />
  
@@ -19,11 +19,11 @@
 		<constructor-arg name="databaseName" value="testdb" />
 	</bean>
 	
-	<bean id="parameterArchiver" class="org.hbird.parameterarchive.mongodb.SimpleMongoParameterArchiver">
+	<bean id="parameterArchiver" class="org.hbird.application.parameterarchive.mongodb.SimpleMongoParameterArchiver">
 		<property name="collection" value="Parameters"></property>
 	</bean>
 	
-	<bean id="parameterRetriever" class="org.hbird.parameterarchive.mongodb.SimpleMongoParameterRetriever">
+	<bean id="parameterRetriever" class="org.hbird.application.parameterarchive.mongodb.SimpleMongoParameterRetriever">
 		<property name="collection" value="Parameters"></property>
 	</bean>
 	
