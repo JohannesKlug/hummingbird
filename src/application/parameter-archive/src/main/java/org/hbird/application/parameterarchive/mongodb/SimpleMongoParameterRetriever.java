@@ -20,7 +20,7 @@ public class SimpleMongoParameterRetriever implements ParameterRetriever {
 	private String collection;
 
 	@Override
-	public List<Parameter> findParamerers(final String QualifiedName) {
+	public List<Parameter> findParameters(final String QualifiedName) {
 		final Query query = new Query(Criteria.where(""));
 		final List<Parameter> foundParameters = mongo.find(query, Parameter.class, collection);
 		return foundParameters;

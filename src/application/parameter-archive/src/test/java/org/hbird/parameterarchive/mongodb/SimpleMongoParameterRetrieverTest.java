@@ -1,10 +1,10 @@
 package org.hbird.parameterarchive.mongodb;
 
 import static org.junit.Assert.assertEquals;
-import org.hbird.application.parameterarchive.interfaces.ParameterRetriever;
 
 import java.util.List;
 
+import org.hbird.application.parameterarchive.interfaces.ParameterRetriever;
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.parameters.HummingbirdParameter;
 import org.joda.time.DateTime;
@@ -36,17 +36,17 @@ public class SimpleMongoParameterRetrieverTest {
 	@Test
 	@Ignore // no current embedded mode for mongo db means it has to be running. Solutions are appearing...
 	public void test() {
-		parameterRetriever.findParamerers(testParameter.getQualifiedName());
+		parameterRetriever.findParameters(testParameter.getQualifiedName());
 	}
 
 	@Test
 	@Ignore // Tests require mongo db therefore not unit tests!
 	public void testDataRangeRetrieval() {
-		DateTime startDate = new DateTime(2012, 1, 1, 1, 1);
-		DateTime endDate = new DateTime();
-		List<Parameter> actual = parameterRetriever.findParameters(startDate.toDate(), endDate.toDate());
+		final DateTime startDate = new DateTime(2012, 1, 1, 1, 1);
+		final DateTime endDate = new DateTime();
+		final List<Parameter> actual = parameterRetriever.findParameters(startDate.toDate(), endDate.toDate());
 		assertEquals(2, actual.size());
-		for(Parameter<Integer> p : actual) {
+		for(final Parameter<Integer> p : actual) {
 			System.out.println(p);
 		}
 	}
