@@ -46,6 +46,8 @@ public class SerialPortAssembly implements Observer {
 					}
 					catch (IOException e) {
 						LOG.error(e.toString());
+					} finally {
+						closePort();
 					}
 				}
 			});
