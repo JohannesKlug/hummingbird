@@ -33,6 +33,7 @@ import org.hbird.core.generatedcode.xtce.IntegerArgumentType;
 import org.hbird.core.generatedcode.xtce.IntegerParameterType;
 import org.hbird.core.generatedcode.xtce.MetaCommand;
 import org.hbird.core.generatedcode.xtce.MetaCommandSet;
+import org.hbird.core.generatedcode.xtce.ParameterRefEntry;
 import org.hbird.core.generatedcode.xtce.ParameterSetTypeItem;
 import org.hbird.core.generatedcode.xtce.ParameterTypeSetTypeItem;
 import org.hbird.core.generatedcode.xtce.SequenceContainer;
@@ -559,7 +560,11 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 			final EntryList parameterEntrys = sequenceContainer.getEntryList();
 
 			for (int x = 0; x < parameterEntrys.getEntryListTypeItemCount(); x++) {
-				final String parameterRef = parameterEntrys.getEntryListTypeItem(x).getParameterRefEntry().getParameterRef();
+				ParameterRefEntry parameterRefEntry = parameterEntrys.getEntryListTypeItem(x).getParameterRefEntry();
+				if (parameterRefEntry == null) {
+					throw new InvalidSpaceSystemDefinitionException("ParameterRefEntry for entry list type item " + x + " is null.");
+				}
+				final String parameterRef = parameterRefEntry.getParameterRef();
 
 				addParameterToGroup(group, qualifiedNamePrefix + parameterRef);
 

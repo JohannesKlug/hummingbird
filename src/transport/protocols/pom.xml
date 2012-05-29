@@ -62,7 +62,7 @@
 					<instructions>
 						<Export-Package> org.hbird.transport.protocols.* 
 						</Export-Package>
-						<Private-Package>org.slf4j.* </Private-Package>
+						<!--<Private-Package>org.slf4j.* </Private-Package>-->
 					</instructions>
 				</configuration>
 			</plugin>

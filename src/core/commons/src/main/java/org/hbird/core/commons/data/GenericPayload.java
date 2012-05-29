@@ -1,8 +1,10 @@
 package org.hbird.core.commons.data;
 
+import java.io.Serializable;
+
 import org.apache.commons.lang.ArrayUtils;
 
-public class GenericPayload {
+public class GenericPayload implements Serializable {
 
 	public byte[] payload;
 	public String layoutIdentifier;
