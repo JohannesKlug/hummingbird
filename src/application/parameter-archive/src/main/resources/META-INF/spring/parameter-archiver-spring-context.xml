@@ -11,8 +11,16 @@
         					http://www.springframework.org/schema/context/spring-context-3.0.xsd
 							http://www.springframework.org/schema/data/mongo 
 							http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
-							http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
-       						http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+							http://www.springframework.org/schema/osgi 
+							http://www.springframework.org/schema/osgi/spring-osgi.xsd
+       						http://camel.apache.org/schema/spring 
+       						http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<!-- Default provided setup which can be used to run the archiver. You do not need to use this
+	of course. You can use the classes as a library or define your own enterprise route in another
+	project/blueprint. -->
+	
+	<import resource="activemq.xml"/>
 
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:config/configuration.properties"></property>
@@ -28,13 +36,17 @@
 	</bean>
 
 	<bean id="parameterArchiver" class="org.hbird.application.parameterarchive.mongodb.SimpleMongoParameterArchiver">
-		<property name="collection" value="mongodb.parc.db.collection.name"></property>
+		<property name="collection" value="${mongodb.parc.db.collection.name}"></property>
 	</bean>
 	
 	<!-- To translate any MongoExceptions thrown in @Repository annotated classes -->
 	<context:annotation-config />
 	
 	<camel:camelContext>
+		<camel:route>
+			<camel:from uri="activemq:parameterGroups"></camel:from>
+			<camel:to uri="bean:parameterArchiver?method=archiveParameter"></camel:to>
+		</camel:route>
 	</camel:camelContext>
 	
 </beans>
