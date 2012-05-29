@@ -1,7 +1,9 @@
 package org.hbird.core.spacesystemmodel.tmtcgroups;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.hbird.core.commons.tmtc.Parameter;
@@ -303,5 +305,10 @@ public class HummingbirdParameterGroup implements ParameterGroup {
 	@Override
 	public void setTimeStamp(final long timeStamp) {
 		this.timeStamp = timeStamp;
+	}
+
+	@Override
+	public List<Parameter<?>> getAllParametersAsList() {
+		return new ArrayList<Parameter<?>>(this.parameters.values());
 	}
 }

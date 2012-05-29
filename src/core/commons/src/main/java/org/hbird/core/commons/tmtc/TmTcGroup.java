@@ -1,6 +1,7 @@
 package org.hbird.core.commons.tmtc;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
@@ -12,6 +13,7 @@ public interface TmTcGroup extends SpaceSystemModelItem {
 	long getTimeStamp();
 
 	Map<String, Parameter<?>> getAllParameters();
+	List<Parameter<?>> getAllParametersAsList();
 
 	Map<String, Parameter<Integer>> getIntegerParameters();
 	Map<String, Parameter<Long>> getLongParameters();
