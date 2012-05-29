@@ -1,8 +1,9 @@
 package org.hbird.parameterarchive.mongodb;
 
+import org.hbird.application.parameterarchive.interfaces.ParameterArchiver;
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.parameters.HummingbirdParameter;
-import org.hbird.parameterarchive.interfaces.ParameterArchiver;
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -26,6 +27,8 @@ public class SimpleMongoParameterArchiverTest {
 				"testparam",
 				"Quick test int parameter",
 				"Integer parameter for mongo db testing");
+		final DateTime RECEIVED_TIME = new DateTime(2012, 2, 2, 2, 2);
+		testParameter.setReceivedTime(RECEIVED_TIME.getMillis());
 	}
 
 	@Test
