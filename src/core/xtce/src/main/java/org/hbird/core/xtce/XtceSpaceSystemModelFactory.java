@@ -122,7 +122,12 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 
 		model = new XtceSpaceSystemModel();
 
-		spaceSystem = unmarshallXtceXmlSpaceSystem(spaceSystemModelFilename);
+		try {
+			spaceSystem = unmarshallXtceXmlSpaceSystem(spaceSystemModelFilename);
+		}
+		catch (Exception e){
+			throw new InvalidSpaceSystemDefinitionException(e);
+		}
 
 		modelName = spaceSystem.getName();
 
@@ -165,29 +170,20 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	 * Creates the generated class model from the XML file.
 	 * @param spacesystemmodelFilename
 	 * @return
+	 * @throws FileNotFoundException 
+	 * @throws ValidationException 
+	 * @throws MarshalException 
 	 */
-	private final static SpaceSystem unmarshallXtceXmlSpaceSystem(final String spacesystemmodelFilename) {
+	private final static SpaceSystem unmarshallXtceXmlSpaceSystem(final String spacesystemmodelFilename) throws MarshalException, ValidationException, FileNotFoundException {
 		SpaceSystem spaceSystem = null;
-		try {
-			final XMLContext context = new XMLContext();
+		final XMLContext context = new XMLContext();
 
-			// Create a new Unmarshaller
-			final Unmarshaller unmarshaller = context.createUnmarshaller();
-			unmarshaller.setClass(SpaceSystem.class);
+		// Create a new Unmarshaller
+		final Unmarshaller unmarshaller = context.createUnmarshaller();
+		unmarshaller.setClass(SpaceSystem.class);
 
-			// Unmarshall the space system object
-			spaceSystem = (SpaceSystem) unmarshaller.unmarshal(new FileReader(spacesystemmodelFilename));
-		}
-		catch (final FileNotFoundException e) {
-			LOG.error(e.toString());
-		}
-		catch (final MarshalException e) {
-			LOG.error(e.toString());
-		}
-		catch (final ValidationException e) {
-			LOG.error(e.toString());
-		}
-
+		// Unmarshall the space system object
+		spaceSystem = (SpaceSystem) unmarshaller.unmarshal(new FileReader(spacesystemmodelFilename));
 		return spaceSystem;
 	}
 
