@@ -97,8 +97,12 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((longDescription == null) ? 0 : longDescription.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((qualifiedName == null) ? 0 : qualifiedName.hashCode());
+		result = prime * result + (int) (receivedTime ^ (receivedTime >>> 32));
+		result = prime * result + ((shortDescription == null) ? 0 : shortDescription.hashCode());
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
 		return result;
 	}
 
@@ -119,6 +123,14 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 			return false;
 		}
 		HummingbirdParameter<?> other = (HummingbirdParameter<?>) obj;
+		if (longDescription == null) {
+			if (other.longDescription != null) {
+				return false;
+			}
+		}
+		else if (!longDescription.equals(other.longDescription)) {
+			return false;
+		}
 		if (name == null) {
 			if (other.name != null) {
 				return false;
@@ -133,6 +145,25 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 			}
 		}
 		else if (!qualifiedName.equals(other.qualifiedName)) {
+			return false;
+		}
+		if (receivedTime != other.receivedTime) {
+			return false;
+		}
+		if (shortDescription == null) {
+			if (other.shortDescription != null) {
+				return false;
+			}
+		}
+		else if (!shortDescription.equals(other.shortDescription)) {
+			return false;
+		}
+		if (value == null) {
+			if (other.value != null) {
+				return false;
+			}
+		}
+		else if (!value.equals(other.value)) {
 			return false;
 		}
 		return true;
