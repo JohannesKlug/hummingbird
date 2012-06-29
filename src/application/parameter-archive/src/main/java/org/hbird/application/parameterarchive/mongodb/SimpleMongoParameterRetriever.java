@@ -29,6 +29,9 @@ public class SimpleMongoParameterRetriever implements ParameterRetriever {
 		this.collection = collection;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Parameter> findParameters(final String qualifiedName) {
 		System.out.println("Searching by Qualified name "  + qualifiedName);
@@ -37,6 +40,9 @@ public class SimpleMongoParameterRetriever implements ParameterRetriever {
 		return foundParameters;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Parameter> findParameters(final Date startDate, final Date endDate) {
 		System.out.println("Searching by time range name "  + startDate + " - " + endDate);
@@ -46,6 +52,9 @@ public class SimpleMongoParameterRetriever implements ParameterRetriever {
 		return foundParameters;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Parameter<?>> findByReceivedTimeBetween(final long startDate, final long endDate, final int page, final int numOfResults) {
 		Page<Parameter<?>> found = parameterRepo.findByReceivedTimeBetween(startDate, endDate, new PageRequest(page, numOfResults));
@@ -53,6 +62,9 @@ public class SimpleMongoParameterRetriever implements ParameterRetriever {
 		return found.getContent();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Parameter> findParameters(final String qualifiedName, final Date startDate, final Date endDate) {
 		final Query query = new Query(Criteria.where("name").is(qualifiedName).and("receivedTime").gte(startDate.getTime()).lte(endDate.getTime()));
