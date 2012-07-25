@@ -16,9 +16,12 @@
        						http://camel.apache.org/schema/spring 
        						http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-	<!-- Default provided setup which can be used to run the archiver. You do not need to use this
-	of course. You can use the classes as a library or define your own enterprise route in another
-	project/blueprint. -->
+	<!-- 
+		NOTE!!
+		Default provided setup which can be used to run the archiver. You do not need to use this
+		of course. You can use the classes as a library or define your own enterprise route in another
+		project/blueprint.
+	-->
 	
 	<import resource="activemq.xml"/>
 
