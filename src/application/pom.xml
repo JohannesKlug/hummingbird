@@ -16,6 +16,7 @@
 		<module>calibration</module>
 		<module>web-backend</module>
     <module>parameter-archive</module>
+    <module>commanding</module>
   </modules>
 	<groupId>org.hbird.application</groupId>
 </project>
