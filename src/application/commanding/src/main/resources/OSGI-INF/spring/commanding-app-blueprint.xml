@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Configures the MCS using camel as a routing engine -->
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns:context="http://www.springframework.org/schema/context" 
+	   xmlns:camel="http://camel.apache.org/schema/spring" 
+	   xmlns:util="http://www.springframework.org/schema/util" 
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   					   http://www.springframework.org/schema/context 
+	   					   http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	   					   http://camel.apache.org/schema/spring 
+	   					   http://camel.apache.org/schema/spring/camel-spring.xsd 
+	   					   http://www.springframework.org/schema/util 
+	   					   http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<import resource="spring-config.xml"/>
+	<import resource="activemq.xml"/>
+	
+	<!-- Obtain the command list from the publisher proxy -->
+	<bean id="retrievedCommands" factory-bean="publisherProxy" factory-method="getCommandList"></bean>
+	
+	<!-- Instantiate a command list bean to cache the commands obtained from the publisher service -->
+	<bean id="commandList" class="org.hbird.application.commanding.CommandList">
+		<property name="commands" ref="retrievedCommands"></property>
+	</bean>
+	
+	<camel:camelContext id="distributedCmdAppExample">
+		<!-- Create a proxy to the publisher service exposed elsewhere (via the serviceUrl) -->
+		<camel:proxy id="publisherProxy" 
+					 serviceUrl="activemq:publisherServices"
+					 serviceInterface="org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher"/>
+	</camel:camelContext>
+	
+</beans>
