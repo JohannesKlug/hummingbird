@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configures the Space System Publisher using camel as a routing engine -->
+<beans	xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:context="http://www.springframework.org/schema/context" 
+		xmlns:camel="http://camel.apache.org/schema/spring" 
+		xmlns:util="http://www.springframework.org/schema/util" 
+		xmlns:osgix="http://www.springframework.org/schema/osgi-compendium" 
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   					   	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	   					   	http://www.springframework.org/schema/context 
+	   					   	http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+	   					   	http://camel.apache.org/schema/spring 
+	   					   	http://camel.apache.org/schema/spring/camel-spring.xsd 
+	   					   	http://www.springframework.org/schema/util 
+	   					   	http://www.springframework.org/schema/util/spring-util.xsd 
+	   					   	http://www.springframework.org/schema/osgi-compendium 
+	   					   	http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd">
+
+	<import resource="spring-config.xml"/>
+	<import resource="activemq.xml"/>
+	
+	<camel:camelContext id="spaceSystemPublisherCamelContext">
+		<!-- Create a proxy to the publisher service exposed elsewhere (via the serviceUrl) -->
+		<camel:proxy id="spaceSystemFactoryProxy" 
+					 serviceUrl="activemq:publisherServices"
+					 serviceInterface="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory"/>
+	</camel:camelContext>
+	
+	<bean id="spaceSystemModel" factory-bean="spaceSystemFactoryProxy" factory-method="createSpaceSystemModel"></bean>
+	
+	<bean id="spaceSystemPublisher" class="org.hbird.core.spacesystempublisher.publishing.InMemorySpaceSystemPublisher">
+		<constructor-arg ref="spaceSystemModel"></constructor-arg>
+	</bean>
+	
+	
+</beans>

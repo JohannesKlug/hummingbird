@@ -79,11 +79,21 @@
 				</executions>
 				<configuration>
 					<instructions>
-						<Export-Package> org.hbird.core.xtce, org.hbird.core.xtce.utils, org.hbird.core.xtce.exceptions 
+						<Export-Package>
+							org.hbird.core.xtce,
+							org.hbird.core.xtce.utils,
+							org.hbird.core.xtce.exceptions 
 						</Export-Package>
-						<Private-Package> org.hbird.core.generatedcode* 
+						<Private-Package>
+							org.hbird.core.generatedcode* 
 						</Private-Package>
-						<Embed-Dependency> castor-core,castor-xml 
+						<Import-Package>
+							*,
+							org.hbird.core.spacesystempublisher.interfaces,
+							org.springframework.aop
+						</Import-Package>
+						<Embed-Dependency>
+							castor-core,castor-xml 
 						</Embed-Dependency>
 					</instructions>
 				</configuration>
@@ -142,5 +152,11 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.hbird.core</groupId>
+			<artifactId>space-system-publisher</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
+	<packaging>bundle</packaging>
 </project>

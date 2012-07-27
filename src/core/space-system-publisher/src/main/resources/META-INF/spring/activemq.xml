@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans	xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:context="http://www.springframework.org/schema/context" 
+		xmlns:camel="http://camel.apache.org/schema/spring" 
+		xmlns:util="http://www.springframework.org/schema/util" 
+		xmlns:osgix="http://www.springframework.org/schema/osgi-compendium" 
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   					   	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	   					   	http://www.springframework.org/schema/context 
+	   					   	http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+	   					   	http://camel.apache.org/schema/spring 
+	   					   	http://camel.apache.org/schema/spring/camel-spring.xsd 
+	   					   	http://www.springframework.org/schema/util 
+	   					   	http://www.springframework.org/schema/util/spring-util.xsd 
+	   					   	http://www.springframework.org/schema/osgi-compendium 
+	   					   	http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd">
+	
+	<import resource="spring-config.xml"/>
+	
+	<!-- Transport beans -->
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<!-- <osgix:managed-properties persistent-id="org.hbird.core.xtce"/> -->
+		<property name="brokerURL" value="tcp://localhost:61616" /> <!-- FIXME put this in config -->
+	</bean>
+
+	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
+		<property name="maxConnections" value="8" />
+		<property name="maximumActive" value="500" />
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+	</bean>
+
+	<bean id="jmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
+		<property name="connectionFactory" ref="pooledConnectionFactory" />
+		<property name="transacted" value="false" />
+		<property name="concurrentConsumers" value="10" />
+	</bean>
+
+	<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+		<property name="configuration" ref="jmsConfig" />
+	</bean>	
+	
+</beans>

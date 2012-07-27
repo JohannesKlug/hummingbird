@@ -63,7 +63,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 
 	private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModelFactory.class);
 
-	private final String spaceSystemModelFilename;
+	private String spaceSystemModelFilename;
 
 	private SpaceSystem spaceSystem;
 
@@ -106,7 +106,11 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 
 	private final Map<String, Encoding> encodings = new HashMap<String, Encoding>();
 
+	public XtceSpaceSystemModelFactory() {
+	}
+
 	public XtceSpaceSystemModelFactory(final String spaceSystemModelFilename) {
+		LOG.debug("Instantiating XtceSpaceSystemModelFactory with filename " + spaceSystemModelFilename);
 		this.spaceSystemModelFilename = spaceSystemModelFilename;
 	}
 
@@ -117,6 +121,10 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	 */
 	@Override
 	public final SpaceSystemModel createSpaceSystemModel() throws InvalidSpaceSystemDefinitionException {
+
+		if(spaceSystemModelFilename == null) {
+			throw new InvalidSpaceSystemDefinitionException("No path to xtce file set");
+		}
 
 		LOG.debug("File = " + spaceSystemModelFilename);
 
@@ -170,9 +178,9 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	 * Creates the generated class model from the XML file.
 	 * @param spacesystemmodelFilename
 	 * @return
-	 * @throws FileNotFoundException 
-	 * @throws ValidationException 
-	 * @throws MarshalException 
+	 * @throws FileNotFoundException
+	 * @throws ValidationException
+	 * @throws MarshalException
 	 */
 	private final static SpaceSystem unmarshallXtceXmlSpaceSystem(final String spacesystemmodelFilename) throws MarshalException, ValidationException, FileNotFoundException {
 		SpaceSystem spaceSystem = null;
@@ -901,5 +909,13 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 		final Encoding encoding = new Encoding();
 		// TODO - 29.03.2012 kimmell - implement
 		return encoding;
+	}
+
+	public String getSpaceSystemModelFilename() {
+		return spaceSystemModelFilename;
+	}
+
+	public void setSpaceSystemModelFilename(final String spaceSystemModelFilename) {
+		this.spaceSystemModelFilename = spaceSystemModelFilename;
 	}
 }

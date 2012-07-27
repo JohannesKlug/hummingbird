@@ -67,11 +67,6 @@
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-spring</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.hbird.core</groupId>
-			<artifactId>xtce</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 	
 	<packaging>bundle</packaging>
