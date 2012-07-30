@@ -1,6 +1,9 @@
 package org.hbird.core.spacesystemmodel.encoding;
 
-public class Encoding {
+import java.io.Serializable;
+
+public class Encoding implements Serializable {
+	private static final long serialVersionUID = -3932706937964758588L;
 
 	public enum BinaryRepresentation {
 		unsigned, signMagnitude, twosComplement, onesComplement, binaryCodedDecimal, packedBinaryCodedDecimal, UTF8, UTF16, IEEE754_1985, MILSTD_1750A

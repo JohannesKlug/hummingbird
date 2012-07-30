@@ -152,6 +152,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 			//			System.exit(-1);
 		}
 		catch (final InvalidParameterTypeException e1) {
+			e1.printStackTrace();
 			LOG.error(e1.toString());
 			// TODO - 27.03.2012 kimmell - replace with appropriate exception
 			//			System.exit(-1);
