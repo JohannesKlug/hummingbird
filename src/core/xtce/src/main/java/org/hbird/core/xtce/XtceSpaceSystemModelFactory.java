@@ -107,6 +107,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	private final Map<String, Encoding> encodings = new HashMap<String, Encoding>();
 
 	public XtceSpaceSystemModelFactory() {
+		LOG.debug("Instantiating XtceSpaceSystemModelFactory with no space system file path");
 	}
 
 	public XtceSpaceSystemModelFactory(final String spaceSystemModelFilename) {
@@ -126,7 +127,9 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 			throw new InvalidSpaceSystemDefinitionException("No path to xtce file set");
 		}
 
-		LOG.debug("File = " + spaceSystemModelFilename);
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Creating space system model using XTCE file = " + spaceSystemModelFilename);
+		}
 
 		model = new XtceSpaceSystemModel();
 

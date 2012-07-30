@@ -18,14 +18,6 @@
 	   					   	http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd">
 
 	<import resource="spring-config.xml"/>
-	<import resource="activemq.xml"/>
-	
-	<camel:camelContext id="spaceSystemPublisherCamelContext">
-		<!-- Create a proxy to the publisher service exposed elsewhere (via the serviceUrl) -->
-		<camel:proxy id="spaceSystemFactoryProxy" 
-					 serviceUrl="activemq:publisherServices"
-					 serviceInterface="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory"/>
-	</camel:camelContext>
 	
 	<bean id="spaceSystemModel" factory-bean="spaceSystemFactoryProxy" factory-method="createSpaceSystemModel"></bean>
 	
@@ -34,4 +26,11 @@
 	</bean>
 	
 	
+	<camel:camelContext id="spaceSystemPublisherCamelContext">
+		<!-- Create a proxy to the publisher service exposed elsewhere (via the serviceUrl) -->
+		<camel:proxy id="spaceSystemFactoryProxy" 
+					 serviceUrl="activemq:publisherServices"
+					 serviceInterface="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory"/>
+	</camel:camelContext>
+
 </beans>

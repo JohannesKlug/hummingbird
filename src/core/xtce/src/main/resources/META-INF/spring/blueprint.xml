@@ -25,7 +25,7 @@
 	</bean>
 
 
-	<camel:camelContext id="distributedCmdAppExample">
+	<camel:camelContext id="xtceCamelContext">
 		<camel:export 
 			id="spaceSystemPublisherService" 
 			uri="activemq:publisherServices" 

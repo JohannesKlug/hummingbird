@@ -9,15 +9,32 @@ import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemModelUpdate;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+/**
+ * A {@link SpaceSystemPublisher} that holds a {@link SpaceSystemModel} in memory at runtime.
+ *
+ * @author Mark Doyle
+ *
+ */
 public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
+	private static final Logger LOG = LoggerFactory.getLogger(InMemorySpaceSystemPublisher.class);
 
 	private SpaceSystemModel model;
 
 	public InMemorySpaceSystemPublisher() {
 	}
 
+	/**
+	 * Creates the space system publisher with the provided {@link SpaceSystemModel}
+	 * This model will be used to provide responses to all service requests regarding the space system.
+	 * @param model
+	 */
 	public InMemorySpaceSystemPublisher(final SpaceSystemModel model) {
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Instantiated InMemorySpaceSystemPublisher using space system model " + model.getName());
+		}
 		this.model = model;
 	}
 
