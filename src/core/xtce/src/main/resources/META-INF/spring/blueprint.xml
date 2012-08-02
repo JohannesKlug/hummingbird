@@ -33,7 +33,8 @@
 		<osgi:service-properties>
 			<entry key="service.exported.interfaces" value="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory"/> <!-- Adds DOSGi remote access to service interface -->
 			<entry key="service.exported.configs" value="org.apache.cxf.ws"/>
-<!-- 			<entry key="org.apache.cxf.ws.address" value="http://localhost:8181/XtceSpaceSystemModelFactory"/> -->
+			<entry key="org.apache.cxf.ws.httpservice.context" value="/xtce"/>
+			<entry key="org.apache.cxf.ws.address" value="http://localhost:9000/xtce/XtceSpaceSystemModelFactory"/>
 			<entry key="org.apache.cxf.ws.databinding" value="jaxb" /> 
       		<entry key="org.apache.cxf.ws.frontend" value="jaxws" /> 
 		</osgi:service-properties>
