@@ -11,7 +11,7 @@
 	<packaging>pom</packaging>
 
 	<name>Hummingbird Core</name>
-	<description>This module contains the Hummingbird Core</description>
+	<description>This module contains the Hummingbird Core bundles. It is a parent project only.</description>
 	<url/>
 
 	<modules>
@@ -23,4 +23,19 @@
 
 	
 	<groupId>org.hbird.core</groupId>
+	
+	<ciManagement>
+		<url>http://hbird.org:8080/</url>
+		<system>Jenkins</system>
+	</ciManagement>
+	<issueManagement>
+		<url>https://github.com/JohannesKlug/hbird/issues</url>
+		<system>Github issue tracker</system>
+	</issueManagement>
+	<scm>
+		<url>https://github.com/JohannesKlug/hbird</url>
+	</scm>
+	<organization>
+		<name>hbird.org</name>
+	</organization>
 </project>

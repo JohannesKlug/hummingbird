@@ -10,8 +10,7 @@
 	</parent>
 	
 	<artifactId>space-system-publisher</artifactId>
-	<name>space-system-publisher</name>
-	<url>http://maven.apache.org</url>
+	<name>HBIRD - Space System Publisher</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -70,4 +69,6 @@
 	</dependencies>
 	
 	<packaging>bundle</packaging>
+	<description>This bundle provides Hbird space system model publication services. It allows clients to retrive space system model information, update the model, and register for updates to the model.</description>
+	
 </project>

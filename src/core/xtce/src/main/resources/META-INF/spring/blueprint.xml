@@ -5,6 +5,7 @@
 		xmlns:context="http://www.springframework.org/schema/context" 
 		xmlns:camel="http://camel.apache.org/schema/spring" 
 		xmlns:util="http://www.springframework.org/schema/util" 
+		xmlns:osgi="http://www.springframework.org/schema/osgi" 
 		xmlns:osgix="http://www.springframework.org/schema/osgi-compendium" 
 		xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	   					   	http://www.springframework.org/schema/beans/spring-beans.xsd 
@@ -14,6 +15,8 @@
 	   					   	http://camel.apache.org/schema/spring/camel-spring.xsd 
 	   					   	http://www.springframework.org/schema/util 
 	   					   	http://www.springframework.org/schema/util/spring-util.xsd 
+	   					   	http://www.springframework.org/schema/osgi 
+	   					   	http://www.springframework.org/schema/osgi/spring-osgi.xsd 
 	   					   	http://www.springframework.org/schema/osgi-compendium 
 	   					   	http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd">
 
@@ -24,14 +27,27 @@
 		<osgix:managed-properties persistent-id="org.hbird.core.xtce"/>
 	</bean>
 
+	<osgi:service id="xtceSpaceSystemModelFactoryService"
+				  interface="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory"
+				  ref="ssmodelFactory">
+		<osgi:service-properties>
+			<entry key="service.exported.interfaces" value="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory"/> <!-- Adds DOSGi remote access to service interface -->
+			<entry key="service.exported.configs" value="org.apache.cxf.ws"/>
+<!-- 			<entry key="org.apache.cxf.ws.address" value="http://localhost:8181/XtceSpaceSystemModelFactory"/> -->
+			<entry key="org.apache.cxf.ws.databinding" value="jaxb" /> 
+      		<entry key="org.apache.cxf.ws.frontend" value="jaxws" /> 
+		</osgi:service-properties>
+	</osgi:service>
 
 	<camel:camelContext id="xtceCamelContext">
+	<!-- Moving to DOSGi 
 		<camel:export 
 			id="spaceSystemPublisherService" 
 			uri="activemq:publisherServices" 
 			serviceRef="ssmodelFactory" 
 			serviceInterface="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory"
 		/>
+	 -->
 	</camel:camelContext>
 	
 </beans>
