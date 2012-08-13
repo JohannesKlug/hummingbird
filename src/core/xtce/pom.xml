@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<name>HBIRD - XTCE space system model factory and services</name>
+	<name>Hbird :: Core :: XTCE space system model factory and services</name>
 	<description>XTCE implementation of the Space System Model Factory. Also provides space system model factory services for client to retrieve an XTCE built space system model.</description>
 	<parent>
 		<artifactId>hummingbird-core</artifactId>
