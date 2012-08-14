@@ -12,8 +12,7 @@
     <artifactId>xtce-osgi</artifactId>
     <packaging>bundle</packaging>
 
-    <name>xtce-osgi Blueprint Bundle</name>
-    <description>xtce-osgi OSGi blueprint bundle project.</description>
+    <name>Hbird :: Core :: XTCE Space System Model OSGi services</name>
 
     <build>
         <plugins>
@@ -45,4 +44,5 @@
     		<version>0.0.1-SNAPSHOT</version>
     	</dependency>
     </dependencies>
+    <description>XTCE implementation of the Space System Model Factory. Also provides space system model factory services for client to retrieve an XTCE built space system model.</description>
 </project>
