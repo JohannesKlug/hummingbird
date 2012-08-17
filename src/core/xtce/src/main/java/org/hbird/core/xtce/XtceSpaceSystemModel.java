@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
@@ -21,6 +23,7 @@ import org.hbird.core.spacesystemmodel.tmtcgroups.TmTcGroups;
  * @author Johannes Klug
  *
  */
+@XmlRootElement(name = "SpaceSystemModel")
 public class XtceSpaceSystemModel implements SpaceSystemModel {
 	private static final long serialVersionUID = 2532805548202927668L;
 	//	private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModel.class);

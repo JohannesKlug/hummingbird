@@ -2,6 +2,10 @@ package org.hbird.core.spacesystemmodel.encoding;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+// TODO Should this be an interface in commons? I think so. We are dealing with a concrete class here solely defined in the ssm module
+@XmlRootElement(name = "Encoding")
 public class Encoding implements Serializable {
 	private static final long serialVersionUID = -3932706937964758588L;
 

@@ -136,7 +136,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 		try {
 			spaceSystem = unmarshallXtceXmlSpaceSystem(spaceSystemModelFilename);
 		}
-		catch (Exception e){
+		catch (final Exception e){
 			throw new InvalidSpaceSystemDefinitionException(e);
 		}
 
@@ -568,7 +568,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 			final EntryList parameterEntrys = sequenceContainer.getEntryList();
 
 			for (int x = 0; x < parameterEntrys.getEntryListTypeItemCount(); x++) {
-				ParameterRefEntry parameterRefEntry = parameterEntrys.getEntryListTypeItem(x).getParameterRefEntry();
+				final ParameterRefEntry parameterRefEntry = parameterEntrys.getEntryListTypeItem(x).getParameterRefEntry();
 				if (parameterRefEntry == null) {
 					throw new InvalidSpaceSystemDefinitionException("ParameterRefEntry for entry list type item " + x + " is null.");
 				}

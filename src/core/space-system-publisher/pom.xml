@@ -10,7 +10,7 @@
 	</parent>
 	
 	<artifactId>space-system-publisher</artifactId>
-	<name>HBIRD - Space System Publisher</name>
+	<name>Hbird :: Core :: Space System Publisher</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

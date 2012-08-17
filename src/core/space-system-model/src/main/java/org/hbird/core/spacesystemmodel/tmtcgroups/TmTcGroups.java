@@ -2,6 +2,8 @@ package org.hbird.core.spacesystemmodel.tmtcgroups;
 
 import java.math.BigDecimal;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.TmTcGroup;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
@@ -18,6 +20,7 @@ import org.slf4j.LoggerFactory;
  * @author kimmell
  *
  */
+@XmlRootElement(name = "TmTcGroups")
 public class TmTcGroups {
 
 	private static final Logger LOG = LoggerFactory.getLogger(TmTcGroups.class);
@@ -26,7 +29,7 @@ public class TmTcGroups {
 	// it is safe to cast.
 	@SuppressWarnings("unchecked")
 	public static void replaceParameterInGroup(final TmTcGroup group, final String qualifiedName, final Parameter<?> parameter) {
-		String pname = parameter.getQualifiedName();
+		final String pname = parameter.getQualifiedName();
 
 		if (group.getAllParameters().containsKey(pname)) {
 			group.getAllParameters().put(qualifiedName, parameter);
@@ -59,49 +62,49 @@ public class TmTcGroups {
 		try {
 			// Ints
 			if (targetGroup.getIntegerParameters() != null) {
-				for (String qualifiedName : targetGroup.getIntegerParameters().keySet()) {
+				for (final String qualifiedName : targetGroup.getIntegerParameters().keySet()) {
 					targetGroup.getIntegerParameter(qualifiedName).setValue(sourceGroup.getIntegerParameter(qualifiedName).getValue());
 					targetGroup.getIntegerParameter(qualifiedName).setReceivedTime(sourceGroup.getIntegerParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (targetGroup.getLongParameters() != null) {
-				for (String qualifiedName : targetGroup.getLongParameters().keySet()) {
+				for (final String qualifiedName : targetGroup.getLongParameters().keySet()) {
 					targetGroup.getLongParameter(qualifiedName).setValue(sourceGroup.getLongParameter(qualifiedName).getValue());
 					targetGroup.getLongParameter(qualifiedName).setReceivedTime(sourceGroup.getLongParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (targetGroup.getFloatParameters() != null) {
-				for (String qualifiedName : targetGroup.getFloatParameters().keySet()) {
+				for (final String qualifiedName : targetGroup.getFloatParameters().keySet()) {
 					targetGroup.getFloatParameter(qualifiedName).setValue(sourceGroup.getFloatParameter(qualifiedName).getValue());
 					targetGroup.getFloatParameter(qualifiedName).setReceivedTime(sourceGroup.getFloatParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (targetGroup.getDoubleParameters() != null) {
-				for (String qualifiedName : targetGroup.getDoubleParameters().keySet()) {
+				for (final String qualifiedName : targetGroup.getDoubleParameters().keySet()) {
 					targetGroup.getDoubleParameter(qualifiedName).setValue(sourceGroup.getDoubleParameter(qualifiedName).getValue());
 					targetGroup.getDoubleParameter(qualifiedName).setReceivedTime(sourceGroup.getDoubleParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (targetGroup.getBigDecimalParameters() != null) {
-				for (String qualifiedName : targetGroup.getBigDecimalParameters().keySet()) {
+				for (final String qualifiedName : targetGroup.getBigDecimalParameters().keySet()) {
 					targetGroup.getBigDecimalParameter(qualifiedName).setValue(sourceGroup.getBigDecimalParameter(qualifiedName).getValue());
 					targetGroup.getBigDecimalParameter(qualifiedName).setReceivedTime(sourceGroup.getBigDecimalParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (targetGroup.getStringParameters() != null) {
-				for (String qualifiedName : targetGroup.getStringParameters().keySet()) {
+				for (final String qualifiedName : targetGroup.getStringParameters().keySet()) {
 					targetGroup.getStringParameter(qualifiedName).setValue(sourceGroup.getStringParameter(qualifiedName).getValue());
 					targetGroup.getStringParameter(qualifiedName).setReceivedTime(sourceGroup.getStringParameter(qualifiedName).getReceivedTime());
 				}
 			}
 			if (targetGroup.getRawParameters() != null) {
-				for (String qualifiedName : targetGroup.getRawParameters().keySet()) {
+				for (final String qualifiedName : targetGroup.getRawParameters().keySet()) {
 					targetGroup.getRawParameter(qualifiedName).setValue(sourceGroup.getRawParameter(qualifiedName).getValue());
 					targetGroup.getRawParameter(qualifiedName).setReceivedTime(sourceGroup.getRawParameter(qualifiedName).getReceivedTime());
 				}
 			}
 		}
-		catch (UnknownParameterException e) {
+		catch (final UnknownParameterException e) {
 			// TODO - 27.03.2012 kimmell - unit test
 			LOG.error("Unknown parameter when copying parameter values. This is is a serious internal error and must indicate a corruption "
 					+ "in memory, a system bug, or a seriosu misuse of the API (copying parameters to a different space system"

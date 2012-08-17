@@ -1,5 +1,7 @@
 package org.hbird.core.spacesystemmodel.parameters;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.hbird.core.commons.tmtc.Parameter;
 
 /**
@@ -9,6 +11,7 @@ import org.hbird.core.commons.tmtc.Parameter;
  *
  * @author Mark Doyle
  */
+@XmlRootElement(name = "Parameter")
 public class HummingbirdParameter<T> implements Parameter<T> {
 	private static final long serialVersionUID = 4723421286629148964L;
 
@@ -62,7 +65,7 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
+		final StringBuilder builder = new StringBuilder();
 		builder.append("HummingbirdParameter [name=");
 		builder.append(name);
 		builder.append(", value=");
@@ -122,7 +125,7 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		HummingbirdParameter<?> other = (HummingbirdParameter<?>) obj;
+		final HummingbirdParameter<?> other = (HummingbirdParameter<?>) obj;
 		if (longDescription == null) {
 			if (other.longDescription != null) {
 				return false;
