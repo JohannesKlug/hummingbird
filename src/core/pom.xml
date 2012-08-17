@@ -10,7 +10,7 @@
 	<artifactId>hummingbird-core</artifactId>
 	<packaging>pom</packaging>
 
-	<name>Hummingbird Core</name>
+	<name>Hbird :: Core</name>
 	<description>This module contains the Hummingbird Core bundles. It is a parent project only.</description>
 	<url/>
 
@@ -19,7 +19,7 @@
 		<module>space-system-model</module>
 		<module>xtce</module>
 		<module>space-system-publisher</module>
-    <module>xtce-osgi</module>
+    	<module>../osgi/core/xtce-osgi</module>
   </modules>
 
 	
