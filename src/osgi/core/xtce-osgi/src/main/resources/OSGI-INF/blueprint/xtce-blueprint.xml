@@ -21,18 +21,21 @@
  		<cm:managed-properties persistent-id="org.hbird.core.xtce"/>
  	</bean>
 	
+	
 	<!--
 		Exports the XtceSpaceSystemModelFactory bean as a provides of the SpaceSystemModelFactory service.
 		The service is also registered as a DOSGi RESTful web service 
 	 -->
 	<service id="XtceSpaceSystemModelFactoryService" 
-			 interface="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory"
+			 interface="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory" 
 			 ref="XtceSpaceSystemModelFactory">
 			 <service-properties>
-				<entry key="service.exported.interfaces" value="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory"/> <!-- Adds DOSGi remote access to service interface -->
+			  	<!-- Adds DOSGi remote access to service interface -->
+				<entry key="service.exported.interfaces" value="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory"/>
 				<entry key="service.exported.configs" value="org.apache.cxf.rs"/>
 				<entry key="service.exported.intents" value="HTTP"></entry>
-				<entry key="org.apache.cxf.ws.httpservice.context" value="/xtce"/>
+				<entry key="org.apache.cxf.rs.httpservice.context" value="/xtce"/>
+				<entry key="org.apache.cxf.rs.provider" value="org.apache.cxf.jaxrs.provider.JSONProvider"/>
       		</service-properties>
 	</service>
 
