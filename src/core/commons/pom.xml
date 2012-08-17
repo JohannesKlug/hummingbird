@@ -9,7 +9,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>commons</artifactId>
-	<name>commons</name>
+	<name>Hbird :: Core :: Commons</name>
 
 	<build>
 		<plugins>
@@ -54,4 +54,6 @@
 	</dependencies>
 
 	<packaging>bundle</packaging>
+	<description>This bundle contains all the cross-cutting interfaces or exchange types of the hbird system. It defines the API.
+It also contains useful utility classes that are not found in the JDK, e.g., BitSet and Bytes utilities.</description>
 </project>
