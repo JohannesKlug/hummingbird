@@ -12,7 +12,7 @@ public interface SpaceSystemModelFactory {
 
 	@GET
 	@Path("model")
-	@Produces("application/json")
+	@Produces({"application/json", "application/xml"})
 	SpaceSystemModel createSpaceSystemModel() throws InvalidParameterTypeException, InvalidSpaceSystemDefinitionException;
 
 }

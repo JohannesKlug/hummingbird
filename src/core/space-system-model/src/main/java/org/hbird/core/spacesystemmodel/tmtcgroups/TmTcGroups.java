@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  * @author kimmell
  *
  */
-@XmlRootElement(name = "TmTcGroups")
+@XmlRootElement()
 public class TmTcGroups {
 
 	private static final Logger LOG = LoggerFactory.getLogger(TmTcGroups.class);

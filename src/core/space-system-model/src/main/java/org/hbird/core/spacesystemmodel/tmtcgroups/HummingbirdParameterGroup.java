@@ -19,9 +19,8 @@ import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
  * @author Mark Doyle
  * @author Johannes Klug
  */
-@XmlRootElement(name = "ParameterGroup")
+@XmlRootElement()
 public class HummingbirdParameterGroup implements ParameterGroup {
-
 	private static final long serialVersionUID = -6877917071118156741L;
 
 	private final String qualifiedName;

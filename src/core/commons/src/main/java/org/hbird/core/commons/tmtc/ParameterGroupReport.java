@@ -2,9 +2,12 @@ package org.hbird.core.commons.tmtc;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name= "ParameterGroupReport")
 public class ParameterGroupReport implements Serializable {
 	private static final long serialVersionUID = -7299379403601149743L;
-	
+
 	private int intParameters = 0;
 	private int longParameters = 0;
 	private int bigDecimalParameters;
@@ -13,8 +16,8 @@ public class ParameterGroupReport implements Serializable {
 	private int stringParameters = 0;
 	private int rawParameters = 0;
 
-	public ParameterGroupReport(int numberIntParameters, int numberLongParameters, int numberBigDecimalParameters, int numberFloatParameters,
-			int numberDoubleParameters, int numberStringParameters, int numberRawParameters) {
+	public ParameterGroupReport(final int numberIntParameters, final int numberLongParameters, final int numberBigDecimalParameters, final int numberFloatParameters,
+			final int numberDoubleParameters, final int numberStringParameters, final int numberRawParameters) {
 		this.intParameters = numberIntParameters;
 		this.longParameters = numberLongParameters;
 		this.bigDecimalParameters = numberBigDecimalParameters;

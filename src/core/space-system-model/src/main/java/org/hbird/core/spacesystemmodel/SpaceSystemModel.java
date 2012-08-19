@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
@@ -22,6 +24,7 @@ import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException
  * implementation will depend on a data structure in a specific format, but hides this implementation to the monitoring
  * component.
  */
+@XmlRootElement
 public interface SpaceSystemModel extends Serializable {
 
 	// TODO XTCE specific hack. Should move to the xtce project. Investigate. - Mark

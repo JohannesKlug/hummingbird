@@ -90,7 +90,8 @@
 						<Import-Package>
 							*,
 							org.hbird.core.spacesystempublisher.interfaces,
-							org.springframework.aop
+							org.springframework.aop,
+							javax.xml.bind.annotation
 						</Import-Package>
 						<Embed-Dependency>
 							castor-core,castor-xml 

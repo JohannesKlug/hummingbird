@@ -11,7 +11,7 @@ import org.hbird.core.commons.tmtc.Parameter;
  *
  * @author Mark Doyle
  */
-@XmlRootElement(name = "Parameter")
+@XmlRootElement()
 public class HummingbirdParameter<T> implements Parameter<T> {
 	private static final long serialVersionUID = 4723421286629148964L;
 

@@ -23,7 +23,7 @@ import org.hbird.core.spacesystemmodel.tmtcgroups.TmTcGroups;
  * @author Johannes Klug
  *
  */
-@XmlRootElement(name = "SpaceSystemModel")
+@XmlRootElement()
 public class XtceSpaceSystemModel implements SpaceSystemModel {
 	private static final long serialVersionUID = 2532805548202927668L;
 	//	private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModel.class);
