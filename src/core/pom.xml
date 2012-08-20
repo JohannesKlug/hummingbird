@@ -19,8 +19,9 @@
 		<module>space-system-model</module>
 		<module>xtce</module>
 		<module>space-system-publisher</module>
-    	<module>../osgi/core/xtce-osgi</module>
-  </modules>
+    	<module>xtce-osgi</module>
+    	<module>space-system-publisher-osgi</module>
+	</modules>
 
 	
 	<groupId>org.hbird.core</groupId>
