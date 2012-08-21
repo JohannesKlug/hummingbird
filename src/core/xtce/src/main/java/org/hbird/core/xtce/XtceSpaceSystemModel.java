@@ -145,52 +145,52 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public Map<String, Parameter<BigDecimal>> getAllUniqueBigDecimalParameters() {
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 	@Override
 	public Map<String, Parameter<Float>> getAllUniqueFloatParameters() {
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 	@Override
 	public Map<String, Parameter<Double>> getAllUniqueDoubleParameters() {
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 	@Override
 	public Map<String, Parameter<String>> getAllUniqueStringParameters() {
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 	@Override
 	public Map<String, Parameter<Byte[]>> getAllUniqueRawParameters() {
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 	@Override
 	public Parameter<BigDecimal> getBigDecimalParameter(final String qualifiedName) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 	@Override
 	public Parameter<String> getStringParameter(final String qualifiedName) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 	@Override
 	public Parameter<Float> getFloatParameter(final String qualifiedName) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 	@Override
 	public Parameter<Double> getDoubleParameter(final String qualifiedName) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 	@Override
 	public Parameter<Byte[]> getRawParameter(final String qualifiedName) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 	@Override
