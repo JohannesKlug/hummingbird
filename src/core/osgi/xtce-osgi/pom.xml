@@ -12,7 +12,7 @@
     <artifactId>xtce-osgi</artifactId>
     <packaging>bundle</packaging>
 
-    <name>Hbird :: Core :: XTCE Space System Model OSGi services</name>
+    <name>Hbird :: Core :: OSGi :: XTCE Space System Model OSGi services</name>
 
     <build>
         <plugins>
@@ -23,7 +23,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <Export-Package>org.hbird.core.xtce.osgi*;version=${project.version}</Export-Package>
+                        <Export-Package>org.hbird.core.osgi.xtce*;version=${project.version}</Export-Package>
                         <Import-Package>
                         	*,
                         	org.apache.cxf.jaxrs.provider.jsonp,

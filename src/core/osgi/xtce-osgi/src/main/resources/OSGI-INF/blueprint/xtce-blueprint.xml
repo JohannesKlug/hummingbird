@@ -12,13 +12,13 @@
 		<property name="arguments">
 			<list>
 				<value>XTCE</value>
-				<value>org.hbird.core.xtce</value>
+				<value>org.hbird.core.osgi.xtce</value>
 			</list>
 		</property>
 	</bean>
 	
  	<bean id="XtceSpaceSystemModelFactory" class="org.hbird.core.xtce.XtceSpaceSystemModelFactory">
- 		<cm:managed-properties persistent-id="org.hbird.core.xtce"/>
+ 		<cm:managed-properties persistent-id="org.hbird.core.osgi.xtce"/>
  	</bean>
 	
 	
