@@ -6,6 +6,7 @@
 								http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://svn.apache.org/repos/asf/aries/trunk/blueprint/blueprint-cm/src/main/resources/org/apache/aries/blueprint/compendium/cm/blueprint-cm-1.1.0.xsd"  
 			default-activation="lazy">
  			
+ 	<!-- MDC config for sift logging -->
  	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
 		<property name="targetClass"> <value>org.slf4j.MDC</value> </property>
 		<property name="targetMethod"> <value>put</value> </property>
@@ -17,6 +18,7 @@
 		</property>
 	</bean>
 	
+	<!-- Xtce Space System model factory declaration using osgi compendium managed properties. -->
  	<bean id="XtceSpaceSystemModelFactory" class="org.hbird.core.xtce.XtceSpaceSystemModelFactory">
  		<cm:managed-properties persistent-id="org.hbird.core.osgi.xtce"/>
  	</bean>
