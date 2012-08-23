@@ -88,9 +88,9 @@
 							org.hbird.core.generatedcode* 
 						</Private-Package>
 						<Import-Package>
+							!netscape.ldap,
+							!org.apache.regexp,
 							*,
-							org.hbird.core.spacesystempublisher.interfaces,
-							org.springframework.aop,
 							javax.xml.bind.annotation
 						</Import-Package>
 						<Embed-Dependency>
@@ -152,11 +152,6 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.hbird.core</groupId>
-			<artifactId>space-system-publisher</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	<packaging>bundle</packaging>
