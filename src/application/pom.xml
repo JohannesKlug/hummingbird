@@ -9,7 +9,7 @@
 
 	<artifactId>application</artifactId>
 	<packaging>pom</packaging>
-	<name>Hummingbird applications</name>
+	<name>Hbird :: Applications</name>
 	<description/>
 	
 	<modules>

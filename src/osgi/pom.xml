@@ -4,16 +4,22 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>hummingbird-core</artifactId>
-        <groupId>org.hbird.core</groupId>
+        <artifactId>hummingbird</artifactId>
+        <groupId>org.hbird</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>xtce-osgi</artifactId>
-    <packaging>bundle</packaging>
+    <artifactId>osgi-parent</artifactId>
+    <packaging>pom</packaging>
 
-    <name>Hbird :: Core :: OSGi :: XTCE Space System Model OSGi services</name>
+    <name>Hbird :: OSGi</name>
 
+    <modules>
+    	<module>space-system-publisher-osgi</module>
+    	<module>xtce-osgi</module>
+    </modules>
+    
+    
     <build>
         <plugins>
             <plugin>
@@ -27,7 +33,8 @@
                         <Import-Package>
                         	*,
                         	org.apache.cxf.jaxrs.provider.jsonp,
-                        	org.apache.cxf.jaxrs.provider
+                        	org.apache.cxf.jaxrs.provider,
+                        	org.slf4j
                         </Import-Package>
                     </instructions>
                 </configuration>
@@ -57,5 +64,5 @@
     		<version>2.5.2</version>
     	</dependency>
     </dependencies>
-    <description>XTCE implementation of the Space System Model Factory. Also provides space system model factory services for client to retrieve an XTCE built space system model.</description>
+    <groupId>org.hbird.osgi</groupId>
 </project>

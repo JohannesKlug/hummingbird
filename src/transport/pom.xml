@@ -9,8 +9,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>hummingbird-transport</artifactId>
 	<packaging>pom</packaging>
-	<name>Hummingbird Transport Layer</name>
-	<description>This module contains all transport modules</description>
+	<name>Hbird :: Transport</name>
+	<description>This module contains all transport modules.</description>
 	<url/>
 
 	<modules>

@@ -29,8 +29,7 @@
   <artifactId>commanding</artifactId>
   <packaging>bundle</packaging>
 
-  <name>A Camel Route</name>
-  <url>http://www.myorganization.org</url>
+  <name>Hbird :: Applications :: Commanding</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

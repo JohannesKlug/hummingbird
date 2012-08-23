@@ -19,8 +19,8 @@
 		<module>space-system-model</module>
 		<module>xtce</module>
 		<module>space-system-publisher</module>
-		<module>space-system-publisher-osgi</module>
-		<module>xtce-osgi</module>
+		
+		
 	</modules>
 
 	

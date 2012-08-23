@@ -3,17 +3,17 @@
 			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0" 			 
 			xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd 
-								http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://svn.apache.org/repos/asf/aries/trunk/blueprint/blueprint-cm/src/main/resources/org/apache/aries/blueprint/compendium/cm/blueprint-cm-1.1.0.xsd"  
-			default-activation="lazy">
+								http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://svn.apache.org/repos/asf/aries/trunk/blueprint/blueprint-cm/src/main/resources/org/apache/aries/blueprint/compendium/cm/blueprint-cm-1.1.0.xsd">
+
+
+	<reference id="spaceSystemModelFactoryService"
+			   interface="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory">
+	</reference>
 
 	<bean id="publisher"
 		  class="org.hbird.core.spacesystempublisher.publishing.ServiceBasedSpaceSystemPublisher"
 		  init-method="loadModel">
 		  <property name="factoryService" ref="spaceSystemModelFactoryService"></property>
 	</bean>
-	
-	<reference id="spaceSystemModelFactoryService"
-			   interface="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory">
-	</reference>
 
 </blueprint>

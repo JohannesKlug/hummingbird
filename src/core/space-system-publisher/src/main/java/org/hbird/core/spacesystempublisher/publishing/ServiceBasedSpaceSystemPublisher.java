@@ -16,9 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * {@link SpaceSystemPublisher} that uses a {@link SpaceSystemModelFactory} service interface to
- * retrieve the model.
- * 
+ * {@link SpaceSystemPublisher} that uses a {@link SpaceSystemModelFactory} service interface to retrieve the model.
+ *
  * @author Mark Doyle
  *
  */
@@ -35,18 +34,24 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	 * Retrieves and caches the space system model from the space system model factory service.
 	 */
 	public void loadModel() {
-		LOG.debug("Loading space system model from factory service.");
+		LOG.debug("Loading space system model from factory service!");
 
-		try {
-			this.modelCache = factoryService.createSpaceSystemModel();
+		if (factoryService != null) {
+			try {
+				this.modelCache = factoryService.createSpaceSystemModel();
+				LOG.debug("Model " + this.modelCache.getName() + " cached in publisher");
+			}
+			catch (final InvalidParameterTypeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (final InvalidSpaceSystemDefinitionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		catch (final InvalidParameterTypeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (final InvalidSpaceSystemDefinitionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		else {
+			LOG.error("SpaceSystemModelFactoryService is null, cannot retrieve a space system model for loading and caching!");
 		}
 	}
 
@@ -84,7 +89,8 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	}
 
 	/**
-	 * @param model the model to set
+	 * @param model
+	 *            the model to set
 	 */
 	public void setModel(final SpaceSystemModel model) {
 		this.modelCache = model;
@@ -100,7 +106,6 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
-
 
 	public SpaceSystemModelFactory getFactoryService() {
 		return factoryService;

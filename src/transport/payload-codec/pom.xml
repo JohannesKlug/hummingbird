@@ -8,8 +8,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>payload-codec</artifactId>
-	<name>Generic Payload Codec</name>
-	<url>http://maven.apache.org</url>
+	<name>Hbird :: Transport :: Generic Payload Codec</name>
 	<packaging>bundle</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -93,4 +92,5 @@
 			<artifactId>cloning</artifactId>
 		</dependency>
 	</dependencies>
+	<description>Generic payload is capable if decoding and encoding between raw data and telemetry/telecommands using data retrieved frmo a space system model.</description>
 </project>

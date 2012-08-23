@@ -82,4 +82,5 @@ org.glassfish.jersey.core:jersey-client -->
 	</dependencies>
 
 	<packaging>bundle</packaging>
+	<name>Hbird :: Applications :: Web backend</name>
 </project>

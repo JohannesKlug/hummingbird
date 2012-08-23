@@ -4,15 +4,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>hummingbird-core</artifactId>
-        <groupId>org.hbird.core</groupId>
+        <artifactId>osgi-parent</artifactId>
+        <groupId>org.hbird.osgi</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>space-system-publisher-osgi</artifactId>
     <packaging>bundle</packaging>
 
-    <name>Hbird :: Core :: OSGi :: Space System Publisher OSGi services</name>
+    <name>Hbird :: OSGi :: Space System Publisher OSGi services</name>
 
     <build>
         <plugins>
@@ -24,17 +24,17 @@
                     <instructions>
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Export-Package>
-                        	org.hbird.core.osgi.spacesystempublisher*;version=${project.version}
+                        	org.hbird.core.osgi.spacesystempublisher;version=${project.version}
                         </Export-Package>
                         <Import-Package>
                         	*,
-                        	org.apache.cxf,
-                        	org.apache.cxf.jaxrs.provider
+                        	javax.ws.rs.*,
+                        	org.hbird.core.spacesystemmodel
                         </Import-Package>
-<!--                         <DynamicImport-Package> -->
-<!--                         	org.apache.cxf.dosgi.dsw.qos, -->
-<!--                         	org.apache.cxf -->
-<!--                         </DynamicImport-Package> -->
+                        <DynamicImport-Package>
+                        	org.apache.cxf.dosgi.dsw.qos,
+                        	org.apache.cxf
+                        </DynamicImport-Package>
                     </instructions>
                 </configuration>
             </plugin>

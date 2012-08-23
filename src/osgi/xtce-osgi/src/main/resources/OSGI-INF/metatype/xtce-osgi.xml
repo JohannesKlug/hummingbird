@@ -5,7 +5,8 @@
 		 http://www.osgi.org/xmlns/metadata/v1.0.0 http://www.osgi.org/xmlns/metatype/v1.1.0/metatype.xsd
 	 ">
 
- 	 <OCD id="org.hbird.core.xtce-osgi" name="XTCE space system model" description="XTCE Space System Model">
+ 	 <OCD id="org.hbird.core.xtce-osgi" name="XTCE OSGi" 
+		  description="XTCE Space System Model Factory OSGi bundle. Provides services and lifecycle management.">
  	 	<AD id="spaceSystemModelFilename" type="String" name="XTCE space system model file path"></AD>
 	 </OCD>
 	 

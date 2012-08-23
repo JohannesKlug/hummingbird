@@ -131,4 +131,5 @@
 		</dependency>
 	</dependencies>
 	<packaging>bundle</packaging>
+	<name>Hbird :: Applications :: Parameter Archive</name>
 </project>

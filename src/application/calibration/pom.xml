@@ -52,4 +52,5 @@
 		</dependency>
 	</dependencies>
 	<packaging>bundle</packaging>
+	<name>Hbird :: Applications :: Calibration</name>
 </project>

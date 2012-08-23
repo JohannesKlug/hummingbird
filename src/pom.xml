@@ -6,7 +6,7 @@
 	<artifactId>hummingbird</artifactId>
 	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Hummingbird Root Project</name>
+	<name>Hbird</name>
 	<description>The Hummingbird root project is a container for all Hummingbird components, each created in a separate maven module. By building this project, the complete system can be built.</description>
 	<url>http://hbird.org/</url>
 	<parent>
@@ -19,6 +19,7 @@
 		<module>transport</module>
 		<module>application</module>
 		<module>test</module>
+		<module>osgi</module>
 	</modules>
 	<properties>
 		<rxtx.version>2.1.7</rxtx.version>

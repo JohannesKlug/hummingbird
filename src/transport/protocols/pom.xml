@@ -9,8 +9,7 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>protocols</artifactId>
-	<name>Protocols</name>
-	<description>All data transmission protocol implementation are contained herein.</description>
+	<name>Hbird :: Transport :: Protocols</name>
 	
 	<packaging>bundle</packaging>
 	
@@ -126,4 +125,5 @@
 		</dependency>
 	</dependencies>
 	
+	<description>Contains frame and packet codec implementations for protocols not supported by common Operating Systems that are required by Hbird.</description>
 </project>
