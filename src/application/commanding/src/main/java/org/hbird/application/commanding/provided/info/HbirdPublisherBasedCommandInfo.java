@@ -5,33 +5,36 @@ package org.hbird.application.commanding.provided.info;
 
 import java.util.List;
 
-import org.hbird.application.commanding.CommandList;
 import org.hbird.application.commanding.interfaces.info.CommandInformationService;
 import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 
 /**
  * A Hbird provided implementation of the {@link CommandInformationService} interface.
- * It delegates responsibility of gathering the necessary data to it's {@link CommandList} POJO.
  *
  * @author Mark Doyle
  * @author Johannes Klug
  *
  */
-public class HbirdCommandInfo implements CommandInformationService {
+public class HbirdPublisherBasedCommandInfo implements CommandInformationService {
 
-	/** Object responsible for gathering the command list data **/
-	private CommandList commandList;
+	private SpaceSystemPublisher publisher;
+
+	private List<ParameterGroup> cachedCommands;
+
+
+	public void init() {
+		this.cachedCommands = publisher.getCommandList();
+	}
+
 
 	/**
 	 * @{inheritDoc}
 	 */
 	@Override
 	public List<ParameterGroup> getAllCommands() {
-		return commandList.getCommands();
+		return cachedCommands;
 	}
 
-	public void setCommandList(final CommandList commandList) {
-		this.commandList = commandList;
-	}
 
 }

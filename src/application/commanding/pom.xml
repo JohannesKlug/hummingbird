@@ -77,6 +77,10 @@
     	<version>0.0.1-SNAPSHOT</version>
     	<type>bundle</type>
     </dependency>
+    <dependency>
+    	<groupId>joda-time</groupId>
+    	<artifactId>joda-time</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
