@@ -16,18 +16,29 @@
 		<feature name="hbird-xtce" description="Hbird xtce space system bundles including OSGi service provision" version="${version}">
 			<feature version="${version}">hbird-core</feature>
 			<bundle start="false">mvn:org.hbird.core/xtce/0.0.1-SNAPSHOT</bundle>
-			<bundle start="true" start-level="100">mvn:org.hbird.osgi/xtce-osgi/0.0.1-SNAPSHOT</bundle>
+			<bundle start-level="100">mvn:org.hbird.osgi/xtce-osgi/0.0.1-SNAPSHOT</bundle>
 		</feature>
 		
 		<feature name="hbird-publisher" description="Hbird space system publisher bundles including OSGi service provision" version="${version}">
 			<feature version="${version}">hbird-core</feature>
 			<bundle start="false">mvn:org.hbird.core/space-system-publisher/0.0.1-SNAPSHOT</bundle>
-			<bundle start="true" start-level="100">mvn:org.hbird.osgi/space-system-publisher-osgi/0.0.1-SNAPSHOT</bundle>
+			<bundle start-level="100">mvn:org.hbird.osgi/space-system-publisher-osgi/0.0.1-SNAPSHOT</bundle>
+		</feature>
+		
+		<feature name="hbird-transport" description="Hbird transport bundles and services">
+			<feature version="${version}">hbird-core</feature>
 		</feature>
 		
 		<feature name="hbird-commanding" description="Hbird commmanding application server">
 			<feature version="${version}">hbird-core</feature>
 			<bundle start="false">mvn:org.hbird.application/commanding/0.0.1-SNAPSHOT</bundle>
+		</feature>
+		
+		<feature name="hbird-dosgi-cxf" description="Hbird DOSGi feature using CXF since they don't have one yet :)">
+			<bundle>mvn:org.osgi/org.osgi.enterprise/5.0.0</bundle>
+			<bundle>mvn:org.apache.cxf.dosgi/cxf-dosgi-ri-discovery-local/1.3.1</bundle>
+			<bundle>mvn:org.apache.cxf.dosgi/cxf-dosgi-ri-dsw-cxf/1.3.1</bundle>
+			<bundle>mvn:org.apache.cxf.dosgi/cxf-dosgi-ri-topology-manager/1.3.1</bundle>
 		</feature>
 	
 </features>
