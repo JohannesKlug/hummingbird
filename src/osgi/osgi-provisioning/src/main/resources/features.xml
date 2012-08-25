@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.0.0" 
+		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.0.0 http://karaf.apache.org/xmlns/features/v1.0.0"
+		  name="Hbird">
+    
+		<feature name="hbird-core" description="Hbird core component bundles" version="${version}">
+			<bundle start="false">mvn:org.apache.commons/com.springsource.org.apache.commons.lang/2.6.0</bundle>
+			<bundle start="false">mvn:joda-time/joda-time/2.1</bundle>
+			<bundle start="false">mvn:com.googlecode.guava-osgi/guava-osgi/11.0.0</bundle>
+			<bundle start="false">mvn:org.hbird.core/commons/0.0.1-SNAPSHOT</bundle>
+			<bundle start="false">mvn:org.hbird.core/space-system-model/0.0.1-SNAPSHOT</bundle>
+		</feature>
+		
+		<feature name="hbird-xtce" description="Hbird xtce space system bundles including OSGi service provision" version="${version}">
+			<feature version="${version}">hbird-core</feature>
+			<bundle start="false">mvn:org.hbird.core/xtce/0.0.1-SNAPSHOT</bundle>
+			<bundle start="true" start-level="100">mvn:org.hbird.osgi/xtce-osgi/0.0.1-SNAPSHOT</bundle>
+		</feature>
+		
+		<feature name="hbird-publisher" description="Hbird space system publisher bundles including OSGi service provision" version="${version}">
+			<feature version="${version}">hbird-core</feature>
+			<bundle start="false">mvn:org.hbird.core/space-system-publisher/0.0.1-SNAPSHOT</bundle>
+			<bundle start="true" start-level="100">mvn:org.hbird.osgi/space-system-publisher-osgi/0.0.1-SNAPSHOT</bundle>
+		</feature>
+	
+</features>

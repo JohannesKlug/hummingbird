@@ -17,8 +17,9 @@
     <modules>
     	<module>space-system-publisher-osgi</module>
     	<module>xtce-osgi</module>
-    <module>commanding-osgi</module>
-  </modules>
+    	<module>commanding-osgi</module>
+    	<module>osgi-provisioning</module>
+    </modules>
     
     
     <build>
