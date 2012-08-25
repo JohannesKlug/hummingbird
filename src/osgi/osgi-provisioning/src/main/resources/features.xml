@@ -24,5 +24,10 @@
 			<bundle start="false">mvn:org.hbird.core/space-system-publisher/0.0.1-SNAPSHOT</bundle>
 			<bundle start="true" start-level="100">mvn:org.hbird.osgi/space-system-publisher-osgi/0.0.1-SNAPSHOT</bundle>
 		</feature>
+		
+		<feature name="hbird-commanding" description="Hbird commmanding application server">
+			<feature version="${version}">hbird-core</feature>
+			<bundle start="false">mvn:org.hbird.application/commanding/0.0.1-SNAPSHOT</bundle>
+		</feature>
 	
 </features>
