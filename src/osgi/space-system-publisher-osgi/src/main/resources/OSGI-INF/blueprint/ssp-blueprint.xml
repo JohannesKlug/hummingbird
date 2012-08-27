@@ -16,4 +16,6 @@
 		  <property name="factoryService" ref="spaceSystemModelFactoryService"></property>
 	</bean>
 
+	<service id="publisherService" ref="publisher" interface="org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher"/>
+
 </blueprint>
