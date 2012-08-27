@@ -32,6 +32,7 @@
 		<feature name="hbird-commanding" description="Hbird commmanding application server">
 			<feature version="${version}">hbird-core</feature>
 			<bundle start="false">mvn:org.hbird.application/commanding/0.0.1-SNAPSHOT</bundle>
+			<bundle start-level="100">mvn:org.hbird.osgi/commanding-osgi/0.0.1-SNAPSHOT</bundle>
 		</feature>
 		
 		<feature name="hbird-dosgi-cxf" description="Hbird DOSGi feature using CXF since they don't have one yet :)">
