@@ -19,7 +19,8 @@
     	<module>xtce-osgi</module>
     	<module>commanding-osgi</module>
     	<module>osgi-provisioning</module>
-    </modules>
+    	<module>web-ui</module>
+  </modules>
     
     
     <build>
