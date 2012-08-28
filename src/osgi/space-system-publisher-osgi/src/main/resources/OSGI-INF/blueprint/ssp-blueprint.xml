@@ -15,5 +15,10 @@
 		  init-method="loadModel">
 		  <property name="factoryService" ref="spaceSystemModelFactoryService"></property>
 	</bean>
+	
+	<service id="spaceSystemPublisherService"
+			 interface="org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher"
+			 ref="publisher">
+	</service>
 
 </blueprint>

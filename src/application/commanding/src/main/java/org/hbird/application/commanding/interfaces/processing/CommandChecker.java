@@ -1,6 +1,6 @@
 package org.hbird.application.commanding.interfaces.processing;
 
-import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.commons.tmtc.CommandGroup;
 
 public interface CommandChecker {
 	/**
@@ -12,5 +12,5 @@ public interface CommandChecker {
 	 * @param command
 	 * @return
 	 */
-	boolean checkCommand(ParameterGroup command);
+	boolean checkCommand(CommandGroup command);
 }

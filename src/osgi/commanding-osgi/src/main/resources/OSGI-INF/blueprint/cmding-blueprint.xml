@@ -19,7 +19,6 @@
 		<property name="publisher" ref="spaceSystemPublisherService"></property>
 	</bean>
 	
-	<bean id="commandsToSend" class="org.hbird.application.commanding.provided.processing.CachedCommandList"></bean>
 
 	<bean id="commandInModelChecker" class="org.hbird.application.commanding.provided.processing.CommandInModelChecker"></bean>
 
@@ -27,19 +26,30 @@
 	<service id="commandInfoService" 
 			 interface="org.hbird.application.commanding.interfaces.info.CommandInformationService"
 			 ref="commandInformationService">
+		<service-properties>
+		  	<!-- Adds DOSGi remote access to service interface -->
+			<entry key="service.exported.interfaces" value="org.hbird.application.commanding.interfaces.info.CommandInformationService"/>
+			<entry key="service.exported.configs" value="org.apache.cxf.rs"/>
+			<entry key="service.exported.intents" value="HTTP"></entry>
+			<entry key="org.apache.cxf.rs.httpservice.context" value="/commanding"/>
+			<entry key="org.apache.cxf.rs.databinding" value="aegis"/>
+		</service-properties>
 	</service>
-	
+
 	<camel:camelContext>
 		<camel:route id="commandAccepting">
 			<camel:from uri="activemq:sendCommands"></camel:from>
-			<camel:to uri="bean:commandsToSend"></camel:to>
-		</camel:route>
-		
-		<camel:route>
-			<camel:from></camel:from>
 			<camel:filter>
 				<camel:method bean="commandInModelChecker" method="checkCommand"></camel:method>
-				<camel:to uri="activemq:dispatchedCommands"></camel:to>
+				<camel:choice>
+					<camel:when>
+						<camel:method bean="CommandSendTimeFilter" method="shouldSendNow"></camel:method>
+						<camel:to uri="activemq:dispatchedCommands"></camel:to>
+					</camel:when>
+					<camel:otherwise>
+						<camel:log message="TODO send later cache" loggingLevel="WARN"></camel:log>
+					</camel:otherwise>
+				</camel:choice>
 			</camel:filter>
 		</camel:route>
 	</camel:camelContext>

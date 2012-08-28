@@ -32,7 +32,7 @@ public class HbirdPublisherBasedCommandInfo implements CommandInformationService
 	 * @{inheritDoc}
 	 */
 	@Override
-	public List<ParameterGroup> getAllCommands() {
+	public List<ParameterGroup> getAllAllowedCommands() {
 		return cachedCommands;
 	}
 

@@ -124,6 +124,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	public final SpaceSystemModel createSpaceSystemModel() throws InvalidSpaceSystemDefinitionException {
 
 		if(spaceSystemModelFilename == null) {
+			LOG.error("No path to xtce file set");
 			throw new InvalidSpaceSystemDefinitionException("No path to xtce file set");
 		}
 
