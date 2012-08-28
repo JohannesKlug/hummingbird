@@ -13,7 +13,7 @@
     <packaging>bundle</packaging>
 
     <name>Hbird :: OSGi :: Web UI</name>
-    <description>web-ui bundle</description>
+    <description>web-ui bundle. Run features:install war in Karaf!</description>
 
     <properties>
         <servlet-api.version>2.5</servlet-api.version>
@@ -39,7 +39,7 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Import-Package>*</Import-Package>
-                        <Web-ContextPath>fixmeLater</Web-ContextPath>
+                        <Web-ContextPath>/hbird</Web-ContextPath>
                     </instructions>
                     <supportedProjectTypes>
                         <supportedProjectType>jar</supportedProjectType>
