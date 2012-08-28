@@ -21,4 +21,6 @@
 			 ref="publisher">
 	</service>
 
+	<service id="publisherService" ref="publisher" interface="org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher"/>
+
 </blueprint>
