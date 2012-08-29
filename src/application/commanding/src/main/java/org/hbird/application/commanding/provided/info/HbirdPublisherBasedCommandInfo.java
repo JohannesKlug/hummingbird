@@ -37,4 +37,14 @@ public class HbirdPublisherBasedCommandInfo implements CommandInformationService
 	}
 
 
+	public SpaceSystemPublisher getPublisher() {
+		return publisher;
+	}
+
+
+	public void setPublisher(final SpaceSystemPublisher publisher) {
+		this.publisher = publisher;
+	}
+
+
 }
