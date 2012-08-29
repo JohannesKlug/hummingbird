@@ -2,9 +2,7 @@
 <blueprint	xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" 
 			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
-			xmlns:camel="http://camel.apache.org/schema/blueprint"
-			xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
-								http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+			xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
 
 
 	<!-- Get a reference to a publisher service. -->
@@ -36,22 +34,24 @@
 		</service-properties>
 	</service>
 
-	<camel:camelContext>
-		<camel:route id="commandAccepting">
-			<camel:from uri="activemq:sendCommands"></camel:from>
-			<camel:filter>
-				<camel:method bean="commandInModelChecker" method="checkCommand"></camel:method>
-				<camel:choice>
-					<camel:when>
-						<camel:method bean="CommandSendTimeFilter" method="shouldSendNow"></camel:method>
-						<camel:to uri="activemq:dispatchedCommands"></camel:to>
-					</camel:when>
-					<camel:otherwise>
-						<camel:log message="TODO send later cache" loggingLevel="WARN"></camel:log>
-					</camel:otherwise>
-				</camel:choice>
-			</camel:filter>
-		</camel:route>
-	</camel:camelContext>
+	<camelContext xmlns="http://camel.apache.org/schema/blueprint" 
+				  xsi:schemaLocation="http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+		<route id="commandAccepting">
+			<from uri="activemq:sendCommands"></from>
+			<to uri="activemq:tmpTest"></to>
+<!-- 			<camel:filter> -->
+<!-- 				<camel:method bean="commandInModelChecker" method="checkCommand"></camel:method> -->
+<!-- 				<camel:choice> -->
+<!-- 					<camel:when> -->
+<!-- 						<camel:method bean="CommandSendTimeFilter" method="shouldSendNow"></camel:method> -->
+<!-- 						<camel:to uri="activemq:dispatchedCommands"></camel:to> -->
+<!-- 					</camel:when> -->
+<!-- 					<camel:otherwise> -->
+<!-- 						<camel:log message="TODO send later cache" loggingLevel="WARN"></camel:log> -->
+<!-- 					</camel:otherwise> -->
+<!-- 				</camel:choice> -->
+<!-- 			</camel:filter> -->
+		</route>
+	</camelContext>
 	
 </blueprint>
