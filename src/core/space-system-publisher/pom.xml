@@ -30,16 +30,6 @@
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<instructions>
-						<Bundle-Version>${project.version}</Bundle-Version>
-						<Export-Package>
-							org.hbird.core.spacesystempublisher, 
-							org.hbird.core.spacesystempublisher.publishing,
-							org.hbird.core.spacesystempublisher.interfaces 
-						</Export-Package>
-					</instructions>
-				</configuration>
 			</plugin>
 			
 			<plugin>
