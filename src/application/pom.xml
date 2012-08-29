@@ -10,12 +10,13 @@
 	<groupId>org.hbird.application</groupId>
 	<artifactId>application</artifactId>
 	<packaging>pom</packaging>
-	<name>Hbird :: Applications</name>
+	<name>Hbird :: Application</name>
 	<description/>
 	
 	<modules>
 		<module>calibration</module>
     	<module>parameter-archive</module>
     	<module>commanding</module>
-  	</modules>
+    <module>halycon</module>
+  </modules>
 </project>
