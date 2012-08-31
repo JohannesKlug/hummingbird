@@ -67,6 +67,18 @@
         	<version>0.0.1-SNAPSHOT</version>
         	<scope>provided</scope>
         </dependency>
+        <dependency>
+        	<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.2</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+            
         
         <!-- Override the scope of these artifacts from the parent project hummingbird. They are provided by the 
         container so we don't need to bloat our war. -->
@@ -137,6 +149,9 @@
                         <Import-Package>
                         	com.sun.jersey.api.core,
                         	com.sun.jersey.spi.container.servlet,
+                        	com.sun.jersey.api,
+                        	com.sun.jersey.api.json,
+                        	org.codehaus.jackson.xc,
                         	*
                         </Import-Package>
                         <Export-Package>org.hbird.application.halycon</Export-Package>
