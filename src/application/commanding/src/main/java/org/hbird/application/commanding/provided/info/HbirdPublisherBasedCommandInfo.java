@@ -6,7 +6,7 @@ package org.hbird.application.commanding.provided.info;
 import java.util.List;
 
 import org.hbird.application.commanding.interfaces.info.CommandInformationService;
-import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.commons.tmtc.CommandGroup;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 
 /**
@@ -20,7 +20,7 @@ public class HbirdPublisherBasedCommandInfo implements CommandInformationService
 
 	private SpaceSystemPublisher publisher;
 
-	private List<ParameterGroup> cachedCommands;
+	private List<CommandGroup> cachedCommands;
 
 
 	public void init() {
@@ -32,7 +32,7 @@ public class HbirdPublisherBasedCommandInfo implements CommandInformationService
 	 * @{inheritDoc}
 	 */
 	@Override
-	public List<ParameterGroup> getAllAllowedCommands() {
+	public List<CommandGroup> getAllAllowedCommands() {
 		return cachedCommands;
 	}
 
