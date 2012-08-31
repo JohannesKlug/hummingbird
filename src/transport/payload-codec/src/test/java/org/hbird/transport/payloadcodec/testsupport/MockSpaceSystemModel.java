@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hbird.core.commons.tmtc.CommandGroup;
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
@@ -249,7 +250,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Map<String, ParameterGroup> getCommands() {
+	public Map<String, CommandGroup> getCommands() {
 		// Not used in the mock...not yet anyway!
 		throw new UnsupportedOperationException();
 	}

@@ -7,8 +7,8 @@ import static org.junit.Assert.assertNull;
 import java.net.URL;
 import java.util.Map;
 
+import org.hbird.core.commons.tmtc.CommandGroup;
 import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidSpaceSystemDefinitionException;
@@ -42,9 +42,9 @@ public class CommandModelTest {
 	 * @throws UnknownParameterException
 	 *
 	 */
-	private static void verifyCommands(final Map<String, ParameterGroup> commands) throws UnknownParameterException {
+	private static void verifyCommands(final Map<String, CommandGroup> commands) throws UnknownParameterException {
 		assertEquals(1, commands.size());
-		final ParameterGroup openLatchCommand = commands.get("TestSat-all-uints.tc.OPEN_LATCH");
+		final CommandGroup openLatchCommand = commands.get("TestSat-all-uints.tc.OPEN_LATCH");
 		assertNotNull(openLatchCommand);
 		assertNull(openLatchCommand.getShortDescription());
 		assertNull(openLatchCommand.getLongDescription());

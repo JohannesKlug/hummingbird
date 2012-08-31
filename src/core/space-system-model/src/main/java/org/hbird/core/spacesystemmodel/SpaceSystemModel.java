@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hbird.core.commons.tmtc.CommandGroup;
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
@@ -36,7 +37,7 @@ public interface SpaceSystemModel extends Serializable {
 	ParameterGroup getParameterGroup(String qualifiedName) throws UnknownParameterGroupException;
 
 	Map<String, ParameterGroup> getParameterGroups();
-	Map<String, ParameterGroup> getCommands();
+	Map<String, CommandGroup> getCommands();
 
 	Collection<ParameterGroup> getParameterGroupsCollection();
 

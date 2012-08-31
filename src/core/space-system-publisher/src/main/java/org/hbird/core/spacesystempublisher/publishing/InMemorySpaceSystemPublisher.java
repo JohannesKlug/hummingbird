@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.hbird.core.commons.tmtc.CommandGroup;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
@@ -51,13 +52,13 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 	}
 
 	@Override
-	public Map<String, ParameterGroup> getCommands() {
+	public Map<String, CommandGroup> getCommands() {
 		return model.getCommands();
 	}
 
 	@Override
-	public List<ParameterGroup> getCommandList() {
-		return new ArrayList<ParameterGroup>(model.getCommands().values());
+	public List<CommandGroup> getCommandList() {
+		return new ArrayList<CommandGroup>(model.getCommands().values());
 	}
 
 	@Override

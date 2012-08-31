@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hbird.core.commons.tmtc.CommandGroup;
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
@@ -31,7 +32,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	private String name;
 
 	private final Map<String, ParameterGroup> parameterGroups = new HashMap<String, ParameterGroup>();
-	private final Map<String, ParameterGroup> commands = new HashMap<String, ParameterGroup>();
+	private final Map<String, CommandGroup> commands = new HashMap<String, CommandGroup>();
 
 	private final Map<String, List<String>> restrictions = new HashMap<String, List<String>>();
 
@@ -199,7 +200,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Map<String, ParameterGroup> getCommands() {
+	public Map<String, CommandGroup> getCommands() {
 		return commands;
 	}
 

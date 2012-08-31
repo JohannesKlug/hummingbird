@@ -15,8 +15,10 @@ import org.exolab.castor.xml.MarshalException;
 import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.xml.ValidationException;
 import org.exolab.castor.xml.XMLContext;
+import org.hbird.core.commons.tmtc.CommandGroup;
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.commons.tmtc.TmTcGroup;
 import org.hbird.core.generatedcode.xtce.Argument;
 import org.hbird.core.generatedcode.xtce.ArgumentListItem;
 import org.hbird.core.generatedcode.xtce.ArgumentTypeSetItem;
@@ -49,6 +51,7 @@ import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidSpaceSystemDefinitionException;
 import org.hbird.core.spacesystemmodel.parameters.HummingbirdParameter;
+import org.hbird.core.spacesystemmodel.tmtcgroups.HummingbirdCommandGroup;
 import org.hbird.core.spacesystemmodel.tmtcgroups.HummingbirdParameterGroup;
 import org.hbird.core.xtce.exceptions.UnsupportedXtceConstructException;
 import org.hbird.core.xtce.utils.XtceToJavaMapping;
@@ -100,7 +103,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	 * this factory creates.
 	 */
 	private final Map<String, ParameterGroup> tmParameterGroups = new HashMap<String, ParameterGroup>();
-	private final Map<String, ParameterGroup> tcParameterGroups = new HashMap<String, ParameterGroup>();
+	private final Map<String, CommandGroup> tcGroups = new HashMap<String, CommandGroup>();
 
 	private final Map<String, List<Object>> restrictions = new HashMap<String, List<Object>>();
 
@@ -471,12 +474,12 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 					.getMetaCommand();
 
 			// @formatter:off
-			final ParameterGroup parameterGroup =
-					new HummingbirdParameterGroup(qualifiedNamePrefix + xtceContainer.getName(), xtceContainer.getName(),
+			final CommandGroup parameterGroup =
+					new HummingbirdCommandGroup(qualifiedNamePrefix + xtceContainer.getName(), xtceContainer.getName(),
 							xtceContainer.getShortDescription(), xtceContainer.getLongDescription());
 			// @formatter:on
 
-			tcParameterGroups.put(parameterGroup.getQualifiedName(), parameterGroup);
+			tcGroups.put(parameterGroup.getQualifiedName(), parameterGroup);
 
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("Created TC ParameterGroup " + xtceContainer.getName());
@@ -591,7 +594,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 		// For every defined command
 		for (int i = 0; i < commands.getMetaCommandSetItemCount(); i++) {
 			final MetaCommand command = commands.getMetaCommandSetItem(i).getMetaCommand();
-			final ParameterGroup commandGroup = tcParameterGroups.get(qualifiedNamePrefix + command.getName());
+			final CommandGroup commandGroup = tcGroups.get(qualifiedNamePrefix + command.getName());
 
 			final ArgumentListItem[] parameterEntrys = command.getArgumentList().getArgumentListItem();
 			for (int x = 0; x < parameterEntrys.length; x++) {
@@ -633,7 +636,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 		}
 	}
 
-	private void addArgumentParameterToGroup(final ParameterGroup group, final String qualifiedName) throws InvalidSpaceSystemDefinitionException {
+	private void addArgumentParameterToGroup(final TmTcGroup group, final String qualifiedName) throws InvalidSpaceSystemDefinitionException {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Adding " + qualifiedName + " to ParameterGroup " + group.getQualifiedName());
 		}
@@ -671,7 +674,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 				field.set(model, tmParameterGroups);
 			}
 			else  if(StringUtils.equals(name, "commands")) {
-				field.set(model, tcParameterGroups);
+				field.set(model, tcGroups);
 			}
 			else if (StringUtils.equals(name, "restrictions")) {
 				field.set(model, restrictions);
