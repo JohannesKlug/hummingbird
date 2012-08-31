@@ -55,7 +55,7 @@ public class WebAppContextListener implements BundleActivator, ServletContextLis
 
 	static EventAdmin eventAdmin;
 
-	BundleContext bundleContext;
+	static BundleContext bundleContext;
 	ServiceReference eventAdminServiceRef;
 
 	synchronized static EventAdmin getEventAdmin() {
@@ -105,5 +105,9 @@ public class WebAppContextListener implements BundleActivator, ServletContextLis
 			setEventAdmin(null);
 			bundleContext.ungetService(eventAdminServiceRef);
 		}
+	}
+
+	public static BundleContext getBundleContext() {
+		return WebAppContextListener.bundleContext;
 	}
 }

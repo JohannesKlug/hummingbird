@@ -11,9 +11,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>halycon</artifactId>
+	<artifactId>halcyon</artifactId>
 	<packaging>war</packaging>
-	<name>Hbird :: Application :: Halycon</name>
+	<name>Hbird :: Application :: Halcyon</name>
 	
 	<properties>
 		<jersey-version>1.13</jersey-version>
@@ -61,6 +61,12 @@
             <version>4.2.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+        	<groupId>org.hbird.application</groupId>
+        	<artifactId>commanding</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        	<scope>provided</scope>
+        </dependency>
         
         <!-- Override the scope of these artifacts from the parent project hummingbird. They are provided by the 
         container so we don't need to bloat our war. -->
@@ -72,6 +78,12 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.msgpack</groupId>
+			<artifactId>msgpack</artifactId>
+			<version>0.6.6</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

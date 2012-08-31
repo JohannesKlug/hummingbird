@@ -17,6 +17,6 @@
 		<module>calibration</module>
     	<module>parameter-archive</module>
     	<module>commanding</module>
-    <module>halycon</module>
+		<module>halcyon</module>
   </modules>
 </project>
