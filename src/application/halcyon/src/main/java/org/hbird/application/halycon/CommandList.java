@@ -1,8 +1,11 @@
 
 package org.hbird.application.halycon;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -10,8 +13,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.hbird.application.commanding.interfaces.info.CommandInformationService;
+import org.hbird.core.commons.tmtc.CommandGroup;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.msgpack.MessagePack;
+import org.msgpack.packer.Packer;
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
@@ -23,14 +28,20 @@ import org.osgi.util.tracker.ServiceTracker;
 @Path("/commandlist")
 public class CommandList {
 
-	private List<ParameterGroup> allowedCommands = null;
+	private Map<String, String> allowedCommandNames = null;
 
 	public CommandList() {
 		ServiceTracker tracker = new ServiceTracker(WebAppContextListener.getBundleContext(), CommandInformationService.class.getName(), null);
 		tracker.open();
 
 		if(tracker.getTrackingCount() > 0) {
-			allowedCommands = ((CommandInformationService)tracker.getService()).getAllAllowedCommands();
+			List<CommandGroup> allowedCommands = ((CommandInformationService)tracker.getService()).getAllAllowedCommands();
+			if(allowedCommands.size() > 0 ) {
+				allowedCommandNames = new HashMap<String, String>(allowedCommands.size());
+				for(CommandGroup cmd : allowedCommands) {
+					allowedCommandNames.put(cmd.getQualifiedName(), cmd.getName());
+				}
+			}
 		}
 	}
 
@@ -42,10 +53,10 @@ public class CommandList {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getCommandList() {
 		String msg = "";
-		if(allowedCommands != null) {
-			msg = "Hi there! We have " + allowedCommands.size() + " commands";
-			for(ParameterGroup cmdG : allowedCommands) {
-				msg += cmdG.getQualifiedName();
+		if(allowedCommandNames != null) {
+			msg = "Hi there! We have " + allowedCommandNames.size() + " commands. ";
+			for(String qName : allowedCommandNames.keySet()) {
+				msg += qName;
 			}
 		}
 		else {
@@ -65,8 +76,13 @@ public class CommandList {
 	@Produces("application/x-msgpack") // FIXME use a constant.
 	public byte[] getCommandListAsMsgPack() throws IOException {
 		MessagePack msgpack = new MessagePack();
-		msgpack.register(ParameterGroup.class);
-		return msgpack.write(allowedCommands);
+
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        Packer packer = msgpack.createPacker(out);
+        packer.write(allowedCommandNames);
+
+		return out.toByteArray();
 
 	}
 

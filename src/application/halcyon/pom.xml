@@ -134,7 +134,6 @@
                         <supportedProjectType>jar</supportedProjectType>
                     </supportedProjectTypes>
                     <instructions>
-                        <Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
                         <Import-Package>
                         	com.sun.jersey.api.core,
                         	com.sun.jersey.spi.container.servlet,
