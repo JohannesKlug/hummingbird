@@ -77,6 +77,7 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.2</version>
+			<scope>provided</scope>
 		</dependency>
             
         
@@ -117,7 +118,7 @@
 	</pluginRepositories>
 	
 	<build>
-		<finalName>halycon</finalName>
+		<finalName>halcyon</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -152,12 +153,12 @@
                         	com.sun.jersey.api,
                         	com.sun.jersey.api.json,
                         	org.codehaus.jackson.xc,
+                        	org.osgi.service.blueprint.container,
                         	*
                         </Import-Package>
-                        <Export-Package>org.hbird.application.halycon</Export-Package>
                         <Webapp-Context>hbird</Webapp-Context>
                         <Web-ContextPath>hbird</Web-ContextPath>
-                        <Bundle-Activator>org.hbird.application.halycon.WebAppContextListener</Bundle-Activator>
+                        <Bundle-Activator>org.hbird.application.halcyon.WebAppContextListener</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>
@@ -173,6 +174,13 @@
                             <Bundle-ClassPath>WEB-INF/classes</Bundle-ClassPath>
                         </manifestEntries>
                     </archive>
+
+<!--                     <webResources> -->
+<!--             	        <resource> -->
+<!-- 			            	<directory>src/main/resources/OSGI-INF</directory> -->
+<!-- 			            	<targetPath>OSGI-INF</targetPath> -->
+<!--             			</resource> -->
+<!--           			</webResources> -->
                 </configuration>
             </plugin>
 			

@@ -10,11 +10,11 @@
 		 version="2.5">
 		 
 	<listener>
-		<listener-class>org.hbird.application.halycon.WebAppContextListener</listener-class>
+		<listener-class>org.hbird.application.halcyon.WebAppContextListener</listener-class>
 	</listener>
 	
 	<servlet>
-		<servlet-name>Hbird Halycon Web Application</servlet-name>
+		<servlet-name>Hbird Halcyon Web Application</servlet-name>
 		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
 		
 		<init-param>
@@ -24,7 +24,7 @@
 		
 		<init-param>
 			<param-name>com.sun.jersey.config.property.classnames</param-name>
-			<param-value>org.hbird.application.halycon.CommandList</param-value>
+			<param-value>org.hbird.application.halcyon.CommandListResource</param-value>
 		</init-param>
 		
 		<!-- Add automatic json mapping to servlet -->
@@ -37,8 +37,8 @@
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>Hbird Halycon Web Application</servlet-name>
-		<url-pattern>/halycon/*</url-pattern>
+		<servlet-name>Hbird Halcyon Web Application</servlet-name>
+		<url-pattern>/halcyon/*</url-pattern>
 	</servlet-mapping>
 	
 </web-app>

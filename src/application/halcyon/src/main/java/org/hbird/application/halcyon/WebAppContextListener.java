@@ -38,7 +38,7 @@
  * holder.
  */
 
-package org.hbird.application.halycon;
+package org.hbird.application.halcyon;
 
 import java.util.HashMap;
 
@@ -92,7 +92,7 @@ public class WebAppContextListener implements BundleActivator, ServletContextLis
 
 	@Override
 	public void start(final BundleContext context) throws Exception {
-		bundleContext = context;
+		WebAppContextListener.bundleContext = context;
 		eventAdminServiceRef = bundleContext.getServiceReference(EventAdmin.class.getName());
 		if (eventAdminServiceRef != null) {
 			setEventAdmin((EventAdmin) bundleContext.getService(eventAdminServiceRef));
