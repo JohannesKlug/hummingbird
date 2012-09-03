@@ -10,13 +10,18 @@ function getAllowedCommandList() {
 	var jqxhr = $.getJSON(rootURL + "commandlist");
 	
 	jqxhr.done(
-			function(parsedResponse, statusText, jqXhr) {
-				updateAllowedCommands(jqXhr.responseText ); 
-			}
+		function(parsedResponse, statusText, jqXhr) {
+			updateAllowedCommands( jQuery.parseJSON(jqXhr.responseText)); 
+		}
 	);
 }
 
 function updateAllowedCommands(cmdList) {
-	alert(cmdList);
+	$("#commandList").empty();
+	$.each(cmdList,
+		function(i) {
+			$("#commandList").append(cmdList[i].name + ":" + cmdList[i].qualifiedName + "</br>");
+		}
+	);
 }
 
