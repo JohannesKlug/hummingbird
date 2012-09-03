@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.hbird.application</groupId>
+		<artifactId>application</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>web-client</artifactId>
+	<packaging>war</packaging>
+	<name>Hbird :: application :: web-client</name>
+	
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <build>
+		<finalName>web-client</finalName>
+		
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<inherited>true</inherited>
+			</plugin>
+			
+			 <!-- to generate the MANIFEST-FILE required by the bundle -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>bundle-manifest</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>manifest</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <manifestLocation>${project.build.directory}/META-INF</manifestLocation>
+                    <supportedProjectTypes>
+                        <supportedProjectType>bundle</supportedProjectType>
+                        <supportedProjectType>war</supportedProjectType>
+                        <supportedProjectType>jar</supportedProjectType>
+                    </supportedProjectTypes>
+                    <instructions>
+                        <Import-Package>
+                        	org.eclipse.jetty.servlet,
+                        	*
+                        </Import-Package>
+                        <Webapp-Context>hbirdweb</Webapp-Context>
+                        <Web-ContextPath>hbirdweb</Web-ContextPath>
+                        <Bundle-Activator>org.hbird.application.halcyon.WebAppContextListener</Bundle-Activator>
+                    </instructions>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <attachClasses>true</attachClasses>
+                    <archive>
+                        <manifestFile>${project.build.directory}/META-INF/MANIFEST.MF</manifestFile>
+                        <manifestEntries>
+                            <Bundle-ClassPath>WEB-INF/classes</Bundle-ClassPath>
+                        </manifestEntries>
+                    </archive>
+
+<!--                     <webResources> -->
+<!--             	        <resource> -->
+<!-- 			            	<directory>src/main/resources/OSGI-INF</directory> -->
+<!-- 			            	<targetPath>OSGI-INF</targetPath> -->
+<!--             			</resource> -->
+<!--           			</webResources> -->
+                </configuration>
+            </plugin>
+			
+		</plugins>
+	</build>
+  
+</project>
