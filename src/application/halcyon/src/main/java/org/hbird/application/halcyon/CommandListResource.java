@@ -1,7 +1,7 @@
 package org.hbird.application.halcyon;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -29,7 +29,18 @@ public class CommandListResource extends OsgiReady {
 
 	private final static Logger LOG = LoggerFactory.getLogger(CommandListResource.class);
 
-	private Map<String, String> allowedCommandNames = null;
+	//	private Map<String, String> allowedCommandNames = null;
+	private List<CmdNames> allowedCommandNames = null;
+
+	private class CmdNames {
+		public String qualifiedName;
+		public String name;
+		public CmdNames(final String qualifiedName, final String name) {
+			super();
+			this.qualifiedName = qualifiedName;
+			this.name = name;
+		}
+	};
 
 	public CommandListResource() {
 		super(COMMAND_INFORMATION_SERVICE_NAME);
@@ -39,9 +50,10 @@ public class CommandListResource extends OsgiReady {
 		if (allowedCommandNames == null) {
 			final CommandInformationService cmdInfoService = (CommandInformationService) getServiceTracker().getService();
 			if (cmdInfoService != null) {
-				allowedCommandNames = new HashMap<String, String>();
+				//				allowedCommandNames = new HashMap<String, String>();
+				allowedCommandNames = new ArrayList<CmdNames>();
 				for (final CommandGroup cmd : cmdInfoService.getAllAllowedCommands()) {
-					allowedCommandNames.put(cmd.getQualifiedName(), cmd.getName());
+					allowedCommandNames.add(new CmdNames(cmd.getQualifiedName(), cmd.getName()));
 				}
 			}
 			else {
@@ -61,15 +73,15 @@ public class CommandListResource extends OsgiReady {
 		cacheAllowedCommands();
 		String msg = "";
 		msg = "Hi there! We have " + allowedCommandNames.size() + " commands. ";
-		for (final String qName : allowedCommandNames.keySet()) {
-			msg += qName;
+		for (final CmdNames cmdName : allowedCommandNames) {
+			msg += cmdName.qualifiedName + " / " + cmdName.name;
 		}
 		return msg;
 	}
 
 	@GET
 	@Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
-	public Map<String, String> getCommandListJson() {
+	public List<CmdNames> getCommandListJson() {
 		cacheAllowedCommands();
 		System.out.println("Returning allowed command name list as json");
 		if (allowedCommandNames.size() == 0) {
