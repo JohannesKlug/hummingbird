@@ -81,6 +81,7 @@
 			<bundle>mvn:com.sun.jersey/jersey-server</bundle>
 			<bundle>mvn:com.sun.jersey/jersey-servlet</bundle>
 			<bundle>mvn:com.sun.jersey/jersey-json</bundle>
+			<bundle>mvn:com.sun.jersey.contribs/jersey-spring</bundle>
 		</feature>
 		
 		<feature name="hbird-halcyon" description="Hbird Web backend" version="${version}">

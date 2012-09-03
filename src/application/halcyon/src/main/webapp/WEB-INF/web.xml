@@ -9,12 +9,24 @@
 		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
 		 version="2.5">
 		 
+	<display-name>Halcyon</display-name>
+		 
+	
+<!-- 	<context-param> -->
+<!-- 		<param-name>contextConfigLocation</param-name> -->
+<!-- 		<param-value>classpath:webAppContext.xml</param-value> -->
+<!-- 		<param-value>classpath:WEB-INF/classes/spring/webAppContext.xml</param-value> -->
+<!-- 	</context-param> -->
+	
 	<listener>
 		<listener-class>org.hbird.application.halcyon.WebAppContextListener</listener-class>
 	</listener>
 	
 	<servlet>
-		<servlet-name>Hbird Halcyon Web Application</servlet-name>
+<!-- 		<servlet-name>Hbird-jersey-spring-servlet</servlet-name> -->
+<!--    		<servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class> -->
+	
+		<servlet-name>hbird-jersey-servlet</servlet-name>
 		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
 		
 		<init-param>
@@ -24,10 +36,12 @@
 		
 		<init-param>
 			<param-name>com.sun.jersey.config.property.classnames</param-name>
-			<param-value>org.hbird.application.halcyon.CommandListResource</param-value>
+			<param-value>
+				org.hbird.application.halcyon.CommandListResource,
+				org.hbird.application.halcyon.HalcyonResource
+			</param-value>
 		</init-param>
 		
-		<!-- Add automatic json mapping to servlet -->
 		<init-param>
 			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
 			<param-value>true</param-value>
@@ -37,7 +51,7 @@
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>Hbird Halcyon Web Application</servlet-name>
+		<servlet-name>hbird-jersey-servlet</servlet-name>
 		<url-pattern>/halcyon/*</url-pattern>
 	</servlet-mapping>
 	

@@ -33,6 +33,12 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+	    	<groupId>com.sun.jersey.contribs</groupId>
+	    	<artifactId>jersey-spring</artifactId>
+	    	<version>${jersey-version}</version>
+	    	<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
@@ -154,6 +160,7 @@
                         	com.sun.jersey.api.json,
                         	org.codehaus.jackson.xc,
                         	org.osgi.service.blueprint.container,
+                        	com.sun.jersey.spi.spring.container.servlet,
                         	*
                         </Import-Package>
                         <Webapp-Context>hbird</Webapp-Context>
@@ -187,5 +194,5 @@
 		</plugins>
 	</build>
 	
-	<description>A RESTful OSGi WAB web application that utilises OSGi services to offer a user interface to various hbird applictions and modules/components..</description>
+	<description>A RESTful OSGi WAB web application that utilises OSGi services to offer restful web interfaces to various hbird applictions and modules/components..</description>
 </project>

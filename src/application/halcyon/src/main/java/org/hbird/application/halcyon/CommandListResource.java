@@ -14,12 +14,15 @@ import org.hbird.core.commons.tmtc.CommandGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.sun.jersey.spi.resource.Singleton;
+
 /**
  * 
  * @author Mark Doyle
  * @author Johannes Klug
  * 
  */
+@Singleton
 @Path("/commandlist")
 public class CommandListResource extends OsgiReady {
 	private static final String COMMAND_INFORMATION_SERVICE_NAME = "org.hbird.application.commanding.interfaces.info.CommandInformationService";
@@ -65,7 +68,7 @@ public class CommandListResource extends OsgiReady {
 	}
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
 	public Map<String, String> getCommandListJson() {
 		cacheAllowedCommands();
 		System.out.println("Returning allowed command name list as json");
