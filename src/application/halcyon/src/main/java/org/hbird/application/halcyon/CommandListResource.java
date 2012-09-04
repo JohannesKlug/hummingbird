@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -32,6 +33,8 @@ public class CommandListResource extends OsgiReady {
 	//	private Map<String, String> allowedCommandNames = null;
 	private List<CmdNames> allowedCommandNames = null;
 
+	private CommandInformationService cmdInfoService;
+
 	private class CmdNames {
 		public String qualifiedName;
 		public String name;
@@ -48,7 +51,7 @@ public class CommandListResource extends OsgiReady {
 
 	private final void cacheAllowedCommands() {
 		if (allowedCommandNames == null) {
-			final CommandInformationService cmdInfoService = (CommandInformationService) getServiceTracker().getService();
+			cmdInfoService = (CommandInformationService) getServiceTracker().getService();
 			if (cmdInfoService != null) {
 				//				allowedCommandNames = new HashMap<String, String>();
 				allowedCommandNames = new ArrayList<CmdNames>();
@@ -88,6 +91,15 @@ public class CommandListResource extends OsgiReady {
 			LOG.warn("No commands to return!");
 		}
 		return allowedCommandNames;
+	}
+
+
+	@GET
+	@Path("/command/{qualifiedName}")
+	@Produces({MediaType.APPLICATION_JSON})
+	public CommandGroup getCommand(@PathParam("qualifiedName") final String qualifiedName) {
+		LOG.debug("Getting command " + qualifiedName + " from commmand information service");
+		return cmdInfoService.getCommand(qualifiedName);
 	}
 
 	//	@GET

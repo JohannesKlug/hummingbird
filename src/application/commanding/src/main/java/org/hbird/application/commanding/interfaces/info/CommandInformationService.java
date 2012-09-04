@@ -12,4 +12,6 @@ public interface CommandInformationService {
 	 * @return {@link ParameterGroup} list of all commands
 	 */
 	List<CommandGroup> getAllAllowedCommands();
+
+	CommandGroup getCommand(String qualifiedName);
 }

@@ -47,4 +47,10 @@ public class HbirdPublisherBasedCommandInfo implements CommandInformationService
 	}
 
 
+	@Override
+	public CommandGroup getCommand(final String qualifiedName) {
+		return publisher.getCommand(qualifiedName);
+	}
+
+
 }

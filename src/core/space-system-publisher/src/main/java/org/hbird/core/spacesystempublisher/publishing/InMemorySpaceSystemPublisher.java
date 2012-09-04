@@ -91,5 +91,12 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public CommandGroup getCommand(final String qualifiedName) {
+		// TODO Auto-generated method stub
+		//return null;
+		throw new UnsupportedOperationException();
+	}
+
 
 }

@@ -116,4 +116,9 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 		this.factoryService = factoryService;
 	}
 
+	@Override
+	public CommandGroup getCommand(final String qualifiedName) {
+		return this.modelCache.getCommands().get(qualifiedName);
+	}
+
 }

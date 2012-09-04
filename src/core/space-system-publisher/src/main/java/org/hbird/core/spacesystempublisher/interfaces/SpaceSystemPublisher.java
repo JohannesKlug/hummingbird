@@ -9,12 +9,21 @@ import org.hbird.core.spacesystemmodel.encoding.Encoding;
 
 
 public interface SpaceSystemPublisher {
+
 	Map<String, ParameterGroup> getParameterGroups();
-	Map<String, CommandGroup> getCommands();
 	List<ParameterGroup> getParameterGroupList();
+
+
+	Map<String, CommandGroup> getCommands();
 	List<CommandGroup> getCommandList();
+	CommandGroup getCommand(String qualifiedName);
+
+
 	Map<String, Encoding> getEncodings();
+
+
 	Map<String, List<String>> getRestrictions();
+
 
 	void fireUpdate(SpaceSystemModelUpdate update);
 }
