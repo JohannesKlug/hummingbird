@@ -924,6 +924,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	}
 
 	public void setSpaceSystemModelFilename(final String spaceSystemModelFilename) {
+		LOG.debug("Changing SpaceSystemModelFilename to: " + spaceSystemModelFilename);
 		this.spaceSystemModelFilename = spaceSystemModelFilename;
 	}
 }

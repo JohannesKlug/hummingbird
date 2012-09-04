@@ -113,7 +113,6 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	}
 
 	public void setFactoryService(final SpaceSystemModelFactory factoryService) {
-		System.out.println("Setting factory service.");
 		this.factoryService = factoryService;
 	}
 
