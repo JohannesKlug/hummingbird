@@ -10,13 +10,12 @@
 	
 	<artifactId>web-client</artifactId>
 	<packaging>war</packaging>
-	<name>Hbird :: application :: web-client</name>
+	<name>Hbird :: Application :: web-client</name>
 	
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -25,11 +24,6 @@
 		<finalName>web-client</finalName>
 		
 		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<inherited>true</inherited>
-			</plugin>
-			
 			 <!-- to generate the MANIFEST-FILE required by the bundle -->
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -52,13 +46,8 @@
                         <supportedProjectType>jar</supportedProjectType>
                     </supportedProjectTypes>
                     <instructions>
-                        <Import-Package>
-                        	org.eclipse.jetty.servlet,
-                        	*
-                        </Import-Package>
                         <Webapp-Context>hbirdweb</Webapp-Context>
                         <Web-ContextPath>hbirdweb</Web-ContextPath>
-                        <Bundle-Activator>org.hbird.application.halcyon.WebAppContextListener</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>

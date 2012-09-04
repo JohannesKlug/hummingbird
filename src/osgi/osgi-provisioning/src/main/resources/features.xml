@@ -93,4 +93,9 @@
 			<bundle start-level="150">mvn:org.hbird.application/halcyon/0.0.1-SNAPSHOT/war</bundle>
 		</feature>
 		
+		<feature name="hbird-web-client" description="" version="${version}">
+			<feature>hbird-halcyon</feature>
+			<bundle start-level="150">mvn:org.hbird.application/web-client/0.0.1-SNAPSHOT/war</bundle>
+		</feature>
+		
 </features>
