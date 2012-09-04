@@ -90,12 +90,12 @@
 			<bundle start="false">mvn:com.googlecode.json-simple/json-simple/1.1.1</bundle>
 			<bundle start="false">mvn:org.jboss.javassist/com.springsource.javassist/3.15.0.GA</bundle>
 			<bundle start="false">mvn:org.msgpack/msgpack/0.6.6</bundle>
-			<bundle start-level="150">mvn:org.hbird.application/halcyon/0.0.1-SNAPSHOT/war</bundle>
+			<bundle>mvn:org.hbird.application/halcyon/0.0.1-SNAPSHOT/war</bundle>
 		</feature>
 		
 		<feature name="hbird-web-client" description="" version="${version}">
 			<feature>hbird-halcyon</feature>
-			<bundle start-level="150">mvn:org.hbird.application/web-client/0.0.1-SNAPSHOT/war</bundle>
+			<bundle>mvn:org.hbird.application/web-client/0.0.1-SNAPSHOT/war</bundle>
 		</feature>
 		
 </features>
