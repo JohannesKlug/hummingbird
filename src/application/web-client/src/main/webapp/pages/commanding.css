@@ -1,0 +1,7 @@
+.commandListDiv a { 
+	text-decoration: none;
+}
+
+.commandListDiv a:hover {
+	text-decoration: underline;
+}	

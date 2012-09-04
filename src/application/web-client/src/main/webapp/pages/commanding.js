@@ -17,11 +17,23 @@ function getAllowedCommandList() {
 }
 
 function updateAllowedCommands(cmdList) {
+	console.log("[DEBUG - Commanding] - Received " + cmdList.length + " command(s)");
 	$("#commandList").empty();
 	$.each(cmdList,
 		function(i) {
-			$("#commandList").append(cmdList[i].name + ":" + cmdList[i].qualifiedName + "</br>");
+			addCommandLink("commandList", cmdList[i]);
 		}
 	);
 }
 
+function addCommandLink(elementId, cmd) {
+	var html ="<li><a href=\"#\" onclick=\"openCmdDialog('" + cmd.qualifiedName + "', '" + cmd.name + "')\">" + cmd.name + "</a></li>";
+	console.log(html);
+	$("#" + elementId).append(html);
+}
+
+function openCmdDialog(qualifiedName, name) {
+	console.log("Opening dialog for command " + name + " :: " + qualifiedName);
+	$("#cmdName").text(name);
+	$("#cmdModal").reveal();
+}

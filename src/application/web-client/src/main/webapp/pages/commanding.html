@@ -21,6 +21,8 @@
 	<link rel="stylesheet" href="../css/base.css">
 	<link rel="stylesheet" href="../css/skeleton.css">
 	<link rel="stylesheet" href="../css/layout.css">
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="commanding.css">
 
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -36,10 +38,25 @@
 
 <body>
 	<script src="../js/jquery.js"></script>
+	<script src="../js/jquery.reveal.js"></script>
 	<script src="commanding.js"></script>
 
 	<h1>Command list</h1>
-	<p id="commandList">Not received</p>
+	<div class="commandListDiv">
+		<ul id="commandList">
+			<li><a href="#" onclick="getAllowedCommandList()">Not commands received yet</a></li>
+		</ul>
+	</div>
+	
+	
+	<div id="cmdModal" class="reveal-modal">
+		<h1 id="cmdName">Command name</h1>
+		<p>Configure your command</p>
+		<h2>Parameters</h2>
+				
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+	
 </body>
 
 
