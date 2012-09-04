@@ -16,7 +16,7 @@
 		<feature name="hbird-xtce" description="Hbird xtce space system bundles including OSGi service provision" version="${version}">
 			<feature version="${version}">hbird-core</feature>
 			<bundle start="false">mvn:org.hbird.core/xtce</bundle>
-			<bundle start-level="100">mvn:org.hbird.osgi/xtce-osgi</bundle>
+			<bundle>mvn:org.hbird.osgi/xtce-osgi</bundle>
 		</feature>
 		
 		<feature name="hbird-publisher" 
@@ -24,7 +24,7 @@
 				 version="${version}">
 			<feature version="${version}">hbird-core</feature>
 			<bundle start="false">mvn:org.hbird.core/space-system-publisher</bundle>
-			<bundle start-level="100">mvn:org.hbird.osgi/space-system-publisher-osgi</bundle>
+			<bundle>mvn:org.hbird.osgi/space-system-publisher-osgi</bundle>
 		</feature>
 		
 		<feature name="hbird-transport" description="Hbird transport bundles and services" version="${version}">
@@ -34,7 +34,7 @@
 		<feature name="hbird-commanding" description="Hbird commmanding application server" version="${version}">
 			<feature version="${version}">hbird-core</feature>
 			<bundle start="false">mvn:org.hbird.application/commanding</bundle>
-			<bundle start-level="100">mvn:org.hbird.osgi/commanding-osgi</bundle>
+			<bundle>mvn:org.hbird.osgi/commanding-osgi</bundle>
 		</feature>
 		
 		<feature name="hbird-dosgi-cxf" description="Hbird DOSGi feature using CXF since they don't have one yet :)">
@@ -90,7 +90,7 @@
 			<bundle start="false">mvn:com.googlecode.json-simple/json-simple/1.1.1</bundle>
 			<bundle start="false">mvn:org.jboss.javassist/com.springsource.javassist/3.15.0.GA</bundle>
 			<bundle start="false">mvn:org.msgpack/msgpack/0.6.6</bundle>
-			<bundle start-level="150">mvn:org.hbird.application/halcyon/0.0.1-SNAPSHOT/war</bundle>
+			<bundle>mvn:org.hbird.application/halcyon/0.0.1-SNAPSHOT/war</bundle>
 		</feature>
 		
 </features>
