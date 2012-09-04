@@ -11,7 +11,7 @@ function getAllowedCommandList() {
 	
 	jqxhr.done(
 		function(parsedResponse, statusText, jqXhr) {
-			updateAllowedCommands( jQuery.parseJSON(jqXhr.responseText)); 
+			updateAllowedCommands(jQuery.parseJSON(jqXhr.responseText)); 
 		}
 	);
 }
@@ -35,5 +35,16 @@ function addCommandLink(elementId, cmd) {
 function openCmdDialog(qualifiedName, name) {
 	console.log("Opening dialog for command " + name + " :: " + qualifiedName);
 	$("#cmdName").text(name);
+	
+	var jqxhr = $.getJSON(rootURL + "commandlist/command/" + qualifiedName);
+	
+	jqxhr.done(
+		function(parsedResponse, statusText, jqXhr) {
+			console.log("Found command: " + jqXhr.responseText);
+			cmd = jQuery.parseJSON(jqXhr.responseText); 
+			$("#shortDescription").text(cmd.shortDescription);
+		}
+	);
+	
 	$("#cmdModal").reveal();
 }
