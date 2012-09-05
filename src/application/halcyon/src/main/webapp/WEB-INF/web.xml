@@ -38,6 +38,7 @@
 			<param-name>com.sun.jersey.config.property.classnames</param-name>
 			<param-value>
 				org.hbird.application.halcyon.CommandListResource,
+				org.hbird.application.halcyon.TelemetryListResource,
 				org.hbird.application.halcyon.HalcyonResource
 			</param-value>
 		</init-param>
