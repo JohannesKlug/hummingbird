@@ -32,8 +32,6 @@ public class CommandListResource extends OsgiReady {
 
 	private List<CmdNames> allowedCommandNames = null;
 
-	private CommandInformationService cmdInfoService;
-
 	private class CmdNames {
 		public String qualifiedName;
 		public String name;
@@ -97,6 +95,7 @@ public class CommandListResource extends OsgiReady {
 	@Produces({MediaType.APPLICATION_JSON})
 	public CommandGroup getCommand(@PathParam("qualifiedName") final String qualifiedName) {
 		LOG.debug("Getting command " + qualifiedName + " from commmand information service");
+		final CommandInformationService cmdInfoService = (CommandInformationService) getServiceTracker().getService();
 		return cmdInfoService.getCommand(qualifiedName);
 	}
 
