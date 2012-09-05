@@ -20,7 +20,7 @@ function updateAllowedCommands(cmdList) {
 	$("#commandList").empty();
 	$.each(cmdList,
 		function(i) {
-			$("#commandList").append(cmdList[i].name + ":" + cmdList[i].qualifiedName + "</br>");
+			$("#commandList").append("<li>" + cmdList[i].name + ":" + cmdList[i].qualifiedName + "</li>");
 		}
 	);
 }

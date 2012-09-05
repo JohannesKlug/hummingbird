@@ -91,5 +91,10 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public void modelUpdated() {
+		throw new UnsupportedOperationException();
+	}
+
 
 }

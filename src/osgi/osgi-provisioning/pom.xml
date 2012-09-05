@@ -21,10 +21,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Bundle-Version>${project.version}</Bundle-Version>
 						<Export-Package>org.hbird.osgi.commanding*;version=${project.version}</Export-Package>
-						<Import-Package>*</Import-Package>
 					</instructions>
 				</configuration>
 			</plugin>

@@ -17,4 +17,5 @@ public interface SpaceSystemPublisher {
 	Map<String, List<String>> getRestrictions();
 
 	void fireUpdate(SpaceSystemModelUpdate update);
+	void modelUpdated();
 }

@@ -22,7 +22,6 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-Version>${project.version}</Bundle-Version>
                         <Export-Package>
                         	org.hbird.core.osgi.spacesystempublisher;version=${project.version}
                         </Export-Package>
@@ -46,6 +45,13 @@
     		<groupId>org.hbird.core</groupId>
     		<artifactId>space-system-publisher</artifactId>
     		<version>0.0.1-SNAPSHOT</version>
+    		<scope>provided</scope>
+    	</dependency>
+    	<dependency>
+    		<groupId>org.hbird.core</groupId>
+    		<artifactId>space-system-model</artifactId>
+    		<version>0.0.1-SNAPSHOT</version>
+    		<scope>provided</scope>
     	</dependency>
     </dependencies>
     <description>OSGI blueprint bundle which consumes Space System Factory DOSGi services and provides hbird space system model publishing services.</description>

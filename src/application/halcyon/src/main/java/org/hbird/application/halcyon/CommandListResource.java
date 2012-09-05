@@ -17,10 +17,10 @@ import org.slf4j.LoggerFactory;
 import com.sun.jersey.spi.resource.Singleton;
 
 /**
- * 
+ *
  * @author Mark Doyle
  * @author Johannes Klug
- * 
+ *
  */
 @Singleton
 @Path("/commandlist")
@@ -29,12 +29,12 @@ public class CommandListResource extends OsgiReady {
 
 	private final static Logger LOG = LoggerFactory.getLogger(CommandListResource.class);
 
-	//	private Map<String, String> allowedCommandNames = null;
 	private List<CmdNames> allowedCommandNames = null;
 
 	private class CmdNames {
 		public String qualifiedName;
 		public String name;
+
 		public CmdNames(final String qualifiedName, final String name) {
 			super();
 			this.qualifiedName = qualifiedName;
@@ -47,24 +47,22 @@ public class CommandListResource extends OsgiReady {
 	}
 
 	private final void cacheAllowedCommands() {
-		if (allowedCommandNames == null) {
-			final CommandInformationService cmdInfoService = (CommandInformationService) getServiceTracker().getService();
-			if (cmdInfoService != null) {
-				//				allowedCommandNames = new HashMap<String, String>();
-				allowedCommandNames = new ArrayList<CmdNames>();
-				for (final CommandGroup cmd : cmdInfoService.getAllAllowedCommands()) {
-					allowedCommandNames.add(new CmdNames(cmd.getQualifiedName(), cmd.getName()));
-				}
+		final CommandInformationService cmdInfoService = (CommandInformationService) getServiceTracker().getService();
+		if (cmdInfoService != null) {
+			// allowedCommandNames = new HashMap<String, String>();
+			allowedCommandNames = new ArrayList<CmdNames>();
+			for (final CommandGroup cmd : cmdInfoService.getAllAllowedCommands()) {
+				allowedCommandNames.add(new CmdNames(cmd.getQualifiedName(), cmd.getName()));
 			}
-			else {
-				LOG.warn("No " + COMMAND_INFORMATION_SERVICE_NAME + " service found.");
-			}
+		}
+		else {
+			LOG.warn("No " + COMMAND_INFORMATION_SERVICE_NAME + " service found.");
 		}
 	}
 
 	/**
 	 * Method processing HTTP GET requests, producing "text/plain" MIME media type.
-	 * 
+	 *
 	 * @return String that will be send back as a response of type "text/plain".
 	 */
 	@GET
@@ -80,30 +78,31 @@ public class CommandListResource extends OsgiReady {
 	}
 
 	@GET
-	@Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 	public List<CmdNames> getCommandListJson() {
+		System.out.println("Halcyon rest service, CommandListResource, returning allowed command name list as json");
 		cacheAllowedCommands();
-		System.out.println("Returning allowed command name list as json");
 		if (allowedCommandNames.size() == 0) {
-			LOG.warn("No commands to return!");
+			LOG.info("No commands to return!");
 		}
 		return allowedCommandNames;
 	}
 
-	//	@GET
-	//	@Produces("application/x-msgpack")
-	//	// FIXME use a constant.
-	//	public byte[] getCommandListAsMsgPack() throws IOException {
-	//		cacheAllowedCommands();
-	//		final MessagePack msgpack = new MessagePack();
+	// TODO implement msgPack return
+	// @GET
+	// @Produces("application/x-msgpack")
+	// // FIXME use a constant.
+	// public byte[] getCommandListAsMsgPack() throws IOException {
+	// cacheAllowedCommands();
+	// final MessagePack msgpack = new MessagePack();
 	//
-	//		final ByteArrayOutputStream out = new ByteArrayOutputStream();
+	// final ByteArrayOutputStream out = new ByteArrayOutputStream();
 	//
-	//		final Packer packer = msgpack.createPacker(out);
-	//		packer.write(allowedCommandNames);
+	// final Packer packer = msgpack.createPacker(out);
+	// packer.write(allowedCommandNames);
 	//
-	//		return out.toByteArray();
+	// return out.toByteArray();
 	//
-	//	}
+	// }
 
 }
