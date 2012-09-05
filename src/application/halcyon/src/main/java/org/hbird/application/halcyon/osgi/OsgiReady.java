@@ -1,23 +1,46 @@
 package org.hbird.application.halcyon.osgi;
 
 import org.hbird.application.halcyon.WebAppContextListener;
+import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class OsgiReady{
+public class OsgiReady {
+	private static final Logger LOG = LoggerFactory.getLogger(OsgiReady.class);
 
-	private ServiceTracker cachedTracker;
+	private ServiceTracker serviceTracker;
 	private final String serviceInterface;
 
 	public OsgiReady(final String serviceInterface) {
+		System.out.println("Instantiating OsgiReady Jersey resource using serivce " + serviceInterface);
 		this.serviceInterface = serviceInterface;
 	}
 
 	protected ServiceTracker getServiceTracker() {
-		if(cachedTracker == null) {
-			cachedTracker = new ServiceTracker(WebAppContextListener.getBundleContext(), serviceInterface, null);
+		if (serviceTracker == null) {
+			cacheTracker();
 		}
-		cachedTracker.open();
-		return cachedTracker;
+		return serviceTracker;
+	}
+
+	private final void cacheTracker() {
+		System.out.println("Caching tracker");
+		serviceTracker = new ServiceTracker(WebAppContextListener.getBundleContext(), serviceInterface, null) {
+			@Override
+			public Object addingService(final ServiceReference reference) {
+				LOG.debug(serviceInterface + " from bundle " + reference.getBundle().getBundleId() + " service being added to jersey resource");
+				return super.addingService(reference);
+			}
+
+			@Override
+			public void remove(final ServiceReference reference) {
+				LOG.debug(serviceInterface + " from bundle " + reference.getBundle().getBundleId() + " service being removed from jersey resource");
+				super.remove(reference);
+			}
+
+		};
+		serviceTracker.open();
 	}
 
 }

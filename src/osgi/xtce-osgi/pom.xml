@@ -22,14 +22,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-Version>${project.version}</Bundle-Version>
-                        <Export-Package>org.hbird.core.osgi.xtce*;version=${project.version}</Export-Package>
-                        <Import-Package>
-                        	*,
-                        	org.apache.cxf.jaxrs.provider.jsonp,
-                        	org.apache.cxf.jaxrs.provider,
-                        	org.slf4j
-                        </Import-Package>
+                        <Export-Package>org.hbird.osgi.xtceosgi;version=${project.version}</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>
@@ -41,21 +34,19 @@
     		<groupId>org.hbird.core</groupId>
     		<artifactId>xtce</artifactId>
     		<version>0.0.1-SNAPSHOT</version>
+    		<scope>provided</scope>
     	</dependency>
     	<dependency>
     		<groupId>org.hbird.core</groupId>
     		<artifactId>space-system-model</artifactId>
     		<version>0.0.1-SNAPSHOT</version>
+    		<scope>provided</scope>
     	</dependency>
     	<dependency>
-      		<groupId>org.apache.cxf</groupId>
-      		<artifactId>cxf-rt-frontend-jaxrs</artifactId>
-      		<version>2.5.2</version>
-   		</dependency>
-    	<dependency>
-    		<groupId>org.apache.cxf</groupId>
-    		<artifactId>cxf-bundle-minimal</artifactId>
-    		<version>2.5.2</version>
+    		<groupId>org.apache.felix</groupId>
+    		<artifactId>org.apache.felix.configadmin</artifactId>
+    		<version>1.2.8</version>
+    		<scope>provided</scope>
     	</dependency>
     </dependencies>
     <description>XTCE implementation of the Space System Model Factory. Also provides space system model factory services for client to retrieve an XTCE built space system model.</description>

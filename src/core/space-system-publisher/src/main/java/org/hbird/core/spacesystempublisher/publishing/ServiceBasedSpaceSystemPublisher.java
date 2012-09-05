@@ -3,6 +3,8 @@ package org.hbird.core.spacesystempublisher.publishing;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.hbird.core.commons.tmtc.CommandGroup;
 import org.hbird.core.commons.tmtc.ParameterGroup;
@@ -31,12 +33,15 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	/** Cached Space system model */
 	private SpaceSystemModel modelCache = null;
 
+	private final Lock lock = new ReentrantLock();
+
 	/**
 	 * Retrieves and caches the space system model from the space system model factory service.
 	 */
 	public void loadModel() {
 		LOG.debug("Loading space system model from factory service!");
 
+		lock.lock();
 		if (factoryService != null) {
 			try {
 				this.modelCache = factoryService.createSpaceSystemModel();
@@ -54,6 +59,7 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 		else {
 			LOG.error("SpaceSystemModelFactoryService is null, cannot retrieve a space system model for loading and caching!");
 		}
+		lock.unlock();
 	}
 
 	@Override
@@ -114,6 +120,12 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 
 	public void setFactoryService(final SpaceSystemModelFactory factoryService) {
 		this.factoryService = factoryService;
+	}
+
+	@Override
+	public void modelUpdated() {
+		LOG.info("Publisher received notification that the factory space system model updated");
+		loadModel();
 	}
 
 	@Override

@@ -33,7 +33,9 @@ public class HbirdPublisherBasedCommandInfo implements CommandInformationService
 	 */
 	@Override
 	public List<CommandGroup> getAllAllowedCommands() {
-		return cachedCommands;
+		System.out.println("HbirdPublisherBasedCommandInfo returning command list from the publisher");
+		return publisher.getCommandList();
+//		return cachedCommands;
 	}
 
 

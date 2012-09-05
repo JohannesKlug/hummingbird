@@ -18,10 +18,19 @@
 	</bean>
 	
 	<!-- Xtce Space System model factory declaration using osgi compendium managed properties. -->
- 	<bean id="XtceSpaceSystemModelFactory" class="org.hbird.core.xtce.XtceSpaceSystemModelFactory">
- 		<cm:managed-properties persistent-id="xtceSpaceSystemModelFactorySerivce"/>
+ 	<bean id="xtceSpaceSystemModelFactory" class="org.hbird.core.xtce.XtceSpaceSystemModelFactory">
  	</bean>
 	
+	<reference-list id="modelUpdateListenerServices"
+					interface="org.hbird.core.spacesystemmodel.interfaces.SpaceSystemModelUpdateListener"
+					availability="optional">
+	</reference-list>
+	
+	<bean id="configUpdater" class="org.hbird.osgi.xtceosgi.XtceManagedConfigUpdater">
+ 		<cm:managed-properties persistent-id="org.hbird.osgi.xtceosgi.xtceSpaceSystemModelFactoryUpdater"/>
+		<property name="factory" ref="xtceSpaceSystemModelFactory"></property>
+		<property name="modelUpdateListeners" ref="modelUpdateListenerServices"></property>
+	</bean>
 	
 	<!--
 		Exports the XtceSpaceSystemModelFactory bean as a provides of the SpaceSystemModelFactory service.
@@ -29,7 +38,7 @@
 	 -->
 	<service id="XtceSpaceSystemModelFactoryService" 
 			 interface="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory" 
-			 ref="XtceSpaceSystemModelFactory">
+			 ref="xtceSpaceSystemModelFactory">
 		 <service-properties>
 		  	<!-- Adds DOSGi remote access to service interface -->
 			<entry key="service.exported.interfaces" value="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory"/>

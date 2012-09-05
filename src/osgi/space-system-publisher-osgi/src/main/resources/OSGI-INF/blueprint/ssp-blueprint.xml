@@ -16,11 +16,19 @@
 		  <property name="factoryService" ref="spaceSystemModelFactoryService"></property>
 	</bean>
 	
+	<bean id="modelUpdateListener"
+		  class="org.hbird.osgi.publisher.provided.PublisherModelUpdater">
+		  <property name="publisher" ref="publisher"></property>
+	</bean>
+	
 	<service id="spaceSystemPublisherService"
 			 interface="org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher"
 			 ref="publisher">
 	</service>
-
-	<service id="publisherService" ref="publisher" interface="org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher"/>
+	
+	<service id= "publisherModelupdaterService"
+			 interface="org.hbird.core.spacesystemmodel.interfaces.SpaceSystemModelUpdateListener"
+			 ref="modelUpdateListener">
+	</service>
 
 </blueprint>

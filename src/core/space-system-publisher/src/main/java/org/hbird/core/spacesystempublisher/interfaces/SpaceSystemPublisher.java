@@ -26,4 +26,5 @@ public interface SpaceSystemPublisher {
 
 
 	void fireUpdate(SpaceSystemModelUpdate update);
+	void modelUpdated();
 }
