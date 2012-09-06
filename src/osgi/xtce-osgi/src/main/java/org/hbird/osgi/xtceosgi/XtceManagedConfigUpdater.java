@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.hbird.core.spacesystemmodel.interfaces.SpaceSystemModelUpdateListener;
 import org.hbird.core.xtce.XtceSpaceSystemModelFactory;
+import org.osgi.service.cm.ConfigurationException;
+import org.osgi.service.cm.ManagedService;
 
-public class XtceManagedConfigUpdater {
+public class XtceManagedConfigUpdater implements ManagedService {
 
 	private XtceSpaceSystemModelFactory factory;
 
@@ -15,11 +17,6 @@ public class XtceManagedConfigUpdater {
 	private String spaceSystemModelFilename;
 
 	private final Object lock = new Object();
-
-	public void update(final Dictionary props) {
-		System.out.println("Config updated");
-		final String fileName = (String) props.get("spaceSystemModelFilename");
-	}
 
 	public void setFactory(final XtceSpaceSystemModelFactory factory) {
 		this.factory = factory;
@@ -30,7 +27,7 @@ public class XtceManagedConfigUpdater {
 	}
 
 	public void setSpaceSystemModelFilename(final String spaceSystemModelFilename) {
-		System.out.println("GAYYYYBEN");
+		System.out.println("XtceManagedConfigUpdater.setSpaceSystemModelFilename called.");
 		factory.setSpaceSystemModelFilename(spaceSystemModelFilename);
 
 		synchronized (lock) {
@@ -42,6 +39,12 @@ public class XtceManagedConfigUpdater {
 
 	public String getSpaceSystemModelFilename() {
 		return spaceSystemModelFilename;
+	}
+
+	@Override
+	public void updated(Dictionary props) throws ConfigurationException {
+		System.out.println("XtceManagedConfigUpdater.updated called.");
+		//final String fileName = (String) props.get("spaceSystemModelFilename");
 	}
 
 }

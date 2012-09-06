@@ -48,5 +48,9 @@
 			<entry key="org.apache.cxf.rs.databinding" value="aegis"/>
 		</service-properties>
 	</service>
+	
+	<service id="xtceUpdaterConfigService" interface="org.osgi.service.cm.ManagedService" ref="configUpdater">
+		<service-properties><entry key="service.pid" value="org.hbird.osgi.xtceosgi.xtceSpaceSystemModelFactoryUpdater"></entry></service-properties>
+	</service>
 
 </blueprint>
