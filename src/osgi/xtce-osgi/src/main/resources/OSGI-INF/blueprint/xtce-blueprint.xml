@@ -50,7 +50,9 @@
 	</service>
 	
 	<service id="xtceUpdaterConfigService" interface="org.osgi.service.cm.ManagedService" ref="configUpdater">
-		<service-properties><entry key="service.pid" value="org.hbird.osgi.xtceosgi.xtceSpaceSystemModelFactoryUpdater"></entry></service-properties>
+		<service-properties>
+			<entry key="service.pid" value="org.hbird.osgi.xtceosgi.xtceSpaceSystemModelFactoryUpdater"/>
+		</service-properties>
 	</service>
 
 </blueprint>

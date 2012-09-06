@@ -37,13 +37,15 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	 * Retrieves and caches the space system model from the space system model factory service.
 	 */
 	public void loadModel() {
-		LOG.debug("Loading space system model from factory service!");
+		LOG.debug("Loading space system model from factory service...");
 
 		synchronized (lock) {
+			LOG.debug("Aquired lock...");
 			if (factoryService != null) {
+				LOG.debug("Factory service exists...");
 				try {
 					this.modelCache = factoryService.createSpaceSystemModel();
-					LOG.debug("Model " + this.modelCache.getName() + " cached in publisher");
+					LOG.debug("Model " + this.modelCache.getName() + " cached in publisher.");
 				}
 				catch (final InvalidParameterTypeException e) {
 					// TODO Auto-generated catch block
