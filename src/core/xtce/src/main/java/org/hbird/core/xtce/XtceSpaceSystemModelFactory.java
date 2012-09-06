@@ -37,6 +37,7 @@ import org.hbird.core.generatedcode.xtce.MetaCommand;
 import org.hbird.core.generatedcode.xtce.MetaCommandSet;
 import org.hbird.core.generatedcode.xtce.ParameterRefEntry;
 import org.hbird.core.generatedcode.xtce.ParameterSetTypeItem;
+import org.hbird.core.generatedcode.xtce.ParameterTypeSet;
 import org.hbird.core.generatedcode.xtce.ParameterTypeSetTypeItem;
 import org.hbird.core.generatedcode.xtce.SequenceContainer;
 import org.hbird.core.generatedcode.xtce.SpaceSystem;
@@ -131,9 +132,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 			throw new InvalidSpaceSystemDefinitionException("No path to xtce file set");
 		}
 
-		if(LOG.isDebugEnabled()) {
-			LOG.debug("Creating space system model using XTCE file = " + spaceSystemModelFilename);
-		}
+		LOG.debug("Creating space system model using XTCE file = " + spaceSystemModelFilename);
 
 		model = new XtceSpaceSystemModel();
 
@@ -213,7 +212,7 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	private void createCommandModel() throws InvalidSpaceSystemDefinitionException {
 		final CommandMetaData commandMetaData = spaceSystem.getCommandMetaData();
 		if (commandMetaData == null) {
-			LOG.info("No command metadate defined");
+			LOG.info("No command metadata defined");
 			return;
 		}
 		createAllTcArgumentTypes(commandMetaData);
@@ -230,10 +229,16 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	 * @throws InvalidSpaceSystemDefinitionException
 	 */
 	private final void createAllTcArgumentTypes(final CommandMetaData commandMetaData) throws InvalidSpaceSystemDefinitionException {
-		final int numberOfParameterTypes = commandMetaData.getParameterTypeSet().getParameterTypeSetTypeItemCount();
+		final ParameterTypeSet parameterTypeSet = commandMetaData.getParameterTypeSet();
+		if(parameterTypeSet == null) {
+			LOG.error("Hbird only supports ParameterTypeSets in CommandMetaData. Check your XTCE file: " + spaceSystemModelFilename);
+			throw new InvalidSpaceSystemDefinitionException("Hbird only supports ParameterTypeSets in CommandMetaData. Check your XTCE file: " + spaceSystemModelFilename);
+		}
+
+		final int numberOfParameterTypes = parameterTypeSet.getParameterTypeSetTypeItemCount();
 
 		for (int parameterTypeIndex = 0; parameterTypeIndex < numberOfParameterTypes; ++parameterTypeIndex) {
-			final ParameterTypeSetTypeItem item = commandMetaData.getParameterTypeSet().getParameterTypeSetTypeItem(parameterTypeIndex);
+			final ParameterTypeSetTypeItem item = parameterTypeSet.getParameterTypeSetTypeItem(parameterTypeIndex);
 			final String name = checkParameterType(item);
 			xtceTcParameterTypes.put(name, item);
 		}
