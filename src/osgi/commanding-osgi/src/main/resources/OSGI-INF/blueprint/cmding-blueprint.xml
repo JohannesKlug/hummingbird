@@ -12,8 +12,7 @@
 	
 	<!-- Command information service impl bean which uses the publisher to get command info -->
 	<bean id="commandInformationService" 
-		  class="org.hbird.application.commanding.provided.info.HbirdPublisherBasedCommandInfo"
-		  init-method="init">
+		  class="org.hbird.application.commanding.provided.info.HbirdPublisherBasedCommandInfo">
 		<property name="publisher" ref="spaceSystemPublisherService"></property>
 	</bean>
 	

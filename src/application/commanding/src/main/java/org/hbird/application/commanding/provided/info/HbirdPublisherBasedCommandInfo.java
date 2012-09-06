@@ -20,14 +20,6 @@ public class HbirdPublisherBasedCommandInfo implements CommandInformationService
 
 	private SpaceSystemPublisher publisher;
 
-	private List<CommandGroup> cachedCommands;
-
-
-	public void init() {
-		this.cachedCommands = publisher.getCommandList();
-	}
-
-
 	/**
 	 * @{inheritDoc}
 	 */
@@ -35,7 +27,6 @@ public class HbirdPublisherBasedCommandInfo implements CommandInformationService
 	public List<CommandGroup> getAllAllowedCommands() {
 		System.out.println("HbirdPublisherBasedCommandInfo returning command list from the publisher");
 		return publisher.getCommandList();
-//		return cachedCommands;
 	}
 
 

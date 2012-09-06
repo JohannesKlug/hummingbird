@@ -3,8 +3,6 @@ package org.hbird.core.spacesystempublisher.publishing;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import org.hbird.core.commons.tmtc.CommandGroup;
 import org.hbird.core.commons.tmtc.ParameterGroup;
@@ -20,9 +18,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * {@link SpaceSystemPublisher} that uses a {@link SpaceSystemModelFactory} service interface to retrieve the model.
- *
+ * 
  * @author Mark Doyle
- *
+ * 
  */
 public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	private final static Logger LOG = LoggerFactory.getLogger(ServiceBasedSpaceSystemPublisher.class);
@@ -33,7 +31,7 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	/** Cached Space system model */
 	private SpaceSystemModel modelCache = null;
 
-	private final Lock lock = new ReentrantLock();
+	private final Object lock = new Object();
 
 	/**
 	 * Retrieves and caches the space system model from the space system model factory service.
@@ -41,25 +39,25 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	public void loadModel() {
 		LOG.debug("Loading space system model from factory service!");
 
-		lock.lock();
-		if (factoryService != null) {
-			try {
-				this.modelCache = factoryService.createSpaceSystemModel();
-				LOG.debug("Model " + this.modelCache.getName() + " cached in publisher");
+		synchronized (lock) {
+			if (factoryService != null) {
+				try {
+					this.modelCache = factoryService.createSpaceSystemModel();
+					LOG.debug("Model " + this.modelCache.getName() + " cached in publisher");
+				}
+				catch (final InvalidParameterTypeException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				catch (final InvalidSpaceSystemDefinitionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-			catch (final InvalidParameterTypeException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			catch (final InvalidSpaceSystemDefinitionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			else {
+				LOG.error("SpaceSystemModelFactoryService is null, cannot retrieve a space system model for loading and caching!");
 			}
 		}
-		else {
-			LOG.error("SpaceSystemModelFactoryService is null, cannot retrieve a space system model for loading and caching!");
-		}
-		lock.unlock();
 	}
 
 	@Override
