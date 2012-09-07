@@ -5,7 +5,10 @@ jQuery(document).ready(function() {
 	getAllowedCommandList();
 });
 
-
+/**
+ * Uses the RESTful web service @ Halcyon to get the list of all available commands
+ * and then updates the client web command list.
+ */
 function getAllowedCommandList() {
 	var jqxhr = $.getJSON(rootURL + "commandlist");
 	
@@ -16,6 +19,11 @@ function getAllowedCommandList() {
 	);
 }
 
+/**
+ * Adds a command link to the commmand list given an array of CmdNames objects.
+ * @see Halcyon project :: CommandListResource$CmdNames 
+ * @param cmdList
+ */
 function updateAllowedCommands(cmdList) {
 	console.log("[DEBUG - Commanding] - Received " + cmdList.length + " command(s)");
 	$("#commandList").empty();
@@ -42,9 +50,47 @@ function openCmdDialog(qualifiedName, name) {
 		function(parsedResponse, statusText, jqXhr) {
 			console.log("Found command: " + jqXhr.responseText);
 			cmd = jQuery.parseJSON(jqXhr.responseText); 
-			$("#shortDescription").text(cmd.shortDescription);
+			$("#longDescription").text(cmd.longDescription);
+			
+			clearAllArgs();
+			
+			if(cmd.integerParameters != null) {
+				addIntArgs(cmd.integerParameters);
+			}
+			if(cmd.longParameters!= null) {
+				// TODO impl
+			}
+			if(cmd.floatParameters!= null) {
+				// TODO impl
+			}
+			if(cmd.doubleParameters!= null) {
+				// TODO impl
+			}
+			if(cmd.bigDecimalParameters!= null) {
+				// TODO impl
+			}
+			if(cmd.stringParameters!= null) {
+				// TODO impl
+			}
+			if(cmd.rawParameters!= null) {
+				// TODO impl
+			}
 		}
 	);
 	
 	$("#cmdModal").reveal();
 }
+
+function clearAllArgs() {
+	$("#cmdArguments").empty();
+}
+
+function addIntArgs(intArgs) {
+	var html;
+	$.each(intArgs, function(i) {
+		console.log("Adding arg" + intArgs[i].name);
+		html = "<li>" + intArgs[i].name + "</li>"; 
+		$("#cmdArguments").append(html);
+	});
+}
+
