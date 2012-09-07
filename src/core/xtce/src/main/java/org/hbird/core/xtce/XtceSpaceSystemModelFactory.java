@@ -134,7 +134,13 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 
 		LOG.debug("Creating space system model using XTCE file = " + spaceSystemModelFilename);
 
+		// Reset the previous model and colelctions used to construct the model
 		model = new XtceSpaceSystemModel();
+		tmParameterGroups.clear();
+		tcGroups.clear();
+		restrictions.clear();
+		encodings.clear();
+
 
 		try {
 			spaceSystem = unmarshallXtceXmlSpaceSystem(spaceSystemModelFilename);
@@ -478,8 +484,10 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 
 			// @formatter:off
 			final CommandGroup parameterGroup =
-					new HummingbirdCommandGroup(qualifiedNamePrefix + xtceContainer.getName(), xtceContainer.getName(),
-							xtceContainer.getShortDescription(), xtceContainer.getLongDescription());
+					new HummingbirdCommandGroup(qualifiedNamePrefix + xtceContainer.getName(),
+												xtceContainer.getName(),
+												xtceContainer.getShortDescription(),
+												xtceContainer.getLongDescription());
 			// @formatter:on
 
 			tcGroups.put(parameterGroup.getQualifiedName(), parameterGroup);
@@ -669,6 +677,11 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 	 */
 	private void injectConstructsIntoModel() throws IllegalArgumentException, IllegalAccessException {
 		final Field[] fields = model.getClass().getDeclaredFields();
+		LOG.trace("Injecting the following fields into the " + modelName + " model:");
+		LOG.trace(tmParameterGroups.size() + " TM parameter groups");
+		LOG.trace(tcGroups.size() + " TC groups");
+		LOG.trace(restrictions.size() + " restrictions");
+		LOG.trace(encodings.size() + " encodings");
 		// TODO Switch on String when jdk 7 works with camel! Much nicer!
 		for (final Field field : fields) {
 			field.setAccessible(true);

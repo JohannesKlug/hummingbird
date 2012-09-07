@@ -37,7 +37,6 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	public void loadModel() {
 		LOG.debug("Loading space system model from factory service...");
 
-			LOG.debug("Aquired lock...");
 			if (factoryService != null) {
 				LOG.debug("Factory service exists...");
 				try {
@@ -76,6 +75,9 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 
 	@Override
 	public List<CommandGroup> getCommandList() {
+		if(LOG.isTraceEnabled()) {
+			LOG.trace("Returning " + modelCache.getCommands().values().size() + " command(s) from " + modelCache.getName());
+		}
 		return new ArrayList<CommandGroup>(modelCache.getCommands().values());
 	}
 
@@ -121,6 +123,7 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	@Override
 	public void modelUpdated() {
 		LOG.info("Publisher received notification that the factory space system model updated");
+		modelCache = null;
 		loadModel();
 	}
 
