@@ -47,7 +47,7 @@ public class XtceManagedConfigUpdater implements ManagedService {
 	// Suppressing rawtypes on Dictionary because we are running in OSGi which still supports Java 1.4 and therefore does
 	// not use generics.
 	public void updated(@SuppressWarnings("rawtypes") final Dictionary configuration) throws ConfigurationException {
-		LOG.debug("XtceManagedConfigUpdater.updated called.");
+		LOG.trace("Updater called with new configuration");
 		if (configuration == null) {
 			nulledModel();
 			return;

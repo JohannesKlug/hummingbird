@@ -49,6 +49,7 @@
 		</service-properties>
 	</service>
 	
+	<!-- Registers the xtce config updater as a managed service bean so it can propagate configuration changes -->
 	<service id="xtceUpdaterConfigService" interface="org.osgi.service.cm.ManagedService" ref="configUpdater">
 		<service-properties>
 			<entry key="service.pid" value="org.hbird.osgi.xtceosgi.xtceSpaceSystemModelFactoryUpdater"/>

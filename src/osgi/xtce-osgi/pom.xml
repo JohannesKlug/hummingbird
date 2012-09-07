@@ -48,6 +48,12 @@
     		<version>1.2.8</version>
     		<scope>provided</scope>
     	</dependency>
+    	<dependency>
+    	<groupId>org.mockito</groupId>
+  			<artifactId>mockito-all</artifactId>
+  			<version>1.9.0</version>
+  			<scope>test</scope>
+    	</dependency>
     </dependencies>
     <description>XTCE implementation of the Space System Model Factory. Also provides space system model factory services for client to retrieve an XTCE built space system model.</description>
 </project>

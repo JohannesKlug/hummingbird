@@ -61,7 +61,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.primitives.Ints;
 
-public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
+public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 	public static final BinaryRepresentation DEFAULT_STRING_ENCODING = BinaryRepresentation.UTF8;
 
