@@ -18,9 +18,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * {@link SpaceSystemPublisher} that uses a {@link SpaceSystemModelFactory} service interface to retrieve the model.
- * 
+ *
  * @author Mark Doyle
- * 
+ *
  */
 public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	private final static Logger LOG = LoggerFactory.getLogger(ServiceBasedSpaceSystemPublisher.class);
@@ -31,15 +31,12 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	/** Cached Space system model */
 	private SpaceSystemModel modelCache = null;
 
-	private final Object lock = new Object();
-
 	/**
 	 * Retrieves and caches the space system model from the space system model factory service.
 	 */
 	public void loadModel() {
 		LOG.debug("Loading space system model from factory service...");
 
-		synchronized (lock) {
 			LOG.debug("Aquired lock...");
 			if (factoryService != null) {
 				LOG.debug("Factory service exists...");
@@ -59,7 +56,6 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 			else {
 				LOG.error("SpaceSystemModelFactoryService is null, cannot retrieve a space system model for loading and caching!");
 			}
-		}
 	}
 
 	@Override

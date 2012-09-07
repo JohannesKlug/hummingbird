@@ -20,8 +20,6 @@ public class XtceManagedConfigUpdater implements ManagedService {
 
 	private List<SpaceSystemModelUpdateListener> modelUpdateListeners;
 
-	private final Object lock = new Object();
-
 	public void setFactory(final XtceSpaceSystemModelFactory factory) {
 		this.factory = factory;
 	}
@@ -35,10 +33,8 @@ public class XtceManagedConfigUpdater implements ManagedService {
 	}
 
 	private final void notifyModelUpdateListeners() {
-		synchronized (lock) {
-			for (final SpaceSystemModelUpdateListener listener : modelUpdateListeners) {
-				listener.modelChanged();
-			}
+		for (final SpaceSystemModelUpdateListener listener : modelUpdateListeners) {
+			listener.modelChanged();
 		}
 	}
 
@@ -48,7 +44,8 @@ public class XtceManagedConfigUpdater implements ManagedService {
 	}
 
 	@Override
-	// Ignoring rawtypes on Dictionary because we are running in OSGi which still supports Java 1.4 and therefore does not use generics.
+	// Suppressing rawtypes on Dictionary because we are running in OSGi which still supports Java 1.4 and therefore does
+	// not use generics.
 	public void updated(@SuppressWarnings("rawtypes") final Dictionary configuration) throws ConfigurationException {
 		LOG.debug("XtceManagedConfigUpdater.updated called.");
 		if (configuration == null) {
