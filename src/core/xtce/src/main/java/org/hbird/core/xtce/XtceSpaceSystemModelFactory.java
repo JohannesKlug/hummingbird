@@ -169,13 +169,11 @@ public final class XtceSpaceSystemModelFactory implements SpaceSystemModelFactor
 			LOG.error("Critical Error creating XTCE based Space System Model");
 			e.printStackTrace();
 			// TODO - 27.03.2012 kimmell - replace with appropriate exception
-			System.exit(-1);
 		}
 		catch (final IllegalAccessException e) {
 			LOG.error("Critical Error creating XTCE based Space System Model");
 			e.printStackTrace();
 			// TODO - 27.03.2012 kimmell - replace with appropriate exception
-			System.exit(-1);
 		}
 
 		return model;
