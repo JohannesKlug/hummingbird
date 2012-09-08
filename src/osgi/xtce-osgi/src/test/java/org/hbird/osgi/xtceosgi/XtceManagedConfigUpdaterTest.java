@@ -1,9 +1,8 @@
 package org.hbird.osgi.xtceosgi;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -16,8 +15,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import static org.mockito.Mockito.*;
 import org.osgi.service.cm.ConfigurationException;
 
 @RunWith(MockitoJUnitRunner.class)

@@ -53,6 +53,10 @@
     		<version>0.0.1-SNAPSHOT</version>
     		<scope>provided</scope>
     	</dependency>
+    	<dependency>
+    		<groupId>org.mockito</groupId>
+    		<artifactId>mockito-all</artifactId>
+    	</dependency>
     </dependencies>
     <description>OSGI blueprint bundle which consumes Space System Factory DOSGi services and provides hbird space system model publishing services.</description>
 </project>

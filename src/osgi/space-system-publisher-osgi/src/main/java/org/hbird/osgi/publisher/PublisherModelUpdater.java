@@ -1,4 +1,4 @@
-package org.hbird.osgi.publisher.provided;
+package org.hbird.osgi.publisher;
 
 import org.hbird.core.spacesystemmodel.interfaces.SpaceSystemModelUpdateListener;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;

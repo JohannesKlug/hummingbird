@@ -17,7 +17,7 @@
 	</bean>
 	
 	<bean id="modelUpdateListener"
-		  class="org.hbird.osgi.publisher.provided.PublisherModelUpdater">
+		  class="org.hbird.osgi.publisher.PublisherModelUpdater">
 		  <property name="publisher" ref="publisher"></property>
 	</bean>
 	
