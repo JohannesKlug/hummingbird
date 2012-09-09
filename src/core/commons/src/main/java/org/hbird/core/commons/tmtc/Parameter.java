@@ -29,4 +29,6 @@ public interface Parameter<T> extends SpaceSystemModelItem {
 	long getReceivedTime();
 
 	void setReceivedTime(long timestamp);
+
+	boolean isReadOnly();
 }

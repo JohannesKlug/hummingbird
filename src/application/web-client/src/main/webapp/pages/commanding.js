@@ -49,8 +49,8 @@ function openCmdDialog(qualifiedName, name) {
 	jqxhr.done(
 		function(parsedResponse, statusText, jqXhr) {
 			console.log("Found command: " + jqXhr.responseText);
-			cmd = jQuery.parseJSON(jqXhr.responseText); 
-			$("#longDescription").text(cmd.longDescription);
+			cmd = jQuery.parseJSON(jqXhr.responseText);
+			addDescription(cmd);
 			
 			clearAllArgs();
 			
@@ -58,7 +58,10 @@ function openCmdDialog(qualifiedName, name) {
 				addIntArgs(cmd.integerParameters);
 			}
 			if(cmd.longParameters!= null) {
-				// TODO impl
+				addLongArgs(cmd.longParameters);
+			}
+			if(cmd.stringParameters!= null) {
+				addStringArgs(cmd.stringParameters);
 			}
 			if(cmd.floatParameters!= null) {
 				// TODO impl
@@ -67,9 +70,6 @@ function openCmdDialog(qualifiedName, name) {
 				// TODO impl
 			}
 			if(cmd.bigDecimalParameters!= null) {
-				// TODO impl
-			}
-			if(cmd.stringParameters!= null) {
 				// TODO impl
 			}
 			if(cmd.rawParameters!= null) {
@@ -88,9 +88,46 @@ function clearAllArgs() {
 function addIntArgs(intArgs) {
 	var html;
 	$.each(intArgs, function(i) {
-		console.log("Adding arg" + intArgs[i].name);
-		html = "<li>" + intArgs[i].name + "</li>"; 
-		$("#cmdArguments").append(html);
+		if(!intArgs[i].readOnly) {
+			console.log("Adding int arg" + intArgs[i].name);
+			html = "<li>" + intArgs[i].name + " <input type=test name=value/></li>"; 
+			$("#cmdArguments").append(html);
+		}
 	});
 }
+
+function addLongArgs(longArgs) {
+	var html;
+	$.each(longArgs, function(i) {
+		if(!longArgs[i].readOnly) {
+			console.log("Adding long arg" + longArgs[i].name);
+			html = "<li>" + longArgs[i].name + " <input type=test name=value/></li>";
+			$("#cmdArguments").append(html);
+		}
+	});
+}
+
+function addStringArgs(stringArgs) {
+	var html;
+	$.each(stringArgs, function(i) {
+		if(!stringArgs[i].readOnly) {
+			console.log("Adding string arg" + stringArgs[i].name);
+			html = "<li>" + stringArgs[i].name + " <input type=test name=value/></li>";
+			$("#cmdArguments").append(html);
+		}
+	});
+}
+
+function addDescription() {
+	if(cmd.lognDescription != null) {
+		$("#description").text(cmd.longDescription);
+	}
+	else if(cmd.shortDescription != null){
+		$("#description").text(cmd.shortDescription);
+	}
+	else {
+		$("#description").text("No description for this command is defined");
+	}
+}
+
 

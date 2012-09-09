@@ -35,6 +35,7 @@ import org.hbird.core.generatedcode.xtce.IntegerArgumentType;
 import org.hbird.core.generatedcode.xtce.IntegerParameterType;
 import org.hbird.core.generatedcode.xtce.MetaCommand;
 import org.hbird.core.generatedcode.xtce.MetaCommandSet;
+import org.hbird.core.generatedcode.xtce.ParameterProperties;
 import org.hbird.core.generatedcode.xtce.ParameterRefEntry;
 import org.hbird.core.generatedcode.xtce.ParameterSetTypeItem;
 import org.hbird.core.generatedcode.xtce.ParameterTypeSet;
@@ -52,6 +53,7 @@ import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidSpaceSystemDefinitionException;
 import org.hbird.core.spacesystemmodel.parameters.HummingbirdParameter;
+import org.hbird.core.spacesystemmodel.parameters.ProtectedValueParameter;
 import org.hbird.core.spacesystemmodel.tmtcgroups.HummingbirdCommandGroup;
 import org.hbird.core.spacesystemmodel.tmtcgroups.HummingbirdParameterGroup;
 import org.hbird.core.xtce.exceptions.UnsupportedXtceConstructException;
@@ -234,6 +236,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	 */
 	private final void createAllTcArgumentTypes(final CommandMetaData commandMetaData) throws InvalidSpaceSystemDefinitionException {
 		final ParameterTypeSet parameterTypeSet = commandMetaData.getParameterTypeSet();
+
 		if(parameterTypeSet == null) {
 			LOG.error("Hbird only supports ParameterTypeSets in CommandMetaData. Check your XTCE file: " + spaceSystemModelFilename);
 			throw new InvalidSpaceSystemDefinitionException("Hbird only supports ParameterTypeSets in CommandMetaData. Check your XTCE file: " + spaceSystemModelFilename);
@@ -243,7 +246,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 		for (int parameterTypeIndex = 0; parameterTypeIndex < numberOfParameterTypes; ++parameterTypeIndex) {
 			final ParameterTypeSetTypeItem item = parameterTypeSet.getParameterTypeSetTypeItem(parameterTypeIndex);
-			final String name = checkParameterType(item);
+			final String name = getParameterName(item);
 			xtceTcParameterTypes.put(name, item);
 		}
 	}
@@ -259,7 +262,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 		for (int parameterTypeIndex = 0; parameterTypeIndex < numberOfParameterTypes; ++parameterTypeIndex) {
 			final ParameterTypeSetTypeItem item = telemetryMetaData.getParameterTypeSet().getParameterTypeSetTypeItem(parameterTypeIndex);
-			final String name = checkParameterType(item);
+			final String name = getParameterName(item);
 			xtceTmParameterTypes.put(name, item);
 		}
 	}
@@ -365,6 +368,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		// @formatter:off
 		for (int i = 0; i < numberOfTcArguments; ++i) {
 			final ParameterSetTypeItem xtceArgument = commandMetaData.getParameterSet().getParameterSetTypeItem(i);
+			final ParameterProperties paramProps = xtceArgument.getParameter().getParameterProperties();
 			final String parameterTypeRef = xtceArgument.getParameter().getParameterTypeRef();
 			final ParameterTypeSetTypeItem xtceType = xtceTcParameterTypes.get(parameterTypeRef);
 
@@ -429,6 +433,27 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 						throw new InvalidSpaceSystemDefinitionException("Could not add command argument " + type.getName() + " because it has an invalid bit size for float type.");
 				}
 			}
+			// string types
+			else if(xtceType.getStringParameterType() != null) {
+				final StringParameterType type = xtceType.getStringParameterType();
+				Parameter<String> stringParameter;
+				if(paramProps.isReadOnly()) {
+					final String initialValue = type.getInitialValue();
+					if(initialValue != null) {
+						stringParameter = new ProtectedValueParameter<String>(qualifiedName, name, shortDescription, longDescription, initialValue);
+					}
+					else {
+						throw new InvalidSpaceSystemDefinitionException("Hbird only supports read only parameter or argument types when an initial valu is supplied");
+					}
+				}
+				else {
+					stringParameter = new HummingbirdParameter<String>(qualifiedName, name, shortDescription, longDescription);
+				}
+				if (LOG.isDebugEnabled()) {
+					LOG.debug("Adding String argument " + stringParameter.getName());
+				}
+				stringArguments.put(stringParameter.getQualifiedName(), stringParameter);
+			}
 			else {
 				throw new InvalidSpaceSystemDefinitionException("Unknown or unsupported TC argument (parameter) type: " + parameterTypeRef
 						+ ". A parameter references an undeclared TC argument (parameter) type in the XTCE space system definition file.");
@@ -485,9 +510,9 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			// @formatter:off
 			final CommandGroup parameterGroup =
 					new HummingbirdCommandGroup(qualifiedNamePrefix + xtceContainer.getName(),
-												xtceContainer.getName(),
-												xtceContainer.getShortDescription(),
-												xtceContainer.getLongDescription());
+							xtceContainer.getName(),
+							xtceContainer.getShortDescription(),
+							xtceContainer.getLongDescription());
 			// @formatter:on
 
 			tcGroups.put(parameterGroup.getQualifiedName(), parameterGroup);
@@ -767,7 +792,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	 * @return
 	 * @throws InvalidSpaceSystemDefinitionException
 	 */
-	private static String checkParameterType(final ParameterTypeSetTypeItem item) throws InvalidSpaceSystemDefinitionException {
+	private static String getParameterName(final ParameterTypeSetTypeItem item) throws InvalidSpaceSystemDefinitionException {
 		String name = null;
 
 		// If it's an integer parameter..

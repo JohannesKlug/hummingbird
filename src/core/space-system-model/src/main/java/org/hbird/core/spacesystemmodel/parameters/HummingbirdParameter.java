@@ -20,7 +20,7 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	private final String shortDescription;
 	private final String longDescription;
 	private long receivedTime;
-	private T value;
+	protected T value;
 
 	/**
 	 *
@@ -37,6 +37,7 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 		this.shortDescription = shortDescription;
 		this.longDescription = longDescription;
 	}
+
 
 	@Override
 	public String getName() {
@@ -64,19 +65,6 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	}
 
 	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder();
-		builder.append("HummingbirdParameter [name=");
-		builder.append(name);
-		builder.append(", value=");
-		builder.append(value);
-		builder.append(", shortDescription=");
-		builder.append(shortDescription);
-		builder.append("]");
-		return builder.toString();
-	}
-
-	@Override
 	public String getQualifiedName() {
 		return this.qualifiedName;
 	}
@@ -89,6 +77,19 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	@Override
 	public void setReceivedTime(final long timestamp) {
 		this.receivedTime = timestamp;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder();
+		builder.append("HummingbirdParameter [name=");
+		builder.append(name);
+		builder.append(", value=");
+		builder.append(value);
+		builder.append(", shortDescription=");
+		builder.append(shortDescription);
+		builder.append("]");
+		return builder.toString();
 	}
 
 	/*
@@ -170,6 +171,13 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 			return false;
 		}
 		return true;
+	}
+
+
+
+	@Override
+	public boolean isReadOnly() {
+		return false;
 	}
 
 }

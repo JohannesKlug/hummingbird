@@ -40,7 +40,7 @@
 		<surefire-plugin.version>2.7.1</surefire-plugin.version>
 		<commons-io.version>2.0.1</commons-io.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
-		<cloning.version>1.7.4</cloning.version>
+		<cloning.version>1.8.2</cloning.version>
 		<guava.version>11.0</guava.version>
 		<mockito.version>1.9.5-rc1</mockito.version>
 	</properties>
