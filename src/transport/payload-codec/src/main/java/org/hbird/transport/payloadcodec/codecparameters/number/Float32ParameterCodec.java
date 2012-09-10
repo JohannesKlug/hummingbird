@@ -3,8 +3,8 @@ package org.hbird.transport.payloadcodec.codecparameters.number;
 import java.util.BitSet;
 
 import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +40,7 @@ public class Float32ParameterCodec extends CodecParameter<Float> {
 
 
 	@Override
-	public Byte[] encodeToByteArray(final Byte[] targetBytes, final int offset) {
+	public byte[] encodeToByteArray(final byte[] targetBytes, final int offset) {
 		// TODO Auto-generated method stub
 		return null;
 	}

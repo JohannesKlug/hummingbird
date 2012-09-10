@@ -6,11 +6,14 @@ import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Charsets;
 
 public class AsciiStringCodecParameter extends CodecParameter<String> {
 	private static final long serialVersionUID = -1408848190073495601L;
+	private final static Logger LOG = LoggerFactory.getLogger(AsciiStringCodecParameter.class);
 
 	public AsciiStringCodecParameter(final Parameter<String> hostParameter, final Encoding encoding) {
 		super(hostParameter, encoding);
@@ -19,7 +22,6 @@ public class AsciiStringCodecParameter extends CodecParameter<String> {
 	@Override
 	public void decode(final byte[] inBytes, final int offset) {
 		// TODO Auto-generated method stub
-		//
 		throw new UnsupportedOperationException();
 	}
 
@@ -31,16 +33,18 @@ public class AsciiStringCodecParameter extends CodecParameter<String> {
 	}
 
 	@Override
-	public Byte[] encodeToByteArray(final Byte[] targetBytes, final int offset) {
-		// TODO Auto-generated method stub
-		//return null;
-		throw new UnsupportedOperationException();
+	public byte[] encodeToByteArray(final byte[] targetBytes, final int offset) {
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Encoding value: " + getValue() + " to byte array at offset " + offset);
+		}
+		final byte[] bytes = this.getValue().getBytes(Charsets.US_ASCII);
+		System.arraycopy(bytes, 0, targetBytes, offset, encoding.getSizeInBits() / Byte.SIZE);
+		return targetBytes;
 	}
 
 	@Override
 	public BitSet encodeToBitSet(final BitSet targetBitSet, final int offset) {
 		// TODO Auto-generated method stub
-		//return null;
 		throw new UnsupportedOperationException();
 	}
 

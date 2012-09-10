@@ -31,7 +31,7 @@
 	</logger>
 	
 	<logger name="org.hbird.transport.payloadcodec">
-		<level value="ERROR"></level>
+		<level value="DEBUG"></level>
 	</logger>
 	
 	

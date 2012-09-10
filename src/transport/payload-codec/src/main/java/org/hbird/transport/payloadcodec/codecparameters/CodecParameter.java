@@ -44,7 +44,7 @@ public abstract class CodecParameter<T> implements Parameter<T> {
 	 * @param offset
 	 * @return
 	 */
-	public abstract Byte[] encodeToByteArray(Byte[] targetBytes, int offset);
+	public abstract byte[] encodeToByteArray(byte[] targetBytes, int offset);
 
 	/**
 	 * TODO javadoc

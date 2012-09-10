@@ -5,8 +5,8 @@ import java.util.BitSet;
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.commons.util.BytesUtility;
-import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +34,7 @@ public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer>
 			LOG.debug("Extracting " + encoding.getSizeInBits() + " bit int value from " + BitSetUtility.binDump(inBitset));
 		}
 
-		BitSet actualParameter = inBitset.get(0, encoding.getSizeInBits());
+		final BitSet actualParameter = inBitset.get(0, encoding.getSizeInBits());
 
 		final byte[] byteArray = BitSetUtility.toByteArray(actualParameter, encoding.getSizeInBits());
 		final Integer output = Integer.valueOf(BytesUtility.combine(byteArray, encoding.getSizeInBits(), true).intValue());
@@ -43,15 +43,15 @@ public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer>
 	}
 
 	@Override
-	public Byte[] encodeToByteArray(final Byte[] targetBytes, final int offset) {
+	public byte[] encodeToByteArray(final byte[] targetBytes, final int offset) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public BitSet encodeToBitSet(final BitSet out, final int originalOffset) {
-		BitSet result = out;
-		Integer value = getValue();
+		final BitSet result = out;
+		final Integer value = getValue();
 		int offset = originalOffset;
 
 		// TODO this method

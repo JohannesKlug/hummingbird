@@ -5,8 +5,8 @@ import java.util.BitSet;
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.commons.util.BytesUtility;
-import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -104,7 +104,7 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 
 	@Override
 	public void decode(final BitSet inBitset, final int offset) {
-		BitSet actualParameter = inBitset.get(offset, offset + encoding.getSizeInBits());
+		final BitSet actualParameter = inBitset.get(offset, offset + encoding.getSizeInBits());
 
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Extracting " + encoding.getSizeInBits() + " bit int value from " + BitSetUtility.binDump(actualParameter));
@@ -140,7 +140,7 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 		// setting up the number in reverse order
 		int mask = 1;
 
-		int encodingOffset = offset + encoding.getSizeInBits() - 1;
+		final int encodingOffset = offset + encoding.getSizeInBits() - 1;
 
 		for (int i = 0; i < encoding.getSizeInBits(); i++, mask <<= 1) {
 			if ((mask & absValue) > 0) {
@@ -156,7 +156,7 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 	}
 
 	@Override
-	public Byte[] encodeToByteArray(final Byte[] targetBytes, final int offset) {
+	public byte[] encodeToByteArray(final byte[] targetBytes, final int offset) {
 		throw new UnsupportedOperationException();
 	}
 }

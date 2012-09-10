@@ -3,6 +3,7 @@ package org.hbird.transport.payloadcodec.codecparameters.string;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.io.UnsupportedEncodingException;
 import java.util.BitSet;
@@ -32,7 +33,7 @@ public class AsciiStringCodecTest {
 	Parameter<String> mockParameter;
 
 	public AsciiStringCodecTest() throws UnsupportedEncodingException {
-		TEST_STRING = "gaben";
+		TEST_STRING = "gaben"; // Lord of Steam.
 		TEST_STRING_BYTES = TEST_STRING.getBytes(Charsets.US_ASCII);
 		TEST_STRING_LENGTH = TEST_STRING_BYTES.length * Byte.SIZE;
 		TEST_STRING_BITSET = BitSetUtility.fromByteArray(TEST_STRING_BYTES);
@@ -57,10 +58,17 @@ public class AsciiStringCodecTest {
 		assertEquals(TEST_STRING, argument.getValue());
 	}
 
-	@Ignore // Not yet implemented in AsciiStringCodecParameter
 	@Test
 	public void testEncodeToByteArray() {
-		fail("Not yet implemented");
+		final Encoding enc = new Encoding(TEST_STRING_LENGTH, BinaryRepresentation.ASCII);
+		final AsciiStringCodecParameter codec = new AsciiStringCodecParameter(mockParameter, enc);
+
+		when(mockParameter.getValue()).thenReturn("gaben");
+
+		byte[] result = new byte[TEST_STRING_BYTES.length];
+		result = codec.encodeToByteArray(result, 0);
+
+		System.out.println(new String(result, Charsets.US_ASCII));
 	}
 
 	@Ignore // Not yet implemented in AsciiStringCodecParameter

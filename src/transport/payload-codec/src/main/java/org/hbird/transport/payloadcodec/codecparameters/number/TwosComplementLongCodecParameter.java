@@ -5,8 +5,8 @@ import java.util.BitSet;
 
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.util.BitSetUtility;
-import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,14 +61,14 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 
 
 	@Override
-	public Byte[] encodeToByteArray(final Byte[] targetBytes, final int offset) {
+	public byte[] encodeToByteArray(final byte[] targetBytes, final int offset) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public BitSet encodeToBitSet(final BitSet out, final int offset) {
-		long longValue = getValue();
-		int endLocation = offset + encoding.getSizeInBits() - 1;
+		final long longValue = getValue();
+		final int endLocation = offset + encoding.getSizeInBits() - 1;
 
 		// setting all bits to zero
 		out.clear(offset, endLocation);
