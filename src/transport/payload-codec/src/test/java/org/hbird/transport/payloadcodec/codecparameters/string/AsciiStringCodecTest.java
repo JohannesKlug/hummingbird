@@ -18,11 +18,14 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Charsets;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AsciiStringCodecTest {
+	private final static Logger LOG = LoggerFactory.getLogger(AsciiStringCodecTest.class);
 
 	private final String TEST_STRING;
 	private final byte[] TEST_STRING_BYTES;
@@ -68,19 +71,23 @@ public class AsciiStringCodecTest {
 		byte[] result = new byte[TEST_STRING_BYTES.length];
 		result = codec.encodeToByteArray(result, 0);
 
-		System.out.println(new String(result, Charsets.US_ASCII));
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Encoding result = " + new String(result, Charsets.US_ASCII));
+		}
 	}
 
-	@Ignore // Not yet implemented in AsciiStringCodecParameter
 	@Test
 	public void testEncodeToBitSet() {
-		fail("Not yet implemented");
-	}
+		final Encoding enc = new Encoding(TEST_STRING_LENGTH, BinaryRepresentation.ASCII);
+		final AsciiStringCodecParameter codec = new AsciiStringCodecParameter(mockParameter, enc);
 
-	@Ignore // Not yet implemented in AsciiStringCodecParameter
-	@Test
-	public void testAsciiStringCodec() {
-		fail("Not yet implemented");
-	}
+		when(mockParameter.getValue()).thenReturn("gaben");
 
+		BitSet result = new BitSet(TEST_STRING_BYTES.length * Byte.SIZE);
+		result = codec.encodeToBitSet(result, 0);
+
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Encoding result = " + new String(BitSetUtility.toByteArray(result, enc.getSizeInBits()), Charsets.US_ASCII));
+		}
+	}
 }
