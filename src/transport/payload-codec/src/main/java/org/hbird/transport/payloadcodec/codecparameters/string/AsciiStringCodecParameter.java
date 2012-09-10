@@ -1,5 +1,6 @@
 package org.hbird.transport.payloadcodec.codecparameters.string;
 
+import java.util.Arrays;
 import java.util.BitSet;
 
 import org.hbird.core.commons.tmtc.Parameter;
@@ -21,8 +22,9 @@ public class AsciiStringCodecParameter extends CodecParameter<String> {
 
 	@Override
 	public void decode(final byte[] inBytes, final int offset) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		// TODO from offset to encoding length or simply to end of array?
+		final byte[] actualBytes = Arrays.copyOfRange(inBytes, offset, encoding.getSizeInBits() / Byte.SIZE);
+		this.setValue(new String(actualBytes, Charsets.US_ASCII));
 	}
 
 	@Override

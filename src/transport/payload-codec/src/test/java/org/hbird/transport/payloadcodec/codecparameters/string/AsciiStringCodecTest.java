@@ -1,7 +1,6 @@
 package org.hbird.transport.payloadcodec.codecparameters.string;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -12,7 +11,6 @@ import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -42,11 +40,16 @@ public class AsciiStringCodecTest {
 		TEST_STRING_BITSET = BitSetUtility.fromByteArray(TEST_STRING_BYTES);
 	}
 
-
-	@Ignore // Not yet implemented in AsciiStringCodecParameter
 	@Test
 	public void testDecodeByteArrayInt() {
-		fail("Not yet implemented");
+		final ArgumentCaptor<String> argument = ArgumentCaptor.forClass(String.class);
+
+		final Encoding enc = new Encoding(TEST_STRING_LENGTH, BinaryRepresentation.ASCII);
+		final AsciiStringCodecParameter codec = new AsciiStringCodecParameter(mockParameter, enc);
+		codec.decode(TEST_STRING_BYTES, 0);
+
+		verify(mockParameter).setValue(argument.capture());
+		assertEquals(TEST_STRING, argument.getValue());
 	}
 
 	@Test
