@@ -30,8 +30,9 @@
 		<level value="WARN" />
 	</logger>
 	
+	<!-- Please don't commit this on DEBUG or less. There are some big iteration tests that can cause a LOT of spam. -->
 	<logger name="org.hbird.transport.payloadcodec">
-		<level value="DEBUG"></level>
+		<level value="INFO"></level>
 	</logger>
 	
 	
