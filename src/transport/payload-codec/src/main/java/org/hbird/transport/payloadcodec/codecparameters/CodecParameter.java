@@ -24,12 +24,34 @@ public abstract class CodecParameter<T> implements Parameter<T> {
 		this.encoding = encoding;
 	}
 
+	/**
+	 * TODO Javadoc
+	 * @param inBytes
+	 * @param offset
+	 */
 	public abstract void decode(byte[] inBytes, int offset);
 
+	/**
+	 * TODO Javadoc
+	 * @param inBitset
+	 * @param offset
+	 */
 	public abstract void decode(BitSet inBitset, int offset);
 
+	/**
+	 * TODO javadoc
+	 * @param targetBytes
+	 * @param offset
+	 * @return
+	 */
 	public abstract Byte[] encodeToByteArray(Byte[] targetBytes, int offset);
 
+	/**
+	 * TODO javadoc
+	 * @param targetBitSet
+	 * @param offset
+	 * @return
+	 */
 	public abstract BitSet encodeToBitSet(BitSet targetBitSet, int offset);
 
 	// Pass through methods which the Codec Parameter does not need to alter in it's decoration.
@@ -67,7 +89,7 @@ public abstract class CodecParameter<T> implements Parameter<T> {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
+		final StringBuilder builder = new StringBuilder();
 		builder.append("CodecParameter [parameter=");
 		builder.append(parameter);
 		builder.append("]");
@@ -88,4 +110,8 @@ public abstract class CodecParameter<T> implements Parameter<T> {
 		this.parameter.setReceivedTime(timestamp);
 	}
 
+	@Override
+	public boolean isReadOnly() {
+		return this.parameter.isReadOnly();
+	}
 }
