@@ -24,19 +24,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class InMemoryPayloadCodec implements PayloadCodec {
-
 	private static final Logger LOG = LoggerFactory.getLogger(InMemoryPayloadCodec.class);
 
-	private Map<String, ParameterGroup> parameterGroups = null;
+	protected Map<String, ParameterGroup> parameterGroups = null;
 	private Map<String, ParameterGroup> codecAwareParameterGroups = null;
-	private final Map<String, Encoding> encodings;
-	private final Map<String, List<String>> restrictions;
+	protected final Map<String, Encoding> encodings;
+	protected final Map<String, List<String>> restrictions;
 
 
 	public InMemoryPayloadCodec(final Map<String, ParameterGroup> parameterGroups, final Map<String, Encoding> encodings, final Map<String, List<String>> restrictions) {
 		this.parameterGroups = parameterGroups;
 		this.encodings = encodings;
 		this.restrictions = restrictions;
+
+		if(LOG.isTraceEnabled()) {
+			LOG.trace("Constructed with " + parameterGroups.size() + " parameterGroups, " + encodings.size() + " encodings, and " + restrictions.size() + " restrictions");
+		}
 
 		final ParameterGroupCodecDecorator decorator = new ParameterGroupCodecDecorator(this.encodings);
 

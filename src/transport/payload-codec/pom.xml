@@ -100,6 +100,11 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.hbird.core</groupId>
+			<artifactId>space-system-publisher</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<description>Generic payload is capable if decoding and encoding between raw data and telemetry/telecommands using data retrieved frmo a space system model.</description>
 </project>
