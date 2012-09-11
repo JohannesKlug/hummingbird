@@ -23,7 +23,7 @@
                 <configuration>
                     <instructions>
                         <Export-Package>
-                        	org.hbird.core.osgi.spacesystempublisher;version=${project.version}
+                        	org.hbird.osgi.publisher;version=${project.version}
                         </Export-Package>
                         <Import-Package>
                         	*,
