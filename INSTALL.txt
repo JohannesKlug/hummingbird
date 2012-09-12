@@ -1,6 +1,6 @@
 You must have Maven setup for your OS.
 
-Tested on Windows 7 and Windows 8
+Tested on Windows 7 x64, Windows 8 x64, Linux x64 (various distros). It's Java so it shouldn't matter.
 
 KARAF setup
 ---------------------------
