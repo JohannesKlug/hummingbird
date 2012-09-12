@@ -1,6 +1,7 @@
 package org.hbird.transport.payloadcodec.codecparameters.string;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -77,6 +78,8 @@ public class AsciiStringCodecTest {
 		if(LOG.isDebugEnabled()) {
 			LOG.debug("Encoding result = " + new String(result, Charsets.US_ASCII));
 		}
+		
+		assertArrayEquals(TEST_STRING_BYTES, result);
 	}
 
 	@Test
@@ -92,5 +95,8 @@ public class AsciiStringCodecTest {
 		if(LOG.isDebugEnabled()) {
 			LOG.debug("Encoding result = " + new String(BitSetUtility.toByteArray(result, enc.getSizeInBits()), Charsets.US_ASCII));
 		}
+		
+		assertEquals(TEST_STRING_BITSET, result);
+		
 	}
 }
