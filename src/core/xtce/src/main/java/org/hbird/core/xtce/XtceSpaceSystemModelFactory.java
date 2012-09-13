@@ -433,6 +433,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 						throw new InvalidSpaceSystemDefinitionException("Could not add command argument " + type.getName() + " because it has an invalid bit size for float type.");
 				}
 			}
+
 			// string types
 			else if(xtceType.getStringParameterType() != null) {
 				final StringParameterType type = xtceType.getStringParameterType();
@@ -453,6 +454,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 					LOG.debug("Adding String argument " + stringParameter.getName());
 				}
 				stringArguments.put(stringParameter.getQualifiedName(), stringParameter);
+				encodings.put(stringParameter.getQualifiedName(), createXtceStringEncoding(type));
 			}
 			else {
 				throw new InvalidSpaceSystemDefinitionException("Unknown or unsupported TC argument (parameter) type: " + parameterTypeRef
