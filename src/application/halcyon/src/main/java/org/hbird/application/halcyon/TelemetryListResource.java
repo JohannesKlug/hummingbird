@@ -1,6 +1,5 @@
 package org.hbird.application.halcyon;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -25,9 +24,9 @@ import com.sun.jersey.spi.resource.Singleton;
 @Singleton
 @Path("/telemetrylist")
 public class TelemetryListResource extends OsgiReady {
-	private static final String PUBLISHER_SERVICE_NAME = "org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher";
-
 	private final static Logger LOG = LoggerFactory.getLogger(TelemetryListResource.class);
+
+	private static final String PUBLISHER_SERVICE_NAME = "org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher";
 
 	private List<ParameterGroup> parameterGroups;
 

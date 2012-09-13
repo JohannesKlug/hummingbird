@@ -105,6 +105,12 @@
 			<version>0.6.6</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-websocket</artifactId>
+			<version>7.5.4.v20111024</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 	
 	<repositories>
@@ -161,11 +167,12 @@
                         	org.codehaus.jackson.xc,
                         	org.osgi.service.blueprint.container,
                         	com.sun.jersey.spi.spring.container.servlet,
+                        	org.eclipse.jetty.websocket,
                         	*
                         </Import-Package>
                         <Webapp-Context>hbird</Webapp-Context>
                         <Web-ContextPath>hbird</Web-ContextPath>
-                        <Bundle-Activator>org.hbird.application.halcyon.WebAppContextListener</Bundle-Activator>
+                        <Bundle-Activator>org.hbird.application.halcyon.HalcyonServletContextListener</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>

@@ -51,7 +51,15 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventAdmin;
 
-public class WebAppContextListener implements BundleActivator, ServletContextListener {
+/**
+ * Links the servlet context to the OSGI event services; it simply registers OSGi events when
+ * the servlet context calls back on the listener. since it's a {@link ServletContextListener}
+ * this happens when the context is initialised and destroyed.
+ * 
+ * @author Mark Doyle
+ *
+ */
+public class HalcyonServletContextListener implements BundleActivator, ServletContextListener {
 
 	static EventAdmin eventAdmin;
 
@@ -63,13 +71,13 @@ public class WebAppContextListener implements BundleActivator, ServletContextLis
 	}
 
 	synchronized static void setEventAdmin(final EventAdmin eventAdmin) {
-		WebAppContextListener.eventAdmin = eventAdmin;
+		HalcyonServletContextListener.eventAdmin = eventAdmin;
 	}
 
 	@Override
 	public void contextInitialized(final ServletContextEvent sce) {
 		if (getEventAdmin() != null) {
-			getEventAdmin().sendEvent(new Event("jersey/test/DEPLOYED", new HashMap<String, String>() {
+			getEventAdmin().sendEvent(new Event("jersey/halcyon/DEPLOYED", new HashMap<String, String>() {
 				private static final long serialVersionUID = 1L;
 				{
 					put("context-path", sce.getServletContext().getContextPath());
@@ -81,7 +89,7 @@ public class WebAppContextListener implements BundleActivator, ServletContextLis
 	@Override
 	public void contextDestroyed(final ServletContextEvent sce) {
 		if (getEventAdmin() != null) {
-			getEventAdmin().sendEvent(new Event("jersey/test/UNDEPLOYED", new HashMap<String, String>() {
+			getEventAdmin().sendEvent(new Event("jersey/halcyon/UNDEPLOYED", new HashMap<String, String>() {
 				private static final long serialVersionUID = 1L;
 				{
 					put("context-path", sce.getServletContext().getContextPath());
@@ -92,7 +100,7 @@ public class WebAppContextListener implements BundleActivator, ServletContextLis
 
 	@Override
 	public void start(final BundleContext context) throws Exception {
-		WebAppContextListener.bundleContext = context;
+		HalcyonServletContextListener.bundleContext = context;
 		eventAdminServiceRef = bundleContext.getServiceReference(EventAdmin.class.getName());
 		if (eventAdminServiceRef != null) {
 			setEventAdmin((EventAdmin) bundleContext.getService(eventAdminServiceRef));
@@ -108,6 +116,6 @@ public class WebAppContextListener implements BundleActivator, ServletContextLis
 	}
 
 	public static BundleContext getBundleContext() {
-		return WebAppContextListener.bundleContext;
+		return HalcyonServletContextListener.bundleContext;
 	}
 }

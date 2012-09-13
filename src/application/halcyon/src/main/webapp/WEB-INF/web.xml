@@ -12,20 +12,11 @@
 	<display-name>Halcyon</display-name>
 		 
 	
-<!-- 	<context-param> -->
-<!-- 		<param-name>contextConfigLocation</param-name> -->
-<!-- 		<param-value>classpath:webAppContext.xml</param-value> -->
-<!-- 		<param-value>classpath:WEB-INF/classes/spring/webAppContext.xml</param-value> -->
-<!-- 	</context-param> -->
-	
 	<listener>
-		<listener-class>org.hbird.application.halcyon.WebAppContextListener</listener-class>
+		<listener-class>org.hbird.application.halcyon.HalcyonServletContextListener</listener-class>
 	</listener>
 	
 	<servlet>
-<!-- 		<servlet-name>Hbird-jersey-spring-servlet</servlet-name> -->
-<!--    		<servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class> -->
-	
 		<servlet-name>hbird-jersey-servlet</servlet-name>
 		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
 		
@@ -51,9 +42,19 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
+	<servlet>
+		<servlet-name>hbird-jetty-tm-websocket</servlet-name>
+		<servlet-class>org.hbird.application.halcyon.servlets.LiveTmWebSocketServlet</servlet-class>
+	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>hbird-jersey-servlet</servlet-name>
 		<url-pattern>/halcyon/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>hbird-jetty-tm-websocket</servlet-name>
+		<url-pattern>halcyon/tmsock</url-pattern>
 	</servlet-mapping>
 	
 </web-app>
