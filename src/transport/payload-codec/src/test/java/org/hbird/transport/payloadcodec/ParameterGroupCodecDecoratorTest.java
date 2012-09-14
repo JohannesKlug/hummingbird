@@ -25,6 +25,7 @@ import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.core.spacesystemmodel.exceptions.ParameterNotInGroupException;
 import org.hbird.core.spacesystemmodel.exceptions.ParameterNotInModelException;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
+import org.hbird.core.spacesystemmodel.tmtcgroups.HummingbirdParameterGroup;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +42,6 @@ public class ParameterGroupCodecDecoratorTest {
 
 	private static Map<String, Encoding> mockEncodings;
 
-	@Mock
 	private ParameterGroup mockGroup;
 
 	@Mock
@@ -90,7 +90,6 @@ public class ParameterGroupCodecDecoratorTest {
 	}
 
 	@Test
-	// FIXME How do we test this with Mockito?
 	public void testDecorateStringContainingParameterGroup() throws NoEncodingException, UnsupportedParameterEncodingException,
 			UnknownParameterEncodingException, UnexpectedParameterTypeException {
 
@@ -98,17 +97,30 @@ public class ParameterGroupCodecDecoratorTest {
 
 		// Setup
 		Map<String, ParameterGroup> parameterGroups = new HashMap<String, ParameterGroup>(1);
+		mockGroup = new HummingbirdParameterGroup("Mock Group", "MG", "", "");
 		parameterGroups.put("mockGroup", mockGroup);
 		Map<String, Parameter<String>> stringParameters = new HashMap<String, Parameter<String>>();
 		stringParameters.put("mockStringParam", mockStringParameter);
 
 		when(mockModel.getParameterGroups()).thenReturn(parameterGroups);
-		when(mockGroup.getStringParameters()).thenReturn(stringParameters);
 		when(mockStringParameter.getQualifiedName()).thenReturn(MOCK_STRING_PARAMETER_NAME);
 
+		mockGroup.addStringParameter(mockStringParameter);
 
 		Map<String, ParameterGroup> codecAwareParameterGroups = decorator.decorateParameterGroups(mockModel.getParameterGroups());
 
+		for (ParameterGroup pg : codecAwareParameterGroups.values()) {
+			Map<String, Parameter<String>> decoratedStringParameters = pg.getStringParameters();
+			if (decoratedStringParameters != null) {
+				for (Parameter<String> p : decoratedStringParameters.values()) {
+					if (!(p instanceof CodecParameter<?>)) {
+						fail("Parameter " + p.getQualifiedName() + " was not decorated by the codec decorator");
+					}
+					CodecParameter<String> cp = (CodecParameter<String>) p;
+					assertNotNull(cp);
+				}
+			}
+		}
 
 	}
 
