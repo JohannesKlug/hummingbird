@@ -102,8 +102,8 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	private final Map<String, Parameter<Byte[]>> rawArguments = new LinkedHashMap<String, Parameter<Byte[]>>();
 
 	/**
-	 * This contains all the parameter groups (layouts if you like) defined in XTCE. It's contents are injected into the model
-	 * this factory creates.
+	 * This contains all the parameter groups (layouts if you like) defined in XTCE. It's contents are injected into the
+	 * model this factory creates.
 	 */
 	private final Map<String, ParameterGroup> tmParameterGroups = new HashMap<String, ParameterGroup>();
 	private final Map<String, CommandGroup> tcGroups = new HashMap<String, CommandGroup>();
@@ -129,7 +129,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	@Override
 	public final SpaceSystemModel createSpaceSystemModel() throws InvalidSpaceSystemDefinitionException {
 
-		if(spaceSystemModelFilename == null) {
+		if (spaceSystemModelFilename == null) {
 			LOG.error("No path to xtce file set");
 			throw new InvalidSpaceSystemDefinitionException("No path to xtce file set");
 		}
@@ -143,11 +143,10 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		restrictions.clear();
 		encodings.clear();
 
-
 		try {
 			spaceSystem = unmarshallXtceXmlSpaceSystem(spaceSystemModelFilename);
 		}
-		catch (final Exception e){
+		catch (final Exception e) {
 			throw new InvalidSpaceSystemDefinitionException(e);
 		}
 
@@ -160,15 +159,14 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		catch (final NumberFormatException e1) {
 			LOG.error(e1.toString());
 			// TODO - 27.03.2012 kimmell - replace with appropriate exception
-			//			System.exit(-1);
+			// System.exit(-1);
 		}
 		catch (final InvalidParameterTypeException e1) {
 			e1.printStackTrace();
 			LOG.error(e1.toString());
 			// TODO - 27.03.2012 kimmell - replace with appropriate exception
-			//			System.exit(-1);
+			// System.exit(-1);
 		}
-
 
 		try {
 			injectConstructsIntoModel();
@@ -189,13 +187,15 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 	/**
 	 * Creates the generated class model from the XML file.
+	 *
 	 * @param spacesystemmodelFilename
 	 * @return
 	 * @throws FileNotFoundException
 	 * @throws ValidationException
 	 * @throws MarshalException
 	 */
-	private final static SpaceSystem unmarshallXtceXmlSpaceSystem(final String spacesystemmodelFilename) throws MarshalException, ValidationException, FileNotFoundException {
+	private final static SpaceSystem unmarshallXtceXmlSpaceSystem(final String spacesystemmodelFilename) throws MarshalException, ValidationException,
+			FileNotFoundException {
 		SpaceSystem spaceSystem = null;
 		final XMLContext context = new XMLContext();
 
@@ -227,19 +227,20 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		populateCommandGroups();
 	}
 
-
 	/**
 	 * Bit nasty we have another method but we are working with XML. The generated code creates two separate classes
 	 * TelemetryMetaData and CommandMetaData.
+	 *
 	 * @param commandMetaData
 	 * @throws InvalidSpaceSystemDefinitionException
 	 */
 	private final void createAllTcArgumentTypes(final CommandMetaData commandMetaData) throws InvalidSpaceSystemDefinitionException {
 		final ParameterTypeSet parameterTypeSet = commandMetaData.getParameterTypeSet();
 
-		if(parameterTypeSet == null) {
+		if (parameterTypeSet == null) {
 			LOG.error("Hbird only supports ParameterTypeSets in CommandMetaData. Check your XTCE file: " + spaceSystemModelFilename);
-			throw new InvalidSpaceSystemDefinitionException("Hbird only supports ParameterTypeSets in CommandMetaData. Check your XTCE file: " + spaceSystemModelFilename);
+			throw new InvalidSpaceSystemDefinitionException("Hbird only supports ParameterTypeSets in CommandMetaData. Check your XTCE file: "
+					+ spaceSystemModelFilename);
 		}
 
 		final int numberOfParameterTypes = parameterTypeSet.getParameterTypeSetTypeItemCount();
@@ -374,8 +375,10 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 			// If it's an integer type...
 			if (xtceType == null) {
-				throw new InvalidSpaceSystemDefinitionException("Unknown TC argument (parameter) type: " + parameterTypeRef
-						+ ". A parameter references an undeclared TC argument (parameter) type in the XTCE space system definition file.");
+				String msg = "Unknown TC argument (parameter) type: " + parameterTypeRef
+						+ ". A parameter references an undeclared TC argument (parameter) type in the XTCE space system definition file.";
+				LOG.error(msg);
+				throw new InvalidSpaceSystemDefinitionException(msg);
 			}
 
 			final String qualifiedNamePrefix = spaceSystem.getName() + ".tc.";
@@ -440,10 +443,13 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 				if(paramProps.isReadOnly()) {
 					final String initialValue = type.getInitialValue();
 					if(initialValue != null) {
+						LOG.trace("Creating readonly protected value parameter " + qualifiedName);
 						stringParameter = new ProtectedValueParameter<String>(qualifiedName, name, shortDescription, longDescription, initialValue);
 					}
 					else {
-						throw new InvalidSpaceSystemDefinitionException("Hbird only supports read only parameter or argument types when an initial valu is supplied");
+						String msg = "Hbird only supports read only parameter or argument types when an initial value is supplied";
+						LOG.error(msg);
+						throw new InvalidSpaceSystemDefinitionException(msg);
 					}
 				}
 				else {
@@ -455,8 +461,10 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 				stringArguments.put(stringParameter.getQualifiedName(), stringParameter);
 			}
 			else {
-				throw new InvalidSpaceSystemDefinitionException("Unknown or unsupported TC argument (parameter) type: " + parameterTypeRef
-						+ ". A parameter references an undeclared TC argument (parameter) type in the XTCE space system definition file.");
+				String msg = "Unknown or unsupported TC argument (parameter) type: " + parameterTypeRef
+						+ ". A parameter references an undeclared TC argument (parameter) type in the XTCE space system definition file.";
+				LOG.error(msg);
+				throw new InvalidSpaceSystemDefinitionException(msg);
 			}
 			// @formatter:on
 		}
@@ -504,8 +512,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		final String qualifiedNamePrefix = spaceSystem.getName() + ".tc.";
 		final int numTcParameterGroups = spaceSystem.getCommandMetaData().getMetaCommandSet().getMetaCommandSetItemCount();
 		for (int containerIndex = 0; containerIndex < numTcParameterGroups; ++containerIndex) {
-			final MetaCommand xtceContainer = spaceSystem.getCommandMetaData().getMetaCommandSet().getMetaCommandSetItem(containerIndex)
-					.getMetaCommand();
+			final MetaCommand xtceContainer = spaceSystem.getCommandMetaData().getMetaCommandSet().getMetaCommandSetItem(containerIndex).getMetaCommand();
 
 			// @formatter:off
 			final CommandGroup parameterGroup =
@@ -522,7 +529,6 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			}
 		}
 	}
-
 
 	/**
 	 * @throws InvalidSpaceSystemDefinitionException
@@ -636,7 +642,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			for (int x = 0; x < parameterEntrys.length; x++) {
 				final ArgumentListItem argumentListEntry = parameterEntrys[x];
 				final Argument[] arguments = argumentListEntry.getArgument();
-				for(int y = 0; y < arguments.length; y++) {
+				for (int y = 0; y < arguments.length; y++) {
 					final Argument argument = arguments[y];
 					final String argumentTypeRef = argument.getArgumentTypeRef();
 
@@ -690,13 +696,18 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		}
 		else {
 			// TODO Finish unsupported parameter types
-			throw new InvalidSpaceSystemDefinitionException("Hummingbird currently only supports integer, long string & binary parameters");
+			String msg = "Could not find type for parameter "
+					+ qualifiedName
+					+ ". Check the type ref for the parameter in the model definition file, you may be referencing an undelcared type ot simply have a typo. The other possibility is that you are referencing an unsupported type. Hummingbird currently only supports integer, long, string & binary parameters. ";
+			LOG.error(msg);
+			throw new InvalidSpaceSystemDefinitionException(msg);
 		}
 	}
 
 	/**
-	 * Injects the data into the model using reflection. This means we don't have to pollute the Space System Model interface
-	 * with lots of setters.
+	 * Injects the data into the model using reflection. This means we don't have to pollute the Space System Model
+	 * interface with lots of setters.
+	 *
 	 * @throws IllegalArgumentException
 	 * @throws IllegalAccessException
 	 */
@@ -714,7 +725,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			if (StringUtils.equals(name, "parameterGroups")) {
 				field.set(model, tmParameterGroups);
 			}
-			else  if(StringUtils.equals(name, "commands")) {
+			else if (StringUtils.equals(name, "commands")) {
 				field.set(model, tcGroups);
 			}
 			else if (StringUtils.equals(name, "restrictions")) {
@@ -731,9 +742,11 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			}
 		}
 	}
+
 	/**
 	 * Checks the parameter and returns the name if valid.
 	 *
+	 * TODO This is for future support of argument types.
 	 * @param item
 	 * @return
 	 * @throws InvalidSpaceSystemDefinitionException
@@ -783,7 +796,6 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 		return name;
 	}
-
 
 	/**
 	 * Checks the parameter and returns the name if valid.
@@ -965,7 +977,9 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	}
 
 	public void setSpaceSystemModelFilename(final String spaceSystemModelFilename) {
-		LOG.debug("Changing SpaceSystemModelFilename to: " + spaceSystemModelFilename);
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("Changing SpaceSystemModelFilename to: " + spaceSystemModelFilename);
+		}
 		this.spaceSystemModelFilename = spaceSystemModelFilename;
 	}
 }
