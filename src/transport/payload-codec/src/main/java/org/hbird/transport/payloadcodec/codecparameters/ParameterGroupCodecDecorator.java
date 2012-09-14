@@ -24,6 +24,17 @@ public final class ParameterGroupCodecDecorator {
 	}
 
 
+	/**
+	 * Remember this takes place at initialisation or reconfiguration, not in the parameter processing chain. It's a static
+	 * configuration.
+	 *
+	 * @param parameterGroups
+	 * @return
+	 * @throws NoEncodingException
+	 * @throws UnsupportedParameterEncodingException
+	 * @throws UnknownParameterEncodingException
+	 * @throws UnexpectedParameterTypeException
+	 */
 	public Map<String, ParameterGroup> decorateParameterGroups(final Map<String, ParameterGroup> parameterGroups) throws NoEncodingException,
 	UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException {
 
@@ -62,9 +73,21 @@ public final class ParameterGroupCodecDecorator {
 				}
 			}
 
+			// next, the string parameters..
+			Map<String, Parameter<String>> stringParameters = pg.getStringParameters();
+			if(stringParameters != null) {
+				Iterator<Entry<String, Parameter<String>>> it = stringParameters.entrySet().iterator();
+				while(it.hasNext()) {
+					Entry<String, Parameter<String>> entry = it.next();
+					Encoding enc = findEncoding(entry.getValue().getQualifiedName());
+					Parameter<String> codecAwareStringParameter = StringCodecFactory.decorateParameterWithCodec(entry.getValue(), enc);
+					TmTcGroups.replaceParameterInGroup(pg, codecAwareStringParameter.getQualifiedName(), codecAwareStringParameter);
+				}
+			}
+
 		}
 
-		// FIXME BigDecimal, Float, Double, String, Binary
+		// FIXME BigDecimal, Float, Double, Binary
 
 		return codecAwareParameterGroups;
 	}

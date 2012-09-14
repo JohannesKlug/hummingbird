@@ -1,8 +1,12 @@
 package org.hbird.transport.payloadcodec;
 
+import org.mockito.Mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.hbird.core.commons.tmtc.Parameter;
@@ -16,16 +20,45 @@ import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingExcep
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
 import org.hbird.transport.payloadcodec.testsupport.MockSpaceSystemModel;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
+import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.core.spacesystemmodel.exceptions.ParameterNotInGroupException;
 import org.hbird.core.spacesystemmodel.exceptions.ParameterNotInModelException;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ParameterGroupCodecDecoratorTest {
 
 	private final SpaceSystemModel ssm = new MockSpaceSystemModel();
 	private final ParameterGroupCodecDecorator decorator = new ParameterGroupCodecDecorator(ssm.getEncodings());
 
+	@Mock
+	private SpaceSystemModel mockModel;
+
+	private static Map<String, Encoding> mockEncodings;
+
+	@Mock
+	private ParameterGroup mockGroup;
+
+	@Mock
+	private Parameter<String> mockStringParameter;
+	private static final String MOCK_STRING_PARAMETER_NAME = "MockStringParameter";
+
+	@BeforeClass
+	public static void setupEncodings() {
+		mockEncodings = new HashMap<String, Encoding>(1);
+		Encoding asciiEncoding = new Encoding(8, BinaryRepresentation.ASCII);
+		mockEncodings.put(MOCK_STRING_PARAMETER_NAME, asciiEncoding);
+	}
+
+	/**
+	 * TODO Pre-Mockito, uses test support MockSpaceSystemModel and the ParameterGroupCodecDecorator field initialised
+	 * in this class. Convert to Mockito like the other tests at some point.
+	 */
 	@Test
 	public void testDecorateParameterGroup() throws UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException,
 			UnknownParameterGroupException, ParameterNotInGroupException, NoEncodingException, UnknownParameterException, ParameterNotInModelException {
@@ -54,6 +87,29 @@ public class ParameterGroupCodecDecoratorTest {
 				}
 			}
 		}
+	}
+
+	@Test
+	// FIXME How do we test this with Mockito?
+	public void testDecorateStringContainingParameterGroup() throws NoEncodingException, UnsupportedParameterEncodingException,
+			UnknownParameterEncodingException, UnexpectedParameterTypeException {
+
+		ParameterGroupCodecDecorator decorator = new ParameterGroupCodecDecorator(mockEncodings);
+
+		// Setup
+		Map<String, ParameterGroup> parameterGroups = new HashMap<String, ParameterGroup>(1);
+		parameterGroups.put("mockGroup", mockGroup);
+		Map<String, Parameter<String>> stringParameters = new HashMap<String, Parameter<String>>();
+		stringParameters.put("mockStringParam", mockStringParameter);
+
+		when(mockModel.getParameterGroups()).thenReturn(parameterGroups);
+		when(mockGroup.getStringParameters()).thenReturn(stringParameters);
+		when(mockStringParameter.getQualifiedName()).thenReturn(MOCK_STRING_PARAMETER_NAME);
+
+
+		Map<String, ParameterGroup> codecAwareParameterGroups = decorator.decorateParameterGroups(mockModel.getParameterGroups());
+
+
 	}
 
 }
