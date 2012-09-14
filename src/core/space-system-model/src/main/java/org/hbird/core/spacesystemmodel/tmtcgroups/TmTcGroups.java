@@ -35,6 +35,7 @@ public class TmTcGroups {
 			group.getAllParameters().put(qualifiedName, parameter);
 		}
 
+		// Map puts overwrite the existing parameter as the key is qualified names which are unique and hashmap keys must also be unique.
 		if (group.getIntegerParameters() != null && group.getIntegerParameters().containsKey(pname)) {
 			group.getIntegerParameters().put(qualifiedName, (Parameter<Integer>) parameter);
 		}
@@ -106,11 +107,12 @@ public class TmTcGroups {
 		}
 		catch (final UnknownParameterException e) {
 			// TODO - 27.03.2012 kimmell - unit test
-			LOG.error("Unknown parameter when copying parameter values. This is is a serious internal error and must indicate a corruption "
-					+ "in memory, a system bug, or a seriosu misuse of the API (copying parameters to a different space system"
-					+ "model which has a different structure.  The system must shut down as integrity cannot be guaranteed.");
+			String msg = "Unknown parameter when copying parameter values. This is is a serious internal error and must indicate a corruption "
+					+ "in memory, a system bug, or a serious misuse of the API (copying parameters to a different space system"
+					+ "model which has a different structure.";
+			LOG.error(msg);
 			// TODO - 27.03.2012 kimmell - maybe there is better exception to throw at this point?
-			throw new RuntimeException("Unknown parameter when copying parameter values");
+			throw new RuntimeException(msg);
 		}
 
 		return targetGroup;
