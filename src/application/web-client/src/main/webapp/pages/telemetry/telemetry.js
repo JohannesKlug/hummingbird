@@ -1,5 +1,14 @@
 // The root URL for the RESTful services
-var rootURL = "http://localhost:8181/hbird/halcyon/";
+var host = "localhost";
+var port = "8181";
+var url = "/hbird/halcyon/";
+var rootURL = "http://"+ host + ":" + port + url;
+
+var ws = $.gracefulWebSocket("ws://"+ host + ":" + port + url + "tmsock");
+
+ws.onmessage = function (event) {
+	plotParameter(event.data);   
+};
 
 jQuery(document).ready(function() {
 	getTelemetryList();
@@ -25,3 +34,6 @@ function updateTelemetry(param) {
 	);
 }
 
+function plotParameter(parameter) {
+	
+}

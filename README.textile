@@ -1,9 +1,17 @@
 Hummingbird is an open source, lightweight and standards-compliant mission control system for small spacecraft.
 
-You are at the root of the Hummingbird project. For further information, please refer to one of the following pages: 
+You are at the root of the Hummingbird project.
+
+In order to build Hummingbird, please install Apache Maven first (refer to http://maven.apache.org/).
+Run: "mvn install" in the src sub-directory of this repository. All Hummingbird artifacts will be installed in your local Maven repository.
+
+If you're only interested in deploying and running Hummingbird, please follow the INSTALL.txt guide.
+
+
+For further information, please refer to one of the following pages: 
 
 * "Github repository":https://github.com/JohannesKlug/hbird
-* "Wiki":https://github.com/JohannesKlug/hird/wiki
+* "Wiki":https://github.com/JohannesKlug/hbird/wiki
 * "Facebook":http://www.facebook.com/pages/Hummingbird-Mission-Control-System/156087881111212
 
 

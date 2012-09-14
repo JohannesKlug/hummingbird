@@ -1,6 +1,6 @@
 package org.hbird.application.halcyon.osgi;
 
-import org.hbird.application.halcyon.WebAppContextListener;
+import org.hbird.application.halcyon.HalcyonServletContextListener;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 import org.slf4j.Logger;
@@ -26,7 +26,7 @@ public class OsgiReady {
 
 	private final void cacheTracker() {
 		System.out.println("Caching tracker");
-		serviceTracker = new ServiceTracker(WebAppContextListener.getBundleContext(), serviceInterface, null) {
+		serviceTracker = new ServiceTracker(HalcyonServletContextListener.getBundleContext(), serviceInterface, null) {
 			@Override
 			public Object addingService(final ServiceReference reference) {
 				LOG.debug(serviceInterface + " from bundle " + reference.getBundle().getBundleId() + " service being added to jersey resource");

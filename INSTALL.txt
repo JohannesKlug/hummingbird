@@ -1,0 +1,90 @@
+You must have Maven setup for your OS.
+
+Tested on Windows 7 x64, Windows 8 x64, Linux x64 (various distros). It's Java so it shouldn't matter.
+
+KARAF setup
+---------------------------
+download and extract 2.2.9
+
+NOTE!!! If you experiment with the snapshot of Karaf 3 beware that the features command has been migrated to feature (no trailing s!).
+Also, addurl has become repo-add.
+
+Setup webconsole as required
+
+CXF
+-------
+##############################################
+# CXF not required until we go back to DOSGi #
+##############################################
+Swap  etc/jre.properties with the jre.properties.cxf file.
+
+features:addurl mvn:org.apache.cxf.karaf/apache-cxf/2.6.2/xml/features
+features:install -v http cxf-core cxf-jaxws cxf-jaxrs
+
+
+
+Camel
+--------------
+features:addurl mvn:org.apache.camel.karaf/apache-camel/2.9.2/xml/features
+KARAF3 alert: You need 2.10.0 camel features.
+
+features:install -v camel-core camel-blueprint camel-jms camel-netty camel-spring
+
+
+
+Activemq
+--------------
+See:
+http://activemq.apache.org/osgi-integration.html
+
+NOTE: The 5.5.0 is a lot more stable. 5.6.0 has some issues with thew web console and jmx connection settings.
+
+features:addurl mvn:org.apache.activemq/activemq-karaf/5.5.0/xml/features
+OR (if you are feeling lucky)
+features:addurl mvn:org.apache.activemq/activemq-karaf/5.6.0/xml/features
+
+features:install -v activemq-blueprint activemq-spring activemq-web-console
+
+You need 5.6.0 for activemq camel component
+features:addurl mvn:org.apache.activemq/activemq-karaf/5.6.0/xml/features
+features:install -v activemq-camel
+
+Create a broker and install web console. The web console only seems to work after a broker is created.
+activemq:create-broker --name "SillyBroker"
+
+Add this to etc/system.properties:
+
+webconsole.type=properties
+webconsole.jms.url=tcp://localhost:61616
+webconsole.jmx.url=service:jmx:rmi:///jndi/rmi://localhost:1099/karaf-root
+webconsole.jmx.user=karaf
+webconsole.jmx.password=karaf
+
+
+
+Hbird
+--------
+Add following config files to $karaf/etc
+	xtceSpaceSystemModelFactorySerivce.cfg
+
+features:addurl mvn:org.hbird.osgi/osgi-provisioning/0.0.1-SNAPSHOT/xml/features
+Add as required
+
+If you update the provisioning features file don't forget to refresh.
+features:refreshurl mvn:org.hbird.osgi/osgi-provisioning/0.0.1-SNAPSHOT/xml/features
+
+
+Web-UI
+features:install war
+
+features:install hbird-jersey
+
+
+Web-client
+
+features:install hbird-web-client
+
+Beware of this problem:
+http://stackoverflow.com/questions/9275604/resolving-two-dependency-chains-in-fuseesb-and-jersey-servlet
+Solution seems to be this: Jersey need to fix their exports.
+Until then, remove this bundle: Apache ServiceMix :: Specs :: JSR-311 API 1.1.1 (1.9.0)
