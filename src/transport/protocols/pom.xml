@@ -57,13 +57,6 @@
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<instructions>
-						<Export-Package> org.hbird.transport.protocols.* 
-						</Export-Package>
-						<!--<Private-Package>org.slf4j.* </Private-Package>-->
-					</instructions>
-				</configuration>
 			</plugin>
 			
 			<plugin>
@@ -111,7 +104,6 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
