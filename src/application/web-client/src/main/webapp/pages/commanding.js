@@ -119,7 +119,7 @@ function addStringArgs(stringArgs) {
 }
 
 function addDescription() {
-	if(cmd.lognDescription != null) {
+	if(cmd.longDescription != null) {
 		$("#description").text(cmd.longDescription);
 	}
 	else if(cmd.shortDescription != null){
