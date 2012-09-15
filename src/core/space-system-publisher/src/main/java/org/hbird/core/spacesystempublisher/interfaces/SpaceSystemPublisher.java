@@ -6,6 +6,7 @@ import java.util.Map;
 import org.hbird.core.commons.tmtc.CommandGroup;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 
 
 public interface SpaceSystemPublisher {
@@ -17,6 +18,7 @@ public interface SpaceSystemPublisher {
 	Map<String, CommandGroup> getCommands();
 	List<CommandGroup> getCommandList();
 	CommandGroup getCommand(String qualifiedName);
+	ParameterGroup getParameterGroup(String qualifiedName) throws UnknownParameterGroupException;
 
 
 	Map<String, Encoding> getEncodings();

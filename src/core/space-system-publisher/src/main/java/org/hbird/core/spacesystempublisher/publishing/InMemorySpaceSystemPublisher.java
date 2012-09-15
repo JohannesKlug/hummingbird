@@ -8,6 +8,7 @@ import org.hbird.core.commons.tmtc.CommandGroup;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemModelUpdate;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.slf4j.Logger;
@@ -99,6 +100,11 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 	@Override
 	public void modelUpdated() {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ParameterGroup getParameterGroup(String qualifiedName) throws UnknownParameterGroupException {
+		return model.getParameterGroup(qualifiedName);
 	}
 
 
