@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+	xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+
+	<!-- Get a reference to a publisher service. -->
+	<reference id="spaceSystemPublisherService"
+		interface="org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher">
+	</reference>
+
+	<bean id="rotorSimulator" class="org.hbird.test.rotor.RotorSimulator">
+		<property name="publisher" ref="spaceSystemPublisherService"></property>
+	</bean>
+
+	<camelContext xmlns="http://camel.apache.org/schema/blueprint"
+		xsi:schemaLocation="http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+		<route id="rotorSimulatorRoute">
+			<from uri="timer://clock?fixedRate=true" />
+			<to uri="bean:rotorSimulator?method=tick" />
+			<!-- The idea is to route the parameterGroups returned from the sim to an activemq topic. 
+				From there, we could encode it in all the different formats we support, and output those on topics again.
+				We will host a running instance on the internet, so that people can play with it (command it, see TM, etc). 
+			-->
+			
+			<!-- FIXME Needs a command route into the simulator bean! -->
+		</route>
+	</camelContext>
+
+</blueprint>

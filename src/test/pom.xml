@@ -14,5 +14,6 @@
 	
 	<modules>
 		<module>integration-testing</module>
+		<module>rotor</module>
 	</modules>
 </project>

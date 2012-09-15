@@ -105,6 +105,12 @@
 			<bundle>mvn:org.hbird.application/web-client/0.0.1-SNAPSHOT/war</bundle>
 		</feature>
 		
+		<feature name="hbird-rotor-simulator" description="" version="${version}">
+			<feature>hbird-core</feature>
+			<feature>hbird-publisher</feature>
+			<bundle>mvn:org.hbird/rotor/0.0.1-SNAPSHOT</bundle>
+		</feature>
+		
 		<feature name="hbird-complete" description="A complete single container installation of hbird and core applications">
 			<feature>hbird-core</feature>
 			<feature>hbird-xtce</feature>
