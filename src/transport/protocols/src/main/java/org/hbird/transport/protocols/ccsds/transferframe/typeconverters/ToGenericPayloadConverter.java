@@ -6,25 +6,25 @@ import org.hbird.transport.protocols.ccsds.spacepacket.data.PacketPayload;
 
 @Converter
 public class ToGenericPayloadConverter {
-	
+
 	@Converter
-	public static GenericPayload fromCcsdsPacketPayload(PacketPayload payload) {
+	public static GenericPayload fromCcsdsPacketPayload(final PacketPayload payload) {
 		return new GenericPayload(payload.payload, String.valueOf(payload.payloadIdentifier), payload.timeStamp);
 	}
-	
+
 	@Converter
-	public static PacketPayload fromGenericPayload(GenericPayload payload) {
+	public static PacketPayload fromGenericPayload(final GenericPayload payload) {
 		if (payload.layoutIdentifier != null) {
 			Integer apid = 0;
 			try {
 				apid = Integer.parseInt(payload.layoutIdentifier);
 			}
-			catch (NumberFormatException e) {
+			catch (final NumberFormatException e) {
 				return null;
 			}
 			return new PacketPayload(apid, payload.payload, payload.timeStamp);
 		}
-		return null; 
+		return null;
 	}
 
 }
