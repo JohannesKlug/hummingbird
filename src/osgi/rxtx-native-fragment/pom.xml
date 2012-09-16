@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<artifactId>osgi-parent</artifactId>
+		<groupId>org.hbird.osgi</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>rxtx-native-fragment</artifactId>
+	<packaging>bundle</packaging>
+	<name>Hbird :: OSGi :: RXTX native libs OSGi Fragment</name>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+	
+	<build>
+		<defaultGoal>install</defaultGoal>
+		
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+					 	<Fragment-Host>org.hbird.transport.protocols;bundle-version=0.0.1.SNAPSHOT</Fragment-Host>
+					 	<Include-Resource>rxtx-libs = rxtx-libs</Include-Resource>
+					 	<Bundle-NativeCode>
+					 		rxtx-libs/win-x64/rxtxParallel.dll;
+					 		rxtx-libs/win-x64/rxtxSerial.dll;
+					 		processor=x86-64;
+					 		osname=Win32
+					 	</Bundle-NativeCode>
+					</instructions>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.surefire</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.11</version>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<description>Provides native libraries for the RXTX serial java libs.</description>
+</project>
