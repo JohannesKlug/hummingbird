@@ -11,6 +11,7 @@ import org.hbird.core.spacesystemmodel.SpaceSystemModelFactory;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidSpaceSystemDefinitionException;
+import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemModelUpdate;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.slf4j.Logger;
@@ -130,6 +131,12 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	@Override
 	public CommandGroup getCommand(final String qualifiedName) {
 		return this.modelCache.getCommands().get(qualifiedName);
+	}
+
+	@Override
+	public ParameterGroup getParameterGroup(String qualifiedName)
+			throws UnknownParameterGroupException {
+		return this.modelCache.getParameterGroup(qualifiedName);
 	}
 
 }
