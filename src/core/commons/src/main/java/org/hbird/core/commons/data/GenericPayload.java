@@ -5,6 +5,7 @@ import java.io.Serializable;
 import org.apache.commons.lang.ArrayUtils;
 
 public class GenericPayload implements Serializable {
+	private static final long serialVersionUID = 7823269614387628654L;
 
 	public byte[] payload;
 	public String layoutIdentifier;
