@@ -1,4 +1,4 @@
-package org.hbird.transport.payloadcodec.codecparameters;
+package org.hbird.transport.payloadcodec.codecdecorators.string;
 
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
@@ -22,7 +22,7 @@ public class StringCodecFactory {
 			case UTF16:
 				throw new UnsupportedParameterEncodingException("Not implemented codec yet, file a bug report :D", enc.getBinaryRepresentation());
 			default:
-				throw new UnknownParameterEncodingException("Unknown/Unsupported binary representation for string: ", enc.getBinaryRepresentation());
+				throw new UnknownParameterEncodingException("Unknown/Unsupported binary representation for String: ", enc.getBinaryRepresentation());
 
 		}
 	}

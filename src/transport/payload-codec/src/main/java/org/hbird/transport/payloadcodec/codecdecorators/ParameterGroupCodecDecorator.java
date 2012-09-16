@@ -1,4 +1,4 @@
-package org.hbird.transport.payloadcodec.codecparameters;
+package org.hbird.transport.payloadcodec.codecdecorators;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -6,6 +6,9 @@ import java.util.Map.Entry;
 
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.transport.payloadcodec.codecdecorators.number.IntegerCodecFactory;
+import org.hbird.transport.payloadcodec.codecdecorators.number.LongCodecFactory;
+import org.hbird.transport.payloadcodec.codecdecorators.string.StringCodecFactory;
 import org.hbird.transport.payloadcodec.exceptions.NoEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;

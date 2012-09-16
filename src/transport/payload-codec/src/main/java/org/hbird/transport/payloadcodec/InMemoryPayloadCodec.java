@@ -14,8 +14,8 @@ import org.hbird.core.commons.util.BytesUtility;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.core.spacesystemmodel.tmtcgroups.TmTcGroups;
+import org.hbird.transport.payloadcodec.codecdecorators.ParameterGroupCodecDecorator;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
-import org.hbird.transport.payloadcodec.codecparameters.ParameterGroupCodecDecorator;
 import org.hbird.transport.payloadcodec.exceptions.NoEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
@@ -45,7 +45,9 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 
 		try {
 			this.codecAwareParameterGroups = decorator.decorateParameterGroups(parameterGroups);
-			System.out.println("Decorated");
+			if (LOG.isTraceEnabled()) {
+				LOG.trace("Parameter groups have been cloned and decorated with codec aware parameters");
+			}
 		}
 		catch (final NoEncodingException e) {
 			// TODO Auto-generated catch block
