@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.jetty.websocket.WebSocket;
 import org.eclipse.jetty.websocket.WebSocketServlet;
-import org.hbird.application.halcyon.tm.LiveTmStreamingWebSocket;
+import org.hbird.application.halcyon.tm.OsgiLiveTmStreamingWebSocket;
 
 /**
  * @author Mark Doyle
@@ -39,6 +39,6 @@ public class LiveTmWebSocketServlet extends WebSocketServlet {
 	@Override
 	public WebSocket doWebSocketConnect(final HttpServletRequest request, final String protocol) {
 		System.out.println("doWebSocketConnect called with protocol " + protocol);
-		return new LiveTmStreamingWebSocket();
+		return new OsgiLiveTmStreamingWebSocket();
 	}
 }

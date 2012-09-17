@@ -6,7 +6,12 @@ var rootURL = "http://"+ host + ":" + port + url;
 
 var ws = $.gracefulWebSocket("ws://"+ host + ":" + port + url + "tmsock");
 
-ws.onmessage = function (event) {
+ws.onopen = function() {
+	console.log("Websocket connection established.");
+};
+
+ws.onmessage = function(event) {
+	console.log("Received message on socket");
 	plotParameter(event.data);   
 };
 
@@ -35,5 +40,5 @@ function updateTelemetry(param) {
 }
 
 function plotParameter(parameter) {
-	
+	console.log(parameter);
 }

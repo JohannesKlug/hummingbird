@@ -10,29 +10,37 @@ import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 import org.eclipse.jetty.websocket.WebSocket;
 import org.hbird.core.commons.tmtc.Parameter;
+import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.ServiceRegistration;
 
-public class LiveTmStreamingWebSocket implements WebSocket {
+public class OsgiLiveTmStreamingWebSocket implements WebSocket, LiveTmReceiver {
 
-	Connection connection;
+	private Connection connection;
+	private ServiceRegistration registration;
 
 	/**
 	 * @param liveTmWebSocketServlet
 	 */
-	public LiveTmStreamingWebSocket() {
+	public OsgiLiveTmStreamingWebSocket() {
+		System.out.println("Built new OsgiLiveTmStreamingWebSocket.");
 	}
 
 	@Override
 	public void onOpen(final Connection connection) {
+		System.out.println("Open socket requested.");
 		this.connection = connection;
-		System.out.println("BID = " + FrameworkUtil.getBundle(ParameterListener.class).getBundleId());
+		final BundleContext bc = FrameworkUtil.getBundle(LiveTmWhiteboardDistributer.class).getBundleContext();
+		registration = bc.registerService(LiveTmReceiver.class.getName(), this, null);
 	}
 
 	@Override
 	public void onClose(final int closeCode, final String message) {
+		registration.unregister();
+		// TODO tie into OSGI event and log closure due to closeCode
 	}
 
-	// connection.sendMessage(serialiseParameterToJson(parameter));
 
 	/**
 	 * TODO The fact that this can be static means it's probably not the responsibility of the class and should be moved
@@ -51,6 +59,27 @@ public class LiveTmStreamingWebSocket implements WebSocket {
 		mapper.setSerializationConfig(config);
 
 		return mapper.writeValueAsString(parameter);
+	}
+
+	@Override
+	public void acceptNewLiveParameterGroup(final ParameterGroup parameterGroup) {
+		for (final Parameter<?> p : parameterGroup.getAllParametersAsList()) {
+			try {
+				connection.sendMessage(serialiseParameterToJson(p));
+			}
+			catch (final JsonGenerationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (final JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (final IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

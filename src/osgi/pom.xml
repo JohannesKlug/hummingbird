@@ -21,7 +21,7 @@
     	<module>commanding-osgi</module>
     	<module>osgi-provisioning</module>
     	<module>web-ui</module>
-    <module>rxtx-win64-fragment</module>
+    <module>rxtx-native-fragment</module>
   </modules>
 	
 	<build>
