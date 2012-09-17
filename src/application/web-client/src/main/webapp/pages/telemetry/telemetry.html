@@ -8,7 +8,7 @@
 	<!-- Basic Page Needs
   ================================================== -->
 	<meta charset="utf-8">
-	<title>Commanding</title>
+	<title>Telemetry</title>
 	<meta name="description" content="">
 	<meta name="author" content="Johannes Klug">
 
@@ -37,10 +37,13 @@
 <body>
 	<script type="text/javascript" src="../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../js/jquery.gracefulWebSocket.js"></script>
+	<script type="text/javascript" src="../../js/smoothie.js"></script>
 	<script type="text/javascript" src="telemetry.js"></script>
 
 	<h1>Telemetry parameter list</h1>
 	<p id="telemetryList">Not received</p>
+	
+	<canvas id="tmRealTimeChart" width="800" height="300"></canvas>
 </body>
 
 
