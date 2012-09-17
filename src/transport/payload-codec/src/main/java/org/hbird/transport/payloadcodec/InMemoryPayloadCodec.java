@@ -83,13 +83,18 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 			}
 		}
 		else {
+			boolean foundRestriction = false;
 			for (final Entry<String, List<String>> restrictionEntry : restrictions.entrySet()) {
 				if (restrictionEntry.getValue().contains(payloadLayoutId)) {
 					// we found the correct PG
+					foundRestriction = true;
 					final String pgName = restrictionEntry.getKey();
 					final ParameterGroup pg = codecAwareParameterGroups.get(pgName);
 					decodedGroup = decodeParameterGroup(payload, pg, timeStamp);
 				}
+			}
+			if (!foundRestriction) {
+				LOG.error("Payload codec did not find restriction for payloadLayoutId " + payloadLayoutId + " in the restrictions entryset.");
 			}
 		}
 
@@ -133,7 +138,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 	@Override
 	public byte[] encodeToByteArray(final ParameterGroup parameterGroup) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("encodeToByteArray not yet implemented in InMemeoryPayloadCodec");
 	}
 
 	@Override
@@ -186,7 +191,9 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		int previousSize = 0;
 		int totalSize = 0;
 		for (final Parameter<?> p : decoratedGroup.getAllParameters().values()) {
-			LOG.debug("Encoding parameter " + p.getName());
+			if (LOG.isTraceEnabled()) {
+				LOG.trace("Encoding parameter " + p.getName());
+			}
 			if (count != 0) {
 				offset += previousSize;
 			}
@@ -208,13 +215,15 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		}
 
 		// GenericPayload encodedGroup = new GenericPayload(encodedBytes, layoutId); // FIXME this is crap, says Mark.
-		final GenericPayload encodedGroup = new GenericPayload(encodedBytes, layoutId, System.currentTimeMillis()); // FIXME this is crap, says Mark. JK 2011-11-12: added timeStamp. Can't remember why this is crap?
+		final GenericPayload encodedGroup = new GenericPayload(encodedBytes, layoutId, System.currentTimeMillis()); // FIXME this is crap, says Mark. JK 2011-11-12: added timeStamp. Can't remember why this is crap? Me neither :\
 		return encodedGroup;
 	}
 
 	@Override
 	public ParameterGroup decode(final GenericPayload payload) throws UnknownParameterGroupException {
-		LOG.debug("Decoding: " + BytesUtility.decimalDump(payload.payload) + " with payload ID " + payload.layoutIdentifier);
+		if (LOG.isTraceEnabled()) {
+			LOG.trace("Decoding: " + BytesUtility.decimalDump(payload.payload) + " with payload ID " + payload.layoutIdentifier);
+		}
 		return decode(payload.payload, payload.layoutIdentifier, payload.timeStamp);
 	}
 

@@ -1,1 +1,2 @@
 org.hbird.transport.protocols.ccsds.transferframe.typeconverters.ToGenericPayloadConverter
+org.hbird.transport.protocols.ccsds.transferframe.typeconverters.ToFramePayloadConverter

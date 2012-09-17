@@ -10,6 +10,7 @@ import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 import org.eclipse.jetty.websocket.WebSocket;
 import org.hbird.core.commons.tmtc.Parameter;
+import org.osgi.framework.FrameworkUtil;
 
 public class LiveTmStreamingWebSocket implements WebSocket {
 
@@ -24,15 +25,14 @@ public class LiveTmStreamingWebSocket implements WebSocket {
 	@Override
 	public void onOpen(final Connection connection) {
 		this.connection = connection;
+		System.out.println("BID = " + FrameworkUtil.getBundle(ParameterListener.class).getBundleId());
 	}
 
 	@Override
 	public void onClose(final int closeCode, final String message) {
 	}
 
-	public final void parameterIn(final Parameter<?> parameter) throws IOException {
-		connection.sendMessage(serialiseParameterToJson(parameter));
-	}
+	// connection.sendMessage(serialiseParameterToJson(parameter));
 
 	/**
 	 * TODO The fact that this can be static means it's probably not the responsibility of the class and should be moved
