@@ -8,6 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.hbird.application.halcyon.osgi.OsgiReady;
+import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.slf4j.Logger;
@@ -22,13 +23,14 @@ import com.sun.jersey.spi.resource.Singleton;
  * 
  */
 @Singleton
-@Path("/telemetrylist")
+@Path("/tm")
 public class TelemetryListResource extends OsgiReady {
 	private final static Logger LOG = LoggerFactory.getLogger(TelemetryListResource.class);
 
 	private static final String PUBLISHER_SERVICE_NAME = "org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher";
 
 	private List<ParameterGroup> parameterGroups;
+	private List<Parameter<?>> parameters;
 
 	public TelemetryListResource() {
 		super(PUBLISHER_SERVICE_NAME);
@@ -39,6 +41,7 @@ public class TelemetryListResource extends OsgiReady {
 			final SpaceSystemPublisher publisher = (SpaceSystemPublisher) getServiceTracker().getService();
 			if (publisher != null) {
 				parameterGroups = publisher.getParameterGroupList();
+				parameters = publisher.getAllParameters();
 			}
 			else {
 				LOG.warn("No " + PUBLISHER_SERVICE_NAME + " service found.");
@@ -64,14 +67,27 @@ public class TelemetryListResource extends OsgiReady {
 	}
 
 	@GET
+	@Path("/parameterGroups")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
-	public List<ParameterGroup> getTmListJson() {
+	public List<ParameterGroup> getTmParameterGroupListJson() {
 		cacheTmList();
-		System.out.println("Returning TM list as json");
 		if (parameterGroups.size() == 0) {
 			LOG.warn("No TM ParameterGroups to return!");
 		}
+
 		return parameterGroups;
+	}
+
+	@GET
+	@Path("/parameters")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
+	public List<Parameter<?>> getTmParametersListJson() {
+		cacheTmList();
+		if (parameters.size() == 0) {
+			LOG.warn("No TM Parameters to return!");
+		}
+
+		return parameters;
 	}
 
 }
