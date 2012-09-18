@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hbird.core.commons.tmtc.CommandGroup;
+import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
@@ -103,9 +104,13 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 	}
 
 	@Override
-	public ParameterGroup getParameterGroup(String qualifiedName) throws UnknownParameterGroupException {
+	public ParameterGroup getParameterGroup(final String qualifiedName) throws UnknownParameterGroupException {
 		return model.getParameterGroup(qualifiedName);
 	}
 
+	@Override
+	public List<Parameter<?>> getAllParameters() {
+		return new ArrayList<Parameter<?>>(model.getAllPayloadParameters().values());
+	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hbird.core.commons.tmtc.CommandGroup;
+import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.SpaceSystemModelFactory;
@@ -38,24 +39,24 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	public void loadModel() {
 		LOG.debug("Loading space system model from factory service...");
 
-			if (factoryService != null) {
-				LOG.debug("Factory service exists...");
-				try {
-					this.modelCache = factoryService.createSpaceSystemModel();
-					LOG.debug("Model " + this.modelCache.getName() + " cached in publisher.");
-				}
-				catch (final InvalidParameterTypeException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				catch (final InvalidSpaceSystemDefinitionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		if (factoryService != null) {
+			LOG.debug("Factory service exists...");
+			try {
+				this.modelCache = factoryService.createSpaceSystemModel();
+				LOG.debug("Model " + this.modelCache.getName() + " cached in publisher.");
 			}
-			else {
-				LOG.error("SpaceSystemModelFactoryService is null, cannot retrieve a space system model for loading and caching!");
+			catch (final InvalidParameterTypeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			catch (final InvalidSpaceSystemDefinitionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			LOG.error("SpaceSystemModelFactoryService is null, cannot retrieve a space system model for loading and caching!");
+		}
 	}
 
 	@Override
@@ -134,9 +135,14 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	}
 
 	@Override
-	public ParameterGroup getParameterGroup(String qualifiedName)
+	public ParameterGroup getParameterGroup(final String qualifiedName)
 			throws UnknownParameterGroupException {
 		return this.modelCache.getParameterGroup(qualifiedName);
+	}
+
+	@Override
+	public List<Parameter<?>> getAllParameters() {
+		return new ArrayList<Parameter<?>>(this.modelCache.getAllPayloadParameters().values());
 	}
 
 }
