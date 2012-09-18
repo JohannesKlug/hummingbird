@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="../../css/base.css">
 	<link rel="stylesheet" href="../../css/skeleton.css">
 	<link rel="stylesheet" href="../../css/layout.css">
+	<link rel="stylesheet" href="../../js/chosen.css">
 
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -38,12 +39,28 @@
 	<script type="text/javascript" src="../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../js/jquery.gracefulWebSocket.js"></script>
 	<script type="text/javascript" src="../../js/smoothie.js"></script>
+	<script type="text/javascript" src="../../js/chosen.jquery.min.js"></script>
 	<script type="text/javascript" src="telemetry.js"></script>
 
 	<h1>Telemetry parameter list</h1>
 	<p id="telemetryList">Not received</p>
 	
-	<canvas id="tmRealTimeChart" width="800" height="300"></canvas>
+	<div>
+	<form>
+		<div>
+			<em>Parameters</em>
+		</div>
+		<div>
+			<select data-placeholder="Select parameters to chart" style="width:350px;" multiple class="chzn-select" id="parametersList" name="parametersList_form">
+				<option value=""></option>
+			</select>
+		</div>
+	</form>
+	</div>
+	
+	<div>
+		<canvas id="tmRealTimeChart" width="800" height="300"></canvas>
+	</div>
 </body>
 
 

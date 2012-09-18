@@ -7,11 +7,6 @@ var rootURL = "http://"+ host + ":" + port + url;
 var ws = $.gracefulWebSocket("ws://"+ host + ":" + port + url + "tmsock");
 
 var smoothie = new SmoothieChart({
-//	grid: { 
-//		lineWidth: 1, 
-//		millisPerLine: 1000, 
-//		verticalSections: 6,
-//	},
 	labels: { 
 		fillStyle:'rgb(255, 255, 255)' 
 	}
@@ -31,16 +26,18 @@ ws.onmessage = function(event) {
 };
 
 jQuery(document).ready(function() {
+	$(".chzn-select").chosen(); // Activate chosen plugin
+	$(".chzn-select-deselect").chosen({allow_single_deselect:true});
 	getTelemetryList();
-	smoothie.streamTo(document.getElementById("tmRealTimeChart"), 1000 /*delay*/); 
+	smoothie.streamTo(document.getElementById("tmRealTimeChart"), 1000);
 });
 
 function getTelemetryList() {
-	var jqxhr = $.getJSON(rootURL + "telemetrylist");
+	var jqxhr = $.getJSON(rootURL + "tm/parameters");
 	
 	jqxhr.done(
 		function(parsedResponse, statusText, jqXhr) {
-			updateTelemetry( jQuery.parseJSON(jqXhr.responseText)); 
+			updateTelemetry(jQuery.parseJSON(jqXhr.responseText)); 
 		}
 	);
 }
@@ -49,9 +46,11 @@ function updateTelemetry(param) {
 	$("#telemetryList").empty();
 	$.each(param,
 		function(i) {
-			$("#telemetryList").append(param[i].name + ":" + param[i].qualifiedName + "</br>");
+			console.log("Adding parameter");
+			$("#parametersList").append(new Option(param[i].name, param[i].qualifiedName, false, false));
 		}
 	);
+	$("#parametersList").trigger("liszt:updated");
 }
 
 var line1 = new TimeSeries( { strokeStyle:'rgb(0, 255, 0)', fillStyle:'rgba(0, 255, 0, 0.4)', lineWidth:3 });
