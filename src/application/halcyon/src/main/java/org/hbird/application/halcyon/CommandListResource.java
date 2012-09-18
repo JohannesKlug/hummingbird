@@ -24,7 +24,7 @@ import com.sun.jersey.spi.resource.Singleton;
  *
  */
 @Singleton
-@Path("/commandlist")
+@Path("/commanding/info")
 public class CommandListResource extends OsgiReady {
 	private static final String COMMAND_INFORMATION_SERVICE_NAME = "org.hbird.application.commanding.interfaces.info.CommandInformationService";
 
@@ -32,6 +32,7 @@ public class CommandListResource extends OsgiReady {
 
 	private List<CmdNames> allowedCommandNames = null;
 
+	// TODO check if we need this. Could be junk.
 	private class CmdNames {
 		public String qualifiedName;
 		public String name;
@@ -98,6 +99,7 @@ public class CommandListResource extends OsgiReady {
 		final CommandInformationService cmdInfoService = (CommandInformationService) getServiceTracker().getService();
 		return cmdInfoService.getCommand(qualifiedName);
 	}
+
 
 	// TODO implement msgPack return
 	// @GET

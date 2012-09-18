@@ -10,7 +10,7 @@ jQuery(document).ready(function() {
  * and then updates the client web command list.
  */
 function getAllowedCommandList() {
-	var jqxhr = $.getJSON(rootURL + "commandlist");
+	var jqxhr = $.getJSON(rootURL + "commanding/info");
 	
 	jqxhr.done(
 		function(parsedResponse, statusText, jqXhr) {
@@ -44,7 +44,7 @@ function openCmdDialog(qualifiedName, name) {
 	console.log("Opening dialog for command " + name + " :: " + qualifiedName);
 	$("#cmdName").text(name);
 	
-	var jqxhr = $.getJSON(rootURL + "commandlist/command/" + qualifiedName);
+	var jqxhr = $.getJSON(rootURL + "commanding/info/command/" + qualifiedName);
 	
 	jqxhr.done(
 		function(parsedResponse, statusText, jqXhr) {
