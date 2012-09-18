@@ -22,6 +22,7 @@
 	<link rel="stylesheet" href="../../css/skeleton.css">
 	<link rel="stylesheet" href="../../css/layout.css">
 	<link rel="stylesheet" href="../../js/chosen.css">
+	<link rel="stylesheet" href="telemetry.css">
 
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -42,11 +43,13 @@
 	<script type="text/javascript" src="../../js/chosen.jquery.min.js"></script>
 	<script type="text/javascript" src="telemetry.js"></script>
 
+	<div class="container">
+	
 	<h1>Telemetry parameter list</h1>
 	<p id="telemetryList">Not received</p>
 	
-	<div>
-	<form>
+	<div class="six columns">
+	<form id="parameterForm">
 		<div>
 			<em>Parameters</em>
 		</div>
@@ -58,8 +61,10 @@
 	</form>
 	</div>
 	
-	<div>
-		<canvas id="tmRealTimeChart" width="800" height="300"></canvas>
+	<div class="sixteen columns">
+		<canvas  id="tmRealTimeChart" width="800px" height="400px"></canvas>
+	</div>
+		
 	</div>
 </body>
 

@@ -13,24 +13,31 @@ var smoothie = new SmoothieChart({
 });
 
 
-var plotLines = new Array();
+var plotLines = [];
+var parameterPlotsMap = [];
 
 //-----------------
 
-ws.onopen = function() {
-	console.log("Websocket connection established.");
-};
-
-ws.onmessage = function(event) {
-	plotParameter($.parseJSON(event.data));   
-};
 
 jQuery(document).ready(function() {
+	setupWebsocket();
 	$(".chzn-select").chosen(); // Activate chosen plugin
 	$(".chzn-select-deselect").chosen({allow_single_deselect:true});
+	$("#parametersList").change(parameterSelectionChanged);
 	getTelemetryList();
-	smoothie.streamTo(document.getElementById("tmRealTimeChart"), 1000);
+	smoothie.streamTo(document.getElementById("tmRealTimeChart"), 1500);
 });
+
+function setupWebsocket() {
+	ws.onopen = function() {
+		console.log("Websocket connection established.");
+	};
+	
+	ws.onmessage = function(event) {
+		plotParameter($.parseJSON(event.data));   
+	};
+}
+
 
 function getTelemetryList() {
 	var jqxhr = $.getJSON(rootURL + "tm/parameters");
@@ -53,22 +60,40 @@ function updateTelemetry(param) {
 	$("#parametersList").trigger("liszt:updated");
 }
 
-var line1 = new TimeSeries( { strokeStyle:'rgb(0, 255, 0)', fillStyle:'rgba(0, 255, 0, 0.4)', lineWidth:3 });
 function plotParameter(parameter) {
-	if(parameter.qualifiedName == "Thunderbird.tm.Temperature_BMP") {
-	
-//		line = getLine(parameter.qualifiedName);
-
-		setInterval(function() {
-			line1.append(new Date().getTime(), parameter.value);
-		}, 1000);
-
-		smoothie.addTimeSeries(line1);
+	var line = plotLines[parameter.qualifiedName];
+	if(line) {
+		line.append(new Date().getTime(), parameter.value);
 	}
 }
 
-function getLine(qualifiedName) {
+function parameterSelectionChanged() {
+	$("select option:selected").each(function () {
+		// FIXME Will not remove existing plot lines that have been deselected.
+		createPlotLine($(this).val());
+	});
+}
+
+/**
+ * Creates a line in the PlotLines array for the given plotName.
+ * If line already exists it does nothing.
+ * @param plotName
+ */
+function createPlotLine(plotName) {
+	console.log("Creating plot line for " + plotName);
+	for(var i in plotLines) {
+		if(plotLines[i] == plotName) {
+			return;
+		}
+	}
 	
+	// If we got here there is no plot for plotName so we create a new one.
+	
+	var line = new TimeSeries();
+	plotLines[plotName] = line
+	var colour = "rgb(" + Math.round(Math.random()*256) + ", "+Math.round(Math.random()*256)+", "+Math.round(Math.random()*256)+")";
+	console.log(colour);
+	smoothie.addTimeSeries(line, {strokeStyle:colour, lineWidth:3});
 }
 
 
