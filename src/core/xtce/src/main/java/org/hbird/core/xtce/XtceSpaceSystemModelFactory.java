@@ -195,7 +195,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	 * @throws MarshalException
 	 */
 	private final static SpaceSystem unmarshallXtceXmlSpaceSystem(final String spacesystemmodelFilename) throws MarshalException, ValidationException,
-			FileNotFoundException {
+	FileNotFoundException {
 		SpaceSystem spaceSystem = null;
 		final XMLContext context = new XMLContext();
 
@@ -375,7 +375,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 			// If it's an integer type...
 			if (xtceType == null) {
-				String msg = "Unknown TC argument (parameter) type: " + parameterTypeRef
+				final String msg = "Unknown TC argument (parameter) type: " + parameterTypeRef
 						+ ". A parameter references an undeclared TC argument (parameter) type in the XTCE space system definition file.";
 				LOG.error(msg);
 				throw new InvalidSpaceSystemDefinitionException(msg);
@@ -390,18 +390,35 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			if (xtceType.getIntegerParameterType() != null) {
 				final IntegerParameterType type = xtceType.getIntegerParameterType();
 				if (!XtceToJavaMapping.doesXtceIntRequireJavaLong(type)) {
-					final Parameter<Integer> intParameter = new HummingbirdParameter<Integer>(qualifiedName, name, shortDescription, longDescription);
-					if (LOG.isDebugEnabled()) {
-						LOG.debug("Adding Integer argument " + intParameter.getName());
+					Parameter<Integer> intParameter;
+					if(paramProps == null || !paramProps.isReadOnly()) {
+						intParameter = new HummingbirdParameter<Integer>(qualifiedName, name, shortDescription, longDescription);
 					}
+					else {
+						final int initialValue = (int) type.getInitialValue();
+						// TODO integer in XTCE is of any size so init vlaue returns long. Should be check initial value is correct?
+						intParameter = new ProtectedValueParameter<Integer>(qualifiedName, name, shortDescription, longDescription, initialValue);
+						if (LOG.isTraceEnabled()) {
+							LOG.trace("Adding ProtectedValueParameter Integer argument " + intParameter.getName());
+						}
+					}
+
 					integerArguments.put(intParameter.getQualifiedName(), intParameter);
 					encodings.put(intParameter.getQualifiedName(), createXtceIntegerEncoding(type));
 				}
 				else {
-					final Parameter<Long> longParameter = new HummingbirdParameter<Long>(qualifiedName, name, shortDescription, longDescription);
-					if (LOG.isDebugEnabled()) {
-						LOG.debug("Adding Long argument " + longParameter.getName());
+					final Parameter<Long> longParameter;
+					if(paramProps != null && !paramProps.isReadOnly()) {
+						longParameter = new HummingbirdParameter<Long>(qualifiedName, name, shortDescription, longDescription);
 					}
+					else{
+						final long initialValue = type.getInitialValue();
+						longParameter = new ProtectedValueParameter<Long>(qualifiedName, name, shortDescription, longDescription, initialValue);
+						if (LOG.isTraceEnabled()) {
+							LOG.trace("Adding ProtectedValueParameter Long argument " + longParameter.getName());
+						}
+					}
+
 					longArguments.put(longParameter.getQualifiedName(), longParameter);
 					encodings.put(longParameter.getQualifiedName(), createXtceIntegerEncoding(type));
 				}
@@ -448,7 +465,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 						stringParameter = new ProtectedValueParameter<String>(qualifiedName, name, shortDescription, longDescription, initialValue);
 					}
 					else {
-						String msg = "Hbird only supports read only parameter or argument types when an initial value is supplied";
+						final String msg = "Hbird only supports read only parameter or argument types when an initial value is supplied";
 						LOG.error(msg);
 						throw new InvalidSpaceSystemDefinitionException(msg);
 					}
@@ -463,7 +480,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 				encodings.put(stringParameter.getQualifiedName(), createXtceStringEncoding(type));
 			}
 			else {
-				String msg = "Unknown or unsupported TC argument (parameter) type: " + parameterTypeRef
+				final String msg = "Unknown or unsupported TC argument (parameter) type: " + parameterTypeRef
 						+ ". A parameter references an undeclared TC argument (parameter) type in the XTCE space system definition file.";
 				LOG.error(msg);
 				throw new InvalidSpaceSystemDefinitionException(msg);
@@ -698,7 +715,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		}
 		else {
 			// TODO Finish unsupported parameter types
-			String msg = "Could not find type for parameter "
+			final String msg = "Could not find type for parameter "
 					+ qualifiedName
 					+ ". Check the type ref for the parameter in the model definition file, you may be referencing an undelcared type ot simply have a typo. The other possibility is that you are referencing an unsupported type. Hummingbird currently only supports integer, long, string & binary parameters. ";
 			LOG.error(msg);
