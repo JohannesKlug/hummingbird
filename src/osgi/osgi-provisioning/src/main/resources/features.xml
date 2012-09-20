@@ -4,9 +4,12 @@
 		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		  xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.0.0 http://karaf.apache.org/xmlns/features/v1.0.0"
 		  name="Hbird">
+
+     	<repository>mvn:org.apache.camel.karaf/apache-camel/2.9.2/xml/features</repository>
     
 		<feature name="hbird-core" description="Hbird core component bundles" version="${version}">
 			<bundle start="false">mvn:org.apache.commons/com.springsource.org.apache.commons.lang/2.6.0</bundle>
+			<bundle start="false">mvn:org.apache.oro/com.springsource.org.apache.oro/2.0.8</bundle>
 			<bundle start="false">mvn:joda-time/joda-time/2.1</bundle>
 			<bundle start="false">mvn:com.googlecode.guava-osgi/guava-osgi/11.0.0</bundle>
 			<bundle start="false">mvn:org.hbird.core/commons/0.0.1-SNAPSHOT</bundle>
@@ -15,6 +18,7 @@
 		
 		<feature name="hbird-xtce" description="Hbird xtce space system bundles including OSGi service provision" version="${version}">
 			<feature>hbird-core</feature>
+			<feature>camel-core</feature>
 			<bundle start="false">mvn:org.hbird.core/xtce</bundle>
 			<bundle>mvn:org.hbird.osgi/xtce-osgi</bundle>
 		</feature>
@@ -82,7 +86,13 @@
 		<feature name="hbird-jersey" 
 				 description="Jersey for OSGi including dependencies" 
 				 version="1.13">
+			<feature>war</feature>
 			<feature>hbird-jackson</feature>
+			<bundle>mvn:org.springframework/org.springframework.core/3.1.2.RELEASE</bundle>
+			<bundle>mvn:org.springframework/org.springframework.aop/3.1.2.RELEASE</bundle>
+			<bundle>mvn:org.springframework/org.springframework.beans/3.1.2.RELEASE</bundle>
+			<bundle>mvn:org.springframework/org.springframework.context/3.1.2.RELEASE</bundle>
+			<bundle>mvn:org.springframework/org.springframework.web/3.1.2.RELEASE</bundle>
 			<bundle>mvn:org.codehaus.jettison/jettison/1.1</bundle>
 			<bundle>mvn:org.apache.felix/org.apache.felix.eventadmin/1.2.8</bundle>
 			<bundle>mvn:com.sun.jersey/jersey-core</bundle>
