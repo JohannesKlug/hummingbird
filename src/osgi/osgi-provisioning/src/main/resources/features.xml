@@ -121,7 +121,8 @@
 		<feature name="hbird-rotor-simulator" description="" version="${version}">
 			<feature>hbird-core</feature>
 			<feature>hbird-publisher</feature>
-			<bundle>mvn:org.hbird/rotor/0.0.1-SNAPSHOT</bundle>
+			<feature>camel-blueprint</feature>
+			<bundle start="false">mvn:org.hbird/rotor/0.0.1-SNAPSHOT</bundle>
 		</feature>
 		
 		<feature name="hbird-complete" description="A complete single container installation of hbird and core applications">

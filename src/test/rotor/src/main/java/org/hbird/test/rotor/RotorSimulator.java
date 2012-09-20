@@ -6,10 +6,14 @@ import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RotorSimulator {
 
 	private SpaceSystemPublisher publisher;
+	
+	private final static Logger LOG = LoggerFactory.getLogger(RotorSimulator.class);
 
 	public void setPublisher(SpaceSystemPublisher publisher) {
 		this.publisher = publisher;
@@ -66,6 +70,7 @@ public class RotorSimulator {
 	 * @throws UnknownParameterException
 	 */
 	public ParameterGroup tick() throws UnknownParameterGroupException, UnknownParameterException {
+		LOG.debug("tick");
 		DateTime now = new DateTime();
 		Duration moveTime = new Duration(lastMoved, now);
 
@@ -105,8 +110,10 @@ public class RotorSimulator {
 		ParameterGroup pg = null;
 		if (publisher != null) {
 			pg = publisher.getParameterGroup("Stock6.tm.PositionPayload");
-			pg.getIntegerParameter("Stock6.tm.PositionPayload.Azimuth").setValue((int) az);
-			pg.getIntegerParameter("Stock6.tm.PositionPayload.Elevation").setValue((int) el);
+			pg.getIntegerParameter("Stock6.tm.Azimuth").setValue((int) az);
+			pg.getIntegerParameter("Stock6.tm.Elevation").setValue((int) el);
+		} else {
+			LOG.error("Rotor Simulator can't construct telemetry because there is no publisher available.");
 		}
 		return pg;
 	}
