@@ -20,7 +20,6 @@
     	<module>xtce-osgi</module>
     	<module>commanding-osgi</module>
     	<module>osgi-provisioning</module>
-    	<module>web-ui</module>
     <module>rxtx-native-fragment</module>
   </modules>
 	
