@@ -6,6 +6,10 @@
 		  name="Hbird">
 
      	<repository>mvn:org.apache.camel.karaf/apache-camel/2.9.2/xml/features</repository>
+     	<repository>mvn:org.apache.camel.karaf/apache-camel/2.10.1/xml/features</repository>
+     	
+     	<repository>mvn:org.apache.activemq/activemq-karaf/5.5.0/xml/features</repository>
+     	<repository>mvn:org.apache.activemq/activemq-karaf/5.6.0/xml/features</repository>
     
 		<feature name="hbird-core" description="Hbird core component bundles" version="${version}">
 			<bundle start="false">mvn:org.apache.commons/com.springsource.org.apache.commons.lang/2.6.0</bundle>
@@ -14,11 +18,18 @@
 			<bundle start="false">mvn:com.googlecode.guava-osgi/guava-osgi/11.0.0</bundle>
 			<bundle start="false">mvn:org.hbird.core/commons/0.0.1-SNAPSHOT</bundle>
 			<bundle start="false">mvn:org.hbird.core/space-system-model/0.0.1-SNAPSHOT</bundle>
+			<feature version="2.10.1">camel-blueprint</feature>
+			<feature version="2.10.1">camel-spring</feature>
+			<feature version="2.10.1">camel-jms</feature>
+			<feature version="2.10.1">camel-stream</feature>
+			<feature version="5.5.0">activemq-blueprint</feature>
+			<feature version="5.5.0">activemq-spring</feature>
+			<feature version="5.5.0">activemq-web-console</feature>
+			<feature version="5.6.0">activemq-camel</feature>
 		</feature>
 		
 		<feature name="hbird-xtce" description="Hbird xtce space system bundles including OSGi service provision" version="${version}">
 			<feature>hbird-core</feature>
-			<feature>camel-core</feature>
 			<bundle start="false">mvn:org.hbird.core/xtce</bundle>
 			<bundle>mvn:org.hbird.osgi/xtce-osgi</bundle>
 		</feature>
@@ -87,14 +98,14 @@
 		<feature name="hbird-jersey" 
 				 description="Jersey for OSGi including dependencies" 
 				 version="1.14">
-			<feature>xml-specs-api</feature>
 			<feature>war</feature>
-			<bundle dependency="true">mvn:org.springframework/spring-core/3.1.2.RELEASE</bundle>
+			<feature>xml-specs-api</feature>
+ 			<bundle dependency="true">mvn:org.springframework/spring-core/3.0.7.RELEASE</bundle>
 			<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.aopalliance/1.0_6</bundle> <!-- required by spring-aop -->
-			<bundle dependency="true">mvn:org.springframework/spring-aop/3.1.2.RELEASE</bundle>
-			<bundle dependency="true">mvn:org.springframework/spring-beans/3.1.2.RELEASE</bundle>
-			<bundle dependency="true">mvn:org.springframework/spring-context/3.1.2.RELEASE</bundle>
-			<bundle dependency="true">mvn:org.springframework/spring-web/3.1.2.RELEASE</bundle>
+			<bundle dependency="true">mvn:org.springframework/spring-aop/3.0.7.RELEASE</bundle>
+			<bundle dependency="true">mvn:org.springframework/spring-beans/3.0.7.RELEASE</bundle>
+			<bundle dependency="true">mvn:org.springframework/spring-context/3.0.7.RELEASE</bundle>
+			<bundle dependency="true">mvn:org.springframework/spring-web/3.0.7.RELEASE</bundle>
 			<bundle dependency="true">mvn:org.codehaus.jettison/jettison/1.1</bundle>
 			<bundle dependency="true">mvn:org.apache.felix/org.apache.felix.eventadmin/1.2.8</bundle>
 			<bundle>mvn:com.sun.jersey/jersey-core/1.14</bundle>
@@ -122,7 +133,7 @@
 		<feature name="hbird-rotor-simulator" description="" version="${version}">
 			<feature>hbird-core</feature>
 			<feature>hbird-publisher</feature>
-			<feature>camel-blueprint</feature>
+			<feature version="2.10.1">camel-blueprint</feature>
 			<bundle start="false">mvn:org.hbird/rotor/0.0.1-SNAPSHOT</bundle>
 		</feature>
 		

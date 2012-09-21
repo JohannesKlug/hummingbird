@@ -9,11 +9,17 @@ Also, addurl has become repo-add.
 Install Karaf Webconsole if required (features:install webconsole)
 You can reach it at http://localhost:8181/system/console/
 
+*Important*:
+Swap  etc/jre.properties with the jre.properties.cxf file.
+If you forget to do this, Karaf's sysem bundle will export all kinds of javax.* packages, which conflict with what we're going to install ourselves.
+
 Hbird
 --------
+
+Tell Karaf where to find the Hbird software:
 features:addurl mvn:org.hbird.osgi/osgi-provisioning/0.0.1-SNAPSHOT/xml/features
 
-feature:install hbird-jersey
+Install all of Hbird:
 feature:install hbird-complete
 
 If you update the provisioning features file don't forget to refresh:
