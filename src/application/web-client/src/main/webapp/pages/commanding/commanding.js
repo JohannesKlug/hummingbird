@@ -1,15 +1,39 @@
 // The root URL for the RESTful services
 var rootURL = "http://localhost:8181/hbird/halcyon/";
 
+//TODO not worth it? maybe remove this cache and go with selectors on the forms arg list.
+var cmdArgs = [];
+
 jQuery(document).ready(function() {
+	// Set json as default content-type for ajax. Since we are only sending JSON it means we can use the shorthand post. 
+	$.ajaxSetup({
+	    contentType: "application/json"
+	});
+	
 	getAllowedCommandList();
+//	setupCmdFormValidation();
 });
+
+
+/**
+ * TODO all things validation.
+ */
+function setupCmdFormValidation() {
+	$("#cmdFormSubmitButton").attr("disabled", true);
+	var validator = $("#cmdConfigForm").validate(
+						{
+							submitHandler : function(form) {
+								$("#cmdFormSubmitButton").attr("disabled", false);
+							}
+						});
+}
 
 /**
  * Uses the RESTful web service @ Halcyon to get the list of all available commands
  * and then updates the client web command list.
  */
 function getAllowedCommandList() {
+	console.log("Retrieving allowed command list");
 	var jqxhr = $.getJSON(rootURL + "commanding/info");
 	
 	jqxhr.done(
@@ -20,12 +44,12 @@ function getAllowedCommandList() {
 }
 
 /**
- * Adds a command link to the commmand list given an array of CmdNames objects.
+ * Adds a command link to the command list given an array of CmdNames objects.
  * @see Halcyon project :: CommandListResource$CmdNames 
  * @param cmdList
  */
 function updateAllowedCommands(cmdList) {
-	console.log("[DEBUG - Commanding] - Received " + cmdList.length + " command(s)");
+	console.log("Updating command list");
 	$("#commandList").empty();
 	$.each(cmdList,
 		function(i) {
@@ -34,10 +58,18 @@ function updateAllowedCommands(cmdList) {
 	);
 }
 
+// TODO degrade to command page using href
+var staticCounter = 0;
 function addCommandLink(elementId, cmd) {
-	var html ="<li><a href=\"#\" onclick=\"openCmdDialog('" + cmd.qualifiedName + "', '" + cmd.name + "')\">" + cmd.name + "</a></li>";
-	console.log(html);
-	$("#" + elementId).append(html);
+	var element = $("#" + elementId);
+	var html ="<li><a id=cmd" + staticCounter + " href=\"#\">" + cmd.name + "</a></li>";
+	element.append(html);
+
+	$("#cmd" + staticCounter).click(function() {
+		openCmdDialog(cmd.qualifiedName, cmd.name);
+	});
+	
+	staticCounter++;
 }
 
 function openCmdDialog(qualifiedName, name) {
@@ -48,7 +80,7 @@ function openCmdDialog(qualifiedName, name) {
 	
 	jqxhr.done(
 		function(parsedResponse, statusText, jqXhr) {
-			console.log("Found command: " + jqXhr.responseText);
+			console.log("adding cmd: " + jqXhr.responseText);
 			cmd = jQuery.parseJSON(jqXhr.responseText);
 			addDescription(cmd);
 			
@@ -75,25 +107,87 @@ function openCmdDialog(qualifiedName, name) {
 			if(cmd.rawParameters!= null) {
 				// TODO impl
 			}
+			
+			$(cmdConfigForm).submit({cmd:cmd}, submitCommand);
 		}
 	);
 	
 	$("#cmdModal").reveal();
 }
 
-function clearAllArgs() {
-	$("#cmdArguments").empty();
+function submitCommand(event) {	
+	// Get the command object and populate the necessary parameter values
+	var cmd = event.data.cmd;
+	
+	console.log(cmd);
+	
+	$("#cmdArguments li").each(function(index, element) {
+		$(element).children("input").each(function(index, element) {
+			var input = $(element);
+			cmd = setValue(input.data("qualifiedName"), input.data("type"), input.val(), cmd);
+		});
+	});
+	
+	
+	var jsonString = JSON.stringify(cmd);
+	console.log("Submitting CMD; json = " + jsonString);
+	jQuery.post(rootURL + "commanding/sendcommand", jsonString, function(){}, "application/json");
+
+	return false;
 }
 
+function setValue(tgtQualifiedName, type, newValue, cmdObject) {
+	switch(type) {
+		case "integer":
+			$.each(cmdObject.integerParameters, function(i) {
+				if(cmdObject.integerParameters[i].qualifiedName === tgtQualifiedName) {
+					cmdObject.integerParameters[i].value = newValue;
+					console.log("Set value on cmd to: " + cmdObject.integerParameters[i].value);
+				}
+			});
+			break;
+		default:
+			console.log("Unsupported Type!");
+	}
+	
+	return cmd;
+}
+
+function validateCommandForm(cmd) {
+	
+}
+
+
+function clearAllArgs() {
+	$("#cmdArguments").empty();
+	cmdArgs.length = 0;
+}
+
+
+var staticArgCounter = 0;
 function addIntArgs(intArgs) {
-	var html;
+	var liHtml;
+	var inputHtml;
+
+	// for each integer parameter create a new list item and input field. Add metadata to input field 
+	// for use by other functions
 	$.each(intArgs, function(i) {
 		if(!intArgs[i].readOnly) {
 			console.log("Adding int arg" + intArgs[i].name);
-			html = "<li>" + intArgs[i].name + " <input type=test name=value/></li>"; 
-			$("#cmdArguments").append(html);
+			var id = "arg" + staticArgCounter;
+			
+			liHtml = "<li>" + intArgs[i].name + "</li>";
+			var liSelector = $(liHtml).appendTo($("#cmdArguments"));
+			
+			inputHtml = " <input id=" + id + " type=test class=required name=value/>";
+			var inputSelector = $(inputHtml).appendTo(liSelector);
+			
+			inputSelector.data("qualifiedName", intArgs[i].qualifiedName);
+			inputSelector.data("type", "integer");
 		}
 	});
+	
+	staticArgCounter++;
 }
 
 function addLongArgs(longArgs) {
@@ -101,10 +195,12 @@ function addLongArgs(longArgs) {
 	$.each(longArgs, function(i) {
 		if(!longArgs[i].readOnly) {
 			console.log("Adding long arg" + longArgs[i].name);
-			html = "<li>" + longArgs[i].name + " <input type=test name=value/></li>";
+			html = "<li>" + longArgs[i].name + " <input id=arg" + staticArgCounter + " type=test class=required name=value/></li>";
 			$("#cmdArguments").append(html);
+			$(id).addClass("longParameter");
 		}
 	});
+	staticArgCounter++;
 }
 
 function addStringArgs(stringArgs) {
@@ -112,11 +208,14 @@ function addStringArgs(stringArgs) {
 	$.each(stringArgs, function(i) {
 		if(!stringArgs[i].readOnly) {
 			console.log("Adding string arg" + stringArgs[i].name);
-			html = "<li>" + stringArgs[i].name + " <input type=test name=value/></li>";
+			html = "<li>" + stringArgs[i].name + " <input id=arg" + staticArgCounter + " type=test class=required name=value/></li>";
 			$("#cmdArguments").append(html);
+			$(id).addClass("stringParameter");
 		}
 	});
+	staticArgCounter++;
 }
+
 
 function addDescription() {
 	if(cmd.longDescription != null) {

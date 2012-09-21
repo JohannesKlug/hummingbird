@@ -90,7 +90,7 @@ function createPlotLine(plotName) {
 	// If we got here there is no plot for plotName so we create a new one.
 	
 	var line = new TimeSeries();
-	plotLines[plotName] = line
+	plotLines[plotName] = line;
 	var colour = "rgb(" + Math.round(Math.random()*256) + ", "+Math.round(Math.random()*256)+", "+Math.round(Math.random()*256)+")";
 	console.log(colour);
 	smoothie.addTimeSeries(line, {strokeStyle:colour, lineWidth:3});
