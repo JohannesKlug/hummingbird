@@ -4,9 +4,12 @@
 		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		  xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.0.0 http://karaf.apache.org/xmlns/features/v1.0.0"
 		  name="Hbird">
+
+     	<repository>mvn:org.apache.camel.karaf/apache-camel/2.9.2/xml/features</repository>
     
 		<feature name="hbird-core" description="Hbird core component bundles" version="${version}">
 			<bundle start="false">mvn:org.apache.commons/com.springsource.org.apache.commons.lang/2.6.0</bundle>
+			<bundle start="false">mvn:org.apache.oro/com.springsource.org.apache.oro/2.0.8</bundle>
 			<bundle start="false">mvn:joda-time/joda-time/2.1</bundle>
 			<bundle start="false">mvn:com.googlecode.guava-osgi/guava-osgi/11.0.0</bundle>
 			<bundle start="false">mvn:org.hbird.core/commons/0.0.1-SNAPSHOT</bundle>
@@ -15,6 +18,7 @@
 		
 		<feature name="hbird-xtce" description="Hbird xtce space system bundles including OSGi service provision" version="${version}">
 			<feature>hbird-core</feature>
+			<feature>camel-core</feature>
 			<bundle start="false">mvn:org.hbird.core/xtce</bundle>
 			<bundle>mvn:org.hbird.osgi/xtce-osgi</bundle>
 		</feature>
@@ -71,8 +75,9 @@
 		</feature>
 		
 		<feature name="hbird-jackson"
-				 description="Jackson JSON framework"
+				 description="Jackson JSON framework - only to be imported by hbird-jersey, not to be installed standalone!"
 				 version="1.9.9">
+				 <!-- FIXME this requires javax.ws.rs to install from a clean Karaf. It can only be installed through hbird-jersey -->
 			<bundle>mvn:org.codehaus.jackson/jackson-core-asl</bundle>
 			<bundle>mvn:org.codehaus.jackson/jackson-mapper-asl</bundle>
 			<bundle>mvn:org.codehaus.jackson/jackson-jaxrs</bundle>
@@ -82,12 +87,19 @@
 		<feature name="hbird-jersey" 
 				 description="Jersey for OSGi including dependencies" 
 				 version="1.13">
-			<feature>hbird-jackson</feature>
-			<bundle>mvn:org.codehaus.jettison/jettison/1.1</bundle>
-			<bundle>mvn:org.apache.felix/org.apache.felix.eventadmin/1.2.8</bundle>
+			<!-- <feature>war</feature> -->
+			<bundle dependency="true">mvn:org.springframework/spring-core/3.1.2.RELEASE</bundle>
+			<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.aopalliance/1.0_6</bundle> <!-- required by spring-aop -->
+			<bundle dependency="true">mvn:org.springframework/spring-aop/3.1.2.RELEASE</bundle>
+			<bundle dependency="true">mvn:org.springframework/spring-beans/3.1.2.RELEASE</bundle>
+			<bundle dependency="true">mvn:org.springframework/spring-context/3.1.2.RELEASE</bundle>
+			<bundle dependency="true">mvn:org.springframework/spring-web/3.1.2.RELEASE</bundle>
+			<bundle dependency="true">mvn:org.codehaus.jettison/jettison/1.1</bundle>
+			<bundle dependency="true">mvn:org.apache.felix/org.apache.felix.eventadmin/1.2.8</bundle>
 			<bundle>mvn:com.sun.jersey/jersey-core</bundle>
 			<bundle>mvn:com.sun.jersey/jersey-server</bundle>
 			<bundle>mvn:com.sun.jersey/jersey-servlet</bundle>
+			<feature>hbird-jackson</feature>
 			<bundle>mvn:com.sun.jersey/jersey-json</bundle>
 			<bundle>mvn:com.sun.jersey.contribs/jersey-spring</bundle>
 		</feature>
@@ -109,7 +121,8 @@
 		<feature name="hbird-rotor-simulator" description="" version="${version}">
 			<feature>hbird-core</feature>
 			<feature>hbird-publisher</feature>
-			<bundle>mvn:org.hbird/rotor/0.0.1-SNAPSHOT</bundle>
+			<feature>camel-blueprint</feature>
+			<bundle start="false">mvn:org.hbird/rotor/0.0.1-SNAPSHOT</bundle>
 		</feature>
 		
 		<feature name="hbird-complete" description="A complete single container installation of hbird and core applications">

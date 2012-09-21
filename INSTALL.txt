@@ -9,7 +9,11 @@ download and extract 2.2.9
 NOTE!!! If you experiment with the snapshot of Karaf 3 beware that the features command has been migrated to feature (no trailing s!).
 Also, addurl has become repo-add.
 
-Setup webconsole as required
+Setup webconsole as required (features:install webconsole)
+
+If you just want Hummingbird, skip straight to the Hbird section in this document.
+
+
 
 CXF
 -------
@@ -65,10 +69,14 @@ webconsole.jmx.password=karaf
 Hbird
 --------
 Add following config files to $karaf/etc
-	xtceSpaceSystemModelFactorySerivce.cfg
+	xtceSpaceSystemModelFactorySerivce.cfg (FIXME not required anymore?)
+	org.hbird.osgi.xtceosgi.xtceSpaceSystemModelFactoryUpdater.cfg
 
 features:addurl mvn:org.hbird.osgi/osgi-provisioning/0.0.1-SNAPSHOT/xml/features
 Add as required
+
+uninstall mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jaxb-impl/2.2.1.1_2
+bundle:install mvn:org.apache.oro/com.springsource.org.apache.oro/2.0.8
 
 If you update the provisioning features file don't forget to refresh.
 features:refreshurl mvn:org.hbird.osgi/osgi-provisioning/0.0.1-SNAPSHOT/xml/features
