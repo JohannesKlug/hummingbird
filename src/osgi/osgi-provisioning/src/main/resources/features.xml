@@ -86,8 +86,9 @@
 		
 		<feature name="hbird-jersey" 
 				 description="Jersey for OSGi including dependencies" 
-				 version="1.13">
-			<!-- <feature>war</feature> -->
+				 version="1.14">
+			<feature>xml-specs-api</feature>
+			<feature>war</feature>
 			<bundle dependency="true">mvn:org.springframework/spring-core/3.1.2.RELEASE</bundle>
 			<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.aopalliance/1.0_6</bundle> <!-- required by spring-aop -->
 			<bundle dependency="true">mvn:org.springframework/spring-aop/3.1.2.RELEASE</bundle>
@@ -96,12 +97,12 @@
 			<bundle dependency="true">mvn:org.springframework/spring-web/3.1.2.RELEASE</bundle>
 			<bundle dependency="true">mvn:org.codehaus.jettison/jettison/1.1</bundle>
 			<bundle dependency="true">mvn:org.apache.felix/org.apache.felix.eventadmin/1.2.8</bundle>
-			<bundle>mvn:com.sun.jersey/jersey-core</bundle>
-			<bundle>mvn:com.sun.jersey/jersey-server</bundle>
-			<bundle>mvn:com.sun.jersey/jersey-servlet</bundle>
+			<bundle>mvn:com.sun.jersey/jersey-core/1.14</bundle>
+			<bundle>mvn:com.sun.jersey/jersey-server/1.14</bundle>
+			<bundle>mvn:com.sun.jersey/jersey-servlet/1.14</bundle>
 			<feature>hbird-jackson</feature>
-			<bundle>mvn:com.sun.jersey/jersey-json</bundle>
-			<bundle>mvn:com.sun.jersey.contribs/jersey-spring</bundle>
+			<bundle>mvn:com.sun.jersey/jersey-json/1.14</bundle>
+			<bundle>mvn:com.sun.jersey.contribs/jersey-spring/1.14</bundle>
 		</feature>
 		
 		<feature name="hbird-halcyon" description="Hbird Web backend" version="${version}">
