@@ -31,6 +31,9 @@ public class OsgiLiveTmStreamingWebSocket implements WebSocket, LiveTmReceiver {
 	public void onOpen(final Connection connection) {
 		System.out.println("Open socket requested.");
 		this.connection = connection;
+
+		// Register this as a LiveTmReceiver so the blueprint instantiated class used in the camel route can
+		// route to this (a servlet managed classes). Whiteboard pattern!
 		final BundleContext bc = FrameworkUtil.getBundle(LiveTmWhiteboardDistributer.class).getBundleContext();
 		registration = bc.registerService(LiveTmReceiver.class.getName(), this, null);
 	}

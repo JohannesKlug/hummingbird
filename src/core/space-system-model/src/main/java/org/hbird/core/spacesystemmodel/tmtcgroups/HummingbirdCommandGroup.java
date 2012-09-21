@@ -1,7 +1,10 @@
 package org.hbird.core.spacesystemmodel.tmtcgroups;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.hbird.core.commons.tmtc.CommandGroup;
 
+@XmlRootElement()
 public class HummingbirdCommandGroup extends HummingbirdTmTcGroup implements CommandGroup {
 	private static final long serialVersionUID = 1524916260066501266L;
 

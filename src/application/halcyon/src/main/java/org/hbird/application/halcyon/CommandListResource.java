@@ -50,9 +50,9 @@ public class CommandListResource extends OsgiReady {
 
 	private final void cacheAllowedCommands() {
 		final CommandInformationService cmdInfoService = (CommandInformationService) getServiceTracker().getService();
+		allowedCommandNames = new ArrayList<CmdNames>();
 		if (cmdInfoService != null) {
 			// allowedCommandNames = new HashMap<String, String>();
-			allowedCommandNames = new ArrayList<CmdNames>();
 			for (final CommandGroup cmd : cmdInfoService.getAllAllowedCommands()) {
 				allowedCommandNames.add(new CmdNames(cmd.getQualifiedName(), cmd.getName()));
 			}
@@ -82,7 +82,9 @@ public class CommandListResource extends OsgiReady {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 	public List<CmdNames> getCommandListJson() {
-		System.out.println("Halcyon rest service, CommandListResource, returning allowed command name list as json");
+		if (LOG.isTraceEnabled()) {
+			LOG.trace("Halcyon rest service, CommandListResource, returning allowed command name list as json");
+		}
 		cacheAllowedCommands();
 		if (allowedCommandNames.size() == 0) {
 			LOG.info("No commands to return!");
