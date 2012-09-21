@@ -7,7 +7,10 @@
        http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
        
 
-	<reference-list id="liveTmReceiverServices" interface="org.hbird.application.halcyon.tm.LiveTmReceiver">
+	<reference-list id="liveTmReceiverServices" 
+					interface="org.hbird.application.halcyon.tm.LiveTmReceiver" 
+					availability="optional"
+					activation="lazy">
 	</reference-list>
 
 	<bean id="parameterListener" class="org.hbird.application.halcyon.tm.LiveTmWhiteboardDistributer">
