@@ -29,13 +29,17 @@ public class OsgiReady {
 		serviceTracker = new ServiceTracker(HalcyonServletContextListener.getBundleContext(), serviceInterface, null) {
 			@Override
 			public Object addingService(final ServiceReference reference) {
-				LOG.debug(serviceInterface + " from bundle " + reference.getBundle().getBundleId() + " service being added to jersey resource");
+				if (LOG.isTraceEnabled()) {
+					LOG.trace(serviceInterface + " from bundle " + reference.getBundle().getBundleId() + " service being added to jersey resource");
+				}
 				return super.addingService(reference);
 			}
 
 			@Override
 			public void remove(final ServiceReference reference) {
-				LOG.debug(serviceInterface + " from bundle " + reference.getBundle().getBundleId() + " service being removed from jersey resource");
+				if (LOG.isTraceEnabled()) {
+					LOG.trace(serviceInterface + " from bundle " + reference.getBundle().getBundleId() + " service being removed from jersey resource");
+				}
 				super.remove(reference);
 			}
 

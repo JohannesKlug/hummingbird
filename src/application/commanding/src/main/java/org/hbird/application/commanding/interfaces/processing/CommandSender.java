@@ -2,8 +2,7 @@ package org.hbird.application.commanding.interfaces.processing;
 
 import org.hbird.core.commons.tmtc.CommandGroup;
 
-public interface Commanding {
+public interface CommandSender {
 
-	void acceptCommand(CommandGroup cmd);
-
+	void sendCommand(CommandGroup cmd);
 }

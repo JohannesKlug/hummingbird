@@ -2,6 +2,8 @@ package org.hbird.core.commons.tmtcgroups;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.hbird.core.commons.tmtc.CommandGroup;
 
 @XmlRootElement()
@@ -10,7 +12,9 @@ public class HummingbirdCommandGroup extends HummingbirdTmTcGroup implements Com
 
 	private long sendTime;
 
-	public HummingbirdCommandGroup(final String qualifiedName, final String name, final String shortDescription, final String longDescription) {
+	@JsonCreator
+	public HummingbirdCommandGroup(@JsonProperty("qualifiedName") final String qualifiedName, @JsonProperty("name") final String name,
+			@JsonProperty("shortDescription") final String shortDescription, @JsonProperty("longDescription") final String longDescription) {
 		super(qualifiedName, name, shortDescription, longDescription);
 	}
 

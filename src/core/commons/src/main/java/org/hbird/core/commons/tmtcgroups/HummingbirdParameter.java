@@ -2,6 +2,9 @@ package org.hbird.core.commons.tmtcgroups;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.hbird.core.commons.tmtc.Parameter;
 
 /**
@@ -12,6 +15,8 @@ import org.hbird.core.commons.tmtc.Parameter;
  * @author Mark Doyle
  */
 @XmlRootElement()
+@JsonIgnoreProperties(ignoreUnknown = true)
+// FIXME This will cause problems if we need to deserialise subclasses such as protectedvalueparameter
 public class HummingbirdParameter<T> implements Parameter<T> {
 	private static final long serialVersionUID = 4723421286629148964L;
 
@@ -31,7 +36,9 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	 * @param endianness
 	 * @param encoding
 	 */
-	public HummingbirdParameter(final String qualifiedName, final String name, final String shortDescription, final String longDescription) {
+	@JsonCreator
+	public HummingbirdParameter(@JsonProperty("qualifiedName") final String qualifiedName, @JsonProperty("name") final String name,
+			@JsonProperty("shortDescription") final String shortDescription, @JsonProperty("longDescription") final String longDescription) {
 		this.name = name;
 		this.qualifiedName = qualifiedName;
 		this.shortDescription = shortDescription;

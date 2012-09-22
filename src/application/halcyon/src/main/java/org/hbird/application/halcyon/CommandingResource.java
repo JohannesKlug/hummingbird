@@ -18,7 +18,7 @@ import com.sun.jersey.spi.resource.Singleton;
 public class CommandingResource extends OsgiReady {
 	private final static Logger LOG = LoggerFactory.getLogger(CommandingResource.class);
 
-	private static final String COMMANDING_SERVICE_NAME = "org.hbird.application.commanding.interfaces.info.Commanding";
+	private static final String COMMANDING_SERVICE_NAME = "org.hbird.application.commanding.interfaces.processing.Commanding";
 
 	public CommandingResource() {
 		super(COMMANDING_SERVICE_NAME);
@@ -31,10 +31,10 @@ public class CommandingResource extends OsgiReady {
 		final Commanding cmdService = (Commanding) getServiceTracker().getService();
 
 		if(cmdService != null) {
-			cmdService.sendCommand(cmd);
+			cmdService.acceptCommand(cmd);
 		}
 		else {
-			LOG.error("No commanding service available. Cannot send commmand " + cmd);
+			LOG.error("No commanding service available. Cannot send commmand " + cmd.getQualifiedName());
 		}
 	}
 

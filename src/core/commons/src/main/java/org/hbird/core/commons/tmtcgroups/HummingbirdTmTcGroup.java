@@ -9,7 +9,6 @@ import java.util.Map;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.core.commons.tmtc.ParameterGroupReport;
 import org.hbird.core.commons.tmtc.TmTcGroup;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 
@@ -31,7 +30,6 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 	protected Map<String, Parameter<String>> stringParameters;
 	protected Map<String, Parameter<Byte[]>> rawParameters;
 
-	protected final ParameterGroupReport parameterReport = new ParameterGroupReport();
 
 	/** List of Parameters belonging to this Group */
 
@@ -117,7 +115,6 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 		}
 		this.integerParameters.put(qualifiedName, parameter);
 		this.parameters.put(qualifiedName, parameter);
-		this.parameterReport.incrementIntCount();
 	}
 
 	@Override
@@ -129,7 +126,6 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 		}
 		this.longParameters.put(qualifiedName, parameter);
 		this.parameters.put(qualifiedName, parameter);
-		this.parameterReport.incrementLongCount();
 	}
 
 	@Override
@@ -141,7 +137,6 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 		}
 		this.bigDecimalParameters.put(qualifiedName, parameter);
 		this.parameters.put(qualifiedName, parameter);
-		this.parameterReport.incrementBigDecimalCount();
 	}
 
 	@Override
@@ -153,7 +148,6 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 		}
 		this.floatParameters.put(qualifiedName, parameter);
 		this.parameters.put(qualifiedName, parameter);
-		this.parameterReport.incrementFloatCount();
 	}
 
 	@Override
@@ -165,7 +159,6 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 		}
 		this.doubleParameters.put(qualifiedName, parameter);
 		this.parameters.put(qualifiedName, parameter);
-		this.parameterReport.incrementDoubleCount();
 	}
 
 	@Override
@@ -177,7 +170,6 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 		}
 		this.stringParameters.put(qualifiedName, parameter);
 		this.parameters.put(qualifiedName, parameter);
-		this.parameterReport.incrementStringCount();
 	}
 
 	@Override
@@ -189,13 +181,8 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 		}
 		this.rawParameters.put(qualifiedName, parameter);
 		this.parameters.put(qualifiedName, parameter);
-		this.parameterReport.incrementRawCount();
 	}
 
-	@Override
-	public ParameterGroupReport getParameterReport() {
-		return this.parameterReport;
-	}
 
 	@Override
 	public Parameter<Integer> getIntegerParameter(final String qualifiedName) throws UnknownParameterException {

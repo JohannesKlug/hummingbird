@@ -14,12 +14,11 @@ import org.hbird.core.commons.tmtc.ParameterGroup;
 public class HummingbirdParameterGroup extends HummingbirdTmTcGroup implements ParameterGroup {
 	private static final long serialVersionUID = -6877917071118156741L;
 
+	private long timeStamp = 0;
+
 	public HummingbirdParameterGroup(final String qualifiedName, final String name, final String shortDescription, final String longDescription) {
 		super(qualifiedName, name, shortDescription, longDescription);
 	}
-
-
-	private long timeStamp = 0;
 
 	@Override
 	public long getTimeStamp() {
@@ -30,6 +29,4 @@ public class HummingbirdParameterGroup extends HummingbirdTmTcGroup implements P
 	public void setTimeStamp(final long timeStamp) {
 		this.timeStamp = timeStamp;
 	}
-
-
 }

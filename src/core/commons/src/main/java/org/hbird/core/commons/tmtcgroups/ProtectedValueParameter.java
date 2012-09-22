@@ -1,14 +1,22 @@
 package org.hbird.core.commons.tmtcgroups;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 
 public class ProtectedValueParameter<T> extends HummingbirdParameter<T> {
 	private static final long serialVersionUID = -7017970975497905485L;
 
-	public ProtectedValueParameter(final String qualifiedName, final String name, final String shortDescription, final String longDescription,
+	// @formatter:off
+	public ProtectedValueParameter(
+			@JsonProperty("qualifiedName") final String qualifiedName,
+			@JsonProperty("name") final String name,
+			@JsonProperty("shortDescription") final String shortDescription,
+			@JsonProperty("longDescription") final String longDescription,
 			final T initialValue) {
 		super(qualifiedName, name, shortDescription, longDescription);
 		this.value = initialValue;
 	}
+	// @formatter:on
 
 	@Override
 	public void setValue(final T value) {

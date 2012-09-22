@@ -12,42 +12,41 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TmTcGenerator {
-	
+
 	private static final Logger LOG = LoggerFactory.getLogger(TmTcGenerator.class);
-	
-	private SpaceSystemModel model;
-	
-    @EndpointInject(uri = "seda:tmSource")
-    ProducerTemplate template;
-	
-	public TmTcGenerator(SpaceSystemModel model) {
+
+	private final SpaceSystemModel model;
+
+	@EndpointInject(uri = "seda:tmSource")
+	ProducerTemplate template;
+
+	public TmTcGenerator(final SpaceSystemModel model) {
 		this.model = model;
 	}
-	
-	
+
 	public ParameterGroup generateGroup() {
 		ParameterGroup groupToEncode = null;
 		try {
 			groupToEncode = model.getParameterGroup("Thunderbird.tm.RocketPayload");
-			if (groupToEncode.getParameterReport().getNumberIntParameters() >0) {
-				for (Parameter<Integer> parameter : groupToEncode.getIntegerParameters().values()) {
+			if (groupToEncode.getIntegerParameters() != null) {
+				for (final Parameter<Integer> parameter : groupToEncode.getIntegerParameters().values()) {
 					LOG.debug("Setting value for:" + parameter.getQualifiedName());
 					parameter.setValue(getRandomPositiveNumber(model.getEncodings().get(parameter.getQualifiedName()).getSizeInBits()));
 				}
 			}
 		}
-		catch (UnknownParameterGroupException e) {
+		catch (final UnknownParameterGroupException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
-		
+
 		template.sendBody(groupToEncode);
 		return groupToEncode;
-		
+
 	}
-	
-	private int getRandomPositiveNumber(int sizeInBits) {
-		Random rand = new Random();
+
+	private int getRandomPositiveNumber(final int sizeInBits) {
+		final Random rand = new Random();
 		return (int) (rand.nextInt() % Math.pow(2, sizeInBits));
 	}
 

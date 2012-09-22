@@ -12,7 +12,7 @@
 					availability="optional"
 					activation="lazy">
 	</reference-list>
-
+	
 	<bean id="parameterListener" class="org.hbird.application.halcyon.tm.LiveTmWhiteboardDistributer">
 		<property name="receivers" ref="liveTmReceiverServices"></property>
 	</bean>
