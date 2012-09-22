@@ -9,7 +9,7 @@ import java.util.Map;
 
 import org.hbird.application.calibration.PolynomialCalibrator;
 import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.core.spacesystemmodel.parameters.HummingbirdParameter;
+import org.hbird.core.commons.tmtcgroups.HummingbirdParameter;
 import org.junit.Test;
 
 public class PolynomialCalibratorTest {

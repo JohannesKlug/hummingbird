@@ -11,14 +11,14 @@ import org.hbird.core.commons.tmtc.CommandGroup;
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
+import org.hbird.core.commons.tmtcgroups.HummingbirdParameter;
+import org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup;
+import org.hbird.core.commons.tmtcgroups.TmTcGroups;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.core.spacesystemmodel.exceptions.ParameterNotInModelException;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
-import org.hbird.core.spacesystemmodel.parameters.HummingbirdParameter;
-import org.hbird.core.spacesystemmodel.tmtcgroups.HummingbirdParameterGroup;
-import org.hbird.core.spacesystemmodel.tmtcgroups.TmTcGroups;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

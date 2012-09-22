@@ -2,7 +2,7 @@ package org.hbird.parameterarchive.mongodb;
 
 import org.hbird.application.parameterarchive.interfaces.ParameterArchiver;
 import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.core.spacesystemmodel.parameters.HummingbirdParameter;
+import org.hbird.core.commons.tmtcgroups.HummingbirdParameter;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Ignore;

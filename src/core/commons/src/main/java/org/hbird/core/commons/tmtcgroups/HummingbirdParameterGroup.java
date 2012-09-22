@@ -1,4 +1,4 @@
-package org.hbird.core.spacesystemmodel.tmtcgroups;
+package org.hbird.core.commons.tmtcgroups;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

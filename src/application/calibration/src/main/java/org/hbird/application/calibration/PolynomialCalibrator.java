@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
-import org.hbird.core.spacesystemmodel.parameters.HummingbirdParameter;
-import org.hbird.core.spacesystemmodel.tmtcgroups.HummingbirdParameterGroup;
+import org.hbird.core.commons.tmtcgroups.HummingbirdParameter;
+import org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup;
 
 public class PolynomialCalibrator {
 	

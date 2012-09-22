@@ -1,4 +1,4 @@
-package org.hbird.core.spacesystemmodel.parameters;
+package org.hbird.core.commons.tmtcgroups;
 
 
 public class ProtectedValueParameter<T> extends HummingbirdParameter<T> {

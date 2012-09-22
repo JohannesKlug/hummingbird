@@ -1,4 +1,4 @@
-package org.hbird.core.spacesystemmodel.tmtcgroups;
+package org.hbird.core.commons.tmtcgroups;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -245,13 +245,13 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 		return p;
 	}
 
-	void validateQualifiedName(final String qualifiedName) throws NullPointerException {
+	public void validateQualifiedName(final String qualifiedName) throws NullPointerException {
 		if (qualifiedName == null) {
 			throw new NullPointerException("Parameter qualifed name is null");
 		}
 	}
 
-	void validateParameterNotNull(final Parameter<?> p, final String qualifiedName) throws UnknownParameterException {
+	public void validateParameterNotNull(final Parameter<?> p, final String qualifiedName) throws UnknownParameterException {
 		if (p == null) {
 			throw new UnknownParameterException(qualifiedName);
 		}

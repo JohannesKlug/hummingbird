@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.hbird.application.parameterarchive.interfaces.ParameterRetriever;
 import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.core.spacesystemmodel.parameters.HummingbirdParameter;
+import org.hbird.core.commons.tmtcgroups.HummingbirdParameter;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Ignore;

@@ -32,9 +32,6 @@
 				</executions>
 				<configuration>
 					<instructions>
-						<Export-Package>
-							org.hbird.core.spacesystemmodel.*,
-						</Export-Package>
 						<Import-Package>
 							*,
 							javax.xml.bind.annotation

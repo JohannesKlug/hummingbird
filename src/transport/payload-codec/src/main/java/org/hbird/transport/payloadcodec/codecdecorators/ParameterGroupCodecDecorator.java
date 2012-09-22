@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.commons.tmtcgroups.TmTcGroups;
 import org.hbird.transport.payloadcodec.codecdecorators.number.IntegerCodecFactory;
 import org.hbird.transport.payloadcodec.codecdecorators.number.LongCodecFactory;
 import org.hbird.transport.payloadcodec.codecdecorators.string.StringCodecFactory;
@@ -14,7 +15,6 @@ import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeExcept
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
-import org.hbird.core.spacesystemmodel.tmtcgroups.TmTcGroups;
 
 import com.rits.cloning.Cloner;
 
