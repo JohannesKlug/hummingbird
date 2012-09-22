@@ -27,6 +27,9 @@ features:refreshurl mvn:org.hbird.osgi/osgi-provisioning/0.0.1-SNAPSHOT/xml/feat
 
 Optional: Add following config file to $karaf/etc/
 	org.hbird.osgi.xtceosgi.xtceSpaceSystemModelFactoryUpdater.cfg
+and add the following config option to it:
+	spaceSystemModelFilename = /path/to/an/xtce/file.xml
+A sample XTCE file can be found in our Stock6 project: https://github.com/markjohndoyle/Stock6
 
 
 In the current version of our features.xml, Camel is referenced, so you do not need to install it manually. The following is left for reference:
