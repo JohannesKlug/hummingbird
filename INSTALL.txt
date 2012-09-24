@@ -34,7 +34,7 @@ A sample XTCE file can be found in our Stock6 project: https://github.com/markjo
 
 In the current version of our features.xml, Camel is referenced, so you do not need to install it manually. The following is left for reference:
 	
-Camel
+Camel ############# IS THIS CAMEL SECTION REQUIRED? CAMEL IS INSTALLED UNDER HBIRD-COMPLETE. ###############
 --------------
 features:addurl mvn:org.apache.camel.karaf/apache-camel/2.9.2/xml/features
 KARAF3 alert: You need 2.10.0 camel features.
