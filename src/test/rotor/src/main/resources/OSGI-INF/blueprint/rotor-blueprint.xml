@@ -22,6 +22,7 @@
 				From there, we could encode it in all the different formats we support, and output those on topics again.
 				We will host a running instance on the internet, so that people can play with it (command it, see TM, etc). 
 			-->
+			<to uri="activemq:rotorParameterGroups" />
 			
 			<!-- FIXME Needs a command route into the simulator bean! -->
 		</route>
