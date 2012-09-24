@@ -9,7 +9,9 @@ Also, addurl has become repo-add.
 Install Karaf Webconsole if required (features:install webconsole)
 You can reach it at http://localhost:8181/system/console/
 
-*Important*:
+##########################################
+##		IMPORTANT		##
+##########################################
 Swap  etc/jre.properties with the jre.properties.cxf file.
 If you forget to do this, Karaf's sysem bundle will export all kinds of javax.* packages, which conflict with what we're going to install ourselves.
 
@@ -34,7 +36,7 @@ A sample XTCE file can be found in our Stock6 project: https://github.com/markjo
 
 In the current version of our features.xml, Camel is referenced, so you do not need to install it manually. The following is left for reference:
 	
-Camel
+Camel ############# IS THIS CAMEL SECTION REQUIRED? CAMEL IS INSTALLED UNDER HBIRD-COMPLETE. ###############
 --------------
 features:addurl mvn:org.apache.camel.karaf/apache-camel/2.9.2/xml/features
 KARAF3 alert: You need 2.10.0 camel features.
