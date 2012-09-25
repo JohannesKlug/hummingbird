@@ -37,8 +37,10 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	 * @param encoding
 	 */
 	@JsonCreator
-	public HummingbirdParameter(@JsonProperty("qualifiedName") final String qualifiedName, @JsonProperty("name") final String name,
-			@JsonProperty("shortDescription") final String shortDescription, @JsonProperty("longDescription") final String longDescription) {
+	public HummingbirdParameter(@JsonProperty("qualifiedName") final String qualifiedName,
+								@JsonProperty("name") final String name,
+								@JsonProperty("shortDescription") final String shortDescription,
+								@JsonProperty("longDescription") final String longDescription) {
 		this.name = name;
 		this.qualifiedName = qualifiedName;
 		this.shortDescription = shortDescription;
