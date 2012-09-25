@@ -1,5 +1,6 @@
 package org.hbird.test.rotor;
 
+import org.hbird.core.commons.tmtc.CommandGroup;
 import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
@@ -115,6 +116,12 @@ public class RotorSimulator {
 			LOG.error("Rotor Simulator can't construct telemetry because there is no publisher available.");
 		}
 		return pg;
+	}
+	
+	public void slewRotor(CommandGroup cg) throws UnknownParameterException {
+		int targetAz = cg.getIntegerParameter("TargetAzimuth").getValue();
+		int targetEl = cg.getIntegerParameter("TargetElevation").getValue();
+		slewRotor(targetAz, targetEl);
 	}
 
 }
