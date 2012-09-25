@@ -18,14 +18,15 @@
 			<bundle start="false">mvn:com.googlecode.guava-osgi/guava-osgi/11.0.0</bundle>
 			<bundle start="false">mvn:org.hbird.core/commons/0.0.1-SNAPSHOT</bundle>
 			<bundle start="false">mvn:org.hbird.core/space-system-model/0.0.1-SNAPSHOT</bundle>
-			<feature version="2.10.1">camel-blueprint</feature>
-			<feature version="2.10.1">camel-spring</feature>
-			<feature version="2.10.1">camel-jms</feature>
-			<feature version="2.10.1">camel-stream</feature>
+			<feature version="${camel.version}">camel-blueprint</feature>
+			<feature version="${camel.version}">camel-spring</feature>
+			<feature version="${camel.version}">camel-jms</feature>
+			<feature version="${camel.version}">camel-stream</feature>
+			<feature version="${camel.version}">camel-mina</feature>
 			<feature version="5.5.0">activemq-blueprint</feature>
 			<feature version="5.5.0">activemq-spring</feature>
 			<feature version="5.5.0">activemq-web-console</feature>
-			<feature version="5.6.0">activemq-camel</feature>
+			<feature>activemq-camel</feature>
 		</feature>
 		
 		<feature name="hbird-xtce" description="Hbird xtce space system bundles including OSGi service provision" version="${version}">
@@ -133,14 +134,16 @@
 		<feature name="hbird-rotor-simulator" description="" version="${version}">
 			<feature>hbird-core</feature>
 			<feature>hbird-publisher</feature>
-			<feature version="2.10.1">camel-blueprint</feature>
+			<feature version="${camel.version}">camel-blueprint</feature>
 			<bundle start="false">mvn:org.hbird/rotor/0.0.1-SNAPSHOT</bundle>
 		</feature>
 		
-		<feature name="hbird-complete" description="A complete single container installation of hbird and core applications">
+		<feature name="hbird-complete" description="A complete single container installation of hbird and core applications" version="${version}">
+			<feature>hbird-jersey</feature>
 			<feature>hbird-core</feature>
 			<feature>hbird-xtce</feature>
 			<feature>hbird-publisher</feature>
+			<feature>hbird-transport</feature>
 			<feature>hbird-commanding</feature>
 			<feature>hbird-halcyon</feature>
 			<feature>hbird-web-client</feature>
