@@ -4,8 +4,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.hbird.core.commons.tmtc.CommandGroup;
 import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.commons.tmtcgroups.TmTcGroups;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.payloadcodec.AbstractClonerCodecDecorator;
@@ -17,31 +17,19 @@ import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeExcept
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
 
-public final class ParameterGroupCodecDecorator extends AbstractClonerCodecDecorator {
+public class CommandGroupCodecDecorator extends AbstractClonerCodecDecorator {
 
-	public ParameterGroupCodecDecorator(final Map<String, Encoding> encodings) {
+	public CommandGroupCodecDecorator(final Map<String, Encoding> encodings) {
 		super(encodings);
 	}
 
-	/**
-	 * Remember this takes place at initialisation or reconfiguration, not in the parameter processing chain. It's a
-	 * static configuration.
-	 * 
-	 * @param parameterGroups
-	 * @return
-	 * @throws NoEncodingException
-	 * @throws UnsupportedParameterEncodingException
-	 * @throws UnknownParameterEncodingException
-	 * @throws UnexpectedParameterTypeException
-	 */
-	public Map<String, ParameterGroup> decorateParameterGroups(final Map<String, ParameterGroup> parameterGroups) throws NoEncodingException,
+	public Map<String, CommandGroup> decorateParameterGroups(final Map<String, CommandGroup> commandGroups) throws NoEncodingException,
 			UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException {
-
 		// Create a new cloned Map with the existing parameters in. This list will be decorated and returned.
-		Map<String, ParameterGroup> codecAwareParameterGroups = cloner.deepClone(parameterGroups);
+		Map<String, CommandGroup> codecAwareParameterGroups = cloner.deepClone(commandGroups);
 
 		// the list contains all the parameters acquired from the space system model since it was created from it!
-		for (ParameterGroup pg : codecAwareParameterGroups.values()) {
+		for (CommandGroup pg : codecAwareParameterGroups.values()) {
 			// Iterate over the parameter group integer parameters, decorating each one with codec functionality
 			// and replacing the original Parameter in the new list.
 
@@ -89,4 +77,5 @@ public final class ParameterGroupCodecDecorator extends AbstractClonerCodecDecor
 
 		return codecAwareParameterGroups;
 	}
+
 }

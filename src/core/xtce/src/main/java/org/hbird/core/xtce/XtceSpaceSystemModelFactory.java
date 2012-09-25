@@ -45,6 +45,7 @@ import org.hbird.core.generatedcode.xtce.ParameterSetTypeItem;
 import org.hbird.core.generatedcode.xtce.ParameterTypeSet;
 import org.hbird.core.generatedcode.xtce.ParameterTypeSetTypeItem;
 import org.hbird.core.generatedcode.xtce.SequenceContainer;
+import org.hbird.core.generatedcode.xtce.SizeRangeInCharacters;
 import org.hbird.core.generatedcode.xtce.SpaceSystem;
 import org.hbird.core.generatedcode.xtce.StringParameterType;
 import org.hbird.core.generatedcode.xtce.TelemetryMetaData;
@@ -123,7 +124,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.hbird.core.xtce.SpaceSystemModelFactory#createSpaceSystemModel(java.lang.String)
 	 */
 	@Override
@@ -187,7 +188,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 	/**
 	 * Creates the generated class model from the XML file.
-	 *
+	 * 
 	 * @param spacesystemmodelFilename
 	 * @return
 	 * @throws FileNotFoundException
@@ -195,7 +196,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	 * @throws MarshalException
 	 */
 	private final static SpaceSystem unmarshallXtceXmlSpaceSystem(final String spacesystemmodelFilename) throws MarshalException, ValidationException,
-	FileNotFoundException {
+			FileNotFoundException {
 		SpaceSystem spaceSystem = null;
 		final XMLContext context = new XMLContext();
 
@@ -230,7 +231,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	/**
 	 * Bit nasty we have another method but we are working with XML. The generated code creates two separate classes
 	 * TelemetryMetaData and CommandMetaData.
-	 *
+	 * 
 	 * @param commandMetaData
 	 * @throws InvalidSpaceSystemDefinitionException
 	 */
@@ -457,6 +458,13 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			// string types
 			else if(xtceType.getStringParameterType() != null) {
 				final StringParameterType type = xtceType.getStringParameterType();
+				SizeRangeInCharacters sizeRange = type.getSizeRangeInCharacters();
+				if(sizeRange == null) {
+					final String msg = "Hbird only supports String arguments that have a size range defined. The maximum range will correspond to the maximum string length. Type: " + type.getName() + " violates this.";
+					LOG.error(msg);
+					throw new InvalidSpaceSystemDefinitionException(msg);
+				}
+				
 				Parameter<String> stringParameter;
 				if(paramProps.isReadOnly()) {
 					final String initialValue = type.getInitialValue();
@@ -492,9 +500,9 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	/**
 	 * Create all ParameterGroups. In this iteration we create the parameter groups, but do not create the references
 	 * between them as the referenced objects do not yet exit.
-	 *
+	 * 
 	 * @throws InvalidSpaceSystemDefinitionException
-	 *
+	 * 
 	 * @throws UnsupportedXtceConstructException
 	 */
 	private final void createAllParameterGroups() throws InvalidSpaceSystemDefinitionException {
@@ -522,9 +530,9 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	/**
 	 * Create all ParameterGroups. In this iteration we create the parameter groups, but do not create the references
 	 * between them as the referenced objects do not yet exit.
-	 *
+	 * 
 	 * @throws InvalidSpaceSystemDefinitionException
-	 *
+	 * 
 	 * @throws UnsupportedXtceConstructException
 	 */
 	private final void createAllCommandGroups() throws InvalidSpaceSystemDefinitionException {
@@ -552,7 +560,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	/**
 	 * @throws InvalidSpaceSystemDefinitionException
 	 * @throws UnsupportedXtceConstructException
-	 *
+	 * 
 	 */
 	private final void populateParameterGroupRestrictions(final String qualifiedName, final SequenceContainer parameterGroupContainer)
 			throws InvalidSpaceSystemDefinitionException {
@@ -726,7 +734,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	/**
 	 * Injects the data into the model using reflection. This means we don't have to pollute the Space System Model
 	 * interface with lots of setters.
-	 *
+	 * 
 	 * @throws IllegalArgumentException
 	 * @throws IllegalAccessException
 	 */
@@ -764,8 +772,9 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 	/**
 	 * Checks the parameter and returns the name if valid.
-	 *
+	 * 
 	 * TODO This is for future support of argument types.
+	 * 
 	 * @param item
 	 * @return
 	 * @throws InvalidSpaceSystemDefinitionException
@@ -818,7 +827,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 	/**
 	 * Checks the parameter and returns the name if valid.
-	 *
+	 * 
 	 * @param item
 	 * @return
 	 * @throws InvalidSpaceSystemDefinitionException
@@ -871,7 +880,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 	/**
 	 * Covers Java Integers and Longs
-	 *
+	 * 
 	 * @param intParamType
 	 * @return
 	 * @throws InvalidSpaceSystemDefinitionException
@@ -928,7 +937,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 	/**
 	 * Covers Java Floats and Doubles.
-	 *
+	 * 
 	 * @param type
 	 * @return
 	 * @throws InvalidSpaceSystemDefinitionException
@@ -955,12 +964,15 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 				encoding.setBinaryRepresentation(BinaryRepresentation.MILSTD_1750A);
 				break;
 			default:
-				throw new InvalidSpaceSystemDefinitionException("Invalid float encoding in type " + type);
+				throw new InvalidSpaceSystemDefinitionException("Invalid float encoding in float type " + type.getName());
 		}
 		return encoding;
 	}
 
 	final static Encoding createXtceStringEncoding(final StringParameterType type) throws InvalidSpaceSystemDefinitionException {
+		final int UFT8_CHAR_BIT_LENGTH = 8;
+		final int UFT16_CHAR_BIT_LENGTH = 16;
+
 		final Encoding encoding = new Encoding();
 		if (type.getCharacterWidth() == null) {
 			// fall back to default encoding
@@ -970,15 +982,19 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			switch (type.getCharacterWidth()) {
 				case VALUE_8:
 					encoding.setBinaryRepresentation(BinaryRepresentation.UTF8);
-					// TODO - 27.03.2012 kimmell - encoding.setSizeInBits(); - one to four bytes - what's the correct
-					// value in here?
+					// FIXME Possible loss of data in int cast. Why the hell anybody would have a long length string in
+					// their TC or TM is anybodies guess!
+					encoding.setSizeInBits((int) type.getSizeRangeInCharacters().getMax() * UFT8_CHAR_BIT_LENGTH);
 					break;
 				case VALUE_16:
 					encoding.setBinaryRepresentation(BinaryRepresentation.UTF16);
-					// TODO - 27.03.2012 kimmell - encoding.setSizeInBits(); - what's the correct value in here?
+					// FIXME Possible loss of data in int cast. Why the hell anybody would have a long length string in
+					// their TC or TM is anybodies guess!
+					encoding.setSizeInBits((int) type.getSizeRangeInCharacters().getMax() * UFT16_CHAR_BIT_LENGTH);
 					break;
 				default:
-					throw new InvalidSpaceSystemDefinitionException("Invalid string encoding type " + type);
+					// encoding.setBinaryRepresentation(BinaryRepresentation.ASCII); TODO valid?
+					throw new InvalidSpaceSystemDefinitionException("Invalid string character width for String type: " + type.getName());
 			}
 		}
 
@@ -996,8 +1012,8 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	}
 
 	public void setSpaceSystemModelFilename(final String spaceSystemModelFilename) {
-		if(LOG.isDebugEnabled()) {
-			LOG.debug("Changing SpaceSystemModelFilename to: " + spaceSystemModelFilename);
+		if (LOG.isTraceEnabled()) {
+			LOG.trace("Changing SpaceSystemModelFilename to: " + spaceSystemModelFilename);
 		}
 		this.spaceSystemModelFilename = spaceSystemModelFilename;
 	}

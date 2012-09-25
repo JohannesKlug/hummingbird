@@ -7,13 +7,16 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 import org.hbird.core.commons.data.GenericPayload;
+import org.hbird.core.commons.tmtc.CommandGroup;
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.commons.tmtc.TmTcGroup;
 import org.hbird.core.commons.tmtcgroups.TmTcGroups;
 import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.commons.util.BytesUtility;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
+import org.hbird.transport.payloadcodec.codecdecorators.CommandGroupCodecDecorator;
 import org.hbird.transport.payloadcodec.codecdecorators.ParameterGroupCodecDecorator;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.NoEncodingException;
@@ -28,25 +31,47 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 
 	protected Map<String, ParameterGroup> parameterGroups = null;
 	private Map<String, ParameterGroup> codecAwareParameterGroups = null;
+
+	protected Map<String, CommandGroup> commandGroups = null;
+	private Map<String, CommandGroup> codecAwareCommandGroups = null;
+
 	protected final Map<String, Encoding> encodings;
 	protected final Map<String, List<String>> restrictions;
 
-
-	public InMemoryPayloadCodec(final Map<String, ParameterGroup> parameterGroups, final Map<String, Encoding> encodings, final Map<String, List<String>> restrictions) {
+	public InMemoryPayloadCodec(final Map<String, ParameterGroup> parameterGroups, final Map<String, CommandGroup> commandGroups,
+			final Map<String, Encoding> encodings, final Map<String, List<String>> restrictions) {
 		this.parameterGroups = parameterGroups;
+		this.commandGroups = commandGroups;
 		this.encodings = encodings;
 		this.restrictions = restrictions;
 
-		if(LOG.isTraceEnabled()) {
-			LOG.trace("Constructed with " + parameterGroups.size() + " parameterGroups, " + encodings.size() + " encodings, and " + restrictions.size() + " restrictions");
+		if (LOG.isTraceEnabled()) {
+			LOG.trace("Constructed with " + parameterGroups.size() + " parameterGroups, " + encodings.size() + " encodings, and " + restrictions.size()
+					+ " restrictions");
 		}
 
-		final ParameterGroupCodecDecorator decorator = new ParameterGroupCodecDecorator(this.encodings);
+		final ParameterGroupCodecDecorator parameterGroupDecorator = new ParameterGroupCodecDecorator(this.encodings);
+		final CommandGroupCodecDecorator commandGroupDecorator = new CommandGroupCodecDecorator(this.encodings);
 
 		try {
-			this.codecAwareParameterGroups = decorator.decorateParameterGroups(parameterGroups);
+			if (parameterGroups != null) {
+				this.codecAwareParameterGroups = parameterGroupDecorator.decorateParameterGroups(parameterGroups);
+			}
+			else {
+				LOG.debug("No parameter groups to decorate");
+			}
 			if (LOG.isTraceEnabled()) {
 				LOG.trace("Parameter groups have been cloned and decorated with codec aware parameters");
+			}
+
+			if (commandGroups != null) {
+				this.codecAwareCommandGroups = commandGroupDecorator.decorateParameterGroups(commandGroups);
+			}
+			else {
+				LOG.debug("No command groups to decorate");
+			}
+			if (LOG.isTraceEnabled()) {
+				LOG.trace("Command groups have been cloned and decorated with codec aware parameters");
 			}
 		}
 		catch (final NoEncodingException e) {
@@ -66,7 +91,6 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 			e.printStackTrace();
 		}
 	}
-
 
 	@Override
 	public ParameterGroup decode(final byte[] payload, final String payloadLayoutId, final long timeStamp) throws UnknownParameterGroupException {
@@ -142,15 +166,16 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 	}
 
 	@Override
-	public GenericPayload encodeToGenericPayload(final ParameterGroup parameterGroup) {
-		final BitSet encoded = new BitSet();
-
-		final String undecoratedGroupName = parameterGroup.getName();
+	public GenericPayload encodeToGenericPayload(final TmTcGroup parameterGroup) {
+		if (LOG.isTraceEnabled()) {
+			LOG.trace("Encoding TMTC Group " + parameterGroup.getQualifiedName() + " to GenericPayload");
+		}
+		final String undecoratedGroupName = parameterGroup.getQualifiedName();
 		ParameterGroup decoratedGroup = null;
 		// for each parameter group in the decorated parameter groups...
 		for (final ParameterGroup pg : codecAwareParameterGroups.values()) {
 			// if we find the equivalent group we must transfer the set values
-			if (StringUtils.equals(pg.getName(), undecoratedGroupName)) {
+			if (StringUtils.equals(pg.getQualifiedName(), undecoratedGroupName)) {
 				decoratedGroup = pg;
 
 				// Integers
@@ -185,7 +210,13 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 			}
 		}
 
+		if (decoratedGroup == null) {
+			LOG.error("Could not find codec decorated TmTcGroup for " + parameterGroup.getQualifiedName());
+			return null; // FIXME mid-method return is Gaben.
+		}
+
 		// Carry out the encode
+		final BitSet encoded = new BitSet();
 		int count = 0;
 		int offset = 0;
 		int previousSize = 0;
@@ -215,7 +246,9 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		}
 
 		// GenericPayload encodedGroup = new GenericPayload(encodedBytes, layoutId); // FIXME this is crap, says Mark.
-		final GenericPayload encodedGroup = new GenericPayload(encodedBytes, layoutId, System.currentTimeMillis()); // FIXME this is crap, says Mark. JK 2011-11-12: added timeStamp. Can't remember why this is crap? Me neither :\
+		// FIXME 2011-11-12: added timeStamp. Can't remember why this is crap? Me neither :\
+		// We should probably remove this; nobody remembers why it was deemed crap. Perhaps it's good!
+		final GenericPayload encodedGroup = new GenericPayload(encodedBytes, layoutId, System.currentTimeMillis());
 		return encodedGroup;
 	}
 

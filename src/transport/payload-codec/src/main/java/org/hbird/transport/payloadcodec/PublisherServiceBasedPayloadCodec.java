@@ -4,14 +4,15 @@ import java.util.BitSet;
 
 import org.hbird.core.commons.data.GenericPayload;
 import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.commons.tmtc.TmTcGroup;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 
 /**
  * TODO publisher update mechanism, the publisher needs to be able to update the payload codec.
- *
+ * 
  * @author Mark Doyle
- *
+ * 
  */
 public class PublisherServiceBasedPayloadCodec implements PayloadCodec {
 
@@ -19,7 +20,7 @@ public class PublisherServiceBasedPayloadCodec implements PayloadCodec {
 	private SpaceSystemPublisher publisher;
 
 	public void cacheModelInformation() {
-		codec = new InMemoryPayloadCodec(publisher.getParameterGroups(), publisher.getEncodings(), publisher.getRestrictions());
+		codec = new InMemoryPayloadCodec(publisher.getParameterGroups(), publisher.getCommands(), publisher.getEncodings(), publisher.getRestrictions());
 	}
 
 	public void setPublisher(final SpaceSystemPublisher publisher) {
@@ -47,7 +48,7 @@ public class PublisherServiceBasedPayloadCodec implements PayloadCodec {
 	}
 
 	@Override
-	public GenericPayload encodeToGenericPayload(final ParameterGroup parameterGroup) {
+	public GenericPayload encodeToGenericPayload(final TmTcGroup parameterGroup) {
 		return this.codec.encodeToGenericPayload(parameterGroup);
 	}
 

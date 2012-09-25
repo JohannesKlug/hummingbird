@@ -76,7 +76,7 @@ public class PayloadCodecTest {
 	public static void setUp() throws BitSetOperationException, UnsupportedParameterEncodingException, UnknownParameterEncodingException,
 			UnexpectedParameterTypeException, UnknownParameterGroupException, ParameterNotInGroupException {
 		ssm = new MockSpaceSystemModel();
-		codec = new InMemoryPayloadCodec(ssm.getParameterGroups(), ssm.getEncodings(), ssm.getAllPayloadRestrictions());
+		codec = new InMemoryPayloadCodec(ssm.getParameterGroups(), null, ssm.getEncodings(), ssm.getAllPayloadRestrictions());
 	}
 
 	@Test
@@ -158,7 +158,7 @@ public class PayloadCodecTest {
 	}
 
 	@Test
-	public void testEncodeParameterGroupBitSet() throws UnknownParameterGroupException, UnknownParameterException, BitSetOperationException{
+	public void testEncodeParameterGroupBitSet() throws UnknownParameterGroupException, UnknownParameterException, BitSetOperationException {
 		ParameterGroup testGroup = ssm.getParameterGroup(MockSpaceSystemModel.TEST_GROUP_QUALIFIED_NAME);
 
 		testGroup.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_QUALIFIED_NAME).setValue(SCID_VALUE_1);
