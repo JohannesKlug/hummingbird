@@ -12,10 +12,10 @@ import org.slf4j.LoggerFactory;
 public class RotorSimulator {
 
 	private SpaceSystemPublisher publisher;
-	
+
 	private final static Logger LOG = LoggerFactory.getLogger(RotorSimulator.class);
 
-	public void setPublisher(SpaceSystemPublisher publisher) {
+	public void setPublisher(final SpaceSystemPublisher publisher) {
 		this.publisher = publisher;
 	}
 
@@ -25,12 +25,12 @@ public class RotorSimulator {
 	private int targetAz = 0;
 	private int targetEl = 0;
 
-	private int maxAz = 450; // Value taken from the Yaesu G-5500 user manual
-	private int maxEl = 180; // Value taken from the Yaesu G-5500 user manual
+	private final int maxAz = 450; // Value taken from the Yaesu G-5500 user manual
+	private final int maxEl = 180; // Value taken from the Yaesu G-5500 user manual
 
-	private double azPerMs = 360 / 58 / 1000; // Values taken from the Yaesu
+	private final double azPerMs = 360 / 58 / 1000; // Values taken from the Yaesu
 												// G-5500 user manual
-	private double elPerMs = 180 / 67 / 1000; // Values taken from the Yaesu
+	private final double elPerMs = 180 / 67 / 1000; // Values taken from the Yaesu
 												// G-5500 user manual
 
 	private DateTime lastMoved = new DateTime();
@@ -64,13 +64,12 @@ public class RotorSimulator {
 	 * reading out of the simulator. It's therefore a bit of a lazy hack, but it gets around the need to have a
 	 * dedicated thread propagating the simulator model. The model is only updated when somebody observes it - if you
 	 * don't look, nothing happens.
-	 * 
+	 *
 	 * @return Current Az/El reading
 	 * @throws UnknownParameterGroupException
 	 * @throws UnknownParameterException
 	 */
 	public ParameterGroup tick() throws UnknownParameterGroupException, UnknownParameterException {
-		LOG.debug("tick");
 		DateTime now = new DateTime();
 		Duration moveTime = new Duration(lastMoved, now);
 

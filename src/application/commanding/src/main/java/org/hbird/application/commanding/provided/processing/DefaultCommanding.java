@@ -21,7 +21,9 @@ public class DefaultCommanding implements Commanding {
 
 	@Override
 	public void acceptCommand(final CommandGroup cmd) {
-		LOG.trace("Received command to send: " + cmd);
+		if(LOG.isTraceEnabled()) {
+			LOG.trace("Received command to send: " + cmd);
+		}
 		sender.sendCommand(cmd);
 	}
 
