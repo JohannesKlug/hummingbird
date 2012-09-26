@@ -17,7 +17,7 @@
 		<property name="receivers" ref="liveTmReceiverServices"></property>
 	</bean>
 
-	<camelContext id="halcyonCamelcontext" trace="false" xmlns="http://camel.apache.org/schema/blueprint">
+	<camelContext id="halcyonCamelContext" xmlns="http://camel.apache.org/schema/blueprint">
 		<route id="parametersIn">
 			<from uri="activemq:topic:parametersOut"/>
 			<to uri="bean:parameterListener"/>
