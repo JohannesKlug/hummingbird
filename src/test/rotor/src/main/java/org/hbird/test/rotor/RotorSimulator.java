@@ -29,10 +29,10 @@ public class RotorSimulator {
 	private final int maxAz = 450; // Value taken from the Yaesu G-5500 user manual
 	private final int maxEl = 180; // Value taken from the Yaesu G-5500 user manual
 
-	private final double azPerMs = 360 / 58 / 1000; // Values taken from the Yaesu
-												// G-5500 user manual
-	private final double elPerMs = 180 / 67 / 1000; // Values taken from the Yaesu
-												// G-5500 user manual
+	private final double azPerMs = 360d / 58 / 1000; // Values taken from the Yaesu
+	// G-5500 user manual
+	private final double elPerMs = 180d / 67 / 1000; // Values taken from the Yaesu
+	// G-5500 user manual
 
 	private DateTime lastMoved = new DateTime();
 
@@ -65,7 +65,7 @@ public class RotorSimulator {
 	 * reading out of the simulator. It's therefore a bit of a lazy hack, but it gets around the need to have a
 	 * dedicated thread propagating the simulator model. The model is only updated when somebody observes it - if you
 	 * don't look, nothing happens.
-	 *
+	 * 
 	 * @return Current Az/El reading
 	 * @throws UnknownParameterGroupException
 	 * @throws UnknownParameterException
@@ -74,10 +74,14 @@ public class RotorSimulator {
 		DateTime now = new DateTime();
 		Duration moveTime = new Duration(lastMoved, now);
 
+		LOG.trace("Target = " + targetAz + " :: " + targetEl);
+
 		lastMoved = now;
 
 		double azMoved = azPerMs * moveTime.getMillis();
 		double elMoved = elPerMs * moveTime.getMillis();
+
+		LOG.trace("azMoved=" + azMoved + ", elMoved=" + elMoved);
 
 		// move az
 		if (Math.abs(targetAz - az) < azMoved) {
@@ -106,21 +110,26 @@ public class RotorSimulator {
 				el -= elMoved;
 			}
 		}
+		LOG.trace("Current = " + az + " :: " + el);
 		// return current readings
 		ParameterGroup pg = null;
 		if (publisher != null) {
 			pg = publisher.getParameterGroup("Stock6.tm.PositionPayload");
 			pg.getIntegerParameter("Stock6.tm.Azimuth").setValue((int) az);
 			pg.getIntegerParameter("Stock6.tm.Elevation").setValue((int) el);
-		} else {
+		}
+		else {
 			LOG.error("Rotor Simulator can't construct telemetry because there is no publisher available.");
 		}
 		return pg;
 	}
-	
-	public void slewRotor(CommandGroup cg) throws UnknownParameterException {
-		int targetAz = cg.getIntegerParameter("TargetAzimuth").getValue();
-		int targetEl = cg.getIntegerParameter("TargetElevation").getValue();
+
+	public void slewRotor(final CommandGroup cg) throws UnknownParameterException {
+		if (LOG.isTraceEnabled()) {
+			LOG.trace("Received command group; slewing rotor");
+		}
+		int targetAz = cg.getIntegerParameter("Stock6.tc.Target Azimuth").getValue();
+		int targetEl = cg.getIntegerParameter("Stock6.tc.Target Elevation").getValue();
 		slewRotor(targetAz, targetEl);
 	}
 

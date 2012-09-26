@@ -18,8 +18,8 @@
 	
 	<bean id="jmsConnectionFactory" 
 	   class="org.apache.activemq.ActiveMQConnectionFactory">
-	   <property name="brokerURL" value="tcp://192.168.3.153:61616" />
-	   <!-- <property name="brokerURL" value="tcp://localhost:61616" /> -->
+<!-- 	   <property name="brokerURL" value="tcp://192.168.3.153:61616" /> -->
+	   <property name="brokerURL" value="tcp://localhost:61616" />
 	</bean>
 	
 	<bean id="pooledConnectionFactory" 
@@ -45,7 +45,7 @@
 	<camelContext xmlns="http://camel.apache.org/schema/blueprint"
 		xsi:schemaLocation="http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
 		<route id="rotorSimulatorRoute">
-			<from uri="timer://clock?fixedRate=true" />
+			<from uri="timer://clock?fixedRate=true&amp;period=50" />
 			<to uri="bean:rotorSimulator?method=tick" />
 			<!-- The idea is to route the parameterGroups returned from the sim to an activemq topic. 
 				From there, we could encode it in all the different formats we support, and output those on topics again.
@@ -54,6 +54,11 @@
 			<to uri="activemq:rotorParameterGroups" />
 			
 			<!-- FIXME Needs a command route into the simulator bean! -->
+		</route>
+		
+		<route>
+			<from uri="activemq:rotorSimCmds"></from>
+			<to uri="bean:rotorSimulator?method=slewRotor"></to>
 		</route>
 	</camelContext>
 
