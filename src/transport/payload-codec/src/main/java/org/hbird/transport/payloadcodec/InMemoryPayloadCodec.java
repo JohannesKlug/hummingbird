@@ -166,62 +166,38 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 	}
 
 	@Override
-	public GenericPayload encodeToGenericPayload(final TmTcGroup parameterGroup) {
+	public GenericPayload encodeToGenericPayload(final TmTcGroup tmtcGroup) {
 		if (LOG.isTraceEnabled()) {
-			LOG.trace("Encoding TMTC Group " + parameterGroup.getQualifiedName() + " to GenericPayload");
-		}
-		final String undecoratedGroupName = parameterGroup.getQualifiedName();
-		ParameterGroup decoratedGroup = null;
-		// for each parameter group in the decorated parameter groups...
-		for (final ParameterGroup pg : codecAwareParameterGroups.values()) {
-			// if we find the equivalent group we must transfer the set values
-			if (StringUtils.equals(pg.getQualifiedName(), undecoratedGroupName)) {
-				decoratedGroup = pg;
-
-				// Integers
-				final Map<String, Parameter<Integer>> integerParameters = parameterGroup.getIntegerParameters();
-				if (integerParameters != null) {
-					for (final Parameter<Integer> undecoratedParameter : integerParameters.values()) {
-						for (final Parameter<Integer> decoratedParameter : pg.getIntegerParameters().values()) {
-							if (StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
-								decoratedParameter.setValue(undecoratedParameter.getValue());
-							}
-						}
-					}
-				}
-
-				// Longs
-				final Map<String, Parameter<Long>> longParameters = parameterGroup.getLongParameters();
-				if (longParameters != null) {
-					for (final Parameter<Long> undecoratedParameter : longParameters.values()) {
-						for (final Parameter<Long> decoratedParameter : pg.getLongParameters().values()) {
-							if (StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
-								decoratedParameter.setValue(undecoratedParameter.getValue());
-							}
-						}
-					}
-				}
-
-				// FIXME Support for other types
-
-				// We have transfered the values to the correct group so we can
-				// exit the loop
-				break;
-			}
+			LOG.trace("Encoding TMTC Group " + tmtcGroup.getQualifiedName() + " to GenericPayload");
 		}
 
-		if (decoratedGroup == null) {
-			LOG.error("Could not find codec decorated TmTcGroup for " + parameterGroup.getQualifiedName());
-			return null; // FIXME mid-method return is Gaben.
+		// FIXME Bit inefficient to search through both groups when commanding is majority of use-case.
+		final String undecoratedGroupName = tmtcGroup.getQualifiedName();
+		TmTcGroup decoratedCommandGroup = findInCodecCommandGroups(undecoratedGroupName);
+		TmTcGroup decoratedParameterGroup = findInCodecParameterGroups(undecoratedGroupName);
+
+		if (decoratedParameterGroup != null) {
+			InMemoryPayloadCodec.setValuesInCodecGroup(tmtcGroup, decoratedParameterGroup);
+			return encodeTmTcGroup(decoratedParameterGroup);
 		}
 
+		if (decoratedCommandGroup != null) {
+			InMemoryPayloadCodec.setValuesInCodecGroup(tmtcGroup, decoratedCommandGroup);
+			return encodeTmTcGroup(decoratedCommandGroup);
+		}
+
+		// FIXME Exception rather than null?
+		return null;
+	}
+
+	private final GenericPayload encodeTmTcGroup(final TmTcGroup tmTcGroup) {
 		// Carry out the encode
 		final BitSet encoded = new BitSet();
 		int count = 0;
 		int offset = 0;
 		int previousSize = 0;
 		int totalSize = 0;
-		for (final Parameter<?> p : decoratedGroup.getAllParameters().values()) {
+		for (final Parameter<?> p : tmTcGroup.getAllParameters().values()) {
 			if (LOG.isTraceEnabled()) {
 				LOG.trace("Encoding parameter " + p.getName());
 			}
@@ -236,7 +212,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		}
 
 		final byte[] encodedBytes = BitSetUtility.toByteArray(encoded, totalSize);
-		final List<String> layoutIdList = restrictions.get(parameterGroup.getQualifiedName());
+		final List<String> layoutIdList = restrictions.get(tmTcGroup.getQualifiedName());
 		String layoutId = "";
 		if (layoutIdList != null) {
 			layoutId = layoutIdList.get(0);
@@ -248,8 +224,65 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		// GenericPayload encodedGroup = new GenericPayload(encodedBytes, layoutId); // FIXME this is crap, says Mark.
 		// FIXME 2011-11-12: added timeStamp. Can't remember why this is crap? Me neither :\
 		// We should probably remove this; nobody remembers why it was deemed crap. Perhaps it's good!
+
+		if (LOG.isTraceEnabled()) {
+			LOG.trace("Final encoded bytes = " + BytesUtility.decimalDump(encodedBytes));
+		}
 		final GenericPayload encodedGroup = new GenericPayload(encodedBytes, layoutId, System.currentTimeMillis());
 		return encodedGroup;
+	}
+
+	/**
+	 * TODO This fact that this can be declared static could indicate that is doesn't necessarily belong in this class.
+	 * Check it out.
+	 * 
+	 * @param tmtcGroup
+	 * @param decoratedTmTcGroup
+	 */
+	private static void setValuesInCodecGroup(final TmTcGroup tmtcGroup, final TmTcGroup decoratedTmTcGroup) {
+		// Integers
+		final Map<String, Parameter<Integer>> integerParameters = tmtcGroup.getIntegerParameters();
+		if (integerParameters != null) {
+			for (final Parameter<Integer> undecoratedParameter : integerParameters.values()) {
+				for (final Parameter<Integer> decoratedParameter : decoratedTmTcGroup.getIntegerParameters().values()) {
+					if (StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
+						decoratedParameter.setValue(undecoratedParameter.getValue());
+					}
+				}
+			}
+		}
+
+		// Longs
+		final Map<String, Parameter<Long>> longParameters = tmtcGroup.getLongParameters();
+		if (longParameters != null) {
+			for (final Parameter<Long> undecoratedParameter : longParameters.values()) {
+				for (final Parameter<Long> decoratedParameter : decoratedTmTcGroup.getLongParameters().values()) {
+					if (StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
+						decoratedParameter.setValue(undecoratedParameter.getValue());
+					}
+				}
+			}
+		}
+
+		// FIXME Support for other types
+	}
+
+	private ParameterGroup findInCodecParameterGroups(final String undecoratedGroupName) {
+		if (codecAwareParameterGroups != null) {
+			return codecAwareParameterGroups.get(undecoratedGroupName);
+		}
+		else {
+			return null;
+		}
+	}
+
+	private CommandGroup findInCodecCommandGroups(final String undecoratedGroupName) {
+		if (codecAwareCommandGroups != null) {
+			return codecAwareCommandGroups.get(undecoratedGroupName);
+		}
+		else {
+			return null;
+		}
 	}
 
 	@Override

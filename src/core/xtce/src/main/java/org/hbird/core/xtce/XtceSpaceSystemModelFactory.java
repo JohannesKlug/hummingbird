@@ -337,6 +337,13 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			// If it's a string type ...
 			else if (xtceType.getStringParameterType() != null) {
 				final StringParameterType type = xtceType.getStringParameterType();
+				SizeRangeInCharacters sizeRange = type.getSizeRangeInCharacters();
+				if(sizeRange == null) {
+					final String msg = "Hbird only supports String arguments that have a size range defined. The maximum range will correspond to the maximum string length. Type: " + type.getName() + " violates this.";
+					LOG.error(msg);
+					throw new InvalidSpaceSystemDefinitionException(msg);
+				}
+				
 				final Parameter<String> stringParameter = new HummingbirdParameter<String>(qualifiedName, name, shortDescription, longDescription);
 				LOG.debug("Adding String parameter {}", stringParameter.getQualifiedName());
 				stringParameters.put(stringParameter.getQualifiedName(), stringParameter);
@@ -977,6 +984,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		if (type.getCharacterWidth() == null) {
 			// fall back to default encoding
 			encoding.setBinaryRepresentation(DEFAULT_STRING_ENCODING);
+			encoding.setSizeInBits((int) type.getSizeRangeInCharacters().getMax() * UFT8_CHAR_BIT_LENGTH);
 		}
 		else {
 			switch (type.getCharacterWidth()) {
@@ -985,6 +993,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 					// FIXME Possible loss of data in int cast. Why the hell anybody would have a long length string in
 					// their TC or TM is anybodies guess!
 					encoding.setSizeInBits((int) type.getSizeRangeInCharacters().getMax() * UFT8_CHAR_BIT_LENGTH);
+					LOG.trace("Size in bits for UTF8 parameter " + type.getName() + " set to " + encoding.getSizeInBits());
 					break;
 				case VALUE_16:
 					encoding.setBinaryRepresentation(BinaryRepresentation.UTF16);

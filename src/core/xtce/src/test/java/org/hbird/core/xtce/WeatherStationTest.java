@@ -17,7 +17,7 @@ import org.junit.Test;
 
 /**
  * @author kimmell
- *
+ * 
  */
 public class WeatherStationTest {
 
@@ -114,7 +114,7 @@ public class WeatherStationTest {
 
 		final Encoding stationNameEncoding = encodings.get("WeatherStation.tm.StationName");
 		assertNotNull(stationNameEncoding);
-		assertEquals(0, stationNameEncoding.getSizeInBits());
+		assertEquals(8, stationNameEncoding.getSizeInBits());
 		assertEquals(BinaryRepresentation.UTF8, stationNameEncoding.getBinaryRepresentation());
 
 		final Encoding timestampEncoding = encodings.get("WeatherStation.tm.Timestamp");

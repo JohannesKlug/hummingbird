@@ -11,7 +11,9 @@
 			<IntegerParameterType name="Long" sizeInBits="64">
 				<UnitSet/>
 			</IntegerParameterType>
-			<StringParameterType name="String"/>
+			<StringParameterType name="String">
+				<SizeRangeInCharacters min="1" max="1"/>
+			</StringParameterType>
 			<BinaryParameterType name="Bytes"/>
 		
 		</ParameterTypeSet>
@@ -21,7 +23,7 @@
 			<Parameter parameterTypeRef="Int" name="Temperature"/>
 			<Parameter parameterTypeRef="Int" name="WindSpeed"/>
 			<Parameter parameterTypeRef="Int" name="WindDirection"/>
-			<Parameter parameterTypeRef="String" name="StationName"/>
+			<Parameter parameterTypeRef="String" name="StationName" />
 			<Parameter parameterTypeRef="Long" name="Timestamp"/>
 			<Parameter parameterTypeRef="Bytes" name="Image"/>
 <!-- 			<Parameter parameterTypeRef="Date" name="Timestamp"/> -->
