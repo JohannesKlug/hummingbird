@@ -36,8 +36,12 @@ public class RotorSimulator {
 
 	private DateTime lastMoved = new DateTime();
 
+	/**
+	 * 
+	 * @param targetAz
+	 * @param targetEl
+	 */
 	public void slewRotor(int targetAz, int targetEl) {
-
 		this.targetAz = targetAz;
 		// Sanity checks.
 		if (targetAz > maxAz) {
@@ -71,15 +75,15 @@ public class RotorSimulator {
 	 * @throws UnknownParameterException
 	 */
 	public ParameterGroup tick() throws UnknownParameterGroupException, UnknownParameterException {
-		DateTime now = new DateTime();
-		Duration moveTime = new Duration(lastMoved, now);
+		final DateTime now = new DateTime();
+		final Duration moveTime = new Duration(lastMoved, now);
 
 		LOG.trace("Target = " + targetAz + " :: " + targetEl);
 
 		lastMoved = now;
 
-		double azMoved = azPerMs * moveTime.getMillis();
-		double elMoved = elPerMs * moveTime.getMillis();
+		final double azMoved = azPerMs * moveTime.getMillis();
+		final double elMoved = elPerMs * moveTime.getMillis();
 
 		LOG.trace("azMoved=" + azMoved + ", elMoved=" + elMoved);
 
@@ -128,8 +132,8 @@ public class RotorSimulator {
 		if (LOG.isTraceEnabled()) {
 			LOG.trace("Received command group; slewing rotor");
 		}
-		int targetAz = cg.getIntegerParameter("Stock6.tc.Target Azimuth").getValue();
-		int targetEl = cg.getIntegerParameter("Stock6.tc.Target Elevation").getValue();
+		final int targetAz = cg.getIntegerParameter("Stock6.tc.Target Azimuth").getValue();
+		final int targetEl = cg.getIntegerParameter("Stock6.tc.Target Elevation").getValue();
 		slewRotor(targetAz, targetEl);
 	}
 
