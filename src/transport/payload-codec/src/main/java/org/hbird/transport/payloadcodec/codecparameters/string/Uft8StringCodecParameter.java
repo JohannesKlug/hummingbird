@@ -6,6 +6,7 @@ package org.hbird.transport.payloadcodec.codecparameters.string;
 import java.util.BitSet;
 
 import org.hbird.core.commons.tmtc.Parameter;
+import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.slf4j.Logger;
@@ -49,8 +50,26 @@ public class Uft8StringCodecParameter extends CodecParameter<String> {
 
 	@Override
 	public BitSet encodeToBitSet(final BitSet targetBitSet, final int offset) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Encoding value: " + getValue() + " to BitSet at offset " + offset);
+		}
+
+		final byte[] bytes = this.getValue().getBytes(Charsets.UTF_8);
+		final BitSet srcBitSet = BitSetUtility.fromByteArray(bytes);
+
+		// setting all bits to zero
+		targetBitSet.clear(offset, offset + encoding.getSizeInBits() - 1);
+
+		for (int i = offset; i < encoding.getSizeInBits(); i++) {
+			if (srcBitSet.get(i)) {
+				targetBitSet.set(i);
+			}
+			else {
+				targetBitSet.clear(i);
+			}
+		}
+
+		return targetBitSet;
 	}
 
 }
