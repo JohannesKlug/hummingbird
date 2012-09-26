@@ -6,10 +6,10 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Various byte utility methods used across the Hummingbird transport layer.
- *
+ * 
  * @author Johannes Klug (John Clever, lol)
  * @author Mark Doyle
- *
+ * 
  */
 public abstract class BytesUtility {
 
@@ -21,12 +21,12 @@ public abstract class BytesUtility {
 
 	/**
 	 * Here be magical byte work. Please don't mess it up :(
-	 *
+	 * 
 	 * <p>
-	 *
+	 * 
 	 * Combines a byte array representing a signed or unsigned number of size sizeInBits into a long value. This is
 	 * returned as a {@link Number} from which users can grab any primitive type value via the {@link Number} methods.
-	 *
+	 * 
 	 * @param b
 	 *            byte array that represents a number
 	 * @param sizeIntBits
@@ -115,10 +115,9 @@ public abstract class BytesUtility {
 		return value;
 	}
 
-
 	/**
 	 * Dumps the byte array into a string as a series of 8bit decimal numbers
-	 *
+	 * 
 	 * @param bytes
 	 * @return
 	 */
@@ -131,21 +130,21 @@ public abstract class BytesUtility {
 
 		return buffer.toString();
 	}
-	
-	public static byte[] binaryStringToByteArray(String binaryString) throws InvalidBinaryStringException {
-		if ((binaryString.length()%8) != 0) {
+
+	public static byte[] binaryStringToByteArray(final String binaryString) throws InvalidBinaryStringException {
+		if ((binaryString.length() % 8) != 0) {
 			throw new InvalidBinaryStringException(binaryString.length());
 		}
-		
-		int numberOfBytes = binaryString.length()/8;
-		byte[] result = new byte[numberOfBytes]; 
-		
-		for (int i=0; i<numberOfBytes; i++) {
-			String currentByteAsString = binaryString.substring(i*Byte.SIZE, (i+1)*Byte.SIZE);
+
+		int numberOfBytes = binaryString.length() / 8;
+		byte[] result = new byte[numberOfBytes];
+
+		for (int i = 0; i < numberOfBytes; i++) {
+			String currentByteAsString = binaryString.substring(i * Byte.SIZE, (i + 1) * Byte.SIZE);
 			int currentByteAsInt = Integer.parseInt(currentByteAsString, 2);
 			result[i] = (byte) (currentByteAsInt & 0xFF);
 		}
-		
+
 		return result;
 	}
 }
