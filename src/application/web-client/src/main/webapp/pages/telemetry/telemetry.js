@@ -7,9 +7,11 @@ var rootURL = "http://"+ host + ":" + port + url;
 var ws = $.gracefulWebSocket("ws://"+ host + ":" + port + url + "tmsock");
 
 var smoothie = new SmoothieChart({
-	labels: { 
-		fillStyle:'rgb(255, 255, 255)' 
-	}
+	labels : { 
+		fillStyle:'rgb(255, 255, 255)'
+	},
+	minValue: "0",
+	maxValue: "450"
 });
 
 
@@ -20,10 +22,12 @@ var parameterPlotsMap = [];
 
 
 jQuery(document).ready(function() {
+	$('body').layout({ applyDefaultStyles: true });
 	setupWebsocket();
 	$(".chzn-select").chosen(); // Activate chosen plugin
 	$(".chzn-select-deselect").chosen({allow_single_deselect:true});
 	$("#parametersList").change(parameterSelectionChanged);
+	$(".resizable").resizable();
 	getTelemetryList();
 	smoothie.streamTo(document.getElementById("tmRealTimeChart"), 1500);
 });

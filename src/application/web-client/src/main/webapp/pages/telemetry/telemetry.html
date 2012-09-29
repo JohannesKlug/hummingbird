@@ -18,10 +18,12 @@
 
 	<!-- CSS
   ================================================== -->
-	<link rel="stylesheet" href="../../css/base.css">
-	<link rel="stylesheet" href="../../css/skeleton.css">
-	<link rel="stylesheet" href="../../css/layout.css">
+<!-- 	<link rel="stylesheet" href="../../css/base.css"> -->
+<!-- 	<link rel="stylesheet" href="../../css/skeleton.css"> -->
+<!-- 	<link rel="stylesheet" href="../../css/layout.css"> -->
 	<link rel="stylesheet" href="../../js/chosen.css">
+	<link rel="Stylesheet" href="../../css/ui-lightness/jquery-ui-1.8.23.custom.css"/>	
+<!-- 	<link rel="Stylesheet" href="../../css/layout-default-latest.css"/>	 -->
 	<link rel="stylesheet" href="telemetry.css">
 
 	<!--[if lt IE 9]>
@@ -34,40 +36,49 @@
 	<link rel="apple-touch-icon" href="../../images/apple-touch-icon.png">
 	<link rel="apple-touch-icon" sizes="36x36" href="../../images/satelliteDish36.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="../../images/satelliteDish72.png">
-</head>
-
-<body>
+	
 	<script type="text/javascript" src="../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../js/jquery-ui-1.8.23.custom.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery.layout-latest.min.js"></script>
 	<script type="text/javascript" src="../../js/jquery.gracefulWebSocket.js"></script>
 	<script type="text/javascript" src="../../js/smoothie.js"></script>
 	<script type="text/javascript" src="../../js/chosen.jquery.min.js"></script>
 	<script type="text/javascript" src="telemetry.js"></script>
+</head>
 
-	<div class="container">
-	
-	<h1>Telemetry parameter list</h1>
-	<p id="telemetryList">Not received</p>
-	
-	<div class="six columns">
-	<form id="parameterForm">
+<body>
+	<div class="ui-layout-center">
 		<div>
-			<em>Parameters</em>
+			<canvas id="tmRealTimeChart"></canvas>
 		</div>
-		<div>
-			<select data-placeholder="Select parameters to chart" style="width:350px;" multiple class="chzn-select" id="parametersList" name="parametersList_form">
-				<option value=""></option>
-			</select>
-		</div>
-	</form>
 	</div>
-	
-	<div class="sixteen columns">
-		<canvas  id="tmRealTimeChart" width="800px" height="400px"></canvas>
+	<div class="ui-layout-north">
+		North
+	</div>
+	<div class="ui-layout-south">
+		South
+	</div>
+	<div class="ui-layout-east">
+		East
+	</div>
+	<div class="ui-layout-west">
+		<h1>Telemetry parameter list</h1>
+		<p id="telemetryList">Not received</p>
+		<div>
+		<form id="parameterForm">
+			<div>
+				<em>Parameters</em>
+			</div>
+			<div>
+				<select data-placeholder="Select parameters to chart" style="width:350px;" multiple class="chzn-select" id="parametersList" name="parametersList_form">
+					<option value=""></option>
+				</select>
+			</div>
+		</form>
+		</div>
 	</div>
 		
-	</div>
 </body>
-
 
 </html>
 

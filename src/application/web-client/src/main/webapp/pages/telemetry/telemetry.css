@@ -1,4 +1,4 @@
-.chartCanvas { 
-    width: 800px;
-    height:400px;
+#tmRealTimeChart {
+    width: 400px;
+    height: 200px;
 }
