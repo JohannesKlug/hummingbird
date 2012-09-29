@@ -45,19 +45,19 @@ public class RotorSimulator {
 		this.targetAz = targetAz;
 		// Sanity checks.
 		if (targetAz > maxAz) {
-			targetAz = maxAz;
+			this.targetAz = maxAz;
 		}
 		else if (targetAz < 0) {
-			targetAz = 0;
+			this.targetAz = 0;
 		}
 
 		this.targetEl = targetEl;
 		// Sanity checks.
 		if (targetEl > maxEl) {
-			targetEl = maxEl;
+			this.targetEl = maxEl;
 		}
 		else if (targetEl < 0) {
-			targetEl = 0;
+			this.targetEl = 0;
 		}
 
 		// start moving now!
