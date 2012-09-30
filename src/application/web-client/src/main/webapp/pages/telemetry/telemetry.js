@@ -25,7 +25,12 @@ jQuery(document).ready(function() {
 
 	getTelemetryList();
 
-	liveTmChart = $.plot($("#liveTmChart"), chartData);
+	var options = {
+					xaxis: { 
+						mode: "time" 
+					}
+				  };
+	liveTmChart = $.plot($("#liveTmChart"), chartData, options);
 });
 
 /**
