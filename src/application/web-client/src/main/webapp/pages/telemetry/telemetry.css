@@ -1,4 +1,5 @@
-#tmRealTimeChart {
-    width: 400px;
-    height: 200px;
+#liveTmChart {
+    width:90%;
+	height:90%;
+	margin:0 auto;
 }

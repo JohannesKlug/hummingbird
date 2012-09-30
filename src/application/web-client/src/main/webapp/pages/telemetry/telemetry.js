@@ -7,13 +7,15 @@ var rootURL = "http://"+ host + ":" + port + url;
 var ws = $.gracefulWebSocket("ws://"+ host + ":" + port + url + "tmsock");
 
 var seriesData = [];
-var seriesGraphIndexMap = [];
 var chartData = new Array();
 var liveTmChart;
 
 //-----------------
 
 
+/**
+ * On page ready do the following.
+ */
 jQuery(document).ready(function() {
 	$('body').layout({ applyDefaultStyles: true });
 	setupWebsocket();
@@ -26,6 +28,9 @@ jQuery(document).ready(function() {
 	liveTmChart = $.plot($("#liveTmChart"), chartData);
 });
 
+/**
+ * Sets up the web socket callbacks.
+ */
 function setupWebsocket() {
 	ws.onopen = function() {
 		console.log("Websocket connection established.");
@@ -37,6 +42,10 @@ function setupWebsocket() {
 }
 
 
+/**
+ * Calls the Halcyon restful web service to gather the TM parameters list then
+ * updated the TM list on the page. 
+ */
 function getTelemetryList() {
 	var jqxhr = $.getJSON(rootURL + "tm/parameters");
 	
@@ -47,6 +56,11 @@ function getTelemetryList() {
 	);
 }
 
+/**
+ * Accepts an array of parameters (Hbird commons tmtc Parameter) and adds them to the 
+ * parameter selection form as options.
+ * @param param
+ */
 function updateTelemetry(param) {
 	$("#telemetryList").empty();
 	$.each(param,
@@ -87,26 +101,35 @@ function plotParameter(parameter) {
 	liveTmChart.draw();
 }
 
+/**
+ * Gets the series from the seriesData Map given the qualified name.
+ * 
+ * @param name
+ * @returns
+ */
 function getSeriesData(name) {
 	if(name in seriesData) {
-//		console.log("Found existing series for " + name);
 		return seriesData[name];
 	}
 }
 
+/**
+ * Called when parameter combo-box selection has changed.
+ */
 function parameterSelectionChanged() {
 	$("select option:selected").each(function () {
 		createDataSeries($(this).val());
 	});
 }
 
-// FIXME Will not remove existing plot lines that have been deselected.
+
 /**
- * 
- * [ qname:[], qname:[] ]
+ * series data format as follows:
+ * [ { qualifiedName:[], qualifiedName:[] } ]
+ *
+ * FIXME Will not remove existing plot lines that have been deselected.
  * 
  */
-var seriesIndex = 0;
 function createDataSeries(name) {
 	if(name in seriesData) {
 		console.log("Series already exists for " + name);
@@ -115,8 +138,7 @@ function createDataSeries(name) {
 
 	var data = [];
 	seriesData[name] = data;
-	seriesGraphIndexMap[name] = seriesIndex++;
-	console.log("Series created for " + name + " indexed at " + seriesGraphIndexMap[name]);
+	console.log("Series created for " + name);
 }
 
 
