@@ -6,9 +6,19 @@ var rootURL = "http://"+ host + ":" + port + url;
 
 var ws = $.gracefulWebSocket("ws://"+ host + ":" + port + url + "tmsock");
 
+var smoothie = new SmoothieChart({
+	labels : { 
+		fillStyle:'rgb(255, 255, 255)'
+	},
+	minValue: "0",
+	maxValue: "450"
+});
+
+
+var plotLines = [];
+
 var seriesData = [];
 var seriesGraphIndexMap = [];
-var chartData = new Array();
 var liveTmChart;
 
 //-----------------
@@ -23,7 +33,18 @@ jQuery(document).ready(function() {
 
 	getTelemetryList();
 
-	liveTmChart = $.plot($("#liveTmChart"), chartData);
+//	smoothie.streamTo(document.getElementById("tmRealTimeChart"), 1500);
+	liveTmChart = $.jqplot("chartdiv", [new Array(1)], {
+		axes: {
+            xaxis: {
+                renderer: $.jqplot.DateAxisRenderer,
+                tickOptions: {
+                    formatString: '%H-%M-%S'
+                },
+                numberTicks: 10
+            }
+        }
+	});
 });
 
 function setupWebsocket() {
@@ -58,15 +79,6 @@ function updateTelemetry(param) {
 	$("#parametersList").trigger("liszt:updated");
 }
 
-/**
- * 
- * [ 
- * 	{ label: "Foo", data: [ [10, 1], [17, -14], [30, 5] ] },
- * 	{ label: "Bar", data: [ [11, 13], [19, 11], [30, -7] ] }
- * ]
- * 
- * @param parameter JS object of Parameter object.
- */
 function plotParameter(parameter) {
 	// Get the parameters series data and append the new data to it. If the
 	// series does not exist return and do nothing.
@@ -76,15 +88,20 @@ function plotParameter(parameter) {
 	}
 	parameterSeries.push([parameter.receivedTime, parameter.value]);
 
-	var newData = [];
-	for(var i in seriesData) {
-		newData.push({"label":i, "data":seriesData[i]});
+	// Find the index of the series in the jqPlot and append the new data
+	var seriesIndex = seriesGraphIndexMap[parameter.qualifiedName];
+	if(liveTmChart.series.length <= seriesIndex) {
+		console.log("Parameter does not have a series in the chart!");
+		liveTmChart.series[seriesIndex] = parameterSeries; // Can't do this
 	}
-	
-	console.log("Adding seriesData");
-	liveTmChart.setData(newData);
-	liveTmChart.setupGrid();
-	liveTmChart.draw();
+	else {
+		var series = liveTmChart.series[seriesIndex];
+		series.data = parameterSeries;
+	}
+
+	// reconfigure and replot (draws the updated plots).
+	liveTmChart.resetAxesScale();
+	liveTmChart.replot(false);
 }
 
 function getSeriesData(name) {
@@ -101,11 +118,6 @@ function parameterSelectionChanged() {
 }
 
 // FIXME Will not remove existing plot lines that have been deselected.
-/**
- * 
- * [ qname:[], qname:[] ]
- * 
- */
 var seriesIndex = 0;
 function createDataSeries(name) {
 	if(name in seriesData) {
@@ -118,6 +130,28 @@ function createDataSeries(name) {
 	seriesGraphIndexMap[name] = seriesIndex++;
 	console.log("Series created for " + name + " indexed at " + seriesGraphIndexMap[name]);
 }
+
+/**
+ * Creates a line in the PlotLines array for the given plotName.
+ * If line already exists it does nothing.
+ * @param plotName
+ */
+//function createPlotLine(plotName) {
+//	console.log("Creating plot line for " + plotName);
+//	for(var i in plotLines) {
+//		if(plotLines[i] == plotName) {
+//			return;
+//		}
+//	}
+//	
+//	// If we got here there is no plot for plotName so we create a new one.
+//	
+//	var line = new TimeSeries();
+//	plotLines[plotName] = line;
+//	var colour = "rgb(" + Math.round(Math.random()*256) + ", "+Math.round(Math.random()*256)+", "+Math.round(Math.random()*256)+")";
+//	console.log(colour);
+//	smoothie.addTimeSeries(line, {strokeStyle:colour, lineWidth:3});
+//}
 
 
 
