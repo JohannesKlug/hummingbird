@@ -25,10 +25,7 @@ jQuery(document).ready(function() {
 
 	getTelemetryList();
 
-	var options = {
-					xaxis: { 
-						mode: "time" 
-					}
+	var options = {	xaxis: 		{ mode: "time"},
 				  };
 	liveTmChart = $.plot($("#liveTmChart"), chartData, options);
 });
@@ -86,6 +83,7 @@ function updateTelemetry(param) {
  * 
  * @param parameter JS object of Parameter object.
  */
+var maxDataSeriesSize = 500;
 function plotParameter(parameter) {
 	// Get the parameters series data and append the new data to it. If the
 	// series does not exist return and do nothing.
@@ -93,7 +91,11 @@ function plotParameter(parameter) {
 	if(typeof parameterSeries === "undefined") {
 		return;
 	}
-	parameterSeries.push([parameter.receivedTime, parameter.value]);
+	
+	var size = parameterSeries.push([parameter.receivedTime, parameter.value]);
+	if(size >= maxDataSeriesSize) {
+		parameterSeries.shift();
+	}
 
 	var newData = [];
 	for(var i in seriesData) {
