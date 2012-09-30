@@ -24,6 +24,7 @@
 	<link rel="stylesheet" href="../../js/chosen.css">
 	<link rel="Stylesheet" href="../../css/ui-lightness/jquery-ui-1.8.23.custom.css"/>	
 <!-- 	<link rel="Stylesheet" href="../../css/layout-default-latest.css"/>	 -->
+	<link rel="stylesheet" href="../../css/jquery.jqplot.min.css" />
 	<link rel="stylesheet" href="telemetry.css">
 
 	<!--[if lt IE 9]>
@@ -43,14 +44,13 @@
 	<script type="text/javascript" src="../../js/jquery.gracefulWebSocket.js"></script>
 	<script type="text/javascript" src="../../js/smoothie.js"></script>
 	<script type="text/javascript" src="../../js/chosen.jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery.jqplot.min.js"></script>
 	<script type="text/javascript" src="telemetry.js"></script>
 </head>
 
 <body>
 	<div class="ui-layout-center">
-		<div>
-			<canvas id="tmRealTimeChart"></canvas>
-		</div>
+		<div id="chartdiv" style="height:100%x;width:100%;"></div>
 	</div>
 	<div class="ui-layout-north">
 		North
@@ -62,15 +62,15 @@
 		East
 	</div>
 	<div class="ui-layout-west">
-		<h1>Telemetry parameter list</h1>
+		<h3>Telemetry parameter list</h3>
 		<p id="telemetryList">Not received</p>
-		<div>
+		<div style="width:100%;">
 		<form id="parameterForm">
 			<div>
 				<em>Parameters</em>
 			</div>
-			<div>
-				<select data-placeholder="Select parameters to chart" style="width:350px;" multiple class="chzn-select" id="parametersList" name="parametersList_form">
+			<div style="width:100%;">
+				<select data-placeholder="Select parameters to chart" style="width:100%;" multiple class="chzn-select" id="parametersList" name="parametersList_form">
 					<option value=""></option>
 				</select>
 			</div>

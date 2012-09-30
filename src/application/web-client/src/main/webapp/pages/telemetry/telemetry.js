@@ -18,6 +18,9 @@ var smoothie = new SmoothieChart({
 var plotLines = [];
 var parameterPlotsMap = [];
 
+var tmData = [];
+var liveTmChart;
+
 //-----------------
 
 
@@ -27,9 +30,21 @@ jQuery(document).ready(function() {
 	$(".chzn-select").chosen(); // Activate chosen plugin
 	$(".chzn-select-deselect").chosen({allow_single_deselect:true});
 	$("#parametersList").change(parameterSelectionChanged);
-	$(".resizable").resizable();
+
 	getTelemetryList();
-	smoothie.streamTo(document.getElementById("tmRealTimeChart"), 1500);
+
+//	smoothie.streamTo(document.getElementById("tmRealTimeChart"), 1500);
+	liveTmChart = $.jqplot("chartdiv", [new Array(1)], {
+		axes: {
+            xaxis: {
+                renderer: $.jqplot.DateAxisRenderer,
+                tickOptions: {
+                    formatString: '%H-%M-%S'
+                },
+                numberTicks: 10
+            }
+        }
+	});
 });
 
 function setupWebsocket() {
@@ -64,11 +79,23 @@ function updateTelemetry(param) {
 	$("#parametersList").trigger("liszt:updated");
 }
 
+var count = 0;
 function plotParameter(parameter) {
-	var line = plotLines[parameter.qualifiedName];
-	if(line) {
-		line.append(new Date().getTime(), parameter.value);
+	
+	if(parameter.name == "Azimuth") {
+//		var time = new Date(parameter.receivedTime);
+//		console.log("time = " + time);
+		tmData.push([parameter.receivedTime, parameter.value]);
+		console.log("Adding azimuth plot point");
+		liveTmChart.series[0].data = tmData;
+		liveTmChart.resetAxesScale();
+		liveTmChart.replot(false);
 	}
+
+//	var line = plotLines[parameter.qualifiedName];
+//	if(line) {
+//		line.append(new Date().getTime(), parameter.value);
+//	}
 }
 
 function parameterSelectionChanged() {
