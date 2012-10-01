@@ -1,3 +1,7 @@
+body {
+    font-size: 12px;
+}
+
 #liveTmChart {
     width:90%;
 	height:90%;

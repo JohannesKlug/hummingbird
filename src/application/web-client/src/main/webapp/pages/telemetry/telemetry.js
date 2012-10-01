@@ -10,6 +10,7 @@ var seriesData = [];
 var chartData = new Array();
 var liveTmChart;
 
+var maxDataSeriesSize = 400;
 //-----------------
 
 
@@ -17,18 +18,51 @@ var liveTmChart;
  * On page ready do the following.
  */
 jQuery(document).ready(function() {
-	$('body').layout({ applyDefaultStyles: true });
 	setupWebsocket();
-	$(".chzn-select").chosen(); // Activate chosen plugin
-	$(".chzn-select-deselect").chosen({allow_single_deselect:true});
-	$("#parametersList").change(parameterSelectionChanged);
+	
+	$('body').layout({ applyDefaultStyles: true });
+	
+	setupEastAccordion();
+	
+	setupChosen();
 
 	getTelemetryList();
+	
+	setupChartOptionsForm();
 
-	var options = {	xaxis: 		{ mode: "time"},
+	var options = {
+					xaxis:	{ mode: "time" }
 				  };
 	liveTmChart = $.plot($("#liveTmChart"), chartData, options);
 });
+
+function setupChartOptionsForm() {
+	$("#maxPointsInput").val(maxDataSeriesSize);
+
+	$("#chartOptionsForm").submit(function(event) {
+		console.log("submitted " + event);
+		maxDataSeriesSize = $("#maxPointsInput").val();
+	});
+}
+
+function setupEastAccordion() {
+	$("#accordion").accordion();
+	
+	$("body").layout({
+		west__onresize: function () {
+			console.log("west resize");
+			// $('#accordion').accordion("resize")
+		}
+	});
+	
+}
+
+function setupChosen() {
+	$(".chzn-select").chosen(); // Activate chosen plugin
+	$(".chzn-select-deselect").chosen({allow_single_deselect:true});
+	$("#parametersList").change(parameterSelectionChanged);
+}
+
 
 /**
  * Sets up the web socket callbacks.
@@ -83,7 +117,6 @@ function updateTelemetry(param) {
  * 
  * @param parameter JS object of Parameter object.
  */
-var maxDataSeriesSize = 500;
 function plotParameter(parameter) {
 	// Get the parameters series data and append the new data to it. If the
 	// series does not exist return and do nothing.

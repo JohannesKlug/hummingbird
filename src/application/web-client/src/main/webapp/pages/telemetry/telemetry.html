@@ -18,8 +18,8 @@
 
 	<!-- CSS
   ================================================== -->
+	<link rel="Stylesheet" href="../../css/smoothness/jquery-ui-1.8.24.custom.css"/>	
 	<link rel="stylesheet" href="../../js/chosen.css">
-	<link rel="Stylesheet" href="../../css/ui-lightness/jquery-ui-1.8.23.custom.css"/>	
 	<link rel="stylesheet" href="../../css/jquery.jqplot.min.css" />
 	<link rel="stylesheet" href="telemetry.css">
 
@@ -41,6 +41,7 @@
 	<script type="text/javascript" src="../../js/chosen.jquery.min.js"></script>
 	<script type="text/javascript" src="../../js/flot/jquery.flot.js"></script>
 	<script type="text/javascript" src="../../js/flot/jquery.flot.resize.js"></script>
+	<script type="text/javascript" src="../../js/flot/jquery.flot.crosshair.js"></script>
 	<script type="text/javascript" src="telemetry.js"></script>
 </head>
 
@@ -49,13 +50,31 @@
 		<div id="liveTmChart" style="height:90%;width:90%;"></div>
 	</div>
 	<div class="ui-layout-north">
-		North
+		<h1>Telemetry charting</h1>
 	</div>
 	<div class="ui-layout-south">
-		South
+		<p>placeholder - navigation menu</p>
 	</div>
 	<div class="ui-layout-east">
-		East
+		<div id="accordion">
+			<h3><a href="#">Chart options</a></h3>
+			<div id="chartOptions">
+				<form id="chartOptionsForm" onsubmit="return false">
+					Max points: <input id="maxPointsInput" type="text" name="max points"></input>
+<!-- 					<input id="submitChartOptions" type="button" value="Set"> -->
+				</form>
+			</div>
+		
+			<h3><a href="#">Placeholder</a></h3>
+			<div>
+				<p>
+					Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+					purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+					velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+					suscipit faucibus urna.
+				</p>
+			</div>
+		</div>
 	</div>
 	<div class="ui-layout-west">
 		<h3>Telemetry parameter list</h3>

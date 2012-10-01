@@ -108,7 +108,7 @@ function openCmdDialog(qualifiedName, name) {
 				// TODO impl
 			}
 			
-			$(cmdConfigForm).submit({cmd:cmd}, submitCommand);
+			$("#cmdConfigForm").submit({cmd:cmd}, submitCommand);
 		}
 	);
 	
@@ -179,7 +179,7 @@ function addIntArgs(intArgs) {
 			liHtml = "<li>" + intArgs[i].name + "</li>";
 			var liSelector = $(liHtml).appendTo($("#cmdArguments"));
 			
-			inputHtml = " <input id=" + id + " type=test class=required name=value/>";
+			inputHtml = " <input id=" + id + " type=text class=required name=value/>";
 			var inputSelector = $(inputHtml).appendTo(liSelector);
 			
 			inputSelector.data("qualifiedName", intArgs[i].qualifiedName);
@@ -195,7 +195,7 @@ function addLongArgs(longArgs) {
 	$.each(longArgs, function(i) {
 		if(!longArgs[i].readOnly) {
 			console.log("Adding long arg" + longArgs[i].name);
-			html = "<li>" + longArgs[i].name + " <input id=arg" + staticArgCounter + " type=test class=required name=value/></li>";
+			html = "<li>" + longArgs[i].name + " <input id=arg" + staticArgCounter + " type=text class=required name=value/></li>";
 			$("#cmdArguments").append(html);
 			$(id).addClass("longParameter");
 		}
@@ -208,7 +208,7 @@ function addStringArgs(stringArgs) {
 	$.each(stringArgs, function(i) {
 		if(!stringArgs[i].readOnly) {
 			console.log("Adding string arg" + stringArgs[i].name);
-			html = "<li>" + stringArgs[i].name + " <input id=arg" + staticArgCounter + " type=test class=required name=value/></li>";
+			html = "<li>" + stringArgs[i].name + " <input id=arg" + staticArgCounter + " type=text class=required name=value/></li>";
 			$("#cmdArguments").append(html);
 			$(id).addClass("stringParameter");
 		}
