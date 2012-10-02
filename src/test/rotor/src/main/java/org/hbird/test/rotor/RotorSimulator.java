@@ -45,8 +45,8 @@ public class RotorSimulator {
 	public void slewRotor(final int targetAz, final int targetEl) {
 		this.targetAz = targetAz;
 		// Sanity checks.
-		if (targetAz > maxAz) {
-			this.targetAz = maxAz;
+		if (targetAz > this.maxAz) {
+			this.targetAz = this.maxAz;
 		}
 		else if (targetAz < 0) {
 			this.targetAz = 0;
@@ -54,8 +54,8 @@ public class RotorSimulator {
 
 		this.targetEl = targetEl;
 		// Sanity checks.
-		if (targetEl > maxEl) {
-			this.targetEl = maxEl;
+		if (targetEl > this.maxEl) {
+			this.targetEl = this.maxEl;
 		}
 		else if (targetEl < 0) {
 			this.targetEl = 0;
@@ -77,53 +77,53 @@ public class RotorSimulator {
 	 */
 	public ParameterGroup tick() throws UnknownParameterGroupException, UnknownParameterException {
 		final DateTime now = new DateTime();
-		final Duration moveTime = new Duration(lastMoved, now);
+		final Duration moveTime = new Duration(this.lastMoved, now);
 
-		LOG.trace("Target = " + targetAz + " :: " + targetEl);
+		LOG.trace("Target = " + this.targetAz + " :: " + this.targetEl);
 
-		lastMoved = now;
+		this.lastMoved = now;
 
-		final double azMoved = azPerMs * moveTime.getMillis();
-		final double elMoved = elPerMs * moveTime.getMillis();
+		final double azMoved = this.azPerMs * moveTime.getMillis();
+		final double elMoved = this.elPerMs * moveTime.getMillis();
 
 		LOG.trace("azMoved=" + azMoved + ", elMoved=" + elMoved);
 
 		// move az
-		if (Math.abs(targetAz - az) < azMoved) {
-			az = targetAz;
+		if (Math.abs(this.targetAz - this.az) < azMoved) {
+			this.az = this.targetAz;
 		}
 		else {
 			// Potential use case for the glorious crement?
-			if (targetAz > az) {
-				az += azMoved;
+			if (this.targetAz > this.az) {
+				this.az += azMoved;
 			}
 			else {
-				az -= azMoved;
+				this.az -= azMoved;
 			}
 		}
 
 		// move el
-		if (Math.abs(targetEl - el) < azMoved) {
-			el = targetEl;
+		if (Math.abs(this.targetEl - this.el) < azMoved) {
+			this.el = this.targetEl;
 		}
 		else {
 			// Potential use case for the glorious crement?
-			if (targetEl > el) {
-				el += elMoved;
+			if (this.targetEl > this.el) {
+				this.el += elMoved;
 			}
 			else {
-				el -= elMoved;
+				this.el -= elMoved;
 			}
 		}
-		LOG.trace("Current = " + az + " :: " + el);
+		LOG.trace("Current = " + this.az + " :: " + this.el);
 		// return current readings
 		ParameterGroup pg = null;
-		if (publisher != null) {
-			pg = publisher.getParameterGroup("Stock6.tm.PositionPayload");
+		if (this.publisher != null) {
+			pg = this.publisher.getParameterGroup("Stock6.tm.PositionPayload");
 			final Parameter<Integer> azimuthParameter = pg.getIntegerParameter("Stock6.tm.Azimuth");
-			azimuthParameter.setValue((int) az);
+			azimuthParameter.setValue((int) this.az);
 			final Parameter<Integer> elevationParameter = pg.getIntegerParameter("Stock6.tm.Elevation");
-			elevationParameter.setValue((int) el);
+			elevationParameter.setValue((int) this.el);
 
 			azimuthParameter.setReceivedTime(new DateTime().getMillis());
 			elevationParameter.setReceivedTime(new DateTime().getMillis());
