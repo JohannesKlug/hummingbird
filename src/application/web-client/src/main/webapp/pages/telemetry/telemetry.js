@@ -10,6 +10,9 @@ var seriesData = [];
 var chartData = new Array();
 var liveTmChart;
 
+var rollChartIntervalId;
+var rollingChart;
+
 var maxDataSeriesSize = 400;
 //-----------------
 
@@ -40,9 +43,50 @@ function setupChartOptionsForm() {
 	$("#maxPointsInput").val(maxDataSeriesSize);
 
 	$("#chartOptionsForm").submit(function(event) {
-		console.log("submitted " + event);
 		maxDataSeriesSize = $("#maxPointsInput").val();
 	});
+	
+	$("#rollChartToggle").click(function(event) {
+		if ($("#rollChartToggle").is(":checked")) {
+			toggleUpdateChartTimer(true);
+		}
+		else {
+			toggleUpdateChartTimer(false);
+		}
+	});
+}
+
+function toggleUpdateChartTimer(state) {
+	if(state) {
+		rollChartIntervalId = window.setInterval(rollChartUpdate, 50);
+		rollingChart = true;
+	}
+	else {
+		if(typeof rollChartIntervalId !== "undefined") {
+			console.log("Clearing roll chart interval");
+			window.clearInterval(rollChartIntervalId);
+			rollingChart = false;
+		}
+	}
+}
+
+function rollChartUpdate() {
+	var newData = [];
+	for(var i in seriesData) {
+		var latestEntry = seriesData[i][[(seriesData[i].length) - 1]];
+		console.log("Pushing latest entry onto series: " + latestEntry[0] + " :: " + latestEntry[1]);
+		var size = seriesData[i].push(latestEntry);
+		if(size >= maxDataSeriesSize) {
+			seriesData[i].shift();
+		}
+//		var latestEntry = series[(series.length) - 1];
+		newData.push({"label":i, "data":seriesData[i]});
+	}
+	
+	if(!rollingChart) {
+		liveTmChart.setData(newData);
+		liveTmChart.draw();
+	}
 }
 
 function setupEastAccordion() {
@@ -125,18 +169,21 @@ function plotParameter(parameter) {
 		return;
 	}
 	
+	// Push the new data into the parameter series array and remove the oldest entry if the array
+	// has grown too large.
 	var size = parameterSeries.push([parameter.receivedTime, parameter.value]);
 	if(size >= maxDataSeriesSize) {
 		parameterSeries.shift();
 	}
 
+	// Create the new data for the chart by added all seriesData to a new array and setting on the plot.
 	var newData = [];
 	for(var i in seriesData) {
 		newData.push({"label":i, "data":seriesData[i]});
 	}
-	
-	console.log("Adding seriesData");
 	liveTmChart.setData(newData);
+	
+	// Redraw
 	liveTmChart.setupGrid();
 	liveTmChart.draw();
 }

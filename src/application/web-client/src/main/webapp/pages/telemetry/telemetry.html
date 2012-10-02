@@ -49,19 +49,22 @@
 	<div class="ui-layout-center">
 		<div id="liveTmChart" style="height:90%;width:90%;"></div>
 	</div>
+
 	<div class="ui-layout-north">
 		<h1>Telemetry charting</h1>
 	</div>
+
 	<div class="ui-layout-south">
 		<p>placeholder - navigation menu</p>
 	</div>
+
 	<div class="ui-layout-east">
 		<div id="accordion">
 			<h3><a href="#">Chart options</a></h3>
 			<div id="chartOptions">
 				<form id="chartOptionsForm" onsubmit="return false">
 					Max points: <input id="maxPointsInput" type="text" name="max points"></input>
-<!-- 					<input id="submitChartOptions" type="button" value="Set"> -->
+					Roll chart: <input id="rollChartToggle" type="checkbox" name="Toggle rollchart" disabled="disabled"></input>
 				</form>
 			</div>
 		
@@ -74,22 +77,34 @@
 					suscipit faucibus urna.
 				</p>
 			</div>
+			
+			<h3><a href="#">Placeholder</a></h3>
+			<div>
+				<p>
+					Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+					purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+					velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+					suscipit faucibus urna.
+				</p>
+			</div>
 		</div>
 	</div>
+
 	<div class="ui-layout-west">
 		<h3>Telemetry parameter list</h3>
 		<p id="telemetryList">Not received</p>
-		<div style="width:100%;">
-		<form id="parameterForm">
-			<div>
-				<em>Parameters</em>
-			</div>
-			<div style="width:100%;">
-				<select data-placeholder="Select parameters to chart" style="width:100%;" multiple class="chzn-select" id="parametersList" name="parametersList_form">
-					<option value=""></option>
-				</select>
-			</div>
-		</form>
+		
+		<div>
+			<form id="parameterForm">
+				<div>
+					<em>Parameters</em>
+				</div>
+				<div>
+					<select data-placeholder="Select parameters to chart" style="width:100%;" multiple class="chzn-select" id="parametersList" name="parametersList_form">
+						<option value=""></option>
+					</select>
+				</div>
+			</form>
 		</div>
 	</div>
 		
