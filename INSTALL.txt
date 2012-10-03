@@ -15,9 +15,15 @@ You can reach it at http://localhost:8181/system/console/
 Swap  etc/jre.properties with the jre.properties.cxf file.
 If you forget to do this, Karaf's sysem bundle will export all kinds of javax.* packages, which conflict with what we're going to install ourselves.
 
+
+
 Hbird
 --------
+To install snapshot versions of Hbird you must add the following repo to the org.ops4j.pax.url.mvn.cfg config file in etc
+ 
+ http://oss.sonatype.org/content/repositories/snapshots/@snapshots@noreleases
 
+ 
 Tell Karaf where to find the Hbird software:
 features:addurl mvn:org.hbird.osgi/osgi-provisioning/0.0.1-SNAPSHOT/xml/features
 
@@ -34,14 +40,20 @@ and add the following config option to it:
 A sample XTCE file can be found in our Stock6 project: https://github.com/markjohndoyle/Stock6
 
 
-In the current version of our features.xml, Camel is referenced, so you do not need to install it manually. The following is left for reference:
+
+
 	
-Camel ############# IS THIS CAMEL SECTION REQUIRED? CAMEL IS INSTALLED UNDER HBIRD-COMPLETE. ###############
+Camel
 --------------
+NOTE: In the current version of our features.xml, Camel is referenced, so you do not need to install it manually. The following is left for reference:
+
+
 features:addurl mvn:org.apache.camel.karaf/apache-camel/2.9.2/xml/features
 KARAF3 alert: You need 2.10.0 camel features.
 
 features:install -v camel-core camel-blueprint camel-jms camel-netty camel-spring
+
+NOTE: if you have problems make sure that there aren't two versions of camel running. Specifically, make sure 2.9.2 isn't installed, except for the karaf commands.
 
 
 Activemq
