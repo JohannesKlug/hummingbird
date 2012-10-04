@@ -1,10 +1,9 @@
 // The root URL for the RESTful services
-var host = "localhost";
-var port = "8181";
+var host = window.location.hostname;
 var url = "/hbird/halcyon/";
-var rootURL = "http://"+ host + ":" + port + url;
+var rootURL = location.protocol + "//"+ host + ":" + location.port + url;
 
-var ws = $.gracefulWebSocket("ws://"+ host + ":" + port + url + "tmsock");
+var ws = $.gracefulWebSocket("ws://"+ host + ":" + location.port + url + "tmsock");
 
 var seriesData = [];
 var chartData = new Array();
