@@ -3,7 +3,7 @@ var host = window.location.hostname;
 var url = "/hbird/halcyon/";
 var rootURL = location.protocol + "//"+ host + ":" + location.port + url;
 
-var ws = $.gracefulWebSocket("ws://"+ host + ":" + location.port + url + "tmsock");
+var ws;
 
 var seriesData = [];
 var chartData = new Array();
@@ -111,6 +111,16 @@ function setupChosen() {
  * Sets up the web socket callbacks.
  */
 function setupWebsocket() {
+	var wsProtocol;
+	if(location.protocol == "http:") {
+        	wsProtocol = "ws:";
+	}
+	else {
+        	wsProtocol = "wss:";
+	}
+
+ 	ws = $.gracefulWebSocket(wsProtocol + "//" + host + ":" + location.port + url + "tmsock");
+	
 	ws.onopen = function() {
 		console.log("Websocket connection established.");
 	};
