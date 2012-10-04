@@ -1,5 +1,5 @@
 // The root URL for the RESTful services
-var rootURL = "http://localhost:8181/hbird/halcyon/";
+var rootURL = location.protocol + "//" + window.location.hostname + ":" + location.port + "/hbird/halcyon/";
 
 //TODO not worth it? maybe remove this cache and go with selectors on the forms arg list.
 var cmdArgs = [];
