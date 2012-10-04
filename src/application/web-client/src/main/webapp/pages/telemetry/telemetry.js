@@ -1,5 +1,6 @@
 // The root URL for the RESTful services
-var host = "localhost";
+//var host = "localhost";
+var host = window.location.hostname;
 var port = "8181";
 var url = "/hbird/halcyon/";
 var rootURL = "http://"+ host + ":" + port + url;
@@ -46,48 +47,48 @@ function setupChartOptionsForm() {
 		maxDataSeriesSize = $("#maxPointsInput").val();
 	});
 	
-	$("#rollChartToggle").click(function(event) {
-		if ($("#rollChartToggle").is(":checked")) {
-			toggleUpdateChartTimer(true);
-		}
-		else {
-			toggleUpdateChartTimer(false);
-		}
-	});
+//	$("#rollChartToggle").click(function(event) {
+//		if ($("#rollChartToggle").is(":checked")) {
+//			toggleUpdateChartTimer(true);
+//		}
+//		else {
+//			toggleUpdateChartTimer(false);
+//		}
+//	});
 }
 
-function toggleUpdateChartTimer(state) {
-	if(state) {
-		rollChartIntervalId = window.setInterval(rollChartUpdate, 50);
-		rollingChart = true;
-	}
-	else {
-		if(typeof rollChartIntervalId !== "undefined") {
-			console.log("Clearing roll chart interval");
-			window.clearInterval(rollChartIntervalId);
-			rollingChart = false;
-		}
-	}
-}
+//function toggleUpdateChartTimer(state) {
+//	if(state) {
+//		rollChartIntervalId = window.setInterval(rollChartUpdate, 50);
+//		rollingChart = true;
+//	}
+//	else {
+//		if(typeof rollChartIntervalId !== "undefined") {
+//			console.log("Clearing roll chart interval");
+//			window.clearInterval(rollChartIntervalId);
+//			rollingChart = false;
+//		}
+//	}
+//}
 
-function rollChartUpdate() {
-	var newData = [];
-	for(var i in seriesData) {
-		var latestEntry = seriesData[i][[(seriesData[i].length) - 1]];
-		console.log("Pushing latest entry onto series: " + latestEntry[0] + " :: " + latestEntry[1]);
-		var size = seriesData[i].push(latestEntry);
-		if(size >= maxDataSeriesSize) {
-			seriesData[i].shift();
-		}
-//		var latestEntry = series[(series.length) - 1];
-		newData.push({"label":i, "data":seriesData[i]});
-	}
-	
-	if(!rollingChart) {
-		liveTmChart.setData(newData);
-		liveTmChart.draw();
-	}
-}
+//function rollChartUpdate() {
+//	var newData = [];
+//	for(var i in seriesData) {
+//		var latestEntry = seriesData[i][[(seriesData[i].length) - 1]];
+//		console.log("Pushing latest entry onto series: " + latestEntry[0] + " :: " + latestEntry[1]);
+//		var size = seriesData[i].push(latestEntry);
+//		if(size >= maxDataSeriesSize) {
+//			seriesData[i].shift();
+//		}
+////		var latestEntry = series[(series.length) - 1];
+//		newData.push({"label":i, "data":seriesData[i]});
+//	}
+//	
+//	if(!rollingChart) {
+//		liveTmChart.setData(newData);
+//		liveTmChart.draw();
+//	}
+//}
 
 function setupEastAccordion() {
 	$("#accordion").accordion();
