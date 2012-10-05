@@ -20,23 +20,40 @@ var maxDataSeriesSize = 400;
  * On page ready do the following.
  */
 jQuery(document).ready(function() {
+	setupLayout();
+	setupChosen();
 	setupWebsocket();
+	setupChartOptionsForm();
+	setupChart();
+	getTelemetryList();
+});
+
+function setupLayout() {
+	var layoutOptions = { 
+		applyDefaultStyles: true,
+		north: {
+			resizable		: false,
+			size			: 50,
+			minSize			: 50,
+			maxSize			: 50
+		},
+		south: {
+			resizable		: false,
+			initClosed		: true
+		}
+	};
 	
-	$('body').layout({ applyDefaultStyles: true });
+	$('body').layout(layoutOptions);
 	
 	setupEastAccordion();
-	
-	setupChosen();
+}
 
-	getTelemetryList();
-	
-	setupChartOptionsForm();
-
+function setupChart() {
 	var options = {
-					xaxis:	{ mode: "time" }
-				  };
+			xaxis:	{ mode: "time" }
+	};
 	liveTmChart = $.plot($("#liveTmChart"), chartData, options);
-});
+}
 
 function setupChartOptionsForm() {
 	$("#maxPointsInput").val(maxDataSeriesSize);
