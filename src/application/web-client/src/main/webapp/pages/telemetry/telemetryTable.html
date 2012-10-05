@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>Telemetry</title>
+	<meta name="description" content="">
+	<meta name="author" content="Johannes Klug">
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="Stylesheet" href="../../css/smoothness/jquery-ui-1.8.24.custom.css"/>	
+	<link rel="stylesheet" href="../../js/chosen.css">
+	<link rel="stylesheet" href="../../css/datatables/jquery.dataTables.css" />
+	<link rel="stylesheet" href="telemetry.css">
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="../../images/satelliteDish.ico">
+	<link rel="apple-touch-icon" href="../../images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="36x36" href="../../images/satelliteDish36.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="../../images/satelliteDish72.png">
+	
+	<script type="text/javascript" src="../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../js/jquery-ui-1.8.23.custom.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery.layout-latest.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery.gracefulWebSocket.js"></script>
+	<script type="text/javascript" src="../../js/datatables/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="telemetryTable.js"></script>
+</head>
+
+<body>
+	<div class="ui-layout-center">
+		<table id="tmTable">
+    		<thead>
+        		<tr>
+		            <th>Parameter</th>
+            		<th>Value</th>
+            		<th>Received Time</th>
+        		</tr>
+    		</thead>
+    		<tbody>
+    		</tbody>
+		</table>
+	</div>
+
+	<div class="ui-layout-north">
+		<p>Telemetry</p>
+	</div>
+
+	<div class="ui-layout-south">
+		<p>placeholder - navigation menu</p>
+	</div>
+
+	<div class="ui-layout-east">
+		<div id="accordion">
+			<h3><a href="#">Chart options</a></h3>
+			<div id="tableOptions">
+				<form id="chartOptionsForm" onsubmit="return false">
+					Max rows: <input id="maxRowsInput" type="text" name="max points"></input>
+				</form>
+			</div>
+		
+			<h3><a href="#">Placeholder</a></h3>
+			<div>
+				<p>
+					Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+					purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+					velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+					suscipit faucibus urna.
+				</p>
+			</div>
+			
+			<h3><a href="#">Placeholder</a></h3>
+			<div>
+				<p>
+					Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+					purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+					velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+					suscipit faucibus urna.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="ui-layout-west">
+	</div>
+		
+</body>
+
+</html>
+
+
