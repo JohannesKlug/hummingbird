@@ -18,6 +18,10 @@ jQuery(document).ready(function() {
 	setupDataTable();
 });
 
+/**
+ * Sets up the form which allows the user to control how the telemetry
+ * table behaves.
+ */
 function setupTableOptions() {
 	$("#maxRowsInput").val(maxRows);
 }
@@ -104,6 +108,10 @@ function setupWebsocket() {
 
 /**
  * Called when a new parameter arrives at the client.
+ * 
+ * This method builds a new array representing the table row from the parameter and adds it to the 
+ * table. It then checks the maximum allowed number of rows and if the table now exceeds that 
+ * limit, it removes the oldest entry.
  * 
  * @param parameter the new parameter
  */
