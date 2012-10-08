@@ -22,6 +22,7 @@
 			<feature version="${camel.version}">camel-jms</feature>
 			<feature version="${camel.version}">camel-stream</feature>
 			<feature version="${camel.version}">camel-mina</feature>
+			<feature version="${camel.version}">camel-mongodb</feature>
 			<feature version="5.5.0">activemq-blueprint</feature>
 			<feature version="5.5.0">activemq-spring</feature>
 			<feature version="5.5.0">activemq-web-console</feature>
@@ -137,13 +138,23 @@
 			<bundle start="false">mvn:org.hbird/rotor/0.0.1-SNAPSHOT</bundle>
 		</feature>
 		
-		<feature name="hbird-complete" description="A complete single container installation of hbird and core applications" version="${version}">
+		<feature name="hbird-parameter-archive" 
+				 description="Hbird framework bundles for parameter archiving. Included provided implementations for mongoDb"
+				 version="${version}">
+				 <feature>hbird-core</feature>
+				 <bundle start="false">mvn:org.hbird.application/parameter-archive</bundle>
+		</feature>
+		
+		<feature name="hbird-complete" 
+				 description="A complete single container installation of hbird and core applications. NOTE: Model and publisher bundles contain blueprints which wire up their services" 
+				 version="${version}">
 			<feature>hbird-jersey</feature>
 			<feature>hbird-core</feature>
 			<feature>hbird-xtce</feature>
 			<feature>hbird-publisher</feature>
 			<feature>hbird-transport</feature>
 			<feature>hbird-commanding</feature>
+			<feature>hbird-parameter-archive</feature>
 			<feature>hbird-halcyon</feature>
 			<feature>hbird-web-client</feature>
 		</feature>
