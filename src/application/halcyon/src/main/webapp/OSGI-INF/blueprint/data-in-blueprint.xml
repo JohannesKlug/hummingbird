@@ -19,7 +19,7 @@
 
 	<camelContext id="halcyonCamelContext" xmlns="http://camel.apache.org/schema/blueprint">
 		<route id="parametersIn">
-			<from uri="activemq:topic:parametersOut"/>
+			<from uri="activemq:topic:parameterGroupsOut"/>
 			<to uri="bean:parameterListener"/>
 		</route>
 	</camelContext>

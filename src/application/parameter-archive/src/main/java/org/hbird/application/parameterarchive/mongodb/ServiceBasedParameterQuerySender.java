@@ -10,9 +10,11 @@ public class ServiceBasedParameterQuerySender implements ParameterQuerySender {
 
 	@Override
 	public String query(String query) {
+		System.out.println("Received parameter archive query request: " + query);
 		String result = null;
 		// camel-mongodb type converters should convert the json query string to a DBObject
 		result = sender.query(query);
+		System.out.println("Result = " + result);
 		return result;
 	}
 

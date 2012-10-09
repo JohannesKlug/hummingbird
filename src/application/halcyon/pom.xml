@@ -70,8 +70,8 @@
         <dependency>
         	<groupId>org.hbird.application</groupId>
         	<artifactId>commanding</artifactId>
-        	<version>0.0.1-SNAPSHOT</version>
         	<scope>provided</scope>
+        	<version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
         	<groupId>org.codehaus.jackson</groupId>
@@ -109,6 +109,12 @@
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-websocket</artifactId>
 			<version>7.5.4.v20111024</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hbird.application</groupId>
+			<artifactId>parameter-archive</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

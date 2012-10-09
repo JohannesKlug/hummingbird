@@ -31,7 +31,8 @@
 				org.hbird.application.halcyon.CommandListResource,
 				org.hbird.application.halcyon.TelemetryListResource,
 				org.hbird.application.halcyon.HalcyonResource,
-				org.hbird.application.halcyon.CommandingResource
+				org.hbird.application.halcyon.CommandingResource,
+				org.hbird.application.halcyon.ParameterArchiveQueryResource
 			</param-value>
 		</init-param>
 		

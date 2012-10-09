@@ -18,17 +18,17 @@ import org.slf4j.LoggerFactory;
 import com.sun.jersey.spi.resource.Singleton;
 
 /**
- *
+ * 
  * @author Mark Doyle
  * @author Johannes Klug
- *
+ * 
  */
 @Singleton
 @Path("/commanding/info")
 public class CommandListResource extends OsgiReady {
-	private static final String COMMAND_INFORMATION_SERVICE_NAME = "org.hbird.application.commanding.interfaces.info.CommandInformationService";
-
 	private final static Logger LOG = LoggerFactory.getLogger(CommandListResource.class);
+
+	private static final String COMMAND_INFORMATION_SERVICE_NAME = "org.hbird.application.commanding.interfaces.info.CommandInformationService";
 
 	private List<CmdNames> allowedCommandNames = null;
 
@@ -64,7 +64,7 @@ public class CommandListResource extends OsgiReady {
 
 	/**
 	 * Method processing HTTP GET requests, producing "text/plain" MIME media type.
-	 *
+	 * 
 	 * @return String that will be send back as a response of type "text/plain".
 	 */
 	@GET
@@ -92,16 +92,14 @@ public class CommandListResource extends OsgiReady {
 		return allowedCommandNames;
 	}
 
-
 	@GET
 	@Path("/command/{qualifiedName}")
-	@Produces({MediaType.APPLICATION_JSON})
+	@Produces({ MediaType.APPLICATION_JSON })
 	public CommandGroup getCommand(@PathParam("qualifiedName") final String qualifiedName) {
 		LOG.debug("Getting command " + qualifiedName + " from commmand information service");
 		final CommandInformationService cmdInfoService = (CommandInformationService) getServiceTracker().getService();
 		return cmdInfoService.getCommand(qualifiedName);
 	}
-
 
 	// TODO implement msgPack return
 	// @GET
