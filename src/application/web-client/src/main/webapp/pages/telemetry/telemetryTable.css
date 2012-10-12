@@ -1,3 +1,20 @@
 body {
-    font-size: 12px;
+    font-size: 11px;
+}
+
+/* remove padding and scrolling from elements that contain an Accordion OR a content-div */
+.ui-layout-east .ui-layout-content  {
+	padding: 0 !important;
+	overflow: hidden !important;
+}
+
+/* remove margin in panes that contain accordions*/
+.ui-accordion .ui-accordion-header {
+	margin-top: 0px !important;
+}
+
+#timeRange {
+	width: 160px;
+	max-width: 160px;
+	margin: 0px;
 }

@@ -20,12 +20,11 @@ jQuery(document).ready(function() {
  */
 function setupCmdFormValidation() {
 	$("#cmdFormSubmitButton").attr("disabled", true);
-	var validator = $("#cmdConfigForm").validate(
-						{
-							submitHandler : function(form) {
-								$("#cmdFormSubmitButton").attr("disabled", false);
-							}
-						});
+	var validator = $("#cmdConfigForm").validate({
+		submitHandler : function(form) {
+			$("#cmdFormSubmitButton").attr("disabled", false);
+		}
+	});
 }
 
 /**
@@ -33,14 +32,11 @@ function setupCmdFormValidation() {
  * and then updates the client web command list.
  */
 function getAllowedCommandList() {
-	console.log("Retrieving allowed command list");
 	var jqxhr = $.getJSON(rootURL + "commanding/info");
 	
-	jqxhr.done(
-		function(parsedResponse, statusText, jqXhr) {
-			updateAllowedCommands(jQuery.parseJSON(jqXhr.responseText)); 
-		}
-	);
+	jqxhr.done(function(parsedResponse, statusText, jqXhr) {
+		updateAllowedCommands(jQuery.parseJSON(jqXhr.responseText)); 
+	});
 }
 
 /**
@@ -51,11 +47,9 @@ function getAllowedCommandList() {
 function updateAllowedCommands(cmdList) {
 	console.log("Updating command list");
 	$("#commandList").empty();
-	$.each(cmdList,
-		function(i) {
-			addCommandLink("commandList", cmdList[i]);
-		}
-	);
+	$.each(cmdList, function(i) {
+		addCommandLink("commandList", cmdList[i]);
+	});
 }
 
 // TODO degrade to command page using href
@@ -119,8 +113,6 @@ function submitCommand(event) {
 	// Get the command object and populate the necessary parameter values
 	var cmd = event.data.cmd;
 	
-	console.log(cmd);
-	
 	$("#cmdArguments li").each(function(index, element) {
 		$(element).children("input").each(function(index, element) {
 			var input = $(element);
@@ -128,9 +120,7 @@ function submitCommand(event) {
 		});
 	});
 	
-	
 	var jsonString = JSON.stringify(cmd);
-	console.log("Submitting CMD; json = " + jsonString);
 	jQuery.post(rootURL + "commanding/sendcommand", jsonString, function(){}, "application/json");
 
 	return false;

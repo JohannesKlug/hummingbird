@@ -96,7 +96,6 @@ public class CommandListResource extends OsgiReady {
 	@Path("/command/{qualifiedName}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public CommandGroup getCommand(@PathParam("qualifiedName") final String qualifiedName) {
-		LOG.debug("Getting command " + qualifiedName + " from commmand information service");
 		final CommandInformationService cmdInfoService = (CommandInformationService) getServiceTracker().getService();
 		return cmdInfoService.getCommand(qualifiedName);
 	}

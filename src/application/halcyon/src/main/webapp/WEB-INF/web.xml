@@ -32,7 +32,7 @@
 				org.hbird.application.halcyon.TelemetryListResource,
 				org.hbird.application.halcyon.HalcyonResource,
 				org.hbird.application.halcyon.CommandingResource,
-				org.hbird.application.halcyon.ParameterArchiveQueryResource
+				org.hbird.application.halcyon.MongoParameterArchiveQueryResource
 			</param-value>
 		</init-param>
 		
