@@ -114,8 +114,8 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 					ServerSideProcReturnData aaDataStructure = new ServerSideProcReturnData();
 					aaDataStructure.sEcho = aoData.get("sEcho");
 					aaDataStructure.aaData = (List<?>) results;
-					aaDataStructure.iTotalRecords = 20000;
-					aaDataStructure.iTotalDisplayRecords = 20000;
+					aaDataStructure.iTotalRecords = (int) parameterQuerySenderService.queryNumRecords();
+					aaDataStructure.iTotalDisplayRecords = aaDataStructure.iTotalRecords;
 					ObjectMapper mapper = new ObjectMapper();
 					Writer out = new StringWriter();
 					mapper.writeValue(out, aaDataStructure);
