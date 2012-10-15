@@ -15,4 +15,8 @@ public interface MongoServiceStrategy {
 	List<DBObject> query(Object dbQuery);
 
 	List<DBObject> query(String dbQuery);
+
+	List<DBObject> query(Object dbQuery, int limit, int skip);
+
+	long queryNumRecords();
 }

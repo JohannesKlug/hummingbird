@@ -27,4 +27,14 @@ public class MongoDbParameterQuerySender implements ParameterQuerySender {
 	public void setMongoService(MongoServiceStrategy mongoService) {
 		this.mongoService = mongoService;
 	}
+
+	@Override
+	public Object query(Object dbQuery, int limit, int skip) {
+		return mongoService.query(dbQuery, limit, skip);
+	}
+
+	@Override
+	public long queryNumRecords() {
+		return mongoService.queryNumRecords();
+	}
 }

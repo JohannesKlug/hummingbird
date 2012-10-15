@@ -2,6 +2,7 @@
 var host = window.location.hostname;
 var url = "/hbird/halcyon/";
 var rootURL = location.protocol + "//" + host + ":" + location.port + url;
+var archiveUrl = rootURL + "tm/parameterarchive/rawquery";
 var ws;
 
 var table;
@@ -29,7 +30,7 @@ function setupJqueryDefaults() {
 	// Set json as default content-type for ajax. Since we are only sending JSON it means 
 	// we can use the shorthand post. 
 	$.ajaxSetup({
-	    contentType: "application/json"
+	    contentType: "application/json; charset=UTF-8"
 	});
 }
 
@@ -45,7 +46,7 @@ function setupGlobalJqueryUi() {
  * archive.
  */
 function setupArchiveFilterOptions() {
-	var from, to;
+	var from, to = null;
 	
 	from = $("#from").datetimepicker({
 		changeMonth : true,
@@ -87,28 +88,75 @@ function setupArchiveFilterOptions() {
 }
 
 function startLiveMode() {
+	toggleTableModeSettings(false);
+	table.fnClearTable();
 	live = true;
 }
 
 function startArchiveMode() {
-	live = false;
-	var filters = new Object();
-	filters.startTime = new Number(startTime.getTime());
-	filters.endTime = new Number(endTime.getTime());
+	toggleTableModeSettings(true);
+	table.fnDraw();
 
-	var jsonString = JSON.stringify(filters);
-	var request = jQuery.post(rootURL + "tm/parameterarchive/query", jsonString, function(data) {
-		updateDataTable(data);
-	}, "json")
-	request.success(function(jqXhr, status, error) {
-		console.log(status);
-	});
-    request.error(function(jqXHR, status, error) {
-    	console.log(status + " :: " + error);
-    });
-    request.complete(function() {
-    	console.log("Archive request complete");
-    });
+//	live = false;
+//	var filters = new Object();
+//	filters.startTime = new Number(startTime.getTime());
+//	filters.endTime = new Number(endTime.getTime());
+//	filters.count = new Number(maxRows);
+//
+//	var jsonString = JSON.stringify(filters);
+//	var request = $.post(rootURL + "tm/parameterarchive/query", jsonString, function(data) {
+//		updateDataTable(data);
+//	}, "json");
+//	request.success(function(jqXhr, status, error) {
+//		console.log(status);
+//	});
+//    request.error(function(jqXHR, status, error) {
+//    	console.log(status + " :: " + error);
+//    });
+//    request.complete(function() {
+//    	console.log("Archive request complete");
+//    });
+}
+
+/**
+ * Given a state parameter representing whether we are switching to archive or 
+ * live mode this function alters the table settings between server-side and
+ * client-side processing.
+ * 
+ * @param archive if true archive mode, if false live mode.
+ */
+function toggleTableModeSettings(archive) {
+	var settings = table.fnSettings();
+	// If archive change the table to use server-side processing and provide a 
+	// custom function for retrieving the data via Ajax. We want to use a POST
+	// method so we can send filter data to a JAX RS restful service.
+	if(archive) {
+		console.log("changing table settings to archive mode");
+		settings.oFeatures.bServerSide = true;
+		settings.fnServerData = function(sSource, aoData, fnCallback, oSettings) {
+			console.log("fnServerData triggered; sending aoData:");
+//			aoData.push({"startTime" : new Number(startTime.getTime())});
+//			aoData.push({"endTime" : new Number(endTime.getTime())});
+			
+			oSettings.jqXHR = $.ajax( {
+		        "dataType": "json",
+		        "type": "POST",
+		        "url": archiveUrl,
+		        "data": JSON.stringify(aoData),
+		        "success": fnCallback
+		     });
+			
+			oSettings.jqXHR.success = function() {
+				console.log("Request successful");
+			};
+		};
+	}
+	// else we are going to live mode and need to switch the table settings back to 
+	// client side processing.
+	else {
+		settings.oFeatures.bServerSide = false;
+		settings.fnServerData = null;
+	}
 }
 
 function updateDataTable(data) {
@@ -126,6 +174,10 @@ function updateDataTable(data) {
  */
 function setupTableOptions() {
 	$("#maxRowsInput").val(maxRows);
+	$("#maxRowsInput").submit(function(){
+		console.log($(this).val());
+		maxRows = $(this).val();
+	});
 
 	$("#accordion").accordion({
 		fillSpace : true,
@@ -149,12 +201,15 @@ function setupDataTable() {
 		"aaData" : [],
 		"aoColumns" : [ {
 			"sTitle" : "Parameter",
-			"sType" : "String"
+			"sType" : "String",
+			"mData" : "name"
 		}, {
 			"sTitle" : "Value",
-			"sType" : "Numeric"
+			"sType" : "Numeric",
+			"mData" : "value"
 		}, {
 			"sTitle" : "Received Time",
+			"mData" : "receivedTime",
 			"asSorting" : [ "desc" ]
 		} ],
 		"aaSorting" : [ [ 2, "desc" ] ]

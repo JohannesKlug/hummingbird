@@ -1,9 +1,12 @@
 package org.hbird.application.parameterarchive.mongodb;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.component.mongodb.MongoDbConstants;
 
 import com.mongodb.DBObject;
 
@@ -14,7 +17,6 @@ public class CamelEndpointMongoServiceStrategy implements MongoServiceStrategy {
 
 	@Override
 	public List<DBObject> query(Object dbQuery) {
-		System.out.println("Received parameter archive query request: " + dbQuery);
 		List<DBObject> result = null;
 		if (dbQuery instanceof DBObject) {
 			result = (List<DBObject>) producer.requestBody(dbQuery);
@@ -24,7 +26,6 @@ public class CamelEndpointMongoServiceStrategy implements MongoServiceStrategy {
 
 	@Override
 	public List<DBObject> query(String dbQuery) {
-		System.out.println("Received parameter archive query request: " + dbQuery);
 		List<DBObject> result = null;
 		// camel-mongodb type converters should convert the json query string to a DBObject
 		result = (List<DBObject>) producer.requestBody(dbQuery);
@@ -32,4 +33,24 @@ public class CamelEndpointMongoServiceStrategy implements MongoServiceStrategy {
 		return result;
 	}
 
+	@Override
+	public List<DBObject> query(Object dbQuery, int limit, int skip) {
+		List<DBObject> result = null;
+		Map<String, Object> headers = new HashMap<String, Object>(2);
+		headers.put(MongoDbConstants.NUM_TO_SKIP, skip);
+		headers.put(MongoDbConstants.LIMIT, limit);
+		// camel-mongodb type converters should convert the json query string to a DBObject
+		result = (List<DBObject>) producer.requestBodyAndHeaders(dbQuery, headers);
+		System.out.println("Result = " + result);
+		return result;
+	}
+
+	@Override
+	public long queryNumRecords() {
+		Map<String, Object> headers = new HashMap<String, Object>(2);
+		headers.put(MongoDbConstants.OPERATION_HEADER, "count");
+		// camel-mongodb type converters should convert the json query string to a DBObject
+		Object result = producer.requestBodyAndHeaders(null, headers);
+		return (Long) result;
+	}
 }

@@ -129,6 +129,12 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-mongodb</artifactId>
+			<scope>provided</scope>
+			<version>${camel.version}</version>
+		</dependency>
 	</dependencies>
 	<packaging>bundle</packaging>
 	<name>Hbird :: Application :: Parameter Archive</name>

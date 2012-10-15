@@ -19,4 +19,16 @@ public interface ParameterQuerySender {
 	 * @return results, probably a list. Depends upon your database.
 	 */
 	Object query(Object dbQuery);
+
+	/**
+	 * FIXME Mongo parameters in interface. They are generic concepts though, I think.
+	 * 
+	 * @param dbQuery
+	 * @param limit
+	 * @param skip
+	 * @return
+	 */
+	Object query(Object dbQuery, int limit, int skip);
+
+	long queryNumRecords();
 }
