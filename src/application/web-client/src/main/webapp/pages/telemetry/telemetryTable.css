@@ -19,6 +19,10 @@ body {
 	margin: 0px;
 }
 
+.ui-layout-pane-center {
+	padding: 0px !important; /* remove padding generated around centre content */
+}
+
 tr.odd {
 	background-color: rgb(246, 246, 246) !important;
 }
@@ -28,9 +32,9 @@ tr.even {
 }
 
 tr.even td.sorting_1 {
-	background-color: rgb(221, 221, 221) !important;
+	background-color: rgb(211, 211, 221) !important;
 }
 
 tr.odd td.sorting_1 {
-	background-color: rgb(246, 246, 246) !important;
+	background-color: rgb(236, 236, 246) !important;
 }
