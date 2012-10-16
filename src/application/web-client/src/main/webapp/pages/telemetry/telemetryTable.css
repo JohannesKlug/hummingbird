@@ -1,9 +1,9 @@
 body {
-    font-size: 11px;
+	
 }
 
 /* remove padding and scrolling from elements that contain an Accordion OR a content-div */
-.ui-layout-east .ui-layout-content  {
+.ui-layout-east .ui-layout-content {
 	padding: 0 !important;
 	overflow: hidden !important;
 }
@@ -17,4 +17,20 @@ body {
 	width: 160px;
 	max-width: 160px;
 	margin: 0px;
+}
+
+tr.odd {
+	background-color: rgb(246, 246, 246) !important;
+}
+
+tr.even {
+	background-color: rgb(221, 221, 221) !important;
+}
+
+tr.even td.sorting_1 {
+	background-color: rgb(221, 221, 221) !important;
+}
+
+tr.odd td.sorting_1 {
+	background-color: rgb(246, 246, 246) !important;
 }

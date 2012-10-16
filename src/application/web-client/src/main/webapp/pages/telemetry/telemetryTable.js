@@ -114,6 +114,7 @@ function toggleTableModeSettings(archive) {
 	if(archive) {
 		console.log("changing table settings to archive mode");
 		settings.oFeatures.bServerSide = true;
+		settings.oFeatures.bDeferRender = true;
 		settings.fnServerData = function(sSource, aoData, fnCallback, oSettings) {
 			console.log("fnServerData triggered; sending aoData:");
 			aoData.push({"name" : "startTime", "value" : startTime.getTime()});
