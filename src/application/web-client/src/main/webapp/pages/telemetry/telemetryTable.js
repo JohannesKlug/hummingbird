@@ -94,28 +94,9 @@ function startLiveMode() {
 }
 
 function startArchiveMode() {
+	live = false;
 	toggleTableModeSettings(true);
 	table.fnDraw();
-
-//	live = false;
-//	var filters = new Object();
-//	filters.startTime = new Number(startTime.getTime());
-//	filters.endTime = new Number(endTime.getTime());
-//	filters.count = new Number(maxRows);
-//
-//	var jsonString = JSON.stringify(filters);
-//	var request = $.post(rootURL + "tm/parameterarchive/query", jsonString, function(data) {
-//		updateDataTable(data);
-//	}, "json");
-//	request.success(function(jqXhr, status, error) {
-//		console.log(status);
-//	});
-//    request.error(function(jqXHR, status, error) {
-//    	console.log(status + " :: " + error);
-//    });
-//    request.complete(function() {
-//    	console.log("Archive request complete");
-//    });
 }
 
 /**
@@ -135,9 +116,8 @@ function toggleTableModeSettings(archive) {
 		settings.oFeatures.bServerSide = true;
 		settings.fnServerData = function(sSource, aoData, fnCallback, oSettings) {
 			console.log("fnServerData triggered; sending aoData:");
-//			aoData.push({"startTime" : new Number(startTime.getTime())});
-//			aoData.push({"endTime" : new Number(endTime.getTime())});
-			
+			aoData.push({"name" : "startTime", "value" : startTime.getTime()});
+			aoData.push({"name" : "endTime", "value" : endTime.getTime()});
 			oSettings.jqXHR = $.ajax( {
 		        "dataType": "json",
 		        "type": "POST",
@@ -202,14 +182,23 @@ function setupDataTable() {
 		"aoColumns" : [ {
 			"sTitle" : "Parameter",
 			"sType" : "String",
-			"mData" : "name"
+			"mData" : "name",
+			"mRender": function(data, type, full) {
+				return data;
+			}
 		}, {
 			"sTitle" : "Value",
 			"sType" : "Numeric",
-			"mData" : "value"
+			"mData" : "value",
+			"mRender": function(data, type, full) {
+				return data;
+			}
 		}, {
 			"sTitle" : "Received Time",
 			"mData" : "receivedTime",
+			"mRender": function(data, type, full) {
+				return new Date(new Number(data));
+			},
 			"asSorting" : [ "desc" ]
 		} ],
 		"aaSorting" : [ [ 2, "desc" ] ]
@@ -285,7 +274,7 @@ function setupWebsocket() {
  *            the new parameter
  */
 function parameterReceived(parameter) {
-	var newRow = [ parameter.name, parameter.value, new Date(parameter.receivedTime) ];
+	var newRow = [ parameter ];
 	table.fnAddData(newRow);
 	if (table.fnGetData().length > maxRows) {
 		table.fnDeleteRow(0);

@@ -19,6 +19,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.hbird.application.halcyon.datatables.ServerSideProcReturnData;
 import org.hbird.application.halcyon.osgi.OsgiReady;
 import org.hbird.application.parameterarchive.interfaces.ParameterQuerySender;
+import org.hbird.application.parameterarchive.mongodb.MongoResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -110,11 +111,12 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 				String count = aoData.get("iDisplayLength");
 				Object results = parameterQuerySenderService.query(query, Integer.parseInt(count), Integer.parseInt(skip));
 				// FIXME Put results into aaData and return aoData back to server!
-				if (results instanceof List<?>) {
+				if (results instanceof MongoResult) {
+					MongoResult mongoResults = (MongoResult) results;
 					ServerSideProcReturnData aaDataStructure = new ServerSideProcReturnData();
 					aaDataStructure.sEcho = aoData.get("sEcho");
-					aaDataStructure.aaData = (List<?>) results;
-					aaDataStructure.iTotalRecords = (int) parameterQuerySenderService.queryNumRecords();
+					aaDataStructure.aaData = mongoResults.results;
+					aaDataStructure.iTotalRecords = mongoResults.totalResults;
 					aaDataStructure.iTotalDisplayRecords = aaDataStructure.iTotalRecords;
 					ObjectMapper mapper = new ObjectMapper();
 					Writer out = new StringWriter();
@@ -137,18 +139,17 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 
 	private static DBObject buildMongoQuery(Map<String, String> aoData) {
 		DBObject mongoQuery = new BasicDBObject();
-
+		long startTime = Long.parseLong(aoData.get("startTime"));
+		long endTime = Long.parseLong(aoData.get("endTime"));
+		mongoQuery.put("receivedTime", BasicDBObjectBuilder.start("$gte", startTime).add("$lte", endTime).get());
 		return mongoQuery;
 	}
 
 	private static Map<String, String> refineAoDataList(List<Map<String, String>> dataTablesAoData) {
-		final int AO_DATA_ARRAY_LENGTH = 25;
 		Map<String, String> aoData = null;
-		if (dataTablesAoData.size() == 25) {
-			aoData = new HashMap<String, String>(AO_DATA_ARRAY_LENGTH);
-			for (Map<String, String> aoDataObj : dataTablesAoData) {
-				aoData.put(aoDataObj.get("name"), aoDataObj.get("value"));
-			}
+		aoData = new HashMap<String, String>(25);
+		for (Map<String, String> aoDataObj : dataTablesAoData) {
+			aoData.put(aoDataObj.get("name"), aoDataObj.get("value"));
 		}
 		return aoData;
 	}
