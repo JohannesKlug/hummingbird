@@ -2,7 +2,7 @@
 var host = window.location.hostname;
 var url = "/hbird/halcyon/";
 var rootURL = location.protocol + "//" + host + ":" + location.port + url;
-var archiveUrl = rootURL + "tm/parameterarchive/rawquery";
+var archiveUrl = rootURL + "tm/parameterarchive/datatablesquery";
 var ws;
 
 var table;
@@ -137,15 +137,6 @@ function toggleTableModeSettings(archive) {
 		settings.oFeatures.bServerSide = false;
 		settings.fnServerData = null;
 	}
-}
-
-function updateDataTable(data) {
-	var newData = [];
-	for(var i=0; i < data.length; i++) {
-		newData[i] = [data[i].name, data[i].value, new Date(data[i].receivedTime) ];
-	}
-	table.fnClearTable();
-	table.fnAddData(newData);
 }
 
 /**

@@ -95,7 +95,7 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 	}
 
 	@POST
-	@Path("/rawquery")
+	@Path("/datatablesquery")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String queryParameterDatabaseForDataTables(List<Map<String, String>> dataTablesAoData) throws JsonGenerationException, JsonMappingException,
@@ -124,11 +124,11 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 					result = out.toString();
 				}
 				else {
-					LOG.error("Object returned from the parameter archiver was not a List<?>");
+					LOG.error("Object returned from the parameter archiver was not a MongoResult object");
 				}
 			}
 			else {
-				LOG.error("Invalid aoData received");
+				LOG.error("Invalid aoData received - data was null");
 			}
 		}
 		else {

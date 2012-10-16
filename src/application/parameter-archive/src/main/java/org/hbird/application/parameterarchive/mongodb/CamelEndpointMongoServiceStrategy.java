@@ -31,7 +31,6 @@ public class CamelEndpointMongoServiceStrategy implements MongoServiceStrategy {
 		List<DBObject> result = null;
 		// camel-mongodb type converters should convert the json query string to a DBObject
 		result = (List<DBObject>) producer.requestBody(dbQuery);
-		System.out.println("Result = " + result);
 		return result;
 	}
 
