@@ -2,13 +2,25 @@ body {
 	
 }
 
+#filtering {
+	margin: 6px;
+}
+
+#filtering #filterControls {
+	margin-top: 4px;
+}
+
+#filtering #filterControls button {
+	margin-left: 0px;
+}
+
 /* remove padding and scrolling from elements that contain an Accordion OR a content-div */
 .ui-layout-east .ui-layout-content {
 	padding: 0 !important;
 	overflow: hidden !important;
 }
 
-/* remove margin in panes that contain accordions*/
+/* remove accordion top margin */
 .ui-accordion .ui-accordion-header {
 	margin-top: 0px !important;
 }
@@ -19,10 +31,9 @@ body {
 	margin: 0px;
 }
 
-.ui-layout-pane-center {
-	padding: 0px !important; /* remove padding generated around centre content */
-}
-
+/*
+ Datatable's default row colours
+*/
 tr.odd {
 	background-color: rgb(246, 246, 246) !important;
 }

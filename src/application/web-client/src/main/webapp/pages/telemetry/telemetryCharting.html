@@ -18,10 +18,14 @@
 
 	<!-- CSS
   ================================================== -->
+  	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  	<link rel="stylesheet" href="../../css/reset-min.css">
+  	<link rel="stylesheet" href="../../css/hbird-base.css">
+	<link rel="stylesheet" href="telemetryCharting.css">
 	<link rel="Stylesheet" href="../../css/flick/theme.css"/>
 	<link rel="stylesheet" href="../../js/chosen.css">
 	<link rel="stylesheet" href="../../css/jquery.jqplot.min.css" />
-	<link rel="stylesheet" href="telemetry.css">
+	<link rel="stylesheet" href="../../css/layout-default-latest.css" />
 
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -42,12 +46,14 @@
 	<script type="text/javascript" src="../../js/flot/jquery.flot.js"></script>
 	<script type="text/javascript" src="../../js/flot/jquery.flot.resize.js"></script>
 	<script type="text/javascript" src="../../js/flot/jquery.flot.crosshair.js"></script>
-	<script type="text/javascript" src="telemetry.js"></script>
+	<script type="text/javascript" src="telemetryCharting.js"></script>
 </head>
 
 <body>
 	<div class="ui-layout-center">
-		<div id="liveTmChart" style="height:90%;width:90%;"></div>
+		<div id="chartArea">
+			<div id="liveTmChart"></div>
+		</div>
 	</div>
 
 	<div class="ui-layout-north">
@@ -106,6 +112,10 @@
 				</div>
 			</form>
 		</div>
+	</div>
+	
+	<div id="footer">
+		footer
 	</div>
 		
 </body>

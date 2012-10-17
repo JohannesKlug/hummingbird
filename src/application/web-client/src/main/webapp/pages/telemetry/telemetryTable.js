@@ -204,7 +204,8 @@ function setupDataTable() {
  */
 function setupLayout() {
 	var layoutOptions = {
-		applyDefaultStyles : true,
+		applyDefaultStyles : false,
+		spacing_open : 3,
 		north : {
 			resizable : false,
 			size : 50,
@@ -213,13 +214,17 @@ function setupLayout() {
 		},
 		south : {
 			resizable : false,
-			initClosed : true
+			closable : false,
+//			initClosed : true,
+			resizable : false,
+			size : 30,
+			minSize : 30,
+			maxSize : 30
 		},
 		west : {
 			showOverflowOnHover : true
 		},
 		east : {
-			size : 250
 		},
 		east__onresize : function() {
 			$("#accordion").accordion("resize");

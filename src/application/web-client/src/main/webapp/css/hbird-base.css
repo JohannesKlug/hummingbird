@@ -1,6 +1,5 @@
 body {
 	font-family: 'Open Sans', sans-serif;
-	font-size: 11px;
 }
 
 h1 {
@@ -22,4 +21,87 @@ h4 {
 p {
 	font-size: 0.75em; /* 16x0.75=12 */
 	hyphenate: auto;
+}
+
+a:LINK {
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size: 1.5em;
+	color: rgb(240, 240, 240);
+	text-shadow: 0px 2px 3px #555;
+	text-decoration: none;
+	-webkit-transition: color .4s linear; 
+	-moz-transition: color .4s linear; 
+	-ms-transition: color .4s linear; 
+	-o-transition: color .4s linear; 
+	transition: color .4s linear; 
+}
+
+a:VISITED {
+	color: rgb(240, 240, 240);
+}
+
+a:HOVER {
+	color: #e06c1f; 
+}
+
+a:ACTIVE {
+	color: #3B689B;
+}
+
+#header {
+	background-color: gray;
+	height: 70px;
+	background-color: rgba(100, 100, 100, 0.2);
+	border-bottom: thick;
+	border-bottom: white;
+	padding-left: 10px;
+	padding-top: 12px;
+	z-index: 10;
+}
+
+#header #logoTitle {
+	display: inline;
+	position: absolute;
+}
+
+#header #title {
+	margin-left: 10px;
+	display: inline;
+	vertical-align: middle;
+}
+
+#header #logo {
+	vertical-align: middle;
+}
+
+#header #topMenu {
+	text-align: center;
+	margin-top: 16px;
+}
+
+#header #topMenu a {
+	padding: 4px;
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: opacity 1s linear;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: visibility 0s 1s, opacity 1s linear;
+}
+
+#footer {
+	width: 100%;
+	background-color: gray;
+	background-color: rgba(100, 100, 100, 0.2);
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	height: 30px;
+	text-align: center;
 }

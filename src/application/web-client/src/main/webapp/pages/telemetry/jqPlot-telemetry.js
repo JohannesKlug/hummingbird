@@ -25,7 +25,7 @@ var liveTmChart;
 
 
 jQuery(document).ready(function() {
-	$('body').layout({ applyDefaultStyles: true });
+	setupLayout();
 	setupWebsocket();
 	$(".chzn-select").chosen(); // Activate chosen plugin
 	$(".chzn-select-deselect").chosen({allow_single_deselect:true});
@@ -46,6 +46,12 @@ jQuery(document).ready(function() {
         }
 	});
 });
+
+function setupLayout() {
+	$('body').layout({
+		applyDefaultStyles: true 
+	});
+}
 
 function setupWebsocket() {
 	ws.onopen = function() {

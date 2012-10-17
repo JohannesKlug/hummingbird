@@ -18,9 +18,14 @@
 
 	<!-- CSS
   ================================================== -->
-	<link rel="stylesheet" href="css/base.css">
-	<link rel="stylesheet" href="css/skeleton.css">
-	<link rel="stylesheet" href="css/layout.css">
+	<link rel="stylesheet" href="css/reset-min.css">
+	<link rel="stylesheet" href="css/hbird-base.css">
+	<link rel="stylesheet" href="css/index.css">
+	
+	<!-- Web fonts
+	================================================== -->
+	<link href='http://fonts.googleapis.com/css?family=Homenaje' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -32,67 +37,49 @@
 	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 	<link rel="apple-touch-icon" sizes="36x36" href="images/satelliteDish36.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="images/satelliteDish72.png">
+	
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/pages/index.js"></script>
 
 </head>
 <body>
 
 
+	<div id="header">
+		<div id="logoTitle">
+			<img id="logo" alt="" src="images/satellite.png">
+			<h1 id="title">Hbird</h1>
+		</div>
+		
+		
+		<div id="topMenu">
+			<a id="menuHome" href="#"><span>Home</span></a>
+			<a id="menuTm" href="#"><span>Telemetry</span></a>
+			<a id="menuCmd" href="pages/commanding/commanding.html"><span>Commanding</span></a>
+			<a id="menuAbout" href="#"><span>About</span></a>
+			<a id="menuHelp" href="#"><span>Help</span></a>
+		</div>
+	</div>
 
 	<!-- Primary Page Layout
 	================================================== -->
 
 	<!-- Delete everything in this .container and get started on your own site! -->
 
-	<div class="container">
-		<div class="sixteen columns">
-			<h1 class="remove-bottom" style="margin-top: 40px">Halcyon</h1>
-			<h5>Version 0.0.1-SNAPSHOT</h5>
-			<hr />
+	<div id="menuContainer" class="hidden">
+		<div>
+			<h3>Telemetry</h3>
+			<p>Visualise incoming or archived telemetry received from your system.</p>
+			<a href="pages/telemetry/telemetryCharting.html">Telemetry charting</a>
+			<a href="pages/telemetry/telemetryTable.html">Telemetry table</a>
 		</div>
-		
-		<div class="one-third column">
-			<h3>About Hbirdweb and Halcyon</h3>
-			<p>Halcyon and Hbirdweb combine to provide a RESTful web application designed to run in an OSGi container providing a cutting edge user interface to various hbird applications.</p>
-		</div>
-		
-		<div class="one-third column">
-			<h3>Three Core Principles</h3>
-			<p>Hbirdweb and Halcyon are built on four core principles:</p>
-			<ul class="square">
-				<li><strong>RESTful</strong>: Employs Restful web service principles.</li>
-				<li><strong>OSGi</strong>: Real modular software. Plug and play different components at runtime.</li>
-				<li><strong>Separation of Concerns</strong>: A restful backend and a powerful client based javascript front.</li>
-				<li><strong>Metro styling</strong>: <a href="http://en.wikipedia.org/wiki/International_Typographic_Style">Style inspiration</a></li>
-			</ul>
-		</div>
-		
-		<div class="one-third column">
-			<h3>Docs &amp; Support</h3>
-			<p>org.hbird. Contacts.</p>
-		</div>
-		
-		
-		<div class="sixteen columns">
-			<h2>What next? Let's proceed...</h2>
-			<hr/>
-			<div class="one-third column">
-				<h3>Telemetry</h3>
-				<p>Visualise incoming or archived telemetry received from your system.</p>
-				<a href="pages/telemetry/telemetry.html">Telemetry charting</a>
-				<a href="pages/telemetry/telemetryTable.html">Telemetry table</a>
-			</div>
-			<div class="one-third column">
-				<h3><a href="pages/commanding/commanding.html">Commanding</a></h3>
-				<p>Send telecommands to your system.</p>
-			</div>
-		</div>
-
-	</div><!-- container -->
+	</div>
 
 
-<footer>
-	<p>&copy; 2012 Hbird</p>
-</footer>
+	<div id="footer">
+		<p id="copyriteMsg">&copy; 2012 Hbird</p>
+	</div>
+	
 <!-- End Document
 ================================================== -->
 </body>

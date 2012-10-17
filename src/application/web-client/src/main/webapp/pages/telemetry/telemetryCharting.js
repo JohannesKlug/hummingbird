@@ -3,7 +3,7 @@ var host = window.location.hostname;
 var url = "/hbird/halcyon/";
 var rootURL = location.protocol + "//" + host + ":" + location.port + url;
 
-var ws;
+var live = true;
 
 var seriesData = [];
 var chartData = new Array();
@@ -29,7 +29,8 @@ jQuery(document).ready(function() {
 
 function setupLayout() {
 	var layoutOptions = {
-		applyDefaultStyles : true,
+		applyDefaultStyles : false,
+		spacing_open : 3,
 		north : {
 			resizable : false,
 			size : 50,
@@ -38,7 +39,18 @@ function setupLayout() {
 		},
 		south : {
 			resizable : false,
-			initClosed : true
+			closable : false,
+			resizable : false,
+			size : 30,
+			minSize : 30,
+			maxSize : 30
+		},
+		west : {
+			showOverflowOnHover : true
+		},
+		east : {},
+		east__onresize : function() {
+			$("#accordion").accordion("resize");
 		}
 	};
 
@@ -62,60 +74,11 @@ function setupChartOptionsForm() {
 	$("#chartOptionsForm").submit(function(event) {
 		maxDataSeriesSize = $("#maxPointsInput").val();
 	});
-
-	// $("#rollChartToggle").click(function(event) {
-	// if ($("#rollChartToggle").is(":checked")) {
-	// toggleUpdateChartTimer(true);
-	// }
-	// else {
-	// toggleUpdateChartTimer(false);
-	// }
-	// });
 }
 
-// function toggleUpdateChartTimer(state) {
-// if(state) {
-// rollChartIntervalId = window.setInterval(rollChartUpdate, 50);
-// rollingChart = true;
-// }
-// else {
-// if(typeof rollChartIntervalId !== "undefined") {
-// console.log("Clearing roll chart interval");
-// window.clearInterval(rollChartIntervalId);
-// rollingChart = false;
-// }
-// }
-// }
-
-// function rollChartUpdate() {
-// var newData = [];
-// for(var i in seriesData) {
-// var latestEntry = seriesData[i][[(seriesData[i].length) - 1]];
-// console.log("Pushing latest entry onto series: " + latestEntry[0] + " :: " +
-// latestEntry[1]);
-// var size = seriesData[i].push(latestEntry);
-// if(size >= maxDataSeriesSize) {
-// seriesData[i].shift();
-// }
-// // var latestEntry = series[(series.length) - 1];
-// newData.push({"label":i, "data":seriesData[i]});
-// }
-//	
-// if(!rollingChart) {
-// liveTmChart.setData(newData);
-// liveTmChart.draw();
-// }
-// }
 
 function setupEastAccordion() {
 	$("#accordion").accordion();
-
-	$("body").layout({
-		west__onresize : function() {
-			console.log("west resize");
-			// $('#accordion').accordion("resize")
-		}
-	});
 }
 
 function setupChosen() {
@@ -127,25 +90,27 @@ function setupChosen() {
 }
 
 /**
- * Sets up the web socket callbacks.
+ * Sets up the web socket and it's callbacks.
  */
 function setupWebsocket() {
 	var wsProtocol;
+
 	if (location.protocol == "http:") {
 		wsProtocol = "ws:";
 	} else {
 		wsProtocol = "wss:";
 	}
 
-	ws = $.gracefulWebSocket(wsProtocol + "//" + host + ":" + location.port
-			+ url + "tmsock");
+	var liveTmWebsocket = $.gracefulWebSocket(wsProtocol + "//" + host + ":" + location.port + url + "tmsock");
 
-	ws.onopen = function() {
+	liveTmWebsocket.onopen = function() {
 		console.log("Websocket connection established.");
 	};
 
-	ws.onmessage = function(event) {
-		plotParameter($.parseJSON(event.data));
+	liveTmWebsocket.onmessage = function(event) {
+		if(live) {
+			plotParameter($.parseJSON(event.data));
+		}
 	};
 }
 
@@ -171,16 +136,13 @@ function updateTelemetry(param) {
 	$("#telemetryList").empty();
 	$.each(param, function(i) {
 		console.log("Adding parameter");
-		$("#parametersList")
-				.append(
-						new Option(param[i].name, param[i].qualifiedName,
-								false, false));
+		$("#parametersList").append(new Option(param[i].name, param[i].qualifiedName,false, false));
 	});
 	$("#parametersList").trigger("liszt:updated");
 }
 
 /**
- *  [ { label: "Foo", data: [ [10, 1], [17, -14], [30, 5] ] }, { label: "Bar",
+ * [ { label: "Foo", data: [ [10, 1], [17, -14], [30, 5] ] }, { label: "Bar",
  * data: [ [11, 13], [19, 11], [30, -7] ] } ]
  * 
  * @param parameter
