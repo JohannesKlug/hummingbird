@@ -24,8 +24,8 @@
 	
 	<!-- Web fonts
 	================================================== -->
-	<link href='http://fonts.googleapis.com/css?family=Homenaje' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Homenaje' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -42,42 +42,77 @@
 	<script type="text/javascript" src="js/pages/index.js"></script>
 
 </head>
-<body>
 
+<body>
+	<div id="backdrop">
+		<!-- images cycled on menu click - order is the same as the menu list -->
+		<img src="images/earth-backdrop.png" class="opaque">
+		<img src="images/ground-station-sunset.png">
+		<img src="images/shuttle-silhouette.jpg">
+		<img src="images/earth-sunrise-space.jpg">
+	</div>
 
 	<div id="header">
 		<div id="logoTitle">
 			<img id="logo" alt="" src="images/satellite.png">
-			<h1 id="title">Hbird</h1>
+			<h1 id="title">Hummingbird</h1>
 		</div>
-		
 		
 		<div id="topMenu">
-			<a id="menuHome" href="#"><span>Home</span></a>
-			<a id="menuTm" href="#"><span>Telemetry</span></a>
-			<a id="menuCmd" href="pages/commanding/commanding.html"><span>Commanding</span></a>
-			<a id="menuAbout" href="#"><span>About</span></a>
-			<a id="menuHelp" href="#"><span>Help</span></a>
+			<ul>
+				<li><a id="menuHome" href="#"><span>Home</span></a></li>
+				<li><a id="menuTm" href="#"><span>Telemetry</span></a></li>
+				<li><a id="menuCmd" href="#"><span>Commanding</span></a></li>
+				<li><a id="menuHelp" href="#"><span>Help</span></a></li>
+			</ul>
 		</div>
 	</div>
+	
+<!-- 	<div id="subMenu"> -->
+<!-- 		<p>Visualise incoming or archived telemetry received from your system.</p> -->
+<!-- 		<ul> -->
+<!-- 			<li><a href="pages/telemetry/telemetryCharting.html">Telemetry charting</a></li> -->
+<!-- 			<li><a href="pages/telemetry/telemetryTable.html">Telemetry table</a></li> -->
+<!-- 		</ul> -->
+<!-- 	</div>					 -->
 
 	<!-- Primary Page Layout
 	================================================== -->
-
-	<!-- Delete everything in this .container and get started on your own site! -->
-
-	<div id="menuContainer" class="hidden">
-		<div>
-			<h3>Telemetry</h3>
-			<p>Visualise incoming or archived telemetry received from your system.</p>
-			<a href="pages/telemetry/telemetryCharting.html">Telemetry charting</a>
-			<a href="pages/telemetry/telemetryTable.html">Telemetry table</a>
+	
+	<div id="subMenu" class="subMenu">
+		<span id="closeButton" class="closeButton"></span>
+		<div class="subMenuContent">
+			<div class="subMenuContentInner">
+			test 1
+			</div>
+		</div>	
+		<div class="subMenuContent">
+			<div class="subMenuContentInner">
+				<p>Visualise incoming or archived telemetry received from your system.</p>
+				<ul>
+					<li><a href="pages/telemetry/telemetryCharting.html">Telemetry charting</a></li>
+					<li><a href="pages/telemetry/telemetryTable.html">Telemetry table</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="subMenuContent">
+			<div class="subMenuContentInner">
+				<p>Send commands to your system.</p>
+				<ul>
+					<li><a href="pages/commanding/commanding.html">Commanding</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="subMenuContent">
+			<div class="subMenuContentInner">
+			test4
+			</div>
 		</div>
 	</div>
 
 
 	<div id="footer">
-		<p id="copyriteMsg">&copy; 2012 Hbird</p>
+		<p id="copyriteMsg">&copy; 2012 hbird.org</p>
 	</div>
 	
 <!-- End Document

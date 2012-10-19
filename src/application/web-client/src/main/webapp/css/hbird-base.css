@@ -1,17 +1,77 @@
+html {
+/* 	background-image: url("../images/earth-backdrop.png"); */
+/* 	background-repeat: no-repeat; */
+/*  background-position: center; */
+/*  background-attachment: fixed; */
+/* 	background-size: cover; */
+/*     -webkit-background-size: cover; */
+/*     -moz-background-size: cover; */
+/*     -o-background-size: cover; */
+}
+
+* {
+	box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+#backdrop {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	pause: 0px;	
+	z-index: -1;
+}
+
+#backdrop img {
+	/* Set rules to fill background */
+	min-height: 100%;
+	min-width: 1600px;
+	/* Set up proportionate scaling */
+	width: 100%;
+	height: auto;
+	/* Set up positioning */
+	position: fixed;
+	top: 0;
+	left: 0;
+	
+	-webkit-transition: opacity 1s ease-in-out;
+	-moz-transition: opacity 1s ease-in-out;
+	-o-transition: opacity 1s ease-in-out;
+	transition: opacity 1s ease-in-out;
+	opacity:0;
+}
+
+#backdrop img.opaque {
+	opacity: 1;
+}
+
 body {
 	font-family: 'Open Sans', sans-serif;
 }
 
 h1 {
+	font-family: 'Open Sans Condensed', sans-serif;
+	opacity: 1;
+	color: rgb(240, 240, 240);
+	text-shadow: 0px 2px 3px #555;
 	font-size: 2.25em; /* 16x2.25=36 */
 }
 
 h2 {
 	font-size: 1.5em; /* 16x1.5=24 */
+	font-family: 'Open Sans Condensed', sans-serif;
+	color: rgb(240, 240, 240);
+	text-shadow: 0px 2px 3px #555;
 }
 
 h3 {
 	font-size: 1.125em; /* 16x1.125=18 */
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size: 1.5em;
+	color: rgb(240, 240, 240);
+	text-shadow: 0px 2px 3px #555;
 }
 
 h4 {
@@ -19,6 +79,7 @@ h4 {
 }
 
 p {
+	font-family: 'Open Sans Condensed', sans-serif;
 	font-size: 0.75em; /* 16x0.75=12 */
 	hyphenate: auto;
 }
@@ -31,7 +92,6 @@ a:LINK {
 	text-decoration: none;
 	-webkit-transition: color .4s linear; 
 	-moz-transition: color .4s linear; 
-	-ms-transition: color .4s linear; 
 	-o-transition: color .4s linear; 
 	transition: color .4s linear; 
 }
@@ -48,12 +108,16 @@ a:ACTIVE {
 	color: #3B689B;
 }
 
+.activeMenuLink {
+	color: #3B689B !important;	
+}
+
 #header {
-	background-color: gray;
-	height: 70px;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255, 255, 255, 0.15)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+	background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+ */
 	background-color: rgba(100, 100, 100, 0.2);
-	border-bottom: thick;
-	border-bottom: white;
+	border-bottom: thin solid rgba(255, 255, 255, 0.01);
+	height: 70px;
 	padding-left: 10px;
 	padding-top: 12px;
 	z-index: 10;
@@ -79,21 +143,78 @@ a:ACTIVE {
 	margin-top: 16px;
 }
 
+#header #topMenu ul li {
+	display: inline;
+}
+
 #header #topMenu a {
 	padding: 4px;
 }
 
-.visible {
-  visibility: visible;
-  opacity: 1;
-  -webkit-transition: opacity 1s linear;
+/* SUB MENU WORK
+ =================================================*/
+.subMenu {         
+	border: thin solid rgba(255, 255, 255, 0.2);
+	background: rgba(0, 0, 0, 0.5);
+	color:white;
+	padding:4px;
+	width: 400px;
+	height: 400px;
+	position: absolute;
+	top: 100px;
+	left: 20px;
+	z-index: 4;
+	
+	visibility: hidden;
+  	opacity: 0;
+  	-webkit-transition: visibility 0s 0.3s, opacity 0.3s ease;
+  	transition: visibility 0s 0.3s, opacity 0.3s ease;
 }
 
-.hidden {
-  visibility: hidden;
-  opacity: 0;
-  -webkit-transition: visibility 0s 1s, opacity 1s linear;
+.subMenu .subMenuContent {
+	visibility: hidden;
+  	opacity: 0;
+  	-webkit-transition: visibility 0s 0.3s, opacity 0.3s ease;
+  	transition: visibility 0s 0.3s, opacity 0.3s ease;
+  	position: absolute;
+  	left: 0px;
+  	top: 0px;
 }
+
+.subMenu .subMenuContent .subMenuContentInner {
+	outline: none;
+	padding: 20px;
+}
+
+.subMenu .subMenuContent .subMenuContentInner p,a {
+	font-size: 1.1em;
+}
+
+.subMenuOpen {
+  visibility: visible !important;
+  opacity: 1 !important;
+  -webkit-transition: opacity 0.3s ease !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.subMenu .closeButton {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+	background: transparent url("../images/close.png") no-repeat top left;
+	opacity: 0.8;
+	z-index: 5;
+}
+
+.subMenu .closeButton:HOVER {
+	opacity: 1;
+}
+
+
+/*==========================================*/
 
 #footer {
 	width: 100%;
