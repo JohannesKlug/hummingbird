@@ -1,8 +1,8 @@
 var menus,
  	tmMenu,	
  	subMenu,
- 	closeSubMenuBtn,
- 	currentIndex;
+ 	closeSubMenuBtn;
+var currentIndex = 0;
 
 /**
  * On page ready do the following.
@@ -19,6 +19,9 @@ function setupFrequentUsedDomVars() {
 	closeSubMenuBtn = $("#closeButton");
 }
 
+/**
+ * Setup menu and submenus.
+ */
 function setupMenu() {
 	menus.click(function() {
 		// Style menu buttons
@@ -26,13 +29,25 @@ function setupMenu() {
 		$(this).toggleClass("activeMenuLink");
 		
 		var menuIndex = $(this).parent().index();
-		if(!subMenu.hasClass("subMenuOpen")) {
-			subMenu.toggleClass("subMenuOpen");
+		if(currentIndex != menuIndex) {
+			if(!subMenu.hasClass("subMenuOpen")) {
+				subMenu.toggleClass("subMenuOpen");
+			}
 		}
-		var divIndex = menuIndex + 1;
+		else {
+			subMenu.toggleClass("subMenuOpen");
+			if(!subMenu.hasClass("subMenuOpen")) {
+				$(this).toggleClass("activeMenuLink");
+			}
+		}
+		currentIndex = menuIndex;
+		
+		var divIndex = menuIndex + 1; // +1 to ignore close button in subMenu HTML.
+		// Open a subMenuContent and hide the others.
 		var active = $($("#subMenu").children().get(divIndex)).addClass("subMenuOpen");
 		$($("#subMenu").children().not(active)).removeClass("subMenuOpen");
 		
+		// Change backdrop
 		$("#backdrop img").removeClass("opaque");
 		$("#backdrop img").eq(menuIndex).addClass("opaque");
 	});
@@ -42,5 +57,3 @@ function setupMenu() {
 	});
 }
 
-function popTmMenu() {
-}
