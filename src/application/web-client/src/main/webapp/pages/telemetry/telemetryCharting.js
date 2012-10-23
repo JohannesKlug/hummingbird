@@ -7,65 +7,211 @@ var live = true;
 
 var seriesData = [];
 var chartData = new Array();
+//		{
+//	label : "Foo",
+//	data : [ [ 10, 1 ], [ 17, -14 ], [ 30, 5 ] ]
+//});
 var liveTmChart;
 
 var rollChartIntervalId;
 var rollingChart;
 
 var maxDataSeriesSize = 400;
+
+var omniSearchInput;
+
 // -----------------
 
 /**
  * On page ready do the following.
  */
 jQuery(document).ready(function() {
-	setupLayout();
+	setupJqueryDefaults();
+	setupVariables();
 	setupChosen();
+	setupOmniSearch();
 	setupWebsocket();
 	setupChartOptionsForm();
 	setupChart();
-	getTelemetryList();
+	setupTimeRangeSlider();
+//	retreiveTmList();
 });
 
-function setupLayout() {
-	var layoutOptions = {
-		applyDefaultStyles : false,
-		spacing_open : 3,
-		north : {
-			resizable : false,
-			size : 50,
-			minSize : 50,
-			maxSize : 50
-		},
-		south : {
-			resizable : false,
-			closable : false,
-			resizable : false,
-			size : 30,
-			minSize : 30,
-			maxSize : 30
-		},
-		west : {
-			showOverflowOnHover : true
-		},
-		east : {},
-		east__onresize : function() {
-			$("#accordion").accordion("resize");
+function setupJqueryDefaults() {
+	// Set json as default content-type for ajax. Since we are only sending JSON it means 
+	// we can use the shorthand post. 
+	$.ajaxSetup({
+	    contentType: "application/json; charset=UTF-8"
+	});
+}
+
+function setupTimeRangeSlider() {
+	var future = $.post(url + "tm/parameterarchive/queryMin", "receivedTime", function(data, textStatus, jqXHR) {
+		console.log("success");
+		
+		var maxRange = new Object();
+		maxRange.days = $("#maxRangeInput").val();
+		
+		var timestamp = jQuery.parseJSON(jqXHR.responseText).receivedTime;
+		var defaultUpper = new Date(timestamp);
+		defaultUpper.setDate(defaultUpper.getDate() + maxRange.days);
+		
+		$("#dateRangeSlider").dateRangeSlider({
+			bounds: { 
+				min: timestamp, 
+				max: new Date().valueOf()
+			},
+			defaultValues: {
+				min: timestamp,
+				max: defaultUpper.valueOf()
+			},
+			range: {
+				min: false,
+				max: maxRange
+			}
+		});
+	}, 
+	"json");
+	
+	future.error(function() {
+		$("#dateRangeSlider").dateRangeSlider();
+		$("#dateRangeSlider").removeClass("visible");
+	});
+	
+	$("#maxRangeInput").change(function() {
+		var newMax = $(this).val();
+		if(newMax == false) {
+			newMax = false;			
 		}
-	};
+		else {
+			newMax = {"days" : $(this).val()};			
+		}
+		$("#dateRangeSlider").dateRangeSlider("option", "range", {
+			min:false,
+			max: newMax
+		});
+	});
+	
+}
 
-	$('body').layout(layoutOptions);
+function setupVariables() {
+	omniSearchInput = $("#omniSearch");
+}
 
-	setupEastAccordion();
+function setupOmniSearch() {
+	// Populate auto-complete datalist over ajax request to publisher
+	$("#omniSearch").on("input", function(e) {
+		var val = $(this).val();
+		if(val < 1) {
+			return;
+		}
+		var url = rootURL + "tm/parameters/";
+		$.getJSON(url + val, null, function(data, textStatus, jqXHR) {
+			parameters = jQuery.parseJSON(jqXHR.responseText);
+			var parameterList = $("#parameterList");
+			parameterList.empty();
+			$.each(parameters, function(i) {
+				console.log("Adding new option to autocomplete");
+				parameterList.append(new Option(parameters[i].name, parameters[i].qualifiedName, false, false));
+			});
+		});
+	});
+	
+	
+	// On submit
+	$("#omniForm").submit(function() {
+		var input = omniSearchInput.val();
+		var option = $("#parameterList").children();
+		var found = false;
+		$.each(option, function(i) {
+			console.log("input = " + input + ". child val = " + $(option[i]).val());
+			if(input === $(option[i]).val()) {
+				createDataSeries(input);
+				found = true;
+				return false; // this is the same as a break in the jquery each function
+			}
+		});
+		if(!found) {
+			console.log("Invalid parameter: " + input);
+		}
+		return false;
+	});
 }
 
 function setupChart() {
 	var options = {
 		xaxis : {
-			mode : "time"
+			mode : "time",
+			color : "#FFF"
+		},
+		yaxis : {
+			color : "#DDD"
+		},
+		legend : {
+			backgroundColor : "#999",
+			container : $("#legend")
 		}
 	};
+
 	liveTmChart = $.plot($("#liveTmChart"), chartData, options);
+
+	// setup overview
+	var overview = $.plot($("#overview"), chartData, {
+		legend : {
+			show : false,
+		},
+		series : {
+			lines : {
+				show : true,
+				lineWidth : 1
+			},
+			shadowSize : 0
+		},
+		grid : {
+			color : "#999"
+		},
+		selection : {
+			mode : "xy"
+		}
+	});
+
+	$("#liveTmChart").bind("plotselected", function(event, ranges) {
+		if(live) {
+			return;
+		}
+		// clamp the zooming to prevent eternal zoom
+		if (ranges.xaxis.to - ranges.xaxis.from < 0.00001) {
+			ranges.xaxis.to = ranges.xaxis.from + 0.00001;
+			}
+		if (ranges.yaxis.to - ranges.yaxis.from < 0.00001) {
+			ranges.yaxis.to = ranges.yaxis.from + 0.00001;
+		}
+
+		// do the zooming
+		liveTmChart = $.plot($("#liveTmChart"), getData(ranges.xaxis.from, ranges.xaxis.to), 
+			$.extend(true, {}, 
+				options, {
+				xaxis : {
+					min : ranges.xaxis.from,
+					max : ranges.xaxis.to
+				},
+				yaxis : {
+					min : ranges.yaxis.from,
+					max : ranges.yaxis.to
+				}
+			})
+		);
+
+		// don't fire event on the overview to prevent eternal loop
+		overview.setSelection(ranges, true);
+	});
+
+	$("#overview").bind("plotselected", function(event, ranges) {
+		if(live) {
+			return;
+		}
+		liveTmChart.setSelection(ranges);
+	});
 }
 
 function setupChartOptionsForm() {
@@ -74,11 +220,6 @@ function setupChartOptionsForm() {
 	$("#chartOptionsForm").submit(function(event) {
 		maxDataSeriesSize = $("#maxPointsInput").val();
 	});
-}
-
-
-function setupEastAccordion() {
-	$("#accordion").accordion();
 }
 
 function setupChosen() {
@@ -101,14 +242,15 @@ function setupWebsocket() {
 		wsProtocol = "wss:";
 	}
 
-	var liveTmWebsocket = $.gracefulWebSocket(wsProtocol + "//" + host + ":" + location.port + url + "tmsock");
+	var liveTmWebsocket = $.gracefulWebSocket(wsProtocol + "//" + host + ":"
+			+ location.port + url + "tmsock");
 
 	liveTmWebsocket.onopen = function() {
 		console.log("Websocket connection established.");
 	};
 
 	liveTmWebsocket.onmessage = function(event) {
-		if(live) {
+		if (live) {
 			plotParameter($.parseJSON(event.data));
 		}
 	};
@@ -118,11 +260,11 @@ function setupWebsocket() {
  * Calls the Halcyon restful web service to gather the TM parameters list then
  * updated the TM list on the page.
  */
-function getTelemetryList() {
+function retreiveTmList() {
 	var jqxhr = $.getJSON(rootURL + "tm/parameters");
 
 	jqxhr.done(function(parsedResponse, statusText, jqXhr) {
-		updateTelemetry(jQuery.parseJSON(jqXhr.responseText));
+		updateTelemetryList(jQuery.parseJSON(jqXhr.responseText));
 	});
 }
 
@@ -132,13 +274,15 @@ function getTelemetryList() {
  * 
  * @param param
  */
-function updateTelemetry(param) {
+function updateTelemetryList(param) {
 	$("#telemetryList").empty();
-	$.each(param, function(i) {
-		console.log("Adding parameter");
-		$("#parametersList").append(new Option(param[i].name, param[i].qualifiedName,false, false));
-	});
 	$("#parametersList").trigger("liszt:updated");
+
+	$.each(param, function(i) {
+		$("#parametersList").append(new Option(param[i].name, param[i].qualifiedName,false, false));
+		$("#datalist1").append(new Option(param[i].qualifiedName, param[i].name, false, false));
+	});
+	
 }
 
 /**
@@ -209,6 +353,9 @@ function parameterSelectionChanged() {
  * 
  */
 function createDataSeries(name) {
+	if(!$("#chartArea").hasClass("visible")) {
+		$("#chartArea").addClass("visible");
+	}
 	if (name in seriesData) {
 		console.log("Series already exists for " + name);
 		return;

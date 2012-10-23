@@ -27,6 +27,28 @@ public class CamelEndpointMongoServiceStrategy implements MongoServiceStrategy {
 	}
 
 	@Override
+	public List<DBObject> query(Object query, DBObject sort, int limit) {
+		List<DBObject> result = null;
+		if (query instanceof DBObject) {
+			final Map<String, Object> headers = new HashMap<String, Object>(2);
+			headers.put(MongoDbConstants.SORT_BY, sort);
+			headers.put(MongoDbConstants.LIMIT, limit);
+			result = (List<DBObject>) producer.requestBodyAndHeaders(query, headers);
+		}
+		return result;
+	}
+
+	@Override
+	public List<DBObject> query(final DBObject query, DBObject mongoFieldFilter, DBObject sort, int limit) {
+		final Map<String, Object> headers = new HashMap<String, Object>(3);
+		headers.put(MongoDbConstants.SORT_BY, sort.toString());
+		headers.put(MongoDbConstants.FIELDS_FILTER, mongoFieldFilter.toString());
+		headers.put(MongoDbConstants.LIMIT, limit);
+
+		return producer.requestBodyAndHeaders(producer.getDefaultEndpoint(), query, headers, List.class);
+	}
+
+	@Override
 	public List<DBObject> query(String dbQuery) {
 		List<DBObject> result = null;
 		// camel-mongodb type converters should convert the json query string to a DBObject

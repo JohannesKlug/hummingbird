@@ -69,7 +69,7 @@ function getTelemetryList() {
 	
 	jqxhr.done(
 		function(parsedResponse, statusText, jqXhr) {
-			updateTelemetry(jQuery.parseJSON(jqXhr.responseText)); 
+			updateTelemetryList(jQuery.parseJSON(jqXhr.responseText)); 
 		}
 	);
 }

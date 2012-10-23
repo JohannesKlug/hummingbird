@@ -13,11 +13,11 @@
 	<meta name="author" content="Mark Doyle">
 
 	<!-- Mobile Specific Metas
-  ================================================== -->
+	================================================== -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<!-- CSS
-  ================================================== -->
+	================================================== -->
   	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   	<link rel="stylesheet" href="../../css/reset-min.css">
   	<link rel="stylesheet" href="../../css/hbird-base.css">
@@ -25,7 +25,13 @@
 	<link rel="Stylesheet" href="../../css/flick/theme.css"/>
 	<link rel="stylesheet" href="../../js/chosen.css">
 	<link rel="stylesheet" href="../../css/jquery.jqplot.min.css" />
-	<link rel="stylesheet" href="../../css/layout-default-latest.css" />
+	<link rel="stylesheet" href="../../css/avgrund/avgrund.css" />
+	<link rel="stylesheet" href="../../css/slider/iThing.css" />
+	
+	<!-- Web fonts
+	================================================== -->
+	<link href='https://fonts.googleapis.com/css?family=Homenaje' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -38,6 +44,8 @@
 	<link rel="apple-touch-icon" sizes="36x36" href="../../images/satelliteDish36.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="../../images/satelliteDish72.png">
 	
+	<!-- Scripts 
+	=====================================================-->
 	<script type="text/javascript" src="../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../js/jquery-ui-1.8.23.custom.min.js"></script>
 	<script type="text/javascript" src="../../js/jquery.layout-latest.min.js"></script>
@@ -46,78 +54,105 @@
 	<script type="text/javascript" src="../../js/flot/jquery.flot.js"></script>
 	<script type="text/javascript" src="../../js/flot/jquery.flot.resize.js"></script>
 	<script type="text/javascript" src="../../js/flot/jquery.flot.crosshair.js"></script>
+	<script type="text/javascript" src="../../js/flot/jquery.flot.selection.js"></script>
+	<script type="text/javascript" src="../../js/avgrund/avgrund.js"></script>
 	<script type="text/javascript" src="telemetryCharting.js"></script>
+	
+	<!-- TODO Get production minified "all" version of scripts later -->
+<!-- 	<script type="text/javascript" src="../../js/slider/jQRangeSliderMouseTouch.js"></script> -->
+<!-- 	<script type="text/javascript" src="../../js/slider/jQRangeSliderDraggable.js"></script> -->
+<!-- 	<script type="text/javascript" src="../../js/slider/jQRangeSliderBar.js"></script> -->
+<!-- 	<script type="text/javascript" src="../../js/slider/jQRangeSliderHandle.js"></script> -->
+<!-- 	<script type="text/javascript" src="../../js/slider/jQDateRangeSliderHandle.js"></script> -->
+<!-- 	<script type="text/javascript" src="../../js/slider/jQRangeSliderLabel.js"></script> -->
+	<script type="text/javascript" src="../../js/slider/jQRangeSlider-min.js"></script>
+	<script type="text/javascript" src="../../js/slider/jQDateRangeSlider-min.js"></script>
 </head>
 
 <body>
-	<div class="ui-layout-center">
-		<div id="chartArea">
-			<div id="liveTmChart"></div>
+	<div id="header">
+		<div id="logoTitle">
+			<img id="logo" alt="" src="../../images/satellite.png">
+			<h1 id="title">Hummingbird</h1>
+		</div>
+		
+		<div id="topMenu">
+			<ul>
+				<li><a id="menuHome" href="../../index.html"><span>Home</span></a></li>
+				<li><a id="menuTm" href="#"><span>Telemetry</span></a></li>
+				<li><a id="menuCmd" href="#"><span>Commanding</span></a></li>
+				<li><a id="menuHelp" href="#"><span>Help</span></a></li>
+			</ul>
 		</div>
 	</div>
-
-	<div class="ui-layout-north">
-		<p>Telemetry charting</p>
-	</div>
-
-	<div class="ui-layout-south">
-		<p>placeholder - navigation menu</p>
-	</div>
-
-	<div class="ui-layout-east">
-		<div id="accordion">
-			<h3><a href="#">Chart options</a></h3>
-			<div id="chartOptions">
-				<form id="chartOptionsForm" onsubmit="return false">
-					Max points: <input id="maxPointsInput" type="text" name="max points">
-					Roll chart: <input id="rollChartToggle" type="checkbox" name="Toggle rollchart" disabled="disabled">
-				</form>
-			</div>
-		
-			<h3><a href="#">Placeholder</a></h3>
+	
+	<div id="chartInputData">
+		<form id="parameterForm">
 			<div>
-				<p>
-					Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-					purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-					velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-					suscipit faucibus urna.
-				</p>
+				<em>Parameters</em>
 			</div>
-			
-			<h3><a href="#">Placeholder</a></h3>
 			<div>
-				<p>
-					Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-					purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-					velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-					suscipit faucibus urna.
-				</p>
+				<select data-placeholder="Select parameters to chart" multiple class="chzn-select" id="parametersList" name="parametersList_form">
+					<option value=""></option>
+				</select>
 			</div>
-		</div>
+		</form>
 	</div>
-
-	<div class="ui-layout-west">
-		<h3>Telemetry parameter list</h3>
-		<p id="telemetryList">Not received</p>
-		
-		<div>
-			<form id="parameterForm">
-				<div>
-					<em>Parameters</em>
-				</div>
-				<div>
-					<select data-placeholder="Select parameters to chart" style="width:100%;" multiple class="chzn-select" id="parametersList" name="parametersList_form">
-						<option value=""></option>
-					</select>
+	
+	<div id="chartOptions">
+		<form id="chartOptionsForm" onsubmit="return false">
+			Max points: <input id="maxPointsInput" type="text" name="max points">
+			Roll chart: <input id="rollChartToggle" type="checkbox" name="Toggle rollchart" disabled="disabled">
+		</form>
+	</div>
+	
+	<div id="chartArea" class="visible">
+<!-- 	<div id="chartArea"> -->
+		<div id="legend"></div>
+		<div id="liveTmChart"></div>
+	</div>
+	
+	<div id="controls">
+		<h4>Controls</h4>
+		<div id="sliderStylingContainer"><div id="dateRangeSlider"></div></div>
+		<div id="formStylingContainer">
+			<form id="dateRangeOptionsForm" onsubmit="return false">
+				<div id="dateRangeOptions">
+					<dl>
+						<dt>Maximum range</dt>
+						<dd>
+							<select id="maxRangeInput" name="maxRange" >
+								<option value="false">Unlimited</option>
+								<option value="5" selected="selected">5 days</option>
+								<option value="10">10 days</option>
+								<option value="15">15 days</option>
+								<option value="31">31 days</option>
+								<option value="54">54 days</option>
+								<option value="108">108 days</option>
+								<option value="216">216 days</option>
+							</select>
+						</dd>
+					</dl>
 				</div>
 			</form>
 		</div>
 	</div>
 	
+	
+	<div id="overview">
+	</div>
+	
 	<div id="footer">
-		footer
+		<form id="omniForm" onsubmit="return false">
+			<input id="omniSearch"  class="rounded" list="parameterList" type="search" 
+				   results=5 placeholder="Search for parameters" autofocus="autofocus">
+			<datalist id="parameterList"></datalist>
+		</form>
 	</div>
 		
+		
+	<div class="avgrund-cover"></div>
+	
 </body>
 
 </html>

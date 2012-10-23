@@ -2,6 +2,7 @@ package org.hbird.application.halcyon.datatables;
 
 import java.util.List;
 
+// TODO i'd like this to be a plugin of some kind. Another OSGI bundle offering extensions to Halcyon. We can use reflection outside of OSGi to pick up extensions.
 public class ServerSideProcReturnData {
 	/**
 	 * Total records, before filtering (i.e. the total number of records in the database)

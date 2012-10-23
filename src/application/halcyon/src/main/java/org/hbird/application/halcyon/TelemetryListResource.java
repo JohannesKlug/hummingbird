@@ -1,12 +1,15 @@
 package org.hbird.application.halcyon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.lang.StringUtils;
 import org.hbird.application.halcyon.osgi.OsgiReady;
 import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.ParameterGroup;
@@ -68,7 +71,7 @@ public class TelemetryListResource extends OsgiReady {
 
 	@GET
 	@Path("/parameterGroups")
-	@Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 	public List<ParameterGroup> getTmParameterGroupListJson() {
 		cacheTmList();
 		if (parameterGroups.size() == 0) {
@@ -88,6 +91,20 @@ public class TelemetryListResource extends OsgiReady {
 		}
 
 		return parameters;
+	}
+
+	@GET
+	@Path("/parameters/{searchStr}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<Parameter<?>> getParametersContains(@PathParam("searchStr") final String searchStr) {
+		cacheTmList();
+		List<Parameter<?>> res = new ArrayList<Parameter<?>>();
+		for (Parameter<?> p : parameters) {
+			if (StringUtils.containsIgnoreCase(p.getQualifiedName(), searchStr)) {
+				res.add(p);
+			}
+		}
+		return res;
 	}
 
 }
