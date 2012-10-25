@@ -5,12 +5,14 @@ var rootURL = location.protocol + "//" + host + ":" + location.port + url;
 
 var live = true;
 
+var parametersPlotted = new Array();
 var seriesData = [];
 var chartData = new Array();
 //		{
 //	label : "Foo",
 //	data : [ [ 10, 1 ], [ 17, -14 ], [ 30, 5 ] ]
 //});
+// for css styling ^
 var liveTmChart;
 
 var rollChartIntervalId;
@@ -34,8 +36,60 @@ jQuery(document).ready(function() {
 	setupChartOptionsForm();
 	setupChart();
 	setupTimeRangeSlider();
+	setupArchiveSubmit();
 //	retreiveTmList();
 });
+
+function setupArchiveSubmit() {
+	$("#dateRangeOptionsForm").submit(function() {
+		console.log("Plotting....");
+		var dateRange = $("#dateRangeSlider").dateRangeSlider("values");
+
+		var queryRequest = new Object();
+		queryRequest.startTime = dateRange.min.getTime();
+		queryRequest.endTime = dateRange.max.getTime();
+		queryRequest.parameterQualifiedName = parametersPlotted;
+		
+		$.post(rootURL + "tm/parameterarchive/hbirdquery", JSON.stringify(queryRequest), function(results) {
+			updateChart(results);
+		},
+		"json");
+	});
+}
+
+/**
+ * Used for archive chart updates. Clears the existing data.
+ * FIXME Horribly inefficient. Has to loop through the entire data set to create 
+ * the newData with flot metadata i.e. label and data.
+ * 
+ * @param parameters
+ */
+function updateChart(parameters) {
+	var newData = [];
+	
+	var series;
+	$.each(parametersPlotted, function(i) {
+		series = createDataSeries(parametersPlotted[i]);
+		series.length = 0;
+	});
+	
+	$.each(parameters, function(i) {
+		var series = getSeriesData(parameters[i].qualifiedName);
+		series.push([parameters[i].receivedTime, parameters[i].value ]);
+	});
+
+	$.each(parametersPlotted, function(i) {
+		newData.push({
+			"label" : parametersPlotted[i],
+			"data" : getSeriesData(parametersPlotted[i])
+		});
+		
+	});
+	
+	liveTmChart.setData(newData);
+	liveTmChart.setupGrid();
+	liveTmChart.draw();
+}
 
 function setupJqueryDefaults() {
 	// Set json as default content-type for ajax. Since we are only sending JSON it means 
@@ -111,7 +165,6 @@ function setupOmniSearch() {
 			var parameterList = $("#parameterList");
 			parameterList.empty();
 			$.each(parameters, function(i) {
-				console.log("Adding new option to autocomplete");
 				parameterList.append(new Option(parameters[i].name, parameters[i].qualifiedName, false, false));
 			});
 		});
@@ -286,8 +339,10 @@ function updateTelemetryList(param) {
 }
 
 /**
- * [ { label: "Foo", data: [ [10, 1], [17, -14], [30, 5] ] }, { label: "Bar",
- * data: [ [11, 13], [19, 11], [30, -7] ] } ]
+ * [ 
+ * 	{ label: "Foo", data: [ [10, 1], [17, -14], [30, 5] ] }, 
+ * 	{ label: "Bar", data: [ [11, 13], [19, 11], [30, -7] ] } 
+ * ]
  * 
  * @param parameter
  *            JS object of Parameter object.
@@ -303,8 +358,7 @@ function plotParameter(parameter) {
 	// Push the new data into the parameter series array and remove the oldest
 	// entry if the array
 	// has grown too large.
-	var size = parameterSeries
-			.push([ parameter.receivedTime, parameter.value ]);
+	var size = parameterSeries.push([ parameter.receivedTime, parameter.value ]);
 	if (size >= maxDataSeriesSize) {
 		parameterSeries.shift();
 	}
@@ -312,7 +366,7 @@ function plotParameter(parameter) {
 	// Create the new data for the chart by added all seriesData to a new array
 	// and setting on the plot.
 	var newData = [];
-	for ( var i in seriesData) {
+	for(var i in seriesData) {
 		newData.push({
 			"label" : i,
 			"data" : seriesData[i]
@@ -357,11 +411,12 @@ function createDataSeries(name) {
 		$("#chartArea").addClass("visible");
 	}
 	if (name in seriesData) {
-		console.log("Series already exists for " + name);
-		return;
+		return seriesData[name];
 	}
 
 	var data = [];
 	seriesData[name] = data;
+	parametersPlotted.push(name);
 	console.log("Series created for " + name);
+	return seriesData[name];
 }

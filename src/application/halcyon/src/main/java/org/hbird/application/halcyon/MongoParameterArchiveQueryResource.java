@@ -19,6 +19,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.hbird.application.halcyon.datatables.ServerSideProcReturnData;
 import org.hbird.application.halcyon.osgi.OsgiReady;
 import org.hbird.application.parameterarchive.interfaces.ParameterQuerySender;
+import org.hbird.application.parameterarchive.model.QueryRequest;
 import org.hbird.application.parameterarchive.mongodb.MongoResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,12 +42,40 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 		super(SERVICE_INTERFACE);
 	}
 
+	/**
+	 * TODO testing new QueryRequest design. Convert all resources if successful.
+	 * 
+	 * @param request
+	 * @return
+	 */
 	@POST
-	@Path("/rawquery")
+	@Path("/hbirdquery")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String queryParameterDatabase(QueryRequest request) {
+		String result = null;
+
+		final ParameterQuerySender parameterQuerySenderService = (ParameterQuerySender) getServiceTracker().getService();
+		if (parameterQuerySenderService != null) {
+			Object qRes = parameterQuerySenderService.query(request);
+			if (qRes instanceof List<?>) {
+				result = JSON.serialize(qRes);
+			}
+			else {
+				LOG.error("Object returned from the parameter archiver was not a List of Mongo Db objects");
+			}
+		}
+		else {
+			LOG.warn("No " + SERVICE_INTERFACE + " service found.");
+		}
+		return result;
+	}
+
+	@POST
+	@Path("/query")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String queryParameterDatabase(String jsonQuery) {
-		System.out.println("received query " + jsonQuery);
 		String result = null;
 
 		final ParameterQuerySender parameterQuerySenderService = (ParameterQuerySender) getServiceTracker().getService();
@@ -55,7 +84,6 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 			Object qRes = parameterQuerySenderService.query(mongoQuery);
 			if (qRes instanceof List<?>) {
 				result = JSON.serialize(qRes);
-				System.out.println(result);
 			}
 			else {
 				LOG.error("Object returned from the parameter archiver was not a List of Mongo Db objects");
@@ -86,7 +114,7 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 					result = JSON.serialize(dbResult.get(0));
 				}
 				else {
-					LOG.error("Expected only one result from database whenquerying for minimum value of a field! Received " + dbResult.size());
+					LOG.error("Expected only one result from database when querying for minimum value of a field! Received " + dbResult.size());
 				}
 			}
 			else {
@@ -182,6 +210,7 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 		return result;
 	}
 
+	// FIXME convert to hbird archiver interface and move this to the archiver.
 	private static DBObject buildMongoQuery(Map<String, String> aoData) {
 		DBObject mongoQuery = new BasicDBObject();
 		long startTime = Long.parseLong(aoData.get("startTime"));

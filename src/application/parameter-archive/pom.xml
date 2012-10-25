@@ -30,13 +30,6 @@
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<instructions>
-						<Export-Package> org.hbird.application.parameterarchive.interfaces.*,
-										 org.hbird.application.parameterarchive.mongodb.*,
-						</Export-Package>
-					</instructions>
-				</configuration>
 			</plugin>
 			
 			<!-- allows the route to be ran via 'mvn camel:run' -->
@@ -54,12 +47,10 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.6.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.6.1</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -134,6 +125,10 @@
 			<artifactId>camel-mongodb</artifactId>
 			<scope>provided</scope>
 			<version>${camel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
 		</dependency>
 	</dependencies>
 	<packaging>bundle</packaging>

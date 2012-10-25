@@ -1,5 +1,7 @@
 package org.hbird.application.parameterarchive.interfaces;
 
+import org.hbird.application.parameterarchive.model.QueryRequest;
+
 public interface ParameterQuerySender {
 
 	/**
@@ -54,5 +56,9 @@ public interface ParameterQuerySender {
 	Object query(Object dbQuery, int limit, int skip);
 
 	long queryNumRecords();
+
+	Object query(long startTime, long endTime);
+
+	Object query(QueryRequest request);
 
 }
