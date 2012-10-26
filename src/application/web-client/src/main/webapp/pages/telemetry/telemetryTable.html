@@ -22,14 +22,24 @@
   	<link rel="stylesheet" href="../../css/reset-min.css">
   	<link rel="stylesheet" href="../../css/hbird-base.css">
   	<link rel="stylesheet" href="telemetryTable.css">
-	<link rel="Stylesheet" href="../../css/flick/theme.css"/>
+  	
+  	<link rel="Stylesheet" href="../../css/flick/theme.css"/>
 	<link rel="stylesheet" href="../../js/chosen.css">
+	<link rel="stylesheet" href="../../css/jquery.jqplot.min.css" />
+	<link rel="stylesheet" href="../../css/avgrund/avgrund.css" />
+	<link rel="stylesheet" href="../../css/slider/iThing.css" />
+
+	<link rel="stylesheet" href="../../oxygen/icons.css">
 	<link rel="stylesheet" href="../../css/datatables/jquery.dataTables.css" />
 	<link rel="stylesheet" href="../../css/datatables/jquery.dataTables_themeroller.css" />
 	<link rel="stylesheet" href="../../css/jquery-ui-timepicker-addon.css" />
-	<link rel="stylesheet" href="../../css/layout-default-latest.css" />
 	<link rel="stylesheet" href="../../css/pines/jquery.pnotify.default.css" media="all" />
 	<link rel="stylesheet" href="../../css/pines/jquery.pnotify.default.icons.css" media="all" />
+	
+	<!-- Web fonts
+	================================================== -->
+	<link href='https://fonts.googleapis.com/css?family=Homenaje' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -55,7 +65,23 @@
 </head>
 
 <body>
-	<div class="ui-layout-center">
+	<div id="header">
+		<div id="logoTitle">
+			<img id="logo" alt="" src="../../images/satellite.png">
+			<h1 id="title">Hummingbird</h1>
+		</div>
+		
+		<div id="topMenu">
+			<ul>
+				<li><a id="menuHome" href="../../index.html"><span>Home</span></a></li>
+				<li><a id="menuTm" href="#"><span>Telemetry</span></a></li>
+				<li><a id="menuCmd" href="#"><span>Commanding</span></a></li>
+				<li><a id="menuHelp" href="#"><span>Help</span></a></li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="tableContainer">
 		<table id="tmTable">
     		<thead>
         		<tr>
@@ -69,16 +95,7 @@
 		</table>
 	</div>
 
-	<div class="ui-layout-north">
-		Telemetry
-	</div>
-
-	<div class="ui-layout-south">
-		<p>placeholder - navigation menu</p>
-	</div>
-
-	<div class="ui-layout-east">
-	<div class="ui-layout-content">
+	<div class="tableOptionsContainer">
 		<div id="accordion">
 			<h3><a href="#">Chart options</a></h3>
 			<div id="tableOptions">
@@ -86,31 +103,9 @@
 					Max rows: <input id="maxRowsInput" type="text" name="max points"></input>
 				</form>
 			</div>
-		
-			<h3><a href="#">Placeholder</a></h3>
-			<div>
-				<p>
-					Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-					purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-					velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-					suscipit faucibus urna.
-				</p>
-			</div>
-			
-			<h3><a href="#">Placeholder</a></h3>
-			<div>
-				<p>
-					Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-					purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-					velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-					suscipit faucibus urna.
-				</p>
-			</div>
 		</div>
 	</div>
-	</div>
 
-	<div class="ui-layout-west">
 	<div id="filtering">
 		<div id="timeRange">
 			<div>
@@ -127,10 +122,13 @@
 			<button id="liveButton">Live</button>
 		</div>
 	</div>
-	</div>
 	
 	<div id="footer">
-		test
+		<form id="omniForm" onsubmit="return false">
+			<input id="omniSearch"  class="rounded" list="parameterList" type="search" 
+				   results=5 placeholder="Search for parameters" autofocus="autofocus">
+			<datalist id="parameterList"></datalist>
+		</form>
 	</div>
 		
 </body>

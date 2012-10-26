@@ -147,8 +147,8 @@ function updateChart(parameters) {
 }
 
 function setNumParametersChartInfo(num) {
-	$(".numParametersPlotted").remove();
-	$("#numParametersInfo").append("<dd class=\"numParametersPlotted\">" + num + "</dd>");
+//	$(".numParametersPlotted").remove();
+	$("#numParametersPlotted").text(num);
 }
 
 
@@ -428,17 +428,23 @@ function plotParameter(parameter) {
 	if (size >= maxDataSeriesSize) {
 		parameterSeries.shift();
 	}
+	
 
 	// Create the new data for the chart by added all seriesData to a new array
 	// and setting on the plot.
 	var newData = [];
+	var totalPlottedPoints = 0;
 	for(var i in seriesData) {
 		newData.push({
 			"label" : i,
 			"data" : seriesData[i]
 		});
+		totalPlottedPoints += seriesData[i].length;
 	}
 	liveTmChart.setData(newData);
+
+	$("#chartInfo").addClass("visible");
+	setNumParametersChartInfo(totalPlottedPoints);
 
 	// Redraw
 	liveTmChart.setupGrid();

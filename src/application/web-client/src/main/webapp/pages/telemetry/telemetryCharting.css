@@ -1,5 +1,4 @@
 html {
-	background-color: hsla(0, 0%, 15%, 1);
 }
 
 @media all {
@@ -132,18 +131,6 @@ select {
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
-}
-	
-#omniSearch {
-	margin-top: 4px;
-	margin-right: 8px;
-	float: right;
-	width: 250px;
-	background-color: hsla(0, 0%, 94%, 1);
-}
-
-#omniSearch::-webkit-input-placeholder {
-        color: hsla(24, 76%, 50%, 1);
 }
 
 input.rounded {

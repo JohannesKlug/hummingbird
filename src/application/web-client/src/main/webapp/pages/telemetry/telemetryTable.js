@@ -19,7 +19,6 @@ var endTime;
 jQuery(document).ready(function() {
 	setupJqueryDefaults();
 	setupGlobalJqueryUi();
-	setupLayout();
 	setupTableOptions();
 	setupArchiveFilterOptions();
 	setupWebsocket();
