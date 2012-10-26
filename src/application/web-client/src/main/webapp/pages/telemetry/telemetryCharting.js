@@ -47,7 +47,13 @@ function setupControls() {
 	$("#goLiveButton").click(function(){
 		var clear = liveTmChart.getData();
 		clear = [];
+		for(name in seriesData) {
+			console.log("Switching to live; clearing data in " + name);
+			seriesData[name] = [];
+		}
 		liveTmChart.setData(clear);
+    	liveTmChart.setupGrid();
+    	liveTmChart.draw();
 		live = true;
 	});
 }
@@ -461,7 +467,7 @@ function parameterSelectionChanged() {
 }
 
 /**
- * series data format as follows: [ { qualifiedName:[], qualifiedName:[] } ]
+ * series data format as follows: { qualifiedName:[], qualifiedName:[] }
  * 
  * FIXME Will not remove existing plot lines that have been deselected.
  * 
