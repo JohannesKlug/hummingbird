@@ -27,6 +27,9 @@
 	<link rel="stylesheet" href="../../css/jquery.jqplot.min.css" />
 	<link rel="stylesheet" href="../../css/avgrund/avgrund.css" />
 	<link rel="stylesheet" href="../../css/slider/iThing.css" />
+	<link rel="stylesheet" href="../../css/pines/jquery.pnotify.default.css" />
+	<link rel="stylesheet" href="../../css/pines/jquery.pnotify.default.icons.css" />
+	<link rel="stylesheet" href="../../oxygen/icons.css">
 	
 	<!-- Web fonts
 	================================================== -->
@@ -56,15 +59,9 @@
 	<script type="text/javascript" src="../../js/flot/jquery.flot.crosshair.js"></script>
 	<script type="text/javascript" src="../../js/flot/jquery.flot.selection.js"></script>
 	<script type="text/javascript" src="../../js/avgrund/avgrund.js"></script>
+	<script type="text/javascript" src="../../js/pines/jquery.pnotify.min.js"></script>
 	<script type="text/javascript" src="telemetryCharting.js"></script>
 	
-	<!-- TODO Get production minified "all" version of scripts later -->
-<!-- 	<script type="text/javascript" src="../../js/slider/jQRangeSliderMouseTouch.js"></script> -->
-<!-- 	<script type="text/javascript" src="../../js/slider/jQRangeSliderDraggable.js"></script> -->
-<!-- 	<script type="text/javascript" src="../../js/slider/jQRangeSliderBar.js"></script> -->
-<!-- 	<script type="text/javascript" src="../../js/slider/jQRangeSliderHandle.js"></script> -->
-<!-- 	<script type="text/javascript" src="../../js/slider/jQDateRangeSliderHandle.js"></script> -->
-<!-- 	<script type="text/javascript" src="../../js/slider/jQRangeSliderLabel.js"></script> -->
 	<script type="text/javascript" src="../../js/slider/jQRangeSlider-min.js"></script>
 	<script type="text/javascript" src="../../js/slider/jQDateRangeSlider-min.js"></script>
 </head>
@@ -108,12 +105,17 @@
 	
 	<div id="chartArea" class="visible">
 <!-- 	<div id="chartArea"> -->
+		<div id="chartInfo" class="hidden">
+			<dl>
+				<dt id="numParametersInfo">Number of parameters</dt>
+			</dl>
+		</div>
 		<div id="legend"></div>
 		<div id="liveTmChart"></div>
 	</div>
 	
 	<div id="controls">
-		<h4>Controls</h4>
+		<h3>Controls</h3>
 		<div id="sliderStylingContainer"><div id="dateRangeSlider"></div></div>
 		<div id="formStylingContainer">
 			<form id="dateRangeOptionsForm" onsubmit="return false">
@@ -131,6 +133,9 @@
 								<option value="108">108 days</option>
 								<option value="216">216 days</option>
 							</select>
+						</dd>
+						<dd>
+							<button id="goLiveButton">Go Live</button>
 						</dd>
 					</dl>
 				</div>

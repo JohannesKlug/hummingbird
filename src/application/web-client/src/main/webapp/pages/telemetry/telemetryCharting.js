@@ -22,12 +22,14 @@ var maxDataSeriesSize = 400;
 
 var omniSearchInput;
 
+
 // -----------------
 
 /**
  * On page ready do the following.
  */
 jQuery(document).ready(function() {
+//	$.pnotify.defaults.styling = "jqueryui";
 	setupJqueryDefaults();
 	setupVariables();
 	setupChosen();
@@ -35,13 +37,24 @@ jQuery(document).ready(function() {
 	setupWebsocket();
 	setupChartOptionsForm();
 	setupChart();
+	setupControls();
+});
+
+function setupControls() {
 	setupTimeRangeSlider();
 	setupArchiveSubmit();
-//	retreiveTmList();
-});
+
+	$("#goLiveButton").click(function(){
+		var clear = liveTmChart.getData();
+		clear = [];
+		liveTmChart.setData(clear);
+		live = true;
+	});
+}
 
 function setupArchiveSubmit() {
 	$("#dateRangeOptionsForm").submit(function() {
+		live = false;
 		console.log("Plotting....");
 		var dateRange = $("#dateRangeSlider").dateRangeSlider("values");
 
@@ -65,31 +78,73 @@ function setupArchiveSubmit() {
  * @param parameters
  */
 function updateChart(parameters) {
-	var newData = [];
-	
-	var series;
-	$.each(parametersPlotted, function(i) {
-		series = createDataSeries(parametersPlotted[i]);
-		series.length = 0;
-	});
-	
-	$.each(parameters, function(i) {
-		var series = getSeriesData(parameters[i].qualifiedName);
-		series.push([parameters[i].receivedTime, parameters[i].value ]);
+	var curProg = 1;
+    var progress;
+    var crement = 100 / (parameters.length);
+
+
+	// Make a loader.
+	var loader = $.pnotify({
+	    title: "Plotting graph...",
+	    text: "<div class=\"progress_bar\" />",
+	    icon: 'picon picon-throbber',
+	    hide: false,
+	    closer: false,
+	    sticker: false,
+	    history: false,
+	    before_open: function(pnotify) {
+	        progress = pnotify.find("div.progress_bar");
+	        progress.progressbar({
+	            value: curProg
+	        });
+	        
+	        /**/
+	        var newData = [];
+	    	
+	    	// We must clear out the old data otherwise we'll re-plot it with 
+	    	// the new data.
+	    	var series;
+	    	$.each(parametersPlotted, function(i) {
+	    		series = createDataSeries(parametersPlotted[i]);
+	    		series.length = 0;
+	    	});
+	    	
+	    	// Push the new data into the series.
+	    	$.each(parameters, function(i) {
+	    		var series = getSeriesData(parameters[i].qualifiedName);
+	    		series.push([parameters[i].receivedTime, parameters[i].value ]);
+	    		curProg += crement;
+	    	});
+
+	    	// Add Flot metadata and wrap in new data array.
+	    	$.each(parametersPlotted, function(i) {
+	    		newData.push({
+	    			"label" : parametersPlotted[i],
+	    			"data" : getSeriesData(parametersPlotted[i])
+	    		});
+	    		
+	    	});
+	    	
+	    	setNumParametersChartInfo(parameters.length);
+	    	$("#chartInfo").addClass("visible");
+	    	
+	    	liveTmChart.setData(newData);
+	    	liveTmChart.setupGrid();
+	    	liveTmChart.draw();
+	    	/**/
+	    	
+	    }
 	});
 
-	$.each(parametersPlotted, function(i) {
-		newData.push({
-			"label" : parametersPlotted[i],
-			"data" : getSeriesData(parametersPlotted[i])
-		});
-		
-	});
+	loader.pnotify_remove();
 	
-	liveTmChart.setData(newData);
-	liveTmChart.setupGrid();
-	liveTmChart.draw();
 }
+
+function setNumParametersChartInfo(num) {
+	$(".numParametersPlotted").remove();
+	$("#numParametersInfo").append("<dd class=\"numParametersPlotted\">" + num + "</dd>");
+}
+
 
 function setupJqueryDefaults() {
 	// Set json as default content-type for ajax. Since we are only sending JSON it means 
@@ -185,7 +240,12 @@ function setupOmniSearch() {
 			}
 		});
 		if(!found) {
-			console.log("Invalid parameter: " + input);
+			$.pnotify({
+			    title: "Search failure",
+			    text: "Could not find a parameter called " + input,
+			    type: "error",
+			    icon: "picon picon-page-zoom"
+			});
 		}
 		return false;
 	});
@@ -417,6 +477,10 @@ function createDataSeries(name) {
 	var data = [];
 	seriesData[name] = data;
 	parametersPlotted.push(name);
-	console.log("Series created for " + name);
+	$.pnotify({
+	    title: "Added parameter",
+	    text: name,
+	    type: "success"
+	});
 	return seriesData[name];
 }
