@@ -1,4 +1,4 @@
-package org.hbird.transport.protocols.ip.udp;
+package org.hbird.transport.protocols.mina;
 
 import org.apache.mina.filter.codec.ProtocolCodecFactory;
 import org.apache.mina.filter.codec.ProtocolDecoder;

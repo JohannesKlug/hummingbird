@@ -1,4 +1,4 @@
-package org.hbird.transport.protocols.ip.udp;
+package org.hbird.transport.protocols.mina;
 
 import java.net.InetSocketAddress;
 
@@ -6,10 +6,10 @@ import org.apache.camel.Header;
 import org.apache.mina.core.session.IoSession;
 import org.hbird.core.commons.data.GenericPayload;
 
-public class MinaUdpToGenericPayloadReceiver {
+public class CamelMinaUdpToGenericPayloadConverter {
 
 	/**
-	 * Processes a {@link GenericPayload} object give a Camel Mina UDP datagram and session using
+	 * Processes a Camel Mina UDP datagram and turns it into a Camel generic payload object using
 	 * the source IP address as the payload layout identifier.
 	 * @param datagram UDP payload
 	 * @param ioSession
