@@ -14,10 +14,10 @@ public class ToGenericPayloadConverter {
 
 	@Converter
 	public static PacketPayload fromGenericPayload(final GenericPayload payload) {
-		if (payload.layoutIdentifier != null) {
+		if (payload.layoutIdentifiers != null && payload.layoutIdentifiers.size() == 1) {
 			Integer apid = 0;
 			try {
-				apid = Integer.parseInt(payload.layoutIdentifier);
+				apid = Integer.parseInt(payload.layoutIdentifiers.get(0));
 			}
 			catch (final NumberFormatException e) {
 				return null;

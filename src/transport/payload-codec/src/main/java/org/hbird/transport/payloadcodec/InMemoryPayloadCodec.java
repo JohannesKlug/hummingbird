@@ -93,14 +93,14 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 	}
 
 	@Override
-	public ParameterGroup decode(final byte[] payload, final String payloadLayoutId, final long timeStamp) throws UnknownParameterGroupException {
-		return decode(BitSetUtility.fromByteArray(payload), payloadLayoutId, timeStamp);
+	public ParameterGroup decode(final byte[] payload, final List<String> payloadLayoutIds, final long timeStamp) throws UnknownParameterGroupException {
+		return decode(BitSetUtility.fromByteArray(payload), payloadLayoutIds, timeStamp);
 	}
 
 	@Override
-	public ParameterGroup decode(final BitSet payload, final String payloadLayoutId, final long timeStamp) throws UnknownParameterGroupException {
+	public ParameterGroup decode(final BitSet payload, final List<String> payloadLayoutIds, final long timeStamp) throws UnknownParameterGroupException {
 		ParameterGroup decodedGroup = null;
-		if (payloadLayoutId == null) {
+		if (payloadLayoutIds == null || payloadLayoutIds.isEmpty()) {
 			// no restrictions, decode everything!
 			for (final ParameterGroup pg : codecAwareParameterGroups.values()) {
 				decodedGroup = decodeParameterGroup(payload, pg, timeStamp);
@@ -109,7 +109,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		else {
 			boolean foundRestriction = false;
 			for (final Entry<String, List<String>> restrictionEntry : restrictions.entrySet()) {
-				if (restrictionEntry.getValue().contains(payloadLayoutId)) {
+				if (restrictionEntry.getValue().containsAll(payloadLayoutIds)) {
 					// we found the correct PG
 					foundRestriction = true;
 					final String pgName = restrictionEntry.getKey();
@@ -118,7 +118,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 				}
 			}
 			if (!foundRestriction) {
-				LOG.error("Payload codec did not find restriction for payloadLayoutId " + payloadLayoutId + " in the restrictions entryset.");
+				LOG.error("Payload codec did not find restriction for payloadLayoutId " + payloadLayoutIds + " in the restrictions entryset.");
 			}
 		}
 
@@ -289,26 +289,22 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		if (codecAwareParameterGroups != null) {
 			return codecAwareParameterGroups.get(undecoratedGroupName);
 		}
-		else {
-			return null;
-		}
+		return null;
 	}
 
 	private CommandGroup findInCodecCommandGroups(final String undecoratedGroupName) {
 		if (codecAwareCommandGroups != null) {
 			return codecAwareCommandGroups.get(undecoratedGroupName);
 		}
-		else {
-			return null;
-		}
+		return null;
 	}
 
 	@Override
 	public ParameterGroup decode(final GenericPayload payload) throws UnknownParameterGroupException {
 		if (LOG.isTraceEnabled()) {
-			LOG.trace("Decoding: " + BytesUtility.decimalDump(payload.payload) + " with payload ID " + payload.layoutIdentifier);
+			LOG.trace("Decoding: " + BytesUtility.decimalDump(payload.payload) + " with payload ID " + payload.layoutIdentifiers);
 		}
-		return decode(payload.payload, payload.layoutIdentifier, payload.timeStamp);
+		return decode(payload.payload, payload.layoutIdentifiers, payload.timeStamp);
 	}
 
 }

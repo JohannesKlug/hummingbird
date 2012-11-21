@@ -2,6 +2,7 @@ package org.hbird.transport.payloadcodec.testsupport;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +39,8 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	public static final String RESTRICTED_GROUP_QUALIFIED_NAME = TEST_PREFIX + "." + RESTRICTED_GROUP_NAME;
 	public static final String RESTRICTED_LASER_GROUP_NAME = "TestRestrictedLaserGroup";
 	public static final String RESTRICTED_LASER_GROUP_QUALIFIED_NAME = TEST_PREFIX + "." + RESTRICTED_LASER_GROUP_NAME;
-	public static final String INTEGER_RESTRICTION_ID = "1000";
+	public static final String[] INTEGER_RESTRICTION_ID = { "1000" };
+	public static final List<String> INTEGER_RESTRICTION_ID_LIST = new ArrayList<String>(Arrays.asList(INTEGER_RESTRICTION_ID));
 	public static final String INTEGER_LASER_RESTRICTION_ID = "12";
 	public static final String FUEL_PARAMETER_QUALIFIED_NAME = TEST_PREFIX + ".Fuel";
 	public static final String SCID_PARAMETER_QUALIFIED_NAME = TEST_PREFIX + ".SCID";
@@ -73,15 +75,14 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 		LOG.debug("Building parameter group with restrictions" + RESTRICTED_GROUP_QUALIFIED_NAME);
 		final ParameterGroup restrictedTestGroup = new HummingbirdParameterGroup(RESTRICTED_GROUP_QUALIFIED_NAME, RESTRICTED_GROUP_NAME, "", "");
 		groups.put(restrictedTestGroup.getQualifiedName(), restrictedTestGroup);
-		final List<String> testGroupRestrictions = new ArrayList<String>();
-		testGroupRestrictions.add(INTEGER_RESTRICTION_ID);
-		restrictions.put(restrictedTestGroup.getQualifiedName(), testGroupRestrictions);
+		restrictions.put(restrictedTestGroup.getQualifiedName(), INTEGER_RESTRICTION_ID_LIST);
 		restrictedTestGroup.addIntegerParameter(spacecraftId);
 		restrictedTestGroup.addIntegerParameter(fuelParam);
 		restrictedTestGroup.addLongParameter(laserTemp);
 
 		LOG.debug("Building parameter group with restrictions ans only laser temp" + RESTRICTED_LASER_GROUP_QUALIFIED_NAME);
-		final ParameterGroup restrictedLaserTestGroup = new HummingbirdParameterGroup(RESTRICTED_LASER_GROUP_QUALIFIED_NAME, RESTRICTED_LASER_GROUP_NAME, "", "");
+		final ParameterGroup restrictedLaserTestGroup = new HummingbirdParameterGroup(RESTRICTED_LASER_GROUP_QUALIFIED_NAME, RESTRICTED_LASER_GROUP_NAME, "",
+				"");
 		groups.put(restrictedLaserTestGroup.getQualifiedName(), restrictedLaserTestGroup);
 		final List<String> testLaserGroupRestrictions = new ArrayList<String>();
 		testLaserGroupRestrictions.add(INTEGER_LASER_RESTRICTION_ID);

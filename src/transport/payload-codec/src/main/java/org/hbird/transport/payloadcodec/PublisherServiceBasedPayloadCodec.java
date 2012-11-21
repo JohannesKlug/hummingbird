@@ -1,6 +1,7 @@
 package org.hbird.transport.payloadcodec;
 
 import java.util.BitSet;
+import java.util.List;
 
 import org.hbird.core.commons.data.GenericPayload;
 import org.hbird.core.commons.tmtc.ParameterGroup;
@@ -28,13 +29,13 @@ public class PublisherServiceBasedPayloadCodec implements PayloadCodec {
 	}
 
 	@Override
-	public ParameterGroup decode(final byte[] payload, final String payloadLayoutId, final long timeStamp) throws UnknownParameterGroupException {
-		return this.codec.decode(payload, payloadLayoutId, timeStamp);
+	public ParameterGroup decode(final byte[] payload, final List<String> payloadLayoutIds, final long timeStamp) throws UnknownParameterGroupException {
+		return this.codec.decode(payload, payloadLayoutIds, timeStamp);
 	}
 
 	@Override
-	public ParameterGroup decode(final BitSet payload, final String payloadLayoutId, final long timeStamp) throws UnknownParameterGroupException {
-		return this.codec.decode(payload, payloadLayoutId, timeStamp);
+	public ParameterGroup decode(final BitSet payload, final List<String> payloadLayoutIds, final long timeStamp) throws UnknownParameterGroupException {
+		return this.codec.decode(payload, payloadLayoutIds, timeStamp);
 	}
 
 	@Override
