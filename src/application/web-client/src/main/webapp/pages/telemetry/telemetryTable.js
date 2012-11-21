@@ -38,6 +38,16 @@ function setupJqueryDefaults() {
  */
 function setupGlobalJqueryUi() {
 	$("button").button();
+	$("#filterButton").button({
+		icons: {
+			primary: "ui-icon-search"
+		}
+	});
+	$("#liveButton").button({
+		icons: {
+			primary: "ui-icon-play"
+		}
+    });
 }
 
 /**

@@ -1,5 +1,6 @@
 html {
 	background-color: hsla(0, 0%, 15%, 1);
+	font-size: 14px;
 }
 
 * {
@@ -50,11 +51,11 @@ h1 {
 	opacity: 1;
 	color: rgb(240, 240, 240);
 	text-shadow: 0px 2px 3px #555;
-	font-size: 2.25em; /* 16x2.25=36 */
+	font-size: 2.5em; /* 16x2.25=36 */
 }
 
 h2 {
-	font-size: 1.5em; /* 16x1.5=24 */
+	font-size: 1.75em; /* 16x1.5=24 */
 	font-family: 'Open Sans Condensed', sans-serif;
 	color: rgb(240, 240, 240);
 	text-shadow: 0px 2px 3px #555;
@@ -81,16 +82,21 @@ p {
 }
 
 a:LINK {
-	font-family: 'Open Sans Condensed', sans-serif;
-	font-size: 1.5em;
 	color: rgb(240, 240, 240);
-	text-shadow: 0px 2px 3px #555;
 	text-decoration: none;
 	-webkit-transition: color .4s linear; 
 	-moz-transition: color .4s linear; 
 	-o-transition: color .4s linear; 
 	transition: color .4s linear; 
 }
+
+#header 
+a:LINK {
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size: 1.5em;
+	text-shadow: 0px 2px 3px #555;
+}
+	
 
 a:VISITED {
 	color: rgb(240, 240, 240);
@@ -145,6 +151,7 @@ a:ACTIVE {
 #header #topMenu {
 	text-align: center;
 	margin-top: 16px;
+	font-size: 16px;
 }
 
 #header #topMenu ul li {
@@ -250,7 +257,7 @@ a:ACTIVE {
 }
 
 /* Bootstrap styles*/
-/*============================================== */
+/* ============================================== */
 .alert {
   padding: 8px 35px 8px 14px;
   margin-bottom: 18px;

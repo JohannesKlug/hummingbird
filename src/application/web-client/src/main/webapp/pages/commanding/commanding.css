@@ -1,7 +1,3 @@
-.commandListDiv a { 
-	text-decoration: none;
+cmdModal {
+	color: black;
 }
-
-.commandListDiv a:hover {
-	text-decoration: underline;
-}	

@@ -18,14 +18,12 @@
 
 	<!-- CSS
   ================================================== -->
-  	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   	<link rel="stylesheet" href="../../css/reset-min.css">
   	<link rel="stylesheet" href="../../css/hbird-base.css">
   	<link rel="stylesheet" href="telemetryTable.css">
   	
   	<link rel="Stylesheet" href="../../css/flick/theme.css"/>
 	<link rel="stylesheet" href="../../js/chosen.css">
-	<link rel="stylesheet" href="../../css/jquery.jqplot.min.css" />
 	<link rel="stylesheet" href="../../css/avgrund/avgrund.css" />
 	<link rel="stylesheet" href="../../css/slider/iThing.css" />
 
@@ -38,6 +36,7 @@
 	
 	<!-- Web fonts
 	================================================== -->
+  	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Homenaje' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 
@@ -81,48 +80,48 @@
 		</div>
 	</div>
 	
-	<div class="tableContainer">
-		<table id="tmTable">
-    		<thead>
-        		<tr>
-		            <th>Parameter</th>
-            		<th>Value</th>
-            		<th>Received Time</th>
-        		</tr>
-    		</thead>
-    		<tbody>
-    		</tbody>
-		</table>
-	</div>
-
-	<div class="tableOptionsContainer">
-		<div id="accordion">
-			<h3><a href="#">Chart options</a></h3>
-			<div id="tableOptions">
-				<form id="chartOptionsForm" onsubmit="return false">
-					Max rows: <input id="maxRowsInput" type="text" name="max points"></input>
-				</form>
+	<div id="dataArea">
+		<div id="tableContainer">
+			<table id="tmTable">
+	    		<thead>
+	        		<tr>
+			            <th>Parameter</th>
+	            		<th>Value</th>
+	            		<th>Received Time</th>
+	        		</tr>
+	    		</thead>
+	    		<tbody>
+	    		</tbody>
+			</table>
+		</div>
+		
+		<div id="filtering">
+			<div id="timeRange">
+				<div>
+					<label for="from">From</label><br>
+					<input type="text" id="from" name="from" />
+				</div>
+				<div>
+					<label for="to">to</label><br>
+					<input type="text" id="to" name="to" />
+				</div>
+			</div>
+			<div id="filterControls" class="ui-widget-header ui-corner-all">
+				<button id="filterButton">Filter</button>
+				<button id="liveButton">Live</button>
 			</div>
 		</div>
 	</div>
 
-	<div id="filtering">
-		<div id="timeRange">
-			<div>
-				<label for="from">From</label><br>
-				<input type="text" id="from" name="from" />
-			</div>
-			<div>
-				<label for="to">to</label><br>
-				<input type="text" id="to" name="to" />
-			</div>
-		</div>
-		<div id="filterControls">
-			<button id="filterButton">Filter</button>
-			<button id="liveButton">Live</button>
+	<div class="tableOptionsContainer hidden">
+		<h3><a href="#">Chart options</a></h3>
+		<div id="tableOptions">
+			<form id="chartOptionsForm" onsubmit="return false">
+				Max rows: <input id="maxRowsInput" type="text" name="max points"></input>
+			</form>
 		</div>
 	</div>
-	
+
 	<div id="footer">
 		<form id="omniForm" onsubmit="return false">
 			<input id="omniSearch"  class="rounded" list="parameterList" type="search" 
