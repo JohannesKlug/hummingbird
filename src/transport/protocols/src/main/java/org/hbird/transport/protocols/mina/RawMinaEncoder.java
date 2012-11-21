@@ -5,12 +5,11 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolEncoder;
 import org.apache.mina.filter.codec.ProtocolEncoderOutput;
 
-final class RawMinaEncoder implements ProtocolEncoder {
+public final class RawMinaEncoder implements ProtocolEncoder {
 
 	@Override
 	public void dispose(IoSession arg0) {
 		System.out.println("Encoder.dispose");
-
 	}
 
 	@Override
