@@ -3,7 +3,7 @@ package org.hbird.transport.protocols.ip.udp;
 import java.net.InetSocketAddress;
 
 import org.apache.camel.Header;
-import org.apache.mina.common.IoSession;
+import org.apache.mina.core.session.IoSession;
 import org.hbird.core.commons.data.GenericPayload;
 
 public class MinaUdpToGenericPayloadReceiver {
