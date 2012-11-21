@@ -17,4 +17,16 @@ public class GenericPayload implements Serializable {
 		this.timeStamp = timeStamp;
 	}
 
+	public byte[] getPayload() {
+		return payload;
+	}
+
+	public String getLayoutIdentifier() {
+		return layoutIdentifier;
+	}
+
+	public long getTimeStamp() {
+		return timeStamp;
+	}
+
 }

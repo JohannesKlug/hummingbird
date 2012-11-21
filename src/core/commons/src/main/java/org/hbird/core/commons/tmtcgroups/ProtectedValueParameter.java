@@ -2,7 +2,6 @@ package org.hbird.core.commons.tmtcgroups;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-
 public class ProtectedValueParameter<T> extends HummingbirdParameter<T> {
 	private static final long serialVersionUID = -7017970975497905485L;
 
@@ -21,7 +20,11 @@ public class ProtectedValueParameter<T> extends HummingbirdParameter<T> {
 	@Override
 	public void setValue(final T value) {
 		throw new UnsupportedOperationException(
-				"Value is protected in ProtectedValueParameter. You should not modify this, if you work around it you are violating the intention of the model definition. Be warned!");
+				"Failed to assign value "
+						+ value
+						+ " for parameter "
+						+ getQualifiedName()
+						+ " is protected in ProtectedValueParameter. You should not modify this, if you work around it you are violating the intention of the model definition. Be warned!");
 	}
 
 	@Override
