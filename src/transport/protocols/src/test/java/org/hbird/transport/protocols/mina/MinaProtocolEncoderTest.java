@@ -2,7 +2,7 @@ package org.hbird.transport.protocols.mina;
 
 import static org.junit.Assert.*;
 
-import org.hbird.transport.protocols.ip.udp.RawMinaCodec;
+import org.hbird.transport.protocols.mina.RawMinaCodec;
 import org.junit.Test;
 
 public class MinaProtocolEncoderTest {
