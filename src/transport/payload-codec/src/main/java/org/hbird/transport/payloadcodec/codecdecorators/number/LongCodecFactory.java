@@ -1,18 +1,19 @@
 package org.hbird.transport.payloadcodec.codecdecorators.number;
 
 import org.hbird.core.commons.tmtc.Parameter;
+import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.codecparameters.number.TwosComplementLongCodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
-import org.hbird.core.spacesystemmodel.encoding.Encoding;
 
 public final class LongCodecFactory {
 
 	private LongCodecFactory() {
 		// Utility class
 	}
+
 	/**
 	 * TODO update this doc
 	 */
@@ -24,21 +25,16 @@ public final class LongCodecFactory {
 				throw new UnsupportedParameterEncodingException("File a bug report :D");
 			case twosComplement:
 				if (enc.getSizeInBits() > Long.SIZE) {
-					throw new UnexpectedParameterTypeException(
-							"Size of this parameter is > 32 which is too big to be a signed long. Size = " + enc.getSizeInBits());
+					throw new UnexpectedParameterTypeException("Size of this parameter is > 32 which is too big to be a signed long. Size = "
+							+ enc.getSizeInBits());
 				}
-				else {
-					return new TwosComplementLongCodecParameter(parameter, enc);
-				}
+				return new TwosComplementLongCodecParameter(parameter, enc);
 			case unsigned:
 				if (enc.getSizeInBits() > Long.SIZE) {
-					throw new UnexpectedParameterTypeException(
-							"Size of this parameter is > 64 which is too big to be an unsigned integer. Size = "
-									+ enc.getSizeInBits());
+					throw new UnexpectedParameterTypeException("Size of this parameter is > 64 which is too big to be an unsigned integer. Size = "
+							+ enc.getSizeInBits());
 				}
-				else {
-					throw new UnsupportedParameterEncodingException("File a bug report :D");
-				}
+				throw new UnsupportedParameterEncodingException("File a bug report :D");
 			case signMagnitude:
 				throw new UnsupportedParameterEncodingException("File a bug report :D");
 			default:
