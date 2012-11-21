@@ -1,6 +1,7 @@
 package org.hbird.core.spacesystemmodel.encoding;
 
 import java.io.Serializable;
+import java.nio.ByteOrder;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -14,6 +15,7 @@ public class Encoding implements Serializable {
 	}
 
 	private int sizeInBits;
+	private ByteOrder byteOrder;
 	private BinaryRepresentation binaryRepresentation;
 
 	public Encoding() {
@@ -23,7 +25,6 @@ public class Encoding implements Serializable {
 		this.sizeInBits = sizeInBits;
 		this.binaryRepresentation = binaryRepresentation;
 	}
-
 
 	public int getSizeInBits() {
 		return sizeInBits;
@@ -39,6 +40,14 @@ public class Encoding implements Serializable {
 
 	public void setBinaryRepresentation(final BinaryRepresentation binaryRepresentation) {
 		this.binaryRepresentation = binaryRepresentation;
+	}
+
+	public ByteOrder getByteOrder() {
+		return byteOrder;
+	}
+
+	public void setByteOrder(ByteOrder byteOrder) {
+		this.byteOrder = byteOrder;
 	}
 
 }
