@@ -2,33 +2,53 @@ body {
 	
 }
 
+#dataArea {
+/* 	border: thin solid lime; */
+}
+
 #filtering {
-	margin: 6px;
+/* 	border: thin solid red; */
+	display: inline-block;
+	vertical-align: top;
+	margin: 3px;
 }
 
 #filtering #filterControls {
 	margin-top: 4px;
+    padding: 2px 2px;
+    text-align: center;
 }
 
 #filtering #filterControls button {
 	margin-left: 0px;
 }
 
-/* remove padding and scrolling from elements that contain an Accordion OR a content-div */
-.ui-layout-east .ui-layout-content {
-	padding: 0 !important;
-	overflow: hidden !important;
-}
-
-/* remove accordion top margin */
-.ui-accordion .ui-accordion-header {
-	margin-top: 0px !important;
+#filtering input {
+	width: 100%;
 }
 
 #timeRange {
-	width: 160px;
-	max-width: 160px;
-	margin: 0px;
+}
+
+#tableContainer {
+	margin: 8px 8px 0px 8px;
+	width: 80%;
+	display: inline-block;
+}
+
+.tableOptionsContainer {
+	position: fixed;
+	top: 50%;
+	margin-top: -250px;
+	left: 50%;
+	margin-left: -200px;
+	width: 400px;
+	height: 500px;
+	background-color: hsla(0, 5%, 10%, 1);
+}
+
+tr {
+	color: black;	
 }
 
 /*

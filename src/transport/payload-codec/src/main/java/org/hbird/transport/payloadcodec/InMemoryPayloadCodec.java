@@ -245,8 +245,10 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		if (integerParameters != null) {
 			for (final Parameter<Integer> undecoratedParameter : integerParameters.values()) {
 				for (final Parameter<Integer> decoratedParameter : decoratedTmTcGroup.getIntegerParameters().values()) {
-					if (StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
-						decoratedParameter.setValue(undecoratedParameter.getValue());
+					if (!decoratedParameter.isReadOnly()) {
+						if (StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
+							decoratedParameter.setValue(undecoratedParameter.getValue());
+						}
 					}
 				}
 			}
@@ -257,8 +259,24 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		if (longParameters != null) {
 			for (final Parameter<Long> undecoratedParameter : longParameters.values()) {
 				for (final Parameter<Long> decoratedParameter : decoratedTmTcGroup.getLongParameters().values()) {
-					if (StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
-						decoratedParameter.setValue(undecoratedParameter.getValue());
+					if (!decoratedParameter.isReadOnly()) {
+						if (StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
+							decoratedParameter.setValue(undecoratedParameter.getValue());
+						}
+					}
+				}
+			}
+		}
+
+		// Strings
+		final Map<String, Parameter<String>> stringParameters = tmtcGroup.getStringParameters();
+		if (stringParameters != null) {
+			for (final Parameter<String> undecoratedParameter : stringParameters.values()) {
+				for (final Parameter<String> decoratedParameter : decoratedTmTcGroup.getStringParameters().values()) {
+					if (!decoratedParameter.isReadOnly()) {
+						if (StringUtils.equals(undecoratedParameter.getName(), decoratedParameter.getName())) {
+							decoratedParameter.setValue(undecoratedParameter.getValue());
+						}
 					}
 				}
 			}
