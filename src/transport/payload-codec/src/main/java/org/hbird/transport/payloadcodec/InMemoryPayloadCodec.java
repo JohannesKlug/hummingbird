@@ -15,7 +15,6 @@ import org.hbird.core.commons.tmtcgroups.TmTcGroups;
 import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.commons.util.BytesUtility;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
-import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.transport.payloadcodec.codecdecorators.CommandGroupCodecDecorator;
 import org.hbird.transport.payloadcodec.codecdecorators.ParameterGroupCodecDecorator;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
@@ -93,12 +92,12 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 	}
 
 	@Override
-	public ParameterGroup decode(final byte[] payload, final List<String> payloadLayoutIds, final long timeStamp) throws UnknownParameterGroupException {
+	public ParameterGroup decode(final byte[] payload, final List<String> payloadLayoutIds, final long timeStamp) {
 		return decode(BitSetUtility.fromByteArray(payload), payloadLayoutIds, timeStamp);
 	}
 
 	@Override
-	public ParameterGroup decode(final BitSet payload, final List<String> payloadLayoutIds, final long timeStamp) throws UnknownParameterGroupException {
+	public ParameterGroup decode(final BitSet payload, final List<String> payloadLayoutIds, final long timeStamp) {
 		ParameterGroup decodedGroup = null;
 		if (payloadLayoutIds == null || payloadLayoutIds.isEmpty()) {
 			// no restrictions, decode everything!
@@ -109,7 +108,12 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		else {
 			boolean foundRestriction = false;
 			for (final Entry<String, List<String>> restrictionEntry : restrictions.entrySet()) {
-				if (restrictionEntry.getValue().containsAll(payloadLayoutIds)) {
+				// if (restrictionEntry.getValue().containsAll(payloadLayoutIds)) {
+				int count = 0;
+				for (String restrictionValue : restrictionEntry.getValue()) {
+					if (!restrictionValue.equals(payloadLayoutIds.get(count++))) {
+						break;
+					}
 					// we found the correct PG
 					foundRestriction = true;
 					final String pgName = restrictionEntry.getKey();
@@ -300,7 +304,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 	}
 
 	@Override
-	public ParameterGroup decode(final GenericPayload payload) throws UnknownParameterGroupException {
+	public ParameterGroup decode(final GenericPayload payload) {
 		if (LOG.isTraceEnabled()) {
 			LOG.trace("Decoding: " + BytesUtility.decimalDump(payload.payload) + " with payload ID " + payload.layoutIdentifiers);
 		}
