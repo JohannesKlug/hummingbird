@@ -1,4 +1,4 @@
-package org.hbird.core.commons.tmtcgroups;
+package org.hbird.core.spacesystemmodel.tmtc.provided;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 

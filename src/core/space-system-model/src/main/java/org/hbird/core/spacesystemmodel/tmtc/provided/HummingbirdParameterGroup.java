@@ -1,8 +1,8 @@
-package org.hbird.core.commons.tmtcgroups;
+package org.hbird.core.spacesystemmodel.tmtc.provided;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 
 /**
  * TELEMETRY

@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.core.commons.tmtc.ParameterGroup;
-import org.hbird.core.commons.tmtcgroups.HummingbirdParameter;
-import org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup;
+import org.hbird.core.spacesystemmodel.tmtc.Parameter;
+import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
+import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
+import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameterGroup;
 
 public class PolynomialCalibrator {
 	

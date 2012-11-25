@@ -1,7 +1,7 @@
-package org.hbird.core.commons.tmtc;
+package org.hbird.core.spacesystemmodel.tmtc;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.hbird.core.commons.tmtcgroups.HummingbirdCommandGroup;
+import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdCommandGroup;
 
 /**
  * The interface is deserialised as {@link HummingbirdCommandGroup} unless you provide your own Jackson JSON processor.

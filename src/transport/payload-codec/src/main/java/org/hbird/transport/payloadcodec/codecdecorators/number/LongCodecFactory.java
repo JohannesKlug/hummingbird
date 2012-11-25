@@ -1,7 +1,7 @@
 package org.hbird.transport.payloadcodec.codecdecorators.number;
 
-import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.codecparameters.number.TwosComplementLongCodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;

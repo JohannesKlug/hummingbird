@@ -8,15 +8,15 @@ import java.util.Map;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.hbird.core.commons.tmtc.CommandGroup;
-import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
-import org.hbird.core.commons.tmtcgroups.TmTcGroups;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.exceptions.ParameterNotInModelException;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
+import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
+import org.hbird.core.spacesystemmodel.tmtc.Parameter;
+import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
+import org.hbird.core.spacesystemmodel.tmtc.provided.TmTcGroups;
 
 /**
  *

@@ -1,4 +1,4 @@
-package org.hbird.transport.commons.tmtcgroups;
+package org.hbird.core.spacesystemmodel.tmtc;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -10,9 +10,8 @@ import static org.mockito.Mockito.when;
 import java.math.BigDecimal;
 import java.util.Map;
 
-import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
-import org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup;
+import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameterGroup;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +21,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 /**
  * @author kimmell
- *
+ * 
  */
 @RunWith(MockitoJUnitRunner.class)
 public class HummingbirdParameterGroupTest {
@@ -75,7 +74,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#HummingbirdParameterGroup(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#HummingbirdParameterGroup(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testHummingbirdParameterGroup() {
@@ -201,7 +202,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#addIntegerParameter(java.lang.String, org.hbird.core.commons.tmtc.Parameter)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#addIntegerParameter(java.lang.String, org.hbird.core.commons.tmtc.Parameter)}
+	 * .
 	 */
 	@Test
 	public void testAddIntegerParameter() {
@@ -220,7 +223,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#addLongParameter(java.lang.String, org.hbird.core.commons.tmtc.Parameter)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#addLongParameter(java.lang.String, org.hbird.core.commons.tmtc.Parameter)}
+	 * .
 	 */
 	@Test
 	public void testAddLongParameter() {
@@ -239,7 +244,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#addBigDecimalParameter(java.lang.String, org.hbird.core.commons.tmtc.Parameter)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#addBigDecimalParameter(java.lang.String, org.hbird.core.commons.tmtc.Parameter)}
+	 * .
 	 */
 	@Test
 	public void testAddBigDecimalParameter() {
@@ -258,7 +265,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#addFloatParameter(java.lang.String, org.hbird.core.commons.tmtc.Parameter)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#addFloatParameter(java.lang.String, org.hbird.core.commons.tmtc.Parameter)}
+	 * .
 	 */
 	@Test
 	public void testAddFloatParameter() {
@@ -277,7 +286,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#addDoubleParameter(java.lang.String, org.hbird.core.commons.tmtc.Parameter)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#addDoubleParameter(java.lang.String, org.hbird.core.commons.tmtc.Parameter)}
+	 * .
 	 */
 	@Test
 	public void testAddDoubleParameter() {
@@ -296,7 +307,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#addStringParameter(java.lang.String, org.hbird.core.commons.tmtc.Parameter)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#addStringParameter(java.lang.String, org.hbird.core.commons.tmtc.Parameter)}
+	 * .
 	 */
 	@Test
 	public void testAddStringParameter() {
@@ -315,7 +328,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#addRawParameter(java.lang.String, org.hbird.core.commons.tmtc.Parameter)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#addRawParameter(java.lang.String, org.hbird.core.commons.tmtc.Parameter)}
+	 * .
 	 */
 	@Test
 	public void testAddRawParameter() {
@@ -333,9 +348,10 @@ public class HummingbirdParameterGroupTest {
 		assertEquals(rawParameter, allParams.get(name));
 	}
 
-
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getIntegerParameter(java.lang.String)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getIntegerParameter(java.lang.String)}.
+	 * 
 	 * @throws UnknownParameterException
 	 * @throws Exception
 	 */
@@ -345,7 +361,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getIntegerParameter(java.lang.String)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getIntegerParameter(java.lang.String)}.
+	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -355,7 +373,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getLongParameter(java.lang.String)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getLongParameter(java.lang.String)}.
+	 * 
 	 * @throws UnknownParameterException
 	 */
 	@Test(expected = UnknownParameterException.class)
@@ -364,7 +384,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getLongParameter(java.lang.String)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getLongParameter(java.lang.String)}.
+	 * 
 	 * @throws UnknownParameterException
 	 */
 	@Test
@@ -374,7 +396,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getParameter(java.lang.String)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getParameter(java.lang.String)}.
+	 * 
 	 * @throws UnknownParameterException
 	 */
 	@Test(expected = UnknownParameterException.class)
@@ -383,7 +407,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getParameter(java.lang.String)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getParameter(java.lang.String)}.
+	 * 
 	 * @throws UnknownParameterException
 	 */
 	@Test
@@ -401,7 +427,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getFloatParameter(java.lang.String)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getFloatParameter(java.lang.String)}.
+	 * 
 	 * @throws UnknownParameterException
 	 */
 	@Test(expected = UnsupportedOperationException.class)
@@ -410,7 +438,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getDoubleParameter(java.lang.String)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getDoubleParameter(java.lang.String)}.
+	 * 
 	 * @throws UnknownParameterException
 	 */
 	@Test(expected = UnsupportedOperationException.class)
@@ -419,7 +449,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getBigDecimalParameter(java.lang.String)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getBigDecimalParameter(java.lang.String)}.
+	 * 
 	 * @throws UnknownParameterException
 	 */
 	@Test(expected = UnsupportedOperationException.class)
@@ -428,7 +460,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getStringParameter(java.lang.String)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getStringParameter(java.lang.String)}.
+	 * 
 	 * @throws UnknownParameterException
 	 */
 	@Test(expected = UnknownParameterException.class)
@@ -437,7 +471,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getStringParameter(java.lang.String)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getStringParameter(java.lang.String)}.
+	 * 
 	 * @throws UnknownParameterException
 	 */
 	@Test
@@ -447,7 +483,10 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#validateParameterNotNull(org.hbird.core.commons.tmtc.Parameter, java.lang.String)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#validateParameterNotNull(org.hbird.core.commons.tmtc.Parameter, java.lang.String)}
+	 * .
+	 * 
 	 * @throws UnknownParameterException
 	 */
 	@Test(expected = UnknownParameterException.class)
@@ -456,7 +495,10 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#validateParameterNotNull(org.hbird.core.commons.tmtc.Parameter, java.lang.String)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#validateParameterNotNull(org.hbird.core.commons.tmtc.Parameter, java.lang.String)}
+	 * .
+	 * 
 	 * @throws UnknownParameterException
 	 */
 	@Test
@@ -465,7 +507,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getRawParameter(java.lang.String)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getRawParameter(java.lang.String)}.
+	 * 
 	 * @throws UnknownParameterException
 	 */
 	@Test(expected = UnknownParameterException.class)
@@ -474,7 +518,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getRawParameter(java.lang.String)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getRawParameter(java.lang.String)}.
+	 * 
 	 * @throws UnknownParameterException
 	 */
 	@Test
@@ -492,7 +538,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#validateQualifiedName(String)}.
+	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#validateQualifiedName(String)}
+	 * .
+	 * 
 	 * @throws UnknownParameterException
 	 */
 	@Test
@@ -505,7 +553,9 @@ public class HummingbirdParameterGroupTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#validateQualifiedName(String)}.
+	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#validateQualifiedName(String)}
+	 * .
+	 * 
 	 * @throws UnknownParameterException
 	 */
 	@Test(expected = NullPointerException.class)

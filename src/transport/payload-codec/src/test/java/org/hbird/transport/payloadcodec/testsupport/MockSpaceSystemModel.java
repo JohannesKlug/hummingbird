@@ -8,18 +8,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hbird.core.commons.tmtc.CommandGroup;
-import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
-import org.hbird.core.commons.tmtcgroups.HummingbirdParameter;
-import org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup;
-import org.hbird.core.commons.tmtcgroups.TmTcGroups;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.core.spacesystemmodel.exceptions.ParameterNotInModelException;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
+import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
+import org.hbird.core.spacesystemmodel.tmtc.Parameter;
+import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
+import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
+import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameterGroup;
+import org.hbird.core.spacesystemmodel.tmtc.provided.TmTcGroups;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

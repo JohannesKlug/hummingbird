@@ -2,8 +2,8 @@ package org.hbird.transport.payloadcodec.codecparameters;
 
 import java.util.BitSet;
 
-import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 
 /**
  * Parameter Decorator.

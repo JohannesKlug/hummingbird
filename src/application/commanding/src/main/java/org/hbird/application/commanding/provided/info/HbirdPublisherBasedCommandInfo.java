@@ -6,7 +6,7 @@ package org.hbird.application.commanding.provided.info;
 import java.util.List;
 
 import org.hbird.application.commanding.interfaces.info.CommandInformationService;
-import org.hbird.core.commons.tmtc.CommandGroup;
+import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 
 /**

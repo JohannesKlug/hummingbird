@@ -1,7 +1,7 @@
 package org.hbird.application.commanding.camel;
 
 import org.apache.camel.Body;
-import org.hbird.core.commons.tmtc.CommandGroup;
+import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 import org.joda.time.DateTime;
 
 public class CommandSendTimeFilter {

@@ -68,6 +68,12 @@
 			<groupId>uk.com.robust-it</groupId>
 			<artifactId>cloning</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.9</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 	<packaging>bundle</packaging>
 	<description>Defines the Hbird core space system model classes and interfaces. Also provides the Space System Model Factory interface.</description>

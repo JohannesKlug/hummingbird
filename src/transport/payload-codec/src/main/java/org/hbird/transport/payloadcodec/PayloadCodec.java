@@ -4,9 +4,9 @@ import java.util.BitSet;
 import java.util.List;
 
 import org.hbird.core.commons.data.GenericPayload;
-import org.hbird.core.commons.tmtc.ParameterGroup;
-import org.hbird.core.commons.tmtc.TmTcGroup;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
+import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
+import org.hbird.core.spacesystemmodel.tmtc.TmTcGroup;
 
 public interface PayloadCodec {
 

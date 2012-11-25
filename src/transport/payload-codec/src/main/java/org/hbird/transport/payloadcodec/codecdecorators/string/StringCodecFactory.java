@@ -1,7 +1,7 @@
 package org.hbird.transport.payloadcodec.codecdecorators.string;
 
-import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.transport.payloadcodec.codecparameters.string.AsciiStringCodecParameter;
 import org.hbird.transport.payloadcodec.codecparameters.string.Uft8StringCodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;

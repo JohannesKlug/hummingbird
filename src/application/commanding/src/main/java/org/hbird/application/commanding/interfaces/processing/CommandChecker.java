@@ -1,6 +1,6 @@
 package org.hbird.application.commanding.interfaces.processing;
 
-import org.hbird.core.commons.tmtc.CommandGroup;
+import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 
 public interface CommandChecker {
 	/**

@@ -8,10 +8,10 @@ import static org.mockito.Mockito.when;
 import java.io.UnsupportedEncodingException;
 import java.util.BitSet;
 
-import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
+import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;

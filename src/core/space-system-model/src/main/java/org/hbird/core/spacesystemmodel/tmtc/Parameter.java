@@ -1,7 +1,7 @@
-package org.hbird.core.commons.tmtc;
+package org.hbird.core.spacesystemmodel.tmtc;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.hbird.core.commons.tmtcgroups.HummingbirdParameter;
+import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
 
 
 /**

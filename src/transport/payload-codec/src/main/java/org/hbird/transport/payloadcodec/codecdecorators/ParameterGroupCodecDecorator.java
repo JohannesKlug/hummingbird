@@ -4,10 +4,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.core.commons.tmtc.ParameterGroup;
-import org.hbird.core.commons.tmtcgroups.TmTcGroups;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.core.spacesystemmodel.tmtc.Parameter;
+import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
+import org.hbird.core.spacesystemmodel.tmtc.provided.TmTcGroups;
 import org.hbird.transport.payloadcodec.AbstractClonerCodecDecorator;
 import org.hbird.transport.payloadcodec.codecdecorators.number.IntegerCodecFactory;
 import org.hbird.transport.payloadcodec.codecdecorators.number.LongCodecFactory;

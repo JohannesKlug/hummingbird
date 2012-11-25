@@ -1,4 +1,4 @@
-package org.hbird.core.commons.tmtcgroups;
+package org.hbird.core.spacesystemmodel.tmtc.provided;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -8,9 +8,9 @@ import java.util.Map;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.core.commons.tmtc.TmTcGroup;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
+import org.hbird.core.spacesystemmodel.tmtc.Parameter;
+import org.hbird.core.spacesystemmodel.tmtc.TmTcGroup;
 
 @XmlRootElement()
 public abstract class HummingbirdTmTcGroup implements TmTcGroup {
@@ -30,19 +30,18 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 	protected Map<String, Parameter<String>> stringParameters;
 	protected Map<String, Parameter<Byte[]>> rawParameters;
 
-
 	/** List of Parameters belonging to this Group */
 
 	/**
 	 * Constructor of the ParameterGroup class.
-	 *
+	 * 
 	 * @param name
 	 *            The name of the container.
 	 * @param shortDescription
 	 *            A one line description of the container, used for tooltip type information.
 	 * @param longDescription
 	 *            A detailed description of the container.
-	 *
+	 * 
 	 */
 	public HummingbirdTmTcGroup(final String qualifiedName, final String name, final String shortDescription, final String longDescription) {
 		this.name = name;
@@ -183,7 +182,6 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 		this.parameters.put(qualifiedName, parameter);
 	}
 
-
 	@Override
 	public Parameter<Integer> getIntegerParameter(final String qualifiedName) throws UnknownParameterException {
 		final Parameter<Integer> p = integerParameters == null ? null : integerParameters.get(qualifiedName);
@@ -210,16 +208,28 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 		return this.qualifiedName;
 	}
 
+	/**
+	 * @throws UnknownParameterException
+	 *             not supported yet
+	 */
 	@Override
 	public Parameter<Float> getFloatParameter(final String qualifiedName) throws UnknownParameterException {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * @throws UnknownParameterException
+	 *             not supported yet
+	 */
 	@Override
 	public Parameter<Double> getDoubleParameter(final String qualifiedName) throws UnknownParameterException {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * @throws UnknownParameterException
+	 *             not supported yet
+	 */
 	@Override
 	public Parameter<BigDecimal> getBigDecimalParameter(final String qualifiedName) throws UnknownParameterException {
 		throw new UnsupportedOperationException();

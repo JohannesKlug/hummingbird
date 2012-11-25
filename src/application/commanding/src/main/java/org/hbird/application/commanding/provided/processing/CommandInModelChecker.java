@@ -3,7 +3,7 @@ package org.hbird.application.commanding.provided.processing;
 import java.util.List;
 
 import org.hbird.application.commanding.interfaces.processing.CommandChecker;
-import org.hbird.core.commons.tmtc.CommandGroup;
+import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 
 public class CommandInModelChecker implements CommandChecker {
 

@@ -4,12 +4,12 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.BitSet;
 
-import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.core.commons.tmtcgroups.HummingbirdParameter;
 import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidParameterTypeException;
+import org.hbird.core.spacesystemmodel.tmtc.Parameter;
+import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

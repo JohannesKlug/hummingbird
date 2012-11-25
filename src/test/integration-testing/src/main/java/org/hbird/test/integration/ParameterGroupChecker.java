@@ -1,7 +1,7 @@
 package org.hbird.test.integration;
 
-import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.spacesystemmodel.tmtc.Parameter;
+import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

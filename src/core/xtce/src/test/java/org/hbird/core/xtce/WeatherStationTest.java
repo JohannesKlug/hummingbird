@@ -7,11 +7,11 @@ import static org.junit.Assert.assertNull;
 import java.net.URL;
 import java.util.Map;
 
-import org.hbird.core.commons.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidSpaceSystemDefinitionException;
+import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.junit.Before;
 import org.junit.Test;
 

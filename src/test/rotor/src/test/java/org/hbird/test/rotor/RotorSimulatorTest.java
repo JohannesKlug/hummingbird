@@ -3,10 +3,10 @@ package org.hbird.test.rotor;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.core.commons.tmtc.ParameterGroup;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
+import org.hbird.core.spacesystemmodel.tmtc.Parameter;
+import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.junit.Before;
 import org.junit.Test;

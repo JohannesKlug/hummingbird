@@ -6,7 +6,7 @@ package org.hbird.core.spacesystemmodel.exceptions;
 import java.util.Map;
 import java.util.Set;
 
-import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 
 /**
  * This is a checked exception class which will allow the client to take steps to

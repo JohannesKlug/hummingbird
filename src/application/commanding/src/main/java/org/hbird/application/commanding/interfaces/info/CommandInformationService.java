@@ -2,8 +2,8 @@ package org.hbird.application.commanding.interfaces.info;
 
 import java.util.List;
 
-import org.hbird.core.commons.tmtc.CommandGroup;
-import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
+import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 
 public interface CommandInformationService {
 

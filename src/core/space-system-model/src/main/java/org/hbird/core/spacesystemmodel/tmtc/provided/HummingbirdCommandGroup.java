@@ -1,10 +1,10 @@
-package org.hbird.core.commons.tmtcgroups;
+package org.hbird.core.spacesystemmodel.tmtc.provided;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.hbird.core.commons.tmtc.CommandGroup;
+import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 
 @XmlRootElement()
 public class HummingbirdCommandGroup extends HummingbirdTmTcGroup implements CommandGroup {

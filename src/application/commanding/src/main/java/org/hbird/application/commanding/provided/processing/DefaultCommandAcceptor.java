@@ -3,7 +3,7 @@ package org.hbird.application.commanding.provided.processing;
 import org.apache.camel.Produce;
 import org.hbird.application.commanding.interfaces.processing.CommandAcceptor;
 import org.hbird.application.commanding.interfaces.processing.CommandSender;
-import org.hbird.core.commons.tmtc.CommandGroup;
+import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

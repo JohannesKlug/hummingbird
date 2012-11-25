@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.hbird.application.commanding.interfaces.info.CommandInformationService;
 import org.hbird.application.halcyon.osgi.OsgiReady;
-import org.hbird.core.commons.tmtc.CommandGroup;
+import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

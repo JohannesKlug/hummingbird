@@ -1,11 +1,11 @@
-package org.hbird.core.commons.tmtcgroups;
+package org.hbird.core.spacesystemmodel.tmtc.provided;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.hbird.core.commons.tmtc.Parameter;
+import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 
 /**
  * The Hummingbird implementation of the {@link Parameter}.

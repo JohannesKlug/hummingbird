@@ -1,12 +1,12 @@
-package org.hbird.core.commons.tmtcgroups;
+package org.hbird.core.spacesystemmodel.tmtc.provided;
 
 import java.math.BigDecimal;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.hbird.core.commons.tmtc.Parameter;
-import org.hbird.core.commons.tmtc.TmTcGroup;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
+import org.hbird.core.spacesystemmodel.tmtc.Parameter;
+import org.hbird.core.spacesystemmodel.tmtc.TmTcGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

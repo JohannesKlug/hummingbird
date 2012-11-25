@@ -1,14 +1,16 @@
-package org.hbird.transport.commons.tmtcgroups;
+package org.hbird.core.spacesystemmodel.tmtc;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
-import org.hbird.core.commons.tmtcgroups.HummingbirdParameter;
+import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author kimmell
- *
+ * 
  */
 public class HummingbirdParameterTest {
 
@@ -28,7 +30,9 @@ public class HummingbirdParameterTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameter#HummingbirdParameter(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
+	 * Test method for
+	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameter#HummingbirdParameter(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testHummingbirdParameter() {
@@ -43,7 +47,7 @@ public class HummingbirdParameterTest {
 	 */
 	@Test
 	public void testGetName() {
-		assertEquals(NAME, parameter.getName()); 
+		assertEquals(NAME, parameter.getName());
 	}
 
 	/**

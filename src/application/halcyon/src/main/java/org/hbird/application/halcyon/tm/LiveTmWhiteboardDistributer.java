@@ -3,7 +3,7 @@ package org.hbird.application.halcyon.tm;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hbird.core.commons.tmtc.ParameterGroup;
+import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 
 public class LiveTmWhiteboardDistributer {
 

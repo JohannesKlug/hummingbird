@@ -1,4 +1,4 @@
-package org.hbird.core.commons.tmtc;
+package org.hbird.core.spacesystemmodel.tmtc;
 
 
 public interface ParameterGroup extends TmTcGroup {
