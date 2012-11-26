@@ -102,16 +102,30 @@
 			<xtce:Parameter parameterTypeRef="sc_id" name="SC_ID_CONSTANT">
 				<xtce:ParameterProperties readOnly="true" dataSource="constant" />
 			</xtce:Parameter>
+			
 			<xtce:Parameter parameterTypeRef="1-bit-uint" name="DOOR_LATCH_FLAG"></xtce:Parameter>
 		</xtce:ParameterSet>
 
 		<xtce:MetaCommandSet>
-			<xtce:MetaCommand name="OPEN_LATCH">
+		
+			<xtce:MetaCommand name="TestBase" abstract="true">
 				<xtce:ArgumentList>
-					<xtce:Argument name="Space craft ID" argumentTypeRef="SC_ID_CONSTANT"></xtce:Argument>
+						<xtce:Argument name="Hardcoded Spacecraft Id" argumentTypeRef="SC_ID_CONSTANT"></xtce:Argument>
+					</xtce:ArgumentList>
+			</xtce:MetaCommand>
+		
+		
+			<xtce:MetaCommand name="OPEN_LATCH">
+				<xtce:BaseMetaCommand metaCommandRef="TestBase">
+					<xtce:ArgumentAssignmentList>
+						<xtce:ArgumentAssignment argumentValue="5" argumentName="SC_ID_CONSTANT"/>
+					</xtce:ArgumentAssignmentList>
+				</xtce:BaseMetaCommand>
+				<xtce:ArgumentList>
 					<xtce:Argument name="Door latch state" argumentTypeRef="DOOR_LATCH_FLAG"></xtce:Argument>
 				</xtce:ArgumentList>
 			</xtce:MetaCommand>
+			
 		</xtce:MetaCommandSet>
 
 	</xtce:CommandMetaData>

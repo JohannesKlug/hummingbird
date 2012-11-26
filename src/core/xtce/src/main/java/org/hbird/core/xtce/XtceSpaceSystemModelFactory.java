@@ -20,6 +20,7 @@ import org.hbird.core.generatedcode.xtce.ArgumentListItem;
 import org.hbird.core.generatedcode.xtce.ArgumentTypeSetItem;
 import org.hbird.core.generatedcode.xtce.BaseContainer;
 import org.hbird.core.generatedcode.xtce.BaseDataTypeChoice;
+import org.hbird.core.generatedcode.xtce.BaseMetaCommand;
 import org.hbird.core.generatedcode.xtce.BinaryParameterType;
 import org.hbird.core.generatedcode.xtce.CommandMetaData;
 import org.hbird.core.generatedcode.xtce.Comparison;
@@ -31,6 +32,7 @@ import org.hbird.core.generatedcode.xtce.IntegerArgumentType;
 import org.hbird.core.generatedcode.xtce.IntegerParameterType;
 import org.hbird.core.generatedcode.xtce.MetaCommand;
 import org.hbird.core.generatedcode.xtce.MetaCommandSet;
+import org.hbird.core.generatedcode.xtce.MetaCommandSetItem;
 import org.hbird.core.generatedcode.xtce.ParameterProperties;
 import org.hbird.core.generatedcode.xtce.ParameterRefEntry;
 import org.hbird.core.generatedcode.xtce.ParameterSetTypeItem;
@@ -546,22 +548,66 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		final String qualifiedNamePrefix = spaceSystem.getName() + ".tc.";
 		final int numTcParameterGroups = spaceSystem.getCommandMetaData().getMetaCommandSet().getMetaCommandSetItemCount();
 		for (int containerIndex = 0; containerIndex < numTcParameterGroups; ++containerIndex) {
-			final MetaCommand xtceContainer = spaceSystem.getCommandMetaData().getMetaCommandSet().getMetaCommandSetItem(containerIndex).getMetaCommand();
+			final MetaCommand metaCommand = spaceSystem.getCommandMetaData().getMetaCommandSet().getMetaCommandSetItem(containerIndex).getMetaCommand();
+
+			if (metaCommand.isAbstract()) {
+				continue;
+			}
 
 			// @formatter:off
 			final CommandGroup parameterGroup =
-					new HummingbirdCommandGroup(qualifiedNamePrefix + xtceContainer.getName(),
-							xtceContainer.getName(),
-							xtceContainer.getShortDescription(),
-							xtceContainer.getLongDescription());
+					new HummingbirdCommandGroup(qualifiedNamePrefix + metaCommand.getName(),
+							metaCommand.getName(),
+							metaCommand.getShortDescription(),
+							metaCommand.getLongDescription());
 			// @formatter:on
 
 			tcGroups.put(parameterGroup.getQualifiedName(), parameterGroup);
 
 			if (LOG.isDebugEnabled()) {
-				LOG.debug("Created TC ParameterGroup " + xtceContainer.getName());
+				LOG.debug("Created TC ParameterGroup " + metaCommand.getName());
 			}
 		}
+	}
+
+	private Parameter<?> getCreatedArgument(String argumentName) throws InvalidSpaceSystemDefinitionException {
+
+		Parameter<?> arg = integerArguments.get(argumentName);
+		if (arg != null) {
+			return arg;
+		}
+
+		arg = longArguments.get(argumentName);
+		if (arg != null) {
+			return arg;
+		}
+
+		arg = floatArguments.get(argumentName);
+		if (arg != null) {
+			return arg;
+		}
+
+		arg = doubleArguments.get(argumentName);
+		if (arg != null) {
+			return arg;
+		}
+
+		arg = bigDecimalArguments.get(argumentName);
+		if (arg != null) {
+			return arg;
+		}
+
+		arg = stringArguments.get(argumentName);
+		if (arg != null) {
+			return arg;
+		}
+
+		arg = rawArguments.get(argumentName);
+		if (arg != null) {
+			return arg;
+		}
+
+		throw new InvalidSpaceSystemDefinitionException("Command argument " + argumentName + " not defined.");
 	}
 
 	/**
@@ -669,22 +715,95 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 		// For every defined command
 		for (int i = 0; i < commands.getMetaCommandSetItemCount(); i++) {
+
 			final MetaCommand command = commands.getMetaCommandSetItem(i).getMetaCommand();
+
+			if (command.isAbstract()) {
+				continue;
+			}
+
 			final CommandGroup commandGroup = tcGroups.get(qualifiedNamePrefix + command.getName());
 
-			final ArgumentListItem[] parameterEntrys = command.getArgumentList().getArgumentListItem();
-			for (int x = 0; x < parameterEntrys.length; x++) {
-				final ArgumentListItem argumentListEntry = parameterEntrys[x];
-				final Argument[] arguments = argumentListEntry.getArgument();
-				for (int y = 0; y < arguments.length; y++) {
-					final Argument argument = arguments[y];
-					final String argumentTypeRef = argument.getArgumentTypeRef();
+			BaseMetaCommand baseMetaCommand = command.getBaseMetaCommand();
+			// if current command has a base command we need to create a command instance of it's arguments.
+			if (baseMetaCommand != null) {
+				// find base command
+				String baseCommandName = baseMetaCommand.getMetaCommandRef();
+				for (MetaCommandSetItem commandSetItem : commands.getMetaCommandSetItem()) {
+					if (StringUtils.equals(commandSetItem.getMetaCommand().getName(), baseCommandName)) {
+						MetaCommand baseCommand = commandSetItem.getMetaCommand();
 
-					addArgumentParameterToGroup(commandGroup, qualifiedNamePrefix + argumentTypeRef);
+						ArgumentListItem[] baseCmdArgumentListItem = baseCommand.getArgumentList().getArgumentListItem();
 
-					if (LOG.isDebugEnabled()) {
-						LOG.debug("Added TC argument " + qualifiedNamePrefix + argumentTypeRef + " to command group " + commandGroup.getName());
+						createCommandInstanceVersionsOfBaseArgs(baseCmdArgumentListItem, command.getName());
+
+						// base command found, add all arguments
+						addArgumentsToCommandGroup(qualifiedNamePrefix + command.getName() + ".", commandGroup, baseCmdArgumentListItem);
 					}
+				}
+			}
+
+			// cmd args non-base
+			final ArgumentListItem[] parameterEntrys = command.getArgumentList().getArgumentListItem();
+			addArgumentsToCommandGroup(qualifiedNamePrefix, commandGroup, parameterEntrys);
+		}
+	}
+
+	private void createCommandInstanceVersionsOfBaseArgs(ArgumentListItem[] baseCmdArgumentListItem, String commandName) {
+		String qualifiedNamePrefix = spaceSystem.getName() + ".tc.";
+		String cmdQualifiedNamePrefix = qualifiedNamePrefix + commandName;
+		for (ArgumentListItem argumentList : baseCmdArgumentListItem) {
+			for (Argument arg : argumentList.getArgument()) {
+				LOG.debug("Adding argument " + arg.getArgumentTypeRef());
+
+				Parameter<Integer> baseArgument = integerArguments.get(qualifiedNamePrefix + arg.getArgumentTypeRef());
+				if (baseArgument != null) {
+					Parameter<Integer> p;
+					if (baseArgument.isReadOnly()) {
+						// create protected
+						p = new ProtectedValueParameter<Integer>(cmdQualifiedNamePrefix + "." + arg.getArgumentTypeRef(), arg.getArgumentTypeRef(),
+								baseArgument.getShortDescription(), baseArgument.getLongDescription(), baseArgument.getValue());
+					}
+					else {
+						p = new HummingbirdParameter<Integer>(cmdQualifiedNamePrefix + "." + arg.getArgumentTypeRef(), arg.getArgumentTypeRef(),
+								baseArgument.getShortDescription(), baseArgument.getLongDescription());
+					}
+					integerArguments.put(cmdQualifiedNamePrefix + "." + arg.getArgumentTypeRef(), p);
+					continue;
+				}
+				Parameter<Long> longBaseArgument = longArguments.get(qualifiedNamePrefix + arg.getArgumentTypeRef());
+				if (longBaseArgument != null) {
+					Parameter<Long> p;
+					if (baseArgument.isReadOnly()) {
+						// create protected
+						p = new ProtectedValueParameter<Long>(cmdQualifiedNamePrefix + "." + arg.getArgumentTypeRef(), arg.getArgumentTypeRef(),
+								longBaseArgument.getShortDescription(), longBaseArgument.getLongDescription(), longBaseArgument.getValue());
+					}
+					else {
+						p = new HummingbirdParameter<Long>(cmdQualifiedNamePrefix + "." + arg.getArgumentTypeRef(), arg.getArgumentTypeRef(),
+								longBaseArgument.getShortDescription(), longBaseArgument.getLongDescription());
+					}
+					longArguments.put(cmdQualifiedNamePrefix + "." + arg.getArgumentTypeRef(), p);
+					continue;
+				}
+			}
+		}
+
+	}
+
+	private void addArgumentsToCommandGroup(final String qualifiedNamePrefix, final CommandGroup commandGroup, final ArgumentListItem[] parameterEntrys)
+			throws InvalidSpaceSystemDefinitionException {
+		for (int x = 0; x < parameterEntrys.length; x++) {
+			final ArgumentListItem argumentListEntry = parameterEntrys[x];
+			final Argument[] arguments = argumentListEntry.getArgument();
+			for (int y = 0; y < arguments.length; y++) {
+				final Argument argument = arguments[y];
+				final String argumentTypeRef = argument.getArgumentTypeRef();
+
+				addArgumentParameterToGroup(commandGroup, qualifiedNamePrefix + argumentTypeRef);
+
+				if (LOG.isDebugEnabled()) {
+					LOG.debug("Added TC argument " + qualifiedNamePrefix + "." + argumentTypeRef + " to command group " + commandGroup.getName());
 				}
 			}
 		}
@@ -730,7 +849,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		}
 		else {
 			// TODO Finish unsupported parameter types
-			final String msg = "Could not find type for parameter "
+			final String msg = "Could not find parameter "
 					+ qualifiedName
 					+ ". Check the type ref for the parameter in the model definition file, you may be referencing an undelcared type ot simply have a typo. The other possibility is that you are referencing an unsupported type. Hummingbird currently only supports integer, long, string & binary parameters. ";
 			LOG.error(msg);

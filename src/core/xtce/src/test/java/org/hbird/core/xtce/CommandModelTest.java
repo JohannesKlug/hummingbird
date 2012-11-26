@@ -17,7 +17,7 @@ import org.junit.Test;
 
 /**
  * @author Mark Doyle
- *
+ * 
  */
 public class CommandModelTest {
 
@@ -40,21 +40,23 @@ public class CommandModelTest {
 
 	/**
 	 * @throws UnknownParameterException
-	 *
+	 * 
 	 */
 	private static void verifyCommands(final Map<String, CommandGroup> commands) throws UnknownParameterException {
 		assertEquals(1, commands.size());
 		final CommandGroup openLatchCommand = commands.get("TestSat-all-uints.tc.OPEN_LATCH");
 		assertNotNull(openLatchCommand);
+
 		assertNull(openLatchCommand.getShortDescription());
 		assertNull(openLatchCommand.getLongDescription());
+
 		assertEquals("TestSat-all-uints.tc.OPEN_LATCH", openLatchCommand.getQualifiedName());
 		assertEquals("OPEN_LATCH", openLatchCommand.getName());
 
 		final Map<String, Parameter<?>> arguments = openLatchCommand.getAllParameters();
 		assertEquals(2, arguments.size());
 
-		final Parameter<?> scidArg = openLatchCommand.getParameter("TestSat-all-uints.tc.SC_ID_CONSTANT");
+		final Parameter<?> scidArg = openLatchCommand.getParameter("TestSat-all-uints.tc.OPEN_LATCH.SC_ID_CONSTANT");
 		assertNotNull(scidArg);
 		assertEquals("SC_ID_CONSTANT", scidArg.getName());
 
