@@ -59,6 +59,7 @@ public class CommandModelTest {
 		final Parameter<?> scidArg = openLatchCommand.getParameter("TestSat-all-uints.tc.OPEN_LATCH.SC_ID_CONSTANT");
 		assertNotNull(scidArg);
 		assertEquals("SC_ID_CONSTANT", scidArg.getName());
+		assertEquals(5, scidArg.getValue());
 
 		final Parameter<?> doorLatchArg = openLatchCommand.getParameter("TestSat-all-uints.tc.DOOR_LATCH_FLAG");
 		assertNotNull(doorLatchArg);

@@ -16,6 +16,7 @@ import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.xml.ValidationException;
 import org.exolab.castor.xml.XMLContext;
 import org.hbird.core.generatedcode.xtce.Argument;
+import org.hbird.core.generatedcode.xtce.ArgumentAssignment;
 import org.hbird.core.generatedcode.xtce.ArgumentListItem;
 import org.hbird.core.generatedcode.xtce.ArgumentTypeSetItem;
 import org.hbird.core.generatedcode.xtce.BaseContainer;
@@ -737,16 +738,59 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 						createCommandInstanceVersionsOfBaseArgs(baseCmdArgumentListItem, command.getName());
 
+						for (ArgumentAssignment argumentAssignment : baseMetaCommand.getArgumentAssignmentList().getArgumentAssignment()) {
+							performCommandArgumentAssignments(qualifiedNamePrefix, command.getName(), argumentAssignment);
+						}
+
 						// base command found, add all arguments
 						addArgumentsToCommandGroup(qualifiedNamePrefix + command.getName() + ".", commandGroup, baseCmdArgumentListItem);
+
 					}
 				}
+
 			}
 
 			// cmd args non-base
 			final ArgumentListItem[] parameterEntrys = command.getArgumentList().getArgumentListItem();
 			addArgumentsToCommandGroup(qualifiedNamePrefix, commandGroup, parameterEntrys);
 		}
+	}
+
+	private void performCommandArgumentAssignments(String qualifiedNamePrefix, String commandName, ArgumentAssignment argumentAssignment) {
+		Parameter<Integer> p = integerArguments.get(qualifiedNamePrefix + argumentAssignment.getArgumentName());
+		if (p != null) {
+			String qualifiedName = qualifiedNamePrefix + commandName + "." + p.getName();
+			if (p.isReadOnly()) {
+				p = new ProtectedValueParameter<Integer>(qualifiedName, p.getName(), p.getShortDescription(), p.getLongDescription(),
+						Integer.valueOf(argumentAssignment.getArgumentValue()));
+			}
+			else {
+				p = new HummingbirdParameter<Integer>(qualifiedName, p.getName(), p.getShortDescription(), p.getLongDescription());
+				p.setValue(Integer.valueOf(argumentAssignment.getArgumentValue()));
+
+			}
+			LOG.debug("Adding base command integer argument" + p.getQualifiedName());
+			integerArguments.put(p.getQualifiedName(), p);
+		}
+		else {
+			Parameter<Long> lp;
+			lp = longArguments.get(qualifiedNamePrefix + argumentAssignment.getArgumentName());
+			if (lp != null) {
+				String qualifiedName = qualifiedNamePrefix + commandName + "." + lp.getName();
+				if (lp.isReadOnly()) {
+					lp = new ProtectedValueParameter<Long>(qualifiedName, lp.getName(), lp.getShortDescription(), lp.getLongDescription(),
+							Long.valueOf(argumentAssignment.getArgumentValue()));
+				}
+				else {
+					lp = new HummingbirdParameter<Long>(qualifiedName, lp.getName(), lp.getShortDescription(), lp.getLongDescription());
+					lp.setValue(Long.valueOf(argumentAssignment.getArgumentValue()));
+
+				}
+				LOG.debug("Adding base command long argument" + p.getQualifiedName());
+				longArguments.put(lp.getQualifiedName(), lp);
+			}
+		}
+
 	}
 
 	private void createCommandInstanceVersionsOfBaseArgs(ArgumentListItem[] baseCmdArgumentListItem, String commandName) {
