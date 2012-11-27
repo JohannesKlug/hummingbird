@@ -81,16 +81,19 @@ function openCmdDialog(qualifiedName, name) {
 			addedParameter = false;
 			
 			if(cmd.integerParameters != null) {
-				addIntArgs(cmd.integerParameters);
-				addedParameter = true;
+				if(addIntArgs(cmd.integerParameters)) {
+					addedParameter = true;
+				}
 			}
 			if(cmd.longParameters!= null) {
-				addLongArgs(cmd.longParameters);
-				addedParameter = true;
+				if(addLongArgs(cmd.longParameters)) {
+					addedParameter = true;
+				}
 			}
 			if(cmd.stringParameters!= null) {
-				addStringArgs(cmd.stringParameters);
-				addedParameter = true;
+				if(addStringArgs(cmd.stringParameters)) {
+					addedParameter = true;
+				}
 			}
 			if(cmd.floatParameters!= null) {
 				// TODO impl
@@ -106,15 +109,18 @@ function openCmdDialog(qualifiedName, name) {
 			}
 			
 			if(!addedParameter) {
-				$("#configureInstructions").toggle();
-				$("#parametersTitle").toggle();
+				$("#configureInstructions").hide();
+				$("#parametersTitle").hide();
 			}
 			
 			$("#cmdConfigForm").submit({cmd:cmd}, submitCommand);
 		}
 	);
 	
-	$("#cmdModal").reveal();
+	$("#cmdModal").reveal({
+		animation: "fade",
+		animationspeed: 150
+	});
 }
 
 function submitCommand(event) {	
@@ -166,6 +172,7 @@ var staticArgCounter = 0;
 function addIntArgs(intArgs) {
 	var liHtml;
 	var inputHtml;
+	var added = 0;
 
 	// for each integer parameter create a new list item and input field. Add metadata to input field 
 	// for use by other functions
@@ -182,36 +189,50 @@ function addIntArgs(intArgs) {
 			
 			inputSelector.data("qualifiedName", intArgs[i].qualifiedName);
 			inputSelector.data("type", "integer");
+			added++;
 		}
 	});
 	
 	staticArgCounter++;
+	
+	console.log(added);
+	return added;
 }
 
 function addLongArgs(longArgs) {
 	var html;
+	var added = 0;
+	
 	$.each(longArgs, function(i) {
 		if(!longArgs[i].readOnly) {
 			console.log("Adding long arg" + longArgs[i].name);
 			html = "<li>" + longArgs[i].name + " <input id=arg" + staticArgCounter + " type=text class=required name=value/></li>";
 			$("#cmdArguments").append(html);
 			$(id).addClass("longParameter");
+			added++;
 		}
 	});
 	staticArgCounter++;
+	console.log(added);
+	return added;
 }
 
 function addStringArgs(stringArgs) {
 	var html;
+	var added = 0;
+	
 	$.each(stringArgs, function(i) {
 		if(!stringArgs[i].readOnly) {
 			console.log("Adding string arg" + stringArgs[i].name);
 			html = "<li>" + stringArgs[i].name + " <input id=arg" + staticArgCounter + " type=text class=required name=value/></li>";
 			$("#cmdArguments").append(html);
 			$(id).addClass("stringParameter");
+			add++;
 		}
 	});
 	staticArgCounter++;
+	console.log(added);
+	return added;
 }
 
 
