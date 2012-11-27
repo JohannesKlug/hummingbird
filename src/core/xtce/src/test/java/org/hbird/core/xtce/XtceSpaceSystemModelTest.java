@@ -27,7 +27,7 @@ public class XtceSpaceSystemModelTest {
 	private SpaceSystem spaceSystem;
 
 	private static final int NUM_OF_PARAMETERS_IN_PAYLOADS = 3;
-	private static final int NUM_OF_PARAMETER_ENCODINGS = 6;
+	private static final int NUM_OF_PARAMETER_ENCODINGS = 7;
 	private static final int NUM_OF_PARAMETER_GROUPS = 4;
 
 	private static final String P_FLIGHT_HOURS_NAME = "FLIGHT_HOURS";
@@ -61,7 +61,6 @@ public class XtceSpaceSystemModelTest {
 
 	private SpaceSystemModel xtceSsm;
 
-
 	@BeforeClass
 	public static final void SetupOnce() {
 	}
@@ -71,9 +70,9 @@ public class XtceSpaceSystemModelTest {
 		xtceSsm = null;
 	}
 
-
 	@Test
-	public void testSpaceSystemCreationAllUints() throws InvalidSpaceSystemDefinitionException, InvalidParameterTypeException, NumberFormatException, UnsupportedXtceConstructException {
+	public void testSpaceSystemCreationAllUints() throws InvalidSpaceSystemDefinitionException, InvalidParameterTypeException, NumberFormatException,
+			UnsupportedXtceConstructException {
 		URL testFileUrl = XtceSpaceSystemModelTest.class.getResource("TestSat-all-uints.xml");
 		xtceSsm = new XtceSpaceSystemModelFactory(testFileUrl.getPath()).createSpaceSystemModel();
 
@@ -85,11 +84,9 @@ public class XtceSpaceSystemModelTest {
 		testParameterGroups(xtceSsm);
 	}
 
-
 	private static void testParameterGroups(final SpaceSystemModel xtceSsm) {
 		assertEquals("Should be 3 integer parameters", xtceSsm.getParameterGroups().size(), NUM_OF_PARAMETER_GROUPS);
 	}
-
 
 	private static void testParameters(final SpaceSystemModel xtceSsm) {
 		assertEquals(NUM_OF_PARAMETER_GROUPS, xtceSsm.getParameterGroups().size());
@@ -112,7 +109,6 @@ public class XtceSpaceSystemModelTest {
 		Encoding encoding = encodings.get(param.getQualifiedName());
 		assertEquals(LIGHT_HOURS_LENGTH, encoding.getSizeInBits());
 
-
 		param = allParameters.get(tmPrefix + P_LASER_TEMP_NAME);
 		assertNotNull(param);
 		encoding = encodings.get(param.getQualifiedName());
@@ -123,13 +119,15 @@ public class XtceSpaceSystemModelTest {
 		encoding = encodings.get(param.getQualifiedName());
 		assertEquals(FUEL_LENGTH, encoding.getSizeInBits());
 
-		assertEquals("Should be " + NUM_OF_INTEGER_TYPED_PARAMETERS + " integer type parameters", NUM_OF_INTEGER_TYPED_PARAMETERS, xtceSsm.getAllUniqueIntegerParameters().size());
-		assertEquals("Should be " + NUM_OF_LONG_TYPED_PARAMETERS + " long type parameters", NUM_OF_LONG_TYPED_PARAMETERS, xtceSsm.getAllUniqueLongParameters().size());
+		assertEquals("Should be " + NUM_OF_INTEGER_TYPED_PARAMETERS + " integer type parameters", NUM_OF_INTEGER_TYPED_PARAMETERS, xtceSsm
+				.getAllUniqueIntegerParameters().size());
+		assertEquals("Should be " + NUM_OF_LONG_TYPED_PARAMETERS + " long type parameters", NUM_OF_LONG_TYPED_PARAMETERS, xtceSsm.getAllUniqueLongParameters()
+				.size());
 	}
 
-
 	@Test
-	public void testParameterGroupsCreationAllUints() throws InvalidSpaceSystemDefinitionException, InvalidParameterTypeException, UnknownParameterGroupException, UnsupportedXtceConstructException {
+	public void testParameterGroupsCreationAllUints() throws InvalidSpaceSystemDefinitionException, InvalidParameterTypeException,
+			UnknownParameterGroupException, UnsupportedXtceConstructException {
 		URL testFileUrl = XtceSpaceSystemModelTest.class.getResource("TestSat-all-uints.xml");
 		xtceSsm = new XtceSpaceSystemModelFactory(testFileUrl.getPath()).createSpaceSystemModel();
 		String tmPrefix = xtceSsm.getName() + ".tm.";
@@ -138,26 +136,31 @@ public class XtceSpaceSystemModelTest {
 		assertEquals("There should be " + NUM_OF_PARAMETER_GROUPS + " parameter groups", NUM_OF_PARAMETER_GROUPS, parameterGroups.size());
 
 		ParameterGroup allSystemsPg = xtceSsm.getParameterGroup(tmPrefix + PG_ALL_SYSTEMS_NAME);
-		assertEquals("There should be " + PG_ALL_SYSTEMS_NUM_PARAMETERS + " parameter groups", PG_ALL_SYSTEMS_NUM_PARAMETERS, allSystemsPg.getAllParameters().size());
-		assertEquals("There should be " + PG_ALL_SYSTEMS_NUM_INT_PARAMETERS + " parameter groups", PG_ALL_SYSTEMS_NUM_INT_PARAMETERS, allSystemsPg.getIntegerParameters().size());
-		assertEquals("There should be " + PG_ALL_SYSTEMS_NUM_LONG_PARAMETERS + " parameter groups", PG_ALL_SYSTEMS_NUM_LONG_PARAMETERS, allSystemsPg.getLongParameters().size());
+		assertEquals("There should be " + PG_ALL_SYSTEMS_NUM_PARAMETERS + " parameter groups", PG_ALL_SYSTEMS_NUM_PARAMETERS, allSystemsPg.getAllParameters()
+				.size());
+		assertEquals("There should be " + PG_ALL_SYSTEMS_NUM_INT_PARAMETERS + " parameter groups", PG_ALL_SYSTEMS_NUM_INT_PARAMETERS, allSystemsPg
+				.getIntegerParameters().size());
+		assertEquals("There should be " + PG_ALL_SYSTEMS_NUM_LONG_PARAMETERS + " parameter groups", PG_ALL_SYSTEMS_NUM_LONG_PARAMETERS, allSystemsPg
+				.getLongParameters().size());
 
 		ParameterGroup fuelPg = xtceSsm.getParameterGroup(tmPrefix + PG_FUEL_LOAD_NAME);
 		assertEquals("There should be " + PG_FUEL_LOAD_NUM_PARAMETERS + " parameter groups", PG_FUEL_LOAD_NUM_PARAMETERS, fuelPg.getAllParameters().size());
-		assertEquals("There should be " + PG_FUEL_LOAD_NUM_INT_PARAMETERS + " parameter groups", PG_FUEL_LOAD_NUM_INT_PARAMETERS, fuelPg.getIntegerParameters().size());
+		assertEquals("There should be " + PG_FUEL_LOAD_NUM_INT_PARAMETERS + " parameter groups", PG_FUEL_LOAD_NUM_INT_PARAMETERS, fuelPg.getIntegerParameters()
+				.size());
 		assertNull("There should be no long typed parameters on this group", fuelPg.getLongParameters());
 
 		ParameterGroup flightHoursPg = xtceSsm.getParameterGroup(tmPrefix + PG_FLIGHT_HOURS_NAME);
-		assertEquals("There should be " + PG_FLIGHT_HOURS_NUM_PARAMETERS + " parameter groups", PG_FLIGHT_HOURS_NUM_PARAMETERS, flightHoursPg.getAllParameters().size());
-		assertEquals("There should be " + PG_FLIGHT_HOURS_NUM_LONG_PARAMETERS + " parameter groups", PG_FLIGHT_HOURS_NUM_LONG_PARAMETERS, flightHoursPg.getLongParameters().size());
+		assertEquals("There should be " + PG_FLIGHT_HOURS_NUM_PARAMETERS + " parameter groups", PG_FLIGHT_HOURS_NUM_PARAMETERS, flightHoursPg
+				.getAllParameters().size());
+		assertEquals("There should be " + PG_FLIGHT_HOURS_NUM_LONG_PARAMETERS + " parameter groups", PG_FLIGHT_HOURS_NUM_LONG_PARAMETERS, flightHoursPg
+				.getLongParameters().size());
 		assertNull("There shouzld be no int typed parameters on this group", flightHoursPg.getIntegerParameters());
 
 		ParameterGroup laserTempPg = xtceSsm.getParameterGroup(tmPrefix + PG_LASER_TEMP_NAME);
-		assertEquals("There should be " + PG_LASER_TEMP_NUM_PARAMETERS + " parameter groups", PG_LASER_TEMP_NUM_PARAMETERS, laserTempPg.getAllParameters().size());
-		assertEquals("There should be " + PG_LASER_TEMP_NUM_INT_PARAMETERS + " parameter groups", PG_LASER_TEMP_NUM_INT_PARAMETERS, laserTempPg.getIntegerParameters().size());
+		assertEquals("There should be " + PG_LASER_TEMP_NUM_PARAMETERS + " parameter groups", PG_LASER_TEMP_NUM_PARAMETERS, laserTempPg.getAllParameters()
+				.size());
+		assertEquals("There should be " + PG_LASER_TEMP_NUM_INT_PARAMETERS + " parameter groups", PG_LASER_TEMP_NUM_INT_PARAMETERS, laserTempPg
+				.getIntegerParameters().size());
 		assertNull("There should be no long typed parameters on this group", laserTempPg.getLongParameters());
 	}
 }
-
-
-

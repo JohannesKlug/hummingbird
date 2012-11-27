@@ -17,6 +17,7 @@ import org.exolab.castor.xml.ValidationException;
 import org.exolab.castor.xml.XMLContext;
 import org.hbird.core.generatedcode.xtce.Argument;
 import org.hbird.core.generatedcode.xtce.ArgumentAssignment;
+import org.hbird.core.generatedcode.xtce.ArgumentList;
 import org.hbird.core.generatedcode.xtce.ArgumentListItem;
 import org.hbird.core.generatedcode.xtce.ArgumentTypeSetItem;
 import org.hbird.core.generatedcode.xtce.BaseContainer;
@@ -156,21 +157,8 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 		modelName = spaceSystem.getName();
 
-		try {
-			createTelemetryModel();
-			createCommandModel();
-		}
-		catch (final NumberFormatException e1) {
-			LOG.error(e1.toString());
-			// TODO - 27.03.2012 kimmell - replace with appropriate exception
-			// System.exit(-1);
-		}
-		catch (final InvalidParameterTypeException e1) {
-			e1.printStackTrace();
-			LOG.error(e1.toString());
-			// TODO - 27.03.2012 kimmell - replace with appropriate exception
-			// System.exit(-1);
-		}
+		createTelemetryModel();
+		createCommandModel();
 
 		try {
 			injectConstructsIntoModel();
@@ -212,7 +200,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		return spaceSystem;
 	}
 
-	private void createTelemetryModel() throws InvalidSpaceSystemDefinitionException, NumberFormatException, InvalidParameterTypeException {
+	private void createTelemetryModel() throws InvalidSpaceSystemDefinitionException, NumberFormatException {
 		createAllTmParameterTypes(spaceSystem.getTelemetryMetaData());
 		createAllTmParameters();
 		createAllParameterGroups();
@@ -571,45 +559,45 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		}
 	}
 
-	private Parameter<?> getCreatedArgument(String argumentName) throws InvalidSpaceSystemDefinitionException {
-
-		Parameter<?> arg = integerArguments.get(argumentName);
-		if (arg != null) {
-			return arg;
-		}
-
-		arg = longArguments.get(argumentName);
-		if (arg != null) {
-			return arg;
-		}
-
-		arg = floatArguments.get(argumentName);
-		if (arg != null) {
-			return arg;
-		}
-
-		arg = doubleArguments.get(argumentName);
-		if (arg != null) {
-			return arg;
-		}
-
-		arg = bigDecimalArguments.get(argumentName);
-		if (arg != null) {
-			return arg;
-		}
-
-		arg = stringArguments.get(argumentName);
-		if (arg != null) {
-			return arg;
-		}
-
-		arg = rawArguments.get(argumentName);
-		if (arg != null) {
-			return arg;
-		}
-
-		throw new InvalidSpaceSystemDefinitionException("Command argument " + argumentName + " not defined.");
-	}
+	// private Parameter<?> getCreatedArgument(String argumentName) throws InvalidSpaceSystemDefinitionException {
+	//
+	// Parameter<?> arg = integerArguments.get(argumentName);
+	// if (arg != null) {
+	// return arg;
+	// }
+	//
+	// arg = longArguments.get(argumentName);
+	// if (arg != null) {
+	// return arg;
+	// }
+	//
+	// arg = floatArguments.get(argumentName);
+	// if (arg != null) {
+	// return arg;
+	// }
+	//
+	// arg = doubleArguments.get(argumentName);
+	// if (arg != null) {
+	// return arg;
+	// }
+	//
+	// arg = bigDecimalArguments.get(argumentName);
+	// if (arg != null) {
+	// return arg;
+	// }
+	//
+	// arg = stringArguments.get(argumentName);
+	// if (arg != null) {
+	// return arg;
+	// }
+	//
+	// arg = rawArguments.get(argumentName);
+	// if (arg != null) {
+	// return arg;
+	// }
+	//
+	// throw new InvalidSpaceSystemDefinitionException("Command argument " + argumentName + " not defined.");
+	// }
 
 	/**
 	 * @throws InvalidSpaceSystemDefinitionException
@@ -751,8 +739,11 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			}
 
 			// cmd args non-base
-			final ArgumentListItem[] parameterEntrys = command.getArgumentList().getArgumentListItem();
-			addArgumentsToCommandGroup(qualifiedNamePrefix, commandGroup, parameterEntrys);
+			ArgumentList argumentList = command.getArgumentList();
+			if (argumentList != null) {
+				final ArgumentListItem[] parameterEntrys = argumentList.getArgumentListItem();
+				addArgumentsToCommandGroup(qualifiedNamePrefix, commandGroup, parameterEntrys);
+			}
 		}
 	}
 
@@ -762,15 +753,17 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			String qualifiedName = qualifiedNamePrefix + commandName + "." + p.getName();
 			if (p.isReadOnly()) {
 				p = new ProtectedValueParameter<Integer>(qualifiedName, p.getName(), p.getShortDescription(), p.getLongDescription(),
-						Integer.valueOf(argumentAssignment.getArgumentValue()));
+						Integer.decode(argumentAssignment.getArgumentValue()));
 			}
 			else {
 				p = new HummingbirdParameter<Integer>(qualifiedName, p.getName(), p.getShortDescription(), p.getLongDescription());
-				p.setValue(Integer.valueOf(argumentAssignment.getArgumentValue()));
+				p.setValue(Integer.decode(argumentAssignment.getArgumentValue()));
 
 			}
 			LOG.debug("Adding base command integer argument" + p.getQualifiedName());
 			integerArguments.put(p.getQualifiedName(), p);
+			Encoding e = encodings.get(qualifiedNamePrefix + p.getName());
+			encodings.put(qualifiedName, e);
 		}
 		else {
 			Parameter<Long> lp;
@@ -779,15 +772,17 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 				String qualifiedName = qualifiedNamePrefix + commandName + "." + lp.getName();
 				if (lp.isReadOnly()) {
 					lp = new ProtectedValueParameter<Long>(qualifiedName, lp.getName(), lp.getShortDescription(), lp.getLongDescription(),
-							Long.valueOf(argumentAssignment.getArgumentValue()));
+							Long.decode(argumentAssignment.getArgumentValue()));
 				}
 				else {
 					lp = new HummingbirdParameter<Long>(qualifiedName, lp.getName(), lp.getShortDescription(), lp.getLongDescription());
-					lp.setValue(Long.valueOf(argumentAssignment.getArgumentValue()));
+					lp.setValue(Long.decode(argumentAssignment.getArgumentValue()));
 
 				}
-				LOG.debug("Adding base command long argument" + p.getQualifiedName());
+				LOG.debug("Adding base command long argument" + lp.getQualifiedName());
 				longArguments.put(lp.getQualifiedName(), lp);
+				Encoding e = encodings.get(qualifiedNamePrefix + lp.getName());
+				encodings.put(qualifiedName, e);
 			}
 		}
 
@@ -818,7 +813,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 				Parameter<Long> longBaseArgument = longArguments.get(qualifiedNamePrefix + arg.getArgumentTypeRef());
 				if (longBaseArgument != null) {
 					Parameter<Long> p;
-					if (baseArgument.isReadOnly()) {
+					if (longBaseArgument.isReadOnly()) {
 						// create protected
 						p = new ProtectedValueParameter<Long>(cmdQualifiedNamePrefix + "." + arg.getArgumentTypeRef(), arg.getArgumentTypeRef(),
 								longBaseArgument.getShortDescription(), longBaseArgument.getLongDescription(), longBaseArgument.getValue());
@@ -847,7 +842,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 				addArgumentParameterToGroup(commandGroup, qualifiedNamePrefix + argumentTypeRef);
 
 				if (LOG.isDebugEnabled()) {
-					LOG.debug("Added TC argument " + qualifiedNamePrefix + "." + argumentTypeRef + " to command group " + commandGroup.getName());
+					LOG.debug("Added TC argument " + qualifiedNamePrefix + argumentTypeRef + " to command group " + commandGroup.getName());
 				}
 			}
 		}
@@ -1173,7 +1168,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		return encoding;
 	}
 
-	final static Encoding createXtceBinaryEncoding(final BinaryParameterType type) throws InvalidSpaceSystemDefinitionException {
+	final static Encoding createXtceBinaryEncoding(final BinaryParameterType type) {
 		final Encoding encoding = new Encoding();
 		// TODO - 29.03.2012 kimmell - implement
 		return encoding;

@@ -21,9 +21,7 @@ public class AbstractClonerCodecDecorator {
 		if (encodings.containsKey(qualifiedName)) {
 			return encodings.get(qualifiedName);
 		}
-		else {
-			throw new NoEncodingException(qualifiedName);
-		}
+		throw new NoEncodingException(qualifiedName);
 	}
 
 }

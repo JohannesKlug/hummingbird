@@ -100,7 +100,7 @@
 		
 		<xtce:ParameterSet>
 			<xtce:Parameter parameterTypeRef="sc_id" name="SC_ID_CONSTANT">
-				<xtce:ParameterProperties readOnly="true" dataSource="constant" />
+				<xtce:ParameterProperties readOnly="true" />
 			</xtce:Parameter>
 			
 			<xtce:Parameter parameterTypeRef="1-bit-uint" name="DOOR_LATCH_FLAG"></xtce:Parameter>

@@ -22,20 +22,39 @@ import org.junit.Test;
 public class CommandModelTest {
 
 	private static final String SSM_URL = "TestSat-all-uints.xml";
+	private static final String STRAND_SSM_URL = "Strand1.xml";
 
 	private SpaceSystemModel ssm;
+	private SpaceSystemModel strandSsm;
 
 	@Before
 	public void setUp() throws InvalidSpaceSystemDefinitionException {
 		final URL url = CommandModelTest.class.getResource(SSM_URL);
 		ssm = new XtceSpaceSystemModelFactory(url.getPath()).createSpaceSystemModel();
 		assertNotNull(ssm);
+		final URL strandUrl = CommandModelTest.class.getResource(STRAND_SSM_URL);
+		strandSsm = new XtceSpaceSystemModelFactory(strandUrl.getPath()).createSpaceSystemModel();
+		assertNotNull(strandSsm);
 	}
 
 	@Test
 	public void testCommandDefinition() throws UnknownParameterException {
 		assertEquals("TestSat-all-uints", ssm.getName());
 		CommandModelTest.verifyCommands(ssm.getCommands());
+		assertEquals("Strand-1", strandSsm.getName());
+		verifyStrandCommands(strandSsm.getCommands());
+	}
+
+	private void verifyStrandCommands(Map<String, CommandGroup> commands) {
+		assertEquals(1, commands.size());
+		CommandGroup warpCommand = commands.get("Strand-1.tc.PSB Switch 3 WARP valve On time");
+		assertNotNull(warpCommand);
+
+		assertEquals("There should be 4 arguments to the warp command", 4, warpCommand.getAllParameters().size());
+
+		for (Parameter<?> p : warpCommand.getAllParametersAsList()) {
+			assertNotNull("There must be an Encoding in the encodings map for each parameter", strandSsm.getEncodings().get(p.getQualifiedName()));
+		}
 	}
 
 	/**

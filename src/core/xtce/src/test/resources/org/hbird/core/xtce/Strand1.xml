@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SpaceSystem xmlns="http://www.omg.org/space/xtce"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xsi:schemaLocation="http://www.omg.org/space/xtce http://www.omg.org/space/xtce/SpaceSystemV1.0.xsd"
+			 name="Strand-1" 
+			 shortDescription="Strand-1 - Model definition for the Strand satellite. Dev snapshot">
+
+	<Header validationStatus="Draft" date="2011-12-08" version="0.0.1-SNAPSHOT" classification="NotClassified">
+		<AuthorSet>
+			<Author>Mark Doyle - mark.doyle@logica.com, markjohndoyle@googlemail.com</Author>
+			<Author>Johannes Klug - johannes.klug@logica.com</Author>
+		</AuthorSet>
+		<HistorySet>
+			<History>Version 0.1</History>
+		</HistorySet>
+	</Header>
+
+
+	<!-- Telemetry definition -->
+	<TelemetryMetaData>
+
+		<ParameterTypeSet>
+			<IntegerParameterType name="8BitUInteger" sizeInBits="8" shortDescription="8-bit unsigned integer">
+				<UnitSet/>
+			</IntegerParameterType>
+			<IntegerParameterType name="16BitUInteger" sizeInBits="16" shortDescription="16-bit unsigned integer">
+				<UnitSet/>
+			</IntegerParameterType>
+			<IntegerParameterType name="32BitUInteger" sizeInBits="32" shortDescription="32-bit unsigned integer">
+				<UnitSet/>
+			</IntegerParameterType>
+		</ParameterTypeSet>
+
+		<ParameterSet>
+			<!-- Virtual Header Field -->
+			<Parameter parameterTypeRef="8BitUInteger" name="Address" />
+			<Parameter parameterTypeRef="8BitUInteger" name="Channel" />
+			
+			<!-- Payload parameters start here -->
+			
+			<!-- AOCS Wheels -->
+			<Parameter parameterTypeRef="8BitUInteger" name="AOCS Wheels x-axis speed" />
+			<Parameter parameterTypeRef="8BitUInteger" name="AOCS Wheels x-axis current" />
+			<Parameter parameterTypeRef="8BitUInteger" name="AOCS Wheels x-axis commutation" />
+			<Parameter parameterTypeRef="8BitUInteger" name="AOCS Wheels y-axis speed" />
+			<Parameter parameterTypeRef="8BitUInteger" name="AOCS Wheels y-axis current" />
+			<Parameter parameterTypeRef="8BitUInteger" name="AOCS Wheels y-axis commutation" />
+			<Parameter parameterTypeRef="8BitUInteger" name="AOCS Wheels z-axis speed" />
+			<Parameter parameterTypeRef="8BitUInteger" name="AOCS Wheels z-axis current" />
+			<Parameter parameterTypeRef="8BitUInteger" name="AOCS Wheels z-axis commutation" />
+			
+			<!-- Power Switch Board (PSB) -->
+			<Parameter parameterTypeRef="32BitUInteger" name="PSB Switch 3 WARP Valve switch ON time" />
+			<Parameter parameterTypeRef="32BitUInteger" name="PSB Switch 3 WARP Valve cumulative switch ON time" />
+			
+		</ParameterSet>
+
+		<ContainerSet>
+			<SequenceContainer name="AOCS Wheels 0x66 0x01"
+							   shortDescription="Report current speed of x-axis wheel">
+				<EntryList>
+					<ParameterRefEntry parameterRef="AOCS Wheels x-axis speed" />
+				</EntryList>
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison parameterRef="Address" value="0x66" />
+							<Comparison parameterRef="Channel" value="0x01" />
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+			</SequenceContainer>
+
+			<SequenceContainer name="AOCS Wheels 0x66 0x02"
+							   shortDescription="Report current of x-axis wheel">
+				<EntryList>
+					<ParameterRefEntry parameterRef="AOCS Wheels x-axis current" />
+				</EntryList>
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison parameterRef="Address" value="0x66" />
+							<Comparison parameterRef="Channel" value="0x02" />
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+			</SequenceContainer>
+
+			<SequenceContainer name="AOCS Wheels 0x66 0x03"
+							   shortDescription="Report current commutation of x-axis wheel">
+				<EntryList>
+					<ParameterRefEntry parameterRef="AOCS Wheels x-axis commutation" />
+				</EntryList>
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison parameterRef="Address" value="0x66" />
+							<Comparison parameterRef="Channel" value="0x03" />
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+			</SequenceContainer>
+		
+			<SequenceContainer name="AOCS Wheels 0xC6 0x01"
+							   shortDescription="Report current speed of y-axis wheel">
+				<EntryList>
+					<ParameterRefEntry parameterRef="AOCS Wheels y-axis speed" />
+				</EntryList>
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison parameterRef="Address" value="0xC6" />
+							<Comparison parameterRef="Channel" value="0x01" />
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+			</SequenceContainer>
+
+			<SequenceContainer name="AOCS Wheels 0xC6 0x02"
+							   shortDescription="Report current of y-axis wheel">
+				<EntryList>
+					<ParameterRefEntry parameterRef="AOCS Wheels y-axis current" />
+				</EntryList>
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison parameterRef="Address" value="0xC6" />
+							<Comparison parameterRef="Channel" value="0x02" />
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+			</SequenceContainer>
+
+			<SequenceContainer name="AOCS Wheels 0xC6 0x03"
+							   shortDescription="Report current commutation of y-axis wheel">
+				<EntryList>
+					<ParameterRefEntry parameterRef="AOCS Wheels y-axis commutation" />
+				</EntryList>
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison parameterRef="Address" value="0xC6" />
+							<Comparison parameterRef="Channel" value="0x03" />
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+			</SequenceContainer>
+
+			<SequenceContainer name="AOCS Wheels 0x6C 0x01"
+							   shortDescription="Report current speed of z-axis wheel">
+				<EntryList>
+					<ParameterRefEntry parameterRef="AOCS Wheels z-axis speed" />
+				</EntryList>
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison parameterRef="Address" value="0x6C" />
+							<Comparison parameterRef="Channel" value="0x01" />
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+			</SequenceContainer>
+
+			<SequenceContainer name="AOCS Wheels 0x6C 0x02"
+							   shortDescription="Report current of z-axis wheel">
+				<EntryList>
+					<ParameterRefEntry parameterRef="AOCS Wheels z-axis current" />
+				</EntryList>
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison parameterRef="Address" value="0x6C" />
+							<Comparison parameterRef="Channel" value="0x02" />
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+			</SequenceContainer>
+
+			<SequenceContainer name="AOCS Wheels 0x6C 0x03"
+							   shortDescription="Report current commutation of z-axis wheel">
+				<EntryList>
+					<ParameterRefEntry parameterRef="AOCS Wheels z-axis commutation" />
+				</EntryList>
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison parameterRef="Address" value="0x6C" />
+							<Comparison parameterRef="Channel" value="0x03" />
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+			</SequenceContainer>
+
+		
+			<!-- Power Switch Board -->
+			<SequenceContainer name="PSB 0x66 0x94"
+						   shortDescription="Switch 3 (WARP Valve) amount of time the switch has been ON for.">
+				<EntryList>
+					<ParameterRefEntry parameterRef="PSB Switch 3 WARP Valve switch ON time" />
+					<ParameterRefEntry parameterRef="PSB Switch 3 WARP Valve cumulative switch ON time" />
+				</EntryList>
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<ComparisonList>
+							<Comparison parameterRef="Address" value="0x66" />
+							<Comparison parameterRef="Channel" value="0x94" />
+						</ComparisonList>
+					</RestrictionCriteria>
+				</BaseContainer>
+			</SequenceContainer>
+		
+		</ContainerSet>
+	</TelemetryMetaData>
+
+
+	<CommandMetaData>
+		<ParameterTypeSet>
+			<IntegerParameterType name="8BitUint" signed="false" shortDescription="8 bit unsigned integer - MSB" sizeInBits="8" initialValue="2">
+				<UnitSet></UnitSet>
+			</IntegerParameterType>
+		</ParameterTypeSet>
+
+		<ParameterSet>
+			<Parameter parameterTypeRef="8BitUint" name="TC Type" >
+				<ParameterProperties readOnly="true"/>
+			</Parameter>
+			<Parameter parameterTypeRef="8BitUint" name="Node">
+				<ParameterProperties readOnly="true"/>
+			</Parameter>
+			<Parameter parameterTypeRef="8BitUint" name="Channel">
+				<ParameterProperties readOnly="true"/>
+			</Parameter>
+			<Parameter parameterTypeRef="8BitUint" name="Length">
+				<ParameterProperties readOnly="true"/>
+			</Parameter>
+		</ParameterSet>
+
+
+		<MetaCommandSet>
+			<!-- Base command for TM requests. All TM request commands inherit from this. -->
+			<MetaCommand name="TM request command" abstract="true">
+				<ArgumentList>
+					<Argument name="TC Type" argumentTypeRef="TC Type"></Argument>
+					<Argument name="Node" argumentTypeRef="Node" />
+					<Argument name="Channel" argumentTypeRef="Channel"/>
+					<Argument name="Length" argumentTypeRef="Length"/>
+				</ArgumentList>
+			</MetaCommand>
+			
+			<MetaCommand name="PSB Switch 3 WARP valve On time" 
+						 shortDescription="Requests the on time parameters for the WARP Valve"> 
+				<BaseMetaCommand metaCommandRef="TM request command">
+					<ArgumentAssignmentList>
+						<ArgumentAssignment argumentName="TC Type" argumentValue="2" />
+						<ArgumentAssignment argumentName="Node" argumentValue="0x66" />
+						<ArgumentAssignment argumentName="Channel" argumentValue="0x94" />
+						<ArgumentAssignment argumentName="Length" argumentValue="4" />
+					</ArgumentAssignmentList>
+				</BaseMetaCommand>
+			</MetaCommand>
+
+		</MetaCommandSet>
+	</CommandMetaData>
+
+</SpaceSystem>
