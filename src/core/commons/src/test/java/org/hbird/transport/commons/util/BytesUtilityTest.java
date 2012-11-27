@@ -142,5 +142,12 @@ public class BytesUtilityTest {
 		BytesUtility.binaryStringToByteArray("0");
 		fail();
 	}
+	
+	@Test
+	public void testHexdump(){
+		byte[] in = new byte[] {0x10, (byte) (0xff & 0xff), 0x10, 0x00};
+		String out = BytesUtility.hexDump(in);
+		assertEquals("10 ff 10 0 ", out);
+	}
 
 }

@@ -147,4 +147,12 @@ public abstract class BytesUtility {
 
 		return result;
 	}
+
+	public static String hexDump(byte[] payload) {
+		String hexdump = "";
+		for (byte b : payload) {
+			hexdump += Integer.toHexString(b & 0xff) + " ";
+		}
+		return hexdump;
+	}
 }
