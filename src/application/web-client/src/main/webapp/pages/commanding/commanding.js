@@ -74,20 +74,23 @@ function openCmdDialog(qualifiedName, name) {
 	
 	jqxhr.done(
 		function(parsedResponse, statusText, jqXhr) {
-			console.log("adding cmd: " + jqXhr.responseText);
 			cmd = jQuery.parseJSON(jqXhr.responseText);
 			addDescription(cmd);
 			
 			clearAllArgs();
+			addedParameter = false;
 			
 			if(cmd.integerParameters != null) {
 				addIntArgs(cmd.integerParameters);
+				addedParameter = true;
 			}
 			if(cmd.longParameters!= null) {
 				addLongArgs(cmd.longParameters);
+				addedParameter = true;
 			}
 			if(cmd.stringParameters!= null) {
 				addStringArgs(cmd.stringParameters);
+				addedParameter = true;
 			}
 			if(cmd.floatParameters!= null) {
 				// TODO impl
@@ -100,6 +103,11 @@ function openCmdDialog(qualifiedName, name) {
 			}
 			if(cmd.rawParameters!= null) {
 				// TODO impl
+			}
+			
+			if(!addedParameter) {
+				$("#configureInstructions").toggle();
+				$("#parametersTitle").toggle();
 			}
 			
 			$("#cmdConfigForm").submit({cmd:cmd}, submitCommand);
