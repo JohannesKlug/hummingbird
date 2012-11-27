@@ -18,11 +18,7 @@ public final class RawMinaEncoder implements ProtocolEncoder {
 	@Override
 	public void encode(IoSession iosession, Object object, ProtocolEncoderOutput out) {
 		if (object instanceof byte[]) {
-			byte[] inBytes = (byte[]) object;
-			IoBuffer buf = IoBuffer.allocate(inBytes.length);
-			buf.put(inBytes);
-			buf.flip();
-			out.write(buf);
+			out.write(IoBuffer.wrap((byte[]) object));
 		}
 		else {
 			LOG.warn("No byte array in input");
