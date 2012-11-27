@@ -1,3 +1,16 @@
 .reveal-modal p {
 	color: black;
 }
+
+.reveal-modal h1 {
+	color: black;
+}
+
+.reveal-modal h2 {
+	color: black;
+}
+
+#cmdControls {
+	margin-top: 10px;
+	float: right;
+}

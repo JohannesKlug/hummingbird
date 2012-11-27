@@ -11,7 +11,8 @@ jQuery(document).ready(function() {
 	});
 	
 	getAllowedCommandList();
-//	setupCmdFormValidation();
+	
+	$("#cmdFormSubmitButton").button();
 });
 
 
@@ -20,7 +21,7 @@ jQuery(document).ready(function() {
  */
 function setupCmdFormValidation() {
 	$("#cmdFormSubmitButton").attr("disabled", true);
-	var validator = $("#cmdConfigForm").validate({
+	$("#cmdConfigForm").validate({
 		submitHandler : function(form) {
 			$("#cmdFormSubmitButton").attr("disabled", false);
 		}
