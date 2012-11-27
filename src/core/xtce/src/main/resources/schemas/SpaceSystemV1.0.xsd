@@ -26,7 +26,7 @@ Style Notes, used througout the schema:
 	- Whenever an additional validity check must be performed that is not describable in the schema language, 
 	  an appinfo annotation describes that validity check.
 -->
-<schema targetNamespace="http://www.hbird.org/space/xtce" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xtce="http://www.hbird.org/space/xtce" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<schema targetNamespace="http://www.omg.org/space/xtce" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xtce="http://www.omg.org/space/xtce" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<annotation>
 		<documentation>OMG Document Number: dtc/2005-01-05</documentation>
 		<documentation>$Id: SpaceSystemV1.0.xsd,v 1.15 2005/01/24 05:02:50 gerry Exp $</documentation>
@@ -1832,14 +1832,6 @@ Style Notes, used througout the schema:
 				</attribute>
 				<attribute name="sizeInBits" type="positiveInteger" default="32"/>
 				<attribute name="signed" type="boolean" default="true"/>
-				<attribute name="byteOrder" default="bigEndian">
-					<simpleType>
-						<restriction base="string">
-							<enumeration value="litteEndian"/>
-							<enumeration value="bigEndian"/>
-						</restriction>
-					</simpleType>
-				</attribute>
 			</extension>
 		</complexContent>
 	</complexType>
@@ -1868,6 +1860,14 @@ Style Notes, used througout the schema:
 					</element>
 				</sequence>
 				<attribute name="validRangeAppliesToCalibrated" type="boolean" default="true"/>
+ 				<attribute name="byteOrder" default="bigEndian">
+					<simpleType>
+						<restriction base="string">
+							<enumeration value="litteEndian"/>
+							<enumeration value="bigEndian"/>
+						</restriction>
+					</simpleType>
+				</attribute>
 			</extension>
 		</complexContent>
 	</complexType>

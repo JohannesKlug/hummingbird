@@ -2,7 +2,7 @@
 <SpaceSystem xmlns="http://www.omg.org/space/xtce"
 			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			 xmlns:xtce="http://www.omg.org/space/xtce"
-			 xsi:schemaLocation="http://www.omg.org/space/xtce http://dl.dropbox.com/u/10007025/hbird/xtce/SpaceSystemV1.0.xsd"
+			 xsi:schemaLocation="https://raw.github.com/JohannesKlug/hbird/master/src/core/xtce/src/main/resources/schemas SpaceSystemV1.0.xsd"
 			 name="TestSat-all-uints">
 
 	<TelemetryMetaData>
