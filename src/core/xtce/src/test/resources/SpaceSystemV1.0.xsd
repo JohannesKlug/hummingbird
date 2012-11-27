@@ -1832,6 +1832,14 @@ Style Notes, used througout the schema:
 				</attribute>
 				<attribute name="sizeInBits" type="positiveInteger" default="32"/>
 				<attribute name="signed" type="boolean" default="true"/>
+				<attribute name="byteOrder" default="bigEndian">
+					<simpleType>
+						<restriction base="string">
+							<enumeration value="litteEndian"/>
+							<enumeration value="bigEndian"/>
+						</restriction>
+					</simpleType>
+				</attribute>
 			</extension>
 		</complexContent>
 	</complexType>
