@@ -21,9 +21,20 @@ public class Encoding implements Serializable {
 	public Encoding() {
 	}
 
-	public Encoding(final int sizeInBits, final BinaryRepresentation binaryRepresentation) {
+	public Encoding(final int sizeInBits, final BinaryRepresentation binaryRepresentation, ByteOrder orderOfBytes) {
 		this.sizeInBits = sizeInBits;
 		this.binaryRepresentation = binaryRepresentation;
+		this.byteOrder = orderOfBytes;
+	}
+
+	/**
+	 * BIG ENDIAN OK
+	 * 
+	 * @param sizeInBits
+	 * @param binaryRep
+	 */
+	public Encoding(int sizeInBits, BinaryRepresentation binaryRep) {
+		this(sizeInBits, binaryRep, ByteOrder.BIG_ENDIAN);
 	}
 
 	public int getSizeInBits() {

@@ -1,14 +1,11 @@
-package org.hbird.transport.commons.util;
+package org.hbird.core.commons.util;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-import java.util.Arrays;
 import java.util.BitSet;
 
-import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.commons.util.exceptions.BitSetOperationException;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -17,10 +14,10 @@ import org.slf4j.LoggerFactory;
 public class BitSetUtilityTest {
 	private static final Logger LOG = LoggerFactory.getLogger(BitSetUtilityTest.class);
 
-	private static final String BIT_STR_BE_123 = "1111011";
+	private static final String BIT_STR_BE_123 = "01111011";
 	private static BitSet BITSET_BE_123;
-	private static final int BITSET_BE_123_DEC_BYTE_REP = -10;
-	private static final byte[] BYTES_BE_123 = new byte[] { -10 };
+	private static final int BITSET_BE_123_DEC_BYTE_REP = 123;
+	private static final byte[] BYTES_BE_123 = new byte[] { 123 };
 
 	private static final String BIT_STR_LE_123 = "1101111";
 	private static BitSet BITSET_LE_123;
@@ -49,9 +46,10 @@ public class BitSetUtilityTest {
 	public static void setUpBeforeClass() throws Exception {
 		LOG.info("############ Setting up before all tests #################");
 		BITSET_BE_123 = new BitSet(BIT_STR_BE_123.length());
-		BITSET_BE_123.set(0, 4);
-		BITSET_BE_123.set(5, 7);
-		assertEquals(BIT_STR_BE_123, BitSetUtility.bitSetToBinaryString(BITSET_BE_123, true));
+		BITSET_BE_123.set(1, 5);
+		BITSET_BE_123.set(6, 8);
+		String expected = BitSetUtility.bitSetToBinaryString(BITSET_BE_123, true);
+		assertEquals(expected, BIT_STR_BE_123);
 
 		BITSET_LE_123 = new BitSet(BIT_STR_LE_123.length());
 		BITSET_LE_123.set(0, 2);
@@ -86,10 +84,6 @@ public class BitSetUtilityTest {
 		assertEquals(MULTI_BYTE_STRING, BitSetUtility.bitSetToBinaryString(MULTI_BYTE_BITSET, MULTI_BYTE_STRING.length()));
 	}
 
-	@Before
-	public void setUp() throws Exception {
-	}
-
 	@SuppressWarnings("static-method")
 	@Test
 	public final void testStringToBitSetBE69BIT() throws BitSetOperationException {
@@ -111,7 +105,6 @@ public class BitSetUtilityTest {
 		final BitSet actual = BitSetUtility.stringToBitSet(BIT_STR_LE_123, false, false);
 		assertEquals(BITSET_LE_123, actual);
 	}
-
 
 	@SuppressWarnings("static-method")
 	@Test
@@ -139,7 +132,7 @@ public class BitSetUtilityTest {
 		actual = BitSetUtility.bitSetToBinaryString(BITSET_BE_123, 5);
 		assertEquals(BIT_STR_BE_123.subSequence(0, 5), actual);
 
-		actual = BitSetUtility.bitSetToBinaryString(BITSET_BE_123, 7);
+		actual = BitSetUtility.bitSetToBinaryString(BITSET_BE_123, 8);
 		assertEquals(BIT_STR_BE_123, actual);
 	}
 
@@ -151,7 +144,7 @@ public class BitSetUtilityTest {
 		assertEquals(25, actual.length());
 		final StringBuilder expected = new StringBuilder();
 		expected.append(BIT_STR_BE_123);
-		expected.append("000000000000000000");
+		expected.append("00000000000000000");
 		assertEquals(expected.toString(), actual);
 	}
 
@@ -183,7 +176,7 @@ public class BitSetUtilityTest {
 	public final void testBitSetToBinaryStringNotLogicalSize() {
 		LOG.debug("############ Starting test #################");
 		final String actual = BitSetUtility.bitSetToBinaryString(BITSET_BE_123, false);
-		final String expected = "1111011000000000000000000000000000000000000000000000000000000000";
+		final String expected = "0111101100000000000000000000000000000000000000000000000000000000";
 		assertEquals(expected, actual);
 	}
 
@@ -209,9 +202,9 @@ public class BitSetUtilityTest {
 	@Test
 	public final void toByteArraySingleByteRequired() {
 		LOG.debug("############ Starting test #################");
-		final byte[] actual = BitSetUtility.toByteArray(BITSET_BE_123, 7);
+		final byte[] actual = BitSetUtility.toByteArray(BITSET_BE_123, 8);
 		final byte[] expected = new byte[] { BITSET_BE_123_DEC_BYTE_REP };
-		assertTrue("Byte arrays should be equal", Arrays.equals(actual, expected));
+		assertArrayEquals(expected, actual);
 	}
 
 	@SuppressWarnings("static-method")
@@ -219,8 +212,8 @@ public class BitSetUtilityTest {
 	public final void toByteArrayTwoBytesRequired() {
 		LOG.debug("############ Starting test #################");
 		final byte[] actual = BitSetUtility.toByteArray(BITSET_BE_999, 11);
-		final byte[] expected = new byte[] { 124, -32 };
-		assertTrue("Byte arrays should be equal", Arrays.equals(actual, expected));
+		final byte[] expected = new byte[] { 0x3, (byte) 0xE7 };
+		assertArrayEquals(expected, actual);
 	}
 
 	@SuppressWarnings("static-method")

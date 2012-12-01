@@ -104,13 +104,13 @@ public abstract class BytesUtility {
 		}
 
 		// if not signed chop the bits and pad the start of the long primitive with 0's
-		if (!signed) {
-			value = value >>> chopBits;
-		}
-		// ...else chop the bits whilst retaining the sign bit
-		else {
-			value = value >> chopBits;
-		}
+		// if (!signed) {
+		// value = value >>> chopBits;
+		// }
+		// // ...else chop the bits whilst retaining the sign bit
+		// else {
+		// value = value >> chopBits;
+		// }
 
 		return value;
 	}
@@ -124,7 +124,7 @@ public abstract class BytesUtility {
 	public static String decimalDump(final byte[] bytes) {
 		StringBuffer buffer = new StringBuffer();
 		for (byte b : bytes) {
-			buffer.append(Byte.toString(b));
+			buffer.append(Byte.toString((byte) (b & 0xFF)));
 			buffer.append(" ");
 		}
 
@@ -151,7 +151,7 @@ public abstract class BytesUtility {
 	public static String hexDump(byte[] payload) {
 		String hexdump = "";
 		for (byte b : payload) {
-			hexdump += Integer.toHexString(b & 0xff) + " ";
+			hexdump += "0x" + Integer.toHexString(b & 0xff) + " ";
 		}
 		return hexdump;
 	}

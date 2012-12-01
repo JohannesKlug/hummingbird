@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -1052,6 +1053,18 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	 */
 	private static final Encoding createXtceIntegerEncoding(final IntegerParameterType intParamType) throws InvalidSpaceSystemDefinitionException {
 		final Encoding encoding = new Encoding();
+
+		switch (intParamType.getByteOrder()) {
+			case BIGENDIAN:
+				encoding.setByteOrder(ByteOrder.BIG_ENDIAN);
+				break;
+			case LITTLEENDIAN:
+				encoding.setByteOrder(ByteOrder.LITTLE_ENDIAN);
+				break;
+			default:
+				LOG.error("SCHEISSE MIT GREP");
+				break;
+		}
 
 		int sizeInBits = 0;
 		try {

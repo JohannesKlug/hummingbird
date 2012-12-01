@@ -1863,7 +1863,7 @@ Style Notes, used througout the schema:
  				<attribute name="byteOrder" default="bigEndian">
 					<simpleType>
 						<restriction base="string">
-							<enumeration value="litteEndian"/>
+							<enumeration value="littleEndian"/>
 							<enumeration value="bigEndian"/>
 						</restriction>
 					</simpleType>

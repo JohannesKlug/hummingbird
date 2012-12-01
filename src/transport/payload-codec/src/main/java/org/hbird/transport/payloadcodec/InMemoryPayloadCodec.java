@@ -215,7 +215,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 			count++;
 		}
 
-		final byte[] encodedBytes = BitSetUtility.toByteArray(encoded, totalSize);
+		final byte[] encodedBytes = BitSetUtility.toByteArray(encoded, totalSize, false);
 		final List<String> layoutIdList = restrictions.get(tmTcGroup.getQualifiedName());
 		String layoutId = "";
 		if (layoutIdList != null) {

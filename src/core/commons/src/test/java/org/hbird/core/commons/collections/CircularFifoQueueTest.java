@@ -1,4 +1,4 @@
-package org.hbird.transport.commons.collections;
+package org.hbird.core.commons.collections;
 
 import static org.junit.Assert.assertEquals;
 

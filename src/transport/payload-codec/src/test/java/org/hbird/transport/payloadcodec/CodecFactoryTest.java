@@ -6,16 +6,16 @@ import java.util.BitSet;
 
 import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.commons.util.exceptions.BitSetOperationException;
+import org.hbird.core.spacesystemmodel.encoding.Encoding;
+import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
+import org.hbird.core.spacesystemmodel.tmtc.Parameter;
+import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
 import org.hbird.transport.payloadcodec.codecdecorators.number.IntegerCodecFactory;
 import org.hbird.transport.payloadcodec.codecdecorators.number.LongCodecFactory;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
 import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
 import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
-import org.hbird.core.spacesystemmodel.encoding.Encoding;
-import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
-import org.hbird.core.spacesystemmodel.tmtc.Parameter;
-import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ public class CodecFactoryTest {
 	/** Big endian bitset representing 11bit 133 */
 	private static final BitSet BITSET_11BIT_BE_133 = new BitSet(11);
 
-	/** Big endian bitset representing 11bit -133 */
+	/** Big endian bitset representing 11bit -891 */
 	private static final BitSet BITSET_11BIT_BE_NEG_891 = new BitSet(11);
 
 	private static final long TEST_LONG = 2305843397479642193l;

@@ -1,12 +1,10 @@
-package org.hbird.transport.commons.util;
+package org.hbird.core.commons.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.BitSet;
 
-import org.hbird.core.commons.util.BitSetUtility;
-import org.hbird.core.commons.util.BytesUtility;
 import org.hbird.core.commons.util.exceptions.InvalidBinaryStringException;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -41,7 +39,6 @@ public class BytesUtilityTest {
 	private static BitSet TEST_BITSET_VALUE_BE_UNSIGNED_CHAR_154;
 	private static byte[] BYTES_UNSIGNED_CHAR_154;
 
-
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		LOG.debug("########### Creating BE -180  ##########");
@@ -70,7 +67,7 @@ public class BytesUtilityTest {
 		TEST_BITSET_VALUE_BE_19BIT = BitSetUtility.stringToBitSet(TEST_STR_VALUE_BE_19BIT, true, true);
 		assertEquals(TEST_STR_VALUE_BE_19BIT, BitSetUtility.bitSetToBinaryString(TEST_BITSET_VALUE_BE_19BIT, TEST_VALUE_LENGTH_BE_19BIT));
 		BYTES_19BIT = BitSetUtility.toByteArray(TEST_BITSET_VALUE_BE_19BIT, TEST_VALUE_LENGTH_BE_19BIT);
-		LOG.debug(BytesUtility.decimalDump(BYTES_19BIT));
+		LOG.debug("19bit hexdump: " + BytesUtility.hexDump(BYTES_19BIT));
 
 		LOG.debug("########### Creating 154 Unsigned char ##########");
 		TEST_BITSET_VALUE_BE_UNSIGNED_CHAR_154 = new BitSet(TEST_VALUE_LENGTH_BE_UNSIGNED_CHAR_154);
@@ -94,7 +91,6 @@ public class BytesUtilityTest {
 		assertEquals(-180, result.intValue());
 		assertEquals(-180, result.longValue());
 	}
-
 
 	@Test
 	public void testCombine8() {
@@ -124,30 +120,30 @@ public class BytesUtilityTest {
 		assertEquals(154, result.intValue());
 		assertEquals(154, result.longValue());
 	}
-	
+
 	@Test
 	public void testByteFromBinaryString() throws InvalidBinaryStringException {
 		String zero = "00000000";
 		String ff = "11111111";
 		String zeroff = zero + ff;
-		
+
 		assertEquals((byte) 0x00, BytesUtility.binaryStringToByteArray(zero)[0]);
 		assertEquals((byte) 0xFF & 0xFF, BytesUtility.binaryStringToByteArray(ff)[0] & 0xFF);
 		assertEquals((byte) 0x00, BytesUtility.binaryStringToByteArray(zeroff)[0]);
 		assertEquals((byte) 0xFF & 0xFF, BytesUtility.binaryStringToByteArray(zeroff)[1] & 0xFF);
 	}
-	
+
 	@Test(expected = InvalidBinaryStringException.class)
 	public void testByteFromBinaryStringWithMalformedString() throws InvalidBinaryStringException {
 		BytesUtility.binaryStringToByteArray("0");
 		fail();
 	}
-	
+
 	@Test
-	public void testHexdump(){
-		byte[] in = new byte[] {0x10, (byte) (0xff & 0xff), 0x10, 0x00};
+	public void testHexdump() {
+		byte[] in = new byte[] { 0x10, (byte) (0xff & 0xff), 0x10, 0x00 };
 		String out = BytesUtility.hexDump(in);
-		assertEquals("10 ff 10 0 ", out);
+		assertEquals("0x10 0xff 0x10 0x0 ", out);
 	}
 
 }

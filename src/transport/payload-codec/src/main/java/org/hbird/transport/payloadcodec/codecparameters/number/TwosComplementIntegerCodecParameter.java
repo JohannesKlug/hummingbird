@@ -34,9 +34,14 @@ public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer>
 			LOG.debug("Extracting " + encoding.getSizeInBits() + " bit int value from " + BitSetUtility.binDump(inBitset));
 		}
 
-		final BitSet actualParameter = inBitset.get(0, encoding.getSizeInBits());
+		BitSet actualParameter = inBitset.get(0, encoding.getSizeInBits());
 
-		final byte[] byteArray = BitSetUtility.toByteArray(actualParameter, encoding.getSizeInBits());
+		int numBytes = (encoding.getSizeInBits() + Byte.SIZE - 1) / Byte.SIZE;
+		int byteBoundLength = numBytes * Byte.SIZE;
+
+		actualParameter = BitSetUtility.padToByteBoundary(actualParameter, encoding.getSizeInBits(), byteBoundLength, true);
+
+		final byte[] byteArray = BitSetUtility.toByteArray(actualParameter, byteBoundLength);
 		final Integer output = Integer.valueOf(BytesUtility.combine(byteArray, encoding.getSizeInBits(), true).intValue());
 
 		this.setValue(output);
@@ -55,30 +60,27 @@ public class TwosComplementIntegerCodecParameter extends CodecParameter<Integer>
 		int offset = originalOffset;
 
 		// TODO this method
-		final long unsignedInt = value.longValue();
 
 		// checking whether the value fits into the bit string of length - 1
-		final long absValue = Math.abs(unsignedInt);
-		if (absValue > Math.pow(2.0, encoding.getSizeInBits()) - 1 || unsignedInt == Long.MIN_VALUE) {
-			// TODO Could indicate a programming or configuration bug which is not recoverable. Maybe System.exit?
-			throw new IllegalArgumentException("The value of " + unsignedInt + " does not fit into a bit string of " + (encoding.getSizeInBits() - 1) + " bits.");
-		}
-
-		// setting all bits to zero
-		// bitSetTarget.clear(offset, offset + getSizeInBits() - 1);
+		// final long absValue = Math.abs(value);
+		// if (absValue > Math.pow(2.0, encoding.getSizeInBits()) - 1 || value == Long.MIN_VALUE) {
+		// // TODO Could indicate a programming or configuration bug which is not recoverable. Maybe System.exit?
+		// throw new IllegalArgumentException("The value of " + value + " does not fit into a bit string of " +
+		// (encoding.getSizeInBits() - 1) + " bits.");
+		// }
 
 		// setting up the number in reverse order
-		int mask = 1;
+		long mask = 1;
 		offset += encoding.getSizeInBits() - 1;
 
 		for (int i = 0; i < encoding.getSizeInBits(); i++, mask <<= 1) {
-			if ((mask & absValue) > 0) {
+			if ((mask & value) > 0) {
 				result.set(offset - i);
 			}
 		}
 
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("Calculated Bitset from value " + value.intValue() + " was: " + BitSetUtility.binDump(result));
+			LOG.debug("Calculated Bitset from value " + value + " was: " + BitSetUtility.binDump(result));
 		}
 
 		return result;

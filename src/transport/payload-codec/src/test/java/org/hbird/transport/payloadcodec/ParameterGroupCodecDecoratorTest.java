@@ -7,13 +7,9 @@ import static org.mockito.Mockito.when;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
-import org.hbird.core.spacesystemmodel.exceptions.ParameterNotInGroupException;
-import org.hbird.core.spacesystemmodel.exceptions.ParameterNotInModelException;
-import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameterGroup;
@@ -60,7 +56,7 @@ public class ParameterGroupCodecDecoratorTest {
 	 */
 	@Test
 	public void testDecorateParameterGroup() throws UnsupportedParameterEncodingException, UnknownParameterEncodingException, UnexpectedParameterTypeException,
-	UnknownParameterGroupException, ParameterNotInGroupException, NoEncodingException, UnknownParameterException, ParameterNotInModelException {
+			NoEncodingException {
 		final Map<String, ParameterGroup> codecAwareParameterGroups = decorator.decorateParameterGroups(ssm.getParameterGroups());
 
 		for (final ParameterGroup pg : codecAwareParameterGroups.values()) {
@@ -90,7 +86,7 @@ public class ParameterGroupCodecDecoratorTest {
 
 	@Test
 	public void testDecorateStringContainingParameterGroup() throws NoEncodingException, UnsupportedParameterEncodingException,
-	UnknownParameterEncodingException, UnexpectedParameterTypeException {
+			UnknownParameterEncodingException, UnexpectedParameterTypeException {
 
 		final ParameterGroupCodecDecorator decorator = new ParameterGroupCodecDecorator(mockEncodings);
 

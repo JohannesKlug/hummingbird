@@ -31,9 +31,8 @@
 	</logger>
 	
 	<logger name="org.hbird.core.commons">
-		<level value="DEBUG"></level>
+		<level value="TRACE"></level>
 	</logger>
-	
 	
 	<!--	ROOT LOGGER-->
 	<root>

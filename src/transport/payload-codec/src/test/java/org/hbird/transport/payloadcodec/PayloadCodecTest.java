@@ -13,20 +13,19 @@ import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.commons.util.exceptions.BitSetOperationException;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
-import org.hbird.core.spacesystemmodel.exceptions.ParameterNotInGroupException;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
-import org.hbird.transport.payloadcodec.exceptions.UnexpectedParameterTypeException;
-import org.hbird.transport.payloadcodec.exceptions.UnknownParameterEncodingException;
-import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingException;
 import org.hbird.transport.payloadcodec.testsupport.MockSpaceSystemModel;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PayloadCodecTest {
+	private final static Logger LOG = LoggerFactory.getLogger(PayloadCodecTest.class);
 
 	private static PayloadCodec codec;
 	private static SpaceSystemModel ssm;
@@ -73,8 +72,7 @@ public class PayloadCodecTest {
 	private static final long TIMESTAMP = 5478;
 
 	@BeforeClass
-	public static void setUp() throws BitSetOperationException, UnsupportedParameterEncodingException, UnknownParameterEncodingException,
-			UnexpectedParameterTypeException, UnknownParameterGroupException, ParameterNotInGroupException {
+	public static void setUp() {
 		ssm = new MockSpaceSystemModel();
 		codec = new InMemoryPayloadCodec(ssm.getParameterGroups(), null, ssm.getEncodings(), ssm.getAllPayloadRestrictions());
 	}
@@ -154,6 +152,7 @@ public class PayloadCodecTest {
 	private static void encodeAndAssert(final ParameterGroup testGroup, final BitSet expected) {
 		GenericPayload actualGenericPayload = codec.encodeToGenericPayload(testGroup);
 		BitSet actual = BitSetUtility.fromByteArray(actualGenericPayload.payload);
+		// assertArrayEquals(expectedBytes, actualGenericPayload.payload);
 		assertEquals("Encoded BitSet should match " + expected, expected, actual);
 	}
 
@@ -177,6 +176,7 @@ public class PayloadCodecTest {
 		testGroup.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_QUALIFIED_NAME).setValue(scIdValue);
 		testGroup.getIntegerParameter(MockSpaceSystemModel.FUEL_PARAMETER_QUALIFIED_NAME).setValue(fuelValue);
 		testGroup.getLongParameter(MockSpaceSystemModel.LASER_TEMP_PARAMETER_QUALIFIED_NAME).setValue(laserValue);
+		LOG.debug("Set test parameter values to: " + scIdValue + " :: " + fuelValue + " :: " + laserValue);
 		return testGroup;
 	}
 

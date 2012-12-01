@@ -1,6 +1,7 @@
 package org.hbird.core.commons.util;
 
 /** TODO Put in the transport.common */
+import java.nio.ByteOrder;
 import java.util.BitSet;
 
 import org.apache.commons.lang.StringUtils;
@@ -10,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The bitset utilities class helps the encoding / decoding of simple java types such as integer and float to a bitset.
- *
+ * 
  * @author Mark Doyle
  * @author Johannes Klug
  */
@@ -44,22 +45,22 @@ public final class BitSetUtility {
 
 	/**
 	 * Encodes a bitset in binary format, i.e. a string in the format '01100101...'.
-	 *
+	 * 
 	 * The encoding always follows sequentially from the least significant bit to the most significant bit, i.e. the
 	 * value 1 encoded in a 8 bit field is '1000000' not '0000001' as people are used too.
-	 *
+	 * 
 	 * To simplify the reading, a space is inserted for each byte and only 8 bytes are displayed per line. The string is
 	 * thus formatted as; '00000000 00000000 10000000 10010111 11111111 00011101 11000100 11100000' '01100100 10111100
 	 * 10000000 10010111 11000001 10001101 00101100 10000011'
-	 *
+	 * 
 	 * Notice that the complete bitset is displayed. A bit set is always an equal number of words, i.e. encoding on bit
 	 * at the start of a bitset will create a 64 bit long BitSet with 1 bit set. This function will print '10000000
 	 * 00000000 00000000 00000000 00000000 00000000 00000000 00000000'
-	 *
+	 * 
 	 * @param BitSet
 	 *            The bitset to be converted to a string.
 	 * @return A string representing the bitset in binary format.
-	 *
+	 * 
 	 */
 	public static String binDump(final BitSet data) {
 		String dump = "";
@@ -103,7 +104,7 @@ public final class BitSetUtility {
 	/**
 	 * Creates a {@link BitSet} from a String. The String must represent bit states using a '0' or a '1' (ASCII values
 	 * 48 or 49). Invalid characters in the String will cause a BitSetOperationException to be thrown.
-	 *
+	 * 
 	 * @param str
 	 *            {@link String} encoding the required BitSet using 1's and 0's
 	 * @param isBigEndian
@@ -172,16 +173,16 @@ public final class BitSetUtility {
 
 	/**
 	 * Converts the passed BitSet into a binary string.
-	 *
+	 * 
 	 * A flag is used to determine whether you wish to convert the logical bitSet or the entire BitSet. If
 	 * useLogicalSize is set to false it will use the complete BitSet i.e. the size and <b><i>not</i></b> the length.
 	 * Note: BitSets always finish on 64 bit a boundary.
-	 *
+	 * 
 	 * If useLogicalSize is set to true it will use the logical BitSet, that is, only the relevant set bits
-	 *
+	 * 
 	 * Whichever one you choose the returned value will equate to the same, however, if you set useLogicalSize to false
 	 * you will get the complete 0 padded BitSet.
-	 *
+	 * 
 	 * @param data
 	 * @param useLogicalSize
 	 * @return
@@ -217,7 +218,7 @@ public final class BitSetUtility {
 
 	/**
 	 * FIXME Javadoc
-	 *
+	 * 
 	 * @param data
 	 * @param length
 	 * @return
@@ -283,7 +284,7 @@ public final class BitSetUtility {
 
 	/**
 	 * TODO Can we remove the magic numbers?
-	 *
+	 * 
 	 * @param bits
 	 * @return
 	 */
@@ -293,7 +294,7 @@ public final class BitSetUtility {
 		int intFromBitset = 0;
 		int requiredByteShifts = 3;
 		int bytePosition = requiredByteShifts;
-		for(int i = 0; i < Integer.SIZE / 8; i++) {
+		for (int i = 0; i < Integer.SIZE / 8; i++) {
 			intFromBitset += (bytes[i] & BYTE_TO_INT_MASK) << bytePosition * Byte.SIZE;
 			bytePosition--;
 		}
@@ -303,7 +304,7 @@ public final class BitSetUtility {
 
 	/**
 	 * TODO Can we remove the magic numbers?
-	 *
+	 * 
 	 * @param bits
 	 * @return
 	 */
@@ -324,14 +325,7 @@ public final class BitSetUtility {
 		return Double.longBitsToDouble(longFromBitset);
 	}
 
-	/**
-	 * FIXME javadoc
-	 *
-	 * @param bitset
-	 * @param sizeInBits
-	 * @return
-	 */
-	public static final byte[] toByteArray(final BitSet bitset, final int sizeInBits) {
+	public static byte[] toByteArray(BitSet bitset, int sizeInBits, ByteOrder byteOrder, boolean boundToBytes) {
 		// Split into Bytes.
 		int numberOfBytes = sizeInBits / Byte.SIZE;
 		// Any remaining bits require an extra Byte
@@ -340,43 +334,111 @@ public final class BitSetUtility {
 		}
 		final byte[] bytes = new byte[numberOfBytes];
 
+		BitSet processedBitSet = new BitSet();
+		if (boundToBytes) {
+			int numByteBoundaryPaddingBits = (numberOfBytes * Byte.SIZE) - sizeInBits;
+
+			// Pad bitset in correct position
+			if (byteOrder == ByteOrder.BIG_ENDIAN) {
+				// pad first byte at the front
+				for (int x = 0; x <= sizeInBits; x++) {
+					if (bitset.get(x)) {
+						processedBitSet.set(x + numByteBoundaryPaddingBits);
+					}
+				}
+			}
+			else { // Little Endian
+					// Calculate the starting position of the final byte in the bitset.
+				int bytePosInBitset = (numberOfBytes - 1) * Byte.SIZE - 1;
+				// Copy left of padding bits
+				for (int x = 0; x <= bytePosInBitset; x++) {
+					if (bitset.get(x)) {
+						processedBitSet.set(x);
+					}
+				}
+				LOG.trace("Little endian padding copy first bytes: " + processedBitSet);
+				// Add padding in by default as bitset's bits are cleared (0) by default.
+				// Now add remaining data after padding
+				for (int x = bytePosInBitset + 1 + numByteBoundaryPaddingBits; x <= sizeInBits + numByteBoundaryPaddingBits; x++) {
+					if (bitset.get(x - numByteBoundaryPaddingBits)) {
+						processedBitSet.set(x);
+					}
+				}
+
+			}
+		}
+		else {
+			processedBitSet = bitset;
+		}
+
+		// create byte array with correct endianness.
+
 		int bitSetPosition = 0;
 		for (int byteNo = 0; byteNo < numberOfBytes; byteNo++) {
 			bytes[byteNo] = 0;
 			for (int i = Byte.SIZE; i >= 1; i--) {
-				if (bitset.get(bitSetPosition)) {
+				if (processedBitSet.get(bitSetPosition)) {
 					bytes[byteNo] += Math.pow(2, i - 1);
 				}
 				bitSetPosition++;
 			}
 		}
+
+		LOG.trace("Returning: " + BytesUtility.hexDump(bytes));
 		return bytes;
 	}
 
 	/**
+	 * FIXME javadoc
+	 * 
+	 * default: big endian unsigned byte bound
+	 * 
+	 * @param bitset
+	 * @param sizeInBits
+	 * @return
+	 */
+	public static final byte[] toByteArray(final BitSet bitset, final int sizeInBits) {
+		return toByteArray(bitset, sizeInBits, ByteOrder.BIG_ENDIAN, true);
+	}
+
+	public static final byte[] toByteArray(final BitSet bitset, final int sizeInBits, boolean boundToBytes) {
+		return toByteArray(bitset, sizeInBits, ByteOrder.BIG_ENDIAN, boundToBytes);
+	}
+
+	public static final BitSet fromByteArray(final byte[] bytes) {
+		return fromByteArray(bytes, ByteOrder.BIG_ENDIAN);
+	}
+
+	/**
 	 * Takes a byte array and returns a BitSet of the same value.
-	 *
+	 * 
 	 * @param bytes
 	 * @return
 	 */
-	public static final BitSet fromByteArray(final byte[] bytes) {
+	public static final BitSet fromByteArray(final byte[] bytes, ByteOrder byteOrder) {
+		LOG.trace("Input bytes = " + BytesUtility.hexDump(bytes));
 		final int bitsToSet = bytes.length * Byte.SIZE;
-		final BitSet result = new BitSet(bitsToSet);
+		BitSet result = new BitSet(bitsToSet);
 
 		// Loop over the number of bits we must set in the BitSet to convert this byte array.
 		for (int i = 0; i < bitsToSet; i++) {
 			// calculate which byte in the array covers this bit index
 			final int byteIndex = i / Byte.SIZE;
+
 			// Mask the byte with a mask which contains a 1 set in the current bit index we are working on.
 			// We mask the byte moving a 1 from left to right
-			final int maskShift = i % 8;
-
+			final long maskShift = i % 8;
 			if ((bytes[byteIndex] & (128 >>> maskShift)) > 0) {
 				// if the results is > 0 i.e. the bit at position i is set to 1 in the byte
-				// then set the same position in the BitSet
+				// therefore we set the same position in the BitSet
 				result.set(i);
 			}
 		}
+
+		if (LOG.isTraceEnabled()) {
+			LOG.trace("Returning: " + result + ". Bin: " + BitSetUtility.binDump(result));
+		}
+
 		return result;
 	}
 
@@ -394,4 +456,23 @@ public final class BitSetUtility {
 		return reversed;
 	}
 
+	public static BitSet padToByteBoundary(BitSet actualParameter, int sizeInBits, int byteBoundLength, boolean preserveFirstAsSign) {
+		BitSet paddedSet = new BitSet(byteBoundLength);
+		int numPaddingBits = byteBoundLength - sizeInBits;
+
+		// If we are preserving the sign and the first bit is set
+		if (preserveFirstAsSign && actualParameter.get(0)) {
+			for (int i = 0; i < numPaddingBits; i++) {
+				paddedSet.set(i);
+			}
+		}
+
+		for (int i = numPaddingBits; i < byteBoundLength; i++) {
+			if (actualParameter.get(i - numPaddingBits)) {
+				paddedSet.set(i);
+			}
+		}
+
+		return paddedSet;
+	}
 }
