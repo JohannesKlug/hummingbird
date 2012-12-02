@@ -45,21 +45,20 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 			LOG.trace("Endianness applied byte array = " + BytesUtility.hexDump(endianBytes.array()));
 		}
 
-		// final int output = BytesUtility.combine(endianBytes.array(), encoding.getSizeInBits(), false).intValue();
 		int output = 0;
-		if (encoding.getSizeInBits() <= 8) {
+		if (encoding.getSizeInBits() <= Byte.SIZE) {
 			byte byteValue = endianBytes.get();
 			output = byteValue & 0xFF;
 		}
-		else if (encoding.getSizeInBits() <= 16) {
+		else if (encoding.getSizeInBits() <= Short.SIZE) {
 			short shortValue = endianBytes.getShort();
 			output = shortValue & 0xFFFF;
 		}
-		else if (encoding.getSizeInBits() <= 32) {
+		else if (encoding.getSizeInBits() <= Integer.SIZE) {
 			int intValue = endianBytes.getInt();
 			output = intValue & 0xFFFFFFFF;
 		}
-		else if (encoding.getSizeInBits() > 32) {
+		else if (encoding.getSizeInBits() > Integer.SIZE) {
 			// The type is larger than 32 bits so we cannot process it in Parameter<Integer> it must be
 			// built with a Parameter<Long>
 			throw new IncorrectJavaTypeParameter(getQualifiedName(), encoding.getSizeInBits());
@@ -90,19 +89,19 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 			numberOfBytes++;
 		}
 		ByteBuffer littleEndianBuffer = ByteBuffer.allocate(numberOfBytes);
-		if (encoding.getSizeInBits() <= 8) {
+		if (encoding.getSizeInBits() <= Byte.SIZE) {
 			littleEndianBuffer.put((byte) absValue).flip();
 			absValue = littleEndianBuffer.order(encoding.getByteOrder()).get();
 		}
-		else if (encoding.getSizeInBits() <= 16) {
+		else if (encoding.getSizeInBits() <= Short.SIZE) {
 			littleEndianBuffer.putShort((short) absValue).flip();
 			absValue = littleEndianBuffer.order(encoding.getByteOrder()).getShort();
 		}
-		else if (encoding.getSizeInBits() <= 32) {
+		else if (encoding.getSizeInBits() <= Integer.SIZE) {
 			littleEndianBuffer.putInt((int) absValue).flip();
 			absValue = littleEndianBuffer.order(encoding.getByteOrder()).getInt();
 		}
-		else if (encoding.getSizeInBits() > 32) {
+		else if (encoding.getSizeInBits() > Integer.SIZE) {
 			// The type is larger than 32 bits so we cannot process it in Parameter<Integer> it must be
 			// built with a Parameter<Long>
 			throw new IncorrectJavaTypeParameter(getQualifiedName(), encoding.getSizeInBits());
@@ -138,74 +137,4 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 		throw new UnsupportedOperationException();
 	}
 
-	// @Override
-	// public BitSet insertIntoBitSet(final Number number, final BitSet bitSetTarget, int offset) {
-	//
-	// final long unsignedInt = number.longValue();
-	//
-	// // checking whether the value fits into the bit string of length - 1
-	// final long absValue = Math.abs(unsignedInt);
-	// if (absValue > Math.pow(2.0, getSIZE_IN_BITS()) - 1 || unsignedInt == Long.MIN_VALUE) {
-	// throw new RuntimeException("The value of " + unsignedInt + " does not fit into a bit string of "
-	// + (getSIZE_IN_BITS() - 1) + " bits.");
-	// }
-	//
-	// // setting all bits to zero
-	// bitSetTarget.clear(offset, offset + getSIZE_IN_BITS() - 1);
-	//
-	// // setting up the number in reverse order
-	// int mask = 1;
-	// if (isBigEndian) {
-	// offset += getSIZE_IN_BITS() - 1;
-	// }
-	// for (int i = 0; i < getSIZE_IN_BITS(); i++, mask <<= 1) {
-	// if ((mask & absValue) > 0) {
-	// if (isBigEndian) {
-	// bitSetTarget.set(offset - i);
-	// }
-	// else {
-	// bitSetTarget.set(offset + i);
-	// }
-	// }
-	// }
-	//
-	// if (LOG.isDebugEnabled()) {
-	// LOG.debug("Calculated Bitset from value " + number.intValue() + " was: " + BitSetUtility.binDump(bitSetTarget));
-	// }
-	//
-	// return bitSetTarget;
-	// }
-
-	// @Override
-	// public BitSet insertIntoBitSet(final Number number, final BitSet bitSetTarget, int offset) {
-	//
-	// final long unsignedInt = number.longValue();
-	//
-	// // checking whether the value fits into the bit string of length - 1
-	// final long absValue = Math.abs(unsignedInt);
-	// if (absValue > Math.pow(2.0, getSIZE_IN_BITS()) - 1 || unsignedInt == Long.MIN_VALUE) {
-	// throw new RuntimeException("The value of " + unsignedInt + " does not fit into a bit string of "
-	// + (getSIZE_IN_BITS() - 1) + " bits.");
-	// }
-	//
-	// // setting all bits to zero
-	// bitSetTarget.clear(offset, offset + getSIZE_IN_BITS() - 1);
-	//
-	// // setting up the number in reverse order
-	// int mask = 1;
-	// if (isBigEndian) {
-	// offset += getSIZE_IN_BITS() - 1;
-	// }
-	//
-	// for (int i = 0; i < getSIZE_IN_BITS(); i++, mask <<= 1) {
-	// if ((mask & absValue) > 0) {
-	// if (isBigEndian) {
-	// bitSetTarget.set(offset - i);
-	// }
-	// else {
-	// bitSetTarget.set(offset + i);
-	// }
-	// }
-	// }
-	// }
 }

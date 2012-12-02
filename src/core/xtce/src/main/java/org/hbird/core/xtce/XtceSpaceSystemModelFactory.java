@@ -1,4 +1,4 @@
-package org.hbird.core.xtce; // Hi Mark.
+package org.hbird.core.xtce;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -142,7 +142,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 		LOG.debug("Creating space system model using XTCE file = " + spaceSystemModelFilename);
 
-		// Reset the previous model and colelctions used to construct the model
+		// Reset the previous model and collections used to construct the model
 		model = new XtceSpaceSystemModel();
 		tmParameterGroups.clear();
 		tcGroups.clear();
@@ -166,12 +166,10 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		}
 		catch (final IllegalArgumentException e) {
 			LOG.error("Critical Error creating XTCE based Space System Model");
-			e.printStackTrace();
 			// TODO - 27.03.2012 kimmell - replace with appropriate exception
 		}
 		catch (final IllegalAccessException e) {
 			LOG.error("Critical Error creating XTCE based Space System Model");
-			e.printStackTrace();
 			// TODO - 27.03.2012 kimmell - replace with appropriate exception
 		}
 
@@ -187,7 +185,9 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	 * @throws ValidationException
 	 * @throws MarshalException
 	 */
-	private final static SpaceSystem unmarshallXtceXmlSpaceSystem(final String spacesystemmodelFilename) throws MarshalException, ValidationException,
+	@SuppressWarnings("resource")
+	// SpaceSystem is not a closeable
+	private static final SpaceSystem unmarshallXtceXmlSpaceSystem(final String spacesystemmodelFilename) throws MarshalException, ValidationException,
 			FileNotFoundException {
 		SpaceSystem spaceSystem = null;
 		final XMLContext context = new XMLContext();
@@ -201,7 +201,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		return spaceSystem;
 	}
 
-	private void createTelemetryModel() throws InvalidSpaceSystemDefinitionException, NumberFormatException {
+	private void createTelemetryModel() throws InvalidSpaceSystemDefinitionException {
 		createAllTmParameterTypes(spaceSystem.getTelemetryMetaData());
 		createAllTmParameters();
 		createAllParameterGroups();
@@ -559,46 +559,6 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			}
 		}
 	}
-
-	// private Parameter<?> getCreatedArgument(String argumentName) throws InvalidSpaceSystemDefinitionException {
-	//
-	// Parameter<?> arg = integerArguments.get(argumentName);
-	// if (arg != null) {
-	// return arg;
-	// }
-	//
-	// arg = longArguments.get(argumentName);
-	// if (arg != null) {
-	// return arg;
-	// }
-	//
-	// arg = floatArguments.get(argumentName);
-	// if (arg != null) {
-	// return arg;
-	// }
-	//
-	// arg = doubleArguments.get(argumentName);
-	// if (arg != null) {
-	// return arg;
-	// }
-	//
-	// arg = bigDecimalArguments.get(argumentName);
-	// if (arg != null) {
-	// return arg;
-	// }
-	//
-	// arg = stringArguments.get(argumentName);
-	// if (arg != null) {
-	// return arg;
-	// }
-	//
-	// arg = rawArguments.get(argumentName);
-	// if (arg != null) {
-	// return arg;
-	// }
-	//
-	// throw new InvalidSpaceSystemDefinitionException("Command argument " + argumentName + " not defined.");
-	// }
 
 	/**
 	 * @throws InvalidSpaceSystemDefinitionException
@@ -1181,7 +1141,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		return encoding;
 	}
 
-	final static Encoding createXtceBinaryEncoding(final BinaryParameterType type) {
+	private static final Encoding createXtceBinaryEncoding(final BinaryParameterType type) {
 		final Encoding encoding = new Encoding();
 		// TODO - 29.03.2012 kimmell - implement
 		return encoding;
