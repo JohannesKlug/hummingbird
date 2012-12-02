@@ -8,6 +8,7 @@ import org.hbird.core.commons.util.BytesUtility;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
+import org.hbird.transport.payloadcodec.exceptions.IncorrectJavaTypeParameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,18 +49,20 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 		int output = 0;
 		if (encoding.getSizeInBits() <= 8) {
 			byte byteValue = endianBytes.get();
-			output = byteValue & 0xff;
+			output = byteValue & 0xFF;
 		}
 		else if (encoding.getSizeInBits() <= 16) {
 			short shortValue = endianBytes.getShort();
-			output = shortValue & 0xffff;
+			output = shortValue & 0xFFFF;
 		}
 		else if (encoding.getSizeInBits() <= 32) {
 			int intValue = endianBytes.getInt();
-			output = intValue & 0xffff;
+			output = intValue & 0xFFFFFFFF;
 		}
 		else if (encoding.getSizeInBits() > 32) {
-			// PROBLEM?
+			// The type is larger than 32 bits so we cannot process it in Parameter<Integer> it must be
+			// built with a Parameter<Long>
+			throw new IncorrectJavaTypeParameter(getQualifiedName(), encoding.getSizeInBits());
 		}
 
 		if (LOG.isTraceEnabled()) {
@@ -100,7 +103,9 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 			absValue = littleEndianBuffer.order(encoding.getByteOrder()).getInt();
 		}
 		else if (encoding.getSizeInBits() > 32) {
-			// PROBLEM?
+			// The type is larger than 32 bits so we cannot process it in Parameter<Integer> it must be
+			// built with a Parameter<Long>
+			throw new IncorrectJavaTypeParameter(getQualifiedName(), encoding.getSizeInBits());
 		}
 
 		// setting all bits to zero
