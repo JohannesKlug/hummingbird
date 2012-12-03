@@ -11,7 +11,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Enumeration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class SerialPortDriver {
+	private static final Logger LOG = LoggerFactory.getLogger(SerialPortDriver.class);
 
 	private final SerialPort serialPort;
 
@@ -21,16 +25,6 @@ public class SerialPortDriver {
 
 		while (pList.hasMoreElements()) {
 			CommPortIdentifier cpi = (CommPortIdentifier) pList.nextElement();
-			System.out.print("Port " + cpi.getName() + " ");
-			if (cpi.getPortType() == CommPortIdentifier.PORT_SERIAL) {
-				System.out.println("is a Serial Port: " + cpi);
-			}
-			else if (cpi.getPortType() == CommPortIdentifier.PORT_PARALLEL) {
-				System.out.println("is a Parallel Port: " + cpi);
-			}
-			else {
-				System.out.println("is an Unknown Port: " + cpi);
-			}
 		}
 
 		CommPortIdentifier cpi;
@@ -38,11 +32,8 @@ public class SerialPortDriver {
 		cpi = CommPortIdentifier.getPortIdentifier(portIdentifier);
 
 		serialPort = (SerialPort) cpi.open("Hummingbird", 2000);
-		serialPort.setSerialPortParams(57600,
-			       					   SerialPort.DATABITS_8,
-			       					   SerialPort.STOPBITS_1,
-			       					   SerialPort.PARITY_NONE);
-		System.out.println(serialPort.getName() + " is open");
+		serialPort.setSerialPortParams(57600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+		LOG.debug(serialPort.getName() + " is open");
 	}
 
 	public InputStream getInputStream() throws IOException {

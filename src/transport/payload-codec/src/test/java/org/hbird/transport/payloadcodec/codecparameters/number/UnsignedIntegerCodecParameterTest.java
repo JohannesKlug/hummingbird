@@ -35,6 +35,10 @@ public class UnsignedIntegerCodecParameterTest {
 	private final static int TEST_VALUE_LENGTH_BE_555 = 10;
 	private static BitSet TEST_BITSET_VALUE_BE_555;
 
+	private final static String TEST_STR_VALUE_1 = "1";
+	private final static int TEST_VALUE_LENGTH_1 = 1;
+	private static BitSet TEST_BITSET_VALUE_1;
+
 	private final static String TEST_STR_VALUE_LE_555 = "0010101110";
 	private final static int TEST_VALUE_LENGTH_LE_555 = 10;
 	private static BitSet TEST_BITSET_VALUE_LE_555;
@@ -105,6 +109,10 @@ public class UnsignedIntegerCodecParameterTest {
 		assertEquals(TEST_STR_VALUE_LE_123_32bit,
 				BitSetUtility.bitSetToBinaryString(TEST_BITSET_VALUE_123_LE_32bit, false).substring(0, TEST_VALUE_LENGTH_LE_123_32bit));
 
+		TEST_BITSET_VALUE_1 = new BitSet(TEST_VALUE_LENGTH_1);
+		TEST_BITSET_VALUE_1.set(0);
+		assertEquals(TEST_STR_VALUE_1, BitSetUtility.bitSetToBinaryString(TEST_BITSET_VALUE_1, false).substring(0, TEST_VALUE_LENGTH_1));
+
 		LOG.debug("Test bitsets set-up completed successfully");
 	}
 
@@ -124,6 +132,16 @@ public class UnsignedIntegerCodecParameterTest {
 		codec.decode(TEST_BITSET_VALUE_BE_555, 0);
 		tDec++;
 		assertEquals(555, codec.getValue().intValue());
+	}
+
+	@Test
+	public void testOneValueFromBitSet() {
+		Parameter<Integer> p = new HummingbirdParameter<Integer>("test.unit", "uint", "", "");
+		Encoding enc = new Encoding(TEST_VALUE_LENGTH_1, BinaryRepresentation.unsigned);
+		UnsignedIntegerCodecParameter codec = new UnsignedIntegerCodecParameter(p, enc);
+		codec.decode(TEST_BITSET_VALUE_1, 0);
+		tDec++;
+		assertEquals(1, codec.getValue().intValue());
 	}
 
 	@Test
@@ -248,6 +266,18 @@ public class UnsignedIntegerCodecParameterTest {
 	}
 
 	@SuppressWarnings("static-method")
+	@Test(expected = IncorrectJavaTypeParameter.class)
+	public final void testIncorrectIntJavaTypeDecode() {
+		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", "");
+		Encoding enc = new Encoding(56, BinaryRepresentation.unsigned);
+		UnsignedIntegerCodecParameter behaviour = new UnsignedIntegerCodecParameter(p, enc);
+		BitSet input = createTestBitSet(87, enc.getSizeInBits(), enc.getByteOrder());
+		behaviour.decode(input, 0);
+		tDec++;
+		assertEquals(87, behaviour.getValue().intValue());
+	}
+
+	@SuppressWarnings("static-method")
 	@Test
 	public final void testDecodeLittleEndianIntLargeRange() {
 		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", "");
@@ -306,7 +336,7 @@ public class UnsignedIntegerCodecParameterTest {
 
 	@SuppressWarnings("static-method")
 	@Test
-	public final void testInsertIntoBitSetBE555() {
+	public final void testEncode10BitIntegerBE555() {
 		BitSet actual = new BitSet();
 		Parameter<Integer> parameter = new HummingbirdParameter<Integer>("", "", "", "");
 		parameter.setValue(555);
@@ -315,6 +345,19 @@ public class UnsignedIntegerCodecParameterTest {
 		actual = codecParameter.encodeToBitSet(actual, 0);
 		tEnc++;
 		assertEquals(actual, TEST_BITSET_VALUE_BE_555);
+	}
+
+	@SuppressWarnings("static-method")
+	@Test
+	public final void testEncode1BitFlagIntegerOn() {
+		BitSet actual = new BitSet();
+		Parameter<Integer> parameter = new HummingbirdParameter<Integer>("", "", "", "");
+		parameter.setValue(1);
+		Encoding enc = new Encoding(TEST_VALUE_LENGTH_1, BinaryRepresentation.unsigned);
+		UnsignedIntegerCodecParameter codecParameter = new UnsignedIntegerCodecParameter(parameter, enc);
+		actual = codecParameter.encodeToBitSet(actual, 0);
+		tEnc++;
+		assertEquals(actual, TEST_BITSET_VALUE_1);
 	}
 
 	@Test
@@ -408,7 +451,7 @@ public class UnsignedIntegerCodecParameterTest {
 	}
 
 	@Test(expected = IncorrectJavaTypeParameter.class)
-	public final void testLargeIntEncode() {
+	public final void testInccorectIntTypeEncode() {
 		Parameter<Integer> p = new HummingbirdParameter<Integer>("test.p", "byteGaben", "", "");
 		Encoding enc = new Encoding(45, BinaryRepresentation.unsigned);
 		codec = new UnsignedIntegerCodecParameter(p, enc);

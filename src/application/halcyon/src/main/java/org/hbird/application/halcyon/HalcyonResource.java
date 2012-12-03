@@ -13,7 +13,6 @@ public class HalcyonResource {
 
 	@GET
 	public Viewable getHome() {
-		System.out.println("Returning home page");
 		return new Viewable("/index.html");
 	}
 

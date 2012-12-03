@@ -33,17 +33,14 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 	@Override
 	public void decode(final BitSet inBitset, final int bitOffset) {
 		final BitSet actualParameter = inBitset.get(bitOffset, bitOffset + encoding.getSizeInBits());
-		if (LOG.isTraceEnabled()) {
-			LOG.trace("Extracted " + encoding.getSizeInBits() + " bit int value from " + BitSetUtility.binDump(actualParameter));
-		}
+
+		LOG.trace("Extracted " + encoding.getSizeInBits() + " bit int value from " + BitSetUtility.binDump(actualParameter));
 
 		final byte[] byteArray = BitSetUtility.toByteArray(actualParameter, encoding.getSizeInBits(), encoding.getByteOrder(), true);
 		ByteBuffer endianBytes = ByteBuffer.wrap(byteArray).order(encoding.getByteOrder());
 
-		if (LOG.isTraceEnabled()) {
-			LOG.trace("Byte array = " + BytesUtility.hexDump(byteArray));
-			LOG.trace("Endianness applied byte array = " + BytesUtility.hexDump(endianBytes.array()));
-		}
+		LOG.trace("Byte array = " + BytesUtility.hexDump(byteArray));
+		LOG.trace("Endianness applied byte array = " + BytesUtility.hexDump(endianBytes.array()));
 
 		int output = 0;
 		if (encoding.getSizeInBits() <= Byte.SIZE) {
@@ -64,10 +61,7 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 			throw new IncorrectJavaTypeParameter(getQualifiedName(), encoding.getSizeInBits());
 		}
 
-		if (LOG.isTraceEnabled()) {
-			LOG.trace("Output(bin) = " + Long.toBinaryString(output));
-			LOG.trace("Output(dec) = " + output);
-		}
+		LOG.trace("Output(bin) = " + Long.toBinaryString(output));
 
 		this.setValue(output);
 	}
@@ -122,13 +116,8 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 			}
 		}
 
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Calculated encoded Bitset from value " + getValue() + " was: " + BitSetUtility.binDump(out));
-		}
+		LOG.trace("Calculated encoded Bitset from value " + getValue() + " was: " + BitSetUtility.binDump(out));
 
-		if (out.length() > encoding.getSizeInBits()) {
-			LOG.trace("bitset too large");
-		}
 		return out;
 	}
 

@@ -13,7 +13,6 @@ public class OsgiReady {
 	private final String serviceInterface;
 
 	public OsgiReady(final String serviceInterface) {
-		System.out.println("Instantiating OsgiReady Jersey resource using serivce " + serviceInterface);
 		this.serviceInterface = serviceInterface;
 	}
 
@@ -25,7 +24,6 @@ public class OsgiReady {
 	}
 
 	private final void cacheTracker() {
-		System.out.println("Caching tracker");
 		serviceTracker = new ServiceTracker(HalcyonServletContextListener.getBundleContext(), serviceInterface, null) {
 			@Override
 			public Object addingService(final ServiceReference reference) {

@@ -32,12 +32,9 @@ public class TwosComplementLongCodecParameterTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		LOG.info("--------- Setup -------------------------");
 		TEST_LONG_BITSET_BE = BitSetUtility.stringToBitSet(TEST_LONG_STR_BE, true, true);
-		System.out.println(BitSetUtility.binDump(TEST_LONG_BITSET_BE));
 		TEST_MAX_LONG_BITSET = BitSetUtility.stringToBitSet(TEST_MAX_LONG_STR, true, true);
 		TEST_MIN_LONG_BITSET = BitSetUtility.stringToBitSet(TEST_MIN_LONG_STR, true, true);
-		LOG.info("-----------------------------------------------");
 	}
 
 	@Before

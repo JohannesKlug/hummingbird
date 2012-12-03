@@ -84,8 +84,6 @@ public class Float32BehaviourTest {
 	// public void testBoundaryValueFromBitSet() {
 	// Float myFloat = new Float(BOUNDARY_SET_TEST_FLOAT);
 	// Integer myInt = Float.floatToIntBits(myFloat);
-	// System.out.println(myFloat);
-	// System.out.println(myInt);
 	//
 	// assertEquals(BOUNDARY_SET_TEST_FLOAT, Float.intBitsToFloat(myInt), 0.00001);
 	//

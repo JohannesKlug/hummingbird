@@ -114,8 +114,6 @@ public class PayloadCodecTest {
 			testEncode();
 		}
 		long end = System.currentTimeMillis();
-		System.out.println("Completed " + testsBurned + " tests in " + (end - start) + " ms");
-		System.out.println(testsBurned / ((end - start) / 1000) + " payloads encoded per second");
 	}
 
 	@Test
@@ -134,8 +132,6 @@ public class PayloadCodecTest {
 
 					BitSet expected = BitSetUtility.stringToBitSet(scIdBinaryString + fuelBinaryString + laserBinaryString, true, true);
 					ParameterGroup testGroup = setTestGroupParameterValues(scIdValue, fuelValue, laserValue);
-					// System.out.println("Test number: " + testNumber + ". scId: " + scIdValue + ", fuel: " + fuelValue
-					// + ", laser: " + laserValue );
 					encodeAndAssert(testGroup, expected);
 					testsBurned++;
 				}

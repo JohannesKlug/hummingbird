@@ -24,12 +24,10 @@ public class OsgiLiveTmStreamingWebSocket implements WebSocket, LiveTmReceiver {
 	 * @param liveTmWebSocketServlet
 	 */
 	public OsgiLiveTmStreamingWebSocket() {
-		System.out.println("Built new OsgiLiveTmStreamingWebSocket.");
 	}
 
 	@Override
 	public void onOpen(final Connection connection) {
-		System.out.println("Open socket requested.");
 		this.connection = connection;
 
 		// Register this as a LiveTmReceiver so the blueprint instantiated class used in the camel route can

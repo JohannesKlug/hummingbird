@@ -24,7 +24,6 @@ public class LiveTmWebSocketServlet extends WebSocketServlet {
 	 * 
 	 */
 	public LiveTmWebSocketServlet() {
-		System.out.println("Constructed LiveTmWebSocketServlet");
 	}
 
 	@Override
@@ -38,7 +37,6 @@ public class LiveTmWebSocketServlet extends WebSocketServlet {
 	 */
 	@Override
 	public WebSocket doWebSocketConnect(final HttpServletRequest request, final String protocol) {
-		System.out.println("doWebSocketConnect called with protocol " + protocol);
 		return new OsgiLiveTmStreamingWebSocket();
 	}
 }

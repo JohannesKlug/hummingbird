@@ -20,9 +20,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * {@link SpaceSystemPublisher} that uses a {@link SpaceSystemModelFactory} service interface to retrieve the model.
- *
+ * 
  * @author Mark Doyle
- *
+ * 
  */
 public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	private final static Logger LOG = LoggerFactory.getLogger(ServiceBasedSpaceSystemPublisher.class);
@@ -66,7 +66,6 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 
 	@Override
 	public List<ParameterGroup> getParameterGroupList() {
-		System.out.println("Request received for parameter group list");
 		return new ArrayList<ParameterGroup>(modelCache.getParameterGroupsCollection());
 	}
 
@@ -77,7 +76,7 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 
 	@Override
 	public List<CommandGroup> getCommandList() {
-		if(LOG.isTraceEnabled()) {
+		if (LOG.isTraceEnabled()) {
 			LOG.trace("Returning " + modelCache.getCommands().values().size() + " command(s) from " + modelCache.getName());
 		}
 		return new ArrayList<CommandGroup>(modelCache.getCommands().values());
@@ -135,8 +134,7 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	}
 
 	@Override
-	public ParameterGroup getParameterGroup(final String qualifiedName)
-			throws UnknownParameterGroupException {
+	public ParameterGroup getParameterGroup(final String qualifiedName) throws UnknownParameterGroupException {
 		return this.modelCache.getParameterGroup(qualifiedName);
 	}
 

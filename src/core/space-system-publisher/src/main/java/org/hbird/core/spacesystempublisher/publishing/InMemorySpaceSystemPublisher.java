@@ -17,9 +17,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * A {@link SpaceSystemPublisher} that holds a {@link SpaceSystemModel} in memory at runtime.
- *
+ * 
  * @author Mark Doyle
- *
+ * 
  */
 public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 	private static final Logger LOG = LoggerFactory.getLogger(InMemorySpaceSystemPublisher.class);
@@ -30,12 +30,13 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 	}
 
 	/**
-	 * Creates the space system publisher with the provided {@link SpaceSystemModel}
-	 * This model will be used to provide responses to all service requests regarding the space system.
+	 * Creates the space system publisher with the provided {@link SpaceSystemModel} This model will be used to provide
+	 * responses to all service requests regarding the space system.
+	 * 
 	 * @param model
 	 */
 	public InMemorySpaceSystemPublisher(final SpaceSystemModel model) {
-		if(LOG.isDebugEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Instantiated InMemorySpaceSystemPublisher using space system model " + model.getName());
 		}
 		this.model = model;
@@ -43,13 +44,11 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 
 	@Override
 	public Map<String, ParameterGroup> getParameterGroups() {
-		System.out.println("Request received!!!!");
 		return model.getParameterGroups();
 	}
 
 	@Override
 	public List<ParameterGroup> getParameterGroupList() {
-		System.out.println("Request received for parameter group list");
 		return new ArrayList<ParameterGroup>(model.getParameterGroupsCollection());
 	}
 
@@ -76,7 +75,8 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 	}
 
 	/**
-	 * @param model the model to set
+	 * @param model
+	 *            the model to set
 	 */
 	public void setModel(final SpaceSystemModel model) {
 		this.model = model;
