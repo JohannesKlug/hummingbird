@@ -48,7 +48,6 @@
 		<feature name="hbird-transport" description="Hbird transport bundles and services" version="${version}">
 			<feature version="${version}">hbird-core</feature>
 			<bundle>mvn:org.objenesis/objenesis/1.2</bundle>
-			<bundle>mvn:org.rxtx/rxtx/2.1.7</bundle>
 			<bundle>mvn:org.hbird.transport/payload-codec</bundle>
 			<bundle>mvn:org.hbird.transport/protocols</bundle>
 			<bundle start="false">mvn:org.hbird.osgi/rxtx-native-fragment</bundle>
