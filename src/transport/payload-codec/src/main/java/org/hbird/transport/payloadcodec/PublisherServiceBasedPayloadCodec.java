@@ -4,7 +4,6 @@ import java.util.BitSet;
 import java.util.List;
 
 import org.hbird.core.commons.data.GenericPayload;
-import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 import org.hbird.core.spacesystemmodel.tmtc.TmTcGroup;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
@@ -29,17 +28,17 @@ public class PublisherServiceBasedPayloadCodec implements PayloadCodec {
 	}
 
 	@Override
-	public ParameterGroup decode(final byte[] payload, final List<String> payloadLayoutIds, final long timeStamp) throws UnknownParameterGroupException {
+	public ParameterGroup decode(final byte[] payload, final List<String> payloadLayoutIds, final long timeStamp) {
 		return this.codec.decode(payload, payloadLayoutIds, timeStamp);
 	}
 
 	@Override
-	public ParameterGroup decode(final BitSet payload, final List<String> payloadLayoutIds, final long timeStamp) throws UnknownParameterGroupException {
+	public ParameterGroup decode(final BitSet payload, final List<String> payloadLayoutIds, final long timeStamp) {
 		return this.codec.decode(payload, payloadLayoutIds, timeStamp);
 	}
 
 	@Override
-	public ParameterGroup decode(final GenericPayload payload) throws UnknownParameterGroupException {
+	public ParameterGroup decode(final GenericPayload payload) {
 		return this.codec.decode(payload);
 	}
 

@@ -128,45 +128,6 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 		return result;
 	}
 
-	// @POST
-	// @Path("/query")
-	// @Produces(MediaType.APPLICATION_JSON)
-	// @Consumes(MediaType.APPLICATION_JSON)
-	// public String queryParameterDatabase(Map<String, Object> filters) {
-	// String result = null;
-	//
-	// final ParameterQuerySender parameterQuerySenderService = (ParameterQuerySender) getServiceTracker().getService();
-	// if (parameterQuerySenderService != null) {
-	//
-	// Object val = filters.remove("sort");
-	// DBObject mongoSort = null;
-	// if (val != null) {
-	// // must be a map otherwise the client has sent incorrect data or it was corrupted.
-	// @SuppressWarnings("unchecked")
-	// Map<String, Object> sortValues = (Map<String, Object>) val;
-	// mongoSort = new BasicDBObject(sortValues);
-	// }
-	//
-	// Object limit = filters.remove("limit");
-	// if (limit != null && limit instanceof Integer) {
-	// }
-	//
-	// DBObject mongoQuery = new BasicDBObject(filters);
-	// Object qRes = parameterQuerySenderService.query(mongoQuery, mongoSort);
-	// if (qRes instanceof List<?>) {
-	// result = JSON.serialize(qRes);
-	// }
-	// else {
-	// LOG.error("Object returned from the parameter archiver was not a List<?>");
-	// }
-	// }
-	// else {
-	// LOG.warn("No " + SERVICE_INTERFACE + " service found.");
-	// }
-	//
-	// return result;
-	// }
-
 	@POST
 	@Path("/datatablesquery")
 	@Produces(MediaType.APPLICATION_JSON)

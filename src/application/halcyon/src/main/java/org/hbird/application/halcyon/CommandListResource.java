@@ -56,6 +56,7 @@ public class CommandListResource extends OsgiReady {
 			for (final CommandGroup cmd : cmdInfoService.getAllAllowedCommands()) {
 				allowedCommandNames.add(new CmdNames(cmd.getQualifiedName(), cmd.getName()));
 			}
+			LOG.debug("Cached " + cmdInfoService.getAllAllowedCommands().size() + " commands");
 		}
 		else {
 			LOG.warn("No " + COMMAND_INFORMATION_SERVICE_NAME + " service found.");
@@ -99,22 +100,5 @@ public class CommandListResource extends OsgiReady {
 		final CommandInformationService cmdInfoService = (CommandInformationService) getServiceTracker().getService();
 		return cmdInfoService.getCommand(qualifiedName);
 	}
-
-	// TODO implement msgPack return
-	// @GET
-	// @Produces("application/x-msgpack")
-	// // FIXME use a constant.
-	// public byte[] getCommandListAsMsgPack() throws IOException {
-	// cacheAllowedCommands();
-	// final MessagePack msgpack = new MessagePack();
-	//
-	// final ByteArrayOutputStream out = new ByteArrayOutputStream();
-	//
-	// final Packer packer = msgpack.createPacker(out);
-	// packer.write(allowedCommandNames);
-	//
-	// return out.toByteArray();
-	//
-	// }
 
 }

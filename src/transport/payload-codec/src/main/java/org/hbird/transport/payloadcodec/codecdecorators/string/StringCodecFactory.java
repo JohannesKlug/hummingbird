@@ -14,6 +14,10 @@ import org.hbird.transport.payloadcodec.exceptions.UnsupportedParameterEncodingE
  */
 public class StringCodecFactory {
 
+	private StringCodecFactory() {
+		// Utility class
+	}
+
 	public static Parameter<String> decorateParameterWithCodec(final Parameter<String> parameter, final Encoding enc) throws UnknownParameterEncodingException,
 			UnsupportedParameterEncodingException {
 		switch (enc.getBinaryRepresentation()) {

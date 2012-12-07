@@ -5,7 +5,6 @@ package org.hbird.application.halcyon.servlets;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,25 +14,23 @@ import org.hbird.application.halcyon.tm.OsgiLiveTmStreamingWebSocket;
 
 /**
  * @author Mark Doyle
- *
+ * 
  */
 public class LiveTmWebSocketServlet extends WebSocketServlet {
 	private static final long serialVersionUID = -645861775618085268L;
 
-	/**
-	 * 
-	 */
-	public LiveTmWebSocketServlet() {
-	}
-
 	@Override
-	protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
 		resp.setContentType("text/html");
 		resp.getWriter().println("Gaben says SOCKET!");
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jetty.websocket.WebSocketFactory.Acceptor#doWebSocketConnect(javax.servlet.http.HttpServletRequest, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.jetty.websocket.WebSocketFactory.Acceptor#doWebSocketConnect(javax.servlet.http.HttpServletRequest,
+	 * java.lang.String)
 	 */
 	@Override
 	public WebSocket doWebSocketConnect(final HttpServletRequest request, final String protocol) {

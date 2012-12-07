@@ -4,17 +4,19 @@ import java.util.zip.Checksum;
 
 public class CRC16CCITT implements Checksum {
 
-	int crc = 0xFFFF; // initial value
-	int normalPolynomial = 0x1021; // 0001 0000 0010 0001 (0, 5, 12)
+	/** initial value **/
+	private static int crc = 0xFFFF;
+	/** 0001 0000 0010 0001 (0, 5, 12) **/
+	private static final int NORMAL_POLYNOMIAL = 0x1021;
 
 	@Override
 	public void update(int b) {
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < Byte.SIZE; i++) {
 			boolean bit = ((b >> (7 - i) & 1) == 1);
 			boolean c15 = ((crc >> 15 & 1) == 1);
 			crc <<= 1;
 			if (c15 ^ bit) {
-				crc ^= normalPolynomial;
+				crc ^= NORMAL_POLYNOMIAL;
 			}
 		}
 		crc &= 0xFFFF;

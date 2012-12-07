@@ -11,17 +11,20 @@ import org.slf4j.LoggerFactory;
 
 public class CcsdsPacketDecoder {
 
-	private final static Logger LOG = LoggerFactory.getLogger(CcsdsPacketDecoder.class);
+	private static final int CCSDS_PKT_HEADER_LENGTH = 6;
+
+	private static final int MIN_CCSDS_PKT_LENGTH = 7;
+
+	private static final Logger LOG = LoggerFactory.getLogger(CcsdsPacketDecoder.class);
 
 	private byte[] packetBuffer = ArrayUtils.EMPTY_BYTE_ARRAY;
-	
 
 	public synchronized List<PacketPayload> decode(final FramePayload framePayload) {
-		
+
 		LOG.debug("Decoding");
 
 		// FIXME check for null framePayload
-		
+
 		List<PacketPayload> payloads = new ArrayList<PacketPayload>();
 		byte[] packet = ArrayUtils.clone(framePayload.payload);
 		boolean isNextPacket = framePayload.isNextFrame;
@@ -38,13 +41,13 @@ public class CcsdsPacketDecoder {
 		LOG.debug("Packet Buffer is now " + packetBuffer.length + " bytes long.");
 
 		// the minimum defined length for a packet is 7 bytes (6 bytes in the header, 1 byte payload)
-		if (packetBuffer.length < 7) {
+		if (packetBuffer.length < MIN_CCSDS_PKT_LENGTH) {
 			return null;
 		}
 
-		byte[] primaryHeader = ArrayUtils.subarray(packetBuffer, 0, 6);
+		byte[] primaryHeader = ArrayUtils.subarray(packetBuffer, 0, CCSDS_PKT_HEADER_LENGTH);
 
-		int payloadOffset = 6;
+		int payloadOffset = CCSDS_PKT_HEADER_LENGTH;
 
 		int packetVersionNumber = ((0xE0 & primaryHeader[0]) & 0xFF) >>> 5;
 
@@ -65,45 +68,38 @@ public class CcsdsPacketDecoder {
 
 		// FIXME Figure this out
 		// check for secondary header flag (5th bit in primary header
-		// if ((0x08 & primaryHeader[0]) == 0x08) {
-		// Not sure how to handle secondary header: where to get its length?
-		// payloadOffset += ??
-		// }
 
 		int apidHighByte = (0x07 & primaryHeader[0]) << 8;
 		int apidLowByte = 0xFF & primaryHeader[1];
 		int apid = apidHighByte + apidLowByte;
 		LOG.debug("Apid: " + apid);
 
-		int packetSequenceFlags = (0xC0 & primaryHeader[2]) >> 6;
+		int packetSequenceFlags = (0xC0 & primaryHeader[2]) >> CCSDS_PKT_HEADER_LENGTH;
 		LOG.debug("Packet Sequence Flags: " + packetSequenceFlags);
 
-		int packetSequenceCountOrPacketNameHighByte = (0x3F & primaryHeader[2]) << 8;
+		int packetSequenceCountOrPacketNameHighByte = (0x3F & primaryHeader[2]) << Byte.SIZE;
 		int packetSequenceCountOrPacketNameLowByte = 0xFF & primaryHeader[3];
 		int packetSequenceCountOrPacketName = packetSequenceCountOrPacketNameHighByte + packetSequenceCountOrPacketNameLowByte;
 		LOG.debug("Packet Sequence Count or Packet Name: " + packetSequenceCountOrPacketName);
 
-
-		int packetDataLengthHighByte = (0xFF & primaryHeader[4]) << 8;
+		int packetDataLengthHighByte = (0xFF & primaryHeader[4]) << Byte.SIZE;
 		int packetDataLengthLowByte = 0xFF & primaryHeader[5];
 		int packetDataLength = packetDataLengthHighByte + packetDataLengthLowByte + 1;
 		LOG.debug("Packet Data Length: " + packetDataLength);
 
 		int payloadEnd = payloadOffset + packetDataLength;
 
-
 		byte[] packetPayload = ArrayUtils.subarray(packetBuffer, payloadOffset, payloadEnd);
-		
+
 		// add the current payload
 		payloads.add(new PacketPayload(apid, packetPayload, framePayload.timeStamp));
-		
-		
+
 		if (packetBuffer.length >= (payloadEnd)) {
 			// Buffer is not empty yet, recurse!
-			
+
 			// put the rest into the packet buffer and reprocess
 			packetBuffer = ArrayUtils.subarray(packetBuffer, payloadEnd, packetBuffer.length);
-			
+
 			// pass an empty byte array to ourselves.
 			// Recursion, yeah!
 			List<PacketPayload> morePayloads = this.decode(new FramePayload(ArrayUtils.EMPTY_BYTE_ARRAY, true, System.currentTimeMillis()));

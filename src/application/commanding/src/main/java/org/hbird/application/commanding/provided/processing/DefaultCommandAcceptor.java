@@ -11,7 +11,8 @@ public class DefaultCommandAcceptor implements CommandAcceptor {
 	private final static Logger LOG = LoggerFactory.getLogger(DefaultCommandAcceptor.class);
 
 	/**
-	 * The commandSenderEndpoint is looked up int he Registry so make sure you have one in your spring or blueprint!
+	 * The commandSenderEndpoint is looked up in the Registry so make sure you have one in your spring config file or
+	 * blueprint!
 	 */
 	@Produce(ref = "commandSenderEndpoint")
 	private CommandSender sender;

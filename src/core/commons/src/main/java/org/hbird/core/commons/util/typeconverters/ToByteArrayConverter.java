@@ -7,6 +7,10 @@ import org.hbird.core.commons.util.exceptions.InvalidBinaryStringException;
 @Converter
 public class ToByteArrayConverter {
 
+	private ToByteArrayConverter() {
+		// Utility class.
+	}
+
 	public static byte[] toByteArray(String binaryString) throws InvalidBinaryStringException {
 		return BytesUtility.binaryStringToByteArray(binaryString);
 	}

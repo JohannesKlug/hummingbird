@@ -9,13 +9,17 @@ import org.hbird.core.commons.util.exceptions.BitSetOperationException;
 @Converter
 public class ToBitSetConverter {
 
+	private ToBitSetConverter() {
+		// Utility class.
+	}
+
 	@Converter
 	public static BitSet toBitSet(final String binaryString) throws BitSetOperationException {
 		return BitSetUtility.stringToBitSet(binaryString, true, true);
 	}
 
 	@Converter
-	public static BitSet toBitSet(final byte[] bytes) throws BitSetOperationException {
+	public static BitSet toBitSet(final byte[] bytes) {
 		return BitSetUtility.fromByteArray(bytes);
 	}
 }

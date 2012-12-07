@@ -12,8 +12,10 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public abstract class BytesUtility {
-
 	private static final Logger LOG = LoggerFactory.getLogger(BytesUtility.class);
+
+	private static final int SINGLE_BYTE_SIGN_MASK = 0xFF;
+	private static final int MAX_SUPPORTED_NUM_OF_BYTES = 8;
 
 	private BytesUtility() {
 		// Utility class
@@ -37,7 +39,7 @@ public abstract class BytesUtility {
 	 */
 	public static Number combine(final byte[] b, final int sizeIntBits, final boolean signed) {
 		// Defensive! We are combining into a primitive long so we are limited to 64 bits (8 bytes)
-		if (b.length > 8) {
+		if (b.length > MAX_SUPPORTED_NUM_OF_BYTES) {
 			throw new IllegalArgumentException("Cannot fit this Byte array into a long.  Max size is 8 elements.");
 		}
 
@@ -63,19 +65,19 @@ public abstract class BytesUtility {
 				// a sign bit
 				else {
 					// "anding" with 0xff removes the sign
-					value |= (long) (b[index] & 0xff) << (i << 3);
+					value |= (long) (b[index] & SINGLE_BYTE_SIGN_MASK) << (i << 3);
 				}
 			}
 			// ...else if we are dealing with an unsigned number
 			else {
-				value |= (long) (b[index] & 0xff) << (i << 3);
+				value |= (long) (b[index] & SINGLE_BYTE_SIGN_MASK) << (i << 3);
 			}
 
 		}
 
 		// Calculate how much we have to chop off to make the sizeInBits integer
-		int numCompleteBytesRequired = sizeIntBits / 8;
-		int extraBitsRequired = sizeIntBits % 8;
+		int numCompleteBytesRequired = sizeIntBits / Byte.SIZE;
+		int extraBitsRequired = sizeIntBits % Byte.SIZE;
 		int totalBytesRequired;
 
 		// If we required extra bits then we will need an extra byte to store the number...
@@ -91,9 +93,9 @@ public abstract class BytesUtility {
 		// Because we are using a byte array we are bound by multiples of 8 bits to represent the number
 		// This means we will (if bit size is off the bound) have extra bits at the end of the long primitive we need to
 		// chop off (right shift)
-		int chopBits = (b.length - totalBytesRequired) * 8;
+		int chopBits = (b.length - totalBytesRequired) * Byte.SIZE;
 		if (extraBitsRequired != 0) {
-			chopBits += 8 - extraBitsRequired;
+			chopBits += Byte.SIZE - extraBitsRequired;
 		}
 
 		if (LOG.isDebugEnabled()) {
@@ -102,15 +104,6 @@ public abstract class BytesUtility {
 			LOG.debug("Total Bytes required to store value = " + totalBytesRequired);
 			LOG.debug("Need to chop (unsigned right shift) " + chopBits + " bits off");
 		}
-
-		// if not signed chop the bits and pad the start of the long primitive with 0's
-		// if (!signed) {
-		// value = value >>> chopBits;
-		// }
-		// // ...else chop the bits whilst retaining the sign bit
-		// else {
-		// value = value >> chopBits;
-		// }
 
 		return value;
 	}
@@ -124,7 +117,7 @@ public abstract class BytesUtility {
 	public static String decimalDump(final byte[] bytes) {
 		StringBuffer buffer = new StringBuffer();
 		for (byte b : bytes) {
-			buffer.append(Byte.toString((byte) (b & 0xFF)));
+			buffer.append(Byte.toString((byte) (b & SINGLE_BYTE_SIGN_MASK)));
 			buffer.append(" ");
 		}
 
@@ -132,17 +125,17 @@ public abstract class BytesUtility {
 	}
 
 	public static byte[] binaryStringToByteArray(final String binaryString) throws InvalidBinaryStringException {
-		if ((binaryString.length() % 8) != 0) {
+		if ((binaryString.length() % Byte.SIZE) != 0) {
 			throw new InvalidBinaryStringException(binaryString.length());
 		}
 
-		int numberOfBytes = binaryString.length() / 8;
+		int numberOfBytes = binaryString.length() / Byte.SIZE;
 		byte[] result = new byte[numberOfBytes];
 
 		for (int i = 0; i < numberOfBytes; i++) {
 			String currentByteAsString = binaryString.substring(i * Byte.SIZE, (i + 1) * Byte.SIZE);
 			int currentByteAsInt = Integer.parseInt(currentByteAsString, 2);
-			result[i] = (byte) (currentByteAsInt & 0xFF);
+			result[i] = (byte) (currentByteAsInt & SINGLE_BYTE_SIGN_MASK);
 		}
 
 		return result;
@@ -151,7 +144,7 @@ public abstract class BytesUtility {
 	public static String hexDump(byte[] payload) {
 		String hexdump = "";
 		for (byte b : payload) {
-			hexdump += "0x" + Integer.toHexString(b & 0xff) + " ";
+			hexdump += "0x" + Integer.toHexString(b & SINGLE_BYTE_SIGN_MASK) + " ";
 		}
 		return hexdump;
 	}

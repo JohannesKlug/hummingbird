@@ -144,10 +144,10 @@ public final class BitSetUtility {
 		final BitSet result = new BitSet(str.length());
 
 		int count = 0;
-		int crement = 1; // Haha, the CREMENT!
+		// Haha, the CREMENT!
+		int crement = 1;
 
 		if (isBigEndian) {
-			// count = result.size() - 1;
 			count = str.length() - 1;
 			crement = -1;
 		}
@@ -164,9 +164,7 @@ public final class BitSetUtility {
 			count += crement;
 		}
 
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Returning: " + binDump(result));
-		}
+		LOG.debug("Returning: " + binDump(result));
 
 		return result;
 	}
@@ -294,7 +292,7 @@ public final class BitSetUtility {
 		int intFromBitset = 0;
 		int requiredByteShifts = 3;
 		int bytePosition = requiredByteShifts;
-		for (int i = 0; i < Integer.SIZE / 8; i++) {
+		for (int i = 0; i < Integer.SIZE / Byte.SIZE; i++) {
 			intFromBitset += (bytes[i] & BYTE_TO_INT_MASK) << bytePosition * Byte.SIZE;
 			bytePosition--;
 		}
@@ -347,8 +345,9 @@ public final class BitSetUtility {
 					}
 				}
 			}
-			else { // Little Endian
-					// Calculate the starting position of the final byte in the bitset.
+			// Little Endian
+			else {
+				// Calculate the starting position of the final byte in the bitset.
 				int bytePosInBitset = (numberOfBytes - 1) * Byte.SIZE - 1;
 				// Copy left of padding bits
 				for (int x = 0; x <= bytePosInBitset; x++) {
@@ -427,7 +426,7 @@ public final class BitSetUtility {
 
 			// Mask the byte with a mask which contains a 1 set in the current bit index we are working on.
 			// We mask the byte moving a 1 from left to right
-			final long maskShift = i % 8;
+			final long maskShift = i % Byte.SIZE;
 			if ((bytes[byteIndex] & (128 >>> maskShift)) > 0) {
 				// if the results is > 0 i.e. the bit at position i is set to 1 in the byte
 				// therefore we set the same position in the BitSet

@@ -52,7 +52,6 @@ import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.SpaceSystemModelFactory;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
-import org.hbird.core.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidSpaceSystemDefinitionException;
 import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
@@ -62,7 +61,6 @@ import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdCommandGroup;
 import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
 import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameterGroup;
 import org.hbird.core.spacesystemmodel.tmtc.provided.ProtectedValueParameter;
-import org.hbird.core.xtce.exceptions.UnsupportedXtceConstructException;
 import org.hbird.core.xtce.utils.XtceToJavaMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,6 +68,8 @@ import org.slf4j.LoggerFactory;
 import com.google.common.primitives.Ints;
 
 public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
+
+	private static final String TC_QUALIFIED_NAME_POSTFIX = ".tc.";
 
 	public static final BinaryRepresentation DEFAULT_STRING_ENCODING = BinaryRepresentation.UTF8;
 
@@ -185,9 +185,9 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	 * @throws ValidationException
 	 * @throws MarshalException
 	 */
-	@SuppressWarnings("resource")
 	// SpaceSystem is not a closeable
-	private static final SpaceSystem unmarshallXtceXmlSpaceSystem(final String spacesystemmodelFilename) throws MarshalException, ValidationException,
+	@SuppressWarnings("resource")
+	private static final SpaceSystem unmarshallXtceXmlSpaceSystem(String spacesystemmodelFilename) throws MarshalException, ValidationException,
 			FileNotFoundException {
 		SpaceSystem spaceSystem = null;
 		final XMLContext context = new XMLContext();
@@ -248,7 +248,6 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	/**
 	 * @param telemetryMetaData
 	 * @return
-	 * @throws InvalidParameterTypeException
 	 * @throws InvalidSpaceSystemDefinitionException
 	 */
 	private final void createAllTmParameterTypes(final TelemetryMetaData telemetryMetaData) throws InvalidSpaceSystemDefinitionException {
@@ -381,7 +380,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 				throw new InvalidSpaceSystemDefinitionException(msg);
 			}
 
-			final String qualifiedNamePrefix = spaceSystem.getName() + ".tc.";
+			final String qualifiedNamePrefix = spaceSystem.getName() + TC_QUALIFIED_NAME_POSTFIX;
 			final String name = xtceArgument.getParameter().getName();
 			final String qualifiedName = qualifiedNamePrefix + name;
 			final String shortDescription = xtceArgument.getParameter().getShortDescription();
@@ -502,7 +501,6 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	 * 
 	 * @throws InvalidSpaceSystemDefinitionException
 	 * 
-	 * @throws UnsupportedXtceConstructException
 	 */
 	private final void createAllParameterGroups() throws InvalidSpaceSystemDefinitionException {
 		final String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
@@ -532,10 +530,9 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	 * 
 	 * @throws InvalidSpaceSystemDefinitionException
 	 * 
-	 * @throws UnsupportedXtceConstructException
 	 */
 	private final void createAllCommandGroups() throws InvalidSpaceSystemDefinitionException {
-		final String qualifiedNamePrefix = spaceSystem.getName() + ".tc.";
+		final String qualifiedNamePrefix = spaceSystem.getName() + TC_QUALIFIED_NAME_POSTFIX;
 		final int numTcParameterGroups = spaceSystem.getCommandMetaData().getMetaCommandSet().getMetaCommandSetItemCount();
 		for (int containerIndex = 0; containerIndex < numTcParameterGroups; ++containerIndex) {
 			final MetaCommand metaCommand = spaceSystem.getCommandMetaData().getMetaCommandSet().getMetaCommandSetItem(containerIndex).getMetaCommand();
@@ -562,7 +559,6 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 	/**
 	 * @throws InvalidSpaceSystemDefinitionException
-	 * @throws UnsupportedXtceConstructException
 	 * 
 	 */
 	private final void populateParameterGroupRestrictions(final String qualifiedName, final SequenceContainer parameterGroupContainer)
@@ -660,7 +656,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	}
 
 	private void populateCommandGroups() throws InvalidSpaceSystemDefinitionException {
-		final String qualifiedNamePrefix = spaceSystem.getName() + ".tc.";
+		final String qualifiedNamePrefix = spaceSystem.getName() + TC_QUALIFIED_NAME_POSTFIX;
 		final MetaCommandSet commands = spaceSystem.getCommandMetaData().getMetaCommandSet();
 
 		// For every defined command
@@ -750,7 +746,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	}
 
 	private void createCommandInstanceVersionsOfBaseArgs(ArgumentListItem[] baseCmdArgumentListItem, String commandName) {
-		String qualifiedNamePrefix = spaceSystem.getName() + ".tc.";
+		String qualifiedNamePrefix = spaceSystem.getName() + TC_QUALIFIED_NAME_POSTFIX;
 		String cmdQualifiedNamePrefix = qualifiedNamePrefix + commandName;
 		for (ArgumentListItem argumentList : baseCmdArgumentListItem) {
 			for (Argument arg : argumentList.getArgument()) {
@@ -1108,14 +1104,14 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	}
 
 	final static Encoding createXtceStringEncoding(final StringParameterType type) throws InvalidSpaceSystemDefinitionException {
-		final int UFT8_CHAR_BIT_LENGTH = 8;
-		final int UFT16_CHAR_BIT_LENGTH = 16;
+		final int uft8CharBitLength = 8;
+		final int utf16CharBitLength = 16;
 
 		final Encoding encoding = new Encoding();
 		if (type.getCharacterWidth() == null) {
 			// fall back to default encoding
 			encoding.setBinaryRepresentation(DEFAULT_STRING_ENCODING);
-			encoding.setSizeInBits((int) type.getSizeRangeInCharacters().getMax() * UFT8_CHAR_BIT_LENGTH);
+			encoding.setSizeInBits((int) type.getSizeRangeInCharacters().getMax() * uft8CharBitLength);
 		}
 		else {
 			switch (type.getCharacterWidth()) {
@@ -1123,14 +1119,14 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 					encoding.setBinaryRepresentation(BinaryRepresentation.UTF8);
 					// FIXME Possible loss of data in int cast. Why the hell anybody would have a long length string in
 					// their TC or TM is anybodies guess!
-					encoding.setSizeInBits((int) type.getSizeRangeInCharacters().getMax() * UFT8_CHAR_BIT_LENGTH);
+					encoding.setSizeInBits((int) type.getSizeRangeInCharacters().getMax() * uft8CharBitLength);
 					LOG.trace("Size in bits for UTF8 parameter " + type.getName() + " set to " + encoding.getSizeInBits());
 					break;
 				case VALUE_16:
 					encoding.setBinaryRepresentation(BinaryRepresentation.UTF16);
 					// FIXME Possible loss of data in int cast. Why the hell anybody would have a long length string in
 					// their TC or TM is anybodies guess!
-					encoding.setSizeInBits((int) type.getSizeRangeInCharacters().getMax() * UFT16_CHAR_BIT_LENGTH);
+					encoding.setSizeInBits((int) type.getSizeRangeInCharacters().getMax() * utf16CharBitLength);
 					break;
 				default:
 					// encoding.setBinaryRepresentation(BinaryRepresentation.ASCII); TODO valid?
