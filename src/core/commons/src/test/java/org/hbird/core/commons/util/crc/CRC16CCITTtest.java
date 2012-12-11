@@ -5,17 +5,17 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CRC16CCITTTest {
+public class CRC16ccittTest {
 
 	private static final String TEST_INPUT = "123456789";
 	private static final int EXPECTED_CRC = 0x29B1;
 	private static final int EXPECTED_RESET_CRC = 0xFFFF;
 
-	private CRC16CCITT crc;
+	private CRC16ccitt crc;
 
 	@Before
 	public void setUp() throws Exception {
-		crc = new CRC16CCITT();
+		crc = new CRC16ccitt();
 	}
 
 	private void testUpdateInt() {

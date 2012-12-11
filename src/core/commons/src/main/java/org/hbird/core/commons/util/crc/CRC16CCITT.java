@@ -2,7 +2,7 @@ package org.hbird.core.commons.util.crc;
 
 import java.util.zip.Checksum;
 
-public class CRC16CCITT implements Checksum {
+public class CRC16ccitt implements Checksum {
 
 	/** initial value **/
 	private static int crc = 0xFFFF;
