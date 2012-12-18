@@ -16,17 +16,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SerialPortAssembly implements Observer {
-	private final static Logger LOG = LoggerFactory.getLogger(SerialPortAssembly.class);
+	private static final int SIGN_BYTE_MASK = 0xFF;
 
+	private static final Logger LOG = LoggerFactory.getLogger(SerialPortAssembly.class);
+
+	// FIXME hardcoded lol
 	@EndpointInject(uri = "activemq:slipstream")
 	ProducerTemplate producer;
 
 	// FIXME These should be removed and put into the default constructor for SLIP
-	private static final int END = (0xC0 & 0xFF), ESC = (0xDB & 0xFF), ESCEND = (0xDC & 0xFF), ESCESC = (0xDD & 0xFF);
+	private static final int END = (0xC0 & 0xFF);
+	private static final int ESC = (0xDB & 0xFF);
+	private static final int ESCEND = (0xDC & 0xFF);
+	private static final int ESCESC = (0xDD & 0xFF);
 
 	private SerialPortDriver driver;
-
-	private byte[] receivedBytes;
 
 	// Default: use /dev/ttyUSB0 and CCSDS ASM for frame sync
 	public SerialPortAssembly() {
@@ -38,7 +42,7 @@ public class SerialPortAssembly implements Observer {
 			driver = new SerialPortDriver(commPortId);
 			sync.addObserver(this);
 
-			Thread receiver = new Thread(new Runnable() {
+			Thread receiverThread = new Thread(new Runnable() {
 				@Override
 				public void run() {
 					try {
@@ -46,13 +50,13 @@ public class SerialPortAssembly implements Observer {
 					}
 					catch (IOException e) {
 						LOG.error(e.toString());
-					} finally {
+					}
+					finally {
 						closePort();
 					}
 				}
 			});
-			receiver.start();
-
+			receiverThread.start();
 
 		}
 		catch (NoSuchPortException e) {
@@ -65,7 +69,6 @@ public class SerialPortAssembly implements Observer {
 			LOG.error(e.toString());
 		}
 
-
 	}
 
 	public void closePort() {
@@ -74,12 +77,12 @@ public class SerialPortAssembly implements Observer {
 
 	@Override
 	public void update(final Observable o, final Object arg) {
-		receivedBytes = (byte[]) arg;
+		byte[] receivedBytes = (byte[]) arg;
 		producer.sendBody(receivedBytes);
 		LOG.debug("Received " + receivedBytes.length + " bytes:");
 		String receivedBytesInHex = "";
 		for (byte b : receivedBytes) {
-			receivedBytesInHex += Integer.toHexString(b & 0xFF) + " ";
+			receivedBytesInHex += Integer.toHexString(b & SIGN_BYTE_MASK) + " ";
 		}
 		LOG.debug(receivedBytesInHex);
 		LOG.debug("---------------------------------------------");

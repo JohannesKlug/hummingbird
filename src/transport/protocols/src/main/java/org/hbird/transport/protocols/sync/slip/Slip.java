@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public class Slip extends ObservableFrameSynchroniser {
-	private final static Logger LOG = LoggerFactory.getLogger(Slip.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Slip.class);
 
 	private final int end, esc, escEnd, escEsc;
 
@@ -33,7 +33,7 @@ public class Slip extends ObservableFrameSynchroniser {
 	}
 
 	// FIXME This method should be put into commons.
-	private byte[] convertToByteArray(final int[] input) {
+	private static byte[] convertToByteArray(final int[] input) {
 		byte[] outputBytes = ArrayUtils.EMPTY_BYTE_ARRAY;
 
 		for (int i : input) {
@@ -71,7 +71,6 @@ public class Slip extends ObservableFrameSynchroniser {
 		output = ArrayUtils.add(output, end);
 		// Add a second end to conform to the dutch implementation
 		output = ArrayUtils.add(output, end);
-
 
 		return convertToByteArray(output);
 	}

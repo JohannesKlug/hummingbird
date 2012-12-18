@@ -10,12 +10,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CcsdsPacketDecoder {
+	private static final Logger LOG = LoggerFactory.getLogger(CcsdsPacketDecoder.class);
 
 	private static final int CCSDS_PKT_HEADER_LENGTH = 6;
 
 	private static final int MIN_CCSDS_PKT_LENGTH = 7;
-
-	private static final Logger LOG = LoggerFactory.getLogger(CcsdsPacketDecoder.class);
 
 	private byte[] packetBuffer = ArrayUtils.EMPTY_BYTE_ARRAY;
 
@@ -30,10 +29,8 @@ public class CcsdsPacketDecoder {
 		boolean isNextPacket = framePayload.isNextFrame;
 
 		if (!isNextPacket) {
-			// this is not the next packet in sequence
-			// clear the packet buffer
+			// this is not the next packet in sequence clear the packet buffer
 			packetBuffer = ArrayUtils.EMPTY_BYTE_ARRAY;
-			// packetBuffer = new byte[0];
 		}
 
 		LOG.debug("Packet Buffer is now " + packetBuffer.length + " bytes long.");
@@ -100,8 +97,7 @@ public class CcsdsPacketDecoder {
 			// put the rest into the packet buffer and reprocess
 			packetBuffer = ArrayUtils.subarray(packetBuffer, payloadEnd, packetBuffer.length);
 
-			// pass an empty byte array to ourselves.
-			// Recursion, yeah!
+			// pass an empty byte array to ourselves. Recursion, yeah!
 			List<PacketPayload> morePayloads = this.decode(new FramePayload(ArrayUtils.EMPTY_BYTE_ARRAY, true, System.currentTimeMillis()));
 			if (morePayloads != null) {
 				payloads.addAll(morePayloads);
