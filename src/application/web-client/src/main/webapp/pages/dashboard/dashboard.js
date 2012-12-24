@@ -62,7 +62,8 @@ function addNewParameterMonitorWidget() {
 }
 
 function createMonitorDiv(id) {
-	var div = $("<div>");
+	var div = $("<div id=\"monitorDiv" + id + "\">");
+	return div;
 }
 
 function createSearchForm(id) {
@@ -89,13 +90,48 @@ function createSearchForm(id) {
 			parameters = jQuery.parseJSON(jqXHR.responseText);
 			var parameterList = $("#parameterList" + id);
 			parameterList.empty();
+			console.log("Received: " + parameters.length);
 			$.each(parameters, function(i) {
 				parameterList.append(new Option(parameters[i].qualifiedName, parameters[i].name, false, false));
 			});
 		});
 	});
 	
+	// On submit
+	form.submit(function() {
+		var inputValue = input.val();
+		var option = $("#parameterList" + id).children();
+		var found = false;
+		console.log("Input submitted: " + inputValue);
+		$.each(option, function(i) {
+			console.log("input = " + inputValue + ". child val = " + $(option[i]).val());
+			if(inputValue === $(option[i]).val()) {
+				configureMonitorDiv(id, inputValue);
+				found = true;
+				return false; // this is the same as a break in the jquery each function
+			}
+		});
+		if(!found) {
+			$.pnotify({
+			    title: "Search failure",
+			    text: "Could not find a parameter called " + inputValue,
+			    type: "error",
+			    icon: "picon picon-page-zoom"
+			});
+		}
+		return false;
+	});
+	
 	return searchDiv;
+}
+
+
+function configureMonitorDiv(id, inputValue) {
+	console.log("configuring monitor div " + id);
+	var mDiv = $("#monitorDiv" + id);
+	mDiv.append("<h4>" + inputValue + "</h4>");
+	
+	mDiv.append("<div id=\"value" + inputValue + "\"></div>");
 }
 
 
