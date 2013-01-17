@@ -1,24 +1,24 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" 
-		 xmlns="http://maven.apache.org/POM/4.0.0"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>org.hbird.application</groupId>
 		<artifactId>application</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<artifactId>halcyon</artifactId>
 	<packaging>war</packaging>
 	<name>Hbird :: Application :: Halcyon</name>
-	
+
 	<properties>
 		<jersey-version>1.13</jersey-version>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
@@ -33,10 +33,10 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-	    	<groupId>com.sun.jersey.contribs</groupId>
-	    	<artifactId>jersey-spring</artifactId>
-	    	<version>${jersey-version}</version>
-	    	<scope>provided</scope>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-spring</artifactId>
+			<version>${jersey-version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -50,31 +50,31 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.core</artifactId>
-            <version>4.2.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.compendium</artifactId>
-            <version>4.2.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-        	<groupId>org.hbird.application</groupId>
-        	<artifactId>commanding</artifactId>
-        	<scope>provided</scope>
-        	<version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-        	<groupId>org.codehaus.jackson</groupId>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>4.2.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
+			<version>4.2.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hbird.application</groupId>
+			<artifactId>commanding</artifactId>
+			<scope>provided</scope>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-core-asl</artifactId>
 			<version>1.9.2</version>
 			<scope>provided</scope>
@@ -85,11 +85,11 @@
 			<version>1.9.2</version>
 			<scope>provided</scope>
 		</dependency>
-            
-        
-        <!-- Override the scope of these artifacts from the parent project hummingbird. They are provided by the 
-        container so we don't need to bloat our war. -->
-        <dependency>
+
+
+		<!-- Override the scope of these artifacts from the parent project hummingbird. 
+			They are provided by the container so we don't need to bloat our war. -->
+		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<scope>provided</scope>
@@ -118,7 +118,7 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<repositories>
 		<repository>
 			<id>m2.java.net</id>
@@ -126,7 +126,7 @@
 			<url>http://download.java.net/maven/2</url>
 		</repository>
 	</repositories>
-	
+
 	<pluginRepositories>
 		<pluginRepository>
 			<id>m2.java.net</id>
@@ -134,7 +134,7 @@
 			<url>http://download.java.net/maven/2</url>
 		</pluginRepository>
 	</pluginRepositories>
-	
+
 	<build>
 		<finalName>halcyon</finalName>
 		<plugins>
@@ -142,75 +142,98 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<inherited>true</inherited>
 			</plugin>
-			
-			 <!-- to generate the MANIFEST-FILE required by the bundle -->
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
-                <executions>
-                    <execution>
-                        <id>bundle-manifest</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>manifest</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <manifestLocation>${project.build.directory}/META-INF</manifestLocation>
-                    <supportedProjectTypes>
-                        <supportedProjectType>bundle</supportedProjectType>
-                        <supportedProjectType>war</supportedProjectType>
-                        <supportedProjectType>jar</supportedProjectType>
-                    </supportedProjectTypes>
-                    <instructions>
-                    	<Export-Package>
-                    		*
-                    	</Export-Package>
-                        <Import-Package>
-                        	*,
-                        	com.sun.jersey.api.core,
-                        	com.sun.jersey.spi.container.servlet,
-                        	com.sun.jersey.api,
-                        	com.sun.jersey.api.json,
-                        	org.codehaus.jackson.xc,
-                        	org.osgi.service.blueprint.container,
-                        	com.sun.jersey.spi.spring.container.servlet,
-                        	org.eclipse.jetty.websocket
-                        </Import-Package>
-                        <Webapp-Context>hbird</Webapp-Context>
-                        <Web-ContextPath>hbird</Web-ContextPath>
-                        <Bundle-Activator>org.hbird.application.halcyon.HalcyonServletContextListener</Bundle-Activator>
-                    </instructions>
-                </configuration>
-            </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <attachClasses>true</attachClasses>
-                    <archive>
-                    	<!-- Puts the manifest file generated by the bundle plugin into the war -->
-                        <manifestFile>${project.build.directory}/META-INF/MANIFEST.MF</manifestFile>
-                        <manifestEntries>
-                            <Bundle-ClassPath>WEB-INF/classes</Bundle-ClassPath>
-                        </manifestEntries>
-                    </archive>
+			<!-- to generate the MANIFEST-FILE required by the bundle -->
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<manifestLocation>${project.build.directory}/META-INF</manifestLocation>
+					<supportedProjectTypes>
+						<supportedProjectType>bundle</supportedProjectType>
+						<supportedProjectType>war</supportedProjectType>
+						<supportedProjectType>jar</supportedProjectType>
+					</supportedProjectTypes>
+					<instructions>
+						<Export-Package>
+							*
+						</Export-Package>
+						<Import-Package>
+							*,
+							com.sun.jersey.api.core,
+							com.sun.jersey.spi.container.servlet,
+							com.sun.jersey.api,
+							com.sun.jersey.api.json,
+							org.codehaus.jackson.xc,
+							org.osgi.service.blueprint.container,
+							com.sun.jersey.spi.spring.container.servlet,
+							org.eclipse.jetty.websocket
+						</Import-Package>
+						<Webapp-Context>hbird</Webapp-Context>
+						<Web-ContextPath>hbird</Web-ContextPath>
+						<Bundle-Activator>org.hbird.application.halcyon.HalcyonServletContextListener</Bundle-Activator>
+					</instructions>
+				</configuration>
+			</plugin>
 
-<!--                     <webResources> -->
-<!--             	        <resource> -->
-<!-- 			            	<directory>src/main/resources/OSGI-INF</directory> -->
-<!-- 			            	<targetPath>OSGI-INF</targetPath> -->
-<!--               				<filtering>true</filtering> -->
-<!--             			</resource> -->
-<!--           			</webResources> -->
-                </configuration>
-            </plugin>
-			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<attachClasses>true</attachClasses>
+					<archive>
+						<!-- Puts the manifest file generated by the bundle plugin into the 
+							war -->
+						<manifestFile>${project.build.directory}/META-INF/MANIFEST.MF</manifestFile>
+						<manifestEntries>
+							<Bundle-ClassPath>WEB-INF/classes</Bundle-ClassPath>
+						</manifestEntries>
+					</archive>
+
+					<!-- <webResources> -->
+					<!-- <resource> -->
+					<!-- <directory>src/main/resources/OSGI-INF</directory> -->
+					<!-- <targetPath>OSGI-INF</targetPath> -->
+					<!-- <filtering>true</filtering> -->
+					<!-- </resource> -->
+					<!-- </webResources> -->
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.enunciate</groupId>
+				<artifactId>maven-enunciate-plugin</artifactId>
+				<version>1.26.2</version>
+				<configuration>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>docs</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.enunciate</groupId>
+						<artifactId>enunciate-amf</artifactId>
+						<version>1.26.2</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
 		</plugins>
 	</build>
-	
+
 	<description>A RESTful OSGi WAB web application that utilises OSGi services to offer restful web interfaces to various hbird applictions and modules/components..</description>
 </project>
