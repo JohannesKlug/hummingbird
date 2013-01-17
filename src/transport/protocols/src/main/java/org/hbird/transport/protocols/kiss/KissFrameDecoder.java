@@ -81,6 +81,7 @@ public class KissFrameDecoder extends CumulativeProtocolDecoder {
 			// If the type is RETURN we need to get out of here.
 			if (type == RETURN) {
 				// exit KISS
+				state = false; // TODO Check this.
 			}
 			else {
 				if (type == FEND) {
@@ -98,17 +99,7 @@ public class KissFrameDecoder extends CumulativeProtocolDecoder {
 				// Now we can perform the correct logic given the type.
 				switch (commandType) {
 					case DATA_FRAME:
-						// FIXME handle transposed ends
-						byte[] data = ArrayUtils.EMPTY_BYTE_ARRAY;
-						byte next = (byte) 0x00;
-						while ((next = in.get()) != FEND) {
-							data = ArrayUtils.add(data, next);
-						}
-
-						// The next byte is now FEND so we have the full data payload and can write it out.
-						state = false;
-						out.write(data);
-
+						state = handleDataFrame(in, out);
 						break;
 					case TX_DELAY:
 						break;
@@ -124,11 +115,26 @@ public class KissFrameDecoder extends CumulativeProtocolDecoder {
 						break;
 					default:
 						// Corruption
+						state = false;
 						break;
 				}
 			}
 		}
 
 		return state;
+	}
+
+	private static boolean handleDataFrame(IoBuffer in, ProtocolDecoderOutput out) {
+		// FIXME handle transposed ends
+		byte[] data = ArrayUtils.EMPTY_BYTE_ARRAY;
+		byte next = (byte) 0x00;
+		while ((next = in.get()) != FEND) {
+			data = ArrayUtils.add(data, next);
+		}
+
+		// The next byte is now FEND so we have the full data payload and can write it out.
+		out.write(data);
+
+		return false;
 	}
 }
