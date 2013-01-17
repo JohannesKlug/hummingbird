@@ -53,4 +53,14 @@ public class KissFrameDecoderTest {
 
 		verify(mockOut).write(expectedOutput);
 	}
+
+	@Test
+	public void testKissFrameDecodeDoubleFendAtStart() throws Exception {
+		byte[] testInput = new byte[] { (byte) 0xC0, (byte) 0xC0, 0x00, 0x08, 0x1F, (byte) 0xC0 };
+		byte[] expectedOutput = new byte[] { 0x08, 0x1F };
+
+		decoder.decode(mockSession, IoBuffer.wrap(testInput), mockOut);
+
+		verify(mockOut).write(expectedOutput);
+	}
 }

@@ -83,8 +83,16 @@ public class KissFrameDecoder extends CumulativeProtocolDecoder {
 				// exit KISS
 			}
 			else {
+				if (type == FEND) {
+					// drop second FEND as this could be a sync flush
+					type = in.get();
+				}
+
 				// The type indicator is split across two nibbles so we need to get those first...
 				byte commandType = (byte) (type & LOW_NIBBLE_MASK);
+
+				@SuppressWarnings("unused")
+				// Not implemented send to port yet
 				byte port = (byte) ((type >> 4) & LOW_NIBBLE_MASK);
 
 				// Now we can perform the correct logic given the type.
