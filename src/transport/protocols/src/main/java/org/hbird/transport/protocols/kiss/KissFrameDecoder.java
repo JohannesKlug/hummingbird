@@ -95,7 +95,7 @@ public class KissFrameDecoder extends CumulativeProtocolDecoder {
 						byte[] data = ArrayUtils.EMPTY_BYTE_ARRAY;
 						byte next = (byte) 0x00;
 						while ((next = in.get()) != FEND) {
-							ArrayUtils.add(data, next);
+							data = ArrayUtils.add(data, next);
 						}
 
 						// The next byte is now FEND so we have the full data payload and can write it out.
