@@ -53,7 +53,7 @@ function setupWidgetControlPanel() {
 function addNewParameterMonitorWidget() {
 	var widgetHtml = "<div id=\"" + widgetNum + "\" class=\"column\" draggable=\"true\"><header>New monitor</header></div>";
 	var widget = $(widgetHtml);
-	createSearchForm(widgetNum).appendTo(widget);
+	createMonitorSearchForm(widgetNum).appendTo(widget);
 	createMonitorDiv(widgetNum).appendTo(widget);
 	widget.appendTo("#columns");
 	widget.resizable();
@@ -66,7 +66,7 @@ function createMonitorDiv(id) {
 	return div;
 }
 
-function createSearchForm(id) {
+function createMonitorSearchForm(id) {
 	var searchDiv = $("<div id=\"searchSection" + id + "\">");
 	var input = $("<input id=\"parameterSearch\" list=\"parameterList" + id + "\" type=\"search\" results=5 placeholder=\"Type parameter name\"" +
 						" autofocus=\"autofocus\">")
