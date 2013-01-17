@@ -28,7 +28,7 @@ Tell Karaf where to find the Hbird software:
 features:addurl mvn:org.hbird.osgi/osgi-provisioning/0.0.1-SNAPSHOT/xml/features
 
 Install all of Hbird:
-feature:install hbird-complete
+features:install -v hbird-complete
 
 If you update the provisioning features file don't forget to refresh:
 features:refreshurl mvn:org.hbird.osgi/osgi-provisioning/0.0.1-SNAPSHOT/xml/features
