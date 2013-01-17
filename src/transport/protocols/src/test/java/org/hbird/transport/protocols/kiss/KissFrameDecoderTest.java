@@ -43,4 +43,14 @@ public class KissFrameDecoderTest {
 
 		verify(mockOut).write(expectedOutput);
 	}
+
+	@Test
+	public void testKissFrameDecodeRubbishEitherSide() throws Exception {
+		byte[] testInput = new byte[] { 0x45, 0x10, (byte) 0xC0, 0x00, 0x08, 0x1F, (byte) 0xC0, 0x0F };
+		byte[] expectedOutput = new byte[] { 0x08, 0x1F };
+
+		decoder.decode(mockSession, IoBuffer.wrap(testInput), mockOut);
+
+		verify(mockOut).write(expectedOutput);
+	}
 }

@@ -70,7 +70,7 @@ public class KissFrameDecoder extends CumulativeProtocolDecoder {
 
 	@Override
 	protected boolean doDecode(IoSession session, IoBuffer in, ProtocolDecoderOutput out) throws Exception {
-		boolean state = false;
+		boolean state = true;
 
 		byte first = in.get();
 
@@ -81,7 +81,6 @@ public class KissFrameDecoder extends CumulativeProtocolDecoder {
 			// If the type is RETURN we need to get out of here.
 			if (type == RETURN) {
 				// exit KISS
-				state = true;
 			}
 			else {
 				// The type indicator is split across two nibbles so we need to get those first...
@@ -99,7 +98,7 @@ public class KissFrameDecoder extends CumulativeProtocolDecoder {
 						}
 
 						// The next byte is now FEND so we have the full data payload and can write it out.
-						state = true;
+						state = false;
 						out.write(data);
 
 						break;
