@@ -70,6 +70,16 @@ public class KissFrameDecoderTest {
 	}
 
 	@Test
+	public void testKissFrameDecodeDoubleFendWithRubbish() throws Exception {
+		byte[] testInput = new byte[] { 0x45, FEND, FEND, DATA_FRAME, 0x08, 0x1F, FEND };
+		byte[] expectedOutput = new byte[] { 0x08, 0x1F };
+
+		decoder.decode(mockSession, IoBuffer.wrap(testInput), mockOut);
+
+		verify(mockOut).write(expectedOutput);
+	}
+
+	@Test
 	public void testKissFrameDecodeEscapedFendValidFrame() throws Exception {
 		byte[] testInput = new byte[] { FEND, DATA_FRAME, 0x08, 0x1F, FESC, TFEND, 0x08, FEND };
 		byte[] expectedOutput = new byte[] { 0x08, 0x1F, (byte) 0xC0, 0x08 };

@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class RawMinaEncoder implements ProtocolEncoder {
-	private final static Logger LOG = LoggerFactory.getLogger(RawMinaCodec.class);
+	private static final Logger LOG = LoggerFactory.getLogger(RawMinaCodec.class);
 
 	@Override
 	public void dispose(IoSession session) {
@@ -21,7 +21,7 @@ public final class RawMinaEncoder implements ProtocolEncoder {
 			out.write(IoBuffer.wrap((byte[]) object));
 		}
 		else {
-			LOG.warn("No byte array in input");
+			LOG.warn("No byte array in input! Got a " + object.getClass().getName());
 		}
 	}
 }
