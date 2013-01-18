@@ -581,7 +581,11 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 					final Comparison[] restrictionCriteria = comparisonList.getComparison();
 					for (final Comparison comparison : restrictionCriteria) {
 						final String comparisonValue = comparison.getValue();
-						comparisons.add(comparisonValue);
+						if(comparisonValue.startsWith("0x")) {
+							comparisons.add(Integer.decode(comparisonValue).toString());
+						} else {
+							comparisons.add(comparisonValue);
+						}
 						if (LOG.isDebugEnabled()) {
 							LOG.debug("Added restriction " + comparisonValue + " to parameter group " + parameterGroupContainer.getName());
 						}
@@ -592,7 +596,11 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 				final Comparison singleComparison = baseContainer.getRestrictionCriteria().getComparison();
 				if (singleComparison != null) {
 					final String comparisonValue = singleComparison.getValue();
-					comparisons.add(comparisonValue);
+					if(comparisonValue.startsWith("0x")) {
+						comparisons.add(Integer.decode(comparisonValue).toString());
+					} else {
+						comparisons.add(comparisonValue);
+					}
 					restrictions.put(qualifiedName, comparisons);
 					if (LOG.isDebugEnabled()) {
 						LOG.debug("Added restriction " + comparisonValue + " to parameter group " + parameterGroupContainer.getName());
