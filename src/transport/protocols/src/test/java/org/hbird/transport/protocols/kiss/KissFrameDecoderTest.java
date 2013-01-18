@@ -1,5 +1,10 @@
 package org.hbird.transport.protocols.kiss;
 
+import static org.hbird.transport.protocols.kiss.KissFrameDecoder.DATA_FRAME;
+import static org.hbird.transport.protocols.kiss.KissFrameDecoder.FEND;
+import static org.hbird.transport.protocols.kiss.KissFrameDecoder.FESC;
+import static org.hbird.transport.protocols.kiss.KissFrameDecoder.TFEND;
+import static org.hbird.transport.protocols.kiss.KissFrameDecoder.TFESC;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -36,7 +41,7 @@ public class KissFrameDecoderTest {
 
 	@Test
 	public void testKissFrameDecode() throws Exception {
-		byte[] testInput = new byte[] { (byte) 0xC0, 0x00, 0x08, 0x1F, (byte) 0xC0 };
+		byte[] testInput = new byte[] { FEND, DATA_FRAME, 0x08, 0x1F, FEND };
 		byte[] expectedOutput = new byte[] { 0x08, 0x1F };
 
 		decoder.decode(mockSession, IoBuffer.wrap(testInput), mockOut);
@@ -46,7 +51,7 @@ public class KissFrameDecoderTest {
 
 	@Test
 	public void testKissFrameDecodeRubbishEitherSide() throws Exception {
-		byte[] testInput = new byte[] { 0x45, 0x10, (byte) 0xC0, 0x00, 0x08, 0x1F, (byte) 0xC0, 0x0F };
+		byte[] testInput = new byte[] { 0x45, 0x10, FEND, DATA_FRAME, 0x08, 0x1F, FEND, 0x0F };
 		byte[] expectedOutput = new byte[] { 0x08, 0x1F };
 
 		decoder.decode(mockSession, IoBuffer.wrap(testInput), mockOut);
@@ -56,8 +61,48 @@ public class KissFrameDecoderTest {
 
 	@Test
 	public void testKissFrameDecodeDoubleFendAtStart() throws Exception {
-		byte[] testInput = new byte[] { (byte) 0xC0, (byte) 0xC0, 0x00, 0x08, 0x1F, (byte) 0xC0 };
+		byte[] testInput = new byte[] { FEND, FEND, DATA_FRAME, 0x08, 0x1F, FEND };
 		byte[] expectedOutput = new byte[] { 0x08, 0x1F };
+
+		decoder.decode(mockSession, IoBuffer.wrap(testInput), mockOut);
+
+		verify(mockOut).write(expectedOutput);
+	}
+
+	@Test
+	public void testKissFrameDecodeEscapedFendValidFrame() throws Exception {
+		byte[] testInput = new byte[] { FEND, DATA_FRAME, 0x08, 0x1F, FESC, TFEND, 0x08, FEND };
+		byte[] expectedOutput = new byte[] { 0x08, 0x1F, (byte) 0xC0, 0x08 };
+
+		decoder.decode(mockSession, IoBuffer.wrap(testInput), mockOut);
+
+		verify(mockOut).write(expectedOutput);
+	}
+
+	@Test
+	public void testKissFrameDecodeEscapedEscapeValidFrame() throws Exception {
+		byte[] testInput = new byte[] { FEND, DATA_FRAME, 0x08, 0x1F, FESC, TFESC, 0x08, FEND };
+		byte[] expectedOutput = new byte[] { 0x08, 0x1F, (byte) 0xDB, 0x08 };
+
+		decoder.decode(mockSession, IoBuffer.wrap(testInput), mockOut);
+
+		verify(mockOut).write(expectedOutput);
+	}
+
+	@Test
+	public void testKissFrameDecodeEscapedEscapeNoisyFrame() throws Exception {
+		byte[] testInput = new byte[] { FEND, DATA_FRAME, 0x08, 0x1F, FESC, 0x08, FEND };
+		byte[] expectedOutput = new byte[] { 0x08, 0x1F, 0x08 };
+
+		decoder.decode(mockSession, IoBuffer.wrap(testInput), mockOut);
+
+		verify(mockOut).write(expectedOutput);
+	}
+
+	@Test
+	public void testKissFrameDecodeEscapedFendNoisyFrame() throws Exception {
+		byte[] testInput = new byte[] { FEND, DATA_FRAME, 0x08, 0x1F, FESC, (byte) 0xFF, FEND };
+		byte[] expectedOutput = new byte[] { 0x08, 0x1F, (byte) 0xFF };
 
 		decoder.decode(mockSession, IoBuffer.wrap(testInput), mockOut);
 
