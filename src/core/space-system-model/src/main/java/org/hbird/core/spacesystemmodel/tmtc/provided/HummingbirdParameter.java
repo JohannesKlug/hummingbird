@@ -9,9 +9,9 @@ import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 
 /**
  * The Hummingbird implementation of the {@link Parameter}.
- *
+ * 
  * This is a generic class that is able to represent a parameter of any class.
- *
+ * 
  * @author Mark Doyle
  */
 @XmlRootElement()
@@ -28,7 +28,7 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	protected T value;
 
 	/**
-	 *
+	 * 
 	 * @param name
 	 * @param shortDescription
 	 * @param longDescription
@@ -37,16 +37,13 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	 * @param encoding
 	 */
 	@JsonCreator
-	public HummingbirdParameter(@JsonProperty("qualifiedName") final String qualifiedName,
-								@JsonProperty("name") final String name,
-								@JsonProperty("shortDescription") final String shortDescription,
-								@JsonProperty("longDescription") final String longDescription) {
+	public HummingbirdParameter(@JsonProperty("qualifiedName") final String qualifiedName, @JsonProperty("name") final String name,
+			@JsonProperty("shortDescription") final String shortDescription, @JsonProperty("longDescription") final String longDescription) {
 		this.name = name;
 		this.qualifiedName = qualifiedName;
 		this.shortDescription = shortDescription;
 		this.longDescription = longDescription;
 	}
-
 
 	@Override
 	public String getName() {
@@ -90,20 +87,13 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 
 	@Override
 	public String toString() {
-		final StringBuilder builder = new StringBuilder();
-		builder.append("HummingbirdParameter [name=");
-		builder.append(name);
-		builder.append(", value=");
-		builder.append(value);
-		builder.append(", shortDescription=");
-		builder.append(shortDescription);
-		builder.append("]");
-		return builder.toString();
+		return "HummingbirdParameter [qualifiedName=" + qualifiedName + ", name=" + name + ", shortDescription=" + shortDescription + ", longDescription="
+				+ longDescription + ", receivedTime=" + receivedTime + ", value=" + value + "]";
 	}
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -121,7 +111,7 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -181,8 +171,6 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 		}
 		return true;
 	}
-
-
 
 	@Override
 	public boolean isReadOnly() {
