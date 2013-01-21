@@ -4,6 +4,7 @@ import static org.hbird.transport.protocols.kiss.KissConstants.FEND;
 import static org.hbird.transport.protocols.kiss.KissConstants.FESC;
 import static org.hbird.transport.protocols.kiss.KissConstants.TFEND;
 import static org.hbird.transport.protocols.kiss.KissConstants.TFESC;
+import static org.hbird.transport.protocols.kiss.KissConstants.DATA_FRAME;
 
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
@@ -29,10 +30,13 @@ public class KissSyncerEncoder extends ProtocolEncoderAdapter {
 	}
 
 	private static IoBuffer createBuffer(byte[] bytesin) {
-		IoBuffer buffer = IoBuffer.allocate(bytesin.length * 2 + 2);
+		IoBuffer buffer = IoBuffer.allocate(bytesin.length + 3);
+		
+		buffer.setAutoExpand(true);
 
 		buffer.put(FEND);
-		for (byte b : buffer.array()) {
+		buffer.put(DATA_FRAME);
+		for (byte b : bytesin) {
 			if (b == FEND) {
 				buffer.put(FESC);
 				buffer.put(TFEND);
@@ -48,7 +52,7 @@ public class KissSyncerEncoder extends ProtocolEncoderAdapter {
 		}
 
 		buffer.put(FEND);
-		buffer.shrink();
+		buffer.flip();
 
 		return buffer;
 	}
