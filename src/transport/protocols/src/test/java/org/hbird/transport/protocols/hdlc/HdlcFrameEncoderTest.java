@@ -1,10 +1,14 @@
-package org.hbird.transport.protocols;
+package org.hbird.transport.protocols.hdlc;
 
 import static org.junit.Assert.*;
 
 import org.hbird.transport.protocols.hdlc.HdlcFrameEncoder;
 import org.junit.Test;
-
+/**
+ * 
+ * @author Johannes Klug
+ *
+ */
 public class HdlcFrameEncoderTest {
 	
 	private HdlcFrameEncoder encoder = new HdlcFrameEncoder();
