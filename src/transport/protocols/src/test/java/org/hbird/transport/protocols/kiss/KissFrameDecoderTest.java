@@ -1,10 +1,10 @@
 package org.hbird.transport.protocols.kiss;
 
-import static org.hbird.transport.protocols.kiss.KissFrameDecoder.DATA_FRAME;
-import static org.hbird.transport.protocols.kiss.KissFrameDecoder.FEND;
-import static org.hbird.transport.protocols.kiss.KissFrameDecoder.FESC;
-import static org.hbird.transport.protocols.kiss.KissFrameDecoder.TFEND;
-import static org.hbird.transport.protocols.kiss.KissFrameDecoder.TFESC;
+import static org.hbird.transport.protocols.kiss.KissConstants.DATA_FRAME;
+import static org.hbird.transport.protocols.kiss.KissConstants.FEND;
+import static org.hbird.transport.protocols.kiss.KissConstants.FESC;
+import static org.hbird.transport.protocols.kiss.KissConstants.TFEND;
+import static org.hbird.transport.protocols.kiss.KissConstants.TFESC;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
