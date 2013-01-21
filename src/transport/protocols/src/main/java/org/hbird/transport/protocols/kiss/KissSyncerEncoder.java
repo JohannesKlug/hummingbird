@@ -1,10 +1,10 @@
 package org.hbird.transport.protocols.kiss;
 
+import static org.hbird.transport.protocols.kiss.KissConstants.DATA_FRAME;
 import static org.hbird.transport.protocols.kiss.KissConstants.FEND;
 import static org.hbird.transport.protocols.kiss.KissConstants.FESC;
 import static org.hbird.transport.protocols.kiss.KissConstants.TFEND;
 import static org.hbird.transport.protocols.kiss.KissConstants.TFESC;
-import static org.hbird.transport.protocols.kiss.KissConstants.DATA_FRAME;
 
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
@@ -17,7 +17,7 @@ public class KissSyncerEncoder extends ProtocolEncoderAdapter {
 	private static final Logger LOG = LoggerFactory.getLogger(KissSyncerEncoder.class);
 
 	@Override
-	public void encode(IoSession session, Object message, ProtocolEncoderOutput out) throws Exception {
+	public void encode(IoSession session, Object message, ProtocolEncoderOutput out) {
 		if (message instanceof byte[]) {
 			byte[] bytesin = (byte[]) message;
 			IoBuffer buffer = createBuffer(bytesin);
@@ -31,7 +31,7 @@ public class KissSyncerEncoder extends ProtocolEncoderAdapter {
 
 	private static IoBuffer createBuffer(byte[] bytesin) {
 		IoBuffer buffer = IoBuffer.allocate(bytesin.length + 3);
-		
+
 		buffer.setAutoExpand(true);
 
 		buffer.put(FEND);
