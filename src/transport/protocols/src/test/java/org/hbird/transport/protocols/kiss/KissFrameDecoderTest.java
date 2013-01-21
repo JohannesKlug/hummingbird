@@ -22,7 +22,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class KissFrameDecoderTest {
 
-	private final CumulativeProtocolDecoder decoder = new KissFrameDecoder();
+	private final CumulativeProtocolDecoder decoder = new KissSyncerDecoder();
 
 	@Mock
 	private ProtocolDecoderOutput mockOut;

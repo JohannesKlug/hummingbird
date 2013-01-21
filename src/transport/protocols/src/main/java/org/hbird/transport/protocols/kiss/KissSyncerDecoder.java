@@ -28,8 +28,8 @@ import org.slf4j.LoggerFactory;
  * @author Johannes Klug
  * 
  */
-public class KissFrameDecoder extends CumulativeProtocolDecoder {
-	private static final Logger LOG = LoggerFactory.getLogger(KissFrameDecoder.class);
+public class KissSyncerDecoder extends CumulativeProtocolDecoder {
+	private static final Logger LOG = LoggerFactory.getLogger(KissSyncerDecoder.class);
 
 	private static final int LOW_NIBBLE_MASK = 0x0F;
 
@@ -97,7 +97,6 @@ public class KissFrameDecoder extends CumulativeProtocolDecoder {
 	 * @return
 	 */
 	private static boolean handleDataFrame(IoBuffer in, ProtocolDecoderOutput out) {
-		// FIXME handle transposed ends
 		byte[] data = ArrayUtils.EMPTY_BYTE_ARRAY;
 		byte next = (byte) 0x00;
 		while ((next = in.get()) != FEND) {
