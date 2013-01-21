@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
  */
 public class HdlcFrameDecoder {
 
-	/** whether the frame decoder should expect a checksum and calculate the validity of the frame. */
+	/** Whether the frame decoder should expect a checksum and calculate the validity of the frame. */
 	private boolean useChecksum = true;
 
 	// Not implemented yet
