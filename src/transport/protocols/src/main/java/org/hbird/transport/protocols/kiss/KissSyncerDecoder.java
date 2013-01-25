@@ -18,6 +18,7 @@ import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.CumulativeProtocolDecoder;
 import org.apache.mina.filter.codec.ProtocolDecoderOutput;
+import org.hbird.core.commons.util.BytesUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,20 +34,23 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 
 	private static final int LOW_NIBBLE_MASK = 0x0F;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected boolean doDecode(IoSession session, IoBuffer in, ProtocolDecoderOutput out) throws Exception {
 		boolean state = true;
 
 		byte first = in.get();
 
-		// If we have a FEND we are ready to go
-		if (first == FEND) {
+		// If we have a FEND and some data, we are ready to go
+		if (first == FEND && in.hasRemaining()) {
 			byte type = in.get();
 
 			// If the type is RETURN we need to get out of here.
 			if (type == RETURN) {
 				// exit KISS
-				state = false; // TODO Check this.
+				state = true; // TODO Check this.
 			}
 			else {
 				if (type == FEND) {
@@ -80,7 +84,8 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 						break;
 					default:
 						// Corruption
-						state = false;
+						LOG.error("Corrupt KISS frame; unknown command type: 0x" + Integer.toHexString(commandType));
+						state = true;
 						break;
 				}
 			}
@@ -118,9 +123,12 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 			data = ArrayUtils.add(data, next);
 		}
 
-		// The next byte is now FEND so we have the full data payload and can write it out.
+		// The next byte is now FEND so we have the full data payload and can write out the data.
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("KISS frame data = " + BytesUtility.hexDump(data));
+		}
 		out.write(data);
 
-		return false;
+		return true;
 	}
 }

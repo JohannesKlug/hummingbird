@@ -2,6 +2,10 @@ package org.hbird.transport.protocols.hdlc;
 
 import java.nio.ByteBuffer;
 
+import org.hbird.core.commons.util.BytesUtility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Decodes an HDLC frame and returns the HDLC information section. Essentially, this is the packet or payload of the
  * frame.
@@ -10,6 +14,7 @@ import java.nio.ByteBuffer;
  * 
  */
 public class HdlcFrameDecoder {
+	private static final Logger LOG = LoggerFactory.getLogger(HdlcFrameDecoder.class);
 
 	/** Whether the frame decoder should expect a checksum and calculate the validity of the frame. */
 	private boolean useChecksum = true;
@@ -41,6 +46,10 @@ public class HdlcFrameDecoder {
 
 		byte[] hdlcInformation = new byte[in.remaining()];
 		in.get(hdlcInformation);
+
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("HDLC information = " + BytesUtility.hexDump(hdlcInformation));
+		}
 
 		return hdlcInformation;
 	}

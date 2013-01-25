@@ -118,4 +118,20 @@ public class KissFrameDecoderTest {
 
 		verify(mockOut).write(expectedOutput);
 	}
+
+	@Test
+	public void testKissFrameDecodeBackToBackFrames() throws Exception {
+		byte[] testInput = new byte[] { FEND, DATA_FRAME, 0x08, 0x1F, (byte) 0xFF, FEND, FEND, DATA_FRAME, 0x08, 0x1F, (byte) 0x33, FEND };
+		byte[] expectedOutput = new byte[] { 0x08, 0x1F, (byte) 0xFF };
+		byte[] expectedOutput2 = new byte[] { 0x08, 0x1F, (byte) 0x33 };
+
+		IoBuffer wrappedInput = IoBuffer.wrap(testInput);
+
+		decoder.decode(mockSession, wrappedInput, mockOut);
+		verify(mockOut).write(expectedOutput);
+
+		decoder.decode(mockSession, wrappedInput, mockOut);
+		verify(mockOut).write(expectedOutput2);
+
+	}
 }
