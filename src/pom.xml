@@ -33,7 +33,7 @@
 		<jencks.version>2.2</jencks.version>
 		<slf4j.version>1.6.4</slf4j.version>
 		<docgenerator.version>0.0.7</docgenerator.version>
-		<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+		<maven-compiler-plugin.version>2.5.1</maven-compiler-plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<h2.version>1.2.147</h2.version>
@@ -46,11 +46,12 @@
 	</properties>
 	<scm>
 		<connection>scm:git:git@github.com:JohannesKlug/hbird.git</connection>
-		<developerConnection>scm:git:git@github.com:JohannesKlug/hbird.git</developerConnection>
 		<url>git@github.com:JohannesKlug/hbird.git</url>
 	</scm>
 	<issueManagement>
 		<!-- <system>GitHub Issue tracker</system> <url>https://github.com/JohannesKlug/hummingbird/issues</url> -->
+		<url>https://github.com/JohannesKlug/hbird/issues?state=open</url>
+		<system>Github</system>
 	</issueManagement>
 	<ciManagement>
 		<system>Jenkins</system>

@@ -19,5 +19,6 @@
 		<module>commanding</module>
 		<module>halcyon</module>
     <module>web-client</module>
+    <module>parameter-cache</module>
   </modules>
 </project>

@@ -9,6 +9,11 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
 
+/**
+ * 
+ * @author Mark Doyle
+ * 
+ */
 public class MongoDbParameterQuerySender implements ParameterQuerySender {
 
 	MongoServiceStrategy mongoService;
