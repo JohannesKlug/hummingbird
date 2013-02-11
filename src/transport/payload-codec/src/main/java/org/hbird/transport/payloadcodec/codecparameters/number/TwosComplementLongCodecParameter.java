@@ -37,7 +37,6 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 	@Override
 	public void decode(final byte[] inBytes, final int offset) {
 		// We are going to use Bytebuffer to eventually read out a long value so we need a long sized buffer.
-
 		ByteBuffer fullLengthLongBuf = ByteBuffer.allocate(Long.SIZE);
 
 		// First grab the byte array version of the value.
@@ -70,28 +69,10 @@ public class TwosComplementLongCodecParameter extends CodecParameter<Long> {
 		setValue(fullLengthLongBuf.getLong());
 	}
 
-	// FIXME String implementation for decoding is nasty!
 	@Override
 	public void decode(final BitSet inBitset, final int offset) {
-		long parameterValue = 0;
-
-		String binaryString = BitSetUtility.bitSetToBinaryString(inBitset, false);
-
-		binaryString = binaryString.substring(offset, offset + encoding.getSizeInBits());
-
-		// If we are dealing with a negative number...
-		if (binaryString.startsWith("1")) {
-			// We must prepend a minus sign for the valueOf method used later.
-			binaryString = "-" + binaryString;
-		}
-
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("BitSet string = " + binaryString);
-		}
-
-		parameterValue = Long.valueOf(binaryString, 2);
-
-		this.setValue(parameterValue);
+		BitSet value = inBitset.get(offset, offset + encoding.getSizeInBits() + 1);
+		decode(BitSetUtility.toByteArray(value, encoding.getSizeInBits()), 0);
 	}
 
 	@Override
