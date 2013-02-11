@@ -1,6 +1,6 @@
 package org.hbird.transport.protocols.kiss;
 
-public class KissConstants {
+public final class KissConstants {
 
 	/** Frame end */
 	public static final byte FEND = (byte) 0xC0;

@@ -14,6 +14,7 @@ public final class RawMinaEncoder extends ProtocolEncoderAdapter {
 	public void encode(IoSession iosession, Object object, ProtocolEncoderOutput out) {
 		if (object instanceof byte[]) {
 			out.write(IoBuffer.wrap((byte[]) object));
+			out.flush();
 		}
 		else {
 			LOG.warn("No byte array in input! Got a " + object.getClass().getName());

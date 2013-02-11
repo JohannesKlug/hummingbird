@@ -29,12 +29,15 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 	private static final Logger LOG = LoggerFactory.getLogger(InMemoryPayloadCodec.class);
 
 	protected Map<String, ParameterGroup> parameterGroups = null;
+
 	private Map<String, ParameterGroup> codecAwareParameterGroups = null;
 
 	protected Map<String, CommandGroup> commandGroups = null;
+
 	private Map<String, CommandGroup> codecAwareCommandGroups = null;
 
 	protected final Map<String, Encoding> encodings;
+
 	protected final Map<String, List<String>> restrictions;
 
 	public InMemoryPayloadCodec(final Map<String, ParameterGroup> parameterGroups, final Map<String, CommandGroup> commandGroups,
@@ -108,7 +111,6 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		else {
 			boolean foundRestriction = false;
 			for (final Entry<String, List<String>> restrictionEntry : restrictions.entrySet()) {
-				// if (restrictionEntry.getValue().containsAll(payloadLayoutIds)) {
 				int count = 0;
 				for (String restrictionValue : restrictionEntry.getValue()) {
 					if (!restrictionValue.equals(payloadLayoutIds.get(count++))) {

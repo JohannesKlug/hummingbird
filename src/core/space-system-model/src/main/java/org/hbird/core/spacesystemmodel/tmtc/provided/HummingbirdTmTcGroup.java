@@ -17,17 +17,27 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 	private static final long serialVersionUID = 7331716323505575390L;
 
 	protected final String qualifiedName;
+
 	protected final String name;
+
 	protected final String shortDescription;
+
 	protected final String longDescription;
 
 	protected final Map<String, Parameter<?>> parameters = new LinkedHashMap<String, Parameter<?>>();
+
 	protected Map<String, Parameter<Integer>> integerParameters;
+
 	protected Map<String, Parameter<Long>> longParameters;
+
 	protected Map<String, Parameter<Float>> floatParameters;
+
 	protected Map<String, Parameter<Double>> doubleParameters;
+
 	protected Map<String, Parameter<BigDecimal>> bigDecimalParameters;
+
 	protected Map<String, Parameter<String>> stringParameters;
+
 	protected Map<String, Parameter<Byte[]>> rawParameters;
 
 	/** List of Parameters belonging to this Group */

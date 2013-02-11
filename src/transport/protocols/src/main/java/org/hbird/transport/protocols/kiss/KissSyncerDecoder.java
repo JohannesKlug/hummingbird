@@ -84,7 +84,7 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 						break;
 					default:
 						// Corruption
-						LOG.error("Corrupt KISS frame; unknown command type: 0x" + Integer.toHexString(commandType));
+						LOG.error("Corrupt KISS frame; unknown command type: 0x" + Integer.toHexString(commandType & 0xFF));
 						state = true;
 						break;
 				}
