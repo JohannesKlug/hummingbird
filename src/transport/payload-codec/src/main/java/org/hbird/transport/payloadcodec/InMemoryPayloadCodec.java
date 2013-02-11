@@ -114,6 +114,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 				int count = 0;
 				for (String restrictionValue : restrictionEntry.getValue()) {
 					if (!restrictionValue.equals(payloadLayoutIds.get(count++))) {
+						foundRestriction = false;
 						break;
 					}
 					// we found the correct PG
