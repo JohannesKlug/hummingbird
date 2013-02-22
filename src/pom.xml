@@ -333,6 +333,7 @@
 					<configuration>
                     	<instructions>
                         	<Bundle-Version>${project.version}</Bundle-Version>
+                        	<Bundle-Category>MCS</Bundle-Category>
                     	</instructions>
                 	</configuration>
 				</plugin>
