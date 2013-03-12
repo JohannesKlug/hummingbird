@@ -14,10 +14,14 @@ import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceRegistration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OsgiLiveTmStreamingWebSocket implements WebSocket, LiveTmReceiver {
+	private static final Logger LOG = LoggerFactory.getLogger(OsgiLiveTmStreamingWebSocket.class);
 
 	private Connection connection;
+
 	private ServiceRegistration registration;
 
 	/**
@@ -42,7 +46,6 @@ public class OsgiLiveTmStreamingWebSocket implements WebSocket, LiveTmReceiver {
 		// TODO tie into OSGI event and log closure due to closeCode
 	}
 
-
 	/**
 	 * TODO The fact that this can be static means it's probably not the responsibility of the class and should be moved
 	 * elsewhere.
@@ -64,23 +67,27 @@ public class OsgiLiveTmStreamingWebSocket implements WebSocket, LiveTmReceiver {
 
 	@Override
 	public void acceptNewLiveParameterGroup(final ParameterGroup parameterGroup) {
-		for (final Parameter<?> p : parameterGroup.getAllParametersAsList()) {
-			try {
-				connection.sendMessage(serialiseParameterToJson(p));
-			}
-			catch (final JsonGenerationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			catch (final JsonMappingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			catch (final IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		if (parameterGroup.getAllParameters() != null) {
+			for (final Parameter<?> p : parameterGroup.getAllParametersAsList()) {
+				try {
+					connection.sendMessage(serialiseParameterToJson(p));
+				}
+				catch (final JsonGenerationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				catch (final JsonMappingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				catch (final IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
+		else {
+			LOG.warn("Parameters in Parameter group: " + parameterGroup.getQualifiedName() + " are null");
+		}
 	}
-
 }

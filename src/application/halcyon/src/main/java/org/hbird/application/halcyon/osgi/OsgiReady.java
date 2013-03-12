@@ -10,6 +10,7 @@ public class OsgiReady {
 	private static final Logger LOG = LoggerFactory.getLogger(OsgiReady.class);
 
 	private ServiceTracker serviceTracker;
+
 	private final String serviceInterface;
 
 	public OsgiReady(final String serviceInterface) {
@@ -23,6 +24,9 @@ public class OsgiReady {
 		return serviceTracker;
 	}
 
+	/**
+	 * 
+	 */
 	private final void cacheTracker() {
 		serviceTracker = new ServiceTracker(HalcyonServletContextListener.getBundleContext(), serviceInterface, null) {
 			@Override
