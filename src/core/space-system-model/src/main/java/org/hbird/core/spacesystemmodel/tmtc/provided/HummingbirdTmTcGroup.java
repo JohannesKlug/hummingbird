@@ -6,23 +6,30 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.TmTcGroup;
 
+/**
+ * 
+ * @author Mark Doyle
+ * @author Johannes Klug
+ * 
+ */
 @XmlRootElement()
 public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 	private static final long serialVersionUID = 7331716323505575390L;
 
-	protected final String qualifiedName;
+	protected String qualifiedName;
 
-	protected final String name;
+	protected String name;
 
-	protected final String shortDescription;
+	protected String shortDescription;
 
-	protected final String longDescription;
+	protected String longDescription;
 
 	protected final Map<String, Parameter<?>> parameters = new LinkedHashMap<String, Parameter<?>>();
 
@@ -303,6 +310,30 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 	@Override
 	public List<Parameter<?>> getAllParametersAsList() {
 		return new ArrayList<Parameter<?>>(this.parameters.values());
+	}
+
+	public Map<String, Parameter<?>> getParameters() {
+		return parameters;
+	}
+
+	@XmlElement
+	public void setQualifiedName(String qualifiedName) {
+		this.qualifiedName = qualifiedName;
+	}
+
+	@XmlElement
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@XmlElement
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
+	}
+
+	@XmlElement
+	public void setLongDescription(String longDescription) {
+		this.longDescription = longDescription;
 	}
 
 }

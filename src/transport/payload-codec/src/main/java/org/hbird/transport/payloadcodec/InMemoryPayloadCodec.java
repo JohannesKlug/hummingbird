@@ -110,6 +110,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		}
 		else {
 			boolean foundRestriction = false;
+			Entry<String, List<String>> validEntry = null;
 			for (final Entry<String, List<String>> restrictionEntry : restrictions.entrySet()) {
 				int count = 0;
 				for (String restrictionValue : restrictionEntry.getValue()) {
@@ -119,13 +120,20 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 					}
 					// we found the correct PG
 					foundRestriction = true;
-					final String pgName = restrictionEntry.getKey();
-					final ParameterGroup pg = codecAwareParameterGroups.get(pgName);
-					decodedGroup = decodeParameterGroup(payload, pg, timeStamp);
+					validEntry = restrictionEntry;
+				}
+				if (foundRestriction) {
+					break;
 				}
 			}
+			if (foundRestriction) {
+				final String pgName = validEntry.getKey();
+				final ParameterGroup pg = codecAwareParameterGroups.get(pgName);
+				decodedGroup = decodeParameterGroup(payload, pg, timeStamp);
+			}
+
 			if (!foundRestriction) {
-				LOG.error("Payload codec did not find restriction for payloadLayoutId " + payloadLayoutIds + " in the restrictions entryset.");
+				LOG.error("Payload codec did not find restriction for payloadLayoutIds " + payloadLayoutIds + " in the restrictions entryset.");
 			}
 		}
 
@@ -197,7 +205,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		return null;
 	}
 
-	private final GenericPayload encodeTmTcGroup(final TmTcGroup tmTcGroup) {
+	private final GenericPayload encodeTmTcGroup(TmTcGroup tmTcGroup) {
 		// Carry out the encode
 		final BitSet encoded = new BitSet();
 		int count = 0;
@@ -235,8 +243,8 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		if (LOG.isTraceEnabled()) {
 			LOG.trace("Final encoded bytes = " + BytesUtility.decimalDump(encodedBytes));
 		}
-		final GenericPayload encodedGroup = new GenericPayload(encodedBytes, layoutId, System.currentTimeMillis());
-		return encodedGroup;
+
+		return new GenericPayload(encodedBytes, layoutId, System.currentTimeMillis());
 	}
 
 	/**

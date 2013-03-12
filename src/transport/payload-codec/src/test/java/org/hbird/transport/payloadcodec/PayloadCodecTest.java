@@ -28,19 +28,23 @@ public class PayloadCodecTest {
 	private final static Logger LOG = LoggerFactory.getLogger(PayloadCodecTest.class);
 
 	private static PayloadCodec codec;
+
 	private static SpaceSystemModel ssm;
 
-	private static long testsBurned = 0;
-
 	private static final int SCID_VALUE_1 = 1;
+
 	private static final String SCID_VALUE_1_AS_STRING = "0000000000000000000000000000001";
+
 	private static final int SCID_VALUE_1073807361 = 1073807361;
+
 	private static final String SCID_VALUE_1073807361_AS_STRING = "1000000000000010000000000000001";
 
 	private static final int FUEL_VALUE_3814 = 3814;
+
 	private static final String FUEL_VALUE_3814_AS_STRING = "111011100110";
 
 	private static final long LASER_TEMP_VALUE_94528016102 = 94528016102L;
+
 	private static final String LASER_TEMP_94528016102_AS_STRING = "0001011000000010010011110000111011100110";
 
 	// @formatter:off
@@ -108,12 +112,10 @@ public class PayloadCodecTest {
 
 	@Test
 	public void feelTheBurn() throws BitSetOperationException, UnknownParameterGroupException, UnknownParameterException {
-		long start = System.currentTimeMillis();
 		int burnLevel = 500;
 		for (int i = 0; i < burnLevel; i++) {
 			testEncode();
 		}
-		long end = System.currentTimeMillis();
 	}
 
 	@Test
@@ -133,7 +135,6 @@ public class PayloadCodecTest {
 					BitSet expected = BitSetUtility.stringToBitSet(scIdBinaryString + fuelBinaryString + laserBinaryString, true, true);
 					ParameterGroup testGroup = setTestGroupParameterValues(scIdValue, fuelValue, laserValue);
 					encodeAndAssert(testGroup, expected);
-					testsBurned++;
 				}
 			}
 		}
