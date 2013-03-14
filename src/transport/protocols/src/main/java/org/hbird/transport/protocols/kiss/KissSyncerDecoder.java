@@ -102,6 +102,11 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 	 * @return
 	 */
 	private static boolean handleDataFrame(IoBuffer in, ProtocolDecoderOutput out) {
+		if (!in.hasRemaining()) {
+			// Nothing here! Might need more data from the OS network buffer.
+			return false;
+		}
+
 		byte[] data = ArrayUtils.EMPTY_BYTE_ARRAY;
 		byte next = (byte) 0x00;
 		while ((next = in.get()) != FEND) {
@@ -121,6 +126,12 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 				}
 			}
 			data = ArrayUtils.add(data, next);
+
+			// If there is no data left and we have not yet found a FEND then we need more data from the buffer
+			// returning false signifies this.
+			if (!in.hasRemaining()) {
+				return false;
+			}
 		}
 
 		// The next byte is now FEND so we have the full data payload and can write out the data.
