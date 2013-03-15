@@ -34,6 +34,10 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 
 	private static final int LOW_NIBBLE_MASK = 0x0F;
 
+	private Byte currentlyHandling = null;
+
+	private byte[] data = ArrayUtils.EMPTY_BYTE_ARRAY;
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -41,57 +45,70 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 	protected boolean doDecode(IoSession session, IoBuffer in, ProtocolDecoderOutput out) throws Exception {
 		boolean state = true;
 
+		if (currentlyHandling != null) {
+			// figure out which type we were handling and send IoBuffer to that method to continue handling
+			return handleType(in, out, state, currentlyHandling);
+		}
+
 		byte first = in.get();
 
 		// If we have a FEND and some data, we are ready to go
 		if (first == FEND && in.hasRemaining()) {
 			byte type = in.get();
 
-			// If the type is RETURN we need to get out of here.
-			if (type == RETURN) {
-				// exit KISS
-				state = true; // TODO Check this.
-			}
-			else {
-				if (type == FEND) {
-					// drop second FEND as this could be a sync flush
+			if (type == FEND) {
+				// drop second FEND as this could be a sync flush
+				if (in.hasRemaining()) {
 					type = in.get();
 				}
-
-				// The type indicator is split across two nibbles so we need to get those first...
-				byte commandType = (byte) (type & LOW_NIBBLE_MASK);
-
-				@SuppressWarnings("unused")
-				// Not implemented send to port yet
-				byte port = (byte) ((type >> 4) & LOW_NIBBLE_MASK);
-
-				// Now we can perform the correct logic given the type.
-				switch (commandType) {
-					case DATA_FRAME:
-						state = handleDataFrame(in, out);
-						break;
-					case TX_DELAY:
-						break;
-					case P:
-						break;
-					case SLOT_TIME:
-						break;
-					case TX_TAIL:
-						break;
-					case FULL_DUPLEX:
-						break;
-					case SET_HARDWARE:
-						break;
-					default:
-						// Corruption
-						LOG.error("Corrupt KISS frame; unknown command type: 0x" + Integer.toHexString(commandType & 0xFF));
-						state = true;
-						break;
+				else {
+					return false;
 				}
 			}
+
+			// The type indicator is split across two nibbles so we need to get those first...
+			byte commandType = (byte) (type & LOW_NIBBLE_MASK);
+
+			@SuppressWarnings("unused")
+			// Not implemented send to port yet
+			byte port = (byte) ((type >> 4) & LOW_NIBBLE_MASK);
+
+			currentlyHandling = commandType;
+			state = handleType(in, out, state, commandType);
 		}
 
 		return state;
+	}
+
+	private boolean handleType(IoBuffer in, ProtocolDecoderOutput out, boolean state, byte commandType) {
+		boolean localState = state;
+		// Now we can perform the correct logic given the type.
+		switch (commandType) {
+			case DATA_FRAME:
+				localState = handleDataFrame(in, out);
+				break;
+			case TX_DELAY:
+				break;
+			case P:
+				break;
+			case SLOT_TIME:
+				break;
+			case TX_TAIL:
+				break;
+			case FULL_DUPLEX:
+				break;
+			case SET_HARDWARE:
+				break;
+			case RETURN:
+				break;
+			default:
+				// Corruption
+				LOG.error("Corrupt KISS frame; unknown command type: 0x" + Integer.toHexString(commandType & 0xFF));
+				currentlyHandling = null;
+				localState = true;
+				break;
+		}
+		return localState;
 	}
 
 	/**
@@ -101,13 +118,12 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 	 * @param out
 	 * @return
 	 */
-	private static boolean handleDataFrame(IoBuffer in, ProtocolDecoderOutput out) {
+	private boolean handleDataFrame(IoBuffer in, ProtocolDecoderOutput out) {
 		if (!in.hasRemaining()) {
 			// Nothing here! Might need more data from the OS network buffer.
 			return false;
 		}
 
-		byte[] data = ArrayUtils.EMPTY_BYTE_ARRAY;
 		byte next = (byte) 0x00;
 		while ((next = in.get()) != FEND) {
 			if (next == FESC) {
@@ -139,6 +155,8 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 			LOG.debug("KISS frame data = " + BytesUtility.hexDump(data));
 		}
 		out.write(data);
+		currentlyHandling = null;
+		data = ArrayUtils.EMPTY_BYTE_ARRAY;
 
 		return true;
 	}
