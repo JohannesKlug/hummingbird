@@ -88,18 +88,25 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 				localState = handleDataFrame(in, out);
 				break;
 			case TX_DELAY:
+				currentlyHandling = null;
 				break;
 			case P:
+				currentlyHandling = null;
 				break;
 			case SLOT_TIME:
+				currentlyHandling = null;
 				break;
 			case TX_TAIL:
+				currentlyHandling = null;
 				break;
 			case FULL_DUPLEX:
+				currentlyHandling = null;
 				break;
 			case SET_HARDWARE:
+				currentlyHandling = null;
 				break;
 			case RETURN:
+				currentlyHandling = null;
 				break;
 			default:
 				// Corruption
