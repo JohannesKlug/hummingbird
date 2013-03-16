@@ -15,13 +15,13 @@ import com.mongodb.DBObject;
 public class CamelEndpointMongoServiceStrategy implements MongoServiceStrategy {
 
 	@EndpointInject(ref = "parameterArchiveQueriesEndpoint")
-	ProducerTemplate producer;
+	ProducerTemplate mongoInputEndpoint;
 
 	@Override
 	public List<DBObject> query(Object dbQuery) {
 		List<DBObject> result = null;
 		if (dbQuery instanceof DBObject) {
-			result = (List<DBObject>) producer.requestBody(dbQuery);
+			result = (List<DBObject>) mongoInputEndpoint.requestBody(dbQuery);
 		}
 		return result;
 	}
@@ -33,7 +33,7 @@ public class CamelEndpointMongoServiceStrategy implements MongoServiceStrategy {
 			final Map<String, Object> headers = new HashMap<String, Object>(2);
 			headers.put(MongoDbConstants.SORT_BY, sort);
 			headers.put(MongoDbConstants.LIMIT, limit);
-			result = (List<DBObject>) producer.requestBodyAndHeaders(query, headers);
+			result = (List<DBObject>) mongoInputEndpoint.requestBodyAndHeaders(query, headers);
 		}
 		return result;
 	}
@@ -45,14 +45,14 @@ public class CamelEndpointMongoServiceStrategy implements MongoServiceStrategy {
 		headers.put(MongoDbConstants.FIELDS_FILTER, mongoFieldFilter.toString());
 		headers.put(MongoDbConstants.LIMIT, limit);
 
-		return producer.requestBodyAndHeaders(producer.getDefaultEndpoint(), query, headers, List.class);
+		return mongoInputEndpoint.requestBodyAndHeaders(mongoInputEndpoint.getDefaultEndpoint(), query, headers, List.class);
 	}
 
 	@Override
 	public List<DBObject> query(String dbQuery) {
 		List<DBObject> result = null;
 		// camel-mongodb type converters should convert the json query string to a DBObject
-		result = (List<DBObject>) producer.requestBody(dbQuery);
+		result = (List<DBObject>) mongoInputEndpoint.requestBody(dbQuery);
 		return result;
 	}
 
@@ -68,7 +68,7 @@ public class CamelEndpointMongoServiceStrategy implements MongoServiceStrategy {
 		// not including the pagination. This is typically different to the number of results we asked the
 		// Database to return, since with pagination we don't return everything. Doing it this way prevents
 		// us having to make two requests with one dedicated to counting the results.
-		Exchange ex = producer.request(producer.getDefaultEndpoint(), new Processor() {
+		Exchange ex = mongoInputEndpoint.request(mongoInputEndpoint.getDefaultEndpoint(), new Processor() {
 			@Override
 			public void process(Exchange exchange) throws Exception {
 				exchange.getIn().setBody(dbQuery);
@@ -86,7 +86,7 @@ public class CamelEndpointMongoServiceStrategy implements MongoServiceStrategy {
 		Map<String, Object> headers = new HashMap<String, Object>(2);
 		headers.put(MongoDbConstants.OPERATION_HEADER, "count");
 		// camel-mongodb type converters should convert the json query string to a DBObject
-		Object result = producer.requestBodyAndHeaders(null, headers);
+		Object result = mongoInputEndpoint.requestBodyAndHeaders(null, headers);
 		return (Long) result;
 	}
 }
