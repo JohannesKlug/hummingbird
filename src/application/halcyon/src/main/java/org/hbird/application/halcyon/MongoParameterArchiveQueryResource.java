@@ -191,8 +191,10 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 		if(search != null && (!search.isEmpty())) {
 			LOG.trace("Adding search query " + search);
 			Pattern match = Pattern.compile(search, Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-//			mongoQuery.put("name", match);
-			mongoQuery.put("name", new BasicDBObject("$regex", match.toString()));
+			// Note, normally you would pass the Pattern object to the Java Mongo driver but when using distributed routing
+			// over JMS you can only send objectified primitives. This means we have to create the search string ourselves. 
+			DBObject matchString = new BasicDBObject("$regex", match.toString()).append("$options", "im");
+			mongoQuery.put("name", matchString);
 		}
 		//@formatter:on
 
