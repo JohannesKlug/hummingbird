@@ -6,6 +6,7 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -140,6 +141,9 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 		if (parameterQuerySenderService != null) {
 			Map<String, String> aoData = refineAoDataList(dataTablesAoData);
 			if (aoData != null) {
+				if (LOG.isTraceEnabled()) {
+					LOG.trace("Querying with aoData:" + aoData);
+				}
 				DBObject query = buildMongoQuery(aoData);
 				String skip = aoData.get("iDisplayStart");
 				String count = aoData.get("iDisplayLength");
@@ -176,7 +180,22 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 		DBObject mongoQuery = new BasicDBObject();
 		long startTime = Long.parseLong(aoData.get("startTime"));
 		long endTime = Long.parseLong(aoData.get("endTime"));
-		mongoQuery.put("receivedTime", BasicDBObjectBuilder.start("$gte", startTime).add("$lte", endTime).get());
+
+		//@formatter:off
+		mongoQuery.put("receivedTime", 
+				BasicDBObjectBuilder.start("$gte", startTime).
+									 add("$lte", endTime).
+									 get());
+		
+		String search = aoData.get("sSearch");
+		if(search != null && (!search.isEmpty())) {
+			LOG.trace("Adding search query " + search);
+			Pattern match = Pattern.compile(search, Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+//			mongoQuery.put("name", match);
+			mongoQuery.put("name", new BasicDBObject("$regex", match.toString()));
+		}
+		//@formatter:on
+
 		return mongoQuery;
 	}
 
