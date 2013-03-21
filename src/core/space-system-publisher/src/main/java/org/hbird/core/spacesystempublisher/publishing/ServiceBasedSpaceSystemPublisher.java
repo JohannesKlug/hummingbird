@@ -61,6 +61,9 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 
 	@Override
 	public Map<String, ParameterGroup> getParameterGroups() {
+		if (modelCache == null) {
+			loadModel();
+		}
 		return modelCache.getParameterGroups();
 	}
 
