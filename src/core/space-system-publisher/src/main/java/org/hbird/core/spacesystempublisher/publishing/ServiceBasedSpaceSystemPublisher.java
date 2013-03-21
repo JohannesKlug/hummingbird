@@ -40,7 +40,9 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 		LOG.debug("Loading space system model from factory service...");
 
 		if (factoryService != null) {
-			LOG.debug("Factory service exists...");
+			if (LOG.isTraceEnabled()) {
+				LOG.trace("Space system model factory service exists...");
+			}
 			try {
 				this.modelCache = factoryService.createSpaceSystemModel();
 				LOG.debug("Model " + this.modelCache.getName() + " cached in publisher.");
@@ -55,7 +57,7 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 			}
 		}
 		else {
-			LOG.error("SpaceSystemModelFactoryService is null, cannot retrieve a space system model for loading and caching!");
+			LOG.error("SpaceSystemModelFactoryService is not available or injected, cannot retrieve a space system model for loading and caching!");
 		}
 	}
 
