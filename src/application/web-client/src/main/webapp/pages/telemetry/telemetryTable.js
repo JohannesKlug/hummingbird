@@ -6,7 +6,7 @@ var archiveUrl = rootURL + "tm/parameterarchive/datatablesquery";
 var ws;
 
 var table;
-var maxRows = 500;
+var maxRows = 100;
 
 var live = true;
 
@@ -208,40 +208,6 @@ function setupDataTable() {
 	table = $("#tmTable").dataTable(tableOptions);
 }
 
-/**
- * Sets up the jquery ui layout.
- */
-function setupLayout() {
-	var layoutOptions = {
-		applyDefaultStyles : false,
-		spacing_open : 3,
-		north : {
-			resizable : false,
-			size : 50,
-			minSize : 50,
-			maxSize : 50
-		},
-		south : {
-			resizable : false,
-			closable : false,
-//			initClosed : true,
-			resizable : false,
-			size : 30,
-			minSize : 30,
-			maxSize : 30
-		},
-		west : {
-			showOverflowOnHover : true
-		},
-		east : {
-		},
-		east__onresize : function() {
-			$("#accordion").accordion("resize");
-		}
-	};
-
-	$('body').layout(layoutOptions);
-}
 
 /**
  * Sets up the web socket with the correct protocol and configures it's
