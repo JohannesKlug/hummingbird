@@ -43,7 +43,8 @@
 					 		rxtx-libs/win-x64/rxtxParallel.dll;
 					 		rxtx-libs/win-x64/rxtxSerial.dll;
 					 		processor=x86-64;
-					 		osname=Win32
+					 		osname=Win32;
+					 		osname=Win8
 					 	</Bundle-NativeCode>
 					</instructions>
 				</configuration>

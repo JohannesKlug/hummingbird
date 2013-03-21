@@ -177,7 +177,11 @@
 							org.codehaus.jackson.xc,
 							org.osgi.service.blueprint.container,
 							com.sun.jersey.spi.spring.container.servlet,
-							org.eclipse.jetty.websocket
+							org.eclipse.jetty.websocket,
+							org.apache.activemq,
+							org.apache.activemq.pool,
+							org.apache.camel.component.jms,
+							org.apache.activemq.camel.component
 						</Import-Package>
 						<Webapp-Context>hbird</Webapp-Context>
 						<Web-ContextPath>hbird</Web-ContextPath>
@@ -199,14 +203,6 @@
 							<Bundle-ClassPath>WEB-INF/classes</Bundle-ClassPath>
 						</manifestEntries>
 					</archive>
-
-					<!-- <webResources> -->
-					<!-- <resource> -->
-					<!-- <directory>src/main/resources/OSGI-INF</directory> -->
-					<!-- <targetPath>OSGI-INF</targetPath> -->
-					<!-- <filtering>true</filtering> -->
-					<!-- </resource> -->
-					<!-- </webResources> -->
 				</configuration>
 			</plugin>
 
@@ -214,8 +210,6 @@
 				<groupId>org.codehaus.enunciate</groupId>
 				<artifactId>maven-enunciate-plugin</artifactId>
 				<version>1.26.2</version>
-				<configuration>
-				</configuration>
 				<executions>
 					<execution>
 						<goals>
@@ -223,13 +217,6 @@
 						</goals>
 					</execution>
 				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.codehaus.enunciate</groupId>
-						<artifactId>enunciate-amf</artifactId>
-						<version>1.26.2</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 
 		</plugins>

@@ -53,7 +53,7 @@ public interface ParameterQuerySender {
 	 * @param skip
 	 * @return
 	 */
-	Object query(Object dbQuery, int limit, int skip);
+	Object query(Object dbQuery, int limit, int skip, String sortCol, boolean ascending);
 
 	long queryNumRecords();
 

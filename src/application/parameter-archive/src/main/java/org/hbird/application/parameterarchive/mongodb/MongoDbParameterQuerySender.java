@@ -38,8 +38,8 @@ public class MongoDbParameterQuerySender implements ParameterQuerySender {
 	}
 
 	@Override
-	public Object query(Object dbQuery, int limit, int skip) {
-		return mongoService.query(dbQuery, limit, skip);
+	public Object query(Object dbQuery, int limit, int skip, String sortCol, boolean ascending) {
+		return mongoService.query(dbQuery, limit, skip, sortCol, ascending);
 	}
 
 	@Override

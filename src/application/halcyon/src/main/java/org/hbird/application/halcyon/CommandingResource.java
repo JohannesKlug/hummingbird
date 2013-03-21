@@ -27,10 +27,10 @@ public class CommandingResource extends OsgiReady {
 	@POST
 	@Path("/sendcommand")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void sendCommand(final CommandGroup cmd) {
+	public void sendCommand(CommandGroup cmd) {
 		final CommandAcceptor cmdService = (CommandAcceptor) getServiceTracker().getService();
 
-		if(cmdService != null) {
+		if (cmdService != null) {
 			cmdService.acceptCommand(cmd);
 		}
 		else {

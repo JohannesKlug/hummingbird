@@ -19,9 +19,6 @@ import org.apache.mina.filter.codec.ProtocolEncoder;
  */
 public class KissMinaCodecFactory implements ProtocolCodecFactory {
 
-	/** Strand uses a Kiss frame decoder as the first line codec */
-	private static ProtocolDecoder decoder = new KissSyncerDecoder();
-
 	/** Strand uses a Kiss frame encoder */
 	private static ProtocolEncoder encoder = new KissSyncerEncoder();
 
@@ -30,7 +27,7 @@ public class KissMinaCodecFactory implements ProtocolCodecFactory {
 	 */
 	@Override
 	public ProtocolDecoder getDecoder(IoSession session) {
-		return decoder;
+		return new KissSyncerDecoder();
 
 	}
 

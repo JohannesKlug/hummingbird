@@ -53,17 +53,18 @@ import org.osgi.service.event.EventAdmin;
 
 /**
  * Links the servlet context to the OSGI event services; it simply registers OSGi events when
- * the servlet context calls back on the listener. since it's a {@link ServletContextListener}
- * this happens when the context is initialised and destroyed.
+ * the servlet context calls back on the listener. since it's a {@link ServletContextListener} this happens when the
+ * context is initialised and destroyed.
  * 
  * @author Mark Doyle
- *
+ * 
  */
 public class HalcyonServletContextListener implements BundleActivator, ServletContextListener {
 
 	static EventAdmin eventAdmin;
 
 	static BundleContext bundleContext;
+
 	ServiceReference eventAdminServiceRef;
 
 	synchronized static EventAdmin getEventAdmin() {

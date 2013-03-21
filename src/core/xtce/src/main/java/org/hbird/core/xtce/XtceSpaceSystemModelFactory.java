@@ -84,27 +84,35 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	private String modelName;
 
 	private final Map<String, ParameterTypeSetTypeItem> xtceTmParameterTypes = new LinkedHashMap<String, ParameterTypeSetTypeItem>();
+
 	private final Map<String, ParameterTypeSetTypeItem> xtceTcParameterTypes = new LinkedHashMap<String, ParameterTypeSetTypeItem>();
 
 	private final Map<String, Parameter<Integer>> integerParameters = new LinkedHashMap<String, Parameter<Integer>>();
+
 	private final Map<String, Parameter<Integer>> integerArguments = new LinkedHashMap<String, Parameter<Integer>>();
 
 	private final Map<String, Parameter<Long>> longParameters = new LinkedHashMap<String, Parameter<Long>>();
+
 	private final Map<String, Parameter<Long>> longArguments = new LinkedHashMap<String, Parameter<Long>>();
 
 	private final Map<String, Parameter<Float>> floatParameters = new LinkedHashMap<String, Parameter<Float>>();
+
 	private final Map<String, Parameter<Float>> floatArguments = new LinkedHashMap<String, Parameter<Float>>();
 
 	private final Map<String, Parameter<Double>> doubleParameters = new LinkedHashMap<String, Parameter<Double>>();
+
 	private final Map<String, Parameter<Double>> doubleArguments = new LinkedHashMap<String, Parameter<Double>>();
 
 	private final Map<String, Parameter<BigDecimal>> bigDecimalParameters = new LinkedHashMap<String, Parameter<BigDecimal>>();
+
 	private final Map<String, Parameter<BigDecimal>> bigDecimalArguments = new LinkedHashMap<String, Parameter<BigDecimal>>();
 
 	private final Map<String, Parameter<String>> stringParameters = new LinkedHashMap<String, Parameter<String>>();
+
 	private final Map<String, Parameter<String>> stringArguments = new LinkedHashMap<String, Parameter<String>>();
 
 	private final Map<String, Parameter<Byte[]>> rawParameters = new LinkedHashMap<String, Parameter<Byte[]>>();
+
 	private final Map<String, Parameter<Byte[]>> rawArguments = new LinkedHashMap<String, Parameter<Byte[]>>();
 
 	/**
@@ -112,6 +120,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	 * model this factory creates.
 	 */
 	private final Map<String, ParameterGroup> tmParameterGroups = new HashMap<String, ParameterGroup>();
+
 	private final Map<String, CommandGroup> tcGroups = new HashMap<String, CommandGroup>();
 
 	private final Map<String, List<Object>> restrictions = new HashMap<String, List<Object>>();
@@ -140,7 +149,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			throw new InvalidSpaceSystemDefinitionException("No path to xtce file set");
 		}
 
-		LOG.debug("Creating space system model using XTCE file = " + spaceSystemModelFilename);
+		LOG.trace("Creating space system model using XTCE file = " + spaceSystemModelFilename);
 
 		// Reset the previous model and collections used to construct the model
 		model = new XtceSpaceSystemModel();
@@ -166,11 +175,13 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		}
 		catch (final IllegalArgumentException e) {
 			LOG.error("Critical Error creating XTCE based Space System Model");
-			// TODO - 27.03.2012 kimmell - replace with appropriate exception
 		}
 		catch (final IllegalAccessException e) {
 			LOG.error("Critical Error creating XTCE based Space System Model");
-			// TODO - 27.03.2012 kimmell - replace with appropriate exception
+		}
+
+		if (LOG.isTraceEnabled()) {
+			LOG.trace("Space system model creation complete");
 		}
 
 		return model;
@@ -581,9 +592,10 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 					final Comparison[] restrictionCriteria = comparisonList.getComparison();
 					for (final Comparison comparison : restrictionCriteria) {
 						final String comparisonValue = comparison.getValue();
-						if(comparisonValue.startsWith("0x")) {
+						if (comparisonValue.startsWith("0x")) {
 							comparisons.add(Integer.decode(comparisonValue).toString());
-						} else {
+						}
+						else {
 							comparisons.add(comparisonValue);
 						}
 						if (LOG.isDebugEnabled()) {
@@ -596,9 +608,10 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 				final Comparison singleComparison = baseContainer.getRestrictionCriteria().getComparison();
 				if (singleComparison != null) {
 					final String comparisonValue = singleComparison.getValue();
-					if(comparisonValue.startsWith("0x")) {
+					if (comparisonValue.startsWith("0x")) {
 						comparisons.add(Integer.decode(comparisonValue).toString());
-					} else {
+					}
+					else {
 						comparisons.add(comparisonValue);
 					}
 					restrictions.put(qualifiedName, comparisons);

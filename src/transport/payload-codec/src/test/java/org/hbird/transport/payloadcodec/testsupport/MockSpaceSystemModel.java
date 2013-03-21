@@ -12,7 +12,6 @@ import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
-import org.hbird.core.spacesystemmodel.exceptions.ParameterNotInModelException;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
@@ -25,28 +24,47 @@ import org.slf4j.LoggerFactory;
 
 public class MockSpaceSystemModel implements SpaceSystemModel {
 	private static final long serialVersionUID = -345641886444350845L;
+
 	private static final Logger LOG = LoggerFactory.getLogger(MockSpaceSystemModel.class);
 
 	private final String name = "MockSpaceModel";
+
 	private final Map<String, ParameterGroup> groups = new HashMap<String, ParameterGroup>();
+
 	private final Map<String, Encoding> encodings = new HashMap<String, Encoding>();
+
 	private final Map<String, List<String>> restrictions = new HashMap<String, List<String>>();
 
-	public static final String TEST_PREFIX = "Test";
-	public static final String TEST_GROUP_NAME = "TestGroup";
+	private static final String TEST_PREFIX = "Test";
+
+	private static final String TEST_GROUP_NAME = "TestGroup";
+
 	public static final String TEST_GROUP_QUALIFIED_NAME = TEST_PREFIX + "." + TEST_GROUP_NAME;
+
 	public static final String RESTRICTED_GROUP_NAME = "TestRestrictedGroup";
+
 	public static final String RESTRICTED_GROUP_QUALIFIED_NAME = TEST_PREFIX + "." + RESTRICTED_GROUP_NAME;
+
 	public static final String RESTRICTED_LASER_GROUP_NAME = "TestRestrictedLaserGroup";
+
 	public static final String RESTRICTED_LASER_GROUP_QUALIFIED_NAME = TEST_PREFIX + "." + RESTRICTED_LASER_GROUP_NAME;
+
 	public static final String[] INTEGER_RESTRICTION_ID = { "1000" };
+
 	public static final List<String> INTEGER_RESTRICTION_ID_LIST = new ArrayList<String>(Arrays.asList(INTEGER_RESTRICTION_ID));
+
 	public static final String INTEGER_LASER_RESTRICTION_ID = "12";
+
 	public static final String FUEL_PARAMETER_QUALIFIED_NAME = TEST_PREFIX + ".Fuel";
+
 	public static final String SCID_PARAMETER_QUALIFIED_NAME = TEST_PREFIX + ".SCID";
+
 	public static final String LASER_TEMP_PARAMETER_QUALIFIED_NAME = TEST_PREFIX + ".Laser Temp";
+
 	public static final String FUEL_PARAMETER_NAME = "Fuel";
+
 	public static final String SCID_PARAMETER_NAME = "SCID";
+
 	public static final String LASER_TEMP_PARAMETER_NAME = "Laser Temp";
 
 	public MockSpaceSystemModel() {
@@ -115,7 +133,7 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInModelException {
+	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) {
 		for (final ParameterGroup pg : this.groups.values()) {
 			TmTcGroups.replaceParameterInGroup(pg, qualifiedName, newParameter);
 		}
@@ -152,27 +170,27 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Parameter<BigDecimal> getBigDecimalParameter(final String qualifiedName) throws UnknownParameterException {
+	public Parameter<BigDecimal> getBigDecimalParameter(final String qualifiedName) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Parameter<String> getStringParameter(final String qualifiedName) throws UnknownParameterException {
+	public Parameter<String> getStringParameter(final String qualifiedName) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Parameter<Float> getFloatParameter(final String qualifiedName) throws UnknownParameterException {
+	public Parameter<Float> getFloatParameter(final String qualifiedName) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Parameter<Double> getDoubleParameter(final String qualifiedName) throws UnknownParameterException {
+	public Parameter<Double> getDoubleParameter(final String qualifiedName) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Parameter<Byte[]> getRawParameter(final String qualifiedName) throws UnknownParameterException {
+	public Parameter<Byte[]> getRawParameter(final String qualifiedName) {
 		throw new UnsupportedOperationException();
 	}
 
