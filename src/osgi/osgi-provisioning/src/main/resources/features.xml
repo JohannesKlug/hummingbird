@@ -5,11 +5,9 @@
 		  xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.0.0 http://karaf.apache.org/xmlns/features/v1.0.0"
 		  name="Hbird">
 
-     	<repository>mvn:org.apache.camel.karaf/apache-camel/2.9.2/xml/features</repository> <!-- ActiveMQ depends on camel-jms 2.9.2 -->
-     	<repository>mvn:org.apache.camel.karaf/apache-camel/2.10.1/xml/features</repository>
+     	<repository>mvn:org.apache.camel.karaf/apache-camel/2.10.4/xml/features</repository>
      	
-     	<repository>mvn:org.apache.activemq/activemq-karaf/5.5.0/xml/features</repository>
-     	<repository>mvn:org.apache.activemq/activemq-karaf/5.6.0/xml/features</repository>
+     	<repository>mvn:org.apache.activemq/activemq-karaf/5.8.0/xml/features</repository>
     
 		<feature name="hbird-core" description="Hbird core component bundles" version="${version}">
 			<bundle start="false">mvn:org.apache.commons/com.springsource.org.apache.commons.lang/2.6.0</bundle>
@@ -25,10 +23,7 @@
 			<feature version="${camel.version}">camel-mina</feature>
 			<feature version="${camel.version}">camel-mina2</feature>
 			<feature version="${camel.version}">camel-mongodb</feature>
-			<feature version="5.5.0">activemq-blueprint</feature>
-			<feature version="5.5.0">activemq-spring</feature>
-			<feature version="5.5.0">activemq-web-console</feature>
-			<feature>activemq-camel</feature>
+			<feature>activemq-broker</feature>
 		</feature>
 		
 		<feature name="hbird-xtce" description="Hbird xtce space system bundles including OSGi service provision" version="${version}">
