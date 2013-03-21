@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
+
 
 public class GenericPayload implements Serializable {
 	private static final long serialVersionUID = 7823269614387628654L;

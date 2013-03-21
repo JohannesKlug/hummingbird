@@ -1,6 +1,6 @@
 package org.hbird.transport.protocols.ccsds.spacepacket;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.hbird.transport.protocols.ccsds.spacepacket.data.CcsdsPacketType;
 import org.hbird.transport.protocols.ccsds.spacepacket.data.PacketPayload;
 import org.hbird.transport.protocols.ccsds.spacepacket.exceptions.InvalidApIdException;

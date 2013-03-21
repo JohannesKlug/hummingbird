@@ -4,7 +4,7 @@ package org.hbird.core.commons.util;
 import java.nio.ByteOrder;
 import java.util.BitSet;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.hbird.core.commons.util.exceptions.BitSetOperationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

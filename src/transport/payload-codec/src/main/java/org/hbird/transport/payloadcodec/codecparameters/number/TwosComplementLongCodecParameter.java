@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.BitSet;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;

@@ -100,7 +100,8 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 		<!-- For creating OSGi bundles -->
-		<!-- COMMENT: The bundle version is very old. Camel uses 4.1.0 and I some problems due to this. -->
+		<!-- COMMENT: The bundle version is very old. Camel uses 4.1.0 and I some 
+			problems due to this. -->
 		<!-- <dependency> -->
 		<!-- <groupId>org.apache.felix</groupId> -->
 		<!-- <artifactId>org.osgi.core</artifactId> -->
@@ -282,13 +283,19 @@
 				<artifactId>junit</artifactId>
 				<version>${junit.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.1</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<build>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -313,7 +320,7 @@
 						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
-				
+
 				<plugin>
 					<artifactId>maven-assembly-plugin</artifactId>
 					<version>2.1</version>
@@ -323,7 +330,7 @@
 						</descriptorRefs>
 					</configuration>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.felix</groupId>
 					<artifactId>maven-bundle-plugin</artifactId>
@@ -331,19 +338,19 @@
 					<extensions>true</extensions>
 					<inherited>true</inherited>
 					<configuration>
-                    	<instructions>
-                        	<Bundle-Version>${project.version}</Bundle-Version>
-                        	<Bundle-Category>MCS</Bundle-Category>
-                    	</instructions>
-                	</configuration>
+						<instructions>
+							<Bundle-Version>${project.version}</Bundle-Version>
+							<Bundle-Category>MCS</Bundle-Category>
+						</instructions>
+					</configuration>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>2.3.1</version>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
@@ -353,32 +360,32 @@
 						<target>1.6</target>
 					</configuration>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
 					<version>2.7</version>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
 					<version>2.1.2</version>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-gpg-plugin</artifactId>
 					<version>1.1</version>
 				</plugin>
-				
+
 				<plugin>
-        			<groupId>org.codehaus.mojo</groupId>
-        			<artifactId>sonar-maven-plugin</artifactId>
-        			<version>2.0</version>
-      			</plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>2.0</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
-	
+
 </project>
