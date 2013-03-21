@@ -14,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -147,7 +148,11 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 				DBObject query = buildMongoQuery(aoData);
 				String skip = aoData.get("iDisplayStart");
 				String count = aoData.get("iDisplayLength");
-				Object results = parameterQuerySenderService.query(query, Integer.parseInt(count), Integer.parseInt(skip));
+
+				String sortCol = calculateSortColumn(aoData);
+				boolean ascending = StringUtils.equals(aoData.get("sSortDir_0"), "asc") ? true : false;
+
+				Object results = parameterQuerySenderService.query(query, Integer.parseInt(count), Integer.parseInt(skip), sortCol, ascending);
 				// FIXME Put results into aaData and return aoData back to server.
 				if (results instanceof MongoResult) {
 					MongoResult mongoResults = (MongoResult) results;
@@ -175,19 +180,39 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 		return result;
 	}
 
+	private static String calculateSortColumn(Map<String, String> aoData) {
+		String col = null;
+		switch (Integer.parseInt(aoData.get("iSortCol_0"))) {
+			case 0:
+				col = "name";
+				break;
+			case 1:
+				col = "value";
+				break;
+			case 2:
+				col = "receviedTime";
+				break;
+			default:
+				LOG.warn("Unexpected column number for sorting");
+				break;
+		}
+		return col;
+	}
+
 	// FIXME convert to hbird archiver interface and move this to the archiver.
 	private static DBObject buildMongoQuery(Map<String, String> aoData) {
-		DBObject mongoQuery = new BasicDBObject();
+		// Get datatables values
 		long startTime = Long.parseLong(aoData.get("startTime"));
 		long endTime = Long.parseLong(aoData.get("endTime"));
-
-		//@formatter:off
-		mongoQuery.put("receivedTime", 
-				BasicDBObjectBuilder.start("$gte", startTime).
-									 add("$lte", endTime).
-									 get());
-		
 		String search = aoData.get("sSearch");
+
+		// Build mongo query
+		//@formatter:off
+		DBObject mongoQuery = new BasicDBObject();
+		mongoQuery.put("receivedTime", BasicDBObjectBuilder.start("$gte", startTime).
+									   add("$lte", endTime).
+									   get());
+		
 		if(search != null && (!search.isEmpty())) {
 			LOG.trace("Adding search query " + search);
 			Pattern match = Pattern.compile(search, Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
@@ -196,6 +221,7 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 			DBObject matchString = new BasicDBObject("$regex", match.toString()).append("$options", "im");
 			mongoQuery.put("name", matchString);
 		}
+
 		//@formatter:on
 
 		return mongoQuery;

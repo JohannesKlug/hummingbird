@@ -4,7 +4,15 @@ import java.util.List;
 
 import com.mongodb.DBObject;
 
+/**
+ * Implementations of this interface will be expected to deal with interfacing with the Mongo DB.
+ * 
+ * @author Mark Doyle
+ * 
+ */
 public interface MongoServiceStrategy {
+
+	long queryNumRecords();
 
 	/**
 	 * Query is an Object your database implementation can work with.
@@ -18,10 +26,7 @@ public interface MongoServiceStrategy {
 
 	List<DBObject> query(Object query, DBObject sort, int limit);
 
-	MongoResult query(Object dbQuery, int limit, int skip);
-
-	long queryNumRecords();
-
 	List<DBObject> query(DBObject mongoQuery, DBObject mongoFieldFilter, DBObject mongoSort, int i);
 
+	MongoResult query(Object dbQuery, int limit, int skip, String sortCol, boolean asc);
 }
