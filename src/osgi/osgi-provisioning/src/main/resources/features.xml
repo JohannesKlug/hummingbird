@@ -20,8 +20,8 @@
 			<feature version="${camel.version}">camel-spring</feature>
 			<feature version="${camel.version}">camel-jms</feature>
 			<feature version="${camel.version}">camel-stream</feature>
-			<feature version="${camel.version}">camel-mina</feature>
 			<feature version="${camel.version}">camel-mina2</feature>
+			<feature version="${camel.version}">camel-netty</feature>
 			<feature version="${camel.version}">camel-mongodb</feature>
 			<feature>activemq-broker</feature>
 		</feature>
