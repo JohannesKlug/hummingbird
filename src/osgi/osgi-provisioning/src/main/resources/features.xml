@@ -140,6 +140,7 @@
 				 version="${version}">
 				 <feature>hbird-core</feature>
 				 <bundle start="false">mvn:org.hbird.application/parameter-archive</bundle>
+				 <bundle start="false">mvn:org.hbird.application/parameter-cache</bundle>
 		</feature>
 		
 		<feature name="hbird-complete" 
