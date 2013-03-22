@@ -4,6 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.io.IOException;
+
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
 import org.junit.Before;
 import org.junit.Test;
@@ -99,5 +104,12 @@ public class HummingbirdParameterTest {
 	@Test
 	public void testGetQualifiedName() {
 		assertEquals(QN, parameter.getQualifiedName());
+	}
+	
+	@Test
+	public void testParameterToJson() throws JsonGenerationException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		parameter.setValue(new Integer(1337));
+		System.out.println(mapper.writeValueAsString(parameter));
 	}
 }

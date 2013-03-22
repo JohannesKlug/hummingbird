@@ -13,7 +13,7 @@ import static org.hbird.transport.protocols.kiss.KissConstants.TFESC;
 import static org.hbird.transport.protocols.kiss.KissConstants.TX_DELAY;
 import static org.hbird.transport.protocols.kiss.KissConstants.TX_TAIL;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.CumulativeProtocolDecoder;

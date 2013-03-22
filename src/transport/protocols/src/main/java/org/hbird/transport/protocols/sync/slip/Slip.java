@@ -3,7 +3,7 @@ package org.hbird.transport.protocols.sync.slip;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.hbird.transport.protocols.sync.ObservableFrameSynchroniser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,6 +1,6 @@
 package org.hbird.transport.protocols.ccsds.transferframe;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.hbird.transport.protocols.ccsds.transferframe.data.CcsdsFramePayload;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.FrameFailedCrcCheckException;
 import org.hbird.transport.protocols.ccsds.transferframe.exceptions.InvalidFrameLengthException;
@@ -48,7 +48,7 @@ public class CcsdsFrameDecoder {
 	}
 
 	private final VirtualChannel[] virtualChannel = new VirtualChannel[8];
-	
+
 	public CcsdsFrameDecoder(final int frameLength) {
 		this(frameLength, false, false);
 	}
@@ -120,7 +120,6 @@ public class CcsdsFrameDecoder {
 
 		primaryHeader = ArrayUtils.subarray(frame, 0, 6);
 
-
 		int spacecraftIdHighByte = (0x3F & primaryHeader[0]) << 4;
 		int spacecraftIdLowByte = (0xF0 & primaryHeader[1]) >> 4;
 		int spacecraftId = spacecraftIdHighByte + spacecraftIdLowByte;
@@ -174,7 +173,7 @@ public class CcsdsFrameDecoder {
 		byte[] payload = ArrayUtils.subarray(frame, payloadOffset, payloadEnd);
 
 		return virtualChannel[virtualChannelId].processPayload(spacecraftId, payload, virtualChannelFrameCount, firstHeaderPointer);
-		
+
 	}
-	
+
 }

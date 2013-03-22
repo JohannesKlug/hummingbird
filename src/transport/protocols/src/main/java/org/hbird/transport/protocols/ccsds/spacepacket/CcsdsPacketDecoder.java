@@ -3,7 +3,7 @@ package org.hbird.transport.protocols.ccsds.spacepacket;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.hbird.transport.protocols.ccsds.spacepacket.data.PacketPayload;
 import org.hbird.transport.protocols.ccsds.transferframe.data.FramePayload;
 import org.slf4j.Logger;
