@@ -10,7 +10,7 @@ import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mongodb.MongoDbConstants;
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,11 +18,11 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
 /**
- * This implementation uses the Camel MongoDB component wired up to receive requests from an endpoint
- * named: parameterArchiveQueriesEndpoint.
+ * This implementation uses the Camel MongoDB component wired up to receive requests from an endpoint named:
+ * parameterArchiveQueriesEndpoint.
  * 
- * For example, you could create the following endpoint in your camel route. This example uses the Spring DSL
- * and routes requests via activemq:
+ * For example, you could create the following endpoint in your camel route. This example uses the Spring DSL and routes
+ * requests via activemq:
  * 
  * <pre>
  * {@code

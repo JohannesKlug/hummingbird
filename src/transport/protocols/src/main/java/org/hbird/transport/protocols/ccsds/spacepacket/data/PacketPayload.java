@@ -2,7 +2,8 @@ package org.hbird.transport.protocols.ccsds.spacepacket.data;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
+
 
 public class PacketPayload implements Serializable {
 	private static final long serialVersionUID = -1837235324860411156L;

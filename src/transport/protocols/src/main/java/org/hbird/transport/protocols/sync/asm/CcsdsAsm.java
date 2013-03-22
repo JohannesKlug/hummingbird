@@ -3,7 +3,7 @@ package org.hbird.transport.protocols.sync.asm;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.hbird.transport.protocols.sync.ObservableFrameSynchroniser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,7 @@ public class CcsdsAsm extends ObservableFrameSynchroniser {
 	private final byte[] asm;
 
 	/**
-	 *  Default Constructor using the ASM bit pattern defined in CCSDS 131 (0x1ACFFC1D)
+	 * Default Constructor using the ASM bit pattern defined in CCSDS 131 (0x1ACFFC1D)
 	 */
 	public CcsdsAsm() {
 		// 1ACFFC1D
@@ -67,7 +67,8 @@ public class CcsdsAsm extends ObservableFrameSynchroniser {
 						}
 					}
 					else {
-						// Received byte not part of the ASM. Reset current asm byte "pointer" and continue processing the stream.
+						// Received byte not part of the ASM. Reset current asm byte "pointer" and continue processing
+						// the stream.
 						asmByte = 0;
 					}
 				}
