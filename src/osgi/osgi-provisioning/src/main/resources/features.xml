@@ -10,7 +10,7 @@
      	<repository>mvn:org.apache.activemq/activemq-karaf/5.8.0/xml/features</repository>
     
 		<feature name="hbird-core" description="Hbird core component bundles" version="${version}">
-			<bundle start="false">mvn:org.apache.commons/com.springsource.org.apache.commons.lang/2.6.0</bundle>
+			<bundle start="false">mvn:org.apache.commons/commons-lang3/3.1</bundle>
 			<bundle start="false">mvn:org.apache.oro/com.springsource.org.apache.oro/2.0.8</bundle>
 			<bundle start="false">mvn:joda-time/joda-time/2.1</bundle>
 			<bundle start="false">mvn:com.googlecode.guava-osgi/guava-osgi/11.0.0</bundle>
