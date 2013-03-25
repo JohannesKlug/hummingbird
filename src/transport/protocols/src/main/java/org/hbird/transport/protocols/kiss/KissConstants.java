@@ -59,7 +59,7 @@ public final class KissConstants {
 	 * Exit KISS and return control to a higher-level program. This is useful only when KISS is incorporated into the
 	 * TNC along with other applications.
 	 */
-	public static final byte RETURN = (byte) 0xFF;
+	public static final byte RETURN = (byte) 0x0F;
 
 	private KissConstants() {
 		// Constants class, utility.
