@@ -6,7 +6,7 @@ import java.util.zip.Checksum;
 public class CRC16CCITT implements Checksum {
 
 	/** initial value **/
-	private static int crc = 0xFFFF;
+	private int crc = 0xFFFF;
 
 	/** 0001 0000 0010 0001 (0, 5, 12) **/
 	private static final int NORMAL_POLYNOMIAL = 0x1021;
