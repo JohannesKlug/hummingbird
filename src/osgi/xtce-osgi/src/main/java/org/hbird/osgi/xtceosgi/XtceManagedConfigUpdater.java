@@ -1,5 +1,6 @@
 package org.hbird.osgi.xtceosgi;
 
+import java.io.File;
 import java.util.Dictionary;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class XtceManagedConfigUpdater implements ManagedService {
 
 	private final static Logger LOG = LoggerFactory.getLogger(XtceManagedConfigUpdater.class);
 
-	private static final String SPACE_SYSTEM_MODLE_FILENAME_FIELD = "spaceSystemModelFilename";
+	private static final String SPACE_SYSTEM_MODEL_FILENAME_FIELD = "spaceSystemModelFilename";
 
 	private XtceSpaceSystemModelFactory factory;
 
@@ -44,17 +45,30 @@ public class XtceManagedConfigUpdater implements ManagedService {
 	}
 
 	@Override
-	// Suppressing rawtypes on Dictionary because we are running in OSGi which still supports Java 1.4 and therefore does
-	// not use generics.
-	public void updated(@SuppressWarnings("rawtypes") final Dictionary configuration) throws ConfigurationException {
+	public void updated(final Dictionary configuration) throws ConfigurationException {
 		LOG.trace("Updater called with new configuration");
 		if (configuration == null) {
 			nulledModel();
 			return;
 		}
 
-		setSpaceSystemModelFilename((String) configuration.get(SPACE_SYSTEM_MODLE_FILENAME_FIELD));
-		notifyModelUpdateListeners();
+		String spaceSystemModelFilename = (String) configuration.get(SPACE_SYSTEM_MODEL_FILENAME_FIELD);
+		if (checkFile(spaceSystemModelFilename)) {
+			setSpaceSystemModelFilename(spaceSystemModelFilename);
+			notifyModelUpdateListeners();
+		}
+		else {
+			throw new ConfigurationException(SPACE_SYSTEM_MODEL_FILENAME_FIELD,
+					"Invalid space system model file. File does not exist, is not a file (you may hav specified a directory), or is not readable");
+		}
+	}
+
+	private static boolean checkFile(String file) {
+		File check = new File(file);
+		if (check.exists() & check.isFile() & check.canRead()) {
+			return true;
+		}
+		return false;
 	}
 
 }
