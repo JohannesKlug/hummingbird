@@ -8,7 +8,9 @@ import org.junit.Test;
 public class CRC16CCITTtest {
 
 	private static final String TEST_INPUT = "123456789";
+
 	private static final int EXPECTED_CRC = 0x29B1;
+
 	private static final int EXPECTED_RESET_CRC = 0xFFFF;
 
 	private CRC16CCITT crc;
@@ -18,7 +20,8 @@ public class CRC16CCITTtest {
 		crc = new CRC16CCITT();
 	}
 
-	private void testUpdateInt() {
+	@Test
+	public void testUpdateInt() {
 		for (byte b : TEST_INPUT.getBytes()) {
 			crc.update(b);
 		}
@@ -32,9 +35,10 @@ public class CRC16CCITTtest {
 		assertEquals(EXPECTED_RESET_CRC, crc.getValue());
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test
 	public void testUpdateByteWithOffset() {
-		crc.update(new byte[5], 2, 3);
+		crc.update(TEST_INPUT.getBytes(), 0, TEST_INPUT.getBytes().length);
+		assertEquals(EXPECTED_CRC, crc.getValue());
 	}
 
 }

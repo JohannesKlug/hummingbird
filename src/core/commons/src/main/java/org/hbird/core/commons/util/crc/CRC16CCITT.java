@@ -1,11 +1,13 @@
 package org.hbird.core.commons.util.crc;
 
+import java.util.Arrays;
 import java.util.zip.Checksum;
 
 public class CRC16CCITT implements Checksum {
 
 	/** initial value **/
-	private static int crc = 0xFFFF;
+	private int crc = 0xFFFF;
+
 	/** 0001 0000 0010 0001 (0, 5, 12) **/
 	private static final int NORMAL_POLYNOMIAL = 0x1021;
 
@@ -23,8 +25,11 @@ public class CRC16CCITT implements Checksum {
 	}
 
 	@Override
-	public void update(byte[] b, int off, int len) {
-		throw new UnsupportedOperationException("Offset update not implemented.");
+	public void update(byte[] bytes, int off, int len) {
+		byte[] arraySection = Arrays.copyOfRange(bytes, off, len);
+		for (byte b : arraySection) {
+			update(b);
+		}
 	}
 
 	@Override

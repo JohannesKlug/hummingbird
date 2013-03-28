@@ -20,6 +20,7 @@
 		<module>application</module>
 		<module>test</module>
 		<module>osgi</module>
+		<module>hbird-karaf</module>
 	</modules>
 	<properties>
 		<rxtx.version>2.1.7</rxtx.version>
@@ -340,7 +341,7 @@
 					<configuration>
 						<instructions>
 							<Bundle-Version>${project.version}</Bundle-Version>
-							<Bundle-Category>MCS</Bundle-Category>
+							<Bundle-Category>Hbird</Bundle-Category>
 						</instructions>
 					</configuration>
 				</plugin>

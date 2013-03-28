@@ -7,6 +7,12 @@ import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Camel based {@link CommandAcceptor}
+ * 
+ * @author Mark Doyle
+ * 
+ */
 public class DefaultCommandAcceptor implements CommandAcceptor {
 	private final static Logger LOG = LoggerFactory.getLogger(DefaultCommandAcceptor.class);
 

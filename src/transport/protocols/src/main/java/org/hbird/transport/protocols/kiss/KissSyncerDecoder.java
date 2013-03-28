@@ -46,6 +46,9 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 		boolean state = true;
 
 		if (currentlyHandling != null) {
+			if (LOG.isTraceEnabled()) {
+				LOG.trace("Currently handling frame, continuing with new buffer...");
+			}
 			// figure out which type we were handling and send IoBuffer to that method to continue handling
 			return handleType(in, out, state, currentlyHandling);
 		}
@@ -85,27 +88,37 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 		// Now we can perform the correct logic given the type.
 		switch (commandType) {
 			case DATA_FRAME:
+				if (LOG.isTraceEnabled()) {
+					LOG.trace("Data frame detected.");
+				}
 				localState = handleDataFrame(in, out);
 				break;
 			case TX_DELAY:
+				LOG.warn("Unsupported KISS command type: TX_DELAY. Ignoring frame");
 				currentlyHandling = null;
 				break;
 			case P:
+				LOG.warn("Unsupported KISS command type: \"P\". Ignoring frame");
 				currentlyHandling = null;
 				break;
 			case SLOT_TIME:
+				LOG.warn("Unsupported KISS command type: SLOT_TIME. Ignoring frame");
 				currentlyHandling = null;
 				break;
 			case TX_TAIL:
+				LOG.warn("Unsupported KISS command type: TX_TAIL. Ignoring frame");
 				currentlyHandling = null;
 				break;
 			case FULL_DUPLEX:
+				LOG.warn("Unsupported KISS command type: FULL_DUPLEX. Ignoring frame");
 				currentlyHandling = null;
 				break;
 			case SET_HARDWARE:
+				LOG.warn("Unsupported KISS command type: SET_HARDWARE. Ignoring frame");
 				currentlyHandling = null;
 				break;
 			case RETURN:
+				LOG.warn("Unsupported KISS command type: RETURN. Ignoring frame");
 				currentlyHandling = null;
 				break;
 			default:

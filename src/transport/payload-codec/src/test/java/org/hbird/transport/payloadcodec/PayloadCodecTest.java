@@ -5,8 +5,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Collection;
+import java.util.List;
 
 import org.hbird.core.commons.data.GenericPayload;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
@@ -75,6 +78,10 @@ public class PayloadCodecTest {
 
 	private static final long TIMESTAMP = 5478;
 
+	private static final int PGS_ENCODED = 144000;
+
+	private static final List<GenericPayload> TEST_PAYLOADS = new ArrayList<GenericPayload>(PGS_ENCODED);
+
 	@BeforeClass
 	public static void setUp() {
 		ssm = new MockSpaceSystemModel();
@@ -112,10 +119,35 @@ public class PayloadCodecTest {
 
 	@Test
 	public void feelTheBurn() throws BitSetOperationException, UnknownParameterGroupException, UnknownParameterException {
-		int burnLevel = 500;
+		long startTime = System.currentTimeMillis();
+		int burnLevel = 100;
 		for (int i = 0; i < burnLevel; i++) {
 			testEncode();
 		}
+		long endTime = System.currentTimeMillis();
+
+		long totalTime = (endTime - startTime);
+		double perGroup = (double) totalTime / PGS_ENCODED;
+		double perParameter = perGroup / 3;
+
+		System.out.println("Total encode time = " + totalTime + " ms");
+		System.out.println("Total encode time per parameter group = " + perGroup + " ms");
+		System.out.println("Total encode time per parameter = " + perParameter + " ms");
+
+		startTime = System.currentTimeMillis();
+		for (GenericPayload payload : TEST_PAYLOADS) {
+			payload.layoutIdentifiers.clear();
+			payload.layoutIdentifiers.addAll(Arrays.asList(MockSpaceSystemModel.INTEGER_RESTRICTION_ID));
+			codec.decode(payload);
+		}
+		endTime = System.currentTimeMillis();
+		totalTime = (endTime - startTime);
+		perGroup = (double) totalTime / PGS_ENCODED;
+		perParameter = perGroup / 3;
+
+		System.out.println("Total decode time = " + totalTime + " ms");
+		System.out.println("Total decode time per parameter group = " + perGroup + " ms");
+		System.out.println("Total decode time per parameter = " + perParameter + " ms");
 	}
 
 	@Test
@@ -148,6 +180,7 @@ public class PayloadCodecTest {
 
 	private static void encodeAndAssert(final ParameterGroup testGroup, final BitSet expected) {
 		GenericPayload actualGenericPayload = codec.encodeToGenericPayload(testGroup);
+		TEST_PAYLOADS.add(actualGenericPayload);
 		BitSet actual = BitSetUtility.fromByteArray(actualGenericPayload.payload);
 		// assertArrayEquals(expectedBytes, actualGenericPayload.payload);
 		assertEquals("Encoded BitSet should match " + expected, expected, actual);

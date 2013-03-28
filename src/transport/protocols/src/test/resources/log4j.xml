@@ -29,6 +29,10 @@
 	<logger name="org.springframework">
 		<level value="WARN" />
 	</logger>
+
+	<logger name="org.hbird.transport.protocols.kiss">
+		<level value="TRACE" />
+	</logger>
 	
 	<!--	ROOT LOGGER-->
 	<root>
