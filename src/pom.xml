@@ -20,6 +20,7 @@
 		<module>application</module>
 		<module>test</module>
 		<module>osgi</module>
+		<module>hbird-karaf</module>
 	</modules>
 	<properties>
 		<rxtx.version>2.1.7</rxtx.version>
