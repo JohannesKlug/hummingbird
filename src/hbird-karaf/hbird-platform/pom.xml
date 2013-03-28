@@ -118,7 +118,7 @@
 
 		<!-- Repository dependency for Sonatype Snapshots repository (for hbird 
 			transport) -->
-		<repository>
+ 		<repository>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
@@ -133,11 +133,11 @@
 			<url>http://svn.apache.org/repos/asf/servicemix/m2-repo</url>
 		</repository>
 
-<!-- 		<repository>
+		<repository>
 			<id>spring-release</id>
 			<name>spring-release</name>
 			<url>http://repository.springsource.com/maven/bundles/release</url>
-		</repository> -->
+		</repository>
 
 		<repository>
 			<id>spring-external</id>

@@ -9,11 +9,12 @@
      	
      	<!-- <repository>mvn:org.apache.activemq/activemq-karaf/5.8.0/xml/features</repository> -->
     
-		<feature name="hbird-core" description="Hbird core component bundles" version="${version}">
-			<bundle start="false">mvn:org.apache.commons/commons-lang3/3.1</bundle>
-			<bundle start="false">mvn:org.apache.oro/com.springsource.org.apache.oro/2.0.8</bundle>
-			<bundle start="false">mvn:joda-time/joda-time/2.1</bundle>
-			<bundle start="false">mvn:com.googlecode.guava-osgi/guava-osgi/11.0.0</bundle>
+		<feature name="hbird-core" description="Hbird core component bundles" version="${project.version}">
+			<bundle dependency="true" start="false">mvn:org.apache.commons/commons-lang3/3.1</bundle>
+			<bundle dependency="true" start="false">mvn:org.apache.commons/com.springsource.org.apache.commons.lang/2.1.0</bundle>
+			<bundle dependency="true" start="false">mvn:org.apache.oro/com.springsource.org.apache.oro/2.0.8</bundle>
+			<bundle dependency="true" start="false">mvn:joda-time/joda-time/2.1</bundle>
+			<bundle dependency="true" start="false">mvn:com.googlecode.guava-osgi/guava-osgi/11.0.0</bundle>
 			<bundle start="false">mvn:org.hbird.core/commons/${project.version}</bundle>
 			<bundle start="false">mvn:org.hbird.core/space-system-model/${project.version}</bundle>
 			<feature version="${camel.version}">camel-blueprint</feature>
@@ -26,7 +27,7 @@
 			<!-- <feature>activemq-broker</feature> -->
 		</feature>
 		
-		<feature name="hbird-xtce" description="Hbird xtce space system bundles including OSGi service provision" version="${version}">
+		<feature name="hbird-xtce" description="Hbird xtce space system bundles including OSGi service provision" version="${project.version}">
 			<feature>hbird-core</feature>
 			<bundle start="false">mvn:org.hbird.core/xtce/${project.version}</bundle>
 			<bundle>mvn:org.hbird.osgi/xtce-osgi/${project.version}</bundle>
@@ -34,21 +35,21 @@
 		
 		<feature name="hbird-publisher" 
 				 description="Hbird space system publisher bundles including OSGi service provision" 
-				 version="${version}">
+				 version="${project.version}">
 			<feature>hbird-core</feature>
 			<bundle start="false">mvn:org.hbird.core/space-system-publisher/${project.version}</bundle>
 			<bundle>mvn:org.hbird.osgi/space-system-publisher-osgi/${project.version}</bundle>
 		</feature>
 		
-		<feature name="hbird-transport" description="Hbird transport bundles and services" version="${version}">
-			<feature version="${version}">hbird-core</feature>
+		<feature name="hbird-transport" description="Hbird transport bundles and services" version="${project.version}">
+			<feature version="${project.version}">hbird-core</feature>
 			<bundle>mvn:org.objenesis/objenesis/1.2</bundle>
 			<bundle>mvn:org.hbird.transport/payload-codec/${project.version}</bundle>
 			<bundle>mvn:org.hbird.transport/protocols/${project.version}</bundle>
 			<bundle start="false">mvn:org.hbird.osgi/rxtx-native-fragment/${project.version}</bundle>
 		</feature>
 		
-		<feature name="hbird-commanding" description="Hbird commmanding application server" version="${version}">
+		<feature name="hbird-commanding" description="Hbird commmanding application server" version="${project.version}">
 			<feature>hbird-publisher</feature>
 			<bundle start="false">mvn:org.hbird.application/commanding/${project.version}</bundle>
 <!-- 			<bundle start="false">mvn:org.hbird.osgi/commanding-osgi</bundle> -->
@@ -114,7 +115,7 @@
 			<bundle>mvn:com.sun.jersey.contribs/jersey-spring/1.14</bundle>
 		</feature>
 		
-		<feature name="hbird-halcyon" description="Hbird Web services backend" version="${version}">
+		<feature name="hbird-halcyon" description="Hbird Web services backend" version="${project.version}">
 			<feature>hbird-jersey</feature>
 			<feature>hbird-commanding</feature>
 			<bundle start="false">mvn:com.googlecode.json-simple/json-simple/1.1.1</bundle>
@@ -123,12 +124,12 @@
 			<bundle>mvn:org.hbird.application/halcyon/${project.version}/war</bundle>
 		</feature>
 		
-		<feature name="hbird-web-client" description="Web gui" version="${version}">
+		<feature name="hbird-web-client" description="Web gui" version="${project.version}">
 			<feature>hbird-halcyon</feature>
 			<bundle>mvn:org.hbird.application/web-client/${project.version}/war</bundle>
 		</feature>
 		
-		<feature name="hbird-rotor-simulator" description="" version="${version}">
+		<feature name="hbird-rotor-simulator" description="" version="${project.version}">
 			<feature>hbird-core</feature>
 			<feature>hbird-publisher</feature>
 			<feature version="${camel.version}">camel-blueprint</feature>
@@ -137,7 +138,7 @@
 		
 		<feature name="hbird-parameter-archive" 
 				 description="Hbird framework bundles for parameter archiving. Included provided implementations for mongoDb"
-				 version="${version}">
+				 version="${project.version}">
 				 <feature>hbird-core</feature>
 				 <bundle start="false">mvn:org.hbird.application/parameter-archive/${project.version}</bundle>
 				 <bundle start="false">mvn:org.hbird.application/parameter-cache/${project.version}</bundle>
@@ -145,7 +146,7 @@
 		
 		<feature name="hbird-complete" 
 				 description="A complete single container installation of hbird and core applications. NOTE: Model and publisher bundles contain blueprints which wire up their services" 
-				 version="${version}">
+				 version="${project.version}">
 			<feature>hbird-jersey</feature>
 			<feature>hbird-core</feature>
 			<feature>hbird-xtce</feature>
