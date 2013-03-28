@@ -92,7 +92,7 @@
 					<startupFeatures>
 						<feature>standard</feature>
 						<feature>management</feature>
-						<!-- <feature>webconsole</feature> -->
+						<feature>webconsole</feature>
 						<!-- <feature>activemq-broker</feature> -->
 					</startupFeatures>
 					<bootFeatures>
@@ -143,6 +143,12 @@
 			<id>spring-external</id>
 			<name>spring-external</name>
 			<url>http://repository.springsource.com/maven/bundles/external</url>
+		</repository>
+		
+		<repository>
+			<id>m2.java.net</id>
+			<name>Java.net Maven 2 Repository</name>
+			<url>http://download.java.net/maven/2</url>
 		</repository>
 
 	</repositories>

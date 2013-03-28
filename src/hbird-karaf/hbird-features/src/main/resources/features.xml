@@ -44,8 +44,8 @@
 		<feature name="hbird-transport" description="Hbird transport bundles and services" version="${project.version}">
 			<feature version="${project.version}">hbird-core</feature>
 			<bundle>mvn:org.objenesis/objenesis/1.2</bundle>
-			<bundle>mvn:org.hbird.transport/payload-codec/${project.version}</bundle>
-			<bundle>mvn:org.hbird.transport/protocols/${project.version}</bundle>
+			<bundle start="false">mvn:org.hbird.transport/payload-codec/${project.version}</bundle>
+			<bundle start="false">mvn:org.hbird.transport/protocols/${project.version}</bundle>
 			<bundle start="false">mvn:org.hbird.osgi/rxtx-native-fragment/${project.version}</bundle>
 		</feature>
 		
@@ -58,30 +58,6 @@
 		<feature name="hbird-enterprise-osgi" description="Enterprise OSGi bundles for spec 4.2.0">
 			<bundle>mvn:org.osgi/org.osgi.compendium/4.2.0</bundle>
 			<bundle>mvn:org.osgi/org.osgi.enterprise/4.2.0</bundle>
-		</feature>
-		
-		<feature name="hbird-dosgi-cxf" description="Hbird DOSGi feature using CXF since they don't have one yet :)">
-			<feature>cxf-databinding-aegis</feature>
-			<feature>cxf-ws-policy</feature>
-			<feature>hbird-enterprise-osgi</feature>
-			<bundle>mvn:org.jdom/com.springsource.org.jdom/1.1.0</bundle>
-			<bundle start="false">mvn:org.apache.commons/com.springsource.org.apache.commons.lang/2.6.0</bundle>
-			<bundle>mvn:org.apache.cxf.dosgi/cxf-dosgi-ri-discovery-local/1.3.1</bundle>
-			<bundle>mvn:org.apache.cxf.dosgi/cxf-dosgi-ri-dsw-cxf/1.3.1</bundle>
-			<bundle>mvn:org.apache.cxf.dosgi/cxf-dosgi-ri-topology-manager/1.3.1</bundle>
-		</feature>
-	
-		<feature name="hbird-dosgi-cxf-14snap" 
-				 description="Hbird DOSGi feature using CXF since they don't have one yet :)" 
-				 version="1.4-SNAPSHOT">
-			<feature>cxf-databinding-aegis</feature>
-			<feature>cxf-ws-policy</feature>
-			<feature>hbird-enterprise-osgi</feature>
-			<bundle>mvn:org.jdom/com.springsource.org.jdom/1.1.0</bundle>
-			<bundle start="false">mvn:org.apache.commons/com.springsource.org.apache.commons.lang/2.6.0</bundle>
-			<bundle>mvn:org.apache.cxf.dosgi/cxf-dosgi-ri-discovery-local</bundle>
-			<bundle>mvn:org.apache.cxf.dosgi/cxf-dosgi-ri-dsw-cxf</bundle>
-			<bundle>mvn:org.apache.cxf.dosgi/cxf-dosgi-ri-topology-manager</bundle>
 		</feature>
 		
 		<feature name="hbird-jackson"
@@ -118,6 +94,7 @@
 		<feature name="hbird-halcyon" description="Hbird Web services backend" version="${project.version}">
 			<feature>hbird-jersey</feature>
 			<feature>hbird-commanding</feature>
+			<bundle start="false">mvn:org.eclipse.jetty/jetty-websocket/8.1.10.v20130312</bundle>
 			<bundle start="false">mvn:com.googlecode.json-simple/json-simple/1.1.1</bundle>
 			<bundle start="false">mvn:org.jboss.javassist/com.springsource.javassist/3.15.0.GA</bundle>
 			<bundle start="false">mvn:org.msgpack/msgpack/0.6.6</bundle>
