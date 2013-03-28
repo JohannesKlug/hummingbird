@@ -2,140 +2,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>org.hbird</groupId>
 		<artifactId>hummingbird</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>hbird-karaf</artifactId>
-	<packaging>karaf-assembly</packaging>
-	<name>Hbird :: OSGi :: Karaf</name>
+	<artifactId>karaf-parent</artifactId>
+	<packaging>pom</packaging>
+	<name>Hbird :: Karaf :: Parent project</name>
+
+	<modules>
+		<module>hbird-features</module>
+		<module>hbird-platform</module>
+	</modules>
 
 	<properties>
-		<!-- <karaf.version>2.2.9</karaf.version> -->
-<!-- 		<karaf.version>2.3.1</karaf.version> -->
 		<karaf.version>3.0.0-SNAPSHOT</karaf.version>
-		<hbird.version>0.0.1-SNAPSHOT</hbird.version>
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<!-- scope is compile so all features (there is only one) are installed 
-				into startup.properties and the feature repo itself is not installed -->
-			<groupId>org.apache.karaf.features</groupId>
-			<artifactId>framework</artifactId>
-			<version>${karaf.version}</version>
-			<type>kar</type>
-		</dependency>
-		<dependency>
-			<!-- scope is runtime so the feature repo is listed in the features service 
-				config file, and features may be installed using the karaf-maven-plugin configuration -->
-			<groupId>org.apache.karaf.features</groupId>
-			<artifactId>standard</artifactId>
-			<version>${karaf.version}</version>
-			<classifier>features</classifier>
-			<type>xml</type>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<!-- scope is runtime so the feature repo is listed in the features service 
-				config file, and features may be installed using the karaf-maven-plugin configuration -->
-			<groupId>org.apache.karaf.features</groupId>
-			<artifactId>spring</artifactId>
-			<version>${karaf.version}</version>
-			<classifier>features</classifier>
-			<type>xml</type>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel.karaf</groupId>
-			<artifactId>apache-camel</artifactId>
-			<version>2.10.4</version>
-			<classifier>features</classifier>
-			<type>xml</type>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hbird.osgi</groupId>
-			<artifactId>osgi-provisioning</artifactId>
-			<version>${hbird.version}</version>
-			<classifier>features</classifier>
-			<type>xml</type>
-			<scope>runtime</scope>
-		</dependency>
-	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.karaf.tooling</groupId>
-				<artifactId>karaf-maven-plugin</artifactId>
-				<version>${karaf.version}</version>
-				<extensions>true</extensions>
-				<configuration>
-					<startupFeatures>
-						<feature>standard</feature>
-						<feature>management</feature>
-						<feature>webconsole</feature>
-					</startupFeatures>
-					<bootFeatures>
-						<feature>camel-core</feature>
-						<feature>hbird-complete</feature>
-					</bootFeatures>
-					<installedFeatures>
-					</installedFeatures>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
-	<repositories>
-		<repository>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<id>apache.snapshots</id>
-			<url>http://repository.apache.org/snapshots/</url>
-		</repository>
-
-		<!-- Repository dependency for Sonatype Snapshots repository (for hbird 
-			transport) -->
-		<repository>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<id>sonatyperepository</id>
-			<name>sonatyperepository</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-		</repository>
-
-		<repository>
-			<id>servicemix</id>
-			<name>servicemix</name>
-			<url>http://svn.apache.org/repos/asf/servicemix/m2-repo</url>
-		</repository>
-
-		<repository>
-			<id>spring-release</id>
-			<name>spring-release</name>
-			<url>http://repository.springsource.com/maven/bundles/release</url>
-		</repository>
-
-		<repository>
-			<id>spring-external</id>
-			<name>spring-external</name>
-			<url>http://repository.springsource.com/maven/bundles/external</url>
-		</repository>
-
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>apache.snapshots</id>
-			<url>http://repository.apache.org/snapshots/</url>
-		</pluginRepository>
-	</pluginRepositories>
-	<description>A Karaf based platform containing all hbird libraries and minimum dependencies.</description>
+	<groupId>org.hbird.karaf</groupId>
 </project>

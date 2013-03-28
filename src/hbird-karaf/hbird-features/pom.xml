@@ -3,14 +3,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<groupId>org.hbird.osgi</groupId>
-		<artifactId>osgi-parent</artifactId>
+		<groupId>org.hbird.karaf</groupId>
+		<artifactId>karaf-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>osgi-provisioning</artifactId>
+	<artifactId>hbird-features</artifactId>
 	<packaging>bundle</packaging>
-	<name>Hbird :: OSGi :: OSGi-provisioning</name>
+	<name>Hbird :: Karaf :: Features</name>
 	<description>Contains the features metadata used to deploy hbird bundles.</description>
 	
 	<build>

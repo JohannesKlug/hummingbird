@@ -19,8 +19,7 @@
     	<module>space-system-publisher-osgi</module>
     	<module>xtce-osgi</module>
     	<module>commanding-osgi</module>
-    	<module>osgi-provisioning</module>
-    <module>rxtx-native-fragment</module>
+    	<module>rxtx-native-fragment</module>
   </modules>
 	
 	<build>
