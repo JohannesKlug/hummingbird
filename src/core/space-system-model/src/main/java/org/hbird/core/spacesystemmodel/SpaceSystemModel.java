@@ -18,7 +18,7 @@ import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 
 /**
  * Interface to create Space System Model factories.
- *
+ * 
  * The models are created based on an underlying space system model, defining the structure of the space system,
  * including the telemetry and command structures. The space system can be constructed from any format given the correct
  * factory, for example, the OMG/CCSDS XTCE, ESA MIB/PUS model, Spring, or any other DSL. The model factory
@@ -28,7 +28,7 @@ import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 @XmlRootElement
 public interface SpaceSystemModel extends Serializable {
 
-	// TODO XTCE specific hack. Should move to the xtce project. Investigate. - Mark
+	// FIXME XTCE specific hack. Should move to the xtce project. Investigate. - Mark
 	String HUMMINGBIRD_PROCESSED_HEADER = "HEADER";
 
 	String getName();
@@ -37,6 +37,7 @@ public interface SpaceSystemModel extends Serializable {
 	ParameterGroup getParameterGroup(String qualifiedName) throws UnknownParameterGroupException;
 
 	Map<String, ParameterGroup> getParameterGroups();
+
 	Map<String, CommandGroup> getCommands();
 
 	Collection<ParameterGroup> getParameterGroupsCollection();
@@ -84,7 +85,7 @@ public interface SpaceSystemModel extends Serializable {
 
 	/**
 	 * Finds and replaces a parameter keyed by qualified name in the the model
-	 *
+	 * 
 	 * @throws ParameterNotInModelException
 	 */
 	void replaceParameterInModel(String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInModelException;
