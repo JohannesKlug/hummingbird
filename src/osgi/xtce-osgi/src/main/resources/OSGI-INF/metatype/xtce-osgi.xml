@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MetaData xmlns="http://www.osgi.org/xmlns/metadata/v1.0.0"
-	 	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	 	  xsi:schemaLocation="http://www.osgi.org/xmlns/metadata/v1.0.0 http://www.osgi.org/xmlns/metatype/v1.1.0/metatype.xsd">
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.0.0">
 
- 	 <OCD id="xtceSpaceSystemModelFactory" name="Hbird :: OSGi :: XTCE Space System Model Factory configuration" 
+ 	 <OCD id="xtceConfig" name="Hbird :: XTCE Space System Model Factory configuration" 
 		  description="XTCE Space System Model Factory providing space system model factory services">
  	 	<AD id="spaceSystemModelFilename" type="String" name="XTCE space system model file path"></AD>
 	 </OCD>
 	 
-	 <Designate pid="org.hbird.osgi.xtceosgi.xtceSpaceSystemModelFactoryUpdater" >
-	 	<Object ocdref="xtceSpaceSystemModelFactory"></Object>
+	 <Designate pid="org.hbird.osgi.xtceosgi" >
+	 	<Object ocdref="xtceConfig"></Object>
 	 </Designate>
 
-</MetaData>
+</metatype:MetaData>

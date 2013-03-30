@@ -43,6 +43,16 @@
 			<!-- scope is runtime so the feature repo is listed in the features service 
 				config file, and features may be installed using the karaf-maven-plugin configuration -->
 			<groupId>org.apache.karaf.features</groupId>
+			<artifactId>enterprise</artifactId>
+			<version>${karaf.version}</version>
+			<classifier>features</classifier>
+			<type>xml</type>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<!-- scope is runtime so the feature repo is listed in the features service 
+				config file, and features may be installed using the karaf-maven-plugin configuration -->
+			<groupId>org.apache.karaf.features</groupId>
 			<artifactId>spring</artifactId>
 			<version>${karaf.version}</version>
 			<classifier>features</classifier>
@@ -91,6 +101,7 @@
 				<configuration>
 					<startupFeatures>
 						<feature>standard</feature>
+						<feature>enterprise</feature>
 						<feature>management</feature>
 						<feature>webconsole</feature>
 						<!-- <feature>activemq-broker</feature> -->

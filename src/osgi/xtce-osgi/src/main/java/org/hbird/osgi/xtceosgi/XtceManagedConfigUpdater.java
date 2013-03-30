@@ -21,40 +21,26 @@ public class XtceManagedConfigUpdater implements ManagedService {
 
 	private List<SpaceSystemModelUpdateListener> modelUpdateListeners;
 
-	public void setFactory(final XtceSpaceSystemModelFactory factory) {
-		this.factory = factory;
-	}
-
-	public void setModelUpdateListeners(final List<SpaceSystemModelUpdateListener> modelUpdateListeners) {
-		this.modelUpdateListeners = modelUpdateListeners;
-	}
-
-	public void setSpaceSystemModelFilename(final String spaceSystemModelFilename) {
-		factory.setSpaceSystemModelFilename(spaceSystemModelFilename);
-	}
-
 	private final void notifyModelUpdateListeners() {
 		for (final SpaceSystemModelUpdateListener listener : modelUpdateListeners) {
 			listener.modelChanged();
 		}
 	}
 
-	private final void nulledModel() {
-		this.setSpaceSystemModelFilename("");
-		this.notifyModelUpdateListeners();
-	}
-
 	@Override
 	public void updated(final Dictionary configuration) throws ConfigurationException {
-		LOG.trace("Updater called with new configuration");
+		if (LOG.isTraceEnabled()) {
+			LOG.trace("Updater called with new configuration");
+		}
+
 		if (configuration == null) {
-			nulledModel();
+			LOG.warn("Updater received a null configuration. Model will not be changed");
 			return;
 		}
 
 		String spaceSystemModelFilename = (String) configuration.get(SPACE_SYSTEM_MODEL_FILENAME_FIELD);
 		if (checkFile(spaceSystemModelFilename)) {
-			setSpaceSystemModelFilename(spaceSystemModelFilename);
+			configureFactoryModelFilename(spaceSystemModelFilename);
 			notifyModelUpdateListeners();
 		}
 		else {
@@ -66,9 +52,23 @@ public class XtceManagedConfigUpdater implements ManagedService {
 	private static boolean checkFile(String file) {
 		File check = new File(file);
 		if (check.exists() & check.isFile() & check.canRead()) {
+			if (LOG.isTraceEnabled()) {
+				LOG.trace("File " + file + " is present and readable.");
+			}
 			return true;
 		}
 		return false;
 	}
 
+	public void setFactory(final XtceSpaceSystemModelFactory factory) {
+		this.factory = factory;
+	}
+
+	public void setModelUpdateListeners(final List<SpaceSystemModelUpdateListener> modelUpdateListeners) {
+		this.modelUpdateListeners = modelUpdateListeners;
+	}
+
+	public void configureFactoryModelFilename(final String spaceSystemModelFilename) {
+		factory.setSpaceSystemModelFilename(spaceSystemModelFilename);
+	}
 }

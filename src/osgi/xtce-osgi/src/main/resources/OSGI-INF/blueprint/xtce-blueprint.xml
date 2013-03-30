@@ -5,54 +5,40 @@
 			xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd 
 								http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://svn.apache.org/repos/asf/aries/trunk/blueprint/blueprint-cm/src/main/resources/org/apache/aries/blueprint/compendium/cm/blueprint-cm-1.1.0.xsd">
  			
- 	<!-- MDC config for sift logging -->
- 	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-		<property name="targetClass"> <value>org.slf4j.MDC</value> </property>
-		<property name="targetMethod"> <value>put</value> </property>
-		<property name="arguments">
-			<list>
-				<value>Hbird :: Core :: OSGi :: XTCE Space System Model OSGi services</value>
-				<value>org.hbird.core.xtce-osgi</value>
-			</list>
-		</property>
-	</bean>
-	
 	<!-- Xtce Space System model factory declaration using osgi compendium managed properties. -->
  	<bean id="xtceSpaceSystemModelFactory" class="org.hbird.core.xtce.XtceSpaceSystemModelFactory">
  	</bean>
 	
+	<!-- Register the Space System Model factory as a service. This allows other bundles to get space system information via the 
+	SpaceSystemModelFactory interface -->
+	<service id="XtceSpaceSystemModelFactoryService" 
+			 interface="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory" 
+			 ref="xtceSpaceSystemModelFactory">
+	</service>
+	
+	<!-- Get a list of all SpaceSystemModelUpdateListeners in order to update them whenever the factory changes. -->
 	<reference-list id="modelUpdateListenerServices"
 					interface="org.hbird.core.spacesystemmodel.interfaces.SpaceSystemModelUpdateListener"
 					availability="optional">
 	</reference-list>
 	
+	<!-- Create a Space System model factory updater Managed service bean that received updates vis the ConfigAdmin service and propgates them to
+	the Space System model factory and any registered listeners -->
 	<bean id="configUpdater" class="org.hbird.osgi.xtceosgi.XtceManagedConfigUpdater">
- 		<cm:managed-properties persistent-id="org.hbird.osgi.xtceosgi.xtceSpaceSystemModelFactoryUpdater"/>
 		<property name="factory" ref="xtceSpaceSystemModelFactory"></property>
 		<property name="modelUpdateListeners" ref="modelUpdateListenerServices"></property>
 	</bean>
 	
-	<!--
-		Exports the XtceSpaceSystemModelFactory bean as a provides of the SpaceSystemModelFactory service.
-		The service is also registered as a DOSGi RESTful web service 
-	 -->
-	<service id="XtceSpaceSystemModelFactoryService" 
-			 interface="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory" 
-			 ref="xtceSpaceSystemModelFactory">
-		 <service-properties>
-		  	<!-- Adds DOSGi remote access to service interface -->
-			<entry key="service.exported.interfaces" value="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory"/>
-			<entry key="service.exported.configs" value="org.apache.cxf.rs"/>
-			<entry key="service.exported.intents" value="HTTP"></entry>
-			<entry key="org.apache.cxf.rs.httpservice.context" value="/xtce"/>
-			<entry key="org.apache.cxf.rs.databinding" value="aegis"/>
-		</service-properties>
-	</service>
+	<!-- Add PID with reload strategy -->
+	<cm:property-placeholder persistent-id="org.hbird.osgi.xtceosgi" update-strategy="reload" />
 	
-	<!-- Registers the xtce config updater as a managed service bean so it can propagate configuration changes -->
-	<service id="xtceUpdaterConfigService" interface="org.osgi.service.cm.ManagedService" ref="configUpdater">
+	<!-- Registers the xtce config updater as a managed service bean so it can received configuration changes 
+	from the ConfigAdmin service -->
+	<service id="xtceUpdaterConfigService" 
+			 interface="org.osgi.service.cm.ManagedService" 
+			 ref="configUpdater">
 		<service-properties>
-			<entry key="service.pid" value="org.hbird.osgi.xtceosgi.xtceSpaceSystemModelFactoryUpdater"/>
+			<entry key="service.pid" value="org.hbird.osgi.xtceosgi"/>
 		</service-properties>
 	</service>
 

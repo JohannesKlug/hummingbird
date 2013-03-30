@@ -60,7 +60,7 @@ public class XtceManagedConfigUpdaterTest {
 
 	@Test
 	public void testSetSpaceSystemModelFilename() {
-		updater.setSpaceSystemModelFilename(fullFilePath);
+		updater.configureFactoryModelFilename(fullFilePath);
 		verify(mockFactory, times(1)).setSpaceSystemModelFilename(fullFilePath);
 	}
 

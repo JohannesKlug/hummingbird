@@ -29,6 +29,8 @@
 		
 		<feature name="hbird-xtce" description="Hbird xtce space system bundles including OSGi service provision" version="${project.version}">
 			<feature>hbird-core</feature>
+			<config name="org.hbird.osgi.xtceosgi">
+			</config>
 			<bundle start="false">mvn:org.hbird.core/xtce/${project.version}</bundle>
 			<bundle>mvn:org.hbird.osgi/xtce-osgi/${project.version}</bundle>
 		</feature>
