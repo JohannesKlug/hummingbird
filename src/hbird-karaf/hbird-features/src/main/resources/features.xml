@@ -31,6 +31,7 @@
 			<feature>hbird-core</feature>
 			<config name="org.hbird.osgi.xtceosgi">
 			</config>
+			<configfile finalname="etc/org.hbird.osgi.xtceosgi.cfg">mvn:org.hbird/strand/${project.version}/cfg/org.hbird.osgi.xtceosgi</configfile>
 			<bundle start="false">mvn:org.hbird.core/xtce/${project.version}</bundle>
 			<bundle>mvn:org.hbird.osgi/xtce-osgi/${project.version}</bundle>
 		</feature>
