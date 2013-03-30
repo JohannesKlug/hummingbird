@@ -33,8 +33,10 @@ public interface SpaceSystemPublisher {
 	// Restriction/Payload Id related
 	Map<String, List<String>> getRestrictions();
 
+	void setClients(List<PublisherClient> clients);
+
 	// Model state propagation related
-	void fireUpdate(SpaceSystemModelUpdate update);
+	void fireUpdate();
 
 	void modelUpdated();
 }

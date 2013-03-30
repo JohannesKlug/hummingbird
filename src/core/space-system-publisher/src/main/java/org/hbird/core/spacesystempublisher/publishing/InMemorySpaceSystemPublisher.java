@@ -10,7 +10,7 @@ import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException
 import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
-import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemModelUpdate;
+import org.hbird.core.spacesystempublisher.interfaces.PublisherClient;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +25,8 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 	private static final Logger LOG = LoggerFactory.getLogger(InMemorySpaceSystemPublisher.class);
 
 	private SpaceSystemModel model;
+
+	private List<PublisherClient> clients;
 
 	public InMemorySpaceSystemPublisher() {
 	}
@@ -88,9 +90,10 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 	}
 
 	@Override
-	public void fireUpdate(final SpaceSystemModelUpdate update) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+	public void fireUpdate() {
+		for (PublisherClient client : clients) {
+			client.entireModelUpdated();
+		}
 	}
 
 	@Override
@@ -111,6 +114,11 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 	@Override
 	public List<Parameter<?>> getAllParameters() {
 		return new ArrayList<Parameter<?>>(model.getAllPayloadParameters().values());
+	}
+
+	@Override
+	public void setClients(List<PublisherClient> clients) {
+		this.clients = clients;
 	}
 
 }

@@ -13,7 +13,7 @@ import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException
 import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
-import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemModelUpdate;
+import org.hbird.core.spacesystempublisher.interfaces.PublisherClient;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +33,8 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	/** Cached Space system model */
 	private SpaceSystemModel modelCache = null;
 
+	private List<PublisherClient> clients;
+
 	/**
 	 * Retrieves and caches the space system model from the space system model factory service.
 	 */
@@ -48,12 +50,10 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 				LOG.debug("Model " + this.modelCache.getName() + " cached in publisher.");
 			}
 			catch (final InvalidParameterTypeException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOG.warn("Model not cached, will try again next request." + e.getMessage());
 			}
 			catch (final InvalidSpaceSystemDefinitionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOG.warn("Model not cached, will try again next request." + e.getMessage());
 			}
 		}
 		else {
@@ -113,9 +113,10 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	}
 
 	@Override
-	public void fireUpdate(final SpaceSystemModelUpdate update) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+	public void fireUpdate() {
+		for (PublisherClient client : clients) {
+			client.entireModelUpdated();
+		}
 	}
 
 	public SpaceSystemModelFactory getFactoryService() {
@@ -148,4 +149,8 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 		return new ArrayList<Parameter<?>>(this.modelCache.getAllPayloadParameters().values());
 	}
 
+	@Override
+	public void setClients(List<PublisherClient> clients) {
+		this.clients = clients;
+	}
 }

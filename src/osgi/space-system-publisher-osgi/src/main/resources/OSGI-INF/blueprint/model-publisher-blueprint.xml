@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/blueprint" 
+       xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0" 
+       xsi:schemaLocation="
+       http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+       http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+
+	<!-- Get a reference to the Space System Model Factory service. Future task, can get a list of services and 
+	aggregate multiple model definitions into one model? -->
+	<reference id="spaceSystemModelFactoryService"
+			   interface="org.hbird.core.spacesystemmodel.SpaceSystemModelFactory">
+	</reference>
+
+	<!-- Create a publisher bean that loads the space system model into it's cache on creation. The Space System Model Factory service
+	is injected. -->
+	<bean id="publisher"
+		  class="org.hbird.core.spacesystempublisher.publishing.ServiceBasedSpaceSystemPublisher"
+		  init-method="loadModel">
+		  <property name="factoryService" ref="spaceSystemModelFactoryService"></property>
+	</bean>
+	
+	<!-- Register the Publisher as a publisher service so other components can use it. -->
+	<service id="spaceSystemPublisherService"
+			 interface="org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher"
+			 ref="publisher">
+	</service>
+	
+	<!-- Create a publisher updater bean. This is a Space System Model update listener which is registered with the container.
+	When the Space System Model factory is updated it is notified of the update. -->
+	<bean id="modelUpdateListener"
+		  class="org.hbird.osgi.publisher.PublisherModelUpdater">
+		  <property name="publisher" ref="publisher"></property>
+	</bean>
+	
+	<!-- Register the publisher updater as a SpaceSystemModelUpdateListener so it is notified of changed by the 
+	Space System Model factory. -->
+	<service id= "publisherModelupdaterService"
+			 interface="org.hbird.core.spacesystemmodel.interfaces.SpaceSystemModelUpdateListener"
+			 ref="modelUpdateListener">
+	</service>
+	
+</blueprint>
