@@ -39,13 +39,13 @@ public class XtceManagedConfigUpdater implements ManagedService {
 		}
 
 		String spaceSystemModelFilename = (String) configuration.get(SPACE_SYSTEM_MODEL_FILENAME_FIELD);
-		if (checkFile(spaceSystemModelFilename)) {
+		if (spaceSystemModelFilename != null && checkFile(spaceSystemModelFilename)) {
 			configureFactoryModelFilename(spaceSystemModelFilename);
 			notifyModelUpdateListeners();
 		}
 		else {
 			throw new ConfigurationException(SPACE_SYSTEM_MODEL_FILENAME_FIELD,
-					"Invalid space system model file. File does not exist, is not a file (you may hav specified a directory), or is not readable");
+					"Invalid space system model file. File does not exist, is not a file (you may have specified a directory), or is not readable");
 		}
 	}
 

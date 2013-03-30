@@ -22,6 +22,9 @@
 					availability="optional">
 	</reference-list>
 	
+	<!-- Add PID with reload strategy -->
+	<cm:property-placeholder persistent-id="org.hbird.osgi.xtceosgi" update-strategy="reload" />
+	
 	<!-- Create a Space System model factory updater Managed service bean that received updates vis the ConfigAdmin service and propgates them to
 	the Space System model factory and any registered listeners -->
 	<bean id="configUpdater" class="org.hbird.osgi.xtceosgi.XtceManagedConfigUpdater">
@@ -29,8 +32,6 @@
 		<property name="modelUpdateListeners" ref="modelUpdateListenerServices"></property>
 	</bean>
 	
-	<!-- Add PID with reload strategy -->
-	<cm:property-placeholder persistent-id="org.hbird.osgi.xtceosgi" update-strategy="reload" />
 	
 	<!-- Registers the xtce config updater as a managed service bean so it can received configuration changes 
 	from the ConfigAdmin service -->
