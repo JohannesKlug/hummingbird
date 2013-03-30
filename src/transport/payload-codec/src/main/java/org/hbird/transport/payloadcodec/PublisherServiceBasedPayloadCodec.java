@@ -6,7 +6,10 @@ import java.util.List;
 import org.hbird.core.commons.data.GenericPayload;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 import org.hbird.core.spacesystemmodel.tmtc.TmTcGroup;
+import org.hbird.core.spacesystempublisher.interfaces.PublisherClient;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO publisher update mechanism, the publisher needs to be able to update the payload codec.
@@ -14,13 +17,20 @@ import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
  * @author Mark Doyle
  * 
  */
-public class PublisherServiceBasedPayloadCodec implements PayloadCodec {
+public class PublisherServiceBasedPayloadCodec implements PayloadCodec, PublisherClient {
+	private static final Logger LOG = LoggerFactory.getLogger(PublisherServiceBasedPayloadCodec.class);
 
 	private InMemoryPayloadCodec codec;
+
 	private SpaceSystemPublisher publisher;
 
 	public void cacheModelInformation() {
-		codec = new InMemoryPayloadCodec(publisher.getParameterGroups(), publisher.getCommands(), publisher.getEncodings(), publisher.getRestrictions());
+		if (publisher != null) {
+			codec = new InMemoryPayloadCodec(publisher.getParameterGroups(), publisher.getCommands(), publisher.getEncodings(), publisher.getRestrictions());
+		}
+		else {
+			LOG.warn("Attempt to cache space system model information when there is no publisher service available");
+		}
 	}
 
 	public void setPublisher(final SpaceSystemPublisher publisher) {
@@ -52,4 +62,12 @@ public class PublisherServiceBasedPayloadCodec implements PayloadCodec {
 		return this.codec.encodeToGenericPayload(parameterGroup);
 	}
 
+	@Override
+	public void entireModelUpdated() {
+		// Reconfigure model
+		this.codec.parameterGroups = publisher.getParameterGroups();
+		this.codec.commandGroups = publisher.getCommands();
+		this.codec.encodings = publisher.getEncodings();
+		this.codec.restrictions = publisher.getRestrictions();
+	}
 }

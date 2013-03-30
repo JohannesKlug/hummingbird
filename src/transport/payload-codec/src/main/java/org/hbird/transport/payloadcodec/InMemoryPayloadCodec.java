@@ -36,9 +36,9 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 
 	private Map<String, CommandGroup> codecAwareCommandGroups = null;
 
-	protected final Map<String, Encoding> encodings;
+	protected Map<String, Encoding> encodings;
 
-	protected final Map<String, List<String>> restrictions;
+	protected Map<String, List<String>> restrictions;
 
 	public InMemoryPayloadCodec(final Map<String, ParameterGroup> parameterGroups, final Map<String, CommandGroup> commandGroups,
 			final Map<String, Encoding> encodings, final Map<String, List<String>> restrictions) {
