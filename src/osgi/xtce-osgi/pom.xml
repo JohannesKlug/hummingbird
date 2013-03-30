@@ -63,7 +63,7 @@
 						<configuration>
 							<artifacts>
 								<artifact>
-									<file>target/org.hbird.osgi.xtceosgi</file>
+									<file>target/org.hbird.osgi.xtceosgi.cfg</file>
 									<type>cfg</type>
 									<classifier>xtce</classifier>
 								</artifact>
