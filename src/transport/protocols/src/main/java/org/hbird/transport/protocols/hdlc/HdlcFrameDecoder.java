@@ -1,6 +1,7 @@
 package org.hbird.transport.protocols.hdlc;
 
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 import org.hbird.core.commons.util.BytesUtility;
 import org.hbird.core.commons.util.crc.CRC16CCITT;
@@ -16,6 +17,8 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public class HdlcFrameDecoder {
+	private static final int SHORT_SIZE_BYTES = Short.SIZE / Byte.SIZE;
+
 	private static final Logger LOG = LoggerFactory.getLogger(HdlcFrameDecoder.class);
 
 	public static enum FCS {
@@ -39,6 +42,10 @@ public class HdlcFrameDecoder {
 	 * @throws CrcFailureException
 	 */
 	public final byte[] decode(byte[] dataIn) throws CrcFailureException {
+		if (LOG.isTraceEnabled()) {
+			LOG.trace("Decoding " + Arrays.toString(dataIn));
+		}
+
 		ByteBuffer in = ByteBuffer.wrap(dataIn);
 
 		// TODO Address and Control still to be implemented.
@@ -48,19 +55,16 @@ public class HdlcFrameDecoder {
 		byte[] hdlcInformation = null;
 
 		if (useChecksum) {
-			// TODO get checksum here and do calculations
 			int infoSize;
 			switch (fcs) {
 				case CRC_CCITT:
-					infoSize = in.remaining() - Short.SIZE / Byte.SIZE;
+					infoSize = in.remaining() - SHORT_SIZE_BYTES;
 					hdlcInformation = new byte[infoSize];
 					in.get(hdlcInformation);
 					long crcCcitt = in.getShort() & 0xFFFF;
 					CRC16CCITT crc = new CRC16CCITT();
 					byte[] crcData = ByteBuffer.allocate(1 + 1 + infoSize).put(address).put(control).put(hdlcInformation).array();
-					for (byte b : crcData) {
-						crc.update(b);
-					}
+					crc.update(crcData, 0, crcData.length);
 					if (crc.getValue() != crcCcitt) {
 						throw new CrcFailureException("HLDC Frame CRC check failed. CRC = " + crcCcitt + ". CRC calculation value = " + crc.getValue());
 					}
