@@ -9,7 +9,7 @@
      	
      	<!-- <repository>mvn:org.apache.activemq/activemq-karaf/5.8.0/xml/features</repository> -->
     
-		<feature name="hbird-core" description="Hbird core component bundles" version="${project.version}">
+		<feature name="hbird-core" description="Hbird core component bundles">
 			<bundle dependency="true" start="false">mvn:org.apache.commons/commons-lang3/3.1</bundle>
 			<bundle dependency="true" start="false">mvn:commons-lang/commons-lang/2.6</bundle>
 			<bundle dependency="true" start="false">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.oro/2.0.8_6</bundle>
@@ -19,12 +19,10 @@
 			<bundle start="false">mvn:org.hbird.core/space-system-model/${project.version}</bundle>
 			<feature version="${camel.version}">camel-blueprint</feature>
 			<feature version="${camel.version}">camel-spring</feature>
-			<!-- <feature version="${camel.version}">camel-jms</feature> -->
 			<feature version="${camel.version}">camel-stream</feature>
 			<feature version="${camel.version}">camel-mina2</feature>
 			<feature version="${camel.version}">camel-netty</feature>
 			<feature version="${camel.version}">camel-mongodb</feature>
-			<!-- <feature>activemq-broker</feature> -->
 		</feature>
 		
 		<feature name="hbird-xtce" description="Hbird xtce space system bundles including OSGi service provision" version="${project.version}">
@@ -53,7 +51,6 @@
 		<feature name="hbird-commanding" description="Hbird commmanding application server" version="${project.version}">
 			<feature>hbird-publisher</feature>
 			<bundle start="false">mvn:org.hbird.application/commanding/${project.version}</bundle>
-<!-- 			<bundle start="false">mvn:org.hbird.osgi/commanding-osgi</bundle> -->
 		</feature>
 		
 		<feature name="hbird-enterprise-osgi" description="Enterprise OSGi bundles for spec 4.2.0">
@@ -97,8 +94,6 @@
 			<feature>hbird-commanding</feature>
 			<bundle start="false">mvn:org.eclipse.jetty/jetty-websocket/8.1.10.v20130312</bundle>
 			<bundle start="false">mvn:com.googlecode.json-simple/json-simple/1.1.1</bundle>
-			<bundle start="false">mvn:org.jboss.javassist/com.springsource.javassist/3.15.0.GA</bundle>
-			<bundle start="false">mvn:org.msgpack/msgpack/0.6.6</bundle>
 			<bundle>mvn:org.hbird.application/halcyon/${project.version}/war</bundle>
 		</feature>
 		
@@ -117,7 +112,7 @@
 		<feature name="hbird-parameter-archive" 
 				 description="Hbird framework bundles for parameter archiving. Included provided implementations for mongoDb"
 				 version="${project.version}">
-				 <feature>hbird-core</feature>
+				 <feature version="${project.version}">hbird-core</feature>
 				 <bundle start="false">mvn:org.hbird.application/parameter-archive/${project.version}</bundle>
 				 <bundle start="false">mvn:org.hbird.application/parameter-cache/${project.version}</bundle>
 		</feature>
