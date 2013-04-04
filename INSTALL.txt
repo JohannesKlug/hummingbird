@@ -1,21 +1,19 @@
-Karaf setup
----------------------------
-Download and extract Karaf version 2.2.9 from:
-http://karaf.apache.org/
+Karaf with Hummimgbird pre-deployed
+-----------------------------------
 
-NOTE!!! If you experiment with the snapshot of Karaf 3 beware that the features command has been migrated to feature (no trailing s!).
-Also, addurl has become repo-add.
+Download the latest snapshot of a current Karaf with Hbird pre-deployed from here:
+https://oss.sonatype.org/content/repositories/snapshots/org/hbird/karaf/hbird-platform/0.0.1-SNAPSHOT/
+
+If you'd rather do the installation yourself, follow the instructions below.
+
+
+Manual Karaf setup
+---------------------------
+Download and extract Karaf version 3 from:
+http://karaf.apache.org/
 
 Install Karaf Webconsole if required (features:install webconsole)
 You can reach it at http://localhost:8181/system/console/
-
-##########################################
-##		IMPORTANT		##
-##########################################
-Swap  etc/jre.properties with the jre.properties.cxf file.
-If you forget to do this, Karaf's sysem bundle will export all kinds of javax.* packages, which conflict with what we're going to install ourselves.
-
-
 
 Hbird
 --------
@@ -25,75 +23,24 @@ To install snapshot versions of Hbird you must add the following repo to the org
 
  
 Tell Karaf where to find the Hbird software:
-features:addurl mvn:org.hbird.osgi/osgi-provisioning/0.0.1-SNAPSHOT/xml/features
+repo-add mvn:org.hbird.karaf/hbird-features/0.0.1-SNAPSHOT/xml/features
 
 Install all of Hbird:
 features:install -v hbird-complete
 
 If you update the provisioning features file don't forget to refresh:
-features:refreshurl mvn:org.hbird.osgi/osgi-provisioning/0.0.1-SNAPSHOT/xml/features
+features:refreshurl mvn:org.hbird.karaf/hbird-features/0.0.1-SNAPSHOT/xml/features 
+
+
+
+
+Outdated, kept for reference:
+-----------------------------
 
 Optional: Add following config file to $karaf/etc/
 	org.hbird.osgi.xtceosgi.xtceSpaceSystemModelFactoryUpdater.cfg
 and add the following config option to it:
 	spaceSystemModelFilename = /path/to/an/xtce/file.xml
 A sample XTCE file can be found in our Stock6 project: https://github.com/markjohndoyle/Stock6
-
-
-
-
-	
-Camel
---------------
-NOTE: In the current version of our features.xml, Camel is referenced, so you do not need to install it manually. The following is left for reference:
-
-
-features:addurl mvn:org.apache.camel.karaf/apache-camel/2.9.2/xml/features
-KARAF3 alert: You need 2.10.0 camel features.
-
-features:install -v camel-core camel-blueprint camel-jms camel-netty camel-spring
-
-NOTE: if you have problems make sure that there aren't two versions of camel running. Specifically, make sure 2.9.2 isn't installed, except for the karaf commands.
-
-
-Activemq
---------------
-See:
-http://activemq.apache.org/osgi-integration.html
-
-NOTE: The 5.5.0 is a lot more stable. 5.6.0 has some issues with thew web console and jmx connection settings.
-
-features:addurl mvn:org.apache.activemq/activemq-karaf/5.5.0/xml/features
-OR (if you are feeling lucky)
-features:addurl mvn:org.apache.activemq/activemq-karaf/5.6.0/xml/features
-
-features:install -v activemq-blueprint activemq-spring activemq-web-console
-
-You need 5.6.0 for activemq camel component
-features:addurl mvn:org.apache.activemq/activemq-karaf/5.6.0/xml/features
-features:install -v activemq-camel
-
-Create a broker and install web console. The web console only seems to work after a broker is created.
-activemq:create-broker --name "SillyBroker"
-
-Add this to etc/system.properties:
-
-webconsole.type=properties
-webconsole.jms.url=tcp://localhost:61616
-webconsole.jmx.url=service:jmx:rmi:///jndi/rmi://localhost:1099/karaf-root
-webconsole.jmx.user=karaf
-webconsole.jmx.password=karaf
-
-
-
-CXF
--------
-##############################################
-# CXF not required until we go back to DOSGi #
-##############################################
-Swap  etc/jre.properties with the jre.properties.cxf file.
-
-features:addurl mvn:org.apache.cxf.karaf/apache-cxf/2.6.2/xml/features
-features:install -v http cxf-core cxf-jaxws cxf-jaxrs
 
 
