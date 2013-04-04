@@ -67,14 +67,14 @@
 			<type>xml</type>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-karaf</artifactId>
 			<version>5.8.0</version>
 			<classifier>features</classifier>
 			<type>xml</type>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency>-->
 
 		<dependency>
 			<groupId>org.hbird.karaf</groupId>
