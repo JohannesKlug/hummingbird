@@ -19,7 +19,7 @@
 	</modules>
 
 	<properties>
-		<karaf.version>3.0.0-SNAPSHOT</karaf.version>
+		<karaf.version>3.0.0.RC1</karaf.version>
 	</properties>
 
 
