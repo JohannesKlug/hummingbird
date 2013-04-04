@@ -26,10 +26,7 @@ Tell Karaf where to find the Hbird software:
 repo-add mvn:org.hbird.karaf/hbird-features/0.0.1-SNAPSHOT/xml/features
 
 Install all of Hbird:
-features:install -v hbird-complete
-
-If you update the provisioning features file don't forget to refresh:
-features:refreshurl mvn:org.hbird.karaf/hbird-features/0.0.1-SNAPSHOT/xml/features 
+feature:install -v hbird-complete
 
 
 
