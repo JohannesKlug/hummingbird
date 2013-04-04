@@ -9,7 +9,7 @@
      	
      	<!-- <repository>mvn:org.apache.activemq/activemq-karaf/5.8.0/xml/features</repository> -->
     
-		<feature name="hbird-core" description="Hbird core component bundles">
+		<feature name="hbird-core" description="Hbird core component bundles" version="${project.version}>
 			<bundle dependency="true" start="false">mvn:org.apache.commons/commons-lang3/3.1</bundle>
 			<bundle dependency="true" start="false">mvn:commons-lang/commons-lang/2.6</bundle>
 			<bundle dependency="true" start="false">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.oro/2.0.8_6</bundle>
@@ -53,7 +53,7 @@
 			<bundle start="false">mvn:org.hbird.application/commanding/${project.version}</bundle>
 		</feature>
 		
-		<feature name="hbird-enterprise-osgi" description="Enterprise OSGi bundles for spec 4.2.0">
+		<feature name="hbird-enterprise-osgi" description="Enterprise OSGi bundles for spec 4.2.0" version="4.2.0">
 			<bundle>mvn:org.osgi/org.osgi.compendium/4.2.0</bundle>
 			<bundle>mvn:org.osgi/org.osgi.enterprise/4.2.0</bundle>
 		</feature>
