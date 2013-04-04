@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.TmTcGroup;
@@ -31,6 +32,7 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 
 	protected String longDescription;
 
+	@JsonIgnore
 	protected final Map<String, Parameter<?>> parameters = new LinkedHashMap<String, Parameter<?>>();
 
 	protected Map<String, Parameter<Integer>> integerParameters;
@@ -82,6 +84,7 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 		return this.longDescription;
 	}
 
+	@JsonIgnore
 	@Override
 	public Map<String, Parameter<?>> getAllParameters() {
 		return parameters;
@@ -307,6 +310,7 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 		return builder.toString();
 	}
 
+	@JsonIgnore
 	@Override
 	public List<Parameter<?>> getAllParametersAsList() {
 		return new ArrayList<Parameter<?>>(this.parameters.values());
@@ -334,6 +338,64 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 	@XmlElement
 	public void setLongDescription(String longDescription) {
 		this.longDescription = longDescription;
+	}
+
+	// TESTING
+
+	public void setIntegerParameters(Map<String, Parameter<Integer>> integerParameters) {
+		if (integerParameters != null) {
+			for (Parameter<Integer> p : integerParameters.values()) {
+				addIntegerParameter(p);
+			}
+		}
+	}
+
+	public void setLongParameters(Map<String, Parameter<Long>> longParameters) {
+		if (longParameters != null) {
+			for (Parameter<Long> p : longParameters.values()) {
+				addLongParameter(p);
+			}
+		}
+	}
+
+	public void setFloatParameters(Map<String, Parameter<Float>> floatParameters) {
+		if (floatParameters != null) {
+			for (Parameter<Float> p : floatParameters.values()) {
+				addFloatParameter(p);
+			}
+		}
+	}
+
+	public void setDoubleParameters(Map<String, Parameter<Double>> doubleParameters) {
+		if (doubleParameters != null) {
+			for (Parameter<Double> p : doubleParameters.values()) {
+				addDoubleParameter(p);
+			}
+		}
+	}
+
+	public void setBigDecimalParameters(Map<String, Parameter<BigDecimal>> bigDecimalParameters) {
+		if (bigDecimalParameters != null) {
+			for (Parameter<BigDecimal> p : bigDecimalParameters.values()) {
+				addBigDecimalParameter(p);
+			}
+		}
+	}
+
+	public void setStringParameters(Map<String, Parameter<String>> stringParameters) {
+		if (stringParameters != null) {
+			for (Parameter<String> p : stringParameters.values()) {
+				addStringParameter(p);
+			}
+		}
+	}
+
+	public void setRawParameters(Map<String, Parameter<Byte[]>> rawParameters) {
+		if (rawParameters != null) {
+			for (Parameter<Byte[]> p : rawParameters.values()) {
+				addRawParameter(p);
+			}
+		}
 	}
 
 }

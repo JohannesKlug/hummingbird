@@ -12,11 +12,17 @@ public class HummingbirdCommandGroup extends HummingbirdTmTcGroup implements Com
 
 	private long sendTime;
 
+	//@formatter:off
+	
 	@JsonCreator
-	public HummingbirdCommandGroup(@JsonProperty("qualifiedName") final String qualifiedName, @JsonProperty("name") final String name,
-			@JsonProperty("shortDescription") final String shortDescription, @JsonProperty("longDescription") final String longDescription) {
+	public HummingbirdCommandGroup(@JsonProperty("qualifiedName") final String qualifiedName, 
+								   @JsonProperty("name") final String name,
+								   @JsonProperty("shortDescription") final String shortDescription, 
+								   @JsonProperty("longDescription") final String longDescription) {
 		super(qualifiedName, name, shortDescription, longDescription);
 	}
+
+	//@formatter:on
 
 	@Override
 	public long getSendTime() {

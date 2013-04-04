@@ -8,10 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Camel based {@link CommandAcceptor}
+ * CommandSender service based {@link CommandAcceptor}.
+ * Set the CommandSender before using the class. Camel annotation will look up the commandSenderEndpoint
+ * first.
  * 
  * @author Mark Doyle
- * 
  */
 public class DefaultCommandAcceptor implements CommandAcceptor {
 	private final static Logger LOG = LoggerFactory.getLogger(DefaultCommandAcceptor.class);
@@ -19,6 +20,9 @@ public class DefaultCommandAcceptor implements CommandAcceptor {
 	/**
 	 * The commandSenderEndpoint is looked up in the Registry so make sure you have one in your spring config file or
 	 * blueprint!
+	 * Camel proxies the interface ({@link CommandSender}) so we only have a camel annotation in the code, no direct
+	 * dependency.
+	 * We can plug in anything that implements {@link CommandSender}
 	 */
 	@Produce(ref = "commandSenderEndpoint")
 	private CommandSender sender;
