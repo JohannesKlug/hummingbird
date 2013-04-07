@@ -4,8 +4,18 @@
 	font-size: 10px;
 }
 
+.hidget button {
+	font-size: 1em;
+	float: right;
+}
+
 .hidget h3 {
 	display: inline;
+}
+
+.hidget .titleArea {
+	display: block;
+	margin-bottom: 14px;
 }
 
 .parameterSearchInput {

@@ -24,7 +24,7 @@ var colours = ["metroPurple",
 /** Map of object references to all hidgets to save using dom selection. Keyed on id. */
 var hidgets = {};
 
-var defaultHidget = '<li class="hidget"><span id="titleArea"><h3>Monitor</h3></span></li>';
+var defaultHidget = '<li class="hidget"><span class="titleArea"><h3>Monitor</h3></span></li>';
 
 jQuery(document).ready(function() {
 	setupJqueryDefaults();
@@ -45,9 +45,10 @@ function setupControls() {
 		hidget.attr("id",  "hidget" + currentId);
 
 		// Create the internal markup for the hidget.
-		createSettingsButton(currentId).
-			appendTo(createMonitorSearchForm(currentId)).
-			appendTo($(hidget).children("#titleArea"));
+		var searchForm = createMonitorSearchForm(currentId).addClass("hidden");
+		var button = createSettingsButton(currentId);
+		button.appendTo($(hidget).children(".titleArea"));
+		searchForm.appendTo(hidget);
 
 		// Colour the hidget.
 		var colourIndex = Math.floor((Math.random() * 9) + 1);
@@ -62,13 +63,11 @@ function createSettingsButton(id) {
 	var button = $("<button type=\"button\">Settings</button>").attr("id", "hidgetSettingsButton" + id);
 	button.button({
 		icons: {
-			primary: "ui-icon-gear",
-			secondary: "ui-icon-triangle-1-s"
+			primary: "ui-icon-gear"
 		},
 	    text: false
 	}).click(function() {
-		console.log("Adding visible to search section " + id);
-		$("searchSection" + id).addClass("visible");
+		$(hidgets[id]).children("#searchSection" + id).toggleClass("hidden");
 	});
 	return button;
 }
@@ -133,7 +132,6 @@ function createMonitorSearchForm(id) {
 		$.each(option, function(i) {
 			console.log("input = " + inputValue + ". child val = " + $(option[i]).val());
 			if(inputValue === $(option[i]).val()) {
-				configureMonitorDiv(id, inputValue);
 				found = true;
 				return false; // this is the same as a break in the jquery each function
 			}
