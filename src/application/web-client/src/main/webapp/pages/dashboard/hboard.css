@@ -4,6 +4,10 @@
 	font-size: 10px;
 }
 
+.hidget h3 {
+	display: inline;
+}
+
 .parameterSearchInput {
 	width: 100%;
 }

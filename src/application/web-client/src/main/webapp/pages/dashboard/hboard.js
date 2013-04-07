@@ -24,7 +24,7 @@ var colours = ["metroPurple",
 /** Map of object references to all hidgets to save using dom selection. Keyed on id. */
 var hidgets = {};
 
-var defaultHidget = '<li class="hidget"><span><h3>Monitor</h3></span><button type="button" class="hidgetSettingsButton">Settings</button></li>'; 
+var defaultHidget = '<li class="hidget"><span id="titleArea"><h3>Monitor</h3></span></li>';
 
 jQuery(document).ready(function() {
 	setupJqueryDefaults();
@@ -36,26 +36,41 @@ jQuery(document).ready(function() {
 var hidgetId = 0;
 function setupControls() {
 	$("#addParameterMonitor").click(function(){
+		// Add the hbird widget to the grid
 		var hidget = gridster.add_widget(defaultHidget, 2, 1);
+
+		// Grab a unique ID and increment the counter. We use this to operate on the hidget, 
+		// e.g., pop up submenus etc.
 		var currentId = hidgetId++;
-		hidget.attr("id", id="hidget" + currentId);
-		createMonitorSearchForm(currentId).appendTo(hidget);
-		var colourIndex = Math.floor((Math.random()*9)+1);
+		hidget.attr("id",  "hidget" + currentId);
+
+		// Create the internal markup for the hidget.
+		createSettingsButton(currentId).
+			appendTo(createMonitorSearchForm(currentId)).
+			appendTo($(hidget).children("#titleArea"));
+
+		// Colour the hidget.
+		var colourIndex = Math.floor((Math.random() * 9) + 1);
 		hidget.addClass(colours[colourIndex]);
-		
-		$(".hidgetSettingsButton").button({
-			icons: {
-				primary: "ui-icon-gear",
-				secondary: "ui-icon-triangle-1-s"
-			},
-		    text: false
-		}).click(function() {
-			console.log("Adding visible to search section " + currentId);
-			$("searchSection" + currentId).addClass("visible");
-		});
-		
+
+		// Track the hidget in a map for quick lookup
 		hidgets[currentId] = hidget;
 	});
+}
+
+function createSettingsButton(id) {
+	var button = $("<button type=\"button\">Settings</button>").attr("id", "hidgetSettingsButton" + id);
+	button.button({
+		icons: {
+			primary: "ui-icon-gear",
+			secondary: "ui-icon-triangle-1-s"
+		},
+	    text: false
+	}).click(function() {
+		console.log("Adding visible to search section " + id);
+		$("searchSection" + id).addClass("visible");
+	});
+	return button;
 }
 
 function setupGridster() {
