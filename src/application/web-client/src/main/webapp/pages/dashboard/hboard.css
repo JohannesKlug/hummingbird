@@ -1,0 +1,9 @@
+.hidget {
+	padding: 4px;
+	border: thin solid rgba(255, 255, 255, 0.5);
+	font-size: 10px;
+}
+
+.parameterSearchInput {
+	width: 100%;
+}

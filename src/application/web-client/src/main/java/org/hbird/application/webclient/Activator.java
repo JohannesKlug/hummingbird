@@ -15,6 +15,7 @@ public class Activator implements BundleActivator {
 
 	@Override
 	public void stop(final BundleContext context) throws Exception {
+		// Nothing to do in stop, but we must implement the interface.
 	}
 
 }

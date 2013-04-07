@@ -256,6 +256,37 @@ a:ACTIVE {
         color: hsla(24, 76%, 50%, 1);
 }
 
+.metroPurple {
+	background-color: rgb(162, 0, 255);
+}
+.metroMagenta {
+	background-color: rgb(255, 0, 151);
+}
+.metroTeal {
+	background-color: rgb(0, 171, 169);
+}
+.metroLime {
+	background-color: rgb(140, 191, 38);
+}
+.metroBrown {
+	background-color: rgb(160, 80, 0);
+}
+.metroPink {
+	background-color: rgb(230, 113, 184);
+}
+.metroOrange {
+	background-color: rgb(240, 150, 9);
+}
+.metroBlue {
+	background-color: rgb(27, 161, 226);
+}
+.metroRed {
+	background-color: rgb(229, 20, 0);
+}
+.metroGreen {
+	background-color: rgb(51, 153, 51);
+}
+
 /* Bootstrap styles*/
 /* ============================================== */
 .alert {

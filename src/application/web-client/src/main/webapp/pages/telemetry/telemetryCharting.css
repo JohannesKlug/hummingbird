@@ -25,6 +25,7 @@ html {
 	width: 15%;
 	margin-right: 15px;
 	border: thin solid hsla(0, 0%, 100%, 0.2);
+	visibility: hidden;
 }
 
 .legendLabel {
@@ -144,4 +145,12 @@ input.rounded {
 
 #parameterForm input {
 	box-sizing: content-box;
+}
+
+#parameterAddInput {
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 5px;
+	padding: 1px;
+	width: 300px;
 }

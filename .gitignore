@@ -47,3 +47,4 @@ obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
 *Thumbs.db
+src/application/web-client/.externalToolBuilders/org.eclipse.wst.jsdt.core.javascriptValidator.launch

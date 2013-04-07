@@ -85,23 +85,11 @@
 		</div>
 	</div>
 	
-	<div id="chartInputData">
-		<form id="parameterForm">
-			<div>
-				<em>Parameters</em>
-			</div>
-			<div>
-				<select data-placeholder="Select parameters to chart" multiple class="chzn-select" id="parametersList" name="parametersList_form">
-					<option value=""></option>
-				</select>
-			</div>
-		</form>
-	</div>
-	
-	<div id="chartOptions">
-		<form id="chartOptionsForm" onsubmit="return false">
-			Max points: <input id="maxPointsInput" type="text" name="max points">
-			Roll chart: <input id="rollChartToggle" type="checkbox" name="Toggle rollchart" disabled="disabled">
+	<div>
+		<form id="parameterAddForm" onsubmit="return false">
+			<input id="parameterAddInput"  class="rounded" list="parameterList" type="search" 
+				   results=5 placeholder="Search for parameters" autofocus="autofocus">
+			<datalist id="parameterList"></datalist>
 		</form>
 	</div>
 	
@@ -151,14 +139,6 @@
 	<div id="overview">
 	</div>
 	
-	<div id="footer">
-		<form id="omniForm" onsubmit="return false">
-			<input id="omniSearch"  class="rounded" list="parameterList" type="search" 
-				   results=5 placeholder="Search for parameters" autofocus="autofocus">
-			<datalist id="parameterList"></datalist>
-		</form>
-	</div>
-		
 		
 	<div class="avgrund-cover"></div>
 	

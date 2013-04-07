@@ -210,12 +210,12 @@ function setupTimeRangeSlider() {
 }
 
 function setupVariables() {
-	omniSearchInput = $("#omniSearch");
+	omniSearchInput = $("#parameterAddInput");
 }
 
 function setupOmniSearch() {
 	// Populate auto-complete datalist over ajax request to publisher
-	$("#omniSearch").on("input", function(e) {
+	$("#parameterAddInput").on("input", function(e) {
 		var val = $(this).val();
 		if(val < 1) {
 			return;
@@ -233,7 +233,7 @@ function setupOmniSearch() {
 	
 	
 	// On submit
-	$("#omniForm").submit(function() {
+	$("#parameterAddForm").submit(function() {
 		var input = omniSearchInput.val();
 		var option = $("#parameterList").children();
 		var found = false;
@@ -242,6 +242,7 @@ function setupOmniSearch() {
 			if(input === $(option[i]).val()) {
 				createDataSeries(input);
 				found = true;
+				$("legend").addClass("visible");
 				return false; // this is the same as a break in the jquery each function
 			}
 		});
