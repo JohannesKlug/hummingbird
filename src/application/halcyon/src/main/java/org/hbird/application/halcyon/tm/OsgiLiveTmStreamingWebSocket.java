@@ -1,6 +1,8 @@
 package org.hbird.application.halcyon.tm;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.AnnotationIntrospector;
@@ -8,7 +10,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
-import org.eclipse.jetty.websocket.WebSocket;
+import org.eclipse.jetty.websocket.WebSocket.OnTextMessage;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 import org.osgi.framework.BundleContext;
@@ -17,15 +19,19 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class OsgiLiveTmStreamingWebSocket implements WebSocket, LiveTmReceiver {
+public class OsgiLiveTmStreamingWebSocket implements OnTextMessage, LiveTmReceiver {
 	private static final Logger LOG = LoggerFactory.getLogger(OsgiLiveTmStreamingWebSocket.class);
 
 	private Connection connection;
 
 	private ServiceRegistration registration;
 
+	private boolean filtered = false;
+
+	private final Set<String> parametersActive = new HashSet<String>();
+
 	/**
-	 * @param liveTmWebSocketServlet
+	 * 
 	 */
 	public OsgiLiveTmStreamingWebSocket() {
 	}
@@ -35,7 +41,7 @@ public class OsgiLiveTmStreamingWebSocket implements WebSocket, LiveTmReceiver {
 		this.connection = connection;
 
 		// Register this as a LiveTmReceiver so the blueprint instantiated class used in the camel route can
-		// route to this (a servlet managed classes). Whiteboard pattern!
+		// route to this (a servlet managed class). Whiteboard pattern.
 		final BundleContext bc = FrameworkUtil.getBundle(LiveTmWhiteboardDistributer.class).getBundleContext();
 		registration = bc.registerService(LiveTmReceiver.class.getName(), this, null);
 	}
@@ -44,6 +50,16 @@ public class OsgiLiveTmStreamingWebSocket implements WebSocket, LiveTmReceiver {
 	public void onClose(final int closeCode, final String message) {
 		registration.unregister();
 		// TODO tie into OSGI event and log closure due to closeCode
+	}
+
+	@Override
+	public void onMessage(String data) {
+		if (LOG.isTraceEnabled()) {
+			LOG.trace("Adding " + data + " to live filtering.");
+		}
+		// FIXME Not very defensive. Very brittle.
+		parametersActive.add(data);
+		filtered = true;
 	}
 
 	/**
@@ -69,6 +85,11 @@ public class OsgiLiveTmStreamingWebSocket implements WebSocket, LiveTmReceiver {
 	public void acceptNewLiveParameterGroup(final ParameterGroup parameterGroup) {
 		if (parameterGroup.getAllParameters() != null) {
 			for (final Parameter<?> p : parameterGroup.getAllParametersAsList()) {
+				if (filtered) {
+					if (!parametersActive.contains(p.getQualifiedName())) {
+						continue;
+					}
+				}
 				try {
 					connection.sendMessage(serialiseParameterToJson(p));
 				}

@@ -9,8 +9,10 @@
 	float: right;
 }
 
-.hidget h3 {
+.hidget h2 {
+	color: hsla(0, 100%, 100%, 0.7);
 	display: inline;
+	text-shadow: none;
 }
 
 .hidget .titleArea {
@@ -18,6 +20,26 @@
 	margin-bottom: 14px;
 }
 
+.hidget .valueDisplay {
+	text-align: center;
+}
+
+.hidget .value {
+	font-size: 3em;
+	font-weight: bold;
+}
+
+.hidget .unit {
+	font-size: 2em;
+}
+
 .parameterSearchInput {
 	width: 100%;
+	height: 28px;
+	font-size: 14px;
 }
+
+.hidget .content {
+	font-size: 14px;
+}
+

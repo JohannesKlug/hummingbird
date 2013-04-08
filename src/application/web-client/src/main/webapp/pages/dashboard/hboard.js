@@ -8,6 +8,8 @@ var url = "/hbird/halcyon/";
 var rootURL = location.protocol + "//" + host + ":" + location.port + url;
 var halcyonUrl = location.protocol + "//" + host + ":" + location.port + "/hbird/halcyon/";
 
+var liveTmWebsocket;
+
 var gridster;
 
 var colours = ["metroPurple",
@@ -22,16 +24,29 @@ var colours = ["metroPurple",
                "metroGreen"];
 
 /** Map of object references to all hidgets to save using dom selection. Keyed on id. */
-var hidgets = {};
+var hidgets = [];
 
-var defaultHidget = '<li class="hidget"><span class="titleArea"><h3>Monitor</h3></span></li>';
+/** Map of parameter monitor hidget Ids keyed on the parameter qualified name they are monitoring */ 
+var hidgetMonitorMap = {};
 
+var defaultHidget = '<li class="hidget">' + 
+						'<span class="titleArea"><h2>Parameter monitor</h2></span>' +
+						'<div class="content">' +
+							'<p id="defaultContent">Configure the widget using the settings button.</p>' + 
+						'</div>' + 
+					'</li>';
+
+
+/**
+ * Where the magic begins. Ha!
+ */
 jQuery(document).ready(function() {
 	setupJqueryDefaults();
 	setupWebsocket();
 	setupGridster();
 	setupControls();
 });
+
 
 var hidgetId = 0;
 function setupControls() {
@@ -45,13 +60,13 @@ function setupControls() {
 		hidget.attr("id",  "hidget" + currentId);
 
 		// Create the internal markup for the hidget.
-		var searchForm = createMonitorSearchForm(currentId).addClass("hidden");
+		var searchForm = createMonitorSearchForm(currentId);
 		var button = createSettingsButton(currentId);
 		button.appendTo($(hidget).children(".titleArea"));
 		searchForm.appendTo(hidget);
 
 		// Colour the hidget.
-		var colourIndex = Math.floor((Math.random() * 9) + 1);
+		var colourIndex = Math.floor((Math.random() * colours.length-1) + 1);
 		hidget.addClass(colours[colourIndex]);
 
 		// Track the hidget in a map for quick lookup
@@ -67,7 +82,8 @@ function createSettingsButton(id) {
 		},
 	    text: false
 	}).click(function() {
-		$(hidgets[id]).children("#searchSection" + id).toggleClass("hidden");
+		toggleDefaultHidgetContent(id);
+		$(hidgets[id]).children("#searchSection" + id).toggleClass("removed");
 	});
 	return button;
 }
@@ -93,7 +109,7 @@ function setupJqueryDefaults() {
 
 
 function createMonitorSearchForm(id) {
-	var searchDiv = $("<div id=\"searchSection" + id + "\">").addClass("hidden");;
+	var searchDiv = $("<div id=\"searchSection" + id + "\">").addClass("removed");
 	var input = $("<input id=\"parameterSearch\" list=\"parameterList" + id + "\" type=\"search\" results=5 placeholder=\"Type parameter name\"" +
 						" autofocus=\"autofocus\">")
 				.addClass("parameterSearchInput");
@@ -118,21 +134,26 @@ function createMonitorSearchForm(id) {
 			parameterList.empty();
 			console.log("Received: " + parameters.length);
 			$.each(parameters, function(i) {
-				parameterList.append(new Option(parameters[i].qualifiedName, parameters[i].name, false, false));
+				parameterList.append(new Option(parameters[i].name, parameters[i].qualifiedName, false, false));
 			});
 		});
 	});
 	
 	// On submit
 	form.submit(function() {
-		var inputValue = input.val();
+		var parameterQualifiedName = input.val();
 		var option = $("#parameterList" + id).children();
 		var found = false;
-		console.log("Input submitted: " + inputValue);
+		console.log("Input submitted: " + parameterQualifiedName);
 		$.each(option, function(i) {
-			console.log("input = " + inputValue + ". child val = " + $(option[i]).val());
-			if(inputValue === $(option[i]).val()) {
+			console.log("input = " + parameterQualifiedName + ". child val = " + $(option[i]).val());
+			if(parameterQualifiedName === $(option[i]).val()) {
 				found = true;
+				setHidgetTitle(id, $(option[i]).text());
+				$("#searchSection" + id).toggleClass("removed");
+				hidgetMonitorMap[parameterQualifiedName] = id;
+				hidgets[id].append(createMonitorValueDisplay(id));
+				liveTmWebsocket.send(parameterQualifiedName);
 				return false; // this is the same as a break in the jquery each function
 			}
 		});
@@ -149,6 +170,29 @@ function createMonitorSearchForm(id) {
 	
 	return searchDiv;
 }
+
+
+function createMonitorValueDisplay(id) {
+	var div = $("<div class=\"valueDisplay\" id=\"valueDisplay" + id + "\">");
+	var monitorValue = $("<p class=value id=value" + id + ">--</p>");
+	var monitorUnit = $("<p class=unit id=unit" + id + ">unknown unit</p>");
+	monitorValue.appendTo(div);
+	monitorUnit.appendTo(div);
+	
+	return div;	
+}
+
+function toggleDefaultHidgetContent(id) {
+	$(hidgets[id]).children(".content").children("#defaultContent").toggleClass("removed");
+}
+
+
+function setHidgetTitle(id, title) {
+	console.log("Setting title on id " + id + " to " + title);
+	$(hidgets[id]).children(".titleArea").children("h2").text(title);
+}
+
+
 /**
  * Sets up the web socket and it's callbacks.
  */
@@ -161,20 +205,39 @@ function setupWebsocket() {
 		wsProtocol = "wss:";
 	}
 
-	var liveTmWebsocket = $.gracefulWebSocket(wsProtocol + "//" + host + ":"
-			+ location.port + url + "tmsock");
+	liveTmWebsocket = $.gracefulWebSocket(wsProtocol + "//" + host + ":" + location.port + url + "tmsock");
 
 	liveTmWebsocket.onopen = function() {
-		console.log("Websocket connection established.");
+		$.pnotify({
+		    title: "System message",
+		    text: "Websocket connection established.",
+		    type: "info",
+		    icon: "'picon picon-network-wireless'"
+		});
+	};
+	
+	liveTmWebsocket.onerror = function() {
+		$.pnotify({
+		    title: "System message",
+		    text: "Websocket connection failed. Cannot receive live telemetry.",
+		    type: "error",
+		    icon: "'picon picon-network-wireless'"
+		});
 	};
 
 	liveTmWebsocket.onmessage = function(event) {
-		if (live) {
-			parameterReceived($.parseJSON(event.data));
-		}
+		// FIXME DO check here so we don't waste time parsing JSON if there are no widgets around.
+		parameterReceived($.parseJSON(event.data));
 	};
 }
 
 function parameterReceived(parameter) {
-	
+	if((parameter.qualifiedName in hidgetMonitorMap)) {
+		update(hidgetMonitorMap[parameter.qualifiedName], parameter);
+	}
 }
+
+function update(id, parameter) {
+	$(hidgets[id]).find("#value" + id).text(parameter.value);
+}
+
