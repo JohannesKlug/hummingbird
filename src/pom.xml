@@ -29,7 +29,6 @@
 		<junit.version>4.10</junit.version>
 		<castor.version>1.3.2</castor.version>
 		<camel.version>2.10.4</camel.version>
-		<activemq.version>5.8.0</activemq.version>
 		<mysqlconnector.version>5.1.10</mysqlconnector.version>
 		<jencks.version>2.2</jencks.version>
 		<slf4j.version>1.6.4</slf4j.version>
@@ -160,21 +159,6 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-test</artifactId>
 				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.activemq</groupId>
-				<artifactId>activemq-camel</artifactId>
-				<version>${activemq.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.activemq</groupId>
-				<artifactId>activemq-core</artifactId>
-				<version>${activemq.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.activemq</groupId>
-				<artifactId>activemq-pool</artifactId>
-				<version>${activemq.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>mysql</groupId>

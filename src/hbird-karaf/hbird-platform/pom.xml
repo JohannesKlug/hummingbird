@@ -67,14 +67,14 @@
 			<type>xml</type>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-karaf</artifactId>
 			<version>5.8.0</version>
 			<classifier>features</classifier>
 			<type>xml</type>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency>-->
 
 		<dependency>
 			<groupId>org.hbird.karaf</groupId>
@@ -119,13 +119,13 @@
 	</build>
 
 	<repositories>
-		<repository>
+<!--		<repository>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
 			<id>apache.snapshots</id>
 			<url>http://repository.apache.org/snapshots/</url>
-		</repository>
+		</repository>-->
 
 		<!-- Repository dependency for Sonatype Snapshots repository (for hbird 
 			transport) -->
@@ -165,11 +165,11 @@
 	</repositories>
 
 	<!-- Apache Snapshots plugin repo is required for the Karaf 3 snapshot maven plugin -->
-	<pluginRepositories>
+<!--	<pluginRepositories>
 		<pluginRepository>
 			<id>apache.snapshots</id>
 			<url>http://repository.apache.org/snapshots/</url>
 		</pluginRepository>
-	</pluginRepositories>
+	</pluginRepositories>-->
 
 </project>
