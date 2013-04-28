@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
  */
 public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 	private static final long serialVersionUID = 6820348312687042896L;
+
 	private static final Logger LOG = LoggerFactory.getLogger(UnsignedIntegerCodecParameter.class);
 
 	public UnsignedIntegerCodecParameter(final Parameter<Integer> hostParameter, final Encoding encoding) {
@@ -28,6 +29,8 @@ public class UnsignedIntegerCodecParameter extends CodecParameter<Integer> {
 	public void decode(final byte[] inBytes, final int bitOffset) {
 		// TODO Do this without BitSet.
 		decode(BitSetUtility.fromByteArray(inBytes), bitOffset);
+
+		// ByteBuffer buffer = ByteBuffer.wrap(inBytes);
 	}
 
 	@Override
