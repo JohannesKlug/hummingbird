@@ -30,7 +30,7 @@
 				<executions>
 					<execution>
 						<id>add-castor-generated-sources</id>
-						<phase>process-sources</phase>
+						<phase>generate-sources</phase>
 						<goals>
 							<goal>add-source</goal>
 						</goals>

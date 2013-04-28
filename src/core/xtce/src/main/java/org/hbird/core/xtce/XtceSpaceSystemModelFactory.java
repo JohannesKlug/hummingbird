@@ -323,6 +323,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 						final Parameter<Double> doubleParameter = new HummingbirdParameter<Double>(qualifiedName, name, shortDescription, longDescription);
 						LOG.debug("Adding Double parameter {}", doubleParameter.getQualifiedName());
 						doubleParameters.put(doubleParameter.getQualifiedName(), doubleParameter);
+						encodings.put(doubleParameter.getQualifiedName(), createXtceDoubleEncoding(type));
 						// TODO - 27.03.2012 kimmell - add encoding
 						break;
 					case VALUE_128:
@@ -836,6 +837,9 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		else if (longParameters.containsKey(qualifiedName)) {
 			group.addLongParameter(longParameters.get(qualifiedName));
 		}
+		else if (doubleParameters.containsKey(qualifiedName)) {
+			group.addDoubleParameter(doubleParameters.get(qualifiedName));
+		}
 		else if (stringParameters.containsKey(qualifiedName)) {
 			group.addStringParameter(stringParameters.get(qualifiedName));
 		}
@@ -1021,6 +1025,35 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		return name;
 	}
 
+	private static Encoding createXtceDoubleEncoding(FloatParameterType type) throws InvalidSpaceSystemDefinitionException {
+		final Encoding encoding = new Encoding();
+
+		encoding.setSizeInBits(Double.SIZE);
+
+		final BaseDataTypeChoice baseDataTypeChoice = type.getBaseDataTypeChoice();
+		if (baseDataTypeChoice == null) {
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("Base data type does not have a base data type choice, assuming default of IEEE754_1985 encoding");
+			}
+			encoding.setBinaryRepresentation(BinaryRepresentation.IEEE754_1985);
+			return encoding;
+		}
+
+		final FloatDataEncodingTypeEncodingType xtceEncoding = baseDataTypeChoice.getFloatDataEncoding().getEncoding();
+		switch (xtceEncoding) {
+			case IEEE754_1985:
+				encoding.setBinaryRepresentation(BinaryRepresentation.IEEE754_1985);
+				break;
+			case MILSTD_1750A:
+				encoding.setBinaryRepresentation(BinaryRepresentation.MILSTD_1750A);
+				break;
+			default:
+				throw new InvalidSpaceSystemDefinitionException("Invalid XTCE Float encoding in type " + type);
+		}
+
+		return encoding;
+	}
+
 	/**
 	 * Covers Java Integers and Longs
 	 * 
@@ -1049,7 +1082,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		}
 		catch (final IllegalArgumentException e) {
 			throw new InvalidSpaceSystemDefinitionException("Illegal value (" + intParamType.getSizeInBits() + ") defined as size in bits for parameter type "
-					+ intParamType.getName() + ". Hummingbird suppports sizes up to " + Integer.MAX_VALUE + ".");
+					+ intParamType.getName() + ". Hummingbird suppports sizes up to " + Integer.MAX_VALUE + ".", e);
 		}
 
 		encoding.setSizeInBits(sizeInBits);
@@ -1087,40 +1120,6 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 				throw new InvalidSpaceSystemDefinitionException("Invalid integer encoding in type " + intParamType);
 		}
 
-		return encoding;
-	}
-
-	/**
-	 * Covers Java Floats and Doubles.
-	 * 
-	 * @param type
-	 * @return
-	 * @throws InvalidSpaceSystemDefinitionException
-	 */
-	private final static Encoding getFloatEncoding(final FloatParameterType type) throws InvalidSpaceSystemDefinitionException {
-		final BaseDataTypeChoice baseDataTypeChoice = type.getBaseDataTypeChoice();
-
-		final Encoding encoding = new Encoding();
-		encoding.setSizeInBits(Integer.parseInt(type.getSizeInBits().value()));
-
-		if (baseDataTypeChoice == null) {
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("Base data type does not have a base data type choice, assuming default of IEEE754_1985 float encoding");
-			}
-			encoding.setBinaryRepresentation(BinaryRepresentation.IEEE754_1985);
-		}
-		final FloatDataEncodingTypeEncodingType xtceEncoding = baseDataTypeChoice.getFloatDataEncoding().getEncoding();
-
-		switch (xtceEncoding) {
-			case IEEE754_1985:
-				encoding.setBinaryRepresentation(BinaryRepresentation.IEEE754_1985);
-				break;
-			case MILSTD_1750A:
-				encoding.setBinaryRepresentation(BinaryRepresentation.MILSTD_1750A);
-				break;
-			default:
-				throw new InvalidSpaceSystemDefinitionException("Invalid float encoding in float type " + type.getName());
-		}
 		return encoding;
 	}
 

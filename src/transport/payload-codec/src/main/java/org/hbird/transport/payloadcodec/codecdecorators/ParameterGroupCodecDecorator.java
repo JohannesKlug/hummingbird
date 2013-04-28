@@ -9,6 +9,7 @@ import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 import org.hbird.core.spacesystemmodel.tmtc.provided.TmTcGroups;
 import org.hbird.transport.payloadcodec.AbstractClonerCodecDecorator;
+import org.hbird.transport.payloadcodec.codecdecorators.number.DoubleCodecFactory;
 import org.hbird.transport.payloadcodec.codecdecorators.number.IntegerCodecFactory;
 import org.hbird.transport.payloadcodec.codecdecorators.number.LongCodecFactory;
 import org.hbird.transport.payloadcodec.codecdecorators.string.StringCodecFactory;
@@ -80,6 +81,17 @@ public final class ParameterGroupCodecDecorator extends AbstractClonerCodecDecor
 					Encoding enc = findEncoding(entry.getValue().getQualifiedName());
 					Parameter<String> codecAwareStringParameter = StringCodecFactory.decorateParameterWithCodec(entry.getValue(), enc);
 					TmTcGroups.replaceParameterInGroup(pg, codecAwareStringParameter.getQualifiedName(), codecAwareStringParameter);
+				}
+			}
+
+			Map<String, Parameter<Double>> doubleParameters = pg.getDoubleParameters();
+			if (doubleParameters != null) {
+				Iterator<Entry<String, Parameter<Double>>> it = doubleParameters.entrySet().iterator();
+				while (it.hasNext()) {
+					Entry<String, Parameter<Double>> entry = it.next();
+					Encoding enc = findEncoding(entry.getValue().getQualifiedName());
+					Parameter<Double> codecAwareDoubleParameter = DoubleCodecFactory.decorateParameterWithCodec(entry.getValue(), enc);
+					TmTcGroups.replaceParameterInGroup(pg, codecAwareDoubleParameter.getQualifiedName(), codecAwareDoubleParameter);
 				}
 			}
 

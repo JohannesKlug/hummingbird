@@ -243,7 +243,9 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 	 */
 	@Override
 	public Parameter<Double> getDoubleParameter(final String qualifiedName) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
+		Parameter<Double> p = doubleParameters == null ? null : doubleParameters.get(qualifiedName);
+		validateParameterNotNull(p, qualifiedName);
+		return p;
 	}
 
 	/**

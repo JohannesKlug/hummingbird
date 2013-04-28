@@ -27,8 +27,11 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class HummingbirdParameterGroupTest {
 
 	private static final String QN = "a.b.c";
+
 	private static final String NAME = "c";
+
 	private static final String DESCRIPTION_LONG = "Long description";
+
 	private static final String DESCRIPTION_SHORT = "Short description";
 
 	@Mock
@@ -437,16 +440,16 @@ public class HummingbirdParameterGroupTest {
 		group.getFloatParameter("float");
 	}
 
-	/**
-	 * Test method for
-	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getDoubleParameter(java.lang.String)}.
-	 * 
-	 * @throws UnknownParameterException
-	 */
-	@Test(expected = UnsupportedOperationException.class)
-	public void testGetDoubleParameter() throws UnknownParameterException {
-		group.getDoubleParameter("double");
-	}
+	// /**
+	// * Test method for
+	// * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameterGroup#getDoubleParameter(java.lang.String)}.
+	// *
+	// * @throws UnknownParameterException
+	// */
+	// @Test
+	// public void testGetDoubleParameter() throws UnknownParameterException {
+	// group.getDoubleParameter("double");
+	// }
 
 	/**
 	 * Test method for
