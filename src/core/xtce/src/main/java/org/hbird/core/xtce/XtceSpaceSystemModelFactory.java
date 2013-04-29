@@ -838,7 +838,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		}
 		else if (doubleParameters.containsKey(qualifiedName)) {
 			group.addDoubleParameter(doubleParameters.get(qualifiedName));
-	        }
+		}
 		else if (floatParameters.containsKey(qualifiedName)) {
 			group.addFloatParameter(floatParameters.get(qualifiedName));
 		}
@@ -1056,7 +1056,10 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		return encoding;
 	}
 
+	private static Encoding createXtceFloatEncoding(FloatParameterType type) throws InvalidSpaceSystemDefinitionException {
+		final Encoding encoding = new Encoding();
 
+		encoding.setSizeInBits(Float.SIZE);
 		final BaseDataTypeChoice baseDataTypeChoice = type.getBaseDataTypeChoice();
 		if (baseDataTypeChoice == null) {
 			if (LOG.isDebugEnabled()) {
@@ -1081,10 +1084,6 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		return encoding;
 	}
 
-	private static Encoding createXtceFloatEncoding(FloatParameterType type) throws InvalidSpaceSystemDefinitionException {
-		final Encoding encoding = new Encoding();
-
-		encoding.setSizeInBits(Float.SIZE);
 	/**
 	 * Covers Java Integers and Longs
 	 * 

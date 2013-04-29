@@ -96,9 +96,6 @@ public final class ParameterGroupCodecDecorator extends AbstractClonerCodecDecor
 				}
 			}
 
-				}
-			}
-
 			Map<String, Parameter<Float>> floatParameters = pg.getFloatParameters();
 			if (floatParameters != null) {
 				Iterator<Entry<String, Parameter<Float>>> it = floatParameters.entrySet().iterator();
@@ -107,6 +104,8 @@ public final class ParameterGroupCodecDecorator extends AbstractClonerCodecDecor
 					Encoding enc = findEncoding(entry.getValue().getQualifiedName());
 					Parameter<Float> codecAwareFloatParameter = FloatCodecFactory.decorateParameterWithCodec(entry.getValue(), enc);
 					TmTcGroups.replaceParameterInGroup(pg, codecAwareFloatParameter.getQualifiedName(), codecAwareFloatParameter);
+				}
+			}
 		}
 
 		// FIXME BigDecimal, Float, Double, Binary
