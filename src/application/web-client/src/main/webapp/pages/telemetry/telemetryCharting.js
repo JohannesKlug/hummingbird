@@ -278,7 +278,7 @@ function setupChart() {
 	// setup overview
 	var overview = $.plot($("#overview"), chartData, {
 		legend : {
-			show : false,
+			show : true,
 		},
 		series : {
 			lines : {

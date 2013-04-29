@@ -16,7 +16,7 @@
 	<name>Hbird :: Application :: Halcyon</name>
 
 	<properties>
-		<jersey-version>1.13</jersey-version>
+		<jersey-version>1.17</jersey-version>
 	</properties>
 
 	<dependencies>

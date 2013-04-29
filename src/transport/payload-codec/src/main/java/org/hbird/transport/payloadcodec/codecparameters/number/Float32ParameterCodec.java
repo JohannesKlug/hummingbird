@@ -1,7 +1,9 @@
 package org.hbird.transport.payloadcodec.codecparameters.number;
 
+import java.nio.ByteBuffer;
 import java.util.BitSet;
 
+import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
@@ -10,101 +12,43 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Parameter behaviour for an IEEE 754 32-bit precision Float.
- *
+ * 
  * @author Mark Doyle
  * @author Johannes Klug
- *
+ * 
  */
 public class Float32ParameterCodec extends CodecParameter<Float> {
-	private static final Logger LOG = LoggerFactory.getLogger(Float32ParameterCodec.class);
+	private static final long serialVersionUID = -8334901457487780586L;
 
+	private static final Logger LOG = LoggerFactory.getLogger(Float32ParameterCodec.class);
 
 	public Float32ParameterCodec(final Parameter<Float> hostParameter, final Encoding encoding) {
 		super(hostParameter, encoding);
-		// TODO Auto-generated constructor stub
 	}
-
-
 
 	@Override
 	public void decode(final BitSet inBitset, final int offset) {
-		// TODO Auto-generated method stub
-
+		BitSet value = inBitset.get(offset, offset + encoding.getSizeInBits() + 1);
+		decode(BitSetUtility.toByteArray(value, encoding.getSizeInBits()), 0);
 	}
 
 	@Override
 	public void decode(final byte[] inBytes, final int offset) {
-		// TODO Auto-generated method stub
-
+		if (LOG.isTraceEnabled()) {
+			LOG.trace("Decoding parameter " + getQualifiedName() + " offset: " + offset / Byte.SIZE);
+		}
+		ByteBuffer buf = ByteBuffer.wrap(inBytes);
+		float value = buf.getFloat(offset / Byte.SIZE);
+		setValue(value);
 	}
-
 
 	@Override
 	public byte[] encodeToByteArray(final byte[] targetBytes, final int offset) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Not implemented yet, file an issue :)");
 	}
 
 	@Override
 	public BitSet encodeToBitSet(final BitSet out, final int offset) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Not implemented yet, file an issue :)");
 	}
-
-	// @Override
-	// public Float valueFromBitSet(final BitSet packet) {
-	// final int offset = 0;
-	//
-	// final BitSet actualBitSet = packet.get(offset, offset + getSizeInBits());
-	//
-	// LOG.debug("Float Parameter BitSet taken from bitset in = " + BitSetUtility.binDump(actualBitSet));
-	//
-	// return BitSetUtility.toFloat(actualBitSet);
-	// }
-
-	// @Override
-	// public BitSet insertIntoBitSet(final Number number, final BitSet bitSetTarget, final int offset)
-	// throws BitSetOperationException {
-	// final float value = number.floatValue();
-	//
-	// // Convert the value to a bitset
-	// // Parse as IEEE-754 Single Precision (32-bit) (Java Integer)
-	// final int intBits = Float.floatToIntBits(value);
-	//
-	// String binaryString = Integer.toBinaryString(intBits);
-	// LOG.debug("Float32 insertIntoBitSet - Binary string = " + binaryString);
-	//
-	// if (value >= 0) {
-	// // We have to add the Sign bit manually for positive Numbers
-	// binaryString = '0' + binaryString;
-	// }
-	//
-	// // Get the BitSet from the String.
-	// BitSet valueBitSet = this.bitSetFromString(binaryString);
-	//
-	// // If the floats has leading zeros the int conversion above will truncate them. This is expected as
-	// // the leading zeros are surplus for a Java big endian int. They are however vital to an IEEE-754 float
-	// // since they contain the sign, exponent and mantissa. We must repair the bitset in this case.
-	// if (valueBitSet.length() < Float.SIZE) {
-	// // int truncation = 32 - valueBitSet.length();
-	// String bitsetString = BitSetUtility.bitSetToBinaryString(valueBitSet, true);
-	// LOG.debug("Truncated bitset = " + bitsetString);
-	// bitsetString = BitSetUtility.padStringFromTheFront(bitsetString, Float.SIZE);
-	// LOG.debug("Repaired bitset = " + bitsetString);
-	// valueBitSet = BitSetUtility.stringToBitSet(bitsetString, true, true);
-	// }
-	//
-	// // Insert the value BitSet into the target BitSet and return
-	// for (int i = 0; i < getSizeInBits(); i++) {
-	// if (valueBitSet.get(i)) {
-	// bitSetTarget.set(i + offset);
-	// }
-	// else {
-	// bitSetTarget.clear(i + offset);
-	// }
-	// }
-	//
-	// LOG.debug("Returning BitSet = " + BitSetUtility.binDump(bitSetTarget));
-	// return bitSetTarget;
-	// }
 }

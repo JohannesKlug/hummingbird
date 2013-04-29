@@ -10,6 +10,7 @@ import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 import org.hbird.core.spacesystemmodel.tmtc.provided.TmTcGroups;
 import org.hbird.transport.payloadcodec.AbstractClonerCodecDecorator;
 import org.hbird.transport.payloadcodec.codecdecorators.number.DoubleCodecFactory;
+import org.hbird.transport.payloadcodec.codecdecorators.number.FloatCodecFactory;
 import org.hbird.transport.payloadcodec.codecdecorators.number.IntegerCodecFactory;
 import org.hbird.transport.payloadcodec.codecdecorators.number.LongCodecFactory;
 import org.hbird.transport.payloadcodec.codecdecorators.string.StringCodecFactory;
@@ -95,6 +96,17 @@ public final class ParameterGroupCodecDecorator extends AbstractClonerCodecDecor
 				}
 			}
 
+				}
+			}
+
+			Map<String, Parameter<Float>> floatParameters = pg.getFloatParameters();
+			if (floatParameters != null) {
+				Iterator<Entry<String, Parameter<Float>>> it = floatParameters.entrySet().iterator();
+				while (it.hasNext()) {
+					Entry<String, Parameter<Float>> entry = it.next();
+					Encoding enc = findEncoding(entry.getValue().getQualifiedName());
+					Parameter<Float> codecAwareFloatParameter = FloatCodecFactory.decorateParameterWithCodec(entry.getValue(), enc);
+					TmTcGroups.replaceParameterInGroup(pg, codecAwareFloatParameter.getQualifiedName(), codecAwareFloatParameter);
 		}
 
 		// FIXME BigDecimal, Float, Double, Binary

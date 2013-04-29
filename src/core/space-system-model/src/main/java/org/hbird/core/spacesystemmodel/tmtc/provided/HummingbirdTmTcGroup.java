@@ -229,17 +229,15 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 	}
 
 	/**
-	 * @throws UnknownParameterException
-	 *             not supported yet
 	 */
 	@Override
 	public Parameter<Float> getFloatParameter(final String qualifiedName) throws UnknownParameterException {
-		throw new UnsupportedOperationException();
+		Parameter<Float> p = floatParameters == null ? null : floatParameters.get(qualifiedName);
+		validateParameterNotNull(p, qualifiedName);
+		return p;
 	}
 
 	/**
-	 * @throws UnknownParameterException
-	 *             not supported yet
 	 */
 	@Override
 	public Parameter<Double> getDoubleParameter(final String qualifiedName) throws UnknownParameterException {

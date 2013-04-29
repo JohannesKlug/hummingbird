@@ -317,14 +317,13 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 						final Parameter<Float> floatParameter = new HummingbirdParameter<Float>(qualifiedName, name, shortDescription, longDescription);
 						LOG.debug("Adding Float parameter {}", floatParameter.getQualifiedName());
 						floatParameters.put(floatParameter.getQualifiedName(), floatParameter);
-						// TODO - 27.03.2012 kimmell - add encoding
+						encodings.put(floatParameter.getQualifiedName(), createXtceFloatEncoding(type));
 						break;
 					case VALUE_64:
 						final Parameter<Double> doubleParameter = new HummingbirdParameter<Double>(qualifiedName, name, shortDescription, longDescription);
 						LOG.debug("Adding Double parameter {}", doubleParameter.getQualifiedName());
 						doubleParameters.put(doubleParameter.getQualifiedName(), doubleParameter);
 						encodings.put(doubleParameter.getQualifiedName(), createXtceDoubleEncoding(type));
-						// TODO - 27.03.2012 kimmell - add encoding
 						break;
 					case VALUE_128:
 						final Parameter<BigDecimal> bigDecimalParameter = new HummingbirdParameter<BigDecimal>(qualifiedName, name, shortDescription, longDescription);
@@ -839,6 +838,9 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		}
 		else if (doubleParameters.containsKey(qualifiedName)) {
 			group.addDoubleParameter(doubleParameters.get(qualifiedName));
+	        }
+		else if (floatParameters.containsKey(qualifiedName)) {
+			group.addFloatParameter(floatParameters.get(qualifiedName));
 		}
 		else if (stringParameters.containsKey(qualifiedName)) {
 			group.addStringParameter(stringParameters.get(qualifiedName));
@@ -1054,6 +1056,35 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		return encoding;
 	}
 
+
+		final BaseDataTypeChoice baseDataTypeChoice = type.getBaseDataTypeChoice();
+		if (baseDataTypeChoice == null) {
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("Base data type does not have a base data type choice, assuming default of IEEE754_1985 encoding");
+			}
+			encoding.setBinaryRepresentation(BinaryRepresentation.IEEE754_1985);
+			return encoding;
+		}
+
+		final FloatDataEncodingTypeEncodingType xtceEncoding = baseDataTypeChoice.getFloatDataEncoding().getEncoding();
+		switch (xtceEncoding) {
+			case IEEE754_1985:
+				encoding.setBinaryRepresentation(BinaryRepresentation.IEEE754_1985);
+				break;
+			case MILSTD_1750A:
+				encoding.setBinaryRepresentation(BinaryRepresentation.MILSTD_1750A);
+				break;
+			default:
+				throw new InvalidSpaceSystemDefinitionException("Invalid XTCE Float encoding in type " + type);
+		}
+
+		return encoding;
+	}
+
+	private static Encoding createXtceFloatEncoding(FloatParameterType type) throws InvalidSpaceSystemDefinitionException {
+		final Encoding encoding = new Encoding();
+
+		encoding.setSizeInBits(Float.SIZE);
 	/**
 	 * Covers Java Integers and Longs
 	 * 

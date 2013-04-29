@@ -44,11 +44,11 @@ public class Double64ParameterCodec extends CodecParameter<Double> {
 
 	@Override
 	public byte[] encodeToByteArray(final byte[] targetBytes, final int offset) {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("Not implemented yet, file an issue :)");
 	}
 
 	@Override
 	public BitSet encodeToBitSet(final BitSet targetBitSet, final int offset) {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("Not implemented yet, file an issue :)");
 	}
 }
