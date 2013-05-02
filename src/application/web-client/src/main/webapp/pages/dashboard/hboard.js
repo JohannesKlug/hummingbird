@@ -183,7 +183,13 @@ function createMonitorSearchForm(id) {
 				setHidgetTitle(id, $(option[i]).text());
 				$("#searchSection" + id).toggleClass("removed");
 				hidgetMonitorMap[parameterQualifiedName] = id;
-				hidgets[id].append(createMonitorValueDisplay(id));
+				if($("#valueDisplay" + id).length == 0) {
+					hidgets[id].append(createMonitorValueDisplay(id));
+				}
+				else {
+					$("#valueDisplay" + id).replaceWith(createMonitorValueDisplay(id));
+				}
+				
 				liveTmWebsocket.send(parameterQualifiedName);
 				return false; // this is the same as a break in the jquery each function
 			}
