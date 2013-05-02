@@ -5,6 +5,8 @@
 }
 
 .hidget button {
+	width: 16px;
+	height: 16px;
 	font-size: 1em;
 	float: right;
 }

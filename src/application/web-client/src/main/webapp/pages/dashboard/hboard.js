@@ -62,6 +62,8 @@ function setupControls() {
 		// Create the internal markup for the hidget.
 		var searchForm = createMonitorSearchForm(currentId);
 		var button = createSettingsButton(currentId);
+		var closeButton = createWidgetCloseButton(currentId);
+		closeButton.appendTo($(hidget).children(".titleArea"));
 		button.appendTo($(hidget).children(".titleArea"));
 		searchForm.appendTo(hidget);
 
@@ -74,13 +76,34 @@ function setupControls() {
 	});
 }
 
+/**
+ * Creates a close button for a specific widget. Button removes the widget from gridster.
+ * @param id
+ * @returns
+ */
+function createWidgetCloseButton(id) {
+	var butt = $("<button type=\"button\"/>").attr("id", "closeButton" + id);
+	butt.button({
+		icons: { primary : "ui-icon-close"},
+		text : false
+	}).click(function() {
+		gridster.remove_widget( $("#hidget" + id));
+	});
+	// return butt, ha! ...Ahem.
+	return butt;
+} 
+
+/**
+ * Creates a settings button for a specific widget.
+ * 
+ * @param id
+ * @returns
+ */
 function createSettingsButton(id) {
 	var button = $("<button type=\"button\">Settings</button>").attr("id", "hidgetSettingsButton" + id);
 	button.button({
-		icons: {
-			primary: "ui-icon-gear"
-		},
-	    text: false
+		icons : { primary: "ui-icon-gear" },
+	    text : false
 	}).click(function() {
 		toggleDefaultHidgetContent(id);
 		$(hidgets[id]).children("#searchSection" + id).toggleClass("removed");
@@ -88,6 +111,9 @@ function createSettingsButton(id) {
 	return button;
 }
 
+/**
+ * Set up the gridster plugin.
+ */
 function setupGridster() {
 	$(".gridster ul").gridster({
         widget_margins: [10, 10],
@@ -108,6 +134,11 @@ function setupJqueryDefaults() {
 }
 
 
+/**
+ * Create a monitor search for for a specific widget id. This is used to search the parameter list.
+ * @param id
+ * @returns
+ */
 function createMonitorSearchForm(id) {
 	var searchDiv = $("<div id=\"searchSection" + id + "\">").addClass("removed");
 	var input = $("<input id=\"parameterSearch\" list=\"parameterList" + id + "\" type=\"search\" results=5 placeholder=\"Type parameter name\"" +
@@ -172,6 +203,11 @@ function createMonitorSearchForm(id) {
 }
 
 
+/**
+ * Creates a div to show the parameter value and unit type for a specific widget.
+ * @param id
+ * @returns
+ */
 function createMonitorValueDisplay(id) {
 	var div = $("<div class=\"valueDisplay\" id=\"valueDisplay" + id + "\">");
 	var monitorValue = $("<p class=value id=value" + id + ">--</p>");
