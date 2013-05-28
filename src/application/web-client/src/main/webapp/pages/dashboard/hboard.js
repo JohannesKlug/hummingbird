@@ -60,9 +60,9 @@ var maxSeriesPoints = 75;
  */
 jQuery(document).ready(function() {
 	setupJqueryDefaults();
-	setupWebsocket();
 	setupGridster();
 	setupControls();
+	setupWebsocket();
 });
 
 
@@ -141,7 +141,7 @@ function createWidgetCloseButton(id) {
 function createSettingsButton(id) {
 	var button = $("<button type=\"button\">Settings</button>").attr("id", "hidgetSettingsButton" + id);
 	button.button({
-		icons : { primary: "ui-icon-gear" },
+		icons: { primary: "ui-icon-gear" },
 	    text : false
 	}).click(function() {
 		toggleWidgetContent(id);
@@ -223,11 +223,6 @@ function createMonitorSearchForm(id) {
 				$("#searchSection" + id).toggleClass("removed");
 				linkWidgetToParameter(parameterQualifiedName, id);
 				createWidgetContent(id);
-				}
-				else {
-					$("#valueDisplay" + id).replaceWith(createMonitorValueDisplay(id));
-				}
-				
 				liveTmWebsocket.send(parameterQualifiedName);
 				return false; // this is the same as a break in the jquery each function
 			}
