@@ -77,13 +77,14 @@ function setupControls() {
 		var currentId = hidgetId++;
 		monitorWidget.attr("id",  "hidget" + currentId);
 
-		addWidgetSettingsContent(currentId, monitorWidget);
-
+		// Track the hidget in a map for quick lookup
+		widgets[currentId] = monitorWidget;
+		
 		// Colour the hidget.
 		monitorWidget.addClass(grabSomeColour());
 
-		// Track the hidget in a map for quick lookup
-		widgets[currentId] = monitorWidget;
+		addWidgetSettingsContent(currentId, monitorWidget);
+
 	});
 	
 	$("#addParameterPlot").click(function(){
@@ -93,35 +94,43 @@ function setupControls() {
 		
 		// Add the hbird plot widget to the grid
 		var plotWidget = gridster.add_widget(plotWidgetHtml, 4, 2);
+		
+		// Track the hidget in a map for quick lookup
+		widgets[currentId] = plotWidget;
 
 		plotWidget.attr("id",  "hidget" + currentId);
-
-		addWidgetSettingsContent(currentId, plotWidget);
-
+		
 		// Colour the hidget.
 		plotWidget.addClass(grabSomeColour());
 
-		// Track the hidget in a map for quick lookup
-		widgets[currentId] = plotWidget;
+		addWidgetSettingsContent(currentId, plotWidget);
+
 	});
 }
-
 
 function addWidgetSettingsContent(id, widget) {
 	createWidgetCloseButton(id).appendTo($(widget).children(".titleArea"));
 	createSettingsButton(id).appendTo($(widget).children(".titleArea"));
-	var settingsContent = $('<div id=settingsContent' + id + '>Settings</div>').addClass("removed");
+	var settingsContent = $('<div class=settings id=settingsContent' + id + '>Settings</div>').addClass("removed");
 	settingsContent.appendTo(widget);
 	createMonitorSearchForm(id).appendTo(settingsContent);
 	createCosmeticSettings(id).appendTo(settingsContent);
 }
 
 function createCosmeticSettings(id) {
-	var form = $('<form> ' + 
-			   		'Colour: <input type=color name=favcolor><br>' + 
-			   		'<input type="submit">' + 
+	var currentWidgetColour = rgb2hex(widgets[id].css("background-color"));
+	
+	var form = $('<form> ' +
+					'<span id=colourSection' + id + '>Background</>' + 
 			   	'</form>');
-//	form.addClass("removed");
+	
+	var colourPicker = $('<input type=color id=backColour' + id + ' value=' + currentWidgetColour + '>');
+	colourPicker.on('change', function() {
+		widgets[id].css('background-color', this.value);
+	});
+	
+	form.children('#colourSection' + id).append(colourPicker);
+	
 	return form;
 }
 
@@ -165,7 +174,7 @@ function createWidgetCloseButton(id) {
  * @returns
  */
 function createSettingsButton(id) {
-	var button = $("<button type=\"button\">Settings</button>").attr("id", "hidgetSettingsButton" + id);
+	var button = $('<button type=button>Settings</button>').attr('id', 'hidgetSettingsButton' + id);
 	button.button({
 		icons: { primary: "ui-icon-gear" },
 	    text : false
@@ -481,3 +490,11 @@ function update(id, parameter) {
 	}
 }
 
+
+function rgb2hex(rgb){
+	 rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+	 return "#" +
+	  ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+	  ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+	  ("0" + parseInt(rgb[3],10).toString(16)).slice(-2);
+	}

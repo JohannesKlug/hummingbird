@@ -45,6 +45,15 @@
 	font-size: 14px;
 }
 
+.widget .settings {
+	font-size: 1.8em;
+}
+
+.widget .settings form {
+	padding-top: 4px;
+	font-size: 0.8em;
+}
+
 .plot {
 	width: 610px;
 	height: 240px;
