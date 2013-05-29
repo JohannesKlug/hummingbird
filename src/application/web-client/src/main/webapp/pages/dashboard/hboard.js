@@ -77,11 +77,7 @@ function setupControls() {
 		var currentId = hidgetId++;
 		monitorWidget.attr("id",  "hidget" + currentId);
 
-		// Create the internal markup for the hidget.
-		var searchForm = createMonitorSearchForm(currentId);
-		createWidgetCloseButton(currentId).appendTo($(monitorWidget).children(".titleArea"));
-		createSettingsButton(currentId).appendTo($(monitorWidget).children(".titleArea"));
-		searchForm.appendTo(monitorWidget);
+		addWidgetSettingsContent(currentId, monitorWidget);
 
 		// Colour the hidget.
 		monitorWidget.addClass(grabSomeColour());
@@ -100,11 +96,7 @@ function setupControls() {
 
 		plotWidget.attr("id",  "hidget" + currentId);
 
-		// Create the internal markup for the hidget.
-		var searchForm = createMonitorSearchForm(currentId);
-		createWidgetCloseButton(currentId).appendTo($(plotWidget).children(".titleArea"));
-		createSettingsButton(currentId).appendTo($(plotWidget).children(".titleArea"));
-		searchForm.appendTo(plotWidget);
+		addWidgetSettingsContent(currentId, plotWidget);
 
 		// Colour the hidget.
 		plotWidget.addClass(grabSomeColour());
@@ -112,6 +104,25 @@ function setupControls() {
 		// Track the hidget in a map for quick lookup
 		widgets[currentId] = plotWidget;
 	});
+}
+
+
+function addWidgetSettingsContent(id, widget) {
+	createWidgetCloseButton(id).appendTo($(widget).children(".titleArea"));
+	createSettingsButton(id).appendTo($(widget).children(".titleArea"));
+	var settingsContent = $('<div id=settingsContent' + id + '>Settings</div>').addClass("removed");
+	settingsContent.appendTo(widget);
+	createMonitorSearchForm(id).appendTo(settingsContent);
+	createCosmeticSettings(id).appendTo(settingsContent);
+}
+
+function createCosmeticSettings(id) {
+	var form = $('<form> ' + 
+			   		'Colour: <input type=color name=favcolor><br>' + 
+			   		'<input type="submit">' + 
+			   	'</form>');
+//	form.addClass("removed");
+	return form;
 }
 
 
@@ -160,7 +171,7 @@ function createSettingsButton(id) {
 	    text : false
 	}).click(function() {
 		toggleWidgetContent(id);
-		$(widgets[id]).children("#searchSection" + id).toggleClass("removed");
+		toggleSettingsContent(id);
 	});
 	return button;
 }
@@ -194,7 +205,7 @@ function setupJqueryDefaults() {
  * @returns
  */
 function createMonitorSearchForm(id) {
-	var searchDiv = $("<div id=\"searchSection" + id + "\">").addClass("removed");
+	var searchDiv = $("<div id=\"searchSection" + id + "\">");//.addClass("removed");
 	var input = $("<input id=\"parameterSearch\" list=\"parameterList" + id + "\" type=\"search\" results=5 placeholder=\"Search for a parameter name\"" +
 						" autofocus=\"autofocus\">")
 				.addClass("parameterSearchInput");
@@ -235,7 +246,7 @@ function createMonitorSearchForm(id) {
 			if(parameterQualifiedName === $(option[i]).val()) {
 				found = true;
 				setHidgetTitle(id, $(option[i]).text());
-				$("#searchSection" + id).toggleClass("removed");
+				toggleSettingsContent(id);
 				linkWidgetToParameter(parameterQualifiedName, id);
 				createWidgetContent(id);
 				liveTmWebsocket.send(parameterQualifiedName);
@@ -255,6 +266,11 @@ function createMonitorSearchForm(id) {
 	});
 	
 	return searchDiv;
+}
+
+
+function toggleSettingsContent(id) {
+	$(widgets[id]).children("#settingsContent" + id).toggleClass("removed");
 }
 
 function linkWidgetToParameter(parameterQualifiedName, widgetId) {
