@@ -38,7 +38,7 @@ var widget = '<li class="widget monitor">' +
 
 var plotWidgetHtml = '<li class="widget plot">' + 
 				 	'<span class="titleArea"><h2>Parameter plot</h2></span>' +
-				 	'<div class="content">' +
+				 	'<div class="content" id=defaultContent>' +
 				 		'<p id="defaultContent">Configure the widget using the settings button.</p>' +
 				 	'</div>' +
 				  '</li>';
@@ -79,8 +79,8 @@ function setupControls() {
 
 		// Create the internal markup for the hidget.
 		var searchForm = createMonitorSearchForm(currentId);
-		var button = createSettingsButton(currentId);
-		button.appendTo($(monitorWidget).children(".titleArea"));
+		createWidgetCloseButton(currentId).appendTo($(monitorWidget).children(".titleArea"));
+		createSettingsButton(currentId).appendTo($(monitorWidget).children(".titleArea"));
 		searchForm.appendTo(monitorWidget);
 
 		// Colour the hidget.
@@ -91,7 +91,7 @@ function setupControls() {
 	});
 	
 	$("#addParameterPlot").click(function(){
-		// Grab a unique ID and increment the counter. We use this to operate on the hidget, 
+		// Grab a unique ID and increment the counter. We use this to operate on the widget, 
 		// e.g., pop up submenus etc.
 		var currentId = hidgetId++;
 		
@@ -102,9 +102,8 @@ function setupControls() {
 
 		// Create the internal markup for the hidget.
 		var searchForm = createMonitorSearchForm(currentId);
-		
-		var button = createSettingsButton(currentId);
-		button.appendTo($(plotWidget).children(".titleArea"));
+		createWidgetCloseButton(currentId).appendTo($(plotWidget).children(".titleArea"));
+		createSettingsButton(currentId).appendTo($(plotWidget).children(".titleArea"));
 		searchForm.appendTo(plotWidget);
 
 		// Colour the hidget.
@@ -114,6 +113,7 @@ function setupControls() {
 		widgets[currentId] = plotWidget;
 	});
 }
+
 
 /** Returns a random colour name from the colours array. Names are linked to the CSS style. */
 function grabSomeColour() {
@@ -126,9 +126,24 @@ function createWidgetCloseButton(id) {
 		icons: { primary : "ui-icon-close"},
 		text : false
 	}).click(function() {
-		gridster.remove_widget( $("#hidget" + id));
+		// Remove any listener "registrations" for this widget id...
+		var widget = widgets[id];
+		for(var key in hidgetMonitorMap) {
+			var updatedListenerList = [];
+			updatedListenerList = $.grep(hidgetMonitorMap[key], function(widgetId, index) {
+				console.log("DEBUG - id: " + id + " widgetId: " + widgetId);
+				if(id === widgetId) {
+					return false;
+				}
+				else {
+					return true;
+				}
+			});
+			hidgetMonitorMap[key] = updatedListenerList;
+		}
+		// Remove widget from the grid.
+		gridster.remove_widget(widget);
 	});
-	// return butt, ha! ...Ahem.
 	return butt;
 } 
 
@@ -250,11 +265,11 @@ function linkWidgetToParameter(parameterQualifiedName, widgetId) {
 		updatedListenerList = $.grep(hidgetMonitorMap[key], function(id, index) {
 			console.log("DEBUG - id: " + id + " widgetId: " + widgetId);
 			if(id === widgetId) {
-				console.log("Removing widget " + widgetId);
+				// widget already listening to a parameter, let's remove that. If it's a plot we must clear the data too.
+				plotSeriesMap[id] = [];
 				return false;
 			}
 			else {
-				console.log("Keeping widget " + widgetId);
 				return true;
 			}
 		});
@@ -278,7 +293,7 @@ function createWidgetContent(id) {
 		setWidgetContent(id, createMonitorValueDisplay(id));
 	}
 	else if(widgets[id].hasClass("plot")) {
-		widgets[id].append(createPlot(id));
+		setWidgetContent(id, createPlot(id));
 		plots[id] = setupChart(id);
 	}
 	else {
@@ -320,7 +335,7 @@ function setHidgetTitle(id, title) {
  */
 function createPlot(id) {
 	var div = $('<div class=plotDisplay id=plotDisplay' + id + '\>');
-	var plot = $('<div class=plot id=plot' + id + '>plot goes here!</siv>');
+	var plot = $('<div class=plot id=plot' + id + '></div>');
 	plot.appendTo(div);
 	
 	return div;
