@@ -25,10 +25,10 @@
 	<properties>
 		<rxtx.version>2.1.7</rxtx.version>
 		<log4j.version>1.2.16</log4j.version>
-		<spring.version>3.2.1.RELEASE</spring.version>
+		<spring.version>3.1.4.RELEASE</spring.version>
 		<junit.version>4.10</junit.version>
 		<castor.version>1.3.2</castor.version>
-		<camel.version>2.10.4</camel.version>
+		<camel.version>2.11.0</camel.version>
 		<mysqlconnector.version>5.1.10</mysqlconnector.version>
 		<jencks.version>2.2</jencks.version>
 		<slf4j.version>1.6.4</slf4j.version>
@@ -43,6 +43,7 @@
 		<cloning.version>1.8.2</cloning.version>
 		<guava.version>11.0</guava.version>
 		<mockito.version>1.9.5-rc1</mockito.version>
+		<jersey.version>1.17</jersey.version>
 	</properties>
 	<scm>
 		<connection>scm:git:git@github.com:JohannesKlug/hbird.git</connection>

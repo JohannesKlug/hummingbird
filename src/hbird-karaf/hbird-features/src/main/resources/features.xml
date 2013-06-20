@@ -23,6 +23,8 @@
 			<feature version="${camel.version}">camel-mina2</feature>
 			<feature version="${camel.version}">camel-netty</feature>
 			<feature version="${camel.version}">camel-mongodb</feature>
+			<feature version="${spring.version}">spring</feature>
+			<feature version="${spring.version}">spring-web</feature>
 		</feature>
 		
 		<feature name="hbird-xtce" description="Hbird xtce space system bundles including OSGi service provision" version="${project.version}">
@@ -70,23 +72,18 @@
 		
 		<feature name="hbird-jersey" 
 				 description="Jersey for OSGi including dependencies" 
-				 version="1.14">
+				 version="${jersey.version}">
 			<feature>war</feature>
 			<feature>xml-specs-api</feature>
- 			<bundle dependency="true">mvn:org.springframework/org.springframework.core/${spring.version}</bundle>
 			<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.aopalliance/1.0_6</bundle>
-			<bundle dependency="true">mvn:org.springframework/org.springframework.aop/${spring.version}</bundle>
-			<bundle dependency="true">mvn:org.springframework/org.springframework.beans/${spring.version}</bundle>
-			<bundle dependency="true">mvn:org.springframework/org.springframework.context/${spring.version}</bundle>
-			<bundle dependency="true">mvn:org.springframework/org.springframework.web/${spring.version}</bundle>
 			<bundle dependency="true">mvn:org.codehaus.jettison/jettison/1.1</bundle>
 			<bundle dependency="true">mvn:org.apache.felix/org.apache.felix.eventadmin/1.2.8</bundle>
-			<bundle>mvn:com.sun.jersey/jersey-core/1.14</bundle>
-			<bundle>mvn:com.sun.jersey/jersey-server/1.14</bundle>
-			<bundle>mvn:com.sun.jersey/jersey-servlet/1.14</bundle>
+			<bundle>mvn:com.sun.jersey/jersey-core/${jersey.version}</bundle>
+			<bundle>mvn:com.sun.jersey/jersey-server/${jersey.version}</bundle>
+			<bundle>mvn:com.sun.jersey/jersey-servlet/${jersey.version}</bundle>
 			<feature>hbird-jackson</feature>
-			<bundle>mvn:com.sun.jersey/jersey-json/1.14</bundle>
-			<bundle>mvn:com.sun.jersey.contribs/jersey-spring/1.14</bundle>
+			<bundle>mvn:com.sun.jersey/jersey-json/${jersey.version}</bundle>
+			<bundle>mvn:com.sun.jersey.contribs/jersey-spring/${jersey.version}</bundle>
 		</feature>
 		
 		<feature name="hbird-halcyon" description="Hbird Web services backend" version="${project.version}">
