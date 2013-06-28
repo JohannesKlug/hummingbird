@@ -4,6 +4,8 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.hbird.application.commanding.interfaces.processing.CommandAcceptor;
 import org.hbird.application.halcyon.osgi.OsgiReady;
@@ -27,7 +29,7 @@ public class CommandingResource extends OsgiReady {
 	@POST
 	@Path("/sendcommand")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void sendCommand(CommandGroup cmd) {
+	public Response sendCommand(CommandGroup cmd) {
 		final CommandAcceptor cmdService = (CommandAcceptor) getServiceTracker().getService();
 
 		if (cmdService != null) {
@@ -35,7 +37,10 @@ public class CommandingResource extends OsgiReady {
 		}
 		else {
 			LOG.error("No commanding service available. Cannot send commmand " + cmd.getQualifiedName());
+			return Response.status(Status.BAD_REQUEST).build();
 		}
+
+		return Response.status(Status.OK).build();
 	}
 
 }
