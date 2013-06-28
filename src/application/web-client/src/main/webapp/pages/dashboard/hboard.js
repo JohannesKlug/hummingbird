@@ -86,7 +86,7 @@ function setupControls() {
 		addWidgetSettingsContent(currentId, monitorWidget);
 
 	});
-	
+
 	$("#addParameterPlot").click(function(){
 		// Grab a unique ID and increment the counter. We use this to operate on the widget, 
 		// e.g., pop up submenus etc.
@@ -121,7 +121,7 @@ function createCosmeticSettings(id) {
 	var currentWidgetColour = rgb2hex(widgets[id].css("background-color"));
 	
 	var form = $('<form> ' +
-					'<span id=colourSection' + id + '>Background</>' + 
+					'<span id=colourSection' + id + '>Background</>' +
 			   	'</form>');
 	
 	var colourPicker = $('<input type=color id=backColour' + id + ' value=' + currentWidgetColour + '>');
@@ -129,7 +129,27 @@ function createCosmeticSettings(id) {
 		widgets[id].css('background-color', this.value);
 	});
 	
+	var resize = $('<div/>', { id: "resize" + id });
+	var width = $('<input type="number" id=width' + id + ' min="1" max="5">');
+	var height = $('<input type="number" id=height' + id + ' min="1" max="5">');
+	width.val(widgets[id].coords().grid.size_x);
+	height.val(widgets[id].coords().grid.size_y);
+	resize.append(width);
+	resize.append(height);
+	
+	var apply = $('<input type="Submit" value="Apply">');
+	
+	
 	form.children('#colourSection' + id).append(colourPicker);
+	form.append(resize);
+	form.append(apply);
+	
+	apply.button();
+	
+	form.submit(function() {
+		gridster.resize_widget(widgets[id], width.val(), height.val());
+		return false;
+	});
 	
 	return form;
 }
@@ -214,7 +234,7 @@ function setupJqueryDefaults() {
  * @returns
  */
 function createMonitorSearchForm(id) {
-	var searchDiv = $("<div id=\"searchSection" + id + "\">");//.addClass("removed");
+	var searchDiv = $("<div id=\"searchSection" + id + "\">");
 	var input = $("<input id=\"parameterSearch\" list=\"parameterList" + id + "\" type=\"search\" results=5 placeholder=\"Search for a parameter name\"" +
 						" autofocus=\"autofocus\">")
 				.addClass("parameterSearchInput");

@@ -54,7 +54,16 @@
 	font-size: 0.8em;
 }
 
+.widget .settings {
+	font-size: 1.8em;
+}
+
 .plot {
 	width: 610px;
 	height: 240px;
+}
+
+.widget .settings input.ui-button {
+	font-size: 12px;
+	float: right;
 }
