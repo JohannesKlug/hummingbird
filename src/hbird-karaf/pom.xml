@@ -18,10 +18,5 @@
 		<module>hbird-platform</module>
 	</modules>
 
-	<properties>
-		<karaf.version>3.0.0.RC1</karaf.version>
-	</properties>
-
-
 	<groupId>org.hbird.karaf</groupId>
 </project>

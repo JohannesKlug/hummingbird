@@ -62,20 +62,11 @@
 		<dependency>
 			<groupId>org.apache.camel.karaf</groupId>
 			<artifactId>apache-camel</artifactId>
-			<version>2.10.4</version>
+			<version>${camel.version}</version>
 			<classifier>features</classifier>
 			<type>xml</type>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-karaf</artifactId>
-			<version>5.8.0</version>
-			<classifier>features</classifier>
-			<type>xml</type>
-			<scope>runtime</scope>
-		</dependency>-->
-
 		<dependency>
 			<groupId>org.hbird.karaf</groupId>
 			<artifactId>hbird-features</artifactId>
@@ -91,7 +82,6 @@
 			<plugin>
 				<groupId>org.apache.karaf.tooling</groupId>
 				<artifactId>karaf-maven-plugin</artifactId>
-				<version>${karaf.version}</version>
 				<extensions>true</extensions>
 				<executions>
 					<execution>
@@ -100,16 +90,15 @@
 				</executions>
 				<configuration>
 					<startupFeatures>
+					</startupFeatures>
+					<bootFeatures>
 						<feature>standard</feature>
 						<feature>enterprise</feature>
 						<feature>management</feature>
 						<feature>webconsole</feature>
-						<!-- <feature>activemq-broker</feature> -->
-					</startupFeatures>
-					<bootFeatures>
-						<!-- <feature>camel-core</feature> -->
+						<feature>camel</feature>
+						<feature>war</feature>
 						<feature>hbird-complete</feature>
-						<!-- <feature>activemq-broker</feature> -->
 					</bootFeatures>
 					<installedFeatures>
 					</installedFeatures>
@@ -161,15 +150,22 @@
 			<name>Java.net Maven 2 Repository</name>
 			<url>http://download.java.net/maven/2</url>
 		</repository>
+		
+		<!-- Apache Snapshots plugin repo is required for the Karaf 3 snapshot maven 
+		plugin -->
+		<repository>
+			<id>apache.snapshots</id>
+			<url>http://repository.apache.org/snapshots/</url>
+		</repository>
 
 	</repositories>
-
-	<!-- Apache Snapshots plugin repo is required for the Karaf 3 snapshot maven plugin -->
-<!--	<pluginRepositories>
+	
+	<!-- Apache Snapshots plugin repo is required for the Karaf 3 snapshot maven 
+		plugin -->
+	<pluginRepositories>
 		<pluginRepository>
 			<id>apache.snapshots</id>
 			<url>http://repository.apache.org/snapshots/</url>
 		</pluginRepository>
-	</pluginRepositories>-->
-
+	</pluginRepositories>
 </project>

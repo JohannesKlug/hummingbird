@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>org.hbird</groupId>
 	<artifactId>hummingbird</artifactId>
 	<packaging>pom</packaging>
@@ -9,11 +11,13 @@
 	<name>Hbird</name>
 	<description>The Hummingbird root project is a container for all Hummingbird components, each created in a separate maven module. By building this project, the complete system can be built.</description>
 	<url>http://hbird.org/</url>
+
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
 		<artifactId>oss-parent</artifactId>
 		<version>7</version>
 	</parent>
+
 	<modules>
 		<module>core</module>
 		<module>transport</module>
@@ -22,6 +26,7 @@
 		<module>osgi</module>
 		<module>hbird-karaf</module>
 	</modules>
+
 	<properties>
 		<rxtx.version>2.1.7</rxtx.version>
 		<log4j.version>1.2.16</log4j.version>
@@ -44,11 +49,15 @@
 		<guava.version>11.0</guava.version>
 		<mockito.version>1.9.5-rc1</mockito.version>
 		<jersey.version>1.17</jersey.version>
+		<jersey.version>1.17</jersey.version>
+		<karaf.version>3.0.0.RC1</karaf.version>
 	</properties>
+
 	<scm>
 		<connection>scm:git:git@github.com:JohannesKlug/hbird.git</connection>
 		<url>git@github.com:JohannesKlug/hbird.git</url>
 	</scm>
+
 	<issueManagement>
 		<!-- <system>GitHub Issue tracker</system> <url>https://github.com/JohannesKlug/hummingbird/issues</url> -->
 		<url>https://github.com/JohannesKlug/hbird/issues?state=open</url>
@@ -370,8 +379,30 @@
 					<artifactId>sonar-maven-plugin</artifactId>
 					<version>2.0</version>
 				</plugin>
+
+				<plugin>
+					<groupId>org.apache.karaf.tooling</groupId>
+					<artifactId>karaf-maven-plugin</artifactId>
+					<version>3.0.0-SNAPSHOT</version>
+					<extensions>true</extensions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.karaf.tooling</groupId>
+				<artifactId>karaf-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
 	</build>
+
+	<!-- Apache Snapshots plugin repo is required for the Karaf 3 snapshot maven 
+		plugin -->
+	<pluginRepositories>
+		<pluginRepository>
+			<id>apache.snapshots</id>
+			<url>http://repository.apache.org/snapshots/</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 </project>
