@@ -14,4 +14,8 @@ public interface CommandGroup extends TmTcGroup {
 	void setSendTime(long sendTime);
 
 	long getSendTime();
+
+	void setUid(long uid);
+
+	long getUid();
 }

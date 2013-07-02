@@ -4,7 +4,11 @@ var rootURL = location.protocol + "//" + window.location.hostname + ":" + locati
 //TODO not worth it? maybe remove this cache and go with selectors on the forms arg list.
 var cmdArgs = [];
 
+var cmdTrackCompletedSteps = 0;
+
 jQuery(document).ready(function() {
+	$("#cmd").hide(0);
+	
 	// Set json as default content-type for ajax. Since we are only sending JSON it means we can use the shorthand post. 
 	$.ajaxSetup({
 	    contentType: "application/json"
@@ -13,7 +17,23 @@ jQuery(document).ready(function() {
 	getAllowedCommandList();
 	
 	$("#cmdFormSubmitButton").button();
+	
+	setupCommandTracker();
 });
+
+function setupCommandTracker() {	
+	$("ol.cmdTracker").each(function(){
+        $(this).attr("data-cmdTracker-steps", $(this).children("li").length);
+    });
+}
+
+
+function setCompletedCmdTrackerStep(step) {
+	var completedSteps = $('.cmdTracker li:lt('+ step + ')');
+	console.log("selected " + completedSteps);
+	completedSteps.removeClass();
+	completedSteps.addClass("cmdTracker-done");
+}
 
 
 /**
@@ -69,8 +89,8 @@ function addCommandLink(elementId, cmd) {
 
 function openCmdDialog(qualifiedName, name) {
 	console.log("Opening dialog for command " + name + " :: " + qualifiedName);
+
 	$("#cmdName").text(name);
-	
 	var jqxhr = $.getJSON(rootURL + "commanding/info/command/" + qualifiedName);
 	
 	jqxhr.done(
@@ -118,10 +138,9 @@ function openCmdDialog(qualifiedName, name) {
 		}
 	);
 	
-	$("#cmdModal").reveal({
-		animation: "fade",
-		animationspeed: 150
-	});
+	$("#cmd").fadeIn(50);
+	
+	setCompletedCmdTrackerStep(1);
 }
 
 function submitCommand(event) {	
@@ -136,7 +155,26 @@ function submitCommand(event) {
 	});
 	
 	var jsonString = JSON.stringify(cmd);
-	jQuery.post(rootURL + "commanding/sendcommand", jsonString, function(){}, "application/json");
+	setCompletedCmdTrackerStep(2);
+	jQuery.post(rootURL + "commanding/sendcommand", jsonString, function(){
+		setCompletedCmdTrackerStep(3);
+	})
+	.done(function() { 
+		$.pnotify({
+		    title: "Command",
+		    text: "Command submitted successfully.",
+		    type: "info",
+		    icon: "'picon picon-network-wireless'"
+		});
+	})
+	.fail(function(data, textStatus, error) { 
+		$.pnotify({
+		    title: "Command failure",
+		    text: textStatus + " :: " + error,
+		    type: "error",
+		    icon: "picon picon-page-zoom"
+		});
+	});
 
 	return false;
 }
@@ -171,23 +209,27 @@ function clearAllArgs() {
 
 var staticArgCounter = 0;
 function addIntArgs(intArgs) {
+	var label;
 	var liHtml;
 	var inputHtml;
 	var added = 0;
 
-	// for each integer parameter create a new list item and input field. Add metadata to input field 
+	// for each integer parameter create a new list item and input field. Add meta data to input field 
 	// for use by other functions
 	$.each(intArgs, function(i) {
 		if(!intArgs[i].readOnly) {
 			console.log("Adding int arg" + intArgs[i].name);
 			var id = "arg" + staticArgCounter;
-			
-			liHtml = "<li>" + intArgs[i].name + "</li>";
-			var liSelector = $(liHtml).appendTo($("#cmdArguments"));
-			
-			inputHtml = " <input id=" + id + " type=text class=required name=value/>";
-			var inputSelector = $(inputHtml).appendTo(liSelector);
-			
+
+			label = $('<label for=' + intArgs[i].name + '>' + intArgs[i].name + '</label>');
+			label.appendTo($("#cmdArguments"));
+
+			liHtml = $('<li id=' + intArgs[i].name + '></li>');
+			liSelector = liHtml.appendTo($("#cmdArguments"));
+
+			inputHtml = $(" <input id=" + id + " type=text class=required name=value/>");
+			var inputSelector = inputHtml.appendTo(liSelector);
+
 			inputSelector.data("qualifiedName", intArgs[i].qualifiedName);
 			inputSelector.data("type", "integer");
 			added++;

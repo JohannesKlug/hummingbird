@@ -77,37 +77,37 @@
 		</div>
 	</div>
 
-	<h1>Command list</h1>
-	<div class="commandListDiv">
-		<ul id="commandList">
-			<li><a href="#">No commands received yet</a></li>
-		</ul>
-	</div>
-	
-	
-	<div id="cmdModal" class="reveal-modal">
-		<h1 id="cmdName">Command name</h1>
-		<p id="description">blah blah blah</p>
-		<p id="configureInstructions">Configure your command</p>
-		<h2 id="parametersTitle">Arguments</h2>
-		
-		<form id="cmdConfigForm">
-			<ul id="cmdArguments">
+	<div id="commandingPanel">
+		<h2>Command list</h2>
+		<div id="commandList">
+			<ul id="commands">
+				<li>No commands available</li>
 			</ul>
-			<div id="cmdControls">
-				<input id="cmdFormSubmitButton" type="submit" value="Send" />
-			</div>
-		</form>
-
-		<a class="close-reveal-modal">&#215;</a>
+		</div>
+		
+		<div id="cmd">
+			<h2 id="cmdName">Command name</h2>
+			<p id="description">--</p>
+			<h3 id="parametersTitle">Arguments</h3>
+			
+			<form id="cmdConfigForm">
+				<ul id="cmdArguments">
+				</ul>
+				<div id="cmdControls">
+					<input id="cmdFormSubmitButton" type="submit" value="Send" />
+				</div>
+			</form>
+		</div>
 	</div>
 	
-	<div id="footer">
-		<form id="omniForm" onsubmit="return false">
-			<input id="omniSearch"  class="rounded" list="parameterList" type="search" 
-				   results=5 placeholder="Search for commands" autofocus="autofocus">
-			<datalist id="parameterList"></datalist>
-		</form>
+	<div>
+		<ol class="cmdTracker">
+			<li class="cmdTracker-todo">Configure command</li><!--
+		 --><li class="cmdTracker-todo">Sent to control system</li><!--
+		 --><li class="cmdTracker-todo">Sent to satellite</li><!--
+		 --><li class="cmdTracker-todo">Received by satellite</li><!--
+		 --><li class="cmdTracker-todo">Executed</li>
+		</ol>
 	</div>
 	
 </body>

@@ -28,10 +28,10 @@
 		<init-param>
 			<param-name>com.sun.jersey.config.property.classnames</param-name>
 			<param-value>
-				org.hbird.application.halcyon.CommandListResource,
+				org.hbird.application.halcyon.commanding.CommandListResource,
 				org.hbird.application.halcyon.TelemetryListResource,
 				org.hbird.application.halcyon.HalcyonResource,
-				org.hbird.application.halcyon.CommandingResource,
+				org.hbird.application.halcyon.commanding.CommandingResource,
 				org.hbird.application.halcyon.MongoParameterArchiveQueryResource
 			</param-value>
 		</init-param>

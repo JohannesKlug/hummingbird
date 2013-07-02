@@ -93,4 +93,6 @@ public interface SpaceSystemModel extends Serializable {
 	Map<String, List<String>> getAllPayloadRestrictions();
 
 	Map<String, Encoding> getEncodings();
+
+	Map<String, String> getCommandVerifiers(String qualifiedName);
 }

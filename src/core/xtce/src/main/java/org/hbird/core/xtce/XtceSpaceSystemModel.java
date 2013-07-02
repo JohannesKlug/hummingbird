@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
-import org.hbird.core.spacesystemmodel.exceptions.ParameterNotInModelException;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
@@ -19,24 +18,28 @@ import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 import org.hbird.core.spacesystemmodel.tmtc.provided.TmTcGroups;
 
 /**
- *
+ * 
  * @author Mark Doyle
  * @author Johannes Klug
- *
+ * 
  */
 @XmlRootElement()
 public class XtceSpaceSystemModel implements SpaceSystemModel {
 	private static final long serialVersionUID = 2532805548202927668L;
-	//	private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModel.class);
+
+	// private static final Logger LOG = LoggerFactory.getLogger(XtceSpaceSystemModel.class);
 
 	private String name;
 
 	private final Map<String, ParameterGroup> parameterGroups = new HashMap<String, ParameterGroup>();
+
 	private final Map<String, CommandGroup> commands = new HashMap<String, CommandGroup>();
 
 	private final Map<String, List<String>> restrictions = new HashMap<String, List<String>>();
 
 	private final Map<String, Encoding> encodings = new HashMap<String, Encoding>();
+
+	private final Map<String, Map<String, String>> verifications = new HashMap<String, Map<String, String>>();
 
 	public XtceSpaceSystemModel() {
 	}
@@ -60,7 +63,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	/**
 	 * Iterates over all the parameter groups and creates a list of all their parameters.
-	 *
+	 * 
 	 * @throws UnknownParameterException
 	 */
 	@Override
@@ -110,7 +113,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) throws ParameterNotInModelException {
+	public void replaceParameterInModel(final String qualifiedName, final Parameter<?> newParameter) {
 		for (final ParameterGroup pg : this.parameterGroups.values()) {
 			TmTcGroups.replaceParameterInGroup(pg, qualifiedName, newParameter);
 		}
@@ -170,27 +173,27 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Parameter<BigDecimal> getBigDecimalParameter(final String qualifiedName) throws UnknownParameterException {
+	public Parameter<BigDecimal> getBigDecimalParameter(final String qualifiedName) {
 		return null;
 	}
 
 	@Override
-	public Parameter<String> getStringParameter(final String qualifiedName) throws UnknownParameterException {
+	public Parameter<String> getStringParameter(final String qualifiedName) {
 		return null;
 	}
 
 	@Override
-	public Parameter<Float> getFloatParameter(final String qualifiedName) throws UnknownParameterException {
+	public Parameter<Float> getFloatParameter(final String qualifiedName) {
 		return null;
 	}
 
 	@Override
-	public Parameter<Double> getDoubleParameter(final String qualifiedName) throws UnknownParameterException {
+	public Parameter<Double> getDoubleParameter(final String qualifiedName) {
 		return null;
 	}
 
 	@Override
-	public Parameter<Byte[]> getRawParameter(final String qualifiedName) throws UnknownParameterException {
+	public Parameter<Byte[]> getRawParameter(final String qualifiedName) {
 		return null;
 	}
 
@@ -214,4 +217,8 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 		return name;
 	}
 
+	@Override
+	public Map<String, String> getCommandVerifiers(String qualifiedName) {
+		return verifications.get(qualifiedName);
+	}
 }

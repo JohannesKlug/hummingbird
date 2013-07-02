@@ -18,3 +18,64 @@
 	margin-top: 10px;
 	float: right;
 }
+
+#commandingPanel {
+	float: left;
+	width: 100%;
+}
+
+#commandList {
+	clear: left;
+	float: left;
+	width: 28%;
+	padding: 20px 0;
+	margin-left: 4px;
+	display: inline;
+}
+
+#cmd {
+	float: right;
+	width: 60%;
+	padding: 20px 0;
+	display: inline;
+	margin-right:40px;
+}
+
+#cmdConfigForm {
+	padding-left: 4px;
+}
+
+.cmdTracker {
+	clear:both;
+}
+
+ol.cmdTracker {
+	font-size: larger;
+    margin: 100px;
+    padding: 0;
+    list-style-type none;
+}
+
+ol.cmdTracker li {
+    display: inline-block;
+    text-align: center;
+    line-height: 3em;
+}
+
+/* Currently there are 4 tracking steps, but this could change so add more of thses if required! */
+ol.cmdTracker[data-cmdTracker-steps="4"] li { 
+	width: 24%; 
+}
+
+ol.cmdTracker[data-cmdTracker-steps="5"] li { 
+	width: 19%; 
+}
+
+ol.cmdTracker li.cmdTracker-done {
+    color: hsla(24, 76%, 50%, 1);
+    border-bottom: 4px solid yellowgreen;
+}
+ol.cmdTracker li.cmdTracker-todo {
+    color: silver; 
+    border-bottom: 4px solid silver;
+}

@@ -10,6 +10,8 @@ import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 public class HummingbirdCommandGroup extends HummingbirdTmTcGroup implements CommandGroup {
 	private static final long serialVersionUID = 1524916260066501266L;
 
+	private long uid;
+
 	private long sendTime;
 
 	//@formatter:off
@@ -32,6 +34,16 @@ public class HummingbirdCommandGroup extends HummingbirdTmTcGroup implements Com
 	@Override
 	public void setSendTime(final long sendTime) {
 		this.sendTime = sendTime;
+	}
+
+	@Override
+	public void setUid(long uid) {
+		this.uid = uid;
+	}
+
+	@Override
+	public long getUid() {
+		return uid;
 	}
 
 }

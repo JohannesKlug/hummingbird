@@ -28,6 +28,7 @@ import org.hbird.core.generatedcode.xtce.BinaryParameterType;
 import org.hbird.core.generatedcode.xtce.CommandMetaData;
 import org.hbird.core.generatedcode.xtce.Comparison;
 import org.hbird.core.generatedcode.xtce.ComparisonList;
+import org.hbird.core.generatedcode.xtce.CompleteVerifier;
 import org.hbird.core.generatedcode.xtce.ContainerSet;
 import org.hbird.core.generatedcode.xtce.EntryList;
 import org.hbird.core.generatedcode.xtce.FloatParameterType;
@@ -46,6 +47,8 @@ import org.hbird.core.generatedcode.xtce.SizeRangeInCharacters;
 import org.hbird.core.generatedcode.xtce.SpaceSystem;
 import org.hbird.core.generatedcode.xtce.StringParameterType;
 import org.hbird.core.generatedcode.xtce.TelemetryMetaData;
+import org.hbird.core.generatedcode.xtce.Verifiers;
+import org.hbird.core.generatedcode.xtce.types.ComparisonOperatorsType;
 import org.hbird.core.generatedcode.xtce.types.FloatDataEncodingTypeEncodingType;
 import org.hbird.core.generatedcode.xtce.types.IntegerDataEncodingTypeEncodingType;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
@@ -68,6 +71,8 @@ import org.slf4j.LoggerFactory;
 import com.google.common.primitives.Ints;
 
 public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
+
+	private static final String TM_QUALIFIED_NAME_POSTFIX = ".tm.";
 
 	private static final String TC_QUALIFIED_NAME_POSTFIX = ".tc.";
 
@@ -126,6 +131,8 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	private final Map<String, List<Object>> restrictions = new HashMap<String, List<Object>>();
 
 	private final Map<String, Encoding> encodings = new HashMap<String, Encoding>();
+
+	private final Map<String, Map<String, String>> commandVerifications = new HashMap<String, Map<String, String>>();
 
 	public XtceSpaceSystemModelFactory() {
 		LOG.debug("Instantiating XtceSpaceSystemModelFactory with no space system file path");
@@ -229,6 +236,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		createAllTcArguments();
 		createAllCommandGroups();
 		populateCommandGroups();
+		createAllVerifiers();
 	}
 
 	/**
@@ -504,6 +512,43 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			}
 			// @formatter:on
 		}
+	}
+
+	private final void createAllVerifiers() throws InvalidSpaceSystemDefinitionException {
+		final CommandMetaData commandMetaData = spaceSystem.getCommandMetaData();
+		final int numberOfTcArguments = commandMetaData.getParameterSet().getParameterSetTypeItemCount();
+
+		// @formatter:off
+		for (int i = 0; i < numberOfTcArguments; ++i) {
+			MetaCommand xtceMetaCmd = commandMetaData.getMetaCommandSet().getMetaCommandSetItem(i).getMetaCommand();
+			Verifiers verifiers = xtceMetaCmd.getVerifiers();
+			int numOfCompleteVerifiers = verifiers.getCompleteVerifierCount();
+			for (int j = 0; j < numOfCompleteVerifiers; j++) {
+				CompleteVerifier completeVerifier = verifiers.getCompleteVerifier(j);
+				for(Comparison comparison : completeVerifier.getComparisonList().getComparison()) {
+					String parameterRef = comparison.getParameterRef();
+					String value = comparison.getValue();
+					if (value == "?") {
+						value = null;
+					}
+					ComparisonOperatorsType operator = comparison.getComparisonOperator();
+					if (operator != ComparisonOperatorsType.VALUE_0) {
+						throw new InvalidSpaceSystemDefinitionException("Error in Command Verification for command " + xtceMetaCmd.getName() + ": Expected \"==\" as comparison operator. Operator " + operator.toString() + " not supported yet");
+					}
+					Map<String, String> cmdVerification = new HashMap<String, String>();
+					cmdVerification.put(getTmPrefix() + parameterRef, value);
+					commandVerifications.put(getTcPrefix() + xtceMetaCmd.getName(), cmdVerification);
+				}
+			}
+		}
+	}
+	
+	private final String getTcPrefix() {
+		return spaceSystem.getName() + TC_QUALIFIED_NAME_POSTFIX;
+	}
+	
+	private final String getTmPrefix() {
+		return spaceSystem.getName() + TM_QUALIFIED_NAME_POSTFIX;
 	}
 
 	/**
@@ -810,11 +855,9 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 	private void addArgumentsToCommandGroup(final String qualifiedNamePrefix, final CommandGroup commandGroup, final ArgumentListItem[] parameterEntrys)
 			throws InvalidSpaceSystemDefinitionException {
-		for (int x = 0; x < parameterEntrys.length; x++) {
-			final ArgumentListItem argumentListEntry = parameterEntrys[x];
+		for (final ArgumentListItem argumentListEntry : parameterEntrys) {
 			final Argument[] arguments = argumentListEntry.getArgument();
-			for (int y = 0; y < arguments.length; y++) {
-				final Argument argument = arguments[y];
+			for (final Argument argument : arguments) {
 				final String argumentTypeRef = argument.getArgumentTypeRef();
 
 				addArgumentParameterToGroup(commandGroup, qualifiedNamePrefix + argumentTypeRef);
@@ -912,6 +955,9 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			}
 			else if (StringUtils.equals(name, "name")) {
 				field.set(model, modelName);
+			}
+			else if (StringUtils.equals(name, "commandVerificiations")) {
+				field.set(model, commandVerifications);
 			}
 			else {
 				LOG.debug("Not interested in field : " + name);

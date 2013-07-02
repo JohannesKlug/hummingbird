@@ -153,4 +153,9 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	public void setClients(List<PublisherClient> clients) {
 		this.clients = clients;
 	}
+
+	@Override
+	public Map<String, String> getCommandVerifiers(String qualifiedName) {
+		return this.modelCache.getCommandVerifiers(qualifiedName);
+	}
 }

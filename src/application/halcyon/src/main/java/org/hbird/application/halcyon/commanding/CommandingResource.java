@@ -1,4 +1,4 @@
-package org.hbird.application.halcyon;
+package org.hbird.application.halcyon.commanding;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -42,5 +42,4 @@ public class CommandingResource extends OsgiReady {
 
 		return Response.status(Status.OK).build();
 	}
-
 }

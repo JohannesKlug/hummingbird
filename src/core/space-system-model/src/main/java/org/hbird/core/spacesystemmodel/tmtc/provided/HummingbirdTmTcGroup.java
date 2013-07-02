@@ -270,7 +270,7 @@ public abstract class HummingbirdTmTcGroup implements TmTcGroup {
 
 	public void validateParameterNotNull(final Parameter<?> p, final String qualifiedName) throws UnknownParameterException {
 		if (p == null) {
-			throw new UnknownParameterException(qualifiedName);
+			throw new UnknownParameterException("Unknown parameter requested from Space System Model. Requested name: " + qualifiedName, qualifiedName);
 		}
 	}
 

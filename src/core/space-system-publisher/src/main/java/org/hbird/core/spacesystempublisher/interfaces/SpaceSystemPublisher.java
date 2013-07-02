@@ -39,4 +39,7 @@ public interface SpaceSystemPublisher {
 	void fireUpdate();
 
 	void modelUpdated();
+
+	Map<String, String> getCommandVerifiers(String qualifiedName);
+
 }

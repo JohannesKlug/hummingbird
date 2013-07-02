@@ -1,4 +1,4 @@
-package org.hbird.application.halcyon;
+package org.hbird.application.halcyon.commanding;
 
 import java.util.ArrayList;
 import java.util.List;

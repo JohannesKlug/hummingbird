@@ -11,20 +11,19 @@ public class CommandInModelChecker implements CommandChecker {
 
 	/**
 	 * Checks if the given command is present in the {@link CommandList}.
-	 *
-	 * @{inheritDoc}
+	 * 
+	 * @{inheritDoc
 	 */
 	@Override
 	public boolean checkCommand(final CommandGroup command) {
 		boolean result = false;
-		for(CommandGroup cmd : commands) {
+		for (CommandGroup cmd : commands) {
 			// TODO Assumes ParameterGroup has a valid equality implementation with corresponding hashcode method.
-			if(cmd.equals(command)) {
+			if (cmd.equals(command)) {
 				result = true;
 				break;
 			}
 		}
-
 		return result;
 	}
 
