@@ -27,36 +27,51 @@ public class XtceSpaceSystemModelTest {
 	private SpaceSystem spaceSystem;
 
 	private static final int NUM_OF_PARAMETERS_IN_PAYLOADS = 3;
+
 	private static final int NUM_OF_PARAMETER_ENCODINGS = 7;
+
 	private static final int NUM_OF_PARAMETER_GROUPS = 4;
 
 	private static final String P_FLIGHT_HOURS_NAME = "FLIGHT_HOURS";
+
 	private static final int LIGHT_HOURS_LENGTH = 33;
 
 	private static final String P_LASER_TEMP_NAME = "LASER_TEMP";
+
 	private static final int LASER_TEMP_LENGTH = 11;
 
 	private static final String P_FUEL_NAME = "FUEL";
+
 	private static final int FUEL_LENGTH = 16;
 
 	private static final int NUM_OF_INTEGER_TYPED_PARAMETERS = 2;
+
 	private static final int NUM_OF_LONG_TYPED_PARAMETERS = 1;
 
 	private static final String PG_FLIGHT_HOURS_NAME = "FlightHours";
+
 	private static final int PG_FLIGHT_HOURS_NUM_PARAMETERS = 1;
+
 	private static final int PG_FLIGHT_HOURS_NUM_LONG_PARAMETERS = 1;
 
 	private static final String PG_LASER_TEMP_NAME = "LaserTemp";
+
 	private static final int PG_LASER_TEMP_NUM_PARAMETERS = 1;
+
 	private static final int PG_LASER_TEMP_NUM_INT_PARAMETERS = 1;
 
 	private static final String PG_FUEL_LOAD_NAME = "FuelLoad";
+
 	private static final int PG_FUEL_LOAD_NUM_PARAMETERS = 1;
+
 	private static final int PG_FUEL_LOAD_NUM_INT_PARAMETERS = 1;
 
 	private static final String PG_ALL_SYSTEMS_NAME = "AllSystems";
+
 	private static final int PG_ALL_SYSTEMS_NUM_PARAMETERS = 3;
+
 	private static final int PG_ALL_SYSTEMS_NUM_INT_PARAMETERS = 2;
+
 	private static final int PG_ALL_SYSTEMS_NUM_LONG_PARAMETERS = 1;
 
 	private SpaceSystemModel xtceSsm;

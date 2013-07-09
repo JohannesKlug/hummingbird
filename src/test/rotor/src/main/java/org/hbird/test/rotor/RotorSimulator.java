@@ -22,17 +22,22 @@ public class RotorSimulator {
 	}
 
 	private double az = 0;
+
 	private double el = 0;
 
 	private int targetAz = 0;
+
 	private int targetEl = 0;
 
 	private final int maxAz = 450; // Value taken from the Yaesu G-5500 user manual
+
 	private final int maxEl = 180; // Value taken from the Yaesu G-5500 user manual
 
 	private final double azPerMs = 360d / 58 / 1000; // Values taken from the Yaesu
+
 	// G-5500 user manual
 	private final double elPerMs = 180d / 67 / 1000; // Values taken from the Yaesu
+
 	// G-5500 user manual
 
 	private DateTime lastMoved = new DateTime();

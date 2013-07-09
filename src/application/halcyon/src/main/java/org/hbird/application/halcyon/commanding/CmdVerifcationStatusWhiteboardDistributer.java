@@ -3,7 +3,7 @@ package org.hbird.application.halcyon.commanding;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hbird.application.commanding.interfaces.processing.CommandVerificationSender;
+import org.hbird.application.commanding.provided.processing.VerificationUpdate;
 
 public class CmdVerifcationStatusWhiteboardDistributer {
 
@@ -13,9 +13,9 @@ public class CmdVerifcationStatusWhiteboardDistributer {
 		receivers = new ArrayList<CmdVerificationReceiver>(0);
 	}
 
-	public void receiveVerificationUpdate(CommandVerificationSender.Stage stage, long uid) {
+	public void receiveVerificationUpdate(VerificationUpdate update) {
 		for (CmdVerificationReceiver receiver : receivers) {
-			receiver.verifcationUpdate(stage, uid);
+			receiver.verifcationUpdate(update);
 		}
 	}
 

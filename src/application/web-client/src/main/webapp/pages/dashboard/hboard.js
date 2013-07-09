@@ -447,7 +447,7 @@ function setupWebsocket() {
 		wsProtocol = "wss:";
 	}
 
-	liveTmWebsocket = $.gracefulWebSocket(wsProtocol + "//" + host + ":" + location.port + url + "tmsock");
+	liveTmWebsocket = $.gracefulWebSocket(wsProtocol + "//" + host + ":" + location.port + url + "websocket");
 
 	liveTmWebsocket.onopen = function() {
 		$.pnotify({
@@ -470,8 +470,11 @@ function setupWebsocket() {
 	// When we receive a message from the websocket first check if there are any widgets on the dashboard,
 	// if so, parse the message into a parameter object and call our handler.
 	liveTmWebsocket.onmessage = function(event) {
-		if(Object.keys(hidgetMonitorMap).length > 0) {
-			parameterReceived($.parseJSON(event.data));
+		var message = $.parseJSON(event.data);
+		if(message.id === "LIVE_TM") {
+			if(Object.keys(hidgetMonitorMap).length > 0) {
+				parameterReceived(message.content);
+			}
 		}
 	};
 }

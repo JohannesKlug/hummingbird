@@ -274,4 +274,10 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public Map<String, String> getCommandVerifiers(String qualifiedName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

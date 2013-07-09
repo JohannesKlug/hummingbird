@@ -1,5 +1,9 @@
 // The root URL for the RESTful services
 var rootURL = location.protocol + "//" + window.location.hostname + ":" + location.port + "/hbird/halcyon/";
+var host = window.location.hostname;
+var halcyonUrl = "/hbird/halcyon/";
+
+var cmdVerifySocket;
 
 //TODO not worth it? maybe remove this cache and go with selectors on the forms arg list.
 var cmdArgs = [];
@@ -8,6 +12,8 @@ var cmdTrackCompletedSteps = 0;
 
 jQuery(document).ready(function() {
 	$("#cmd").hide(0);
+	
+	setupWebSocket();
 	
 	// Set json as default content-type for ajax. Since we are only sending JSON it means we can use the shorthand post. 
 	$.ajaxSetup({
@@ -21,7 +27,63 @@ jQuery(document).ready(function() {
 	setupCommandTracker();
 });
 
-function setupCommandTracker() {	
+function setupWebSocket() {
+	var wsProtocol;
+
+	if (location.protocol == "http:") {
+		wsProtocol = "ws:";
+	} else {
+		wsProtocol = "wss:";
+	}
+
+	cmdVerifySocket = $.gracefulWebSocket(wsProtocol + "//" + host + ":" + location.port + halcyonUrl + "websocket");
+	
+	cmdVerifySocket.onopen = function() {
+		$.pnotify({
+		    title: "System message",
+		    text: "Websocket connection established.",
+		    type: "info",
+		    icon: "'picon picon-network-wireless'"
+		});
+	};
+	
+	cmdVerifySocket.onerror = function() {
+		$.pnotify({
+		    title: "System message",
+		    text: "Websocket connection failed. Cannot receive commanding verification updates.",
+		    type: "error",
+		    icon: "'picon picon-network-wireless'"
+		});
+	};
+
+	// When we receive a message from the websocket first check if there are any widgets on the dashboard,
+	// if so, parse the message into a parameter object and call our handler.
+	cmdVerifySocket.onmessage = function(event) {
+		var message = $.parseJSON(event.data);
+		if(message.id === "CMD_VERIFICATION_UPDATE") {
+			processCmdVerifcationUpdate(message.content);
+		}
+	};
+}
+
+function processCmdVerifcationUpdate(update) {
+	switch(update.stage) {
+		case "ACCEPTED":
+			setCompletedCmdTrackerStep(4);
+			break;
+		case "EXECUTED":
+			setCompletedCmdTrackerStep(5);
+			break;
+		case "COMPLETE":
+			setCompletedCmdTrackerStep(5);
+			break;
+		default:
+			console.log("Unexpected update state: " + update.stage);			
+	}
+}
+
+function setupCommandTracker() {
+	// Set the data attribute to the number of list items, that is, the number of steps in the process
 	$("ol.cmdTracker").each(function(){
         $(this).attr("data-cmdTracker-steps", $(this).children("li").length);
     });
@@ -29,10 +91,12 @@ function setupCommandTracker() {
 
 
 function setCompletedCmdTrackerStep(step) {
+	var index = step - 1;
+	var incompleteSteps = $('.cmdTracker li:gt('+ index + ')');
+	incompleteSteps.removeClass().addClass("cmdTracker-todo");
+	
 	var completedSteps = $('.cmdTracker li:lt('+ step + ')');
-	console.log("selected " + completedSteps);
-	completedSteps.removeClass();
-	completedSteps.addClass("cmdTracker-done");
+	completedSteps.removeClass().addClass("cmdTracker-done");
 }
 
 
@@ -156,7 +220,10 @@ function submitCommand(event) {
 	
 	var jsonString = JSON.stringify(cmd);
 	setCompletedCmdTrackerStep(2);
-	jQuery.post(rootURL + "commanding/sendcommand", jsonString, function(){
+	jQuery.post(rootURL + "commanding/sendcommand", jsonString, function(data, textStatus, jqXHR){
+		console.log("data: " + data);
+		console.log("status: " + textStatus);
+		console.log("jqXHR: " + jqXHR);
 		setCompletedCmdTrackerStep(3);
 	})
 	.done(function() { 
@@ -219,7 +286,7 @@ function addIntArgs(intArgs) {
 	$.each(intArgs, function(i) {
 		if(!intArgs[i].readOnly) {
 			console.log("Adding int arg" + intArgs[i].name);
-			var id = "arg" + staticArgCounter;
+			var id = "arg" + staticArgCounter++;
 
 			label = $('<label for=' + intArgs[i].name + '>' + intArgs[i].name + '</label>');
 			label.appendTo($("#cmdArguments"));
@@ -229,6 +296,10 @@ function addIntArgs(intArgs) {
 
 			inputHtml = $(" <input id=" + id + " type=text class=required name=value/>");
 			var inputSelector = inputHtml.appendTo(liSelector);
+			
+			inputHtml.focus(function() {
+				commandArgInputClicked();
+			});
 
 			inputSelector.data("qualifiedName", intArgs[i].qualifiedName);
 			inputSelector.data("type", "integer");
@@ -236,10 +307,12 @@ function addIntArgs(intArgs) {
 		}
 	});
 	
-	staticArgCounter++;
-	
 	console.log(added);
 	return added;
+}
+
+function commandArgInputClicked() {
+	setCompletedCmdTrackerStep(1);
 }
 
 function addLongArgs(longArgs) {

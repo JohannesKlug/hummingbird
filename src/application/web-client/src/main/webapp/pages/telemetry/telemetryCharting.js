@@ -363,7 +363,7 @@ function setupWebsocket() {
 	}
 
 	var liveTmWebsocket = $.gracefulWebSocket(wsProtocol + "//" + host + ":"
-			+ location.port + url + "tmsock");
+			+ location.port + url + "websocket");
 
 	liveTmWebsocket.onopen = function() {
 		console.log("Websocket connection established.");
@@ -371,7 +371,10 @@ function setupWebsocket() {
 
 	liveTmWebsocket.onmessage = function(event) {
 		if (live) {
-			plotParameter($.parseJSON(event.data));
+			var message = $.parseJSON(event.data);
+			if(message.id === "LIVE_TM") {
+				plotParameter(message.content);
+			}
 		}
 	};
 }

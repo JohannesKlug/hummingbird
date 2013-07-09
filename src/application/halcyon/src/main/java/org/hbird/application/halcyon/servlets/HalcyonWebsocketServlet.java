@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.jetty.websocket.WebSocket;
 import org.eclipse.jetty.websocket.WebSocketServlet;
-import org.hbird.application.halcyon.tm.OsgiLiveTmStreamingWebSocket;
+import org.hbird.application.halcyon.websocket.HalcyonWebsocket;
 
 /**
  * @author Mark Doyle
  * 
  */
-public class LiveTmWebSocketServlet extends WebSocketServlet {
+public class HalcyonWebsocketServlet extends WebSocketServlet {
 	private static final long serialVersionUID = -645861775618085268L;
 
 	@Override
@@ -34,6 +34,6 @@ public class LiveTmWebSocketServlet extends WebSocketServlet {
 	 */
 	@Override
 	public WebSocket doWebSocketConnect(final HttpServletRequest request, final String protocol) {
-		return new OsgiLiveTmStreamingWebSocket();
+		return new HalcyonWebsocket();
 	}
 }

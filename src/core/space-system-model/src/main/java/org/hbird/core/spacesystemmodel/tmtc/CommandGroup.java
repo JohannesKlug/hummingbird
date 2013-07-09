@@ -1,5 +1,7 @@
 package org.hbird.core.spacesystemmodel.tmtc;
 
+import java.util.UUID;
+
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdCommandGroup;
 
@@ -15,7 +17,7 @@ public interface CommandGroup extends TmTcGroup {
 
 	long getSendTime();
 
-	void setUid(long uid);
+	void setUid(UUID uid);
 
-	long getUid();
+	UUID getUid();
 }

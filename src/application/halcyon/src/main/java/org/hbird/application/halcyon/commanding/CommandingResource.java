@@ -33,13 +33,11 @@ public class CommandingResource extends OsgiReady {
 		final CommandAcceptor cmdService = (CommandAcceptor) getServiceTracker().getService();
 
 		if (cmdService != null) {
-			cmdService.acceptCommand(cmd);
-		}
-		else {
-			LOG.error("No commanding service available. Cannot send commmand " + cmd.getQualifiedName());
-			return Response.status(Status.BAD_REQUEST).build();
+			String cmdTransactionId = cmdService.acceptCommand(cmd);
+			return Response.status(Status.OK).entity(cmdTransactionId).build();
 		}
 
-		return Response.status(Status.OK).build();
+		LOG.error("No commanding service available. Cannot send commmand " + cmd.getQualifiedName());
+		return Response.status(Status.BAD_REQUEST).build();
 	}
 }

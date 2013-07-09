@@ -39,7 +39,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	private final Map<String, Encoding> encodings = new HashMap<String, Encoding>();
 
-	private final Map<String, Map<String, String>> verifications = new HashMap<String, Map<String, String>>();
+	private final Map<String, Map<String, String>> commandVerifiers = new HashMap<String, Map<String, String>>();
 
 	public XtceSpaceSystemModel() {
 	}
@@ -219,6 +219,6 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public Map<String, String> getCommandVerifiers(String qualifiedName) {
-		return verifications.get(qualifiedName);
+		return commandVerifiers.get(qualifiedName);
 	}
 }

@@ -1,5 +1,7 @@
 package org.hbird.core.spacesystemmodel.tmtc.provided;
 
+import java.util.UUID;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonCreator;
@@ -10,7 +12,7 @@ import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 public class HummingbirdCommandGroup extends HummingbirdTmTcGroup implements CommandGroup {
 	private static final long serialVersionUID = 1524916260066501266L;
 
-	private long uid;
+	private UUID uid;
 
 	private long sendTime;
 
@@ -37,12 +39,12 @@ public class HummingbirdCommandGroup extends HummingbirdTmTcGroup implements Com
 	}
 
 	@Override
-	public void setUid(long uid) {
+	public void setUid(UUID uid) {
 		this.uid = uid;
 	}
 
 	@Override
-	public long getUid() {
+	public UUID getUid() {
 		return uid;
 	}
 

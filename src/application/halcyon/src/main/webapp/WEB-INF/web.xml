@@ -45,8 +45,8 @@
 	</servlet>
 	
 	<servlet>
-		<servlet-name>hbird-jetty-tm-websocket</servlet-name>
-		<servlet-class>org.hbird.application.halcyon.servlets.LiveTmWebSocketServlet</servlet-class>
+		<servlet-name>hbird-jetty-websocket</servlet-name>
+		<servlet-class>org.hbird.application.halcyon.servlets.HalcyonWebsocketServlet</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
@@ -55,8 +55,8 @@
 	</servlet-mapping>
 	
 	<servlet-mapping>
-		<servlet-name>hbird-jetty-tm-websocket</servlet-name>
-		<url-pattern>halcyon/tmsock</url-pattern>
+		<servlet-name>hbird-jetty-websocket</servlet-name>
+		<url-pattern>halcyon/websocket</url-pattern>
 	</servlet-mapping>
-	
+
 </web-app>

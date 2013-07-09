@@ -121,4 +121,9 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 		this.clients = clients;
 	}
 
+	@Override
+	public Map<String, String> getCommandVerifiers(String qualifiedName) {
+		return model.getCommandVerifiers(qualifiedName);
+	}
+
 }

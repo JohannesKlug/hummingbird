@@ -1,11 +1,9 @@
 package org.hbird.application.commanding.interfaces.processing;
 
-import org.apache.camel.InOnly;
 import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 
 public interface CommandAcceptor {
 
-	@InOnly
-	void acceptCommand(CommandGroup cmd);
+	String acceptCommand(CommandGroup cmd);
 
 }

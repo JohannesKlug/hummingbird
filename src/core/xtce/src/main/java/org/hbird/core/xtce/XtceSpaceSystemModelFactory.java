@@ -516,28 +516,27 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 	private final void createAllVerifiers() throws InvalidSpaceSystemDefinitionException {
 		final CommandMetaData commandMetaData = spaceSystem.getCommandMetaData();
-		final int numberOfTcArguments = commandMetaData.getParameterSet().getParameterSetTypeItemCount();
-
+		final int numberOfTcArguments = commandMetaData.getMetaCommandSet().getMetaCommandSetItemCount();
 		// @formatter:off
-		for (int i = 0; i < numberOfTcArguments; ++i) {
+		for (int i = 0; i < numberOfTcArguments; i++) {
 			MetaCommand xtceMetaCmd = commandMetaData.getMetaCommandSet().getMetaCommandSetItem(i).getMetaCommand();
 			Verifiers verifiers = xtceMetaCmd.getVerifiers();
+			if(verifiers != null) {
 			int numOfCompleteVerifiers = verifiers.getCompleteVerifierCount();
-			for (int j = 0; j < numOfCompleteVerifiers; j++) {
-				CompleteVerifier completeVerifier = verifiers.getCompleteVerifier(j);
-				for(Comparison comparison : completeVerifier.getComparisonList().getComparison()) {
-					String parameterRef = comparison.getParameterRef();
-					String value = comparison.getValue();
-					if (value == "?") {
-						value = null;
+				for (int j = 0; j < numOfCompleteVerifiers; j++) {
+					CompleteVerifier completeVerifier = verifiers.getCompleteVerifier(j);
+					for(Comparison comparison : completeVerifier.getComparisonList().getComparison()) {
+						String parameterRef = comparison.getParameterRef();
+						String value = comparison.getValue();
+						ComparisonOperatorsType operator = comparison.getComparisonOperator();
+						if (operator != ComparisonOperatorsType.VALUE_0) {
+							throw new InvalidSpaceSystemDefinitionException("Error in Command Verification for command " + xtceMetaCmd.getName() + ": Expected \"==\" as comparison operator. Operator " + operator.toString() + " not supported yet");
+						}
+						Map<String, String> cmdVerification = new HashMap<String, String>();
+						cmdVerification.put(getTmPrefix() + parameterRef, value);
+						commandVerifications.put(getTcPrefix() + xtceMetaCmd.getName(), cmdVerification);
+						LOG.trace("Added command verification: " + cmdVerification + " for " + getTcPrefix() + xtceMetaCmd.getName());
 					}
-					ComparisonOperatorsType operator = comparison.getComparisonOperator();
-					if (operator != ComparisonOperatorsType.VALUE_0) {
-						throw new InvalidSpaceSystemDefinitionException("Error in Command Verification for command " + xtceMetaCmd.getName() + ": Expected \"==\" as comparison operator. Operator " + operator.toString() + " not supported yet");
-					}
-					Map<String, String> cmdVerification = new HashMap<String, String>();
-					cmdVerification.put(getTmPrefix() + parameterRef, value);
-					commandVerifications.put(getTcPrefix() + xtceMetaCmd.getName(), cmdVerification);
 				}
 			}
 		}
@@ -932,32 +931,33 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	 */
 	private void injectConstructsIntoModel() throws IllegalArgumentException, IllegalAccessException {
 		final Field[] fields = model.getClass().getDeclaredFields();
-		LOG.trace("Injecting the following fields into the " + modelName + " model:");
-		LOG.trace(tmParameterGroups.size() + " TM parameter groups");
-		LOG.trace(tcGroups.size() + " TC groups");
-		LOG.trace(restrictions.size() + " restrictions");
-		LOG.trace(encodings.size() + " encodings");
 		// TODO Switch on String when jdk 7 works with camel! Much nicer!
 		for (final Field field : fields) {
 			field.setAccessible(true);
 			final String name = field.getName();
 			if (StringUtils.equals(name, "parameterGroups")) {
 				field.set(model, tmParameterGroups);
+				LOG.trace("Injected " + tmParameterGroups.size() + " TM parameter groups");
 			}
 			else if (StringUtils.equals(name, "commands")) {
 				field.set(model, tcGroups);
+				LOG.trace("Injected " + tcGroups.size() + " TC groups");
 			}
 			else if (StringUtils.equals(name, "restrictions")) {
 				field.set(model, restrictions);
+				LOG.trace("Injected " + restrictions.size() + " restrictions");
 			}
 			else if (StringUtils.equals(name, "encodings")) {
 				field.set(model, encodings);
+				LOG.trace("Injected " + encodings.size() + " encodings");
 			}
 			else if (StringUtils.equals(name, "name")) {
 				field.set(model, modelName);
+				LOG.trace("Injected " + modelName + " model name");
 			}
-			else if (StringUtils.equals(name, "commandVerificiations")) {
+			else if (StringUtils.equals(name, "commandVerifiers")) {
 				field.set(model, commandVerifications);
+				LOG.trace("Injected " + commandVerifications.size() + " command verifiers");
 			}
 			else {
 				LOG.debug("Not interested in field : " + name);
