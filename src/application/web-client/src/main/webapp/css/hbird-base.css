@@ -40,6 +40,11 @@ html {
 
 #backdrop img.opaque {
 	opacity: 1;
+	-webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 
 @font-face {
@@ -49,15 +54,22 @@ html {
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+	font-family: 'metro';
+	src: local('?'), url('../fonts/Metrophobic.otf') format("opentype");
+	font-weight: normal;
+	font-style: normal;
+}
  
 
 body {
-/* 	font-family: "HelveticaNeueUltraLight, HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; */
-	font-family: "HelveticaNeueUltraLight";
+	font-family: 'metro';
 	color: rgb(240, 240, 240);
 }
 
 h1 {
+	font-family: 'HelveticaNeueUltraLight';
 	opacity: 1;
 	color: rgb(240, 240, 240);
 	text-shadow: 0px 2px 3px #555;
@@ -99,7 +111,6 @@ a:LINK {
 
 #header 
 a:LINK {
-	font-family: 'Open Sans Condensed', sans-serif;
 	font-size: 1.5em;
 	text-shadow: 0px 2px 3px #555;
 }

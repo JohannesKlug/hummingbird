@@ -41,78 +41,24 @@
 	<link rel="apple-touch-icon" sizes="72x72" href="images/satelliteDish72.png">
 	
 	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/pages/index.js"></script>
+	<script type="text/javascript" src="js/pages/menu.js"></script>
+	<script type="text/javascript" src="js/pages/backdrops.js"></script>
 
 </head>
 
 <body>
-	<div id="backdrop">
-		<!-- images cycled on menu click - order is the same as the menu list -->
-		<img src="images/earth-backdrop.jpg" class="opaque">
-		<img src="images/ground-station-sunset.jpg">
-		<img src="images/shuttle-silhouette.jpg">
-		<img src="images/earth-sunrise-space.jpg">
-	</div>
-
 	<div id="header">
 		<div id="logoTitle">
 			<img id="logo" alt="" src="images/satellite.png">
 			<h1 id="title">Hummingbird</h1>
 		</div>
 		
-		<div id="topMenu">
-			<ul>
-				<li><a id="menuHome" href="#"><span>Home</span></a></li>
-				<li><a id="menuDash" href="pages/dashboard/hboard.html"><span>Dash</span></a></li>
-				<li><a id="menuTm" href="#"><span>Telemetry</span></a></li>
-				<li><a id="menuCmd" href="#"><span>Commanding</span></a></li>
-				<li><a id="menuHelp" href="#"><span>Help</span></a></li>
-			</ul>
-		</div>
+		<div id="topMenu"></div>
 	</div>
 
-	<!-- Primary Page Layout
-	================================================== -->
 	
-	<div id="subMenu" class="subMenu">
-		<span id="closeButton" class="closeButton"></span>
-		<div class="subMenuContent">
-			<div class="subMenuContentInner">
-				<p>Welcome to the Hummingbird mission control system web interface.</p>
-				<br>
-				<p>Currently available screens are:</p>
-				<ul>
-					<li>Telemetry visualisation.</li>
-					<li>Commanding interfaces.</li>
-				</ul>
-			</div>
-		</div>	
-		<div class="subMenuContent">
-			<div class="subMenuContentInner">
-				<p>Visualise incoming or archived telemetry received from your system.</p>
-				<ul>
-					<li><a href="pages/telemetry/telemetryCharting.html">Telemetry charting</a></li>
-					<li><a href="pages/telemetry/telemetryTable.html">Telemetry table</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="subMenuContent">
-			<div class="subMenuContentInner">
-				<p>Send commands to your system.</p>
-				<ul>
-					<li><a href="pages/commanding/commanding.html">Commanding</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="subMenuContent">
-			<div class="subMenuContentInner">
-			test4
-			</div>
-		</div>
-	</div>
-
-
 	<div id="footer">
+		<span>Configured for the Next Generation On-board Software study</span>
 	</div>
 	
 <!-- End Document

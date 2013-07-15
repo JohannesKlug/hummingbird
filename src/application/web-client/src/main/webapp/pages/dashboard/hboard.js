@@ -69,6 +69,8 @@ jQuery(document).ready(function() {
 var hidgetId = 0;
 function setupControls() {
 	$("#addParameterMonitor").click(function(){
+		fadeoutBackdrop();
+		
 		// Add the hbird widget to the grid
 		var monitorWidget = gridster.add_widget(widget, 2, 1);
 
@@ -88,6 +90,8 @@ function setupControls() {
 	});
 
 	$("#addParameterPlot").click(function(){
+		fadeoutBackdrop();
+		
 		// Grab a unique ID and increment the counter. We use this to operate on the widget, 
 		// e.g., pop up submenus etc.
 		var currentId = hidgetId++;
