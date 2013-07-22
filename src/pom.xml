@@ -51,6 +51,7 @@
 		<jersey.version>1.17</jersey.version>
 		<jersey.version>1.17</jersey.version>
 		<karaf.version>3.0.0.RC1</karaf.version>
+		<commons-io.version>1.4_3</commons-io.version>
 	</properties>
 
 	<scm>
@@ -282,6 +283,12 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>3.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.servicemix.bundles</groupId>
+				<artifactId>org.apache.servicemix.bundles.commons-io</artifactId>
+				<version>${commons-io.version}</version>
+				<scope>provided</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

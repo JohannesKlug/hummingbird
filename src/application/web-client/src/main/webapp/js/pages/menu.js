@@ -1,5 +1,6 @@
 var rootUrl = location.protocol + "//" + window.location.hostname + ":" + location.port;
 var rootHbirdwebUrl = rootUrl + "/hbirdweb/";
+var halcyonUrl = rootUrl + '/hbird/halcyon/';
 
 var topMenu,
  	tmMenu,	
@@ -20,10 +21,18 @@ var menuHelp = $('<li><a id=menuHelp href=' + rootUrl + 'smc/index.html><span>He
 jQuery(document).ready(function() {
 	setupFrequentUsedDomVars();
 	
+	setupTitle();
+
 	if(addMenuHtml()) {
 		setupMenu();
 	}
 });
+
+function setupTitle() {
+	$.get(halcyonUrl + 'branding/mcsName', null, function(data, textStatus, jqXHR) {
+		$('#title').html(jqXHR.responseText);		
+	}, 'text');
+}
 
 function setupFrequentUsedDomVars() {
 	topMenu = $('#topMenu');

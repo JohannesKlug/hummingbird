@@ -10,8 +10,7 @@ var maxRows = 100;
 
 var live = true;
 
-var startTime;
-var endTime;
+var startTime, endTime;
 
 /**
  * On page ready do the following.
@@ -65,7 +64,6 @@ function setupArchiveFilterOptions() {
 		timeFormat : "hh:mm:ss",
 		defaultDate : new Date(),
 		onSelect : function(selectedDate) {
-			to.datetimepicker("option", "minDate", selectedDate);
 			startTime = $(this).datetimepicker("getDate");
 		}
 	});
@@ -78,13 +76,13 @@ function setupArchiveFilterOptions() {
 		timeFormat : "hh:mm:ss",
 		defaultDate : new Date(),
 		onSelect : function(selectedDate) {
-			from.datetimepicker("option", "maxDate", selectedDate);
 			endTime = $(this).datetimepicker("getDate");
 		}
 	});
 	
 	from.datepicker('setDate', new Date());
 	to.datepicker('setDate', new Date());
+	
 	
 	$("#filterButton").click(function() {
 		startArchiveMode();
@@ -121,11 +119,21 @@ function toggleTableModeSettings(archive) {
 	// custom function for retrieving the data via Ajax. We want to use a POST
 	// method so we can send filter data to a JAX RS restful service.
 	if(archive) {
-		console.log("changing table settings to archive mode");
+		if(!startTime || !endTime) {
+			$.pnotify({
+			    title: "System message",
+			    text: "From or To times have not been set, canonot retreive parameters.",
+			    type: "error",
+			    icon: "'ui-icon ui-icon-alert'",
+			    nonblock: true,
+			    nonblock_opacity: .2
+			});
+			return;
+		}
+		
 		settings.oFeatures.bServerSide = true;
 		settings.oFeatures.bDeferRender = true;
 		settings.fnServerData = function(sSource, aoData, fnCallback, oSettings) {
-			console.log("fnServerData triggered; sending aoData:");
 			aoData.push({"name" : "startTime", "value" : startTime.getTime()});
 			aoData.push({"name" : "endTime", "value" : endTime.getTime()});
 			oSettings.jqXHR = $.ajax( {
@@ -135,10 +143,6 @@ function toggleTableModeSettings(archive) {
 		        "data": JSON.stringify(aoData),
 		        "success": fnCallback
 		     });
-			
-			oSettings.jqXHR.success = function() {
-				console.log("Request successful");
-			};
 		};
 	}
 	// else we are going to live mode and need to switch the table settings back to 

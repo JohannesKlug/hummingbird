@@ -45,6 +45,8 @@ import java.util.HashMap;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import org.hbird.application.halcyon.branding.Branding;
+import org.hbird.application.halcyon.branding.BrandingPlugin;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -61,9 +63,11 @@ import org.osgi.service.event.EventAdmin;
  */
 public class HalcyonServletContextListener implements BundleActivator, ServletContextListener {
 
-	static EventAdmin eventAdmin;
+	private static BrandingPlugin brandingPlugin;
 
-	static BundleContext bundleContext;
+	private static EventAdmin eventAdmin;
+
+	private static BundleContext bundleContext;
 
 	ServiceReference eventAdminServiceRef;
 
@@ -106,6 +110,11 @@ public class HalcyonServletContextListener implements BundleActivator, ServletCo
 		if (eventAdminServiceRef != null) {
 			setEventAdmin((EventAdmin) bundleContext.getService(eventAdminServiceRef));
 		}
+
+		// Load branding plugins
+		Branding brandingLoader = new Branding();
+		brandingLoader.loadProperties();
+		HalcyonServletContextListener.brandingPlugin = brandingLoader;
 	}
 
 	@Override
@@ -119,4 +128,9 @@ public class HalcyonServletContextListener implements BundleActivator, ServletCo
 	public static BundleContext getBundleContext() {
 		return HalcyonServletContextListener.bundleContext;
 	}
+
+	public static BrandingPlugin getBrandingPlugin() {
+		return brandingPlugin;
+	}
+
 }

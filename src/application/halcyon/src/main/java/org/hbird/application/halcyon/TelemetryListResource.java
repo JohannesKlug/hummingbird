@@ -33,6 +33,7 @@ public class TelemetryListResource extends OsgiReady {
 	private static final String PUBLISHER_SERVICE_NAME = "org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher";
 
 	private List<ParameterGroup> parameterGroups;
+
 	private List<Parameter<?>> parameters;
 
 	public TelemetryListResource() {
@@ -64,7 +65,7 @@ public class TelemetryListResource extends OsgiReady {
 		String msg = "";
 		msg = "Hi there! We have " + parameterGroups.size() + " ParameterGroups. ";
 		for (final ParameterGroup pg : parameterGroups) {
-			msg += pg.getQualifiedName() + " / " + pg.getName();
+			msg += pg.getQualifiedName() + " / " + pg.getName() + " :: ";
 		}
 		return msg;
 	}

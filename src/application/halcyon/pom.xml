@@ -85,6 +85,10 @@
 			<version>1.9.2</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.servicemix.bundles</groupId>
+			<artifactId>org.apache.servicemix.bundles.commons-io</artifactId>
+		</dependency>
 
 
 		<!-- Override the scope of these artifacts from the parent project hummingbird. 
@@ -111,6 +115,7 @@
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		
 	</dependencies>
 
 	<repositories>
