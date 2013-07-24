@@ -9,6 +9,10 @@ var imgEarth = $('<img src=' + rootHbirdwebUrl + 'images/earth-backdrop.jpg>');
 var imgGsSunset = $('<img src=' + rootHbirdwebUrl + 'images/ground-station-sunset.jpg>');
 var imgShuttleSil = $('<img src=' + rootHbirdwebUrl + 'images/shuttle-silhouette.jpg>');
 
+var currentImgIndex;
+var imageTextPositions = ['right', 'left', 'left', 'right'];
+
+
 /**
  * On page ready do the following.
  */
@@ -35,13 +39,19 @@ function changeBackdrop(index) {
 	console.log("Changing backdrop to index " + index);
 	$('img', imagesDiv).removeClass("opaque");
 	if(index >= 0) {
+		currentImgIndex = index;
 		$('img', imagesDiv).eq(index).addClass("opaque");
 	}
 	else {
-		$('img', imagesDiv).eq(Math.floor(Math.random()*3)).addClass("opaque");
+		currentImgIndex = Math.floor(Math.random()*4);
+		$('img', imagesDiv).eq(currentImgIndex).addClass("opaque");
 	}
 }
 
 function fadeoutBackdrop() {
 	$('img', imagesDiv).removeClass("opaque");
+}
+
+function getBackdropTextPosition() {
+	return imageTextPositions[currentImgIndex];
 }

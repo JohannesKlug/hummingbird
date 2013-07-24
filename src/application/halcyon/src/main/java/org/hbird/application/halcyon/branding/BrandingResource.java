@@ -17,4 +17,16 @@ public class BrandingResource {
 		return HalcyonServletContextListener.getBrandingPlugin().getMcsName();
 	}
 
+	@GET
+	@Path("/welcomeHeader")
+	public String getWelcomeHeader() {
+		return HalcyonServletContextListener.getBrandingPlugin().getWelcomeHeader();
+	}
+
+	@GET
+	@Path("/welcomeContent")
+	public String getWelcomeContent() {
+		return HalcyonServletContextListener.getBrandingPlugin().getWelcomeContent();
+	}
+
 }

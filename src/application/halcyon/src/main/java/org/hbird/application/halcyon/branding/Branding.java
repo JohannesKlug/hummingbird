@@ -16,6 +16,12 @@ public class Branding implements BrandingPlugin {
 
 	private String missionName;
 
+	private String footerMessage;
+
+	private String welcomeHeader;
+
+	private String welcomeContent;
+
 	public final void loadProperties() {
 		Properties props = new Properties();
 
@@ -35,6 +41,9 @@ public class Branding implements BrandingPlugin {
 
 		brandName = props.getProperty("mcs.name", "Hummingbird"); //$NON-NLS-1$
 		missionName = props.getProperty("mission.name", "Hummingbird"); //$NON-NLS-1$
+		footerMessage = props.getProperty("footer.msg", "Mission Control System"); //$NON-NLS-1$
+		welcomeHeader = props.getProperty("welcome.header", "Welcome to your control system"); //$NON-NLS-1$
+		welcomeContent = props.getProperty("welcome.content", ""); //$NON-NLS-1$
 	}
 
 	@Override
@@ -45,5 +54,20 @@ public class Branding implements BrandingPlugin {
 	@Override
 	public String getMissionName() {
 		return missionName;
+	}
+
+	@Override
+	public String getFooterMessage() {
+		return footerMessage;
+	}
+
+	@Override
+	public String getWelcomeHeader() {
+		return welcomeHeader;
+	}
+
+	@Override
+	public String getWelcomeContent() {
+		return welcomeContent;
 	}
 }

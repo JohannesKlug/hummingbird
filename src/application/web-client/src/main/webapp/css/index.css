@@ -2,3 +2,14 @@
 	color: white;
 	font-size: 1em;
 }
+
+#welcome {
+	margin-top: 40px;
+	margin-right: 10px;
+	margin-left: 10px;
+	width: 500px;
+}
+
+#welcome a:LINK {
+	color: hsl(209, 89%, 61%);
+}
