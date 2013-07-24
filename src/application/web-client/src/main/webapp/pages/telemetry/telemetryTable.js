@@ -13,6 +13,16 @@ var live = true;
 var startTime, endTime;
 
 /**
+ * Datatables progress indicator plugin
+ */
+jQuery.fn.dataTableExt.oApi.fnProcessingIndicator = function ( oSettings, onoff ) {
+    if( typeof(onoff) == 'undefined' ) {
+        onoff=true;
+    }
+    this.oApi._fnProcessingDisplay( oSettings, onoff );
+};
+
+/**
  * On page ready do the following.
  */
 jQuery(document).ready(function() {
@@ -119,15 +129,17 @@ function toggleTableModeSettings(archive) {
 	// custom function for retrieving the data via Ajax. We want to use a POST
 	// method so we can send filter data to a JAX RS restful service.
 	if(archive) {
+		retrievalInProgress(true);
 		if(!startTime || !endTime) {
 			$.pnotify({
 			    title: "System message",
-			    text: "From or To times have not been set, canonot retreive parameters.",
+			    text: "From or To times have not been set, cannot retreive parameters.",
 			    type: "error",
 			    icon: "'ui-icon ui-icon-alert'",
 			    nonblock: true,
 			    nonblock_opacity: .2
 			});
+			retrievalInProgress(false);
 			return;
 		}
 		
@@ -141,7 +153,11 @@ function toggleTableModeSettings(archive) {
 		        "type": "POST",
 		        "url": archiveUrl,
 		        "data": JSON.stringify(aoData),
-		        "success": fnCallback
+		        "success": function(json) {
+		        	fnCallback(json);
+		        	retrievalInProgress(false);
+		        },
+		        "error": handleArchiveRequestError
 		     });
 		};
 	}
@@ -151,6 +167,17 @@ function toggleTableModeSettings(archive) {
 		settings.oFeatures.bServerSide = false;
 		settings.fnServerData = null;
 	}
+}
+
+function handleArchiveRequestError(xhr, textStatus, error) {
+	$.pnotify({
+		title:"Archive retrieval error",
+		text: textStatus,
+		type: "error",
+		icon: "'ui-icon ui-icon-alert'",
+	    nonblock: true,
+	    nonblock_opacity: .2
+	});
 }
 
 /**
@@ -257,5 +284,22 @@ function parameterReceived(parameter) {
 	table.fnAddData(newRow);
 	if (table.fnGetData().length > maxRows) {
 		table.fnDeleteRow(0);
+	}
+}
+
+
+function retrievalInProgress(state) {
+	var filterInputs = $('#filtering').find('input');
+	var filterButtons = $('#filtering').find('button');
+	
+	if(state) {
+		filterInputs.prop('disabled', true);
+		filterButtons.prop('disabled', true);
+		table.fnProcessingIndicator();
+	}
+	else {
+		filterInputs.prop('disabled', false);
+		filterButtons.prop('disabled', false);
+		table.fnProcessingIndicator(false);
 	}
 }
