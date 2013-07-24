@@ -293,11 +293,13 @@ function retrievalInProgress(state) {
 	var filterButtons = $('#filtering').find('button');
 	
 	if(state) {
+		$('#ajaxLoader').show();
 		filterInputs.prop('disabled', true);
 		filterButtons.prop('disabled', true);
 		table.fnProcessingIndicator();
 	}
 	else {
+		$('#ajaxLoader').hide();
 		filterInputs.prop('disabled', false);
 		filterButtons.prop('disabled', false);
 		table.fnProcessingIndicator(false);

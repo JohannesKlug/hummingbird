@@ -1,0 +1,112 @@
+@CHARSET "ISO-8859-1";
+
+#ajaxLoader {
+	display: none;
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	right: 2%;
+	top: 3%;
+	margin: 0 0 0 -15px;
+	border: 8px solid #fff;
+    border-right: none;
+    border-bottom: none;
+	border-radius: 50%;
+	box-shadow: 0 0 25px 2px #eee;
+    
+    -webkit-animation: spin 3s linear infinite;
+	-moz-animation: spin 3s linear infinite;
+	-ms-animation: spin 3s linear infinite;
+	-o-animation: spin 3s linear infinite;
+    animation: spin 3s linear infinite;
+}
+
+@-webkit-keyframes spin {
+	0% { 
+        -webkit-transform: rotate(0deg); 
+        opacity: 0.4;
+    }
+	50%  { 
+        -webkit-transform: rotate(180deg); 
+        opacity: 1;
+        border-left-color: hsl(24, 76%, 50%);
+        border-top-color: hsl(24, 76%, 50%);
+        box-shadow: 0 0 25px 2px hsla(24, 76%, 50%, 0.7);
+    }
+	100%   { 
+        -webkit-transform: rotate(360deg); 
+        opacity: 0.4; 
+    }
+}
+
+@-moz-keyframes spin {
+	from { 
+        -moz-transform: rotate(0deg); 
+        opacity: 0.4; 
+    }
+	50%  { 
+        -moz-transform: rotate(180deg); 
+        opacity: 1;
+        border-left-color: hsl(24, 76%, 50%);
+        border-top-color: hsl(24, 76%, 50%);
+    }
+	to   { 
+        -moz-transform: rotate(360deg); 
+        opacity: 0.4; 
+    }
+}
+
+
+
+@-ms-keyframes spin {
+	from { 
+        -ms-transform: rotate(0deg);
+         opacity: 0.4; 
+    }
+	50%  {
+	    -ms-transform: rotate(180deg);
+        opacity: 1;
+        border-left-color: hsl(24, 76%, 50%);
+        border-top-color: hsl(24, 76%, 50%);
+    }
+	to	{
+	    -ms-transform: rotate(360deg); 
+	    border-left-color: hsl(24, 76%, 50%);
+        border-top-color: hsl(24, 76%, 50%);
+        opacity: 0.4;
+    }
+}
+
+@-o-keyframes spin {
+	from { 
+		-o-transform: rotate(0deg); 
+		opacity: 0.4;
+	}
+	50%  { 
+		-o-transform: rotate(180deg);
+		opacity: 1;
+		border-left-color: hsl(24, 76%, 50%);
+        border-top-color: hsl(24, 76%, 50%);
+	}
+	to   { 
+		-o-transform: rotate(360deg); 
+		opacity: 0.4;
+	}
+}
+
+@keyframes spin {
+	from { 
+		transform: rotate(0deg);
+		opacity: 0.2;
+	}
+	50%  {
+		transform: rotate(180deg);
+		opacity: 1;
+		border-left-color: hsl(24, 76%, 50%);
+        border-top-color: hsl(24, 76%, 50%);
+	}
+	to   {
+		transform: rotate(360deg);
+		opacity: 0.2;
+	}
+}
