@@ -2,7 +2,8 @@ var rootUrl = location.protocol + "//" + window.location.hostname + ":" + locati
 var rootHbirdwebUrl = rootUrl + "/hbirdweb/";
 var halcyonUrl = rootUrl + '/hbird/halcyon/';
 
-var topMenu,
+var title,
+	topMenu,
  	tmMenu,	
  	subMenu,
  	closeSubMenuBtn;
@@ -13,20 +14,46 @@ var menuHome = $('<li><a id=menuHome href=' + rootHbirdwebUrl + 'index.html><spa
 var menuDash = $('<li><a id=menuDash href=' + rootHbirdwebUrl + 'pages/dashboard/hboard.html><span>Dash</span></a></li>');
 var menuTm = $('<li><a id=menuTm href=' + rootHbirdwebUrl + 'pages/telemetry/telemetryIndex.html><span>Telemetry</span></a></li>');
 var menuCmd = $('<li><a id=menuCmd href=' + rootHbirdwebUrl + 'pages/commanding/commanding.html><span>Commanding</span></a></li>');
-var menuHelp = $('<li><a id=menuHelp href=' + rootUrl + 'smc/index.html><span>Help</span></a></li>');
+var menuHelp = $('<li><a id=menuHelp href=#><span>Help</span></a></li>');
 
 /**
  * On page ready do the following.
  */
 jQuery(document).ready(function() {
 	setupFrequentUsedDomVars();
-	
+
 	setupTitle();
 
 	if(addMenuHtml()) {
 		setupMenu();
+		setHelpUrl();
 	}
+
+	setupMenuBarColour();
 });
+
+/**
+ * Horrid code. The link to backdrops, number of pages and colours needs consolidating.
+ */
+function setupMenuBarColour() {
+	var header = $('#header');
+	if(header.length) {
+		switch(title) {
+			case 'Dashboard':
+				header.css('background-color', 'rgba(162, 0, 255, 0.2)');
+				break;
+			case 'Telemetry':
+				header.css('background-color', 'rgba(230, 113, 184, 0.2)');
+				break;
+			case 'Commanding':
+				header.css('background-color', 'rgba(0, 171, 169, 0.2)');
+				break;
+			default:
+				break;
+		
+		}
+	};
+}
 
 function setupTitle() {
 	$.get(halcyonUrl + 'branding/mcsName', null, function(data, textStatus, jqXHR) {
@@ -39,6 +66,7 @@ function setupFrequentUsedDomVars() {
 	tmMenu = $('#menuTm');
 	subMenu = $('#subMenu');
 	closeSubMenuBtn = $("#closeButton");
+	title = $(document).attr('title');
 }
 
 /**
@@ -61,9 +89,13 @@ function addMenuHtml() {
 	
 	topMenu.append(menuList);
 	
-	console.log("Menu contruction complete");
-	
 	return true;
+}
+
+function setHelpUrl() {
+	$.get(halcyonUrl + 'branding/helpUrl', null, function(data, text, jqXHR) {
+		$('#menuHelp').attr('href', jqXHR.responseText);
+	}, 'text');
 }
 
 /**
