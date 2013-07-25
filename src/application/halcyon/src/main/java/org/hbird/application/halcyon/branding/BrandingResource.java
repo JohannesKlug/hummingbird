@@ -29,4 +29,10 @@ public class BrandingResource {
 		return HalcyonServletContextListener.getBrandingPlugin().getWelcomeContent();
 	}
 
+	@GET
+	@Path("/helpUrl")
+	public String getHelpUrl() {
+		return HalcyonServletContextListener.getBrandingPlugin().getHelpUrl();
+	}
+
 }

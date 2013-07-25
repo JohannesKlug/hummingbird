@@ -1,5 +1,6 @@
 package org.hbird.application.halcyon.branding;
 
+
 public interface BrandingPlugin {
 	String getMcsName();
 
@@ -10,4 +11,6 @@ public interface BrandingPlugin {
 	String getWelcomeHeader();
 
 	String getWelcomeContent();
+
+	String getHelpUrl();
 }
