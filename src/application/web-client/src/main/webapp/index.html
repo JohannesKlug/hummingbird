@@ -20,6 +20,7 @@
   ================================================== -->
 	<link rel="stylesheet" href="css/reset-min.css">
 	<link rel="stylesheet" href="css/hbird-base.css">
+	<link rel="Stylesheet" href="css/flick/theme.css"/>
 	<link rel="stylesheet" href="css/index.css">
 	
 	<!-- Web fonts
@@ -41,32 +42,41 @@
 	<link rel="apple-touch-icon" sizes="72x72" href="images/satelliteDish72.png">
 	
 	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
 	<script type="text/javascript" src="js/pages/menu.js"></script>
 	<script type="text/javascript" src="js/pages/backdrops.js"></script>
 	<script type="text/javascript" src="js/pages/index.js"></script>
+	<script type="text/javascript" src="js/pages/hbird-help.js"></script>
 
 </head>
 
 <body>
-	<div id="header">
-		<div id="logoTitle">
-			<img id="logo" alt="" src="images/satellite.png">
-			<h1 id="title"></h1>
+	<div id="helpModal" class="md-modal">
+		<h2 id="helpHeader">Help</h2>
+		<div id="helpContent" class=md-content></div>
+		<div id="helpControls" class=md-controls></div>
+	</div>
+	
+	<div class=container>
+		<div id="header">
+			<div id="logoTitle">
+				<img id="logo" alt="" src="images/satellite.png">
+				<h1 id="title"></h1>
+			</div>
+			
+			<div id="topMenu"></div>
 		</div>
 		
-		<div id="topMenu"></div>
+		
+		<div id="welcome">
+			<div id="welcomeHeader"></div>
+			<div id="welcomeContent"></div>
+		</div>
+		
+		<div id="footer"></div>
 	</div>
 	
-	
-	<div id="welcome">
-		<div id="welcomeHeader"></div>
-		<div id="welcomeContent"></div>
-	</div>
+	<div class="md-overlay"></div>
 
-	
-	<div id="footer"></div>
-	
-<!-- End Document
-================================================== -->
 </body>
 </html>

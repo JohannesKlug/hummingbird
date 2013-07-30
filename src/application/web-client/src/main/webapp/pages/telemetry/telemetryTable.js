@@ -46,7 +46,6 @@ function setupJqueryDefaults() {
  * Sets up all global class replacements, widgets, options etc
  */
 function setupGlobalJqueryUi() {
-	$("button").button();
 	$("#filterButton").button({
 		icons: {
 			primary: "ui-icon-search"

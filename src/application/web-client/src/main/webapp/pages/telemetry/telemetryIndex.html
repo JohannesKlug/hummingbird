@@ -10,6 +10,7 @@
   	<link rel="stylesheet" href="../../css/reset-min.css">
   	<link rel="stylesheet" href="../../css/hbird-base.css">
 	<link rel="Stylesheet" href="../../css/flick/theme.css"/>
+	<link rel="Stylesheet" href="telemetryIndex.css"/>
 	
 	<!-- Favicons
 	================================================== -->
@@ -22,28 +23,39 @@
 	================================================== -->
 	<script type="text/javascript" src="../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../js/jquery-ui-1.8.23.custom.min.js"></script>
-	<script src="../../js/pages/menu.js"></script>
+	<script type="text/javascript" src="../../js/pages/menu.js"></script>
+	<script type="text/javascript" src="../../js//pages/hbird-help.js"></script>
 	
 </head>
 
 <body>
-	<div id="header">
-		<div id="logoTitle">
-			<img id="logo" alt="" src="../../images/satellite.png">
-			<h1 id="title"></h1>
+	<div id="helpModal" class="md-modal">
+		<h2 id="helpHeader">Help</h2>
+		<div id="helpContent" class=md-content></div>
+		<div id="helpControls" class=md-controls></div>
+	</div>
+	
+	<div class=container>
+		<div id="header">
+			<div id="logoTitle">
+				<img id="logo" alt="" src="../../images/satellite.png">
+				<h1 id="title"></h1>
+			</div>
+			
+			<div id="topMenu"></div>
 		</div>
-		
-		<div id="topMenu"></div>
+	
+		<div class="tmSubCat">
+			<a href="telemetryTable.html"><strong>Table</strong></a>
+			<p>The telemetry table allows you to view live or archived telemetry in a tabular format.</p>
+		</div>
+		<div class="tmSubCat">
+			<a href="telemetryCharting.html"><strong>Plotting</strong></a>
+			<p>The plotting pagee allows you to view live or archived telemetry as a plot. It is possible to plot multiple parameters on the same chart.</p>
+		</div>
 	</div>
-
-	<div>
-		<a href="telemetryTable.html">Table</a>
-		<p>The telemetry table allows you to view live or archived telemetry in a tabular format.</p>
-	</div>
-	<div>
-		<a href="telemetryCharting.html">Plotting</a>
-		<p>The plotting pagee allows you to view live or archived telemetry as a plot. It is possible to plot multiple parameters on the same chart.</p>
-	</div>
+	
+	<div class="md-overlay"></div>	
 	
 </body>
 

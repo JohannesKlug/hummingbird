@@ -11,7 +11,7 @@
 	<title>Dashboard</title>
 	<meta name="description" content="">
 	<meta name="author" content="Mark Doyle">
-
+	
 	<!-- Mobile Specific Metas
   ================================================== -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -24,6 +24,7 @@
 	<link rel="stylesheet" href="../../css/pines/jquery.pnotify.default.css" media="all" />
 	<link rel="stylesheet" href="../../css/pines/jquery.pnotify.default.icons.css" media="all" />
 	<link rel="stylesheet" href="../../css/gridster/jquery.gridster.css" media="all" />
+	<link rel="stylesheet" href="../../css/hint/hint.css" media="all" />
 	<link rel="stylesheet" href="hboard.css">
 	
 	<!-- Web fonts
@@ -62,30 +63,41 @@
 	<script src="../../js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="../../js/pages/menu.js"></script>
 	<script type="text/javascript" src="../../js/pages/backdrops.js"></script>
+	<script type="text/javascript" src="../../js/pages/hbird-help.js"></script>
 	<script src="hboard.js"></script>
 	
 </head>
 
 
 <body>
-	<div id="header">
-		<div id="logoTitle">
-			<img id="logo" alt="" src="../../images/satellite.png">
-			<h1 id="title"></h1>
+	<div id="helpModal" class="md-modal">
+		<h2 id="helpHeader">Help</h2>
+		<div id="helpContent" class=md-content></div>
+		<div id="helpControls" class=md-controls></div>
+	</div>
+	
+	<div class=container>
+		<div id="header">
+			<div id="logoTitle">
+				<img id="logo" alt="" src="../../images/satellite.png">
+				<h1 id="title"></h1>
+			</div>
+			
+			<div id="topMenu"></div>
 		</div>
 		
-		<div id="topMenu"></div>
+		<div id="controlPanel" class="hint--right hint--info" data-hint="Use these buttons to add parameter value monitors and/or parameter plots.">
+			<button id="addParameterMonitor">Add monitor</button>
+			<button id="addParameterPlot">Add plot</button>
+		</div>
+		
+		<div class="gridster">
+			<ul>
+			</ul>
+		</div>
 	</div>
-
-	<div id="controlPanel">
-		<button id="addParameterMonitor">Add monitor</button>
-		<button id="addParameterPlot">Add plot</button>
-	</div>
-
-	<div class="gridster">
-		<ul>
-		</ul>
-	</div>
+	
+	<div class="md-overlay"></div>
 
 </body>
 

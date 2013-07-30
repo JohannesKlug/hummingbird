@@ -24,6 +24,7 @@
 	<link rel="stylesheet" href="../../css/reveal.css">
 	<link rel="stylesheet" href="../../css/pines/jquery.pnotify.default.css" media="all" />
 	<link rel="stylesheet" href="../../css/pines/jquery.pnotify.default.icons.css" media="all" />
+	<link rel="stylesheet" href="../../css/hint/hint.css" media="all" />
 	<link rel="stylesheet" href="commanding.css">
 	
 	<!-- Web fonts
@@ -56,54 +57,65 @@
 	<script type="text/javascript" src="../../js/pines/jquery.pnotify.min.js"></script>
 	<script type="text/javascript" src="../../js/jquery.reveal.js"></script>
 	<script type="text/javascript" src="../../js/jquery.gracefulWebSocket.js"></script>
-	<script src="../../js/jquery.validate.min.js"></script>
-	<script src="../../js/pages/menu.js"></script>
-	<script src="commanding.js"></script>
+	<script type="text/javascript" src="../../js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="../../js/pages/menu.js"></script>
+	<script type="text/javascript" src="../../js/pages/hbird-help.js"></script>
+	<script type="text/javascript" src="commanding.js"></script>
 </head>
 
 
 <body>
-	<div id="header">
-		<div id="logoTitle">
-			<img id="logo" alt="" src="../../images/satellite.png">
-			<h1 id="title"></h1>
-		</div>
-		
-		<div id="topMenu"></div>
+	<div id="helpModal" class="md-modal">
+		<h2 id="helpHeader">Help</h2>
+		<div id="helpContent" class=md-content></div>
+		<div id="helpControls" class=md-controls></div>
 	</div>
-
-	<div id="commandingPanel">
-		<h2>Command list</h2>
-		<div id="commandList">
-			<ul id="commands">
-				<li>No commands available</li>
-			</ul>
+	
+	<div class=container>
+		<div id="header">
+			<div id="logoTitle">
+				<img id="logo" alt="" src="../../images/satellite.png">
+				<h1 id="title"></h1>
+			</div>
+			
+			<div id="topMenu"></div>
+		</div>
+	
+		<div id="commandingPanel">
+			<h2>Command list</h2>
+			<div id="commandList" class="hint--right hint--info" data-hint="Available commands will appear here, click a command to begin the sending process.">
+				<ul id="commands">
+					<li>No commands available</li>
+				</ul>
+			</div>
+			
+			<div id="cmd" class="hint--top hint--info" data-hint="Populate any required command parameters here.">
+				<h2 id="cmdName">Command name</h2>
+				<p id="description">--</p>
+				<h3 id="parametersTitle">Arguments</h3>
+				
+				<form id="cmdConfigForm">
+					<ul id="cmdArguments">
+					</ul>
+					<div id="cmdControls">
+						<input id="cmdFormSubmitButton" type="submit" value="Send" />
+					</div>
+				</form>
+			</div>
 		</div>
 		
-		<div id="cmd">
-			<h2 id="cmdName">Command name</h2>
-			<p id="description">--</p>
-			<h3 id="parametersTitle">Arguments</h3>
-			
-			<form id="cmdConfigForm">
-				<ul id="cmdArguments">
-				</ul>
-				<div id="cmdControls">
-					<input id="cmdFormSubmitButton" type="submit" value="Send" />
-				</div>
-			</form>
+		<div>
+			<ol class="cmdTracker">
+				<li class="cmdTracker-todo">Configure command</li><!--
+			 --><li class="cmdTracker-todo">Sent to MCS</li><!--
+			 --><li class="cmdTracker-todo">Sent to satellite</li><!--
+			 --><li class="cmdTracker-todo">Received</li><!--
+			 --><li class="cmdTracker-todo">Executed</li>
+			</ol>
 		</div>
 	</div>
 	
-	<div>
-		<ol class="cmdTracker">
-			<li class="cmdTracker-todo">Configure command</li><!--
-		 --><li class="cmdTracker-todo">Sent to control system</li><!--
-		 --><li class="cmdTracker-todo">Sent to satellite</li><!--
-		 --><li class="cmdTracker-todo">Received by satellite</li><!--
-		 --><li class="cmdTracker-todo">Executed</li>
-		</ol>
-	</div>
+	<div class="md-overlay"></div>
 	
 </body>
 

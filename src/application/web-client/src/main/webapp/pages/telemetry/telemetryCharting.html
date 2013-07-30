@@ -8,7 +8,7 @@
 	<!-- Basic Page Needs
   ================================================== -->
 	<meta charset="utf-8">
-	<title>Telemetry</title>
+	<title>TelemetryPlotting</title>
 	<meta name="description" content="">
 	<meta name="author" content="Mark Doyle">
 
@@ -29,6 +29,7 @@
 	<link rel="stylesheet" href="../../css/pines/jquery.pnotify.default.css" />
 	<link rel="stylesheet" href="../../css/pines/jquery.pnotify.default.icons.css" />
 	<link rel="stylesheet" href="../../oxygen/icons.css">
+	<link rel="stylesheet" href="../../css/hint/hint.css" media="all" />
 	
 	<!-- Web fonts
 	================================================== -->
@@ -57,84 +58,94 @@
 	<script type="text/javascript" src="../../js/jquery.gracefulWebSocket.js"></script>
 	<script type="text/javascript" src="../../js/chosen.jquery.min.js"></script>
 	<script type="text/javascript" src="../../js/flot/jquery.flot.js"></script>
-	<script type="text/javascript" src="../../js/flot/jquery.flot.resize.js"></script>
-	<script type="text/javascript" src="../../js/flot/jquery.flot.crosshair.js"></script>
-	<script type="text/javascript" src="../../js/flot/jquery.flot.selection.js"></script>
+	<script type="text/javascript" src="../../js/flot/jquery.flot.resize.min.js"></script>
+	<script type="text/javascript" src="../../js/flot/jquery.flot.crosshair.min.js"></script>
+	<script type="text/javascript" src="../../js/flot/jquery.flot.selection.min.js"></script>
+	<script type="text/javascript" src="../../js/flot/jquery.flot.time.min.js"></script>
+	<script type="text/javascript" src="../../js/slider/jQRangeSlider-min.js"></script>
+	<script type="text/javascript" src="../../js/slider/jQDateRangeSlider-min.js"></script>
 	<script type="text/javascript" src="../../js/avgrund/avgrund.js"></script>
 	<script type="text/javascript" src="../../js/pines/jquery.pnotify.min.js"></script>
 	<script type="text/javascript" src="../../js/pages/menu.js"></script>
+	<script type="text/javascript" src="../../js/pages/hbird-help.js"></script>
 	<script type="text/javascript" src="telemetryCharting.js"></script>
 	
-	<script type="text/javascript" src="../../js/slider/jQRangeSlider-min.js"></script>
-	<script type="text/javascript" src="../../js/slider/jQDateRangeSlider-min.js"></script>
 </head>
 
 <body>
-	<div id="header">
-		<div id="logoTitle">
-			<img id="logo" alt="" src="../../images/satellite.png">
-			<h1 id="title"></h1>
+	<div id="helpModal" class="md-modal">
+		<h2 id="helpHeader">Help</h2>
+		<div id="helpContent" class=md-content></div>
+		<div id="helpControls" class=md-controls></div>
+	</div>
+	
+	<div class=container>
+		<div id="header">
+			<div id="logoTitle">
+				<img id="logo" alt="" src="../../images/satellite.png">
+				<h1 id="title"></h1>
+			</div>
+			
+			<div id="topMenu"></div>
 		</div>
 		
-		<div id="topMenu"></div>
-	</div>
-	
-	<div>
-		<form id="parameterAddForm" onsubmit="return false">
-			<input id="parameterAddInput"  class="rounded" list="parameterList" type="search" 
-				   results=5 placeholder="Search for parameters" autofocus="autofocus">
-			<datalist id="parameterList"></datalist>
-		</form>
-	</div>
-	
-	<div id="chartArea" class="visible">
-<!-- 	<div id="chartArea"> -->
-		<div id="chartInfo" class="hidden">
-			<dl>
-				<dt id="numParametersInfo">Number of parameters</dt>
-				<dd id="numParametersPlotted">--</dd>
-			</dl>
-		</div>
-		<div id="legend"></div>
-		<div id="liveTmChart"></div>
-	</div>
-	
-	<div id="controls">
-		<h3>Controls</h3>
-		<div id="sliderStylingContainer"><div id="dateRangeSlider"></div></div>
-		<div id="formStylingContainer">
-			<form id="dateRangeOptionsForm" onsubmit="return false">
-				<div id="dateRangeOptions">
-					<dl>
-						<dt>Maximum range</dt>
-						<dd>
-							<select id="maxRangeInput" name="maxRange" >
-								<option value="false">Unlimited</option>
-								<option value="5" selected="selected">5 days</option>
-								<option value="10">10 days</option>
-								<option value="15">15 days</option>
-								<option value="31">31 days</option>
-								<option value="54">54 days</option>
-								<option value="108">108 days</option>
-								<option value="216">216 days</option>
-							</select>
-						</dd>
-					</dl>
-				</div>
-				<div id="submitArchivePlot">
-					<input type="submit" value="Plot" >
-				</div>
-				<button type="button" id="goLiveButton">Go Live</button>
+		<div>
+			<form id="parameterAddForm" onsubmit="return false" class="hint--bottom hint--info" data-hint="Search and add parameters to the plot here.">
+				<input id="parameterAddInput"  class="rounded" list="parameterList" type="search" 
+					   results=5 placeholder="Search for parameters" autofocus="autofocus">
+				<datalist id="parameterList"></datalist>
 			</form>
 		</div>
-	</div>
-	
-	
-	<div id="overview">
-	</div>
-	
 		
-	<div class="avgrund-cover"></div>
+		<div id="chartArea" class="visible">
+	<!-- 	<div id="chartArea"> -->
+			<div id="chartInfo" class="hidden">
+				<dl>
+					<dt id="numParametersInfo">Number of parameters</dt>
+					<dd id="numParametersPlotted">--</dd>
+				</dl>
+			</div>
+			<div id="legend"></div>
+			<div id="liveTmChart"></div>
+		</div>
+		
+		<div id="controls" class="hint--bottom hint--info" data-hint="Use these controls to plot historical values of the parameters you have added to the plot.">
+			<h3>Controls</h3>
+			<div id="sliderStylingContainer"><div id="dateRangeSlider"></div></div>
+			<div id="formStylingContainer">
+				<form id="dateRangeOptionsForm" onsubmit="return false">
+					<div id="dateRangeOptions">
+						<dl>
+							<dt>Maximum range</dt>
+							<dd>
+								<select id="maxRangeInput" name="maxRange" >
+									<option value="false">Unlimited</option>
+									<option value="5" selected="selected">5 days</option>
+									<option value="10">10 days</option>
+									<option value="15">15 days</option>
+									<option value="31">31 days</option>
+									<option value="54">54 days</option>
+									<option value="108">108 days</option>
+									<option value="216">216 days</option>
+								</select>
+							</dd>
+						</dl>
+					</div>
+					<div id="submitArchivePlot">
+						<input type="submit" value="Plot" >
+					</div>
+					<button type="button" id="goLiveButton">Go Live</button>
+				</form>
+			</div>
+		</div>
+		
+		
+		<div id="overview">
+		</div>
+		
+	</div>
+	
+	<div class="md-overlay"></div>
 	
 </body>
 

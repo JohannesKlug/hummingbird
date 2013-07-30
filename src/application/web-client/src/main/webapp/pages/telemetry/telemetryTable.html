@@ -8,7 +8,7 @@
 	<!-- Basic Page Needs
   ================================================== -->
 	<meta charset="utf-8">
-	<title>Telemetry</title>
+	<title>TelemetryTable</title>
 	<meta name="description" content="">
 	<meta name="author" content="Mark Doyle">
 
@@ -34,6 +34,7 @@
 	<link rel="stylesheet" href="../../css/jquery-ui-timepicker-addon.css" />
 	<link rel="stylesheet" href="../../css/pines/jquery.pnotify.default.css" media="all" />
 	<link rel="stylesheet" href="../../css/pines/jquery.pnotify.default.icons.css" media="all" />
+	<link rel="stylesheet" href="../../css/hint/hint.css" media="all" />
 	
 	<!-- Web fonts
 	================================================== -->
@@ -64,63 +65,74 @@
 	<script type="text/javascript" src="../../js/jquery-ui-timepicker-addon.js"></script>
 	<script type="text/javascript" src="../../js/pines/jquery.pnotify.min.js"></script>
 	<script type="text/javascript" src="../../js/pages/menu.js"></script>
+	<script type="text/javascript" src="../../js/pages/hbird-help.js"></script>
 	<script type="text/javascript" src="telemetryTable.js"></script>
 </head>
 
 <body>
+	<div id="helpModal" class="md-modal">
+		<h2 id="helpHeader">Help</h2>
+		<div id="helpContent" class=md-content></div>
+		<div id="helpControls" class=md-controls></div>
+	</div>
+	
 	<div id="ajaxLoader"></div>
 	
-	<div id="header">
-		<div id="logoTitle">
-			<img id="logo" alt="" src="../../images/satellite.png">
-			<h1 id="title"></h1>
+	<div class=container>
+		<div id="header">
+			<div id="logoTitle">
+				<img id="logo" alt="" src="../../images/satellite.png">
+				<h1 id="title"></h1>
+			</div>
+			
+			<div id="topMenu"></div>
 		</div>
 		
-		<div id="topMenu"></div>
+		<div id="dataArea">
+			<div id="tableContainer" class="hint--bottom hint--info" data-hint="The table is where live or retreived archived telemetry will appear.">
+				<table id="tmTable" >
+		    		<thead>
+		        		<tr>
+				            <th>Parameter</th>
+		            		<th>Value</th>
+		            		<th>Received Time</th>
+		        		</tr>
+		    		</thead>
+		    		<tbody>
+		    		</tbody>
+				</table>
+			</div>
+			
+			<div id="filtering" class="hint--left hint--info" data-hint="Use the filtering controls to retreive archived telemetry or switch back into Live telemetry flow.">
+				<div id="timeRange">
+					<div>
+						<label for="from">From</label><br>
+						<input type="text" id="from" name="from" />
+					</div>
+					<div>
+						<label for="to">to</label><br>
+						<input type="text" id="to" name="to" />
+					</div>
+				</div>
+				<div id="filterControls" class="ui-widget-header ui-corner-all">
+					<button id="filterButton">Filter</button>
+					<button id="liveButton">Live</button>
+				</div>
+			</div>
+		</div>
+	
+		<div class="tableOptionsContainer hidden">
+			<h3><a href="#">Chart options</a></h3>
+			<div id="tableOptions">
+				<form id="chartOptionsForm" onsubmit="return false">
+					Max rows: <input id="maxRowsInput" type="text" name="max points"></input>
+				</form>
+			</div>
+		</div>
 	</div>
 	
-	<div id="dataArea">
-		<div id="tableContainer">
-			<table id="tmTable">
-	    		<thead>
-	        		<tr>
-			            <th>Parameter</th>
-	            		<th>Value</th>
-	            		<th>Received Time</th>
-	        		</tr>
-	    		</thead>
-	    		<tbody>
-	    		</tbody>
-			</table>
-		</div>
-		
-		<div id="filtering">
-			<div id="timeRange">
-				<div>
-					<label for="from">From</label><br>
-					<input type="text" id="from" name="from" />
-				</div>
-				<div>
-					<label for="to">to</label><br>
-					<input type="text" id="to" name="to" />
-				</div>
-			</div>
-			<div id="filterControls" class="ui-widget-header ui-corner-all">
-				<button id="filterButton">Filter</button>
-				<button id="liveButton">Live</button>
-			</div>
-		</div>
-	</div>
+	<div class="md-overlay"></div>
 
-	<div class="tableOptionsContainer hidden">
-		<h3><a href="#">Chart options</a></h3>
-		<div id="tableOptions">
-			<form id="chartOptionsForm" onsubmit="return false">
-				Max rows: <input id="maxRowsInput" type="text" name="max points"></input>
-			</form>
-		</div>
-	</div>
-		
 </body>
 
 </html>

@@ -26,7 +26,7 @@ jQuery(document).ready(function() {
 
 	if(addMenuHtml()) {
 		setupMenu();
-		setHelpUrl();
+//		setHelpUrl(); // moving to per page help pop-up
 	}
 
 	setupMenuBarColour();
@@ -103,37 +103,51 @@ function setHelpUrl() {
  */
 function setupMenu() {
 	// Grab all the menus added in the addMenuHtml function
-	var menus = $('a', topMenu);
-	
-	console.log("Setting up functionality for " + menus.length + " menus.");
+//	var menus = $('a', topMenu);
+//	
+//	console.log("Setting up functionality for " + menus.length + " menus.");
 
-	menus.click(function() {
-		// Remove styling from all menus. 
-		$("#topMenu a").removeClass("activeMenuLink");
-		
-		// Add active menu style to the clicked menu
-		$(this).toggleClass("activeMenuLink");
-		
-		// If the menu clicked is already active...
-		var menuIndex = $(this).parent().index();
-		if(currentIndex != menuIndex) {
-			// and it's submenu is not open...
-			if(!subMenu.hasClass("subMenuOpen")) {
-				// open it.
-				subMenu.toggleClass("subMenuOpen");
-			}
-		}
-		// else, open the menus submenu
-		else {
-			subMenu.toggleClass("subMenuOpen");
-			if(!subMenu.hasClass("subMenuOpen")) {
-				$(this).toggleClass("activeMenuLink");
-			}
-		}
-		currentIndex = menuIndex;
-	});
+//	menus.click(function() {
+//		// Remove styling from all menus. 
+//		$("#topMenu a").removeClass("activeMenuLink");
+//		
+//		// If the menu clicked is already active...
+//		var menuIndex = $(this).parent().index();
+//		if(currentIndex != menuIndex) {
+//			// and it's submenu is not open...
+//			if(!subMenu.hasClass("subMenuOpen")) {
+//				// open it.
+//				subMenu.toggleClass("subMenuOpen");
+//			}
+//		}
+//		// else, open the menus submenu
+//		else {
+//			subMenu.toggleClass("subMenuOpen");
+//			if(!subMenu.hasClass("subMenuOpen")) {
+//				$(this).toggleClass("activeMenuLink");
+//			}
+//		}
+//		currentIndex = menuIndex;
+//	});
 	
-	closeSubMenuBtn.click(function() {
-		subMenu.removeClass("subMenuOpen");
-	});
+//	closeSubMenuBtn.click(function() {
+//		subMenu.removeClass("subMenuOpen");
+//	});
+}
+
+/**
+ * Adds a new menu item to the main menu.
+ * The user must pass in a jQuery selector for an anchor element.
+ * 
+ * @param menu jquery selector for an anchor element
+ */
+function addNewMenu(menu) {
+	if(menu.length && menu.is('a')) {
+		var newMenuItem = $('<li>');
+		newMenuItem.append(menu);
+		menuList.append(newMenuItem);
+	}
+	else {
+		console.log("Error, an anchor selection must be passed to the addNewMenu function.");
+	}
 }
