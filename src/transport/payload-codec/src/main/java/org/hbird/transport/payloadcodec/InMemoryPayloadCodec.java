@@ -145,6 +145,8 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 		int offset = 0;
 		int previousSize = 0;
 		int count = 0;
+		// FIXME Move pg.getAllParameters away from the loop? We could cache this at startup only updating if the
+		// publisher pushes model changes.
 		for (final Parameter<?> p : pg.getAllParameters().values()) {
 			if (count != 0) {
 				offset += previousSize;
