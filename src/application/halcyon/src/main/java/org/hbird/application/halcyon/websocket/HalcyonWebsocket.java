@@ -51,7 +51,7 @@ public class HalcyonWebsocket implements OnTextMessage, LiveTmReceiver, CmdVerif
 
 	@Override
 	public void onClose(final int closeCode, final String message) {
-		LOG.trace("Websocket is closing with code: " + closeCode + ". " + message);
+		LOG.info("Websocket is closing with code: " + closeCode + ". " + message);
 		livetmReceiverRegistration.unregister();
 		cmdVerfificationReceiverRegistration.unregister();
 		// TODO tie into OSGI event and log closure due to closeCode
