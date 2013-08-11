@@ -12,6 +12,8 @@ import static org.hbird.transport.protocols.kiss.KissConstants.TFEND;
 import static org.hbird.transport.protocols.kiss.KissConstants.TFESC;
 import static org.hbird.transport.protocols.kiss.KissConstants.TX_DELAY;
 import static org.hbird.transport.protocols.kiss.KissConstants.TX_TAIL;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -22,6 +24,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.service.TransportMetadata;
+import org.apache.mina.core.session.DummySession;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.CumulativeProtocolDecoder;
 import org.apache.mina.filter.codec.ProtocolDecoderOutput;
@@ -85,10 +88,12 @@ public class KissFrameDecoderTest {
 
 	@Test
 	public void testKissFrameDecodeRubbishEitherSide() throws Exception {
+		IoSession session = new DummySession();
+
 		byte[] testInput = new byte[] { 0x45, 0x10, FEND, DATA_FRAME, 0x08, 0x1F, FEND, 0x0F };
 		byte[] expectedOutput = new byte[] { 0x08, 0x1F };
 
-		decoder.decode(mockSession, IoBuffer.wrap(testInput), mockOut);
+		decoder.decode(session, IoBuffer.wrap(testInput), mockOut);
 
 		verify(mockOut).write(expectedOutput);
 	}
@@ -131,6 +136,24 @@ public class KissFrameDecoderTest {
 		decoder.decode(mockSession, IoBuffer.wrap(testInput), mockOut);
 
 		verify(mockOut).write(expectedOutput);
+	}
+
+	/**
+	 * C0 00 DB DC 80 85 09 02 66 9A 05 00 00 59 00 57 C0
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testStrandFrame() throws Exception {
+		IoSession session = new DummySession();
+
+		byte[] testInput = new byte[] { (byte) 0xC0, 0x00, (byte) 0xDB, (byte) 0xDC, (byte) 0x80, (byte) 0x85, 0x09, 0x02, 0x66, (byte) 0x9A, 0x05, 0x00, 0x00,
+				0x59, 0x00, 0x57, (byte) 0xC0 };
+		byte[] expected = new byte[] { (byte) 0xC0, (byte) 0x80, (byte) 0x85, 0x09, 0x02, 0x66, (byte) 0x9A, 0x05, 0x00, 0x00, 0x59, 0x00, 0x57 };
+
+		decoder.decode(session, IoBuffer.wrap(testInput), mockOut);
+
+		verify(mockOut).write(expected);
 	}
 
 	@Test
@@ -250,6 +273,24 @@ public class KissFrameDecoderTest {
 		decoder.decode(mockSession, IoBuffer.wrap(uptoCommandType), mockOut);
 		decoder.decode(mockSession, IoBuffer.wrap(restOfFrame), mockOut);
 
+		verify(mockOut).write(GOOD_DATA_FRAME_CONTENT);
+	}
+
+	@Test
+	public void testFragmentationGoodFrame() throws Exception {
+		IoSession session = new DummySession();
+
+		IoBuffer firstFrag = IoBuffer.wrap(new byte[] { FEND, DATA_FRAME });
+		IoBuffer secondFrag = IoBuffer.wrap(GOOD_DATA_FRAME_CONTENT.clone());
+		IoBuffer thridFrag = IoBuffer.wrap(new byte[] { FEND });
+
+		decoder.decode(session, firstFrag, mockOut);
+		verify(mockOut, never()).write(anyObject());
+
+		decoder.decode(session, secondFrag, mockOut);
+		verify(mockOut, never()).write(anyObject());
+
+		decoder.decode(session, thridFrag, mockOut);
 		verify(mockOut).write(GOOD_DATA_FRAME_CONTENT);
 	}
 

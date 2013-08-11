@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * See standard: http://www.ka9q.net/papers/kiss.html
+ * See <a href="http://www.ka9q.net/papers/kiss.html">KISS standard</a>.
  * 
  * @author Mark Doyle
  * @author Johannes Klug
@@ -47,7 +47,7 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 
 		if (currentlyHandling != null) {
 			if (LOG.isTraceEnabled()) {
-				LOG.trace("Currently handling frame, continuing with new buffer...");
+				LOG.trace("Currently handling frame type " + Integer.toHexString(currentlyHandling & 0xFF) + ", continuing with new buffer...");
 			}
 			// figure out which type we were handling and send IoBuffer to that method to continue handling
 			return handleType(in, out, state, currentlyHandling);
@@ -56,30 +56,45 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 		byte first = in.get();
 
 		// If we have a FEND and some data, we are ready to go
-		if (first == FEND && in.hasRemaining()) {
-			byte type = in.get();
+		if (first == FEND) {
+			if (in.hasRemaining()) {
+				byte type = in.get();
 
-			if (type == FEND) {
-				// drop second FEND as this could be a sync flush
-				if (in.hasRemaining()) {
-					type = in.get();
+				if (type == FEND) {
+					// drop second FEND as this could be a sync flush
+					if (in.hasRemaining()) {
+						type = in.get();
+					}
+					else {
+						return false;
+					}
 				}
-				else {
-					return false;
-				}
+
+				// The type indicator is split across two nibbles so we need to get those first...
+				// Command type is the low nibble
+				byte commandType = (byte) (type & LOW_NIBBLE_MASK);
+
+				// Port number is the high nibble
+				@SuppressWarnings("unused")
+				// Not implemented send to port yet
+				byte port = (byte) ((type >> 4) & LOW_NIBBLE_MASK);
+
+				currentlyHandling = commandType;
+				state = handleType(in, out, state, commandType);
 			}
-
-			// The type indicator is split across two nibbles so we need to get those first...
-			byte commandType = (byte) (type & LOW_NIBBLE_MASK);
-
-			@SuppressWarnings("unused")
-			// Not implemented send to port yet
-			byte port = (byte) ((type >> 4) & LOW_NIBBLE_MASK);
-
-			currentlyHandling = commandType;
-			state = handleType(in, out, state, commandType);
+			else {
+				// Nothing left in the buffer so we'll wait.
+				if (LOG.isTraceEnabled()) {
+					LOG.trace("Nothing left in the buffer immediately after receiving a FEND, will wait on more data.");
+				}
+				state = false;
+			}
 		}
-
+		else {
+			if (LOG.isTraceEnabled()) {
+				LOG.trace("Not currently processing a frame and didn't encounter a FEND. Moving on, nothing else to see here.");
+			}
+		}
 		return state;
 	}
 
@@ -122,13 +137,18 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 				currentlyHandling = null;
 				break;
 			default:
-				// Corruption
-				LOG.error("Corrupt KISS frame; unknown command type: 0x" + Integer.toHexString(commandType & 0xFF));
-				currentlyHandling = null;
-				localState = true;
+				localState = handleExtendedKissFrame(commandType, in, out);
 				break;
 		}
 		return localState;
+	}
+
+	protected boolean handleExtendedKissFrame(byte commandType, IoBuffer in, ProtocolDecoderOutput out) {
+		// Corruption as this handler only expects standard KISS frames. Cancel frame handling and return true to end
+		// this frame.
+		LOG.error("Corrupt KISS frame; unknown command type: 0x" + Integer.toHexString(commandType & 0xFF));
+		currentlyHandling = null;
+		return true;
 	}
 
 	/**
@@ -138,9 +158,12 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 	 * @param out
 	 * @return
 	 */
-	private boolean handleDataFrame(IoBuffer in, ProtocolDecoderOutput out) {
+	protected boolean handleDataFrame(IoBuffer in, ProtocolDecoderOutput out) {
 		if (!in.hasRemaining()) {
 			// Nothing here! Might need more data from the OS network buffer.
+			if (LOG.isTraceEnabled()) {
+				LOG.trace("No data remaining in the buffer when attempting, waiting for more data...");
+			}
 			return false;
 		}
 
@@ -156,9 +179,9 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 					next = FESC;
 				}
 				else {
-					// escaped mode error; no action is taken and frame assembly continues
+					// escaped mode error; no action is taken and frame decode continues
 					LOG.warn("Unexpected byte 0x" + Integer.toHexString(next & 0xFF)
-							+ " after escape in KISS TNC frame. Expected TFESC or TFEND. Ignoring escape.");
+							+ " after escape in KISS TNC frame. Expected TFESC or TFEND. Ignoring escape and continuing decode.");
 				}
 			}
 			data = ArrayUtils.add(data, next);
@@ -166,14 +189,18 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 			// If there is no data left and we have not yet found a FEND then we need more data from the buffer
 			// returning false signifies this.
 			if (!in.hasRemaining()) {
+				if (LOG.isTraceEnabled()) {
+					LOG.trace("No remaining data and no FEND received so we probably have fragmentation in the data frame, waiting for more data...");
+				}
 				return false;
 			}
 		}
 
 		// The next byte is now FEND so we have the full data payload and can write out the data.
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("KISS frame data = " + BytesUtility.hexDump(data));
+			LOG.debug("Received FEND so the frame is complete. Data = " + BytesUtility.hexDump(data));
 		}
+
 		out.write(data);
 		currentlyHandling = null;
 		data = ArrayUtils.EMPTY_BYTE_ARRAY;
