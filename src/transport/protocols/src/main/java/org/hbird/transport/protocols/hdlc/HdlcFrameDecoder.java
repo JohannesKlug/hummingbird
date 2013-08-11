@@ -1,7 +1,6 @@
 package org.hbird.transport.protocols.hdlc;
 
 import java.nio.ByteBuffer;
-import java.util.Arrays;
 
 import org.hbird.core.commons.util.BytesUtility;
 import org.hbird.core.commons.util.crc.CRC16CCITT;
@@ -10,8 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Decodes an HDLC frame and returns the HDLC information section. Essentially, this is the packet or payload of the
- * frame.
+ * Decodes an HDLC frame and returns the HDLC information section.
+ * 
+ * <p>
+ * <a href="http://en.wikipedia.org/wiki/High-Level_Data_Link_Control">HDLC</a>
+ * </p>
  * 
  * @author Mark Doyle
  * 
@@ -34,6 +36,19 @@ public class HdlcFrameDecoder {
 
 	private byte control = 0;
 
+	private boolean useAddressAndControl = true;
+
+	/**
+	 * Perform any calculations on a read only version of the byteBuffer before decoding takes place.
+	 * By default nothing is carried out, but users using a customised version of HDLC can extend this class and
+	 * implement the method.
+	 * 
+	 * @param in
+	 */
+	protected void predecode(ByteBuffer in) {
+		// Do nothing by default
+	}
+
 	/**
 	 * Decodes a byte array as an HDLC frame.
 	 * 
@@ -43,14 +58,24 @@ public class HdlcFrameDecoder {
 	 */
 	public final byte[] decode(byte[] dataIn) throws CrcFailureException {
 		if (LOG.isTraceEnabled()) {
-			LOG.trace("Decoding " + Arrays.toString(dataIn));
+			LOG.trace("Decoding " + BytesUtility.hexDump(dataIn));
 		}
 
 		ByteBuffer in = ByteBuffer.wrap(dataIn);
 
-		// TODO Address and Control still to be implemented.
-		address = in.get();
-		control = in.get();
+		if (!in.hasRemaining()) {
+			// TODO handle this better?
+			LOG.warn("Empty Byte buffer passed to the HDLC decoder, will ignore this and return an empty byte array.");
+			return new byte[0];
+		}
+
+		predecode(in.asReadOnlyBuffer());
+
+		if (useAddressAndControl) {
+			// TODO Address and Control still to be implemented.
+			address = in.get();
+			control = in.get();
+		}
 
 		byte[] hdlcInformation = null;
 
@@ -104,4 +129,13 @@ public class HdlcFrameDecoder {
 	public void setUseChecksum(boolean useChecksum) {
 		this.useChecksum = useChecksum;
 	}
+
+	public boolean isUseAddressAndControl() {
+		return useAddressAndControl;
+	}
+
+	public void setUseAddressAndControl(boolean useAddressAndControl) {
+		this.useAddressAndControl = useAddressAndControl;
+	}
+
 }
