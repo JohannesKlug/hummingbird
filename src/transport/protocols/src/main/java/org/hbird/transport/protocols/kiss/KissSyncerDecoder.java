@@ -158,13 +158,29 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 	 * @param out
 	 * @return
 	 */
-	protected boolean handleDataFrame(IoBuffer in, ProtocolDecoderOutput out) {
+	private boolean handleDataFrame(IoBuffer in, ProtocolDecoderOutput out) {
+		byte[] extractedData = extractDataFromFrame(in);
+		if (extractedData == null) {
+			return false;
+		}
+
+		out.write(data);
+		handleComplete();
+		return true;
+	}
+
+	protected void handleComplete() {
+		currentlyHandling = null;
+		data = ArrayUtils.EMPTY_BYTE_ARRAY;
+	}
+
+	protected byte[] extractDataFromFrame(IoBuffer in) {
 		if (!in.hasRemaining()) {
 			// Nothing here! Might need more data from the OS network buffer.
 			if (LOG.isTraceEnabled()) {
 				LOG.trace("No data remaining in the buffer when attempting, waiting for more data...");
 			}
-			return false;
+			return null;
 		}
 
 		byte next = (byte) 0x00;
@@ -192,7 +208,7 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 				if (LOG.isTraceEnabled()) {
 					LOG.trace("No remaining data and no FEND received so we probably have fragmentation in the data frame, waiting for more data...");
 				}
-				return false;
+				return null;
 			}
 		}
 
@@ -201,10 +217,10 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 			LOG.debug("Received FEND so the frame is complete. Data = " + BytesUtility.hexDump(data));
 		}
 
-		out.write(data);
-		currentlyHandling = null;
-		data = ArrayUtils.EMPTY_BYTE_ARRAY;
+		return data;
+	}
 
-		return true;
+	public void setCurrentlyHandling(Byte currentlyHandling) {
+		this.currentlyHandling = currentlyHandling;
 	}
 }
