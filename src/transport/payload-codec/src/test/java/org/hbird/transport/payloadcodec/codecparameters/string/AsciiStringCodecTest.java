@@ -1,11 +1,10 @@
 package org.hbird.transport.payloadcodec.codecparameters.string;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.io.UnsupportedEncodingException;
 import java.util.BitSet;
 
 import org.hbird.core.commons.util.BitSetUtility;
@@ -27,14 +26,17 @@ public class AsciiStringCodecTest {
 	private final static Logger LOG = LoggerFactory.getLogger(AsciiStringCodecTest.class);
 
 	private final String TEST_STRING;
+
 	private final byte[] TEST_STRING_BYTES;
+
 	private final BitSet TEST_STRING_BITSET;
+
 	private final int TEST_STRING_LENGTH;
 
 	@Mock
 	Parameter<String> mockParameter;
 
-	public AsciiStringCodecTest() throws UnsupportedEncodingException {
+	public AsciiStringCodecTest() {
 		TEST_STRING = "gaben"; // Lord of Steam.
 		TEST_STRING_BYTES = TEST_STRING.getBytes(Charsets.US_ASCII);
 		TEST_STRING_LENGTH = TEST_STRING_BYTES.length * Byte.SIZE;
@@ -75,10 +77,10 @@ public class AsciiStringCodecTest {
 		byte[] result = new byte[TEST_STRING_BYTES.length];
 		result = codec.encodeToByteArray(result, 0);
 
-		if(LOG.isDebugEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Encoding result = " + new String(result, Charsets.US_ASCII));
 		}
-		
+
 		assertArrayEquals(TEST_STRING_BYTES, result);
 	}
 
@@ -92,11 +94,11 @@ public class AsciiStringCodecTest {
 		BitSet result = new BitSet(TEST_STRING_BYTES.length * Byte.SIZE);
 		result = codec.encodeToBitSet(result, 0);
 
-		if(LOG.isDebugEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Encoding result = " + new String(BitSetUtility.toByteArray(result, enc.getSizeInBits()), Charsets.US_ASCII));
 		}
-		
+
 		assertEquals(TEST_STRING_BITSET, result);
-		
+
 	}
 }
