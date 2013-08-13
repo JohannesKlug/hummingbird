@@ -90,11 +90,6 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 				state = false;
 			}
 		}
-		else {
-			if (LOG.isTraceEnabled()) {
-				LOG.trace("Not currently processing a frame and didn't encounter a FEND. Moving on, nothing else to see here.");
-			}
-		}
 		return state;
 	}
 
@@ -164,9 +159,27 @@ public class KissSyncerDecoder extends CumulativeProtocolDecoder {
 			return false;
 		}
 
-		out.write(data);
+		byte[] newData = editOutData(data);
+		if (newData != null) {
+			out.write(newData);
+		}
+		else {
+			out.write(data);
+		}
+
 		handleComplete();
 		return true;
+	}
+
+	/**
+	 * Allows a subclass to change the data that is to be written out just before it is sent.#
+	 * 
+	 * If the method returns null, the original data is written out.
+	 * 
+	 * @return
+	 */
+	protected byte[] editOutData(byte[] outData) {
+		return null;
 	}
 
 	protected void handleComplete() {

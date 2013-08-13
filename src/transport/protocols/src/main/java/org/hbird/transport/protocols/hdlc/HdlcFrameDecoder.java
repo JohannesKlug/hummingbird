@@ -69,7 +69,7 @@ public class HdlcFrameDecoder {
 			return new byte[0];
 		}
 
-		predecode(in.asReadOnlyBuffer());
+		predecode(in);
 
 		if (useAddressAndControl) {
 			// TODO Address and Control still to be implemented.
@@ -105,11 +105,32 @@ public class HdlcFrameDecoder {
 			in.get(hdlcInformation);
 		}
 
+		byte[] updatedHdlcInfo = editHldcInfo(hdlcInformation);
+
+		if (updatedHdlcInfo != null) {
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("HDLC information was updated = " + BytesUtility.hexDump(updatedHdlcInfo));
+			}
+			return updatedHdlcInfo;
+		}
+
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("HDLC information = " + BytesUtility.hexDump(hdlcInformation));
 		}
-
 		return hdlcInformation;
+	}
+
+	/**
+	 * Allows subclasses to change the hdlc information before it is returned. This is useful in niche cases where the
+	 * protocol stack has been customised.
+	 * If null is returned from this method the original HDLC information is returned from the decode method.
+	 * 
+	 * @param hdlcInformation
+	 * @return
+	 */
+	protected byte[] editHldcInfo(byte[] hdlcInformation) {
+		// do nothing by default
+		return null;
 	}
 
 	/**
