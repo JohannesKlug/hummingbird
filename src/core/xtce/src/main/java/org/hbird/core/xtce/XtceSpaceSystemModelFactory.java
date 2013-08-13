@@ -892,7 +892,12 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		}
 		else {
 			// TODO Finish unsupported parameter types
-			throw new InvalidSpaceSystemDefinitionException("Hummingbird currently only supports integer, long string & binary parameters");
+			throw new InvalidSpaceSystemDefinitionException(
+					"Could not add parameter "
+							+ qualifiedName
+							+ " to parameter group "
+							+ group.getQualifiedName()
+							+ ". The parameter is either not be defined correctly or not supported; Hummingbird currently only supports integer, long, string & binary parameters");
 		}
 	}
 
