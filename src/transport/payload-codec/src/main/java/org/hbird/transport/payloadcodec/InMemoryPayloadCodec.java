@@ -319,7 +319,7 @@ public class InMemoryPayloadCodec implements PayloadCodec {
 	@Override
 	public ParameterGroup decode(final GenericPayload payload) {
 		if (LOG.isTraceEnabled()) {
-			LOG.trace("Decoding: " + BytesUtility.decimalDump(payload.payload) + " with payload ID " + payload.layoutIdentifiers);
+			LOG.trace("Decoding: " + payload);
 		}
 		return decode(payload.payload, payload.layoutIdentifiers, payload.timeStamp);
 	}

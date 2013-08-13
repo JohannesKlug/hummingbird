@@ -5,13 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
-
+import org.hbird.core.commons.util.BytesUtility;
 
 public class GenericPayload implements Serializable {
 	private static final long serialVersionUID = 7823269614387628654L;
 
 	public byte[] payload;
+
 	public List<String> layoutIdentifiers = new ArrayList<String>();
+
 	public long timeStamp;
 
 	public GenericPayload(final byte[] payload, final String layoutIdentifier, final long timeStamp) {
@@ -36,6 +38,11 @@ public class GenericPayload implements Serializable {
 
 	public long getTimeStamp() {
 		return timeStamp;
+	}
+
+	@Override
+	public String toString() {
+		return "GenericPayload [payload=" + BytesUtility.decimalDump(payload) + ", layoutIdentifiers=" + layoutIdentifiers + ", timeStamp=" + timeStamp + "]";
 	}
 
 }
