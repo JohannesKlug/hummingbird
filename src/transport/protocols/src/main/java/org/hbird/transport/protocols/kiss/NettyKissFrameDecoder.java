@@ -174,7 +174,7 @@ public class NettyKissFrameDecoder extends FrameDecoder {
 		return null;
 	}
 
-	private byte[] extractDataFromFrame(ChannelBuffer in) {
+	protected byte[] extractDataFromFrame(ChannelBuffer in) {
 		if (!in.readable()) {
 			// Nothing here! Might need more data from the OS network buffer.
 			if (LOG.isTraceEnabled()) {
@@ -230,6 +230,10 @@ public class NettyKissFrameDecoder extends FrameDecoder {
 		// this frame.
 		LOG.error("Corrupt KISS frame; unknown command type: 0x" + Integer.toHexString(commandType & 0xFF));
 		return null;
+	}
+
+	protected void setCurrentlyHandling(byte currentlyHandling) {
+		this.currentlyHandling = currentlyHandling;
 	}
 
 }
