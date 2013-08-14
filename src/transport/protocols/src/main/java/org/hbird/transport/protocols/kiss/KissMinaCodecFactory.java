@@ -23,7 +23,6 @@ public class KissMinaCodecFactory implements ProtocolCodecFactory {
 	private static ProtocolEncoder encoder = new KissSyncerEncoder();
 
 	/**
-	 * Creates a new decoder for each request as the decoder is stateful (handles fragmentation).
 	 * 
 	 * {@inheritDoc}
 	 */
