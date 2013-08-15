@@ -175,11 +175,17 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 			}
 		}
 		else {
-			LOG.warn("No " + SERVICE_INTERFACE + " service found.");
+			LOG.warn("Cannot query parameter archive because there is no " + SERVICE_INTERFACE + " service found.");
 		}
 		return result;
 	}
 
+	/**
+	 * FIXME Retrieve Strings from hbird parameter archive interface rather than hardcode!
+	 * 
+	 * @param aoData
+	 * @return
+	 */
 	private static String calculateSortColumn(Map<String, String> aoData) {
 		String col = null;
 		switch (Integer.parseInt(aoData.get("iSortCol_0"))) {
@@ -190,7 +196,7 @@ public class MongoParameterArchiveQueryResource extends OsgiReady {
 				col = "value";
 				break;
 			case 2:
-				col = "receviedTime";
+				col = "receivedTime";
 				break;
 			default:
 				LOG.warn("Unexpected column number for sorting");

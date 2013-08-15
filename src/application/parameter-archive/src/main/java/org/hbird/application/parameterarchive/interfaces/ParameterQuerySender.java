@@ -61,4 +61,13 @@ public interface ParameterQuerySender {
 
 	Object query(QueryRequest request);
 
+	/**
+	 * Query given a {@link QueryRequest} and a column to sort the results on.
+	 * 
+	 * @param request
+	 * @param sortColumn
+	 * @return
+	 */
+	Object query(QueryRequest request, String sortColumn);
+
 }

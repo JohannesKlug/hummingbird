@@ -75,8 +75,22 @@ public class MongoDbParameterQuerySender implements ParameterQuerySender {
 
 	@Override
 	public Object query(QueryRequest request) {
+		if (request.sortColumn == null) {
+			DBObject query = buildQuery(request);
+			return mongoService.query(query);
+		}
+
+		return query(request, request.sortColumn);
+	}
+
+	@Override
+	public Object query(QueryRequest request, String sortColumn) {
 		DBObject query = buildQuery(request);
-		return mongoService.query(query);
+
+		DBObject mongoSort = new BasicDBObject();
+		mongoSort.put(sortColumn, 1);
+
+		return mongoService.query(query, mongoSort);
 	}
 
 	private static DBObject buildQuery(QueryRequest request) {

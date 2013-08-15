@@ -29,4 +29,13 @@ public interface MongoServiceStrategy {
 	List<DBObject> query(DBObject mongoQuery, DBObject mongoFieldFilter, DBObject mongoSort, int i);
 
 	MongoResult query(Object dbQuery, int limit, int skip, String sortCol, boolean asc);
+
+	/**
+	 * Query mongo and sort the results.
+	 * 
+	 * @param query
+	 * @param sortColumn
+	 * @return
+	 */
+	Object query(Object query, DBObject sort);
 }

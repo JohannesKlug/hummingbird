@@ -52,6 +52,21 @@ public class CamelEndpointMongoServiceStrategy implements MongoServiceStrategy {
 	}
 
 	@Override
+	public Object query(Object dbQuery, DBObject sort) {
+		List<DBObject> result = null;
+		if (dbQuery instanceof DBObject) {
+			final Map<String, Object> headers = new HashMap<String, Object>(1);
+			headers.put(MongoDbConstants.SORT_BY, sort);
+			result = (List<DBObject>) mongoInputProducer.requestBodyAndHeaders(dbQuery, headers);
+		}
+		else {
+			LOG.error("This is the Camel Mongo service strategy and can only process DBObjects from the Mongo Java API. Something passed a "
+					+ dbQuery.getClass().getName());
+		}
+		return result;
+	}
+
+	@Override
 	public List<DBObject> query(Object query, DBObject sort, int limit) {
 		List<DBObject> result = null;
 		if (query instanceof DBObject) {
