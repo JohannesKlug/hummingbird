@@ -68,6 +68,7 @@ function setupArchiveSubmit() {
 		queryRequest.startTime = dateRange.min.getTime();
 		queryRequest.endTime = dateRange.max.getTime();
 		queryRequest.parameterQualifiedName = parametersPlotted;
+		queryRequest.sortColumn = "receivedTime";
 		
 		$.post(rootURL + "tm/parameterarchive/hbirdquery", JSON.stringify(queryRequest), function(results) {
 			updateChart(results);
