@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
+import org.hbird.core.spacesystemmodel.calibration.Calibrator;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.exceptions.ParameterNotInModelException;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
@@ -95,4 +96,14 @@ public interface SpaceSystemModel extends Serializable {
 	Map<String, Encoding> getEncodings();
 
 	Map<String, String> getCommandVerifiers(String qualifiedName);
+
+	Map<String, Calibrator> getCalibrators();
+
+	/**
+	 * Gets the calibration definition associated with a specified parameter.
+	 * 
+	 * @param qualifiedName
+	 *            the parameter whose calibration definition you which to retrieve.
+	 */
+	Calibrator getCalibrator(String qualifiedName);
 }

@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
+import org.hbird.core.spacesystemmodel.calibration.Calibrator;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
@@ -38,6 +39,8 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	private final Map<String, List<String>> restrictions = new HashMap<String, List<String>>();
 
 	private final Map<String, Encoding> encodings = new HashMap<String, Encoding>();
+
+	private final Map<String, Calibrator> calibrators = new HashMap<String, Calibrator>();
 
 	private final Map<String, Map<String, String>> commandVerifiers = new HashMap<String, Map<String, String>>();
 
@@ -220,5 +223,15 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	@Override
 	public Map<String, String> getCommandVerifiers(String qualifiedName) {
 		return commandVerifiers.get(qualifiedName);
+	}
+
+	@Override
+	public Calibrator getCalibrator(String qualifiedName) {
+		return calibrators.get(qualifiedName);
+	}
+
+	@Override
+	public Map<String, Calibrator> getCalibrators() {
+		return calibrators;
 	}
 }

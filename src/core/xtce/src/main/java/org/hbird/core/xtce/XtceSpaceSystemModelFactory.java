@@ -30,6 +30,7 @@ import org.hbird.core.generatedcode.xtce.Comparison;
 import org.hbird.core.generatedcode.xtce.ComparisonList;
 import org.hbird.core.generatedcode.xtce.CompleteVerifier;
 import org.hbird.core.generatedcode.xtce.ContainerSet;
+import org.hbird.core.generatedcode.xtce.DefaultCalibrator;
 import org.hbird.core.generatedcode.xtce.EntryList;
 import org.hbird.core.generatedcode.xtce.FloatParameterType;
 import org.hbird.core.generatedcode.xtce.IntegerArgumentType;
@@ -42,6 +43,7 @@ import org.hbird.core.generatedcode.xtce.ParameterRefEntry;
 import org.hbird.core.generatedcode.xtce.ParameterSetTypeItem;
 import org.hbird.core.generatedcode.xtce.ParameterTypeSet;
 import org.hbird.core.generatedcode.xtce.ParameterTypeSetTypeItem;
+import org.hbird.core.generatedcode.xtce.PolynomialCalibrator;
 import org.hbird.core.generatedcode.xtce.SequenceContainer;
 import org.hbird.core.generatedcode.xtce.SizeRangeInCharacters;
 import org.hbird.core.generatedcode.xtce.SpaceSystem;
@@ -53,6 +55,8 @@ import org.hbird.core.generatedcode.xtce.types.FloatDataEncodingTypeEncodingType
 import org.hbird.core.generatedcode.xtce.types.IntegerDataEncodingTypeEncodingType;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.core.spacesystemmodel.calibration.Calibrator;
+import org.hbird.core.spacesystemmodel.calibration.Term;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidSpaceSystemDefinitionException;
@@ -132,6 +136,8 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 	private final Map<String, Encoding> encodings = new HashMap<String, Encoding>();
 
+	private final Map<String, Calibrator> calibrators = new HashMap<String, Calibrator>();
+
 	private final Map<String, Map<String, String>> commandVerifications = new HashMap<String, Map<String, String>>();
 
 	public XtceSpaceSystemModelFactory() {
@@ -178,7 +184,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		createCommandModel();
 
 		try {
-			injectConstructsIntoModel();
+			refelctionInjectionZumModel();
 		}
 		catch (final IllegalArgumentException e) {
 			LOG.error("Critical Error creating XTCE based Space System Model");
@@ -299,7 +305,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			final String qualifiedName = qualifiedNamePrefix + name;
 			final String shortDescription = xtceParameter.getParameter().getShortDescription();
 			final String longDescription = xtceParameter.getParameter().getLongDescription();
-
+			
 			// If it's an integer type ...
 			if (xtceType.getIntegerParameterType() != null) {
 				final IntegerParameterType type = xtceType.getIntegerParameterType();
@@ -374,6 +380,29 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 						+ ". A parameter references an undeclared TM parameter type in the XTCE space system definition file.");
 			}
 			// @formatter:on
+
+			createCalibrator(qualifiedName, xtceParameter);
+		}
+	}
+
+	private final void createCalibrator(String qName, ParameterSetTypeItem xtceParameter) throws InvalidSpaceSystemDefinitionException {
+		DefaultCalibrator xtceCalibrator = xtceParameter.getParameter().getDefaultCalibrator();
+		if (xtceCalibrator != null) {
+			PolynomialCalibrator xtcePoly = xtceCalibrator.getPolynomialCalibrator();
+			Calibrator calibrator = null;
+			if (xtcePoly != null) {
+				List<Term> terms = new ArrayList<Term>();
+				for (int x = 0; x < xtcePoly.getTermCount(); x++) {
+					org.hbird.core.generatedcode.xtce.Term xtceTerm = xtcePoly.getTerm(x);
+					terms.add(new Term().setCoefficient(xtceTerm.getCoefficient()).setExponent(xtceTerm.getExponent()));
+				}
+				calibrator = new org.hbird.core.spacesystemmodel.calibration.PolynomialCalibrator(terms);
+			}
+			else {
+				throw new InvalidSpaceSystemDefinitionException("Hummingbird currently only supports Polynomial calibration definitions");
+			}
+
+			this.calibrators.put(qName, calibrator);
 		}
 	}
 
@@ -934,7 +963,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	 * @throws IllegalArgumentException
 	 * @throws IllegalAccessException
 	 */
-	private void injectConstructsIntoModel() throws IllegalArgumentException, IllegalAccessException {
+	private void refelctionInjectionZumModel() throws IllegalArgumentException, IllegalAccessException {
 		final Field[] fields = model.getClass().getDeclaredFields();
 		// TODO Switch on String when jdk 7 works with camel! Much nicer!
 		for (final Field field : fields) {
@@ -963,6 +992,10 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			else if (StringUtils.equals(name, "commandVerifiers")) {
 				field.set(model, commandVerifications);
 				LOG.trace("Injected " + commandVerifications.size() + " command verifiers");
+			}
+			else if (StringUtils.equals(name, "calibrators")) {
+				field.set(model, calibrators);
+				LOG.trace("Injected " + calibrators.size() + " calibrators");
 			}
 			else {
 				LOG.debug("Not interested in field : " + name);

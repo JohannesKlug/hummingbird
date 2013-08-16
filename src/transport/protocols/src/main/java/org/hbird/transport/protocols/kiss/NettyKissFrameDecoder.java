@@ -184,22 +184,32 @@ public class NettyKissFrameDecoder extends FrameDecoder {
 		}
 
 		byte next = (byte) 0x00;
+		in.markReaderIndex();
 		while ((next = in.readByte()) != FEND) {
+			// we have data, deal with any fesc or add to data array
 			if (next == FESC) {
-				// escape mode active
-				next = in.readByte();
-				if (next == TFEND) {
-					next = FEND;
-				}
-				else if (next == TFESC) {
-					next = FESC;
+				if (in.readable()) {
+					// escape mode active
+					next = in.readByte();
+					if (next == TFEND) {
+						next = FEND;
+					}
+					else if (next == TFESC) {
+						next = FESC;
+					}
+					else {
+						// escaped mode error; no action is taken and frame decode continues
+						LOG.warn("Unexpected byte 0x" + Integer.toHexString(next & 0xFF)
+								+ " after escape in KISS TNC frame. Expected TFESC or TFEND. Ignoring escape and continuing decode.");
+					}
 				}
 				else {
-					// escaped mode error; no action is taken and frame decode continues
-					LOG.warn("Unexpected byte 0x" + Integer.toHexString(next & 0xFF)
-							+ " after escape in KISS TNC frame. Expected TFESC or TFEND. Ignoring escape and continuing decode.");
+					// Not enough bytes left to handle FESC, must wait.
+					in.resetReaderIndex();
+					return null;
 				}
 			}
+
 			data = ArrayUtils.add(data, next);
 
 			// If there is no data left and we have not yet found a FEND then we need more data from the buffer

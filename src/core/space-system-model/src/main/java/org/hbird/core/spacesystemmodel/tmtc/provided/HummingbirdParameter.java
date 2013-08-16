@@ -12,6 +12,10 @@ import org.hbird.core.spacesystemmodel.tmtc.Parameter;
  * 
  * This is a generic class that is able to represent a parameter of any class.
  * 
+ * <p>
+ * FIXME extend new Abstract Parameter {@link AbstractParameter}
+ * </p>
+ * 
  * @author Mark Doyle
  */
 @XmlRootElement()
@@ -21,10 +25,15 @@ public class HummingbirdParameter<T> implements Parameter<T> {
 	private static final long serialVersionUID = 4723421286629148964L;
 
 	private final String qualifiedName;
+
 	private final String name;
+
 	private final String shortDescription;
+
 	private final String longDescription;
+
 	private long receivedTime;
+
 	protected T value;
 
 	/**
