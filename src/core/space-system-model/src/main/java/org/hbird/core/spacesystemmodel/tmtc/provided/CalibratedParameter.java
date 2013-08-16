@@ -54,4 +54,13 @@ public class CalibratedParameter extends AbstractParameter<Double> {
 		return false;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CalibratedParameter [calibratedValue=").append(calibratedValue).append(", getValue()=").append(getValue())
+				.append(", getReceivedTime()=").append(getReceivedTime()).append(", getName()=").append(getName()).append(", getQualifiedName()=")
+				.append(getQualifiedName()).append("]");
+		return builder.toString();
+	}
+
 }

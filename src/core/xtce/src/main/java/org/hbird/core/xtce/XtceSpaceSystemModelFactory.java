@@ -295,16 +295,15 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			final String parameterTypeRef = xtceParameter.getParameter().getParameterTypeRef();
 			final ParameterTypeSetTypeItem xtceType = xtceTmParameterTypes.get(parameterTypeRef);
 
-			if (xtceType == null) {
-				throw new InvalidSpaceSystemDefinitionException("Unknown TM parameter type: " + parameterTypeRef
-						+ ". A parameter references an undeclared TM parameter type in the XTCE space system definition file.");
-			}
-
 			final String qualifiedNamePrefix = spaceSystem.getName() + ".tm.";
 			final String name = xtceParameter.getParameter().getName();
 			final String qualifiedName = qualifiedNamePrefix + name;
 			final String shortDescription = xtceParameter.getParameter().getShortDescription();
 			final String longDescription = xtceParameter.getParameter().getLongDescription();
+			
+			if (xtceType == null) {
+				throw new InvalidSpaceSystemDefinitionException("Parameter " +qualifiedName + " references an undeclared TM parameter type (" + parameterTypeRef + ") in the XTCE space system definition file.");
+			}
 			
 			// If it's an integer type ...
 			if (xtceType.getIntegerParameterType() != null) {
@@ -388,6 +387,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	private final void createCalibrator(String qName, ParameterSetTypeItem xtceParameter, ParameterTypeSetTypeItem xtceType)
 			throws InvalidSpaceSystemDefinitionException {
 		DefaultCalibrator xtceCalibrator = xtceParameter.getParameter().getDefaultCalibrator();
+
 		if (xtceCalibrator != null) {
 			PolynomialCalibrator xtcePoly = xtceCalibrator.getPolynomialCalibrator();
 			Calibrator calibrator = null;
@@ -408,6 +408,9 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			}
 
 			this.calibrators.put(qName, calibrator);
+			if (LOG.isTraceEnabled()) {
+				LOG.trace("Associated calibrator " + xtceCalibrator.getName() + " with Parameter " + qName);
+			}
 		}
 	}
 

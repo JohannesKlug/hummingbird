@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
+import org.hbird.core.spacesystemmodel.calibration.Calibrator;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
@@ -276,6 +277,18 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public Map<String, String> getCommandVerifiers(String qualifiedName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, Calibrator> getAllCalibrators() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Calibrator getCalibrator(String qualifiedName) {
 		// TODO Auto-generated method stub
 		return null;
 	}

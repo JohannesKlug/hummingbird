@@ -5,16 +5,12 @@ import java.util.Map;
 import org.hbird.core.spacesystemmodel.calibration.Calibrator;
 import org.hbird.core.spacesystemmodel.exceptions.CalibrationException;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
-import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 
-public class ServiceBasedCalibrator {
+public class InMemoryCalibrator {
+	private Map<String, Calibrator> calibrators;
 
-	private SpaceSystemPublisher publisherService;
-
-	private final Map<String, Calibrator> calibrators;
-
-	public ServiceBasedCalibrator() {
-		calibrators = publisherService.getAllCalibrators();
+	public InMemoryCalibrator(Map<String, Calibrator> calibrators) {
+		this.calibrators = calibrators;
 	}
 
 	/**
@@ -26,7 +22,11 @@ public class ServiceBasedCalibrator {
 	 * @throws CalibrationException
 	 */
 	public Parameter<?> calibrate(Parameter<?> parameter) throws CalibrationException {
-		Calibrator calibrator = calibrators.get(parameter);
+		if (calibrators == null) {
+			throw new CalibrationException("Cannot perform calibration on " + parameter.getQualifiedName() + " as there is no calibration data available.");
+		}
+
+		Calibrator calibrator = calibrators.get(parameter.getQualifiedName());
 
 		if (calibrator != null) {
 			return calibrator.calibrate(parameter);
@@ -34,4 +34,13 @@ public class ServiceBasedCalibrator {
 
 		return parameter;
 	}
+
+	public Map<String, Calibrator> getCalibrators() {
+		return calibrators;
+	}
+
+	public void setCalibrators(Map<String, Calibrator> calibrators) {
+		this.calibrators = calibrators;
+	}
+
 }
