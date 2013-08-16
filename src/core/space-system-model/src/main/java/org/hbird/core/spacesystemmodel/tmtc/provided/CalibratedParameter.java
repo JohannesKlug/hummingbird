@@ -12,7 +12,7 @@ public class CalibratedParameter extends AbstractParameter<Double> {
 	@JsonCreator
 	public CalibratedParameter(@JsonProperty("qualifiedName") final String qualifiedName, @JsonProperty("name") final String name,
 			@JsonProperty("shortDescription") final String shortDescription, @JsonProperty("longDescription") final String longDescription) {
-		super(name, qualifiedName, shortDescription, longDescription);
+		super(qualifiedName, name, shortDescription, longDescription);
 	}
 
 	/**
