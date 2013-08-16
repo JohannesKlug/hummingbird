@@ -2593,6 +2593,7 @@ Style Notes, used througout the schema:
 						<extension base="xtce:NameDescriptionType">
 							<sequence>
 								<element name="ParameterProperties" type="xtce:ParameterPropertiesType" minOccurs="0"/>
+								<element name="DefaultCalibrator" type="xtce:CalibratorType" minOccurs="0" maxOccurs="1"/>
 							</sequence>
 							<attribute name="parameterTypeRef" type="xtce:NameReferenceType" use="required"/>
 						</extension>
