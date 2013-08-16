@@ -10,6 +10,7 @@ import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.calibration.Calibrator;
 import org.hbird.core.spacesystemmodel.calibration.PolynomialCalibrator;
+import org.hbird.core.spacesystemmodel.exceptions.CalibrationException;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidSpaceSystemDefinitionException;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.provided.CalibratedParameter;
@@ -17,11 +18,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author Mark Doyle
  * 
+ * @author Mark Doyle
  */
 public class ParameterDefinitionModelTest {
 	private static final String SSM_URL = "test-parameter-model.xml";
+
+	private static final String INVALID_POLY_SSM_URL = "invalid-poly-model.xml";
 
 	private static final double EXPECTED_LASER_CALIBRATION_VALUE = 70.0;
 
@@ -31,11 +34,15 @@ public class ParameterDefinitionModelTest {
 
 	@Before
 	public void setUp() throws InvalidSpaceSystemDefinitionException {
-		final URL url = CommandModelTest.class.getResource(SSM_URL);
-		ssm = new XtceSpaceSystemModelFactory(url.getPath()).createSpaceSystemModel();
+		loadModel(SSM_URL);
 		assertNotNull(ssm);
 
 		qualifiedTmPrefix = ssm.getName() + ".tm.";
+	}
+
+	private final void loadModel(String uri) throws InvalidSpaceSystemDefinitionException {
+		final URL url = CommandModelTest.class.getResource(uri);
+		ssm = new XtceSpaceSystemModelFactory(url.getPath()).createSpaceSystemModel();
 	}
 
 	@Test
@@ -50,13 +57,18 @@ public class ParameterDefinitionModelTest {
 	}
 
 	@Test
-	public void testCalibration() throws UnknownParameterException {
+	public void testCalibration() throws UnknownParameterException, CalibrationException {
 		Parameter<Integer> laserParam = ssm.getIntParameter(qualifiedTmPrefix + "LASER_TEMP");
 		laserParam.setValue(5);
 
 		Calibrator calibrator = ssm.getCalibrator(laserParam.getQualifiedName());
-		CalibratedParameter caliParam = calibrator.calibrateInt(laserParam);
+		CalibratedParameter caliParam = calibrator.calibrate(laserParam);
 
 		assertEquals(EXPECTED_LASER_CALIBRATION_VALUE, caliParam.getValue(), 0.0);
+	}
+
+	@Test(expected = InvalidSpaceSystemDefinitionException.class)
+	public void testInvalidPolynomialParameterAssociation() throws InvalidSpaceSystemDefinitionException {
+		loadModel(INVALID_POLY_SSM_URL);
 	}
 }

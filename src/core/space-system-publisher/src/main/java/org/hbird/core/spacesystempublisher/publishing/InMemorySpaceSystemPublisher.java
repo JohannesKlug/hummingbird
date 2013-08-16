@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
+import org.hbird.core.spacesystemmodel.calibration.Calibrator;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
@@ -124,6 +125,11 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 	@Override
 	public Map<String, String> getCommandVerifiers(String qualifiedName) {
 		return model.getCommandVerifiers(qualifiedName);
+	}
+
+	@Override
+	public Map<String, Calibrator> getAllCalibrators() {
+		return model.getAllCalibrators();
 	}
 
 }

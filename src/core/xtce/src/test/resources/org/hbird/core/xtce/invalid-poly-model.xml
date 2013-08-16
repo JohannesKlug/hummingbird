@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SpaceSystem xmlns="http://www.omg.org/space/xtce"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			 xmlns:xtce="http://www.omg.org/space/xtce"
+			 xsi:schemaLocation="https://raw.github.com/JohannesKlug/hbird/master/src/core/xtce/src/main/resources/schemas SpaceSystemV1.0.xsd"
+			 name="test-parameter-model">
+
+	<TelemetryMetaData>
+		<ParameterTypeSet>
+			<IntegerParameterType name="11bitUInteger" sizeInBits="11" signed="false">
+				<UnitSet />
+			</IntegerParameterType>
+
+			<IntegerParameterType name="16bitUInteger" sizeInBits="16" signed="false">
+				<UnitSet />
+			</IntegerParameterType>
+
+			<IntegerParameterType name="33bitUInteger" sizeInBits="33" signed="false" byteOrder="littleEndian">
+				<UnitSet />
+			</IntegerParameterType>
+			
+			<xtce:StringParameterType name="testString" characterWidth="8" >
+				<xtce:UnitSet></xtce:UnitSet>
+				<xtce:SizeRangeInCharacters min="0" max="8"></xtce:SizeRangeInCharacters>
+			</xtce:StringParameterType>
+		</ParameterTypeSet>
+
+		<ParameterSet>
+			<Parameter parameterTypeRef="11bitUInteger" name="CCSDS_APID"/>
+			<Parameter parameterTypeRef="testString" name="LASER_TEMP">
+				<!-- Laser temp calibration 2x^2 + 3x + 5 -->
+				<DefaultCalibrator name="laserTempCalibration">
+					<PolynomialCalibrator>
+						<Term coefficient="2" exponent="2"/>
+						<Term coefficient="3" exponent="1"/>
+						<Term coefficient="5" exponent="0"/>
+					</PolynomialCalibrator>
+				</DefaultCalibrator>
+			</Parameter>
+			<Parameter parameterTypeRef="16bitUInteger" name="FUEL" />
+			<Parameter parameterTypeRef="33bitUInteger" name="FLIGHT_HOURS" />
+		</ParameterSet>
+
+		<ContainerSet>
+			<SequenceContainer name="FlightHours"
+				shortDescription="contains all telemetred data parameters for for flight hours">
+				<EntryList>
+					<ParameterRefEntry parameterRef="FLIGHT_HOURS" />
+				</EntryList>
+
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<xtce:Comparison parameterRef="CCSDS_APID" value="333" />
+					</RestrictionCriteria>
+				</BaseContainer>
+
+			</SequenceContainer>
+
+			<SequenceContainer name="LaserTemp"
+				shortDescription="contains all telemetred data parameters for laser temp">
+				<EntryList>
+					<ParameterRefEntry parameterRef="LASER_TEMP" />
+				</EntryList>
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<Comparison parameterRef="CCSDS_APID" value="555" />
+					</RestrictionCriteria>
+				</BaseContainer>
+
+			</SequenceContainer>
+
+			<SequenceContainer name="FuelLoad"
+				shortDescription="contains all telemetred data parameters for laser temp">
+				<EntryList>
+					<ParameterRefEntry parameterRef="FUEL" />
+				</EntryList>
+				
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<Comparison parameterRef="CCSDS_APID" value="888" />
+					</RestrictionCriteria>
+				</BaseContainer>
+
+			</SequenceContainer>
+
+			<SequenceContainer name="AllSystems"
+				shortDescription="contains all telemetred data parameters for X-Wing laser temp and flight hours">
+				<EntryList>
+					<ParameterRefEntry parameterRef="LASER_TEMP" />
+					<ParameterRefEntry parameterRef="FLIGHT_HOURS" />
+					<ParameterRefEntry parameterRef="FUEL" />
+				</EntryList>
+				
+				<BaseContainer containerRef="HEADER">
+					<RestrictionCriteria>
+						<Comparison parameterRef="CCSDS_APID" value="1000" />
+					</RestrictionCriteria>
+				</BaseContainer>
+			</SequenceContainer>
+			
+		</ContainerSet>
+	</TelemetryMetaData>
+
+
+
+</SpaceSystem>
+
+

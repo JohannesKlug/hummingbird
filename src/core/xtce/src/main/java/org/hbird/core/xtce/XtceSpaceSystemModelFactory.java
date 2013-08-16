@@ -184,7 +184,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		createCommandModel();
 
 		try {
-			refelctionInjectionZumModel();
+			reflectionInjectionZumModel();
 		}
 		catch (final IllegalArgumentException e) {
 			LOG.error("Critical Error creating XTCE based Space System Model");
@@ -381,16 +381,21 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			}
 			// @formatter:on
 
-			createCalibrator(qualifiedName, xtceParameter);
+			createCalibrator(qualifiedName, xtceParameter, xtceType);
 		}
 	}
 
-	private final void createCalibrator(String qName, ParameterSetTypeItem xtceParameter) throws InvalidSpaceSystemDefinitionException {
+	private final void createCalibrator(String qName, ParameterSetTypeItem xtceParameter, ParameterTypeSetTypeItem xtceType)
+			throws InvalidSpaceSystemDefinitionException {
 		DefaultCalibrator xtceCalibrator = xtceParameter.getParameter().getDefaultCalibrator();
 		if (xtceCalibrator != null) {
 			PolynomialCalibrator xtcePoly = xtceCalibrator.getPolynomialCalibrator();
 			Calibrator calibrator = null;
 			if (xtcePoly != null) {
+				if (!checkPolynomicalCalibratorValidity(xtceType)) {
+					throw new InvalidSpaceSystemDefinitionException("Polynomical calibrators can only be associated with Number based parameters. Cannot add "
+							+ xtceCalibrator.getName() + " to parameter " + qName);
+				}
 				List<Term> terms = new ArrayList<Term>();
 				for (int x = 0; x < xtcePoly.getTermCount(); x++) {
 					org.hbird.core.generatedcode.xtce.Term xtceTerm = xtcePoly.getTerm(x);
@@ -404,6 +409,10 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 
 			this.calibrators.put(qName, calibrator);
 		}
+	}
+
+	private static boolean checkPolynomicalCalibratorValidity(ParameterTypeSetTypeItem xtceType) {
+		return (xtceType.getFloatParameterType() != null) || (xtceType.getIntegerParameterType() != null);
 	}
 
 	/**
@@ -963,7 +972,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	 * @throws IllegalArgumentException
 	 * @throws IllegalAccessException
 	 */
-	private void refelctionInjectionZumModel() throws IllegalArgumentException, IllegalAccessException {
+	private void reflectionInjectionZumModel() throws IllegalArgumentException, IllegalAccessException {
 		final Field[] fields = model.getClass().getDeclaredFields();
 		// TODO Switch on String when jdk 7 works with camel! Much nicer!
 		for (final Field field : fields) {
@@ -1252,14 +1261,14 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 				case VALUE_8:
 					encoding.setBinaryRepresentation(BinaryRepresentation.UTF8);
 					// FIXME Possible loss of data in int cast. Why the hell anybody would have a long length string in
-					// their TC or TM is anybodies guess!
+					// their TC or TM is anybody's guess!
 					encoding.setSizeInBits((int) type.getSizeRangeInCharacters().getMax() * uft8CharBitLength);
 					LOG.trace("Size in bits for UTF8 parameter " + type.getName() + " set to " + encoding.getSizeInBits());
 					break;
 				case VALUE_16:
 					encoding.setBinaryRepresentation(BinaryRepresentation.UTF16);
 					// FIXME Possible loss of data in int cast. Why the hell anybody would have a long length string in
-					// their TC or TM is anybodies guess!
+					// their TC or TM is anybody's guess!
 					encoding.setSizeInBits((int) type.getSizeRangeInCharacters().getMax() * utf16CharBitLength);
 					break;
 				default:

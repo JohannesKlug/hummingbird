@@ -3,6 +3,7 @@ package org.hbird.core.spacesystempublisher.interfaces;
 import java.util.List;
 import java.util.Map;
 
+import org.hbird.core.spacesystemmodel.calibration.Calibrator;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
@@ -41,5 +42,7 @@ public interface SpaceSystemPublisher {
 	void modelUpdated();
 
 	Map<String, String> getCommandVerifiers(String qualifiedName);
+
+	Map<String, Calibrator> getAllCalibrators();
 
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.SpaceSystemModelFactory;
+import org.hbird.core.spacesystemmodel.calibration.Calibrator;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidSpaceSystemDefinitionException;
@@ -157,5 +158,10 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	@Override
 	public Map<String, String> getCommandVerifiers(String qualifiedName) {
 		return this.modelCache.getCommandVerifiers(qualifiedName);
+	}
+
+	@Override
+	public Map<String, Calibrator> getAllCalibrators() {
+		return this.modelCache.getAllCalibrators();
 	}
 }

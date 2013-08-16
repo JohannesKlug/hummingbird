@@ -97,7 +97,7 @@ public interface SpaceSystemModel extends Serializable {
 
 	Map<String, String> getCommandVerifiers(String qualifiedName);
 
-	Map<String, Calibrator> getCalibrators();
+	Map<String, Calibrator> getAllCalibrators();
 
 	/**
 	 * Gets the calibration definition associated with a specified parameter.

@@ -231,7 +231,7 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	}
 
 	@Override
-	public Map<String, Calibrator> getCalibrators() {
+	public Map<String, Calibrator> getAllCalibrators() {
 		return calibrators;
 	}
 }
