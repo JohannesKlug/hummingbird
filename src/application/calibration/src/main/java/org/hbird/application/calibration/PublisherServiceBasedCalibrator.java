@@ -13,7 +13,7 @@ public class PublisherServiceBasedCalibrator {
 
 	private InMemoryCalibrator calibrator;
 
-	public void cacheModelInformation() {
+	public void createHostCalibrator() {
 		if (publisherService != null) {
 			calibrator = new InMemoryCalibrator(publisherService.getAllCalibrators());
 		}

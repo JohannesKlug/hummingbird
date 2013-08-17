@@ -9,6 +9,8 @@ public class CalibratedParameter extends AbstractParameter<Double> {
 
 	private double calibratedValue;
 
+	private long receivedTime;
+
 	@JsonCreator
 	public CalibratedParameter(@JsonProperty("qualifiedName") final String qualifiedName, @JsonProperty("name") final String name,
 			@JsonProperty("shortDescription") final String shortDescription, @JsonProperty("longDescription") final String longDescription) {
@@ -25,6 +27,7 @@ public class CalibratedParameter extends AbstractParameter<Double> {
 	public static CalibratedParameter createFromParameterAndValue(Parameter<?> p, double cval) {
 		CalibratedParameter cp = new CalibratedParameter(p.getQualifiedName(), p.getName(), p.getShortDescription(), p.getLongDescription());
 		cp.setValue(cval);
+		cp.setReceivedTime(p.getReceivedTime());
 		return cp;
 	}
 
@@ -40,13 +43,12 @@ public class CalibratedParameter extends AbstractParameter<Double> {
 
 	@Override
 	public long getReceivedTime() {
-		// FIXME Push to telemetered parameter class
-		return 0;
+		return receivedTime;
 	}
 
 	@Override
 	public void setReceivedTime(long timestamp) {
-		// FIXME Push to telemetered parameter class
+		this.receivedTime = timestamp;
 	}
 
 	@Override
