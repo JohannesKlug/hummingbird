@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Dictionary;
 import java.util.List;
 
-import org.hbird.core.spacesystemmodel.interfaces.SpaceSystemModelUpdateListener;
+import org.hbird.core.spacesystemmodel.SpaceSystemModelUpdateListener;
 import org.hbird.core.xtce.XtceSpaceSystemModelFactory;
 import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.cm.ManagedService;

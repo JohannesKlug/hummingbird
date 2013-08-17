@@ -37,7 +37,7 @@
 	<!-- Register the publisher updater as a SpaceSystemModelUpdateListener so it is notified of changed by the 
 	Space System Model factory. -->
 	<service id= "publisherModelupdaterService"
-			 interface="org.hbird.core.spacesystemmodel.interfaces.SpaceSystemModelUpdateListener"
+			 interface="org.hbird.core.spacesystemmodel.SpaceSystemModelUpdateListener"
 			 ref="modelUpdateListener">
 	</service>
 	

@@ -9,7 +9,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 
-import org.hbird.core.spacesystemmodel.interfaces.SpaceSystemModelUpdateListener;
+import org.hbird.core.spacesystemmodel.SpaceSystemModelUpdateListener;
 import org.hbird.core.xtce.XtceSpaceSystemModelFactory;
 import org.junit.Before;
 import org.junit.Test;

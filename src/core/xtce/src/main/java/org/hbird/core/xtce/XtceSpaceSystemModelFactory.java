@@ -65,7 +65,7 @@ import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 import org.hbird.core.spacesystemmodel.tmtc.TmTcGroup;
 import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdCommandGroup;
-import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
+import org.hbird.core.spacesystemmodel.tmtc.provided.TelemeteredParameter;
 import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameterGroup;
 import org.hbird.core.spacesystemmodel.tmtc.provided.ProtectedValueParameter;
 import org.hbird.core.xtce.utils.XtceToJavaMapping;
@@ -309,13 +309,13 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			if (xtceType.getIntegerParameterType() != null) {
 				final IntegerParameterType type = xtceType.getIntegerParameterType();
 				if (!XtceToJavaMapping.doesXtceIntRequireJavaLong(type)) {
-					final Parameter<Integer> intParameter = new HummingbirdParameter<Integer>(qualifiedName, name, shortDescription, longDescription);
+					final Parameter<Integer> intParameter = new TelemeteredParameter<Integer>(qualifiedName, name, shortDescription, longDescription);
 					LOG.debug("Adding Integer parameter {}", intParameter.getQualifiedName());
 					integerParameters.put(intParameter.getQualifiedName(), intParameter);
 					encodings.put(intParameter.getQualifiedName(), createXtceIntegerEncoding(type));
 				}
 				else {
-					final Parameter<Long> longParameter = new HummingbirdParameter<Long>(qualifiedName, name, shortDescription, longDescription);
+					final Parameter<Long> longParameter = new TelemeteredParameter<Long>(qualifiedName, name, shortDescription, longDescription);
 					LOG.debug("Adding Long parameter {}", longParameter.getQualifiedName());
 					longParameters.put(longParameter.getQualifiedName(), longParameter);
 					encodings.put(longParameter.getQualifiedName(), createXtceIntegerEncoding(type));
@@ -327,19 +327,19 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 				final FloatParameterType type = xtceType.getFloatParameterType();
 				switch (type.getSizeInBits()) {
 					case VALUE_32:
-						final Parameter<Float> floatParameter = new HummingbirdParameter<Float>(qualifiedName, name, shortDescription, longDescription);
+						final Parameter<Float> floatParameter = new TelemeteredParameter<Float>(qualifiedName, name, shortDescription, longDescription);
 						LOG.debug("Adding Float parameter {}", floatParameter.getQualifiedName());
 						floatParameters.put(floatParameter.getQualifiedName(), floatParameter);
 						encodings.put(floatParameter.getQualifiedName(), createXtceFloatEncoding(type));
 						break;
 					case VALUE_64:
-						final Parameter<Double> doubleParameter = new HummingbirdParameter<Double>(qualifiedName, name, shortDescription, longDescription);
+						final Parameter<Double> doubleParameter = new TelemeteredParameter<Double>(qualifiedName, name, shortDescription, longDescription);
 						LOG.debug("Adding Double parameter {}", doubleParameter.getQualifiedName());
 						doubleParameters.put(doubleParameter.getQualifiedName(), doubleParameter);
 						encodings.put(doubleParameter.getQualifiedName(), createXtceDoubleEncoding(type));
 						break;
 					case VALUE_128:
-						final Parameter<BigDecimal> bigDecimalParameter = new HummingbirdParameter<BigDecimal>(qualifiedName, name, shortDescription, longDescription);
+						final Parameter<BigDecimal> bigDecimalParameter = new TelemeteredParameter<BigDecimal>(qualifiedName, name, shortDescription, longDescription);
 						LOG.debug("Adding BigDecimal parameter {}", bigDecimalParameter.getQualifiedName());
 						bigDecimalParameters.put(bigDecimalParameter.getQualifiedName(), bigDecimalParameter);
 						// TODO - 27.03.2012 kimmell - add encoding
@@ -359,7 +359,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 					throw new InvalidSpaceSystemDefinitionException(msg);
 				}
 				
-				final Parameter<String> stringParameter = new HummingbirdParameter<String>(qualifiedName, name, shortDescription, longDescription);
+				final Parameter<String> stringParameter = new TelemeteredParameter<String>(qualifiedName, name, shortDescription, longDescription);
 				LOG.debug("Adding String parameter {}", stringParameter.getQualifiedName());
 				stringParameters.put(stringParameter.getQualifiedName(), stringParameter);
 				encodings.put(stringParameter.getQualifiedName(), createXtceStringEncoding(type));
@@ -368,7 +368,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			// If it's binary type ...
 			else if (xtceType.getBinaryParameterType() != null) {
 				final BinaryParameterType type = xtceType.getBinaryParameterType();
-				final Parameter<Byte[]> rawParameter = new HummingbirdParameter<Byte[]>(qualifiedName, name, shortDescription, longDescription);
+				final Parameter<Byte[]> rawParameter = new TelemeteredParameter<Byte[]>(qualifiedName, name, shortDescription, longDescription);
 				LOG.debug("Adding raw parameter {}", rawParameter.getQualifiedName());
 				rawParameters.put(rawParameter.getQualifiedName(), rawParameter);
 				encodings.put(rawParameter.getQualifiedName(), createXtceBinaryEncoding(type));
@@ -451,7 +451,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 				if (!XtceToJavaMapping.doesXtceIntRequireJavaLong(type)) {
 					Parameter<Integer> intParameter;
 					if(paramProps == null || !paramProps.isReadOnly()) {
-						intParameter = new HummingbirdParameter<Integer>(qualifiedName, name, shortDescription, longDescription);
+						intParameter = new TelemeteredParameter<Integer>(qualifiedName, name, shortDescription, longDescription);
 					}
 					else {
 						final int initialValue = (int) type.getInitialValue();
@@ -468,7 +468,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 				else {
 					final Parameter<Long> longParameter;
 					if(paramProps != null && !paramProps.isReadOnly()) {
-						longParameter = new HummingbirdParameter<Long>(qualifiedName, name, shortDescription, longDescription);
+						longParameter = new TelemeteredParameter<Long>(qualifiedName, name, shortDescription, longDescription);
 					}
 					else{
 						final long initialValue = type.getInitialValue();
@@ -488,21 +488,21 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 				final FloatParameterType type = xtceType.getFloatParameterType();
 				switch (type.getSizeInBits()) {
 					case VALUE_32:
-						final Parameter<Float> floatParameter = new HummingbirdParameter<Float>(qualifiedName, name, shortDescription, longDescription);
+						final Parameter<Float> floatParameter = new TelemeteredParameter<Float>(qualifiedName, name, shortDescription, longDescription);
 						floatArguments.put(floatParameter.getQualifiedName(), floatParameter);
 						if (LOG.isDebugEnabled()) {
 							LOG.debug("Adding Float argument " + floatParameter.getName());
 						}
 						break;
 					case VALUE_64:
-						final Parameter<Double> doubleParameter = new HummingbirdParameter<Double>(qualifiedName, name, shortDescription, longDescription);
+						final Parameter<Double> doubleParameter = new TelemeteredParameter<Double>(qualifiedName, name, shortDescription, longDescription);
 						doubleArguments.put(doubleParameter.getQualifiedName(), doubleParameter);
 						if (LOG.isDebugEnabled()) {
 							LOG.debug("Adding Double argument " + doubleParameter.getName());
 						}
 						break;
 					case VALUE_128:
-						final Parameter<BigDecimal> bigDecimalParameter = new HummingbirdParameter<BigDecimal>(qualifiedName, name, shortDescription, longDescription);
+						final Parameter<BigDecimal> bigDecimalParameter = new TelemeteredParameter<BigDecimal>(qualifiedName, name, shortDescription, longDescription);
 						bigDecimalArguments.put(bigDecimalParameter.getQualifiedName(), bigDecimalParameter);
 						if (LOG.isDebugEnabled()) {
 							LOG.debug("Adding BigDecimal argument " + bigDecimalParameter.getName());
@@ -537,7 +537,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 					}
 				}
 				else {
-					stringParameter = new HummingbirdParameter<String>(qualifiedName, name, shortDescription, longDescription);
+					stringParameter = new TelemeteredParameter<String>(qualifiedName, name, shortDescription, longDescription);
 				}
 				if (LOG.isDebugEnabled()) {
 					LOG.debug("Adding String argument " + stringParameter.getName());
@@ -819,7 +819,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 						Integer.decode(argumentAssignment.getArgumentValue()));
 			}
 			else {
-				p = new HummingbirdParameter<Integer>(qualifiedName, p.getName(), p.getShortDescription(), p.getLongDescription());
+				p = new TelemeteredParameter<Integer>(qualifiedName, p.getName(), p.getShortDescription(), p.getLongDescription());
 				p.setValue(Integer.decode(argumentAssignment.getArgumentValue()));
 
 			}
@@ -838,7 +838,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 							Long.decode(argumentAssignment.getArgumentValue()));
 				}
 				else {
-					lp = new HummingbirdParameter<Long>(qualifiedName, lp.getName(), lp.getShortDescription(), lp.getLongDescription());
+					lp = new TelemeteredParameter<Long>(qualifiedName, lp.getName(), lp.getShortDescription(), lp.getLongDescription());
 					lp.setValue(Long.decode(argumentAssignment.getArgumentValue()));
 
 				}
@@ -867,7 +867,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 								baseArgument.getShortDescription(), baseArgument.getLongDescription(), baseArgument.getValue());
 					}
 					else {
-						p = new HummingbirdParameter<Integer>(cmdQualifiedNamePrefix + "." + arg.getArgumentTypeRef(), arg.getArgumentTypeRef(),
+						p = new TelemeteredParameter<Integer>(cmdQualifiedNamePrefix + "." + arg.getArgumentTypeRef(), arg.getArgumentTypeRef(),
 								baseArgument.getShortDescription(), baseArgument.getLongDescription());
 					}
 					integerArguments.put(cmdQualifiedNamePrefix + "." + arg.getArgumentTypeRef(), p);
@@ -882,7 +882,7 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 								longBaseArgument.getShortDescription(), longBaseArgument.getLongDescription(), longBaseArgument.getValue());
 					}
 					else {
-						p = new HummingbirdParameter<Long>(cmdQualifiedNamePrefix + "." + arg.getArgumentTypeRef(), arg.getArgumentTypeRef(),
+						p = new TelemeteredParameter<Long>(cmdQualifiedNamePrefix + "." + arg.getArgumentTypeRef(), arg.getArgumentTypeRef(),
 								longBaseArgument.getShortDescription(), longBaseArgument.getLongDescription());
 					}
 					longArguments.put(cmdQualifiedNamePrefix + "." + arg.getArgumentTypeRef(), p);

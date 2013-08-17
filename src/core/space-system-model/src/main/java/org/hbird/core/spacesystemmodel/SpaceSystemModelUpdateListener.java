@@ -1,4 +1,4 @@
-package org.hbird.core.spacesystemmodel.interfaces;
+package org.hbird.core.spacesystemmodel;
 
 public interface SpaceSystemModelUpdateListener {
 

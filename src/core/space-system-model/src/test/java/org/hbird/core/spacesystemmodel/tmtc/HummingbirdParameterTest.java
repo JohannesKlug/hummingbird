@@ -9,7 +9,7 @@ import java.io.IOException;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
+import org.hbird.core.spacesystemmodel.tmtc.provided.TelemeteredParameter;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,19 +24,19 @@ public class HummingbirdParameterTest {
 	private static final String DESCRIPTION_SHORT = "short";
 	private static final String DESCRIPTION_LONG = "long";
 
-	private HummingbirdParameter<Object> parameter;
+	private TelemeteredParameter<Object> parameter;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		parameter = new HummingbirdParameter<Object>(QN, NAME, DESCRIPTION_SHORT, DESCRIPTION_LONG);
+		parameter = new TelemeteredParameter<Object>(QN, NAME, DESCRIPTION_SHORT, DESCRIPTION_LONG);
 	}
 
 	/**
 	 * Test method for
-	 * {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameter#HummingbirdParameter(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
+	 * {@link org.hbird.core.commons.tmtcgroups.TelemeteredParameter#HummingbirdParameter(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
 	 * .
 	 */
 	@Test
@@ -48,7 +48,7 @@ public class HummingbirdParameterTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameter#getName()}.
+	 * Test method for {@link org.hbird.core.commons.tmtcgroups.TelemeteredParameter#getName()}.
 	 */
 	@Test
 	public void testGetName() {
@@ -56,7 +56,7 @@ public class HummingbirdParameterTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameter#getShortDescription()}.
+	 * Test method for {@link org.hbird.core.commons.tmtcgroups.TelemeteredParameter#getShortDescription()}.
 	 */
 	@Test
 	public void testGetShortDescription() {
@@ -64,7 +64,7 @@ public class HummingbirdParameterTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameter#getLongDescription()}.
+	 * Test method for {@link org.hbird.core.commons.tmtcgroups.TelemeteredParameter#getLongDescription()}.
 	 */
 	@Test
 	public void testGetLongDescription() {
@@ -72,7 +72,7 @@ public class HummingbirdParameterTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameter#getValue()}.
+	 * Test method for {@link org.hbird.core.commons.tmtcgroups.TelemeteredParameter#getValue()}.
 	 */
 	@Test
 	public void testGetValue() {
@@ -80,7 +80,7 @@ public class HummingbirdParameterTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameter#setValue(java.lang.Object)}.
+	 * Test method for {@link org.hbird.core.commons.tmtcgroups.TelemeteredParameter#setValue(java.lang.Object)}.
 	 */
 	@Test
 	public void testSetValue() {
@@ -91,7 +91,7 @@ public class HummingbirdParameterTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameter#toString()}.
+	 * Test method for {@link org.hbird.core.commons.tmtcgroups.TelemeteredParameter#toString()}.
 	 */
 	@Test
 	public void testToString() {
@@ -99,7 +99,7 @@ public class HummingbirdParameterTest {
 	}
 
 	/**
-	 * Test method for {@link org.hbird.core.commons.tmtcgroups.HummingbirdParameter#getQualifiedName()}.
+	 * Test method for {@link org.hbird.core.commons.tmtcgroups.TelemeteredParameter#getQualifiedName()}.
 	 */
 	@Test
 	public void testGetQualifiedName() {

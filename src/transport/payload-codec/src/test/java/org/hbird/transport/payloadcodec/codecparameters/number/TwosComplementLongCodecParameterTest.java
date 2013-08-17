@@ -9,7 +9,7 @@ import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
-import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
+import org.hbird.core.spacesystemmodel.tmtc.provided.TelemeteredParameter;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -45,7 +45,7 @@ public class TwosComplementLongCodecParameterTest {
 
 	@Before
 	public void setUp() {
-		Parameter<Long> parameterBigEndian = new HummingbirdParameter<Long>("test.beLongParameter", "beLongParameter", "", "");
+		Parameter<Long> parameterBigEndian = new TelemeteredParameter<Long>("test.beLongParameter", "beLongParameter", "", "");
 		Encoding enc = new Encoding(64, BinaryRepresentation.twosComplement);
 		parameterBigEndian.setValue(TEST_LONG);
 		codec = new TwosComplementLongCodecParameter(parameterBigEndian, enc);
@@ -85,7 +85,7 @@ public class TwosComplementLongCodecParameterTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public final void testDecodeByteArrayFullSizeByteBoundExact64Long() {
-		Parameter<Long> hostParameter = new HummingbirdParameter<Long>("", "", "", "");
+		Parameter<Long> hostParameter = new TelemeteredParameter<Long>("", "", "", "");
 		Long testValue = 1252009l;
 
 		byte[] bigEndianBytes = new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x13, 0x1A, (byte) 0xA9 };
@@ -104,7 +104,7 @@ public class TwosComplementLongCodecParameterTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public final void testDecodeByteArrayFullSizeByteBoundLessThan64() {
-		Parameter<Long> hostParameter = new HummingbirdParameter<Long>("", "", "", "");
+		Parameter<Long> hostParameter = new TelemeteredParameter<Long>("", "", "", "");
 		Long testValue = 1252009l;
 
 		byte[] bigEndianBytes = new byte[] { 0x00, 0x00, 0x00, 0x13, 0x1A, (byte) 0xA9 };
@@ -123,7 +123,7 @@ public class TwosComplementLongCodecParameterTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public final void testDecodeByteArrayFullSizeNonBound() {
-		Parameter<Long> hostParameter = new HummingbirdParameter<Long>("", "", "", "");
+		Parameter<Long> hostParameter = new TelemeteredParameter<Long>("", "", "", "");
 		Long testValue = 68719476736l;
 		final int BIT_PACKED_LENGTH = 37;
 

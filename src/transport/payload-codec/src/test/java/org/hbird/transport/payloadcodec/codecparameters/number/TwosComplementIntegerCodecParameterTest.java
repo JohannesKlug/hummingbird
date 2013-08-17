@@ -9,7 +9,7 @@ import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
-import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
+import org.hbird.core.spacesystemmodel.tmtc.provided.TelemeteredParameter;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +22,7 @@ public class TwosComplementIntegerCodecParameterTest {
 
 	@Test
 	public void testEncodeSingleByteFullRange() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("test.p", "byteGaben", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("test.p", "byteGaben", "", "");
 		Encoding enc = new Encoding(Byte.SIZE, BinaryRepresentation.twosComplement);
 		codec = new TwosComplementIntegerCodecParameter(p, enc);
 
@@ -36,7 +36,7 @@ public class TwosComplementIntegerCodecParameterTest {
 
 	@Test
 	public void testEncodeShortFullRange() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("test.p", "shortGaben", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("test.p", "shortGaben", "", "");
 		Encoding enc = new Encoding(Short.SIZE, BinaryRepresentation.twosComplement);
 		codec = new TwosComplementIntegerCodecParameter(p, enc);
 
@@ -51,7 +51,7 @@ public class TwosComplementIntegerCodecParameterTest {
 
 	@Test
 	public void testEncodeIntegerFullRange() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("test.p", "intGaben", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("test.p", "intGaben", "", "");
 		Encoding enc = new Encoding(Integer.SIZE, BinaryRepresentation.twosComplement);
 		codec = new TwosComplementIntegerCodecParameter(p, enc);
 

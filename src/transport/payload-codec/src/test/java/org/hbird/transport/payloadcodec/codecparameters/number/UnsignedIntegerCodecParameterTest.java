@@ -10,7 +10,7 @@ import org.hbird.core.commons.util.BitSetUtility;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
 import org.hbird.core.spacesystemmodel.encoding.Encoding.BinaryRepresentation;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
-import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
+import org.hbird.core.spacesystemmodel.tmtc.provided.TelemeteredParameter;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.exceptions.IncorrectJavaTypeParameter;
 import org.junit.AfterClass;
@@ -126,7 +126,7 @@ public class UnsignedIntegerCodecParameterTest {
 
 	@Test
 	public void testBigEndianValueFromBitSet() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("test.unit", "uint", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("test.unit", "uint", "", "");
 		Encoding enc = new Encoding(TEST_VALUE_LENGTH_BE_555, BinaryRepresentation.unsigned);
 		UnsignedIntegerCodecParameter codec = new UnsignedIntegerCodecParameter(p, enc);
 		codec.decode(TEST_BITSET_VALUE_BE_555, 0);
@@ -136,7 +136,7 @@ public class UnsignedIntegerCodecParameterTest {
 
 	@Test
 	public void testOneValueFromBitSet() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("test.unit", "uint", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("test.unit", "uint", "", "");
 		Encoding enc = new Encoding(TEST_VALUE_LENGTH_1, BinaryRepresentation.unsigned);
 		UnsignedIntegerCodecParameter codec = new UnsignedIntegerCodecParameter(p, enc);
 		codec.decode(TEST_BITSET_VALUE_1, 0);
@@ -146,7 +146,7 @@ public class UnsignedIntegerCodecParameterTest {
 
 	@Test
 	public void testLittleEndianValueFromBitSet() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("test.unit", "uint", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("test.unit", "uint", "", "");
 		Encoding enc = new Encoding(TEST_VALUE_LENGTH_LE_555, BinaryRepresentation.unsigned, ByteOrder.LITTLE_ENDIAN);
 		UnsignedIntegerCodecParameter codec = new UnsignedIntegerCodecParameter(p, enc);
 		codec.decode(TEST_BITSET_VALUE_LE_555, 0);
@@ -156,7 +156,7 @@ public class UnsignedIntegerCodecParameterTest {
 
 	@Test
 	public void testBigEndianBoundaryValueFromBitSet() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("", "", "", "");
 		Encoding enc = new Encoding(TEST_VALUE_LENGTH_1024, BinaryRepresentation.unsigned);
 		UnsignedIntegerCodecParameter codec = new UnsignedIntegerCodecParameter(p, enc);
 		codec.decode(TEST_BITSET_VALUE_BE_1024, 0);
@@ -166,7 +166,7 @@ public class UnsignedIntegerCodecParameterTest {
 
 	@Test
 	public void testLitteEndianFromBitSet() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("", "", "", "");
 		Encoding enc = new Encoding(TEST_VALUE_LENGTH_LE_123_32bit, BinaryRepresentation.unsigned, ByteOrder.LITTLE_ENDIAN);
 		UnsignedIntegerCodecParameter codec = new UnsignedIntegerCodecParameter(p, enc);
 		codec.decode(TEST_BITSET_VALUE_123_LE_32bit, 0);
@@ -176,7 +176,7 @@ public class UnsignedIntegerCodecParameterTest {
 
 	@Test
 	public void testZeroByteContainingValueFromBitSet() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("", "", "", "");
 		Encoding enc = new Encoding(TEST_VALUE_LENGTH_BE_123_32bit, BinaryRepresentation.unsigned);
 		UnsignedIntegerCodecParameter codecParam = new UnsignedIntegerCodecParameter(p, enc);
 		codecParam.decode(TEST_BITSET_VALUE_123_32bit, 0);
@@ -187,7 +187,7 @@ public class UnsignedIntegerCodecParameterTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public final void testLeadingZeroBE999ValueFromBitSet() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("", "", "", "");
 		Encoding enc = new Encoding(TEST_VALUE_LENGTH_BE_999, BinaryRepresentation.unsigned);
 		UnsignedIntegerCodecParameter behaviour = new UnsignedIntegerCodecParameter(p, enc);
 		behaviour.decode(TEST_BITSET_VALUE_BE_999, 0);
@@ -198,7 +198,7 @@ public class UnsignedIntegerCodecParameterTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public final void testDecodeByteFullRange() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("", "", "", "");
 		Encoding enc = new Encoding(Byte.SIZE, BinaryRepresentation.unsigned);
 		UnsignedIntegerCodecParameter behaviour = new UnsignedIntegerCodecParameter(p, enc);
 		for (int i = MIN_UNSIGNED_ALL; i < MAX_UNSIGNED_BYTE; i++) {
@@ -212,7 +212,7 @@ public class UnsignedIntegerCodecParameterTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public final void testDecodeLittleEndianByteFullRange() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("", "", "", "");
 		Encoding enc = new Encoding(Byte.SIZE, BinaryRepresentation.unsigned, ByteOrder.LITTLE_ENDIAN);
 		UnsignedIntegerCodecParameter behaviour = new UnsignedIntegerCodecParameter(p, enc);
 		for (int i = MIN_UNSIGNED_ALL; i < MAX_UNSIGNED_BYTE; i++) {
@@ -226,7 +226,7 @@ public class UnsignedIntegerCodecParameterTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public final void testDecodeShortFullRange() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("", "", "", "");
 		Encoding enc = new Encoding(Short.SIZE, BinaryRepresentation.unsigned);
 		UnsignedIntegerCodecParameter behaviour = new UnsignedIntegerCodecParameter(p, enc);
 		for (int i = MIN_UNSIGNED_ALL; i < MAX_UNSIGNED_SHORT; i++) {
@@ -240,7 +240,7 @@ public class UnsignedIntegerCodecParameterTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public final void testDecodeLittleEndianShortFullRange() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("", "", "", "");
 		Encoding enc = new Encoding(Short.SIZE, BinaryRepresentation.unsigned, ByteOrder.LITTLE_ENDIAN);
 		UnsignedIntegerCodecParameter behaviour = new UnsignedIntegerCodecParameter(p, enc);
 		for (int i = MIN_UNSIGNED_ALL; i < MAX_UNSIGNED_SHORT; i++) {
@@ -254,7 +254,7 @@ public class UnsignedIntegerCodecParameterTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public final void testDecodeIntLargeRange() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("", "", "", "");
 		Encoding enc = new Encoding(Integer.SIZE, BinaryRepresentation.unsigned);
 		UnsignedIntegerCodecParameter behaviour = new UnsignedIntegerCodecParameter(p, enc);
 		for (int i = MIN_UNSIGNED_ALL; i < 520509; i++) {
@@ -268,7 +268,7 @@ public class UnsignedIntegerCodecParameterTest {
 	@SuppressWarnings("static-method")
 	@Test(expected = IncorrectJavaTypeParameter.class)
 	public final void testIncorrectIntJavaTypeDecode() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("", "", "", "");
 		Encoding enc = new Encoding(56, BinaryRepresentation.unsigned);
 		UnsignedIntegerCodecParameter behaviour = new UnsignedIntegerCodecParameter(p, enc);
 		BitSet input = createTestBitSet(87, enc.getSizeInBits(), enc.getByteOrder());
@@ -280,7 +280,7 @@ public class UnsignedIntegerCodecParameterTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public final void testDecodeLittleEndianIntLargeRange() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("", "", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("", "", "", "");
 		Encoding enc = new Encoding(Integer.SIZE, BinaryRepresentation.unsigned, ByteOrder.LITTLE_ENDIAN);
 		UnsignedIntegerCodecParameter behaviour = new UnsignedIntegerCodecParameter(p, enc);
 		for (int i = MIN_UNSIGNED_ALL; i < 520509; i++) {
@@ -338,7 +338,7 @@ public class UnsignedIntegerCodecParameterTest {
 	@Test
 	public final void testEncode10BitIntegerBE555() {
 		BitSet actual = new BitSet();
-		Parameter<Integer> parameter = new HummingbirdParameter<Integer>("", "", "", "");
+		Parameter<Integer> parameter = new TelemeteredParameter<Integer>("", "", "", "");
 		parameter.setValue(555);
 		Encoding enc = new Encoding(TEST_VALUE_LENGTH_BE_555, BinaryRepresentation.unsigned);
 		UnsignedIntegerCodecParameter codecParameter = new UnsignedIntegerCodecParameter(parameter, enc);
@@ -351,7 +351,7 @@ public class UnsignedIntegerCodecParameterTest {
 	@Test
 	public final void testEncode1BitFlagIntegerOn() {
 		BitSet actual = new BitSet();
-		Parameter<Integer> parameter = new HummingbirdParameter<Integer>("", "", "", "");
+		Parameter<Integer> parameter = new TelemeteredParameter<Integer>("", "", "", "");
 		parameter.setValue(1);
 		Encoding enc = new Encoding(TEST_VALUE_LENGTH_1, BinaryRepresentation.unsigned);
 		UnsignedIntegerCodecParameter codecParameter = new UnsignedIntegerCodecParameter(parameter, enc);
@@ -362,7 +362,7 @@ public class UnsignedIntegerCodecParameterTest {
 
 	@Test
 	public final void testByteFullRangeEncode() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("test.p", "byteGaben", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("test.p", "byteGaben", "", "");
 		Encoding enc = new Encoding(Byte.SIZE, BinaryRepresentation.unsigned);
 		codec = new UnsignedIntegerCodecParameter(p, enc);
 
@@ -376,7 +376,7 @@ public class UnsignedIntegerCodecParameterTest {
 
 	@Test
 	public final void testShortFullRangeEncode() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("test.p", "byteGaben", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("test.p", "byteGaben", "", "");
 		Encoding enc = new Encoding(Short.SIZE, BinaryRepresentation.unsigned);
 		codec = new UnsignedIntegerCodecParameter(p, enc);
 
@@ -391,7 +391,7 @@ public class UnsignedIntegerCodecParameterTest {
 
 	@Test
 	public final void testIntLargeRangeEncode() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("test.p", "byteGaben", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("test.p", "byteGaben", "", "");
 		Encoding enc = new Encoding(Integer.SIZE, BinaryRepresentation.unsigned);
 		codec = new UnsignedIntegerCodecParameter(p, enc);
 
@@ -406,7 +406,7 @@ public class UnsignedIntegerCodecParameterTest {
 
 	@Test
 	public final void testLittleEndianShortFullRangeEncode() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("test.p", "byteGaben", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("test.p", "byteGaben", "", "");
 		Encoding enc = new Encoding(Short.SIZE, BinaryRepresentation.unsigned, ByteOrder.LITTLE_ENDIAN);
 		codec = new UnsignedIntegerCodecParameter(p, enc);
 
@@ -429,7 +429,7 @@ public class UnsignedIntegerCodecParameterTest {
 
 	@Test
 	public final void testLittleEndianByteFullRangeEncode() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("test.p", "byteGaben", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("test.p", "byteGaben", "", "");
 		Encoding enc = new Encoding(Byte.SIZE, BinaryRepresentation.unsigned, ByteOrder.LITTLE_ENDIAN);
 		codec = new UnsignedIntegerCodecParameter(p, enc);
 
@@ -452,7 +452,7 @@ public class UnsignedIntegerCodecParameterTest {
 
 	@Test(expected = IncorrectJavaTypeParameter.class)
 	public final void testInccorectIntTypeEncode() {
-		Parameter<Integer> p = new HummingbirdParameter<Integer>("test.p", "byteGaben", "", "");
+		Parameter<Integer> p = new TelemeteredParameter<Integer>("test.p", "byteGaben", "", "");
 		Encoding enc = new Encoding(45, BinaryRepresentation.unsigned);
 		codec = new UnsignedIntegerCodecParameter(p, enc);
 

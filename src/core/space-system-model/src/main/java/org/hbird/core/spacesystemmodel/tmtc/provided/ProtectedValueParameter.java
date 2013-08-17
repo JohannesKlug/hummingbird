@@ -2,7 +2,7 @@ package org.hbird.core.spacesystemmodel.tmtc.provided;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class ProtectedValueParameter<T> extends HummingbirdParameter<T> {
+public class ProtectedValueParameter<T> extends TelemeteredParameter<T> {
 	private static final long serialVersionUID = -7017970975497905485L;
 
 	// @formatter:off

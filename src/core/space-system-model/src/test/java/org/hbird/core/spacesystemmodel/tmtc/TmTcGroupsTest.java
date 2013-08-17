@@ -9,7 +9,7 @@ import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 
-import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
+import org.hbird.core.spacesystemmodel.tmtc.provided.TelemeteredParameter;
 import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameterGroup;
 import org.hbird.core.spacesystemmodel.tmtc.provided.TmTcGroups;
 import org.junit.Before;
@@ -73,14 +73,14 @@ public class TmTcGroupsTest {
 	 */
 	@Test
 	public void testCopyAllParameterValues() throws Exception {
-		target.addIntegerParameter(new HummingbirdParameter<Integer>("int", "", "", ""));
-		target.addLongParameter(new HummingbirdParameter<Long>("long", "", "", ""));
+		target.addIntegerParameter(new TelemeteredParameter<Integer>("int", "", "", ""));
+		target.addLongParameter(new TelemeteredParameter<Long>("long", "", "", ""));
 		// TODO - 27.03.2012 kimmell - not implemented
-		// target.addFloatParameter(new HummingbirdParameter<Float>("float", "", "", ""));
-		// target.addDoubleParameter(new HummingbirdParameter<Double>("double", "", "", ""));
-		// target.addBigDecimalParameter(new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
-		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
-		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
+		// target.addFloatParameter(new TelemeteredParameter<Float>("float", "", "", ""));
+		// target.addDoubleParameter(new TelemeteredParameter<Double>("double", "", "", ""));
+		// target.addBigDecimalParameter(new TelemeteredParameter<BigDecimal>("bigDecimal", "", "", ""));
+		target.addStringParameter(new TelemeteredParameter<String>("string", "", "", ""));
+		target.addRawParameter(new TelemeteredParameter<Byte[]>("raw", "", "", ""));
 
 		int intVal = 100;
 		long longVal = 2000L;
@@ -156,13 +156,13 @@ public class TmTcGroupsTest {
 	 */
 	@Test
 	public void testReplaceParameterInGroupInt() throws Exception {
-		target.addIntegerParameter(new HummingbirdParameter<Integer>("int", "", "", ""));
-		target.addLongParameter(new HummingbirdParameter<Long>("long", "", "", ""));
-		target.addFloatParameter(new HummingbirdParameter<Float>("float", "", "", ""));
-		target.addDoubleParameter(new HummingbirdParameter<Double>("double", "", "", ""));
-		target.addBigDecimalParameter(new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
-		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
-		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
+		target.addIntegerParameter(new TelemeteredParameter<Integer>("int", "", "", ""));
+		target.addLongParameter(new TelemeteredParameter<Long>("long", "", "", ""));
+		target.addFloatParameter(new TelemeteredParameter<Float>("float", "", "", ""));
+		target.addDoubleParameter(new TelemeteredParameter<Double>("double", "", "", ""));
+		target.addBigDecimalParameter(new TelemeteredParameter<BigDecimal>("bigDecimal", "", "", ""));
+		target.addStringParameter(new TelemeteredParameter<String>("string", "", "", ""));
+		target.addRawParameter(new TelemeteredParameter<Byte[]>("raw", "", "", ""));
 
 		assertNotSame(intParameter, target.getIntegerParameter("int"));
 		assertNotSame(intParameter, target.getParameter("int"));
@@ -183,13 +183,13 @@ public class TmTcGroupsTest {
 	 */
 	@Test
 	public void testReplaceParameterInGroupLong() throws Exception {
-		target.addIntegerParameter(new HummingbirdParameter<Integer>("int", "", "", ""));
-		target.addLongParameter(new HummingbirdParameter<Long>("long", "", "", ""));
-		target.addFloatParameter(new HummingbirdParameter<Float>("float", "", "", ""));
-		target.addDoubleParameter(new HummingbirdParameter<Double>("double", "", "", ""));
-		target.addBigDecimalParameter(new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
-		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
-		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
+		target.addIntegerParameter(new TelemeteredParameter<Integer>("int", "", "", ""));
+		target.addLongParameter(new TelemeteredParameter<Long>("long", "", "", ""));
+		target.addFloatParameter(new TelemeteredParameter<Float>("float", "", "", ""));
+		target.addDoubleParameter(new TelemeteredParameter<Double>("double", "", "", ""));
+		target.addBigDecimalParameter(new TelemeteredParameter<BigDecimal>("bigDecimal", "", "", ""));
+		target.addStringParameter(new TelemeteredParameter<String>("string", "", "", ""));
+		target.addRawParameter(new TelemeteredParameter<Byte[]>("raw", "", "", ""));
 
 		assertNotSame(longParameter, target.getLongParameter("long"));
 		assertNotSame(longParameter, target.getParameter("long"));
@@ -210,13 +210,13 @@ public class TmTcGroupsTest {
 	 */
 	@Test
 	public void testReplaceParameterInGroupFloat() throws Exception {
-		target.addIntegerParameter(new HummingbirdParameter<Integer>("int", "", "", ""));
-		target.addLongParameter(new HummingbirdParameter<Long>("long", "", "", ""));
-		target.addFloatParameter(new HummingbirdParameter<Float>("float", "", "", ""));
-		target.addDoubleParameter(new HummingbirdParameter<Double>("double", "", "", ""));
-		target.addBigDecimalParameter(new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
-		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
-		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
+		target.addIntegerParameter(new TelemeteredParameter<Integer>("int", "", "", ""));
+		target.addLongParameter(new TelemeteredParameter<Long>("long", "", "", ""));
+		target.addFloatParameter(new TelemeteredParameter<Float>("float", "", "", ""));
+		target.addDoubleParameter(new TelemeteredParameter<Double>("double", "", "", ""));
+		target.addBigDecimalParameter(new TelemeteredParameter<BigDecimal>("bigDecimal", "", "", ""));
+		target.addStringParameter(new TelemeteredParameter<String>("string", "", "", ""));
+		target.addRawParameter(new TelemeteredParameter<Byte[]>("raw", "", "", ""));
 		// TODO - 27.03.2012 kimmell - not implemented
 		// assertNotSame(floatParameter, target.getFloatParameter("float"));
 		assertNotSame(floatParameter, target.getParameter("float"));
@@ -238,13 +238,13 @@ public class TmTcGroupsTest {
 	 */
 	@Test
 	public void testReplaceParameterInGroupDouble() throws Exception {
-		target.addIntegerParameter(new HummingbirdParameter<Integer>("int", "", "", ""));
-		target.addLongParameter(new HummingbirdParameter<Long>("long", "", "", ""));
-		target.addFloatParameter(new HummingbirdParameter<Float>("float", "", "", ""));
-		target.addDoubleParameter(new HummingbirdParameter<Double>("double", "", "", ""));
-		target.addBigDecimalParameter(new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
-		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
-		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
+		target.addIntegerParameter(new TelemeteredParameter<Integer>("int", "", "", ""));
+		target.addLongParameter(new TelemeteredParameter<Long>("long", "", "", ""));
+		target.addFloatParameter(new TelemeteredParameter<Float>("float", "", "", ""));
+		target.addDoubleParameter(new TelemeteredParameter<Double>("double", "", "", ""));
+		target.addBigDecimalParameter(new TelemeteredParameter<BigDecimal>("bigDecimal", "", "", ""));
+		target.addStringParameter(new TelemeteredParameter<String>("string", "", "", ""));
+		target.addRawParameter(new TelemeteredParameter<Byte[]>("raw", "", "", ""));
 
 		// TODO - 27.03.2012 kimmell - not implemented
 		// assertNotSame(doubleParameter, target.getDoubleParameter("double"));
@@ -267,13 +267,13 @@ public class TmTcGroupsTest {
 	 */
 	@Test
 	public void testReplaceParameterInGroupBigDecimal() throws Exception {
-		target.addIntegerParameter(new HummingbirdParameter<Integer>("int", "", "", ""));
-		target.addLongParameter(new HummingbirdParameter<Long>("long", "", "", ""));
-		target.addFloatParameter(new HummingbirdParameter<Float>("float", "", "", ""));
-		target.addDoubleParameter(new HummingbirdParameter<Double>("double", "", "", ""));
-		target.addBigDecimalParameter(new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
-		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
-		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
+		target.addIntegerParameter(new TelemeteredParameter<Integer>("int", "", "", ""));
+		target.addLongParameter(new TelemeteredParameter<Long>("long", "", "", ""));
+		target.addFloatParameter(new TelemeteredParameter<Float>("float", "", "", ""));
+		target.addDoubleParameter(new TelemeteredParameter<Double>("double", "", "", ""));
+		target.addBigDecimalParameter(new TelemeteredParameter<BigDecimal>("bigDecimal", "", "", ""));
+		target.addStringParameter(new TelemeteredParameter<String>("string", "", "", ""));
+		target.addRawParameter(new TelemeteredParameter<Byte[]>("raw", "", "", ""));
 
 		// TODO - 27.03.2012 kimmell - not implemented
 		// assertNotSame(bigDecimalParameter, target.getBigDecimalParameter("bigDecimal"));
@@ -296,13 +296,13 @@ public class TmTcGroupsTest {
 	 */
 	@Test
 	public void testReplaceParameterInGroupString() throws Exception {
-		target.addIntegerParameter(new HummingbirdParameter<Integer>("int", "", "", ""));
-		target.addLongParameter(new HummingbirdParameter<Long>("long", "", "", ""));
-		target.addFloatParameter(new HummingbirdParameter<Float>("float", "", "", ""));
-		target.addDoubleParameter(new HummingbirdParameter<Double>("double", "", "", ""));
-		target.addBigDecimalParameter(new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
-		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
-		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
+		target.addIntegerParameter(new TelemeteredParameter<Integer>("int", "", "", ""));
+		target.addLongParameter(new TelemeteredParameter<Long>("long", "", "", ""));
+		target.addFloatParameter(new TelemeteredParameter<Float>("float", "", "", ""));
+		target.addDoubleParameter(new TelemeteredParameter<Double>("double", "", "", ""));
+		target.addBigDecimalParameter(new TelemeteredParameter<BigDecimal>("bigDecimal", "", "", ""));
+		target.addStringParameter(new TelemeteredParameter<String>("string", "", "", ""));
+		target.addRawParameter(new TelemeteredParameter<Byte[]>("raw", "", "", ""));
 
 		assertNotSame(stringParameter, target.getStringParameter("string"));
 		assertNotSame(stringParameter, target.getParameter("string"));
@@ -323,13 +323,13 @@ public class TmTcGroupsTest {
 	 */
 	@Test
 	public void testReplaceParameterInGroupRaw() throws Exception {
-		target.addIntegerParameter(new HummingbirdParameter<Integer>("int", "", "", ""));
-		target.addLongParameter(new HummingbirdParameter<Long>("long", "", "", ""));
-		target.addFloatParameter(new HummingbirdParameter<Float>("float", "", "", ""));
-		target.addDoubleParameter(new HummingbirdParameter<Double>("double", "", "", ""));
-		target.addBigDecimalParameter(new HummingbirdParameter<BigDecimal>("bigDecimal", "", "", ""));
-		target.addStringParameter(new HummingbirdParameter<String>("string", "", "", ""));
-		target.addRawParameter(new HummingbirdParameter<Byte[]>("raw", "", "", ""));
+		target.addIntegerParameter(new TelemeteredParameter<Integer>("int", "", "", ""));
+		target.addLongParameter(new TelemeteredParameter<Long>("long", "", "", ""));
+		target.addFloatParameter(new TelemeteredParameter<Float>("float", "", "", ""));
+		target.addDoubleParameter(new TelemeteredParameter<Double>("double", "", "", ""));
+		target.addBigDecimalParameter(new TelemeteredParameter<BigDecimal>("bigDecimal", "", "", ""));
+		target.addStringParameter(new TelemeteredParameter<String>("string", "", "", ""));
+		target.addRawParameter(new TelemeteredParameter<Byte[]>("raw", "", "", ""));
 
 		assertNotSame(rawParameter, target.getRawParameter("raw"));
 		assertNotSame(rawParameter, target.getParameter("raw"));

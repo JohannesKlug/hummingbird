@@ -17,7 +17,7 @@ import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException
 import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
-import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
+import org.hbird.core.spacesystemmodel.tmtc.provided.TelemeteredParameter;
 import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameterGroup;
 import org.hbird.core.spacesystemmodel.tmtc.provided.TmTcGroups;
 import org.slf4j.Logger;
@@ -71,17 +71,17 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 	public MockSpaceSystemModel() {
 		LOG.debug("Building parameter " + SCID_PARAMETER_QUALIFIED_NAME);
 		final Encoding uint31 = new Encoding(31, BinaryRepresentation.unsigned);
-		final Parameter<Integer> spacecraftId = new HummingbirdParameter<Integer>(SCID_PARAMETER_QUALIFIED_NAME, SCID_PARAMETER_NAME, "", "");
+		final Parameter<Integer> spacecraftId = new TelemeteredParameter<Integer>(SCID_PARAMETER_QUALIFIED_NAME, SCID_PARAMETER_NAME, "", "");
 		encodings.put(spacecraftId.getQualifiedName(), uint31);
 
 		LOG.debug("Building parameter " + FUEL_PARAMETER_QUALIFIED_NAME);
 		final Encoding uint12 = new Encoding(12, BinaryRepresentation.unsigned);
-		final Parameter<Integer> fuelParam = new HummingbirdParameter<Integer>(FUEL_PARAMETER_QUALIFIED_NAME, FUEL_PARAMETER_NAME, "", "");
+		final Parameter<Integer> fuelParam = new TelemeteredParameter<Integer>(FUEL_PARAMETER_QUALIFIED_NAME, FUEL_PARAMETER_NAME, "", "");
 		encodings.put(fuelParam.getQualifiedName(), uint12);
 
 		LOG.debug("Building parameter " + LASER_TEMP_PARAMETER_QUALIFIED_NAME);
 		final Encoding twosInt31 = new Encoding(40, BinaryRepresentation.twosComplement);
-		final Parameter<Long> laserTemp = new HummingbirdParameter<Long>(LASER_TEMP_PARAMETER_QUALIFIED_NAME, LASER_TEMP_PARAMETER_NAME, "", "");
+		final Parameter<Long> laserTemp = new TelemeteredParameter<Long>(LASER_TEMP_PARAMETER_QUALIFIED_NAME, LASER_TEMP_PARAMETER_NAME, "", "");
 		encodings.put(laserTemp.getQualifiedName(), twosInt31);
 
 		LOG.debug("Building parameter group " + TEST_GROUP_QUALIFIED_NAME);

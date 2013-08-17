@@ -19,7 +19,7 @@ import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
-import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameter;
+import org.hbird.core.spacesystemmodel.tmtc.provided.TelemeteredParameter;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
 import org.hbird.transport.payloadcodec.testsupport.MockSpaceSystemModel;
 import org.junit.BeforeClass;
@@ -95,15 +95,15 @@ public class PayloadCodecTest {
 
 		ParameterGroup actual = codec.decode(rawIn, MockSpaceSystemModel.INTEGER_RESTRICTION_ID_LIST, 0);
 
-		// Check the return is a plain parameter, i.e., not a decorated CodecParameter but just the HummingbirdParameter
+		// Check the return is a plain parameter, i.e., not a decorated CodecParameter but just the TelemeteredParameter
 		// used as an exchange type.
 		Collection<Parameter<?>> decodedParameters = actual.getAllParameters().values();
 		for (Parameter<?> p : decodedParameters) {
 			assertFalse("Return Parameter " + p.getName() + " should not be an instance of CodecParameter<?>, i.e., not decorated",
 					(p instanceof CodecParameter<?>));
 			assertTrue("Return Parameter " + p.getName()
-					+ " should be an instance of HummingbirdParameter<?> (for this test, i.e., using Hummingbird default implementations of Parameter<?>",
-					(p instanceof HummingbirdParameter<?>));
+					+ " should be an instance of TelemeteredParameter<?> (for this test, i.e., using Hummingbird default implementations of Parameter<?>",
+					(p instanceof TelemeteredParameter<?>));
 		}
 
 		// Now check the values have been decoded.

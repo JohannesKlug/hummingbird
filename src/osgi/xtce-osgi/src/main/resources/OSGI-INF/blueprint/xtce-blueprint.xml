@@ -18,7 +18,7 @@
 	
 	<!-- Get a list of all SpaceSystemModelUpdateListeners in order to update them whenever the factory changes. -->
 	<reference-list id="modelUpdateListenerServices"
-					interface="org.hbird.core.spacesystemmodel.interfaces.SpaceSystemModelUpdateListener"
+					interface="org.hbird.core.spacesystemmodel.SpaceSystemModelUpdateListener"
 					availability="optional">
 	</reference-list>
 	

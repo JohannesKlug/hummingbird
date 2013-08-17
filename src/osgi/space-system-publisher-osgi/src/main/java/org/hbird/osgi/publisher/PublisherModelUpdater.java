@@ -1,6 +1,6 @@
 package org.hbird.osgi.publisher;
 
-import org.hbird.core.spacesystemmodel.interfaces.SpaceSystemModelUpdateListener;
+import org.hbird.core.spacesystemmodel.SpaceSystemModelUpdateListener;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
