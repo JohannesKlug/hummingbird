@@ -261,12 +261,25 @@ function setupOmniSearch() {
 
 function setupChart() {
 	var options = {
+		series : {
+			lines : { 
+				show : true,
+				lineWidth: 0.2
+			},
+			points : { show : true},
+			shadowSize : 0
+		},
+		grid : {
+			show: true,
+		    aboveData: false,
+		    color: "rgb(50,50,50)"
+		},
 		xaxis : {
 			mode : "time",
-			color : "#FFF"
+			color : "rgb(50,50,50)"
 		},
 		yaxis : {
-			color : "#DDD"
+			color : "rgb(50,50,50)"
 		},
 		legend : {
 			backgroundColor : "#999",
@@ -282,10 +295,8 @@ function setupChart() {
 			show : true,
 		},
 		series : {
-			lines : {
-				show : true,
-				lineWidth : 1
-			},
+			lines : { show : false },
+			points : { show : true},
 			shadowSize : 0
 		},
 		grid : {
