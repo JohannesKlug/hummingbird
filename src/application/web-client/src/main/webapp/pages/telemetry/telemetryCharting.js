@@ -22,6 +22,8 @@ var maxDataSeriesSize = 400;
 
 var omniSearchInput;
 
+var chartCreated = false;
+
 
 // -----------------
 
@@ -29,14 +31,12 @@ var omniSearchInput;
  * On page ready do the following.
  */
 jQuery(document).ready(function() {
-//	$.pnotify.defaults.styling = "jqueryui";
 	setupJqueryDefaults();
 	setupVariables();
 	setupChosen();
 	setupOmniSearch();
 	setupWebsocket();
 	setupChartOptionsForm();
-	setupChart();
 	setupControls();
 });
 
@@ -88,6 +88,10 @@ function updateChart(parameters) {
 	var curProg = 1;
     var progress;
     var crement = 100 / (parameters.length);
+    
+    if(!chartCreated) {
+    	createChart();
+    }
 
 
 	// Make a loader.
@@ -259,8 +263,8 @@ function setupOmniSearch() {
 	});
 }
 
-function setupChart() {
-	var options = {
+function getChartOptions() {
+	return options = {
 		series : {
 			lines : { 
 				show : true,
@@ -272,22 +276,27 @@ function setupChart() {
 		grid : {
 			show: true,
 		    aboveData: false,
-		    color: "rgb(50,50,50)"
+		    color: "rgb(40,40,40)"
 		},
 		xaxis : {
 			mode : "time",
-			color : "rgb(50,50,50)"
+			color : "rgb(99,99,99)"
 		},
 		yaxis : {
-			color : "rgb(50,50,50)"
+			color : "rgb(99,99,99)"
 		},
 		legend : {
 			backgroundColor : "#999",
-			container : $("#legend")
+			container : $("#legend"),
+		    noColumns: 3
 		}
 	};
+}
 
-	liveTmChart = $.plot($("#liveTmChart"), chartData, options);
+function createChart() {
+	$("#chartInfo").show();
+	$("#liveTmChart").css("border", "none");
+	liveTmChart = $.plot($("#liveTmChart"), chartData, getChartOptions());
 
 	// setup overview
 	var overview = $.plot($("#overview"), chartData, {
@@ -344,6 +353,8 @@ function setupChart() {
 		}
 		liveTmChart.setSelection(ranges);
 	});
+	
+	chartCreated = true;
 }
 
 function setupChartOptionsForm() {

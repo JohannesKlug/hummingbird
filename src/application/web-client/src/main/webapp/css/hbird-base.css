@@ -304,6 +304,10 @@ Modals
 -------------------------------------------------
 */
 
+.container {
+	height: 100%;	
+}
+
 .md-modal {
 	font-family: 'lato';
 	visibility: hidden;

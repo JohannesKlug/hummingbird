@@ -1,10 +1,12 @@
-html {
-}
-
 @media all {
+	
+html, body {
+	height: 100%;
+}
 
 #chartArea {
 	visibility: hidden;
+	height: 100%;
 }
 
 #overview {
@@ -17,48 +19,42 @@ html {
 }
 
 #legend {
-/* 	border: thin solid aqua; */
 	padding: 4px;
 	background-color: hsla(0, 0%, 0%, 0.1);
-/* 	position: absolute; */
-	float: right;
-	width: 15%;
-	margin-right: 15px;
+	left: 4%;
+	right: 4%;
+	width: 92%;
 	border: thin solid hsla(0, 0%, 100%, 0.2);
-	visibility: hidden;
 }
 
-.legendLabel {
-	font-size: 1.25em;
-	padding-left: 4px;
+#legend .legendLabel {
+    padding-right:10px;
 	color: hsla(0, 0%, 80%, 1);
 }
 
-} /* end media all */
 
-#chartInputData {
-	visibility: hidden;
-	position: absolute;
-	width: 200px;
-	margin-left: 30px;
-	margin-top: 10px;
+#plotContentControls {
+	margin: 15px;
+	text-align: center;
 }
 
-
 #liveTmChart {
-	width: 80%;
-	height: 460px;
-	left: 10px;
+	left: 4%;
+	right: 4%;
+	width: 92%;
+	height: 60%;
+	clear: both;
+	border: thin dashed hsl(0, 0%, 20%);
 }
 
 #chartInfo {
-	margin-left: 11px;
+	display: none;
+	margin-left: 2%;
 	margin-bottom: 4px;
 	padding-bottom: 60px;
 }
 
-#chartInfo
-dt {
+#chartInfo dt {
 	float: left;
 	margin-right: 4px;
 }
@@ -67,11 +63,16 @@ dt {
 	visibility: hidden;
 }
 
+#chartPlaceholder {
+	font-size: 5em;
+	text-align: center;
+}
+
 #controls {
 /* 	border:thin solid red; */
-	margin-top: 10px;
-	margin-left: 10px;
-	width: 80%;
+	left: 4%;
+	right: 4%;
+	width: 92%;
 }
 
 #controls 
@@ -153,3 +154,5 @@ input.rounded {
 	padding: 1px;
 	width: 300px;
 }
+
+} /* end media all */

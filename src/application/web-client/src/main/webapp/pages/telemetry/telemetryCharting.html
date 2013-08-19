@@ -89,7 +89,7 @@
 			<div id="topMenu"></div>
 		</div>
 		
-		<div>
+		<div id="plotContentControls">
 			<form id="parameterAddForm" onsubmit="return false" class="hint--bottom hint--info" data-hint="Search and add parameters to the plot here.">
 				<input id="parameterAddInput"  class="rounded" list="parameterList" type="search" 
 					   results=5 placeholder="Search for parameters" autofocus="autofocus">
@@ -97,17 +97,18 @@
 			</form>
 		</div>
 		
-		<div id="chartArea" class="visible">
-	<!-- 	<div id="chartArea"> -->
-			<div id="chartInfo" class="hidden">
-				<dl>
-					<dt id="numParametersInfo">Number of parameters</dt>
-					<dd id="numParametersPlotted">--</dd>
-				</dl>
-			</div>
+		<div id="chartInfo" class="hidden">
 			<div id="legend"></div>
-			<div id="liveTmChart"></div>
+			<dl>
+				<dt id="numParametersInfo">Number of parameters</dt>
+				<dd id="numParametersPlotted">--</dd>
+			</dl>
 		</div>
+
+		<div id="liveTmChart">
+			<div id="chartPlaceholder">No Data plotted.</div>
+		</div>
+		
 		
 		<div id="controls" class="hint--bottom hint--info" data-hint="Use these controls to plot historical values of the parameters you have added to the plot.">
 			<h3>Controls</h3>
