@@ -76,10 +76,25 @@ function setupArchiveSubmit() {
 		queryRequest.sortColumn = "receivedTime";
 		
 		$.post(rootURL + "tm/parameterarchive/hbirdquery", JSON.stringify(queryRequest), function(results) {
+			if(results.length === 0) {
+				noDataReceived();
+				return;
+			}
 			updateChart(results);
 		},
 		"json");
 	});
+}
+
+function noDataReceived() {
+	$('#liveTmChart').empty();
+	$('#overview').empty();
+	$('#chartPlaceholder').remove();
+	$('<div/>').html("We don't seem to have any records for the requested parameters and given time range.").attr("id", "chartPlaceholder").appendTo('#liveTmChart');
+	for(var key in parametersPlotted) {
+		$('<p/>').append(key).appendTo('#chartPlaceholder');
+	};
+	$('<div/>').html("Sorry! Although it's not really our fault ;)").appendTo('#chartPlaceholder');
 }
 
 /**
