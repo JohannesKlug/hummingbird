@@ -5,7 +5,9 @@ var rootURL = location.protocol + "//" + host + ":" + location.port + url;
 
 var live = true;
 
-var parametersPlotted = new Array();
+/** A map of all parameters added to the chart. Key is name, value is qualifiedName */
+var parametersPlotted = {};
+
 var seriesData = [];
 var chartData = new Array();
 //		{
@@ -33,7 +35,6 @@ var chartCreated = false;
 jQuery(document).ready(function() {
 	setupJqueryDefaults();
 	setupVariables();
-	setupChosen();
 	setupOmniSearch();
 	setupWebsocket();
 	setupChartOptionsForm();
@@ -61,13 +62,17 @@ function setupControls() {
 function setupArchiveSubmit() {
 	$("#dateRangeOptionsForm").submit(function() {
 		live = false;
-		console.log("Plotting....");
 		var dateRange = $("#dateRangeSlider").dateRangeSlider("values");
+		
+		var qualifiedNames = [];
+		for(var key in parametersPlotted) {
+			qualifiedNames.push(parametersPlotted[key]);
+		}
 
 		var queryRequest = new Object();
 		queryRequest.startTime = dateRange.min.getTime();
 		queryRequest.endTime = dateRange.max.getTime();
-		queryRequest.parameterQualifiedName = parametersPlotted;
+		queryRequest.parameterQualifiedName = qualifiedNames;
 		queryRequest.sortColumn = "receivedTime";
 		
 		$.post(rootURL + "tm/parameterarchive/hbirdquery", JSON.stringify(queryRequest), function(results) {
@@ -89,11 +94,6 @@ function updateChart(parameters) {
     var progress;
     var crement = 100 / (parameters.length);
     
-    if(!chartCreated) {
-    	createChart();
-    }
-
-
 	// Make a loader.
 	var loader = $.pnotify({
 	    title: "Plotting graph...",
@@ -112,38 +112,36 @@ function updateChart(parameters) {
 	        /**/
 	        var newData = [];
 	    	
-	    	// We must clear out the old data otherwise we'll re-plot it with 
-	    	// the new data.
+	    	// We must clear out the old data otherwise we'll re-plot it with the new data.
 	    	var series;
-	    	$.each(parametersPlotted, function(i) {
-	    		series = createDataSeries(parametersPlotted[i]);
-	    		series.length = 0;
-	    	});
+	    	for(var key in parametersPlotted) {
+	    		series = {};
+				series = createDataSeries(key, parametersPlotted[key]);
+				series.length = 0;
+			}
 	    	
 	    	// Push the new data into the series.
 	    	$.each(parameters, function(i) {
-	    		var series = getSeriesData(parameters[i].qualifiedName);
+	    		var series = getSeriesData(parameters[i].name);
 	    		series.push([parameters[i].receivedTime, parameters[i].value ]);
 	    		curProg += crement;
 	    	});
 
 	    	// Add Flot metadata and wrap in new data array.
-	    	$.each(parametersPlotted, function(i) {
+	    	for(var key in parametersPlotted) {
 	    		newData.push({
-	    			"label" : parametersPlotted[i],
-	    			"data" : getSeriesData(parametersPlotted[i])
+	    			"label" : key,
+	    			"data" : getSeriesData(key)
 	    		});
-	    		
-	    	});
-	    	
+	    	}
+
 	    	setNumParametersChartInfo(parameters.length);
 	    	$("#chartInfo").addClass("visible");
 	    	
-	    	liveTmChart.setData(newData);
+	    	createChart(newData);
+	    	
 	    	liveTmChart.setupGrid();
 	    	liveTmChart.draw();
-	    	/**/
-	    	
 	    }
 	});
 
@@ -151,8 +149,8 @@ function updateChart(parameters) {
 	
 }
 
+
 function setNumParametersChartInfo(num) {
-//	$(".numParametersPlotted").remove();
 	$("#numParametersPlotted").text(num);
 }
 
@@ -231,7 +229,7 @@ function setupOmniSearch() {
 			var parameterList = $("#parameterList");
 			parameterList.empty();
 			$.each(parameters, function(i) {
-				parameterList.append(new Option(parameters[i].name, parameters[i].qualifiedName, false, false));
+				parameterList.append(new Option(parameters[i].qualifiedName, parameters[i].name, false, false));
 			});
 		});
 	});
@@ -244,8 +242,8 @@ function setupOmniSearch() {
 		var found = false;
 		$.each(option, function(i) {
 			console.log("input = " + input + ". child val = " + $(option[i]).val());
-			if(input === $(option[i]).val()) {
-				createDataSeries(input);
+			if(input === option.val()) {
+				createDataSeries(input, option.text());
 				found = true;
 				$("legend").addClass("visible");
 				return false; // this is the same as a break in the jquery each function
@@ -264,7 +262,7 @@ function setupOmniSearch() {
 }
 
 function getChartOptions() {
-	return options = {
+	return {
 		series : {
 			lines : { 
 				show : true,
@@ -276,7 +274,9 @@ function getChartOptions() {
 		grid : {
 			show: true,
 		    aboveData: false,
-		    color: "rgb(40,40,40)"
+		    color: "rgb(40,40,40)",
+		    hoverable: true,
+			clickable: true
 		},
 		xaxis : {
 			mode : "time",
@@ -289,24 +289,30 @@ function getChartOptions() {
 			backgroundColor : "#999",
 			container : $("#legend"),
 		    noColumns: 3
+		},
+		selection : {
+			mode : "xy"
 		}
 	};
 }
 
-function createChart() {
-	$("#chartInfo").show();
-	$("#liveTmChart").css("border", "none");
-	liveTmChart = $.plot($("#liveTmChart"), chartData, getChartOptions());
-
-	// setup overview
-	var overview = $.plot($("#overview"), chartData, {
+function getOverviewChartOptions() {
+	return {
 		legend : {
-			show : true,
+			show : false,
 		},
 		series : {
-			lines : { show : false },
-			points : { show : true},
+			lines : { 
+				show : true,
+				lineWidth: 1,
+			},
 			shadowSize : 0
+		},
+		xaxis: {
+			ticks: []
+		},
+		yaxis: {
+			ticks: [],
 		},
 		grid : {
 			color : "#999"
@@ -314,45 +320,101 @@ function createChart() {
 		selection : {
 			mode : "xy"
 		}
-	});
+	};
+}
 
-	$("#liveTmChart").bind("plotselected", function(event, ranges) {
+function createChart(data) {
+	$(".chartInfo").show();
+	$("#liveTmChart").css("border", "none");
+	
+	mainPlotSelection = $("#liveTmChart");
+	
+	liveTmChart = $.plot("#liveTmChart", data, getChartOptions());
+	var overview = $.plot("#overview", data, getOverviewChartOptions());
+
+	mainPlotSelection.on("plotselected", function(event, ranges) {
 		if(live) {
 			return;
 		}
 		// clamp the zooming to prevent eternal zoom
 		if (ranges.xaxis.to - ranges.xaxis.from < 0.00001) {
 			ranges.xaxis.to = ranges.xaxis.from + 0.00001;
-			}
+		}
 		if (ranges.yaxis.to - ranges.yaxis.from < 0.00001) {
 			ranges.yaxis.to = ranges.yaxis.from + 0.00001;
 		}
 
 		// do the zooming
-		liveTmChart = $.plot($("#liveTmChart"), getData(ranges.xaxis.from, ranges.xaxis.to), 
-			$.extend(true, {}, 
-				options, {
-				xaxis : {
-					min : ranges.xaxis.from,
-					max : ranges.xaxis.to
-				},
-				yaxis : {
-					min : ranges.yaxis.from,
-					max : ranges.yaxis.to
+		liveTmChart = $.plot("#liveTmChart", data, 
+			$.extend(true, {}, getChartOptions(), {
+					xaxis : {
+						min : ranges.xaxis.from,
+						max : ranges.xaxis.to
+					},
+					yaxis : {
+						min : ranges.yaxis.from,
+						max : ranges.yaxis.to
+					}
 				}
-			})
+			)
 		);
 
 		// don't fire event on the overview to prevent eternal loop
 		overview.setSelection(ranges, true);
 	});
-
-	$("#overview").bind("plotselected", function(event, ranges) {
+	
+	$("#overview").on("plotselected", function(event, ranges) {
 		if(live) {
+			console.log("overview plotselected handler returning as we are in live mode");
 			return;
 		}
 		liveTmChart.setSelection(ranges);
 	});
+	
+	mainPlotSelection.dblclick(function() {
+		liveTmChart = $.plot("#liveTmChart", data, getChartOptions());
+		overview = $.plot("#overview", data, getOverviewChartOptions());
+	});
+
+	var previousPoint = null;
+	mainPlotSelection.bind("plothover", function (event, pos, item) {
+		if (item) {
+			if (previousPoint != item.dataIndex) {
+				previousPoint = item.dataIndex;
+				
+				$("#chartTooltip").remove();
+				showTooltip(item.pageX, item.pageY, item.datapoint[1]);
+			}
+		} 
+		else {
+			$("#chartTooltip").remove();
+			previousPoint = null;
+		}
+	});
+	
+	var previousClicked = null;
+	mainPlotSelection.bind("plotclick", function (event, pos, item) {
+		if (item) {
+			if (previousClicked != item.dataIndex) {
+				previousClicked = item.dataIndex;
+				$("#chartTooltip").empty();
+				$('#plotPointDetail').empty();
+				$('#plotPointDetail').hide();
+				showPlotPointDetail(item.pageX, item.pageY, item);
+			}
+		}
+		else {
+			$('#plotPointDetail').empty();
+			$('#plotPointDetail').hide();
+			previousClicked = null;
+		}
+	});
+
+	$("#overview").dblclick(function() {
+		liveTmChart = $.plot("#liveTmChart", data, getChartOptions());
+		overview = $.plot("#overview", data, getOverviewChartOptions());
+	});
+	
 	
 	chartCreated = true;
 }
@@ -363,14 +425,6 @@ function setupChartOptionsForm() {
 	$("#chartOptionsForm").submit(function(event) {
 		maxDataSeriesSize = $("#maxPointsInput").val();
 	});
-}
-
-function setupChosen() {
-	$(".chzn-select").chosen(); // Activate chosen plugin
-	$(".chzn-select-deselect").chosen({
-		allow_single_deselect : true
-	});
-	$("#parametersList").change(parameterSelectionChanged);
 }
 
 /**
@@ -425,7 +479,7 @@ function updateTelemetryList(param) {
 	$("#parametersList").trigger("liszt:updated");
 
 	$.each(param, function(i) {
-		$("#parametersList").append(new Option(param[i].name, param[i].qualifiedName,false, false));
+		$("#parametersList").append(new Option(param[i].qualifiedName, param[i].name, false, false));
 		$("#datalist1").append(new Option(param[i].qualifiedName, param[i].name, false, false));
 	});
 	
@@ -443,7 +497,7 @@ function updateTelemetryList(param) {
 function plotParameter(parameter) {
 	// Get the parameters series data and append the new data to it. If the
 	// series does not exist return and do nothing.
-	var parameterSeries = getSeriesData(parameter.qualifiedName);
+	var parameterSeries = getSeriesData(parameter.name);
 	if (typeof parameterSeries === "undefined") {
 		return;
 	}
@@ -491,21 +545,12 @@ function getSeriesData(name) {
 }
 
 /**
- * Called when parameter combo-box selection has changed.
- */
-function parameterSelectionChanged() {
-	$("select option:selected").each(function() {
-		createDataSeries($(this).val());
-	});
-}
-
-/**
- * series data format as follows: { qualifiedName:[], qualifiedName:[] }
+ * series data format as follows: { name : [], name : [] }
  * 
  * FIXME Will not remove existing plot lines that have been deselected.
  * 
  */
-function createDataSeries(name) {
+function createDataSeries(name, qualifiedName) {
 	if(!$("#chartArea").hasClass("visible")) {
 		$("#chartArea").addClass("visible");
 	}
@@ -515,11 +560,37 @@ function createDataSeries(name) {
 
 	var data = [];
 	seriesData[name] = data;
-	parametersPlotted.push(name);
+	parametersPlotted[name] = qualifiedName;
 	$.pnotify({
 	    title: "Added parameter",
 	    text: name,
 	    type: "success"
 	});
 	return seriesData[name];
+}
+
+function showPlotPointDetail(x, y, plotItem) {
+	var modal = $('#plotPointDetail').css({top: y + 5, left: x + 5});
+	modal.fadeIn(100);
+	
+	$("<h4/>").append(plotItem.series.label).appendTo(modal);
+	$("<p/>").append('Value: ' + plotItem.datapoint[1]).appendTo(modal);
+	$("<p/>").append('Received: ' + new Date(plotItem.datapoint[0])).appendTo(modal);
+	$("<p/>").append('Point ' + plotItem.dataIndex + ' of ' + plotItem.series.data.length + ' in the series.').appendTo(modal);
+}
+
+/**
+ * Creates and appends a tooltip div to the body at the given absolute position and populated with 
+ * the provide contents.
+ * @param x
+ * @param y
+ * @param contents
+ */
+function showTooltip(x, y, contents) {
+	$("<div id='chartTooltip'>" + contents + "</div>").css({
+		position: "absolute",
+		display: "none",
+		top: y + 5,
+		left: x + 5,
+	}).appendTo("body").fadeIn(200);
 }

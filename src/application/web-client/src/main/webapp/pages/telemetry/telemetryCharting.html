@@ -57,11 +57,13 @@
 	<script type="text/javascript" src="../../js/jquery.layout-latest.min.js"></script>
 	<script type="text/javascript" src="../../js/jquery.gracefulWebSocket.js"></script>
 	<script type="text/javascript" src="../../js/chosen.jquery.min.js"></script>
+
 	<script type="text/javascript" src="../../js/flot/jquery.flot.js"></script>
+	<script type="text/javascript" src="../../js/flot/jquery.flot.selection.js"></script>
 	<script type="text/javascript" src="../../js/flot/jquery.flot.resize.min.js"></script>
 	<script type="text/javascript" src="../../js/flot/jquery.flot.crosshair.min.js"></script>
-	<script type="text/javascript" src="../../js/flot/jquery.flot.selection.min.js"></script>
 	<script type="text/javascript" src="../../js/flot/jquery.flot.time.min.js"></script>
+
 	<script type="text/javascript" src="../../js/slider/jQRangeSlider-min.js"></script>
 	<script type="text/javascript" src="../../js/slider/jQDateRangeSlider-min.js"></script>
 	<script type="text/javascript" src="../../js/avgrund/avgrund.js"></script>
@@ -91,22 +93,25 @@
 		
 		<div id="plotContentControls">
 			<form id="parameterAddForm" onsubmit="return false" class="hint--bottom hint--info" data-hint="Search and add parameters to the plot here.">
-				<input id="parameterAddInput"  class="rounded" list="parameterList" type="search" 
-					   results=5 placeholder="Search for parameters" autofocus="autofocus">
+				<input id="parameterAddInput"  class="rounded" list="parameterList" type="search" placeholder="Search for parameters" autofocus="autofocus">
 				<datalist id="parameterList"></datalist>
 			</form>
 		</div>
 		
-		<div id="chartInfo" class="hidden">
-			<div id="legend"></div>
+		<div class="chartInfo" class="hidden">
 			<dl>
 				<dt id="numParametersInfo">Number of parameters</dt>
 				<dd id="numParametersPlotted">--</dd>
 			</dl>
+			<div id="legend"></div>
 		</div>
 
 		<div id="liveTmChart">
 			<div id="chartPlaceholder">No Data plotted.</div>
+		</div>
+		
+		<div class="chartInfo">
+			<div id="overview"></div>
 		</div>
 		
 		
@@ -140,13 +145,11 @@
 			</div>
 		</div>
 		
-		
-		<div id="overview">
-		</div>
-		
 	</div>
 	
 	<div class="md-overlay"></div>
+	
+	<div id="plotPointDetail"></div>
 	
 </body>
 
