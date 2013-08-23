@@ -21,6 +21,9 @@ html, body {
 	color: hsla(0, 0%, 80%, 1);
 }
 
+#legend td {
+	cursor: pointer;
+}
 
 #plotContentControls {
 	margin: 15px;
@@ -145,7 +148,7 @@ input.rounded {
 	margin-right: 5px;
 	margin-top: 5px;
 	padding: 1px;
-	width: 300px;
+	width: 500px;
 }
 
 #chartTooltip {

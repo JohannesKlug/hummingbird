@@ -615,6 +615,7 @@ Licensed under the MIT license.
             draw: [],
             bindEvents: [],
             drawOverlay: [],
+            legendInserted: [],
             shutdown: []
         },
         plot = this;
@@ -2732,6 +2733,8 @@ Licensed under the MIT license.
                     }
                     var div = legend.children();
                     $('<div style="position:absolute;width:' + div.width() + 'px;height:' + div.height() + 'px;' + pos +'background-color:' + c + ';"> </div>').prependTo(legend).css('opacity', options.legend.backgroundOpacity);
+
+                    executeHooks(hooks.legendInserted, [legend]);
                 }
             }
         }

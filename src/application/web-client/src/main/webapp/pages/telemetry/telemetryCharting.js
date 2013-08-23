@@ -5,9 +5,15 @@ var rootURL = location.protocol + "//" + host + ":" + location.port + url;
 
 var live = true;
 
-/** A map of all parameters added to the chart. Key is name, value is qualifiedName */
+/** 
+ * A map of all parameters added to the chart. 
+ * Key is name, value is qualifiedName.
+ */
 var parametersPlotted = {};
 
+/**
+ * Series data format as follows: { name : [], name : [] }
+ */
 var seriesData = [];
 var chartData = new Array();
 //		{
@@ -61,29 +67,33 @@ function setupControls() {
 
 function setupArchiveSubmit() {
 	$("#dateRangeOptionsForm").submit(function() {
-		live = false;
-		var dateRange = $("#dateRangeSlider").dateRangeSlider("values");
-		
-		var qualifiedNames = [];
-		for(var key in parametersPlotted) {
-			qualifiedNames.push(parametersPlotted[key]);
-		}
-
-		var queryRequest = new Object();
-		queryRequest.startTime = dateRange.min.getTime();
-		queryRequest.endTime = dateRange.max.getTime();
-		queryRequest.parameterQualifiedName = qualifiedNames;
-		queryRequest.sortColumn = "receivedTime";
-		
-		$.post(rootURL + "tm/parameterarchive/hbirdquery", JSON.stringify(queryRequest), function(results) {
-			if(results.length === 0) {
-				noDataReceived();
-				return;
-			}
-			updateChart(results);
-		},
-		"json");
+		plotArchiveRequest();
 	});
+}
+
+function plotArchiveRequest() {
+	live = false;
+	var dateRange = $("#dateRangeSlider").dateRangeSlider("values");
+	
+	var qualifiedNames = [];
+	for(var key in parametersPlotted) {
+		qualifiedNames.push(parametersPlotted[key]);
+	}
+
+	var queryRequest = new Object();
+	queryRequest.startTime = dateRange.min.getTime();
+	queryRequest.endTime = dateRange.max.getTime();
+	queryRequest.parameterQualifiedName = qualifiedNames;
+	queryRequest.sortColumn = "receivedTime";
+	
+	$.post(rootURL + "tm/parameterarchive/hbirdquery", JSON.stringify(queryRequest), function(results) {
+		if(results.length === 0) {
+			noDataReceived();
+			return;
+		}
+		plotArchivedData(results);
+	},
+	"json");
 }
 
 function noDataReceived() {
@@ -98,70 +108,41 @@ function noDataReceived() {
 }
 
 /**
- * Used for archive chart updates. Clears the existing data.
- * FIXME Horribly inefficient. Has to loop through the entire data set to create 
- * the newData with flot metadata i.e. label and data.
+ * Used for archive chart updates. 
+ * Clears the existing data.
+ * Creates or obtains series data for each parameter
+ * Creates a new data array in the flot format
+ * Creates a new plot with the flot data array.
  * 
  * @param parameters
  */
-function updateChart(parameters) {
-	var curProg = 1;
-    var progress;
-    var crement = 100 / (parameters.length);
-    
-	// Make a loader.
-	var loader = $.pnotify({
-	    title: "Plotting graph...",
-	    text: "<div class=\"progress_bar\" />",
-	    icon: 'picon picon-throbber',
-	    hide: false,
-	    closer: false,
-	    sticker: false,
-	    history: false,
-	    before_open: function(pnotify) {
-	        progress = pnotify.find("div.progress_bar");
-	        progress.progressbar({
-	            value: curProg
-	        });
-	        
-	        /**/
-	        var newData = [];
-	    	
-	    	// We must clear out the old data otherwise we'll re-plot it with the new data.
-	    	var series;
-	    	for(var key in parametersPlotted) {
-	    		series = {};
-				series = createDataSeries(key, parametersPlotted[key]);
-				series.length = 0;
-			}
-	    	
-	    	// Push the new data into the series.
-	    	$.each(parameters, function(i) {
-	    		var series = getSeriesData(parameters[i].name);
-	    		series.push([parameters[i].receivedTime, parameters[i].value ]);
-	    		curProg += crement;
-	    	});
+function plotArchivedData(parameters) {
+	// We must clear out the old data otherwise we'll append the new data.
+    seriesData = [];
 
-	    	// Add Flot metadata and wrap in new data array.
-	    	for(var key in parametersPlotted) {
-	    		newData.push({
-	    			"label" : key,
-	    			"data" : getSeriesData(key)
-	    		});
-	    	}
+    var series;
+    var flotDataArray = [];
+    // for every parameter...
+	$.each(parameters, function(i) {
+		// check if we have an existing series, if not create it and add it to the flot data
+		// array with a label.
+		series = getSeriesData(parameters[i].name);
+		if(series === null) {
+			series = createSeriesData(parameters[i].name, parameters[i].qualifiedName);
 
-	    	setNumParametersChartInfo(parameters.length);
-	    	$("#chartInfo").addClass("visible");
-	    	
-	    	createChart(newData);
-	    	
-	    	liveTmChart.setupGrid();
-	    	liveTmChart.draw();
-	    }
+			flotDataArray.push({
+				"label" : parameters[i].name,
+				"data" : series
+			});
+		}
+		// once we have a series, existing or newly created, we can add the data to it.
+		series.push([parameters[i].receivedTime, parameters[i].value ]);
 	});
 
-	loader.pnotify_remove();
+	setNumParametersChartInfo(parameters.length);
+	$("#chartInfo").addClass("visible");
 	
+	createChart(flotDataArray);
 }
 
 
@@ -232,7 +213,7 @@ function setupVariables() {
 }
 
 function setupOmniSearch() {
-	// Populate auto-complete datalist over ajax request to publisher
+	// Populate auto-complete datalist over AJAX request to Halcyon web-service in Hbird.
 	$("#parameterAddInput").on("input", function(e) {
 		var val = $(this).val();
 		if(val < 1) {
@@ -249,7 +230,6 @@ function setupOmniSearch() {
 		});
 	});
 	
-	
 	// On submit
 	$("#parameterAddForm").submit(function() {
 		var input = omniSearchInput.val();
@@ -258,20 +238,24 @@ function setupOmniSearch() {
 		$.each(option, function(i) {
 			console.log("input = " + input + ". child val = " + $(option[i]).val());
 			if(input === option.val()) {
-				createDataSeries(input, option.text());
+				if(getSeriesData(input) !== null) {
+					notifyUserInfo("Not necessary", input + " already added!");
+					found = true;
+					return false;
+				}
+
+				// create the series so we are ready for live data immediately.
+				createSeriesData(input, option.text());
 				found = true;
-				$("legend").addClass("visible");
-				return false; // this is the same as a break in the jquery each function
+				notifyUserSuccess("Added parameter", input);
+				return false;
 			}
 		});
+
 		if(!found) {
-			$.pnotify({
-			    title: "Search failure",
-			    text: "Could not find a parameter called " + input,
-			    type: "error",
-			    icon: "picon picon-page-zoom"
-			});
+			notifyUserError("Search failure", "Could not find a parameter called " + input);
 		}
+
 		return false;
 	});
 }
@@ -295,6 +279,7 @@ function getChartOptions() {
 		},
 		xaxis : {
 			mode : "time",
+			timezone: "UTC",
 			color : "rgb(99,99,99)"
 		},
 		yaxis : {
@@ -330,7 +315,7 @@ function getOverviewChartOptions() {
 			ticks: [],
 		},
 		grid : {
-			color : "#999"
+			color: "rgb(40,40,40)",
 		},
 		selection : {
 			mode : "xy"
@@ -339,6 +324,10 @@ function getOverviewChartOptions() {
 }
 
 function createChart(data) {
+	if(!$("#chartArea").hasClass("visible")) {
+		$("#chartArea").addClass("visible");
+	}
+	
 	$(".chartInfo").show();
 	$("#liveTmChart").css("border", "none");
 	
@@ -430,8 +419,27 @@ function createChart(data) {
 		overview = $.plot("#overview", data, getOverviewChartOptions());
 	});
 	
-	
+//	setupInteractiveLegend();
+
 	chartCreated = true;
+}
+
+function setupInteractiveLegend() {
+	$("#legend").delegate('td', 'click', function() {
+		var td = $(this);
+		if(td.hasClass("legendColorBox")) {
+			removePlot(td.next('td').text());			
+		}
+		else {
+			removePlot(td.text());
+		}
+	});
+}
+
+function removePlot(seriesName) {
+	deleteSeries(seriesName);
+	delete parametersPlotted[seriesName];
+	plotArchiveRequest();
 }
 
 function setupChartOptionsForm() {
@@ -501,6 +509,8 @@ function updateTelemetryList(param) {
 }
 
 /**
+ * 
+ * Called on tm reception at websocket when Live plotting. 
  * [ 
  * 	{ label: "Foo", data: [ [10, 1], [17, -14], [30, 5] ] }, 
  * 	{ label: "Bar", data: [ [11, 13], [19, 11], [30, -7] ] } 
@@ -512,18 +522,15 @@ function updateTelemetryList(param) {
 function plotParameter(parameter) {
 	// Get the parameters series data and append the new data to it. If the
 	// series does not exist return and do nothing.
-	var parameterSeries = getSeriesData(parameter.name);
-	if (typeof parameterSeries === "undefined") {
+	var series = getSeriesData(parameter.name);
+	if (series === null) {
 		return;
 	}
 
-	// Push the new data into the parameter series array and remove the oldest
-	// entry if the array
-	// has grown too large.
-	var size = parameterSeries.push([ parameter.receivedTime, parameter.value ]);
-	if (size >= maxDataSeriesSize) {
-		parameterSeries.shift();
-	}
+	// Add the new data and shift array if it's is at the size limit (maxDataSeriesSize).
+	if(series.push([parameter.receivedTime, parameter.value]) >= maxDataSeriesSize) {
+		series.shift();
+	};
 
 	// Create the new data for the chart by added all seriesData to a new array
 	// and setting on the plot.
@@ -537,12 +544,12 @@ function plotParameter(parameter) {
 		});
 		totalPlottedPoints += seriesData[i].length;
 	}
-	liveTmChart.setData(newData);
 
 	$("#chartInfo").addClass("visible");
 	setNumParametersChartInfo(totalPlottedPoints);
 
 	// Redraw
+	liveTmChart.setData(newData);
 	liveTmChart.setupGrid();
 	liveTmChart.draw();
 }
@@ -557,30 +564,33 @@ function getSeriesData(name) {
 	if (name in seriesData) {
 		return seriesData[name];
 	}
+	return null;
+}
+
+function deleteSeries(name) {
+	if(name in seriesData) {
+		delete seriesData[name];
+	}
 }
 
 /**
- * series data format as follows: { name : [], name : [] }
+ * Creates or retrieves and existing series data given the parameter name and returns
+ * it.
+ * 
+ * 
  * 
  * FIXME Will not remove existing plot lines that have been deselected.
  * 
  */
-function createDataSeries(name, qualifiedName) {
-	if(!$("#chartArea").hasClass("visible")) {
-		$("#chartArea").addClass("visible");
-	}
-	if (name in seriesData) {
-		return seriesData[name];
+function createSeriesData(name, qualifiedName) {
+	var existingSeries = getSeriesData(name);
+	if(existingSeries) {
+		return existingSeries;
 	}
 
-	var data = [];
-	seriesData[name] = data;
+	seriesData[name] = [];
 	parametersPlotted[name] = qualifiedName;
-	$.pnotify({
-	    title: "Added parameter",
-	    text: name,
-	    type: "success"
-	});
+	
 	return seriesData[name];
 }
 
@@ -609,3 +619,30 @@ function showTooltip(x, y, contents) {
 		left: x + 5,
 	}).appendTo("body").fadeIn(200);
 }
+
+function notifyUserSuccess(title, message) {
+	$.pnotify({
+	    title: title,
+	    text: message,
+	    type: "success"
+	});
+}
+
+function notifyUserInfo(title, message) {
+	$.pnotify({
+		title: title,
+		text: message,
+		type: "info"
+	});
+}
+
+function notifyUserError(title, message) {
+	$.pnotify({
+	    title: title,
+	    text: message,
+	    type: "error",
+	    icon: "picon picon-page-zoom"
+	});
+}
+
+
