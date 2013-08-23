@@ -14,6 +14,7 @@ var menuHome = $('<li><a id=menuHome href=' + rootHbirdwebUrl + 'index.html><spa
 var menuDash = $('<li><a id=menuDash href=' + rootHbirdwebUrl + 'pages/dashboard/hboard.html><span>Dash</span></a></li>');
 var menuTm = $('<li><a id=menuTm href=' + rootHbirdwebUrl + 'pages/telemetry/telemetryIndex.html><span>Telemetry</span></a></li>');
 var menuCmd = $('<li><a id=menuCmd href=' + rootHbirdwebUrl + 'pages/commanding/commanding.html><span>Commanding</span></a></li>');
+var menuGlobe = $('<li><a id=menuGlobe href=' + rootHbirdwebUrl + 'pages/globe/globe.html><span>Globe</span></a></li>');
 var menuHelp = $('<li><a id=menuHelp href=#><span>Help</span></a></li>');
 
 /**
@@ -85,6 +86,7 @@ function addMenuHtml() {
 	menuList.append(menuDash);
 	menuList.append(menuTm);
 	menuList.append(menuCmd);
+	menuList.append(menuGlobe);
 	menuList.append(menuHelp);
 	
 	topMenu.append(menuList);
