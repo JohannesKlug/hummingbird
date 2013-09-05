@@ -49,6 +49,7 @@ import org.hbird.core.generatedcode.xtce.SizeRangeInCharacters;
 import org.hbird.core.generatedcode.xtce.SpaceSystem;
 import org.hbird.core.generatedcode.xtce.StringParameterType;
 import org.hbird.core.generatedcode.xtce.TelemetryMetaData;
+import org.hbird.core.generatedcode.xtce.UnitType;
 import org.hbird.core.generatedcode.xtce.Verifiers;
 import org.hbird.core.generatedcode.xtce.types.ComparisonOperatorsType;
 import org.hbird.core.generatedcode.xtce.types.FloatDataEncodingTypeEncodingType;
@@ -65,9 +66,9 @@ import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 import org.hbird.core.spacesystemmodel.tmtc.TmTcGroup;
 import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdCommandGroup;
-import org.hbird.core.spacesystemmodel.tmtc.provided.TelemeteredParameter;
 import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameterGroup;
 import org.hbird.core.spacesystemmodel.tmtc.provided.ProtectedValueParameter;
+import org.hbird.core.spacesystemmodel.tmtc.provided.TelemeteredParameter;
 import org.hbird.core.xtce.utils.XtceToJavaMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -139,6 +140,8 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 	private final Map<String, Calibrator> calibrators = new HashMap<String, Calibrator>();
 
 	private final Map<String, Map<String, String>> commandVerifications = new HashMap<String, Map<String, String>>();
+
+	private final Map<String, String> unitDescriptions = new HashMap<String, String>();
 
 	public XtceSpaceSystemModelFactory() {
 		LOG.debug("Instantiating XtceSpaceSystemModelFactory with no space system file path");
@@ -380,7 +383,16 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 			}
 			// @formatter:on
 
+			createUnit(qualifiedName, xtceParameter);
 			createCalibrator(qualifiedName, xtceParameter, xtceType);
+		}
+	}
+
+	private final void createUnit(String qName, ParameterSetTypeItem xtceParameter) {
+		UnitType xtceUnitType = xtceParameter.getParameter().getUnit();
+		if (xtceUnitType != null) {
+			String unitDescription = xtceUnitType.getDescription();
+			this.unitDescriptions.put(qName, unitDescription);
 		}
 	}
 
@@ -1009,6 +1021,10 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 				field.set(model, calibrators);
 				LOG.trace("Injected " + calibrators.size() + " calibrators");
 			}
+			else if (StringUtils.equals(name, "unitDescriptions")) {
+				field.set(model, unitDescriptions);
+				LOG.trace("Injected " + unitDescriptions.size() + " unit descriptions");
+			}
 			else {
 				LOG.debug("Not interested in field : " + name);
 			}
@@ -1299,4 +1315,5 @@ public class XtceSpaceSystemModelFactory implements SpaceSystemModelFactory {
 		}
 		this.spaceSystemModelFilename = spaceSystemModelFilename;
 	}
+
 }

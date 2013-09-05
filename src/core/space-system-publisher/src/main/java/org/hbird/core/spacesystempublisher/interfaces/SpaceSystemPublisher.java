@@ -45,4 +45,8 @@ public interface SpaceSystemPublisher {
 
 	Map<String, Calibrator> getAllCalibrators();
 
+	Map<String, String> getAllUnitDescriptions();
+
+	String getUnitDescription(String qualifiedName);
+
 }

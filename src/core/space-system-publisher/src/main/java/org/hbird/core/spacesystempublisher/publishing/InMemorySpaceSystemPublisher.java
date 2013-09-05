@@ -132,4 +132,13 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 		return model.getAllCalibrators();
 	}
 
+	@Override
+	public Map<String, String> getAllUnitDescriptions() {
+		return model.getAllUnitDescriptions();
+	}
+
+	@Override
+	public String getUnitDescription(String qualifiedName) {
+		return getAllUnitDescriptions().get((qualifiedName));
+	}
 }

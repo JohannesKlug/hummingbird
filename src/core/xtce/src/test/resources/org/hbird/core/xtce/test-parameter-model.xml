@@ -2,7 +2,7 @@
 <SpaceSystem xmlns="http://www.omg.org/space/xtce"
 			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			 xmlns:xtce="http://www.omg.org/space/xtce"
-			 xsi:schemaLocation="https://raw.github.com/JohannesKlug/hbird/master/src/core/xtce/src/main/resources/schemas SpaceSystemV1.0.xsd"
+			 xsi:schemaLocation="../../../ SpaceSystemV1.0.xsd"
 			 name="test-parameter-model">
 
 	<TelemetryMetaData>
@@ -31,6 +31,7 @@
 						<Term coefficient="5" exponent="0"/>
 					</PolynomialCalibrator>
 				</DefaultCalibrator>
+				<Unit description="°C" />
 			</Parameter>
 			<Parameter parameterTypeRef="16bitUInteger" name="FUEL" />
 			<Parameter parameterTypeRef="33bitUInteger" name="FLIGHT_HOURS" />

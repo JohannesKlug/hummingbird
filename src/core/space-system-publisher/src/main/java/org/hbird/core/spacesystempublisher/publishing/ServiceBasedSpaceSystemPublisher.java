@@ -164,4 +164,14 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	public Map<String, Calibrator> getAllCalibrators() {
 		return this.modelCache.getAllCalibrators();
 	}
+
+	@Override
+	public Map<String, String> getAllUnitDescriptions() {
+		return modelCache.getAllUnitDescriptions();
+	}
+
+	@Override
+	public String getUnitDescription(String qualifiedName) {
+		return modelCache.getUnitDescription(qualifiedName);
+	}
 }

@@ -32,6 +32,8 @@ var omniSearchInput;
 
 var chartCreated = false;
 
+var unitDescriptions;
+
 
 // -----------------
 
@@ -45,7 +47,16 @@ jQuery(document).ready(function() {
 	setupWebsocket();
 	setupChartOptionsForm();
 	setupControls();
+	cacheUnitDescriptions();
 });
+
+function cacheUnitDescriptions() {
+	var url = rootURL + "parameter/unit/all";
+	$.getJSON(url, null, function(data, textStatus, jqXHR) {
+		unitDescriptions = jQuery.parseJSON(jqXHR.responseText);
+		console.log(unitDescriptions);
+	});
+}
 
 function setupControls() {
 	setupTimeRangeSlider();

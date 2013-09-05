@@ -2592,8 +2592,9 @@ Style Notes, used througout the schema:
 					<complexContent>
 						<extension base="xtce:NameDescriptionType">
 							<sequence>
-								<element name="ParameterProperties" type="xtce:ParameterPropertiesType" minOccurs="0"/>
-								<element name="DefaultCalibrator" type="xtce:CalibratorType" minOccurs="0" maxOccurs="1"/>
+								<element name="ParameterProperties" type="xtce:ParameterPropertiesType" minOccurs="0" />
+								<element name="DefaultCalibrator" type="xtce:CalibratorType" minOccurs="0" maxOccurs="1" />
+								<element name="Unit" type="xtce:UnitType" minOccurs="0" maxOccurs="1"/>
 							</sequence>
 							<attribute name="parameterTypeRef" type="xtce:NameReferenceType" use="required"/>
 						</extension>

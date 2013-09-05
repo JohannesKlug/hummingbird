@@ -71,4 +71,14 @@ public class ParameterDefinitionModelTest {
 	public void testInvalidPolynomialParameterAssociation() throws InvalidSpaceSystemDefinitionException {
 		loadModel(INVALID_POLY_SSM_URL);
 	}
+
+	@Test
+	public void testParameterUnit() throws UnknownParameterException {
+		Parameter<Integer> laserParam = ssm.getIntParameter(qualifiedTmPrefix + "LASER_TEMP");
+		assertNotNull(laserParam);
+
+		String unit = ssm.getUnitDescription(laserParam.getQualifiedName());
+		assertEquals("°C", unit);
+	}
+
 }

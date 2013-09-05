@@ -44,6 +44,8 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 
 	private final Map<String, Map<String, String>> commandVerifiers = new HashMap<String, Map<String, String>>();
 
+	private final Map<String, String> unitDescriptions = new HashMap<String, String>();
+
 	public XtceSpaceSystemModel() {
 	}
 
@@ -233,5 +235,15 @@ public class XtceSpaceSystemModel implements SpaceSystemModel {
 	@Override
 	public Map<String, Calibrator> getAllCalibrators() {
 		return calibrators;
+	}
+
+	@Override
+	public Map<String, String> getAllUnitDescriptions() {
+		return unitDescriptions;
+	}
+
+	@Override
+	public String getUnitDescription(String qualifiedName) {
+		return unitDescriptions.get(qualifiedName);
 	}
 }

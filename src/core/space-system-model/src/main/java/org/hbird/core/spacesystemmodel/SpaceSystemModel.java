@@ -106,4 +106,9 @@ public interface SpaceSystemModel extends Serializable {
 	 *            the parameter whose calibration definition you which to retrieve.
 	 */
 	Calibrator getCalibrator(String qualifiedName);
+
+	Map<String, String> getAllUnitDescriptions();
+
+	String getUnitDescription(String qualifiedName);
+
 }
