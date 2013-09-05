@@ -17,8 +17,8 @@ import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException
 import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
-import org.hbird.core.spacesystemmodel.tmtc.provided.TelemeteredParameter;
 import org.hbird.core.spacesystemmodel.tmtc.provided.HummingbirdParameterGroup;
+import org.hbird.core.spacesystemmodel.tmtc.provided.TelemeteredParameter;
 import org.hbird.core.spacesystemmodel.tmtc.provided.TmTcGroups;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -289,6 +289,18 @@ public class MockSpaceSystemModel implements SpaceSystemModel {
 
 	@Override
 	public Calibrator getCalibrator(String qualifiedName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, String> getAllUnitDescriptions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getUnitDescription(String qualifiedName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
