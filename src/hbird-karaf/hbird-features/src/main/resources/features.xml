@@ -115,6 +115,11 @@
 				 <bundle start="false">mvn:org.hbird.application/parameter-cache/${project.version}</bundle>
 		</feature>
 		
+		<feature name="hbird-calibration" version="${project.version}">
+			<feature  version="${project.version}">hbird-core</feature>
+			<bundle start="false">mvn:org.hbird.application/calibration/${project.version}</bundle>
+		</feature>
+		
 		<feature name="hbird-complete" 
 				 description="A complete single container installation of hbird and core applications. NOTE: Model and publisher bundles contain blueprints which wire up their services" 
 				 version="${project.version}">
@@ -124,6 +129,7 @@
 			<feature>hbird-publisher</feature>
 			<feature>hbird-transport</feature>
 			<feature>hbird-commanding</feature>
+			<feature>hbird-calibration</feature>
 			<feature>hbird-parameter-archive</feature>
 			<feature>hbird-halcyon</feature>
 			<feature>hbird-web-client</feature>
