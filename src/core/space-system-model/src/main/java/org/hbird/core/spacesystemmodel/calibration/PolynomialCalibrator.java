@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.hbird.core.spacesystemmodel.exceptions.CalibrationException;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
-import org.hbird.core.spacesystemmodel.tmtc.provided.AbstractParameter;
 import org.hbird.core.spacesystemmodel.tmtc.provided.CalibratedParameter;
 
 /**
@@ -32,7 +31,7 @@ public class PolynomialCalibrator implements Calibrator {
 	 * Calibrates {@link Number} parameters returning a new {@link CalibratedParameter} holding the result.
 	 */
 	@Override
-	public AbstractParameter<Double> calibrate(Parameter<?> parameter) throws CalibrationException {
+	public CalibratedParameter calibrate(Parameter<?> parameter) throws CalibrationException {
 		Object raw = parameter.getValue();
 		if (raw instanceof Number) {
 			double calibrated = calibrate(((Number) raw).doubleValue());

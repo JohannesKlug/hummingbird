@@ -22,8 +22,8 @@ public class CalibratedParameter extends AbstractParameter<Double> {
 	 * @param cval
 	 * @return
 	 */
-	public static AbstractParameter<Double> createFromParameterAndValue(Parameter<?> p, double cval) {
-		AbstractParameter<Double> cp = new CalibratedParameter(p.getQualifiedName(), p.getName(), p.getShortDescription(), p.getLongDescription());
+	public static CalibratedParameter createFromParameterAndValue(Parameter<?> p, double cval) {
+		CalibratedParameter cp = new CalibratedParameter(p.getQualifiedName(), p.getName(), p.getShortDescription(), p.getLongDescription());
 		cp.setValue(cval);
 		cp.setReceivedTime(p.getReceivedTime());
 		return cp;
