@@ -13,7 +13,7 @@ import org.hbird.core.spacesystemmodel.calibration.PolynomialCalibrator;
 import org.hbird.core.spacesystemmodel.exceptions.CalibrationException;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidSpaceSystemDefinitionException;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
-import org.hbird.core.spacesystemmodel.tmtc.provided.AbstractParameter;
+import org.hbird.core.spacesystemmodel.tmtc.provided.CalibratedParameter;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -62,7 +62,7 @@ public class ParameterDefinitionModelTest {
 		laserParam.setValue(5);
 
 		Calibrator calibrator = ssm.getCalibrator(laserParam.getQualifiedName());
-		AbstractParameter<Double> caliParam = calibrator.calibrate(laserParam);
+		CalibratedParameter caliParam = calibrator.calibrate(laserParam);
 
 		assertEquals(EXPECTED_LASER_CALIBRATION_VALUE, caliParam.getValue(), 0.0);
 	}
