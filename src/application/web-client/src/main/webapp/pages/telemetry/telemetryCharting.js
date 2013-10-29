@@ -63,12 +63,12 @@ function setupControls() {
 	setupArchiveSubmit();
 
 	$("#goLiveButton").click(function(){
-		var clear = liveTmChart.getData();
-		clear = [];
+		var clear = [];
 		for(name in seriesData) {
 			console.log("Switching to live; clearing data in " + name);
 			seriesData[name] = [];
 		}
+		createChart(seriesData);
 		liveTmChart.setData(clear);
     	liveTmChart.setupGrid();
     	liveTmChart.draw();
