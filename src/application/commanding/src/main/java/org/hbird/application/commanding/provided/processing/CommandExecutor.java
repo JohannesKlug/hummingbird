@@ -14,6 +14,7 @@ import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
+import org.hbird.core.spacesystempublisher.exceptions.UnavailableSpaceSystemModelException;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +52,7 @@ public class CommandExecutor implements CommandAcceptor, MonitorListener {
 	}
 
 	@Override
-	public String acceptCommand(final CommandGroup cmd) {
+	public String acceptCommand(final CommandGroup cmd) throws UnknownParameterException, UnavailableSpaceSystemModelException {
 		if (LOG.isTraceEnabled()) {
 			LOG.trace("Received command to send: " + cmd);
 		}
@@ -59,18 +60,11 @@ public class CommandExecutor implements CommandAcceptor, MonitorListener {
 		UUID uid = UUID.randomUUID();
 		cmd.setUid(uid);
 
-		try {
-			if (publisher != null) {
-				monitors.add(new CommandMonitor(cmd, this, publisher));
-			}
-			else {
-				LOG.warn("Command verification cannot be tracked as there is no space system publisher service available to the Command Executor.");
-			}
+		if (publisher != null) {
+			monitors.add(new CommandMonitor(cmd, this, publisher));
 		}
-		catch (UnknownParameterException e) {
-			LOG.error("Error in definition for command " + cmd.getQualifiedName() + ", Unknown parameter (" + e.getNameOfRequestedParameter()
-					+ ") used in verification comparison list. Full stack trace: " + e.toString());
-			return null;
+		else {
+			LOG.warn("Command verification cannot be tracked as there is no space system publisher service available to the Command Executor.");
 		}
 
 		cmd.setSendTime(System.currentTimeMillis());

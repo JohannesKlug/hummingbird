@@ -21,6 +21,7 @@ import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
 import org.hbird.core.spacesystemmodel.tmtc.provided.TelemeteredParameter;
 import org.hbird.transport.payloadcodec.codecparameters.CodecParameter;
+import org.hbird.transport.payloadcodec.exceptions.CodecConfigurationException;
 import org.hbird.transport.payloadcodec.testsupport.MockSpaceSystemModel;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -118,7 +119,7 @@ public class PayloadCodecTest {
 	}
 
 	@Test
-	public void feelTheBurn() throws BitSetOperationException, UnknownParameterGroupException, UnknownParameterException {
+	public void feelTheBurn() throws CodecConfigurationException, BitSetOperationException, UnknownParameterGroupException, UnknownParameterException {
 		long startTime = System.currentTimeMillis();
 		int burnLevel = 100;
 		for (int i = 0; i < burnLevel; i++) {
@@ -151,7 +152,7 @@ public class PayloadCodecTest {
 	}
 
 	@Test
-	public void testEncode() throws BitSetOperationException, UnknownParameterGroupException, UnknownParameterException {
+	public void testEncode() throws BitSetOperationException, UnknownParameterGroupException, UnknownParameterException, CodecConfigurationException {
 		for (int scIdValue : TEST_UINT_31_VALUES) {
 			for (int fuelValue : TEST_UINT_12_VALUES) {
 				for (long laserValue : TEST_UINT_40_VALUES) {
@@ -178,7 +179,7 @@ public class PayloadCodecTest {
 		return binaryString;
 	}
 
-	private static void encodeAndAssert(final ParameterGroup testGroup, final BitSet expected) {
+	private static void encodeAndAssert(final ParameterGroup testGroup, final BitSet expected) throws CodecConfigurationException {
 		GenericPayload actualGenericPayload = codec.encodeToGenericPayload(testGroup);
 		TEST_PAYLOADS.add(actualGenericPayload);
 		BitSet actual = BitSetUtility.fromByteArray(actualGenericPayload.payload);
@@ -187,7 +188,8 @@ public class PayloadCodecTest {
 	}
 
 	@Test
-	public void testEncodeParameterGroupBitSet() throws UnknownParameterGroupException, UnknownParameterException, BitSetOperationException {
+	public void testEncodeParameterGroupBitSet() throws UnknownParameterGroupException, UnknownParameterException, BitSetOperationException,
+			CodecConfigurationException {
 		ParameterGroup testGroup = ssm.getParameterGroup(MockSpaceSystemModel.TEST_GROUP_QUALIFIED_NAME);
 
 		testGroup.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_QUALIFIED_NAME).setValue(SCID_VALUE_1);
@@ -211,7 +213,8 @@ public class PayloadCodecTest {
 	}
 
 	@Test
-	public void testEncodeParameterGroupBitSet2() throws UnknownParameterGroupException, BitSetOperationException, UnknownParameterException {
+	public void testEncodeParameterGroupBitSet2() throws UnknownParameterGroupException, BitSetOperationException, UnknownParameterException,
+			CodecConfigurationException {
 		ParameterGroup testGroup = ssm.getParameterGroup(MockSpaceSystemModel.TEST_GROUP_QUALIFIED_NAME);
 
 		testGroup.getIntegerParameter(MockSpaceSystemModel.SCID_PARAMETER_QUALIFIED_NAME).setValue(SCID_VALUE_1073807361);
@@ -225,7 +228,7 @@ public class PayloadCodecTest {
 	}
 
 	@Test
-	public void testDecodeWithRestriction() throws BitSetOperationException, UnknownParameterGroupException, UnknownParameterException {
+	public void testDecodeWithRestriction() throws BitSetOperationException, UnknownParameterException, CodecConfigurationException {
 
 		String bitSetString = SCID_VALUE_1_AS_STRING + FUEL_VALUE_3814_AS_STRING + LASER_TEMP_94528016102_AS_STRING;
 		BitSet rawIn = BitSetUtility.stringToBitSet(bitSetString, true, true);

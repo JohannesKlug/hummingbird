@@ -1,6 +1,7 @@
 package org.hbird.osgi.publisher;
 
 import org.hbird.core.spacesystemmodel.SpaceSystemModelUpdateListener;
+import org.hbird.core.spacesystempublisher.exceptions.UnavailableSpaceSystemModelException;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +14,15 @@ public class PublisherModelUpdater implements SpaceSystemModelUpdateListener {
 	@Override
 	public void modelChanged() {
 		if (publisher != null) {
-			publisher.modelUpdated();
+			try {
+				publisher.modelUpdated();
+			}
+			catch (UnavailableSpaceSystemModelException e) {
+				LOG.warn("The publisher cannot access a space system model due to {0}", e.getMessage());
+			}
 		}
 		else {
-			LOG.error("Could not update publisher as it no longer exists!");
+			LOG.error("Could not update space system model as the publisher/publisher service no longer exists!");
 		}
 	}
 

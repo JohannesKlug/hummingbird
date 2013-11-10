@@ -7,6 +7,7 @@ import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
+import org.hbird.core.spacesystempublisher.exceptions.UnavailableSpaceSystemModelException;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +33,7 @@ public class RotorSimulatorTest {
 	private Parameter<Integer> mockElevationParameter;
 
 	@Before
-	public void setupMockModel() throws UnknownParameterException, UnknownParameterGroupException {
+	public void setupMockModel() throws UnknownParameterException, UnknownParameterGroupException, UnavailableSpaceSystemModelException {
 		when(mockPublisher.getParameterGroup("Stock6.tm.PositionPayload")).thenReturn(mockParameterGroup);
 		when(mockParameterGroup.getIntegerParameter("Stock6.tm.Azimuth")).thenReturn(mockAzimuthParameter);
 		when(mockParameterGroup.getIntegerParameter("Stock6.tm.Elevation")).thenReturn(mockElevationParameter);
@@ -45,7 +46,7 @@ public class RotorSimulatorTest {
 	}
 
 	@Test
-	public void testTickNoSlew() throws UnknownParameterGroupException, UnknownParameterException {
+	public void testTickNoSlew() throws UnknownParameterGroupException, UnknownParameterException, UnavailableSpaceSystemModelException {
 		// Set targets to 0, should not cause a slew
 		sim.slewRotor(0, 0);
 
@@ -56,7 +57,7 @@ public class RotorSimulatorTest {
 	}
 
 	@Test
-	public void testTickWithSlew() throws UnknownParameterGroupException, UnknownParameterException, InterruptedException {
+	public void testTickWithSlew() throws UnknownParameterGroupException, UnknownParameterException, InterruptedException, UnavailableSpaceSystemModelException {
 		// Set targets to 0, should not cause a slew
 		sim.slewRotor(10, 9);
 

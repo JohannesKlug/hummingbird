@@ -9,9 +9,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
-import org.apache.commons.lang3.StringUtils;
 import org.hbird.application.halcyon.osgi.OsgiReady;
+import org.hbird.core.spacesystempublisher.exceptions.UnavailableSpaceSystemModelException;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 
 import com.sun.jersey.spi.resource.Singleton;
@@ -36,14 +39,15 @@ public class UnitDescriptionResource extends OsgiReady {
 	public String getParameterUnitDescription(@PathParam("searchStr") String qualifiedName) {
 		SpaceSystemPublisher publisher = (SpaceSystemPublisher) getServiceTracker().getService();
 
-		String result = "undefined";
 		if (publisher != null) {
-			result = publisher.getUnitDescription(qualifiedName);
-			if (StringUtils.isBlank(result)) {
-				result = "undefined";
+			try {
+				return publisher.getUnitDescription(qualifiedName);
+			}
+			catch (UnavailableSpaceSystemModelException e) {
+				throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
 			}
 		}
-		return result;
+		throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity("SpaceSystemPublisher is unavailable.").build());
 	}
 
 	@Path("/all")
@@ -53,8 +57,13 @@ public class UnitDescriptionResource extends OsgiReady {
 		SpaceSystemPublisher publisher = (SpaceSystemPublisher) getServiceTracker().getService();
 
 		if (publisher != null) {
-			return publisher.getAllUnitDescriptions();
+			try {
+				return publisher.getAllUnitDescriptions();
+			}
+			catch (UnavailableSpaceSystemModelException e) {
+				throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
+			}
 		}
-		return null;
+		throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity("SpaceSystemPublisher is unavailable.").build());
 	}
 }

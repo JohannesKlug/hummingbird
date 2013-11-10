@@ -79,6 +79,10 @@
 			<artifactId>enunciate-core-annotations</artifactId>
 			<version>1.26.2</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
 	</dependencies>
 	<packaging>bundle</packaging>
 	<description>Defines the Hbird core space system model classes and interfaces. Also provides the Space System Model Factory interface.</description>

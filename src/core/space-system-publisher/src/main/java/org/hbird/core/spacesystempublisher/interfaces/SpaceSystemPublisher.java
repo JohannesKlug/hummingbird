@@ -9,44 +9,43 @@ import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException
 import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
+import org.hbird.core.spacesystempublisher.exceptions.UnavailableSpaceSystemModelException;
 
 public interface SpaceSystemPublisher {
-
-	// Parameter related
-	Map<String, ParameterGroup> getParameterGroups();
-
-	List<ParameterGroup> getParameterGroupList();
-
-	List<Parameter<?>> getAllParameters();
-
-	// Command related
-	Map<String, CommandGroup> getCommands();
-
-	List<CommandGroup> getCommandList();
-
-	CommandGroup getCommand(String qualifiedName);
-
-	ParameterGroup getParameterGroup(String qualifiedName) throws UnknownParameterGroupException;
-
-	// Encoding related
-	Map<String, Encoding> getEncodings();
-
-	// Restriction/Payload Id related
-	Map<String, List<String>> getRestrictions();
-
-	void setClients(List<PublisherClient> clients);
 
 	// Model state propagation related
 	void fireUpdate();
 
-	void modelUpdated();
+	void modelUpdated() throws UnavailableSpaceSystemModelException;
 
-	Map<String, String> getCommandVerifiers(String qualifiedName);
+	// Parameter related
+	Map<String, ParameterGroup> getParameterGroups() throws UnavailableSpaceSystemModelException;
 
-	Map<String, Calibrator> getAllCalibrators();
+	List<ParameterGroup> getParameterGroupList() throws UnavailableSpaceSystemModelException;
 
-	Map<String, String> getAllUnitDescriptions();
+	List<Parameter<?>> getAllParameters() throws UnavailableSpaceSystemModelException;
 
-	String getUnitDescription(String qualifiedName);
+	// Command related
+	Map<String, CommandGroup> getCommands() throws UnavailableSpaceSystemModelException;
+
+	List<CommandGroup> getCommandList() throws UnavailableSpaceSystemModelException;
+
+	CommandGroup getCommand(String qualifiedName) throws UnavailableSpaceSystemModelException;
+
+	ParameterGroup getParameterGroup(String qualifiedName) throws UnknownParameterGroupException, UnavailableSpaceSystemModelException;
+
+	// Encoding related
+	Map<String, Encoding> getEncodings() throws UnavailableSpaceSystemModelException;
+
+	// Restriction/Payload Id related
+	Map<String, List<String>> getRestrictions() throws UnavailableSpaceSystemModelException;
+
+	Map<String, String> getCommandVerifiers(String qualifiedName) throws UnavailableSpaceSystemModelException;
+
+	Map<String, Calibrator> getAllCalibrators() throws UnavailableSpaceSystemModelException;
+
+	Map<String, String> getAllUnitDescriptions() throws UnavailableSpaceSystemModelException;
+
+	String getUnitDescription(String qualifiedName) throws UnavailableSpaceSystemModelException;
 
 }

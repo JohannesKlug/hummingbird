@@ -3,6 +3,7 @@ package org.hbird.osgi.publisher;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import org.hbird.core.spacesystempublisher.exceptions.UnavailableSpaceSystemModelException;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +26,7 @@ public class PublisherModelUpdaterTest {
 	}
 
 	@Test
-	public void testModelChanged() {
+	public void testModelChanged() throws UnavailableSpaceSystemModelException {
 		updater.modelChanged();
 
 		verify(mockPublisher, times(1)).modelUpdated();

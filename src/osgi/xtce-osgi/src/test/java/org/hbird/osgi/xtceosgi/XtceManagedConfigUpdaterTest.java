@@ -16,7 +16,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.osgi.service.cm.ConfigurationException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class XtceManagedConfigUpdaterTest {
@@ -58,16 +57,10 @@ public class XtceManagedConfigUpdaterTest {
 		updater.setModelUpdateListeners(mockUpdateListeners);
 	}
 
-	@Test
-	public void testSetSpaceSystemModelFilename() {
-		updater.configureFactoryModelFilename(fullFilePath);
-		verify(mockFactory, times(1)).setSpaceSystemModelFilename(fullFilePath);
-	}
-
-	@SuppressWarnings("unchecked")
 	// OSGi supports 1.4 and therefore passes untyped classes instead of generics.
+	@SuppressWarnings("unchecked")
 	@Test
-	public void testUpdated() throws ConfigurationException {
+	public void testUpdated() {
 		config.put(SPACE_SYSTEM_MODLE_FILENAME_FIELD, fullFilePath);
 
 		updater.setModelUpdateListeners(mockUpdateListeners);

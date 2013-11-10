@@ -5,6 +5,7 @@ import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException
 import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
+import org.hbird.core.spacesystempublisher.exceptions.UnavailableSpaceSystemModelException;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
@@ -79,8 +80,9 @@ public class RotorSimulator {
 	 * @return Current Az/El reading
 	 * @throws UnknownParameterGroupException
 	 * @throws UnknownParameterException
+	 * @throws UnavailableSpaceSystemModelException
 	 */
-	public ParameterGroup tick() throws UnknownParameterGroupException, UnknownParameterException {
+	public ParameterGroup tick() throws UnknownParameterGroupException, UnknownParameterException, UnavailableSpaceSystemModelException {
 		final DateTime now = new DateTime();
 		final Duration moveTime = new Duration(this.lastMoved, now);
 

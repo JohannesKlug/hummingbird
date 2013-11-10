@@ -16,8 +16,7 @@
 	<!-- Create a publisher bean that loads the space system model into it's cache on creation. The Space System Model Factory service
 	is injected. -->
 	<bean id="publisher"
-		  class="org.hbird.core.spacesystempublisher.publishing.ServiceBasedSpaceSystemPublisher"
-		  init-method="loadModel">
+		  class="org.hbird.core.spacesystempublisher.publishing.ServiceBasedSpaceSystemPublisher">
 		  <property name="factoryService" ref="spaceSystemModelFactoryService"></property>
 	</bean>
 	

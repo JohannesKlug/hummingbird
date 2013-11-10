@@ -4,9 +4,9 @@ import java.io.File;
 import java.util.Dictionary;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hbird.core.spacesystemmodel.SpaceSystemModelUpdateListener;
 import org.hbird.core.xtce.XtceSpaceSystemModelFactory;
-import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.cm.ManagedService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,14 +21,11 @@ public class XtceManagedConfigUpdater implements ManagedService {
 
 	private List<SpaceSystemModelUpdateListener> modelUpdateListeners;
 
-	private final void notifyModelUpdateListeners() {
-		for (final SpaceSystemModelUpdateListener listener : modelUpdateListeners) {
-			listener.modelChanged();
-		}
-	}
-
 	@Override
-	public void updated(final Dictionary configuration) throws ConfigurationException {
+	public void updated(final Dictionary configuration) {
+		String dummyModelPath = this.getClass().getResource("DummyModel.xml").getPath();
+		factory.setSpaceSystemModelFilename(dummyModelPath);
+
 		if (LOG.isTraceEnabled()) {
 			LOG.trace("Updater called with new configuration");
 		}
@@ -39,13 +36,24 @@ public class XtceManagedConfigUpdater implements ManagedService {
 		}
 
 		String spaceSystemModelFilename = (String) configuration.get(SPACE_SYSTEM_MODEL_FILENAME_FIELD);
-		if (spaceSystemModelFilename != null && checkFile(spaceSystemModelFilename)) {
-			configureFactoryModelFilename(spaceSystemModelFilename);
-			notifyModelUpdateListeners();
+		if (StringUtils.isNotBlank(spaceSystemModelFilename)) {
+			if (checkFile(spaceSystemModelFilename)) {
+				factory.setSpaceSystemModelFilename(spaceSystemModelFilename);
+				notifyModelUpdateListeners();
+			}
+			else {
+				LOG.warn("Could not update the Space System Model as the configured filename, {0}, refers to an invalid or protected file.",
+						spaceSystemModelFilename);
+			}
 		}
 		else {
-			throw new ConfigurationException(SPACE_SYSTEM_MODEL_FILENAME_FIELD,
-					"Invalid space system model file. File does not exist, is not a file (you may have specified a directory), or is not readable");
+			LOG.warn("Could not update the Space System Model as the configured filename is blank!");
+		}
+	}
+
+	private final void notifyModelUpdateListeners() {
+		for (final SpaceSystemModelUpdateListener listener : modelUpdateListeners) {
+			listener.modelChanged();
 		}
 	}
 
@@ -68,7 +76,4 @@ public class XtceManagedConfigUpdater implements ManagedService {
 		this.modelUpdateListeners = modelUpdateListeners;
 	}
 
-	public void configureFactoryModelFilename(final String spaceSystemModelFilename) {
-		factory.setSpaceSystemModelFilename(spaceSystemModelFilename);
-	}
 }

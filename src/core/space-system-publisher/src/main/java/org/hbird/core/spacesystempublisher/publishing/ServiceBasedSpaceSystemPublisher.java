@@ -8,12 +8,12 @@ import org.hbird.core.spacesystemmodel.SpaceSystemModel;
 import org.hbird.core.spacesystemmodel.SpaceSystemModelFactory;
 import org.hbird.core.spacesystemmodel.calibration.Calibrator;
 import org.hbird.core.spacesystemmodel.encoding.Encoding;
-import org.hbird.core.spacesystemmodel.exceptions.InvalidParameterTypeException;
 import org.hbird.core.spacesystemmodel.exceptions.InvalidSpaceSystemDefinitionException;
 import org.hbird.core.spacesystemmodel.exceptions.UnknownParameterGroupException;
 import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
 import org.hbird.core.spacesystemmodel.tmtc.ParameterGroup;
+import org.hbird.core.spacesystempublisher.exceptions.UnavailableSpaceSystemModelException;
 import org.hbird.core.spacesystempublisher.interfaces.PublisherClient;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.slf4j.Logger;
@@ -38,85 +38,130 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 
 	/**
 	 * Retrieves and caches the space system model from the space system model factory service.
+	 * 
+	 * @throws UnavailableSpaceSystemModelException
 	 */
-	public void loadModel() {
-		LOG.debug("Loading space system model from factory service...");
+	public void loadModel() throws UnavailableSpaceSystemModelException {
+		LOG.debug("Loading space system model from SpaceSystemModelFactory service...");
 
 		if (factoryService != null) {
-			if (LOG.isTraceEnabled()) {
-				LOG.trace("Space system model factory service exists...");
-			}
 			try {
 				this.modelCache = factoryService.createSpaceSystemModel();
-				LOG.debug("Model " + this.modelCache.getName() + " cached in publisher.");
 			}
-			catch (final InvalidParameterTypeException e) {
-				LOG.warn("Model not cached, will try again next request." + e.getMessage());
+			catch (InvalidSpaceSystemDefinitionException e) {
+				throw new UnavailableSpaceSystemModelException("The publisher could not cache the space system model", e);
 			}
-			catch (final InvalidSpaceSystemDefinitionException e) {
-				LOG.warn("Model not cached, will try again next request." + e.getMessage());
-			}
+			LOG.info("Model " + this.modelCache.getName() + " cached in publisher.");
 		}
 		else {
-			LOG.error("SpaceSystemModelFactoryService is not available or injected, cannot retrieve a space system model for loading and caching!");
+			LOG.warn("SpaceSystemModelFactoryService is not available or injected, cannot retrieve a space system model for loading and caching!");
+		}
+	}
+
+	private void checkModelCache() throws UnavailableSpaceSystemModelException {
+		if (modelCache == null) {
+			loadModel();
 		}
 	}
 
 	@Override
-	public Map<String, ParameterGroup> getParameterGroups() {
-		if (modelCache == null) {
-			loadModel();
-		}
+	public Map<String, ParameterGroup> getParameterGroups() throws UnavailableSpaceSystemModelException {
+		checkModelCache();
 		return modelCache.getParameterGroups();
 	}
 
 	@Override
-	public List<ParameterGroup> getParameterGroupList() {
+	public List<ParameterGroup> getParameterGroupList() throws UnavailableSpaceSystemModelException {
+		checkModelCache();
 		return new ArrayList<ParameterGroup>(modelCache.getParameterGroupsCollection());
 	}
 
 	@Override
-	public Map<String, CommandGroup> getCommands() {
+	public Map<String, CommandGroup> getCommands() throws UnavailableSpaceSystemModelException {
+		checkModelCache();
 		return modelCache.getCommands();
 	}
 
 	@Override
-	public List<CommandGroup> getCommandList() {
-		if (LOG.isTraceEnabled()) {
-			LOG.trace("Returning " + modelCache.getCommands().values().size() + " command(s) from " + modelCache.getName());
-		}
+	public List<CommandGroup> getCommandList() throws UnavailableSpaceSystemModelException {
+		checkModelCache();
 		return new ArrayList<CommandGroup>(modelCache.getCommands().values());
 	}
 
 	@Override
-	public Map<String, Encoding> getEncodings() {
+	public Map<String, Encoding> getEncodings() throws UnavailableSpaceSystemModelException {
+		checkModelCache();
 		return modelCache.getEncodings();
 	}
 
 	/**
 	 * @return the model
+	 * @throws UnavailableSpaceSystemModelException
 	 */
-	public SpaceSystemModel getModel() {
+	public SpaceSystemModel getModel() throws UnavailableSpaceSystemModelException {
+		checkModelCache();
 		return modelCache;
 	}
 
-	/**
-	 * @param model
-	 *            the model to set
-	 */
-	public void setModel(final SpaceSystemModel model) {
-		this.modelCache = model;
-	}
-
 	@Override
-	public Map<String, List<String>> getRestrictions() {
+	public Map<String, List<String>> getRestrictions() throws UnavailableSpaceSystemModelException {
+		checkModelCache();
 		return this.modelCache.getAllPayloadRestrictions();
 	}
 
 	@Override
+	public CommandGroup getCommand(final String qualifiedName) throws UnavailableSpaceSystemModelException {
+		checkModelCache();
+		return this.modelCache.getCommands().get(qualifiedName);
+	}
+
+	@Override
+	public ParameterGroup getParameterGroup(final String qualifiedName) throws UnknownParameterGroupException, UnavailableSpaceSystemModelException {
+		checkModelCache();
+		return this.modelCache.getParameterGroup(qualifiedName);
+	}
+
+	@Override
+	public List<Parameter<?>> getAllParameters() throws UnavailableSpaceSystemModelException {
+		checkModelCache();
+		return new ArrayList<Parameter<?>>(this.modelCache.getAllPayloadParameters().values());
+	}
+
+	@Override
+	public Map<String, String> getCommandVerifiers(String qualifiedName) throws UnavailableSpaceSystemModelException {
+		checkModelCache();
+		return this.modelCache.getCommandVerifiers(qualifiedName);
+	}
+
+	@Override
+	public Map<String, Calibrator> getAllCalibrators() throws UnavailableSpaceSystemModelException {
+		checkModelCache();
+		return this.modelCache.getAllCalibrators();
+	}
+
+	@Override
+	public Map<String, String> getAllUnitDescriptions() throws UnavailableSpaceSystemModelException {
+		checkModelCache();
+		return modelCache.getAllUnitDescriptions();
+	}
+
+	@Override
+	public String getUnitDescription(String qualifiedName) throws UnavailableSpaceSystemModelException {
+		checkModelCache();
+		return modelCache.getUnitDescription(qualifiedName);
+	}
+
+	@Override
 	public void fireUpdate() {
-		for (PublisherClient client : clients) {
-			client.entireModelUpdated();
+		if (clients != null) {
+			for (PublisherClient client : clients) {
+				client.entireModelUpdated();
+			}
+		}
+		else {
+			if (LOG.isTraceEnabled()) {
+				LOG.trace("No publisher clients to send mode update too");
+			}
 		}
 	}
 
@@ -129,49 +174,12 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 	}
 
 	@Override
-	public void modelUpdated() {
-		LOG.info("Publisher received notification that the factory space system model updated");
+	public void modelUpdated() throws UnavailableSpaceSystemModelException {
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Publisher received notification that the factory space system model updated");
+		}
 		modelCache = null;
 		loadModel();
 	}
 
-	@Override
-	public CommandGroup getCommand(final String qualifiedName) {
-		return this.modelCache.getCommands().get(qualifiedName);
-	}
-
-	@Override
-	public ParameterGroup getParameterGroup(final String qualifiedName) throws UnknownParameterGroupException {
-		return this.modelCache.getParameterGroup(qualifiedName);
-	}
-
-	@Override
-	public List<Parameter<?>> getAllParameters() {
-		return new ArrayList<Parameter<?>>(this.modelCache.getAllPayloadParameters().values());
-	}
-
-	@Override
-	public void setClients(List<PublisherClient> clients) {
-		this.clients = clients;
-	}
-
-	@Override
-	public Map<String, String> getCommandVerifiers(String qualifiedName) {
-		return this.modelCache.getCommandVerifiers(qualifiedName);
-	}
-
-	@Override
-	public Map<String, Calibrator> getAllCalibrators() {
-		return this.modelCache.getAllCalibrators();
-	}
-
-	@Override
-	public Map<String, String> getAllUnitDescriptions() {
-		return modelCache.getAllUnitDescriptions();
-	}
-
-	@Override
-	public String getUnitDescription(String qualifiedName) {
-		return modelCache.getUnitDescription(qualifiedName);
-	}
 }

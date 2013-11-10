@@ -8,6 +8,7 @@ import org.hbird.application.commanding.interfaces.processing.MonitorListener;
 import org.hbird.core.commons.tmtc.exceptions.UnknownParameterException;
 import org.hbird.core.spacesystemmodel.tmtc.CommandGroup;
 import org.hbird.core.spacesystemmodel.tmtc.Parameter;
+import org.hbird.core.spacesystempublisher.exceptions.UnavailableSpaceSystemModelException;
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,8 +29,10 @@ public class CommandMonitor {
 	 * @param monitorListener
 	 * @param publisher
 	 * @throws UnknownParameterException
+	 * @throws UnavailableSpaceSystemModelException
 	 */
-	public CommandMonitor(CommandGroup cmd, MonitorListener monitorListener, SpaceSystemPublisher publisher) throws UnknownParameterException {
+	public CommandMonitor(CommandGroup cmd, MonitorListener monitorListener, SpaceSystemPublisher publisher) throws UnknownParameterException,
+			UnavailableSpaceSystemModelException {
 		this.cmd = cmd;
 		this.monitorListener = monitorListener;
 

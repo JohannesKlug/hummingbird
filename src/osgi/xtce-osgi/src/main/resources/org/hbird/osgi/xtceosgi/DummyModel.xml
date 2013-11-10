@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SpaceSystem xmlns="http://www.omg.org/space/xtce"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xsi:schemaLocation="https://raw.github.com/JohannesKlug/hbird/master/src/core/xtce/src/main/resources/schemas SpaceSystemV1.0.xsd"
+			 name="Dummy model" 
+			 shortDescription="Dummy space system model ">
+
+	<Header validationStatus="Draft" date="09-11-2013" version="0.0.1-SNAPSHOT" classification="NotClassified">
+		<AuthorSet>
+			<Author>Mark Doyle - mark.doyle@logica.com, markjohndoyle@googlemail.com</Author>
+		</AuthorSet>
+		<HistorySet>
+			<History>Version 0.0.1-SNAPSHOT</History>
+		</HistorySet>
+	</Header>
+
+</SpaceSystem>

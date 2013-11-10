@@ -117,7 +117,6 @@ public class InMemorySpaceSystemPublisher implements SpaceSystemPublisher {
 		return new ArrayList<Parameter<?>>(model.getAllPayloadParameters().values());
 	}
 
-	@Override
 	public void setClients(List<PublisherClient> clients) {
 		this.clients = clients;
 	}
