@@ -10,10 +10,13 @@ import org.hbird.core.xtce.XtceSpaceSystemModelFactory;
 import org.osgi.service.cm.ManagedService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 public class XtceManagedConfigUpdater implements ManagedService {
+	private static final Logger LOG = LoggerFactory.getLogger(XtceManagedConfigUpdater.class);
 
-	private final static Logger LOG = LoggerFactory.getLogger(XtceManagedConfigUpdater.class);
+	private static final Marker OSGI = MarkerFactory.getMarker("OSGi");
 
 	private static final String SPACE_SYSTEM_MODEL_FILENAME_FIELD = "spaceSystemModelFilename";
 
@@ -27,11 +30,11 @@ public class XtceManagedConfigUpdater implements ManagedService {
 		factory.setSpaceSystemModelFilename(dummyModelPath);
 
 		if (LOG.isTraceEnabled()) {
-			LOG.trace("Updater called with new configuration");
+			LOG.trace(OSGI, "Updater called with new configuration");
 		}
 
 		if (configuration == null) {
-			LOG.warn("Updater received a null configuration. Model will not be changed");
+			LOG.warn(OSGI, "Updater received a null configuration. Model will not be changed");
 			return;
 		}
 
@@ -42,18 +45,19 @@ public class XtceManagedConfigUpdater implements ManagedService {
 				notifyModelUpdateListeners();
 			}
 			else {
-				LOG.warn("Could not update the Space System Model as the configured filename, {0}, refers to an invalid or protected file.",
-						spaceSystemModelFilename);
+				LOG.warn(OSGI, "Could not update the Space System Model as the configured filename, {0}, refers to an invalid or protected file.", spaceSystemModelFilename);
 			}
 		}
 		else {
-			LOG.warn("Could not update the Space System Model as the configured filename is blank!");
+			LOG.warn(OSGI, "Could not update the Space System Model as the configured filename is blank!");
 		}
 	}
 
 	private final void notifyModelUpdateListeners() {
-		for (final SpaceSystemModelUpdateListener listener : modelUpdateListeners) {
-			listener.modelChanged();
+		if (modelUpdateListeners != null) {
+			for (final SpaceSystemModelUpdateListener listener : modelUpdateListeners) {
+				listener.modelChanged();
+			}
 		}
 	}
 
@@ -72,8 +76,7 @@ public class XtceManagedConfigUpdater implements ManagedService {
 		this.factory = factory;
 	}
 
-	public void setModelUpdateListeners(final List<SpaceSystemModelUpdateListener> modelUpdateListeners) {
+	public void setModelUpdateListeners(List<SpaceSystemModelUpdateListener> modelUpdateListeners) {
 		this.modelUpdateListeners = modelUpdateListeners;
 	}
-
 }

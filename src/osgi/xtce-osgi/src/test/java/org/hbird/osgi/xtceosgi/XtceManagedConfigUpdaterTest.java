@@ -63,8 +63,6 @@ public class XtceManagedConfigUpdaterTest {
 	public void testUpdated() {
 		config.put(SPACE_SYSTEM_MODLE_FILENAME_FIELD, fullFilePath);
 
-		updater.setModelUpdateListeners(mockUpdateListeners);
-
 		updater.updated(config);
 
 		verify(mockFactory, times(1)).setSpaceSystemModelFilename(fullFilePath);
