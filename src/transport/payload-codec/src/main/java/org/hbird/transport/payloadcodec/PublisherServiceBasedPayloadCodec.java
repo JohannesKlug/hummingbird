@@ -12,6 +12,8 @@ import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.hbird.transport.payloadcodec.exceptions.CodecConfigurationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 /**
  * TODO publisher update mechanism, the publisher needs to be able to update the payload codec.
@@ -22,6 +24,8 @@ import org.slf4j.LoggerFactory;
 public class PublisherServiceBasedPayloadCodec implements PayloadCodec, PublisherClient {
 	private static final Logger LOG = LoggerFactory.getLogger(PublisherServiceBasedPayloadCodec.class);
 
+	private static final Marker TRANSPORT = MarkerFactory.getMarker("TRANSPORT");
+
 	private InMemoryPayloadCodec codec;
 
 	private SpaceSystemPublisher publisher;
@@ -30,14 +34,17 @@ public class PublisherServiceBasedPayloadCodec implements PayloadCodec, Publishe
 		if (publisher != null) {
 			try {
 				codec = new InMemoryPayloadCodec(publisher.getParameterGroups(), publisher.getCommands(), publisher.getEncodings(), publisher.getRestrictions());
+				if (LOG.isTraceEnabled()) {
+					LOG.trace(TRANSPORT, "Code reconfigured");
+				}
 			}
 			catch (UnavailableSpaceSystemModelException e) {
-				LOG.error("Could not configure the payload codec. Codec requests will return null.");
+				LOG.error(TRANSPORT, "Could not configure the payload codec. Codec requests will return null.");
 				codec = null;
 			}
 		}
 		else {
-			LOG.warn("Attempt to cache space system model information when there is no publisher service available");
+			LOG.warn(TRANSPORT, "Attempt to cache space system model information when there is no publisher service available");
 		}
 	}
 

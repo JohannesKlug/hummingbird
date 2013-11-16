@@ -5,9 +5,13 @@ import org.hbird.core.spacesystempublisher.exceptions.UnavailableSpaceSystemMode
 import org.hbird.core.spacesystempublisher.interfaces.SpaceSystemPublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 public class PublisherModelUpdater implements SpaceSystemModelUpdateListener {
 	private final static Logger LOG = LoggerFactory.getLogger(PublisherModelUpdater.class);
+
+	private static final Marker OSGI = MarkerFactory.getMarker("OSGi");
 
 	private SpaceSystemPublisher publisher;
 
@@ -18,11 +22,11 @@ public class PublisherModelUpdater implements SpaceSystemModelUpdateListener {
 				publisher.modelUpdated();
 			}
 			catch (UnavailableSpaceSystemModelException e) {
-				LOG.warn("The publisher cannot access a space system model due to {0}", e.getMessage());
+				LOG.warn(OSGI, "The publisher cannot access a space system model due to {0}", e.getMessage());
 			}
 		}
 		else {
-			LOG.error("Could not update space system model as the publisher/publisher service no longer exists!");
+			LOG.error(OSGI, "Could not update space system model as the publisher/publisher service no longer exists!");
 		}
 	}
 
