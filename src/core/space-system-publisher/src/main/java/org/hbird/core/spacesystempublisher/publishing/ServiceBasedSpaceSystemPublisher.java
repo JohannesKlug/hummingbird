@@ -178,8 +178,8 @@ public class ServiceBasedSpaceSystemPublisher implements SpaceSystemPublisher {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Publisher received notification that the factory space system model updated");
 		}
-		modelCache = null;
 		loadModel();
+		fireUpdate();
 	}
 
 }

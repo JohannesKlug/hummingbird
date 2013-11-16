@@ -32,10 +32,9 @@ var omniSearchInput;
 
 var chartCreated = false;
 
+/** Cached unit description map */
 var unitDescriptions;
 
-
-// -----------------
 
 /**
  * On page ready do the following.
@@ -141,9 +140,18 @@ function plotArchivedData(parameters) {
 		if(series === null) {
 			series = createSeriesData(parameters[i].name, parameters[i].qualifiedName);
 
+			var unit;
+			if(parameters[i].qualifiedName in unitDescriptions) {
+				unit = unitDescriptions[parameters[i].qualifiedName];				
+			}
+			else{
+				unit = "undefined";
+			}
+
 			flotDataArray.push({
 				"label" : parameters[i].name,
-				"data" : series
+				"data" : series,
+				"unit" : unit 
 			});
 		}
 		// once we have a series, existing or newly created, we can add the data to it.
@@ -246,9 +254,9 @@ function setupOmniSearch() {
 		var input = omniSearchInput.val();
 		var option = $("#parameterList").children();
 		var found = false;
-		$.each(option, function(i) {
-			console.log("input = " + input + ". child val = " + $(option[i]).val());
-			if(input === option.val()) {
+		$.each(option, function(i, element) {
+			console.log("input = " + input + ". child val = " + $(element).val());
+			if(input === $(element).val()) {
 				if(getSeriesData(input) !== null) {
 					notifyUserInfo("Not necessary", input + " already added!");
 					found = true;
@@ -256,7 +264,7 @@ function setupOmniSearch() {
 				}
 
 				// create the series so we are ready for live data immediately.
-				createSeriesData(input, option.text());
+				createSeriesData(input, $(element).text());
 				found = true;
 				notifyUserSuccess("Added parameter", input);
 				return false;
@@ -286,7 +294,11 @@ function getChartOptions() {
 		    aboveData: false,
 		    color: "rgb(40,40,40)",
 		    hoverable: true,
-			clickable: true
+			clickable: true,
+			margin: {
+			    left: 20,
+			    bottom: 20
+			}
 		},
 		xaxis : {
 			mode : "time",
@@ -429,10 +441,25 @@ function createChart(data) {
 		liveTmChart = $.plot("#liveTmChart", data, getChartOptions());
 		overview = $.plot("#overview", data, getOverviewChartOptions());
 	});
-	
-//	setupInteractiveLegend();
+		
+	setAxisLabels(data);
 
 	chartCreated = true;
+}
+
+function setAxisLabels(data) {
+	var unit = "";
+	
+	for (var i = 0; i !== data.length; i++) {
+		unit = data[i]["unit"];
+	}
+	
+	var xaxis = $('<div/>');
+	xaxis.addClass('axisLabel');
+	xaxis.addClass('yaxisLabel');
+	xaxis.append('<div class=flot-tick-label>' + unit + '</div>');
+    
+    $("#liveTmChart").append(xaxis);
 }
 
 function setupInteractiveLegend() {
@@ -587,8 +614,6 @@ function deleteSeries(name) {
 /**
  * Creates or retrieves and existing series data given the parameter name and returns
  * it.
- * 
- * 
  * 
  * FIXME Will not remove existing plot lines that have been deselected.
  * 
